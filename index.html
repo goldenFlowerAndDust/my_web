@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自建本地网站</title>
+    <link rel="stylesheet" href="内容文件夹/所有用到的外部样式表/自建网站——导航样式表.css">
+    <style>
+        .div_logo{
+            border: 1px solid red;
+            display: flex;  /*并排行*/
+            align-items: center;  /*垂直居中*/
+            justify-content: center; /*水平居中*/
+            gap:0;  /*两者间距*/
+            /*下面随意发挥*/
+            font-size: 35px;
+            background-color:yellow;
+            color: black;
+        }
+        .logo_img{
+            width: auto;
+            height: 50px;
+        }
+        .span_logo{
+            font-size: 35px;
+            text-align: center;
+        }
+        body{
+            margin: 0;  /*去掉默认白边*/
+            /*padding: 100vh; !*撑满视口高度*!*/
+            background-image: url("内容文件夹/自建本地网站/网站/网站内容添加/网站背景/励志.jpg");
+            background-position: center;
+            background-repeat:no-repeat;
+            background-size: cover;
+            min-height:900px;
+            min-width:auto;
+            padding: 0;
+        }
+        .div_video{
+            pointer-events: none;
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="div_logo">
+        <!--标题即logo-->
+        <audio src="内容文件夹/自建本地网站/网站/网站内容添加/背景音乐/周深%20-%20向光而行.flac" controls class="audio_left"></audio>
+        <span class="span_logo">欢迎来到我的网站</span>
+        <img src="内容文件夹/自建本地网站/网站/网站内容添加/网站logo/引用.png" alt="网站的logo" class="logo_img">
+        </div>
+    </header>
+
+    <nav class="top-nav">
+        <!--导航栏-->
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="index.html">博客</a>
+                <ul>
+                    <li><a href="内容文件夹/自建本地网站/导航栏内容/博客/HTML博客.html">HTML标签博客</a></li>
+                    <li><a href="内容文件夹/自建本地网站/导航栏内容/博客/CSS博客.html">CSS博客</a></li>
+                    <li><a href="内容文件夹/自建本地网站/导航栏内容/博客/python博客.html">python博客</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html">自建网站中遇到的问题</a>
+            <ul>
+                <li><a href="内容文件夹/自建本地网站/导航栏内容/自建网站中遇到的问题总结/总结网页.html">问题总结网页</a></li>
+            </ul>
+            </li>
+            <li><a href="index.html">AI功能</a>
+                <ul>
+                    <li><a href="内容文件夹/自建本地网站/导航栏内容/AI功能/AI功能.html">AI功能跳转链接</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html">自学内容</a>
+                <ul>
+                    <li><a href="内容文件夹/自建本地网站/导航栏内容/自学内容/自学内容.html">自学前端</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html">课后作业</a>
+                <ul>
+                    <li><a href="内容文件夹/自建本地网站/导航栏内容/课后作业/链接跳转/课后作业链接跳转.html">课后作业链接跳转</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="div_video">
+        <video src="内容文件夹/自建本地网站/网站/网站内容添加/视频/背景视频.mp4" controls></video>
+    </div>
+</body>
+</html>
