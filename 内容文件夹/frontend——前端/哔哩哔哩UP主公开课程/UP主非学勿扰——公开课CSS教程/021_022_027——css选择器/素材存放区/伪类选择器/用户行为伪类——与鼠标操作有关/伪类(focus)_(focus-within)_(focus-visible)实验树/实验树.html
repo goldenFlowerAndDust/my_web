@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus 伪类选择器演示</title>
+  <style>
+    /* 仅保留伪类选择器相关样式，无任何额外美化 */
+    /* 1. :focus 伪类：元素获得焦点时生效 */
+    .demo-focus:focus {
+      outline: 2px solid blue;
+    }
+    /*!* 2. :focus-visible 伪类：仅键盘导航（浏览器认为需要时）生效 *!*/
+    .demo-focus-visible:focus-visible {
+      outline: 2px solid purple;
+    }
+
+    /* 3. :focus-within 伪类：元素或其后代获得焦点时生效 */
+    .demo-focus-within:focus-within{
+      outline: 2px solid pink;
+    }
+  </style>
+</head>
+<body>
+  <h1>Focus 伪类选择器基础演示</h1>
+  <p>操作说明：点击元素或按 Tab 键导航，观察焦点效果</p>
+  <h2>1. :focus 伪类（任何方式获得焦点都生效）</h2>
+  <label>
+      <input type="text" class="demo-focus" placeholder="输入框（:focus）">
+  </label>
+  <br><br>
+  <label>
+      <textarea class="demo-focus" placeholder="文本域（:focus）"></textarea>
+  </label>
+  <br><br>
+  <label>
+      <select class="demo-focus">
+    <option>下拉框（:focus）</option>
+    <option>选项 2</option>
+  </select>
+  </label>
+  <br><br>
+  <button class="demo-focus">按钮（:focus）</button>
+
+  <hr style="margin: 30px 0;">
+
+  <h2>2. :focus-visible 伪类（主要键盘导航时生效）</h2>
+  <p>特点：鼠标点击可能不显示焦点，Tab 键导航显示焦点</p>
+  <button class="demo-focus-visible">按钮（:focus-visible）</button>
+  <br><br>
+  <a href="#" class="demo-focus-visible">链接（:focus-visible）</a>
+  <br><br>
+  <label>
+       <input type="text" class="demo-focus-visible" placeholder="输入框（:focus-visible）">
+  </label>
+  <hr style="margin: 30px 0;">
+
+  <h2>3. :focus-within 伪类（自身或子元素获焦时生效）</h2>
+  <div class="demo-focus-within" style="padding: 10px;">
+    <p>父容器（子元素获焦时，我会显示焦点）</p>
+      <label>
+           <input type="text" class="demo-focus" placeholder="子输入框（点击我）">
+      </label>
+    <br><br>
+    <button class="demo-focus">子按钮（点击我）</button>
+  </div>
+</body>
+</html>
