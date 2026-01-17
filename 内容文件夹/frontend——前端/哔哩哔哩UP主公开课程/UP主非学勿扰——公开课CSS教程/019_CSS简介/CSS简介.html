@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS简介</title>
+    <style type="text/css">
+        main{
+            border: 5px solid red;
+            background-color:skyblue;
+        }
+        li{
+            font-size: 25px;
+            color:black;
+        }
+        header{
+            font-size: 35px;
+            color:black;
+            background-color:yellow;
+            text-align:center;
+        }
+        h1,h2,h3{
+            font-size: 30px;
+            color:yellow;
+            background-color:black;
+            text-align:center;
+        }
+        p,pre{
+            font-size: 25px;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <header>CSS简介</header>
+    <main>
+        <section>
+            <h2>CSS概念</h2>
+            <p>
+                CSS(Cascading Style Sheets)层叠样式表，又叫级联样式表，简称样式表
+                <br>CSS文件后缀名为[.css]
+            </p>
+            <h3>为什么需要CSS</h3>
+            <p>使用CSS的目的就是让网页具有美观一致的页面</p>
+        </section>
+        <section>
+            <h2>语法</h2>
+            <p>CSS规则由两个主要的部分构成</p>
+            <ol>
+                <li>选择器</li>
+                <p>
+                    选择器通常是需要改变样式的HTML元素(也可以理解为标签)
+                </p>
+                <li>一条或多条声明</li>
+                <mark>由一个属性和一个值组成</mark>
+                    <ul>
+                        <li>属性</li>
+                        <p>
+                            属性(property)是希望设置的样式属性(Style property)
+                            <br>如：color(设置文本颜色)，font-size(设置文本字体大小)
+                        </p>
+                        <li>属性值</li>
+                        <p>
+                            每一个属性有一个值，属性和值被冒号分开
+                            <br>如：color:red、font-size:25px
+                        </p>
+                    </ul>
+                    <li>如：h1 {color:blue;font-size:12px;}</li>
+                    <ul>
+                        <li>h1就是选择器(意思是将样式在h1标签起作用)</li>
+                        <li>color、font-size就是声明中的【属性】</li>
+                        <li>blue(这是给属性color赋的值，意思是将文本颜色改为蓝色)</li>
+                        <li>12px(这是给属性font-size赋的值，意思将文本字体大小改为12px(单位像素))</li>
+                    </ul>
+            </ol>
+            <h3>代码示例</h3>
+            <p>注意：</p>
+            <ul>
+                <li>所有样式都在style标签内</li>
+                <li>而style标签在head标签内</li>
+                <li>由选择器+大括号组成</li>
+                <li>大括号内部才是CSS语法写入的地方</li>
+                <li>可以添加多个声明，每一个声明占一行(只在对应选择器的大括号内有效)</li>
+            </ul>
+            <pre>
+&lt;style type="text/css"&gt;
+    h1{
+         color:blue;
+         font-size:12px;
+    }
+&lt;/style&gt;
+            </pre>
+        </section>
+    </main>
+</body>
+</html>
