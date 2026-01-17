@@ -1,0 +1,36 @@
+<style>
+		        /* 基础样式重置 */
+		        * {
+		            margin: 0;
+		            padding: 0;
+		        }
+		        header {
+					height: 50px;
+					background-color:#f0f0f0;
+				}
+				div {
+					text-align: center
+				}
+				.body_div {
+					display: flex; 
+					justify-content: center; 
+					align-items: center;
+				}
+				#aside_1 {
+					height: 800px;
+					text-align: center; 
+					width: 80%;
+					border:1px solid #333;
+				}
+				#aside_2 {
+					height: 800px; 
+					width: 20%;
+					border:1px solid #333;
+				}
+				footer {
+					background-color: #333;
+					color: white;
+					text-align: center;
+					height: 100px;
+				}
+		</style>
