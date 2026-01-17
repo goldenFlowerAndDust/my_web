@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单制作</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            width: 60%;
+            min-height: 100vh;
+            margin: 20px auto;
+        }
+
+        .form div {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<!--所有表单均在，form标签内，其中form的属性右action和method
+    1.action是一个地址(url),用于当表单提交(传交)到后端地址接收
+    2.method是传交时的方式有post\get
+        get:通过地址url传参，参数会暴露在地址栏上；安全性更低；传输数据小；
+        post：通过浏览器内部机制传输参数；参数不会暴露在url中；相对于来说安全性更高；传输数据大；
+-->
+<form action="http://www.baidu.com/s" method="get">
+    <!--  大部分的表单标签到需要放入 label标签内 可以同时存在多个label标签  -->
+    <label>
+        <!--  type 是input常见属性 name用于传输参数给后端接收该表单字段使用  placeholder用于提示输入框的文案内容，当用户输入内容时，提示文案会消失  -->
+        搜索：<input type="text" name="wd" placeholder="请输入要搜索的内容">
+        <!--   type 中submit是提交按钮(与标签bottom不同的是，它具有浏览器验证非普通的按钮)
+                type 中value是控件的初始显示文本，常用于提示用户当前按钮是什么功能
+         -->
+        <input type="submit" value="百度一下">
+    </label>
+</form>
+<!--  注册表单  -->
+<h1>golden &nbsp; flower &nbsp; 注册</h1>
+<form action="http://www.goldenflower.com" method="post" class="form">
+    <div>
+        <!--   for 属性绑定表单的input的id，用于聚焦光标的作用     -->
+        <label for="user">用户名:</label>
+        <!--    input 中text属性是文本框控件，就是输入的是字符串
+                input 中required属性是表单必填才能提交，(也就是说，必须输入内容，才会被提交，由浏览器验证)
+                input 中name用于传输参数给后端接收该表单字段使用
+                input 中placeholder用于提示输入框的文案内容，当用户输入内容时，提示文案会消失
+         -->
+        <input type="text" name="user" id="user" required placeholder="请输入用户名">
+    </div>
+    <div>
+        <!--         input 中password属性用密码输入，输入的内容会被隐藏，可通过javaScript添加事件来回切换-->
+        <label for="password">密码:</label>
+        <input type="password" name="password" id="password" required placeholder="请输入密码">
+    </div>
+    <div>
+        <!--    input 中radio属性是单选框，输入的文本在input前或后，placeholder和value没有效果，name互斥(相同的name只能选中一个)
+                input 中checked属性是默认选择对象(可以手动更改到其他的选项)
+        -->
+        性别:
+        <label><input type="radio" name="radio" id="radio" checked>男</label>
+        <label><input type="radio" name="radio">女</label>
+
+    </div>
+    <!--  input 中checkbox是复选框(多选框) 输入的文本在input前或后，placeholder和value没有效果 -->
+    <div>
+        爱好:
+        <label><input type="checkbox" name="love" checked>篮球</label>
+        <label><input type="checkbox" name="love">羽毛球</label>
+        <label><input type="checkbox" name="love">足球</label>
+        <label><input type="checkbox" name="love">乒乓球</label>
+    </div>
+    <!--  input 中number属性只能输入数字，特征右边会有加减数字按钮 -->
+    <div>
+        年龄:
+        <label for="number">
+            <input type="number" name="age" id="number" required>
+        </label>
+    </div>
+    <!--  input 中date属性只能输入日期，特征会显示日期特有的年月日，还有为了方便还可以调出日历 -->
+    <div>
+        出生日期:
+        <label for="date">
+            <input type="date" name="date" id="date" required>
+        </label>
+    </div>
+    <!--  input 中email属性只能输入邮箱，系统默认情况会校验 -->
+    <div>
+        邮箱:
+        <label for="email">
+            <input type="email" name="email" id="email" required>
+        </label>
+    </div>
+    <!--  input 中color属性会显示颜色调色板-->
+    <div>
+        颜色:
+        <label for="color">
+            <input type="color" name="color" id="color" required>
+        </label>
+    </div>
+    <!--  input 中range属性会显示一个拉条 -->
+    <div>
+        范围:
+        <label for="range">
+            <input type="range" name="range" id="range" required>
+        </label>
+    </div>
+    <!--  多选框：必须在label内，且必须是标签：select  -->
+    <div>
+        <label for="city">城市</label>
+        <select name="city" id="city">
+            <option value="广州">广州</option>
+            <option value="深圳">深圳</option>
+        </select>
+    </div>
+<!--  多行文本：必须在label内，且必须是标签：textarea  -->
+    <div>
+        <label for="introduce" style="display: block;">自我介绍</label>
+<!--    cols =>列，改大，宽度越大    -->
+<!--    rows =>行，改大，高度越大    -->
+        <textarea name="introduce" id="introduce" cols="30" rows="10"></textarea>
+    </div>
+    <div>
+<!--   submit 按钮是提交按钮，会根据form的属性action的发送参数，同时会校验，不通过会提醒     -->
+<!--   button 按钮是普通按钮，没有特殊效果，按了之后不会有任何变化     -->
+<!--   reset  按钮是重置南牛，顾名思义就是将所填写的信息全部重置，重新填写表单     -->
+        <input type="submit" value="提交按钮">
+        <input type="button" value="普通按钮">
+        <input type="reset" value="重置按钮">
+    </div>
+</form>
+
+</body>
+</html>

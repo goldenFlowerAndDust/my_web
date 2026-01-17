@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        section {
+            border: 1px solid black;
+            width: 1000px;
+            height: 600px;
+            overflow: hidden;
+        }
+        img{
+            width: 1000px;
+            height: 600px;
+        }
+        .box img {
+            display: inline;
+            background-repeat: no-repeat;
+            background-size: cover;
+            animation: box_img 15s 3s ease-out infinite;
+        }
+
+        div {
+            width: 5100px;
+            height: 600px;
+        }
+
+        @keyframes box_img {
+            20% {
+                transform: translateX(0);
+            }
+            40% {
+                transform: translateX(-1000px);
+            }
+            60% {
+                transform: translateX(-2000px);
+            }
+            80% {
+                transform: translateX(-3000px);
+            }
+            to {
+                transform: translateX(-4000px);
+            }
+        }
+        .box1{
+            width: 1000px;
+            height: 3100px;
+        }
+        .box1 img{
+            display: block;
+            animation: box1 15s 3s ease-out infinite;
+        }
+        @keyframes box1 {
+            20%{
+                transform: translateY(0);
+            }
+            40%{
+                transform: translateY(-600px);
+            }
+            60%{
+                transform: translateY(-1200px);
+            }
+            80%{
+                transform: translateY(-1800px);
+            }
+            to{
+                transform: translateY(-2400px);
+            }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <section>
+        <div class="box">
+            <img src="轮播图images/images/01.jpg" alt="">
+            <img src="轮播图images/images/02.jpg" alt="">
+            <img src="轮播图images/images/03.jpg" alt="">
+            <img src="轮播图images/images/04.jpg" alt="">
+            <img src="轮播图images/images/05.jpg" alt="">
+        </div>
+    </section>
+    <section>
+        <div class="box1">
+            <img src="轮播图images/images/01.jpg" alt="">
+            <img src="轮播图images/images/02.jpg" alt="">
+            <img src="轮播图images/images/03.jpg" alt="">
+            <img src="轮播图images/images/04.jpg" alt="">
+            <img src="轮播图images/images/05.jpg" alt="">
+        </div>
+    </section>
+    <section>
+        <div class="box2">
+            <img src="轮播图images/images/01.jpg" alt="">
+            <img src="轮播图images/images/02.jpg" alt="">
+            <img src="轮播图images/images/03.jpg" alt="">
+            <img src="轮播图images/images/04.jpg" alt="">
+            <img src="轮播图images/images/05.jpg" alt="">
+        </div>
+    </section>
+</main>
+</body>
+</html>

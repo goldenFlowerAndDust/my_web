@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+:root {
+    --font-size: 25px;
+}
+main {
+    width: 90%;
+    min-height: 100vh;
+    margin: 0 auto;
+}
+.nav{
+    width: 100%;
+    height: 50px;
+    background-color: #df5000;
+}
+.nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    box-shadow:0 0 5px rgba(0,0,0,0.3);
+}
+.nav ul li {
+    width: 100%;
+    height: 50px;
+    font-size: 25px;
+    line-height: 50px;
+    text-align: center;
+}
+.nav ul li a {
+    display: block;
+    color: white;
+}
+.nav ul>li:hover {
+    background-color: #ddd;
+}
+/*  左侧边栏  */
+.box1{
+    display: flex;
+    width: 100%;
+    height: 600px;
+    font-size: var(--font-size);
+}
+.box1 aside ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color:orange;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    width: 400px;
+    height: 600px;
+}
+.box1 aside ul li{
+    width: 400px;
+    height: 50px;
+    position: relative;
+}
+.box1 aside ul li a{
+    display: block;
+    color: white;
+}
+.box1 aside ul li>a:hover{
+    background-color: #ddd;
+}
+.box1 aside ul li ol{
+    position: absolute;
+    top:0;
+    left: 100px;
+    width: 100%;
+    height: 450px;
+    text-align: center;
+    line-height: 450px;
+    transform: scale(0);
+    transition: transform 0.3s;
+}
+.box1 aside ul li ol li{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+.box1 aside ol li a{
+    width: 100%;
+    height: 50px;
+    display: block;
+    color: white;
+}
+.box1 aside ol li a:hover{
+    background-color: #ddd;
+}
+.box1 aside ul>li:hover ol{
+    transform: scale(1);
+}
+.image{
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+.image div{
+    width: 100%;
+    height: 3100px;
+}
+.image img{
+    width: 100%;
+    height: 600px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: image 20s ease-out infinite;
+}
+@keyframes image {
+    20%{
+        transform: translateY(0);
+      }
+    40%{
+        transform: translateY(-600px);
+    }
+    60%{
+        transform: translateY(-1200px);
+    }
+    80%{
+        transform: translateY(-1800px);
+    }
+    100%{
+        transform: translateY(-2400px);
+    }
+}

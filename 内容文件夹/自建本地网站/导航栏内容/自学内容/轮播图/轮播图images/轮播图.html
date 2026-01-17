@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				width: 60%;
+				margin: 20px auto;
+			}
+			section{
+				width: 800px;
+				height: 400px;
+				border: 1px solid black;
+				/* 超出图片隐藏 */
+				overflow: hidden;
+			}
+			img{
+				display: inline;
+				width: 800px;
+				height: 400px;
+				background-repeat: no-repeat;
+				background-size: cover;
+				animation: image 15s 1s ease-out infinite;
+			}
+			div{
+				width: 4800px;
+				height: 400px;
+			}
+			@keyframes image {
+				20%{
+					transform: translateX(0);
+				}
+				40%{
+					transform: translateX(-800px);
+				}
+				60%{
+					transform: translateX(-1600px);
+				}
+				80%{
+					transform: translateX(-2400px);
+				}
+				100%{
+					transform: translateX(-3200px);
+				}
+			}
+			.box1{
+				width: 800px;
+				height: 2400px;
+			}
+			.box1 img{
+				display: block;
+				animation: image2 15s 1s ease-out infinite;
+			}
+			@keyframes image2 {
+				20%{
+					transform: translateY(0);
+				}
+				40%{
+					transform: translateY(-400px);
+				}
+				60%{
+					transform: translateY(-800px);
+				}
+				80%{
+					transform: translateY(-1200px);
+				}
+				100%{
+					transform: translateY(-1600px);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<div>
+				<img src="images/01.jpg" alt="">
+				<img src="images/02.jpg" alt="">
+				<img src="images/03.jpg" alt="">
+				<img src="images/04.jpg" alt="">
+				<img src="images/05.jpg"/>
+			</div>
+		</section>
+		<section>
+			<div class="box1">
+				<img src="images/01.jpg" alt="">
+				<img src="images/02.jpg" alt="">
+				<img src="images/03.jpg" alt="">
+				<img src="images/04.jpg" alt="">
+				<img src="images/05.jpg"/>
+			</div>
+		</section>
+	</body>
+</html>
