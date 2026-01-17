@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS结构伪类实验文档树</title>
+    <style>
+        /* 在这里添加你的CSS样式来实验结构伪类 */
+        
+        /* 示例样式 - 你可以修改或删除这些 */
+        .container {
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+        }
+        /* 提示：使用这些结构伪类进行实验 */
+        /* 
+        :first-child - 选择作为其父元素第一个子元素的元素
+        :last-child - 选择作为其父元素最后一个子元素的元素
+        :nth-child(n) - 选择作为其父元素第n个子元素的元素
+        :nth-last-child(n) - 选择作为其父元素倒数第n个子元素的元素
+        :only-child - 选择作为其父元素唯一子元素的元素
+        :first-of-type - 选择作为其父元素第一个特定类型子元素的元素
+        :last-of-type - 选择作为其父元素最后一个特定类型子元素的元素
+        :nth-of-type(n) - 选择作为其父元素第n个特定类型子元素的元素
+        :nth-last-of-type(n) - 选择作为其父元素倒数第n个特定类型子元素的元素
+        :only-of-type - 选择作为其父元素唯一特定类型子元素的元素
+        :empty - 选择没有子元素的元素
+        */
+        .container :first-child{
+            color: red;
+        }
+        .container>:first-child{
+            color: purple;
+        }
+        .container :last-child{
+            color: pink;
+        }
+        .container>:last-child{
+            color: #14fcdf;
+        }
+        .container :nth-child(2){
+            color: green;
+        }
+        .container :nth-child(3n){
+            color: #b47224;
+        }
+        .container ul>li{
+            color: initial;
+        }
+        .container :nth-child(-1){
+            color: #aa5500;
+        }
+        .container :nth-last-child(2){
+            color:lightblue;
+        }
+        .container2 :only-child{
+            color: #6c5ce7;
+        }
+        .container1 span:first-of-type{
+            color: #00cec9;
+        }
+        .mixed-container div:last-of-type{
+            color: #6c5ce7;
+        }
+        .container1 p:nth-of-type(2){
+            color: green;
+        }
+        .container1 div:nth-last-of-type(2){
+            color: #0ea5e9;
+        }
+        .container1 del:only-of-type{
+            color: #aa5500;
+        }
+        .container3 .empty-container div:empty{
+            width: 100px;
+            height: 100px;
+            background-color:skyblue;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CSS结构伪类实验文档树</h1>
+        <p>这个页面专门用于实验CSS结构伪类选择器。</p>
+    </header>
+    
+    <main>
+        <!-- 实验区域1: 基本列表结构 -->
+        <section class="container" id="list-experiment">
+            <h2>列表结构实验区</h2>
+            <p>尝试使用 :first-child, :last-child, :nth-child() 等伪类选择器</p>
+             <ul class="list">
+                <li>列表项 1</li>
+                <li>列表项 2</li>
+                <li>列表项 3</li>
+                <li>列表项 4</li>
+                <li>列表项 5</li>
+            </ul>
+            <ol class="numbered-list">
+                <li>编号项 1</li>
+                <li>编号项 2</li>
+                <li>编号项 3</li>
+                <li>编号项 4</li>
+                <li>编号项 5</li>
+            </ol>
+            <p>注意1解决办法，让该子元素不在最后一个即可</p>
+        </section>
+        
+        <!-- 实验区域2: 混合元素类型 -->
+        <section class="container1" id="mixed-elements">
+            <h2>混合元素类型实验区</h2>
+            <p>尝试使用 :first-of-type, :last-of-type, :nth-of-type() 等伪类选择器</p>
+            <div class="mixed-container">
+                <p>这是一个段落</p>
+                <span>这是一个span</span>
+                <div>这是一个div</div>
+                <p>这是第二个段落</p>
+                <span>这是第二个span</span>
+                <div>这是第二个div</div>
+                <p>这是第三个段落</p>
+            </div>
+            <del>这是唯一的del标签</del>
+        </section>
+        
+        <!-- 实验区域3: 嵌套结构 -->
+        <section class="container2" id="nested-structure">
+            <h2>嵌套结构实验区</h2>
+            <p>尝试在不同层级上使用结构伪类选择器</p>
+            
+            <div class="level-1">
+                <p>第一级段落</p>
+                <div class="level-2">
+                    <p>第二级段落 1</p>
+                    <p>第二级段落 2</p>
+                    <div class="level-3">
+                        <p>第三级段落 1</p>
+                        <p>第三级段落 2</p>
+                        <p>第三级段落 3</p>
+                    </div>
+                </div>
+                <div class="level-2">
+                    <p>另一个第二级段落</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 实验区域4: 特殊案例 -->
+        <section class="container3" id="special-cases">
+            <h2>特殊案例实验区</h2>
+            <p>尝试使用 :only-child, :only-of-type, :empty 等伪类选择器</p>
+            
+            <div class="only-child-container">
+                <div>
+                    <p>这是唯一子元素</p>
+                </div>
+                <div>
+                    <p>第一个段落</p>
+                    <p>第二个段落</p>
+                </div>
+            </div>
+            
+            <div class="only-of-type-container">
+                <p>段落</p>
+                <div>div元素</div>
+                <span>span元素</span>
+                <p>另一个段落</p>
+            </div>
+            
+            <div class="empty-container">
+                <div>有内容的元素</div>
+                <div></div> <!-- 空元素 -->
+                <div>另一个有内容的元素</div>
+                <div><!-- 注释不影响空状态 --></div>
+            </div>
+        </section>
+        
+        <!-- 实验区域5: 表格结构 -->
+        <section class="container4" id="table-structure">
+            <h2>表格结构实验区</h2>
+            <p>尝试在表格中使用结构伪类选择器</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>标题 1</th>
+                        <th>标题 2</th>
+                        <th>标题 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>行 1, 列 1</td>
+                        <td>行 1, 列 2</td>
+                        <td>行 1, 列 3</td>
+                    </tr>
+                    <tr>
+                        <td>行 2, 列 1</td>
+                        <td>行 2, 列 2</td>
+                        <td>行 2, 列 3</td>
+                    </tr>
+                    <tr>
+                        <td>行 3, 列 1</td>
+                        <td>行 3, 列 2</td>
+                        <td>行 3, 列 3</td>
+                    </tr>
+                    <tr>
+                        <td>行 4, 列 1</td>
+                        <td>行 4, 列 2</td>
+                        <td>行 4, 列 3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    
+    <footer>
+        <p>使用说明：在 &lt;style&gt; 标签中添加CSS规则来实验不同的结构伪类选择器。</p>
+    </footer>
+</body>
+</html>

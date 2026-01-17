@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS选择器对比</title>
+</head>
+<body>
+    <h4>CSS选择器对比：通用兄弟选择器（~）和子选择器（>）</h4>
+    <h5>通用兄弟选择器（~）</h5>
+    <ul>
+        <li><strong>定义：</strong>选择某个元素之后的所有兄弟元素。</li>
+        <li><strong>语法：</strong><code>E ~ F</code>，其中 <code>E</code> 是参考元素，<code>F</code> 是 <code>E</code> 之后的所有兄弟元素。</li>
+        <li><strong>作用范围：</strong>选择 <code>E</code> 之后的所有兄弟元素，无论它们的类型。</li>
+        <li><strong>动态性：</strong>如果兄弟元素的数量或顺序发生变化，选择器仍然有效。</li>
+        <li><strong>代码量：</strong>可以一次性选择多个兄弟元素，减少代码量。</li>
+        <li><strong>继承问题：</strong>可能会导致子元素继承样式，需要额外处理。</li>
+        <li><strong>适用场景：</strong>
+            <ul>
+                <li>动态内容，兄弟元素的数量或顺序可能变化。</li>
+                <li>批量样式，需要对多个兄弟元素应用相同样式。</li>
+                <li>指定起始点，从某个特定元素开始选择其后的所有兄弟元素。</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h5>子选择器（>）</h5>
+    <ul>
+        <li><strong>定义：</strong>选择某个父元素的直接子元素。</li>
+        <li><strong>语法：</strong><code>E > F</code>，其中 <code>E</code> 是父元素，<code>F</code> 是 <code>E</code> 的直接子元素。</li>
+        <li><strong>作用范围：</strong>仅选择 <code>E</code> 的直接子元素，不包括嵌套的子元素。</li>
+        <li><strong>动态性：</strong>如果子元素的结构发生变化，选择器可能需要调整。</li>
+        <li><strong>代码量：</strong>需要逐个指定每个子元素，可能会增加代码量。</li>
+        <li><strong>继承问题：</strong>不会影响嵌套的子元素，避免了继承问题。</li>
+        <li><strong>适用场景：</strong>
+            <ul>
+                <li>精确控制，需要精确选择直接子元素。</li>
+                <li>避免嵌套影响，需要避免嵌套元素继承样式。</li>
+                <li>简单直接，需要对直接子元素应用样式。</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
