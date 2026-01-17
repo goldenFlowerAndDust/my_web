@@ -1,0 +1,45 @@
+header{
+    font-size: 25px;
+    color: white;
+    font-style: italic;
+    text-align:center;
+    text-shadow: 10px 5px 5px rgba(255, 180, 0,0.5);
+}
+body{
+    background-color:black;
+
+}
+li{
+    list-style: none;
+}
+nav ul{
+    font-size: 25px;
+    margin: 25px;
+    /*width: 80%;*/
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+ul li a:link {
+    color: yellow;
+}
+img{
+    width:500px;
+    height: auto;
+    float: left;
+}
+section p{
+    font-size: 20px;
+    /*width: 90%;*/
+    /*text-align: left;*/
+    color: white;
+    text-indent: 45px;
+    line-height: 25px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+footer p{
+    color: white;
+    text-align: center;
+}

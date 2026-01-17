@@ -1,0 +1,35 @@
+body{
+    margin: 0 auto;
+    width: 1450px;
+    min-height:300px;
+    background-color: #546e7a;
+}
+#box_1{
+    margin: 10px 0;
+}
+#box_1 div{
+    float: left;
+    margin: 15px 25px;
+    width: 430px;
+    height: 430px;
+    background-color: #dddddd;
+}
+img{
+    margin:15px 90px;
+    width: 250px;
+    height: 250px;
+}
+p{
+    font-size: 18px;
+    margin: 0 7px;
+    clear: both;
+}
+span{
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+}
+#box_1 div:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
