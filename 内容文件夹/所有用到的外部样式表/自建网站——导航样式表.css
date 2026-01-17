@@ -1,0 +1,47 @@
+        /* ================ 导航栏整体背景 ====================*/
+        nav{
+            background:skyblue; /*定义浅蓝色背景*/
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+        }
+        /* ================ 一级菜单横向排列 ==================*/
+        nav > ul{
+            display:flex;  /*横排*/
+            margin:0;  /*去掉浏览器默认缩进*/
+            padding:0;  /*去掉浏览器默认缩进*/
+            list-style:none; /*去掉无序列表前缀小黑点*/
+        }
+        /* ================= 一级菜单相对定位(给下拉做基准) =================*/
+        nav > ul > li{
+            position:relative;
+        }
+        /* ================= 一级链接基本样式 =========================*/
+        nav > ul > li > a{
+            display:block;  /*让整块可以点击*/
+            padding:0 1rem;  /*上下 14px，左右20px*/
+            color:white;  /*文本颜色为黑色*/
+            text-decoration:none;  /*去掉下划线*/
+            border-right:1px solid #aa5500; /*定义分割线*/
+        }
+        /* ================= 下拉列表：默认隐藏 + 垂直堆叠 ====================*/
+        nav li ul {
+            position:absolute; /*脱离文档流，不占位*/
+            left:0; /*贴齐父项左边*/
+            top:100%;  /*贴齐父项底边*/
+            background:#FFFFFF; /*背景比上一级稍深一点*/
+            min-width:160px; /*保证最小的宽度*/
+            display:none; /*关键：隐藏起来*/
+            margin:0;
+            padding:0;
+            list-style:none;
+        }
+        /*================= 下拉链接细微分隔 ===========================*/
+        nav li ul a{
+            padding:10px 15px;
+            border-bottom:1px solid #FFFFFF; /*每条下边框的参数*/
+        }
+        /*================= 鼠标悬停时显示下拉链接 ======================*/
+        nav li:hover > ul{
+            display:block; /*把藏起来的列表亮出来*/
+        }
