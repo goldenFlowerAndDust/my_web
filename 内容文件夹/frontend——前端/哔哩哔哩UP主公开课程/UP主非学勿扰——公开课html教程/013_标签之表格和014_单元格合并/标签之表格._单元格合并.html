@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>标签之表格_单元格合并</title>
+		<style type="text/css">
+			/* *{
+				text-align: center;
+			} */
+			main{
+				border:5px solid red;
+				background-color: skyblue;
+			}
+			header{
+				background-color:yellow;
+				color:black;
+				font-size:35px;
+				text-align:center;
+			}
+			p,span,pre{
+				font-size:25px;
+				background-color:black;
+				color:yellow;
+				margin-bottom: 20px;
+			}
+			h2,h3{
+				font-size:30px;
+				color:green;
+			}
+			table{
+				font-size:25px;
+				text-align:center;
+				color:red;
+				background-color:black;
+			}
+			img{
+				width:100%;
+				height:auto;
+			}
+		</style>
+	</head>
+	<body>
+		<header>标签之表格_单元格合并</header>
+		<main>
+			<section>
+				<p>
+					特点：
+					<br>表格在数据展示方面非常简单，并且表现优秀
+				</p>
+				<img src="素材存放区/表格展示效果.png" alt="表格展示效果">
+			</section>
+			
+			<section>
+				<h2>表格组成与特点</h2>
+				<p>
+					由：行、列、单元格组成
+					<br>单元格的特点：同行等高，同列等宽
+				</p>
+				<h2>表格标签</h2>
+				<p>
+					&nbsp;&nbsp;表格：&lt;table&gt;
+					<br>&nbsp;&nbsp;&nbsp;行：&lt;tr&gt;
+					<br>单元格(列)：&lt;td&gt;
+				</p>
+				
+				<h3>代码演示</h3>
+				<pre>
+		&lt;table&gt;
+			&lt;tr&gt;
+				&lt;td&gt;单元格&lt;/td&gt;
+				&lt;td&gt;单元格&lt;/td&gt;
+				&lt;td&gt;单元格&lt;/td&gt;
+				&lt;td&gt;单元格&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/table&gt;
+				</pre>
+			</section>
+			
+			<section>
+				<h3>代码实践</h3>
+				<table border="1" width="700px" height="40px">
+					<tr>
+						<td>学习计划</td>
+						<td>HTML</td>
+						<td>css</td>
+						<td>javaSript</td>
+					</tr>
+					<tr>
+						<td>表格之标签</td>
+						<td>表格标签:&lt;table&gt;</td>
+						<td>行标签:&lt;tr&gt;</td>
+						<td>单元格(列)标签:&lt;td&gt;</td>
+					</tr>
+				</table>
+				<h3>快捷键</h3>
+				<p>快速生成表格结构：<mark>table>tr*n>td*n{}</mark>
+					<br>n可以是任意数字，n是多少，所对应的行数，列数是多少。
+					<br>{}内输入的文本内容是，所建立的单元格的内容，也就是列的内容，后续可以编辑更改(注意编辑文本内容HBuilderX没有效果)。
+				</p>
+			</section>
+			
+			<section>
+				<h2>表格边框样式</h2>
+				<p>
+					虽然使用了table、tr、td标签建立了表格，但是在网页显示的时候是默认没有边框的
+					<br>如：
+					<img src="素材存放区/使用标签table、tr、td，在网页当中是默认没有边框的，需要使用css样式来定义.png" alt="默认没有边框演示">
+					<h3>表格属性</h3>
+					<span>
+						border：设置表格的边框
+						<br>width:设置表格的宽度
+						<br>height:设置表格的高度
+					</span>
+					<img src="素材存放区/使用属性，为表格添加边框演示.png" alt="使用属性，为表格添加边框演示">
+					<span>
+						当然正常情况下，不建议直接使用属性来添加边框，并且在使用行内标签的时候，
+						还会高亮显示，这是开发环境告诉我们，这么做是不建议的。
+						<img src="素材存放区/直接在行内调用，使用border属性会高亮显示，并提醒.png" alt="直接在行内调用，使用border属性会高亮显示，并提醒">
+					</span>
+				</p>
+			</section>
+			
+			<section>
+				<h2>单元格合并</h2>
+				<p>
+					以上使用标签table、tr、td以及属性border、width、height在网页上成功的创建表格以及边框
+					<br>•但是有没有发现，在网页上的每个表格都是独立的，不在一起。
+					<br>•这样我们需要使用合并单元格
+					<span>
+						<br>任务：
+						<br>1.先建立一个行为5,列为5的表格，并给每个单元格添加编号
+						<br>2.将13~15合并为一个单元格：使用colspan属性
+						<br>3.将2~22合并为一个单元格：使用rowspan属性
+						<br>4.同时使用rowspan,colspan属性合并19，20，24，25。
+						<br>注意：
+						<br>&nbsp;1.以要合并第一个单元格添加对应的属性(colspan、rowspan)
+						<br>&nbsp;2.使用属性时，要算好合并单元格的数量，并将对应的单元格注释或直接删掉。
+						<br>&nbsp;3.水平合并(solspan)：保留左边，删除右边。
+						<br>&nbsp;4.垂直合并(rowspan)：保留上边，删除下边。
+					</span>
+				</p>
+				<table border="1" width="500px" height="10px">
+					<tr>
+						<td>单元格1</td>
+						<td rowspan="5" style="writing-mode:vertical-lr;">单元格2、7、12、17、22</td>
+						<td>单元格3</td>
+						<td>单元格4</td>
+						<td>单元格5</td>
+					</tr>
+					<tr>
+						<td>单元格6</td>
+						<!-- <td>单元格7</td> -->
+						<td>单元格8</td>
+						<td>单元格9</td>
+						<td>单元格10</td>
+					</tr>
+					<tr>
+						<td>单元格11</td>
+						<!-- <td>单元格12</td> -->
+						<td colspan="3">单元格13、14、15</td>
+					</tr>
+					<tr>
+						<td>单元格16</td>
+						<!-- <td>单元格17</td> -->
+						<td>单元格18</td>
+						<td colspan="2" rowspan="2">单元格19,20,24,25</td>
+						<!-- <td>单元格20</td> -->
+					</tr>
+					<tr>
+						<td>单元格21</td>
+						<!-- <td>单元格22</td> -->
+						<td>单元格23</td>
+						<!-- <td>单元格24</td>
+						<td>单元格25</td> -->
+					</tr>
+				</table>
+				<img src="素材存放区/合并单元格演示.png" alt="合并单元格演示">
+				<h3>任务四——同时使用rowspan,solspan属性合并19，20，24，25演示</h3>
+				<img src="素材存放区/任务四——同时使用rowspan,solspan属性合并19，20，24，25演示.png" alt="任务四——同时使用rowspan,solspan属性合并19，20，24，25演示">
+			</section>
+			
+			<section>
+				<p>
+					在 HTML 中，&lt;table&gt;、&lt;tr&gt;、&lt;td&gt;   等元素默认是有 边框间距（border-spacing） 和 边框合并（border-collapse） 的行为的。即使你给   <tr>   或   <td>   设置了   border  ，它们看起来也会是 分开的、有缝隙的，这是因为：
+					<br/>每个单元格的边框是 独立绘制 的，看起来就像中间有缝隙。
+					<br/>这就需要在table标签定义css样式：border-collapse:collspase;
+					<br/>效果：设置   border-collapse: collapse;   后，所有单元格的边框会 合并成一条线，看起来就是一个 完整的表格，没有缝隙。
+				</p>
+			</section>
+		</main>
+	</body>
+</html>

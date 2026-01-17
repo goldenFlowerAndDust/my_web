@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Form表单</title>
+		<style type="text/css">
+			tr,td{
+				border:1px solid black;
+				width:800px;
+				height:50px;
+				text-align:center;
+				background-color: skyblue;
+				color:black;
+				font-size:25px;
+			}
+			main{
+				border: 5px solid red;
+				background-color:skyblue;
+			}
+			header{
+				font-size:35px;
+				background-color:yellow;
+				color:green;
+				text-align:center;
+			}
+			h2,h3{
+				font-size:30px;
+				background-color:black;
+				color:yellow;
+			}
+			p,span,pre,ul,ol,span,mark{
+				font-size:25px;
+			}
+			form{
+				font-size:15px;
+				width: 50%;
+				height:auto;
+			}
+		</style>
+	</head>
+	<body>
+		<header>Form表单</header>
+		<main>
+			<section>
+				<p>
+					1.表单再web网页中用来给用户填写信息，从而能采用户信息，是网页具有交互的功能
+					<br><mark>2.所有的用户输入内容的地方都是用表单来写</mark>，如登入注册，搜索框等
+					<br>如：
+					<img src="素材存放区/Form标签使用情况之一——搜索框.png" alt="Form标签使用情况之一——搜索框">
+					<span>
+						1.表单是由容器和控件组成的，一个表单一般应该包含用户填写的信息的输入框，提交按钮等，这些输入框，
+						2.按钮叫做控件，表单就是容器，它能够容纳各种各样的控件
+					</span>
+				</p>
+				<h2>表单标签Form的使用方法</h2>
+				<span>&lt;from&nbsp;action="url"&nbsp;method="get|post"&nbsp;name="myform"&gt;&lt;/form&gt;</span>
+				<table>
+					<tr>
+						<td>属性说明</td>
+						<td>action——服务器地址</td>
+						<td>name——表单名称</td>
+						<!-- <td></td> -->
+					</tr>
+					<tr>
+						<td>method中Get和post的区别</td>
+						<td>数据提交方式，get把提交的数据url可以看到，post看不到</td>
+						<td>get一般用于提交少量数据，post用来提交大量数据</td>
+						<!-- <td></td> -->
+					</tr>
+				</table>
+			</section>
+			
+			<section>
+				<h2>表单元素</h2>
+				<span>一个完整的表单包含三个基本组成部分：表单标签，表单域，表单按钮</span>
+					<br>
+					<ul>
+						<li>表单标签</li>
+						<li>表单域</li>
+						<li>表单按钮</li>
+					</ul>
+				<h3>代码演示</h3>
+					<pre>
+&lt;form&gt;
+	&lt;input&nbsp;type="text"&gt;
+	&lt;input&nbsp;type="submit"&gt;
+&lt;/form&gt;
+					</pre>									
+			</section>
+			
+			<section>
+				<h2>form一些常用的标签，属性及它们的功能</h2>
+				<ul>
+					<h3>标签及功能</h3>
+					<li>标签input(单标签)——在网页生成输入框</li>
+					<li>type属性中的submit(写在input标签里面)——在搜索框后添加一个[提交]按钮</li>
+					<li>标签button——功能与属性submit相似，同样是将输入的内容传送到另一个地方</li>
+					<!-- <li></li> -->
+				</ul>
+				<form>
+					<input type="text">
+					<input type="submit">
+					<button>提交按钮</button>
+				</form>
+				
+				<img src="素材存放区/form内部编辑控件演示.png" alt="form内部编辑控件演示">
+			</section>
+			
+			<section>
+				<h2>form表单——总结</h2>
+				<ol>
+					<li>form是表单的容器</li>
+					<li>在容器内的统称为控件</li>
+					<li>form内部需要添加表单元素</li>
+					<li>记住：input、submit、button的对应功能</li>
+					<li>表单的作用：给用户提供一个可以输入的方式——只要是提供用户与网页的交互</li>
+					<li>type是表单的类型，里面不同的值，会表达不同的效果，如submit就是提供一个可[提交]的按钮/li>
+					<li>按钮跳转涉及到后端知识——服务器(不懂当前不必深究)</li>
+				</ol>
+			</section>
+			
+			<section>
+				<h2>表单元素章节</h2>
+				<h3>1.文本框</h3>
+				<p>
+					1.文本域通过&lt;input&nbsp;type="text"&gt;标签来设定，当用户要在表单中键入字母、数字等内容时，就会用到文本域
+					<br/>2.还可以在标签input前面添加注意(提醒)，用户需要输入的内容。
+				</p>
+				<mark>文本域代码内容</mark>
+				<pre>
+&lt;form&gt;
+	You Name:&lt;input&nbsp;type="text"&nbsp;name="You&nbsp;Name"&gt;
+	<!-- &lt;&gt; -->
+	You Age:&lt;input&nbsp;type="text"&nbsp;name="You&nbsp;Age"&gt;
+&lt;/form&gt;
+				</pre>
+				<mark>文本域页面演示</mark>
+				<form>
+					You&nbsp;Name:<input type="text" name="You&nbsp;Name"/>
+					<br/>You&nbsp;Age:<input type="text" name="You&nbsp;Age"/>
+				</form>
+				<img src="素材存放区/文本域演示.png" alt="文本域演示">
+				
+				<h3>2.密码框</h3>
+				<p>
+					1.密码字段通过标签&lt;input type="<mark>password</mark>"&gt;来定义
+					<br/><mark>2.密码框的特点：密码字段字符不会明文显示，而是以星号或圆点替代</mark>
+				</p>
+				<mark>密码框代码内容</mark>
+				<pre>
+&lt;form&gt;
+	password&lt;input&nbsp;type="password"&nbsp;name="pwd"&gt;
+&lt;/form&gt;
+				</pre>
+				<mark>密码框网页显示</mark>
+				<form>
+					password:<input type="password" name="paw">
+				</form>
+				<img src="素材存放区/密码框演示.png" alt="密码框演示">
+				
+				<h3>3.提交按钮</h3>
+				<p>
+					1.当用户单击确认按钮时，表单的内容会被传送到另一个文件，表单的动作属性
+					2.定义了目的文件的文件名。
+					<br/>3.由动作属性定义的这个文件通常会接收到的输入数据进行相关的处理。
+					<br/>4.通过submit来完成，按钮的提示文本可以用value来替换文本。
+				</p>
+				<mark>提交按钮代码内容</mark>
+				<pre>
+&lt;form name="input"&nbsp;action="url"&nbsp;method="get"&gt;
+	Username:&lt;input&nbsp;type="text"&nbsp;name="user"&gt;
+	&lt;input&nbsp;type="submit"&nbsp;value="submit"&gt;
+&lt;/form&gt;
+				</pre>
+				<mark>提交按钮网页演示</mark>
+				<form>
+					你的名字：<input type="text" name="你的名字">
+					<br/>你的密码：<input type="password" name="密码">
+					<br/>Username:<input type="text" name="user"/>
+					<input type="submit" value="提交"/>
+				</form>
+				<img src="素材存放区/提示按钮演示.png" alt="提交按钮演示">
+				<h3>表单属性——总结</h3>
+				<ul>
+					<li>文本域——input标签</li>
+					<li>密码框——属性type的值：password</li>
+					<li>提交按钮——属性type的值：submit</li>
+					<li>属性type及它的值均在input标签内部——行内调用</li>
+					<li>提交按钮可以用value替换提示文本</li>
+				</ul>
+			</section>
+		</main>
+	</body>
+</html>
