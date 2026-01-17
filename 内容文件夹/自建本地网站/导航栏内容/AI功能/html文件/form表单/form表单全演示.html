@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>form 全部声明 全集大成演示</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{font-family:Segoe UI,Helvetica,Arial,sans-serif;margin:40px;background:#f7f9fc;line-height:1.6}
+h1{color:#0d47a1}
+form{background:#fff;padding:30px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);max-width:600px;margin:auto}
+fieldset{border:1px solid #cfd8dc;border-radius:6px;padding:20px;margin-bottom:20px}
+legend{font-weight:bold;color:#546e7a}
+label{display:block;margin:8px 0 4px;font-size:14px;color:#455a64}
+input,textarea,select{width:100%;padding:10px;border:1px solid #b0bec5;border-radius:4px;font-size:14px}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#2196f3}
+button{padding:10px 20px;border:none;border-radius:4px;font-size:16px;cursor:pointer;margin-right:10px}
+button[type="submit"]{background:#2196f3;color:#fff}
+button[type="reset"]{background:#78909c;color:#fff}
+button[type="button"]{background:#ffa726;color:#fff}
+.datalist-hint{font-size:12px;color:#78909c;margin-top:4px}
+</style>
+</head>
+<body>
+<h1>form 全部声明 全集大成演示</h1>
+
+<!-- 一行中文解释：form 自身 6 大属性全部登场 -->
+<form action="/search" method="post" enctype="multipart/form-data" target="_blank" autocomplete="off" novalidate>
+  <!-- ① 字段分组 + 标题 -->
+  <fieldset>
+    <legend>用户基础信息</legend>
+
+    <!-- label + for 关联：点击文字=点击控件 -->
+    <label for="user">用户名 *</label>
+    <input id="user" name="username" type="text" value="游客" placeholder="请输入用户名" required maxlength="20" autofocus autocomplete="off">
+
+    <label for="pwd">密码 *</label>
+    <input id="pwd" name="password" type="password" placeholder="8-20位混合字符" required minlength="8" maxlength="20">
+
+    <label for="email">邮箱 *</label>
+    <input id="email" name="email" type="email" placeholder="name@domain.com" required>
+
+    <label for="phone">电话</label>
+    <input id="phone" name="phone" type="tel" placeholder="13800138000" pattern="\d{11}">
+
+    <label for="site">个人网站</label>
+    <input id="site" name="website" type="url" placeholder="https://example.com">
+
+    <label for="age">年龄</label>
+    <input id="age" name="age" type="number" min="0" max="120" step="1" value="18">
+
+    <label for="sat">满意度（0-100）</label>
+    <input id="sat" name="satisfaction" type="range" min="0" max="100" step="5" value="50">
+
+    <label for="bday">生日</label>
+    <input id="bday" name="birthday" type="date" min="1900-01-01" max="2025-12-31">
+
+    <label for="meet">会议时间</label>
+    <input id="meet" name="meeting" type="datetime-local">
+
+    <label for="exp">信用卡到期月</label>
+    <input id="exp" name="expMonth" type="month">
+
+    <label for="week">选择周</label>
+    <input id="week" name="week" type="week">
+
+    <label for="color">主题色</label>
+    <input id="color" name="theme" type="color" value="#2196f3">
+
+    <label for="avatar">头像</label>
+    <input id="avatar" name="avatar" type="file" accept="image/*" multiple>
+
+    <!-- 多行文本 -->
+    <label for="intro">个人简介</label>
+    <textarea id="intro" name="intro" rows="4" cols="40" placeholder="简单介绍一下自己..." maxlength="200"></textarea>
+  </fieldset>
+
+  <!-- ② 单选 + 复选 -->
+  <fieldset>
+    <legend>偏好设置</legend>
+
+    <label>性别（单选）</label>
+    <input type="radio" name="gender" value="M" id="m"><label for="m">男</label>
+    <input type="radio" name="gender" value="F" id="f"><label for="f">女</label>
+    <input type="radio" name="gender" value="O" id="o"><label for="o">其他</label>
+
+    <label>爱好（复选）</label>
+    <input type="checkbox" name="hobby" value="music" id="hm"><label for="hm">音乐</label>
+    <input type="checkbox" name="hobby" value="sport" id="hs"><label for="hs">运动</label>
+    <input type="checkbox" name="hobby" value="read" id="hr"><label for="hr">阅读</label>
+
+    <!-- 下拉选择 -->
+    <label for="city">居住城市</label>
+    <select id="city" name="city">
+      <option value="">请选择</option>
+      <option value="bj">北京</option>
+      <option value="sh">上海</option>
+      <option value="gz">广州</option>
+    </select>
+
+    <!-- 多选下拉 -->
+    <label for="skills">掌握技能（多选）</label>
+    <select id="skills" name="skills" multiple size="4">
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+      <option value="js">JavaScript</option>
+      <option value="py">Python</option>
+    </select>
+
+    <!-- 数据列表（联想） -->
+    <label for="lang">母语（联想输入）</label>
+    <input id="lang" name="language" list="lang-list" placeholder="输入或选择">
+    <datalist id="lang-list">
+      <option value="中文"></option>
+      <option value="English"></option>
+      <option value="Español"></option>
+      <option value="Français"></option>
+    </datalist>
+    <p class="datalist-hint">输入时会自动联想列表内容</p>
+  </fieldset>
+
+  <!-- ③ 按钮全家桶 -->
+  <fieldset>
+    <legend>操作区</legend>
+    <button type="submit">提交数据</button>
+    <button type="reset">清空表单</button>
+    <button type="button" onclick="alert('纯 JS 逻辑可绑这里')">辅助按钮</button>
+    <!-- 隐藏域：仅传数据，不显示 -->
+    <input type="hidden" name="csrf" value="abc123xyz">
+    <!-- 输出结果（JS 写 value） -->
+    <label for="res">计算结果（output 演示）</label>
+    <output id="res" name="result" for="age">0</output>
+  </fieldset>
+</form>
+
+<!-- 中文逐行解释（与演示文件完全分开） -->
+<hr>
+<h2>中文逐行解释（与上面代码对应）</h2>
+<ol>
+  <li><code>action="/search"</code> → 数据提交到 /search 接口；改为你的后端地址即可。</li>
+  <li><code>method="post"</code> → 使用 POST 方式，适合写入/上传；查询可用 GET。</li>
+  <li><code>enctype="multipart/form-data"</code> → 允许上传文件；纯文本可省略或留默认。</li>
+  <li><code>target="_blank"</code> → 提交后在新标签打开结果；_self 为当前页。</li>
+  <li><code>autocomplete="off"</code> → 关闭浏览器自动填充；登录页常设为 off。</li>
+  <li><code>novalidate</code> → 禁用原生校验，完全由你或 JS 校验；去掉则浏览器自动拦截空/格式错误。</li>
+  <li>label + for：点击文字=点击控件，提升可访问性。</li>
+  <li>required / minlength / maxlength / pattern：前端第一道校验，减轻后端压力。</li>
+  <li>type="number" 配合 min/max/step：限定数字范围；step="5" 表示每次增减 5。</li>
+  <li>type="range"：滑块可视化数值；与 number 联动可做双向绑定。</li>
+  <li>date/datetime-local/month/week/time：原生日期/时间选择器，移动端自动弹出轮盘。</li>
+  <li>type="color"：原生取色器，返回 #rrggbb 字符串。</li>
+  <li>type="file" + accept + multiple：文件上传，accept 限制 MIME，multiple 允许多选。</li>
+  <li>textarea：rows/cols 控制默认大小；maxlength 限制字数。</li>
+  <li>radio/checkbox：name 相同即为一组；value 为后端实际接收值。</li>
+  <li>select / select multiple：单选下拉 vs 多选列表；size 控制可见行数。</li>
+  <li>datalist + list：联想输入，输入框与下拉结合，提升用户体验。</li>
+  <li>button type 三兄弟：submit=提交表单，reset=清空，button=纯 JS 触发，无默认行为。</li>
+  <li>hidden：不显示但随表单提交，常放 CSRF、配置 ID 等。</li>
+  <li>output + for：只读展示结果，for 属性关联参与计算的控件 ID 列表（空格分隔）。</li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>盒子分区速成课（3 声明搞定 F 形板块）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* ========== ① 核心 3 声明：背下来就能搭盒子 ========== */
+.row        { display:flex;              /* 中文：弹性容器 → 子元素横排 */ 
+              flex-wrap:wrap;             /* 中文：允许换行 → 手机自动竖排 */
+              margin:0 -10px; }            /* 中文：负外边距 → 抵消子元素间隙 */
+.col        { flex:1 1 300px;              /* 中文：弹性增长+收缩+基础宽度300px */
+              margin:0 10px 20px;          /* 中文：外间距 → 盒子之间留缝 */
+              background:#fff; 
+              border-radius:8px; 
+              box-shadow:0 2px 8px rgba(0,0,0,.1); 
+              padding:20px; }
+/* ========== ② 脑补 F 形：5 个盒子 = 5 板块 ========== */
+.header     { background:#0d47a1; color:#fff; }   /* 头部：Logo + 导航 */
+.hero       { background:#2196f3; color:#fff; }   /* 主视觉：大标题+按钮 */
+.main       { background:#f7f9fc; }               /* 主内容：文章列表 */
+.sidebar    { background:#e3f2fd; }               /* 侧边栏：分类/广告 */
+.footer     { background:#0d47a1; color:#fff; }   /* 底部：版权/链接 */
+</style>
+</head>
+
+<body>
+<!-- ============= ③ 现场搭盒子：复制这段就能跑 ============= -->
+<header class="row header">
+  <div class="col">Logo + 导航</div>
+</header>
+
+<section class="row hero">
+  <div class="col">
+    <h1>大标题一句话</h1>
+    <p>卖点描述，按钮在下面</p>
+    <button style="background:#fff;color:#2196f3;border:none;padding:10px 20px;border-radius:4px;cursor:pointer;">立即体验</button>
+  </div>
+</section>
+
+<main class="row main">
+  <div class="col">
+    <h2>主内容区</h2>
+    <ul>
+      <li>文章 1</li>
+      <li>文章 2</li>
+      <li>文章 3</li>
+    </ul>
+  </div>
+</main>
+
+<aside class="row sidebar">
+  <div class="col">
+    <h3>侧边栏</h3>
+    <ul>
+      <li>分类 A</li>
+      <li>分类 B</li>
+    </ul>
+  </div>
+</aside>
+
+<footer class="row footer">
+  <div class="col">© 2025 我的网站</div>
+</footer>
+
+<!-- ============= ④ 脑补训练：把文字换成真内容 ============= -->
+<div style="margin:40px;background:#fffde7;padding:20px;border-left:5px solid #fbc02d;">
+  <h2>脑补训练（闭眼想象）</h2>
+  <ol>
+    <li><strong>header</strong> → 放 Logo + 导航菜单</li>
+    <li><strong>hero</strong> → 放大标题 + 主按钮 + 背景图</li>
+    <li><strong>main</strong> → 放文章卡片 / 商品列表 / 表单</li>
+    <li><strong>sidebar</strong> → 放分类、广告、热门标签</li>
+    <li><strong>footer</strong> → 放版权、备案号、社交链接</li>
+  </ol>
+  <p>→ 以后任何网页，先画 5 个框，再填内容，再细化样式。</p>
+</div>
+
+<!-- ============= ⑤ 手机适配：一行代码搞定 ============= -->
+<style>
+@media (max-width:768px){
+  .row{flex-direction:column} /* 手机竖排 */
+  .col{margin:10px 0}          /* 手机留缝 */
+}
+</style>
+
+<!-- ============= ⑥ 检查清单：复制打钩 ============= -->
+<ul style="background:#e8f5e9;padding:15px;border-left:5px solid #4caf50;">
+  <li>☐ 复制上面 5 段 &lt;section&gt; → 改 class 名 → 填真内容</li>
+  <li>☐ 换背景图：.hero{background:url(图片) center/cover}</li>
+  <li>☐ 换颜色：改 CSS 变量 --main</li>
+  <li>☐ 手机测试：缩小浏览器，确认竖排正常</li>
+  <li>☐ 上线：push → GitHub Pages → 自定义域名</li>
+</ul>
+</body>
+</html>

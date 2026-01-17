@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>样式和标签总结</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>样式和标签总结</h1>
+    <table>
+        <tr>
+            <th>标签</th>
+            <th>属性</th>
+            <th>说明</th>
+        </tr>
+        <tr>
+            <td>html</td>
+            <td>lang="en"</td>
+            <td>设置文档的语言为英语</td>
+        </tr>
+        <tr>
+            <td>head</td>
+            <td>无</td>
+            <td>包含文档的元数据</td>
+        </tr>
+        <tr>
+            <td>meta</td>
+            <td>charset="UTF-8"</td>
+            <td>设置字符编码为UTF-8</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>无</td>
+            <td>设置文档的标题</td>
+        </tr>
+        <tr>
+            <td>style</td>
+            <td>无</td>
+            <td>定义文档的样式</td>
+        </tr>
+        <tr>
+            <td>body</td>
+            <td>无</td>
+            <td>包含文档的主体内容</td>
+        </tr>
+        <tr>
+            <td>main</td>
+            <td>无</td>
+            <td>定义文档的主要内容区域</td>
+        </tr>
+        <tr>
+            <td>form</td>
+            <td>无</td>
+            <td>定义表单</td>
+        </tr>
+        <tr>
+            <td>fieldset</td>
+            <td>无</td>
+            <td>定义表单中的字段集</td>
+        </tr>
+        <tr>
+            <td>legend</td>
+            <td>无</td>
+            <td>定义字段集的标题</td>
+        </tr>
+        <tr>
+            <td>div</td>
+            <td>无</td>
+            <td>定义文档的一个分区或节</td>
+        </tr>
+        <tr>
+            <td>label</td>
+            <td>for="id"</td>
+            <td>定义表单控件的标签，`for` 属性与表单控件的 `id` 一致</td>
+        </tr>
+        <tr>
+            <td>input</td>
+            <td>type="text"</td>
+            <td>定义单行文本输入框</td>
+        </tr>
+        <tr>
+            <td>input</td>
+            <td>type="password"</td>
+            <td>定义密码输入框</td>
+        </tr>
+        <tr>
+            <td>input</td>
+            <td>type="tel"</td>
+            <td>定义电话号码输入框</td>
+        </tr>
+        <tr>
+            <td>input</td>
+            <td>type="email"</td>
+            <td>定义电子邮件地址输入框</td>
+        </tr>
+        <tr>
+            <td>input</td>
+            <td>type="checkbox"</td>
+            <td>定义复选框</td>
+        </tr>
+        <tr>
+            <td>input</td>
+            <td>type="radio"</td>
+            <td>定义单选按钮</td>
+        </tr>
+        <tr>
+            <td>input</td>
+            <td>type="submit"</td>
+            <td>定义提交按钮</td>
+        </tr>
+        <tr>
+            <td>input</td>
+            <td>type="reset"</td>
+            <td>定义重置按钮</td>
+        </tr>
+        <tr>
+            <td>select</td>
+            <td>无</td>
+            <td>定义下拉列表</td>
+        </tr>
+        <tr>
+            <td>optgroup</td>
+            <td>label="text"</td>
+            <td>定义下拉列表中的选项组</td>
+        </tr>
+        <tr>
+            <td>option</td>
+            <td>无</td>
+            <td>定义下拉列表中的选项</td>
+        </tr>
+        <tr>
+            <td>@keyframes</td>
+            <td>gradient</td>
+            <td>定义动画的关键帧</td>
+        </tr>
+        <tr>
+            <td>animation</td>
+            <td>gradient 15s ease infinite</td>
+            <td>应用动画，`gradient` 是动画名称，`15s` 是动画时长，`ease` 是动画速度曲线，`infinite` 表示无限循环</td>
+        </tr>
+        <tr>
+            <td>background</td>
+            <td>linear-gradient(270deg, #74ebd5, #acb6e5, #f1f8e9)</td>
+            <td>定义线性渐变背景</td>
+        </tr>
+        <tr>
+            <td>background-size</td>
+            <td>600% 600%</td>
+            <td>定义背景的大小</td>
+        </tr>
+        <tr>
+            <td>background-position</td>
+            <td>0% 50%</td>
+            <td>定义背景的位置</td>
+        </tr>
+        <tr>
+            <td>display</td>
+            <td>flex</td>
+            <td>定义弹性布局</td>
+        </tr>
+        <tr>
+            <td>justify-content</td>
+            <td>center</td>
+            <td>在弹性布局中，水平居中对齐子元素</td>
+        </tr>
+        <tr>
+            <td>align-items</td>
+            <td>center</td>
+            <td>在弹性布局中，垂直居中对齐子元素</td>
+        </tr>
+        <tr>
+            <td>padding</td>
+            <td>10px 15px</td>
+            <td>定义内边距</td>
+        </tr>
+        <tr>
+            <td>margin</td>
+            <td>10px 0</td>
+            <td>定义外边距</td>
+        </tr>
+        <tr>
+            <td>cursor</td>
+            <td>:pointer</td>
+            <td>定义鼠标指针的形状，`pointer` 表示鼠标指针变为手形</td>
+        </tr>
+        <tr>
+            <td>outline</td>
+            <td>none</td>
+            <td>移除元素的轮廓</td>
+        </tr>
+        <tr>
+            <td>:hover</td>
+            <td>background-color: #f0f0f0;</td>
+            <td>定义鼠标悬停时的背景颜色</td>
+        </tr>
+    </table>
+</body>
+</html>

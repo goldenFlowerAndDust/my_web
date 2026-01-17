@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态多颜色平滑渐变背景</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background: linear-gradient(45deg, #6c5ce7 0%, #007BFF 25%, #5cf17b 50%, #14fcdf 75%, #acb6e5 100%);
+            background-size: 400% 400%;
+            animation: gradient 15s linear infinite;
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="content">
+            <h1>动态多颜色平滑渐变背景</h1>
+            <p>这是一个带有动态多颜色平滑渐变背景的页面。</p>
+        </div>
+    </main>
+</body>
+</html>

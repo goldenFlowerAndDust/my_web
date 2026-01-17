@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML表单参考表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: #f0f2f5;
+            color: #333;
+            line-height: 1.5;
+            padding: 15px;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 15px;
+            overflow-x: auto;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin: 20px 0 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #4b6cb7;
+            font-size: 1.2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            min-width: 600px;
+        }
+        
+        th {
+            background: #4b6cb7;
+            color: white;
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #eaeaea;
+            vertical-align: top;
+            font-size: 0.85rem;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .tag-name {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #2c3e50;
+            white-space: nowrap;
+        }
+        
+        .code-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 6px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .attr-table th:nth-child(1),
+        .attr-table td:nth-child(1) {
+            width: 25%;
+        }
+        
+        .attr-table th:nth-child(2),
+        .attr-table td:nth-child(2) {
+            width: 35%;
+        }
+        
+        .attr-table th:nth-child(3),
+        .attr-table td:nth-child(3) {
+            width: 40%;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #2c3e50;
+            color: white;
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 0.8rem;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            h2 {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                border-radius: 8px;
+            }
+            
+            header {
+                padding: 15px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HTML表单标签与属性参考表</h1>
+            <p class="subtitle">移动端优化版 - 包含所有常用表单标签和属性</p>
+        </header>
+        
+        <div class="content">
+            <h2>表单结构标签</h2>
+            <table>
+                <tr>
+                    <th width="20%">标签</th>
+                    <th width="25%">中文意思</th>
+                    <th width="55%">说明与示例</th>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;form&gt;</td>
+                    <td>表单容器</td>
+                    <td>定义包含表单元素的HTML表单
+                        <div class="code-example">&lt;form action="/submit" method="post"&gt;&lt;/form&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;fieldset&gt;</td>
+                    <td>字段组</td>
+                    <td>将相关表单元素分组
+                        <div class="code-example">&lt;fieldset&gt;...表单元素...&lt;/fieldset&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;legend&gt;</td>
+                    <td>组标题</td>
+                    <td>为fieldset元素定义标题
+                        <div class="code-example">&lt;legend&gt;个人信息&lt;/legend&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;label&gt;</td>
+                    <td>标签</td>
+                    <td>为表单元素定义标签，使用for属性关联
+                        <div class="code-example">&lt;label for="name"&gt;姓名:&lt;/label&gt;</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <h2>输入控件标签</h2>
+            <table>
+                <tr>
+                    <th width="20%">标签</th>
+                    <th width="25%">中文意思</th>
+                    <th width="55%">说明与示例</th>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;input&gt;</td>
+                    <td>输入框</td>
+                    <td>创建各种类型的输入控件，type属性决定类型
+                        <div class="code-example">&lt;input type="text" name="user"&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;textarea&gt;</td>
+                    <td>文本区域</td>
+                    <td>创建多行文本输入框
+                        <div class="code-example">&lt;textarea rows="4" cols="50"&gt;&lt;/textarea&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;select&gt;</td>
+                    <td>下拉列表</td>
+                    <td>创建下拉选择列表
+                        <div class="code-example">&lt;select name="country"&gt;...&lt;/select&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;option&gt;</td>
+                    <td>选项</td>
+                    <td>定义select元素中的选项
+                        <div class="code-example">&lt;option value="1"&gt;选项1&lt;/option&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;optgroup&gt;</td>
+                    <td>选项组</td>
+                    <td>将相关选项分组
+                        <div class="code-example">&lt;optgroup label="组1"&gt;...&lt;/optgroup&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;datalist&gt;</td>
+                    <td>数据列表</td>
+                    <td>为输入框提供预定义选项
+                        <div class="code-example">&lt;datalist id="list"&gt;...&lt;/datalist&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;button&gt;</td>
+                    <td>按钮</td>
+                    <td>创建可点击的按钮
+                        <div class="code-example">&lt;button type="submit"&gt;提交&lt;/button&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;output&gt;</td>
+                    <td>输出</td>
+                    <td>显示计算或用户操作的结果
+                        <div class="code-example">&lt;output name="result"&gt;0&lt;/output&gt;</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <h2>input类型(type属性)</h2>
+            <table class="attr-table">
+                <tr>
+                    <th>类型</th>
+                    <th>中文说明</th>
+                    <th>示例</th>
+                </tr>
+                <tr>
+                    <td class="tag-name">text</td>
+                    <td>单行文本输入</td>
+                    <td><div class="code-example">&lt;input type="text"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">password</td>
+                    <td>密码输入(掩码显示)</td>
+                    <td><div class="code-example">&lt;input type="password"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">email</td>
+                    <td>电子邮件地址</td>
+                    <td><div class="code-example">&lt;input type="email"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">url</td>
+                    <td>URL地址</td>
+                    <td><div class="code-example">&lt;input type="url"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">tel</td>
+                    <td>电话号码</td>
+                    <td><div class="code-example">&lt;input type="tel"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">number</td>
+                    <td>数字输入</td>
+                    <td><div class="code-example">&lt;input type="number"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">range</td>
+                    <td>范围滑块</td>
+                    <td><div class="code-example">&lt;input type="range"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">date</td>
+                    <td>日期选择</td>
+                    <td><div class="code-example">&lt;input type="date"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">time</td>
+                    <td>时间选择</td>
+                    <td><div class="code-example">&lt;input type="time"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">datetime-local</td>
+                    <td>本地日期时间</td>
+                    <td><div class="code-example">&lt;input type="datetime-local"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">month</td>
+                    <td>年月选择</td>
+                    <td><div class="code-example">&lt;input type="month"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">week</td>
+                    <td>周选择</td>
+                    <td><div class="code-example">&lt;input type="week"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">color</td>
+                    <td>颜色选择</td>
+                    <td><div class="code-example">&lt;input type="color"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">checkbox</td>
+                    <td>复选框</td>
+                    <td><div class="code-example">&lt;input type="checkbox"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">radio</td>
+                    <td>单选按钮</td>
+                    <td><div class="code-example">&lt;input type="radio"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">file</td>
+                    <td>文件上传</td>
+                    <td><div class="code-example">&lt;input type="file"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">hidden</td>
+                    <td>隐藏字段</td>
+                    <td><div class="code-example">&lt;input type="hidden"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">submit</td>
+                    <td>提交按钮</td>
+                    <td><div class="code-example">&lt;input type="submit"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">reset</td>
+                    <td>重置按钮</td>
+                    <td><div class="code-example">&lt;input type="reset"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">button</td>
+                    <td>普通按钮</td>
+                    <td><div class="code-example">&lt;input type="button"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">image</td>
+                    <td>图像提交按钮</td>
+                    <td><div class="code-example">&lt;input type="image" src="btn.png"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">search</td>
+                    <td>搜索框</td>
+                    <td><div class="code-example">&lt;input type="search"&gt;</div></td>
+                </tr>
+            </table>
+            
+            <h2>常用表单属性</h2>
+            <table class="attr-table">
+                <tr>
+                    <th>属性</th>
+                    <th>适用元素</th>
+                    <th>说明与示例</th>
+                </tr>
+                <tr>
+                    <td class="tag-name">name</td>
+                    <td>所有表单控件</td>
+                    <td>定义表单元素的名称，用于数据提交
+                        <div class="code-example">&lt;input name="username"&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">value</td>
+                    <td>input, button, option</td>
+                    <td>定义元素的初始值
+                        <div class="code-example">&lt;input value="默认值"&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">placeholder</td>
+                    <td>input, textarea</td>
+                    <td>提供输入提示文本
+                        <div class="code-example">&lt;input placeholder="请输入..."&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">required</td>
+                    <td>input, select, textarea</td>
+                    <td>指定字段为必填项
+                        <div class="code-example">&lt;input required&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">disabled</td>
+                    <td>所有表单控件</td>
+                    <td>禁用表单元素
+                        <div class="code-example">&lt;input disabled&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">readonly</td>
+                    <td>input, textarea</td>
+                    <td>设置字段为只读
+                        <div class="code-example">&lt;input readonly&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">maxlength</td>
+                    <td>input, textarea</td>
+                    <td>限制输入的最大字符数
+                        <div class="code-example">&lt;input maxlength="10"&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">min / max</td>
+                    <td>input(number/date/range)</td>
+                    <td>设置数值/日期范围
+                        <div class="code-example">&lt;input min="1" max="100"&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">pattern</td>
+                    <td>input(text/tel/email/url)</td>
+                    <td>指定输入值的正则表达式验证
+                        <div class="code-example">&lt;input pattern="[A-Za-z]{3}"&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">autocomplete</td>
+                    <td>form, input</td>
+                    <td>启用/禁用自动完成功能
+                        <div class="code-example">&lt;input autocomplete="off"&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">autofocus</td>
+                    <td>所有表单控件</td>
+                    <td>页面加载时自动聚焦到元素
+                        <div class="code-example">&lt;input autofocus&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">multiple</td>
+                    <td>input(file/email), select</td>
+                    <td>允许多个值/文件
+                        <div class="code-example">&lt;input type="file" multiple&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">form</td>
+                    <td>所有表单控件</td>
+                    <td>指定元素所属的表单
+                        <div class="code-example">&lt;input form="myForm"&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">list</td>
+                    <td>input</td>
+                    <td>引用datalist元素
+                        <div class="code-example">&lt;input list="options"&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">selected</td>
+                    <td>option</td>
+                    <td>预设选中选项
+                        <div class="code-example">&lt;option selected&gt;默认&lt;/option&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">checked</td>
+                    <td>input(checkbox/radio)</td>
+                    <td>预设选中状态
+                        <div class="code-example">&lt;input type="checkbox" checked&gt;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tag-name">for</td>
+                    <td>label</td>
+                    <td>指定label关联的表单元素
+                        <div class="code-example">&lt;label for="inputId"&gt;标签&lt;/label&gt;</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <h2>form标签属性</h2>
+            <table class="attr-table">
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                    <th>示例</th>
+                </tr>
+                <tr>
+                    <td class="tag-name">action</td>
+                    <td>指定表单提交的URL</td>
+                    <td><div class="code-example">&lt;form action="/submit"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">method</td>
+                    <td>指定HTTP方法(get/post)</td>
+                    <td><div class="code-example">&lt;form method="post"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">enctype</td>
+                    <td>指定表单数据的编码类型</td>
+                    <td><div class="code-example">&lt;form enctype="multipart/form-data"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">target</td>
+                    <td>指定响应显示的位置</td>
+                    <td><div class="code-example">&lt;form target="_blank"&gt;</div></td>
+                </tr>
+                <tr>
+                    <td class="tag-name">novalidate</td>
+                    <td>禁用表单验证</td>
+                    <td><div class="code-example">&lt;form novalidate&gt;</div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <footer>
+            <p>HTML表单参考表 &copy; 2023 - 移动端优化版</p>
+        </footer>
+    </div>
+</body>
+</html>

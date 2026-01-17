@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>form 全部声明速查表</title>
+<style>
+  body{font-family:Segoe UI,Helvetica,Arial,sans-serif;margin:40px;background:#f7f9fc}
+  h1{color:#0d47a1}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{border:1px solid #cfd8dc;padding:10px;text-align:left}
+  th{background:#eceff1}
+  code{background:#e3f2fd;padding:2px 4px;border-radius:3px}
+  .demo{background:#fffde7;border-left:4px solid #fbc02d;padding:6px;margin-top:6px}
+</style>
+</head>
+<body>
+<h1>form 全部声明速查表（中文含义 + 作用 + 演示）</h1>
+<table>
+  <thead>
+    <tr><th>声明</th><th>中文含义</th><th>作用简述</th><th>一行演示</th></tr>
+  </thead>
+  <tbody>
+    <!-- ① 表单自身属性 -->
+    <tr><td><code>action</code></td><td>提交地址</td><td>数据要发送到哪个 URL</td><td class="demo"><code>&lt;form action="/search"&gt;</code></td></tr>
+    <tr><td><code>method</code></td><td>提交方法</td><td>get（查询）或 post（写入）</td><td class="demo"><code>&lt;form method="post"&gt;</code></td></tr>
+    <tr><td><code>enctype</code></td><td>编码类型</td><td>文件上传时必须 multipart/form-data</td><td class="demo"><code>&lt;form enctype="multipart/form-data"&gt;</code></td></tr>
+    <tr><td><code>target</code></td><td>目标窗口</td><td>_blank 新标签打开；_self 默认</td><td class="demo"><code>&lt;form target="_blank"&gt;</code></td></tr>
+    <tr><td><code>autocomplete</code></td><td>自动完成</td><td>on 启用（默认）或 off 关闭</td><td class="demo"><code>&lt;form autocomplete="off"&gt;</code></td></tr>
+    <tr><td><code>novalidate</code></td><td>不验证</td><td>禁用浏览器原生校验（纯前端）</td><td class="demo"><code>&lt;form novalidate&gt;</code></td></tr>
+
+    <!-- ② 输入控件 -->
+    <tr><td><code>type="text"</code></td><td>单行文本</td><td>普通字符串输入</td><td class="demo"><code>&lt;input type="text" name="user"&gt;</code></td></tr>
+    <tr><td><code>type="password"</code></td><td>密码</td><td>掩码输入</td><td class="demo"><code>&lt;input type="password" name="pwd"&gt;</code></td></tr>
+    <tr><td><code>type="email"</code></td><td>邮箱</td><td>自带 @ 格式校验</td><td class="demo"><code>&lt;input type="email" name="mail"&gt;</code></td></tr>
+    <tr><td><code>type="tel"</code></td><td>电话</td><td>唤起数字键盘（移动端）</td><td class="demo"><code>&lt;input type="tel" name="phone"&gt;</code></td></tr>
+    <tr><td><code>type="url"</code></td><td>网址</td><td>自带 URL 格式校验</td><td class="demo"><code>&lt;input type="url" name="site"&gt;</code></td></tr>
+    <tr><td><code>type="number"</code></td><td>数字</td><td>仅允许数值，可设 min/max/step</td><td class="demo"><code>&lt;input type="number" min="0" max="100" step="5"&gt;</code></td></tr>
+    <tr><td><code>type="range"</code></td><td>滑块</td><td>可视化数值选择</td><td class="demo"><code>&lt;input type="range" min="0" max="100" value="50"&gt;</code></td></tr>
+    <tr><td><code>type="date"</code></td><td>日期</td><td>自带日期选择器</td><td class="demo"><code>&lt;input type="date" name="birth"&gt;</code></td></tr>
+    <tr><td><code>type="time"</code></td><td>时间</td><td>HH:mm 选择器</td><td class="demo"><code>&lt;input type="time" name="alarm"&gt;</code></td></tr>
+    <tr><td><code>type="datetime-local"</code></td><td>本地日期时间</td><td>日期+时间（无时区）</td><td class="demo"><code>&lt;input type="datetime-local" name="meet"&gt;</code></td></tr>
+    <tr><td><code>type="month"</code></td><td>月份</td><td>YYYY-MM 选择器</td><td class="demo"><code>&lt;input type="month" name="exp"&gt;</code></td></tr>
+    <tr><td><code>type="week"</code></td><td>周</td><td>YYYY-W## 选择器</td><td class="demo"><code>&lt;input type="week" name="week"&gt;</code></td></tr>
+    <tr><td><code>type="color"</code></td><td>颜色</td><td>原生取色器</td><td class="demo"><code>&lt;input type="color" name="theme"&gt;</code></td></tr>
+    <tr><td><code>type="checkbox"</code></td><td>复选框</td><td>多选 on/off</td><td class="demo"><code>&lt;input type="checkbox" name="hobby" value="music"&gt;</code></td></tr>
+    <tr><td><code>type="radio"</code></td><td>单选框</td><td>name 相同组内互斥</td><td class="demo"><code>&lt;input type="radio" name="gender" value="f"&gt;</code></td></tr>
+    <tr><td><code>type="file"</code></td><td>文件</td><td>上传选择；需 enctype 支持</td><td class="demo"><code>&lt;input type="file" name="avatar" accept="image/*"&gt;</code></td></tr>
+    <tr><td><code>type="hidden"</code></td><td>隐藏域</td><td>不显示，只传数据</td><td class="demo"><code>&lt;input type="hidden" name="csrf" value="abc123"&gt;</code></td></tr>
+    <tr><td><code>type="submit"</code></td><td>提交按钮</td><td>触发表单提交</td><td class="demo"><code>&lt;input type="submit" value="保存"&gt;</code></td></tr>
+    <tr><td><code>type="reset"</code></td><td>重置按钮</td><td>清空表单内容</td><td class="demo"><code>&lt;input type="reset" value="清空"&gt;</code></td></tr>
+    <tr><td><code>type="button"</code></td><td>普通按钮</td><td>无默认行为，纯 JS 用</td><td class="demo"><code>&lt;input type="button" value="更多" onclick="add()"&gt;</code></td></tr>
+
+    <!-- ③ 通用输入属性 -->
+    <tr><td><code>name</code></td><td>字段名</td><td>键名，后端接收用</td><td class="demo"><code>&lt;input name="username"&gt;</code></td></tr>
+    <tr><td><code>value</code></td><td>初始值</td><td>默认文本或选项值</td><td class="demo"><code>&lt;input value="游客"&gt;</code></td></tr>
+    <tr><td><code>placeholder</code></td><td>占位提示</td><td>灰字提示，不提交</td><td class="demo"><code>&lt;input placeholder="请输入昵称"&gt;</code></td></tr>
+    <tr><td><code>required</code></td><td>必填</td><td>阻止空值提交（原生校验）</td><td class="demo"><code>&lt;input required&gt;</code></td></tr>
+    <tr><td><code>disabled</code></td><td>禁用</td><td>灰掉，不提交</td><td class="demo"><code>&lt;input disabled&gt;</code></td></tr>
+    <tr><td><code>readonly</code></td><td>只读</td><td>可查看，不可改，会提交</td><td class="demo"><code>&lt;input readonly&gt;</code></td></tr>
+    <tr><td><code>maxlength</code></td><td>最大长度</td><td>字符上限</td><td class="demo"><code>&lt;input maxlength="20"&gt;</code></td></tr>
+    <tr><td><code>min / max</code></td><td>最小/最大值</td><td>数字、日期等范围</td><td class="demo"><code>&lt;input type="number" min="0" max="100"&gt;</code></td></tr>
+    <tr><td><code>step</code></td><td>步长</td><td>数字/滑块每次跳跃量</td><td class="demo"><code>&lt;input type="number" step="0.1"&gt;</code></td></tr>
+    <tr><td><code>pattern</code></td><td>正则校验</td><td>原生格式检查</td><td class="demo"><code>&lt;input pattern="\d{4}"&gt;</code>（4 位数字）</td></tr>
+    <tr><td><code>autofocus</code></td><td>自动聚焦</td><td>进入页面即聚焦该字段</td><td class="demo"><code>&lt;input autofocus&gt;</code></td></tr>
+    <tr><td><code>autocomplete</code></td><td>自动完成</td><td>on / off 浏览器记忆</td><td class="demo"><code>&lt;input autocomplete="off"&gt;</code></td></tr>
+    <tr><td><code>accept</code></td><td>接受类型</td><td>文件上传时限定 MIME</td><td class="demo"><code>&lt;input type="file" accept="image/*"&gt;</code></td></tr>
+    <tr><td><code>multiple</code></td><td>多选/多文件</td><td>文件或 email 可多值</td><td class="demo"><code>&lt;input type="file" multiple&gt;</code></td></tr>
+
+    <!-- ④ 非 input 标签 -->
+    <tr><td><code>&lt;textarea&gt;</code></td><td>多行文本</td><td>可换行的大文本框</td><td class="demo"><code>&lt;textarea rows="4" cols="40"&gt;&lt;/textarea&gt;</code></td></tr>
+    <tr><td><code>&lt;select&gt;</code></td><td>下拉选择</td><td>单选或多选（multiple）</td><td class="demo"><code>&lt;select&gt;&lt;option value="a"&gt;A&lt;/option&gt;&lt;/select&gt;</code></td></tr>
+    <tr><td><code>&lt;label&gt;</code></td><td>标签</td><td>点击文字=点击控件；for 关联 ID</td><td class="demo"><code>&lt;label for="u"&gt;用户名&lt;/label&gt;&lt;input id="u"&gt;</code></td></tr>
+    <tr><td><code>&lt;fieldset&gt;</code></td><td>字段分组</td><td> visually 分组 + legend 标题</td><td class="demo"><code>&lt;fieldset&gt;&lt;legend&gt;登录&lt;/legend&gt; … &lt;/fieldset&gt;</code></td></tr>
+    <tr><td><code>&lt;datalist&gt;</code></td><td>数据列表</td><td>input 联想下拉（兼容）</td><td class="demo"><code>&lt;input list="city"&gt;&lt;datalist id="city"&gt;&lt;option value="Beijing"&gt;&lt;/datalist&gt;</code></td></tr>
+    <tr><td><code>&lt;output&gt;</code></td><td>输出结果</td><td>纯展示计算结果（JS 写 value）</td><td class="demo"><code>&lt;output name="res"&gt;0&lt;/output&gt;</code></td></tr>
+  </tbody>
+</table>
+</body>
+</html>

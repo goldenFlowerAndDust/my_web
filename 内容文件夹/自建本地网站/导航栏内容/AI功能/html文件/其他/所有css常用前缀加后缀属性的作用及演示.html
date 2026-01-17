@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>CSS 属性 → 网页变化速查表（带中文首词）</title>
+<style>
+/*======== 表格基础样式 ========*/
+table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.5;}
+th,td{border:1px solid #ddd;padding:8px 10px;}
+th{background:#f5f5f5;text-align:left;}
+code{background:#eef;padding:2px 4px;border-radius:3px;font-family:Consolas,Monaco,monospace;}
+.preview{display:inline-block;padding:4px 8px;border:1px solid #bbb;border-radius:4px;margin-top:4px;font-size:12px;}
+/*======== 演示用 ========*/
+.demo-flex{display:flex;gap:10px;}
+.demo-flex>div{padding:10px;background:#e3f2fd;}
+.demo-block>div{padding:10px;margin:4px 0;background:#fff3cd;border:1px solid #ffeaa7;}
+.demo-none>span{display:none;}
+</style>
+</head>
+
+<body>
+<h1>CSS 属性 → 网页变化速查表（首词中文注释版）</h1>
+<p>复制即用，绝对准确；每个属性首词带中文含义，持续更新。</p>
+
+<!-- =====================================================
+     1. display 全家桶
+===================================================== -->
+<h2>1. display（显示方式）</h2>
+<table>
+  <thead><tr><th>值</th><th>首词中文</th><th>自身表现</th><th>对子元素/布局影响</th><th>典型场景</th><th>在线演示</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><code>block</code></td><td>块</td><td>独占一行；宽高可设</td><td>子元素按正常流排列（块级竖排）</td><td>段落、标题、容器</td>
+      <td class="demo-block"><div style="display:block">块1</div><div style="display:block">块2</div></td>
+    </tr>
+    <tr>
+      <td><code>inline</code></td><td>行内</td><td>行内不换行；宽高<strong>无效</strong></td><td>子元素继续行内流（不能设宽高）</td><td>超链接、强调文本</td>
+      <td><span style="display:inline;background:#ffeaa7;padding:4px">inline-1</span><span style="display:inline;background:#ffeaa7;padding:4px">inline-2</span></td>
+    </tr>
+    <tr>
+      <td><code>inline-block</code></td><td>行内块</td><td>行内不换行；宽高<strong>有效</strong></td><td>子元素按正常流，但自身可当“块”用</td><td>横排卡片、图标按钮</td>
+      <td><span style="display:inline-block;width:60px;height:30px;background:#74b9ff">卡片1</span><span style="display:inline-block;width:60px;height:30px;background:#0984e3">卡片2</span></td>
+    </tr>
+    <tr>
+      <td><code>flex</code></td><td>弹性</td><td>变成<strong>弹性容器</strong>；子元素=弹性项</td><td>子元素受 flex 规则（主轴、换行、对齐）</td><td>导航、水平居中、自适应</td>
+      <td class="demo-flex"><div style="display:flex;gap:8px"><div>子1</div><div>子2</div></div></td>
+    </tr>
+    <tr>
+      <td><code>inline-flex</code></td><td>行内弹性</td><td>行内版本的 flex；本身不占行</td><td>同 flex，但容器自身可与其他行内元素混排</td><td>行内小工具、标签组</td>
+      <td>文字前 <span style="display:inline-flex;gap:4px"><span style="padding:2px 6px;background:#fd79a8">A</span><span style="padding:2px 6px;background:#fdcb6e">B</span></span> 文字后</td>
+    </tr>
+    <tr>
+      <td><code>grid</code></td><td>网格</td><td>变成<strong>网格容器</strong>；子元素=网格项</td><td>子元素受 grid 规则（行、列、区域）</td><td>复杂栅格、杂志排版</td>
+      <td><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><div style="background:#00b894">1</div><div style="background:#00cec9">2</div><div style="background:#6c5ce7">3</div></div></td>
+    </tr>
+    <tr>
+      <td><code>inline-grid</code></td><td>行内网格</td><td>行内版本的 grid；本身不占行</td><td>同 grid，但容器自身可与其他行内元素混排</td><td>行内小图表、迷你棋盘</td>
+      <td>行内 <span style="display:inline-grid;grid-template-columns:repeat(3,16px);gap:2px"><span style="background:#e17055"></span><span style="background:#e17055"></span><span style="background:#e17055"></span><span style="background:#fdcb6e"></span><span style="background:#fdcb6e"></span><span style="background:#fdcb6e"></span><span style="background:#00b894"></span><span style="background:#00b894"></span><span style="background:#00b894"></span></span> 继续文字</td>
+    </tr>
+    <tr>
+      <td><code>none</code></td><td>无</td><td>元素消失，不占位，DOM 仍在</td><td>子元素一并不可见；布局仿佛它从未存在</td><td>切换显示、隐藏菜单</td>
+      <td class="demo-none">这段文字后有个<span style="display:none">隐形幽灵</span>，你看不到它。</td>
+    </tr>
+    <tr>
+      <td><code>table / table-row / table-cell</code></td><td>表格/行/单元格</td><td>模拟表格布局</td><td>子元素需对应 `table-row` → `table-cell`</td><td>兼容旧表格、垂直居中老式方案</td>
+      <td><div style="display:table;width:100%"><div style="display:table-row"><div style="display:table-cell;background:#dfe6e9">单元1</div><div style="display:table-cell;background:#b2bec3">单元2</div></div></div></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- =====================================================
+     2. position（位置）
+===================================================== -->
+<h2>2. position（位置）</h2>
+<table>
+  <thead><tr><th>值</th><th>首词中文</th><th>参考系</th><th>是否脱离文档流</th><th>使用场景</th><th>在线演示</th></tr></thead>
+  <tbody>
+    <tr><td><code>static</code></td><td>静态</td><td>无（正常流）</td><td>否</td><td>默认状态；写不写一样</td><td>——</td></tr>
+    <tr><td><code>relative</code></td><td>相对</td><td>自己原位置</td><td>否（占位保留）</td><td>小偏移、做“父相子绝”根元素</td><td><div style="position:relative;left:10px;top:5px;background:#ffeaa7">相对偏移</div></td></tr>
+    <tr><td><code>absolute</code></td><td>绝对</td><td>最近非 static 祖先</td><td>是（不占位）</td><td>下拉、角标、遮罩</td><td><div style="position:relative;height:40px;background:#dfe6e9"><div style="position:absolute;right:5px;top:5px;background:#e17055">角标</div></div></td></tr>
+    <tr><td><code>fixed</code></td><td>固定</td><td>视口</td><td>是</td><td>回到顶部、悬浮条</td><td><div style="position:fixed;bottom:10px;right:10px;background:#00b894;color:#fff;padding:4px 8px;border-radius:4px;">固定按钮</div></td></tr>
+    <tr><td><code>sticky</code></td><td>粘性</td><td>“先相对，后固定”</td><td>否（直到粘住那一刻）</td><td>表头、导航随滚随贴</td><td><div style="height:100px;overflow:auto"><div style="position:sticky;top:0;background:#fdcb6e">Sticky Header</div><div style="height:200px;background:#fff">长内容...</div></div></td></tr>
+  </tbody>
+</table>
+
+<!-- =====================================================
+     3. width / height / margin / padding（尺寸与边距）
+===================================================== -->
+<h2>3. 尺寸与边距</h2>
+<table>
+  <thead><tr><th>属性</th><th>首词中文</th><th>功能</th><th>示例值</th><th>网页效果</th></tr></thead>
+  <tbody>
+    <tr><td><code>width</code></td><td>宽度</td><td>内容区宽</td><td><code>300px</code> / <code>50%</code> / <code>auto</code></td><td>盒子变宽/变窄</td></tr>
+    <tr><td><code>height</code></td><td>高度</td><td>内容区高</td><td><code>100px</code> / <code>100vh</code></td><td>盒子变高/撑满视口</td></tr>
+    <tr><td><code>margin</code></td><td>外边距</td><td>盒子外侧</td><td><code>20px</code> / <code>0 auto</code>（水平居中）</td><td>推开别人/自身居中</td></tr>
+    <tr><td><code>padding</code></td><td>内边距</td><td>盒子内侧</td><td><code>10px 15px</code></td><td>内容与边框之间留白</td></tr>
+    <tr><td><code>box-sizing</code></td><td>盒模型</td><td>计算模式</td><td><code>border-box</code></td><td>width/height 包含 padding 和 border，防止“撑破”布局</td></tr>
+  </tbody>
+</table>
+
+<!-- =====================================================
+     4. 文字与装饰
+===================================================== -->
+<h2>4. 文字与装饰</h2>
+<table>
+  <thead><tr><th>属性</th><th>首词中文</th><th>功能</th><th>示例值</th><th>网页效果</th></tr></thead>
+  <tbody>
+    <tr><td><code>font-family</code></td><td>字体族</td><td>字族</td><td><code>"Segoe UI", sans-serif</code></td><td>换字体</td></tr>
+    <tr><td><code>font-size</code></td><td>字号</td><td>字号</td><td><code>16px</code> / <code>1.2rem</code></td><td>变大/变小</td></tr>
+    <tr><td><code>font-weight</code></td><td>字重</td><td>字重</td><td><code>700</code> / <code>bold</code></td><td>加粗</td></tr>
+    <tr><td><code>color</code></td><td>颜色</td><td>前景色</td><td><code>#e74c3c</code> / <code>rgb(231,76,60)</code></td><td>文字换色</td></tr>
+    <tr><td><code>text-align</code></td><td>文本对齐</td><td>水平对齐</td><td><code>left</code> / <code>center</code> / <code>right</code></td><td>左/中/右</td></tr>
+    <tr><td><code>line-height</code></td><td>行高</td><td>行高</td><td><code>1.5</code> / <code>24px</code></td><td>行间距松紧</td></tr>
+    <tr><td><code>text-decoration</code></td><td>文本装饰</td><td>装饰线</td><td><code>underline</code> / <code>none</code></td><td>下划线/去下划线</td></tr>
+    <tr><td><code>white-space</code></td><td>空白处理</td><td>空白处理</td><td><code>nowrap</code> / <code>pre-wrap</code></td><td>不换行 / 保留换行与空格</td></tr>
+  </tbody>
+</table>
+
+<!-- =====================================================
+     5. 背景与边框
+===================================================== -->
+<h2>5. 背景与边框</h2>
+<table>
+  <thead><tr><th>属性</th><th>首词中文</th><th>功能</th><th>示例值</th><th>网页变化</th></tr></thead>
+  <tbody>
+    <tr><td><code>background</code></td><td>背景</td><td>背景简写</td><td><code>#fff url(bg.jpg) no-repeat center/cover fixed</code></td><td>换背景色/图/位置/固定</td></tr>
+    <tr><td><code>background-color</code></td><td>背景颜色</td><td>纯色背景</td><td><code>#f5f5f5</code> / <code>rgba(0,0,0,.5)</code></td><td>背景换色 / 半透明遮罩</td></tr>
+    <tr><td><code>background-image</code></td><td>背景图像</td><td>背景图</td><td><code>url("img/bg.jpg")</code></td><td>出现背景图</td></tr>
+    <tr><td><code>background-size</code></td><td>背景尺寸</td><td>图尺寸</td><td><code>cover</code> / <code>contain</code> / <code>100% 100%</code></td><td>铺满 / 完整显示 / 拉伸</td></tr>
+    <tr><td><code>background-position</code></td><td>背景位置</td><td>图位置</td><td><code>center</code> / <code>top right</code></td><td>图居中 / 靠上右</td></tr>
+    <tr><td><code>background-attachment</code></td><td>背景附着</td><td>图滚动行为</td><td><code>fixed</code> / <code>scroll</code></td><td>背景固定 / 随滚动</td></tr>
+    <tr><td><code>border</code></td><td>边框</td><td>边框简写</td><td><code>1px solid #ccc</code></td><td>出现边框</td></tr>
+    <tr><td><code>border-radius</code></td><td>边框圆角</td><td>圆角</td><td><code>4px</code> / <code>50%</code></td><td>小圆角 / 正圆</td></tr>
+    <tr><td><code>box-shadow</code></td><td>盒子阴影</td><td>阴影</td><td><code>0 2px 4px rgba(0,0,0,.2)</code></td><td>产生浮起阴影</td></tr>
+  </tbody>
+</table>
+
+<!-- =====================================================
+     6. 动画 & 过渡
+===================================================== -->
+<h2>6. 动画与过渡</h2>
+<table>
+  <thead><tr><th>属性</th><th>首词中文</th><th>功能</th><th>示例值</th><th>网页效果</th></tr></thead>
+  <tbody>
+    <tr><td><code>transition</code></td><td>过渡</td><td>过渡简写</td><td><code>all .3s ease</code></td><td>属性变化时平滑过渡</td></tr>
+    <tr><td><code>animation</code></td><td>动画</td><td>动画简写</td><td><code>fadeIn 1s forwards</code></td><td>关键帧动画播放</td></tr>
+    <tr><td><code>@keyframes</code></td><td>关键帧</td><td>定义关键帧</td><td><code>@keyframes fadeIn{ from{opacity:0} to{opacity:1} }</code></td><td>自定义动画序列</td></tr>
+  </tbody>
+</table>
+
+<!-- =====================================================
+     7. 其他高频实用
+===================================================== -->
+<h2>7. 其他高频实用</h2>
+<table>
+  <thead><tr><th>属性</th><th>首词中文</th><th>功能</th><th>示例值</th><th>网页变化</th></tr></thead>
+  <tbody>
+    <tr><td><code>overflow</code></td><td>溢出</td><td>溢出处理</td><td><code>hidden</code> / <code>auto</code> / <code>scroll</code></td><td>隐藏滚动条 / 自动滚动 / 强制滚动条</td></tr>
+    <tr><td><code>cursor</code></td><td>光标</td><td>鼠标指针</td><td><code>pointer</code> / <code>not-allowed</code></td><td>手型 / 禁用图标</td></tr>
+    <tr><td><code>opacity</code></td><td>透明度</td><td>透明度</td><td><code>0.5</code></td><td>半透明</td></tr>
+    <tr><td><code>z-index</code></td><td>层叠顺序</td><td>层叠顺序</td><td><code>10</code> / <code>-1</code></td><td>谁在上/谁在下（需配合 position 非 static）</td></tr>
+    <tr><td><code>gap</code></td><td>间隙</td><td>flex/grid 间距</td><td><code>10px</code> / <code>1rem</code></td><td>子元素之间一键留缝</td></tr>
+    <tr><td><code>object-fit</code></td><td>对象填充</td><td>替换内容填充</td><td><code>cover</code> / <code>contain</code></td><td>img/video 等比例裁剪或完整显示</td></tr>
+  </tbody>
+</table>
+
+<!-- =====================================================
+     页脚
+===================================================== -->
+<hr>
+<p><small>本表可直接嵌入任何网页；复制即用，持续勘误更新。慢工出细活，绝对准确。</small></p>
+</body>
+</html>
