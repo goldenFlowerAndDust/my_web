@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性选择器</title>
+    <style>
+        a[href1]{
+            font-size: 25px;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <!-- 1. 存在属性练习：只有下面第二个 a 带 href，会被 [href] 选到 -->
+            <a>没有 href</a>
+            <a href="href1">有 href</a>
+            <!-- 2. 属性值相等练习：target 恰好 "_blank" 的才会被 [target="_blank"] 选到 -->
+            <a target="_self">本页</a>
+            <a target="_blank">新标签</a>
+            <!-- 3. 开头匹配练习：href 以 https 开头的才会被 [href^="https"] 选到 -->
+            <a href="http://old.com">http</a>
+            <a href="https://new.com">https</a>
+            <!-- 4. 结尾匹配练习：src 以 .pdf 结尾的 img 会被 [src$=".pdf"] 选到 -->
+            <img src="../../../../网上找的图片素材/励志背景.jpg" alt="励志背景">
+            <img src="../../../../网上找的图片素材/地球日.jpg" alt="地球日">
+            <!-- 5. 包含子串练习：class 里只要出现“btn”就会被 [class*="btn"] 选到 -->
+            <div class="btn">纯 btn</div>
+            <span class="large-btn-warning">包含 btn</span>
+            <!-- 6. 整词匹配练习：title 里整词“保存”才会被 [title~="保存"] 选到 -->
+            <button title="保存 文件">匹配</button>
+            <button title="保存文件">不匹配</button>
+            <!-- 7. 连字符整词练习：lang 以 zh 或 zh-CN 等才会被 [lang|="zh"] 选到 -->
+            <p lang="zh-CN">中文</p>
+            <p lang="en-US">English</p>
+            <!-- 8. 大小写忽略练习：data-type 等于 ok/OK/Ok 都会被 [data-type="ok" i] 选到 -->
+            <div data-type="ok">小写</div>
+            <div data-type="OK">大写</div>
+        </section>
+    </main>
+</body>
+</html>

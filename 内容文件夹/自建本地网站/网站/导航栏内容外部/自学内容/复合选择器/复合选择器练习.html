@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复合选择器练习</title>
+    <style>
+        body>p{
+            font-size: 30px;
+            color: #fbc02d;
+        }
+        .sec1,.sec2,.sec3{
+            border: 2px solid blue;
+            width: auto;
+            height: 350px;
+        }
+        /* 子集选择器*/
+        .sec1>p{
+            color:red;
+            font-size: 25px;
+        }
+        /* 子选择器*/
+        .sec3>p{
+            color: blue;
+            font-size: 10px;
+        }
+        .sec2>h3+p{
+            font-size: 20px;
+            color: green;
+        }
+        .sec2 p:nth-of-type(3){
+            font-size: 20px;
+            color: green;
+        }
+        .sec2>h3+p+p{
+            font-size:15px;
+            color: green;
+        }
+        .sec2 .sec21>h3+p{
+            font-size: 15px;
+            color: #0ea5e9;
+        }
+        .sec2 .sec21>h3+p+p{
+            font-size: 20px;
+            color:#0ea5e9;
+        }
+        .sec3 .sec31>h3~p{
+            font-size: 30px;
+            color: #6c5ce7;
+        }
+        /*子选择器与相邻选择器*/
+        /* 相邻选择器：可以连续用选择器直到需要添加的样式对象。*/
+        /* 还可以采用伪类元素直接选择第几个需要添加样式：p:nth-op-type()括号内填具体位置*/
+
+    </style>
+</head>
+<body>
+    <p>不在盒子中的P</p><!--文字大小为30px-->
+		<div class="sec1"><!--300*200，蓝色边框-->
+			<h3>在sec1盒子中的h3标题</h3>
+			<p>在sec1盒子中的p1</p><!--文字大小为25px-->
+			<p>在sec1盒子中的p2</p><!--文字大小为25px-->
+			<p>在sec1盒子中的p3</p><!--文字大小为25px-->
+		</div>
+		<div class="sec2"><!--300*200，蓝色边框-->
+			<h3>在sec2盒子中的h3标题</h3>
+			<p>在sec2盒子中的p1</p><!--文字大小为20px-->
+			<p>在sec2盒子中的p2</p><!--文字大小为15px-->
+			<p>在sec2盒子中的p3</p><!--文字大小为20px-->
+			<div class="sec21">
+				<h3>在sec21盒子中的h3标题</h3>
+				<p>在sec21盒子中的p3</p><!--文字大小为15px-->
+				<p>在sec21盒子中的p2</p><!--文字大小为20px-->
+		    </div>
+		</div>
+		<div class="sec3"><!--300*200，蓝色边框-->
+			<h3>在sec3盒子中的h3标题</h3>
+			<p>在sec3盒子中的p1</p><!--文字大小为10px-->
+			<p>在sec3盒子中的p2</p><!--文字大小为10px-->
+			<p>在sec3盒子中的p3</p><!--文字大小为10px-->
+			<div class="sec31">
+				<h3>在sec31盒子中的h3标题</h3>
+				<p>在sec31盒子中的p3</p><!--文字大小为30px-->
+				<p>在sec31盒子中的p2</p><!--文字大小为30px-->
+		    </div>
+		</div>
+</body>
+</html>

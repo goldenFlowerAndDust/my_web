@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自建网站——使用flex布局</title>
+    <link rel="stylesheet" href="../../网站/网站源码/自建网站样式/自建网站——使用flex布局.css">
+</head>
+<body class="flex">
+    <!--div的默认样式：display：block(指的是块——盒子布局)-->
+    <!--flex——弹性(弹性盒子：可以控制下级盒子的位置)-->
+    <!--    弹性盒子主要有：主轴(main axis)和交叉轴(cross axis)组成
+        默认属性：
+            flex-direction:row/colum
+            弹性——方向：     列/行
+
+            justify-content：flex-start/center
+            对齐——内容：         起点(以交叉轴为起点)/交叉在中间盒子布局在上下均匀分布/
+
+            align-items:stretch/center/flex-end
+            对齐——条目      拉伸(盒子占满交叉轴全部)/中间(主轴在中间，子盒子在主轴左右均匀分布)/尾部(及主轴位于最右部——子盒子从右往左分布)
+
+            弹性盒子(子盒子位置声明)
+            align-self：flex-end/center/
+                        尾部(只作用于对应子盒子布局)/中间/注意：没有在主轴开头的声明(需要实现只能使用：margin：auto——即边距控制)
+
+            弹性盒子(下级子盒子声明)
+            flex:1;
+             它的作用是，会占满上级盒子剩余的全部位置(当多个盒子同时使用，会平分上级盒子的剩余位置)/注意：参数是可以自行调整的(如改成2即设置的子盒子分配的空间，占上级盒子剩余空间分配比例占2倍)
+
+    -->
+    <!--   侧边栏     -->
+    <div style="width: 200px; z-index: 2;" class="div_背景 yingyin flex_主区域">
+         <!-- 头像区域   -->
+        <div style="padding:10px;
+                    align-items: center;
+                    justify-content: center;
+                    border-bottom: 1px solid black;
+                    flex: 1;
+        ">
+            <!-- 头像log  -->
+            <img src="../../网站/网站内容添加/网站logo/引用.png" title="golden flower" alt="头像" style="width:100px;
+                height: 100px;
+                margin-left: 15px;
+                margin-right: 15px;
+                margin-bottom: 0;
+            ">
+            <!-- 名字 -->
+            <span style="margin-left: 10px;font-size: 25px;margin-bottom:0">繁花与尘埃</span>
+        </div>
+        <!-- 侧边栏 -->
+        <aside>
+            <ul>
+                <li><a href="自建网站——使用flex布局.html">首页</a></li>
+                <li><a href="自建网站——使用flex布局.html">博客</a>
+                    <ol>
+                        <li><a href="../../../自建本地网站/导航栏内容/博客/HTML博客.html">HTML博客</a></li>
+                        <li><a href="../../../自建本地网站/导航栏内容/博客/CSS博客.html">CSS博客</a></li>
+                        <li><a href="../../../自建本地网站/导航栏内容/博客/python博客.html">python博客</a></li>
+                    </ol>
+                </li>
+                <li><a href="自建网站——使用flex布局.html">自建网站中遇到的问题</a>
+                    <ol>
+                        <li><a href="../../../自建本地网站/导航栏内容/自建网站中遇到的问题总结/总结网页.html">问题总结网页</a></li>
+                    </ol>
+                </li>
+                <li><a href="自建网站——使用flex布局.html">AI功能</a>
+                    <ol>
+                        <li><a href="../../../自建本地网站/导航栏内容/AI功能/AI功能.html">AI功能跳转链接</a></li>
+                    </ol>
+                </li>
+                <li><a href="自建网站——使用flex布局.html">自学内容</a>
+                    <ol>
+                        <li><a href="../../导航栏内容/自学内容/选择器的运用.html">自学前端</a></li>
+                    </ol>
+                </li>
+                <li><a href="自建网站——使用flex布局.html">课后作业</a>
+                    <ol>
+                       <li><a href="../../../自建本地网站/导航栏内容/课后作业/链接跳转/课后作业链接跳转.html">课后作业链接跳转</a></li>
+                    </ol>
+                </li>
+            </ul>
+        </aside>
+    </div>
+    <!--     主区域   -->
+    <div style="flex: 4" class=" column yingyin">
+        <!--  头部栏  -->
+        <div style="height: 60px; z-index: 1" class="div_背景 yingyin">
+
+        </div>
+        <!--  内容区  -->
+        <div style="overflow: auto;" class="flex_主区域 flex yingyin">
+             <!--  左边区域  -->
+            <div style="flex: 3;" class="column margin yingyin">
+                <!--  数据区   -->
+                <div class="flex yingyin">
+                    <!-- 数据块    -->
+                    <div style="height: 100px;" class="flex_主区域 div_背景 margin_right yingyin"></div>
+                    <div style="height: 100px;" class="flex_主区域 div_背景 margin_right yingyin"></div>
+                    <div style="height: 100px;" class="flex_主区域 div_背景 margin_right yingyin"></div>
+                    <div style="height: 100px;" class="flex_主区域 div_背景 margin_right yingyin"></div>
+
+                </div>
+                <!--      列表区   -->
+                <div>
+                    <div style="height: 160px" class="div_背景 justify-content flex_主区域 margin_top yingyin"></div>
+                    <div style="height: 160px" class="div_背景 justify-content flex_主区域 margin_top yingyin"></div>
+                    <div style="height: 160px" class="div_背景 justify-content flex_主区域 margin_top yingyin"></div>
+                    <div style="height: 160px" class="div_背景 justify-content flex_主区域 margin_top yingyin"></div>
+                    <div style="height: 160px" class="div_背景 justify-content flex_主区域 margin_top yingyin"></div>
+                    <div style="height: 160px" class="div_背景 justify-content flex_主区域 margin_top yingyin"></div>
+                    <div style="height: 160px" class="div_背景 justify-content flex_主区域 margin_top yingyin"></div>
+                </div>
+            </div>
+            <!--  右边区域  -->
+            <div style="flex: 1" class="column margin_right margin_top yingyin">
+                <!-- 提示区    -->
+                <div style="height: 150px;" class="div_背景 yingyin">
+
+                </div>
+                <!-- 消息区    -->
+                <div style="height: 300px;" class="div_背景 margin_top yingyin">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

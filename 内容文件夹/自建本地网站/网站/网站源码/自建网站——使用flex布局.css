@@ -1,0 +1,87 @@
+body{
+    margin: 0; /* 外边距为零 */
+    min-height: 100vh; /* vh(view height)的意思就是浏览器的视图高度 */
+    background-color: #eeeeee; /* 设置背景颜色为灰色 */
+    background-image: url("../../网站/网站内容添加/网站背景/盛林1.jpg") !important;
+    background-repeat:no-repeat !important;
+    background-size: cover !important;
+}
+/**{*/
+/*    border: 1px solid black; !* 使用全局选择器添加样式——为所有元素添加边框(作用：可以直观的看到隐藏元素) *!*/
+/*}*/
+.flex{
+    display: flex;
+}
+.div_背景{
+    background-color: white ;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.flex_主区域{
+    flex: 1; /* 意思主区域需要占满除去侧边栏的所有区域 */
+}
+.column{
+    flex-direction: column;  /* 意思就是竖向布局 */
+}
+.justify-content{
+    justify-content: flex-start;
+}
+.margin{
+    margin: 8px;
+}
+.margin_right{
+    margin-right: 8px;
+}
+.margin_top{
+    margin-top: 8px;
+}
+.yingyin{
+    box-shadow: rgba(0 0 0 / 20%) 0 2px 1px -1px,rgba(0 0 0 / 14%) 0 1px 1px 0 ,rgba(0 0 0 / 12%) 0 1px 3px 0;
+}
+ul,ol {
+    list-style: none;
+    font-size: 15px;
+    text-align: center;
+    line-height: 100%;
+}
+aside ul {
+    width: 150px;
+    border: 1px solid #ddd;
+    padding: 10px 0;
+}
+aside ul>li{
+    margin-top: 0;
+    padding: 10px 10px;
+    position: relative;
+}
+aside ul li>a{
+    text-decoration: none;
+    color: #333;
+
+}
+aside ul>li:hover{
+    background-color: #ddd;
+}
+aside ul li ol{
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 150px;
+    border: 1px solid #ddd;
+    background-color: white;
+    padding: 10px 0;
+    display: none;
+}
+aside ul li ol>li{
+    padding: 10px 0;
+    background-color:white;
+}
+aside ul li ol li:hover{
+    background-color: #ddd;
+}
+aside ul li ol li>a{
+    text-decoration: none;
+    color: #333;
+}
+aside ul>li:hover ol{
+    display: block;
+}

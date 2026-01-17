@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form表单实操</title>
+    <style>
+        .field{
+            display: flex;
+            align-items: center;/*垂直居中*/
+            justify-content: flex-start;/*确保元素从容器的开始对齐*/
+            gap: 0.1em;
+            margin-bottom: 0.6em;
+        }
+        .field label{
+            /*display: block;!*将label和input都设置为块级元素*!*/
+            /*flex-grow: 0;!*自动调整宽度以匹配输入框*!*/
+            width: auto; /*固定宽度，按最长文字调*/
+            text-align: right; /*冒号*/
+            /*flex-shrink: 0; !*防止被挤压*!*/
+            margin-right: 0.4em;
+            white-space: nowrap;
+        }
+        .input-style{
+            flex-grow: 1;/*不自动调整宽度*/
+            width: 20em; /*输入框宽度*/
+            padding:5px; /*内边距*/
+            border: 1px solid #d20bec; /*边框*/
+            border-radius: 4px; /*圆角*/
+            margin-left: 10px; /*与标签的间距*/
+        }
+        label{
+            width: auto; /*固定宽度*/
+            text-align: right; /*右对齐*/
+            margin-right: 10px; /*与输入框的间距*/
+        }
+        .my-form{
+            /*图片路径*/
+            background-image: url("../../网上找的图片素材/梦想.jpg");
+            /* 不平铺/居中/铺满整个盒子*/
+            background-repeat:no-repeat;
+            background-position: center;
+            background-size: cover;
+            /*让表单有高度，避免显示不全问题*/
+            min-height:400px;
+            padding: 2rem;
+            /*半透明底色，防止文字看不清楚*/
+            background-color：rgba(255,255,255,0.5);
+            background-blend-mode:overlay;
+        }
+        fieldset,legend,div{
+            color:yellow;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <form class="my-form">
+       <fieldset>
+           <legend>使用type属性</legend>
+           <div class="field">
+               <label>
+                   密码：<input type="password" name="pwd" class="input-style">
+               </label>
+           </div>
+           <div class="field">
+               <label>
+                    邮箱：<input type="email" name="email" class="input-style">
+               </label>
+           </div>
+           <div class="field">
+               <label>
+                   电话：<input type="tel" name="phone" class="input-style">
+               </label>
+           </div>
+           <div class="field">
+               <label>
+                   请输入单行文本：<input type="text" name="text" class="input-style">
+               </label>
+           </div>
+       </fieldset>
+    </form>
+    </main>
+
+</body>
+</html>
