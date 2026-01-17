@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            width: 20%;
+            height: 100vh;
+            margin: 350px auto;
+        }
+
+        main div:first-of-type{
+            width: 400px;
+            height: 400px;
+            background-color: blue;
+        }
+
+        main div:first-of-type p {
+            font-size: 65px;
+            line-height: 400px;
+            text-align: center;
+            color: white;
+        }
+        /*@keyframes div {*/
+        /*    from{*/
+        /*        */
+        /*    }*/
+        /*    50%{*/
+        /*        */
+        /*    }*/
+        /*    to{*/
+        /*        */
+        /*    }*/
+        /*}*/
+        main div:nth-of-type(2){
+            position: relative;
+            margin-top: 80px;
+            width: 400px;
+            height: 200px;
+            background-color: red;
+            border-radius: 20px;
+            transition-property: transform;
+            transition-duration: 0.5s;
+            transition-timing-function: ease;
+        }
+        main div:nth-of-type(2) p{
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 350px;
+            height: 150px;
+            font-size: 50px;
+            line-height:150px;
+            text-align: center;
+            border: 1px white solid;
+            color: red;
+            background-color:pink;
+        }
+        .bth:hover{
+            transform: translateY(-20px);
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div>
+        <p>Lenovo</p>
+    </div>
+    <div class="bth"><p>Hello</p></div>
+</main>
+</body>
+</html>

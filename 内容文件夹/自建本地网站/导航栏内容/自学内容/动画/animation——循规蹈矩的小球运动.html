@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animation——循规蹈矩的小球运动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 50%;
+            min-height:100vh;
+            margin:80px auto;
+        }
+        main section{
+            margin-bottom: 180px;
+        }
+        div{
+            width: 500px;
+            height: 500px;
+        }
+        .box{
+            position: relative;
+            animation: box 5s linear infinite;
+        }
+        @keyframes box {
+            from{
+                transform: rotate(45deg);
+                background-color:skyblue;
+            }
+            11%{
+                transform: rotate(90deg);
+                background-color:green;
+            }
+            22%{
+                transform: rotate(135deg);
+                background-color:pink;
+            }
+            33%{
+                transform: rotate(180deg);
+            }
+            44%{
+                transform: rotate(225deg);
+                background-color:skyblue;
+            }
+            66%{
+                transform: rotate(270deg);
+                background-color:skyblue;
+            }
+            77%{
+                transform: rotate(315deg);
+                background-color:pink;
+            }
+            88%{
+                transform: rotate(350deg);
+                background-color:green;
+            }
+            to{
+                transform: rotate(360deg);
+                background-color:skyblue;
+            }
+        }
+
+        .box1{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color:red;
+            border-radius: 100%;
+            animation: color 7s infinite,box1 15s infinite;
+        }
+        @keyframes color {
+            from{
+                background-color:red;
+            }
+            50%{
+                background-color:green;
+            }
+            75%{
+                background-color:blue;
+            }
+            to{
+                background-color:red;
+            }
+        }
+        @keyframes box1 {
+            from{
+                transform: translateX(0);
+            }
+            15%{
+                transform: translatex(200px);
+            }
+            25%{
+                transform: translate(200px,400px);
+            }
+            35%{
+                transform: translate(400px,400px);
+            }
+            45%{
+                transform: translate(400px,0);
+            }
+           55%{
+               transform: translate(400px,400px);
+           }
+            65%{
+               transform: translate(0,400px);
+            }
+            75%{
+                transform: translate(0);
+            }
+            85%{
+                transform: translate(400px,0);
+            }
+            95%{
+                transform: translate(400px,400px);
+            }
+            to{
+                transform: translateX(0);
+            }
+        }
+        .box2{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+            height: 500px;
+            animation: box2 5s linear infinite;
+        }
+        @keyframes box2 {
+            from{
+                transform: rotate(-45deg);
+                background-color:skyblue;
+            }
+            11%{
+                transform: rotate(-90deg);
+                background-color:green;
+            }
+            22%{
+                transform: rotate(-135deg);
+                background-color:pink;
+            }
+            33%{
+                transform: rotate(-180deg);
+            }
+            44%{
+                transform: rotate(-225deg);
+                background-color:skyblue;
+            }
+            66%{
+                transform: rotate(-270deg);
+                background-color:skyblue;
+            }
+            77%{
+                transform: rotate(-315deg);
+                background-color:pink;
+            }
+            88%{
+                transform: rotate(-350deg);
+                background-color:green;
+            }
+            to{
+                transform: rotate(-360deg);
+                background-color:skyblue;
+            }
+        }
+        .selection{
+            background-color:red;
+            border-radius: 100%;
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+        }
+        .box3{
+            background-color:blue;
+            animation: box3 5s infinite;
+            animation-delay: 0s;
+        }
+        .box4{
+            background-color:yellow;
+            animation: box4 5s infinite;
+            animation-delay: 0.2s;
+        }
+        .box5{
+            background-color:green;
+            animation: box5 5s infinite;
+            animation-delay: 0.4s;
+        }
+        .box6{
+            background-color:white;
+            animation: box6 5s infinite;
+            animation-delay: 0.2s;
+        }
+        .box7{
+            background-color:blue;
+            animation: box7 5s infinite;
+            animation-delay: 0s;
+        }
+        @keyframes box3 {
+            from{
+                transform: translateY(0);
+            }
+            25%{
+                transform: translateY(-200px);
+            }
+            50%{
+                transform: translateY(200px);
+            }
+            to{
+                transform: translateY(0);
+            }
+        }
+        @keyframes box4 {
+            from{
+                transform: translateY(0);
+            }
+            25%{
+                transform: translateY(-150px);
+            }
+            50%{
+                transform: translateY(150px);
+            }
+            to{
+                transform: translateY(0);
+            }
+        }
+        @keyframes box5 {
+            from{
+                transform: translateY(0);
+            }
+            25%{
+                transform: translateY(-100px);
+            }
+            50%{
+                transform: translateY(100px);
+            }
+            to{
+                transform: translateY(0);
+            }
+        }
+        @keyframes box6 {
+            from{
+                transform: translateY(0);
+            }
+            25%{
+                transform: translateY(-150px);
+            }
+            50%{
+                transform: translateY(150px);
+            }
+            to{
+                transform: translateY(0);
+            }
+        }
+        @keyframes box7 {
+            from{
+                transform: translateY(0);
+            }
+            25%{
+                transform: translateY(-200px);
+            }
+            50%{
+                transform: translateY(200px);
+            }
+            to{
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+<!--        <p>在书上221页</p>-->
+        <section>
+            <div class="box">
+                <div class="box1"></div>
+            </div>
+        </section>
+        <section>
+            <div class="box2">
+                <div class="box3 selection"></div>
+                <div class="box4 selection"></div>
+                <div class="box5 selection"></div>
+                <div class="box6 selection "></div>
+                <div class="box7 selection"></div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
