@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>设计表单样式</title>
+	</head>
+		<style>
+			*{
+				margin:0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+            #布局{
+                margin: auto;
+                border: 1px solid black;
+                width: 650px;
+                height: 1350px;
+            }
+            form{
+                position: relative;
+                background-image: url("../../../../导航栏内容/课后作业/内容/11月26日/素材/背景.png");
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 650px;
+                height: 1350px;
+                background-color: white;
+            }
+            #top{
+                position: absolute;
+                margin: 0 auto;
+                top: 250px;
+            }
+            #h3_定位{
+                left: 130px;
+                text-align: center;
+                font-size: 35px;
+                font-weight: bold;
+            }
+            #div_排版{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            #div_排版 div{
+                flex: 1;
+                border-bottom: 1px solid #dddddd;
+                margin: 40px 15px;
+            }
+            input{
+                width: 450px;
+                height: 45px;
+                background-color: #dddddd;
+            }
+            label{
+                font-size: 25px;
+                color: white;
+            }
+            #div_排版 #button{
+                border-bottom: none;
+            }
+            input[type="reset"],input[type="button"]{
+                font-size: 25px;
+                margin: 0 85px;
+                width: 100px;
+                height: 50px;
+            }
+            input[type="reset"],input[type="button"]:active{
+                /*border: 3px solid skyblue;*/
+                color: skyblue;
+            }
+		</style>
+	<body>
+		<!-- 表单区域 -->
+		<div id="布局">
+			<form action="/register" method="post" name="收集" target="_blank">
+				<div id="top">
+					<h3 id="h3_定位">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</h3>
+						<!-- 姓名 -->
+						<div id="div_排版">
+							<div>
+								<label for="text">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+								<input type="text" id="text">
+							</div>
+							<!-- 电话 -->
+							<div>
+								<label for="photos">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</label>
+								<input type="tel" id="photos">
+							</div>
+							<!-- 邮箱 -->
+							<div>
+								<label for="email">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</label>
+								<input type="email" id="email"/>
+							</div>
+							<!-- 设置密码 -->
+							
+							<div>
+								<label for="password_1">设置&nbsp;&nbsp;&nbsp;&nbsp;密码：</label>
+								<input type="password" id="password_1"/>
+							</div>
+							<!-- 确认密码 -->
+							<div>
+								<label for="password_2">确认&nbsp;&nbsp;&nbsp;&nbsp;密码：</label>
+								<input type="password" id="password_2"/>
+							</div>
+							<!-- 获取验证码 -->
+							<div>
+								<label for="text2">获取验证码：</label>
+								<input type="text" id="text2" />
+							</div>
+							<!-- 按钮 -->
+							<div id="button" style="margin: 0 45px">
+								<label>
+									<input type="reset" value="重置"/>
+								</label>
+                                <label>
+                                    <input type="button" value="注册"/>
+                                </label>
+							</div>
+						</div>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
