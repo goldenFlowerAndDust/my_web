@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单对比</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .comparison {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .form-section {
+            border: 2px solid #ccc;
+            padding: 10px;
+            width: 45%;
+        }
+        .form-section h2 {
+            margin-top: 0;
+        }
+        .form-section p {
+            margin: 10px 0;
+        }
+        .form-section pre {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            white-space: pre-wrap;
+        }
+        .explanation {
+            margin-top: 20px;
+        }
+        .explanation h3 {
+            margin-top: 0;
+        }
+        .explanation p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>表单对比</h1>
+    <div class="comparison">
+        <div class="form-section">
+            <h2>原始表单</h2>
+            <p>原始表单的代码如下：</p>
+            <pre>
+&lt;div&gt;
+    &lt;label&gt;
+        爱好：
+        &lt;input type="checkbox" name="Hobbies" value="Interests"&gt;象棋
+        &lt;input type="checkbox" name="Hobbies" value="Interests"&gt;游泳
+        &lt;input type="checkbox" name="Hobbies" value="Interests"&gt;旅游
+        &lt;input type="checkbox" name="Hobbies" value="Interests"&gt;赏花
+        &lt;input type="checkbox" name="Hobbies" value="Interests"&gt;爬山
+        &lt;input type="checkbox" name="Hobbies" value="Interests"&gt;健身
+    &lt;/label&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;label&gt;
+        &lt;input type="submit" value="提交" name="button"&gt;
+        &lt;input type="reset" value="重置" name="button"&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
+            </pre>
+        </div>
+        <div class="form-section">
+            <h2>AI修正后的表单</h2>
+            <p>AI修正后的表单代码如下：</p>
+            <pre>
+&lt;div&gt;
+    &lt;label&gt;爱好：&lt;/label&gt;
+    &lt;div class="checkbox-group"&gt;
+        &lt;label for="chess"&gt;&lt;input type="checkbox" id="chess" name="Hobbies" value="chess"&gt;象棋&lt;/label&gt;
+        &lt;label for="swimming"&gt;&lt;input type="checkbox" id="swimming" name="Hobbies" value="swimming"&gt;游泳&lt;/label&gt;
+        &lt;label for="traveling"&gt;&lt;input type="checkbox" id="traveling" name="Hobbies" value="traveling"&gt;旅游&lt;/label&gt;
+        &lt;label for="flower_viewing"&gt;&lt;input type="checkbox" id="flower_viewing" name="Hobbies" value="flower_viewing"&gt;赏花&lt;/label&gt;
+        &lt;label for="hiking"&gt;&lt;input type="checkbox" id="hiking" name="Hobbies" value="hiking"&gt;爬山&lt;/label&gt;
+        &lt;label for="fitness"&gt;&lt;input type="checkbox" id="fitness" name="Hobbies" value="fitness"&gt;健身&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;input type="submit" value="提交"&gt;
+    &lt;input type="reset" value="重置"&gt;
+&lt;/div&gt;
+            </pre>
+        </div>
+    </div>
+    <div class="explanation">
+        <h3>如何让复选框与按钮互不影响</h3>
+        <p>在原始表单中，复选框和按钮的点击区域可能会导致误触，尤其是在复选框和按钮的空白部分。以下是AI修正后的具体改进：</p>
+        <ol>
+            <li>
+                <p><strong>复选框改进：</strong></p>
+                <ul>
+                    <li>每个复选框都被 <code>&lt;label&gt;</code> 包裹，并且 <code>&lt;label&gt;</code> 的 <code>for</code> 属性与复选框的 <code>id</code> 一致。这样可以确保点击复选框的文本部分时，复选框会被正确选中。</li>
+                    <li>复选框被放在一个 <code>.checkbox-group</code> 容器中，使用了 <code>display: flex</code> 和 <code>flex-wrap: wrap</code> 来确保它们在同一行显示，并且有足够的间距。</li>
+                </ul>
+            </li>
+            <li>
+                <p><strong>按钮改进：</strong></p>
+                <ul>
+                    <li>按钮的 <code>outline</code> 属性被设置为 <code>none</code>，以避免按钮在聚焦时显示默认的轮廓。</li>
+                    <li>按钮的 <code>cursor</code> 属性被设置为 <code>pointer</code>，以提供明确的鼠标悬停反馈。</li>
+                    <li>按钮的 <code>:hover</code> 伪类被添加，以改变鼠标悬停时的背景颜色，避免误触。</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</body>
+</html>

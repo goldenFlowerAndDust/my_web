@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form表单制作</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        }
+        fieldset {
+            border: 3px solid black;
+            width: 500px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        input[type="submit"],
+        input[type="reset"] {
+            padding: 10px 15px;
+            margin-top: 10px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        /* 添加渐变背景流动效果 */
+        @keyframes gradient {
+            0% {
+                background-position: 0 50%;
+            }
+            30%{
+                background-position: 15% 30%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            70%{
+                background-position: 30% 70%;
+            }
+            100% {
+                background-position: 0 50%;
+            }
+        }
+        main {
+            animation: gradient 15s ease infinite;
+            background: linear-gradient(270deg, #74ebd5, #acb6e5,#00cec9,#aed581,#0d9488);
+            background-size: 600% 600%;
+        }
+        /* 调整复选框样式 */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        /* 防止按钮误触 */
+        input[type="submit"],
+        input[type="reset"] {
+            outline: none;
+        }
+        input[type="submit"]:hover,
+        input[type="reset"]:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <form>
+            <fieldset>
+                <legend>用户注册</legend>
+                <div>
+                    <label for="name">用户名：</label>
+                    <input type="text" id="name" name="name" placeholder="请输入最多15字符的名字" maxlength="15" required>
+                </div>
+                <div>
+                    <label for="password">密码：</label>
+                    <input type="password" id="password" name="psw" maxlength="30">
+                </div>
+                <div>
+                    <label for="tel">电话：</label>
+                    <input type="tel" id="tel" name="phone" maxlength="11" pattern="[0-9]{11}" required>
+                </div>
+                <div>
+                    <label>
+                        性别：
+                        <input type="radio" name="Gender" value="man">男
+                        <input type="radio" name="Gender" value="woman">女
+                    </label>
+                </div>
+                <div>
+                    <label>爱好：</label>
+                    <div class="checkbox-group">
+                        <label for="chess"><input type="checkbox" id="chess" name="Hobbies" value="chess">象棋</label>
+                        <label for="swimming"><input type="checkbox" id="swimming" name="Hobbies" value="swimming">游泳</label>
+                        <label for="traveling"><input type="checkbox" id="traveling" name="Hobbies" value="traveling">旅游</label>
+                        <label for="flower_viewing"><input type="checkbox" id="flower_viewing" name="Hobbies" value="flower_viewing">赏花</label>
+                        <label for="hiking"><input type="checkbox" id="hiking" name="Hobbies" value="hiking">爬山</label>
+                        <label for="fitness"><input type="checkbox" id="fitness" name="Hobbies" value="fitness">健身</label>
+                    </div>
+                </div>
+                <div>
+                    <label>
+                        专业：
+                    <select>
+                        <optgroup label="信息工程学院">
+                            <option>软件技术</option>
+                            <option>计算机网络技术</option>
+                            <option>虚拟现实技术应用</option>
+                            <option>大数据技术</option>
+                            <option>物联网应用技术</option>
+                        </optgroup>
+                        <optgroup label="护理学院">
+                            <option>护理</option>
+                            <option>护理(中外合作办学)</option>
+                            <option>助产</option>
+                            <option>老年保健与管理</option>
+                        </optgroup>
+                        <optgroup label="医学院">
+                            <option>药学</option>
+                            <option>中药学</option>
+                            <option>康复治疗技术</option>
+                            <option>医学美容技术</option>
+                        </optgroup>
+                        <optgroup label="师范学院">
+                            <option>学前教育</option>
+                            <option>早期教育</option>
+                            <option>婴幼儿托育服务与管理</option>
+                            <option>应用英语</option>
+                        </optgroup>
+                        <optgroup label="经济管理学院">
+                            <option>大数据与会计</option>
+                            <option>网络营销与直播电商</option>
+                            <option>旅游管理</option>
+                            <option>现代农业经济管理</option>
+                            <option>烹饪工艺与营养</option>
+                            <option>农产品流通和管理</option>
+                            <option>休闲农业经营与管理</option>
+                        </optgroup>
+                        <optgroup label="艺术与设计学院">
+                            <option>音乐教育</option>
+                            <option>艺术教育</option>
+                            <option>体育教育</option>
+                            <option>数字媒体技术</option>
+                        </optgroup>
+                        <optgroup label="机电与新能源汽车学院">
+                            <option>新能源材料应用技术</option>
+                            <option>机电一体化技术</option>
+                            <option>数控技术</option>
+                            <option>新能源汽车技术</option>
+                            <option>无人机应用技术</option>
+                            <option>储能材料技术</option>
+                            <option>光伏工程技术</option>
+                        </optgroup>
+                    </select>
+                    </label>
+                </div>
+                <div>
+                    <label for="nationality">国籍：</label>
+                    <input type="text" id="nationality" name="nationality" value="中国" readonly>
+                </div>
+                <div>
+                    <label>
+                        地址：
+                        <input type="text" name="adders" required>
+                        <br/>提示：<input type="text" placeholder="**省**市**区**" disabled>
+                    </label>
+                </div>
+                <div>
+                    <label for="email">邮箱：</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div>
+                    <input type="submit" value="提交">
+                    <input type="reset" value="重置">
+                </div>
+            </fieldset>
+        </form>
+    </main>
+</body>
+</html>

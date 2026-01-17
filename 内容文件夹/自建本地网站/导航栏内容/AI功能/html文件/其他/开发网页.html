@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代网页开发示例</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+        }
+
+        /* 导航栏样式 - 玻璃拟态效果 */
+        nav {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(94, 234, 212, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 2rem;
+        }
+
+        nav ul li a {
+            color: #5eead4;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        nav ul li a:hover {
+            color: #0ea5e9;
+            background: rgba(94, 234, 212, 0.1);
+        }
+
+        /* 主要内容区域 */
+        main {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 英雄区域 - 玻璃拟态效果 */
+        .hero {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(94, 234, 212, 0.2);
+            box-shadow: 0 8px 32px rgba(2, 8, 20, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(94, 234, 212, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            color: #f0f9ff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+            color: #cbd5e1;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0d9488 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0d9488 0%, #0ea5e9 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        /* 内容卡片 - 玻璃拟态效果 */
+        .content-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(94, 234, 212, 0.1);
+            box-shadow: 0 8px 32px rgba(2, 8, 20, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(94, 234, 212, 0.05) 100%);
+            z-index: -1;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(94, 234, 212, 0.3);
+            box-shadow: 0 12px 40px rgba(14, 165, 233, 0.2);
+        }
+
+        .card h3 {
+            color: #5eead4;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #0ea5e9;
+            text-shadow: 0 2px 8px rgba(14, 165, 233, 0.4);
+        }
+
+        /* 特性列表 */
+        .features {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(94, 234, 212, 0.1);
+            box-shadow: 0 8px 32px rgba(2, 8, 20, 0.3);
+        }
+
+        .features h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #f0f9ff;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .features h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #0ea5e9, #5eead4);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-list li {
+            padding: 1.2rem;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(94, 234, 212, 0.1);
+        }
+
+        .feature-list li:hover {
+            transform: translateX(8px);
+            background: rgba(14, 165, 233, 0.15);
+            border-color: rgba(94, 234, 212, 0.3);
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: #5eead4;
+            font-weight: bold;
+            font-size: 1.5rem;
+            min-width: 30px;
+            height: 30px;
+            background: rgba(14, 165, 233, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 页脚 */
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(94, 234, 212, 0.2);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            main {
+                padding: 1.2rem;
+            }
+
+            .features {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">首页</a></li>
+            <li><a href="#about">关于</a></li>
+            <li><a href="#services">服务</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1>欢迎来到现代网页开发</h1>
+            <p>探索最新的网页设计趋势和开发技术</p>
+            <a href="#learn-more" class="btn">了解更多</a>
+        </section>
+
+        <section class="content-section">
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3>现代设计</h3>
+                <p>采用最新的设计趋势，包括扁平化设计、渐变色彩和响应式布局，确保您的网站在视觉上引人注目。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>性能优化</h3>
+                <p>通过代码优化、图片压缩和缓存策略，确保网站加载速度快，用户体验流畅。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h3>响应式设计</h3>
+                <p>完美适配各种设备，无论是桌面、平板还是手机，都能提供最佳的浏览体验。</p>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>核心特性</h2>
+            <ul class="feature-list">
+                <li>语义化HTML5标签</li>
+                <li>现代CSS3动画效果</li>
+                <li>Flexbox和Grid布局</li>
+                <li>CSS自定义属性</li>
+                <li>移动优先设计</li>
+                <li>跨浏览器兼容性</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <div class="card">
+                <h3>技术栈</h3>
+                <p>本示例使用了纯HTML和CSS，无需任何外部依赖。您可以轻松地将这些样式应用到自己的项目中。</p>
+                <p>所有代码都经过精心组织，便于理解和修改。</p>
+            </div>
+            <div class="card">
+                <h3>定制指南</h3>
+                <p>您可以根据需要调整颜色、字体、间距等样式属性。CSS变量使得主题定制变得简单快捷。</p>
+                <p>响应式断点也可以根据您的需求进行调整。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 现代网页开发示例. 保留所有权利.</p>
+        <p>使用现代HTML和CSS技术构建</p>
+    </footer>
+</body>
+</html>

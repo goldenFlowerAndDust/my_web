@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML标签完整参考表格</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #4b6cb7;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        th {
+            background: #4b6cb7;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eaeaea;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #eef2f7;
+        }
+        
+        .tag-name {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .code-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            margin-top: 20px;
+        }
+        
+        .category-header {
+            background: #34495e !important;
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.85rem;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HTML标签完整参考表格</h1>
+            <p class="subtitle">包含基础标签与扩展标签，每个标签都有详细说明和代码示例</p>
+        </header>
+        
+        <div class="content">
+            <h2>基础文本与结构标签</h2>
+            <table>
+                <tr>
+                    <th width="15%">标签</th>
+                    <th width="15%">中文意思</th>
+                    <th width="15%">英文原意</th>
+                    <th width="25%">注意事项</th>
+                    <th width="30%">代码示例</th>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;p&gt;</td>
+                    <td>段落</td>
+                    <td>Paragraph</td>
+                    <td>块级元素，浏览器自动添加上下边距</td>
+                    <td class="code-example">&lt;p&gt;这是一个段落&lt;/p&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;div&gt;</td>
+                    <td>分区/容器</td>
+                    <td>Division</td>
+                    <td>块级元素，用于布局和样式化，无语义</td>
+                    <td class="code-example">&lt;div class="container"&gt;内容&lt;/div&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;span&gt;</td>
+                    <td>内联容器</td>
+                    <td>Span</td>
+                    <td>内联元素，用于文本部分样式化，无语义</td>
+                    <td class="code-example">&lt;span class="highlight"&gt;重要&lt;/span&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;br&gt;</td>
+                    <td>换行</td>
+                    <td>Break</td>
+                    <td>空元素，在XHTML中必须自闭合&lt;br /&gt;</td>
+                    <td class="code-example">第一行&lt;br&gt;第二行</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;hr&gt;</td>
+                    <td>水平线</td>
+                    <td>Horizontal Rule</td>
+                    <td>空元素，表示主题内容的变化</td>
+                    <td class="code-example">&lt;hr&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;a&gt;</td>
+                    <td>超链接</td>
+                    <td>Anchor</td>
+                    <td>必须使用href属性，target="_blank"新窗口打开</td>
+                    <td class="code-example">&lt;a href="page.html"&gt;链接&lt;/a&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;img&gt;</td>
+                    <td>图像</td>
+                    <td>Image</td>
+                    <td>空元素，必须使用src和alt属性</td>
+                    <td class="code-example">&lt;img src="pic.jpg" alt="图片"&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;ul&gt; &lt;ol&gt; &lt;li&gt;</td>
+                    <td>无序/有序列表</td>
+                    <td>Unordered/Ordered List, List Item</td>
+                    <td>ul无序列表，ol有序列表，li列表项</td>
+                    <td class="code-example">&lt;ul&gt;&lt;li&gt;项目&lt;/li&gt;&lt;/ul&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;table&gt; &lt;tr&gt; &lt;td&gt;</td>
+                    <td>表格/行/单元格</td>
+                    <td>Table, Table Row, Table Data</td>
+                    <td>table定义表格，tr定义行，td定义单元格</td>
+                    <td class="code-example">&lt;table&gt;&lt;tr&gt;&lt;td&gt;数据&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;b&gt;</td>
+                    <td>粗体</td>
+                    <td>Bold</td>
+                    <td>仅表示视觉上的粗体，无强调语义</td>
+                    <td class="code-example">&lt;b&gt;粗体文本&lt;/b&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;em&gt;</td>
+                    <td>强调</td>
+                    <td>Emphasis</td>
+                    <td>表示语义上的强调，通常显示为斜体</td>
+                    <td class="code-example">&lt;em&gt;强调文本&lt;/em&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;mark&gt;</td>
+                    <td>标记</td>
+                    <td>Mark</td>
+                    <td>表示突出显示或标记的文本</td>
+                    <td class="code-example">&lt;mark&gt;标记文本&lt;/mark&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;del&gt;</td>
+                    <td>删除</td>
+                    <td>Delete</td>
+                    <td>表示已删除的文本，通常有删除线</td>
+                    <td class="code-example">&lt;del&gt;删除文本&lt;/del&gt;</td>
+                </tr>
+            </table>
+            
+            <h2>语义化结构标签</h2>
+            <table>
+                <tr>
+                    <th width="15%">标签</th>
+                    <th width="15%">中文意思</th>
+                    <th width="15%">英文原意</th>
+                    <th width="25%">注意事项</th>
+                    <th width="30%">代码示例</th>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;header&gt;</td>
+                    <td>页眉/头部</td>
+                    <td>Header</td>
+                    <td>表示介绍性内容或导航链接的容器</td>
+                    <td class="code-example">&lt;header&gt;&lt;h1&gt;标题&lt;/h1&gt;&lt;/header&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;main&gt;</td>
+                    <td>主要内容</td>
+                    <td>Main</td>
+                    <td>一个页面只能有一个，表示页面的主要内容</td>
+                    <td class="code-example">&lt;main&gt;主要内容&lt;/main&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;section&gt;</td>
+                    <td>章节/部分</td>
+                    <td>Section</td>
+                    <td>表示文档中的一个独立部分，通常有标题</td>
+                    <td class="code-example">&lt;section&gt;&lt;h2&gt;章节&lt;/h2&gt;&lt;/section&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;nav&gt;</td>
+                    <td>导航</td>
+                    <td>Navigation</td>
+                    <td>表示页面导航部分，通常包含链接列表</td>
+                    <td class="code-example">&lt;nav&gt;&lt;a href="#"&gt;链接&lt;/a&gt;&lt;/nav&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;aside&gt;</td>
+                    <td>侧边栏/旁注</td>
+                    <td>Aside</td>
+                    <td>表示与主要内容相关但不是主要内容的部分</td>
+                    <td class="code-example">&lt;aside&gt;相关内容&lt;/aside&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;footer&gt;</td>
+                    <td>页脚</td>
+                    <td>Footer</td>
+                    <td>表示页面或章节的页脚</td>
+                    <td class="code-example">&lt;footer&gt;版权信息&lt;/footer&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;article&gt;</td>
+                    <td>文章</td>
+                    <td>Article</td>
+                    <td>表示独立、完整、可独立分发的内容</td>
+                    <td class="code-example">&lt;article&gt;&lt;h2&gt;文章标题&lt;/h2&gt;&lt;/article&gt;</td>
+                </tr>
+            </table>
+            
+            <h2>表单与输入标签</h2>
+            <table>
+                <tr>
+                    <th width="15%">标签</th>
+                    <th width="15%">中文意思</th>
+                    <th width="15%">英文原意</th>
+                    <th width="25%">注意事项</th>
+                    <th width="30%">代码示例</th>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;form&gt;</td>
+                    <td>表单</td>
+                    <td>Form</td>
+                    <td>用于创建包含输入控件的表单</td>
+                    <td class="code-example">&lt;form action="/submit" method="post"&gt;&lt;/form&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;input&gt;</td>
+                    <td>输入框</td>
+                    <td>Input</td>
+                    <td>空元素，type属性决定输入类型</td>
+                    <td class="code-example">&lt;input type="text" name="user"&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;label&gt;</td>
+                    <td>标签</td>
+                    <td>Label</td>
+                    <td>为表单元素定义标签，使用for属性关联</td>
+                    <td class="code-example">&lt;label for="name"&gt;姓名&lt;/label&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;select&gt; &lt;option&gt;</td>
+                    <td>下拉列表/选项</td>
+                    <td>Select / Option</td>
+                    <td>select创建下拉列表，option定义选项</td>
+                    <td class="code-example">&lt;select&gt;&lt;option&gt;选项&lt;/option&gt;&lt;/select&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;fieldset&gt; &lt;legend&gt;</td>
+                    <td>字段组/图例</td>
+                    <td>Fieldset / Legend</td>
+                    <td>fieldset分组表单元素，legend定义标题</td>
+                    <td class="code-example">&lt;fieldset&gt;&lt;legend&gt;组&lt;/legend&gt;&lt;/fieldset&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;datalist&gt;</td>
+                    <td>数据列表</td>
+                    <td>Datalist</td>
+                    <td>为输入框提供预定义选项列表</td>
+                    <td class="code-example">&lt;input list="options"&gt;&lt;datalist id="options"&gt;&lt;/datalist&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;textarea&gt;</td>
+                    <td>文本区域</td>
+                    <td>Textarea</td>
+                    <td>创建多行文本输入框</td>
+                    <td class="code-example">&lt;textarea rows="4" cols="50"&gt;&lt;/textarea&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;button&gt;</td>
+                    <td>按钮</td>
+                    <td>Button</td>
+                    <td>创建可点击的按钮</td>
+                    <td class="code-example">&lt;button type="submit"&gt;提交&lt;/button&gt;</td>
+                </tr>
+            </table>
+            
+            <h2>媒体与交互标签</h2>
+            <table>
+                <tr>
+                    <th width="15%">标签</th>
+                    <th width="15%">中文意思</th>
+                    <th width="15%">英文原意</th>
+                    <th width="25%">注意事项</th>
+                    <th width="30%">代码示例</th>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;video&gt;</td>
+                    <td>视频</td>
+                    <td>Video</td>
+                    <td>用于嵌入视频内容，支持多种属性</td>
+                    <td class="code-example">&lt;video controls&gt;&lt;source src="video.mp4"&gt;&lt;/video&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;audio&gt;</td>
+                    <td>音频</td>
+                    <td>Audio</td>
+                    <td>用于嵌入音频内容，支持多种属性</td>
+                    <td class="code-example">&lt;audio controls&gt;&lt;source src="audio.mp3"&gt;&lt;/audio&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;canvas&gt;</td>
+                    <td>画布</td>
+                    <td>Canvas</td>
+                    <td>用于通过JavaScript动态绘制图形</td>
+                    <td class="code-example">&lt;canvas id="myCanvas"&gt;&lt;/canvas&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;details&gt; &lt;summary&gt;</td>
+                    <td>详情/摘要</td>
+                    <td>Details / Summary</td>
+                    <td>创建可折叠的内容区域</td>
+                    <td class="code-example">&lt;details&gt;&lt;summary&gt;标题&lt;/summary&gt;内容&lt;/details&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;progress&gt;</td>
+                    <td>进度条</td>
+                    <td>Progress</td>
+                    <td>表示任务的完成进度</td>
+                    <td class="code-example">&lt;progress value="70" max="100"&gt;&lt;/progress&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;figure&gt; &lt;figcaption&gt;</td>
+                    <td>图表/图表标题</td>
+                    <td>Figure / Figure Caption</td>
+                    <td>figure表示独立内容，figcaption定义标题</td>
+                    <td class="code-example">&lt;figure&gt;&lt;img src="img.jpg"&gt;&lt;figcaption&gt;标题&lt;/figcaption&gt;&lt;/figure&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;meter&gt;</td>
+                    <td>度量</td>
+                    <td>Meter</td>
+                    <td>表示已知范围内的标量测量值</td>
+                    <td class="code-example">&lt;meter value="0.6"&gt;60%&lt;/meter&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;output&gt;</td>
+                    <td>输出</td>
+                    <td>Output</td>
+                    <td>用于显示计算或用户操作的结果</td>
+                    <td class="code-example">&lt;output name="result"&gt;0&lt;/output&gt;</td>
+                </tr>
+            </table>
+            
+            <h2>文档与元数据标签</h2>
+            <table>
+                <tr>
+                    <th width="15%">标签</th>
+                    <th width="15%">中文意思</th>
+                    <th width="15%">英文原意</th>
+                    <th width="25%">注意事项</th>
+                    <th width="30%">代码示例</th>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;html&gt;</td>
+                    <td>HTML文档</td>
+                    <td>HTML Document</td>
+                    <td>表示HTML文档的根元素</td>
+                    <td class="code-example">&lt;html lang="zh-CN"&gt;&lt;/html&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;head&gt;</td>
+                    <td>头部</td>
+                    <td>Head</td>
+                    <td>包含文档的元数据和链接信息</td>
+                    <td class="code-example">&lt;head&gt;&lt;title&gt;标题&lt;/title&gt;&lt;/head&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;body&gt;</td>
+                    <td>主体</td>
+                    <td>Body</td>
+                    <td>包含文档的所有可见内容</td>
+                    <td class="code-example">&lt;body&gt;页面内容&lt;/body&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;title&gt;</td>
+                    <td>标题</td>
+                    <td>Title</td>
+                    <td>定义文档标题，显示在浏览器标签页上</td>
+                    <td class="code-example">&lt;title&gt;页面标题&lt;/title&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;meta&gt;</td>
+                    <td>元数据</td>
+                    <td>Metadata</td>
+                    <td>空元素，提供关于HTML文档的元数据</td>
+                    <td class="code-example">&lt;meta charset="UTF-8"&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;link&gt;</td>
+                    <td>链接</td>
+                    <td>Link</td>
+                    <td>空元素，用于链接外部资源如CSS文件</td>
+                    <td class="code-example">&lt;link rel="stylesheet" href="style.css"&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;style&gt;</td>
+                    <td>样式</td>
+                    <td>Style</td>
+                    <td>用于在文档中嵌入CSS样式</td>
+                    <td class="code-example">&lt;style&gt;body { color: red; }&lt;/style&gt;</td>
+                </tr>
+                <tr>
+                    <td class="tag-name">&lt;script&gt;</td>
+                    <td>脚本</td>
+                    <td>Script</td>
+                    <td>用于嵌入或引用JavaScript代码</td>
+                    <td class="code-example">&lt;script&gt;console.log('Hello')&lt;/script&gt;</td>
+                </tr>
+            </table>
+        </div>
+        
+        <footer>
+            <p>HTML标签完整参考表格 &copy; 2023 - 前端学习资源</p>
+        </footer>
+    </div>
+</body>
+</html>

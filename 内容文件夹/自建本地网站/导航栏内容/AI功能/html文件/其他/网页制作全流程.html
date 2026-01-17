@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>网页制作全流程（零→上线）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* ① 全局样式：先搭盒子，后细化 */
+    :root{ --main:#2196f3; --gap:20px; }
+    body{margin:0;font-family:Segoe UI,Helvetica,Arial,sans-serif;background:#f7f9fc;line-height:1.6}
+    h1,h2{color:#0d47a1}
+    .container{max-width:1200px;margin:auto;padding:var(--gap);}
+    .row{display:flex;flex-wrap:wrap;margin:calc(var(--gap) / -2);}
+    .col{flex:1 1 300px;margin:calc(var(--gap) / 2);background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:var(--gap);}
+    .btn{display:inline-block;padding:10px 20px;background:var(--main);color:#fff;border-radius:4px;text-decoration:none;margin-top:10px}
+    pre{background:#263238;color:#aed581;padding:15px;border-radius:6px;overflow:auto;font-size:14px}
+  </style>
+</head>
+
+<body class="container">
+  <h1>网页制作全流程（零→上线）</h1>
+  <p>照着顺序做，一步不落；先搭盒子，后填内容，最后细化样式 → 部署。</p>
+
+  <!-- =====================================================
+       ① 先画草图：把页面切成 3-5 个“大盒子”
+  ===================================================== -->
+  <section class="row">
+    <div class="col">
+      <h2>① 画草图（30 秒手绘）</h2>
+      <p>任何网页都能拆成 5 个盒子：</p>
+      <ol>
+        <li>头部（Header）—— Logo + 导航</li>
+        <li>主视觉（Hero）—— 大标题 + 按钮</li>
+        <li>内容区（Main）—— 列表/表单/文章</li>
+        <li>侧边栏（Aside）—— 广告/分类</li>
+        <li>底部（Footer）—— 版权/链接</li>
+      </ol>
+      <p>→ 画完草图再写代码，不会乱。</p>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       ② 搭盒子：先写 HTML 骨架（零样式）
+  ===================================================== -->
+  <section class="row">
+    <div class="col">
+      <h2>② 搭盒子（HTML 骨架）</h2>
+      <p>只写结构，不加样式；先让盒子竖排能看。</p>
+      <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-CN"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;我的网页&lt;/title&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- 头部 --&gt;
+  &lt;header&gt;
+    &lt;div class="logo"&gt;Logo&lt;/div&gt;
+    &lt;nav&gt;导航&lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;!-- 主视觉 --&gt;
+  &lt;section class="hero"&gt;
+    &lt;h1&gt;大标题&lt;/h1&gt;
+    &lt;p&gt;一句话卖点&lt;/p&gt;
+    &lt;a href="#" class="btn"&gt;立即体验&lt;/a&gt;
+  &lt;/section&gt;
+
+  &lt;!-- 内容区 --&gt;
+  &lt;main&gt;
+    &lt;h2&gt;最新文章&lt;/h2&gt;
+    &lt;ul&gt;
+      &lt;li&gt;文章 1&lt;/li&gt;
+      &lt;li&gt;文章 2&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/main&gt;
+
+  &lt;!-- 侧边栏 --&gt;
+  &lt;aside&gt;
+    &lt;h3&gt;分类&lt;/h3&gt;
+    &lt;ul&gt;
+      &lt;li&gt;分类 A&lt;/li&gt;
+      &lt;li&gt;分类 B&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/aside&gt;
+
+  &lt;!-- 底部 --&gt;
+  &lt;footer&gt;
+    &copy; 2025 我的网站
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      <p>→ 保存后浏览器打开，看到 5 块竖排文字 = 成功。</p>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       ③ 填内容：把“Logo”换成真 Logo，“文章”换成真文章
+  ===================================================== -->
+  <section class="row">
+    <div class="col">
+      <h2>③ 填内容（替换文本/图片）</h2>
+      <ul>
+        <li>Logo → 放 <code>&lt;img src="images/logo.png"&gt;</code></li>
+        <li>导航 → 放 ul/li 链接</li>
+        <li>文章 → 放 &lt;article&gt; 标题+摘要+日期</li>
+        <li>图片 → 先建 <code>images/</code> 文件夹，统一放图</li>
+      </ul>
+      <p>→ 内容填完再美化，避免“空盒子调样式”。</p>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       ④ 加样式：先全局，再局部；先布局，再细节
+  ===================================================== -->
+  <section class="row">
+    <div class="col">
+      <h2>④ 加样式（CSS 顺序）</h2>
+      <ol>
+        <li>全局：重置、字体、颜色变量</li>
+        <li>布局：.container、.row、.col（Flex/Grid）</li>
+        <li>组件：按钮、卡片、表单</li>
+        <li>细节：圆角、阴影、过渡</li>
+      </ol>
+      <pre>/* 全局变量 */
+:root{ --main:#2196f3; --gap:20px; }
+
+/* 布局：先让盒子横排 */
+.row{display:flex;flex-wrap:wrap;margin:calc(var(--gap) / -2);}
+.col{flex:1 1 300px;margin:calc(var(--gap) / 2);}
+
+/* 组件：按钮 */
+.btn{display:inline-block;padding:10px 20px;background:var(--main);color:#fff;border-radius:4px;}</pre>
+      <p>→ 每写完一条就刷新，确认“盒子没散”再往下写。</p>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       ⑤ 响应式：手机横→竖，平板→桌面
+  ===================================================== -->
+  <section class="row">
+    <div class="col">
+      <h2>⑤ 响应式（媒体查询）</h2>
+      <pre>@media (max-width: 768px){
+  .row{flex-direction:column;} /* 手机竖排 */
+  .col{flex:1 1 100%;}
+}</pre>
+      <p>→ 先写桌面，再写 768px 断点；只改布局，不改内容。</p>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       ⑥ 上线：Git → GitHub Pages → 自定义域名
+  ===================================================== -->
+  <section class="row">
+    <div class="col">
+      <h2>⑥ 上线（零成本）</h2>
+      <ol>
+        <li>本地 <code>git init</code> → 推送到 GitHub</li>
+        <li>仓库 Settings → Pages → 选 main 分支 → Save</li>
+        <li>得到 https://你的用户名.github.io/仓库名</li>
+        <li>（可选）Freenom 免费域名 + DNS 指向 → 自定义网址</li>
+      </ol>
+      <a href="https://github.com/settings/pages" target="_blank" class="btn">打开 GitHub Pages 设置</a>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       ⑦  checklist：每一步都打钩
+  ===================================================== -->
+  <section class="row">
+    <div class="col">
+      <h2>⑦ 检查清单（打印出来打钩）</h2>
+      <ul>
+        <li>☐ 草图：5 个盒子画完</li>
+        <li>☐ HTML：骨架无样式能看</li>
+        <li>☐ 内容：Logo、文章、图片真材实料</li>
+        <li>☐ CSS：先全局→布局→组件→细节</li>
+        <li>☐ 响应：768px 断点测试通过</li>
+        <li>☐ 上线：GitHub Pages 能打开</li>
+        <li>☐ 自定义：免费域名绑定成功</li>
+      </ul>
+      <p>全部打钩 = 网站上线，随时可分享！</p>
+</body>
+</html>

@@ -1,0 +1,131 @@
+/* 一、全局基础样式（按编写顺序：布局模式→尺寸→背景→其他） */
+body{
+    margin: 0;
+    min-height: 100vh;
+    background-color: #eeeeee;
+    background-image: url("../../../网站/网站内容添加/网站背景/盛林1.jpg"); /* 替换为你的图片实际路径 */
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Microsoft YaHei", sans-serif; /* 统一字体，优化阅读体验 */
+}
+
+/* 二、Flex布局核心类（按编写顺序：布局模式→方向→弹性占比） */
+.flex{
+    display: flex; /* 定义Flex容器 */
+}
+.column{
+    flex-direction: column; /* 竖向排列 */
+}
+.flex_主区域{
+    flex: 1; /* 弹性占比，分配剩余空间 */
+}
+
+/* 三、样式辅助类（按编写顺序：定位→背景→边距→阴影） */
+.div_背景{
+    background-color: rgba(255, 255, 255, 0.85); /* 半透明白色，透出背景图 */
+    position: relative; /* 为子元素定位提供参考 */
+    margin: 8px; /* 统一外间距 */
+    box-shadow: rgba(0 0 0 / 20%) 0 2px 1px -1px,rgba(0 0 0 / 14%) 0 1px 1px 0 ,rgba(0 0 0 / 12%) 0 1px 3px 0; /* 阴影增强层次 */
+}
+.margin_right{
+    margin-right: 8px; /* 单独控制右侧间距 */
+}
+.margin_top{
+    margin-top: 8px; /* 单独控制上侧间距 */
+}
+
+/* 四、导航栏样式（按编写顺序：布局→边距→文字→子菜单） */
+#div_nav_布局{
+    display: flex;
+    flex-direction: column;
+    flex: 3; /* 导航区域弹性占比 */
+}
+#nav_布局{
+    margin: 0 25px;
+    list-style: none; /* 清除列表默认圆点 */
+    font-size: 35px;
+    padding: 0;
+}
+/* 子菜单默认隐藏 */
+#nav_布局 li ul li {
+    display: none;
+    font-size: 20px; /* 子菜单字体缩小 */
+    padding: 5px 0;
+}
+/* 父菜单悬停显示子菜单 */
+#nav_布局 li:hover ul li {
+    display: block;
+}
+/* 子菜单定位：避免破坏Flex布局 */
+#nav_布局 li {
+    position: relative;
+    margin: 15px 0; /* 父菜单垂直间距 */
+}
+#nav_布局 li ul {
+    position: absolute;
+    left: 100%; /* 子菜单在父菜单右侧显示 */
+    top: 0;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    min-width: 200px; /* 子菜单最小宽度 */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    list-style: none;
+}
+/* 超链接样式优化 */
+#nav_布局 a {
+    text-decoration: none; /* 清除下划线 */
+    color: #333; /* 链接默认颜色 */
+}
+#nav_布局 a:hover {
+    color: #666; /* 悬停颜色加深 */
+}
+
+/* 五、总结内容样式（美化总结模块，增强可读性） */
+.main-content {
+    padding: 20px 30px;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.8; /* 行高优化，方便阅读 */
+}
+.summary-title {
+    font-size: 24px;
+    color: #222;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin: 30px 0 20px;
+}
+.sub-title {
+    font-size: 20px;
+    color: #444;
+    margin: 25px 0 15px;
+}
+.summary-list {
+    margin: 10px 0 20px 20px;
+}
+.summary-list li {
+    margin: 8px 0;
+}
+.code-block {
+    background-color: #f8f8f8;
+    padding: 15px;
+    border-radius: 4px;
+    font-family: "Consolas", monospace;
+    font-size: 14px;
+    margin: 10px 0;
+    overflow-x: auto; /* 代码超出时可滚动 */
+}
+/* 表格样式（标签/CSS属性对照表） */
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+.summary-table th, .summary-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+}
+.summary-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
