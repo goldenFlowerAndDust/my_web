@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>12月26日课堂练习</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body{
+				background-color: #ddd;
+			}
+			div{
+				border: 1px solid #00ffff;
+			}
+			#box1{
+				border: none ;
+			}
+			main div{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				width: 100%;
+				background-color: #2e2e2e;
+				margin-top: 15px;
+				height: 18.75rem;
+			}
+			p{
+				color: white;
+				font-size: 30px;
+				text-align: center;
+			}
+			#box1{
+				background-color: #ddd;
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				gap: 15px;
+			}
+			#box2{
+				height: 15rem;
+			}
+			#box2 nav ul{
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				gap: 130px;
+			}
+			ul li{
+				font-size: 40px;
+				margin: 0 25px;
+				list-style-type: none;
+			}
+			a{
+				text-decoration: none;
+			}
+			a:hover{
+				background-color: #00ffff;
+			}
+			.flex{
+				flex: 1;
+			}
+			.flex_1{
+				flex: 3;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<!-- 头部区域 -->
+			<div>
+				<p>头部区域</p>
+			</div>
+			<!-- 菜单栏区域 -->
+			<div id="box2">
+				<!-- <p>菜单栏导航区域</p> -->
+				<nav>
+					<ul>
+						<li><a href="#">首页</a></li>
+						<li><a href="#">微博图</a></li>
+						<li><a href="#">移动开发</a></li>
+						<li><a href="#">编程与设计</a></li>
+						<li><a href="#">程序员与语言</a></li>
+						<li><a href="#">编程语言排行榜</a></li>
+					</ul>
+				</nav>
+			</div>
+			<!-- 主区域 -->
+			<div id="box1">
+				<!-- 左 -->
+				<div class="flex">
+					<p>内容区域</p>
+				</div>
+				<!-- 中 -->
+				<div class="flex_1">
+					<p>内容区域</p>
+				</div>
+				<!-- 右 -->
+				<div class="flex">
+					<p>内容区域</p>
+				</div>
+			</div>
+			<!-- 底部区域 -->
+			<div>
+				<footer>
+					<p>底部区域</p>
+				</footer>
+			</div>
+		</main>
+	</body>
+</html>

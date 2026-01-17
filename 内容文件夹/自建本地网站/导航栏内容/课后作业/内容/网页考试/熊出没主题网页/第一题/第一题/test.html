@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<link rel="stylesheet" href="../../熊出没主题网页.css">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			li {
+				list-style: none;
+			}
+
+			body {
+				font-family: "微软雅黑", "PingFang SC", sans-serif;
+				background-color: #f8f9fa;
+				padding: 20px;
+				color: #333;
+				line-height: 1.6;
+			}
+
+			/* 容器：限制最大宽度，居中显示 */
+			.container {
+				max-width: 1100px;
+				margin: 0 auto;
+			}
+
+			/* 头部区域：缩小合照+新增标题 */
+			.header {
+				text-align: center;
+				margin-bottom: 35px;
+				position: relative;
+			}
+
+			nav ul {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				position: relative;
+			}
+
+			.xionda {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				gap:15px;
+			}
+
+			.xionger {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				gap:15px
+			}
+
+			.guangtouqing{
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				margin-right: 15px;
+				gap:15px;
+			}
+			.character-list{
+				position: absolute;
+				top: 220px;
+			}
+			img{
+				box-shadow: 0 0 5px rgab(0,0,0,0.3);
+			}
+			img:hover{
+				transform: translateY(-10px);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="header">
+				<h1>熊出没角色图鉴</h1>
+			</div>
+
+			<!-- 新增功能列表栏 -->
+			<nav>
+				<ul>
+					<li>
+						<span>人物介绍列表</span>
+					</li>
+					<li>
+						<span>角色关系解析</span>
+					</li>
+					<li>
+						<span>经典剧情回顾</span>
+					</li>
+					<li>
+						<span>角色语录合集</span>
+					</li>
+					<li>
+						<span>人气投票排行</span>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- 角色列表 -->
+			<div class="character-list">
+				<!-- 熊大卡片 -->
+				<div class="xionda">
+					<img src="xd.jpg" alt="熊大" width="280px">
+					<div>
+						<h3>熊大</h3>
+						<p>
+							熊大是《熊出没》系列的核心主角，一头充满智慧与勇气的棕熊。作为森林的守护者，他成熟稳重、思维敏捷，总能在关键时刻制定周密计划，带领熊二阻止光头强的伐木行为。熊大不仅战斗力强，更有着温柔的一面，对弟弟熊二呵护备至，对森林里的小动物们也十分友善。他棕褐色的毛发、标志性的粗眉毛，以及“保护森林，熊熊有责”的口头禅，成为了无数观众心中的经典形象。
+						</p>
+
+					</div>
+				</div>
+
+				<!-- 熊二卡片 -->
+				<div class="xionger">
+					<img src="xe.jpg" alt="熊二" width="280px">
+					<div>
+						<h3>熊二</h3>
+						<p>
+							熊二是熊大的弟弟，性格憨厚可爱、贪吃懒散，却有着一颗纯真善良的心。他对蜂蜜有着近乎痴迷的热爱，经常因为贪吃闹出各种笑话，但在森林遭遇危机时，总能挺身而出，与熊大并肩作战。熊二的浅棕色毛发、圆滚滚的肚子，以及略带憨厚的语气，让他成为了系列中的“开心果”。虽然偶尔会犯迷糊、拖后腿，但他对哥哥的信任、对森林的热爱，以及关键时刻的勇敢，让他深受观众喜爱。
+						</p>
+
+					</div>
+				</div>
+
+				<!-- 光头强卡片 -->
+				<div class="guangtouqing">
+					<img src="gtq.jpg" alt="光头强" width="280px">
+					<div>
+						<h3>光头强</h3>
+							<p>
+								光头强是《熊出没》系列的经典角色，从最初的“反派”伐木工人，逐渐成长为守护森林的导游。他有着标志性的光头，总是穿着蓝色工服、戴着黄色安全帽，虽然经常被李老板催促伐木，却总被熊大熊二阻止。光头强乐观坚韧、多才多艺，擅长发明各种工具，本质善良的他在后期放弃了伐木工作，转型为导游，与熊大熊二化敌为友，共同守护森林。他的成长与转变，让角色更加立体丰满，成为系列中最具争议也最受欢迎的角色之一。
+							</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

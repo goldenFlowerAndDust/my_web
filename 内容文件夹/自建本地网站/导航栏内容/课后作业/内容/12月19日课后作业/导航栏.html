@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="CN">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+     body{
+         margin:0 auto;
+         min-width:3000px;
+         min-height: 50px;
+     }
+     nav{
+         width:1950px;
+         background-color:#808080;
+         height:100px;
+     }
+     nav ul li{
+         width: 180px;
+         text-align: center;
+         font-size:30px;
+         font-weight:bolder;
+         float:left;
+         margin:35px 14px;
+         list-style:none;
+     }
+     .ul_1 li{
+         width:180px;
+         float:initial;
+         display:none;
+     }
+     a:hover{
+         background-color:green;
+     }
+     nav ul li:nth-of-type(6):hover .ul_1 li{
+         display:block;
+         background-color:#ddd;
+     }
+     nav ul li:last-of-type:hover .ul_1 li{
+         display:block;
+         background-color:#ddd;
+     }
+</style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">首页</a></li>
+            <li><a href="#">教务管理系统</a></li>
+            <li><a href="#">资源中心</a></li>
+            <li><a href="#">专业资源库</a></li>
+            <li><a href="#">教法中心</a></li>
+            <li><a href="#">校园导航</a>
+                <ul class="ul_1">
+                    <li><a href="#">学校首页</a></li>
+                    <li><a href="#">校直部门</a></li>
+                    <li><a href="#">平台使用指南</a></li>
+                </ul>
+            </li>
+            <li><a href="#">职业技能鉴定</a></li>
+            <li><a href="#">质量工程</a></li>
+            <li><a href="#">使用指南</a>
+                <ul class="ul_1">
+                    <li><a href="#">平台使用指南</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+</body>
+</html>
