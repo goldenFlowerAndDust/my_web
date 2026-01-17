@@ -1,0 +1,18 @@
+main{
+    border: 1px solid red;
+    background-color: skyblue;
+}
+pre{
+    font-size: 25px;
+    color: #000000;
+}
+img{
+    width: auto;
+    height: 500px;
+}
+header{
+    color: black;
+    background-color: rgb(213, 255, 145);
+    font-size: 35px;
+    text-align: center;
+}
