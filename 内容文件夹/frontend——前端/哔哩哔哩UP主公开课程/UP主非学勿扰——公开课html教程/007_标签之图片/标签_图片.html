@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>标签之图片</title>
+		<style type="text/css">
+			main{
+				border: 5px solid red;
+				padding:2px;
+				margin:1px;
+				background-color:blue;
+			}
+			header{
+				text-align:center;
+				color:yellow;
+				background-color:green;
+				font-size:25px;
+			}
+			p{
+				font-size:20px;
+				color:black;
+				background-color:white;
+			}
+			span{
+				font-size:35px;
+				color:yellow;
+				background-color: green;
+			}
+			li{
+				color:pink;
+				font-size:20px;
+			}
+			h1,h2{
+				font-size:25px;
+				color:red;
+			}
+			img{
+				width:100%;
+				height:800px;
+				/* text-align:left; */
+			}
+			hr{
+				border:10px solid yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<header>图片标签——img</header>
+		<main>
+			<section>
+				<h1>img标签的语法结构及注意事项</h1>
+				<p>
+					网站之中最多的元素毋庸置疑，一定是图片
+					<br>img 标签定义HTML页面中的图像
+					<br>&lt;img src="内填写图片地址" alt="内填写当图片加载失败时，由里面的内容代替" title="鼠标悬停在图片上时显示的提示文本" 
+					width="内设置的是图片的宽度" height="内设置的是图片的高度"&gt;
+					<br>注意：
+					<br><span>&lt;img&gt;是单标签，不需要进行任何闭合操作</span>
+				</p>
+			</section>
+			
+			<section>
+				<h1>img的属性及解释</h1>
+				<ol>
+					<li>
+						src:路径(图片地址与名字)
+					</li>
+					<li>alt:规定图像的替代文本</li>
+					<li>
+						width:规定图片的宽度(必须加入单位px或百分比%)
+					</li>
+					<li>
+						height:规定图像的高度(必须加入单位px或百分比%)
+					</li>
+					<li>
+						title：鼠标悬停在图片上给予提示
+					</li>
+				</ol>
+			</section>
+			
+			<section>
+				<h1>属性alt演示</h1>
+				<h2>图片素材</h2>
+				<span>&lt;img src="素材存放区/风景图.jpeg"&gt;</span>
+				<h2>放入HTML页面，并能正常显示出来</h2>
+				<img src="素材存放区/这是风景图——能显示出来的.png">
+				<hr>
+				<span><h2>当不能显示出来时</h2></span>
+				<!-- <img src="素材存放区/这是风景图——能显示出来的.pn"> -->
+				<hr>
+				<span><h2>将图片路径改为错误的，使他不能正常显示出来</h2></span>
+				<img src="素材存放区/这是风景图——将路径改为错误的.png">
+				<hr>
+				<span><h2>加入属性alt，并演示</h2></span>
+				<!-- <img src="素材存放区/这是风景图——能显示出来的.pn" alt="这是一张风景图"> -->
+				<img src="素材存放区/这是风景图——将路径改为错误的，并加入属性alt.png">
+			</section>
+			
+			<section>
+				<h1>属性width、height演示</h1>
+				<p>
+					看，在alt的演示当中，图片太大了，在浏览器当中需要缩小才能看到，具体内容
+					<br>所以我们需要通过属性width、height来改变图片的大小。
+				</p>
+				<span><h2>还未加入width\height的情况</h2></span>
+				<img src="素材存放区/还未添加属性width、height之前的情况。.png">
+				<hr>
+				<p>
+					因为我想更改所有图片的大小，使用行内调用速度太慢，所以采用内部调用，一次定义所有图片的CSS样式。
+				</p>
+				<span>添加width、height属性的参数及效果演示</span>
+				<img src="素材存放区/添加width、height属性.png">
+				<hr>
+				<img src="素材存放区/添加width、height属性及效果演示.png">
+				<hr>
+				<p>
+					总结：属性width和height，可以使图片尺寸产生变化，能使界面看起来更加舒适
+				</p>
+			</section>
+			
+			<span><h1>使用属性title</h1></span>				
+			<span>&lt;img src="素材存放区/风景图.jpeg" title="这是一张风景图"&gt;</span>
+			<span><h1>实际效果图</h1></span>
+			<img src="素材存放区/使用title属性.png">
+		</main>
+	</body>
+</html>
+
+
+

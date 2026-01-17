@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>HTML标签：段落、换行、水平线</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            font-size: 25px;
+        }
+        header {
+            font-size: 35px;
+            text-align: center;
+            background-color: yellow;
+            color: red;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        main {
+            border: 3px solid red;
+            padding: 2px;
+            /* margin: 0 auto;
+            max-width: 100%; */
+        }
+        section {
+            margin-bottom: 30px;
+        }
+        h1, h2, h3, h4 {
+            color: #333;
+        }
+        ul, ol {
+            background-color:blue;
+            color: yellow;
+            padding: 1;
+           /* list-style-type: none; */
+        }
+        li {
+            background-color: black;
+			padding: 1px;
+           margin-bottom: 5px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+        }
+        hr {
+           border: none;
+            height: 13px;
+            background-color: blue;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>HTML标签：段落、换行、水平线</header>
+    <main>
+        <section>
+            <h1>标签-段落</h1>
+            <ul>
+                <li>段落是通过<p>标签定义的</li>
+            </ul>
+            <p>这是一个段落</p>
+            <p>这是另一个段落</p>
+            <img src="素材存放区/p标签.png" alt="段落标签示例">
+        </section>
+
+        <section>
+            <h1>标签——换行</h1>
+            <p>
+                1. 如果您不希望在不产生一个新段落的情况下进行换行（新行），可以用换行标签，br标签<br>
+                2. br元素是一个空的HTML元素。<br>
+                3. 注意：换行标签可以叠加使用。
+            </p>
+            <h2>未使用换行标签(br)，实际效果演示</h2>
+            <img src="素材存放区/换行标签——未使用.png" alt="未使用换行标签">
+            <h2>使用换行标签(br)，实际效果演示</h2>
+            <img src="素材存放区/br标签——已使用.png" alt="使用换行标签">
+        </section>
+		
+        <section>
+            <h1>标签——水平线</h1>
+            <ul>
+                <li>解释</li>
+                <ol>
+                    <li>水平线标签(hr)</li>
+                    <li>该标签是在HTML页面中创建水平线</li>
+                </ol>
+                <li>定义CSS样式属性</li>
+                <ol>
+                    <li>color: 设置水平线的颜色</li>
+                    <hr>
+                    <li>width: 设置水平线的宽度</li>
+                    <hr>
+                    <li>height: 设置水平线的高度</li>
+                    <hr>
+                    <li>align: 设置水平线的对齐方式（默认居中），可取值left（左），right（右）</li>
+                </ol>
+            </ul>
+            <h2>未使用水平线标签</h2>
+            <img src="素材存放区/水平线标签——未使用.png" alt="未使用水平线标签">
+            <h2>使用水平线标签并定义CSS样式属性</h2>
+            <p>
+                CSS属性样式，都在head标签内，新建的style标签内部。
+                <br>因为水平线不属于文本，单独使用color属性，没有效果，需要border搭配使用。例如：border-color:red。
+                <br>width和height不受影响可以直接用。
+                <br>在HTML5里面，hr标签的align被废除了，也就是说，无法直接用center、left、right直接定义对齐方式了，被margin代替。
+            </p>
+			<img src="素材存放区/定义的水平标签CSS样式.png" alt="定义的hr标签CSS样式">
+			<img src="素材存放区/hr标签定义的CSS样式实际效果.png" alt="hr标签定义的CSS样式实际效果">
+			</section>
+			
+			<section>
+            <h3>名词解释——auto</h3>
+            <p>auto就是告诉浏览器，帮我算的意思。</p>
+			<h3>一、margin：auto家族(块级水平对齐专用)</h3>
+            <ul>
+                <h4>属性：</h4>
+                <li>margin-left</li>
+                <li>margin-right</li>
+                <li>margin-top</li>
+                <li>margin-bottom</li>
+                <em>取值: auto</em>
+            </ul>
+            <ul>
+                <h4>计算规则：把可用剩余空间全部吸收到自己身上</h4>
+                <li>行内元素→0(无效)</li>
+                <li><h4>块级元素宽度非auto时:</h4></li>
+                <p>
+                    当left与right同时为auto时，剩余空间平分，最后的结果是水平线居中。
+                    <br>当left与right仅一侧为auto，该侧吃掉全部剩余空间，最后的结果是靠左或靠右。
+                </p>
+                <li><h4>块级元素高度非auto且父级高度确定时:</h4></li>
+                <p>
+                    上下同时为auto→0(CSS2.1规则)。
+                    <br>在Flex容器里再设置margin-top/bottom:auto→垂直真•居中或靠底。
+                </p>
+            </ul>
+			
+			<h3>二、尺寸类auto(width/height/inline-size/block-size)</h3>
+			<ul>
+				<li>width:auto(默认)</li>
+				<p>
+					普通流块级→占满父级内容区宽度(100%效果，但不同于100%的包块计算方式)
+					<br>绝对定位元素→left:0; right:0时同样撑满左右偏移量之间
+					<br>浮动/行内块→收缩到内容宽度(shrink-to-fit)。
+				</p>
+				<li>height:auto(默认)</li>
+				<p>
+					由子元素高度累加得出：
+					<br>绝对定位元素top:0; bottom:o时撑满上下偏移量之间。
+				</p>
+				<li>flex 子项(flex-basis:auto)</li>
+				<p>
+					表示[基准尺寸]先按本来大小(width/height或内容)算，再放大/缩小
+				</p>
+			</ul>
+				
+				<h3>定位偏移量auto(top/right/bottom/left)</h3>
+				<ul>
+					<li>静态定位</li>
+					<p>静态定位(static)→auto等价于0，元素留在文档流原位置。</p>
+					<li>相对定位</li>
+					<p>相对定位(relative)→auto等价于0，不同移动</p>
+					<li>绝对定位</li>
+					<p>
+						绝对/固定定位→auto表示保持原来在文档流中的那一侧边缘位置；
+						<br>典型用方法：
+						<br>只想让元素[宽度撑满剩余空间]时，把对向偏移量设0，另一侧auto:
+						<br>position:absolute;
+						<br>left:100px;right:auto; (意思是：左边留100px,宽度自动撑到父级右边缘)
+					</p>
+				</ul>
+				
+				<h3>溢出行为auto(overflow/overflow-x/overflow-y)</h3>
+				<p>
+					auto = 需要时再出现滚动条，子内容不溢出则没有滚顶条。
+					<br>scroll(永远显示滚顶条)区别就是这样
+				</p>
+				
+				<h3>表格布局auto(table-layout)</h3>
+				<p>
+					table-layout：auto(默认)→列宽由单元格内容自动计算，允许动态变化。
+					<br>设置为fixed则按首行宽度定死，性能更好
+				</p>
+				
+				<h3>列宽/网格轨道auto</h3>
+				<ul>
+					<li>
+						columns:auto→列数由column-width和内容共同决定
+					</li>
+					<li>
+						Grid[grid-template-columns:auto 1fr auto ]→第一、三收缩到内容宽度，中间占剩余空间
+					</li>
+					<li>
+						flex[flex:auto]是1 1 auto的简介，含义同上。
+					</li>
+				</ul>
+				
+				<h3>其他零碎场景</h3>
+				<ul>
+					<li>cursor：auto→交给浏览器根据上下文选择指针样式</li>
+					<li>z-index:auto→不建立新层叠上下文，按文档流顺序层叠</li>
+					<li>outline-sidth:auto→浏览器自定义宽度[通常1px或2px]</li>
+				</ul>
+				
+				<h3>速记口诀</h3>
+				<ol>
+					<li>
+						margin:auto→吸剩余空间；左右同吸 = 居中
+					</li>
+					<li>
+						width/height:auto→自动撑满或收缩到内容
+					</li>
+					<li>
+						定位 offset：auto→别动，或保持原边
+					</li>
+					<li>
+						overflow:auto→按需要出现滚动条
+					</li>
+					<li>
+						其余auto→浏览器自己看着办
+					</li>
+				</ol>
+        </section>
+    </main>
+</body>
+</html>

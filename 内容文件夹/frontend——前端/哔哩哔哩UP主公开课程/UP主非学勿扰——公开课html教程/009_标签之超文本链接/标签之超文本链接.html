@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>标签之超文本链接</title>
+		<style type="text/css">
+			*{
+				/* clear:both; */
+			}
+			main{
+				background-color:#00aa00;
+				border:5px solid red;
+				padding:1px;
+			}
+			span{
+				font-size:35px;
+				text-align:center;
+				background-color:yellow;
+			}
+			#span_1{
+				font-size:15px;
+				text-align:center;
+				background-color:blueviolet;
+				margin-bottom:10px;
+			}
+			img{
+				max-width:100%;
+				height:auto;
+				/* float:left; */
+				/* border:1px solid red; */
+				
+			}
+			p{
+				clear:both;/*清除浮动*/
+				font-size:25px;
+			}
+			header{
+				background-color:yellow;
+				font-size:35px;
+				color:blue;
+				text-align:center;
+				
+			}
+			ul,ol{
+				border:3px solid yellow;
+				font-size:25px:
+				background-color:white;
+				color:black;
+			}
+			h2,h3{
+				font-size:30px;
+				background-color:#FFFFFF;
+				text-align:center;
+			}
+			li{
+				font-size:25px;
+				background-color:#000000;
+				color:yellow;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<header>标签超文本</header>
+		<main>
+			<section>
+				<h2>超文本链接描述</h2>
+				<p>主要作用：跳转(想跳哪里条哪里)</p>
+				<ul>
+					<h3>具体描述</h3>
+					<li>HTML使用标签&lt;a&gt;来设置超文本链接</li>
+					<li>超链接可以是一个字，一个词，或者一组词，也可以是一幅画像……</li>
+					<h3>具体操作</h3>
+					<li>可以<span>点击</span>以上内容实现跳转到新的文档或者当前文档中的某个部分</li>
+					<h3>代码示例</h3>
+					<span>&lt;a href="url"&gt;链接文本&lt;/a&gt;</span>
+					<a href="https://www.csdn.net/"><span id="span_1">CSDN快速跳转链接</span></a>
+					</ul>
+						<h3>注意事项</h3>
+						<ul>
+							<li>超文本链接标签是双标签</li>
+							<li>与属性href搭配使用，里面的内容是需要跳转文本或内容的具体路径</li>
+							<li>在中间的内容可以理解为注释，告诉读者或作者自己这个链接是跳转到什么文本。</li>
+							<li>中间内容，可以是一张图片，一串文本……,只要包含到&lt;a&gt;&lt;/a&gt;标签内都可以实现跳转</li>
+							<li>超链接的表现：<br>当鼠标移动至超链接上，默认箭头变为手指的图标</li>
+							<span>使用图片加文本的形式，创建超链接</span>
+							<br><a href="https://www.csdn.net/"><span style="text-align:center">CSDN快速跳转链接</span><img src="素材存放区/图片素材.png" alt="这是CSDN超链接的图片素材"></a>
+						</ul>
+						<ol>
+							<h3>默认情况下，链接将以，以下形式出现在浏览器中：</h3>
+							<li>一个未访问过的链接显示为蓝色字体并带有下划线</li>
+							<img src="素材存放区/未使用超链接.png" alt="未使用使用超链接">
+							<li>访问过的链接显示为紫色并带有下划线</li>
+							<img src="素材存放区/点击并跳转过的.png" alt="使用超链接">
+							<li>点击超链接时，链接显示为红色并带有下划线</li>
+							<img src="素材存放区/单击但未松手的.png" alt="点击超链接，不松手">
+							<h3>特别注意</h3>
+							<span>后期是可以通过css样式修改这些效果</span>
+						</ol>
+					</p>
+				</ul>
+			</section>
+		</main>
+	</body>
+</html>

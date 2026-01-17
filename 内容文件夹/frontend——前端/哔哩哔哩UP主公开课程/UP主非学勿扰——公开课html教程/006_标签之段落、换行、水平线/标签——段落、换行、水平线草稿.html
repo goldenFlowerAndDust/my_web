@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>标签换行、段落、水平线</title>
+		<style type="text/css">
+			*{
+				font-size:25px;
+			}
+		main{
+			border:5px solid red;			
+		}
+		ul{
+			background-color:blue;
+			color:yellow;
+		}
+		header{
+			font-size:35px;
+			text-align:center;
+			background-color:yellow;
+			color:red;
+		}
+		li{
+			background-color:black;
+		}
+		</style>
+	</head>
+	<body>
+		<header>换行、段落、水平线</header>
+			<main>
+				<h1>标签-段落</h1>
+				<ul>
+					<ul>
+						<li>段落是通过p标签定义的</li>
+						<p>这是一个段落</p>
+						<p>这是另一个段落</p>
+						<img src="素材存放区/p标签.png">
+					</ul>
+			</main>
+			
+			<main>
+				<h1>标签——换行</h1>
+				<p>
+					1.如果您不希望在不产生一个新段落的情况下进行换行(新行)，可以用换行标签，br标签<br>
+					2.br元素是一个空的HTML元素。<br>
+					3.注意：换行标签可以叠加使用。
+				</p>
+			</main>
+				
+			<main>
+				<h2>当没有使用换行标签(br),实际效果演示</h2>
+				<img src="素材存放区/换行标签——未使用.png" alt="路径错误，图片生成失败">
+				<h3>使用换行标签(br),实际效果演示</h3>
+				<img src="素材存放区/br标签——已使用.png" alt="路径错误,图片生成失败">
+			</main>
+					
+			<main>
+				<h1>标签——水平线</h1>
+					<ul>
+						<li>解释</li>
+							<ol>
+								<li>水平线标签(hr)</li>
+								<li>该标签是在HTML页面中创建水平线	</li>							
+							</ol>							
+						<li>定义CSS样式属性</li>
+							<ol>
+								<li>color:设置水平线的颜色</li>
+								<hr>
+								<li>width:设置水平线的宽度</li>
+								<hr>
+								<li>height:设置水平线的高度</li>
+								<hr>
+								<li>align:设置水平线的对其方式(默认居中)，可取值left(左)，right(右)</li>
+							</ol>
+					</ul>
+						<h4>未使用水平线标签</h4>
+						<img src="素材存放区/水平线标签——未使用.png" alt="路径错误，图片生成失败">
+			</main>
+			
+			<main>
+				<h1>使用水平线标签并定义CSS样式属性</h1>
+				<ul>
+					<h2>内部调用</h2>
+					<ol>
+						<li>CSS属性样式，都在head标签内，新建的style标签内部</li>
+						<li>因为水平线不属于文本，单独使用color属性，没有效果，需要border搭配使用<br>则：border-color:red</li>
+						<li>width和height不受影响可以直接用</li>
+						<li>在HTML5里面hr标签的align被废除了，也就是说，无法直接用center、left、right直接定义对齐方式了<br>被margin代替：</li>
+									<p>具体的形式是：<br>
+									靠左：margin-left：数值(单位如：px……)<br>
+									靠右：margin-right：数值(单位如：px……)<br>
+									居中：margin-left：auto 以及 margin-right：auto
+									</p>
+						<h3>名词解释——auto</h3>
+									<p>auto就是告诉浏览器，帮我算的意思:</p>
+									<li>margin:auto家族——块级水平对齐专用</li>
+									<ul class="ul_1">
+										<h4>属性：</h4>
+										<li>margin-left</li>
+										<li>margin-right</li>
+										<li>margin-top</li>
+										<li>margin-boottom</li>
+										<em>取值:auto</em><br>										
+									</ul>
+									<ul class="ul_1">
+										<h4>计算规则：把可用剩余空间全部吸收到自己身上</h4>
+										<li>行内元素→0(无效)</li>
+										<li><h1>块级元素宽度非auto时:</h1></li>
+										<p>
+										   当left与right同时为auto时，剩余空间平分，最后的结果是水平线居中<br>
+										   当left与right仅一侧为auto，该恻吃掉全部剩余空间，最后的结果是靠左或靠右<br>
+										</p>
+										<li><h1>块级元素高度非auto且父级高度确定时:</h1></li>
+										<p>
+											上下同时为auto→0(CSS2.1规则)<br>
+											Flex容器里再设置margin-top/bottom:auto→垂直真•居中或靠底
+											
+										</p>
+									</ul>
+						</main>			
+	</body>
+</html>`

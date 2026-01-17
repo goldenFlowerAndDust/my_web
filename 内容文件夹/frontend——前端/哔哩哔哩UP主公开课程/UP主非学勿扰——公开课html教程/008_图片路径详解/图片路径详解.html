@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片路径详解</title>
+		<style type="text/css">
+			main{
+				border:5px solid red;
+				padding:1px;
+				background-color:blue;
+			}
+			section{
+				border:3px solid yellow;
+			}
+			p{
+				color:black;
+				font-size:25px;
+				background-color:white;
+			}
+			h1,h2{
+				color:red;
+				font-size:35px;
+				background-color:yellow;
+			}
+			header{
+				font-size:40px;
+				text-align:center;
+				color:green;
+				background-color:yellow;
+			}
+			span{
+				font-size:35px;
+				color:red;
+				background-color:#aa5500;
+			}
+			li{
+				font-size:25px;
+				color:pink;
+			}
+		</style>
+	</head>
+	<body>
+		<header>图片路径详解</header>
+		<main>
+			<section>
+				<h1>图片路径分类</h1>
+				<ol>
+					<li>绝对路径</li>
+					<li>相对路径</li>
+					<li>网络路径</li>
+				</ol>
+			</section>
+			
+			<section>
+				<h1>绝对路径</h1>
+				<p><span>绝对路径是电脑的盘符储存与访问的具体地址</span></p>
+				<h2>整个复制绝对路径的过程</h2>
+				<ol>
+					<li><em>谁便到网上下载图片素材或本地磁盘上有图片</em></li>
+					<img src="素材存放区/图片素材.png" alt="这是一张风景图片">
+					<li><em>打开图片所在的文件夹</em></li>
+					<img src="素材存放区/打开图片所在的文件夹.png" alt="打开图片所在的文件夹">
+					<li><em>复制文件绝对路径</em></li>
+					<p>
+						在当前图片右击，选择复制文件地址
+						<img src="D:\HTML5+CSS3-Study\HBuilder-Study\HBuilderX-study\自主预习\哔哩哔哩——UP主非学勿扰\008_图片路径详解\素材存放区\复制图片绝对路径.png" alt="复制文件绝对地址">
+						注意：<br>在浏览器中，如果直接用绝对地址，图片会被屏蔽
+							 <br>因为：浏览器不认本地盘符路径，这是浏览器安全策略，无法绕过。
+							 则：<img src="素材存放区/使用绝对路径并说明注意事项.png">
+					</p>
+				</ol>
+			</section>
+			
+			<section>
+				<h1>相对路径</h1>
+				<p>
+					顾名思义：<span>两者是相对关系(两个文件或资源位于同一个文件夹内)，两者在同一路径下可以直接访问</span>
+					<br>也就说，它不会像绝对路径，被浏览器拦截，显示不出来
+				</p>
+				<ol>
+					<h2>相对路径的三种关系</h2>
+					<li>
+						子级关系：/
+					</li>
+					<p>
+						比如，图片1.webp在imag目录下，则图片与目录是子级的关系
+						<br>html文件与imags目录在名为08_图片路径详解的文件夹下，则文件与目录属于兄弟关系
+						<br>也就所说图片与html文件属于间接子级的关系(也属于子级关系)，
+						而子级关系，只要[/](图片名称即可)
+						<br><span>&lt;img src="素材存放区/子级关系详解.png" alt="子级关系详解"&gt;</span>
+						<br>因为属于间接子级关系，所以要在图片前面加上同级关系(兄弟关系)路径
+						<img src="素材存放区/子级关系详解.png" alt="子级关系详解"
+					</p>
+					<li>
+						父级关系：../
+					</li>
+					<p>
+						如图所示，新建一个文件存放区的目录并将html文件拖入当中，这是文件html为目录的子级，
+						<br>想要引用图片[父级关系详解.png]，则需要返回上一级，这就需要[../]返回上一级目录了，可以直接输入图片名称即可
+						<br>父级关系：一个文件或文件夹所在的上一级目录
+						<br>父级关系以[../]为前缀，不可省略
+						<br>反正，需要使用../返回上级的就是父级关系
+						&lt;img src="../008_图片路径详解/父级关系详解.png"&gt;
+					</p>
+					<img src="素材存放区/父级关系详解.png">
+					<li>
+						同级关系：./
+					</li>
+					<p>
+						同级关系也可以理解为兄弟关系
+						<br>它们在同一个目录下，或同一个层级下
+						<br>同级关系以[./]为前缀加图片名，当然一般情况下，点号可以省略。
+						<br><span>&lt;img src="同级关系详解"&gt;</span>
+						<img src="同级关系详解.png">
+					</p>
+				</ol>
+				<section>
+					<h1>网络地址</h1>
+					<P>
+						顾名思义：就是复制网页的图片，从而获得地址。
+					</P>
+					<img src="素材存放区/网第地址详解.png" alt="网页地址详解">
+				</section>
+			</section>
+			<img src="https://img1.baidu.com/it/u=1738114217,49838550&fm=253&app=138&f=JPEG?w=861&h=800" alt="网页地址成品" title="网页地址成品">
+			<span>
+				<p>
+					<h3>网页地址问题</h3>
+					<em>网页的图片地址不是100%能成功的，我到网上找了一些失败的原因，我是换了好几张图成功的。</em>
+					 <br>图片链接失效：之前的图片链接可能已经失效，或者图片已经被删除或移动。
+					 <br>2. 跨域问题：之前的图片托管在不同的域名下，浏览器可能因为CORS（跨域资源共享）问题而阻止加载。
+					 <br>3. 浏览器缓存问题：浏览器缓存可能导致加载旧的或错误的资源。
+					 <br>4. 图片格式问题：之前的图片格式可能不被浏览器支持。
+					 <br>5. 网络问题：之前的图片服务器可能存在问题，导致图片无法加载
+				</p>
+			</span>
+		</main>
+	</body>
+</html>

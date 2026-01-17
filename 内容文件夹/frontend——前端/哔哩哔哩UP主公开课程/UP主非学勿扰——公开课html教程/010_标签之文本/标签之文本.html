@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>标签之文本</title>
+		<style type="text/css">
+			main{
+				border:5px solid red;
+				background-color:skyblue;
+			}
+			header{
+				text-align:center;
+				background-color:green;
+				font-size:35px;
+				color:yellow;
+			}
+			li{
+				border:3PX solid yellow;
+				font-size:25px;
+				color:black;
+				background-color:white;
+			}
+			span{
+				font-size:30px;
+				color:yellow;
+			}
+			h2,h3{
+				font-size:30px;
+				color:green;
+				background-color:yellow;
+			}
+			ul{
+				font-size:25px;
+			}
+			pre{
+				text-align:left limportant;
+				padding:1;
+				margin:1;
+			}
+		</style>
+	</head>
+	<body>
+		<header>标签之文本</header>
+		<main>
+			<section>
+				<h2>常用的文本标签</h2>
+				<ul>
+					<li>&lt;em&gt;</li>
+					<em>定义着重文字</em>
+					
+					<li>&lt;b&gt;</li>
+					<b>定义粗体文字</b>
+					
+					<li>&lt;i&gt;</li>
+					<i>定义斜体字</i>
+					
+					<li>&lt;strong&gt;</li>
+					<strong>定义加重语气</strong>
+					
+					<li>&lt;del&gt;</li>
+					<del>定义删除字</del>
+					
+					<li>&lt;span&gt;</li>
+					<span>元素没有特定的含义，多用于编写CSS样式</span>
+					
+					<h3>&lt;特别提示&gt;</h3>
+					<em><b><i><strong><del><span>它们是可以嵌套使用的，但切记不能交叉使用</span></del></strong></i></b></em>
+					<br><span>常用文本标签和段落是不同的，段落代表的是一段文本，而文本标签一般表示文本词汇，如单词，一个词语，一段句子……</span>
+					
+				</ul>
+				<section>
+					<h2>每个标签的具体效果</h2>
+					<img src="素材存放区/每个标签的具体效果.png" alt="每个标签的具体效果">
+					<h2>span标签具体效果演示——本身没有特殊效果，但可以使用CSS改变样式</h2>
+					<img src="素材存放区/span标签实际效果.png" alt="span具体效果演示">
+					<span>但是注意：文本标签不只是span可以改变样式，像p\em\b\i\strong\del……都是可以的，但是强烈不建议用。</span>
+				</section>
+				
+				<section>
+					<h2>总结</h2>
+					<ul>
+						<li>  &lt;em&gt;  和  &lt;strong&gt;  ：用于语义化的强调和重要性标记</li>
+						<li> &lt;b>&gt; 和  &lt;i&gt;  ：用于视觉效果，没有语义上的强调</li>
+						<li> &lt;del&gt;  ：用于表示被删除的文本</li>
+					</ul>
+					<h2>文本标签扩展</h2>
+				</section>
+					<h3>文本格式化标签</h3>
+					<span>
+						除去：&lt;b&gt; &lt;strong&gt; &lt;i&gt; &lt;em&gt; &lt;del&gt;
+						 <br>还有：
+					</span>
+					<ul>
+						<!-- <li>&lt;samll&gt;标签</li>
+						<samll></samll>
+						<p>
+							效果：使用文本显示为较小的字体。
+							<br>注意事项：&lt;samll&gt;标签常用于显示辅助性文本，如版权声明、免责声明等。
+						</p> -->
+						<!-- <li>&lt;big&gt;标签</li>
+						<p>
+							效果：使文本显示为较大的字体。
+							<br>注意事项： &lt;big&gt;  标签在HTML5中已被废弃，不建议使用。可以通过CSS的  font-size  属性来实现文本的放大效果。
+						</p> -->
+						
+						<li> &lt;ins&gt;标签</li>
+						<p>
+							效果：使文本显示为下划线，表示文本是插入的内容
+							<br>注意事项：  &lt;ins&gt;  标签常用于显示内容更新、注释等场景。
+						</p>
+						<ins>这是文本下划线演示</ins>
+						<img src="素材存放区/文本下划线演示.png" alt="文本下划线演示">
+						<hr>
+						
+						<li>&lt;sub&gt;标签</li>
+						<p>
+							效果：使文本显示为下标，常用于数学公式、化学公式等
+							<br>注意事项：  &lt;sub&gt;  标签适用于需要表示下标内容的场景，如化学元素的下标等
+						</p>
+						<p>log<sub>a</sub>b=c可转换为a<sup>c</sup>=b</p>
+						<img src="素材存放区/sub标签演示.png" alt="sub标签演示">
+						<hr>
+						
+						<li>&lt;sup&gt;标签</li>
+						<p>
+							效果：使文本显示为上标
+							<br>注意事项：  &lt;sup&gt;  标签适用于需要表示上标内容的场景，如数学公式中的指数等
+						</p>
+						<p>(a+b)<sup>2</sup>=a<sup>2</sup>+b<sup>2</sup>+2ab</p>
+						<img src="素材存放区/sup标签演示.png" alt="sup标签演示">
+					</ul>
+			</section>
+			<section>
+				<h3>文本语义化标签</h3>
+				<ul>
+					<li>&lt;abbr&gt;标签</li>
+					<p>
+						表示缩写或缩略词，鼠标悬停时会显示完整的文本
+						<br>注意事项：&lt;abbr&gt;  标签有助于提高文本的语义化，适用于缩写词的解释。
+					</p>
+					<abbr title="一个演示——名为abbr标签">这是</abbr>
+					<img src="素材存放区/abbr标签演示.png" alt="abbr标签演示">
+					<hr>
+					
+					<li>&lt;cite&gt;标签</li>
+					<p>
+						效果：表示引用的来源，通常显示为斜体
+						<br>注意事项：  &lt;cite&gt;  标签常用于引用书籍、文章、电影等的标题
+					</p>
+					<cite>此扩展文本标签来自于网络查询</cite>
+					<img src="素材存放区/cite标签演示.png" alt="cite标签演示">
+					<hr>
+					
+					<li>&lt;q&gt;标签</li>
+					<p>
+						效果：表示短引用，浏览器会在文本周围添加引号。
+						<br>注意事项：  &lt;q&gt;  标签适用于短引用，长引用建议使用  &lt;blockquote&gt;  标签
+					</p>
+					<q>q标签演示</q>
+					<img src="素材存放区/q标签演示.png" alt="q标签演示">
+					<hr>
+					
+					<li>&lt;blockquote&gt;标签</li>
+					<P>
+						效果：表示长引用，通常会缩进显示
+						<br>注意事项： &lt;blockquote&gt; 标签适用于长引用，可以通过CSS进一步调整样式
+					</P>
+					
+					<li>&lt;address&gt;标签</li>
+					<p>
+						效果：表示联系信息，通常会以斜体显示
+						<br>注意事项：  &lt;address&gt;  标签适用于显示联系信息，如地址、电话等
+					</p>
+					<address>
+						电话：11111111111
+						<br>地址：11111111111
+					</address>
+					<img src="素材存放区/address标签演示.png" alt="address标签演示">
+				</ul>
+			</section>
+			<section>
+				<h3>文本布局标签</h3>
+				<span>除去：&lt;p&gt; &lt;br&gt; &lt;hr&gt; &lt;span&gt;
+					  <br>还有：
+				</span>
+				<ul>
+					<li>&lt;pre&gt;标签</li>
+					<p>
+						 效果：表示预格式化文本，会保留文本中的空格和换行符
+						 <br>注意事项：  &lt;pre&gt;  标签适用于显示代码、诗歌等需要保留格式的文本。
+					</p>
+					<pre>
+						这是pre标签演示
+							这是怕热标签演示
+								我可没用br标签换行哦
+					</pre>
+					<img src="素材存放区/pre标签演示.png" alt="pre标签演示"
+				</ul>
+			</section>
+			<section>
+				<h3>其他文本标签</h3>
+				<ul>
+					<li> &lt;mark&gt;标签</li>
+					<P>
+						效果：表示高亮显示的文本，通常显示为黄色背景
+						<br>注意事项：  &lt;mark&gt;  标签用于突出显示文本，适用于需要引起注意的内容。
+					</P>
+					<mark>mark标签演示，高亮显示</mark>
+					<img src="素材存放区/mark标签演示.png" alt="mark标签演示">
+					<li>&lt;s&gt;标签</li>
+					<p>
+						效果：使文本显示为中划线，表示文本已被删除或不再适用。
+						<br>注意事项：  &lt;s&gt;  标签与  &lt;del&gt;  标签类似，但  &lt;del&gt;  标签更语义化，建议优先使用  &lt;del&gt;  标签。
+					</p>
+					<p>你好<s>该文本已被删除，不在显示</s>很抱歉</p>
+					<img src="素材存放区/s标签演示.png" alt="s标签演示">
+					<hr>
+					
+					<li>&lt;u&gt;标签</li>
+					<p>
+						 效果：使文本显示为下划线，表示文本是插入的内容。
+						 注意事项：  &lt;u&gt;  标签与  &lt;ins&gt;  标签类似，但  &lt;ins&gt;  标签更语义化，建议优先使用  &lt;ins&gt;  标签。
+					</p>
+					<p>这是<u>一个插入文本——来自U标签</u>😂</p>
+					<img src="素材存放区/u标签演示.png" alt="u标签演示">
+				</ul>
+			</section>
+		</main>
+		
+	</body>
+</html>
