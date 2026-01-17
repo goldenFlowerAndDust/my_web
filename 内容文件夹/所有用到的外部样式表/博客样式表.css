@@ -1,0 +1,30 @@
+main{
+    border:5px solid red;
+    background-color: skyblue;
+}
+header{
+    background-color:yellow;
+    color:black;
+    font-size:35px;
+    text-align:center;
+}
+p,span,pre{
+    font-size:25px;
+    background-color:black;
+    color:yellow;
+    margin-bottom: 20px;
+}
+h2,h3{
+    font-size:30px;
+    color:green;
+}
+table{
+    font-size:25px;
+    text-align:center;
+    color:red;
+    background-color:black;
+}
+img{
+    width:100%;
+    height:auto;
+}
