@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VScode开发环境搭建</title>
+    <style type="text/css">
+        main{
+            border: 5px solid red;
+            background-color:skyblue;
+        }
+        li{
+            font-size: 25px;
+            color:black;
+        }
+        header{
+            font-size: 35px;
+            color:black;
+            background-color:yellow;
+            text-align:center;
+        }
+        h1,h2,li{
+            font-size: 30px;
+            color:yellow;
+            background-color:black;
+            text-align:center;
+        }
+        p{
+            font-size: 25px;
+            color:black;
+        }
+        /*img{*/
+        /*    width: 50%;*/
+        /*    height:auto;*/
+        /*    !*margin-left: auto;*!*/
+        /*}*/
+    </style>
+</head>
+<body>
+    <header>VScode开发环境搭建</header>
+    <main>
+        <section>
+            <P>
+                在python开发领域中，Visual Studio Code(简称VScode)凭借着轻量级、高扩展性
+                和强大的社区支持，已经称为开发者首选的编辑器之一。
+                <br>(如pycharm、Jupyter Notebook),VScode不仅具备代码高亮、智能提示、调试支持等基础功能、还能通过丰富的插件生态
+                实现虚拟环境管理，Jupyter交互式编程、Git版本控制等高级功能
+                <mark>当然我还是用pycharm</mark>
+            </P>
+        </section>
+        <section>
+            <h1>第一步：进入VScode官网下载安装包</h1>
+            <a href="https://code.visualstudio.com/"><span style="font-size: 25px">VScode官网</span></a>
+            <h2>具体安装步骤</h2>
+            <ol>
+                <li>步骤一：将下载好的安装程序，右击，再单击</li>
+                <img src="素材存放区/步骤1.png" alt="步骤一">
+                <li>步骤二：单击同意协议，并单击下一步</li>
+                <img src="素材存放区/步骤二：单击同意协议，并单击下一步.png" alt="步骤二">
+                <li>步骤三：单击创建桌面快捷方式复选框，其他默认即可，并单击下一步</li>
+                <img src="素材存放区/步骤三：单击创建桌面快捷方式复选框，其他默认即可，并单击下一步.png" alt="步骤三">
+                <li>步骤四：单击安装</li>
+                <img src="素材存放区/步骤四：单击安装.png" alt="步骤四">
+                <li>注意：</li>
+                <p>
+                    可能是因为我在电脑安装了，没有卸载，没有出现更改路径这个选项(默认安装到了D盘)，<mark>如果安装能更改路径，尽量更改到别的盘符。</mark>
+                </p>
+            </ol>
+            <h2>第二步：打开已经安装好的VScode</h2>
+            <img src="素材存放区/打开VScode.png" alt="打开VScode">
+            <h2>第三步：安装插件</h2>
+            <ul>
+                <li>简体中文插件</li>
+                <p>打开VScode，设置简体中文，在扩展商店，搜索Chinese，安装简体中文或繁体中文插件，然后重启即可。</p>
+                <img src="素材存放区/安装中文插件.png" alt="安装中文插件">
+                <li>python扩展</li>
+                <p>首先，搜索python，单击安装，我因为安装过了，会显示卸载选项</p>
+                <img src="素材存放区/安装python插件.png" alt="安装python插件">
+            </ul>
+            <h2>第四步：配置python解释器</h2>
+            <ol>
+                <li>按Ctrl+Shift+P打开命令面板</li>
+                <img src="素材存放区/打开命令面板.png" alt="打开命令面板">
+                <li>输入python:Select lnterpreter</li>
+                <img src="素材存放区/添加python解释器.png" alt="添加python解释器">
+                <img src="素材存放区/添加python解释器—界面.png" alt="添加python解释器_界面">
+                <p>过一会，软件会自动搜索，安装的python版本，我的是3.11.4，点击添加即可</p>
+                <img src="素材存放区/添加python解释器—添加.png" alt="添加python解释器—添加">
+            </ol>
+            <h2>第五步：验证配置是否成功</h2>
+            <p>
+                1.新建立一个文件夹
+                2.在文件夹当中，新建一个.py文件
+                3.输入print("Hello word")，并运行。
+            </p>
+            <p>
+                注意:一定要先保存再运行(当文件，右边的小白点小时，即是保存成功)
+            </p>
+            <img src="素材存放区/VScode写入第一个代码.png" alt="VScode写入第一个代码">
+            <p>
+                保存好后，在空白处右击，找到[运行python]，选择在终端运行
+            </p>
+            <mark>需要注意的是：设置的文件路径不要太复杂了，运行可能会报错</mark>
+            <img src="素材存放区/出问题了.png" alt="出问题了">
+            <p>最后的显示结果</p>
+            <img src="素材存放区/VScode写入第一个代码—结果.png" alt="最后的结果">
+        </section>
+    </main>
+</body>
+</html>
