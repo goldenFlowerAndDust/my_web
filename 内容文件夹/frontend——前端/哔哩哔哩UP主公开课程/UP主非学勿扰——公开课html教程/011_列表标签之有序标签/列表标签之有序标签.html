@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>列表标签之有序标签</title>
+		<style type="text/css">
+			pre{
+				font-size:25px;
+			}
+			 main{
+				 border:5px solid red;
+				 background-color:skyblue;
+			 }
+			 header{
+				 font-size:35px;
+				 background-color:green;
+				 color:yellow;
+				 text-align:center;
+			 }
+			 ul,ol,p{
+				 font-size:25px;
+				 border:3px solid red;
+				 background-color: black;
+				 color:yellow;
+			 }
+			 h1,h2{
+				 font-size:30px;
+				 background-color:yellow;
+				 color:green;
+			 }
+		</style>
+	</head>
+	<body>
+		<header>列表标签之有序标签</header>
+		<h1>有序列表</h1>
+		<main>
+			<section>
+				<p>有序列表是一列项目，列表项目使用数字进行标记。
+					<br>有序列表始于&lt;ol&gt;标签。
+					<br>每个列表项始于&lt;li&gt;标签
+				</p>
+				 <pre>
+ 具体的操作过程
+	&lt;ol&gt;
+		&lt;li&gt;这是第一个列表项&lt;/li&gt;
+		&lt;li&gt;这是第二个列表项&lt;/li&gt;
+		&lt;li&gt;这是第三个列表项&lt;/li&gt;
+	&lt;/ol&gt;
+				 </pre>
+				 <ol>
+					 <h2>标签演示</h2>
+				 	<li>这是第一个列表项</li>
+				 	<li>这是第二个列表项</li>
+				 	<li>这是第三个列表项</li>
+				 </ol>
+				 <img src="素材存放区/有序列表标签演示.png" alt="有序标签演示">
+			</section>
+			<h2>type属性编辑</h2>
+			<section>
+				&lt;ol&gt;的属性type拥有的选项
+				<br>意思就是：替换，前缀的样式。
+				<ul>
+					<li>1&nbsp;表示列表项目用数字标号(1，2，3……)</li>
+					<li>a&nbsp;表示列表项目用小写字母(a，b，c……)</li>
+					<li>A&nbsp;表示列表项目用大写字母(A，B，C……)</li>
+					<li>i&nbsp;表示列表项目用小写罗马数字标号(i,ii,iii……)</li>
+					<li>i&nbsp;表示列表项目用大写罗马数字标号(I,II,III……)</li>
+				</ul>
+				<pre>
+具体的操作步骤：
+	&lt;ol type="1"&gt;
+	&lt;ol type="a"&gt;
+	&lt;ol type="A"&gt;
+	&lt;ol TYPE="i"&gt;
+	&lt;ol type="I"&gt;
+				</pre>
+			</section>
+			<h2>嵌套有序标签</h2>
+			<section>
+				<p>有序标签是可以嵌套的
+					<br>但是不建议多次嵌套，会导致，界面混乱，且难以维护
+				</p>
+				<pre>
+具体操作步骤：
+	&lt;ol&gt;
+	&lt;li&gt;嵌套主题1&lt;/li&gt;
+		&lt;li&gt;
+			&lt;ol&gt;
+				&lt;li&gt;第一次嵌套&lt;/li&gt;
+					&lt;li&gt;嵌套主题2&lt;/li&gt;
+						&lt;ol&gt;
+							&lt;li&gt;第二次嵌套&lt;/li&gt;
+						&lt;/ol&gt;
+			&lt;/ol&gt;
+		&lt;/li&gt;
+	&lt;/ol&gt;
+
+				<h2>嵌套演示——并使用type属性</h2>
+				<ol>
+					<li>食物</li>
+					<ol>
+						<li>水果</li>
+							<ol type="1">
+								<li>草莓</li>
+								<li>西瓜</li>
+								<li>哈密瓜</li>
+							</ol>
+						<li>蔬菜</li>
+							<ol type="A">
+								<li>西红柿</li>
+								<li>白菜</li>
+								<li>黄瓜</li>
+							</ol>
+						<li>肉类</li>
+							<ol type="I">
+								<li>鸡肉</li>
+								<li>牛肉</li>
+								<li>鸭肉</li>
+							</ol>
+					</ol>
+					
+				</ol>
+				</pre>
+				<img src="素材存放区/嵌套及type个别属性演示.png" alt="嵌套及type个别属性演示">
+			</section>
+			<p>
+				注意：
+				<br>嵌套尽量不要多次嵌套，不仅内容混乱，而且难以维护
+				<br>可以通过，type更改前缀
+			</p>
+		</main>
+	</body>
+</html>

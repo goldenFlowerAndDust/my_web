@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>标题标签</title>
+		<style type="text/css">
+			*{
+				margin:1;
+				padding:1;
+				box-sizing:border-box;
+				
+			}
+			div{
+				border:3px solid red;
+				background-color:#0055ff;
+				
+			}
+			li{
+				font-size:30px;
+				color:red;
+				background-color:yellow;
+			}
+			p{
+				font-size:25px;
+				color:black;
+				background-color:white;
+			}
+			img{
+				width:80%;
+				height:800px;
+				background-color:green;
+			}
+			header{
+				font-size:35px;
+				text-align:center;
+				color:green;
+				background-color:pink;
+			}
+			.li_boby_1{
+				font-size:30px;
+				color:red;
+				background-color:white;
+			}
+			#ul_boby_1{
+				font-size:30px;
+				color:red;
+				background-color:white;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div>
+			<aside>
+				<header>标题介绍与作用</header>
+				<ul>
+					
+					<ol>
+						<li>标题(Heading)解释</li>
+						<p>
+							1.是通过h1~h6标签定义的。<br>
+							2.注意是h1~h6才是标题标签，才有效，超过则无效。<br>
+							3.h1定义最大的标题，h6定义最小的标题。																				
+						</p>
+						
+						<li>标题演示</li>
+						<p>
+							<h1>一级标签</h1>
+							<h2>二级标签</h2>
+							<h3>三级标签</h3>
+							<h4>四级标签</h4>
+							<h5>五级标签</h5>
+							<h6>六级标签</h6>
+						</p>
+						<li>快速生成标题的快捷键</li>
+						<p>h1$*<em>(1~6)</em></p>
+						
+						<li>VScode插件——open in browser</li>
+						<p>
+							这个插件的功能是：快速打开浏览器
+							具体过程：扩展->搜索open in browser->点击安装
+						</p>
+						<img src="素材存放区/安装插件——open%20in%20browser.png" alt="路径错误，图片生成失败" >
+						
+						<li>使用open in browser插件</li>
+						<img src="素材存放区/运行插件——open%20in%20browser.png" alt="路径错误，图片生成失败"><br>
+						<img src="素材存放区/运行插件并打开浏览器的界面.png" alt="路径错误，图片生成失败">
+						
+						<li>正确使用标题</li>
+						<p>
+							1.请确保将HTML标题标签只用于标题。<br>
+							2.不要仅仅是为了生成粗体或大号的文本而使用标题。<br>
+							3.正确使用标题有益于SEO<br>
+							4.应该将h1作用于主标题(最重要的)，其后是h2(次重要的)，再其次是h3，以此类推。<br>
+							5.注意是h1~h6才是标题标签，才有效，超过则无效。
+						</p>
+						
+						<li>通过浏览器，查找网页的内容所对应的属性和标签</li>
+							<ul>
+								<li class="li_boby_1">打开网页控制台的方法:</li>
+								<ol>
+									<li>方法一：打开网页，空白处单击右击，选择检查选项</li>
+									<img src="素材存放区/打开网页控制台.png" alt="路径出错，图片生成失败" style="width:80%;height:400px">
+									<li>方法二：使用快捷键F12</li>
+									<img src="素材存放区/打开网页控制台2.png" alt="路径错误，图片生成失败" style="style=width:80%;height:700px">
+								</ol>
+								
+								<li>使用控制台功能，查找网页对应的属性和标签</li>
+								<p>
+									1.单击并选择控制台左上角的箭头按钮<br>
+									2.移动鼠标到需要查找内容的位置<br>
+									3.按后点击位置，控制台会自动选中该内容的标签
+								</p>
+								<img src="素材存放区/网页控制台查找内容.png" alt="路径错误，图片生成失败">
+							</ul>
+							
+						<li>标题标签位置摆放</li>	
+						<ul>
+							<li>定义属性有两种方法：</li>
+							<ol>
+								<li>通过内部调用</li>
+								<p>	
+									1.先到head标签内建立一个style标签，定义标题标签+{}<br>
+										2.在括号内添加属性：<br>
+										<ul id="ul_boby_1">
+											<li class="li_boby_1">在最左边：text-align:left(一般不会显示，因为默认居左)</li>
+											<li class="li_boby_1">在最右边：text-align：right</li>
+											<li class="li_boby_1">居中对齐：text-align：center</li>
+										</ul>
+																			
+								</p>
+								<img src="素材存放区/内部调用.png" alt="路径错误，图面生成失败"><br>
+								
+								<li>通过行内调用</li><br>
+								<p>
+									样式属性：left(最左边)、right(最右边)、center(居中)<br>
+									1.在首标签后加空格<br>
+									2.输入align="样式属性"					
+								</p>
+								<img src="素材存放区/行内调用.png" alt="路径错误，图面生成失败">
+								<img src="素材存放区/行内调用显示效果.png" alt="路径错误，图片生成失败" style="width:80%;height:500px">
+							</ol>
+							
+						</ul>
+						
+					</ol>
+				</ul>
+			</aside>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>列表标签之无序标签</title>
+		<style type="text/css">
+			/* *{
+				text-align: center;
+			} */
+			main{
+				border:5px solid red;
+				background-color:skyblue;
+				padding-left:1px;
+			}
+			span{
+				font-size:25px;
+				color:yellow;
+			}
+			header{
+				color:black;
+				background-color:yellow;
+				font-size:35px;
+				text-align:center;
+			}
+			h1,h2,h3,ul,ol{
+				font-size:30px;
+				background-color:black;
+				color:yellow;
+			}
+			ul,ol{
+				/* padding:25px;
+				margin: auto; */
+				font-size:30px;
+				color:green;
+				background-color: blueviolet;
+			}
+			pre,li,p{
+				font-size:25px;
+				background-color:white;
+				color:black;
+			}
+		</style>
+	</head>
+	<body>
+		<header>列表标签之无序标签</header>
+		<main>
+			<section>
+				<h1>无序列表</h1>
+				<p>
+					无序列表与有序列表(ol)不同的是：它没有顺序，排名不分先后
+					<br>无序列表是一个项目的列表，此列项目使用粗体圆点(•)进行标记(当然默认是这样，后续可用type属性更改)
+					<br>无序列表始于&lt;ul&gt;标签，每个列表始于&lt;li&gt;标签
+				</p>
+				<pre>
+具体操作过程：
+	&lt;ul&gt;
+		&lt;li&gt;这是第一个列表项&lt;/li&gt;
+		&lt;li&gt;这是第二个列表项&lt;/li&gt;
+		&lt;li&gt;这是第三个列表项&lt;/li&gt;
+	&lt;/ul&gt;
+				</pre>
+				</section>
+				
+				<section>
+				<mark>与有序列表相同的是：ul也有自己的type属性，设置前缀样式</mark>
+				<h2>ul的属性type拥有的选项</h2>
+				<ul>
+					<li>disc——默认实心圆</li>
+					<li>circle——空心圆</li>
+					<li>square——小方块</li>
+					<li>none——不显示(前缀)</li>
+				</ul>
+				</section>
+				
+				<section>
+					<span>无序列表也是可以嵌套的，准确来说无序列表和有序列表可以搭配使用
+						<br>同样不建议多次嵌套，不仅内容混乱，而且难以维护
+					</span>
+					<h2>无序列表与有序列表嵌套，即它们部分type属性演示</h2>
+					<pre>
+&lt;h3&gt;食物&lt;/h3&gt;					
+&lt;ul type="disc"&gt;
+	&lt;li&gt;水果&lt;li&gt;
+	&lt;ol type="1"&gt;
+		&lt;li&gt;苹果&lt;/li&gt;
+		&lt;li&gt;香蕉&lt;/li&gt;
+		&lt;li&gt;西瓜&lt;/li&gt;
+	&lt;/ol&gt;
+	&lt;li&gt;蔬菜&lt;li&gt;
+	&lt;ol type="A"&gt;
+		&lt;li&gt;茄子&lt;/li&gt;
+		&lt;li&gt;西红柿&lt;/li&gt;
+		&lt;li&gt;西兰花&lt;/li&gt;
+	&lt;/ol&gt;
+	&lt;li&gt;肉类&lt;li&gt;
+	&lt;ul type="square"&gt;
+		&lt;li&gt;鸡肉&lt;/li&gt;
+		&lt;li&gt;鱼肉&lt;/li&gt;
+			&lt;ol type="I"&gt;
+				&lt;li&gt;海带鱼&lt;/li&gt;
+				&lt;li&gt;黄花鱼&lt;/li&gt;
+				&lt;li&gt;娃娃鱼&lt;/li&gt;
+			&lt;/ol&gt;
+	&lt;ul&gt;
+	&lt;li&gt;牛肉&lt;/li&gt;
+&lt;ul&gt;
+					</pre>
+					<h3>食物</h3>
+					<ul type="disc">
+						<li>水果<li>
+						<ol type="1">
+							<li>苹果</li>
+							<li>香蕉</li>
+							<li>西瓜</li>
+						</ol>
+						<li>蔬菜<li>
+						<ol type="A">
+							<li>茄子</li>
+							<li>西红柿</li>
+							<li>西兰花</li>
+						</ol>
+						<li>肉类<li>
+						<ul type="square">
+							<li>鸡肉</li>
+							<li>鱼肉</li>
+								<ol type="I">
+									<li>海带鱼</li>
+									<li>黄花鱼</li>
+									<li>娃娃鱼</li>
+								</ol>
+						<li>牛肉</li>
+						</ul>
+					</ul>
+					<img src="素材存放区/无序列表与有序列表嵌套，即它们部分type属性演示.png" alt="无序列表与有序列表嵌套，即它们部分type属性演示">
+				</section>
+				
+				<section>
+					<h2>总结</h2>
+					<ul>
+						<li>无序列表没有顺序</li>
+						<li>可以用type属性替换前缀样式</li>
+						<li>可以嵌套，但不建议多次嵌套，不仅内容混乱，而且难以维护</li>
+						<li>无序列表与有序列表可以搭配使用</li>
+						<h3>无序列表常见应用场景</h3>
+						<ul>
+							<li>无序的列表效果</li>
+							<li>导航效果</li>
+						</ul>
+						<li>快捷键：ul&gt;li*n</li>
+						<span>1.其中n可以是任何数，n是多少，所创建的列表(li)就是多少
+							<br>2.好处是，可以快速创建列表项，减少频繁打出li标签次数，极大提升开发效率。
+							<br>3.当然有序列表也有快捷方式:ol&gt;li*n
+							<br>4.单独列表项快捷方式:li*n
+						</span>
+					</ul>
+				</section>
+		</main>
+	</body>
+</html>

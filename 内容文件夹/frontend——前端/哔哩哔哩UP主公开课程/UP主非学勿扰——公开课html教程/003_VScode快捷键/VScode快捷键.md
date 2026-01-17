@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>VScode快捷键</title>
+		<style type="text/css">
+			*{
+				margin:1;
+				padding:1;
+				box-sizing:border-box;
+			}
+			header{
+				text-align:center;
+				border:3px solid red;
+				color:yellow;
+				font-size:25px;
+				font-family:"宋体";
+				background-color: aqua;
+			}
+			aside{
+				text-align:left;
+				font-size:25px;
+				border:3px solid #0055ff;
+				border-top-color:red;
+			}
+			em{
+				color:green;
+			}
+
+		</style>
+	</head>
+	<body>
+		<p style="font-size:25px;">
+			<header>Vscode常用快捷键1.0</header>
+			<div>
+				<aside>
+					<ol>
+							<li>生成浏览器文件.html的快捷方式：<em>！+ 回车</em>。</li>
+							<li>代码格式化：<em>shift+Alt+F</em>。</li>
+							<li>向代或向下移动一行：<em>Alt+Up或Alt+Down</em>。</li>
+							<li>快速复制一行代码：<em>Shift+Alt+Up[向上复制]或Shiht+Alt+Down[复制向下]</em>。</li>
+							<li>快速保存：<em>ctrl+S</em>。</li>	
+							<li>快速查找：<em>ctrl+F</em>。</li>
+							<li>快速替换：<em>ctrl+H</em>。</li>
+					</ol>
+				</aside>
+			</div>
+
+
+​				
+​			
+​			
+​		</p>
+​	</body>
+</html>
