@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>002_python运行环境搭建</title>
+    <style type="text/css">
+        main{
+            border:5px solid red;
+            background-color:skyblue;
+        }
+        p,mark{
+            font-size: 25px;
+            color: yellow;
+            background-color:black;
+            margin-bottom: 20px;
+        }
+        header{
+            font-size: 35px;
+            color:black;
+            background-color:yellow;
+            text-align:center;
+        }
+        h2{
+           font-size: 30px;
+            color:green;
+            background-color:skyblue;
+        }
+        li{
+           font-size: 25px;
+            color: yellow;
+        }
+        img{
+            width:80%;
+            height:auto;
+        }
+    </style>
+</head>
+<body>
+    <header>python运行环境搭建</header>
+    <main>
+    <section>
+        <h2>为什么要安装python的运行环境</h2>
+        <p>
+            不管用什么工具开发python程序，都必须安装python的运行环境
+            <br>该UP主以Windows系统为主，同时python版本在3.X版本为主
+        </p>
+    </section>
+    <section>
+        <h2>安装python运行环境</h2>
+        <ol>
+            <li>进入python官网(python.org)下载python安装包</li>
+            <p>•python有许多版本，单击下载对应的版本即可</p>
+            <a href="https://www.python.org/downloads/windows/">
+                python版本下载
+                <img src="素材存放区/python下载官网.png" alt="python下载官网">
+            </a>
+            <li>安装下载好的python.exe(因为以前下过python别的版本，我就下载了最新版本做演示)</li>
+            <ul>
+                <li>步骤一:打开下载的python.exe文件</li>
+                <img src="素材存放区/python安装——步骤一.png" alt="python安装——步骤一">
+                <li>步骤二：设置安装路径(建议自定义安装，默认在C盘)，以及勾选Add python.exe to PATH(一定要勾选上)</li>
+                <br><mark>Add python.exe to PATH复选框，勾选后，安装程序就会自动将python的路径加到PATH环境变量中</mark>
+                <img src="素材存放区/python安装——步骤二.png" alt="python安装——步骤二">
+                <li>步骤三：选择自定义安装的往后，建议全选上</li>
+                <img src="素材存放区/python安装——步骤三.png" alt="python安装——步骤三">
+                <li>步骤四：勾选默认的就可以了，但一定要更改安装路径，最后单击install开始安装</li>
+                <img src="素材存放区/python安装——步骤四.png" alt="python安装——步骤四">
+            </ul>
+            <li>检测安装成功</li>
+            <ul>
+                <li>方法一：在终端运行python检测</li>
+                <mark>按windows+R键打开运行框，输入cmd，打开终端
+                        <br>再，输入python并回车，出现当前界面，表示成功了。
+                </mark>
+                <img src="素材存放区/终端——python检测.png" alt="终端——python检测">
+                <li>方法二：在终端运行python --version检测</li>
+                <br><mark>这个方法会显示安装python的版本</mark>
+                <img src="素材存放区/终端——python%20--version检测.png" alt="python--version检测">
+            </ul>
+            <li>输入第一行代码——print("hello word")</li>
+            <mark>
+                注意：所有的字符都是英文，中文会报错
+                <br>print：输出的意思，就是将结果输出到控制台
+            </mark>
+            <img src="素材存放区/终端—-第一行代码.png" alt="终端—-第一行代码.png">
+        </ol>
+    </section>
+    </main>
+
+
+
+</body>
+</html>
