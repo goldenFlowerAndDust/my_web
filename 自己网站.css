@@ -1,0 +1,181 @@
+/*css文件各个布局顺序*/
+/*=================== 第一部分：CSS变量定义(必须最前面！) =====================*/
+:root {
+    /* ====================== 设计系统变量 ====================== */
+
+    /*  颜色系统  */
+    --color-text-header: white;
+    --color-backgrond-header-ul: orange;
+    --color-background-header-li-hover: #ddd;
+    --color-background-aside: skyblue;
+    /*  间距系统  */
+    --container-width: 61.25rem; /* container(容器) 61.25rem=980px */
+    --container-height: 80rem;
+    --header-height: 7.5rem;
+    --main-container-height: 57rem;
+    --main-container-a-padding: 1rem;
+    --main-container-a-height: 7.5rem;
+    --main-container-ol-width: 18.75rem;
+    --main-container-carousel-height:290rem;
+
+    /*  字体大小  */
+    --font-size-text-header: 3rem;
+    --font-size-text-aside: 1.8rem;
+
+    /*  定位  */
+    --main-container-ol-top:0;
+    --main-container-ol-left:100%;
+}
+
+/*=================== 第二部分：重置样式  ==================================*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*=================== 第三部分：基础样式(使用变量) ===========================*/
+body {
+    min-width: var(--container-width);
+    min-height: var(--container-height);
+    box-sizing: border-box;
+}
+
+/*=================== 第四部分：组件样式(使用变量) ===========================*/
+main {
+    max-width: var(--container-width);
+    min-height: var(--container-height);
+}
+
+/*header部分*/
+header {
+    min-width: var(--container-width);
+    height: var(--header-height);
+}
+
+.nav_container ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--color-backgrond-header-ul);
+}
+
+.nav_container ul li a {
+    text-decoration: none;
+    display: block;
+    color: var(--color-text-header);
+    font-size: var(--font-size-text-header);
+    line-height: var(--header-height);
+    text-align: center;
+}
+/*响应设计(电脑端悬停)*/
+
+/*中间区域——mian-container*/
+.main-container {
+    display: flex;
+    justify-content: flex-start;
+    /*align-items: center;*/
+    min-height: var(--main-container-height);
+}
+
+/*侧边栏——aside*/
+.main-container aside {
+    flex: 1;
+}
+
+.main-container aside ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /*需要有高度才会平分空间*/
+}
+
+.main-container aside ul li {
+    position: relative;
+}
+
+.main-container aside ul li a {
+    display: block;
+    line-height: var(--main-container-a-height);
+    padding: var(--main-container-a-padding);
+    font-size: var(--font-size-text-aside);
+    background-color: var(--color-background-aside)
+}
+
+.main-container aside ul li ol {
+    position: absolute;
+    top: var(--main-container-ol-top);
+    left: var(--main-container-ol-left);
+    width: var(--main-container-ol-width);
+    transform: scale(0);
+    transform-origin: center center;
+    transition: all 0.5s ease;
+    z-index: 10;
+}
+.main-container aside ul>li:hover ol {
+    transform: scale(1);
+}
+/*轮播图*/
+.main-container .carousel {
+    flex: 2;
+    height: var(--main-container-height);
+    overflow: hidden;
+}
+.main-container .carousel nav {
+    height: var(--main-container-carousel-height);
+}
+.main-container .carousel nav img {
+    width: 100%;
+    height:var(--main-container-height);
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: carousel 25s ease-out infinite;
+    animation-delay: 0.5s;
+}
+@keyframes carousel {
+    20%{
+        transform: translateY(0);
+    }
+    40%{
+        transform: translateY(-57rem);
+    }
+    60%{
+        transform: translateY(-114rem);
+    }
+    80%{
+        transform: translateY(-171rem);
+    }
+    100%{
+        transform: translateY(-228px);
+    }
+}
+footer{
+    height: 15.5rem;
+    width: 100%;
+    text-align: center;
+    line-height: 15.5rem;
+    background-color:orange;
+    font-size: 3rem;
+}
+@media (min-width: 1024px) and(max-width: 1440px){
+    main{
+        min-width: 80rem;
+    }
+}
+@media (min-width: 1440px){
+    main{
+        min-width: 110rem;
+    }
+    .nav_container{
+        min-width:110rem;
+    }
+}
+
