@@ -1,0 +1,198 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    list-style: none;
+    text-decoration: none;
+}
+body{
+    width: 91%;
+    min-height: 100vh;
+    margin: 40px auto;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/*导航栏*/
+nav{
+    width: 100%;
+    min-height:75px;
+}
+nav ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 25px;
+    width: 100%;
+    height: 75px;
+    background-color:orange;
+}
+nav ul li{
+    width: 100%;
+    height: 75px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    line-height: 75px;
+    text-align: center;
+ }
+nav ul li a{
+    display: block;
+    color: white;
+}
+nav ul li a:hover{
+    background-color: #ddd;
+}
+nav ul li ol{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    min-height:75px;
+    transform: scaleY(0);
+    transition:all 0.4s;
+    transform-origin: 50% 0;
+}
+nav ul li ol li{
+    width: 100%;
+    height: 75px;
+    text-align: center;
+    line-height: 75px;
+}
+nav ul li ol li a{
+    display: block;
+    color: skyblue;
+    font-size: 15px;
+}
+nav ul li ol li a:hover{
+    background-color: #ddd;
+}
+nav ul>li:hover ol{
+    transform: scaleY(1);
+}
+/* 移动端/平板：保留hover，但降低触发灵敏度（聊胜于无） */
+@media screen and (max-width: 992px) {
+    nav ul>li:hover ol{
+        transform: scaleY(1);
+        transition-delay: 0.2s; /* 避免误触 */
+    }
+}
+/* 电脑端不变 */
+@media screen and (min-width: 992px){
+    nav ul>li:hover ol{
+        transform: scaleY(1);
+    }
+}
+/*动画*/
+.transition{
+    width: 100%;
+    height: 500px;
+}
+.transition div{
+    width: 400px;
+    height: 400px;
+    text-align: center;
+    line-height: 400px;
+    background-color:skyblue;
+    margin: 90px auto;
+    animation: transition linear 0s infinite normal running;
+    animation-duration: 4s;
+}
+.transition div:hover{
+    animation-play-state: paused;
+}
+p{
+    font-size: 35px;
+}
+@keyframes transition {
+    from{
+        transform: rotate(0deg);
+        border-radius: 0;
+        color: black;
+        scale: 0.5;
+    }
+    15%{
+        transform: rotate(60deg);
+        border-radius: 50%;
+        color: #74b9ff;
+        scale: 0.6;
+    }
+    30%{
+        transform: rotate(120deg);
+        border-radius: 0;
+        color: #4b6cb7;
+        scale: 0.8;
+    }
+    45%{
+        transform: rotate(180deg);
+        border-radius: 50%;
+        color:green;
+        scale: 1;
+    }
+    60%{
+        transform: rotate(240deg);
+        border-radius: 0;
+        color: yellow;
+        scale: 1.1;
+    }
+    75%{
+        transform: rotate(300deg);
+        border-radius: 50%;
+        color: pink;
+        scale: 1.2;
+    }
+    to{
+        transform: rotate(360deg);
+        border-radius: 0;
+        color:purple;
+        scale: 0.5;
+    }
+}
+/*主体部分*/
+.SingleChoiceQuestion{
+    margin-top:110px;
+}
+.SingleChoiceQuestion ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    min-height: 75px;
+}
+.SingleChoiceQuestion ul li{
+    width: 100%;
+    min-height: 75px;/* 这里设置固定高度(height) 会导致列表项的内容重叠 */
+    text-align: left;
+    line-height: 75px;
+    flex-wrap: wrap;
+    color: #74b9ff;
+}
+span{
+    color: red;
+}
+/*字体图标*/
+.font,.font_image{
+    display: inline-block;
+    font-size: 50px;
+    color: red;
+    transition-duration: 3s;
+    transition-timing-function: ease-out;
+}
+.font_image{
+    line-height: 0;
+    color: pink;
+}
+.font:hover,.font_image:hover{
+    transform: translateY(-5px) rotate(360deg) rotate(300deg) rotate(240deg) rotate(180deg) rotate(120deg) rotate(60deg) rotate(0deg) scale(1.5);
+}
+img{
+    display: block;
+    width: 90%;
+    min-height:75px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
