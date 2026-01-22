@@ -3,12 +3,12 @@
     /* 桌面端 (最大屏) - 默认使用 */
     --font-size-desktop-nav: 28px;
     --font-size-desktop-sub: 35px;
-    --font-size-desktop-title: 55px;
+    --font-size-desktop-title: 60px;
 
     /* 平板端 (中等屏) */
-    --font-size-tablet-nav: 35px;
+    --font-size-tablet-nav: 28px;
     --font-size-tablet-sub: 30px;
-    --font-size-tablet-title: 55px;
+    --font-size-tablet-title: 60px;
 
     /* 手机端 (最小屏) */
     --font-size-mobile-nav: 20px;
@@ -50,7 +50,7 @@ main .transition div {
 /* 新增：主体内容区域的默认大字号 */
  main .SingleChoiceQuestion, main .SingleChoiceQuestion ul li {
     font-size: var(--font-size-desktop-sub) !important; /* 使用和子导航一样的字号，或单独定义 */
-}main
+}
 nav {
     width: 100%;
     min-height: 75px;
@@ -204,7 +204,6 @@ p {
     width: 100%;
     min-height: 75px; /* 这里设置固定高度(height) 会导致列表项的内容重叠 */
     text-align: left;
-    line-height: 1.5;
     flex-wrap: wrap;
     color: #74b9ff;
 }
