@@ -167,17 +167,20 @@ footer{
     background-color:orange;
     font-size: 3rem;
 }
-@media (min-width: 1024px) and(max-width: 1440px){
+@media (min-width: 1024px) and (max-width: 1440px){
     main{
-        min-width: 80rem;
+        min-width: 67.5rem;
+    }
+    .nav_container{
+        min-width:67.5rem;
     }
 }
 @media (min-width: 1440px){
     main{
-        min-width: 110rem;
+        min-width: 180rem;
     }
     .nav_container{
-        min-width:110rem;
+        min-width:180rem;
     }
 }
 
