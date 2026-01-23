@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-size: 1rem;
+}
+body{
+    width: 80%;
+    height: 100vh;
+    margin: 30px auto;
+}
+main ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 75px;
+}
+main ul>li{
+    width: 100%;
+    height: 75px;
+    text-align: center;
+    line-height: 75px;
+    position: relative; /* 让二级菜单相对于此项定位 */
+}
+main a{
+    width: 100%;
+    height: 75px;
+    display: block;
+}
+main ul>li a:hover{
+    background-color:#ddd;
+    color: black;
+}
+
+/* 二级菜单样式 */
+main ul li ol{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: auto; /* 改为 auto 以适应内容 */
+    transform: scaleY(0); /* 改为 scaleY 垂直缩放 */
+    transform-origin: top; /* 从顶部开始缩放 */
+    transition: transform 0.3s ease;
+    position: absolute;
+    top: 100%; /* 放在一级菜单下方 */
+    left: 0;
+    background-color: white; /* 添加背景色 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* 添加阴影效果 */
+}
+main ul li ol li{
+    width: 100%;
+    height: 75px;
+    text-align: center;
+    line-height: 75px;
+    position: relative;
+}
+main ul li ol li a:hover{
+    background-color:#ddd;
+    color: black;
+}
+main ul>li:hover>ol{
+    transform: scaleY(1);
+}
+
+/* 三级菜单样式 */
+.nav_2{
+    position: absolute;
+    top: 0;
+    left: 100%; /* 放在二级菜单项的右侧 */
+    transform: scaleX(0); /* 改为水平缩放 */
+    transform-origin: left; /* 从左侧开始缩放 */
+    transition: transform 0.3s ease;
+    width: 100%;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+}
+main ul li ol>li:hover .nav_2{
+    transform: scaleX(1);
+}
