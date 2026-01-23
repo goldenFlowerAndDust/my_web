@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>相对单位</title>
+    <link rel="stylesheet" href="../../计算机一级考试/内容/计算机一级考试通用样式表.css">
+    <link rel="stylesheet"
+          href="../../计算机一级考试/字体图标/一级列表和三级列表/download/font_fibvrbic6pf/iconfont.css">
+    <link rel="stylesheet" href="../../计算机一级考试/字体图标/二级列表/download%20(1)/font_re1tx7f6uj/iconfont.css">
+    <style>
+        * {
+            color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>em:相对于父元素的字体大小
+        <ol>
+            <li><i class="iconfont icon-icon-test font_image"></i>1em=16px 2em=32px</li>
+        </ol>
+    </li>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>rem:相对于根元素(html)的字体大小
+        <ol>
+            <li><i class="iconfont icon-icon-test font_image"></i>1rem=16px 2rem=32px</li>
+            <li><i class="iconfont icon-icon-test font_image"></i>通常我们会设置html的字体大小为16px，但是为了用户可访问性，有时会设置为百分比(如100%)，这样用户可以在浏览器设置中调整基准字体大小
+            </li>
+        </ol>
+    </li>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>%:百分比，相对于父元素的相应属性
+        <ol>
+            <li><i class="iconfont icon-icon-test font_image"></i>如：父元素宽度为200px，子元素宽度设置为50%，则子元素宽度为100px
+            </li>
+        </ol>
+    </li>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>vm:视口宽度的百分比
+        <ol>
+            <li><i class="iconfont icon-icon-test font_image"></i>1vm=视口宽度的1%，如果视口宽度为1200px，则1vm=12px</li>
+        </ol>
+    </li>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>vh:视口高度百分比的百分比
+        <ol>
+            <li><i class="iconfont icon-icon-test font_image"></i>1vh=视口高度的1%，如果视口高度为800px,则1vh=8px</li>
+        </ol>
+    </li>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>vmin：视口宽度和高度中较小值的百分比
+        <ol>
+            <li><i class="iconfont icon-icon-test font_image"></i>如：视口宽度1200px,高度800px，则1vmin=8px(因为800px的1%是8px，而1200px的1%是12px，区较小值)
+            </li>
+        </ol>
+    </li>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>vmax:视口宽度和高度中较大值的百分比
+        <ol>
+            <li><i class="iconfont icon-icon-test font_image"></i>视口宽度1200px,高度800px，则1vmin=12px(与vmin刚好相反)
+            </li>
+        </ol>
+    </li>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>ch:相对于数字"0"的高度。在等宽字体中，1ch等于一个字符的宽度
+    </li>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>ex:相对于当前字体的X——高度(即字母X的高度)，这个单位不常用
+    </li>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>常见单位换算:
+        <ol>
+            <li><i class="iconfont icon-icon-test font_image"></i><span>0.25rem&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4px</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;微小间距
+            </li>
+            <li><i class="iconfont icon-icon-test font_image"></i><span>0.5rem&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8px</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小间距
+            </li>
+            <li>
+                <i class="iconfont icon-icon-test font_image"></i><span>0.75rem&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;12px</span>&nbsp;&nbsp;&nbsp;&nbsp;中等偏小
+            </li>
+            <li><i class="iconfont icon-icon-test font_image"></i><span>1rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;16px</span>&nbsp;&nbsp;&nbsp;&nbsp;标准间距
+            </li>
+            <li><i class="iconfont icon-icon-test font_image"></i><span>1.5rem&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;24px</span>&nbsp;&nbsp;&nbsp;&nbsp;中大型间距
+            </li>
+            <li><i class="iconfont icon-icon-test font_image"></i><span>2rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;32px</span>&nbsp;&nbsp;&nbsp;&nbsp;大型间距
+            </li>
+            <li><i class="iconfont icon-icon-test font_image"></i><span>3rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;48px</span>&nbsp;&nbsp;&nbsp;&nbsp;超大间距
+            </li>
+            <li><i class="iconfont icon-icon-test font_image"></i><span>4rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;64px</span>&nbsp;&nbsp;&nbsp;&nbsp;巨大型间距
+            </li>
+        </ol>
+    </li>
+    <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>常见物品理解尺寸：
+        <ol>
+            <li><i class="iconfont icon-icon-test font_image"></i>常用间距：
+                <ul>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>0.5rem&nbsp;&nbsp;&nbsp;&nbsp;=8px&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≈&nbsp;&nbsp;一粒米的宽度</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>1rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=16px&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≈&nbsp;&nbsp;一个指甲盖的宽度</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>1.5rem&nbsp;&nbsp;&nbsp;&nbsp;=24px&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≈&nbsp;&nbsp;一枚硬币的直径</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>2rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=32px&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≈&nbsp;&nbsp;一张名片的高度</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>3rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=48px&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≈&nbsp;&nbsp;一张信用卡的长度</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>4rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=64px&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≈&nbsp;&nbsp;一部手机的宽度</span></li>
+                </ul>
+            </li>
+            <li><i class="iconfont icon-icon-test font_image"></i>字体大小(基于阅读体验)：
+                <ul>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>0.75rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;12px&nbsp;&nbsp;-&nbsp;&nbsp;脚注/说明文字</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>0.875rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;14px&nbsp;&nbsp;-&nbsp;&nbsp;正文小字(手机常见)</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>1rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;16px&nbsp;&nbsp;-&nbsp;&nbsp;标题正文(电脑常见)</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>1.125rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;18px&nbsp;&nbsp;-&nbsp;&nbsp;强调正文</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>1.25rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;20px&nbsp;&nbsp;-&nbsp;&nbsp;小标题</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>1.5rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;24px&nbsp;&nbsp;-&nbsp;&nbsp;中等标题</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>1.875rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;30px&nbsp;&nbsp;-&nbsp;&nbsp;大标题</span></li>
+                    <li><i class="iconfont icon-ditu-dibiao font"></i><span>2.25rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;36px&nbsp;&nbsp;-&nbsp;&nbsp;超大标题</span></li>
+                </ul>
+            </li>
+        </ol>
+    </li>
+</ul>
+</body>
+</html>

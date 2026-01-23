@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form表单制作</title>
+    <link rel="stylesheet" href="../../AI功能/html文件/背景渐变/背景渐变.css">
+    <style>
+        *{
+            font-size: 20px;
+        }
+        body{
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            border: 3px solid black;
+            width: 100%;
+            height: auto;
+            color: white;
+
+        }
+        input[type="submit"]:hover{
+            /*padding: 10px 15px;*/
+            margin-top: 10px;
+            margin-right: 10px;
+            border: 4px solid #14fcdf;
+            cursor: pointer;
+            color: rgb(0, 0, 0);
+        }
+        input[type="reset"]:hover{
+            /*padding: 10px 15px;*/
+            margin-top: 10px;
+            margin-right: 10px;
+            border: 4px solid #14fcdf;
+            cursor: pointer;
+            color:rgba(0,0,0,0.5);
+        }
+        input[type="text"]:focus{
+            background: #00cec9;
+        }
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="password"]:focus{
+            background: #0ea5e9;
+        }
+        input:checked+label,.input_2{
+            font-weight: bold;
+            font-size: 18px;
+        }
+        select{
+            font-family: "楷体",serif;
+            font-size: 25px;
+        }
+        .input_1{
+            width: 200px;
+            height: auto;
+        }
+        .div_1{
+            width: 500px;
+            height: auto;
+            background:
+                linear-gradient(rgba(0,0,0,0.5)),
+                url("../../../网站/网站内容添加/网站背景/网站背景.jpg") center/cover;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <form>
+            <div class="div_1">
+                <fieldset>
+                <legend><b>用户注册</b></legend>
+                <div>
+                    <label for="name">用户名：</label>
+                    <input type="text" id="name" name="name" value="请输入最多15字符的名字" maxlength="15" class="input_1" required>
+                </div>
+                <div>
+                    <label for="password">密码：</label>
+                    <input type="password" id="password" name="psw"  maxlength="30" class="input_1">
+                </div>
+                <div>
+                    <label for="tel">电话：</label>
+                    <input type="tel" id="tel" name="phone" maxlength="11" pattern="[0~9]{11]" class="input_1" required>
+                </div>
+                <div>
+                    <label >
+                        性别：
+                        <input type="radio"  name="Gender" value="man">男
+                        <input type="radio"  name="Gender" value="Woman">女
+                    </label>
+                </div>
+                <div >
+                    <label>爱好：</label>
+                    <div>
+                    <label for="Xiangqi"><input type="checkbox" id="Xiangqi" name="Xiangqi">象棋</label>
+                    <label for="Swim"><input type="checkbox" id="Swim" name="Swim">游泳</label>
+                    <label for="Travel"><input type="checkbox" id="Travel" name="Travel">旅游</label>
+                    <label for="Admire the flowers"><input type="checkbox" id="Admire the flowers" name="Admire the flowers">赏花</label>
+                    <label for="Climb mountains"><input type="checkbox" id="Climb mountains">爬山</label>
+                    <label for="work out"><input type="checkbox" id="work out" name="work out">健身</label>
+                    </div>
+                </div>
+                <div>
+                    <label>
+                        专业：
+                    <select>
+                        <optgroup label="信息工程学院" >
+                            <option>软件技术</option>
+                            <option>计算机网络技术</option>
+                            <option>虚拟现实技术应用</option>
+                            <option>大数据技术</option>
+                            <option>物联网应用技术</option>
+                        </optgroup>
+                        <optgroup label="护理学院">
+                            <option>护理</option>
+                            <option>护理(中外合作办学)</option>
+                            <option>助产</option>
+                            <option>老年保健与管理</option>
+                        </optgroup>
+                        <optgroup label="医学院">
+                            <option>药学</option>
+                            <option>中药学</option>
+                            <option>康复治疗技术</option>
+                            <option>医学美容技术</option>
+                        </optgroup>
+                        <optgroup label="师范学院">
+                            <option>学前教育</option>
+                            <option>早期教育</option>
+                            <option>婴幼儿托育服务与管理</option>
+                            <option>应用英语</option>
+                        </optgroup>
+                        <optgroup label="经济管理学院">
+                            <option>大数据与会计</option>
+                            <option>网络营销与直播电商</option>
+                            <option>旅游管理</option>
+                            <option>现代农业经济管理</option>
+                            <option>烹饪工艺与营养</option>
+                            <option>农产品流通和管理</option>
+                            <option>休闲农业经营与管理</option>
+                        </optgroup>
+                        <optgroup label="艺术与与设计学院">
+                            <option>音乐教育</option>
+                            <option>艺术教育</option>
+                            <option>体育教育</option>
+                            <option>数字媒体技术</option>
+                        </optgroup>
+                        <optgroup label="机电与新能源汽车学院">
+                            <option>新能源材料应用技术</option>
+                            <option>机电一体化技术</option>
+                            <option>数控技术</option>
+                            <option>新能源汽车技术</option>
+                            <option>无人机应用技术</option>
+                            <option>储能材料技术</option>
+                            <option>光伏工程技术</option>
+                        </optgroup>
+                    </select>
+                    </label>
+                </div>
+                <div>
+                    <label for="nationality">国籍：</label>
+                    <input type="text" id="nationality" name="nationality" value="中国" class="input_2" readonly>
+                </div>
+                <div>
+                    <label >
+                        地址：
+                        <input type="text"  name="adders" required>
+                        <br/>提示：<input type="text" value="**省**市**区**" class="input_1" disabled>
+                    </label>
+                </div>
+                <div>
+                    <label for="email">邮箱：</label>
+                    <input type="email" id="email" name="email" class="input_1">
+                </div>
+                <div>
+                    <input type="submit" value="提交" >
+                    <input type="reset" value="重置" >
+                </div>
+            </fieldset>
+            </div>
+
+        </form>
+    </main>
+</body>
+</html>
