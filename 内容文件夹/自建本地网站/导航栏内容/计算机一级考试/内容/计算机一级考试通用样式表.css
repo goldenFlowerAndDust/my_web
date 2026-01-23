@@ -6,8 +6,8 @@
     --font-size-desktop-title: 60px;
 
     /* 平板端 (中等屏) */
-    --font-size-tablet-nav: 28px;
-    --font-size-tablet-sub: 23px;
+    --font-size-tablet-nav: 25px;
+    --font-size-tablet-sub: 25px;
     --font-size-tablet-title: 60px;
 
     /* 手机端 (最小屏) */
@@ -273,3 +273,4 @@ img {
     }
 
 }
+
