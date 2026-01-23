@@ -8,6 +8,7 @@
     --color-backgrond-header-ul: orange;
     --color-background-header-li-hover: #ddd;
     --color-background-aside: skyblue;
+    --color-background-color-mian: red;
     /*  间距系统  */
     --container-width: 61.25rem; /* container(容器) 61.25rem=980px */
     --container-height: 80rem;
@@ -52,6 +53,7 @@ body {
 main {
     max-width: var(--container-width);
     min-height: var(--container-height);
+    background-color:var(--color-background-color-mian);
 }
 
 /*header部分*/
