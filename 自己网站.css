@@ -13,11 +13,11 @@
     --container-width: 61.25rem; /* container(容器) 61.25rem=980px */
     --container-height: 80rem;
     --header-height: 7.5rem;
-    --main-container-height: 57rem;
+    --main-container-height: 66.5rem;
     --main-container-a-padding: 1rem;
     --main-container-a-height: 7.5rem;
     --main-container-ol-width: 18.75rem;
-    --main-container-carousel-height:290rem;
+    --main-container-carousel-height:333rem;
 
     /*  字体大小  */
     --font-size-text-header: 3rem;
@@ -127,7 +127,7 @@ header {
 }
 /*轮播图*/
 .main-container .carousel {
-    flex: 2;
+    flex: 2.5;
     height: var(--main-container-height);
     overflow: hidden;
 }
@@ -144,19 +144,19 @@ header {
 }
 @keyframes carousel {
     20%{
-        transform: translateY(0);
+        transform: translateY(0rem);
     }
     40%{
-        transform: translateY(-57rem);
+        transform: translateY(-66.5rem);
     }
     60%{
-        transform: translateY(-114rem);
+        transform: translateY(-133rem);
     }
     80%{
-        transform: translateY(-171rem);
+        transform: translateY(-199.5rem);
     }
-    100%{
-        transform: translateY(-228px);
+    to{
+        transform: translateY(-266rem);
     }
 }
 footer{
@@ -167,7 +167,7 @@ footer{
     background-color:orange;
     font-size: 3rem;
 }
-@media (min-width: 1024px) and (max-width: 1440px){
+@media  (max-width: 1024px){
     main{
         min-width: 67.5rem;
     }
@@ -175,7 +175,15 @@ footer{
         min-width:67.5rem;
     }
 }
-@media (min-width: 1440px){
+@media (max-width: 1800px){
+    main{
+        min-width: 105.5rem;
+    }
+    .nav_container{
+        min-width:105.5rem;
+    }
+}
+@media (min-width: 2000px){
     main{
         min-width: 180rem;
     }
