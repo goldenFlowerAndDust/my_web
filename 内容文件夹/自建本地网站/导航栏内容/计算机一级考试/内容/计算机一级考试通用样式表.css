@@ -2,18 +2,18 @@
 :root{
     /* 桌面端 (最大屏) - 默认使用 */
     --font-size-desktop-nav: 28px;
-    --font-size-desktop-sub: 35px;
+    --font-size-desktop-sub: 30px;
     --font-size-desktop-title: 60px;
 
     /* 平板端 (中等屏) */
     --font-size-tablet-nav: 28px;
-    --font-size-tablet-sub: 30px;
+    --font-size-tablet-sub: 25px;
     --font-size-tablet-title: 60px;
 
     /* 手机端 (最小屏) */
-    --font-size-mobile-nav: 20px;
-    --font-size-mobile-sub: 25px;
-    --font-size-mobile-title: 25px;
+    --font-size-mobile-nav: 15px;
+    --font-size-mobile-sub: 15px;
+    --font-size-mobile-title: 30px;
 }
 * {
     margin: 0;
@@ -86,6 +86,7 @@ nav ul li a:hover {
 }
 
 nav ul li ol {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -95,6 +96,7 @@ nav ul li ol {
     transform: scaleY(0);
     transition: all 0.4s;
     transform-origin: 50% 0;
+    z-index: 20;
 }
 
 nav ul li ol li {
@@ -102,11 +104,12 @@ nav ul li ol li {
     height: 75px;
     text-align: center;
     line-height: 75px;
+    background-color:skyblue;
 }
 
 nav ul li ol li a {
     display: block;
-    color: skyblue;
+    color: white;
 }
 
 nav ul li ol li a:hover {
@@ -132,13 +135,14 @@ nav ul > li:hover ol {
     margin: 90px auto;
     animation: transition linear 0s infinite normal running;
     animation-duration: 4s;
+    z-index: 1;
 }
 .transition div:hover {
     animation-play-state: paused;
 }
 
 p {
-    font-size: 35px;
+    font-size: 40px;
 }
 
 @keyframes transition {
