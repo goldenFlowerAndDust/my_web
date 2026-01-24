@@ -6,7 +6,7 @@
     --font-size-desktop-title: 60px;
 
     /* 平板端 (中等屏) */
-    --font-size-tablet-nav: 20px;
+    --font-size-tablet-nav: 25px;
     --font-size-tablet-sub: 25px;
     --font-size-tablet-title: 60px;
 
@@ -105,6 +105,7 @@ nav ul li ol li {
     text-align: center;
     line-height: 75px;
     background-color:skyblue;
+    position: relative;
 }
 
 nav ul li ol li a {
@@ -116,10 +117,27 @@ nav ul li ol li a:hover {
     background-color: #ddd;
 }
 
-nav ul > li:hover ol {
+nav ul > li:hover>ol {
     transform: scaleY(1);
 }
-
+.nav_2{
+    position: absolute;
+    top: 0;
+    left: 100%; /* 放在二级菜单项的右侧 */
+    transform: scaleX(0); /* 改为水平缩放 */
+    transform-origin: left; /* 从左侧开始缩放 */
+    transition: transform 0.3s ease;
+    width: 100%;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+.nav_2 li{
+    background-color: #6c5ce7;
+}
+main ul li ol>li:hover .nav_2{
+    transform: scaleX(1);
+}
 /*动画*/
 .transition {
     width: 100%;
@@ -241,7 +259,21 @@ img {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+@media (min-width:2880px) {
+    main nav ul {
+        font-size: var(--font-size-desktop-nav) !important;
+    }
+    main nav ul li ol {
+        font-size: var(--font-size-desktop-sub) !important;
+    }
+    main .transition div {
+        font-size: var(--font-size-desktop-title) !important;
+    }
+    /* 新增：主体内容区域在平板的字号 */
+    main .SingleChoiceQuestion, .SingleChoiceQuestion ul li {
+        font-size: var(--font-size-tablet-sub) !important;
+    }
+}
 @media (max-width: 2880px) {
     main nav ul {
         font-size: var(--font-size-tablet-nav) !important;
@@ -271,7 +303,4 @@ img {
     main .SingleChoiceQuestion, .SingleChoiceQuestion ul li {
         font-size: var(--font-size-mobile-sub) !important;
     }
-
 }
-
-
