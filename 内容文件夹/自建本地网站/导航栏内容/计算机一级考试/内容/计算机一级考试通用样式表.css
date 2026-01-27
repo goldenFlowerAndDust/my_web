@@ -7,7 +7,7 @@
 
     /* 平板端 (中等屏) */
     --font-size-tablet-nav: 25px;
-    --font-size-tablet-sub: 25px;
+    --font-size-tablet-sub: 20px;
     --font-size-tablet-title: 60px;
 
     /* 手机端 (最小屏) */
@@ -303,4 +303,5 @@ img {
     main .SingleChoiceQuestion, .SingleChoiceQuestion ul li {
         font-size: var(--font-size-mobile-sub) !important;
     }
+
 }
