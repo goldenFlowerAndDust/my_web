@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性display布局以及补充的标签和属性.</title>
+    <link rel="stylesheet" href="./属性display布局以及补充的标签和属性.css">
+</head>
+<body>
+    <main>
+        <h1>属性display布局以及补充的标签和属性</h1>
+        <section>
+            <h2>block(块级元素)</h2>
+            <ul>
+                <li >块级元素(div、section、p、nav、aside、main…………)默认在静态文档流中，都是垂直堆叠(从上到下排列)——也就是<span>display:block</span></li>
+                <li >块级元素后续可以通过属性display更改(<span>block[块级元素]、inline[内联元素]、flex[弹性布局]、grid[网格布局]</span>)</li>
+                <li >
+                    <ol>块级元素不常用的补充：
+                        <li><span>address</span>使用场景：作者/联系信息(默认状态为斜体)<span>可以使用属性font-style:normal[改为不倾斜状态]</span></li>
+                        <li></li>
+                        <li></li>
+                    </ol>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h2>inline(内联元素)</h2>
+            <ul>
+                <li >内联元素(span、img、br、mark、i………………)默认在静态文档流中，都是在行框内水平排列，当行框宽度不足时，整个元素会移动到下一行继续水平排列——也就是<span>display:inline</span></li>
+                <li >内联元素后续可以通过属性display更改</li>
+                <li >
+                    <ol>内联元素不常用的补充：
+                        <li>
+                            <div>
+                                <h3>内联元素——初始状态为斜体(同样可以使用属性font-style:normal[改为不倾斜状态])</h3>
+                                <P><span>em</span>使用场景：需要强调的词语(默认状态为斜体)</P>
+                                <P><span>cite</span>使用场景：书籍、电影、文章标题(默认状态为斜体)</P>
+                                <P><span>dfn</span>使用场景：首次定义术语时(默认状态为斜体)</P>
+                                <P><span>var</span>使用场景：数学公式、编程变量(默认状态为斜体)</P>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h2>flex(弹性布局)</h2>
+            <ul>
+                <li>任何容器元素+display:flex = flex容器</li>
+                <li>flex容器的直接子元素 = flex项目</li>
+                <li>它可以是body或任何你想要用于布局的容器元素</li>
+                <li>
+                    <div>
+                        <h3>flex最重要的概念(牢记)</h3>
+                        <ol>
+                            <li>定位flex项目的两条轴线(主轴和交叉轴)
+                                <table>
+                                    <tr>
+                                        <td>flex-direction值</td>
+                                        <td>主轴方向与起点</td>
+                                        <td>交叉轴方向</td>
+                                        <td>justify-content(控制)</td>
+                                        <td>align-items(控制)</td>
+                                        <td>视觉类比</td>
+                                    </tr>
+                                    <tr>
+                                        <td>row(默认)</td>
+                                        <td>水平，从左到右</td>
+                                        <td>垂直，从上到下</td>
+                                        <td>水平排列分布</td>
+                                        <td>垂直对齐</td>
+                                        <td>横排书架上放书</td>
+                                    </tr>
+                                    <tr>
+                                        <td>row-reverse</td>
+                                        <td>水品，从右到左</td>
+                                        <td>垂直，从上到下</td>
+                                        <td>水平排列分布</td>
+                                        <td>垂直对齐</td>
+                                        <td>横排书架上放书，但是从右开始放</td>
+                                    </tr>
+                                    <tr>
+                                        <td>column</td>
+                                        <td>垂直，从上到下</td>
+                                        <td>水平从左到右</td>
+                                        <td>垂直排列分布</td>
+                                        <td>水平对齐</td>
+                                        <td>竖排书架上放书</td>
+                                    </tr>
+                                    <tr>
+                                        <td>column-reverse</td>
+                                        <td>垂直，从下到上</td>
+                                        <td>水平从左到右</td>
+                                        <td>垂直排列分布</td>
+                                        <td>水平对齐</td>
+                                        <td>竖排书架上放书，但从底端开始放</td>
+                                    </tr>
+                                </table>
+                                <img src="./image/块级元素/容器布局_block——还未添加flex.png"
+                                     alt="容器布局_block——还未添加flex"
+                                     title="容器布局_block——还未添加flex">
+                                <img src="./image/容器布局_flex——认识flex容器和flex项目/容器布局_flex——认识flex容器和flex项目.png"
+                                     alt="容器布局_flex——认识flex容器和flex项目"
+                                     title="容器布局_flex——认识flex容器和flex项目">
+                                <img src="./image/认识主轴与交叉轴/容器布局_flex——认识主轴与交叉轴_row.png"
+                                     alt="容器布局_flex——认识主轴与交叉轴_row"
+                                     title="容器布局_flex——认识主轴与交叉轴_row">
+                                <img src="./image/认识主轴与交叉轴/容器布局_flex——认识主轴与交叉轴_column.png"
+                                     alt="容器布局_flex——认识主轴与交叉轴_column"
+                                     title="容器布局_flex——认识主轴与交叉轴_column">
+                            </li>
+                            <li>
+                                <div>
+                                    <h3>flex-direction</h3>
+                                    <ol>
+                                        <li>主要有：row(默认)、row-reverse、column、column-reverse四个值</li>
+                                        <li>主要控制的是主轴方向(即所有flex项目会沿着主轴进行排列)</li>
+                                    </ol>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <h3>justify-content</h3>
+                                    <p>该属性永远以主轴为核心</p>
+                                    <ol>
+                                        <li>主要有：flex-start项目对齐到主轴的起点</li>
+                                        <li>
+                                            <table>
+                                                <tr>
+                                                    <td>值</td>
+                                                    <td>作用</td>
+                                                    <td>注意事项</td>
+                                                    <td>图例</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>flex-start</td>
+                                                    <td>把flex项目对齐到主轴的起点</td>
+                                                    <td class="td_left">会受到flex-direction影响
+                                                        <br/>当值为<span>row</span>时：主轴的起点是最左边
+                                                        <br/>当值为<span>row-reverse</span>时，主轴的起点是最右边
+                                                        <br/>当值为<span>column</span>时，主轴的起点是最上面
+                                                        <br/>当值为<span>column-reverse</span>时，主轴的起点是最下面</td>
+                                                    <td class="td_img">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_row_justify——content_flex-statr.png"
+                                                             alt="主轴控制项目对齐起点(row)"
+                                                             title="主轴控制项目对齐起点(row)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_row_reverse_justify——content_flex-statr.png"
+                                                             alt="主轴控制项目对齐起点(row-reverse)"
+                                                             title="主轴控制项目对齐起点(row-reverse)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_column_justify——content_flex-statr.png"
+                                                             alt="主轴控制项目对齐起点(column)"
+                                                             title="主轴控制项目对齐起点(column)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_column_reverse_justify——content_flex-statr.png"
+                                                             alt="主轴控制项目对齐起点(column-reverse)"
+                                                             title="主轴控制项目对齐起点(column-reverse)">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>flex-end</td>
+                                                    <td>把flex项目对齐到主轴的终点</td>
+                                                    <td class="td_left">会受到flex-direction影响
+                                                        <br/>当值为<span>row</span>时：主轴的起点是最右边
+                                                        <br/>当值为<span>row-reverse</span>时，主轴的起点是最左边
+                                                        <br/>当值为<span>column</span>时，主轴的起点是最下面
+                                                        <br/>当值为<span>column-reverse</span>时，主轴的起点是最上面</td>
+                                                    <td class="td_img">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_row_justify——content_flex-end.png"
+                                                             alt="主轴控制项目对齐终点(row)"
+                                                             title="主轴控制项目对齐终点(row)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_row_reverse_justify——content_flex-end.png"
+                                                             alt="主轴控制项目对齐终点(row-reverse)"
+                                                             title="主轴控制项目对齐终点(row-reverse)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_column_justify——content_flex-end.png"
+                                                             alt="主轴控制项目对齐终点(column)"
+                                                             title="主轴控制项目对齐终点(column)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_column_reverse_justify——content_flex-end.png"
+                                                             alt="主轴控制项目对齐终点(column-reverse)"
+                                                             title="主轴控制项目对齐终点(column-reverse)">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>center</td>
+                                                    <td>把flex项目在主轴上居中</td>
+                                                    <td class="td_left">会受到flex-direction影响
+                                                        <br/>当值为<span>row、row-reverse</span>时：水平居中，但是项目方向会受两值的变化，不影响居中的效果。
+                                                        <br/>当值为<span>column、column-reverse</span>时，垂直居中，但是项目方向会受两值的变化，不影响居中的效果。</td>
+                                                    <td class="td_img">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_row_justify——content_center.png"
+                                                             alt="主轴项目居中对齐(row)"
+                                                             title="主轴项目居中对齐(row)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_row_reverse_justify——content_center.png"
+                                                             alt="主轴项目居中对齐(row-reverse)"
+                                                             title="主轴项目居中对齐(row-reverse)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_column_justify——content_center.png"
+                                                             alt="主轴项目居中对齐(column)"
+                                                             title="主轴项目居中对齐(column)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_column_reverse_justify——content_center.png"
+                                                             alt="主轴项目居中对齐(column-reverse)"
+                                                             title="主轴项目居中对齐(column-reverse)">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>space-between</td>
+                                                    <td class="td_left">沿着主轴方向最边上的项目(即最左边项目，和最右边项目)，紧贴flex容器两侧，其余空间由剩下的项目平分
+                                                        <br/><span>处理步骤：第一个项目贴在主轴起点，最后一个项目贴在主轴终点，剩余空间被项，项目之间的间隙平分</span></td>
+                                                    <td class="td_left">会受到flex-direction影响
+                                                        <br/>当值为<span>row、row-reverse</span>时，项目方向会受两值的变化。
+                                                        <br/>当值为<span>column、column-reverse</span>时，项目方向会受两值的变化。</td>
+                                                    <td class="td_img">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_row_justify——content_space-between.png"
+                                                             alt="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(row)"
+                                                             title="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(row)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_row_reverse_justify——content_space-between.png"
+                                                             alt="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(row-reverse)"
+                                                             title="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(row-reverse)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_column_justify——content_space-between.png"
+                                                             alt="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(column)"
+                                                             title="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(column)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_column_reverse_justify——content_space-between.png"
+                                                             alt="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(column-reverse)"
+                                                             title="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(column-reverse)">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>space-around</td>
+                                                    <td class="td_left">沿着主轴方向最边上的项目(即最左边项目，和最右边项目)，离flex容器两侧有一定距离，其余空间由剩下的项目平分
+                                                        <br/><span>处理步骤，将容器主轴空间等分给每个项目及其两侧的间隙，每个项目获得相同大小的周围空间，相邻项目的间隙会叠加，视觉效果：相邻项目的间隙是两侧的两倍</span></td>
+                                                    <td class="td_left">会受到flex-direction影响
+                                                        <br/>当值为<span>row、row-reverse</span>时，项目方向会受两值的变化。
+                                                        <br/>当值为<span>column、column-reverse</span>时，项目方向会受两值的变化。</td>
+                                                    <td class="td_img">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_row_justify——content_space-around.png"
+                                                             alt="项目沿着主轴平分flex容器空间，相邻空间叠加(row)"
+                                                             title="项目沿着主轴平分flex容器空间，相邻空间叠加(row)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_row_reverse_justify——content_space-around.png"
+                                                             alt="项目沿着主轴平分flex容器空间，相邻空间叠加(row-reverse)"
+                                                             title="项目沿着主轴平分flex容器空间，相邻空间叠加(row-reverse)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_column_justify——content_space-around.png"
+                                                             alt="项目沿着主轴平分flex容器空间，相邻空间叠加(column)"
+                                                             title="项目沿着主轴平分flex容器空间，相邻空间叠加(column)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_column_reverse_justify——content_space-around.png"
+                                                             alt="项目沿着主轴平分flex容器空间，相邻空间叠加(column-reverse)"
+                                                             title="项目沿着主轴平分flex容器空间，相邻空间叠加(column-reverse)">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>space-evenly</td>
+                                                    <td class="td_left">将flex容器所有的空间，给项目平分(包括两侧)
+                                                        <br/><span>处理步骤，将flex容器空间等分给所有间隙，间隙数量=项目数量+1,所有间隙大小相等(包括容器边缘)，视觉效果：所有间隙相等</span></td>
+                                                    <td class="td_left">会受到flex-direction影响
+                                                        <br/>当值为<span>row、row-reverse</span>时，项目方向会受两值的变化。
+                                                        <br/>当值为<span>column、column-reverse</span>时，项目方向会受两值的变化。</td>
+                                                    <td class="td_img">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_row_justify——content_space-evenly.png"
+                                                             alt="项目沿着主轴平分flex容器空间(row)"
+                                                             title="项目沿着主轴平分flex容器空间(row)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_row_reverse_justify——content_space-evenly.png"
+                                                             alt="项目沿着主轴平分flex容器空间(row-reverse)"
+                                                             title="项目沿着主轴平分flex容器空间(row-reverse)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_column_justify——content_space-evenly.png"
+                                                             alt="项目沿着主轴平分flex容器空间(column)"
+                                                             title="项目沿着主轴平分flex容器空间(column)">
+                                                        <img src="./image/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_column_reverse_justify——content_space-evenly.png"
+                                                             alt="项目沿着主轴平分flex容器空间(column-reverse)"
+                                                             title="项目沿着主轴平分flex容器空间(column-reverse)">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </li>
+            </ul>
+            <div>
+                <p>弹性布局示例</p>
+                <div class="container div_font-size">
+                    <div><span>hello</span></div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div></div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>一些css属性的补充</h2>
+            <ol>
+                <li>
+                    <div>
+                        <h3>font-style</h3>
+                        <p>该属性控制的是字体的"样式变体"(蒸屉、斜体)或"几何变形"(斜体)</p>
+                        <p>该属性共有normal、italic、oblique、oblique(angle)四个值[以下的名词"字体"可以理解为文本的字体类型(font-family)【微软雅黑、宋体…………】]：</p>
+                    </div>
+                    <ul>
+                        <li>normal：使用字体的"正体"版本(可以理解为非斜体)</li>
+                        <li>italic：优先使用字体的"斜体"变体(如果存在)</li>
+                        <li>oblique：将"正体"版本机械地倾斜一个角度</li>
+                        <li>oblique &lt;angle&gt;：将"正体"版本精确地倾斜指定角度(angle[单位deg（角度）])</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>vertical-align</h3>
+                    <p>该属性控制的是调整行内元素在其所属的[行框(line box)]内的垂直位置</p>
+                    <p>该属性共有：基线对齐(baseline[默认值]、sub、super)、相对行框对齐(text-top、text-bottom)、相对行框对齐(top、middle、bottom)、数值\百分比(长度值[px、rem……]、百分比值)</p>
+                    <table>
+                        <tr>
+                            <td>值</td>
+                            <td>作用</td>
+                            <td>适用场景</td>
+                            <td>示例/说明</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="td_left">基线对齐</td>
+<!--                            <td></td>-->
+<!--                            <td></td>-->
+<!--                            <td></td>-->
+                        </tr>
+                        <tr>
+                            <td>baseline(默认值)</td>
+                            <td>元素的<span>基线</span>与父元素的基线对齐</td>
+                            <td><span>文本对齐</span></td>
+                            <td>同一行中不同字号的文字按基线对齐，看起来很整齐</td>
+                        </tr>
+                        <tr>
+                            <td>sub</td>
+                            <td>将元素对齐父元素的<span>下标基线</span></td>
+                            <td>数学/化学公式</td>
+                            <td>H<sub>2</sub>O中的"2"</td>
+                        </tr>
+                        <tr>
+                            <td>super</td>
+                            <td>将元素对齐到父元素的<span>上标基线</span></td>
+                            <td>数学/幂运算</td>
+                            <td>X<sup>2</sup>中的"2"</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="td_left">相对行框对齐</td>
+<!--                            <td></td>-->
+<!--                            <td></td>-->
+<!--                            <td></td>-->
+                        </tr>
+                        <tr>
+                            <td>text-top</td>
+                            <td>元素的<span>顶部</span>与父元素<span>字体的顶部</span>对齐</td>
+                            <td>图标与文字顶部对齐</td>
+                            <td>让图标与这行文字的最高点对齐</td>
+                        </tr>
+                        <tr>
+                            <td>text-bottom</td>
+                            <td>元素的<span>底部</span>与父元素<span>字体的底部</span>对齐</td>
+                            <td>图标与文字底部对齐</td>
+                            <td>让图标与这行文字的顶最低点对齐</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="td_left">相对行框对齐</td>
+<!--                            <td></td>-->
+<!--                            <td></td>-->
+<!--                            <td></td>-->
+                        </tr>
+                        <tr>
+                            <td>top</td>
+                            <td>元素及其后代的<span>顶部</span>与<span>整行的顶部</span>对齐</td>
+                            <td>多行元素顶部对齐</td>
+                            <td>同一行内多个元素顶部对齐</td>
+                        </tr>
+                        <tr>
+                            <td>middle</td>
+                            <td>元素的<span>中部</span>与父元素<span>基线+x-height/2</span>对齐<br/><span>在表格单元格中；</span>内容在单元格内垂直居中</td>
+                            <td><span>最常用的垂直居中</span></td>
+                            <td>表格单元格垂直居中，图标与文字垂直居中</td>
+                        </tr>
+                        <tr>
+                            <td>bottom</td>
+                            <td>元素及其后代的<span>底部</span>与<span>整行的底部</span>对齐</td>
+                            <td>多行元素底部对齐</td>
+                            <td>同一行内多个元素底部对齐</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="td_left">数值/百分比</td>
+<!--                            <td></td>-->
+<!--                            <td></td>-->
+<!--                            <td></td>-->
+                        </tr>
+                        <tr>
+                            <td>长度值(如px、rem…………)</td>
+                            <td>将元素从基线位置<span>抬高(正值)</span>或<span>降低(负值)</span></td>
+                            <td>微调图标位置</td>
+                            <td>vertical-align:-3px;<span>让图标下移3像素</span></td>
+                        </tr>
+                        <tr>
+                            <td>百分比值(如：50%)</td>
+                            <td>相对于元素<span>自身的</span>line-height计算偏移量</td>
+                            <td>基于行高的精准控制</td>
+                            <td>vertical-align:50%;<span>上移自身行高的一半</span></td>
+                        </tr>
+                    </table>
+                </li>
+            </ol>
+        </section>
+    </main>
+</body>
+</html>
