@@ -7,9 +7,59 @@
 </head>
 <body>
 <main>
-    <h1>属性display布局以及补充的标签和属性</h1>
+    <nav>
+        <ul class="nav_content">
+            <li id="目录——block">
+                <p>block</p>
+                <ul class="nav_ul">
+                    <li><a href="#block_块级元素不常用补充">块级元素补充</a></li>
+                </ul>
+            </li>
+            <li id="目录——inline">
+                <p>inline</p>
+                <ul class="nav_ul">
+                    <li><a href="#inline_内联元素不常用补充">内联元素补充</a></li>
+                </ul>
+            </li>
+            <li id="目录——flex">
+                <p>flex</p>
+                <ul class="nav_ul">
+                    <li><a href="#flex_主轴和交叉轴">主轴和交叉轴</a></li>
+                    <li><a href="#flex_属性flex-direction">flex-direction</a></li>
+                    <li><a href="#flex_justify-content">justify-content</a></li>
+                    <li><a href="#flex_属性值——flex-start">flex-start</a></li>
+                    <li><a href="#flex_属性值_flex-end">flex-end</a></li>
+                    <li><a href="#flex_属性值_flex-center">flex-center</a></li>
+                    <li><a href="#flex_属性值_space-between">space-between</a></li>
+                    <li><a href="#flex_属性值_space-around">space-around</a></li>
+                    <li><a href="#flex_属性值_space-evenly">space-evenly</a></li>
+                    <li><a href="#flex_align-items">align-items</a></li>
+                    <li><a href="#flex_flex-wrap">flex-wrap</a></li>
+                    <li><a href="#flex_gap">flex_gap</a></li>
+                    <li><a href="#flex_align-content">align-content</a></li>
+                    <li><a href="#flex_项目属性_flex-shrink">flex-shrink</a></li>
+                    <li><a href="#flex_项目属性_flex-grow">flex-grow</a></li>
+                    <li><a href="#flex_项目属性_flex-basis">flex-basis</a></li>
+                    <li><a href="#flex_项目属性_align_self">align_self</a></li>
+                    <li><a href="#flex-basis、flex-shrink、flex-grow三属性的简写">项目属性_flex</a></li>
+                    <li><a href="#flex_项目属性_order">order</a></li>
+                    <li><a href="#flex_属性值——baseline、stretch">baseline、stretch</a></li>
+                    <li><a href="#flex_flex-basis、flex-shrink、flex-grow、width/height区别总结">项目属性与宽高区别</a></li>
+                    <li><a href="#flex_flex属性分类总结">flex_flex属性分类</a></li>
+                    <li><a></a></li>
+                </ul>
+            </li>
+            <li id="目录——grid"><p>grid</p></li>
+            <li id="目录——CSS属性补充"><p>CSS属性补充</p>
+                <ol class="nav_ul">
+                    <li><a href="#补充属性_font-style">font-style</a></li>
+                    <li><a href="#补充属性_vertical-align">vertical-align</a></li>
+                </ol>
+            </li>
+        </ul>
+    </nav>
     <section>
-        <h2>block(块级元素)</h2>
+        <h2 id="block"><a href="#目录——block">block(块级元素)</a></h2>
         <ul>
             <li>块级元素(div、section、p、nav、aside、main…………)默认在静态文档流中，都是垂直堆叠(从上到下排列)——也就是<span>display:block</span>
             </li>
@@ -17,24 +67,23 @@
                 块级元素后续可以通过属性display更改(<span>block[块级元素]、inline[内联元素]、flex[弹性布局]、grid[网格布局]</span>)
             </li>
             <li>
-                <ol>块级元素不常用的补充：
+                <ol>
                     <li>
+                        <p id="block_块级元素不常用补充"><a href="#目录——block">块级元素不常用的补充：</a></p>
                         <span>address</span>使用场景：作者/联系信息(默认状态为斜体)<span>可以使用属性font-style:normal[改为不倾斜状态]</span>
                     </li>
-                    <li></li>
-                    <li></li>
                 </ol>
             </li>
         </ul>
     </section>
     <section>
-        <h2>inline(内联元素)</h2>
+        <h2 id="inline"><a href="#目录——inline">inline(内联元素)</a></h2>
         <ul>
             <li>内联元素(span、img、br、mark、i………………)默认在静态文档流中，都是在行框内水平排列，当行框宽度不足时，整个元素会移动到下一行继续水平排列——也就是<span>display:inline</span>
             </li>
             <li>内联元素后续可以通过属性display更改</li>
             <li>
-                <p>内联元素不常用的补充：</p>
+                <p id="inline_内联元素不常用补充"><a href="#目录——inline">内联元素不常用的补充：</a></p>
                 <ol>
                     <li>
                         <h3>内联元素——初始状态为斜体(同样可以使用属性font-style:normal[改为不倾斜状态])</h3>
@@ -48,7 +97,7 @@
         </ul>
     </section>
     <section>
-        <h2>flex(弹性布局)</h2>
+        <h2 id="flex"><a href="#目录——flex">flex(弹性布局)</a></h2>
         <ul>
             <li>任何容器元素+display:flex = flex容器</li>
             <li>flex容器的直接子元素 = flex项目</li>
@@ -56,7 +105,8 @@
             <li>
                 <h3>flex最重要的概念(牢记)——flex容器相关属性</h3>
                 <ol>
-                    <li>定位flex项目的两条轴线(主轴和交叉轴)
+                    <li>
+                        <h3 id="flex_主轴和交叉轴"><a href="#目录——flex">定位flex项目的两条轴线(主轴和交叉轴)</a></h3>
                         <table>
                             <tr>
                                 <td>flex-direction值</td>
@@ -113,14 +163,14 @@
                              title="容器布局_flex——认识主轴与交叉轴_column">
                     </li>
                     <li>
-                        <h3>flex-direction</h3>
+                        <h3 id="flex_属性flex-direction"><a href="#目录——flex">flex-direction</a></h3>
                         <ul>
                             <li>主要有：row(默认)、row-reverse、column、column-reverse四个值</li>
                             <li>主要控制的是主轴方向(即所有flex项目会沿着主轴进行排列)</li>
                         </ul>
                     </li>
                     <li>
-                        <h3>justify-content</h3>
+                        <h3 id="flex_justify-content"><a href="#目录——flex">justify-content</a></h3>
                         <p>该属性永远以主轴为核心</p>
                         <ul>
                             <li>主要有：flex-start项目对齐到主轴的起点</li>
@@ -133,7 +183,7 @@
                                         <td>图例</td>
                                     </tr>
                                     <tr>
-                                        <td>flex-start</td>
+                                        <td id="flex_属性值——flex-start"><a href="#目录——flex">flex-start</a></td>
                                         <td>把flex项目对齐到主轴的起点</td>
                                         <td class="td_left">会受到flex-direction影响
                                             <br/>当值为<span>row</span>时：主轴的起点是最左边
@@ -157,7 +207,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>flex-end</td>
+                                        <td id="flex_属性值_flex-end"><a href="#目录——flex">flex-end</a></td>
                                         <td>把flex项目对齐到主轴的终点</td>
                                         <td class="td_left">会受到flex-direction影响
                                             <br/>当值为<span>row</span>时：主轴的起点是最右边
@@ -181,7 +231,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>center</td>
+                                        <td id="flex_属性值_flex-center"><a href="#目录——flex">center</a></td>
                                         <td>把flex项目在主轴上居中</td>
                                         <td class="td_left">会受到flex-direction影响
                                             <br/>当值为<span>row、row-reverse</span>时：水平居中，但是项目方向会受两值的变化，不影响居中的效果。
@@ -203,7 +253,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>space-between</td>
+                                        <td id="flex_属性值_space-between"><a href="#目录——flex">space-between</a></td>
                                         <td class="td_left">沿着主轴方向最边上的项目(即最左边项目，和最右边项目)，紧贴flex容器两侧，其余空间由剩下的项目平分
                                             <br/><span>处理步骤：第一个项目贴在主轴起点，最后一个项目贴在主轴终点，剩余空间被项，项目之间的间隙平分</span>
                                         </td>
@@ -227,7 +277,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>space-around</td>
+                                        <td id="flex_属性值_space-around"><a href="#目录——flex">space-around</a></td>
                                         <td class="td_left">沿着主轴方向最边上的项目(即最左边项目，和最右边项目)，离flex容器两侧有一定距离，其余空间由剩下的项目平分
                                             <br/><span>处理步骤，将容器主轴空间等分给每个项目及其两侧的间隙，每个项目获得相同大小的周围空间，相邻项目的间隙会叠加，视觉效果：相邻项目的间隙是两侧的两倍</span>
                                         </td>
@@ -251,7 +301,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>space-evenly</td>
+                                        <td id="flex_属性值_space-evenly"><a href="#目录——flex">space-evenly</a></td>
                                         <td class="td_left">将flex容器所有的空间，给项目平分(包括两侧)
                                             <br/><span>处理步骤，将flex容器空间等分给所有间隙，间隙数量=项目数量+1,所有间隙大小相等(包括容器边缘)，视觉效果：所有间隙相等</span>
                                         </td>
@@ -279,7 +329,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h3>align-items</h3>
+                        <h3 id="flex_align-items"><a href="">align-items</a></h3>
                         <ul>
                             <li><span>该属性永远以交叉轴为核心</span></li>
                             <li>与justify-content<span>同样有：</span>flex-start、flex-end、center</li>
@@ -289,14 +339,10 @@
                             <li>flex-start:沿着<span>交叉轴</span>起点对齐</li>
                             <li>flex-end:沿着<span>交叉轴</span>终点对齐</li>
                             <li>center:沿着<span>交叉轴</span>居中对齐</li>
-                            <li>space-between:项目最边上紧贴flex容器<span>交叉轴</span>两侧，其余空间剩余项目平分</li>
-                            <li>space-around:项目沿着<span>交叉轴</span>将flex容器空间平分，相邻间隙合并，视觉效果：两侧间隙是相邻间隙的二分之一
-                            </li>
-                            <li>space-evenly:项目沿着<span>交叉轴</span>将flex容器空间平分，视觉效果：所有间隙均相等</li>
                         </ul>
                     </li>
                     <li>
-                        <h3>gap</h3>
+                        <h3 id="flex_gap"><a href="#目录——flex">gap</a></h3>
                         <ul>
                             <li><span>它可以在flex项目之间创建间距</span></li>
                             <li>使用它，在flex布局中基本不用再需要通过margin来制造间距</li>
@@ -311,7 +357,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h3>flex-wrap</h3>
+                        <h3 id="flex_flex-wrap"><a href="#目录——flex">flex-wrap</a></h3>
                         <ul>
                             <li>使flex布局实现响应式布局</li>
                             <li>主要由:wrap、nowrap两值构成</li>
@@ -438,7 +484,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h3>align-content</h3>
+                        <h3 id="flex_align-content"><a href="#目录——flex">align-content</a></h3>
                         <ul>
                             <li>控制所有<span>行</span>作为一个整体的对齐</li>
                             <li>有:默认值(stretch)、flex-start、flex-end、center、space-between、space-around、space-evenly
@@ -459,7 +505,7 @@
                         <h3>项目相关属性</h3>
                         <ul>
                             <li>
-                                <h3>·flex-shrink</h3>
+                                <h3 id="flex_项目属性_flex-shrink"><a href="#目录——flex">flex-shrink</a></h3>
                                 <ol>
                                     <li>
                                         当flex容器空间不足时，flex项目相对于其他项目，在主轴方向上"缩小"或"被压缩"的“意愿”和能力
@@ -527,7 +573,7 @@
                                 </ol>
                             </li>
                             <li>
-                                <h3>flex-grow</h3>
+                                <h3 id="flex_项目属性_flex-grow"><a href="#目录——flex">flex-grow</a></h3>
                                 <ol>
                                     <li>主要作用，能使元素自动增长(在主轴上伸展)</li>
                                     <li>默认值是0(不自动增长),值越大占据剩余空间的比例越大</li>
@@ -547,11 +593,123 @@
                                 </ol>
                             </li>
                             <li>
-                                <h3>align-self</h3>
+                                <h3 id="flex_项目属性_flex-basis"><a href="#目录——flex">flex-basis</a></h3>
+                                <ol>
+                                    <li>定义flex项目在主轴方向上的初始大小，即在分配剩余空间之前，项目应该占据多大空间</li>
+                                    <li>类似于width/height</li>
+                                    <li>
+                                        <p>但是优先级顺序：</p>
+                                        <p>flex-basis&nbsp;>&nbsp;width(在flex布局中)</p>
+                                        <p>但是，min-width/max-width&nbsp;仍然会约束最终尺寸</p>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h3 id="flex_项目属性_align_self"><a href="#目录——flex">align-self</a></h3>
                                 <ol>
                                     <li>与align-items的区别是它是作用于项目上的</li>
                                     <li>它的值有：flex-start、flex-end、center(作用效果是一样的)</li>
                                     <li>单项目交叉轴对齐</li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h3 id="flex-basis、flex-shrink、flex-grow三属性的简写"><a href="#目录——flex">flex-basis、flex-shrink、flex-grow三属性的简写</a></h3>
+                                <ol>
+                                    <li>它们简写属性是：flex(作用于项目上)</li>
+                                    <li>共有三个参数:flex-basis、flex-shrink、flex-grow</li>
+                                    <li>语法:flex:flex-grow&nbsp;&nbsp;flex-shrink&nbsp;&nbsp;flex-basis[在输入时，参数对应的属性</li>
+                                    <Li>
+                                        <p>三个参数具体解释：</p>
+                                        <ul>
+                                            <li>flex-grow(必须存在)——放大比例</li>
+                                            <li>flex-shrink(可选)——缩小比例</li>
+                                            <li>flex-basis(可选)——基础尺寸</li>
+                                        </ul>
+                                    </Li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h3 id="flex_项目属性_order"><a href="#目录——flex">order</a></h3>
+                                <ol>
+                                    <li>定义：用于控制flex项目或grid项目在容器中的视觉排列顺序</li>
+                                    <li>主要属性值为：整数(正整数、负整数、0[默认])</li>
+                                    <li>
+                                        <p>核心作用</p>
+                                        <ul>
+                                            <li>改变项目的<span>显示顺序</span>，而不改变HTML结构</li>
+                                            <li>实现<span>视觉重排</span>不影响DOM顺序</li>
+                                            <li>响应式设计中调整不同屏幕尺寸下的项目顺序</li>
+                                        </ul>
+                                    </li>
+                                    <li>设置在项目内，不是flex容器</li>
+                                    <li>
+                                        <p>主要用途：</p>
+                                        <ul>
+                                            <li>响应式布局:不同屏幕尺寸下调整项目顺序</li>
+                                            <li>视觉强调:将重要项目提到前面</li>
+                                            <li>布局微调:不修改HTML结构的情况下调整顺序</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p>与z-index的区别</p>
+                                        <table>
+                                            <tr>
+                                                <th colspan="3">order与z-index区别</th>
+
+                                            </tr>
+                                            <tr>
+                                                <td>方面</td>
+                                                <td>order</td>
+                                                <td>z-index</td>
+                                            </tr>
+                                            <tr>
+                                                <td>本质</td>
+                                                <td><span>布局属性</span>，控制平面新顺序</td>
+                                                <td><span>层叠属性</span>，控制垂直顺序</td>
+                                            </tr>
+                                            <tr>
+                                                <td>前提</td>
+                                                <td>需要Flex/Grid布局</td>
+                                                <td>需要定位(position)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>效果</td>
+                                                <td>谁在前谁在后</td>
+                                                <td>谁在上谁在下</td>
+                                            </tr>
+                                            <tr>
+                                                <td>运用</td>
+                                                <td>响应式重拍、视觉强调</td>
+                                                <td>模态框、下拉菜单、弹出层</td>
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <th colspan="4">相同点</th>
+<!--                                                <td></td>-->
+<!--                                                <td></td>-->
+<!--                                                <td></td>-->
+                                            </tr>
+                                            <tr>
+                                                <td>属性</td>
+                                                <td>允许的值类型</td>
+                                                <td>示例</td>
+                                                <td>不允许的值类型</td>
+                                            </tr>
+                                            <tr>
+                                                <td>order</td>
+                                                <td>整数(integer)</td>
+                                                <td>0、1、-1、10</td>
+                                                <td>小数、字符串、百分比、关键字</td>
+                                            </tr>
+                                            <tr>
+                                                <td>z-index</td>
+                                                <td>整数(integer)或auto</td>
+                                                <td>0、1、-1、auto</td>
+                                                <td>小数(除了auto)、字符串、百分比、关键字</td>
+                                            </tr>
+                                        </table>
+                                    </li>
                                 </ol>
                             </li>
                         </ul>
@@ -559,10 +717,10 @@
                 </ol>
             </li>
             <li>
-                <h3>剩余两个属性值:baseline、stretch</h3>
+                <h3 id="flex_属性值——baseline、stretch"><a href="#目录——flex">剩余两个属性值:baseline、stretch</a></h3>
                 <table>
                     <tr>
-                        <th colspan="3">核心解释</th>
+                        <th colspan="4">核心解释</th>
                         <!--                        <td></td>-->
                         <!--                        <td></td>-->
                         <!--                        <td></td>-->
@@ -588,7 +746,7 @@
                 </table>
                 <table>
                     <tr>
-                        <th colspan="4">四属性对baseline和stretch的支持情况</th>
+                        <th colspan="5">四属性对baseline和stretch的支持情况</th>
                         <!--                        <td></td>-->
                         <!--                        <td></td>-->
                         <!--                        <td></td>-->
@@ -631,6 +789,121 @@
                     </tr>
                 </table>
             </li>
+            <li>
+                <h3 id="flex_flex-basis、flex-shrink、flex-grow、width/height区别总结"><a href="#目录——flex">flex-basis、flex-shrink、flex-grow、width/height区别总结</a></h3>
+                <table>
+                    <tr>
+                        <th colspan="3">flex-basis、flex-shrink、flex-grow、width/height区别总结</th>
+<!--                        <td></td>-->
+<!--                        <td></td>-->
+                    </tr>
+                    <tr>
+                        <td>属性</td>
+                        <td>定义</td>
+                        <td>作用时机</td>
+                    </tr>
+                    <tr>
+                        <td>flex-basis</td>
+                        <td>项目在主轴上的"起始尺寸"</td>
+                        <td><span>在分配多余空间之前</span></td>
+                    </tr>
+                    <tr>
+                        <td>width/height</td>
+                        <td>项目的实际尺寸</td>
+                        <td>CSS盒模型中的尺寸</td>
+                    </tr>
+                    <tr>
+                        <td>flex-grow</td>
+                        <td>分配多余空间的"扩张比例"</td>
+                        <td>在计算flex-basis之后</td>
+                    </tr>
+                    <tr>
+                        <td>flex-shrink</td>
+                        <td>收缩空间不足时的"压缩比例"</td>
+                        <td>在计算flex-basis之后</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th colspan="3" id="flex_flex属性分类总结"><a href="#目录——flex">flex属性分类总结</a></th>
+                    </tr>
+                    <tr>
+                        <td>属性</td>
+                        <td>设置位置</td>
+                        <td>作用</td>
+                    </tr>
+                    <tr>
+                        <td>容器属性</td>
+                        <td>父元素</td>
+                        <td>控制所有项目的整体布局</td>
+                    </tr>
+                    <tr>
+                        <td>display:flex</td>
+                        <td>容器</td>
+                        <td>创建flex容器</td>
+                    </tr>
+                    <tr>
+                        <td>flex-direction</td>
+                        <td>容器</td>
+                        <td>主轴方向</td>
+                    </tr>
+                    <tr>
+                        <td>justify-content</td>
+                        <td>容器</td>
+                        <td>主轴对齐</td>
+                    </tr>
+                    <tr>
+                        <td>align-items</td>
+                        <td>容器</td>
+                        <td>交叉轴对齐</td>
+                    </tr>
+                    <tr>
+                        <td>flex-wrap</td>
+                        <td>容器</td>
+                        <td>换行设置</td>
+                    </tr>
+                    <tr>
+                        <td>gap</td>
+                        <td>容器</td>
+                        <td>项目间距</td>
+                    </tr>
+                    <tr>
+                        <td>项目属性</td>
+                        <td>子元素</td>
+                        <td>控制单个项目的表现</td>
+                    </tr>
+                    <tr>
+                        <td>order</td>
+                        <td>项目</td>
+                        <td>排列顺序</td>
+                    </tr>
+                    <tr>
+                        <td>flex-shrink</td>
+                        <td>项目</td>
+                        <td>缩小比例</td>
+                    </tr>
+                    <tr>
+                        <td>flex-grow</td>
+                        <td>项目</td>
+                        <td>放大比例</td>
+                    </tr>
+                    <tr>
+                        <td>flex-basis</td>
+                        <td>项目</td>
+                        <td>基础尺寸</td>
+                    </tr>
+                    <tr>
+                        <td>align-self</td>
+                        <td>项目</td>
+                        <td>单独对齐(交叉轴)</td>
+                    </tr>
+                    <tr>
+                        <td>flex</td>
+                        <td>项目</td>
+                        <td>flex-shrink、flex-grow、flex-basis简写</td>
+                    </tr>
+                </table>
+            </li>
         </ul>
         <div>
             <p>弹性布局示例</p>
@@ -644,10 +917,13 @@
         </div>
     </section>
     <section>
-        <h2>一些css属性的补充</h2>
+        <h2 id="grid"><a href="#目录——grid">grid布局</a></h2>
+    </section>
+    <section>
+        <h2 id="css属性补充"><a href="#目录——CSS属性补充">一些css属性的补充</a></h2>
         <ol>
             <li>
-                <h3>font-style</h3>
+                <h3 id="补充属性_font-style"><a href="#目录——CSS属性补充">font-style</a></h3>
                 <p>该属性控制的是字体的"样式变体"(蒸屉、斜体)或"几何变形"(斜体)</p>
                 <p>
                     该属性共有normal、italic、oblique、oblique(angle)四个值[以下的名词"字体"可以理解为文本的字体类型(font-family)【微软雅黑、宋体…………】]：</p>
@@ -659,7 +935,7 @@
                 </ul>
             </li>
             <li>
-                <h3>vertical-align</h3>
+                <h3 id="补充属性_vertical-align"><a href="#目录——CSS属性补充">vertical-align</a></h3>
                 <p>该属性控制的是调整行内元素在其所属的[行框(line box)]内的垂直位置</p>
                 <p>
                     该属性共有：基线对齐(baseline[默认值]、sub、super)、相对行框对齐(text-top、text-bottom)、相对行框对齐(top、middle、bottom)、数值\百分比(长度值[px、rem……]、百分比值)</p>

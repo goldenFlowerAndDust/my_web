@@ -14,6 +14,7 @@
     --color-border-container-div:green;
     --color-background-container-div:skyblue;
     --color--border-table:black;
+    --color-table-th:red;
 }
 *{
     margin: 0;
@@ -24,9 +25,67 @@ body{
     margin-top: 1.5rem;
 }
 main{
-    width: 93%;
+    width: 100vw;
     margin: 2rem auto;
     background-image:linear-gradient(45deg,skyblue,greenyellow,pink,skyblue);
+}
+nav{
+    width: 100vw;
+    height: 10rem;
+    background-color: orange;
+}
+.nav_content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 10rem;
+    list-style: none;
+    position: relative;
+
+}
+.nav_content li {
+    width: 100%;
+    text-align: center;
+    line-height: 10rem;
+    position: relative;
+}
+.nav_content a{
+    display: block;
+    text-decoration: none;
+}
+.nav_ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* 改为从顶部开始 */
+    max-height: 20rem; /* 改为最大高度 */
+    height: auto; /* 自动高度 */
+    list-style: none;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    transform: scaleY(0);
+    transform-origin: 50% 0;
+    transition: all 0.4s;
+    overflow-y: auto; /* 添加垂直滚动条 */
+    overflow-x: hidden; /* 隐藏水平滚动条 */
+    position: absolute;
+    z-index: 1000;
+    width: 100%; /* 确保宽度与父元素一致 */
+    background-color: white; /* 确保背景色 */
+}
+.nav_ul li{
+    width: 100%;
+    background-color: white;
+    height: 10rem;
+}
+.nav_ul a{
+    display: block;
+}
+.nav_ul a:hover{
+    background-color: #dddddd;
+}
+.nav_content > li:hover .nav_ul{
+    transform: scale(1);
 }
 main>section{
     margin-bottom:1.3rem;
@@ -90,6 +149,10 @@ table,tr,td{
     font-size: var(--font-size-td_left);
     font-weight: bolder;
 }
+th{
+    text-align: center;
+    color:var(--color-table-th);
+}
 img{
     display: block;
     width: 90%;
@@ -106,4 +169,19 @@ table .td_img{
 .div_font-size{
     text-align: center;
     line-height: 10rem;
+}
+@media  (max-width: 1024px){
+    .nav_ul a{
+        font-size: 1.2rem;
+    }
+}
+@media (max-width: 1800px){
+    .nav_ul a{
+        font-size: 1.5rem;
+    }
+}
+@media (min-width: 2000px){
+    .nav_ul a{
+        font-size: 2.5rem;
+    }
 }
