@@ -25,12 +25,12 @@ body{
     margin-top: 1.5rem;
 }
 main{
-    width: 100vw;
+    width: 90vw;
     margin: 2rem auto;
     background-image:linear-gradient(45deg,skyblue,greenyellow,pink,skyblue);
 }
 nav{
-    width: 100vw;
+    width: 90vw;
     height: 10rem;
     background-color: orange;
 }
@@ -170,6 +170,35 @@ table .td_img{
     text-align: center;
     line-height: 10rem;
 }
+/*Grid布局示例*/
+.container_grid{
+    display: grid;
+    grid-template-columns:repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    /*gap: 2rem 1rem;*/
+    width: 80%;
+    height: 40rem;
+    margin: 0 auto;
+    border:10px solid var(--color-border-container);
+}
+.item{
+    min-width: 0;
+    min-height: 0;
+    border: 8px solid var(--color-border-container-div);
+    background-color:var(--color-background-container-div);
+}
+.item-1{
+    grid-row-start:1;
+    grid-row-end:4;
+    grid-column-start:1;
+    grid-column-end:4;
+}
+
+
+
+
+
+/*媒体查询*/
 @media  (max-width: 1024px){
     .nav_ul a{
         font-size: 1.2rem;

@@ -44,12 +44,18 @@
                     <li><a href="#flex-basis、flex-shrink、flex-grow三属性的简写">项目属性_flex</a></li>
                     <li><a href="#flex_项目属性_order">order</a></li>
                     <li><a href="#flex_属性值——baseline、stretch">baseline、stretch</a></li>
-                    <li><a href="#flex_flex-basis、flex-shrink、flex-grow、width/height区别总结">项目属性与宽高区别</a></li>
+                    <li><a href="#flex_flex-basis、flex-shrink、flex-grow、width/height区别总结">项目属性与宽高区别</a>
+                    </li>
                     <li><a href="#flex_flex属性分类总结">flex_flex属性分类</a></li>
                     <li><a></a></li>
                 </ul>
             </li>
-            <li id="目录——grid"><p>grid</p></li>
+            <li id="目录——grid"><p>grid</p>
+                <ol class="nav_ul">
+                    <li><a href="#grid_什么是grid布局">解释何为grid布局</a></li>
+                    <li></li>
+                </ol>
+            </li>
             <li id="目录——CSS属性补充"><p>CSS属性补充</p>
                 <ol class="nav_ul">
                     <li><a href="#补充属性_font-style">font-style</a></li>
@@ -152,13 +158,13 @@
                         <img src="./image/块级元素/容器布局_block——还未添加flex.png"
                              alt="容器布局_block——还未添加flex"
                              title="容器布局_block——还未添加flex">
-                        <img src="./image/容器布局_flex——认识flex容器和flex项目/容器布局_flex——认识flex容器和flex项目.png"
+                        <img src="image/flex布局/容器布局_flex——认识flex容器和flex项目/容器布局_flex——认识flex容器和flex项目.png"
                              alt="容器布局_flex——认识flex容器和flex项目"
                              title="容器布局_flex——认识flex容器和flex项目">
-                        <img src="./image/认识主轴与交叉轴/容器布局_flex——认识主轴与交叉轴_row.png"
+                        <img src="image/flex布局/认识主轴与交叉轴/容器布局_flex——认识主轴与交叉轴_row.png"
                              alt="容器布局_flex——认识主轴与交叉轴_row"
                              title="容器布局_flex——认识主轴与交叉轴_row">
-                        <img src="./image/认识主轴与交叉轴/容器布局_flex——认识主轴与交叉轴_column.png"
+                        <img src="image/flex布局/认识主轴与交叉轴/容器布局_flex——认识主轴与交叉轴_column.png"
                              alt="容器布局_flex——认识主轴与交叉轴_column"
                              title="容器布局_flex——认识主轴与交叉轴_column">
                     </li>
@@ -192,16 +198,16 @@
                                             <br/>当值为<span>column-reverse</span>时，主轴的起点是最下面
                                         </td>
                                         <td class="td_img">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_row_justify——content_flex-statr.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_row_justify——content_flex-statr.png"
                                                  alt="主轴控制项目对齐起点(row)"
                                                  title="主轴控制项目对齐起点(row)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_row_reverse_justify——content_flex-statr.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_row_reverse_justify——content_flex-statr.png"
                                                  alt="主轴控制项目对齐起点(row-reverse)"
                                                  title="主轴控制项目对齐起点(row-reverse)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_column_justify——content_flex-statr.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_column_justify——content_flex-statr.png"
                                                  alt="主轴控制项目对齐起点(column)"
                                                  title="主轴控制项目对齐起点(column)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_column_reverse_justify——content_flex-statr.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_column_reverse_justify——content_flex-statr.png"
                                                  alt="主轴控制项目对齐起点(column-reverse)"
                                                  title="主轴控制项目对齐起点(column-reverse)">
                                         </td>
@@ -216,16 +222,16 @@
                                             <br/>当值为<span>column-reverse</span>时，主轴的起点是最上面
                                         </td>
                                         <td class="td_img">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_row_justify——content_flex-end.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_row_justify——content_flex-end.png"
                                                  alt="主轴控制项目对齐终点(row)"
                                                  title="主轴控制项目对齐终点(row)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_row_reverse_justify——content_flex-end.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_row_reverse_justify——content_flex-end.png"
                                                  alt="主轴控制项目对齐终点(row-reverse)"
                                                  title="主轴控制项目对齐终点(row-reverse)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_column_justify——content_flex-end.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_column_justify——content_flex-end.png"
                                                  alt="主轴控制项目对齐终点(column)"
                                                  title="主轴控制项目对齐终点(column)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_column_reverse_justify——content_flex-end.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_column_reverse_justify——content_flex-end.png"
                                                  alt="主轴控制项目对齐终点(column-reverse)"
                                                  title="主轴控制项目对齐终点(column-reverse)">
                                         </td>
@@ -238,16 +244,16 @@
                                             <br/>当值为<span>column、column-reverse</span>时，垂直居中，但是项目方向会受两值的变化，不影响居中的效果。
                                         </td>
                                         <td class="td_img">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_row_justify——content_center.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_row_justify——content_center.png"
                                                  alt="主轴项目居中对齐(row)"
                                                  title="主轴项目居中对齐(row)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_row_reverse_justify——content_center.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_row_reverse_justify——content_center.png"
                                                  alt="主轴项目居中对齐(row-reverse)"
                                                  title="主轴项目居中对齐(row-reverse)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_column_justify——content_center.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_column_justify——content_center.png"
                                                  alt="主轴项目居中对齐(column)"
                                                  title="主轴项目居中对齐(column)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_column_reverse_justify——content_center.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_column_reverse_justify——content_center.png"
                                                  alt="主轴项目居中对齐(column-reverse)"
                                                  title="主轴项目居中对齐(column-reverse)">
                                         </td>
@@ -262,16 +268,16 @@
                                             <br/>当值为<span>column、column-reverse</span>时，项目方向会受两值的变化。
                                         </td>
                                         <td class="td_img">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_row_justify——content_space-between.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_row_justify——content_space-between.png"
                                                  alt="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(row)"
                                                  title="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(row)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_row_reverse_justify——content_space-between.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_row_reverse_justify——content_space-between.png"
                                                  alt="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(row-reverse)"
                                                  title="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(row-reverse)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_column_justify——content_space-between.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_column_justify——content_space-between.png"
                                                  alt="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(column)"
                                                  title="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(column)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_column_reverse_justify——content_space-between.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-between/容器布局_flex——flex-direction_column_reverse_justify——content_space-between.png"
                                                  alt="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(column-reverse)"
                                                  title="项目最边处沿着主轴紧贴flex容器，剩余空间被剩余项目平分(column-reverse)">
                                         </td>
@@ -286,16 +292,16 @@
                                             <br/>当值为<span>column、column-reverse</span>时，项目方向会受两值的变化。
                                         </td>
                                         <td class="td_img">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_row_justify——content_space-around.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_row_justify——content_space-around.png"
                                                  alt="项目沿着主轴平分flex容器空间，相邻空间叠加(row)"
                                                  title="项目沿着主轴平分flex容器空间，相邻空间叠加(row)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_row_reverse_justify——content_space-around.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_row_reverse_justify——content_space-around.png"
                                                  alt="项目沿着主轴平分flex容器空间，相邻空间叠加(row-reverse)"
                                                  title="项目沿着主轴平分flex容器空间，相邻空间叠加(row-reverse)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_column_justify——content_space-around.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_column_justify——content_space-around.png"
                                                  alt="项目沿着主轴平分flex容器空间，相邻空间叠加(column)"
                                                  title="项目沿着主轴平分flex容器空间，相邻空间叠加(column)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_column_reverse_justify——content_space-around.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-around/容器布局_flex——flex-direction_column_reverse_justify——content_space-around.png"
                                                  alt="项目沿着主轴平分flex容器空间，相邻空间叠加(column-reverse)"
                                                  title="项目沿着主轴平分flex容器空间，相邻空间叠加(column-reverse)">
                                         </td>
@@ -310,16 +316,16 @@
                                             <br/>当值为<span>column、column-reverse</span>时，项目方向会受两值的变化。
                                         </td>
                                         <td class="td_img">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_row_justify——content_space-evenly.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_row_justify——content_space-evenly.png"
                                                  alt="项目沿着主轴平分flex容器空间(row)"
                                                  title="项目沿着主轴平分flex容器空间(row)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_row_reverse_justify——content_space-evenly.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_row_reverse_justify——content_space-evenly.png"
                                                  alt="项目沿着主轴平分flex容器空间(row-reverse)"
                                                  title="项目沿着主轴平分flex容器空间(row-reverse)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_column_justify——content_space-evenly.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_column_justify——content_space-evenly.png"
                                                  alt="项目沿着主轴平分flex容器空间(column)"
                                                  title="项目沿着主轴平分flex容器空间(column)">
-                                            <img src="./image/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_column_reverse_justify——content_space-evenly.png"
+                                            <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_space-evenly/容器布局_flex——flex-direction_column_reverse_justify——content_space-evenly.png"
                                                  alt="项目沿着主轴平分flex容器空间(column-reverse)"
                                                  title="项目沿着主轴平分flex容器空间(column-reverse)">
                                         </td>
@@ -347,10 +353,10 @@
                             <li><span>它可以在flex项目之间创建间距</span></li>
                             <li>使用它，在flex布局中基本不用再需要通过margin来制造间距</li>
                             <li>
-                                <img src="./image/gap间距/gap间距_未添加.png"
+                                <img src="image/flex布局/gap间距/gap间距_未添加.png"
                                      alt="gap间距_未添加"
                                      title="gap间距_未添加">
-                                <img src="./image/gap间距/gap间距_添加.png"
+                                <img src="image/flex布局/gap间距/gap间距_添加.png"
                                      alt="gap间距_添加"
                                      title="gap间距_添加">
                             </li>
@@ -369,7 +375,7 @@
                                         <p><span>wrap：当flex容器空间不足时，flex项目会自动排列到下一行</span></p>
                                         <P>
                                             ·当使用wrap值时，随着flex容器缩小，项目会自动换行，以保证里面的内容能正常显示(这样就实现了响应式布局)</P>
-                                        <img src="./image/wrap响应式布局/warp响应式布局_添加.png"
+                                        <img src="image/flex布局/wrap响应式布局/warp响应式布局_添加.png"
                                              alt="warp响应式布局_添加"
                                              title="warp响应式布局_添加">
                                     </li>
@@ -377,14 +383,14 @@
                                         <p><span>nowrap：默认值，项目不会默认换行</span></p>
                                         <p>
                                             ·当使用nowrap或不添加flex-wrap(即使默认值)，随着flex缩小，项目会溢出容器，看不到</p>
-                                        <img src="./image/wrap响应式布局/warp响应式布局_未添加.png"
+                                        <img src="image/flex布局/wrap响应式布局/warp响应式布局_未添加.png"
                                              alt="warp响应式布局_未添加"
                                              title="warp响应式布局_未添加">
                                     </li>
                                     <li>
                                         <p>·因为每一行都有独立的主轴和交叉轴(这就意味着)</p>
                                         <p>·换行项目的排列会受到(flex-direction、justify-content、align-items影响)</p>
-                                        <ol>
+                                        <ul>
                                             <li>
                                                 ·flex-direction:row;justify-content:flex-start;align-items:center;(换行，水平排列，从左到右，主轴项目起点对齐，交叉轴居中对齐)
                                             </li>
@@ -404,34 +410,34 @@
                                                 ·flex-direction:row;justify-content:flex-start;align-items:space-evenly;(换行，水平排列，从左到右，主轴项目起点对齐，交叉轴项目平分容器空间)
                                             </li>
                                             <li>……………………………………………………</li>
-                                        </ol>
+                                        </ul>
                                         <p>一些示例：</p>
                                         <ol>
                                             <li>
                                                 <p>
                                                     ·flex-direction:row;justify-content:flex-start;align-items:center;</p>
-                                                <img src="./image/wrap响应式布局/warp响应式布局_特殊示例_1.png"
+                                                <img src="image/flex布局/wrap响应式布局/warp响应式布局_特殊示例_1.png"
                                                      alt="warp响应式布局_特殊示例_1"
                                                      title="warp响应式布局_特殊示例_1">
                                             </li>
                                             <li>
                                                 <p>
                                                     ·flex-direction:row-reverse;justify-content:center;align-items:center;</p>
-                                                <img src="./image/wrap响应式布局/warp响应式布局_特殊示例_2.png"
+                                                <img src="image/flex布局/wrap响应式布局/warp响应式布局_特殊示例_2.png"
                                                      alt="warp响应式布局_特殊示例_2"
                                                      title="warp响应式布局_特殊示例_2">
                                             </li>
                                             <li>
                                                 <p>
                                                     ·flex-direction:column;justify-content:space-between;align-items:center;</p>
-                                                <img src="./image/wrap响应式布局/warp响应式布局_特殊示例_3.png"
+                                                <img src="image/flex布局/wrap响应式布局/warp响应式布局_特殊示例_3.png"
                                                      alt="warp响应式布局_特殊示例_3"
                                                      title="warp响应式布局_特殊示例_3">
                                             </li>
                                             <li>
                                                 <p>
                                                     ·flex-direction:column-reverse;justify-content:space-between;align-items:flex-end;</p>
-                                                <img src="./image/wrap响应式布局/warp响应式布局_特殊示例_4.png"
+                                                <img src="image/flex布局/wrap响应式布局/warp响应式布局_特殊示例_4.png"
                                                      alt="warp响应式布局_特殊示例_4"
                                                      title="warp响应式布局_特殊示例_4">
                                             </li>
@@ -542,16 +548,16 @@
                                         </table>
                                     <li>
                                         <p>示例：</p>
-                                        <img src="image/flex项目的属性/正常情况下的排列——容器未收缩状态.png"
+                                        <img src="image/flex布局/flex项目的属性/正常情况下的排列——容器未收缩状态.png"
                                              alt="正常情况下的排列——容器未收缩状态"
                                              title="正常情况下的排列——容器未收缩状态">
-                                        <img src="image/flex项目的属性/正常情况下的排列——容器收缩状态.png"
+                                        <img src="image/flex布局/flex项目的属性/正常情况下的排列——容器收缩状态.png"
                                              alt="正常情况下的排列——容器收缩状态"
                                              title="正常情况下的排列——容器收缩状态">
-                                        <img src="./image/flex项目的属性/当flex-wrap为默认值且flex-shrink_0.png"
+                                        <img src="image/flex布局/flex项目的属性/当flex-wrap为默认值且flex-shrink_0.png"
                                              alt="当flex-wrap为默认值且flex-shrink_0"
                                              title="当flex-wrap为默认值且flex-shrink_0">
-                                        <img src="./image/flex项目的属性/当flex-wrap值为wrap且flex-shrink_0.png"
+                                        <img src="image/flex布局/flex项目的属性/当flex-wrap值为wrap且flex-shrink_0.png"
                                              alt="当flex-wrap值为wrap且flex-shrink_0"
                                              title="当flex-wrap值为wrap且flex-shrink_0">
                                     </li>
@@ -579,10 +585,10 @@
                                     <li>默认值是0(不自动增长),值越大占据剩余空间的比例越大</li>
                                     <li>
                                         <p>图例：</p>
-                                        <img src="./image/flex项目的属性/flex-grow素材.png"
+                                        <img src="image/flex布局/flex项目的属性/flex-grow素材.png"
                                              alt="flex-grow素材"
                                              title="flex-grow素材">
-                                        <img src="./image/flex项目的属性/设置flex-grow属性.png"
+                                        <img src="image/flex布局/flex项目的属性/设置flex-grow属性.png"
                                              alt="f设置flex-grow属性"
                                              title="设置flex-grow属性">
                                         <p>·如图所示：flex-grow: 1 让项目有权按比例分配主轴上的剩余空间。如果它是唯一有
@@ -595,7 +601,8 @@
                             <li>
                                 <h3 id="flex_项目属性_flex-basis"><a href="#目录——flex">flex-basis</a></h3>
                                 <ol>
-                                    <li>定义flex项目在主轴方向上的初始大小，即在分配剩余空间之前，项目应该占据多大空间</li>
+                                    <li>定义flex项目在主轴方向上的初始大小，即在分配剩余空间之前，项目应该占据多大空间
+                                    </li>
                                     <li>类似于width/height</li>
                                     <li>
                                         <p>但是优先级顺序：</p>
@@ -613,11 +620,14 @@
                                 </ol>
                             </li>
                             <li>
-                                <h3 id="flex-basis、flex-shrink、flex-grow三属性的简写"><a href="#目录——flex">flex-basis、flex-shrink、flex-grow三属性的简写</a></h3>
+                                <h3 id="flex-basis、flex-shrink、flex-grow三属性的简写"><a href="#目录——flex">flex-basis、flex-shrink、flex-grow三属性的简写</a>
+                                </h3>
                                 <ol>
                                     <li>它们简写属性是：flex(作用于项目上)</li>
                                     <li>共有三个参数:flex-basis、flex-shrink、flex-grow</li>
-                                    <li>语法:flex:flex-grow&nbsp;&nbsp;flex-shrink&nbsp;&nbsp;flex-basis[在输入时，参数对应的属性</li>
+                                    <li>
+                                        语法:flex:flex-grow&nbsp;&nbsp;flex-shrink&nbsp;&nbsp;flex-basis[在输入时，参数对应的属性
+                                    </li>
                                     <Li>
                                         <p>三个参数具体解释：</p>
                                         <ul>
@@ -686,9 +696,9 @@
                                         <table>
                                             <tr>
                                                 <th colspan="4">相同点</th>
-<!--                                                <td></td>-->
-<!--                                                <td></td>-->
-<!--                                                <td></td>-->
+                                                <!--                                                <td></td>-->
+                                                <!--                                                <td></td>-->
+                                                <!--                                                <td></td>-->
                                             </tr>
                                             <tr>
                                                 <td>属性</td>
@@ -790,12 +800,13 @@
                 </table>
             </li>
             <li>
-                <h3 id="flex_flex-basis、flex-shrink、flex-grow、width/height区别总结"><a href="#目录——flex">flex-basis、flex-shrink、flex-grow、width/height区别总结</a></h3>
+                <h3 id="flex_flex-basis、flex-shrink、flex-grow、width/height区别总结"><a href="#目录——flex">flex-basis、flex-shrink、flex-grow、width/height区别总结</a>
+                </h3>
                 <table>
                     <tr>
                         <th colspan="3">flex-basis、flex-shrink、flex-grow、width/height区别总结</th>
-<!--                        <td></td>-->
-<!--                        <td></td>-->
+                        <!--                        <td></td>-->
+                        <!--                        <td></td>-->
                     </tr>
                     <tr>
                         <td>属性</td>
@@ -918,6 +929,490 @@
     </section>
     <section>
         <h2 id="grid"><a href="#目录——grid">grid布局</a></h2>
+        <ul>
+            <li>
+                <h3>grid学习前的准备</h3>
+                <ol>
+                    <li>
+                        <h3 id="grid_什么是grid布局"><a href="#目录——grid">什么是Grid布局</a></h3>
+                        <ul>
+                            <li>任何<span>容器元素</span>+display: grid = grid 容器</li>
+                            <li>grid 容器的<span>直接子元素 = grid项目</span></li>
+                            <li>grid布局是一个强大的二维布局模型</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 id="grid_布局基础"><a href="#目录——grid">grid布局基础</a></h3>
+                        <ul>
+                            <li>
+                                <h3>网格线</h3>
+                                <p>·<span>每个网格之间的线叫网格线</span></p>
+                                <img src="./image/grid布局/什么是grid/网格线.png"
+                                     alt="网格线"
+                                     title="网格线">
+                            </li>
+                            <li>
+                                <h3>行线</h3>
+                                <p>·<span>水平方向的是行线</span></p>
+                                <img src="./image/grid布局/什么是grid/行线.png"
+                                     alt="行线"
+                                     title="行线">
+                            </li>
+                            <li>
+                                <h3>列线</h3>
+                                <p>·<span>垂直方向的线叫列线</span></p>
+                                <img src="./image/grid布局/什么是grid/列线.png"
+                                     alt="列线"
+                                     title="列线">
+                            </li>
+                            <li>
+                                <h3>网格轨道</h3>
+                                <ol>
+                                    <li>单方向组成的网格空间叫网格轨道</li>
+                                    <li>
+                                        <p>水平方向叫行轨道(由grid-template-rows控制)</p>
+                                        <img src="./image/grid布局/什么是grid/行轨道.png"
+                                             alt="行轨道"
+                                             title="行轨道">
+                                    </li>
+                                    <li>
+                                        <p>垂直方向叫列轨道(由grid-template-columns控制)</p>
+                                        <img src="./image/grid布局/什么是grid/列轨道.png"
+                                             alt="列轨道"
+                                             title="列轨道">
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h3>网格单元</h3>
+                                <p>·行轨道与列轨道相交的地方叫网格单元</p>
+                                <p>·默认情况下一个项目占一个单元</p>
+                                <img src="./image/grid布局/什么是grid/网格单元.png"
+                                     alt="网格单元"
+                                     title="网格单元">
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <p>·准备容器</p>
+                <img src="./image/grid布局/什么是grid/学习grid布局_准备容器.png"
+                     alt="学习grid布局_准备容器"
+                     title="学习grid布局_准备容器">
+                <p>·了解什么是grid容器，什么是grid项目以及怎么开启grid布局</p>
+                <img src="./image/grid布局/什么是grid/了解什么是grid容器，什么是grid项目以及怎么开启grid布局.png"
+                     alt="了解什么是grid容器，什么是grid项目以及怎么开启grid布局"
+                     title="了解什么是grid容器，什么是grid项目以及怎么开启grid布局">
+                <table>
+                    <tr>
+                        <th colspan="4">学习之前必须理清何为列(column)和为行(row)</th>
+                    </tr>
+                    <tr>
+                        <td>中文</td>
+                        <td>行</td>
+                        <td>列</td>
+                        <td>查找方法</td>
+                    </tr>
+                    <tr>
+                        <td>英语</td>
+                        <td>row</td>
+                        <td>column</td>
+                        <td rowspan="4">column(行)：从上往下数，或从下往上数，row(列)：从左往有数，或从右往左数</td>
+                    </tr>
+                    <tr>
+                        <td>对应单元格</td>
+                        <td>垂直</td>
+                        <td>水平</td>
+                    </tr>
+                </table>
+                <img src="./image/grid布局/什么是grid/理解行和列.png"
+                     alt="理解行和列"
+                     title="理解行和列">
+            </li>
+            <li>
+                <h3>grid布局用到的属性</h3>
+                <ol>
+                    <li>
+                        <h3 id="grid-template-columns"><a href="#目录——grid">grid-template-columns</a></h3>
+                        <ul>
+                            <li>主要作用是：设置grid布局包含多少列(column)，定义列宽</li>
+                            <li>
+                                语法：grid-template-columns:[数值][数值][数值]{<span>有多少参数，就有多少列</span>}
+                            </li>
+                            <li>
+                                数值单位可以是:相对单位(<span>%、vw、vh、rem、em、ch[字符宽度]、vmin,vmax)</span>)、绝对单位(<span>px、pt、cm、mm、in</span>)以及最重要的网格专属单位(<span>fr[分数单位{分配剩余空间的比例}]、也可以使用函数[minmax()、repeat()</span>)
+                            </li>
+                            <li>当没有定义任何列(column)时，grid会根据内容自动决定列宽</li>
+                            <li>
+                                <p>grid的默认行为是按行(row)来排列项目</p>
+                                <img src="./image/grid布局/属性——grid-template-columns/理解grid默认行为.png"
+                                     alt="理解grid默认行为"
+                                     title="理解grid默认行为">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 id="grid-template-rows"><a href="#目录——grid">grid-template-rows</a></h3>
+                        <ul>
+                            <li>主要作用是：设置grid布局包含多少行(row)，定义行高</li>
+                            <li>语法：grid-template-rows:[数值][数值][数值]<span>有多少参数，就有多少行</span></li>
+                            <li>
+                                数值单位可以是:相对单位(<span>%、vw、vh、rem、em、ch[字符宽度]、vmin,vmax)</span>)、绝对单位(<span>px、pt、cm、mm、in</span>)以及最重要的网格专属单位(<span>fr[分数单位{分配剩余空间的比例}]、也可以使用函数[minmax()、repeat()</span>)
+                            </li>
+                            <li>当没有定义任何行(row)时，grid会根据内容自动决定行高</li>
+                            <li>
+                                <img src="./image/grid布局/属性——grid-template-rows/属性——grid-template-rows.png"
+                                     alt="属性——grid-template-rows"
+                                     title="属性——grid-template-rows">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 id="grid_gap"><a href="#目录——grid">gap</a></h3>
+                        <ul>
+                            <li>主要作用：为单元格之间创建间距(非常推荐使用gap)</li>
+                            <li>可以取一个值，也可以取两个值</li>
+                            <li>取一个值：同时为行/列添加间距</li>
+                            <li>取两个值：第一个值为<span>行</span>添加间距，第二个值为<span>列</span>添加间距</li>
+                            <li>
+                                <img src="./image/grid布局/gap/属性gap.png"
+                                     alt="属性gap"
+                                     title="属性gap">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 id="grrid_学会如何控制网格轨道"><a href="#目录——grid">学会如何控制网格轨道</a></h3>
+                        <ol>
+                            <li>
+                                <p>方法一：通过四个属性控制(<span>注意：作用于项目，而非容器</span>)<a
+                                        href="#方法二">方法二</a></p>
+                                <ul>
+                                    <li>grid-row-start:控制网格轨道的起点(行线)</li>
+                                    <li>grid-row-end:控制网格轨道的终点(行线)</li>
+                                    <li>grid-column-start:控制网格轨道的起点(列线)</li>
+                                    <li>grid-column-end:控制网格轨道的终点(列线)</li>
+                                    <li>
+                                        <p>以上所有参数遵守以下规则：</p>
+                                        <ol>
+                                            <li>所有参数均不能为0</li>
+                                            <li>所有参数都不能是小数(正整数、负整数)</li>
+                                            <li>end的值永远大于start的值</li>
+                                            <li>
+                                                <p>·占据的轨道数=end-start</p>
+                                                <p>·占据的网格单元数=行轨道数*列轨道数</p>
+                                            </li>
+                                            <li>该项目的具体空间=占据的网格单元数</li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <p>具体示例(4个属性同时设置)：</p>
+                                        <img src="./image/grid布局/属性grid_row和grid_column/四属性综合示例.png" alt="">
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p id="方法二">方法二：四属性简写</p>
+                                <ul>
+                                    <li>
+                                        <p>·grid-row-start和grid-row-end简写是：<span>grid-row</span></p>
+                                        <ol>
+                                            <li>第一个值为start，第二个值为end<span>中间[<code>/</code>]隔开</span></li>
+                                            <li>还可以使用关键子<code>span</code>
+                                                <p>还可以使用关键子<code>span</code></p>
+                                                <table>
+                                                    <tr>
+                                                        <th colspan="3">关于网格单元所有方法</th>
+                                                    </tr>
+                                                    <!-- 基础线编号 -->
+                                                    <tr>
+                                                        <td colspan="3">基础线编号</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: 1 / 3</td>
+                                                        <td>从第1列线到第3列线</td>
+                                                        <td>grid-column: 1 / 3;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-row: 2 / 5</td>
+                                                        <td>从第2行线到第5行线</td>
+                                                        <td>grid-row: 2 / 5;</td>
+                                                    </tr>
+
+                                                    <!-- 使用 span -->
+                                                    <tr>
+                                                        <td colspan="3">使用 span 关键字</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: 1 / span 2</td>
+                                                        <td>从第1列线开始，跨越2列</td>
+                                                        <td>grid-column: 1 / span 2;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-row: span 3</td>
+                                                        <td>跨越3行（起始由自动布局决定）</td>
+                                                        <td>grid-row: span 3;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: span 3 / 5</td>
+                                                        <td>结束于第5列线，向前跨越3列</td>
+                                                        <td>grid-column: span 3 / 5;</td>
+                                                    </tr>
+
+                                                    <!-- 单独值 -->
+                                                    <tr>
+                                                        <td colspan="3">单独值</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: 2</td>
+                                                        <td>只指定起始线，默认占1个轨道</td>
+                                                        <td>grid-column: 2;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: span 2</td>
+                                                        <td>仅指定跨度，起始由布局决定</td>
+                                                        <td>grid-column: span 2;</td>
+                                                    </tr>
+
+                                                    <!-- 负值定位 -->
+                                                    <tr>
+                                                        <td colspan="3">负值定位</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: -3 / -1</td>
+                                                        <td>从倒数第3线到倒数第1线</td>
+                                                        <td>grid-column: -3 / -1;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: 2 / -1</td>
+                                                        <td>从第2列到倒数第1列</td>
+                                                        <td>grid-column: 2 / -1;</td>
+                                                    </tr>
+
+                                                    <!-- 命名网格线 -->
+                                                    <tr>
+                                                        <td colspan="3">命名网格线</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: sidebar-start / sidebar-end</td>
+                                                        <td>使用命名网格线</td>
+                                                        <td>grid-column: sidebar-start / sidebar-end;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: main-start / span 2</td>
+                                                        <td>从命名线开始，跨越指定数量</td>
+                                                        <td>grid-column: main-start / span 2;</td>
+                                                    </tr>
+
+                                                    <!-- 关键字 -->
+                                                    <tr>
+                                                        <td colspan="3">关键字</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: auto</td>
+                                                        <td>默认值，由自动布局算法决定</td>
+                                                        <td>grid-column: auto;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: 1 / auto</td>
+                                                        <td>从指定线开始，结束由布局决定</td>
+                                                        <td>grid-column: 1 / auto;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-column: span 2 / auto</td>
+                                                        <td>跨越指定数量，结束自动</td>
+                                                        <td>grid-column: span 2 / auto;</td>
+                                                    </tr>
+
+                                                    <!-- grid-area 简写 -->
+                                                    <tr>
+                                                        <td colspan="3">grid-area 简写</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-area: 1 / 1 / 4 / 4</td>
+                                                        <td>行始/列始/行终/列终</td>
+                                                        <td>grid-area: 1 / 1 / 4 / 4;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>grid-area: 2 / 1 / span 2 / span 3</td>
+                                                        <td>支持span混合使用</td>
+                                                        <td>grid-area: 2 / 1 / span 2 / span 3;</td>
+                                                    </tr>
+                                                </table>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>grid-column-start和grid-column-end简写是：<span>grid-column</span></li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <ol>
+                    <li>
+                        <h3>grid专用函数</h3>
+                        <p>在CSS中，所有函数均是属性值，而非属性。</p>
+                        <ul>
+                            <li>
+                                <h3 id="grid_minmax()"><a href="#目录——grid">minmax()</a></h3>
+                                <ol>
+                                    <li>共有两个值，第一个为最小值，第二个值为最大值</li>
+                                    <li>最小值顾名思义当容器压缩时，项目压缩到的最小宽度/高度</li>
+                                    <li>最大值，当容器伸缩时，项目拉伸到的最大宽度/高度</li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h3 id="grid_repeat()"><a href="#目录——grid">repeat()</a></h3>
+                                <ol>
+                                    <li>重复函数：当输入的是相同数值，可以使用该函数(减少代码量)</li>
+                                    <li>共有两个值，第一个值为重复次数，第二个值为重复的数值</li>
+                                    <li>重复次数：为数值重复次数</li>
+                                    <li>数值：定义需要重复次数的数值</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <ol>
+                    <li>
+                        <h3>布局中可能的疑问</h3>
+                        <ul>
+                            <li>
+                                <h3 id="grid_当容器内的项目超过所设置的网格数会发生什么？"><a href="#目录——grid">当容器内的项目超过所设置的网格数会发生什么？</a>
+                                </h3>
+                                <p>当项目数量 > 显式网格单元格数时：</p>
+                                <ol>
+                                    <li>按"行优先"方向排列（默认grid-auto-flow: row）</li>
+                                    <li>创建隐式行来容纳多余项目</li>
+                                    <li>隐式行的列数继承grid-template-columns设置</li>
+                                    <li>隐式行高默认由内容决定（可通过grid-auto-rows控制）</li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h3 id="grid专属单位fr(分数单位)"><a href="#目录——grid">grid专属单位fr(分数单位)</a>
+                                </h3>
+                                <ol>
+                                    <li>fr是<code>fraction(分数)</code>的缩写，是CSS Gird布局中<span>独有的单位</span>，用于<span>按比例分配剩余空间</span>
+                                    </li>
+                                    <li>计算时<span>先扣除</span>所有固定尺寸</li>
+                                    <li>可以与minmax()、repeat()等函数结合使用</li>
+                                    <li>需要容器有<span>明确尺寸</span>才能计算</li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h3 id="grid_属性grid-template-columns/grid-template-rows失效的几种状况/解决方法"><a
+                                        href="#目录——grid">属性grid-template-columns/grid-template-rows失效的几种状况/解决方法</a>
+                                </h3>
+                                <table>
+                                    <tr>
+                                        <th colspan="4">
+                                            属性grid-template-columns/grid-template-rows失效的几种状况/解决方法
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>序号</td>
+                                        <td>失效状况</td>
+                                        <td>原因分析</td>
+                                        <td>解决方案</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>容器没有明确尺寸</td>
+                                        <td>fr单位依赖剩余空间分配，当容器尺寸为auto时，剩余空间为0，fr无法生效</td>
+                                        <td>给容器设置明确的width/height或min-width/min-height</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>项目固定尺寸覆盖</td>
+                                        <td>grid项目的width/height/min-width/min-height优先级高于轨道尺寸</td>
+                                        <td>删除项目的固定尺寸，或使用minmax()限制范围，或设置项目尺寸为百分比</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>拼写错误</td>
+                                        <td>属性名拼写错误(如grid-template-row缺少s)</td>
+                                        <td>检查拼写:grid-template-columns/grid-templeat-rows</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>隐式网格覆盖</td>
+                                        <td>项目数量超过定义的轨道数，隐式网格使用grid-auto-rows/grid-auto-columns</td>
+                                        <td>设置grid-auto-rows和grid-auto-rows以控制隐式轨道</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>内容撑开轨道</td>
+                                        <td>项目内容过多，且轨道尺寸为auto或min-content，导致轨道被撑大</td>
+                                        <td>使用<code>minmax()</code>参数：第一个为整数或auto-fit/auto-fill，第儿个为有效尺寸
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>百分比单位无参照</td>
+                                        <td>百分比单位依赖父容器尺寸，若父容器尺寸未定义，则百分比失效</td>
+                                        <td>确保父容器有明确尺寸，或设置overflow控制内容溢出</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>重复函数错误使用</td>
+                                        <td>
+                                            <code>repeat()</code>函数参数错误，如<span>repeat(auto, 1fr)或repeat(0, 1fr)</span>
+                                        </td>
+                                        <td>检查<code>repeat()</code>参数；第一个为整数或auto-fit/auto-fill，第二个尺寸为有效尺寸
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>grid布局未开启</td>
+                                        <td>容器没有设置<code>display:grid</code>或<code>display:linine-grid</code></td>
+                                        <td>确保容器有：display:grid;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>媒体查询覆盖</td>
+                                        <td>在媒体查询中重新定义了网格轨道，覆盖了原有设置</td>
+                                        <td>检查媒体查询中的css规则，确保优先级正确</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>grid简写覆盖</td>
+                                        <td>使用grid简写属性时，可能意外重置了行列规定</td>
+                                        <td>避免使用grid简写，或确保正确设置所有参数</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>浏览器兼容性问题</td>
+                                        <td>某些旧浏览器不支持grid布局或某些特性</td>
+                                        <td>避免前缀或退回方案，检查浏览器兼容性</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>CSS优先级问题</td>
+                                        <td>其他CSS规则具有更高优先级，覆盖了网络轨道设置</td>
+                                        <td>使用开发者工具检查计算样式，增加选择器特异性或使用<code>!important</code>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <h3>Grid布局示例</h3>
+        <div class="container_grid">
+            <div class="item item-1">1</div>
+            <div class="item item-2">2</div>
+            <div class="item item-3">3</div>
+            <div class="item itme-4">4</div>
+            <div class="item itme-5">5</div>
+            <div class="item itme-6">6</div>
+        </div>
     </section>
     <section>
         <h2 id="css属性补充"><a href="#目录——CSS属性补充">一些css属性的补充</a></h2>
