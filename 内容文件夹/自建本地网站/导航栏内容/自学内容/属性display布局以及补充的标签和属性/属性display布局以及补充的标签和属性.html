@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>属性display布局以及补充的标签和属性.</title>
     <link rel="stylesheet" href="./属性display布局以及补充的标签和属性.css">
 </head>
+
 <body>
 <main>
     <nav>
@@ -50,13 +52,34 @@
                     <li><a></a></li>
                 </ul>
             </li>
-            <li id="目录——grid"><p>grid</p>
+            <li id="目录——grid">
+                <p>grid</p>
                 <ol class="nav_ul">
                     <li><a href="#grid_什么是grid布局">解释何为grid布局</a></li>
-                    <li></li>
+                    <li><a href="#grid_布局基础">布局基础</a></li>
+                    <li><a href="#grid_何为行于列">何为行与列</a></li>
+                    <li><a href="#grid-template-columns">grid-template-columns</a></li>
+                    <li><a href="#grid-template-rows">grid-template-rows</a></li>
+                    <li><a href="#grid_gap">gap间距</a></li>
+                    <li><a href="#grid_学会如何控制网格轨道">学会如何控制网格轨道</a></li>
+                    <li><a href="#grid-网格轨道堆叠">网格轨道堆叠</a></li>
+                    <li><a href="#grid-template-areas与grid-areas">grid-template-areas与grid-areas</a></li>
+                    <li><a href="#grid-auto-rows/columns">grid-auto-rows/columns</a></li>
+                    <li><a href="#grid-auto-flow">grid-auto-flow</a></li>
+                    <li><a href="#网格布局中的对齐方式-作用在grid容器内">网格布局中的对齐方式-作用在grid容器内</a></li>
+                    <li><a href="#网格布局中的对齐方式-作用在项目上">网格布局中的对齐方式-作用在项目上</a></li>
+                    <li><a href="#网格布局中的对齐方式-作用于整体">网格布局中的对齐方式-作用于整体</a></li>
+                    <li><a href="#grid_常用的值[响应式]">grid_常用的值[响应式]</a></li>
+                    <li><a href="#grid_minmax()">grid_minmax()</a></li>
+                    <li><a href="#grid_repeat()">grid_repeat()</a></li>
+                    <li><a href="#grid_当容器内的项目超过所设置的网格数会发生什么？">grid_当容器内的项目超过所设置的网格数会发生什么？</a></li>
+                    <li><a href="#grid专属单位fr(分数单位)">grid专属单位fr(分数单位)</a></li>
+                    <li><a href="#grid_属性grid-template-columns/grid-template-rows失效的几种状况/解决方法">grid_属性grid-template-columns/grid-template-rows失效的几种状况/解决方法</a></li>
+                    <li><a href="#grid布局总结">grid布局总结</a></li>
                 </ol>
             </li>
-            <li id="目录——CSS属性补充"><p>CSS属性补充</p>
+            <li id="目录——CSS属性补充">
+                <p>CSS属性补充</p>
                 <ol class="nav_ul">
                     <li><a href="#补充属性_font-style">font-style</a></li>
                     <li><a href="#补充属性_vertical-align">vertical-align</a></li>
@@ -155,12 +178,10 @@
                                 <td>竖排书架上放书，但从底端开始放</td>
                             </tr>
                         </table>
-                        <img src="./image/块级元素/容器布局_block——还未添加flex.png"
-                             alt="容器布局_block——还未添加flex"
+                        <img src="./image/块级元素/容器布局_block——还未添加flex.png" alt="容器布局_block——还未添加flex"
                              title="容器布局_block——还未添加flex">
                         <img src="image/flex布局/容器布局_flex——认识flex容器和flex项目/容器布局_flex——认识flex容器和flex项目.png"
-                             alt="容器布局_flex——认识flex容器和flex项目"
-                             title="容器布局_flex——认识flex容器和flex项目">
+                             alt="容器布局_flex——认识flex容器和flex项目" title="容器布局_flex——认识flex容器和flex项目">
                         <img src="image/flex布局/认识主轴与交叉轴/容器布局_flex——认识主轴与交叉轴_row.png"
                              alt="容器布局_flex——认识主轴与交叉轴_row"
                              title="容器布局_flex——认识主轴与交叉轴_row">
@@ -199,8 +220,7 @@
                                         </td>
                                         <td class="td_img">
                                             <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_row_justify——content_flex-statr.png"
-                                                 alt="主轴控制项目对齐起点(row)"
-                                                 title="主轴控制项目对齐起点(row)">
+                                                 alt="主轴控制项目对齐起点(row)" title="主轴控制项目对齐起点(row)">
                                             <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-statr/容器布局_flex——flex-direction_row_reverse_justify——content_flex-statr.png"
                                                  alt="主轴控制项目对齐起点(row-reverse)"
                                                  title="主轴控制项目对齐起点(row-reverse)">
@@ -223,8 +243,7 @@
                                         </td>
                                         <td class="td_img">
                                             <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_row_justify——content_flex-end.png"
-                                                 alt="主轴控制项目对齐终点(row)"
-                                                 title="主轴控制项目对齐终点(row)">
+                                                 alt="主轴控制项目对齐终点(row)" title="主轴控制项目对齐终点(row)">
                                             <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_flex-end/容器布局_flex——flex-direction_row_reverse_justify——content_flex-end.png"
                                                  alt="主轴控制项目对齐终点(row-reverse)"
                                                  title="主轴控制项目对齐终点(row-reverse)">
@@ -245,14 +264,12 @@
                                         </td>
                                         <td class="td_img">
                                             <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_row_justify——content_center.png"
-                                                 alt="主轴项目居中对齐(row)"
-                                                 title="主轴项目居中对齐(row)">
+                                                 alt="主轴项目居中对齐(row)" title="主轴项目居中对齐(row)">
                                             <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_row_reverse_justify——content_center.png"
                                                  alt="主轴项目居中对齐(row-reverse)"
                                                  title="主轴项目居中对齐(row-reverse)">
                                             <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_column_justify——content_center.png"
-                                                 alt="主轴项目居中对齐(column)"
-                                                 title="主轴项目居中对齐(column)">
+                                                 alt="主轴项目居中对齐(column)" title="主轴项目居中对齐(column)">
                                             <img src="image/flex布局/属性justify-center_主轴控制/justify-centent_center/容器布局_flex——flex-direction_column_reverse_justify——content_center.png"
                                                  alt="主轴项目居中对齐(column-reverse)"
                                                  title="主轴项目居中对齐(column-reverse)">
@@ -353,11 +370,9 @@
                             <li><span>它可以在flex项目之间创建间距</span></li>
                             <li>使用它，在flex布局中基本不用再需要通过margin来制造间距</li>
                             <li>
-                                <img src="image/flex布局/gap间距/gap间距_未添加.png"
-                                     alt="gap间距_未添加"
+                                <img src="image/flex布局/gap间距/gap间距_未添加.png" alt="gap间距_未添加"
                                      title="gap间距_未添加">
-                                <img src="image/flex布局/gap间距/gap间距_添加.png"
-                                     alt="gap间距_添加"
+                                <img src="image/flex布局/gap间距/gap间距_添加.png" alt="gap间距_添加"
                                      title="gap间距_添加">
                             </li>
                         </ul>
@@ -415,31 +430,31 @@
                                         <ol>
                                             <li>
                                                 <p>
-                                                    ·flex-direction:row;justify-content:flex-start;align-items:center;</p>
+                                                    ·flex-direction:row;justify-content:flex-start;align-items:center;
+                                                </p>
                                                 <img src="image/flex布局/wrap响应式布局/warp响应式布局_特殊示例_1.png"
-                                                     alt="warp响应式布局_特殊示例_1"
-                                                     title="warp响应式布局_特殊示例_1">
+                                                     alt="warp响应式布局_特殊示例_1" title="warp响应式布局_特殊示例_1">
                                             </li>
                                             <li>
                                                 <p>
-                                                    ·flex-direction:row-reverse;justify-content:center;align-items:center;</p>
+                                                    ·flex-direction:row-reverse;justify-content:center;align-items:center;
+                                                </p>
                                                 <img src="image/flex布局/wrap响应式布局/warp响应式布局_特殊示例_2.png"
-                                                     alt="warp响应式布局_特殊示例_2"
-                                                     title="warp响应式布局_特殊示例_2">
+                                                     alt="warp响应式布局_特殊示例_2" title="warp响应式布局_特殊示例_2">
                                             </li>
                                             <li>
                                                 <p>
-                                                    ·flex-direction:column;justify-content:space-between;align-items:center;</p>
+                                                    ·flex-direction:column;justify-content:space-between;align-items:center;
+                                                </p>
                                                 <img src="image/flex布局/wrap响应式布局/warp响应式布局_特殊示例_3.png"
-                                                     alt="warp响应式布局_特殊示例_3"
-                                                     title="warp响应式布局_特殊示例_3">
+                                                     alt="warp响应式布局_特殊示例_3" title="warp响应式布局_特殊示例_3">
                                             </li>
                                             <li>
                                                 <p>
-                                                    ·flex-direction:column-reverse;justify-content:space-between;align-items:flex-end;</p>
+                                                    ·flex-direction:column-reverse;justify-content:space-between;align-items:flex-end;
+                                                </p>
                                                 <img src="image/flex布局/wrap响应式布局/warp响应式布局_特殊示例_4.png"
-                                                     alt="warp响应式布局_特殊示例_4"
-                                                     title="warp响应式布局_特殊示例_4">
+                                                     alt="warp响应式布局_特殊示例_4" title="warp响应式布局_特殊示例_4">
                                             </li>
                                             <li>
                                                 <p><span>·学习时发现的规律</span></p>
@@ -585,8 +600,7 @@
                                     <li>默认值是0(不自动增长),值越大占据剩余空间的比例越大</li>
                                     <li>
                                         <p>图例：</p>
-                                        <img src="image/flex布局/flex项目的属性/flex-grow素材.png"
-                                             alt="flex-grow素材"
+                                        <img src="image/flex布局/flex项目的属性/flex-grow素材.png" alt="flex-grow素材"
                                              title="flex-grow素材">
                                         <img src="image/flex布局/flex项目的属性/设置flex-grow属性.png"
                                              alt="f设置flex-grow属性"
@@ -620,7 +634,8 @@
                                 </ol>
                             </li>
                             <li>
-                                <h3 id="flex-basis、flex-shrink、flex-grow三属性的简写"><a href="#目录——flex">flex-basis、flex-shrink、flex-grow三属性的简写</a>
+                                <h3 id="flex-basis、flex-shrink、flex-grow三属性的简写"><a
+                                        href="#目录——flex">flex-basis、flex-shrink、flex-grow三属性的简写</a>
                                 </h3>
                                 <ol>
                                     <li>它们简写属性是：flex(作用于项目上)</li>
@@ -800,7 +815,8 @@
                 </table>
             </li>
             <li>
-                <h3 id="flex_flex-basis、flex-shrink、flex-grow、width/height区别总结"><a href="#目录——flex">flex-basis、flex-shrink、flex-grow、width/height区别总结</a>
+                <h3 id="flex_flex-basis、flex-shrink、flex-grow、width/height区别总结"><a
+                        href="#目录——flex">flex-basis、flex-shrink、flex-grow、width/height区别总结</a>
                 </h3>
                 <table>
                     <tr>
@@ -928,7 +944,7 @@
         </div>
     </section>
     <section>
-        <h2 id="grid"><a href="#目录——grid">grid布局</a></h2>
+        <h2><a href="#目录——grid">grid布局</a></h2>
         <ul>
             <li>
                 <h3>grid学习前的准备</h3>
@@ -947,23 +963,17 @@
                             <li>
                                 <h3>网格线</h3>
                                 <p>·<span>每个网格之间的线叫网格线</span></p>
-                                <img src="./image/grid布局/什么是grid/网格线.png"
-                                     alt="网格线"
-                                     title="网格线">
+                                <img src="./image/grid布局/什么是grid/网格线.png" alt="网格线" title="网格线">
                             </li>
                             <li>
                                 <h3>行线</h3>
                                 <p>·<span>水平方向的是行线</span></p>
-                                <img src="./image/grid布局/什么是grid/行线.png"
-                                     alt="行线"
-                                     title="行线">
+                                <img src="./image/grid布局/什么是grid/行线.png" alt="行线" title="行线">
                             </li>
                             <li>
                                 <h3>列线</h3>
                                 <p>·<span>垂直方向的线叫列线</span></p>
-                                <img src="./image/grid布局/什么是grid/列线.png"
-                                     alt="列线"
-                                     title="列线">
+                                <img src="./image/grid布局/什么是grid/列线.png" alt="列线" title="列线">
                             </li>
                             <li>
                                 <h3>网格轨道</h3>
@@ -971,15 +981,11 @@
                                     <li>单方向组成的网格空间叫网格轨道</li>
                                     <li>
                                         <p>水平方向叫行轨道(由grid-template-rows控制)</p>
-                                        <img src="./image/grid布局/什么是grid/行轨道.png"
-                                             alt="行轨道"
-                                             title="行轨道">
+                                        <img src="./image/grid布局/什么是grid/行轨道.png" alt="行轨道" title="行轨道">
                                     </li>
                                     <li>
                                         <p>垂直方向叫列轨道(由grid-template-columns控制)</p>
-                                        <img src="./image/grid布局/什么是grid/列轨道.png"
-                                             alt="列轨道"
-                                             title="列轨道">
+                                        <img src="./image/grid布局/什么是grid/列轨道.png" alt="列轨道" title="列轨道">
                                     </li>
                                 </ol>
                             </li>
@@ -987,18 +993,15 @@
                                 <h3>网格单元</h3>
                                 <p>·行轨道与列轨道相交的地方叫网格单元</p>
                                 <p>·默认情况下一个项目占一个单元</p>
-                                <img src="./image/grid布局/什么是grid/网格单元.png"
-                                     alt="网格单元"
-                                     title="网格单元">
+                                <img src="./image/grid布局/什么是grid/网格单元.png" alt="网格单元" title="网格单元">
                             </li>
                         </ul>
                     </li>
                 </ol>
             </li>
             <li>
-                <p>·准备容器</p>
-                <img src="./image/grid布局/什么是grid/学习grid布局_准备容器.png"
-                     alt="学习grid布局_准备容器"
+                <p id="grid_何为行于列"><a href="#目录——grid">何为行于列</a></p>
+                <img src="./image/grid布局/什么是grid/学习grid布局_准备容器.png" alt="学习grid布局_准备容器"
                      title="学习grid布局_准备容器">
                 <p>·了解什么是grid容器，什么是grid项目以及怎么开启grid布局</p>
                 <img src="./image/grid布局/什么是grid/了解什么是grid容器，什么是grid项目以及怎么开启grid布局.png"
@@ -1026,9 +1029,7 @@
                         <td>水平</td>
                     </tr>
                 </table>
-                <img src="./image/grid布局/什么是grid/理解行和列.png"
-                     alt="理解行和列"
-                     title="理解行和列">
+                <img src="./image/grid布局/什么是grid/理解行和列.png" alt="理解行和列" title="理解行和列">
             </li>
             <li>
                 <h3>grid布局用到的属性</h3>
@@ -1063,8 +1064,7 @@
                             <li>当没有定义任何行(row)时，grid会根据内容自动决定行高</li>
                             <li>
                                 <img src="./image/grid布局/属性——grid-template-rows/属性——grid-template-rows.png"
-                                     alt="属性——grid-template-rows"
-                                     title="属性——grid-template-rows">
+                                     alt="属性——grid-template-rows" title="属性——grid-template-rows">
                             </li>
                         </ul>
                     </li>
@@ -1076,14 +1076,12 @@
                             <li>取一个值：同时为行/列添加间距</li>
                             <li>取两个值：第一个值为<span>行</span>添加间距，第二个值为<span>列</span>添加间距</li>
                             <li>
-                                <img src="./image/grid布局/gap/属性gap.png"
-                                     alt="属性gap"
-                                     title="属性gap">
+                                <img src="./image/grid布局/gap/属性gap.png" alt="属性gap" title="属性gap">
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <h3 id="grrid_学会如何控制网格轨道"><a href="#目录——grid">学会如何控制网格轨道</a></h3>
+                        <h3 id="grid_学会如何控制网格轨道"><a href="#目录——grid">学会如何控制网格轨道</a></h3>
                         <ol>
                             <li>
                                 <p>方法一：通过四个属性控制(<span>注意：作用于项目，而非容器</span>)<a
@@ -1097,8 +1095,11 @@
                                         <p>以上所有参数遵守以下规则：</p>
                                         <ol>
                                             <li>所有参数均不能为0</li>
-                                            <li>所有参数都不能是小数(正整数、负整数)</li>
-                                            <li>end的值永远大于start的值</li>
+                                            <li>所有参数都不能是小数(只能是正整数、负整数)</li>
+                                            <li>在start与end的值同为正整数(或同为负数)时，end的值永远大于start的值</li>
+                                            <li>
+                                                当start与end非同正，同负时，start的值用于大于end的值【start为1，end为-1,意思是该项目占整行/整列】
+                                            </li>
                                             <li>
                                                 <p>·占据的轨道数=end-start</p>
                                                 <p>·占据的网格单元数=行轨道数*列轨道数</p>
@@ -1107,8 +1108,10 @@
                                         </ol>
                                     </li>
                                     <li>
-                                        <p>具体示例(4个属性同时设置)：</p>
-                                        <img src="./image/grid布局/属性grid_row和grid_column/四属性综合示例.png" alt="">
+                                        <p>具体示例(4个属性同时设置[end为正整数])：</p>
+                                        <img src="./image/grid布局/属性grid_row和grid_column/四属性综合示例.png"
+                                             alt="四属性综合示例"
+                                             title="四属性综合示例">
                                     </li>
                                 </ul>
                             </li>
@@ -1117,136 +1120,361 @@
                                 <ul>
                                     <li>
                                         <p>·grid-row-start和grid-row-end简写是：<span>grid-row</span></p>
+                                        <p>grid-column-start和grid-column-end简写是：<span>grid-column</span></p>
+                                        <p>·第一个值为start，第二个值为end<span>中间[<code>/</code>]隔开</span></p>
                                         <ol>
-                                            <li>第一个值为start，第二个值为end<span>中间[<code>/</code>]隔开</span></li>
-                                            <li>还可以使用关键子<code>span</code>
-                                                <p>还可以使用关键子<code>span</code></p>
-                                                <table>
-                                                    <tr>
-                                                        <th colspan="3">关于网格单元所有方法</th>
-                                                    </tr>
-                                                    <!-- 基础线编号 -->
-                                                    <tr>
-                                                        <td colspan="3">基础线编号</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: 1 / 3</td>
-                                                        <td>从第1列线到第3列线</td>
-                                                        <td>grid-column: 1 / 3;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-row: 2 / 5</td>
-                                                        <td>从第2行线到第5行线</td>
-                                                        <td>grid-row: 2 / 5;</td>
-                                                    </tr>
-
-                                                    <!-- 使用 span -->
-                                                    <tr>
-                                                        <td colspan="3">使用 span 关键字</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: 1 / span 2</td>
-                                                        <td>从第1列线开始，跨越2列</td>
-                                                        <td>grid-column: 1 / span 2;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-row: span 3</td>
-                                                        <td>跨越3行（起始由自动布局决定）</td>
-                                                        <td>grid-row: span 3;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: span 3 / 5</td>
-                                                        <td>结束于第5列线，向前跨越3列</td>
-                                                        <td>grid-column: span 3 / 5;</td>
-                                                    </tr>
-
-                                                    <!-- 单独值 -->
-                                                    <tr>
-                                                        <td colspan="3">单独值</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: 2</td>
-                                                        <td>只指定起始线，默认占1个轨道</td>
-                                                        <td>grid-column: 2;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: span 2</td>
-                                                        <td>仅指定跨度，起始由布局决定</td>
-                                                        <td>grid-column: span 2;</td>
-                                                    </tr>
-
-                                                    <!-- 负值定位 -->
-                                                    <tr>
-                                                        <td colspan="3">负值定位</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: -3 / -1</td>
-                                                        <td>从倒数第3线到倒数第1线</td>
-                                                        <td>grid-column: -3 / -1;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: 2 / -1</td>
-                                                        <td>从第2列到倒数第1列</td>
-                                                        <td>grid-column: 2 / -1;</td>
-                                                    </tr>
-
-                                                    <!-- 命名网格线 -->
-                                                    <tr>
-                                                        <td colspan="3">命名网格线</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: sidebar-start / sidebar-end</td>
-                                                        <td>使用命名网格线</td>
-                                                        <td>grid-column: sidebar-start / sidebar-end;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: main-start / span 2</td>
-                                                        <td>从命名线开始，跨越指定数量</td>
-                                                        <td>grid-column: main-start / span 2;</td>
-                                                    </tr>
-
-                                                    <!-- 关键字 -->
-                                                    <tr>
-                                                        <td colspan="3">关键字</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: auto</td>
-                                                        <td>默认值，由自动布局算法决定</td>
-                                                        <td>grid-column: auto;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: 1 / auto</td>
-                                                        <td>从指定线开始，结束由布局决定</td>
-                                                        <td>grid-column: 1 / auto;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-column: span 2 / auto</td>
-                                                        <td>跨越指定数量，结束自动</td>
-                                                        <td>grid-column: span 2 / auto;</td>
-                                                    </tr>
-
-                                                    <!-- grid-area 简写 -->
-                                                    <tr>
-                                                        <td colspan="3">grid-area 简写</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-area: 1 / 1 / 4 / 4</td>
-                                                        <td>行始/列始/行终/列终</td>
-                                                        <td>grid-area: 1 / 1 / 4 / 4;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>grid-area: 2 / 1 / span 2 / span 3</td>
-                                                        <td>支持span混合使用</td>
-                                                        <td>grid-area: 2 / 1 / span 2 / span 3;</td>
-                                                    </tr>
-                                                </table>
+                                            <li>
+                                                <p><span>使用行线与列线分配</span></p>
+                                                <img src="./image/grid布局/属性grid_row和grid_column/四属性简写案例_使用列线与行线分配.png"
+                                                     alt="四属性简写案例_使用列线与行线分配"
+                                                     title="四属性简写案例_使用列线与行线分配">
+                                            </li>
+                                            <li>
+                                                <p>还可以使用关键子<code>span</code>:</p>
+                                                <ul>
+                                                    <li>指定横跨网格轨道数</li>
+                                                    <li><span>span的值不能是负数和零，只能是正整数</span></li>
+                                                    <li>
+                                                        <p>单独使用：</p>
+                                                        <ol>
+                                                            <li>起点：由浏览器自动放置算法决定[项目当前位置]</li>
+                                                            <li>方向:默认正方向(列向右，行向下)</li>
+                                                            <li>跨度:指定的数量</li>
+                                                            <li>
+                                                                <p>start与end同为正数</p>
+                                                                <img src="./image/grid布局/属性grid_row和grid_column/四属性简写案例_使用关键字span分配.png"
+                                                                     alt="四属性简写案例_使用关键字span分配"
+                                                                     title="四属性简写案例_使用关键字span分配">
+                                                                <p>start与end非同正同负</p>
+                                                                <img src="./image/grid布局/属性grid_row和grid_column/四属性简写案例_使用关键字span与start配合使用_正负.png"
+                                                                     alt="四属性简写案例_使用关键字span与start配合使用_正负"
+                                                                     title="四属性简写案例_使用关键字span与start配合使用_正负">
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                    <li>
+                                                        <p>与起点一起使用</p>
+                                                        <ol>
+                                                            <li>语法：grid-row/grid-column:<code>start / span
+                                                                指定跨轨道数量</code></li>
+                                                            <li>意思是从值start开始跨网格轨道，默认列向右，行向下</li>
+                                                            <li>
+                                                                <img src="./image/grid布局/属性grid_row和grid_column/四属性简写案例_使用关键字span与start配合使用.png"
+                                                                     alt="四属性简写案例_使用关键字span与start配合使用"
+                                                                     title="四属性简写案例_使用关键字span与start配合使用">
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                </ul>
                                             </li>
                                         </ol>
                                     </li>
-                                    <li>grid-column-start和grid-column-end简写是：<span>grid-column</span></li>
                                 </ul>
                             </li>
                         </ol>
+                    </li>
+                    <li>
+                        <p id="grid-网格轨道堆叠"><a href="#目录——grid">网格轨道堆叠:z-index</a></p>
+                        <ul>
+                            <li>其实就跟position(定位一样)，但是这会是脱离文档流，造成高度坍缩等问题</li>
+                            <li>使用grid布局，可以通过指出相同的网格区域，来让项目重叠</li>
+                            <li>当然也可以使用z-index来调整重叠的顺序</li>
+                            <li>
+                                <p>图例正常素材：</p>
+                                <img src="./image/grid布局/重叠/重叠素材.png"
+                                     alt="重叠素材"
+                                     title="重叠素材">
+                                <p>重叠示例一：</p>
+                                <img src="./image/grid布局/重叠/重叠示例一.png"
+                                     alt="重叠示例一"
+                                     title="重叠示例一">
+                                <p>使用z-index重置重叠顺序：</p>
+                                <img src="./image/grid布局/重叠/使用属性z-index，将项目2放置在上面.png"
+                                     alt="使用属性z-index，将项目2放置在上面"
+                                     title="使用属性z-index，将项目2放置在上面">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 id="grid-template-areas与grid-areas"><a
+                                href="#目录——grid">grid-template-areas与grid-areas</a></h3>
+                        <ol>
+                            <li>属性grid-template-areas作用在<span>grid容器</span>主要作用是：为每个项目(轨道)命名</li>
+                            <li>属性grid-area作用在<span>项目</span>主要作用是：采用容器(grid-template-areas)的命名</li>
+                            <li>
+                                grid-template-areas<span>是通过文本矩阵定义网格区域布局的系统，他必须与grid-template-columns/rows的行数/列数严格对应</span>
+                            </li>
+                            <li>
+                                核心规则：
+                                <ul>
+                                    <li><span>一行一引号：</span>每个字符串(引号内)对应一行</li>
+                                    <li><span>一列一名称：</span>字符串内每个名称对应一列，空格分割</li>
+                                    <li><span>同名合并：</span>相同名称的相邻单元格会自动合并成一个区域</li>
+                                    <li><span>空白用点：</span>不需要命名的地方的单元格用.表示</li>
+                                    <li><span>超出隐式：</span>项目数量 > 命名单元格时，自动创建隐式网格轨道(行高由内容决定，列宽占一列)
+                                    </li>
+                                    <li><span>隐式轨道尺寸</span>：由grid-auto-rows/columns控制(未设置则默认auto)</li>
+                                    <li><span>命名规范：</span>区域名称可以是任何有效字符串，但不能是<code>span</code>或数字
+                                    </li>
+                                    <li>
+                                        <h3>案例：</h3>
+                                        <img src="./image/grid布局/grid-template-areas与grid-area/名称显示.png"
+                                             alt="名称显示"
+                                             title="名称显示">
+                                        <p>核心规则演示：</p>
+                                        <img src="./image/grid布局/grid-template-areas与grid-area/grid-template-areas与grid-area_示例.png"
+                                             alt="grid-template-areas与grid-area_示例"
+                                             title="grid-template-areas与grid-area_示例">
+                                        <p>相邻合并:</p>
+                                        <img src="./image/grid布局/grid-template-areas与grid-area/规范_相邻相同的命名会合并.png"
+                                             alt="规范_相邻相同的命名会合并"
+                                             title="规范_相邻相同的命名会合并">
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h3 id="grid-auto-rows/columns"><a href="#目录——grid">grid-auto-rows/columns</a></h3>
+                        <ul>
+                            <li>该属性是控制隐式网格轨道的行高和列宽</li>
+                            <li>与grid-template-columns/grid-template-rows的区别是无法创建列数和行数</li>
+                            <li>
+                                <p>图例：</p>
+                                <img src="./image/grid布局/grid-auto-rows与grid-auto-columns/素材.png"
+                                     alt="素材"
+                                     title="素材">
+                                <img src="./image/grid布局/grid-auto-rows与grid-auto-columns/演示.png"
+                                     alt="演示"
+                                     title="演示">
+                                <p id="grid-值得注意的BUG">注意的小bug：
+                                    <br/>按道理来说，当项目超出grid-template-columns/rows，浏览器会自动创建隐式网格轨道，
+                                    <br/>依照规则:隐式网格轨道在没有设置grid-auto-rows/columns，它是默认auto。
+                                    <br/><span>这会导致，行高与内容高度平齐，列宽由内容的多少决定(内容越多，列宽被撑开，就越宽，还会溢出容器)</span>
+                                    <br/>但是以上项目4因为被命名(grid-area:footer)强制塞进了显示轨道中，这也就解释了为什么列宽占满整列宽度，因为它继承了怎么footer的宽度。
+                                    <br/><span>并且在grid-template-areas中footer排在第四行，但是grid-template-rows却只是设置3个参数，代表3行，这会导致第四行的行高由grid-auto-rows默认值决定</span>
+                                    <br/><span>所以创建隐式轨道的前提是：项目数量 > 显示网格轨道 且没有被命名</span>
+                                </p>
+                                <p>最后因为这个BUG，总结:<span>grid-template-columns/rows与grid-template-areas的严谨性，搞错一个，便是天差地别，grid-area不正当用会影响隐式网格轨道的创建，导致维护困难</span>
+                                </p>
+                                <p>演示修正</p>
+                                <img src="./image/grid布局/grid-auto-rows与grid-auto-columns/演示_修正.png"
+                                     alt="演示_修正"
+                                     title="演示_修正">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 id="grid-auto-flow"><a href="#目录——grid">grid-auto-flow</a></h3>
+                        <ul>
+                            <li>grid-auto-flow用于控制隐式网格轨道的方向</li>
+                            <li>它的默认值是：row(这也就是为什么默认创建的是隐式行轨道)</li>
+                            <li>
+                                <p>自学时发现</p>
+                                <ol>
+                                    <li>当grid-auto-flow值为row时，grid-auto-columns无效</li>
+                                    <li>当grid-auto-flow值为column时，grid-auto-rows无效<</li>
+                                    <li>
+                                        <p>通过查询有以下原因</p>
+                                        <ul>
+                                            <li>实际上，grid-auto-rows/columns<span>本身并不是”无效“</span>，而是：
+                                                <br/>·它们只会在<span>需要创建相应隐式轨道时</span>被使用
+                                                <br/>·创建那种隐式轨道由<span>项目放置方式</span>和<code>grid-auto-flow</code>共同决定
+                                                <table>
+                                                    <tr>
+                                                        <th>关于grid-auto-flow需要注意的事项</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>情景</td>
+                                                        <td>grid-auto-rows生效条件</td>
+                                                        <td>grid-auto-columns生效条件</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            自动放置(grid-row/column)、grid-area、grid-row-start/end、grid-column-start/end
+                                                        </td>
+                                                        <td><code>grid-auto-flow：row</code>或<code>dense</code>,且项目数量超出显示行
+                                                        </td>
+                                                        <td><code>grid-auto-flow：column</code>,且项目数量超出显示列</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>手动放置</td>
+                                                        <td>项目被手动放置到显示网格之外的行</td>
+                                                        <td>项目被手动放置到显示网格之外的列</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>混合情况</td>
+                                                        <td><code>grid-auto-column</code>但项目被手动放到新行</td>
+                                                        <td><code>grid-auto-row</code>但项目被手动放到新列</td>
+                                                    </tr>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <p>示例：grid-auto-flow:row于grid-auto-rows<</p>
+                                                <img src="./image/grid布局/属性——grid-auto-flow/默认行为——row.png"
+                                                     alt="默认行为——row"
+                                                     title="默认行为——row">
+                                                <p>示例：grid-auto-flow:column于grid-auto-columns</p>
+                                                <img src="./image/grid布局/属性——grid-auto-flow/示例：grid-auto-flow_column于grid-auto-columns.png"
+                                                     alt="示例：grid-auto-flow_column于grid-auto-columns"
+                                                     title="示例：grid-auto-flow_column于grid-auto-columns">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <p>使用它的前提是：</p>
+                                <ol>
+                                    <li>有项目无法放入显示定义的网格中</li>
+                                    <li>没有明确为所有项目指定位置(grid-area)</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 id="grid_网格布局中的对齐方式"><a href="#目录——grid">网格布局中的对齐方式</a></h3>
+                        <ul>
+                            <li>grid容器属性</li>
+                            <li>
+                                <p id="网格布局中的对齐方式-作用在grid容器内"><a href="#目录——grid">网格布局中的对齐方式-作用在grid容器内</a></p>
+                                <ol>
+                                    <li>
+                                        <p>justify-items</p>
+                                        <ul>
+                                            <li>控制项目在网格单元内水平方向对齐</li>
+                                            <li>值有:stretch(默认)、start、end、center</li>
+                                            <li>
+                                                <ul>
+                                                    <li>所有操作空间都是在项目网格单元内</li>
+                                                    <li>stretch：项目拉伸与占据网格单元内所有可用空间(填满水平方向整个网格单元)
+                                                    </li>
+                                                    <li>start：项目对齐左边(对齐网格单元最做左边)</li>
+                                                    <li>end:项目对齐右边(对齐网格单元最做有边)</li>
+                                                    <li>center:在水平方向居中(对齐网格单元中间)</li>
+                                                    <li>
+                                                        <img src="./image/grid布局/align-items与justify-items/start.png"
+                                                             alt="start"
+                                                             title="start">
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p>align-items</p>
+                                        <ul>
+                                            <li>控制项目在网格单元内垂直方向对齐</li>
+                                            <li>作用在grid容器上</li>
+                                            <li>值有:stretch(默认)、start、end、center</li>
+                                            <li>
+                                                <ul>
+                                                    <li>所有操作空间都是在项目网格单元内</li>
+                                                    <li>stretch：项目拉伸与占据网格单元内所有可用空间(填满垂直方向整个网格单元)
+                                                    </li>
+                                                    <li>start：项目对齐左边(对齐网格单元最做上面)</li>
+                                                    <li>end:项目对齐右边(对齐网格单元最做下面)</li>
+                                                    <li>center:在水平方向居中(对齐网格单元中间)</li>
+                                                    <li>
+                                                        <img src="./image/grid布局/align-items与justify-items/stretch.png"
+                                                             alt="stretch"
+                                                             title="stretch">
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <p id="网格布局中的对齐方式-作用在项目上"><a href="#目录——grid">网格布局中的对齐方式-作用在项目上</a></p>
+                                <ol>
+                                    <li>
+                                        <p>justify-self-作用在项目上</p>
+                                        <ul>
+                                            <li>控制单个网格单元内水平方向对齐</li>
+                                            <li>值同样有：stretch、start、end、center</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p>align-self-作用在项目上</p>
+                                        <ul>
+                                            <li>控制单个网格单元内垂直方向对齐</li>
+                                            <li>值同样有：stretch、start、end、center</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <p id="网格布局中的对齐方式-作用于整体"><a href="#目录——grid">网格布局中的对齐方式-作用于整体</a></p>
+                                <ol>
+                                    <li>
+                                        <p id="grid-justify-content"><a href="#目录——grid">justify-content</a></p>
+                                        <ul>
+                                            <li>控制所有项目在水平方向对齐方式</li>
+                                            <li>值有：start、end、center、space-between、space-evenly、space-around</li>
+                                            <li><a href="#flex_属性值_space-between">所有值与flex布局相同</a></li>
+                                            <li>
+                                                <img src="./image/grid布局/justify-content/示例.png"
+                                                     alt="示例"
+                                                     title="示例">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p id="grid-align-content"><a href="#目录——grid">align-content</a></p>
+                                        <ul>
+                                            <li>控制所有项目在垂直方向对齐方式</li>
+                                            <li>值有：start、end、center、space-between、space-evenly、space-around</li>
+                                            <li><a href="#flex_属性值_space-between">所有值与flex布局相同</a></li>
+                                            <li>
+                                                <img src="image/grid布局/align-content/示例.png"
+                                                     alt="示例"
+                                                     title="示例">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <p>总结</p>
+                                <ol>
+                                    <li>*-item:<span>单个项目对齐</span>，调整网格项目在<span>其自身单元格内部</span>的位置
+                                    </li>
+                                    <li>
+                                        *-content：<span>整体玩个够</span>的对齐，调整所有网格轨道<span>作为一个整体</span>在容器中的位置。(当容器有剩余空间时生效)
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 id="grid_常用的值[响应式]"><a href="#目录——grid">常用的值[响应式]</a></h3>
+                        <ul>
+                            <li>
+                                <p>auto-fit</p>
+                                <ol>
+                                    <li>效果一：当容器空间不足以容纳所有项目时，会自动减少列数，让项目换行</li>
+                                    <li>效果二：当容器足够宽是，多于的空间，会按设置的列宽平均分给所有项目</li>
+                                    <li>最好搭配：minmax()使用</li>
+                                </ol>
+                            </li>
+                            <li>
+                                <p>auto=fill</p>
+                                <ol>
+                                    <li>效果一：当容器空间不足以容纳所有项目时，会自动减少列数，让项目换行</li>
+                                    <li>效果二：当容器足够宽是，多于的空间，会按设置的列宽平均分给所有项目,当容器宽度大到所有项目分配完还有剩余空间，会新建轨道(可能会留白)</li>
+                                    <li>最好搭配：minmax()使用</li>
+                                </ol>
+                            </li>
+                            <li>
+                                <p>总结：</p>
+                                <ol>
+                                    <li>auto-fit:折叠空轨道，项目可能被拉伸，但容器内<span>没有留白</span></li>
+                                    <li>auto-fill:保留空轨道，项目不被拉伸，容器内<span>可能留白</span></li>
+                                </ol>
+                            </li>
+                        </ul>
                     </li>
                 </ol>
             </li>
@@ -1278,130 +1506,250 @@
                 </ol>
             </li>
             <li>
-                <ol>
+                <h3>布局中可能的疑问</h3>
+                <ul>
                     <li>
-                        <h3>布局中可能的疑问</h3>
-                        <ul>
-                            <li>
-                                <h3 id="grid_当容器内的项目超过所设置的网格数会发生什么？"><a href="#目录——grid">当容器内的项目超过所设置的网格数会发生什么？</a>
-                                </h3>
-                                <p>当项目数量 > 显式网格单元格数时：</p>
-                                <ol>
-                                    <li>按"行优先"方向排列（默认grid-auto-flow: row）</li>
-                                    <li>创建隐式行来容纳多余项目</li>
-                                    <li>隐式行的列数继承grid-template-columns设置</li>
-                                    <li>隐式行高默认由内容决定（可通过grid-auto-rows控制）</li>
-                                </ol>
-                            </li>
-                            <li>
-                                <h3 id="grid专属单位fr(分数单位)"><a href="#目录——grid">grid专属单位fr(分数单位)</a>
-                                </h3>
-                                <ol>
-                                    <li>fr是<code>fraction(分数)</code>的缩写，是CSS Gird布局中<span>独有的单位</span>，用于<span>按比例分配剩余空间</span>
-                                    </li>
-                                    <li>计算时<span>先扣除</span>所有固定尺寸</li>
-                                    <li>可以与minmax()、repeat()等函数结合使用</li>
-                                    <li>需要容器有<span>明确尺寸</span>才能计算</li>
-                                </ol>
-                            </li>
-                            <li>
-                                <h3 id="grid_属性grid-template-columns/grid-template-rows失效的几种状况/解决方法"><a
-                                        href="#目录——grid">属性grid-template-columns/grid-template-rows失效的几种状况/解决方法</a>
-                                </h3>
-                                <table>
-                                    <tr>
-                                        <th colspan="4">
-                                            属性grid-template-columns/grid-template-rows失效的几种状况/解决方法
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>序号</td>
-                                        <td>失效状况</td>
-                                        <td>原因分析</td>
-                                        <td>解决方案</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>容器没有明确尺寸</td>
-                                        <td>fr单位依赖剩余空间分配，当容器尺寸为auto时，剩余空间为0，fr无法生效</td>
-                                        <td>给容器设置明确的width/height或min-width/min-height</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>项目固定尺寸覆盖</td>
-                                        <td>grid项目的width/height/min-width/min-height优先级高于轨道尺寸</td>
-                                        <td>删除项目的固定尺寸，或使用minmax()限制范围，或设置项目尺寸为百分比</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>拼写错误</td>
-                                        <td>属性名拼写错误(如grid-template-row缺少s)</td>
-                                        <td>检查拼写:grid-template-columns/grid-templeat-rows</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>隐式网格覆盖</td>
-                                        <td>项目数量超过定义的轨道数，隐式网格使用grid-auto-rows/grid-auto-columns</td>
-                                        <td>设置grid-auto-rows和grid-auto-rows以控制隐式轨道</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>内容撑开轨道</td>
-                                        <td>项目内容过多，且轨道尺寸为auto或min-content，导致轨道被撑大</td>
-                                        <td>使用<code>minmax()</code>参数：第一个为整数或auto-fit/auto-fill，第儿个为有效尺寸
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>百分比单位无参照</td>
-                                        <td>百分比单位依赖父容器尺寸，若父容器尺寸未定义，则百分比失效</td>
-                                        <td>确保父容器有明确尺寸，或设置overflow控制内容溢出</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>重复函数错误使用</td>
-                                        <td>
-                                            <code>repeat()</code>函数参数错误，如<span>repeat(auto, 1fr)或repeat(0, 1fr)</span>
-                                        </td>
-                                        <td>检查<code>repeat()</code>参数；第一个为整数或auto-fit/auto-fill，第二个尺寸为有效尺寸
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>grid布局未开启</td>
-                                        <td>容器没有设置<code>display:grid</code>或<code>display:linine-grid</code></td>
-                                        <td>确保容器有：display:grid;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>9</td>
-                                        <td>媒体查询覆盖</td>
-                                        <td>在媒体查询中重新定义了网格轨道，覆盖了原有设置</td>
-                                        <td>检查媒体查询中的css规则，确保优先级正确</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10</td>
-                                        <td>grid简写覆盖</td>
-                                        <td>使用grid简写属性时，可能意外重置了行列规定</td>
-                                        <td>避免使用grid简写，或确保正确设置所有参数</td>
-                                    </tr>
-                                    <tr>
-                                        <td>11</td>
-                                        <td>浏览器兼容性问题</td>
-                                        <td>某些旧浏览器不支持grid布局或某些特性</td>
-                                        <td>避免前缀或退回方案，检查浏览器兼容性</td>
-                                    </tr>
-                                    <tr>
-                                        <td>12</td>
-                                        <td>CSS优先级问题</td>
-                                        <td>其他CSS规则具有更高优先级，覆盖了网络轨道设置</td>
-                                        <td>使用开发者工具检查计算样式，增加选择器特异性或使用<code>!important</code>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </li>
-                        </ul>
+                        <h3 id="grid_当容器内的项目超过所设置的网格数会发生什么？"><a href="#目录——grid">当容器内的项目超过所设置的网格数会发生什么？</a>
+                        </h3>
+                        <p>当项目数量 > 显式网格单元格数时：</p>
+                        <ol>
+                            <li>按"行优先"方向排列（默认grid-auto-flow: row）</li>
+                            <li>创建隐式行来容纳多余项目</li>
+                            <li>隐式行的列数继承grid-template-columns设置</li>
+                            <li>隐式行高默认由内容决定（可通过grid-auto-rows控制）</li>
+                        </ol>
                     </li>
-                </ol>
+                    <li>
+                        <h3 id="grid专属单位fr(分数单位)"><a href="#目录——grid">grid专属单位fr(分数单位)</a>
+                        </h3>
+                        <ol>
+                            <li>fr是<code>fraction(分数)</code>的缩写，是CSS
+                                Gird布局中<span>独有的单位</span>，用于<span>按比例分配剩余空间</span>
+                            </li>
+                            <li>计算时<span>先扣除</span>所有固定尺寸</li>
+                            <li>可以与minmax()、repeat()等函数结合使用</li>
+                            <li>需要容器有<span>明确尺寸</span>才能计算</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h3 id="grid_属性grid-template-columns/grid-template-rows失效的几种状况/解决方法"><a
+                                href="#目录——grid">属性grid-template-columns/grid-template-rows失效的几种状况/解决方法</a>
+                        </h3>
+                        <table>
+                            <tr>
+                                <th colspan="4">
+                                    属性grid-template-columns/grid-template-rows失效的几种状况/解决方法
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>序号</td>
+                                <td>失效状况</td>
+                                <td>原因分析</td>
+                                <td>解决方案</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>容器没有明确尺寸</td>
+                                <td>fr单位依赖剩余空间分配，当容器尺寸为auto时，剩余空间为0，fr无法生效</td>
+                                <td>给容器设置明确的width/height或min-width/min-height</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>项目固定尺寸覆盖</td>
+                                <td>grid项目的width/height/min-width/min-height优先级高于轨道尺寸</td>
+                                <td>删除项目的固定尺寸，或使用minmax()限制范围，或设置项目尺寸为百分比</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>拼写错误</td>
+                                <td>属性名拼写错误(如grid-template-row缺少s)</td>
+                                <td>检查拼写:grid-template-columns/grid-templeat-rows</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>隐式网格覆盖</td>
+                                <td>项目数量超过定义的轨道数，隐式网格使用grid-auto-rows/grid-auto-columns</td>
+                                <td>设置grid-auto-rows和grid-auto-rows以控制隐式轨道</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>内容撑开轨道</td>
+                                <td>项目内容过多，且轨道尺寸为auto或min-content，导致轨道被撑大</td>
+                                <td>使用<code>minmax()</code>参数：第一个为整数或auto-fit/auto-fill，第儿个为有效尺寸
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>百分比单位无参照</td>
+                                <td>百分比单位依赖父容器尺寸，若父容器尺寸未定义，则百分比失效</td>
+                                <td>确保父容器有明确尺寸，或设置overflow控制内容溢出</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>重复函数错误使用</td>
+                                <td>
+                                    <code>repeat()</code>函数参数错误，如<span>repeat(auto, 1fr)或repeat(0,
+                                                    1fr)</span>
+                                </td>
+                                <td>检查<code>repeat()</code>参数；第一个为整数或auto-fit/auto-fill，第二个尺寸为有效尺寸
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>grid布局未开启</td>
+                                <td>容器没有设置<code>display:grid</code>或<code>display:linine-grid</code></td>
+                                <td>确保容器有：display:grid;</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>媒体查询覆盖</td>
+                                <td>在媒体查询中重新定义了网格轨道，覆盖了原有设置</td>
+                                <td>检查媒体查询中的css规则，确保优先级正确</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>grid简写覆盖</td>
+                                <td>使用grid简写属性时，可能意外重置了行列规定</td>
+                                <td>避免使用grid简写，或确保正确设置所有参数</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>浏览器兼容性问题</td>
+                                <td>某些旧浏览器不支持grid布局或某些特性</td>
+                                <td>避免前缀或退回方案，检查浏览器兼容性</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>CSS优先级问题</td>
+                                <td>其他CSS规则具有更高优先级，覆盖了网络轨道设置</td>
+                                <td>使用开发者工具检查计算样式，增加选择器特异性或使用<code>!important</code>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3 id="grid布局总结"><a href="#目录——grid">grid布局总结</a></h3>
+                <table>
+                    <tr>
+                        <th colspan="3">关于网格单元所有方法</th>
+                    </tr>
+                    <!-- 基础线编号 -->
+                    <tr>
+                        <td colspan="3">基础线编号</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: 1 / 3</td>
+                        <td>从第1列线到第3列线</td>
+                        <td>grid-column: 1 / 3;</td>
+                    </tr>
+                    <tr>
+                        <td>grid-row: 2 / 5</td>
+                        <td>从第2行线到第5行线</td>
+                        <td>grid-row: 2 / 5;</td>
+                    </tr>
+
+                    <!-- 使用 span -->
+                    <tr>
+                        <td colspan="3">使用 span 关键字</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: 1 / span 2</td>
+                        <td>从第1列线开始，跨越2列</td>
+                        <td>grid-column: 1 / span 2;</td>
+                    </tr>
+                    <tr>
+                        <td>grid-row: span 3</td>
+                        <td>跨越3行（起始由自动布局决定）</td>
+                        <td>grid-row: span 3;</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: span 3 / 5</td>
+                        <td>结束于第5列线，向前跨越3列</td>
+                        <td>grid-column: span 3 / 5;</td>
+                    </tr>
+
+                    <!-- 单独值 -->
+                    <tr>
+                        <td colspan="3">单独值</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: 2</td>
+                        <td>只指定起始线，默认占1个轨道</td>
+                        <td>grid-column: 2;</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: span 2</td>
+                        <td>仅指定跨度，起始由布局决定</td>
+                        <td>grid-column: span 2;</td>
+                    </tr>
+
+                    <!-- 负值定位 -->
+                    <tr>
+                        <td colspan="3">负值定位</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: -3 / -1</td>
+                        <td>从倒数第3线到倒数第1线</td>
+                        <td>grid-column: -3 / -1;</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: 2 / -1</td>
+                        <td>从第2列到倒数第1列</td>
+                        <td>grid-column: 2 / -1;</td>
+                    </tr>
+
+                    <!-- 命名网格线 -->
+                    <tr>
+                        <td colspan="3">命名网格线</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: sidebar-start / sidebar-end</td>
+                        <td>使用命名网格线</td>
+                        <td>grid-column: sidebar-start / sidebar-end;</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: main-start / span 2</td>
+                        <td>从命名线开始，跨越指定数量</td>
+                        <td>grid-column: main-start / span 2;</td>
+                    </tr>
+
+                    <!-- 关键字 -->
+                    <tr>
+                        <td colspan="3">关键字</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: auto</td>
+                        <td>默认值，由自动布局算法决定</td>
+                        <td>grid-column: auto;</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: 1 / auto</td>
+                        <td>从指定线开始，结束由布局决定</td>
+                        <td>grid-column: 1 / auto;</td>
+                    </tr>
+                    <tr>
+                        <td>grid-column: span 2 / auto</td>
+                        <td>跨越指定数量，结束自动</td>
+                        <td>grid-column: span 2 / auto;</td>
+                    </tr>
+
+                    <!-- grid-area 简写 -->
+                    <tr>
+                        <td colspan="3">grid-area 简写</td>
+                    </tr>
+                    <tr>
+                        <td>grid-area: 1 / 1 / 4 / 4</td>
+                        <td>行始/列始/行终/列终</td>
+                        <td>grid-area: 1 / 1 / 4 / 4;</td>
+                    </tr>
+                    <tr>
+                        <td>grid-area: 2 / 1 / span 2 / span 3</td>
+                        <td>支持span混合使用</td>
+                        <td>grid-area: 2 / 1 / span 2 / span 3;</td>
+                    </tr>
+                </table>
             </li>
         </ul>
         <h3>Grid布局示例</h3>
@@ -1409,9 +1757,12 @@
             <div class="item item-1">1</div>
             <div class="item item-2">2</div>
             <div class="item item-3">3</div>
-            <div class="item itme-4">4</div>
-            <div class="item itme-5">5</div>
-            <div class="item itme-6">6</div>
+            <div class="item item-4">4</div>
+            <div class="item item-5">5</div>
+            <div class="item item-6">6</div>
+            <div class="item item-7">7</div>
+            <div class="item item-8">8</div>
+            <div class="item item-9">9</div>
         </div>
     </section>
     <section>
@@ -1421,7 +1772,8 @@
                 <h3 id="补充属性_font-style"><a href="#目录——CSS属性补充">font-style</a></h3>
                 <p>该属性控制的是字体的"样式变体"(蒸屉、斜体)或"几何变形"(斜体)</p>
                 <p>
-                    该属性共有normal、italic、oblique、oblique(angle)四个值[以下的名词"字体"可以理解为文本的字体类型(font-family)【微软雅黑、宋体…………】]：</p>
+                    该属性共有normal、italic、oblique、oblique(angle)四个值[以下的名词"字体"可以理解为文本的字体类型(font-family)【微软雅黑、宋体…………】]：
+                </p>
                 <ul>
                     <li>normal：使用字体的"正体"版本(可以理解为非斜体)</li>
                     <li>italic：优先使用字体的"斜体"变体(如果存在)</li>
@@ -1433,7 +1785,8 @@
                 <h3 id="补充属性_vertical-align"><a href="#目录——CSS属性补充">vertical-align</a></h3>
                 <p>该属性控制的是调整行内元素在其所属的[行框(line box)]内的垂直位置</p>
                 <p>
-                    该属性共有：基线对齐(baseline[默认值]、sub、super)、相对行框对齐(text-top、text-bottom)、相对行框对齐(top、middle、bottom)、数值\百分比(长度值[px、rem……]、百分比值)</p>
+                    该属性共有：基线对齐(baseline[默认值]、sub、super)、相对行框对齐(text-top、text-bottom)、相对行框对齐(top、middle、bottom)、数值\百分比(长度值[px、rem……]、百分比值)
+                </p>
                 <table>
                     <tr>
                         <td>值</td>
@@ -1533,4 +1886,5 @@
     </section>
 </main>
 </body>
+
 </html>
