@@ -92,16 +92,27 @@ header {
 /*侧边栏——aside*/
 .main-container aside {
     flex: 1;
+    background-color: var(--color-background-aside);
+
 }
 
-.main-container aside ul {
+.main-container aside ul{
     display: flex;
+    justify-content: space-evenly; /*需要有高度才会平分空间*/
+    /*align-items: center;*/
     flex-direction: column;
-    justify-content: space-around; /*需要有高度才会平分空间*/
+    height: 100vh;
 }
 
 .main-container aside ul li {
     position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: var(--header-height);
+    font-size: var(--font-size-text-aside);
+
 }
 
 .main-container aside ul li a {
