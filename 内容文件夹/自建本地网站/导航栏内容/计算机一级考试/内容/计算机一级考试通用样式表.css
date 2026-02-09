@@ -1,19 +1,19 @@
 /* === 第1步：在 :root 中定义清晰的三档字号 === */
 :root{
     /* 桌面端 (最大屏) - 默认使用 */
-    --font-size-desktop-nav: 28px;
-    --font-size-desktop-sub: 30px;
-    --font-size-desktop-title: 60px;
+    --font-size-desktop-nav: 1.75rem;
+    --font-size-desktop-sub: 1.8rem;
+    --font-size-desktop-title: 3.75rem;
 
     /* 平板端 (中等屏) */
-    --font-size-tablet-nav: 25px;
-    --font-size-tablet-sub: 20px;
-    --font-size-tablet-title: 60px;
+    --font-size-tablet-nav: 1.5rem;
+    --font-size-tablet-sub: 1.5rem;
+    --font-size-tablet-title: 3.75rem;
 
     /* 手机端 (最小屏) */
-    --font-size-mobile-nav: 15px;
-    --font-size-mobile-sub: 15px;
-    --font-size-mobile-title: 30px;
+    --font-size-mobile-nav: 1rem;
+    --font-size-mobile-sub: 1rem;
+    --font-size-mobile-title: 1.8rem;
 }
 * {
     margin: 0;
@@ -162,7 +162,9 @@ main ul li ol>li:hover .nav_2{
 p {
     font-size: 40px;
 }
-
+nav p{
+    font-size: 1.5rem;
+}
 @keyframes transition {
     from {
         transform: rotate(0deg);
@@ -303,5 +305,7 @@ img {
     main .SingleChoiceQuestion, .SingleChoiceQuestion ul li {
         font-size: var(--font-size-mobile-sub) !important;
     }
-
+    nav p{
+        font-size: 1rem !important;
+    }
 }
