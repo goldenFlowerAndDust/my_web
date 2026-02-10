@@ -2,18 +2,18 @@
 :root{
     /* 桌面端 (最大屏) - 默认使用 */
     --font-size-desktop-nav: 1.75rem;
-    --font-size-desktop-sub: 1.8rem;
-    --font-size-desktop-title: 3.75rem;
+    --font-size-desktop-sub: 1.4rem;
+    --font-size-desktop-title: 3rem;
 
     /* 平板端 (中等屏) */
     --font-size-tablet-nav: 1.5rem;
-    --font-size-tablet-sub: 1.5rem;
-    --font-size-tablet-title: 3.75rem;
+    --font-size-tablet-sub: 1.2rem;
+    --font-size-tablet-title: 2.5rem;
 
     /* 手机端 (最小屏) */
     --font-size-mobile-nav: 1rem;
-    --font-size-mobile-sub: 1rem;
-    --font-size-mobile-title: 1.8rem;
+    --font-size-mobile-sub: 0.8rem;
+    --font-size-mobile-title: 1.5rem;
 }
 * {
     margin: 0;
@@ -275,6 +275,9 @@ img {
     main .SingleChoiceQuestion, .SingleChoiceQuestion ul li {
         font-size: var(--font-size-tablet-sub) !important;
     }
+    main .SingleChoiceQuestion ul li{
+        font-size: var(--font-size-desktop-title) !important;
+    }
 }
 @media (max-width: 2880px) {
     main nav ul {
@@ -290,6 +293,9 @@ img {
     main .SingleChoiceQuestion, .SingleChoiceQuestion ul li {
         font-size: var(--font-size-tablet-sub) !important;
     }
+    main .SingleChoiceQuestion ul li{
+        font-size: var(--font-size-tablet-title) !important;
+    }
 }
 @media (max-width: 1100px) {
     main nav ul {
@@ -304,6 +310,9 @@ img {
     /* 新增：主体内容区域在手机的字号 */
     main .SingleChoiceQuestion, .SingleChoiceQuestion ul li {
         font-size: var(--font-size-mobile-sub) !important;
+    }
+    main .SingleChoiceQuestion ul li{
+        font-size: var(--font-size-mobile-title) !important;
     }
     nav p{
         font-size: 1rem !important;
