@@ -10,8 +10,8 @@
     --color-background-aside: skyblue;
     --color-background-color-mian: red;
     /*  间距系统  */
-    --container-width: 61.25rem; /* container(容器) 61.25rem=980px */
-    --container-height: 80rem;
+    --container-width: 96vw; /* container(容器) 61.25rem=980px */
+    --container-height: 100vh;
     --header-height: 7.5rem;
     --main-container-height: 66.5rem;
     --main-container-a-padding: 1rem;
@@ -54,6 +54,7 @@ main {
     max-width: var(--container-width);
     min-height: var(--container-height);
     background-color:var(--color-background-color-mian);
+    margin: 0 auto;
 }
 
 /*header部分*/
@@ -91,7 +92,7 @@ header {
 
 /*侧边栏——aside*/
 .main-container aside {
-    flex: 1;
+    flex: 1.2;
     background-color: var(--color-background-aside);
 
 }
@@ -101,7 +102,7 @@ header {
     justify-content: space-evenly; /*需要有高度才会平分空间*/
     /*align-items: center;*/
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .main-container aside ul li {
