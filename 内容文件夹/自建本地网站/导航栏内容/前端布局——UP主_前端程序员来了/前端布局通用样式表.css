@@ -1,0 +1,58 @@
+:root{
+    --font-size-base:2rem;
+    --font-size-p:2.1rem;
+    --font-size-h1:3.0rem;
+    --font-size-h2:2.8rem;
+    --font-size-h3:2.6rem;
+
+    --color-p:black;
+    --color-span:red;
+    --color-h1:skyblue;
+    --color-h2:orange;
+    --color-h3:pink;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+main{
+    width: 90vw;
+    min-height: 100vh;
+    margin: 10px auto;
+}
+h1{
+    text-align: center;
+}
+h2,h3{
+    padding-left: 0.5rem;
+}
+h1{
+    color: var(--color-h1);
+    font-size: var(--font-size-h1);
+}
+h2{
+    color: var(--color-h2);
+    font-size: var(--font-size-h2);
+}
+h3{
+    color: var(--color-h3);
+    font-size: var(--font-size-h3);
+}
+li{
+    font-size: var(--font-size-base);
+    font-weight: initial;
+}
+ol,ul{
+    padding-left: 2rem;
+}
+p{
+    color: var(--color-p);
+    font-size: var(--font-size-p);
+}
+span{
+    color: var(--color-span);
+}

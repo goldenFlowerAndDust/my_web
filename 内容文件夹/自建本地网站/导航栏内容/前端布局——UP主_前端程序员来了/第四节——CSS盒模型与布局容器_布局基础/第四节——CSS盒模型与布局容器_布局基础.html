@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第四节——CSS盒模型与布局容器_布局基础</title>
+    <link rel="stylesheet" href="../前端布局通用样式表.css">
+</head>
+<body>
+<main>
+    <h1>CSS盒模型与布局容器_布局基础</h1>
+    <div>
+        <h2>CSS盒模型</h2>
+        <ul>
+            <li>网页布局的基础</li>
+            <li>
+                <p>每个HTML元素可以视为一个矩形盒子(<span>主要由：内容、内边距、边距、外边距组成</span>)</p>
+                <ol>
+                    <li>内容:元素实际内容的区域(content)</li>
+                    <li>内边距：环绕内容区域的空白空间(padding)</li>
+                    <li>边框：包裹在内边距外部的可见线条(border)</li>
+                    <li>外边框：围绕在边框的透明区域(margin)</li>
+                </ol>
+            </li>
+            <li>
+                <h3>盒模型的类型和差异</h3>
+                <ol>
+                    <li>
+                        <p><span>标准盒模型</span></p>
+                        <ul>
+                            <li>盒子尺寸=内容+左右内边距+左右边框+左右外边距(累加一起，也就是说：<span>内容尺寸=所设置的尺寸</span>)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p><span>IE盒模型</span></p>
+                        <ul>
+                            <li>使用属性box-sizing:border-box(放在全局属性选择器内)，将标准盒模型转为IE盒模型</li>
+                            <li>同样盒子尺寸=内容+左右内边距+左右边距+左右外边距(但是最终的尺寸与自己设置的一致，也就是说会自动计算，也就是说:<span>内容=所设置的尺寸-左右外边距-左右边框-左右内边距</span>)</li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h2>布局容器</h2>
+        <ul>
+            <li>包裹内容的父级元素</li>
+            <li>它的尺寸与样式设置将直接影响子元素的布局显示</li>
+        </ul>
+    </div>
+</main>
+</body>
+</html>

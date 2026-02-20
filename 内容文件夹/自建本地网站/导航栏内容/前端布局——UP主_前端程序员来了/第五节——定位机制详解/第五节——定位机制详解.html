@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第五节——定位机制详解</title>
+    <link rel="stylesheet" href="../前端布局通用样式表.css">
+</head>
+<body>
+<main>
+    <h1>定位机制详解</h1>
+    <div>
+        <h2>position(定位)</h2>
+        <ul>
+            <li>
+                <h3>共有五种值：static/relative/absolute/fixed/sticky</h3>
+                <ol>
+                    <li>
+                        <p>static(默认)</p>
+                        <ul>
+                            <li>遵循正常文档流布局</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>relative(相对定位)</p>
+                        <ul>
+                            <li>同样遵循正常文档流内，但可以使用top/right/left/bottom，在当前位置微调</li>
+                            <li>通常父元素用相对定位</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>absolute(绝对定位)</p>
+                        <ul>
+                            <li>脱离文档流，可以使用top/right/left/bottom，按父元素位置移动</li>
+                            <li>因为会脱离文档流，所以需要多次调整位置，才能达到预期效果</li>
+                            <li>通常以position:relative为基准</li>
+                            <li>通常子元素用绝对定位</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>fixed(固定定位)</p>
+                        <ul>
+                            <li>脱离正常文档流，可以使用top/right/left/bottom,按视口为基准移动</li>
+                            <li>不会受到滚动条影响，直接固定在视口</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>sticky(粘性定位)</p>
+                        <ul>
+                            <li>先相对定位，然后固定定位</li>
+                            <li>当元素随着滚动条，达到相对位置所设置的阈值时，会固定在视口上，不会再随着滚动条移动</li>
+                            <li>通常用于制作导航栏…………</li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h2>z-index(层叠顺序)</h2>
+        <ul>
+            <li>通常用于控制层叠顺序</li>
+            <li>值越大，目标元素越靠前</li>
+        </ul>
+    </div>
+</main>
+</body>
+</html>
