@@ -55,6 +55,9 @@ nav {
     width: 100%;
     min-height: 75px;
 }
+.SingleChoiceQuestion ul,ol,img{
+    padding-left: 2rem !important;
+}
 
 nav ul {
     display: flex;
