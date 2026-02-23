@@ -39,7 +39,9 @@ nav {
     height: 10rem;
     background-color: orange;
 }
-
+ul,ol{
+    padding: 2rem;
+}
 .nav_content {
     display: flex;
     flex-direction: row;
