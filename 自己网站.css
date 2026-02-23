@@ -22,6 +22,7 @@
     /*  字体大小  */
     --font-size-text-header: 3rem;
     --font-size-text-aside: 1.8rem;
+    --font-size-text-aside-media: 1.0rem;
 
     /*  定位  */
     --main-container-ol-top:0;
@@ -32,6 +33,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 li {
@@ -179,28 +181,37 @@ footer{
     background-color:orange;
     font-size: 3rem;
 }
-@media  (max-width: 1024px){
+@media  (max-width: 1500px){
     main{
-        min-width: 67.5rem;
+        min-width: 100vw;
     }
     .nav_container{
-        min-width:67.5rem;
+        min-width:100VW;
+    }
+    .main-container aside ul{
+        min-height: 40vw;
+    }
+    .main-container aside ul li{
+        font-size: var(--font-size-text-aside-media);
     }
 }
-@media (max-width: 1800px){
+@media (min-width: 1500px) and (max-width: 3000px){
     main{
-        min-width: 105.5rem;
+        min-width: 40vw;
     }
     .nav_container{
-        min-width:105.5rem;
+        min-width:40vw;
+    }
+    .main-container aside ul{
+        min-height: 55vw;
     }
 }
-@media (min-width: 2000px){
+@media (min-width: 3000px){
     main{
-        min-width: 180rem;
+        min-width: 100vw;
     }
     .nav_container{
-        min-width:180rem;
+        min-width:100vw;
     }
 }
 
