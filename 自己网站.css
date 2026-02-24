@@ -10,7 +10,7 @@
     --color-background-aside: skyblue;
     --color-background-color-mian: red;
     /*  间距系统  */
-    --container-width: 96vw; /* container(容器) 61.25rem=980px */
+    --container-width: 100vw; /* container(容器) 61.25rem=980px */
     --container-height: 100vh;
     --header-height: 7.5rem;
     --main-container-height: 66.5rem;
@@ -20,9 +20,10 @@
     --main-container-carousel-height:333rem;
 
     /*  字体大小  */
-    --font-size-text-header: 3rem;
-    --font-size-text-aside: 1.8rem;
-    --font-size-text-aside-media: 1.0rem;
+    --font-size-text-header: 2.5rem;
+    --font-size-text-aside: 2.2rem;
+    --font-size-text-aside-media: 1.5rem;
+    --font-size-text-aside-media-2: 1.2rem;
 
     /*  定位  */
     --main-container-ol-top:0;
@@ -104,7 +105,7 @@ header {
     justify-content: space-evenly; /*需要有高度才会平分空间*/
     /*align-items: center;*/
     flex-direction: column;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
 }
 
 .main-container aside ul li {
@@ -174,44 +175,39 @@ header {
     }
 }
 footer{
-    height: 15.5rem;
+    height: 20rem;
     width: 100%;
     text-align: center;
-    line-height: 15.5rem;
+    line-height: 20rem;
     background-color:orange;
     font-size: 3rem;
 }
-@media  (max-width: 1500px){
+@media (max-width: 1800px) {
+    main{
+        min-width: 100vw;
+    }
+    .nav_container{
+        min-width:100vw;
+    }
+    .main-container aside ul li{
+        font-size: var(--font-size-text-aside-media);
+    }
+}
+@media (max-width: 1100px){
     main{
         min-width: 100vw;
     }
     .nav_container{
         min-width:100VW;
     }
+    .main-container aside{
+        flex: 1.5;
+    }
     .main-container aside ul{
-        min-height: 40vw;
+        height: 50vh;
     }
     .main-container aside ul li{
-        font-size: var(--font-size-text-aside-media);
-    }
-}
-@media (min-width: 1500px) and (max-width: 3000px){
-    main{
-        min-width: 40vw;
-    }
-    .nav_container{
-        min-width:40vw;
-    }
-    .main-container aside ul{
-        min-height: 55vw;
-    }
-}
-@media (min-width: 3000px){
-    main{
-        min-width: 100vw;
-    }
-    .nav_container{
-        min-width:100vw;
+        font-size: var(--font-size-text-aside-media-2);
     }
 }
 
