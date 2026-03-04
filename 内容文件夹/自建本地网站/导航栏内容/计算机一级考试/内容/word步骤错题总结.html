@@ -27,6 +27,10 @@
                         <li><a href="#开始选项卡——全角与半角转变">全角与半角转变</a></li>
                         <li><a href="#开始选项卡——允许跨行显示">允许跨行显示</a></li>
                         <li><a href="#开始选项卡——中文版式">中文版式(字符宽度)</a></li>
+                        <li><a href="#开始选项卡——字体颜色渐变">字体颜色渐变</a></li>
+                        <li><a href="#开始选项卡——文本突出显示">文本突出显示</a></li>
+                        <li><a href="#开始选项卡——隐藏文本">隐藏文本</a></li>
+                        <li><a href="#开始选项卡——文字文本填充">文字文本填充</a></li>
                     </ol>
                 </li>
                 <li id="插入选项卡"><a href="#">插入选项卡</a>
@@ -48,6 +52,7 @@
                                 <li><a href="#插入表格——边框和底纹的设置">边框底纹设置</a></li>
                                 <li><a href="#插入表格——合并单元格">合并单元格</a></li>
                                 <li><a href="#插入表格——拆分表格">拆分表格</a></li>
+                                <li><a href="#插入表格——斜框线">斜框线</a></li>
                             </ol>
                         </li>
                         <li style="color: white;">
@@ -57,6 +62,7 @@
                                 <li><a href="#插入图片——控制图片宽高">控制图片宽高</a></li>
                                 <li><a href="#插入图片——文本环绕设置">文本环绕设置</a></li>
                                 <li><a href="#插入图片——图片相关操作">图片相关操作</a></li>
+                                <li><a href="#插入图片——添加艺术效果">添加艺术效果</a></li>
                             </ol>
                         </li>
                         <li style="color:white;">
@@ -66,8 +72,10 @@
                                 <li><a href="#页眉页脚——文档部件插入信息">文档部件插入信息</a></li>
                                 <li><a href="#页眉页脚——设置页眉页脚位置">页眉页脚位置</a></li>
                                 <li><a href="#页眉页脚——删除默认页眉线">删除默认页眉线</a></li>
+                                <li><a href="#页眉页脚——添加水印第二种方法">页眉页脚添加水印</a></li>
                             </ol>
                         </li>
+                        <li><a href="#插入选项卡——添加超链接">添加超链接</a></li>
                     </ol>
                 </li>
                 <li id="绘图选项卡"><a href="#">绘图选项卡</a></li>
@@ -83,6 +91,7 @@
                         <li><a href="#布局选项卡——栏">分栏</a></li>
                         <li><a href="#布局选项卡——设置页边距">设置页边距</a></li>
                         <li><a href="#布局选型卡——锁定行数">锁定行数</a></li>
+                        <li><a href="#布局选项卡——文字排列方向">文字排列方向</a></li>
                     </ol>
                 </li>
                 <li id="引用选项卡"><a href="#">引用选项卡</a>
@@ -91,7 +100,11 @@
                     </ol>
                 </li>
                 <li id="邮件选项卡"><a href="#">邮件选项卡</a></li>
-                <li id="审阅选项卡"><a href="#">审阅选项卡</a></li>
+                <li id="审阅选项卡"><a href="#">审阅选项卡</a>
+                    <ol>
+                        <li><a href="#审阅选项卡——简繁切换">简繁切换</a></li>
+                    </ol>
+                </li>
                 <li id="视图选项卡"><a href="#">视图选项卡</a></li>
                 <li id="文件选项卡"><a href="#">文件选项卡</a>
                     <ol>
@@ -295,7 +308,7 @@
                 <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>表格内容对齐方式：<a
                     href="#插入选项卡">选中需要对齐的内容——表格布局选项卡——文本对齐组(选择按要求的对齐方式即可)</a>
                 <br><i
-                    class="iconfont icon-icon-test font_image"></i>图例：<span>注意：开始选项卡的文本对齐方式无效</span><img
+                    class="iconfont icon-icon-test font_image"></i>图例：<span>注意：建议使用布局选项卡中的对齐按钮，它可以同时设置水平和垂直方向</span><img
                     src="../image/word/插入选项卡/插入表格/表格文本对齐方式/表格文本对齐方式.png"
                     alt="插入表格" title="表格文本对齐方式">
             </li>
@@ -323,6 +336,7 @@
             <li id="插入表格——设置重复标题行并排序">
                 <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>设置重复标题行并排序：<a
                     href="#插入选项卡">选中需要设置重复标题行的单元格——表格布局选项卡——单击重复标题行组——选择排序组(按要求来设置关键字和降序或升序)</a>
+                <p>但是注意：排序与设置重复标题行非<span>并列关系</span>，也就是：排序不一定要设置重复标题行，但是排序关键字始终在所选择的第一行(需要单击有标题行可使用)</p>
                 <br><i class="iconfont icon-icon-test font_image"></i>图例：<img
                     src="../image/word/插入选项卡/插入表格/设置重复标题行和排序/设置重复标题行和排序.png"
                     alt="插入表格" title="设置重复标题行和排序">
@@ -420,7 +434,7 @@
             </li>
             <li id="开始选项卡——文本突出显示">
                 <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>文本突出显示：<a
-                    href="#开始选项卡">选中需要突出的文本——开始选新娘卡——单击【突出显示组】下拉菜单——按要求选择对应颜色即可</a>
+                    href="#开始选项卡">选中需要突出的文本——开始选项卡——单击【突出显示组】下拉菜单——按要求选择对应颜色即可</a>
                 <br><i class="iconfont icon-icon-test font_image"></i>图例：<img
                     src="../image/word/开始选项卡/文本突出显示/文本突出显示——图例.png"
                     alt="文本突出显示" title="文本突出显示——图例">
@@ -428,7 +442,7 @@
             <li id="插入选项卡——插入图片">
                 <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>插入图片：<a
                     href="#插入选项卡">选择规定的插入图片的位置——插入选项卡——图片组下拉菜单——选择此设备——找到要求的图片(选择确定即可)</a>
-                <br><i class="iconfont icon-icon-test font_image"></i>图例：什么找不到图片，没事，在考生文件加下——单击地址栏——然后全部复制——最后粘贴到【插入图片对话框的地址栏】按回车——选中规定的图片即可<img
+                <br><i class="iconfont icon-icon-test font_image"></i>图例：找不到图片时，可在插入图片对话框中，可以通过复制考生文件夹路径到地址栏快速定位图片<img
                     src="../image/word/开始选项卡/文本突出显示/文本突出显示——图例.png"
                     alt="文本突出显示" title="文本突出显示——图例">
             </li>
@@ -524,8 +538,10 @@
                 <br><i class="iconfont icon-icon-test font_image"></i>图例：<img
                     src="../image/word/开始选项卡/全角半角转换/全角半角转换——1.png"
                     alt="全角半角转换" title="全角半角转换——1">
-                <p>·但是一般不会让所有内容同时转半角/全角,而是指定更改(某类型的)全角/半角，需要先选定所有该类型的内容，这就需要使用查找功能</p>
-                <p>·具体步骤：开始选项卡——查找和替换组——在弹出的对话框——选择查找——更多——特殊格式(按要求选择)——然后选择主文档——最后按上面步骤完成转换</p>
+                <p>
+                    ·但是一般不会让所有内容同时转半角/全角,而是指定更改(某类型的)全角/半角，需要先选定所有该类型的内容，这就需要使用查找功能</p>
+                <p>
+                    ·具体步骤：开始选项卡——查找和替换组——在弹出的对话框——选择查找——更多——特殊格式(按要求选择)——然后选择主文档——最后按上面步骤完成转换</p>
                 <br><i class="iconfont icon-icon-test font_image"></i>图例：<img
                     src="../image/word/开始选项卡/全角半角转换/全角半角转换——指定转换1.png"
                     alt="全角半角转换" title="全角半角转换——指定转换1">
@@ -560,6 +576,67 @@
                     src="../image/word/开始选项卡/中文版式设置/中文版式设置——打开对话框.png"
                     alt="中文版式设置" title="中文版式设置——打开对话框">
             </li>
+            <li id="插入表格——斜框线">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>斜框线：<a
+                    href="#插入选项卡">选中需要插入斜框线的单元格(行/列/单元格)——表设计选项卡——边框组下拉菜单——选择(斜下框线/斜上框线)</a>
+                <p><span>当是文本转表格中</span>若要求上方文字/下方文字的文本(<span>请注意，在输入对应位置的文本需要按回车键【一定要按回车键】，该操作会使文本自动排列位置</span>)
+                </p>
+                <p><span>同理若是自己建立的表格，按回车则是换行，而不会自动排位置</span></p>
+                <p>
+                    只能连续的行或列能同时添加斜框线，<span>也就是说，通过CTRL键选择不相邻的行或列，无法同时设置斜框线</span>
+                </p>
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                    src="../image/word/插入选项卡/插入表格/插入斜框线/插入斜框线——步骤一.png"
+                    alt="插入斜框线" title="插入斜框线">
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                    src="../image/word/插入选项卡/插入表格/插入斜框线/插入斜框线——上方_下方文字不同操作的区别.png"
+                    alt="插入斜框线" title="插入斜框线——上方_下方文字不同操作的区别">
+            </li>
+            <li id="开始选项卡——字体颜色渐变">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>字体颜色渐变：<a
+                    href="#开始选项卡">选中需要的文本——开始选项卡——字体颜色组——悬停渐变选项——在右侧选择要求的效果</a>
+                <P>注意：这与在字体对话框启动器中的文字效果设置——文字填充——渐变填充不一样。</P>
+                <p>总之记住：<span>有预设用预设，没预设看参数，有参数手动调</span></p>
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                    src="../image/word/开始选项卡/字体颜色渐变/字体颜色渐变——在字体颜色组设置.png"
+                    alt="字体颜色渐变" title="字体颜色渐变——在字体颜色组设置">
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                    src="../image/word/开始选项卡/字体颜色渐变/字体颜色渐变——在文字效果设置.png"
+                    alt="字体颜色渐变" title="字体颜色渐变——在文字效果设置">
+            </li>
+            <li id="插入选项卡——添加超链接">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>添加超链接：<a
+                    href="#插入选项卡">选中需要添加超链接的文本——插入选项卡——单击链接组——在地址栏输入要求的地址——单击确定即可</a>
+                <p><span>方法二：</span>选中需要添加超链接的文本——鼠标右键——在弹出的侧边栏单击链接——在弹出的窗口的地址栏输入要求的地址——单击确定即可</p>
+                <P><span>方法三：</span>选中需要添加超链接的文本——使用快捷键<span>CTRL+K</span>——在弹出的窗口的地址栏输入要求的地址——单击确定即可</P>
+                <P>不管如何，最后显示的窗口都是同一个，输入地址栏，单击确定即可</P>
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                    src="../image/word/插入选项卡/超链接/超链接演示.png"
+                    alt="超链接" title="超链接演示">
+            </li>
+            <li id="布局选项卡——文字排列方向">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>文字排列方向：<a
+                    href="#布局选项卡">选中需要更改方向的文本——布局选项卡——文字方向组——按要求操作</a>
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                    src="../image/word/布局选项卡/文字方向设置/文字方向设置.png"
+                    alt="文字方向设置" title="文字方向设置">
+                <br/><i class="iconfont icon-icon-test font_image"></i>可以直接在下拉菜单设置，也可以在文字方向对话框设置(<span>唯一不同的是：可以选所选文字或整篇文档</span>)<img
+                    src="../image/word/布局选项卡/文字方向设置/文字方向设置——方法二.png"
+                    alt="文字方向设置" title="文字方向设置——方法二">
+            </li>
+            <li id="审阅选项卡——简繁切换">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>简体字与繁字体切换：<a
+                    href="#审阅选项卡">选中需要转换的文本——审阅选项卡——在中文简繁转换组——按要求设置(繁转简、简转繁、简繁转换)</a>
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                    src="../image/word/审阅选项卡/简体繁体转换.png"
+                    alt="简体繁体转换" title="简体繁体转换">
+            </li>
+            <li id="页眉页脚——添加水印第二种方法">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>添加水印第二种方法：<a
+                    href="#插入选项卡">插入选项卡——页眉/页脚组(主要是调出页眉页脚选项卡)——输入文字/图片——关闭页眉页脚选项卡</a>
+                <p>总结来说:可以达到类似水印的效果（虽然不是通过水印功能添加，但在考试中常可作为替代方法）<span>主要用于：规定水印图片的位置，宽高度</span></p>
+                <br/><i class="iconfont icon-icon-test font_image"></i>实例操作：<video controls src="../image/word/插入选项卡/插入页眉页脚/通过页眉页脚设置水印/通过页眉页脚设置水印.mp4"></video>
+            </li>
         </ul>
     </section>
     <section class="SingleChoiceQuestion">
@@ -572,11 +649,9 @@
                 <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><span>建议执行所有操作的时候先选中需要操作的内容</span>
             </li>
             <li>
-                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><span>加粗和倾斜不能再，字体对话框中同时设置，需要在开始选项卡中设置其中同一个</span>
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><span>加粗和倾斜，可以在字体对话框中同时设置，将列表下滑可以看到</span>
             </li>
             <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><span>所有被使用的功能都会突出显示(背景色为灰色[不管是单击操作还是对话框操作])，同理再次单击就是执行取消操作</span>
-            <li>
-                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><span>只有先建立重复标题行，才能排序，且只有在同一行的内容才能排序</span>
             <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><span>横行竖列(记住)</span>
             <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><span>看到要求设置文字效果就是在<a
                     href="#开始选项卡——文本效果和版式">开始选项卡——文字效果和版式查找</a></span>
@@ -592,23 +667,61 @@
             </li>
             <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>表格插入公式的时候，同一种公式不用重复插入，将已经插入公式的单元格复制，粘贴到需要单元格(插入的公式必须是一样的)，然后选中整张单元格，按下F9刷新即可。
             </li>
-            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>关于重复标题行，一般<span>第一行才能设为重复标题行，才能进行排序</span>，也可以：使用选中的方法，将需要排序关键以及它们数据选中，然后单击<span>表格布局选项卡——排序组——弹出的对话框选择有标题行——按照要求决定主要关键字、次要关键字、第三关键字以及它们的排序顺序。</span>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>关于重复标题行，先设置重复标题行（选中标题行，点击“重复标题行”），再对表格进行排序（选中表格或标题行，点击“排序”，设置关键字）。<span>而且排序并不一定需要先设重复标题行，二者无关</span>,当没有设置重复标题行时，<span>选中需要设为关键字的行在最上面，然后单击排序，选择有标题行，在定义关键字和排序升或降</span>
             </li>
             <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>注意：<span><a
                     href="#开始选项卡——文字文本填充">文字文本填充</a>与<a
                     href="#设计选项卡——页面颜色和填充">页面颜色</a>是两种设置，后者是整个页面设置，前者是设置文字文本的设置(注意审题)</span>
             </li>
-            <li>输入数据参数的时候，必须输入数字+单位(注意：<span>若是设置行距需选择固定值</span>)</li>
-            <li>图片居中，可以使用文字居中的方式(开始选项卡——居中组<span>也可以选中图片，使用快捷键Ctrl+E</span>)</li>
-            <li>当设置文本大小，没有给出具体的字号的时候，若是以磅为单位<span>则直接输入数字即可</span></li>
-            <li>当插入脚注和尾注时，不需要一个一个输入，<span>可以先复制需要的内容，然后在输入脚注的位置——右键——在粘贴选项——选择只保留文本即可(选择在A标志的即可)</span>,若直接粘贴，会将考题原本的字体样式复制过来，会导致扣分
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>输入数据参数的时候，必须输入数字+单位(注意：<span>若是设置行距需选择固定值</span>)</li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>图片居中，可以使用文字居中的方式(开始选项卡——居中组<span>也可以选中图片，使用快捷键Ctrl+E</span>)</li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>当设置文本大小，没有给出具体的字号的时候，若是以磅为单位<span>则直接输入数字即可</span></li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>
+                当插入脚注和尾注时，不需要一个一个输入，<span>可以先复制需要的内容，然后在输入脚注的位置——右键——在粘贴选项——选择只保留文本即可(选择在A标志的即可)</span>,若直接粘贴，会将考题原本的字体样式复制过来，会导致扣分
                 <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
-                        src="../image/word/引用选项卡/脚注_尾注/文本粘贴方式.png"
-                        alt="文本粘贴方式" title="文本粘贴方式" style="width: 1000px;height: 1000px;">
+                    src="../image/word/引用选项卡/脚注_尾注/文本粘贴方式.png"
+                    alt="文本粘贴方式" title="文本粘贴方式" class="image_small">
             </li>
-            <li>恶心卷子：八、十二</li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>当页眉所输入“今日”日期的时候，在日期选项，单击下来菜单，弹出的日历选择<span>今日</span>，切记不是在<span>日期地方输入"今日"</span>二字
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                        src="../image/word/插入选项卡/插入页眉页脚/页眉日期注意事项/页眉日期注意事项.png"
+                        alt="页眉日期注意事项" title="页眉日期注意事项" class="image_small">
+            </li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>
+                使用表设计选项卡的边框样式的时候，不用用刷子，一个一个点，还以长按鼠标右键，拖动鼠标，到需要的位置，然后松右键即可
+            </li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>文本底纹设置：选中文本，开始选项卡——边框组下拉菜单——选择边框和底纹——在弹出的对话框选择底纹——将段落改为文字——然后按要求选择颜色等
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                        src="../image/word/开始选项卡/文字添加底纹/文字添加底纹.png"
+                        alt="文字添加底纹" title="文字添加底纹" class="image_small">
+            </li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>当字体同时设置中文字体和西文字体时，开始选项卡下的字体组，有三种显示状态：只选择中中文<span>显示的是所设置的中文字体</span>、只选中西文<span>显示的是所设置的西文字体</span>、若<span>同时选中，则显示为空白</span>，综上所述，一切以字体对话框启动器内设置为主，字体组可以不考虑</li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>当文本效果设置同时要求设置：填充、边框、清晰阴影<span>直接在预设中查找并设置</span>
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                        src="../image/word/开始选项卡/文本和版式/文本和版式——注意事项.png"
+                        alt="文本和版式——注意事项" title="文本和版式——注意事项">
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                        src="../image/word/开始选项卡/文本和版式/文本和版式——注意事项2.png"
+                        alt="文本和版式——注意事项" title="文本和版式——注意事项2" class="image_small">
+                <p class="p_smail">反之，需要单独设置则：<a href="#开始选项卡——文本效果和版式">文本效果和版式</a>按步骤设置</p>
+            </li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>定义项目符号的时候，分具体要求的符号图案和“具体数字”，两种操作是不一样的
+                <p class="p_smail">具体要求图案要自己找图案并使用</p>
+                <p class="p_smail">具体数字图案是<span>输入具体数字，会直接定义到改符号</span>，然后直接使用即可</p>
+                <br/><i class="iconfont icon-icon-test font_image"></i>图例：<img
+                        src="../image/word/开始选项卡/添加编号/添加编号——注意事项.png"
+                        alt="添加编号——注意事项" title="添加编号——注意事项" class="image_small">
+                <p class="p_smail"><span>项目符号、编号、多级列表都是不同的设置，需要仔细读题</span></p>
+            </li>
+            <li><i class="iconfont icon-icon-test font_image"></i><span>在文本效果与版式中，边框=轮廓</span></li>
+            <li><i class="iconfont icon-icon-test font_image"></i><span>关于颜色的专业名词：主题色(官方全称)、个性色(每个word版本叫法不同)与着色(理解为主题色即可)是一种，都是颜色选择器上半部分，可以设置透明度，而标准色就是下半部分，不能设置透明度</span>综上所述：主题色=着色=个性色(可以更改透明度)、标准色(不能更改透明度)</li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>恶心卷子：八、十二</li>
+            <li><i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>有必要练习的卷子：十八、十九，二十一、二十四、二十五、二十六、二十七</li>
         </ul>
     </section>
+    <footer>
+        <p>以上均为个人整理，具体结合操作验证</p>
+    </footer>
 </main>
 </body>
 </html>
