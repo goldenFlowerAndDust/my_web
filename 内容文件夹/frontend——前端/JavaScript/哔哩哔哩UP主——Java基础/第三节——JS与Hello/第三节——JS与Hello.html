@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第三节——JS与Hello.html</title>
+    <link rel="stylesheet" href="../../JavaScript通用样式表.css">
+    <script>
+        // alert("hello word")
+
+        // document.write("hello word")
+
+        // console.log("hello word")
+    </script>
+</head>
+<body>
+<main>
+    <header>
+        <h1>JS与Hello.html</h1>
+    </header>
+    <section id="section_1">
+        <h2>关键字</h2>
+        <ol>
+            <li>
+                <h3>alert关键字</h3>
+                <p>弹出对话框</p>
+                <p>它在<span><a href="#浏览器对象模型">浏览器对象模型中</a></span></p>
+            </li>
+            <li>
+                <h3>document.write(<span>并非现代主流</span>)</h3>
+                <p>作用是：是一个只能在页面初始渲染时使用的、向文档流中即时输出 HTML 的同步写入方法</p>
+                <p>也就是说：如果在页面加载完成后调用，它会先清空整个页面，然后只写入你给的内容。</p>
+                <p>现代替代:
+                    <span>动态插入内容用 innerHTML 或 createElement + appendChild
+                    加载外部资源用 &lt;script&gt;标签动态创建或模块化加载</span></p>
+            </li>
+            <li>
+                <h3>console.log</h3>
+                <p>定义：console.log 是 JavaScript
+                    中用于向浏览器控制台输出信息的方法，主要作用是调试和记录。它不会影响页面的显示，只在开发者工具中可见</p>
+                <ul>
+                    <li>所属对象：console对象[<span>浏览器内置的调试工具</span>]</li>
+                    <li>语法：<code>console.log(obj1[，obj2,…………objN])</code></li>
+                    <li>参数：接受任意多个，任意类型的参数，它们会被依次输出到控制台</li>
+                    <li>返回值：undefined</li>
+                </ul>
+                <p><span>核心特性</span></p>
+                <ul>
+                    <li>
+                        <p>格式化输出</p>
+                        <p>支持类似于C语言的占位符:</p>
+                        <p>
+                            <span>常用占位符：%s（字符串）、%d（整数）、%f（浮点）、%o（DOM 元素）、%O（JavaScript 对象）、%c（CSS 样式）</span>
+                        </p>
+                    </li>
+                    <li>
+                        <p>多参数打印</p>
+                        <p><span>传入多个参数时，控制台会用空格分隔依次显示</span></p>
+                    </li>
+                    <li>
+                        <p>对象/数组的交互式展示</p>
+                        <p><span>打印对象或数组时，控制台会显示为可折叠的树形结构，便于探查</span></p>
+                    </li>
+                    <li>
+                        <p>不影响页面流程</p>
+                        <p><a href="#三种输出方式的对比">与 alert 不同，console.log
+                            不会阻塞代码执行，也不会改变页面内容，是纯调试工具</a></p>
+                    </li>
+                </ul>
+                <p>注意事项：</p>
+                <ul>
+                    <li>生产环境应移除或禁用 console.log，避免暴露信息或影响性能（可用条件编译或构建工具去除）</li>
+                    <li>在 Node.js 环境中，console.log 同样存在，用于向终端输出</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+    <section id="section_2">
+        <h2>名词解释/其他知识</h2>
+        <ol>
+            <li id="浏览器对象模型">
+                <h3>浏览器对象模型</h3>
+                <p>显示的时候在网页之外，浏览器自动生成的</p>
+            </li>
+            <li>
+                <h3>script注释是双斜杠【<span>//</span>】</h3>
+            </li>
+            <li id="三种输出方式的对比">
+                <h3>三种输出方式的对比</h3>
+                <table>
+                    <tr>
+                        <th>方式</th>
+                        <th><span>输出位置</span></th>
+                        <th>影响页面</th>
+                        <th>主要用途</th>
+                    </tr>
+                    <tr>
+                        <td>console.log</td>
+                        <td>控制台</td>
+                        <td>无</td>
+                        <td>调试、日志</td>
+                    </tr>
+                    <tr>
+                        <td>alert()</td>
+                        <td>弹窗</td>
+                        <td>阻塞UI</td>
+                        <td>用户提示(已很少用)</td>
+                    </tr>
+                    <tr>
+                        <td>document.write</td>
+                        <td>页面内</td>
+                        <td>可能覆盖页面</td>
+                        <td>早期动态写入(已过时)</td>
+                    </tr>
+                </table>
+            </li>
+        </ol>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

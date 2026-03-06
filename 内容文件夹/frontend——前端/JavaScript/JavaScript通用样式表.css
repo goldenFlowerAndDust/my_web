@@ -4,6 +4,7 @@
     --color-span: red;
     --color-h2: #2c3e50;
     --color-h3: #4A5568;
+    --color-code: #6f42c1;
 
     /*  backgroun-color  */
     --background-color-main: #FDF5E6;
@@ -12,7 +13,7 @@
     /*  font-size  */
     --size-h1-footer: 2.1rem;
     --size-li: 1.5rem;
-    --size-span: 1.65rem;
+    --size-span-code: 1.65rem;
 
     /* line-height */
     --line-height-p: 1.4;
@@ -111,7 +112,7 @@ img {
 span {
     color: var(--color-span);
     font-weight: bold;
-    font-size: var(--size-span);
+    font-size: var(--size-span-code);
 }
 
 li {
@@ -131,15 +132,20 @@ table {
     margin: 10px auto;
     border: 1px solid var(--border-color-table-td);
     border-collapse: collapse;
+    width: 80%;
 }
 
-td {
+td,th{
     border: 1px solid var(--border-color-table-td);
     text-align: center;
     vertical-align:middle;
 
 }
 
+code {
+    color: var(--color-code);
+    font-size: var(--size-span-code);
+}
 
 footer {
     grid-area: footer;
