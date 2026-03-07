@@ -357,3 +357,24 @@ footer p{
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.ol_initial li{
+    list-style: initial;
+}
+
+table{
+    width: 80%;
+    margin: 0 auto;
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+td,th{
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+}
+
+code{
+    color: green;
+}
