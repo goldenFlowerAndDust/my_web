@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>excel步骤错题总结</title>
-    <link rel="stylesheet" href="./计算机一级考试通用样式表.css">
+    <link rel="stylesheet" href="计算机一级考试通用样式表.css">
     <link rel="stylesheet" href="../字体图标/一级列表和三级列表/download/font_fibvrbic6pf/iconfont.css">
     <link rel="stylesheet" href="../字体图标/二级列表/download%20(1)/font_re1tx7f6uj/iconfont.css">
 </head>
@@ -17,15 +18,29 @@
                     <ol>
                         <li><a href="#开始选项卡——合并并单元格">合并单元格</a></li>
                         <li><a href="#开始选项卡——文本对齐方式">文本对齐方式</a></li>
-                        <li><a href="#开始选项卡——设置单元格数据格式">设置数据格式</a></li>
+                        <li><a href="#开始选项卡——设置单元格数据格式">设置单元格格式</a></li>
+                        <li><a href="#开始选项卡——条件格式">条件格式使用</a></li>
                     </ol>
                 </li>
-                <li><a id="插入选项卡">插入选项卡</a></li>
+                <li><a id="插入选项卡">插入选项卡</a>
+                    <ol>
+                        <li>
+                            <p>图表相关设置</p>
+                            <ol class="nav_2">
+                                <li><a href="#插入选项卡——插入图表">插入图表</a></li>
+                                <li><a href="#图表设计选项卡——添加图表元素">添加图表元素</a></li>
+                                <li><a href="#图表设计选项卡——图表样式">图表样式</a></li>
+                            </ol>
+                        </li>
+                        <li></li>
+                        <li></li>
+                    </ol>
+                </li>
                 <li><a id="页面布局选项卡">页面布局选项卡</a></li>
                 <li><a id="公式选项卡">公式</a>
                     <ol>
-                        <li><a href="#公式——求和">求和</a></li>
-                        <li><a href="#公式——求平均值">求平均值</a></li>
+                        <li><a href="#公式——SUM家族">SUM家族</a></li>
+                        <li><a href="#公式——AVERAGE家族">AVERAGE家族</a></li>
                         <li><a href="#公式——COUNT家族">COUNT家族</a></li>
                     </ol>
                 </li>
@@ -33,7 +48,11 @@
                 <li><a id="审阅选项卡">审阅选项卡</a></li>
                 <li><a id="视图选项卡">视图选项卡</a></li>
                 <li><a id="自动执行选项卡">自动执行选项卡</a></li>
-                <li><a href="#其他知识">其他知识</a></li>
+                <li id="其他知识导航栏"><a href="#其他知识">其他知识</a>
+                    <ol>
+                        <li><a href="#使用公式需要知道的"></a></li>
+                    </ol>
+                </li>
             </ul>
         </nav>
         <div>
@@ -68,10 +87,31 @@
                     alt="文本对齐方式"
                     title="文本对齐方式——方法二">
             </li>
-            <li id="公式——求和">
-                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>求和【函数<code>SUM</code>】(建议先了解<a
+            <li id="公式——SUM家族">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>SUM家族(求和)【函数<code>SUM、SUMIF、SUMIFS</code>】(建议先了解<a
                     href="#使用公式需要知道的事">该知识</a>):<a
                     href="#公式选项卡">选中求和输出结果的单元格——公式选项卡——自动求和组——拖动鼠标选中需要求和的参数——最后按回车</a>
+                <ol class="ol_initial">
+                    <li>
+                        <h2>SUM</h2>
+                        <p>
+                            求和【就是将所选范围内的数字相加】——<span>因为是数字求和，所以空单元格、字符串、逻辑值不会进入求和计算</span>
+                        </p>
+                        <p>语法：<code>=SUM(范围)</code></p>
+                    </li>
+                    <li>
+                        <h2>SUMIF</h2>
+                        <p>单条件求和【就是将所选范围内符合条件的数字相加】——<span>因为是数字求和，所以空单元格、字符串、逻辑值不会进入求和计算(需要求和的数字范围放在最后面)</span>
+                        </p>
+                        <p>语法：<code>=SUMIF(条件范围,条件,数字范围)</code></p>
+                    </li>
+                    <li>
+                        <h2>SUMIFS</h2>
+                        <p>多条件求和【就是将所选范围内符合所有条件的数字相加】——<span>因为是数字求和，所以空单元格、字符串、逻辑值不会进入求和计算(需要求和的数字范围放在最前面)</span>
+                        </p>
+                        <p>语法：<code>=SUMIFS(数字范围,条件范围1,条件1,条件范围2,条件2,条件范围3,.....)</code></p>
+                    </li>
+                </ol>
                 <br><i class="iconfont icon-icon-test font_image"></i>视频：
                 <video controls
                        src="../image/excel/公式选项卡/求和/求和——方法一.mp4"></video>
@@ -89,10 +129,40 @@
                     alt="设置单元格格式"
                     title="设置单元格格式_2">
             </li>
-            <li id="公式——求平均值">
-                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>求平均值【函数<code>AVERAGE</code>】(建议先了解<a
+            <li id="公式——AVERAGE家族">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>AVERAGE家族(平均值)【函数<code>AVERAGE、AVERAGEA、AVERAGEIF、AVERAGEIFS</code>】(建议先了解<a
                     href="#使用公式需要知道的事">该知识</a>):<a
-                    href="#公式选项卡">选中求平均值输出结果的单元格——公式选项卡——自动求和下拉菜单——拖动鼠标选中需要求平均值的参数——最后按回车</a>
+                    href="#公式选项卡">选中求平均值输出结果的单元格——公式选项卡——插入函数组——搜索需要的AVERAGE家族——在弹出的对话框——依次选择对应的参数——最后单击确定</a>
+                <ol class="ol_initial">
+                    <li>
+                        <h2>AVERAGE</h2>
+                        <p>
+                            数字平均值【平均值=参与计算的数字总和/数字单元格个数】——<span>因为是数据的总和，所以空单元格和字符串(文本)不会在平均值计算内</span>
+                        </p>
+                        <p>语法：<code>=AVERAGE(平均值参数范围)</code></p>
+                    </li>
+                    <li>
+                        <h2>AVERAGEA</h2>
+                        <p>
+                            所选范围内非空单元格的平均值——<span>文本和逻辑值(True，false)转换后计入平均值计算内(文本转为0，True转为1,false转为0)</span>
+                        </p>
+                        <p>语法：<code>=AVERAGEA(平均值参数范围)</code></p>
+                    </li>
+                    <li>
+                        <h2>AVERAGEIF</h2>
+                        <p>
+                            单条件求平均值【可选定一个条件】——<span>只计算符合条件的数字平均值(需要注意的是：平均值参数范围始终在最后面)</span>
+                        </p>
+                        <p>语法：<code>=AVERAGEIF(范围1,条件1,平均值参数范围)</code></p>
+                    </li>
+                    <li>
+                        <h2>AVERAGEIFS</h2>
+                        <p>
+                            多条件平均值【可选择多个条件】——<span>只计算符合所有条件的数字平均值((需要注意的是：平均值参数范围始终在最前面))</span>
+                        </p>
+                        <p>语法：<code>=AVERAGEIFS(平均值参数范围,范围1,条件1,范围2,条件2,范围3,.....)</code></p>
+                    </li>
+                </ol>
                 <br><i class="iconfont icon-icon-test font_image"></i>视频：
                 <video controls
                        src="../image/excel/公式选项卡/求平均值/求平均值.mp4"></video>
@@ -140,14 +210,81 @@
                        src="../image/excel/其他知识/其他知识——提升做题效率/其他知识——提升做题效率.mp4"></video>
                 <p>若记得函数，可以直接输入公式，然后拖动鼠标选中需要的参数——最后按回车(但是不建议用)</p>
             </li>
+            <li id="开始选项卡——条件格式">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>条件格式：<a
+                    href="#开始选项卡">选中需要条件格式设置的单元格(地址)——开始选项卡——样式组——条件格式下拉菜单——单击新建规则选项——在弹出的对话框按照题目要求定义规则——最后单击确定即可</a>
+                <p><span>平均值会依靠所选的单元格地址范围自动计算</span></p>
+                <video controls
+                       src="../image/excel/开始选项卡/条件格式的使用/条件格式的使用.mp4"></video>
+            </li>
+            <li id="插入选项卡——插入图表">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>插入图表：<a
+                    href="#插入选项卡">选中题目要求的单元格范围(<span>按住CTRL键可以连续选择不相邻的单元格范围</span>)——插入选项卡——单击图表对话框启动器——在弹出的对话框选择<span>所有图表</span>
+                ——按题目要求选择图表即可</a>
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/插入选项卡/插入图表/插入图表题目.png"
+                    alt="插入图表"
+                    title="插入图表题目">
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/插入选项卡/插入图表/插入图表步骤.png"
+                    alt="插入图表"
+                    title="插入图表步骤">
+                <a href="#插入选项卡案例一">插入选项卡案例一</a>
+            </li>
+            <li id="图表设计选项卡——添加图表元素">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>添加图表元素：<a
+                    href="#插入选项卡">选中需要编辑的图表——图表设计选项卡(插入图表后，并编辑图表时出现)——图表元素组——添加图表元素</a>
+                <p>【添加图表元素】功能很强大可以：</p>
+                <ol class="ol_initial">
+                    <li>指定坐标轴位置</li>
+                    <li>指定坐标轴标题</li>
+                    <li>图表标题位置</li>
+                    <li>数据标签是否显示</li>
+                    <li>是否显示图例标识</li>
+                    <li>设置误差线</li>
+                    <li>网格线</li>
+                    <li>图例</li>
+                    <li>线条</li>
+                    <li>趋势线</li>
+                    <li>涨/跌柱线</li>
+                </ol>
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/插入选项卡/插入图表/添加图表元素/添加图表元素.png"
+                    alt="添加图表元素"
+                    title="添加图表元素">
+                <a href="#插入选项卡案例一">插入选项卡案例一</a>
+            </li>
+            <li id="图表设计选项卡——图表样式">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>图表样式：<a
+                    href="#插入选项卡">选中需要编辑的图表——图表设计选项卡——图表样式组下拉菜单——选择要求的图表样式即可</a>
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/插入选项卡/插入图表/图表样式/图表样式步骤一.png"
+                    alt="图表样式步骤"
+                    title="图表样式步骤一">
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/插入选项卡/插入图表/图表样式/图表样式步骤二.png"
+                    alt="图表样式步骤"
+                    title="图表样式步骤二">
+                <a href="#插入选项卡案例一">插入选项卡案例一</a>
+            </li>
+            <li id="格式选项卡——设置图表区格式">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>设置图表区格式：<a
+                    href="#插入选项卡">选中需要编辑的图表——格式选项卡(只有当图表进行编辑时，出现)——【当所选内容组】——单击【设置所选内容格式】——在弹出的侧边栏里按题目要求设置格式</a>
+                <p>因为是设置所选内容格式，所以<span>具体设置格式的地方与自己选择的内容相关，可以是表标题、整张图表……</span></p>
+                <p><span>方法二：</span>鼠标左键双击选中的区域，打开对应区域的设置格式的侧边栏</p>
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/插入选项卡/插入图表/设置图表内容的格式/设置图表内容的格式.png"
+                    alt="设置图表内容的格式"
+                    title="设置图表内容的格式">
+            </li>
         </ul>
     </section>
     <!--其他部分-->
     <section class="SingleChoiceQuestion">
-        <p id="其他知识">其他知识</p>
+        <p id="其他知识"><a href="#其他知识导航栏">其他知识</a></p>
         <ul>
             <li id="使用公式需要知道的事">
-                <h3>使用公式需要知道的</h3>
+                <h3 id="使用公式需要知道的"><a href="#其他知识导航栏">使用公式需要知道的</a></h3>
                 <ol class="ol_initial">
                     <li>
                         <h4><span>同一公式重复使用</span></h4>
@@ -200,8 +337,8 @@
                                src="../image/excel/其他知识/公式重复使用以及引用/公式重复使用以及引用.mp4"></video>
                     </li>
                     <li>
-                        <h3>采用公式的两种方法</h3>
-                        <ul>
+                        <h3><span>采用公式的两种方法</span></h3>
+                        <ul class="ul_initial">
                             <li>通过公式选项卡插入公式组(自认为建议这种方法<span>因为它会弹出输入参数的对话框，有效避免符号的限制(有时输入成中文，字符串不添加双引号……)</span>)
                             </li>
                             <li>在单元格手动输入</li>
@@ -218,6 +355,13 @@
             </li>
             <li>
                 <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>输入函数参数的时候，只能是英文字符，当是字符串/文本需要英文双引号包裹(<span>若是使用插入函数组，弹出的对话框则不需要</span>)
+            </li>
+            <li>
+                <video src="../image/excel/插入选项卡/案例/案例一.mp4" controls id="插入选项卡案例一"></video>
+            </li>
+            <li>
+                <p><span>设置表标题:</span></p>
+                <p>双击图表标题编辑即可</p>
             </li>
         </ul>
     </section>
