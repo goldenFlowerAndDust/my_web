@@ -1,0 +1,149 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+main{
+	width: 80%;
+	min-height: 100vh;
+	margin: 0 auto;
+}
+/* 全局区域 */
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+/* 导航栏 */
+nav{
+	width: 100%;
+	height: 75px;
+}
+nav ul{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	height: 75px;
+	background-color:#ff5500 ;
+}
+nav ul li{
+	width: 100%;
+	height: 75px;
+	line-height: 75px;
+	text-align: center;
+	font-size: 30px;
+}
+nav ul li a{
+	display: block;
+	width: 100%;
+	height: 75px;
+	color: white;
+}
+nav ul li a:hover{
+	background-color: #ddd;
+}
+/* 第二区域 */
+.box2{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height:500px ;
+	position: relative;
+}
+aside{
+	width: 30%;
+	height: 500px;
+}
+aside ul{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: flex-start;
+	width: 100%;
+	height: 500px;
+	background-color: #00ffff;
+}
+aside ul li{
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+aside ul li a{
+	display: block;
+	width: 100px;
+	height: 50px;
+	color: black;
+}
+span{
+	margin-right: auto;
+}
+aside ul li a:hover{
+	background-color: #ddd;
+}
+/* 右边轮播图 */
+.image{
+	width: 100%;
+	height: 500px;
+	overflow: hidden;
+}
+.image div{
+	width: 100%;
+	height:2600px;
+}
+.image div img{
+	width: 100%;
+	height: 500px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	animation: image 20s ease-out infinite;
+}
+@keyframes image{
+	form{
+		transform: translateY(0);
+	}
+	20%{
+		transform: translateY(-500px);
+	}
+	40%{
+		transform: translateY(-1000px);
+	}
+	60%{
+		transform: translateY(-1500px);
+	}
+	100%{
+		transform: translateY(-2000px);
+	}
+	
+}
+/* 商品中间区域 */
+.box3{
+	display: flex;
+	justify-content: space-around;
+	width:100%;
+	height: 400px;
+	/* position: absolute; */
+}
+.box3 img{
+	width: 100%;
+	height: 250px;
+	background-repeat: no-repeat;
+	background-size:cover;
+	box-shadow: 0 0 5px rgba(0, 0,0,0.3);
+}
+.box3 img:hover{
+	transform: translateY(-10px);
+}
+/* footer */
+footer{
+	width: 100%;
+	height: 400px;
+}
+footer img{
+	width: 100%;
+	height: 400px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}

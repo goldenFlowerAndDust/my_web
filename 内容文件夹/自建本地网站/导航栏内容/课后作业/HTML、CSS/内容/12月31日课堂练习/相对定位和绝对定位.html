@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body{
+				width: 80%;
+				margin: 0 auto;
+			}
+			div{
+				width: 100%;
+				height: 300px;
+				background-color: #ddd;
+			}
+			main div ul{
+				padding: 25px;
+				font-size: 30px;
+				display: flex;
+				gap: 125px;
+				
+			}
+			li{
+				list-style: none;
+			}
+			ul>li{
+				position: relative;
+			}
+			ul li ol{
+				position: absolute;
+				top: 25px;
+				left: 20px;
+				display: none;
+			}
+			ul li ol li{
+				background-color: aqua;
+				margin-top: 15px;
+			}
+			ul li:hover ol{
+				display: block;
+			}
+			a{
+				white-space: nowrap;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<div>
+				<ul>
+					<li><a href="#">一级列表1</a>
+						<ol>
+							<li><a href="#">二级列表1</a></li>
+							<li><a href="#">二级列表2</a></li>
+							<li><a href="#">二级列表3</a></li>
+							<li><a href="#">二级列表4</a></li>
+						</ol>
+					</li>
+					<li><a href="#">一级列表2</a>
+						<ol>
+							<li><a href="#">二级列表1</a></li>
+							<li><a href="#">二级列表2</a></li>
+							<li><a href="#">二级列表3</a></li>
+							<li><a href="#">二级列表4</a></li>
+						</ol>
+					</li>
+					<li><a href="#">一级列表3</a>
+						<ol>
+							<li><a href="#">二级列表1</a></li>
+							<li><a href="#">二级列表2</a></li>
+							<li><a href="#">二级列表3</a></li>
+							<li><a href="#">二级列表4</a></li>
+						</ol>
+					</li>
+					<li><a href="#">一级列表4</a>
+						<ol>
+							<li><a href="#">二级列表1</a></li>
+							<li><a href="#">二级列表2</a></li>
+							<li><a href="#">二级列表3</a></li>
+							<li><a href="#">二级列表4</a></li>
+						</ol>
+					</li>
+					<li><a href="#">一级列表5</a>
+						<ol>
+							<li><a href="#">二级列表1</a></li>
+							<li><a href="#">二级列表2</a></li>
+							<li><a href="#">二级列表3</a></li>
+							<li><a href="#">二级列表4</a></li>
+						</ol>
+					</li>
+				</ul>
+			</div>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>第二章</title>
+	</head>
+	<body>
+		<main>
+			<section>
+				<!-- 主体 -->
+				<h1>基本数据类型</h1>
+				<ul>
+					<li>字符串类型(string)</li>
+					<li>数值数据类型(number)</li>
+					<li>布尔类型——boldean(True、false)</li>
+					<li>未定义类型(undefined)</li>
+					<li>空类型(null)</li>
+					<li>对象类型(object)</li>
+				</ul>
+				<p>其他</p>
+				<ul>
+					<li>typeof查找数据类型——只能在开发者工具控制台查看</li>
+					<li>if，ease(条件语句)</li>
+					<li>switch(循环语句)</li>
+				</ul>
+			</section>
+			<div>
+				<!-- image -->
+				<img src="./image/变量命名规范.png" alt="变量命名规范">
+				<img src="./image/变量声明.png" alt="变量声明">
+				<img src="./image/变量的作用域.png" alt="变量的作用域">
+				<img src="./image/数字类型.png" alt="数字类型">
+				<img src="./image/数字类型转换.png" alt="数字类型转换">
+				<img src="./image/数字类型转换二.png" alt="数字类型转换二">
+			</div>
+			<script>
+				var float = 10
+				console.log(typeof float)
+				console.log(typeof float.toString())  //注意String要大写
+			</script>
+			<script>
+				let number = prompt("请输入第一个加数")
+				let number2 = prompt("请输入第二个加数")
+				let number3 = parseFloat(number) + parseFloat(number2)
+				alert("结果是：" + parseFloat(number3) )
+			</script>
+			<script type="text/javascript">
+				var string = String("星期一")
+				var string2 = String(prompt("请输入星期："))
+				if(string2 == string){
+					alert("你输入的是今天的日期：" + string)
+				}
+				else{
+					alert("你输入的不是今天的日期")
+				}
+			</script>
+			<script>
+				var weekday = String("星期一")
+				var string = String(prompt("请输入星期：")) 
+				switch(string){
+					case "星期一":
+						alert("新的一周开始了");
+						break
+					case "星期五":
+						alert("明天就要休息了");
+						break 
+					default:
+						alert("还要继续努力学习");
+						break
+					
+					
+				}
+			</script>
+		</main>
+	</body>
+</html>

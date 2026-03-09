@@ -1,0 +1,139 @@
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body{
+			margin: 0 auto;
+			min-width: 500px;
+		}
+		nav{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100px;
+			background-color: rgba(65, 65, 65, 1);
+			color: white;
+		}
+		img{
+			width: 170px;
+			height: 70px;
+			float: left;
+			margin-right: 20px;
+		}
+		li{
+			width: 200px;
+			height: 50px;
+			text-align: center;
+			background-color: rgba(62, 63, 65, 1.0);
+		}
+		nav ul li{
+			font-size: 30px;
+			float: left;
+			margin: 20px 20px ;
+			list-style-type: none;
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			border-radius:50px;
+		}
+		nav ul li:hover{
+			background-color: blueviolet;
+		}
+		a:link{
+			color: white;
+			text-decoration: none;
+		}
+		a:visited{
+			color: white;
+			text-decoration: none;
+		}
+		#box1{
+			margin: 15px auto;
+			width:1400px;
+			height:110vh;
+			border: 1px solid #f1f1f1;
+			border-radius: 35px;
+			
+		}
+		#box1 div{
+			height: 380px; 
+			margin-bottom:100px;
+			border: 1px solid #f1f1f1;
+			border-radius: 40px;
+			background-color: #f3f3f3;
+		}
+		.txt{
+			margin: 15px 30px;
+			min-width: 900px;
+			height: 350px;
+			font-size: 35px;
+			font-weight: bolder;
+		}
+		.img{
+			float: left;
+			width: 300px;
+			height: 200px;
+			margin-top: 45px;
+			margin-right: 20px;
+			margin-left: 15px;
+			background-color: white;
+			border-radius: 35px;
+		}
+		h3{
+			margin-top: 45px;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<div id="logo">
+			<img src="./9-2-1素材/img/微信.png" alt="">
+		</div>
+		<div>
+			<ul>
+				<li><a href="#">首页</a></li>
+				<li><a href="#">帮助与反馈</a></li>
+				<li><a href="#">公众平台</a></li>
+				<li><a href="#">开放平台</a></li>
+				<li><a href="#">微信支付</a></li>
+				<li><a href="#">微信广告</a></li>
+				<li><a href="#">企业微信</a></li>
+				<li><a href="#">表情开放平台</a></li>
+				<li><a href="#">微信网页版</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div id="box1">
+		<div class="txt">
+			<img src="./9-2-1素材/img/1.png" alt="" class="img">
+			<div>
+				<h3>AI助力智能办公</h3>
+				<p>提供智能搜索、智能总结、智能机器人、智能服务总结等丰富的 AI 功能，让 AI 融入内外协作场景，为办公和对外服务提质增效。</p>
+			</div>
+			
+		</div>
+		
+		<div class="txt">
+			<img src="./9-2-1素材/img/2.png" alt=""class="img">
+			<div>
+				<h3>协作工具与OA应用</h3>
+				<p>集成智能表格、文档、邮件、日程、会议等协作工具及打卡、审批等OA应用，提供丰富的第三方应用，同时支持接入由服务商代开发及企业自建的应用。</p>
+			</div>
+			
+		</div>
+		
+		<div class="txt">
+			<img src="./9-2-1素材/img/3.png" alt=""class="img">
+			<div>
+				<h3>全面安全保障</h3>
+				<p>国内首家通过SOC2Type2审计的企业办公产品，国际权威认证，银行级加密水平，为企业数据安全提供可靠保障，提供企业级信息安全管控能力。</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

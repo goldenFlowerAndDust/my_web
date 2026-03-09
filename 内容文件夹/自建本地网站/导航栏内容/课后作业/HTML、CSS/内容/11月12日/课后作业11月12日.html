@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课后作业11月12日</title>
+    <style>
+        div{
+            width: 800px;
+            height: 300px;
+            margin: 200px;
+            padding: 0;
+        }
+        #gaige,#kaifang{   /*文本居中*/
+            text-align: center;
+        }
+        #kaifang h2::first-letter{  /*设置div开放块级元素内，文本第一个字符(开)的大小*/
+            font-size: 35px;
+        }
+        #kaifang p:nth-child(3){  /* 设置div开放块级元素内，第三个元素的颜色*/
+            color: green;
+        }
+        #gaige p:nth-child(5){ /*设置div改革块级容器，第五个元素的颜色*/
+            color: skyblue;
+        }
+        #gaige :first-child{ /*设置div改革块级容器，第一个子元素的文本大小和颜色*/
+            font-size: 25px;
+            color: #7078a1;
+        }
+        p:nth-child(2){ /*设置第一个子元素排第二的文本颜色*/
+            color: #14fcdf;
+        }
+        body :nth-child(5){ /*设置body标签中所有块级元素内第五个子元素的样式*/
+            font-size: 25px;
+        }
+        body :last-child{/*设置body标签中所有块级元素内最后子元素的样式*/
+            color: red;
+        }
+        #gaige p::before{/*设置div改革块级元素内，每个p标签文本内容，前插入文本*/
+            content:"前插入------"
+        }
+        body h2::selection{/*设置body标签中所有块级元素内h2标签的文本选择后背景样式*/
+            background-color:skyblue;
+        }
+        #kaifang::first-line{/*设置div开放块级元素内，第一个段落的文本样式*/
+            color: blueviolet;
+        }
+        #kaifang p::after{/*设置div开放块级元素内，所有p标签文本后添加，后引号*/
+            content:"”";
+        }
+        #kaifang p::before{/*设置div开放块级元素内，所有p标签文本前添加，前引号*/
+            content: "“";
+        }
+        #gaige :only-child {/* 设置div改革块级元素内,只有一个子元素的块级元素中的，子元素添加样式*/
+            color: #e6aff6;
+            font-size: 35px;
+        }
+        body :nth-last-child(2){/*设置body标签内，所有块级元素倒数第二个子元素设置样式*/
+            color: #e000ee;
+        }
+    </style>
+</head>
+<body>
+		<div id="gaige">
+			<h2>改革</h2>
+			<p>对内改革</p>
+			<p>各项事业的全面进步</p>
+			<p>更好地实现最广大人民群众的根本利益</p>
+            <p>
+                <span>在坚持社会主义制度的前提下</span>
+            </p>
+			<p>自觉地调整和改革生产关系同生产力</p>
+			<p>上层建筑同经济基础之间不相适应的方面和环节</p>
+		</div>
+		<div id="kaifang">
+			<h2>开放</h2>
+			<p>即对外开放</p>
+			<p>加快我国现代化建设的必然选择</p>
+			<p>符合当今时代的特征和世界发展的大势</p>
+			<p>必须长期坚持的一项基本国策 </p>
+		</div>
+	</body>
+</html>

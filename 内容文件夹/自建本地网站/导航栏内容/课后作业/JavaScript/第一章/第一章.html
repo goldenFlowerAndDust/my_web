@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>第一节课</title>
+		<script type="text/javascript" src="./第一节课.js"></script>
+		<style>
+			h1,h2{
+				color: red;
+				font-size: 2rem;
+				text-align: center;
+			}
+			
+			h1{
+				color: orange;
+			}
+			
+			p{
+				/* background-color: aqua; */
+				color: pink;
+				font-size: 1.6rem;
+				text-align: left;
+				line-height: 1.6;
+			}
+			.div_1{
+				width: 80%;
+				background-color: blueviolet;
+				margin: 0 auto;
+			}
+			.div_2 h1{
+				text-align: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="div_2">
+			<script>
+				document.write("<h1>输出语句：<code>document.write</code></h1>")
+				document.write("<h1>弹出警告对话框——<span>无返回值</span>：<code>alert&#40&#41</code></h1>")
+				document.write("<h1>弹出提示对话框——<span>有返回值</span>：<code>prompt&#40&#41</code></h1>")
+				document.write("<h1>console.log&#40&#41——普通信息&#40<span>只在开发者控制台显示</span>&#41</span>：<code>console.log&#40&#41</code></h1>")
+				document.write("<h1>console.info&#40&#41——提示类信息&#40<span>只在开发者控制台显示</span>&#41</span>：<code>console.info&#40&#41</code></h1>")
+				document.write("<h1>console.error&#40&#41——错误信息&#40<span>只在开发者控制台显示</span>&#41</span>：<code>console.error&#40&#41</code></h1>")
+				document.write("<h1>console.warn&#40&#41——警示信息&#40<span>只在开发者控制台显示</span>&#41</span>：<code>console.warn&#40&#41</code></h1>")
+			</script>
+		</div>
+		<div class="div_1">
+			<script>
+				document.write("<h2>个人信息</h2>")
+				document.write("<p>班级：软件技术25303班</br>学号：20253101681</br>姓名：YLH<br>性别：男</p>")
+			</script>
+		</div>
+		<form>
+			<input type="button" value="提交" onclick="javascript:alert('请输入用户名。')"/>
+		</form>
+		<img src="./image/JavaScript特点.png" alt="JavaScript">
+		<img src="./image/浏览器执行JS简介.png" alt="浏览器执行JS简介">
+		<img src="./image/JavaScript的组成.png" alt="JavaScript的组成">
+		<img src="./image/alert方法.png" alt="alert方法">
+		<img src="./image/alert方法二.png" alt="alert方法二">
+		<img src="./image/方法prompt.png" alt="方法prompt">
+		<script type="text/javascript" src="练习.js">
+			
+		</script>
+	</body>
+</html>

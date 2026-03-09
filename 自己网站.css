@@ -16,7 +16,7 @@
     --main-container-height: 66.5rem;
     --main-container-a-padding: 1rem;
     --main-container-a-height: 7.5rem;
-    --main-container-ol-width: 18.75rem;
+    --main-container-ol-width: 23rem;
     --main-container-carousel-height:333rem;
 
     /*  字体大小  */
@@ -142,7 +142,7 @@ header {
 }
 /*轮播图*/
 .main-container .carousel {
-    flex: 2.5;
+    flex: 2;
     height: var(--main-container-height);
     overflow: hidden;
 }
