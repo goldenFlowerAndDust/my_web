@@ -3,23 +3,26 @@
     /* 桌面端 (最大屏) - 默认使用 */
     --font-size-desktop-nav: 2rem;
     --font-size-desktop-sub: 2.2rem;
-    --font-size-desktop-title: 2.8rem;
+    --font-size-desktop-title: 2.6rem;
+    --font-size-destop-p: 2.3rem;
 
     /* 平板端 (中等屏) */
     --font-size-tablet-nav: 1.4rem;
     --font-size-tablet-sub: 1.2rem;
     --font-size-tablet-title: 2.5rem;
+    --font-size-tablet-p: 2rem;
 
     /* 平板端竖屏 */
     --font-size-tablet_2-nav: 1rem;
     --font-size-tablet_2-sub: 0.8rem;
     --font-size-tablet_2-title: 2rem;
-
+    --font-size-tablet_2-p: 1.5rem;
 
     /* 手机端 (最小屏) */
     --font-size-mobile-nav: 1.2rem;
     --font-size-mobile-sub: 1.3rem;
     --font-size-mobile-title: 1.4rem;
+    --font-size-mobile-p: 1.2rem;
 }
 
 * {
@@ -172,11 +175,11 @@ main ul li ol > li:hover .nav_2 {
 }
 
 p {
-    font-size: 28px;
+    font-size: var(--font-size-destop-p);
 }
 
 .p_smail {
-    font-size: 25px;
+    font-size: var(--font-size-destop-p);
 }
 
 nav p {
@@ -310,6 +313,13 @@ img {
         font-size: var(--font-size-tablet-title);
     }
 
+    p {
+        font-size: var(--font-size-tablet-p);
+    }
+
+    .p_smail {
+        font-size: var(--font-size-tablet-p);
+    }
 
 }
 
@@ -326,6 +336,14 @@ img {
     .SingleChoiceQuestion ul li,
     .SingleChoiceQuestion ol, li {
         font-size: var(--font-size-tablet_2-title);
+    }
+
+    p {
+        font-size: var(--font-size-tablet_2-p);
+    }
+
+    .p_smail {
+        font-size: var(--font-size-tablet_2-p);
     }
 }
 
@@ -377,9 +395,17 @@ img {
         display: block;
     }
 
-    .transition  div {
-    display: none;
-}
+    .transition div {
+        display: none;
+    }
+
+    p {
+        font-size: var(--font-size-mobile-p);
+    }
+
+    .p_smail {
+        font-size: var(--font-size-mobile-p);
+    }
 }
 
 video {
@@ -406,11 +432,11 @@ footer p {
 }
 
 .ol_initial li {
-    list-style-type:decimal;
+    list-style-type: decimal;
 }
 
 .ul_initial li {
-    list-style-type:disc;
+    list-style-type: disc;
 }
 
 table {
