@@ -4,7 +4,7 @@
     --font-size-desktop-nav: 2rem;
     --font-size-desktop-sub: 2.2rem;
     --font-size-desktop-title: 2.6rem;
-    --font-size-destop-p: 2.3rem;
+    --font-size-desktop-p: 2.3rem;
 
     /* 平板端 (中等屏) */
     --font-size-tablet-nav: 1.4rem;
@@ -48,7 +48,9 @@ main {
 }
 
 pre {
-    font-size: var(--font-size-desktop-title);
+    width: 90%;
+    height: auto;
+    font-size: var(--font-size-desktop-p);
 }
 
 
@@ -180,11 +182,11 @@ main ul li ol > li:hover .nav_2 {
 }
 
 p {
-    font-size: var(--font-size-destop-p);
+    font-size: var(--font-size-desktop-p);
 }
 
 .p_smail {
-    font-size: var(--font-size-destop-p);
+    font-size: var(--font-size-desktop-p);
 }
 
 nav p {
@@ -326,9 +328,9 @@ img {
         font-size: var(--font-size-tablet-p);
     }
 
-    pre {
-        font-size: var(--font-size-tablet-title);
-    }
+    /*pre {*/
+    /*    font-size: var(--font-size-tablet-p);*/
+    /*}*/
 
 }
 
@@ -355,9 +357,9 @@ img {
         font-size: var(--font-size-tablet_2-p);
     }
 
-    pre {
-        font-size: var(--font-size-desktop-title);
-    }
+    /*pre {*/
+    /*    font-size: var(--font-size-desktop-p);*/
+    /*}*/
 }
 
 
@@ -420,13 +422,13 @@ img {
         font-size: var(--font-size-mobile-p);
     }
 
-    pre {
-        font-size: var(--font-size-mobile-title);
-    }
+    /*pre {*/
+    /*    font-size: var(--font-size-mobile-p);*/
+    /*}*/
 }
 
 video {
-    width: 100%;
+    width: 90%;
     height: auto;
 }
 
@@ -475,5 +477,29 @@ code {
 
 ol, ul {
     padding-left: 2rem;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+li, p, a, code, pre {
+    word-wrap: break-word;      /* 兼容旧浏览器 */
+    overflow-wrap: break-word;   /* 现代标准 */
+}
+
+ul ul, ol ol {
+    width: 100%;        /* 确保子列表不超出父容器 */
+    padding-left: 1rem; /* 必要时减小缩进 */
+}
+
+pre {
+    white-space: pre-wrap;      /* 保留空格和换行，同时允许自动换行 */
+    word-wrap: break-word;      /* 长单词或URL自动断行 */
+    overflow-wrap: break-word;  /* 同上，更标准的写法 */
+    max-width: 100%;            /* 确保不超出父容器 */
+    /* 如果还溢出，可以加一个背景色调试 */
+    /* background: #f0f0f0; */
 }
 
