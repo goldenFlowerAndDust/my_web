@@ -32,8 +32,7 @@
                                 <li><a href="#图表设计选项卡——图表样式">图表样式</a></li>
                             </ol>
                         </li>
-                        <li></li>
-                        <li></li>
+                        <li><a href="#插入选项卡——插入数据透视表">插入数据透视表</a></li>
                     </ol>
                 </li>
                 <li><a id="页面布局选项卡">页面布局选项卡</a></li>
@@ -42,7 +41,7 @@
                         <li><a href="#公式——SUM家族">SUM家族</a></li>
                         <li><a href="#公式——AVERAGE家族">AVERAGE家族</a></li>
                         <li><a href="#公式——COUNT家族">COUNT家族</a></li>
-                        <li><a href="#IF家族">IF家族</a></li>
+                        <li><a href="#公式选项卡——IF家族">IF家族</a></li>
                     </ol>
                 </li>
                 <li><a id="数据选项卡">数据选项卡</a>
@@ -59,6 +58,8 @@
                         <li><a href="#使用公式需要知道的">使用公式需要知道的</a></li>
                         <li><a href="#工作表重命名">工作表重命名</a></li>
                         <li><a href="#其他知识——加权平均">加权平均</a></li>
+                        <li><a href="#其他知识——颜色查找">颜色查找</a></li>
+                        <li><a href="#其他知识——保留小数点问题">保留小数点问题</a></li>
                     </ol>
                 </li>
             </ul>
@@ -329,7 +330,18 @@
                         <video controls
                                src="../image/excel/数据选项卡/筛选/普通筛选/普通筛选.mp4"></video>
                     </li>
-                    <li></li>
+                    <li>
+                        <h2>高级筛选</h2>
+                        <ol>
+                            <li>与普通筛选不同，高级筛选需要自己在单元格填入条件</li>
+                            <li>考试流程：会先让你往上插入几行，然后输入对应条件</li>
+                            <li>规则：一行规则对应一列，同行为与，同列为或（理解为不同行即可）</li>
+                            <li>与是要同时成立，才能筛选</li>
+                            <li>或是满足其中一个条件，就能进行筛选</li>
+                        </ol>
+                        <video controls
+                               src="../image/excel/数据选项卡/筛选/高级筛选/高级筛选.mp4"></video>
+                    </li>
                 </ul>
             </li>
             <li id="其他知识——加权平均">
@@ -337,9 +349,9 @@
                     href="#其他知识导航栏">审题+套公式</a>
                 <pre>
                     <code>
-                                    数值1 * 权重1 + 数值2 * 权重2+ 数值3 * 权重3+.......
-                       加权平均=  —————————————————————————————————
-                                            权重1+权重2+权重3+........
+            数值1 * 权重1 + 数值2 * 权重2+ 数值3 * 权重3+.......
+加权平均=  —————————————————————————————————————————————————————
+                    权重1+权重2+权重3+........
                     </code>
                 </pre>
                 <p>
@@ -349,20 +361,21 @@
                 <p>·例子1：平均值(百分比计算)、
                     ·例子2：<br>科目期末成绩= 平时分* 平时分权重 + 考试分 * 考试分权重 所以总期末成绩平均值=所有科目期末成绩/科目个数
                     <span>在这里面，平均值不是简单的数值相加/相加的个数，而是要先计算权重后，再相加，最后除以个数</span>
-                    ·例子3：
+                    <br>·例子3：
                     考试得分：最终成绩 = 平时分×20% + 考试分×80%
                     平均分计算：全校平均分 = (一班平均分×一班人数 + 二班平均分×二班人数) ÷ (一班人数 + 二班人数)
                 </p>
                 <video controls
                        src="../image/excel/其他知识/加权平均数/加权平均数实例一.mp4"></video>
             </li>
-            <li id="IF家族">
+            <li id="公式选项卡——IF家族">
                 <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>IF家族【<code>IF、IFS、IFERROR</code>】<a
                     href="#公式选项卡">选中条件输出结果的单元格——公式选项卡——插入函数组——搜索需要的函数——确定弹出对话框——依次输入正确的参数——单击确定</a>
                 <ol class="ol_initial">
                     <li>
                         <h2>IF</h2>
-                        <p>IF【条件函数——分Ture、false二值内容输出，当指定的参数符合对应法则的时候，输出Ture内容，不符合则相反，输出false内容】</p>
+                        <p>
+                            IF【条件函数——分Ture、false二值内容输出，当指定的参数符合对应法则的时候，输出Ture内容，不符合则相反，输出false内容】</p>
                         <p>·语法：它可以是单条件<code>=IF(条件,ture,false)</code>
                             <br>·也可以是多条件<code>=IF(条件,ture,IF(条件,ture,IF(条件,ture,IF(.....)</code>
                             <br>·但是注意：不是没有false，嵌套的IF就是false,只有当上一个IF条件不符合对应法则，才会继续向嵌套IF进行条件判断知道后面嵌套的IF输出的值为ture停止
@@ -384,6 +397,116 @@
                         <p>只是简单的概括一下，一级一般不会考</p>
                     </li>
                 </ol>
+            </li>
+            <li id="ROUND家族">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>ROUND家族(数值修约类)【<code>ROUND、ROUNDUP、ROUNDDOWN、INT、TRUNC</code>】<a
+                    href="#公式选项卡">选中输出结果的单元格——公式选项卡——插入函数组——搜索需要的函数——确定弹出对话框——依次输入正确的参数——单击确定</a>
+
+                <p>ROUND家族有两种使用场景：</p>
+                <ul class="ul_initial">
+                    <li>
+                        <h2>单独使用</h2>
+                        <ol class="ol_initial">
+                            <li>直接对数值进行舍入（四舍五入、向上取整、向下截断等）</li>
+                            <li>语法核心：<code>=函数名(数字, 小数位数)</code></li>
+                            <li>“小数位数”可以是正数（保留小数）、0（取整）、负数（整十整百）</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h2>嵌套在其他函数中使用</h2>
+                        <ol class="ol_initial">
+                            <li>常用于 IF、VLOOKUP、SUM 等函数中，避免浮点误差或满足精度要求</li>
+                            <li>示例：<code>=IF(ROUND(A1,2)>=60, "及格", "不及格")</code></li>
+                            <li>注意：如果只是改显示格式，用“设置单元格格式”，别用 ROUND（它会改真实值）</li>
+                        </ol>
+                    </li>
+                </ul>
+
+                <p>ROUND家族各函数详解（重点理解“小数位数”参数）：</p>
+                <ol class="ol_initial">
+                    <li>
+                        <h3>ROUND（四舍五入）</h3>
+                        <ul class="ul_initial">
+                            <li>语法：<code>=ROUND(数字, 小数位数)</code></li>
+                            <li>规则：看保留位的下一位，≤4舍弃，≥5进位</li>
+                            <li>小数位数=2 → 保留两位小数（如 3.1415 → 3.14）</li>
+                            <li>小数位数=0 → 取整（如 3.1415 → 3）</li>
+                            <li>小数位数=-1 → 四舍五入到十位（如 345 → 350）</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>ROUNDUP（向上舍入）</h3>
+                        <ul class="ul_initial">
+                            <li>语法：<code>=ROUNDUP(数字, 小数位数)</code></li>
+                            <li>规则：只要指定位数后面有数字，就向前进位（远离0的方向）</li>
+                            <li>示例：<code>=ROUNDUP(3.1415, 2)</code> → 3.15（不管第3位是1还是9，都进位）</li>
+                            <li>负数位数同理：<code>=ROUNDUP(345, -1)</code> → 350</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>ROUNDDOWN（向下舍入）</h3>
+                        <ul class="ul_initial">
+                            <li>语法：<code>=ROUNDDOWN(数字, 小数位数)</code></li>
+                            <li>规则：直接截掉指定位数后面的数字，不进位（朝向0的方向）</li>
+                            <li>示例：<code>=ROUNDDOWN(3.1415, 2)</code> → 3.14</li>
+                            <li>负数位数：<code>=ROUNDDOWN(345, -1)</code> → 340</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>INT（向下取整）</h3>
+                        <ul class="ul_initial">
+                            <li>语法：<code>=INT(数字)</code>（只能取整，不能指定小数位数）</li>
+                            <li>规则：取小于等于原数的最大整数（往数轴左边走）</li>
+                            <li>正数：直接去掉小数（3.9 → 3）</li>
+                            <li>负数：取更小的整数（-3.1 → -4，因为 -4 < -3.1）</li>
+                            <li><span>区别点</span>：INT 在负数时“向下”的方向是变小，而 ROUNDDOWN 是靠近0，所以结果不同
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>TRUNC（截断小数）</h3>
+                        <ul class="ul_initial">
+                            <li>语法：<code>=TRUNC(数字, [小数位数])</code>（省略小数位数默认为0）</li>
+                            <li>规则：直接砍掉指定位数后面的数字，不四舍五入，也不管正负</li>
+                            <li>正数：3.1415 → 3.14（小数位数2）</li>
+                            <li>负数：-3.1415 → -3.14（小数位数2），-3.9 → -3（小数位数0）</li>
+                            <li><span>和 ROUNDDOWN 的区别</span>：TRUNC 只是截断，ROUNDDOWN 是“朝0舍入”，结果一样，但逻辑不同
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>📌 核心总结：<br>
+                    · <b>小数位数是关键</b>：正数→小数位，0→个位，负数→十/百/千位。<br>
+                    · <b>正数时</b>：INT = TRUNC = ROUNDDOWN(0) 结果一样。<br>
+                    · <b>负数时</b>：INT 取更小的整数（-3.1→-4），TRUNC 和 ROUNDDOWN 取靠近0的整数（-3.1→-3）。<br>
+                    · <b>ROUNDUP/ROUNDDOWN 是方向性舍入</b>，INT/TRUNC 是取整/截断，各有用处。
+                </p>
+            </li>
+            <li id="插入选项卡——插入数据透视表">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>插入数据透视表：<a
+                    href="#插入选项卡">选中需要透视的区域——插入选项卡——表格组——数据透视表下拉菜单(或直接单击)——
+                按要求是选择新工作表或现有工作表——单击确定——在右侧边栏按要求进行操作(添加字段、将字段拖动到指定位置)——
+                最后单击右上角的X号或单击任意空单元格，退出数据透视表编辑状态即可</a>
+                <h2>注意：</h2>
+                <ol>
+                    <li>字段：指的是数据透视表中数据源的列标题，每个字段在字段列表中唯一</li>
+                    <li>右侧边栏，勾选的字段:筛选、行、列、值是可以拖动的，必要时可以采取拖动的方式，达到要求的区域</li>
+                    <li>看清楚是：新建表格插入，还是现有表格插入</li>
+                    <li>现有表格插入，一般要求指定位置，记得按要求调整位置</li>
+                    <li>
+                        新建表格插入：如果创建时选错区域，直接回车不会显示数据，需检查新工作表是否已生成空白透视表。
+                    </li>
+                </ol>
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/插入选项卡/插入数据透视表/插入数据透视表——步骤一.png"
+                    alt="插入数据透视表"
+                    title="插入数据透视表——步骤一">
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/插入选项卡/插入数据透视表/插入数据透视表——步骤二.png"
+                    alt="插入数据透视表"
+                    title="插入数据透视表——步骤二">
+                <video controls
+                       src="../image/excel/插入选项卡/插入数据透视表/插入数据透视表.mp4"></video>
             </li>
         </ul>
     </section>
@@ -452,6 +575,10 @@
                             <li>在单元格手动输入</li>
                         </ul>
                     </li>
+                    <li>
+                        <p>请牢记引用方式的使用方法，它对于公式自动填充非常重要，输入公式的时候判断那个参数是固定不变的，判断后直接(F4)绝对定位，这样会有效避免错误填充问题</p>
+                        <p>实在难找是否固定，保证正确率，多花点时间，一个一个公式输入(SUM一般不用考虑，直接拖动填充即可)</p>
+                    </li>
                 </ol>
             </li>
             <li>
@@ -473,6 +600,46 @@
             </li>
             <li>
                 <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><span>移动图表到指定位置没有别的方法，靠眼睛仔细、对齐单元格地址、长按Alt键，再拖动图表，移动到指定位置，图表会自动吸附到单元格上</span>
+            </li>
+            <li>
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>当规定图表(<span>内显示数据标签</span>)——在图表设计选项卡——图表布局组——添加图表元素下拉菜单——数据标签内的【居中】，】数据标签内】都可以，只要数据标签在里面就可以了
+            </li>
+            <li>
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font" id="其他知识——颜色查找"></i><a
+                    href="#其他知识导航栏">颜色查找</a>在MS中，
+                <br>·在主题色查找的名词有：主题色、着色、个性色
+                <br>·在标准色查找的名词有：标准色、标准颜色
+                <br>·图表设置颜色：彩色颜色()指的是：图表设计选项卡——图表样式组——更改颜色——按要求选择调色板型号即可（<span>只需要记住彩色只在Excel图表出现，看到彩色联想调色板</span>）
+                <br><img src="../image/excel/其他知识/颜色查找/颜色查找.png"
+                         alt="颜色查找"
+                         title="颜色查找">
+            </li>
+            <li>
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>当需要选中全部的表格的时候，不需要按住鼠标拖动到结尾，只需要单击任意非空单元格，在使用快捷键:Alt+A,就可以一下选中全部单元格
+            </li>
+            <li>
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>在excel中，<a href="#其他知识导航栏">保留0为小数的操作有两个</a>(注意：<span>这非常重要,关乎是否能拿分</span>)
+                <ol class="ol_initial" id="其他知识——保留小数点问题">
+                    <li>
+                        <h2>使用设置单元格的方式</h2>
+                        <p>它可以当作是为了好看而设计的，它不会改变原有数值，会影响后面IF条件的判断</p>
+                        <p>什么情况下用：
+                            <br>·保留小数0为整列，后面没有参与后续IF家族条件判断。
+                            <br>·所以正常情况就用设置单元格格式的方式。
+                        </p>
+                    </li>
+                    <li>
+                        <h2>通过公式ROUND(num，0)的方式</h2>
+                        <p>绝对整数，先四舍五入，后截断小数点后所有数，它改变原有的计算数值，避免后面IF条件判断的错误</p>
+                        <p>什么情况下用：
+                            <br>后续要条件判断的时候(但也没必要在原始数值上直接修约)
+                            <br>所以正确的用途是：嵌套在IF家族中，帮助IF家族进行判断。条件可能是(整数，小数点后N位…………)，通过它四舍五入的特性，会将条件判断错误情况无限接近于零。
+                            <br>最后总结：使用IF家族，就用ROUND，至于四舍五入到什么位置，看判断的条件(<span>整数：<code>=ROUND(num,0)</code>，小数点第N位:<code>=ROUND(NUM,N)</code>，第N位整数:<code>=ROUND(NUM,-N)</code></span>)
+                            <br>嵌套公式:<code>=IF(ROUND(num,0)>=82, "A", "B")</code>
+                        </p>
+                    </li>
+                    <li></li>
+                </ol>
             </li>
         </ul>
     </section>
