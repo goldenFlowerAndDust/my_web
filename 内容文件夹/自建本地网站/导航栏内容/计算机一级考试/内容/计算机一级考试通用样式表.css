@@ -1,14 +1,14 @@
 /* === 第1步：在 :root 中定义清晰的三档字号 === */
 :root {
     /* 桌面端 (最大屏) - 默认使用 */
-    --font-size-desktop-nav: 2rem;
-    --font-size-desktop-sub: 2.2rem;
+    --font-size-desktop-nav: 1.2rem;
+    --font-size-desktop-sub: 1.3rem;
     --font-size-desktop-title: 2.6rem;
     --font-size-desktop-p: 2.3rem;
 
     /* 平板端 (中等屏) */
-    --font-size-tablet-nav: 1.4rem;
-    --font-size-tablet-sub: 1.2rem;
+    --font-size-tablet-nav: 1rem;
+    --font-size-tablet-sub: 1.1rem;
     --font-size-tablet-title: 2.5rem;
     --font-size-tablet-p: 2rem;
 
@@ -428,6 +428,7 @@ img {
 }
 
 video {
+    display: block;
     width: 90%;
     height: auto;
 }
@@ -480,7 +481,7 @@ ol, ul {
 }
 
 img, video {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
 }
 

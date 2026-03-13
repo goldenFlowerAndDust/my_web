@@ -35,13 +35,14 @@
                         <li><a href="#插入选项卡——插入数据透视表">插入数据透视表</a></li>
                     </ol>
                 </li>
-                <li><a id="页面布局选项卡">页面布局选项卡</a></li>
+                <li><a id="页面布局选项卡">页面布局</a></li>
                 <li><a id="公式选项卡">公式</a>
                     <ol>
                         <li><a href="#公式——SUM家族">SUM家族</a></li>
                         <li><a href="#公式——AVERAGE家族">AVERAGE家族</a></li>
                         <li><a href="#公式——COUNT家族">COUNT家族</a></li>
                         <li><a href="#公式选项卡——IF家族">IF家族</a></li>
+                        <li><a href="#公式选项卡——查找家族">查找家族</a></li>
                     </ol>
                 </li>
                 <li><a id="数据选项卡">数据选项卡</a>
@@ -52,9 +53,10 @@
                 </li>
                 <li><a id="审阅选项卡">审阅选项卡</a></li>
                 <li><a id="视图选项卡">视图选项卡</a></li>
-                <li><a id="自动执行选项卡">自动执行选项卡</a></li>
-                <li id="其他知识导航栏"><a href="#其他知识">其他知识</a>
+                <li><a id="自动执行选项卡">自动执行</a></li>
+                <li><a id="其他知识导航栏">其他知识</a>
                     <ol>
+                        <li><a href="#其他知识">其他知识</a></li>
                         <li><a href="#使用公式需要知道的">使用公式需要知道的</a></li>
                         <li><a href="#工作表重命名">工作表重命名</a></li>
                         <li><a href="#其他知识——加权平均">加权平均</a></li>
@@ -153,7 +155,7 @@
                     <li>
                         <h2>AVERAGEA</h2>
                         <p>
-                            所选范围内非空单元格的平均值——<span>文本和逻辑值(True，false)转换后计入平均值计算内(文本转为0，True转为1,false转为0)</span>
+                            所选范围内非空单元格的平均值——<span>文本和逻辑值(TRUE，FALSE)转换后计入平均值计算内(文本转为0，TRUE转为1,FALSE转为0)</span>
                         </p>
                         <p>语法：<code>=AVERAGEA(平均值参数范围)</code></p>
                     </li>
@@ -342,18 +344,23 @@
                         <video controls
                                src="../image/excel/数据选项卡/筛选/高级筛选/高级筛选.mp4"></video>
                     </li>
+                    <li id="数据选项卡——分类汇总">
+                        <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>分类汇总：<a
+                            href="#数据选项卡">选中需要的单元格地址——数据选项卡——单击分级显示组的分类汇总选项——在弹出的对话框——按题目要求设置参数——最后单击确定</a>
+                        <br><i class="iconfont icon-icon-test font_image"></i><img
+                            src="../image/excel/数据选项卡/分类汇总/分类汇总.png"
+                            alt="分类汇总"
+                            title="分类汇总">
+                        <video controls
+                               src="../image/excel/数据选项卡/分类汇总/分类汇总.mp4"></video>
+                    </li>
                 </ul>
             </li>
             <li id="其他知识——加权平均">
                 <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>加权平均：<a
                     href="#其他知识导航栏">审题+套公式</a>
-                <pre>
-                    <code>
-            数值1 * 权重1 + 数值2 * 权重2+ 数值3 * 权重3+.......
-加权平均=  —————————————————————————————————————————————————————
-                    权重1+权重2+权重3+........
-                    </code>
-                </pre>
+                <code>
+                    加权平均= (数值1 * 权重1 + 数值2 * 权重2 +.....)/(权重1+权重2+权重3+........)</code>
                 <p>
                     ·加权平均：指的是每个数的重要性不一样。所以不能直接相加除以个数。
                     ·正确算法：先让每个数乘上它的重要性比重（权重），把结果加起来，最后再除以权重的总和。
@@ -375,19 +382,19 @@
                     <li>
                         <h2>IF</h2>
                         <p>
-                            IF【条件函数——分Ture、false二值内容输出，当指定的参数符合对应法则的时候，输出Ture内容，不符合则相反，输出false内容】</p>
-                        <p>·语法：它可以是单条件<code>=IF(条件,ture,false)</code>
+                            IF【条件函数——分Ture、FALSE二值内容输出，当指定的参数符合对应法则的时候，输出Ture内容，不符合则相反，输出FALSE内容】</p>
+                        <p>·语法：它可以是单条件<code>=IF(条件,ture,FALSE)</code>
                             <br>·也可以是多条件<code>=IF(条件,ture,IF(条件,ture,IF(条件,ture,IF(.....)</code>
-                            <br>·但是注意：不是没有false，嵌套的IF就是false,只有当上一个IF条件不符合对应法则，才会继续向嵌套IF进行条件判断知道后面嵌套的IF输出的值为ture停止
+                            <br>·但是注意：不是没有FALSE，嵌套的IF就是FALSE,只有当上一个IF条件不符合对应法则，才会继续向嵌套IF进行条件判断知道后面嵌套的IF输出的值为ture停止
                             <br>·这种写法好处是：所有版本都能使用，但是当嵌套的越多，越复杂，所以如果能用IFS就不要使用IF嵌套带到多条件判断的目的
                         </p>
                     </li>
                     <li>
                         <h2>IFS</h2>
                         <p>IFS【多条件函数——与IF嵌套相近，但是更直观，多条件非常建议】</p>
-                        <p>语法：<code>=IFS(条件1,条件1的true,条件2,条件2的true,.....ture,ture的值)</code></p>
-                        <p>·从语法可以看出：IFS可以多条件同时定义，同样是是从条件1开始往后依次判断，知道有条件符合对应法则停止，并输出对应的ture值
-                            ·<br>至于最后单独的ture则是否则的意思(不一定要写)，当所有条件均不符合的时候，输出ture的值。
+                        <p>语法：<code>=IFS(条件1,条件1的TRUE,条件2,条件2的TRUE,.....TRUE,TRUE条件)</code></p>
+                        <p>·从语法可以看出：IFS可以多条件同时定义，同样是是从条件1开始往后依次判断，知道有条件符合对应法则停止，并输出对应的TURE值
+                            ·<br>至于最后单独的TRUE则是否则的意思(不一定要写)，当所有条件均不符合的时候，输出TRUE的条件。
                         </p>
                     </li>
                     <li>
@@ -508,6 +515,97 @@
                 <video controls
                        src="../image/excel/插入选项卡/插入数据透视表/插入数据透视表.mp4"></video>
             </li>
+            <li id="公式选项卡——查找家族">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>查找家族【<code>VLOOKUP、HLOOKUP、LOOKUP、XLOOKUP、MATCH、INDEX、OFFSET</code>】:<a
+                    href="#公式选项卡">选中条件输出结果的单元格——公式选项卡——插入函数组——搜索需要的函数——确定弹出对话框——依次输入正确的参数——单击确定</a>
+                <ol class="ol_initial">
+                    <li>
+                        <h2>VLOOKUP</h2>
+                        <ul class="ul_initial">
+                            <li>查找方式：<span>垂直查找</span>一级考试经常出现</li>
+                            <li>语法:<code>=VLOOKUP(找什么,在哪里找,返回第几列,匹配方式)</code></li>
+                            <li>找什么： 当前<span>行</span>用来查找的值</li>
+                            <li>
+                                在哪里找：包含查找列和返回值的大表格区域(<span>查找列必须在第一列【就是第一个参数的外主键】</span>)
+                            </li>
+                            <li>返回第几列：从区域第一列开始数，需要填充的数据在第几列。</li>
+                            <li>匹配方式:FALSE(精确匹配,考试直接使用)或0</li>
+                            <li><span>第二个参数一定要用绝对地址(快捷键F4)</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>HLOOKUP</h2>
+                        <ul class="ul_initial">
+                            <li>查找方式：<span>水平查找</span>一级考试偶尔出现</li>
+                            <li>语法:<code>=VLOOKUP(找什么,在哪里找,返回第几列,匹配方式)</code></li>
+                            <li>参数与VLOOKUP一样</li>
+                            <li>找什么： 当前<span>列</span>用来查找的值</li>
+                            <li>数据按行排列，查找值必须在区域的第一行</li>
+                            <li>返回行数从第一行开始数</li>
+                            <li><span>第二个参数一定要用绝对地址(快捷键F4)</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>MATCH</h2>
+                        <ul class="ul_initial">
+                            <li>查找方式：<span>匹配位置</span>一级考试出现概率为0【了解即可】</li>
+                            <li>语法：<code>=MATCH(找什么, 在哪里找, 匹配方式)</code></li>
+                            <li>找什么：只需要选中字段即可<span>可以理解为查找内容列的标题</span></li>
+                            <li>
+                                在哪里找：包含查找列和返回值的大表格区域(<span>查找列必须在第一列【就是第一个参数的外主键】</span>)
+                            </li>
+                            <li>返回查找值在区域中的位置序号（比如在A1:A10里找“硕士”，它在第3行，就返回3）</li>
+                            <li>匹配方式：0 精确匹配，1 升序近似，-1 降序近似（考试只用0）</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>INDEX</h2>
+                        <ul class="ul_initial">
+                            <li>查找方式：<span>索引取值</span>一级考试出现概率为0【了解即可】</li>
+                            <li>语法：<span>=INDEX(区域, 行号, [列号])</span></li>
+                            <li>根据行号和列号，返回区域中对应位置的值</li>
+                            <li>如果区域只有一列，可以省略列号</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>INDEX + MATCH 组合技——VLOOKUP升级版</h2>
+                        <ul class="ul_initial">
+                            <li>=INDEX(要返回的区域, MATCH(找什么, 查找列, 0))</li>
+                            <li>优点：查找列不一定要在第一列，更灵活</li>
+                            <li>考试偶尔出现，但VLOOKUP足够应付90%的题目</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>LOOKUP</h2>
+                        <ul class="ul_initial">
+                            <li>非常老查找</li>
+                            <li>语法：<code>=LOOKUP(找什么, 查找向量, 返回向量)</code></li>
+                            <li>老式查找，要求数据排序，考试几乎不考</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>XLOOKUP</h2>
+                        <ul class="ul_initial">
+                            <li>查找方式：超级查找</li>
+                            <li>语法：<code>=XLOOKUP(找什么, 查找列, 返回列, [未找到值], [匹配模式], [搜索模式])</code>
+                            </li>
+                            <li>Excel 2021 或 Office 365 才有，一级考试不考</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>OFFSET</h2>
+                        <ul class="ul_initial">
+                            <li>查找方式：偏移引用</li>
+                            <li>语法：<code>=OFFSET(起点, 向下偏移行数, 向右偏移列数, [高度], [宽度])</code></li>
+                            <li>常用于制作动态图表或动态区域，考试极少考</li>
+                        </ul>
+                    </li>
+                </ol>
+                <br><i class="iconfont icon-icon-test font_image"></i>只演示:VLOOKUP和HLOOKUP
+                <br>
+                <video controls
+                       src="../image/excel/公式选项卡/查找家族/VLOOKUP/Vlookup.mp4"></video>
+            </li>
         </ul>
     </section>
     <!--其他部分-->
@@ -576,7 +674,8 @@
                         </ul>
                     </li>
                     <li>
-                        <p>请牢记引用方式的使用方法，它对于公式自动填充非常重要，输入公式的时候判断那个参数是固定不变的，判断后直接(F4)绝对定位，这样会有效避免错误填充问题</p>
+                        <p>
+                            请牢记引用方式的使用方法，它对于公式自动填充非常重要，输入公式的时候判断那个参数是固定不变的，判断后直接(F4)绝对定位，这样会有效避免错误填充问题</p>
                         <p>实在难找是否固定，保证正确率，多花点时间，一个一个公式输入(SUM一般不用考虑，直接拖动填充即可)</p>
                     </li>
                 </ol>
@@ -632,7 +731,7 @@
                         <h2>通过公式ROUND(num，0)的方式</h2>
                         <p>绝对整数，先四舍五入，后截断小数点后所有数，它改变原有的计算数值，避免后面IF条件判断的错误</p>
                         <p>什么情况下用：
-                            <br>后续要条件判断的时候(但也没必要在原始数值上直接修约)
+                            <br>后续要条件判断的时候(但也可以在原始数值上直接修约（如平均值列），视需求而定。更常见的用法是嵌套在IF中临时修约)
                             <br>所以正确的用途是：嵌套在IF家族中，帮助IF家族进行判断。条件可能是(整数，小数点后N位…………)，通过它四舍五入的特性，会将条件判断错误情况无限接近于零。
                             <br>最后总结：使用IF家族，就用ROUND，至于四舍五入到什么位置，看判断的条件(<span>整数：<code>=ROUND(num,0)</code>，小数点第N位:<code>=ROUND(NUM,N)</code>，第N位整数:<code>=ROUND(NUM,-N)</code></span>)
                             <br>嵌套公式:<code>=IF(ROUND(num,0)>=82, "A", "B")</code>
