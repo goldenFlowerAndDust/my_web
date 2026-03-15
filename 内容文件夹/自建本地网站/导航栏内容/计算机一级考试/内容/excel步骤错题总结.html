@@ -20,6 +20,7 @@
                         <li><a href="#开始选项卡——文本对齐方式">文本对齐方式</a></li>
                         <li><a href="#开始选项卡——设置单元格数据格式">设置单元格格式</a></li>
                         <li><a href="#开始选项卡——条件格式">条件格式使用</a></li>
+                        <li><a href="#开始选项卡——设置单元格高宽">设置单元格高宽</a></li>
                     </ol>
                 </li>
                 <li><a id="插入选项卡">插入选项卡</a>
@@ -43,6 +44,8 @@
                         <li><a href="#公式——COUNT家族">COUNT家族</a></li>
                         <li><a href="#公式选项卡——IF家族">IF家族</a></li>
                         <li><a href="#公式选项卡——查找家族">查找家族</a></li>
+                        <li><a href="#公式选项卡——MAX家族">MAX家族</a></li>
+                        <li><a href="#公式选项卡——MIN家族">MIN家族</a></li>
                     </ol>
                 </li>
                 <li><a id="数据选项卡">数据选项卡</a>
@@ -52,7 +55,11 @@
                     </ol>
                 </li>
                 <li><a id="审阅选项卡">审阅选项卡</a></li>
-                <li><a id="视图选项卡">视图选项卡</a></li>
+                <li><a id="视图选项卡">视图选项卡</a>
+                    <ol>
+                        <li><a href="#视图选项卡——页面布局视图切换">页面布局视图切换</a></li>
+                    </ol>
+                </li>
                 <li><a id="自动执行选项卡">自动执行</a></li>
                 <li><a id="其他知识导航栏">其他知识</a>
                     <ol>
@@ -400,7 +407,7 @@
                     <li>
                         <h2>IFERROR</h2>
                         <p>它是excel里的错误处理函数。</p>
-                        <p>语法：<code>IFEEROR(值，错误时返回的值)</code></p>
+                        <p>语法：<code>=IFERROR(值，错误时返回的值)</code></p>
                         <p>只是简单的概括一下，一级一般不会考</p>
                     </li>
                 </ol>
@@ -537,7 +544,7 @@
                         <h2>HLOOKUP</h2>
                         <ul class="ul_initial">
                             <li>查找方式：<span>水平查找</span>一级考试偶尔出现</li>
-                            <li>语法:<code>=VLOOKUP(找什么,在哪里找,返回第几列,匹配方式)</code></li>
+                            <li>语法:<code>=HLOOKUP(找什么,在哪里找,返回第几行,匹配方式)</code></li>
                             <li>参数与VLOOKUP一样</li>
                             <li>找什么： 当前<span>列</span>用来查找的值</li>
                             <li>数据按行排列，查找值必须在区域的第一行</li>
@@ -605,6 +612,71 @@
                 <br>
                 <video controls
                        src="../image/excel/公式选项卡/查找家族/VLOOKUP/Vlookup.mp4"></video>
+            </li>
+            <li id="公式选项卡——MAX家族">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>MAX家族【MAX、MAXIFS】<a
+                    href="#公式选项卡">选中条件输出结果的单元格——公式选项卡——插入函数组——搜索需要的函数——确定弹出对话框——依次输入正确的参数——单击确定</a>
+                <ol class="ol_initial">
+                    <li>
+                        <h2>MAX</h2>
+                        <ul class="ul_initial">
+                            <li>无条件取最大值(只在选定区域内，输出最大值)</li>
+                            <li>语法：<code>=MAX(数字范围)</code></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>MAXIFS</h2>
+                        <ul class="ul_initial">
+                            <li>多条件取最大值(只在选定区域内且符合条件，输出最大值)</li>
+                            <li>语法：<code>=MAXIFS(取最大值区域, 条件区域1, 条件1, [条件区域2, 条件2], ...)</code></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li id="公式选项卡——MIN家族">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>MIN家族【MIN、MINIFS】<a
+                    href="#公式选项卡">选中条件输出结果的单元格——公式选项卡——插入函数组——搜索需要的函数——确定弹出对话框——依次输入正确的参数——单击确定</a>
+                <ol class="ol_initial">
+                    <li>
+                        <h2>MIN</h2>
+                        <ul class="ul_initial">
+                            <li>无条件取最小值(只在选定区域内，输出最小值)</li>
+                            <li>语法：<code>=MIN(数字范围)</code></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>MINIFS</h2>
+                        <ul class="ul_initial">
+                            <li>多条件取最小值(只在选定区域内且符合条件，输出最小值)</li>
+                            <li>语法：<code>=MINIFS(取最小值区域, 条件区域1, 条件1, [条件区域2, 条件2], ...)</code></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li id="开始选项卡——设置单元格高宽">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>设置单元格行高列宽：<a
+                    href="#开始选项卡">选中需要调整行高列宽的单元格——视图选项卡——单击工作簿视图组的页面布局选项——开始菜单——单元格组——格式下拉菜单——单击行高/列宽选项——在弹出的对话框输入规定数值即可——最后单击确定</a>
+                <br><i class="iconfont icon-icon-test font_image"></i><a href="#视图选项卡">页面布局视图切换</a><img
+                    src="../image/excel/视图选项卡/视图切换/页面布局/页面布局视图切换.png"
+                    alt="设置单元格行高_列宽"
+                    title="页面布局视图切换" id="视图选项卡——页面布局视图切换">
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/开始选项卡/设置单元格行高_列宽/设置单元格行高_列宽——步骤一.png"
+                    alt="设置单元格行高_列宽"
+                    title="设置单元格行高_列宽——步骤一">
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/开始选项卡/设置单元格行高_列宽/设置单元格行高_列宽——步骤二.png"
+                    alt="设置单元格行高_列宽"
+                    title="设置单元格行高_列宽——步骤二">
+                <video controls
+                       src="../image/excel/开始选项卡/设置单元格行高_列宽/设置单元格行高和列宽.mp4"></video>
+                <h2>注意</h2>
+                <ol class="ol_initial">
+                    <li>设置单元格分为<span>规定单位</span>与未规定单位</li>
+                    <li>规定单位:按上面步骤，依次完成</li>
+                    <li>未规定单位：可以忽略视图选项卡切换到页面视图步骤[<span>步骤依次是：选中单元格——开始菜单——格式下拉菜单——单击行高/列宽——设置参数——单击确定即可</span>]</li>
+                    <li>后续检查可能有0.01偏差(可以忽略)</li>
+                </ol>
             </li>
         </ul>
     </section>
