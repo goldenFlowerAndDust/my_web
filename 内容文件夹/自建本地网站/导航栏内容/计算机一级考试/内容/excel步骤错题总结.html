@@ -21,6 +21,7 @@
                         <li><a href="#开始选项卡——设置单元格数据格式">设置单元格格式</a></li>
                         <li><a href="#开始选项卡——条件格式">条件格式使用</a></li>
                         <li><a href="#开始选项卡——设置单元格高宽">设置单元格高宽</a></li>
+                        <li><a href="#开始选项卡——条件格式图标集">条件格式图标集</a></li>
                     </ol>
                 </li>
                 <li><a id="插入选项卡">插入选项卡</a>
@@ -31,6 +32,7 @@
                                 <li><a href="#插入选项卡——插入图表">插入图表</a></li>
                                 <li><a href="#图表设计选项卡——添加图表元素">添加图表元素</a></li>
                                 <li><a href="#图表设计选项卡——图表样式">图表样式</a></li>
+                                <li><a href="#图表设计选项卡——图表布局设置">图表布局设置</a></li>
                             </ol>
                         </li>
                         <li><a href="#插入选项卡——插入数据透视表">插入数据透视表</a></li>
@@ -46,6 +48,7 @@
                         <li><a href="#公式选项卡——查找家族">查找家族</a></li>
                         <li><a href="#公式选项卡——MAX家族">MAX家族</a></li>
                         <li><a href="#公式选项卡——MIN家族">MIN家族</a></li>
+                        <li><a href="#公式选项卡——RANK.EQ函数">RANK.EQ函数</a></li>
                     </ol>
                 </li>
                 <li><a id="数据选项卡">数据选项卡</a>
@@ -179,6 +182,12 @@
                             多条件平均值【可选择多个条件】——<span>只计算符合所有条件的数字平均值((需要注意的是：平均值参数范围始终在最前面))</span>
                         </p>
                         <p>语法：<code>=AVERAGEIFS(平均值参数范围,范围1,条件1,范围2,条件2,范围3,.....)</code></p>
+                    </li>
+                    <li>
+                        <h2>注意：</h2>
+                        <ul class="ul_initial">
+                            <li>AVERAGEIF、AVERAGEIFS只能在计算的平均值数字在一列使用</li>
+                        </ul>
                     </li>
                 </ol>
                 <br><i class="iconfont icon-icon-test font_image"></i>视频：
@@ -394,6 +403,7 @@
                             <br>·也可以是多条件<code>=IF(条件,ture,IF(条件,ture,IF(条件,ture,IF(.....)</code>
                             <br>·但是注意：不是没有FALSE，嵌套的IF就是FALSE,只有当上一个IF条件不符合对应法则，才会继续向嵌套IF进行条件判断知道后面嵌套的IF输出的值为ture停止
                             <br>·这种写法好处是：所有版本都能使用，但是当嵌套的越多，越复杂，所以如果能用IFS就不要使用IF嵌套带到多条件判断的目的
+                            <br>·<span>嵌套了几个IF就要在结尾放入对应的右括号</span>
                         </p>
                     </li>
                     <li>
@@ -674,9 +684,54 @@
                 <ol class="ol_initial">
                     <li>设置单元格分为<span>规定单位</span>与未规定单位</li>
                     <li>规定单位:按上面步骤，依次完成</li>
-                    <li>未规定单位：可以忽略视图选项卡切换到页面视图步骤[<span>步骤依次是：选中单元格——开始菜单——格式下拉菜单——单击行高/列宽——设置参数——单击确定即可</span>]</li>
+                    <li>未规定单位：可以忽略视图选项卡切换到页面视图步骤[<span>步骤依次是：选中单元格——开始菜单——格式下拉菜单——单击行高/列宽——设置参数——单击确定即可</span>]
+                    </li>
                     <li>后续检查可能有0.01偏差(可以忽略)</li>
                 </ol>
+            </li>
+            <li id="开始选项卡——条件格式图标集">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>条件格式图标集：<a
+                    href="#开始选项卡">选中需要添加图标的单元格(区域)——开始选项卡——样式组——条件格式下拉菜单——图标集——在右侧边栏选择(<span>要求的图标集名称即可【悬停会显示名称】</span>)</a>
+                <ul class="ol_initial">
+                    <li>
+                        <h2>注意：</h2>
+                        <ol class="ol_initial">
+                            <li>考试一般不需要自己自定义规则(<span>也就是说：一定能找到官方定义的名称</span>)</li>
+                            <li>悬停会显示图标集对应的名称</li>
+                        </ol>
+                    </li>
+                </ul>
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/开始选项卡/条件格式图标集/条件格式图标集.png"
+                    alt="条件格式图标集"
+                    title="条件格式图标集">
+            </li>
+            <li id="公式选项卡——RANK.EQ函数">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>RANK.EQ函数：<a
+                    href="#公式选项卡">选中条件输出结果的单元格——公式选项卡——插入函数组——搜索需要的函数——确定弹出对话框——依次输入正确的参数——单击确定</a>
+                <ul class="ul_initial">
+                    <li>
+                        <h2>RANK.EQ</h2>
+                        <ol class="ol_initial">
+                            <li>该函数主要用于排名</li>
+                            <li>语法：<code>=RANK.EQ(第一个数字,数字整列,逻辑值)</code></li>
+                            <li>使用公式之前：公式填在紧靠排名列的右边，与第一个值为一行</li>
+                            <li>第一个数字：需要排名的列第一个数值(单元格地址)</li>
+                            <li>数字整列：整个排名列的所有数字(单元格地址)——按F4改为绝对地址(一定要)</li>
+                            <li>0为降序(从高到底)，1为升序(从低到高)，什么都不填默认0降序</li>
+                        </ol>
+                    </li>
+                </ul>
+                <video controls
+                       src="../image/excel/公式选项卡/RANK.EQ函数/RANK.EQ函数.mp4"></video>
+            </li>
+            <li id="图表设计选项卡——图表布局设置">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>图表布局设置：<a
+                    href="#插入选项卡">选中图表——图表设计选项卡——图表布局组——快速布局下拉菜单——按要求选择需要的布局即可</a>
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/插入选项卡/插入图表/图表布局设置/图表布局设置.png"
+                    alt="图表布局设置"
+                    title="图表布局设置">
             </li>
         </ul>
     </section>
@@ -809,7 +864,15 @@
                             <br>嵌套公式:<code>=IF(ROUND(num,0)>=82, "A", "B")</code>
                         </p>
                     </li>
-                    <li></li>
+                    <li>
+                        IF、IFS的共同点：所有条件都只针对当前行，不会自动筛选其他行；条件可以涉及多个列（字段），但列必须与条件一一对应（即每个条件中引用的列是确定的）。
+                    </li>
+                    <li>如果平均值是一列，且有条件 → 直接用 AVERAGEIF（单条件）或 AVERAGEIFS（多条件）。
+                        <br/>·如果平均值是多列（比如 7、8、9 月都在同一行）→ 无脑用 AVERAGE 对每行求平均，然后下拉填充。
+                        <br/>·记住：考试里基本就这两种情况，平均值是一列→用 AVERAGEIF/IFS；平均值是多列→无脑 AVERAGE。千万别混着用
+                    </li>
+                    <li><span>所有函数，必须以题目要求为准</span></li>
+                    <li>困难卷：八</li>
                 </ol>
             </li>
         </ul>
