@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一次作业</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        table {
+            width: 80%;
+            margin: 30px auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        tr {
+            min-width: 150px;
+        }
+
+        td {
+            border: 1px solid black;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        input {
+            width: 100px;
+            margin: 10px 10px;
+        }
+        .table{
+            border-collapse: separate;
+            border-spacing: 5px;
+            border: none;
+        }
+        .td{
+            padding: 0;
+            text-align: center;
+            border: 0;
+        }
+        img{
+            width: 100%;
+            height: auto;
+        }
+        video{
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" language="JavaScript">
+    let a = parseInt(prompt("输入正方形边数(0~10)：", ""), 0);
+    if (isNaN(a) || a < 0 || a > 10) {
+        alert("输入无效，请重新输入0~10之间的整数！")
+    } else {
+        let b = "<table class='table'>";            // <table class='table'>
+        for (let i = 0; i < a; i++) {               // 外层循环控制行数 ， 共 i 从0 ~ a-1(随着循环进行而增加)
+            b += "<tr>";                            // <table class='table'><tr>[第一次循环]
+            for (let j = 0; j < a; j++) {           // 内层循环控制每行列数， 共 j 从 0 ~ a-1(随着循环进行而增加)
+                //每一行添加a 个#
+                b += '<td class="td">#</td>';       // <table class='table'><tr><td class='td'#</td>(以a的数量为主)
+            }
+            b += "</tr>";//行末换行                   //<table class='table'><tr><td class='td'#</td></tr>（外面套个</tr>完成行闭环）
+        }
+        b += "</table>";                            //<table class='table'><tr><td class='td'#</td></tr></table>(最后外面套个</table>完成table标签闭环)
+                                                    //按照prompt返回值，循环到指定次数。即<table class=‘table’><tr><td class='td'>#</td>.....</tr><tr><td class='td'>#</td>.....</tr>...</table>
+        //将结果显示在页面(例如插入某个容器中)
+        document.body.innerHTML  += b;              //最后在网页输出(一般建议，放入一个容器内，使用document.write会将页面重置)
+    }
+
+
+</script>
+<table>
+    <tr>
+        <th colspan="5">简易购物车</th>
+    </tr>
+    <tr>
+        <td>商品名称</td>
+        <td>数量(件)</td>
+        <td>单价(元)</td>
+        <td>运费(元)</td>
+        <td><input type="button" value="合计" id="btnSum" onclick="sum()"></td>
+    </tr>
+    <tr>
+        <td>跑跑道具</td>
+        <td><label for="sum1"></label><input type="text" id="sum1"></td>
+        <td><label for="sum2"></label><input type="text" id="sum2"></td>
+        <td><label for="sum3"></label><input type="text" id="sum3"></td>
+        <td><label for="sum4"></label><input type="text" id="sum4"><span>元</span></td>
+    </tr>
+</table>
+<script type="text/javascript" language="JavaScript">
+    function sum() {
+
+        let sum4 = document.getElementById('sum4');
+
+        let sum1 = parseFloat(document.getElementById('sum1').value);
+        let sum2 = parseFloat(document.getElementById('sum2').value);
+        let sum3 = parseFloat(document.getElementById('sum3').value);
+        let sum5 = sum1 * sum2 + sum3;
+
+        sum4.value = sum5.toFixed(2);
+    }
+</script>
+<img src="./第一次作业——html文件.png" alt="第一次作业——html文件">
+<video src="./第一次作业——视频.mp4" controls></video>
+</body>
+</html>

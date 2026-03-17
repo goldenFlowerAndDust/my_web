@@ -161,7 +161,7 @@ main ul li ol > li:hover .nav_2 {
 /*动画*/
 .transition {
     width: 100%;
-    height: 500px;
+    min-height: 500px;
 }
 
 .transition div {
@@ -402,12 +402,12 @@ img {
     img {
         padding-left: 1rem !important; /* 减小左侧缩进 */
     }
-
     table {
-        width: 100%; /* 表格在小屏上占满 */
+        width: 100%; /* 表格宽度占满父容器 */
         font-size: 0.9rem;
-        overflow-x: auto; /* 如果内容太多允许横向滚动 */
-        display: block;
+        /* 移除下面两行，避免破坏表格结构 */
+        /* overflow-x: auto; */
+        /* display: block; */
     }
 
     .transition div {
@@ -460,7 +460,8 @@ footer p {
 }
 
 table {
-    width: 80%;
+    table-layout: fixed;
+    width: 100%;
     margin: 0 auto;
     border: 2px solid black;
     border-collapse: collapse;
@@ -486,21 +487,33 @@ img, video {
 }
 
 li, p, a, code, pre {
-    word-wrap: break-word;      /* 兼容旧浏览器 */
-    overflow-wrap: break-word;   /* 现代标准 */
+    word-wrap: break-word; /* 兼容旧浏览器 */
+    overflow-wrap: break-word; /* 现代标准 */
 }
 
 ul ul, ol ol {
-    width: 100%;        /* 确保子列表不超出父容器 */
+    width: 100%; /* 确保子列表不超出父容器 */
     padding-left: 1rem; /* 必要时减小缩进 */
 }
 
 pre {
-    white-space: pre-wrap;      /* 保留空格和换行，同时允许自动换行 */
-    word-wrap: break-word;      /* 长单词或URL自动断行 */
-    overflow-wrap: break-word;  /* 同上，更标准的写法 */
-    max-width: 100%;            /* 确保不超出父容器 */
+    white-space: pre-wrap; /* 保留空格和换行，同时允许自动换行 */
+    word-wrap: break-word; /* 长单词或URL自动断行 */
+    overflow-wrap: break-word; /* 同上，更标准的写法 */
+    max-width: 100%; /* 确保不超出父容器 */
     /* 如果还溢出，可以加一个背景色调试 */
     /* background: #f0f0f0; */
 }
+
+.div_table {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #ddd;
+}
+
+td, th {
+    word-break: break-word; /* 强制长单词换行 */
+    overflow-wrap: break-word; /* 现代标准，同上 */
+}
+
 

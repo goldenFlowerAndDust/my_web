@@ -10,7 +10,7 @@
 </head>
 <body>
 <main>
-    <section class="transition">
+    <section class="transition" id="transition">
         <nav>
             <ul>
                 <li><a id="文件选项卡">文件选项卡</a></li>
@@ -49,6 +49,7 @@
                         <li><a href="#公式选项卡——MAX家族">MAX家族</a></li>
                         <li><a href="#公式选项卡——MIN家族">MIN家族</a></li>
                         <li><a href="#公式选项卡——RANK.EQ函数">RANK.EQ函数</a></li>
+                        <li><a href="#公式选项卡——日期家族">日期家族</a></li>
                     </ol>
                 </li>
                 <li><a id="数据选项卡">数据选项卡</a>
@@ -56,6 +57,7 @@
                         <li><a href="#数据选项卡——排序">排序</a></li>
                         <li><a href="#数据选项卡——筛选">筛选</a></li>
                         <li><a href="#数据选项卡——分类汇总">分类汇总</a></li>
+                        <li><a href="#数据选项卡——删除重复项">删除重复项</a></li>
                     </ol>
                 </li>
                 <li><a id="审阅选项卡">审阅选项卡</a></li>
@@ -734,6 +736,109 @@
                     alt="图表布局设置"
                     title="图表布局设置">
             </li>
+            <li id="公式选项卡——日期家族">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>日期家族：<a
+                    href="#公式选项卡">选中条件输出结果的单元格——公式选项卡——插入函数组——搜索需要的函数——确定弹出对话框——依次输入正确的参数——单击确定</a>
+                <div class="div_table">
+                    <table>
+                        <tr style="background-color: #f2f2f2;">
+                            <th>函数</th>
+                            <th>作用</th>
+                            <th>语法</th>
+                            <th>示例（假设A1=2026/3/16）</th>
+                            <th style="color: red;">注意事项 / 坑点</th>
+                        </tr>
+                        <tbody>
+                        <tr>
+                            <td><strong>TODAY</strong></td>
+                            <td>返回当前日期</td>
+                            <td><code>=TODAY()</code></td>
+                            <td><code>=TODAY()</code> → 当天日期</td>
+                            <td style="color: red;">每天自动更新，不能用于固定日期。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NOW</strong></td>
+                            <td>返回当前日期+时间</td>
+                            <td><code>=NOW()</code></td>
+                            <td><code>=NOW()</code> → 当天日期+时间</td>
+                            <td style="color: red;">同 TODAY，自动更新，且包含时间。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>YEAR</strong></td>
+                            <td>提取年份</td>
+                            <td><code>=YEAR(日期)</code></td>
+                            <td><code>=YEAR(A1)</code> → 2026</td>
+                            <td style="color: red;">参数必须是有效日期；如果直接写数字会被解析为1900年后的天数。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MONTH</strong></td>
+                            <td>提取月份</td>
+                            <td><code>=MONTH(日期)</code></td>
+                            <td><code>=MONTH(A1)</code> → 3</td>
+                            <td style="color: red;">同 YEAR，日期必须正确。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DAY</strong></td>
+                            <td>提取日</td>
+                            <td><code>=DAY(日期)</code></td>
+                            <td><code>=DAY(A1)</code> → 16</td>
+                            <td style="color: red;">同 YEAR。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DATE</strong></td>
+                            <td>组合成日期</td>
+                            <td><code>=DATE(年,月,日)</code></td>
+                            <td><code>=DATE(2026,3,16)</code> → 2026/3/16</td>
+                            <td style="color: red;">常用于将分开的年、月、日合并为真正的日期。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DATEDIF</strong></td>
+                            <td>计算两个日期的差（隐藏函数）</td>
+                            <td><code>=DATEDIF(开始日,结束日,单位)</code></td>
+                            <td><code>=DATEDIF(A1,TODAY(),"Y")</code> → 从A1到今天整年数</td>
+                            <td style="color: red;">
+                                单位：<code>"Y"</code>年，<code>"M"</code>月，<code>"D"</code>日，<code>"YM"</code>忽略年算月数差等。一级偶尔考。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>WEEKDAY</strong></td>
+                            <td>判断星期几</td>
+                            <td><code>=WEEKDAY(日期,返回类型)</code></td>
+                            <td><code>=WEEKDAY(A1,2)</code> → 3（周二，若以周一为1）</td>
+                            <td style="color: red;">返回类型常用2（周一=1，周日=7）。一级考得少。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EDATE</strong></td>
+                            <td>加减月份</td>
+                            <td><code>=EDATE(日期,月数)</code></td>
+                            <td><code>=EDATE(A1,3)</code> → 2026/6/16</td>
+                            <td style="color: red;">月数为正则往后，负则往前。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EOMONTH</strong></td>
+                            <td>返回指定月份的最后一天</td>
+                            <td><code>=EOMONTH(日期,月数)</code></td>
+                            <td><code>=EOMONTH(A1,0)</code> → 2026/3/31</td>
+                            <td style="color: red;">月数0表示当月最后一天。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NETWORKDAYS</strong></td>
+                            <td>计算两个日期之间的工作日天数</td>
+                            <td><code>=NETWORKDAYS(开始日,结束日,[假日])</code></td>
+                            <td><code>=NETWORKDAYS(A1, DATE(2026,3,31))</code> → 工作日天数</td>
+                            <td style="color: red;">考到算你运气好，了解即可。</td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+            <li id="数据选项卡——删除重复项">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>删除重复项：<a
+                    href="#数据选项卡">选中需要要的单元格范围——数据选项卡——数据工具组——删除重复值——按要求选择列(是否包含标题[若没有要求直接默认])——最后单击确定即可</a>
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/数据选项卡/删除重复项/删除重复项.png"
+                    alt="删除重复项"
+                    title="删除重复项">
+            </li>
         </ul>
     </section>
     <!--其他部分-->
@@ -751,45 +856,47 @@
                     </li>
                     <li>
                         <h4><span>三种引用方式对比</span></h4>
-                        <table>
-                            <tr>
-                                <th>引用类型</th>
-                                <th>写法示例</th>
-                                <th>填充时的变化规律</th>
-                                <th>核心用途</th>
-                            </tr>
-                            <tr>
-                                <td>相对引用</td>
-                                <td>=A1</td>
-                                <td>
-                                    完全变化
-                                    <br>向下填充变<code>=A2</code>，
-                                    <br>向右填充变<code>=B1</code>
-                                </td>
-                                <td>批量计算</td>
-                            </tr>
-                            <tr>
-                                <td>绝对引用</td>
-                                <td>=$A$1</td>
-                                <td>
-                                    完全不变
-                                    <br>无论怎么填充，都指着A1
-                                </td>
-                                <td>引用固定值</td>
-                            </tr>
-                            <tr>
-                                <td>混合引用</td>
-                                <td>
-                                    =$A1/=A$1
-                                </td>
-                                <td>
-                                    部分变化
-                                    <br>$A1:行锁死，列变
-                                    <br>A$1：行变，列锁死
-                                </td>
-                                <td>制作九九乘法表，跨表计算</td>
-                            </tr>
-                        </table>
+                        <div class="div_table">
+                            <table>
+                                <tr>
+                                    <th>引用类型</th>
+                                    <th>写法示例</th>
+                                    <th>填充时的变化规律</th>
+                                    <th>核心用途</th>
+                                </tr>
+                                <tr>
+                                    <td>相对引用</td>
+                                    <td>=A1</td>
+                                    <td>
+                                        完全变化
+                                        <br>向下填充变<code>=A2</code>，
+                                        <br>向右填充变<code>=B1</code>
+                                    </td>
+                                    <td>批量计算</td>
+                                </tr>
+                                <tr>
+                                    <td>绝对引用</td>
+                                    <td>=$A$1</td>
+                                    <td>
+                                        完全不变
+                                        <br>无论怎么填充，都指着A1
+                                    </td>
+                                    <td>引用固定值</td>
+                                </tr>
+                                <tr>
+                                    <td>混合引用</td>
+                                    <td>
+                                        =$A1/=A$1
+                                    </td>
+                                    <td>
+                                        部分变化
+                                        <br>$A1:行锁死，列变
+                                        <br>A$1：行变，列锁死
+                                    </td>
+                                    <td>制作九九乘法表，跨表计算</td>
+                                </tr>
+                            </table>
+                        </div>
                         <video controls
                                src="../image/excel/其他知识/公式重复使用以及引用/公式重复使用以及引用.mp4"></video>
                     </li>
@@ -873,7 +980,9 @@
                         <br/>·记住：考试里基本就这两种情况，平均值是一列→用 AVERAGEIF/IFS；平均值是多列→无脑 AVERAGE。千万别混着用
                     </li>
                     <li><span>所有函数，必须以题目要求为准</span></li>
-                    <li>困难卷：八</li>
+                    <li>困难卷：八
+                        <br>难度不大(但推荐练的)：十
+                    </li>
                 </ol>
             </li>
         </ul>
