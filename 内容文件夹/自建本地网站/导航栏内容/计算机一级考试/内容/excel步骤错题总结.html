@@ -22,6 +22,8 @@
                         <li><a href="#开始选项卡——条件格式">条件格式使用</a></li>
                         <li><a href="#开始选项卡——设置单元格高宽">设置单元格高宽</a></li>
                         <li><a href="#开始选项卡——条件格式图标集">条件格式图标集</a></li>
+                        <li><a href="#开始选项卡——表格内置样式">表格内置样式</a></li>
+                        <li><a href="#开始选项卡——单元格内置样式">单元格内置样式</a></li>
                     </ol>
                 </li>
                 <li><a id="插入选项卡">插入选项卡</a>
@@ -50,6 +52,7 @@
                         <li><a href="#公式选项卡——MIN家族">MIN家族</a></li>
                         <li><a href="#公式选项卡——RANK.EQ函数">RANK.EQ函数</a></li>
                         <li><a href="#公式选项卡——日期家族">日期家族</a></li>
+                        <li><a href="#公式选项卡——TEXT函数">TEXT函数</a></li>
                     </ol>
                 </li>
                 <li><a id="数据选项卡">数据选项卡</a>
@@ -75,6 +78,10 @@
                         <li><a href="#其他知识——加权平均">加权平均</a></li>
                         <li><a href="#其他知识——颜色查找">颜色查找</a></li>
                         <li><a href="#其他知识——保留小数点问题">保留小数点问题</a></li>
+                        <li><a href="#其它知识——条件格式填充颜色注意">条件格式填充颜色注意</a></li>
+                        <li><a href="#其他知识——日期函数与TEXT函数">日期函数与TEXT函数</a></li>
+                        <li><a href="#其他知识——表样式与函数">表样式与函数</a></li>
+                        <li><a href="#其他知识——IF与AND">IF与AND</a></li>
                     </ol>
                 </li>
             </ul>
@@ -401,10 +408,10 @@
                     <li>
                         <h2>IF</h2>
                         <p>
-                            IF【条件函数——分Ture、FALSE二值内容输出，当指定的参数符合对应法则的时候，输出Ture内容，不符合则相反，输出FALSE内容】</p>
-                        <p>·语法：它可以是单条件<code>=IF(条件,ture,FALSE)</code>
-                            <br>·也可以是多条件<code>=IF(条件,ture,IF(条件,ture,IF(条件,ture,IF(.....)</code>
-                            <br>·但是注意：不是没有FALSE，嵌套的IF就是FALSE,只有当上一个IF条件不符合对应法则，才会继续向嵌套IF进行条件判断知道后面嵌套的IF输出的值为ture停止
+                            IF【条件函数——分TRUE、FALSE二值内容输出，当指定的参数符合对应法则的时候，输出TRUE内容，不符合则相反，输出FALSE内容】</p>
+                        <p>·语法：它可以是单条件<code>=IF(条件,TRUE,FALSE)</code>
+                            <br>·也可以是多条件<code>=IF(条件,TRUE,IF(条件,TRUE,IF(条件,TRUE,IF(.....)</code>
+                            <br>·但是注意：不是没有FALSE，嵌套的IF就是FALSE,只有当上一个IF条件不符合对应法则，才会继续向嵌套IF进行条件判断知道后面嵌套的IF输出的值为TRUE停止
                             <br>·这种写法好处是：所有版本都能使用，但是当嵌套的越多，越复杂，所以如果能用IFS就不要使用IF嵌套带到多条件判断的目的
                             <br>·<span>嵌套了几个IF就要在结尾放入对应的右括号</span>
                         </p>
@@ -413,7 +420,7 @@
                         <h2>IFS</h2>
                         <p>IFS【多条件函数——与IF嵌套相近，但是更直观，多条件非常建议】</p>
                         <p>语法：<code>=IFS(条件1,条件1的TRUE,条件2,条件2的TRUE,.....TRUE,TRUE条件)</code></p>
-                        <p>·从语法可以看出：IFS可以多条件同时定义，同样是是从条件1开始往后依次判断，知道有条件符合对应法则停止，并输出对应的TURE值
+                        <p>·从语法可以看出：IFS可以多条件同时定义，同样是是从条件1开始往后依次判断，知道有条件符合对应法则停止，并输出对应的TRUE值
                             ·<br>至于最后单独的TRUE则是否则的意思(不一定要写)，当所有条件均不符合的时候，输出TRUE的条件。
                         </p>
                     </li>
@@ -839,6 +846,43 @@
                     alt="删除重复项"
                     title="删除重复项">
             </li>
+            <li id="开始选项卡——表格内置样式">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>表格内置样式设置：<a
+                    href="#开始选项卡">选中需要的单元格——开始选项卡——样式组——套用表格格式下拉菜单——按要求选择对应样式即可(<span>优先使用内置样式</span>)</a>
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/开始选项卡/表格内置样式/表格内置样式.png"
+                    alt="表格内置样式"
+                    title="表格内置样式">
+            </li>
+            <li id="公式选项卡——TEXT函数">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>TEXT函数:<a
+                    href="#公式选项卡">选中条件输出结果的单元格——公式选项卡——插入函数组——搜索需要的函数——确定弹出对话框——依次输入正确的参数——单击确定</a>
+                <ol class="ol_initial">
+                    <li>
+                        <h2>TEXT函数</h2>
+                        <ul class="ul_initial">
+                            <li>将其他类型转换为文本类型</li>
+                            <li>语法：<code>=TEXT(地址,"")</code></li>
+                            <li>双引号填写"0"(<span>适用于数字格式</span>)，多少个0，从前往后取多少位输出显示</li>
+                            <li>双引号填写"y"(<span>适用于日期</span>)，多少个Y，从前往后取多少位输出显示</li>
+                            <li>可以添加单位："yyyy年"</li>
+                            <li>可以单独使用，也可以嵌套，嵌套的时候它在最外层</li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li id="开始选项卡——单元格内置样式">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>单元格内置样式：<a
+                    href="#开始选项卡">选中需要的单元格——开始选项卡——样式组——单击单元格样式下拉菜单——在弹出的区域，按要求选择样式即可</a>
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/开始选项卡/单元格内置样式/单元格内置样式.png"
+                    alt="单元格内置样式"
+                    title="单元格内置样式">
+                <br><i class="iconfont icon-icon-test font_image"></i><img
+                    src="../image/excel/开始选项卡/单元格内置样式/单元格内置样式2.png"
+                    alt="单元格内置样式"
+                    title="单元格内置样式2">
+            </li>
         </ul>
     </section>
     <!--其他部分-->
@@ -980,10 +1024,84 @@
                         <br/>·记住：考试里基本就这两种情况，平均值是一列→用 AVERAGEIF/IFS；平均值是多列→无脑 AVERAGE。千万别混着用
                     </li>
                     <li><span>所有函数，必须以题目要求为准</span></li>
-                    <li>困难卷：八
-                        <br>难度不大(但推荐练的)：十
+                </ol>
+            </li>
+            <li id="其它知识——条件格式填充颜色注意">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><a
+                    href="#其他知识导航栏">条件格式填充颜色注意</a>
+                <p>在Excel中，条件格式填充的颜色分为自定义(自定义填充、字体颜色)和官方内置样式。</p>
+                <ul class="ul_initial">
+                    <li>
+                        <h2>自定义</h2>
+                        <ol class="ol_initial">
+                            <li>字面意思，自己定义颜色</li>
+                            <li>一般情况下(考试当中)，不需要自定义</li>
+                            <li>直接使用高概率扣分(内置格式有自己的RBG色、十六进制色<span>考试一般都是使用内置格式</span>)
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h2>官方内置格式</h2>
+                        <ol class="ol_initial">
+                            <li>字面意思，官方已经设置好的样式</li>
+                            <li>好处是：可以直接调用，且考试都是使用内置样式</li>
+                            <li>优先使用内置格式，实在没有，再自定义格式</li>
+                            <li>
+                                <p>
+                                    步骤：选中需要的单元格区域——开始选项卡——样式组——条件格式下拉菜单——悬停【<span>突出显示单元格规则</span>】——在侧边栏选择条件——在弹出的对话框中按要求设置颜色——最后单击确定
+                                </p>
+                                <br><img src="../image/excel/其他知识/条件格式颜色设置/条件格式颜色设置——1.png"
+                                         alt="条件格式颜色设置"
+                                         title="条件格式颜色设置——1">
+                                <br><img src="../image/excel/其他知识/条件格式颜色设置/条件格式颜色设置——2.png"
+                                         alt="条件格式颜色设置"
+                                         title="条件格式颜色设置——2">
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </li>
+            <li id="其他知识——表样式与函数">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><a href="#其他知识导航栏">表样式与函数</a>
+                <p>
+                    设置表样式以后，再使用函数，选中的地址会被结构化，其功能与地址是一样的，只要确定自己没有选错区域，不必理会。</p>
+            </li>
+            <li>
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i>在excel中有些题目需要自己的理解，就是不会明说<span>要干什么，要自己去理解</span>
+                如：
+                <br><img src="../image/excel/有点压力/第十四张/第十四张.png"
+                         alt="第十四张"
+                         title="第十四张">
+                <p>
+                    所有内容没有提示要重命名工作表，但是画框的地方突然多出一个表名，要的函数参数刚好在这个表名里，这是暗示我们要将工作表重命名</p>
+            </li>
+            <li id="其他知识——IF与AND">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><a href="#其他知识导航栏">IF与AND</a>
+                <ol class="ol_initial">
+                    <li>在使用IF家族的时候，有时候需要多个条件同时满足，通常使用， IF函数为主，AND函数为辅的搭配。</li>
+                    <li>语法：<code>=IF(AND(条件1,条件2),TRUE,FALSE)</code></li>
+                    <li>AND是与的关系，条件同时满足，反馈给IF，输出TRUE的值，没有同时满足，则输出FALSE的值</li>
+                    <li>
+                        IF嵌套同样适用：<code>=IF(AND(条件1,条件2),TRUE,IF(AND(...),TRUE,IF(AND(...),TRUE,IF(.......)</code>
                     </li>
                 </ol>
+            </li>
+            <li id="其他知识——日期函数与TEXT函数">
+                <i class="iconfont icon-ef-zhongdiangenzong-gongju font"></i><a href="#其他知识导航栏">日期函数与TEXT函数</a>
+                <ol class="ol_initial">
+                    <li>有时候题目要求将日期的年月日，以文本的形式显示。</li>
+                    <li>可以是TEXT函数为主，YEAR\MONTH\DAY为辅搭配</li>
+                    <li>语法:TEXT(YEAR(地址),"0")</li>
+                    <li>但是转换为文本，无法参与计算</li>
+                    <li>不仅限于日期函数，都可以适用TEXT将输出的内容转为文本类型</li>
+                </ol>
+                <p>
+                    <span>当然采用更改单元格格式也是可以了，可以说是及其方便，如果题目没有要求使用函数TEXT，默认使用单元格格式</span>
+                </p>
+            </li>
+            <li>输入函数参数的时候，只要参数地址是固定的，无脑F4，改为绝对地址，<span>注意是位置固定</span></li>
+            <li>困难卷：八、十四
+                <br>难度不大(但推荐练的)：十
             </li>
         </ul>
     </section>
