@@ -22,7 +22,7 @@
     --font-size-mobile-nav: 1.2rem;
     --font-size-mobile-sub: 1.3rem;
     --font-size-mobile-title: 1.4rem;
-    --font-size-mobile-p: 1.2rem;
+    --font-size-mobile-p: 0.8rem;
 }
 
 * {
@@ -304,6 +304,97 @@ img {
     font-size: var(--font-size-desktop-title);
 }
 
+
+video {
+    display: block;
+    width: 90%;
+    height: auto;
+}
+
+footer {
+    width: 100%;
+    height: 6.25rem;
+    background-color: orange;
+}
+
+footer p {
+    text-align: center;
+    line-height: 6.25rem;
+}
+
+.image_small {
+    width: 80%;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.ol_initial li {
+    list-style-type: decimal;
+}
+
+.ul_initial li {
+    list-style-type: disc;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    margin: 0 auto;
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+}
+
+code {
+    color: green;
+}
+
+ol, ul {
+    padding-left: 2rem;
+}
+
+img, video {
+    max-width: 80%;
+    height: auto;
+}
+
+li, p, a, code, pre {
+    word-wrap: break-word; /* 兼容旧浏览器 */
+    overflow-wrap: break-word; /* 现代标准 */
+}
+
+ul ul, ol ol {
+    width: 100%; /* 确保子列表不超出父容器 */
+    padding-left: 1rem; /* 必要时减小缩进 */
+}
+
+pre {
+    white-space: pre-wrap; /* 保留空格和换行，同时允许自动换行 */
+    word-wrap: break-word; /* 长单词或URL自动断行 */
+    overflow-wrap: break-word; /* 同上，更标准的写法 */
+    max-width: 100%; /* 确保不超出父容器 */
+    /* 如果还溢出，可以加一个背景色调试 */
+    /* background: #f0f0f0; */
+}
+
+.div_table {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #ddd;
+}
+
+td, th {
+    word-break: break-word; /* 强制长单词换行 */
+    overflow-wrap: break-word; /* 现代标准，同上 */
+}
+
+
 /* 响应式调整 */
 @media (max-width: 1450px) {
     .transition ul li {
@@ -402,12 +493,19 @@ img {
     img {
         padding-left: 1rem !important; /* 减小左侧缩进 */
     }
+
     table {
         width: 100%; /* 表格宽度占满父容器 */
         font-size: 0.9rem;
         /* 移除下面两行，避免破坏表格结构 */
         /* overflow-x: auto; */
         /* display: block; */
+    }
+
+    td, th{
+        width: 50px;
+        word-break: break-word; /* 强制长单词换行 */
+        overflow-wrap: break-word; /* 现代标准，同上 */
     }
 
     .transition div {
@@ -425,95 +523,6 @@ img {
     /*pre {*/
     /*    font-size: var(--font-size-mobile-p);*/
     /*}*/
-}
-
-video {
-    display: block;
-    width: 90%;
-    height: auto;
-}
-
-footer {
-    width: 100%;
-    height: 6.25rem;
-    background-color: orange;
-}
-
-footer p {
-    text-align: center;
-    line-height: 6.25rem;
-}
-
-.image_small {
-    width: 80%;
-    height: auto;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.ol_initial li {
-    list-style-type: decimal;
-}
-
-.ul_initial li {
-    list-style-type: disc;
-}
-
-table {
-    table-layout: fixed;
-    width: 100%;
-    margin: 0 auto;
-    border: 2px solid black;
-    border-collapse: collapse;
-}
-
-td, th {
-    border: 1px solid black;
-    text-align: center;
-    vertical-align: middle;
-}
-
-code {
-    color: green;
-}
-
-ol, ul {
-    padding-left: 2rem;
-}
-
-img, video {
-    max-width: 80%;
-    height: auto;
-}
-
-li, p, a, code, pre {
-    word-wrap: break-word; /* 兼容旧浏览器 */
-    overflow-wrap: break-word; /* 现代标准 */
-}
-
-ul ul, ol ol {
-    width: 100%; /* 确保子列表不超出父容器 */
-    padding-left: 1rem; /* 必要时减小缩进 */
-}
-
-pre {
-    white-space: pre-wrap; /* 保留空格和换行，同时允许自动换行 */
-    word-wrap: break-word; /* 长单词或URL自动断行 */
-    overflow-wrap: break-word; /* 同上，更标准的写法 */
-    max-width: 100%; /* 确保不超出父容器 */
-    /* 如果还溢出，可以加一个背景色调试 */
-    /* background: #f0f0f0; */
-}
-
-.div_table {
-    width: 100%;
-    overflow-x: auto;
-    border: 1px solid #ddd;
-}
-
-td, th {
-    word-break: break-word; /* 强制长单词换行 */
-    overflow-wrap: break-word; /* 现代标准，同上 */
 }
 
 
