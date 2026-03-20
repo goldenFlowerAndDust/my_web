@@ -23,6 +23,10 @@
     --font-size-mobile-sub: 1.3rem;
     --font-size-mobile-title: 1.4rem;
     --font-size-mobile-p: 0.8rem;
+
+    /*  整体设置  */
+    --color-main:#4A4A4A;
+    --background-color-body:#FDF5E6;
 }
 
 * {
@@ -37,6 +41,7 @@ body {
     width: 98vw;
     min-height: 100vh;
     margin: 40px auto;
+    background-color: var(--background-color-body);
 }
 
 main {
@@ -257,7 +262,7 @@ nav p {
     min-height: 75px; /* 这里设置固定高度(height) 会导致列表项的内容重叠 */
     text-align: left;
     flex-wrap: wrap;
-    color: #74b9ff;
+    color: var(--color-main);
 }
 
 span {
@@ -502,7 +507,7 @@ td, th {
         /* display: block; */
     }
 
-    td, th{
+    td, th {
         width: 50px;
         word-break: break-word; /* 强制长单词换行 */
         overflow-wrap: break-word; /* 现代标准，同上 */
