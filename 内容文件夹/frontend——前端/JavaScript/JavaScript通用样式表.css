@@ -5,18 +5,23 @@
     --color-h2: #2c3e50;
     --color-h3: #4A5568;
     --color-code: #6f42c1;
+    --color-h4: #4A4A4A;
+    --color-li: #3E3A39;
 
     /*  backgroun-color  */
     --background-color-main: #FDF5E6;
     --background-color-header-footer: orange;
 
     /*  font-size  */
-    --size-h1-footer: 2.1rem;
-    --size-li: 1.5rem;
-    --size-span-code: 1.65rem;
+    --size-h1-footer: 3rem;
+    --size-li: 1rem;
+    --size-h2: 2rem;
+    --size-h3: 1.5rem;
+    --size-h4: 1.25rem;
+    --size-span-code: 1.2rem;
 
     /* line-height */
-    --line-height-p: 1.4;
+    --line-height-p: 1.6;
 
     /* border */
     --border-color-table-td: black;
@@ -24,17 +29,25 @@
     /*  响应式设计板块  */
 
     /*  平板  */
-    --size-h1-footer-ipad: 1.8rem;
-    --size-li-ipad: 1.43rem;
-    --size-span-ipad: 1.6rem;
-    --line-height-p-ipad: 1.6;
+    --size-h1-footer-ipad: 2.5rem;
+    --size-h2-ipad: 1.875rem;
+    --size-h3-ipad: 1.375rem;
+    --size-h4-ipad: 1.25rem;
+    --size-li-ipad: 1rem;
+    --size-span-code-ipad: 1.2rem;
+    --line-height-p-ipad: 1.8;
 
     /*  手机  */
-    --size-h1-footer-mobile_phone: 1.3rem;
-    --size-li-mobile_phone: 1.2rem;
-    --size-span-mobile_phone: 1.25rem;
-    --line-height-p-mobile_phone: 1.8;
+    --size-h1-footer-mobile_phone: 1.7rem;
+    --size-h2-mobile_phone: 1.625rem;
+    --size-h3-mobile_phone: 1.3125rem;
+    --size-h4-mobile_phone: 1.125rem;
+    --size-li-mobile_phone: 1rem;
+    --size-span-code-mobile_phone: 1.20rem;
+    --line-height-p-mobile_phone: 2;
 }
+
+
 
 * {
     margin: 0;
@@ -42,12 +55,15 @@
     box-sizing: border-box;
 }
 
-ul, ol {
-    padding-left: 2rem;
+html{
+    font-size: 20px;
 }
+
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem; /* 20px 基于 html 20px */
+    line-height: var(--line-height-p);
 }
 
 main {
@@ -59,7 +75,7 @@ main {
     "section_1"
     "section_2"
     "footer";
-    width: 90vw;
+    width: 95vw;
     min-height: 100vh;
     margin: 0 auto;
     background-color: var(--background-color-main);
@@ -74,6 +90,10 @@ header {
     min-height: 5rem;
 }
 
+ul, ol {
+    padding-left: 2rem;
+}
+
 h1 {
     color: var(--color-h1-footer);
     font-size: var(--size-h1-footer);
@@ -83,11 +103,18 @@ h2 {
     margin-top: 1.3rem;
     font-weight: bolder;
     color: var(--color-h2);
+    font-size: var(--size-h2);
 }
 
 h3 {
     margin-top: 1.25rem;
     color: var(--color-h3);
+    font-size: var(--size-h3);
+}
+
+h4 {
+    font-size: var(--size-h4);
+    color: var(--color-h4);
 }
 
 .item {
@@ -117,6 +144,7 @@ span {
 
 li {
     font-size: var(--size-li);
+    color: var(--color-li);
 }
 
 a {
@@ -135,10 +163,10 @@ table {
     width: 80%;
 }
 
-td,th{
+td, th {
     border: 1px solid var(--border-color-table-td);
     text-align: center;
-    vertical-align:middle;
+    vertical-align: middle;
 
 }
 
@@ -161,9 +189,33 @@ footer p {
     font-size: var(--size-h1-footer);
 }
 
+.div_video{
+    width: 80%;
+    margin: 10px auto;
+}
+
+video{
+    width: 100%;
+    height: auto;
+
+}
+
+
 @media (max-width: 1500px) {
     h1 {
         font-size: var(--size-h1-footer-ipad);
+    }
+
+    h2 {
+        font-size: var(--size-h2-ipad);
+    }
+
+    h3 {
+        font-size: var(--size-h3-ipad);
+    }
+
+    h4 {
+        font-size: var(--size-h4-ipad);
     }
 
     li {
@@ -171,7 +223,11 @@ footer p {
     }
 
     span {
-        font-size: var(--size-span-ipad);
+        font-size: var(--size-span-code-ipad);
+    }
+
+    code {
+        font-size: var(--size-span-code-ipad);
     }
 
     footer p {
@@ -192,12 +248,28 @@ footer p {
         font-size: var(--size-h1-footer-mobile_phone);
     }
 
+    h2 {
+        font-size: var(--size-h2-mobile_phone);
+    }
+
+    h3 {
+        font-size: var(--size-h3-mobile_phone);
+    }
+
+    h4 {
+        font-size: var(--size-h4-mobile_phone);
+    }
+
     li {
         font-size: var(--size-li-mobile_phone);
     }
 
     span {
-        font-size: var(--size-span-mobile_phone);
+        font-size: var(--size-span-code-mobile_phone);
+    }
+
+    code {
+        font-size: var(--size-span-code-mobile_phone);
     }
 
     footer p {

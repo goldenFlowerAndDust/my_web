@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS书写的位置</title>
+    <link rel="stylesheet" href="../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>JS书写的位置</h1>
+    </header>
+    <section id="section_1">
+        <h2>位置</h2>
+        <ul>
+            <li>和css一样，JS也可以有很多种方式书写在页面上时期生效</li>
+            <li>
+                <ol>
+                    <li>
+                        <h3>行内式(<span>非常不建议用</span>)</h3>
+                        <ul>
+                            <li>写在标签上的JS代码依靠事件(<span>行为</span>)来触发</li>
+                            <li>在行内添加onclick属性，在属性内添加JS代码</li>
+                            <li>
+                                <span>使用弹窗(alert、prompt、confirm)会堵塞UI，需要用户确定、取消操作后，运行后续JS代码</span>
+                            </li>
+                            <li>
+                                <h4>图例</h4>
+                                <img src="./image/行内式/素材.png"
+                                     alt="行内式"
+                                     title="行内式——素材">
+                                <img src="./image/行内式/演示.png"
+                                     alt="行内式"
+                                     title="行内式——演示">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>内嵌式</h3>
+                        <ul>
+                            <li><span>将script标签写在head标签内或body标签内</span>，通过打开浏览器执行触发(从上到下依次运行)</li>
+                            <li>
+                                <h4>图例</h4>
+                                <div class="div_video">
+                                    <video src="./image/内嵌式/内嵌式.mp4" controls></video>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>外链式(<span>非常推荐</span>)</h3>
+                        <ul>
+                            <li>在外部建立JS文件，在html内通过script标签，src属性引入JS文件相对路径</li>
+                            <li>建议放在<span>body标签最后面写</span>即是:&lt;/body&gt;之前写</li>
+                            <li>语法：<code>&lt;script src="JS文件相对路径"&gt;</code></li>
+                            <li><span>注意：采用了外链式的script标签，再到内写的代码不会被执行</span></li>
+                            <li>
+                                <h4>图例</h4>
+                                <div class="div_video">
+                                    <video src="./image/外链式/外链式.mp4" controls></video>
+                                </div>
+                            </li>
+                        </ul> 
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>试验区</h2>
+        <ul>
+            <li>
+                <h3>行内式</h3>
+                <ol>
+                    <li>
+                        <a href="#"
+                           onclick="this.style.color='red';this.style.fontSize='4rem';alert('Hello')">单击我一下</a>
+                    </li>
+                    <li>
+                        <code>href="javascript:...."</code>中的<span>this</span>指向window，拿不到&lt;a&gt;元素本身。<span>所以，在内添加JS代码没有效果</span>
+                    </li>
+                    <li>样式属性名在JS中必须用小驼峰：即第一个单词首字母小写，后续每个单词的首字母大写，其余字母小写<span>例如：fontSize、backgroundColor....</span>
+                    </li>
+                    <li>onclick事件属性里的this是作用于当前元素</li>
+                    <li>
+                        除了：onclick(单击事件),还有：<span>ondblclick(双击事件)、onmousedown(按下事件)、onmouseup(松开事件)</span>同样可以用于行内式
+                    </li>
+                    <li>注意：双引号内属性值用<span>单引号</span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>内嵌式</h3>
+<!--                <script type="text/javascript">-->
+<!--                    alert("欢迎学习JS")-->
+<!--                </script>-->
+            </li>
+            <li>
+                <h4>外链式</h4>
+<!--                <script src="第四节——JS书写的位置.js"></script>-->
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
