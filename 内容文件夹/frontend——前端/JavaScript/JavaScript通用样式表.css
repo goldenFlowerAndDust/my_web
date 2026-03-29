@@ -6,6 +6,7 @@
     --color-h3: #4A5568;
     --color-code: #6f42c1;
     --color-h4: #4A4A4A;
+    --color-h5: #95A5A6;
     --color-li: #3E3A39;
 
     /*  backgroun-color  */
@@ -18,6 +19,7 @@
     --size-h2: 2rem;
     --size-h3: 1.5rem;
     --size-h4: 1.25rem;
+    --size-h5: 1.125rem;
     --size-span-code: 1.2rem;
 
     /* line-height */
@@ -33,6 +35,7 @@
     --size-h2-ipad: 1.875rem;
     --size-h3-ipad: 1.375rem;
     --size-h4-ipad: 1.25rem;
+    --size-h5-ipad: 1.125rem;
     --size-li-ipad: 1rem;
     --size-span-code-ipad: 1.2rem;
     --line-height-p-ipad: 1.8;
@@ -42,6 +45,7 @@
     --size-h2-mobile_phone: 1.625rem;
     --size-h3-mobile_phone: 1.3125rem;
     --size-h4-mobile_phone: 1.125rem;
+    --size-h5-mobile_phone: 0.875rem;
     --size-li-mobile_phone: 1rem;
     --size-span-code-mobile_phone: 1.20rem;
     --line-height-p-mobile_phone: 2;
@@ -115,6 +119,11 @@ h3 {
 h4 {
     font-size: var(--size-h4);
     color: var(--color-h4);
+}
+
+h5{
+    font-size: var(--size-h5);
+    color: var(--color-h5);
 }
 
 .item {
@@ -218,6 +227,10 @@ video{
         font-size: var(--size-h4-ipad);
     }
 
+    h5{
+        font-size: var(--size-h5-ipad);
+    }
+
     li {
         font-size: var(--size-li-ipad);
     }
@@ -258,6 +271,10 @@ video{
 
     h4 {
         font-size: var(--size-h4-mobile_phone);
+    }
+
+    h5{
+        font-size: var(--size-h5-mobile_phone);
     }
 
     li {

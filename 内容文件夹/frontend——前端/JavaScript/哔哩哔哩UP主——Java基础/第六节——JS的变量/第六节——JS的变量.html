@@ -27,12 +27,16 @@
             <li>
                 <h3><span>注意：</span></h3>
                 <ol>
+                    <li>一次可以定义多个变量和变量值，但是每个变量之间需要用<span>英文逗号隔开</span></li>
                     <li>除了var可以定义变量，还有<span>let、const</span></li>
                     <li>分为两种情况:定义变量<span>不赋值</span>和定义变量<span>赋值</span></li>
                     <li>不赋值状态：后续可以直接使用变量名(<span>不需要再次声明变量[var、let、const]</span>)</li>
-                    <li>const<span>必须赋值</span>，不然会报错，并且后续不可以重新赋值(<span>值一旦确定，不可改变</span>)——在数组/对象内部数据依然可以改变</li>
+                    <li>const<span>必须赋值</span>，不然会报错，并且后续不可以重新赋值(<span>值一旦确定，不可改变</span>)——在数组/对象内部数据依然可以改变
+                    </li>
                     <li>var、let可以不赋值，也可以赋值，后续可以重新赋值</li>
-                    <li>let、const不允许在同一作用域下，设置同一变量名</li>
+                    <li>let、const不允许在同一<a href="#作用域">作用域</a>下，设置同一变量名</li>
+                    <li>var可以在同一作用域下，设置同一变量名，<span>但是后面的会覆盖前面的变量值</span>所以正常开发不建议使用var定义变量
+                    </li>
                 </ol>
             </li>
         </ul>
@@ -43,16 +47,16 @@
             <li>
                 <h3>初次使用var</h3>
                 <script type="text/javascript">
-                     var name = "张三"
-                     console.log(name)
+                    var name = "张三"
+                    console.log(name)
                 </script>
             </li>
             <li>
                 <h3>不赋值状态</h3>
                 <script type="text/javascript">
-                    let sum  //定义变量但不赋值
+                    /*let sum  //定义变量但不赋值
                     sum = parseInt(prompt("请输入你的数值："))  //它的值有用户输入决定 ，不需要再次声明变量
-                    alert("你输入的数值是：" + sum)  //将用户输入的值调用，用于警告弹窗
+                    alert("你输入的数值是：" + sum)  //将用户输入的值调用，用于警告弹窗*/
                 </script>
                 <div class="div_video">
                     <video src="./不赋值状态/不赋值状态.mp4" controls></video>
@@ -64,6 +68,30 @@
                     const sum2 = 20   //定义变量，并赋值20
                     console.log(sum2) //在控制台调用变量
                 </script>
+                <div class="div_video">
+                    <video src="./赋值状态/赋值状态.mp4" controls></video>
+                </div>
+            </li>
+            <li>
+                <h3 id="作用域">作用域</h3>
+                <ol>
+                    <li>变量在代码中能够访问到的"领地"</li>
+                    <li>
+                        <h4>在JavaScript中有三种领地</h4>
+                        <ul>
+                            <li>全局作用域：写在所有函数和代码块之外的变量，<span>任何地方都能访问</span></li>
+                            <li>
+                                函数作用域：<span>用function包起来的区域</span>，里面的变量只能在这个函数内部使用。
+                                var声明的变量就属于这个领地，函数外拿不到
+                                <br><span>用 let / const 在函数内声明的变量也一样只能在函数内访问</span>
+                            </li>
+                            <li>块级作用域(ES6新增):用{}包起来的区域，比如if、for或单独的{}。
+                                <br><span>let和const声明的变量只在这个{}内有效，外面无法访问</span>
+                                <br>var不支持块级作用域
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
             </li>
         </ul>
     </section>
