@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型转换</title>
+    <link rel="stylesheet" href="../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>数据类型转换</h1>
+    </header>
+    <section id="section_1">
+        <h2>共有三种转换方式</h2>
+        <ul>
+            <li>
+                <h3>转数值</h3>
+                <ol>
+                    <li>
+                        <h4>方法一:<code>Number(变量)</code></h4>
+                        <ul>
+                            <li>可以把一个变量<span>强制转换成数值类型</span></li>
+                            <li>可以转换小数，会保留小数</li>
+                            <li>可以转换布尔值</li>
+                            <li>遇到不可以转换的<span>都会返回NaN</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法二:<code>parseInt(变量)</code></h4>
+                        <ul>
+                            <li>从第一位开始检查，是数字就转换，直到一个不是数字的内容</li>
+                            <li>开头就不是数字，<span>那么直接返回NaN</span></li>
+                            <li><span>不认识小数点，只能保留整数</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法三:<code>parseFloat(变量)</code></h4>
+                        <ul>
+                            <li>从第一位开始检查，是数字就转换，直到一个不是数字的内容</li>
+                            <li>开头不是数字，<span>那么直接返回NaN</span></li>
+                            <li>认识一次小数点</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法四:<span>除加法以外的数学运算符</span></h4>
+                        <ul>
+                            <li>运算符两边都是可运算数字才行</li>
+                            <li>如果运算符任何一边不是一个可运算数字，<span>那么就会返回NaN</span></li>
+                            <li>加法不可以用</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>演示</h4>
+                        <div class="div_video">
+                            <video src="./转换数值/转换数值.mp4" controls></video>
+                        </div>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>转字符串</h3>
+            </li>
+            <li>
+                <h3>转布尔值</h3>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>试验区</h2>
+        <ul>
+            <li>
+                <h3>转数值</h3>
+                <script type="text/javascript">
+                    //方法一：Number(变量)
+                    let num1 = "123456789.5555" //可以看到，赋给num1的值是字符串
+                    num1 = Number(num1) //通过方法一，将字符串强制转为数值类型
+                    console.log(typeof num1,num1) //使用typeof关键字查看当前数值类型，并将结果显示出来(可以看到输出的结果是蓝色的，蓝色代表是数值类型)
+
+                    //方法二:parseInt(变量)
+                    let num2 = "157896.5555"
+                    num2 = parseInt(num2)  // 通过方法二：将字符串转为数值类型
+                    console.log(typeof num2,num2)  //输出的结果可以看到，parseInt不认识小数点，只输出了整数部分
+
+                    //方法三:parseFloat(变量)
+                    let num3 = "157896.5555"
+                    num3 = parseFloat(num3) // 通过方法三：将字符串转为数值类型
+                    console.log(typeof num3,num3) //输出的结果可以看到，parseFloat认识小数点。
+
+                    //方法二与方法三的注意事项
+                    let num4 = "1254562.8.9A2B3BB.663BN"
+                    num5 = parseInt(num4)
+                    num6 = parseFloat(num4)
+
+                    console.log(typeof num5,num5) //通过控制台输出，可以看到，parseInt和parseFloat都是从第一个数字开始，直到第一个非数字结束
+                    console.log(typeof num6,num6) // 可以看到parseFloat只认第一个小数点
+
+                    //当第一个非数字的情况
+                    let num7 = "A2223333"
+                    num8 = parseInt(num7)
+                    num9 = parseFloat(num7)
+
+                    console.log(typeof num8,num8) //当第一个是非数值的情况，输出的结果都是NaN
+                    console.log(typeof num9,num9)
+
+                    //第四种方法
+                    let num10 = "5485"
+                    num10 = num10 * 5
+                    console.log(typeof num10,num10) //可以看到，字符串"5485"遇到乘法计算，最后的结果输出的是数值类型
+
+                    let num11 = "2233"
+                    num11 = num11 + 5
+                    console.log(typeof num11,num11) //可以看到，字符串"2233"遇到加法计算，最后的结果输出的是字符串类型
+
+                </script>
+            </li>
+            <li></li>
+            <li></li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
