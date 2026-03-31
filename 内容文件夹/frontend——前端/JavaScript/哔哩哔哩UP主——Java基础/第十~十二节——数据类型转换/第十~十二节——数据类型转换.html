@@ -90,7 +90,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h4>使用加法运算</h4>
+                        <h4>方法三：使用加法运算</h4>
                         <ul>
                             <li>在JS里面，<span>【+】有两个含义</span></li>
                             <li>字符串拼接:只要+任一一边是字符串，就会进行字符串拼接</li>
@@ -102,6 +102,10 @@
                         <div class="div_video">
                             <p>·转字符串上:<span>涵盖：方法一、方法二</span></p>
                             <video src="./image/转字符串上.mp4" controls></video>
+                        </div>
+                        <div class="div_video">
+                            <p>·转字符串上:<span>涵盖：方法三</span></p>
+                            <video src="./image/转字符串下.mp4" controls></video>
                         </div>
                     </li>
                 </ol>
@@ -183,10 +187,22 @@
                     str6 = String(str6)
                     console.log(typeof str6, str6)
 
+                    //方法二:注意事项
                     str2 = String(str2)
                     str3 = String(str3)
                     console.log(typeof str3, str3)//运行不会报错，可以看见String(变量)支持undefined类型
                     console.log(typeof str2, str2)//运行不会报错，可以看见String(变量)支持null类型
+
+                    //方法三：使用加号拼接
+
+                    let str7 = 8956 //数字
+                    let str8 = 5639 //数字
+                    let str9 = "ABCDE" + 15696 //字符串 + 数字
+                    let str10 = str7 + str8 //数字 + 数字
+
+                    console.log(typeof str10,str10) //输出结果为number，所以加号在两边均为数值时，执行的是数学运算
+                    console.log(typeof str9,str9)
+                    //输出的结果为String ，且是字符串与数字拼接而成的新的字符串，所以，加号两边有一边是字符串，则执行的是字符串拼接操作
 
                 </script>
             </li>
