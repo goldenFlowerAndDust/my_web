@@ -78,7 +78,7 @@
                 <h3>转字符串</h3>
                 <ol>
                     <li>
-                        <h4>方法一:<span>变量.tostring()</span></h4>
+                        <h4>方法一:<span>变量.toString()</span></h4>
                         <ul>
                             <li>有些数据类型不能使用tostring()方法，比如<span>undefined和null</span></li>
                         </ul>
@@ -95,6 +95,7 @@
                             <li>在JS里面，<span>【+】有两个含义</span></li>
                             <li>字符串拼接:只要+任一一边是字符串，就会进行字符串拼接</li>
                             <li>加法运算：只有+两边都是数字的时候，才会进行数学运算</li>
+                            <li>若只是想将原有变量的数值转为字符串，<span>则在+""[空字符串即可,不要由多余的空格]</span></li>
                         </ul>
                     </li>
                     <li>
@@ -112,6 +113,22 @@
             </li>
             <li>
                 <h3>转布尔值</h3>
+                <ol>
+                    <li>
+                        <h4>方法：Boolean(变量)</h4>
+                        <ul>
+                            <li>在JS中，只有[<span>''、null、undefined、NaN</span>],这些转换的是false</li>
+                            <li>其他均是true</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>演示</h4>
+                        <div class="div_video">
+                            <p>·转字符串上:<span>涵盖：方法一、方法二</span></p>
+                            <video src="./image/转布尔值.mp4" controls></video>
+                        </div>
+                    </li>
+                </ol>
             </li>
         </ul>
     </section>
@@ -206,7 +223,31 @@
 
                 </script>
             </li>
-            <li></li>
+            <li>
+                <h3>转布尔值</h3>
+                <script type="text/javascript">
+                    let b = '' //空字符串
+                    let c = null // null类型
+                    let d  //undefined
+                    let e = 5896  //数值类型
+                    let f = "hello"  //字符串类型
+
+                    b =  Boolean(b)
+                    c =  Boolean(c)
+                    d =  Boolean(d)
+                    e =  Boolean(e)
+                    f =  Boolean(f)
+
+                    //运行结果可以看到，所有的类型都转换为布尔类型。
+                    //且''、null、undefined转的值是false 还有一个NaN没有举例
+                    //其他数据类型都是true
+                    console.log(typeof b, b)
+                    console.log(typeof c, c)
+                    console.log(typeof d, d)
+                    console.log(typeof e, e)
+                    console.log(typeof f, f)
+                </script>
+            </li>
         </ul>
     </section>
     <footer>
