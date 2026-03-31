@@ -22,8 +22,10 @@
                         <ul>
                             <li>可以把一个变量<span>强制转换成数值类型</span></li>
                             <li>可以转换小数，会保留小数</li>
-                            <li>可以转换布尔值</li>
-                            <li>遇到不可以转换的<span>都会返回NaN</span></li>
+                            <li>可以转换布尔值(<span>true强制转为1</span>)，<span>false强制转为0</span></li>
+                            <li>null(空值)——<span>强制转为0</span></li>
+                            <li>遇到不可以转换的<span>都会返回NaN——"非数字、布尔值、null"</span></li>
+                            <li>只要存在<span>不可转换的字符，都返回NaN</span></li>
                         </ul>
                     </li>
                     <li>
@@ -39,7 +41,7 @@
                         <ul>
                             <li>从第一位开始检查，是数字就转换，直到一个不是数字的内容</li>
                             <li>开头不是数字，<span>那么直接返回NaN</span></li>
-                            <li>认识一次小数点</li>
+                            <li>只认识第一个小数点</li>
                         </ul>
                     </li>
                     <li>
@@ -47,7 +49,16 @@
                         <ul>
                             <li>运算符两边都是可运算数字才行</li>
                             <li>如果运算符任何一边不是一个可运算数字，<span>那么就会返回NaN</span></li>
-                            <li>加法不可以用</li>
+                            <li>
+                                <span>·加法不可以用</span>
+                                <ol>
+                                    <li>任一操作数是字符串，<span>用加号，会将前/后数据类型转为字符串，并进行拼接</span>
+                                    </li>
+                                    <li>
+                                        当两个操作数都是非字符串、布尔值，<span>用加号，则进行加法运算(但这已经不涉及转换数据类型了[而是两个操作数均是数值])</span>
+                                    </li>
+                                </ol>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -65,6 +76,35 @@
             </li>
             <li>
                 <h3>转字符串</h3>
+                <ol>
+                    <li>
+                        <h4>方法一:<span>变量.tostring()</span></h4>
+                        <ul>
+                            <li>有些数据类型不能使用tostring()方法，比如<span>undefined和null</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法二:<span>String(变量)</span></h4>
+                        <ul>
+                            <li>所有数据类型都可以</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>使用加法运算</h4>
+                        <ul>
+                            <li>在JS里面，<span>【+】有两个含义</span></li>
+                            <li>字符串拼接:只要+任一一边是字符串，就会进行字符串拼接</li>
+                            <li>加法运算：只有+两边都是数字的时候，才会进行数学运算</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>演示</h4>
+                        <div class="div_video">
+                            <p>·转字符串上:<span>涵盖：方法一、方法二</span></p>
+                            <video src="./image/转字符串上.mp4" controls></video>
+                        </div>
+                    </li>
+                </ol>
             </li>
             <li>
                 <h3>转布尔值</h3>
@@ -80,46 +120,76 @@
                     //方法一：Number(变量)
                     let num1 = "123456789.5555" //可以看到，赋给num1的值是字符串
                     num1 = Number(num1) //通过方法一，将字符串强制转为数值类型
-                    console.log(typeof num1,num1) //使用typeof关键字查看当前数值类型，并将结果显示出来(可以看到输出的结果是蓝色的，蓝色代表是数值类型)
+                    console.log(typeof num1, num1) //使用typeof关键字查看当前数值类型，并将结果显示出来(可以看到输出的结果是蓝色的，蓝色代表是数值类型)
 
                     //方法二:parseInt(变量)
                     let num2 = "157896.5555"
                     num2 = parseInt(num2)  // 通过方法二：将字符串转为数值类型
-                    console.log(typeof num2,num2)  //输出的结果可以看到，parseInt不认识小数点，只输出了整数部分
+                    console.log(typeof num2, num2)  //输出的结果可以看到，parseInt不认识小数点，只输出了整数部分
 
                     //方法三:parseFloat(变量)
                     let num3 = "157896.5555"
                     num3 = parseFloat(num3) // 通过方法三：将字符串转为数值类型
-                    console.log(typeof num3,num3) //输出的结果可以看到，parseFloat认识小数点。
+                    console.log(typeof num3, num3) //输出的结果可以看到，parseFloat认识小数点。
 
                     //方法二与方法三的注意事项
                     let num4 = "1254562.8.9A2B3BB.663BN"
                     num5 = parseInt(num4)
                     num6 = parseFloat(num4)
 
-                    console.log(typeof num5,num5) //通过控制台输出，可以看到，parseInt和parseFloat都是从第一个数字开始，直到第一个非数字结束
-                    console.log(typeof num6,num6) // 可以看到parseFloat只认第一个小数点
+                    console.log(typeof num5, num5) //通过控制台输出，可以看到，parseInt和parseFloat都是从第一个数字开始，直到第一个非数字结束
+                    console.log(typeof num6, num6) // 可以看到parseFloat只认第一个小数点
 
                     //当第一个非数字的情况
                     let num7 = "A2223333"
                     num8 = parseInt(num7)
                     num9 = parseFloat(num7)
 
-                    console.log(typeof num8,num8) //当第一个是非数值的情况，输出的结果都是NaN
-                    console.log(typeof num9,num9)
+                    console.log(typeof num8, num8) //当第一个是非数值的情况，输出的结果都是NaN
+                    console.log(typeof num9, num9)
 
                     //第四种方法
                     let num10 = "5485"
                     num10 = num10 * 5
-                    console.log(typeof num10,num10) //可以看到，字符串"5485"遇到乘法计算，最后的结果输出的是数值类型
+                    console.log(typeof num10, num10) //可以看到，字符串"5485"遇到乘法计算，最后的结果输出的是数值类型
 
                     let num11 = "2233"
                     num11 = num11 + 5
-                    console.log(typeof num11,num11) //可以看到，字符串"2233"遇到加法计算，最后的结果输出的是字符串类型
+                    console.log(typeof num11, num11) //可以看到，字符串"2233"遇到加法计算，最后的结果输出的是字符串类型
 
                 </script>
             </li>
-            <li></li>
+            <li>
+                <h3>转字符串</h3>
+                <script type="text/javascript">
+                    //方法一 ： 方法:toString()
+                    let str1 = 2589
+                    str1 = str1.toString()
+                    console.log(typeof str1, str1)
+
+                    //方法一： 注意事项
+                    let str2 = null
+                    let str3
+
+                    // str4 = str2.toString()
+                    // let str5 = str3.toString()
+
+                    // console.log(typeof str4,str4)  //运行报错，可以看见，toString()方法，不能转null类型
+                    // console.log(typeof str5,str5)  //运行报错，可以看见，toString()方法，不能转undefined类型
+
+
+                    //方法二： String(变量)
+                    let str6 = 589.6541
+                    str6 = String(str6)
+                    console.log(typeof str6, str6)
+
+                    str2 = String(str2)
+                    str3 = String(str3)
+                    console.log(typeof str3, str3)//运行不会报错，可以看见String(变量)支持undefined类型
+                    console.log(typeof str2, str2)//运行不会报错，可以看见String(变量)支持null类型
+
+                </script>
+            </li>
             <li></li>
         </ul>
     </section>
