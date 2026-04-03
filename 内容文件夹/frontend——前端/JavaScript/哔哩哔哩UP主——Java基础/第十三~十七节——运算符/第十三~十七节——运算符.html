@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运算符</title>
+    <link rel="stylesheet" href="../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>运算符</h1>
+    </header>
+    <section id="section_1">
+        <h2>什么是运算符</h2>
+        <ul>
+            <li>
+                <ol>
+                    <li>是代码里面进行运算的时候使用的符号</li>
+                    <li>
+                        JS共分六种运算符：[<span>数学运算符、赋值运算符、比较运算符、逻辑运算符、自增自减运算符、三目运算符</span>]
+                    </li>
+                    <li>
+                        <h3>运算符的分类</h3>
+                        <ul>
+                            <li>
+                                <h4>数学运算符(<span>除加号外，其他操作数为非数字字符串，输出均为NaN</span>)</h4>
+                                <ol>
+                                    <li>
+                                        <h5>+号</h5>
+                                        <ul>
+                                            <li>只有<span>符号两边都是数字</span>的时候才会进行加法运算</li>
+                                            <li>
+                                                只要符号<span>任意一边是字符串类型</span>，就会<span>进行字符串拼接</span>
+                                            </li>
+                                            <li>
+                                                <P>·演示</P>
+                                                <script type="text/javascript">
+                                                    let sum = 5
+                                                    let sum2 = "50"
+                                                    let sum3 = 50
+
+                                                    console.log("一侧为字符串："+typeof(sum+sum2),sum+sum2)
+                                                    console.log("两侧均为数字：" + typeof(sum+sum3),sum+sum3)
+                                                </script>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>-号</h5>
+                                        <ul>
+                                                            <li>会执行<span>减法运算</span></li>
+                                            <li><span>会自动把两边都转换成数字进行计算</span></li>
+                                            <li>
+                                                <P>·演示</P>
+                                                <script type="text/javascript"></script>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>*号</h5>
+                                        <ul>
+                                            <li>会执行<span>乘法运算</span></li>
+                                            <li><span>会自动把两边都转换成数字进行运算</span></li>
+                                            <li>
+                                                <P>·演示</P>
+                                                <script type="text/javascript"></script>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>/号</h5>
+                                        <ul>
+                                            <li>会执行<span>除法运算</span></li>
+                                            <li><span>会自动把两边都转换成数字进行运算</span></li>
+                                            <li>
+                                                <P>·演示</P>
+                                                <script type="text/javascript"></script>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>%号</h5>
+                                        <ul>
+                                            <li>会执行<span>取余运算</span></li>
+                                            <li><span>会自动把两边都转换成数字进行运算</span></li>
+                                            <li>
+                                                <P>·演示</P>
+                                                <script type="text/javascript"></script>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
