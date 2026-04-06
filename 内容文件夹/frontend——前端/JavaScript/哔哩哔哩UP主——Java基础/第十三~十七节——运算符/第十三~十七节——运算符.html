@@ -24,7 +24,7 @@
                         <h3>运算符的分类</h3>
                         <ul>
                             <li>
-                                <h4>数学运算符(<span>除加号外，其他操作数为非数字字符串，输出均为NaN</span>)</h4>
+                                <h4>数学运算符(<span>除加号外，其他操作数为非数字字符串，输出均为NaN</span>),除加号外，其他操作数均为数字(两侧均为字符串也一样)，则转为数字，并计算</h4>
                                 <ol>
                                     <li>
                                         <h5>+号</h5>
@@ -33,60 +33,195 @@
                                             <li>
                                                 只要符号<span>任意一边是字符串类型</span>，就会<span>进行字符串拼接</span>
                                             </li>
+                                            <li>当值为布尔类型(<span>true/false</span>)，执行加法运算时，会自动将<span>true[1]/flase[0]</span>
+                                            </li>
                                             <li>
                                                 <P>·演示</P>
                                                 <script type="text/javascript">
-                                                    let sum = 5
-                                                    let sum2 = "50"
-                                                    let sum3 = 50
+                                                    let sum = 5   //数字
+                                                    let sum2 = "50"  // 字符串
+                                                    let sum3 = 50   //数字
+                                                    let sum4 = true
+                                                    let sum5 = false
 
-                                                    console.log("一侧为字符串："+typeof(sum+sum2),sum+sum2)
-                                                    console.log("两侧均为数字：" + typeof(sum+sum3),sum+sum3)
+                                                    console.log("一侧为字符串：" + typeof (sum + sum2), sum + sum2)
+                                                    console.log("两侧均为数字：" + typeof (sum + sum3), sum + sum3)
+                                                    console.log("数字+true; " + typeof (sum + sum4), sum + sum4)
+                                                    console.log("数字+false; " + typeof (sum3 + sum5), sum3 + sum5)
+                                                    console.log("======================================================================")
                                                 </script>
+                                                <img src="image/数学运算符/加号/数学运算符加号.png"
+                                                     alt="数学运算符加号"
+                                                     title="数学运算符加号">
+                                                <img src="image/数学运算符/加号/数学运算符加号与布尔值.png"
+                                                     alt="数学运算符加号与布尔值"
+                                                     title="数学运算符加号与布尔值">
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
                                         <h5>-号</h5>
                                         <ul>
-                                                            <li>会执行<span>减法运算</span></li>
-                                            <li><span>会自动把两边都转换成数字进行计算</span></li>
+                                            <li>会执行<span>减法运算(subtraction)</span></li>
+                                            <li>
+                                                <span>会自动把两边(<span>非数字字符串除外</span>)都转换成数字进行计算</span>
+                                            </li>
+                                            <li>当值为布尔类型(<span>true/false</span>)，执行减法运算时，会自动将<span>true[1]/flase[0]</span>
+                                            </li>
                                             <li>
                                                 <P>·演示</P>
-                                                <script type="text/javascript"></script>
+                                                <script type="text/javascript">
+                                                    let subtraction = 50  // subtraction(减法)
+                                                    let subtraction1 = "50"
+                                                    let subtraction2 = 5
+                                                    let subtraction3 = true
+                                                    let subtraction4 = false
+                                                    let subtraction5 = "ABC"
+
+                                                    console.log("一侧为字符串：" + typeof (subtraction - subtraction1), subtraction - subtraction1)
+                                                    console.log("两侧均为数字" + typeof (subtraction - subtraction2), subtraction - subtraction2)
+                                                    console.log("数字-true" + typeof (subtraction - subtraction3), subtraction - subtraction3)
+                                                    console.log("数字-false" + typeof (subtraction - subtraction4), subtraction - subtraction4)
+                                                    console.log("数字-'非数字字符串'" + typeof (subtraction - subtraction5), subtraction - subtraction5)
+                                                    console.log("===========================================================")
+                                                </script>
+                                                <img src="image/数学运算符/减号/数学运算符减号.png"
+                                                     alt="数学运算符减号"
+                                                     title="数学运算符减号">
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
                                         <h5>*号</h5>
                                         <ul>
-                                            <li>会执行<span>乘法运算</span></li>
-                                            <li><span>会自动把两边都转换成数字进行运算</span></li>
+                                            <li>会执行<span>乘法运算(multiplication)</span></li>
+                                            <li>
+                                                <span>会自动把两边(<span>非数字字符串除外</span>)都转换成数字进行计算</span>
+                                            </li>
+                                            <li>当值为布尔类型(<span>true/false</span>)，执行乘法运算时，会自动将<span>true[1]/flase[0]</span>
+                                            </li>
                                             <li>
                                                 <P>·演示</P>
-                                                <script type="text/javascript"></script>
+                                                <script type="text/javascript">
+                                                    let multiplication = 50  //multiplication （乘法运算）
+                                                    let multiplication1 = "50"
+                                                    let multiplication2 = 5
+                                                    let multiplication3 = "ABC"
+                                                    let multiplication4 = true
+                                                    let multiplication5 = false
+
+                                                    console.log("一侧为字符串：" + typeof (multiplication * multiplication1), multiplication * multiplication1)
+                                                    console.log("两侧均为数字：" + typeof (multiplication * multiplication2), multiplication * multiplication2)
+                                                    console.log("数字 * '非数字字符串'：" + typeof (multiplication * multiplication3), multiplication * multiplication3)
+                                                    console.log("数字 * true：" + typeof (multiplication * multiplication4), multiplication * multiplication4)
+                                                    console.log("数字 * false：" + typeof (multiplication * multiplication5), multiplication * multiplication5)
+                                                    console.log("===========================================================")
+                                                </script>
+                                                <img src="image/数学运算符/乘号/数学运算符乘号.png"
+                                                     alt="数学运算符乘号"
+                                                     title="数学运算符乘号">
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
                                         <h5>/号</h5>
                                         <ul>
-                                            <li>会执行<span>除法运算</span></li>
-                                            <li><span>会自动把两边都转换成数字进行运算</span></li>
+                                            <li>会执行<span>除法运算(division)</span></li>
+                                            <li>
+                                                <span>会自动把两边(<span>非数字字符串除外</span>)都转换成数字进行计算</span>
+                                            </li>
+                                            <li>当值为布尔类型(<span>true/false</span>)，执行除法运算时，会自动将<span>true[1]/flase[0]</span>
+                                            </li>
+                                            <li>
+                                                <span>当操作数为布尔值false的六种情况</span>
+                                                <ol>
+                                                    <li>当<code>false / 正数</code>，值为[<span>0</span>]</li>
+                                                    <li>当<code>false / 负数</code>，值为[<span>-0</span>]</li>
+                                                    <li>当<code>false / 0</code>，值为[<span>NaN</span>]</li>
+                                                    <li>当<code>正数 / false</code>，值为[<span>Infinity(正无穷)</span>]
+                                                    </li>
+                                                    <li>当<code>负数 / false</code>，值为[<span>-Infinity(负无穷)</span>]
+                                                    </li>
+                                                    <li>当<code>0 / false</code>，值为[<span>NaN(无效数字)</span>]</li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                <span>总结：</span>
+                                                <ol>
+                                                    <li><span><code>0/0 ==→ false / 0 或 0 / false</code>值为NaN</span>
+                                                    </li>
+                                                    <li><span><code>非零/0</code>值为±Infinity</span></li>
+                                                    <li><span><code>0/非零</code>值为±0</span></li>
+                                                    <li><span><code>正数/正数[或负数/负数]</code>值为正数</span></li>
+                                                    <li><span><code>正数/负数[或负数/正数]</code>值为负数</span></li>
+                                                    <li>与是否为false无关，只是刚好false被隐式转为0</li>
+                                                </ol>
                                             <li>
                                                 <P>·演示</P>
-                                                <script type="text/javascript"></script>
+                                                <script type="text/javascript">
+                                                    let division = 50
+                                                    let division1 = "50"
+                                                    let division2 = 5
+                                                    let division3 = "ABC"
+                                                    let division4 = false
+                                                    let division5 = true
+                                                    let division6 = -8
+                                                    let division7 = 0
+
+                                                    console.log("一侧为字符串：" + typeof (division / division1), division / division1)
+                                                    console.log("两侧均为数字：" + typeof (division / division2), division / division2)
+                                                    console.log("数字 / '非数字字符串'：" + typeof (division / division3), division / division3)
+                                                    console.log("正数 / false：" + typeof (division / division4), division / division4)
+                                                    console.log("负数 / false：" + typeof (division6 / division4), division6 / division4)
+                                                    console.log("0 / false：" + typeof (division7 / division4), division7 / division4)
+                                                    console.log("false / 正数：" + typeof (division4 / division), division4 / division)
+                                                    console.log("false / 负数：" + typeof (division4 / division6), division4 / division6)
+                                                    console.log("false / 0：" + typeof (division4 / division7), division4 / division7)
+                                                    console.log("数字 / true：" + typeof (division / division5), division / division5)
+                                                    console.log("true / false：" + typeof (division5 / division4), division5 / division4)
+                                                    console.log("============================================")
+                                                </script>
+                                                <img src="image/数学运算符/除号/数学运算符除号.png"
+                                                     alt="数学运算符除号"
+                                                     title="数学运算符除号">
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
                                         <h5>%号</h5>
                                         <ul>
-                                            <li>会执行<span>取余运算</span></li>
+                                            <li>会执行<span>取余运算(modulo)</span></li>
                                             <li><span>会自动把两边都转换成数字进行运算</span></li>
+                                            <li>取余运算，<span>顾名思义就是取除法运算后的余数</span></li>
+                                            <li>
+                                                <span>注意：</span>
+                                                <ol>
+                                                    <li>当除数为0时：<code>非零数 % 0</code>，则值为<span>NaN</span></li>
+                                                    <li>当零是被除数时：<code>0 % 非零数</code>，则值为<span>0</span></li>
+                                                    <li>当0既是除数，又是被除数：<code>0 % 0</code>，则值为<span>NaN</span></li>
+                                                </ol>
+                                            </li>
                                             <li>
                                                 <P>·演示</P>
-                                                <script type="text/javascript"></script>
+                                                <script type="text/javascript">
+                                                    let modulo = 55
+                                                    let modulo1 = "50"
+                                                    let modulo2 = 5
+                                                    let modulo3 = "ABC"
+                                                    let modulo4 = true
+                                                    let modulo5 = false
+
+                                                    console.log("字符串为数字：" + typeof (modulo % modulo1), modulo % modulo1)
+                                                    console.log("两侧均为数字：" + typeof (modulo % modulo2), modulo % modulo2)
+                                                    console.log("字符串为非数字：" + typeof (modulo % modulo3), modulo % modulo3)
+                                                    console.log("数字 % true：" + typeof (modulo % modulo4), modulo % modulo4)
+                                                    console.log("数字 % false：" + typeof (modulo % modulo5), modulo % modulo5)
+                                                    console.log("false % 数字：" + typeof (modulo % modulo2), modulo % modulo2)
+                                                    console.log("false % false：" + typeof (modulo5 % modulo5), modulo5 % modulo5)
+                                                </script>
+                                                <img src="image/数学运算符/取余/数学运算符取余.png"
+                                                     alt="数学运算符取余"
+                                                     title="数学运算符取余">
                                             </li>
                                         </ul>
                                     </li>
