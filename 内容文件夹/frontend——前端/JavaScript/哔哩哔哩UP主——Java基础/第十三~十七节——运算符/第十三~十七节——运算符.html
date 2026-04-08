@@ -429,11 +429,14 @@
                                 <h4 id="比较运算符"><a href="#JS运算符">比较运算符</a>
                                     <ol>
                                         <li>当两个操作数都是字符串时，进行<span>字典顺序</span>比较</li>
-                                        <li>字典顺序就是按字符的<span>Unicode</span>码点逐个比较，与数字大小无关。<span>所以进行比较操作数最好都是数字</span></li>
+                                        <li>字典顺序就是按字符的<span>Unicode</span>码点逐个比较，与数字大小无关。<span>所以进行比较操作数最好都是数字</span>
+                                        </li>
                                         <li>当<span>一个操作数是数字，另一个是字符串时,JS会尝试转为数字，再比较</span>，分三种情况：
                                             <ul>
                                                 <li>如果字符串是纯数字字符串，<span>转成数字后比较</span></li>
-                                                <li>如果字符串是非数字字符串，<span>转换结果为NaN</span>,比较结果通常是<span>false</span>，(<span>!=除外</span>)</li>
+                                                <li>
+                                                    如果字符串是非数字字符串，<span>转换结果为NaN</span>,比较结果通常是<span>false</span>，(<span>!=除外</span>)
+                                                </li>
                                             </ul>
                                         </li>
                                         <li>操作数均为数字，则直接进行比较</li>
@@ -441,212 +444,386 @@
                                 </h4>
                                 <ol>
                                     <li>
-                                        <h5>==</h5>
+                                        <h5>相等运算符(<span>==、!=</span>)</h5>
                                         <ul>
-                                            <li>比较符号两边的<span>值是否相等</span>，<span>不管数据类型</span></li>
-                                            <li>例如：<code>1 == "1"</code></li>
-                                            <li>两个的值是一样的，所以得到true</li>
                                             <li>
-                                                正是因为这样比较差异，<span>所以一般不建议用==来比较两侧是否相等，会出现歧义</span>
+                                                <h5>==</h5>
+                                                <ul>
+                                                    <li>比较符号两边的<span>值是否相等</span>，<span>不管数据类型</span>
+                                                    </li>
+                                                    <li>例如：<code>1 == "1"</code></li>
+                                                    <li>两个的值是一样的，所以得到true</li>
+                                                    <li>
+                                                        正是因为这样比较差异，<span>所以一般不建议用==来比较两侧是否相等，会出现歧义</span>
+                                                    </li>
+                                                    <li>
+                                                        <p>·图例</p>
+                                                        <script type="text/javascript">
+                                                            {
+                                                                let sum = 50
+                                                                let sum2 = "50"
+
+                                                                console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(==)比较的结果是：${sum == sum2}`)
+                                                            }
+                                                        </script>
+                                                        <img src="./image/比较运算符/等于等于/比较运算符等于等于.png"
+                                                             alt="比较运算符等于等于"
+                                                             title="比较运算符等于等于">
+                                                    </li>
+                                                </ul>
                                             </li>
                                             <li>
-                                                <p>·图例</p>
-                                                <script type="text/javascript">
-                                                    {
-                                                        let sum = 50
-                                                        let sum2 = "50"
-                                                        let sum3 = 40
+                                                <h5>!=</h5>
+                                                <ol>
+                                                    <li>
+                                                        比较符号两边的值是否<span>不相等</span>,<span>不管数据类型</span>
+                                                    </li>
+                                                    <li>例如：<code>1 != "1"</code></li>
+                                                    <li>因为两边的值是相等的，所以最后输出结果是false</li>
+                                                    <li>
+                                                        正是因为这样比较差异，<span>所以一般不建议用!=来比较两侧是否不相等，会出现歧义</span>
+                                                    </li>
+                                                    <li>
+                                                        <p>·图例</p>
+                                                        <script type="text/javascript">
+                                                            {
+                                                                let sum = 50
+                                                                let sum2 = "50"
 
 
-                                                        console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(==)比较的结果是：${sum == sum2}`)
-                                                    }
-                                                </script>
-                                                <img src="./image/比较运算符/等于等于/比较运算符等于等于.png"
-                                                     alt="比较运算符等于等于"
-                                                     title="比较运算符等于等于">
+                                                                console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(!=)比较的结果是：${sum != sum2}`)
+                                                            }
+                                                        </script>
+                                                        <img src="./image/比较运算符/不等于运算符/比较运算符不等于.png"
+                                                             alt="比较运算符不等于"
+                                                             title="比较运算符不等于">
+                                                    </li>
+                                                </ol>
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <h5>===【<span>严格相等运算符</span>】</h5>
-                                        <ol>
-                                            <li>比较符号两边的<span>值和数据类型</span>是否相等</li>
-                                            <li>例如：<code>1 === "1"</code></li>
-                                            <li>它们值是一样的，但是数据类型不一样，所以最后的返回值值是false</li>
+                                        <h5>严格运算符(<span>===、!===</span>)</h5>
+                                        <ul>
                                             <li>
-                                                正是因为这样的严格比较，<span>所以非常建议用===来比较两侧是否相等，避免出现歧义</span>
+                                                <h5>===【<span>严格相等运算符</span>】</h5>
+                                                <ol>
+                                                    <li>比较符号两边的<span>值和数据类型</span>是否相等</li>
+                                                    <li>例如：<code>1 === "1"</code></li>
+                                                    <li>它们值是一样的，但是数据类型不一样，所以最后的返回值值是false</li>
+                                                    <li>
+                                                        正是因为这样的严格比较，<span>所以非常建议用===来比较两侧是否相等，避免出现歧义</span>
+                                                    </li>
+                                                    <li>
+                                                        核心规则：<span>先比较类型，类型不同直接false；类型相同再比较值</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>关于不同操作数数据类型的三种情况</span>
+                                                        <ul>
+                                                            <li>
+                                                                <span>类型不同</span>
+                                                                <ol>
+                                                                    <li>例1：<code>123 === "123" </code></li>
+                                                                    <li>例2：<code>true === 1</code></li>
+                                                                    <li>例2：<code>null === undefined</code></li>
+                                                                    <li>直接返回false，不进行任何类型转换</li>
+                                                                </ol>
+                                                            </li>
+                                                            <li>
+                                                                <span>类型相同，且是基本类型(number\string\boolean\symbol\bigint)</span>
+                                                                <ol>
+                                                                    <li>比较值是否相同</li>
+                                                                    <li>
+                                                                        特例1：NaN(<span>一般是非数字字符串转换而成</span>)与任何值(<span>包括自身都不相等</span>)
+                                                                    </li>
+                                                                    <li>特例2：+0 和 -0 视为相等</li>
+                                                                </ol>
+                                                            </li>
+                                                            <li>
+                                                                <span>类型相同，且是引用类型(对象、数组、函数等)</span>
+                                                                <ol>
+                                                                    <li>比较<span>引用地址</span>是否相同(是否指向内存中的同一对象)，<span>而不是比较结构或内容</span>
+                                                                    </li>
+                                                                    <li>例如：<code>{} ===
+                                                                        {} </code><span>值为false,因为它们是两个不同对象</span>
+                                                                    </li>
+                                                                    <li>例如：<code>let obj = {} <br> obj ===
+                                                                        obj</code><br><span>值为true，因为它们同一引用</span>
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <p>·图例</p>
+                                                        <script type="text/javascript">
+                                                            {
+                                                                let sum = 50
+                                                                let sum2 = "50"
+
+                                                                console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(===)比较的结果是：${sum === sum2}`)
+                                                                console.log("=======================================")
+                                                            }
+                                                        </script>
+                                                        <img src="./image/比较运算符/严格相等运算符/比较运算符严格相等运算符.png"
+                                                             alt="比较运算符严格相等运算符"
+                                                             title="比较运算符严格相等运算符">
+                                                    </li>
+                                                </ol>
                                             </li>
-                                            <li>核心规则：<span>先比较类型，类型不同直接false；类型相同再比较值</span></li>
                                             <li>
-                                                <span>关于不同操作数数据类型的三种情况</span>
+                                                <h5>!==【<span>严格不等于运算符</span>】</h5>
+                                                <ol>
+                                                    <li>比较符号两边的<span>值和数据类型</span>是否不相等</li>
+                                                    <li>例如：<code>1 !== "1"</code></li>
+                                                    <li>
+                                                        因为两边的值是相等的，但是数据类型不相等，所有最后输出的结果是true
+                                                    </li>
+                                                    <li>
+                                                        正是因为这样的严格比较，<span>所以非常建议用!==来比较两侧是否不相等，避免出现歧义</span>
+                                                    </li>
+                                                    <li>
+                                                        比较规则：<span>先比较类型，类型不同，直接返回true，类型相同，再比较值，值不同则true，值相同则false</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>关于不同操作数数据类型的三种情况</span>
+                                                        <ul>
+                                                            <li>
+                                                                <span>类型不同</span>
+                                                                <ol>
+                                                                    <li>
+                                                                        类型不同，直接返回true(<span>因为类型不同，那么肯定不相等</span>)
+                                                                    </li>
+                                                                    <li>例1：<code>123 !== "123" </code></li>
+                                                                    <li>例2：<code>true !== 1</code></li>
+                                                                    <li>例2：<code>null !== undefined</code></li>
+                                                                </ol>
+                                                            </li>
+                                                            <li>
+                                                                <span>类型相同，且是基本类型(number\string\boolean\symbol\bigint)</span>
+                                                                <ol>
+                                                                    <li>比较值是否不相同</li>
+                                                                    <li>
+                                                                        特例1：NaN(<span>一般是非数字字符串转换而成</span>)与任何值(<span>包括自身都不相等</span>，所以最后返回值是true)
+                                                                    </li>
+                                                                    <li>特例2：+0 和 -0
+                                                                        视为相等(<span>所以最后返回值是false</span>)
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                            <li>
+                                                                <span>类型相同，且是引用类型(对象、数组、函数等)</span>
+                                                                <ol>
+                                                                    <li>比较<span>引用地址</span>是否相同(是否指向内存中的同一对象)，<span>而不是比较结构或内容</span>
+                                                                    </li>
+                                                                    <li>例如：<code>{} !==
+                                                                        {} </code><span>值为true,因为它们是两个不同对象</span>
+                                                                    </li>
+                                                                    <li>例如：<code>let obj = {} <br> obj !==
+                                                                        obj</code><br><span>值为false，因为它们同一引用</span>
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                            <li><span>整体来说，与严格相等运算符相反</span></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <p>·图例</p>
+                                                        <script type="text/javascript">
+                                                            {
+                                                                let sum = 50
+                                                                let sum2 = "50"
+
+
+                                                                console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(!==)比较的结果是：${sum !== sum2}`)
+                                                            }
+                                                        </script>
+                                                        <img src="./image/比较运算符/严格不相等运算符/比较运算符严格不相等.png"
+                                                             alt="比较运算符严格不相等"
+                                                             title="比较运算符严格不相等">
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>关系运算符(<span><=、<、>=、></span>)</h5>
+                                        <ul>
+                                            <li>当两个操作数都是字符串，<span>字典顺序(Unicode码点)比较</span></li>
+                                            <li>
+                                                <span>至少一侧是数字，分两种情况</span>
+                                                <ol>
+                                                    <li>将另一侧转为数字，再比较数值</li>
+                                                    <li>
+                                                        转换失败(<span>非数字字符串</span>)则为NaN，比较结果恒等于<span>false(除了!=)</span>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                特殊情况：null、undefined与数字比较时，<span>null转成0，undefined转成NaN</span>
+                                            </li>
+                                            <li>布尔值true转为1，false转为0</li>
+                                            <li>两侧均为数字，正常比较，输出结果即可</li>
+                                            <li>数字的判断与数学一样，只不过多了数据类型之间的判断(null、NaN、undefined)
+                                            </li>
+                                            <li>
+                                                <span>>=</span>
+                                                <ol>
+                                                    <li>比较符号两边的值是否<span>相等或大于右侧的值</span></li>
+                                                    <li>是则输出true，否则false</li>
+                                                    <li>
+                                                        <p>·图例</p>
+                                                        <script type="text/javascript">
+                                                            {
+                                                                let sum = 50
+                                                                let sum2 = "40"
+                                                                let sum3 = null
+                                                                let sum4 = "ABC"
+                                                                let sum5
+
+
+                                                                console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|\n所以它们(>=)比较的结果是：${sum >= sum2}`)
+                                                                console.log(`sum：${typeof sum},${sum} |sum4：${typeof sum4},${sum4}|\n所以它们(>=)比较的结果是：${sum >= sum4}`)
+                                                                console.log(`sum3：${typeof sum3},${sum3} |sum5：${typeof sum5},${sum5}|\n所以它们(>=)比较的结果是：${sum >= sum5}`)
+                                                            }
+                                                        </script>
+                                                        <img src="./image/比较运算符/严格不相等运算符/比较运算符严格不相等.png"
+                                                             alt="比较运算符严格不相等"
+                                                             title="比较运算符严格不相等">
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                <span><=</span>
                                                 <ul>
-                                                    <li>
-                                                        <span>类型不同</span>
-                                                        <ol>
-                                                            <li>例1：<code>123 === "123" </code></li>
-                                                            <li>例2：<code>true === 1</code></li>
-                                                            <li>例2：<code>null === undefined</code></li>
-                                                            <li>直接返回false，不进行任何类型转换</li>
-                                                        </ol>
-                                                    </li>
-                                                    <li>
-                                                        <span>类型相同，且是基本类型(number\string\boolean\symbol\bigint)</span>
-                                                        <ol>
-                                                            <li>比较值是否相同</li>
-                                                            <li>特例1：NaN(<span>一般是非数字字符串转换而成</span>)与任何值(<span>包括自身都不相等</span>)</li>
-                                                            <li>特例2：+0 和 -0 视为相等</li>
-                                                        </ol>
-                                                    </li>
-                                                    <li>
-                                                        <span>类型相同，且是引用类型(对象、数组、函数等)</span>
-                                                        <ol>
-                                                            <li>比较<span>引用地址</span>是否相同(是否指向内存中的同一对象)，<span>而不是比较结构或内容</span></li>
-                                                            <li>例如：<code>{} === {} </code><span>值为false,因为它们是两个不同对象</span></li>
-                                                            <li>例如：<code>let obj = {} <br> obj === obj</code><br><span>值为true，因为它们同一引用</span></li>
-                                                        </ol>
-                                                    </li>
+                                                    <li>比较符号两边的值是否<span>相等或小于右侧的值</span></li>
+                                                    <li>是则输出true，否则false</li>
                                                 </ul>
                                             </li>
                                             <li>
-                                                <p>·图例</p>
-                                                <script type="text/javascript">
-                                                    {
-                                                        let sum = 50
-                                                        let sum2 = "50"
-                                                        let sum3 = 40
-
-
-                                                        console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(===)比较的结果是：${sum === sum2}`)
-                                                        console.log("=======================================")
-                                                    }
-                                                </script>
-                                                <img src="./image/比较运算符/严格相等运算符/比较运算符严格相等运算符.png"
-                                                     alt="比较运算符严格相等运算符"
-                                                     title="比较运算符严格相等运算符">
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li>
-                                        <h5>!=</h5>
-                                        <ol>
-                                            <li>比较符号两边的值是否<span>不相等</span>,<span>不管数据类型</span></li>
-                                            <li>例如：<code>1 != "1"</code></li>
-                                            <li>因为两边的值是相等的，所以最后输出结果是false</li>
-                                            <li>
-                                                正是因为这样比较差异，<span>所以一般不建议用!=来比较两侧是否不相等，会出现歧义</span>
-                                            </li>
-                                            <li>
-                                                <p>·图例</p>
-                                                <script type="text/javascript">
-                                                    {
-                                                        let sum = 50
-                                                        let sum2 = "50"
-
-
-                                                        console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(!=)比较的结果是：${sum != sum2}`)
-                                                    }
-                                                </script>
-                                                <img src="./image/比较运算符/不等于运算符/比较运算符不等于.png"
-                                                     alt="比较运算符不等于"
-                                                     title="比较运算符不等于">
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li>
-                                        <h5>!==【<span>严格不等于运算符</span>】</h5>
-                                        <ol>
-                                            <li>比较符号两边的<span>值和数据类型</span>是否不相等</li>
-                                            <li>例如：<code>1 !== "1"</code></li>
-                                            <li>因为两边的值是相等的，但是数据类型不相等，所有最后输出的结果是true</li>
-                                            <li>
-                                                正是因为这样的严格比较，<span>所以非常建议用!==来比较两侧是否不相等，避免出现歧义</span>
-                                            </li>
-                                            <li>比较规则：<span>先比较类型，类型不同，直接返回true，类型相同，再比较值，值不同则true，值相同则false</span></li>
-                                            <li>
-                                                <span>关于不同操作数数据类型的三种情况</span>
+                                                <span>></span>
                                                 <ul>
-                                                    <li>
-                                                        <span>类型不同</span>
-                                                        <ol>
-                                                            <li>类型不同，直接返回true(<span>因为类型不同，那么肯定不相等</span>)</li>
-                                                            <li>例1：<code>123 !== "123" </code></li>
-                                                            <li>例2：<code>true !== 1</code></li>
-                                                            <li>例2：<code>null !== undefined</code></li>
-                                                        </ol>
-                                                    </li>
-                                                    <li>
-                                                        <span>类型相同，且是基本类型(number\string\boolean\symbol\bigint)</span>
-                                                        <ol>
-                                                            <li>比较值是否不相同</li>
-                                                            <li>特例1：NaN(<span>一般是非数字字符串转换而成</span>)与任何值(<span>包括自身都不相等</span>，所以最后返回值是true)</li>
-                                                            <li>特例2：+0 和 -0 视为相等(<span>所以最后返回值是false</span>)</li>
-                                                        </ol>
-                                                    </li>
-                                                    <li>
-                                                        <span>类型相同，且是引用类型(对象、数组、函数等)</span>
-                                                        <ol>
-                                                            <li>比较<span>引用地址</span>是否相同(是否指向内存中的同一对象)，<span>而不是比较结构或内容</span></li>
-                                                            <li>例如：<code>{} !== {} </code><span>值为true,因为它们是两个不同对象</span></li>
-                                                            <li>例如：<code>let obj = {} <br> obj !== obj</code><br><span>值为false，因为它们同一引用</span></li>
-                                                        </ol>
-                                                    </li>
-                                                    <li><span>整体来说，与严格相等运算符相反</span></li>
+                                                    <li>比较符号两边的值是否<span>大于右侧的值</span></li>
+                                                    <li>是则输出true，否则false</li>
                                                 </ul>
                                             </li>
                                             <li>
-                                                <p>·图例</p>
-                                                <script type="text/javascript">
-                                                    {
-                                                        let sum = 50
-                                                        let sum2 = "50"
-
-
-                                                        console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(!==)比较的结果是：${sum !== sum2}`)
-                                                    }
-                                                </script>
-                                                <img src="./image/比较运算符/严格不相等运算符/比较运算符严格不相等.png"
-                                                     alt="比较运算符严格不相等"
-                                                     title="比较运算符严格不相等">
+                                                <span><</span>
+                                                <ul>
+                                                    <li>比较符号两边的值是否<span>小于右侧的值</span></li>
+                                                    <li>是则输出true，否则false</li>
+                                                </ul>
                                             </li>
-                                        </ol>
+                                        </ul>
                                     </li>
-                                    <li>
-                                        <h5>>=</h5>
-                                        <ol>
-                                            <li>比较符号两边的值是否<span>相等或大于右侧的值</span></li>
-                                            <li>是则输出true，否则false</li>
-                                            <li>
-                                                <p>·图例</p>
-                                                <script type="text/javascript">
-                                                    {
-                                                        let sum = 50
-                                                        let sum2 = 40
-
-
-                                                        console.log(`sum：${sum} |sum2：${typeof sum2},${sum2}|所以它们(>=)比较的结果是：${sum >= sum2}`)
-                                                    }
-                                                </script>
-                                                <img src="./image/比较运算符/严格不相等运算符/比较运算符严格不相等.png"
-                                                     alt="比较运算符严格不相等"
-                                                     title="比较运算符严格不相等">
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li>
-                                        <h5><=</h5>
-                                    </li>
-                                    <li>
-                                        <h5>></h5>
-                                    </li>
-                                    <li>
-                                        <h5><</h5>
-                                    </li>
-                                    <li></li>
-                                    <li></li>
                                 </ol>
                             </li>
                             <li>
                                 <h4 id="逻辑运算符"><a href="#JS运算符">逻辑运算符</a></h4>
+                                <ul>
+                                    <li>
+                                        <h5>&&(<span>且</span>)</h5>
+                                        <ol>
+                                            <li>进行<span>且</span>的运算</li>
+                                            <li>符号左边必须为<span>true</span>并且右边也是<span>true</span>，才会返回true
+                                            </li>
+                                            <li><span>只要一侧不是true，那么就会返回false</span></li>
+                                            <li><code>true && true</code><span>最后的返回结果是true</span></li>
+                                            <li><code>true && false</code>结果返回的是false</li>
+                                            <li><code>false && true</code>结果返回的是false</li>
+                                            <li><code>false && false</code>结果返回的是false</li>
+                                            <li><span>常用于条件判断，需要多个条件同时满足的情况</span></li>
+                                            <li><span>判断是否用[&&]——只要看条件是否有数据同时满足的可能，有，则用且(比如成绩判定区间，这个区间可以被同时满足)</span></li>
+                                            <li>
+                                                <p>·图例</p>
+                                                <!--<script type="text/javascript">
+                                                    {
+                                                        let score = parseFloat(prompt("请输入你的成绩(0~100)", ""))
+
+                                                        if (score >= 80 && score <= 100) { // 当输入的值 80 =< score <=100(两个条件需要同时满足用&&)
+                                                            document.writeln("成绩评定：<span>优</span>")
+                                                        } else if (score >= 60 && score < 80) {
+                                                            document.writeln("成绩评定：<span>良</span>")  //  60 =< score <=80(两个条件需要同时满足用&&)
+                                                        } else if (score >= 0 && score < 60) {
+                                                            document.writeln("成绩评定：<span>不合格</span>") // 0  =< score < 60(两个条件需要同时满足用&&)
+                                                        } else {  // 当输入内容不在0~100之间
+                                                            document.writeln("<span>你输入的不是0~100的整数，请重新输入!</span>")
+                                                        }
+                                                    }
+                                                </script>-->
+                                                <div class="div_video">
+                                                    <video src="./image/逻辑运算符/且运算.mp4" controls></video>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>||(<span>或</span>)</h5>
+                                        <ol>
+                                            <li>进行<span>或</span>的运算</li>
+                                            <li>符号两侧<span>有一侧为true</span>，则返回true</li>
+                                            <li><span>只有两侧是false，那么就会返回false</span></li>
+                                            <li><code>true ||  true</code><span>最后的返回结果是true</span></li>
+                                            <li><code>true || false</code>结果返回的是true</li>
+                                            <li><code>false ||  true</code>结果返回的是true</li>
+                                            <li><code>false || false</code>结果返回的是false</li>
+                                            <li><span>常用于条件判断，需要多个条件满足其一的情况</span></li>
+                                            <li><span>判断是否用[||]——只要看条件是否有数据同时满足的可能，没有，则用或</span></li>
+                                            <li>
+                                                <!--<script type="text/javascript">
+                                                    {
+                                                        let score = parseFloat(prompt("请输入你的成绩(0~100)",""))
+                                                        //在且运算示例，多加一个条件，当输入的内容，是非数字，或是非整数
+                                                        //如果用&&，那么只会执行第一个true，判断非整数会失效，因为不会有一个既是非数字，又非整数
+                                                        if (isNaN(score) || !Number.isInteger(score)){ //当输入的值非数字，或不是整数
+                                                            document.writeln("你输入的不是整数，<span>请重新输入!</span>") //输出
+                                                        }
+                                                        else if (score >= 80 && score <= 100){ // 当输入的值 80 =< score <=100(两个条件需要同时满足用&&)
+                                                            document.writeln("成绩评定：<span>优</span>")
+                                                        }
+                                                        else if (score >= 60 && score < 80){
+                                                            document.writeln("成绩评定：<span>良</span>")  //  60 =< score <=80(两个条件需要同时满足用&&)
+                                                        }
+                                                        else if (score >=0 && score < 60){
+                                                            document.writeln("成绩评定：<span>不合格</span>") // 0  =< score < 60(两个条件需要同时满足用&&)
+                                                        }
+                                                        else{  // 当输入数字不在 0~100之间
+                                                            document.writeln("<span>你输入的不是0~100的整数，请重新输入!</span>")
+                                                        }
+                                                    }
+                                                </script>-->
+                                                <div class="div_video">
+                                                    <video src="./image/逻辑运算符/或运算.mp4" controls></video>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>!(<span>取反</span>)</h5>
+                                        <ol>
+                                            <li>进行<span>取反</span>的运算</li>
+                                            <li>本身是<span>true</span>，变成false</li>
+                                            <li>本身是<span>false</span>，变成true</li>
+                                            <li><code>!true</code><span>最后的结果是false</span></li>
+                                            <li><code>!false</code><span>最后的结果是true</span></li>
+                                            <li>
+                                                <p>·图例</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50
+                                                        let sum2 = 80
+
+                                                        document.writeln(`sum:${sum},sum2:${sum2},<span>正常逻辑：sum > sum2 应该是 ${sum > sum2}</span>
+                                                        取反运算后，得出的结果是：<span>${!(sum > sum2)}</span>`)
+                                                    }
+                                                </script>
+                                                <img src="./image/逻辑运算符/逻辑运算符取反.png"
+                                                     alt="逻辑运算符取反"
+                                                     title="逻辑运算符取反">
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <h4 id="自增自减运算符"><a href="#JS运算符">自增自减运算符</a></h4>
