@@ -837,7 +837,7 @@
                                                             <li>
                                                                 <code>&&</code>
                                                                 <ul>
-                                                                    <li><span>返回第一个<a href="">falsy</a></span>的值</li>
+                                                                    <li><span>返回第一个<a href="#falsy">falsy</a></span>的值</li>
                                                                     <li>
                                                                         <p>所以分三种情况</p>
                                                                         <ol>
@@ -852,7 +852,7 @@
                                                             <li>
                                                                 <code>||</code>
                                                                 <ul>
-                                                                    <li><span>返回第一个<a href="">truthy</a></span>的值</li>
+                                                                    <li><span>返回第一个<a href="#truthy">truthy</a></span>的值</li>
                                                                     <li>
                                                                         <p>所以分三种情况</p>
                                                                         <ol>
@@ -867,12 +867,17 @@
                                                         </ol>
                                                     </li>
                                                     <li>
-                                                        <p>·例如</p>
+                                                        <p>·例1——或(默认值)</p>
                                                         <script type="text/javascript">
-                                                            document.writeln(1 && 0)
-                                                            document.writeln('a' && 'b')
-                                                            document.writeln(0 || 'hi')
+                                                            let use = String(prompt("请输出您的姓名：",""))
+                                                            let name = use || "匿名用户"  //sue 为用户输入的内容 ，或运算，遇到第一个truthy，并输出原值，后续不会在逻辑判断既是短路状态
+                                                                                        //什么也没有输入则是null(false)，往后知道需要truthy，输出原值
+                                                                                        //若后续均是falsy，则输出最后一个的原值
+                                                            document.writeln(`欢迎登录：<span>${name}</span>`)
                                                         </script>
+                                                        <div class="div_video">
+                                                            <video src="./image/逻辑运算符/或运算实例—默认值.mp4" controls></video>
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -955,6 +960,20 @@
                     <li>已知，let、const声明的变量，在同一作用域，变量名是唯一的</li>
                     <li>不是每个<span>script标签单独一个作用域</span>，而是所有script块(以及内联代码)共享全局作用域</li>
                     <li>解决办法：单独适用大括号(创建块级作用域)</li>
+                </ol>
+            </li>
+            <li>
+                <h3 id="falsy">falsy</h3>
+                <ol>
+                    <li>可以理解为天生的"false"</li>
+                    <li>共有八种:[<code>""(<span>空字符串</span>)、null、undefined、false(<span>字面量(boolean类型)，不是字符串</span>、0、-0、0n(<span>bigint类型</span>)、NaN)</code>]</li>
+                    <li>只要出现以上八种类型，在逻辑上就是false</li>
+                </ol>
+            </li>
+            <li>
+                <h3 id="truthy">truthy</h3>
+                <ol>
+                    <li>除了falsy外，其他均是truthy</li>
                 </ol>
             </li>
         </ul>
