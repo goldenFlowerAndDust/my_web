@@ -823,6 +823,63 @@
                                             </li>
                                         </ol>
                                     </li>
+                                    <li>
+                                        <h5>关于逻辑运算符注意事项</h5>
+                                        <ol>
+                                            <li>
+                                                <span>返回值不是<span>true/false</span>，而是操作数本身</span>
+                                                <ul>
+                                                    <li>意思就是返回的最终值是<span>决定结果的那个操作数的原值</span></li>
+                                                    <li>但是在if或white中，<span>这些值会被自动转为布尔值，辨认判断结果没有问题</span></li>
+                                                    <li>
+                                                        <span>理解且/或运算符规则</span>
+                                                        <ol>
+                                                            <li>
+                                                                <code>&&</code>
+                                                                <ul>
+                                                                    <li><span>返回第一个<a href="">falsy</a></span>的值</li>
+                                                                    <li>
+                                                                        <p>所以分三种情况</p>
+                                                                        <ol>
+                                                                            <li>当所有值是<span>falsy</span>取最左边的值</li>
+                                                                            <li>包含truthy，取第一个falsy的值(<span>后面的逻辑判断不执行</span>)</li>
+                                                                            <li>均是truthy，取最右边的值</li>
+                                                                        </ol>
+                                                                    </li>
+                                                                    <li>所以，且运算符最适合用于(<span>密码校验、表单校验[那些只有符合全部条件的场景适用]</span>)</li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <code>||</code>
+                                                                <ul>
+                                                                    <li><span>返回第一个<a href="">truthy</a></span>的值</li>
+                                                                    <li>
+                                                                        <p>所以分三种情况</p>
+                                                                        <ol>
+                                                                            <li>当所有值是<span>falsy</span>取最右边的值</li>
+                                                                            <li>包含truthy，取第一个truthy的值(<span>后面的逻辑判断不执行</span>)</li>
+                                                                            <li>均是truthy，取最左边的值</li>
+                                                                        </ol>
+                                                                    </li>
+                                                                    <li>所以，或运算符最适合用于(<span>提供默认值、处理多种错误情况</span>)</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                    <li>
+                                                        <p>·例如</p>
+                                                        <script type="text/javascript">
+                                                            document.writeln(1 && 0)
+                                                            document.writeln('a' && 'b')
+                                                            document.writeln(0 || 'hi')
+                                                        </script>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li></li>
+                                            <li></li>
+                                        </ol>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
