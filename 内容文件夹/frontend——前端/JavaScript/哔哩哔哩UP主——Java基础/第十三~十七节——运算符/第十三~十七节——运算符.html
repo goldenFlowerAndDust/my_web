@@ -21,7 +21,7 @@
                         JS共分六种运算符：[<span><a href="#数学运算符">数学运算符</a>、<a
                             href="#赋值运算符">赋值运算符</a>、<a href="#比较运算符">比较运算符</a>、<br><a
                             href="#逻辑运算符">逻辑运算符</a>、<a href="#自增自减运算符">自增自减运算符</a>、<a
-                            href="#三目运算符">三目运算符</a></span>]
+                            href="#三元运算符">三元运算符</a></span>]
                     </li>
                     <li>
                         <h3>运算符的分类</h3>
@@ -733,7 +733,9 @@
                                             <li><code>false && true</code>结果返回的是false</li>
                                             <li><code>false && false</code>结果返回的是false</li>
                                             <li><span>常用于条件判断，需要多个条件同时满足的情况</span></li>
-                                            <li><span>判断是否用[&&]——只要看条件是否有数据同时满足的可能，有，则用且(比如成绩判定区间，这个区间可以被同时满足)</span></li>
+                                            <li>
+                                                <span>判断是否用[&&]——只要看条件是否有数据同时满足的可能，有，则用且(比如成绩判定区间，这个区间可以被同时满足)</span>
+                                            </li>
                                             <li>
                                                 <p>·图例</p>
                                                 <!--<script type="text/javascript">
@@ -763,12 +765,14 @@
                                             <li>进行<span>或</span>的运算</li>
                                             <li>符号两侧<span>有一侧为true</span>，则返回true</li>
                                             <li><span>只有两侧是false，那么就会返回false</span></li>
-                                            <li><code>true ||  true</code><span>最后的返回结果是true</span></li>
+                                            <li><code>true || true</code><span>最后的返回结果是true</span></li>
                                             <li><code>true || false</code>结果返回的是true</li>
-                                            <li><code>false ||  true</code>结果返回的是true</li>
+                                            <li><code>false || true</code>结果返回的是true</li>
                                             <li><code>false || false</code>结果返回的是false</li>
                                             <li><span>常用于条件判断，需要多个条件满足其一的情况</span></li>
-                                            <li><span>判断是否用[||]——只要看条件是否有数据同时满足的可能，没有，则用或</span></li>
+                                            <li>
+                                                <span>判断是否用[||]——只要看条件是否有数据同时满足的可能，没有，则用或</span>
+                                            </li>
                                             <li>
                                                 <!--<script type="text/javascript">
                                                     {
@@ -806,6 +810,7 @@
                                             <li>本身是<span>false</span>，变成true</li>
                                             <li><code>!true</code><span>最后的结果是false</span></li>
                                             <li><code>!false</code><span>最后的结果是true</span></li>
+                                            <li>特殊：<code>!!变量</code>，将变量转为<span>布尔值</span></li>
                                             <li>
                                                 <p>·图例</p>
                                                 <script type="text/javascript">
@@ -829,69 +834,223 @@
                                             <li>
                                                 <span>返回值不是<span>true/false</span>，而是操作数本身</span>
                                                 <ul>
-                                                    <li>意思就是返回的最终值是<span>决定结果的那个操作数的原值</span></li>
-                                                    <li>但是在if或white中，<span>这些值会被自动转为布尔值，辨认判断结果没有问题</span></li>
+                                                    <li>意思就是返回的最终值是<span>决定结果的那个操作数的原值</span>
+                                                    </li>
+                                                    <li>
+                                                        但是在if或white中，<span>这些值会被自动转为布尔值，辨认判断结果没有问题</span>
+                                                    </li>
                                                     <li>
                                                         <span>理解且/或运算符规则</span>
                                                         <ol>
                                                             <li>
                                                                 <code>&&</code>
                                                                 <ul>
-                                                                    <li><span>返回第一个<a href="#falsy">falsy</a></span>的值</li>
+                                                                    <li><span>返回第一个<a
+                                                                            href="#falsy">falsy</a></span>的值
+                                                                    </li>
                                                                     <li>
                                                                         <p>所以分三种情况</p>
                                                                         <ol>
-                                                                            <li>当所有值是<span>falsy</span>取最左边的值</li>
-                                                                            <li>包含truthy，取第一个falsy的值(<span>后面的逻辑判断不执行</span>)</li>
+                                                                            <li>当所有值是<span>falsy</span>取最左边的值
+                                                                            </li>
+                                                                            <li>包含truthy，取第一个falsy的值(<span>后面的逻辑判断不执行</span>)
+                                                                            </li>
                                                                             <li>均是truthy，取最右边的值</li>
                                                                         </ol>
                                                                     </li>
-                                                                    <li>所以，且运算符最适合用于(<span>密码校验、表单校验[那些只有符合全部条件的场景适用]</span>)</li>
+                                                                    <li>所以，且运算符最适合用于(<span>密码校验、表单校验[那些只有符合全部条件的场景适用(但是通常并不建议直接使用且运算符进行比较，最好还是用比较运算符)]</span>)
+                                                                    </li>
                                                                 </ul>
                                                             </li>
                                                             <li>
                                                                 <code>||</code>
                                                                 <ul>
-                                                                    <li><span>返回第一个<a href="#truthy">truthy</a></span>的值</li>
+                                                                    <li><span>返回第一个<a
+                                                                            href="#truthy">truthy</a></span>的值
+                                                                    </li>
                                                                     <li>
                                                                         <p>所以分三种情况</p>
                                                                         <ol>
-                                                                            <li>当所有值是<span>falsy</span>取最右边的值</li>
-                                                                            <li>包含truthy，取第一个truthy的值(<span>后面的逻辑判断不执行</span>)</li>
+                                                                            <li>当所有值是<span>falsy</span>取最右边的值
+                                                                            </li>
+                                                                            <li>包含truthy，取第一个truthy的值(<span>后面的逻辑判断不执行</span>)
+                                                                            </li>
                                                                             <li>均是truthy，取最左边的值</li>
                                                                         </ol>
                                                                     </li>
-                                                                    <li>所以，或运算符最适合用于(<span>提供默认值、处理多种错误情况</span>)</li>
+                                                                    <li>
+                                                                        所以，或运算符最适合用于(<span>提供默认值、处理多种错误情况</span>)
+                                                                    </li>
                                                                 </ul>
                                                             </li>
                                                         </ol>
                                                     </li>
                                                     <li>
-                                                        <p>·例1——或(默认值)</p>
-                                                        <script type="text/javascript">
-                                                            let use = String(prompt("请输出您的姓名：",""))
-                                                            let name = use || "匿名用户"  //sue 为用户输入的内容 ，或运算，遇到第一个truthy，并输出原值，后续不会在逻辑判断既是短路状态
-                                                                                        //什么也没有输入则是null(false)，往后知道需要truthy，输出原值
-                                                                                        //若后续均是falsy，则输出最后一个的原值
-                                                            document.writeln(`欢迎登录：<span>${name}</span>`)
-                                                        </script>
+                                                        <p>·例子：或(默认值)</p>
+                                                        <!--<script type="text/javascript">
+                                                            {
+                                                                let use = prompt("请输出您的姓名：", "")
+                                                                let name = use || "匿名用户"  //sue 为用户输入的内容 ，或运算，遇到第一个truthy，并输出原值，后续不会在逻辑判断既是短路状态
+                                                                //什么也没有输入则是null(false)，往后知道需要truthy，输出原值
+                                                                //若后续均是falsy，则输出最后一个的原值
+                                                                document.writeln(`欢迎登录：<span>${name}</span>`)
+                                                            }
+                                                        </script>-->
                                                         <div class="div_video">
-                                                            <video src="./image/逻辑运算符/或运算实例—默认值.mp4" controls></video>
+                                                            <video src="./image/逻辑运算符/或运算实例—默认值.mp4"
+                                                                   controls></video>
                                                         </div>
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li></li>
-                                            <li></li>
                                         </ol>
                                     </li>
                                 </ul>
                             </li>
                             <li>
                                 <h4 id="自增自减运算符"><a href="#JS运算符">自增自减运算符</a></h4>
+                                <ol>
+                                    <li>
+                                        <h5>++</h5>
+                                        <ul>
+                                            <li>进行自增运算</li>
+                                            <li>分成两种，<span>前置++</span>和<span>后置++</span></li>
+                                            <li>前置++，会<span>先把值自动+1，在返回自增后的值</span></li>
+                                            <li>后置++，会<span>先返回原值，在自动+1</span></li>
+                                            <li><span>自增运算符只能用于变量，不能用于字面量（比如 5++ 会报错）</span></li>
+                                            <li>
+                                                注意：<span>一条语句中，一个变量最多只做一次自增，否则代码晦涩且可能产生未定义行为。</span>
+                                            </li>
+                                            <li>
+                                                <p>·例子</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50;
+                                                        document.writeln(`sum：${sum},前置++(自增后输出)：<span>${++sum}</span><br>`) // 会返回51，并且把sum的值变成51
+
+                                                        let sum2 = 50;
+                                                        document.writeln(`sum2：${sum2}后置++(先输出原值再自增)：<span>${sum2++}</span><br>`) // 会返回50，所以输出的结果是50,然后再自增加一。
+                                                        document.writeln(`sum2：${sum2}后置++：<span>${sum2++}</span>`) // 因为上一次已经自增了，所以这一次输出51，然后再自增(依次自增)——主要是先输出，再自增
+                                                    }
+                                                </script>
+                                                <ol>
+                                                    <li>sum原值是50，通过前置自增，<span>最后的输出结果是51</span>。[因为前置自增是先自增(50+1)，再输出现有值(50)]
+                                                    </li>
+                                                    <li>
+                                                        sum2的原值是50，通过第一次后置自增，<span>最后的输出结果是50</span>。[因为后置自增是先输出原值(50)，再自增(50+1)]
+                                                    </li>
+                                                    <li>
+                                                        sum2经过第一次后置自增，所以原值是51，再次后置自增，最后的结果同样是51。
+                                                    </li>
+                                                    <li>综上所述：
+                                                        <span>
+                                                            <br>··前置自增：先自增，再输出自增后的值
+                                                            <br>··后置自增：先输出原值，再自增</span>
+                                                    </li>
+                                                </ol>
+                                                <img src="./image/自增自减运算符/自增运算符/自增运算符.png"
+                                                     alt="自增运算符"
+                                                     title="自增运算符">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>--</h5>
+                                        <ul>
+                                            <li>进行自减运算</li>
+                                            <li>分成两种，<span>前置--</span>和<span>后置--</span></li>
+                                            <li>前置--，会<span>先把值自动-1，在返回自减后的值</span></li>
+                                            <li>后置--，会<span>先返回原值，在自动-1</span></li>
+                                            <li><span>自减运算符只能用于变量，不能用于字面量（比如 5-- 会报错）</span></li>
+                                            <li>
+                                                注意：<span>一条语句中，一个变量最多只做一次自减，否则代码晦涩且可能产生未定义行为。</span>
+                                            </li>
+                                            <li>
+                                                <p>·例子</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50;
+                                                        document.writeln(`sum：${sum},前置--(自增后输出)：<span>${--sum}</span><br>`) // 会返回49，并且把sum的值变成49
+
+                                                        let sum2 = 50;
+                                                        document.writeln(`sum2：${sum2}后置--(先输出原值再自增)：<span>${sum2--}</span><br>`) // 会返回50，所以输出的结果是50,然后再自减减一。
+                                                        document.writeln(`sum2：${sum2}后置--：<span>${sum2--}</span>`) // 因为上一次已经自减了，所以这一次输出49，然后再自减(依次自减)——主要是先输出，再自减
+                                                    }
+                                                </script>
+                                                <ol>
+                                                    <li>sum原值是50，通过前置自减，<span>最后的输出结果是49</span>。[因为前置自减是先自减(50-1)，再输出现有值(49)]
+                                                    </li>
+                                                    <li>
+                                                        sum2的原值是50，通过第一次后置自减，<span>最后的输出结果是50</span>。[因为后置自增是先输出原值(50)，再自减(50-1)]
+                                                    </li>
+                                                    <li>
+                                                        sum2经过第一次后置自减，所以原值是49，再次后置自减，最后的结果同样是49。
+                                                    </li>
+                                                    <li>综上所述：
+                                                        <span>
+                                                            <br>··前置自减：先自减，再输出自减后的值
+                                                            <br>··后置自减：先输出原值，再自减</span>
+                                                    </li>
+                                                </ol>
+                                                <img src="./image/自增自减运算符/自减运算符/自减运算符.png"
+                                                     alt="自减运算符"
+                                                     title="自减运算符">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
                             </li>
                             <li>
-                                <h4 id="三目运算符"><a href="#JS运算符">三目运算符</a></h4>
+                                <h4 id="三元运算符"><a href="#JS运算符">三元运算符</a></h4>
+                                <ol>
+                                    <li>三元运算符，就是用<span>两个符号</span>组成一个语句</li>
+                                    <li>语法：<code>条件 ? 条件为true的时候(表达式1) : 条件为false的时候(表达式2)</code>
+                                    </li>
+                                    <li>先判断"条件"是否为真(truthy/falsy)</li>
+                                    <li>如果为真,则执行表达式1</li>
+                                    <li>如果为假,则执行表达式2</li>
+                                    <li>
+                                        <h5>注意:</h5>
+                                        <ul>
+                                            <li>三目运算符返回的是<span>值(可以是任意类型)</span>,可以直接赋值或参与运算
+                                            </li>
+                                            <li>可以嵌套:<code>条件1 ? 表达式1 : (条件2 ? 表达式2 : (条件3 表达式3
+                                                (....)))</code></li>
+                                            <li>
+                                                只能在false表达式嵌套,用小括号包围。<span>与excel的if函数嵌套一致</span><span>但是最好不要嵌套超过两层，用if/switch</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p>·例子</p>
+                                        <script type="text/javascript">
+                                            {
+                                                //不嵌套
+                                                let sum = 50;
+                                                document.writeln(`sum：${sum},条件是[<code>sum > 60 ? "true" : "false"}</code>]最后的结果是：${sum > 60 ? "true" : "<span>false</span>"}`);
+                                            }
+                                        </script>
+                                        <ul>
+                                            <li>sum的原值是50，所设置的三元运算符是[sum > 60 ? "true" :
+                                                "false"]，最后的结果是false
+                                            </li>
+                                            <li>从条件【sum > 60】可以看出，这肯定是一个假，所以执行表达式2("false")</li>
+                                            <li>
+                                                <span>所以具体运算过程是：</span>
+                                                <ol>
+                                                    <li><span>先判断条件的真假</span>(truthy/falsy)</li>
+                                                    <li>如果为真，<span>输出冒号前一个表达式</span></li>
+                                                    <li>如果为假，<span>输出冒号后一个表达式</span></li>
+                                                </ol>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <img src="./image/三元运算符/三元运算符.png"
+                                             alt="三元运算符"
+                                             title="三元运算符">
+                                    </li>
+                                </ol>
                             </li>
                         </ul>
                     </li>
@@ -966,7 +1125,9 @@
                 <h3 id="falsy">falsy</h3>
                 <ol>
                     <li>可以理解为天生的"false"</li>
-                    <li>共有八种:[<code>""(<span>空字符串</span>)、null、undefined、false(<span>字面量(boolean类型)，不是字符串</span>、0、-0、0n(<span>bigint类型</span>)、NaN)</code>]</li>
+                    <li>
+                        共有八种:[<code>""(<span>空字符串</span>)、null、undefined、false(<span>字面量(boolean类型)，不是字符串</span>、0、-0、0n(<span>bigint类型</span>)、NaN)</code>]
+                    </li>
                     <li>只要出现以上八种类型，在逻辑上就是false</li>
                 </ol>
             </li>
