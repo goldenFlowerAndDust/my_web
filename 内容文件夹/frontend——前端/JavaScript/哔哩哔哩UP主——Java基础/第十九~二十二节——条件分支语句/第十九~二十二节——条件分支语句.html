@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件分支语句</title>
+    <link rel="stylesheet" href="../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>条件分支语句</h1>
+    </header>
+    <section id="section_1">
+        <h2>条件分支语句共2个(<span>if/switch</span>)</h2>
+        <ul>
+            <li>
+                <h3>分支结构</h3>
+                <ol>
+                    <li>js代码都是顺序执行(<span>从上到下</span>)</li>
+                    <li>逻辑分支：<span>根据设定好的条件来决定要不要执行某些代码</span></li>
+                </ol>
+            </li>
+            <li></li>
+            <li>
+                <ol>
+                    <li>
+                        <h4>if条件分支结构(<span>重点</span>)</h4>
+                        <ul>
+                            <li>
+                                <h5>if结构</h5>
+                                <ol>
+                                    <li>通过一个<span>if</span>语句来决定代码是否执行</li>
+                                    <li>语法：<code>if(条件){<span>要执行的代码</span>}</code></li>
+                                    <li>通过<span>()</span>里面的条件是否成立来决定<span>{}</span>里面的代码是否执行
+                                    </li>
+                                    <li><span>if必须要有条件</span></li>
+                                    <li>
+                                        <p>·实例</p>
+                                        <!--<script type="text/javascript">
+                                            // 条件为 true 的时候执行{} 里面的代码
+                                            // 条件为 false 的时候后跳过 {} 里面的代码
+                                            {
+                                                let num = parseFloat(prompt("请输出第一个数据："))
+                                                let num2 = parseFloat(prompt("请输出第二个数据："))
+                                                if(num === num2){  // sum = 50 , sum2 = 50 ,执行的是这个条件分支，下面的有关sum与sum2的判断均是false，所以跳过
+                                                    document.writeln(`输入的结果是：${num},${num2}，所以sum 等于 num2`)
+                                                }
+                                                if( num > num2){  //sum = 50 , sum2 = 30 ,执行的是这个if条件分支，上面的都跳过了
+                                                    document.writeln(`输入的结果是：${num},${num2}，所以sum 大于 num2`)
+                                                }
+                                                if( num < num2){ //sum = 50 , sum2 = 60 ,执行的是这个if条件分支，上面的都跳过了
+                                                    document.writeln(`输入的结果是：${num},${num2}，所以sum 小于 num2`)
+                                                }
+                                                //总结就是 遇到true 则执行 {}内的代码  ，false 则跳过，继续往下执行后面的代码
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="./image/if条件分支语句/If条件分支语句.mp4" controls></video>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>if-else结构</h5>
+                                <ol>
+                                    <li>
+                                        <span>if-else结构</span>意思是<span>不是if{}内代码运行，就是else{}内代码运行</span>
+                                    </li>
+                                    <li>
+                                        语法：<code>if(条件){要执行的代码}else(注意要放到if大括号结尾处){要执行的代码}</code>
+                                    </li>
+                                    <li><span>if必须要有条件，else不能有条件</span></li>
+                                    <li>
+                                        <p>·实例</p>
+                                        <!--<script type="text/javascript">
+                                            {
+                                                let sum = parseFloat(prompt("请输出数字(0~100)：" , ""))
+                                                if(sum <0 || sum >100 || isNaN(sum)){ //意思是数字小于0，大于100，且是非数字类型，运行if的代码
+                                                    document.writeln("<span>你输出的不是0~100的数</span>")
+                                                }else{ //不符合if的条件，则运行else的代码
+                                                    document.writeln(`<span>你输入的数字是:${sum}</span>`)
+                                                }
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="./image/if条件分支语句/If-else结构.mp4" controls></video>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>if-else(<span>空格</span>)if-else结构</h5>
+                                <ol>
+                                    <li><span>if-else if(<span>else if可以是多个</span>)-else结构</span>意思是<span>从if开始判断，然后从上到下依次[else if]判断，如果均是false，最后运行else{}内的代码</span>
+                                    </li>
+                                    <li>语法：<code>if(条件){}else if(条件){}else if(条件)....else{}</code></li>
+                                    <li><span>if必须要有条件，else if必须要有条件，else不能有条件</span></li>
+                                    <li>if -else if-else(<span>else不是必要的，可以不用写</span>)</li>
+                                    <li>
+                                        <p>·实例</p>
+                                        <!--<script type="text/javascript">
+                                            /*做一个成绩检查脚本(要求)：
+                                            *           1.用户可以自己输出数据(prompt)
+                                            *           2.成绩的数字类型只支持数值类型，且只能在0~100之间
+                                            *           3.有评级：0(等于)~60(等于) 及格   60~90 良 90(等于)~100(等于) 优秀
+                                            * */
+                                            {
+                                                let sum = parseFloat(prompt("请输出你的成绩：", ""))
+
+                                                if (sum < 0 || sum > 100 || isNaN(sum)) {  //成绩的数字类型只支持数值类型，且只能在0~100之间
+                                                    document.writeln("请输出数值类型(0~100)！！！")
+                                                } else if (sum >= 0 && sum <= 60) {
+                                                    document.writeln(`你的成绩是：${sum},评级为<span>合格</span>`)
+                                                } else if (sum > 60 && sum <= 90) {
+                                                    document.writeln(`你的成绩是：${sum},评级为<span>良</span>`)
+                                                } else { //可以省略，else不是必须写的，但是需要另立一个 else if(sum>90 && sum<=100){}这个分支
+                                                    document.writeln(`你的成绩是：${sum},评级为<span>优秀</span>`)
+                                                }
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="./image/if条件分支语句/If-else%20If-else结构.mp4"
+                                                   controls></video>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>switch</h3>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
