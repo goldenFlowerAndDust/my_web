@@ -126,6 +126,124 @@
                                     </li>
                                 </ol>
                             </li>
+                            <li>
+                                <h5>if案例</h5>
+                                <ol>
+                                    <li>
+                                        <p>·案例1(判断奇偶数)</p>
+                                        <!--<script type="text/javascript">
+                                            // 数学：能整除 2 的数就是偶数 ，否则就是奇数 （一定是整数）!number.isInteger(变量)
+                                            {
+                                                let sum = parseFloat(prompt("请输入一个整数：", ""))
+
+                                                if (isNaN(sum)) {
+                                                    document.writeln("<span>你输入的不是数值类型!!!</span>")
+                                                } else if (!Number.isInteger(sum)) {
+                                                    document.writeln("<span>你输入的不是整数!!!</span>")
+                                                } else if (sum % 2 === 0) {  // 可以将条件替换为 !(sum % 2) 当值返回的是0也就是falsy , 取反就是true，运行{}内的代码
+                                                    document.writeln(`你输入的数值是：<span>${sum}</span>，<span>它是一个偶数</span>`)
+                                                } else if (sum % 2 !== 0) {  // 可以将条件替换为else ,意思就是上面得的值为大于0得数值，也就truthy，取反就是false,运行{}内的代码
+                                                    document.writeln(`你输入的数值是：<spabn>${sum}</spabn>，<span>它是一个奇数</span>`)
+                                                }
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="./image/if条件分支语句/案例1——判断奇偶数.mp4" controls></video>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>·案例2(根据0~100的数字输出成绩评级)</p>
+                                        <!--<script type="text/javascript">
+                                            /*
+                                                90~100 A
+                                                80~90 B
+                                                70~80 C
+                                                60~70 D
+                                                0~60 E
+                                            * */
+                                            {
+                                                let sum = parseFloat(prompt("请输出你的成绩(0~100):", ""))
+
+                                                if (isNaN(sum)) {
+                                                    document.writeln("<span>你输出的不是数值类型!!!</span>")
+                                                } else if (sum < 0 || sum > 100) {   // 控制sum在0~100之间
+                                                    document.writeln("<span>数字范围不在0~100之间</span>")
+                                                } else if (sum <= 100 && sum >= 90) {  // 可以简写为 >=90 因为已知sum的范围在0~100之间
+                                                    document.writeln(`你的成绩是：<span>${sum}</span>,成绩评级为:<span>A</span>`)
+                                                } else if (sum < 90 && sum >= 80) { // // 可以简写为 >=80 因为上面限制范围 <90
+                                                    document.writeln(`你的成绩是：<span>${sum}</span>,成绩评级为:<span>B</span>`)
+                                                } else if (sum <80 && sum >=70) { // 可以简写为 >=70 因为上面限制范围 <80
+                                                    document.writeln(`你的成绩是：<span>${sum}</span>,成绩评级为:<span>C</span>`)
+                                                } else if (sum <70 && sum >= 60) { // 可以简写为 >=60 因为上面限制范围 <70
+                                                    document.writeln(`你的成绩是：<span>${sum}</span>,成绩评级为:<span>D</span>`)
+                                                } else {  // 同样是else ,意思就是 小于60 , 因为早已将sum控制在0~100,所以else 的 意思就是 0~60之间的数
+                                                    document.writeln(`你的成绩是：<span>${sum}</span>,成绩评级为:<span>E</span>`)
+                                                }
+
+
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="./image/if条件分支语句/案例2——根据0%20100的数字输出成绩评级.mp4"
+                                                   controls></video>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>·案例3(判断闰年)</p>
+                                        <!--<script type="text/javascript">
+                                            /*
+                                            *   什么是闰年？
+                                            *       1.世纪闰年：公历年份是整百数的，必须是400的倍数才是闰年
+                                            *       2.普通闰年：公历年份是4的倍数，且不是100的倍数
+                                            *       3.否则是平年
+                                            * */
+                                            {
+                                                let year = parseFloat(prompt("请输出年份(正数)："))
+
+                                                if (isNaN(year)) {
+                                                    document.writeln("<span>请输出有效年份!!!(数值类型)</span>")
+                                                } else if (year <= 0) {
+                                                    document.writeln("<span>请输出有效年份!!!(正数)</span>")
+                                                } else if (!Number.isInteger(year)) {
+                                                    document.writeln("<span>请输出有效年份!!!(非小数)</span>")
+                                                } else if (year % 400 === 0) {
+                                                    document.writeln(`输入的年份是: <span>${year}</span>,是<span>世纪闰年</span>`)
+                                                } else if (year % 4 === 0 && year % 100 !== 0) {
+                                                    document.writeln(`输入的年份是: <span>${year}</span>,是<span>普通闰年</span>`)
+                                                } else {
+                                                    document.writeln(`输入的年份是: <span>${year}</span>,是<span>平年</span>`)
+                                                }
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="./image/if条件分支语句/案例3——判断闰年.mp4" controls></video>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>案例3扩展(判断闰年或平年[<span>主要理解或运算与且运算的优先级</span>])</p>
+                                        <span>·再判断中，且运算的优先级高于或运算</span>
+                                        <!--<script type="text/javascript">
+                                            // 判断闰年或平年[主要理解或运算与且运算的优先级]
+                                            let year = parseFloat(prompt("请输出年份(正数)："))
+
+                                            if (isNaN(year)) {
+                                                document.writeln("<span>请输出有效年份!!!(数值类型)</span>")
+                                            } else if (year <= 0) {
+                                                document.writeln("<span>请输出有效年份!!!(正数)</span>")
+                                            } else if (!Number.isInteger(year)) {
+                                                document.writeln("<span>请输出有效年份!!!(非小数)</span>")
+                                            } else if (year % 400 ===0 || year % 4 === 0 && year % 100 !== 0) { // 会先判断 且运算符 , 再判断或运算符
+                                                document.writeln(`输入的年份是: <span>${year}</span>,是<span>闰年</span>`)
+                                            } else {
+                                                document.writeln(`输入的年份是: <span>${year}</span>,是<span>平年</span>`)
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="./image/if条件分支语句/案例3——判断闰年或平年.mp4" controls></video>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </li>
                         </ul>
                     </li>
                     <li>
