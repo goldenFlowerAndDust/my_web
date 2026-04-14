@@ -19,9 +19,8 @@
                 <ol>
                     <li>js代码都是顺序执行(<span>从上到下</span>)</li>
                     <li>逻辑分支：<span>根据设定好的条件来决定要不要执行某些代码</span></li>
-                </ol>
+                </ol><!--   一级嵌套   -->
             </li>
-            <li></li>
             <li>
                 <ol>
                     <li>
@@ -59,7 +58,7 @@
                                             <video src="./image/if条件分支语句/If条件分支语句.mp4" controls></video>
                                         </div>
                                     </li>
-                                </ol>
+                                </ol> <!--  三级嵌套  -->
                             </li>
                             <li>
                                 <h5>if-else结构</h5>
@@ -87,7 +86,7 @@
                                             <video src="./image/if条件分支语句/If-else结构.mp4" controls></video>
                                         </div>
                                     </li>
-                                </ol>
+                                </ol> <!--三级嵌套-->
                             </li>
                             <li>
                                 <h5>if-else(<span>空格</span>)if-else结构</h5>
@@ -124,7 +123,7 @@
                                                    controls></video>
                                         </div>
                                     </li>
-                                </ol>
+                                </ol> <!--  三级嵌套  -->
                             </li>
                             <li>
                                 <h5>if案例</h5>
@@ -239,17 +238,280 @@
                                             }
                                         </script>-->
                                         <div class="div_video">
-                                            <video src="./image/if条件分支语句/案例3——判断闰年或平年.mp4" controls></video>
+                                            <video src="./image/if条件分支语句/案例3——判断闰年或平年.mp4"
+                                                   controls></video>
                                         </div>
                                     </li>
-                                </ol>
+                                </ol> <!--  三级嵌套  -->
                             </li>
-                        </ul>
+                        </ul> <!--  二级嵌套  -->
                     </li>
                     <li>
-                        <h3>switch</h3>
+                        <h3>switch条件分支结构(<span>重点</span>)</h3>
+                        <ul>
+                            <li>也是<span>条件判断语句的一种</span></li>
+                            <li>是对于某一变量的判断</li>
+                            <li>switch(要判断的变量){
+                                <br><code>case</code> 情况1:
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;情况1要执行的代码
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;break
+                                <br><code>case</code> 情况2:
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;情况2要执行的代码
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;break
+                                <br>.....
+                                <br><code>default</code>:
+                                <br><span>&nbsp;&nbsp;&nbsp;&nbsp;上述情况均不满足执行代码</span>
+                                <br>}
+                            </li>
+                            <li>
+                                <code>case</code>
+                                <ol>
+                                    <li><span>规定，每个条件分支，必须填写</span></li>
+                                    <li><span>会从上到下自动匹配符合的</span></li>
+                                </ol> <!--  三级嵌套    -->
+                            </li>
+                            <li>
+                                <code>break</code>
+                                <ol>
+                                    <li><span>通常每个case后面要写break，否则会继续执行后面的case(穿透效果)</span></li>
+                                    <li>匹配到符合的，且case结尾有break，则<span>跳出switch,执行switch外的代码</span></li>
+                                    <li>
+                                        (穿透效果——<span>类似与或运算符(当不同分支，但是用到同一代码，可以使用穿透效果，减少重复代码量)</span>)
+                                    </li>
+                                </ol> <!--  三级嵌套    -->
+                            </li>
+                            <li>
+                                <code>default</code>
+                                <ol>
+                                    <li>
+                                        <span>default通常放在switch的最后</span>(可以放在开头或中间<span>但是非常不建议</span>)
+                                    </li>
+                                    <li><span>表示所有case都不匹配时执行的代码</span></li>
+                                </ol> <!--  三级嵌套    -->
+                            </li>
+                            <li>
+                                <span>注意：</span>
+                                <ol>
+                                    <li><span>switch不可以通过或运算符，将两个case合并</span>，需要将两个条件，最后的输出代码为一个，可以使用<span>穿透的办法</span>
+                                    </li>
+                                    <li><span>switch匹配是严格相等匹配【<code>case === switch(变量)</code>】(只有数据类型和值相同，才能匹配成功)</span>
+                                    </li>
+                                    <li>
+                                        case后面一定是表达式(可以计算出"值"的代码片段)——有<span>字面量、变量、包含运算符的运算、函数调用</span>，
+                                        <br>···但是非常不推荐<span>包含运算符的运算和函数调用</span>可读性差、容易出错、性能浪费、维护困难
+                                        <br>···最好用:<span>字面量、变量</span>
+                                    </li>
+                                </ol> <!--  三级嵌套    -->
+                            </li>
+                            <li>
+                                <p>·实例(使用switch条件语句判断)</p>
+                                <!--<script type="text/javascript">
+                                    /*
+                                    *   1.用户可以自己输入日期
+                                    *   2.每个星期有自己提示
+                                    *   3.输出星期外的数据，有提示
+                                    * */
+                                    let date2 = prompt("今天是星期几：", "")
+
+                                    switch (date2) {
+                                        case "星期一":
+                                            document.writeln("<span>噢，新的一周开始了！！！</span>")
+                                            break;
+                                        case "星期二":
+                                            document.writeln("<span>学习的有点痛苦了！！！</span>")
+                                            break;
+                                        case "星期三":
+                                            document.writeln("<span>再坚持一下！！！</span>")
+                                            break;
+                                        case "星期四":
+                                            document.writeln("<span>快周末了！！！</span>")
+                                            break;
+                                        case "星期五":
+                                            document.writeln("<span>太好了，明天休息！！！</span>")
+                                            break;
+                                        case "星期六":
+                                            document.writeln("<span>今天休息，可以睡个懒觉了！！！</span>")
+                                            break;
+                                        case "星期天":
+                                            document.writeln("<span>不好了，明天又要上课了！！！</span>")
+                                            break;
+                                        default:
+                                            document.writeln("<span>您输出的不是有效星期()!!!!</span>")
+                                    }
+                                </script>-->
+                                <div class="div_video">
+                                    <video src="././image/switch条件分支语句/Switch条件分支语句实例.mp4"
+                                           controls></video>
+                                </div>
+                            </li>
+                            <li>
+                                <p>·实例(穿透效果演示)</p>
+                                <!--<script type="text/javascript">
+                                    /*
+                                    *   因为星期天还有一个名词是星期日，为了避免出现歧义：
+                                    *                           请用穿透的办法，将星期日归纳到星期天当中
+                                    * */
+                                    {
+                                        let date2 = prompt("今天是星期几：", "")
+
+                                        switch (date2) {
+                                            case "星期一":
+                                                document.writeln("<span>噢，新的一周开始了！！！</span>")
+                                                break;
+                                            case "星期二":
+                                                document.writeln("<span>学习的有点痛苦了！！！</span>")
+                                                break;
+                                            case "星期三":
+                                                document.writeln("<span>再坚持一下！！！</span>")
+                                                break;
+                                            case "星期四":
+                                                document.writeln("<span>快周末了！！！</span>")
+                                                break;
+                                            case "星期五":
+                                                document.writeln("<span>太好了，明天休息！！！</span>")
+                                                break;
+                                            case "星期六":
+                                                document.writeln("<span>今天休息，可以睡个懒觉了！！！</span>")
+                                                break;
+                                            case "星期日" :   //可以在上面新建一个分支，可以加任何代码，但是不能添加break，因为加了break，到运行到break，会自动跳出switch，不再执行下面的代码。
+                                                             // 所以我们可以利用，不加break，继续往下执行代码的特性，为分支添加类似与或运算符的操作。
+                                                            // 只要没有需要break，就会继续往下执行，直到遇到break。
+                                                            //通过输出结果可以看到，星期日和星期天，共用运行同一代码
+                                            case "星期天" : // case后面只能是表达式，所以单纯的使用或运算符不可以。
+                                                document.writeln("<span>不好了，明天又要上课了！！！</span>")
+                                                break;
+                                            default:
+                                                document.writeln("<span>您输出的不是有效星期()!!!!</span>")
+                                        }
+                                    }
+                                </script>-->
+                                <div class="div_video">
+                                    <video src="./image/switch条件分支语句/Switch条件分支语句例2_穿透效果.mp4"
+                                           controls></video>
+                                </div>
+                            </li>
+                            <li>
+                                <p>·实例(根据数字1~12输出每个月有多少天，不考虑闰年)</p>
+                                <!--<script type="text/javascript">
+                                    /*
+                                    *   1.用户输入月份
+                                    *   2.根据输入的月份，输出每个月有多少天，不考虑闰年(2月有28天)
+                                    * */
+                                    {
+                                        let date = prompt("请输入月份：" ,"")
+
+                                        switch(date){
+                                            case "1月":
+                                            case "3月":
+                                            case "5月":
+                                            case "7月":
+                                            case "8月":
+                                            case "10月":
+                                            case "12月":
+                                                document.writeln(`输入的是:<span>${date}</span> , <span>共31天</span>`)
+                                                break;
+                                            case "2月":
+                                                document.writeln(`输入的是:<span>${date}</span>, <span>共28天</span>`)
+                                                break;
+                                            case "4月":
+                                            case "6月":
+                                            case "9月":
+                                            case "11月":
+                                                document.writeln(`输入的是:<span>${date}</span>, <span>共30天</span>`)
+                                                break;
+                                            default:
+                                                document.writeln("<span>请输入正确的月份！！！</span>")
+                                        }
+                                    }
+                                </script>-->
+                                <div class="div_video">
+                                    <video src="./image/switch条件分支语句/Switch实例月份%20不考虑闰年.mp4"
+                                           controls></video>
+                                </div>
+                            </li>
+                        </ul> <!--  二级嵌套  -->
                     </li>
-                </ol>
+                    <li>
+                        <h5>综合实例(按年份，月份，包括闰年，判断每月天数)</h5>
+                        <script type="text/javascript">
+                            /*
+                            *   1.先判断年份
+                            *   2.再判断月份
+                            *   3.最后输出天数
+                            *   4.包括闰年
+                            * */
+                            {
+                                let year = parseFloat(prompt("请输入年份(正整数)：", ""))
+
+                                if (isNaN(year)) {
+                                    document.writeln("<span>请输入有效年份(数值类型)!!!</span>")
+                                } else if (year <= 0) {
+                                    document.writeln("<span>请输入有效年份(正数)!!!</span>")
+                                } else if (!Number.isInteger(year)) {
+                                    document.writeln("<span>请输入有效年份(正整数)!!!</span>")
+                                } else if (year % 400 === 0 || year % 4 === 0 && year % 100 !== 0) {
+                                    let date = prompt("请输入月份(1~12):", "")
+                                    let day
+
+                                    switch (date) {
+                                        case "1":
+                                        case "3":
+                                        case "5":
+                                        case "7":
+                                        case "8":
+                                        case "10":
+                                        case "12":
+                                            day = 31
+                                            break;
+                                        case "2":
+                                            day = 29
+                                            break;
+                                        case "4":
+                                        case "6":
+                                        case "9":
+                                        case "11":
+                                            day = 30
+                                            break;
+                                        default:
+                                            day = "请输入正确的月份！！！"
+                                    }
+                                    document.writeln(`输入的年份是:<span>${year}年</span>,是<span>闰年</span>，输入的月份是:<span>${date}月</span>,共<span>${day}天</span>`)
+                                } else {
+                                    let date = prompt("请输入月份(1~12):", "")
+                                    let day
+
+                                    switch (date) {
+                                        case "1":
+                                        case "3":
+                                        case "5":
+                                        case "7":
+                                        case "8":
+                                        case "10":
+                                        case "12":
+                                            day = 31
+                                            break;
+                                        case "2":
+                                            day = 28
+                                            break;
+                                        case "4":
+                                        case "6":
+                                        case "9":
+                                        case "11":
+                                            day = 30
+                                            break;
+                                        default:
+                                            day = "请输入正确的月份！！！"
+                                    }
+                                    document.writeln(`输入的年份是:<span>${year}年</span>,是<span>平年</span>，输入的月份是:<span>${date}月</span>,共<span>${day}天</span>`)
+                                }
+                            }
+                        </script>
+                        <div class="div_video">
+                            <video src="./image/switch条件分支语句/综合实例(按年份，月份，包括闰年，判断每月天数).mp4"
+                                   controls></video>
+                        </div>
+                    </li>
+                </ol><!--   一级嵌套   -->
             </li>
         </ul>
     </section>
