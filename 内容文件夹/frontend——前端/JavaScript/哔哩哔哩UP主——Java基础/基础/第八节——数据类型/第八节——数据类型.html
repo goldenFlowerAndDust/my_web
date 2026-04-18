@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>数据类型</h1>
+    </header>
+    <section id="section_1">
+        <h2>数据类型解释</h2>
+        <ul>
+            <li>定义：指的是内存中的数据的类型</li>
+            <li>通常分为两大类<span>基本数据类型</span>和<span>复杂数据类型</span></li>
+            <li>
+                <h3>基本数据类型</h3>
+                <ol>
+                    <li>
+                        <h4>数值类型(<span>Number</span>)</h4>
+                        <ul>
+                            <li>
+                                <h4>数值类型 (<span>Number</span>)</h4>
+                                <ul>
+                                    <li>表示所有数字，包括整数、浮点数、科学计数法及不同进制。</li>
+                                    <li><strong>进制表示</strong>：
+                                        <ol>
+                                            <li>二进制：<code>0b1111 = 15(十进制)</code> (0b开头)</li>
+                                            <li>八进制：<code>0o17 = 15(十进制)</code> (0o开头)</li>
+                                            <li>十六进制：<code>0xF = 15(十进制)</code> (0x开头)</li>
+                                        </ol>
+                                    </li>
+                                    <li><strong>特殊值</strong>：<code>NaN(<span>它是属于数字类型，非常重要</span>)</code> (Not a Number) 表示非数字，<code>Infinity</code>
+                                        表示无穷大。
+                                    </li>
+                                    <li><strong>科学计数法</strong>：<code>2e5</code> 等于 2×10⁵ = 200000，仍属于 Number
+                                        类型。
+                                    </li>
+                                    <li>只有 Number 类型能直接参与数学运算，字符串需转换后才能计算。</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>字符串类型(<span>String</span>)</h4>
+                        <ul>
+                            <li>被引号包裹的所有内容(<span>可以是单引号也可以是双引号</span>)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>布尔类型(Boolean)</h4>
+                        <ul>
+                            <li>只有两个(<span>true或者false</span>)</li>
+                            <li>常用于条件判断(IF)</li>
+                            <li>true的意思是真，符合条件</li>
+                            <li>false的意思是假，不符合条件</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>null类型(<span>null</span>)</h4>
+                        <ul>
+                            <li>只有null一个值</li>
+                            <li>null 表示“空值”，常用于主动清空对象引用，typeof null 返回 "object"（历史遗留）</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>Undefied类型</h4>
+                        <ul>
+                            <li>变量声明了，但是未赋值</li>
+                            <li>只有Undefied一个值</li>
+                            <li>表示浏览器不知道它是什么类型</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>Symbol</h4>
+                        <ul>
+                            <li>SE6新增，表示独一无二的值</li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>试验区</h2>
+        <ul>
+            <li>
+                <h3>数字类型</h3>
+                <script type="text/javascript">
+                    let num1 = 10
+                    let num2 = 0b111111
+                    let num3 = 0x111111
+                    let num4 = 0o1111111
+                    let num5 = 2e5
+                    let num6 = 2.8
+
+                    console.log("十进制：" + num1)
+                    console.log("二进制：" + num2)
+                    console.log("十六进制：" + num3)
+                    console.log("八进制：" + num4)
+                    console.log("科学计算法：" + num5)
+                    console.log("浮点数：" + num6)
+                </script>
+                <div class="div_video">
+                    <video src="number类型/Number类型.mp4" controls></video>
+                </div>
+            </li>
+            <li>
+                <h3>字符串类型</h3>
+                <script type="text/javascript">
+                    let name = "李华"
+
+                    console.log(name)
+                </script>
+                <div class="div_video">
+                    <video src="String类型/String类型.mp4" controls></video>
+                </div>
+            </li>
+            <li>
+                <h3>布尔类型</h3>
+                <script type="text/javascript">
+                    const ImLiHua = false
+
+                    const ImXiaoMing = true
+
+                    console.log("我叫李华：" + ImLiHua)
+                    console.log("我叫小明：" + ImXiaoMing)
+                </script>
+                <div class="div_video">
+                    <video src="Boolean类型/Boolean类型.mp4" controls></video>
+                </div>
+            </li>
+            <li>
+                <h3>Undefied</h3>
+                <script type="text/javascript">
+                    let which
+                    console.log(which)
+                </script>
+                <div class="div_video">
+                    <video src="Undefied类型/Undefied类型.mp4" controls></video>
+                </div>
+            </li>
+            <li>
+                <h3>null</h3>
+                <script type="text/javascript">
+                    let whichObject = null  //赋值为空值，意思是后续它是一个对象
+                    console.log(whichObject)
+                </script>
+                <div class="div_video">
+                    <video src="null类型/Null类型.mp4" controls></video>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>循环控制语句</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>循环控制语句</h1>
+    </header>
+    <section id="section_1">
+        <h2>循环控制语句(<a href="#break">break</a>、<a href="#continue">continue</a>)</h2>
+        <ul>
+            <li>
+                <h3 id="break">break(<span>终止循环</span>)</h3>
+                <ol>
+                    <li><span>在循环没有进行完毕，设置break后，条件满足，则提前终止循环</span></li>
+                    <li>比如:要吃5个包子，但是吃到第三个的时候，吃不下了，<span>那么就要停止吃包子这件事</span></li>
+                    <li>总结：<span>要终止循环，就可以直接使用break关键字</span></li>
+                    <li>可以理解为：<span>查找：当查找到需要的，后面再查找就没有意义，浪费精力</span></li>
+                    <li>
+                        <h4>break案例(循环十次，当循环5次，就停止循环)</h4>
+                        <script type="text/javascript">
+                            {
+                                for (let i = 0 ; i <= 10 ; i++) {
+                                    if (i===5){
+                                        break // 当 i = 5 的时候结束 (因为当i = 5 的时候已经停止循环，所以只会输出0~4)
+                                    }
+                                    document.writeln(`<br><span>${i}</span>`) // 当前是循环十次后结束
+                                }
+                            }
+                        </script>
+                        <div class="div_video">
+                            <video src="./image/Break案例——循环十次%20当循环5次%20就停止循环.mp4" controls></video>
+                        </div>
+                    </li>
+                </ol> <!--  第一次嵌套【break】解释  -->
+            </li>
+            <li>
+                <h3 id="continue">continue(<span>结束本次循环</span>)</h3>
+                <ol>
+                    <li><span>在循环中，设置continue后，跳过本次循环，继续执行后续的循环</span></li>
+                    <li>比如：吃5个包子，吃到第三个的时候，包子掉地上了，<span>跳过掉地上的，继续吃后面包子</span></li>
+                    <li>总结：<span>跳过本次循环，就可以使用continue关键字</span></li>
+                    <li>可以理解为：<span>筛选：筛选出不需要的，保留需要的</span></li>
+                    <li>
+                        <h4>continue案例(循环10次，但是跳过第5次)</h4>
+                        <script type="text/javascript">
+                            {
+                                for (let i = 0 ; i<= 10 ; i++) {
+
+                                    if (i===5){
+                                        continue  // 从结果可以看出，跳过了第五次循环，缺少了数字5
+                                    }
+                                    document.writeln(`<br><span>${i}</span>`)
+                                }
+                            }
+                        </script>
+                        <div class="div_video">
+                            <video src="./image/Continue案例——循环10次%20但是跳过第5次.mp4" controls></video>
+                        </div>
+                    </li>
+                </ol> <!--  第一次嵌套【continue】解释  -->
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

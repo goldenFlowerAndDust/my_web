@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运算符</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>运算符</h1>
+    </header>
+    <section id="section_1">
+        <h2>什么是运算符</h2>
+        <ul>
+            <li>
+                <ol>
+                    <li>是代码里面进行运算的时候使用的符号</li>
+                    <li id="JS运算符">
+                        JS共分六种运算符：[<span><a href="#数学运算符">数学运算符</a>、<a
+                            href="#赋值运算符">赋值运算符</a>、<a href="#比较运算符">比较运算符</a>、<br><a
+                            href="#逻辑运算符">逻辑运算符</a>、<a href="#自增自减运算符">自增自减运算符</a>、<a
+                            href="#三元运算符">三元运算符</a></span>]
+                    </li>
+                    <li>
+                        <h3>运算符的分类</h3>
+                        <ul>
+                            <li>
+                                <h4 id="数学运算符"><a
+                                        href="#JS运算符">数学运算符</a>
+                                    <ol>
+                                        <li><span>除加号外，其他操作数为非数字字符串，输出均为NaN</span></li>
+                                        <li>
+                                            <span>除加号外，其他操作数均为数字(两侧均为字符串也一样)，则转为数字，并计算</span>
+                                        </li>
+                                    </ol>
+                                </h4>
+                                <ol>
+                                    <li>
+                                        <h5>+号</h5>
+                                        <ul>
+                                            <li>只有<span>符号两边都是数字</span>的时候才会进行加法运算</li>
+                                            <li>
+                                                只要符号<span>任意一边是字符串类型</span>，就会<span>进行字符串拼接</span>
+                                            </li>
+                                            <li>当值为布尔类型(<span>true/false</span>)，执行加法运算时，会自动将<span>true[1]/flase[0]</span>
+                                            </li>
+                                            <li>
+                                                <P>·演示</P>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 5   //数字
+                                                        let sum2 = "50"  // 字符串
+                                                        let sum3 = 50   //数字
+                                                        let sum4 = true
+                                                        let sum5 = false
+
+                                                        console.log("一侧为字符串：" + typeof (sum + sum2), sum + sum2)
+                                                        console.log("两侧均为数字：" + typeof (sum + sum3), sum + sum3)
+                                                        console.log("数字+true; " + typeof (sum + sum4), sum + sum4)
+                                                        console.log("数字+false; " + typeof (sum3 + sum5), sum3 + sum5)
+                                                        console.log("======================================================================")
+                                                    }
+                                                </script>
+                                                <img src="image/数学运算符/加号/数学运算符加号.png"
+                                                     alt="数学运算符加号"
+                                                     title="数学运算符加号">
+                                                <img src="image/数学运算符/加号/数学运算符加号与布尔值.png"
+                                                     alt="数学运算符加号与布尔值"
+                                                     title="数学运算符加号与布尔值">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>-号</h5>
+                                        <ul>
+                                            <li>会执行<span>减法运算(subtraction)</span></li>
+                                            <li>
+                                                <span>会自动把两边(<span>非数字字符串除外</span>)都转换成数字进行计算</span>
+                                            </li>
+                                            <li>当值为布尔类型(<span>true/false</span>)，执行减法运算时，会自动将<span>true[1]/flase[0]</span>
+                                            </li>
+                                            <li>
+                                                <P>·演示</P>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let subtraction = 50  // subtraction(减法)
+                                                        let subtraction1 = "50"
+                                                        let subtraction2 = 5
+                                                        let subtraction3 = true
+                                                        let subtraction4 = false
+                                                        let subtraction5 = "ABC"
+
+                                                        console.log("一侧为字符串：" + typeof (subtraction - subtraction1), subtraction - subtraction1)
+                                                        console.log("两侧均为数字" + typeof (subtraction - subtraction2), subtraction - subtraction2)
+                                                        console.log("数字-true" + typeof (subtraction - subtraction3), subtraction - subtraction3)
+                                                        console.log("数字-false" + typeof (subtraction - subtraction4), subtraction - subtraction4)
+                                                        console.log("数字-'非数字字符串'" + typeof (subtraction - subtraction5), subtraction - subtraction5)
+                                                        console.log("===========================================================")
+                                                    }
+                                                </script>
+                                                <img src="image/数学运算符/减号/数学运算符减号.png"
+                                                     alt="数学运算符减号"
+                                                     title="数学运算符减号">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>*号</h5>
+                                        <ul>
+                                            <li>会执行<span>乘法运算(multiplication)</span></li>
+                                            <li>
+                                                <span>会自动把两边(<span>非数字字符串除外</span>)都转换成数字进行计算</span>
+                                            </li>
+                                            <li>当值为布尔类型(<span>true/false</span>)，执行乘法运算时，会自动将<span>true[1]/flase[0]</span>
+                                            </li>
+                                            <li>
+                                                <P>·演示</P>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let multiplication = 50  //multiplication （乘法运算）
+                                                        let multiplication1 = "50"
+                                                        let multiplication2 = 5
+                                                        let multiplication3 = "ABC"
+                                                        let multiplication4 = true
+                                                        let multiplication5 = false
+
+                                                        console.log("一侧为字符串：" + typeof (multiplication * multiplication1), multiplication * multiplication1)
+                                                        console.log("两侧均为数字：" + typeof (multiplication * multiplication2), multiplication * multiplication2)
+                                                        console.log("数字 * '非数字字符串'：" + typeof (multiplication * multiplication3), multiplication * multiplication3)
+                                                        console.log("数字 * true：" + typeof (multiplication * multiplication4), multiplication * multiplication4)
+                                                        console.log("数字 * false：" + typeof (multiplication * multiplication5), multiplication * multiplication5)
+                                                        console.log("===========================================================")
+                                                    }
+                                                </script>
+                                                <img src="image/数学运算符/乘号/数学运算符乘号.png"
+                                                     alt="数学运算符乘号"
+                                                     title="数学运算符乘号">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>/号</h5>
+                                        <ul>
+                                            <li>会执行<span>除法运算(division)</span></li>
+                                            <li>
+                                                <span>会自动把两边(<span>非数字字符串除外</span>)都转换成数字进行计算</span>
+                                            </li>
+                                            <li>当值为布尔类型(<span>true/false</span>)，执行除法运算时，会自动将<span>true[1]/flase[0]</span>
+                                            </li>
+                                            <li>
+                                                <span>当操作数为布尔值false的六种情况</span>
+                                                <ol>
+                                                    <li>当<code>false / 正数</code>，值为[<span>0</span>]</li>
+                                                    <li>当<code>false / 负数</code>，值为[<span>-0</span>]</li>
+                                                    <li>当<code>false / 0</code>，值为[<span>NaN</span>]</li>
+                                                    <li>当<code>正数 / false</code>，值为[<span>Infinity(正无穷)</span>]
+                                                    </li>
+                                                    <li>当<code>负数 / false</code>，值为[<span>-Infinity(负无穷)</span>]
+                                                    </li>
+                                                    <li>当<code>0 / false</code>，值为[<span>NaN(无效数字)</span>]</li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                <span>总结：</span>
+                                                <ol>
+                                                    <li><span><code>0/0 ==→ false / 0 或 0 / false</code>值为NaN</span>
+                                                    </li>
+                                                    <li><span><code>非零/0</code>值为±Infinity</span></li>
+                                                    <li><span><code>0/非零</code>值为±0</span></li>
+                                                    <li><span><code>正数/正数[或负数/负数]</code>值为正数</span></li>
+                                                    <li><span><code>正数/负数[或负数/正数]</code>值为负数</span></li>
+                                                    <li>与是否为false无关，只是刚好false被隐式转为0</li>
+                                                </ol>
+                                            <li>
+                                                <P>·演示</P>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let division = 50
+                                                        let division1 = "50"
+                                                        let division2 = 5
+                                                        let division3 = "ABC"
+                                                        let division4 = false
+                                                        let division5 = true
+                                                        let division6 = -8
+                                                        let division7 = 0
+
+                                                        console.log("一侧为字符串：" + typeof (division / division1), division / division1)
+                                                        console.log("两侧均为数字：" + typeof (division / division2), division / division2)
+                                                        console.log("数字 / '非数字字符串'：" + typeof (division / division3), division / division3)
+                                                        console.log("正数 / false：" + typeof (division / division4), division / division4)
+                                                        console.log("负数 / false：" + typeof (division6 / division4), division6 / division4)
+                                                        console.log("0 / false：" + typeof (division7 / division4), division7 / division4)
+                                                        console.log("false / 正数：" + typeof (division4 / division), division4 / division)
+                                                        console.log("false / 负数：" + typeof (division4 / division6), division4 / division6)
+                                                        console.log("false / 0：" + typeof (division4 / division7), division4 / division7)
+                                                        console.log("数字 / true：" + typeof (division / division5), division / division5)
+                                                        console.log("true / false：" + typeof (division5 / division4), division5 / division4)
+                                                        console.log("============================================")
+                                                    }
+                                                </script>
+                                                <img src="image/数学运算符/除号/数学运算符除号.png"
+                                                     alt="数学运算符除号"
+                                                     title="数学运算符除号">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>%号</h5>
+                                        <ul>
+                                            <li>会执行<span>取余运算(modulo)</span></li>
+                                            <li><span>会自动把两边都转换成数字进行运算</span></li>
+                                            <li>取余运算，<span>顾名思义就是取除法运算后的余数</span></li>
+                                            <li>
+                                                <span>注意：</span>
+                                                <ol>
+                                                    <li>当除数为0时：<code>非零数 % 0</code>，则值为<span>NaN</span></li>
+                                                    <li>当零是被除数时：<code>0 % 非零数</code>，则值为<span>0</span></li>
+                                                    <li>当0既是除数，又是被除数：<code>0 % 0</code>，则值为<span>NaN</span>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                <P>·演示</P>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let modulo = 55
+                                                        let modulo1 = "50"
+                                                        let modulo2 = 5
+                                                        let modulo3 = "ABC"
+                                                        let modulo4 = true
+                                                        let modulo5 = false
+
+                                                        console.log("字符串为数字：" + typeof (modulo % modulo1), modulo % modulo1)
+                                                        console.log("两侧均为数字：" + typeof (modulo % modulo2), modulo % modulo2)
+                                                        console.log("字符串为非数字：" + typeof (modulo % modulo3), modulo % modulo3)
+                                                        console.log("数字 % true：" + typeof (modulo % modulo4), modulo % modulo4)
+                                                        console.log("数字 % false：" + typeof (modulo % modulo5), modulo % modulo5)
+                                                        console.log("false % 数字：" + typeof (modulo % modulo2), modulo % modulo2)
+                                                        console.log("false % false：" + typeof (modulo5 % modulo5), modulo5 % modulo5)
+                                                        console.log("=====================================================================")
+                                                    }
+                                                </script>
+                                                <img src="image/数学运算符/取余/数学运算符取余.png"
+                                                     alt="数学运算符取余"
+                                                     title="数学运算符取余">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>综合实例</h5>
+                                        <p>题目：100分钟是几小时，几分钟</p>
+                                        <script type="text/javascript">
+                                            {
+                                                let minute = 100
+                                                let hour = Math.floor(minute / 60)
+                                                let minutes = minute % 60
+
+                                                console.log(`100分钟是：${hour}时${minutes}分`)
+                                                console.log("=====================================================================")
+                                            }
+                                        </script>
+                                        <img src="image/综合实例/综合实例1.png"
+                                             alt="综合实例1"
+                                             title="综合实例1">
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h4 id="赋值运算符"><a
+                                        href="#JS运算符">赋值运算符</a>
+                                    <ol>
+                                        <li><span>注意：相同变量名后面赋的值会覆盖前面赋的值</span></li>
+                                        <li>
+                                            赋值运算符<span>右侧可以是任何数据类型</span>，但是<span>左侧声明的变量名要合法，否则报错</span>
+                                        </li>
+                                        <li><span>不进行任何类型检查或转换</span></li>
+                                    </ol>
+                                </h4>
+                                <ol>
+                                    <li>
+                                        <h5>=</h5>
+                                        <ul>
+                                            <li>将<code>=</code><span>右边的值给等号左边的变量名</span></li>
+                                            <li>例如：<code>var sum = 100</code></li>
+                                            <li>就是将 100 赋值给sum变量</li>
+                                            <li>所以，最后的结果 sum的变量值就是100</li>
+                                            <li>
+                                                <p>·图例</p>
+                                                <script>
+                                                    {
+                                                        let sum = 100
+
+                                                        console.log(`变量名sum的变量值是：${sum}`)
+                                                    }
+                                                </script>
+                                                <img src="image/赋值运算符/等号/赋值运算符等号.png"
+                                                     alt="赋值运算符等号"
+                                                     title="赋值运算符等号">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>+=</h5>
+                                        <ul>
+                                            <li><code>变量名 += 数字</code>其等价于<code>变量名 = 变量名 + 数字</code>
+                                            </li>
+                                            <li>
+                                                <p>·图例</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50
+                                                        sum += 50 //  等价于 sum = sum + 50
+
+                                                        console.log(`变量sum的变量值是：${sum}`)
+                                                    }
+                                                </script>
+                                                <img src="image/赋值运算符/加等于/赋值运算符加等于.png"
+                                                     alt="赋值运算符加等于"
+                                                     title="赋值运算符加等于">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>-=</h5>
+                                        <ul>
+                                            <li><code>变量名 -= 数字</code>其等价于<code>变量名 = 变量名 - 数字</code>
+                                            </li>
+                                            <li>
+                                                <p>·图例</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50
+                                                        sum -= 50 //  等价于 sum = sum - 50
+
+                                                        console.log(`变量sum的变量值是：${sum}`)
+                                                    }
+                                                </script>
+                                                <img src="image/赋值运算符/减等于/赋值运算符减等于.png"
+                                                     alt="赋值运算符减等于"
+                                                     title="赋值运算符减等于号">
+                                            </li>
+                                            <li>
+                                                <p>·实例(<span>交换两个数的值</span>)</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let a = 200
+                                                        let b = 300
+                                                        let c = a
+                                                        a = b
+                                                        b = c
+
+                                                        console.log(`a的值为：${a}，b的值为：${b}`)
+                                                    }
+                                                </script>
+                                                <img src="image/综合实例/交换两个变量的数值.png"
+                                                     alt="交换两个变量的数值"
+                                                     title="交换两个变量的数值">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>*=</h5>
+                                        <ul>
+                                            <li><code>变量名 *= 数字</code>其等价于<code>变量名 = 变量名 * 数字</code>
+                                            </li>
+                                            <li>
+                                                <p>·图例</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50
+                                                        sum *= 50 //  等价于 sum = sum * 50
+
+                                                        console.log(`变量sum的变量值是：${sum}`)
+                                                    }
+                                                </script>
+                                                <img src="image/赋值运算符/乘等于/赋值运算符乘等于.png"
+                                                     alt="/赋值运算符乘等于"
+                                                     title="赋值运算符乘等于">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>/=</h5>
+                                        <ul>
+                                            <li><code>变量名 /= 数字</code>其等价于<code>变量名 = 变量名 / 数字</code>
+                                            </li>
+                                            <li>
+                                                <p>·图例</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50
+                                                        sum /= 50 //  等价于 sum = sum / 50
+
+                                                        console.log(`变量sum的变量值是：${sum}`)
+                                                    }
+                                                </script>
+                                                <img src="image/赋值运算符/除等于/赋值运算符除等于.png"
+                                                     alt="赋值运算符除等于"
+                                                     title="赋值运算符除等于">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>%=</h5>
+                                        <ul>
+                                            <li><code>变量名 %= 数字</code>其等价于<code>变量名 = 变量名 % 数字</code>
+                                            </li>
+                                            <li>
+                                                <p>·图例</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50
+                                                        sum %= 50 //  等价于 sum = sum % 50
+
+                                                        console.log(`变量sum的变量值是：${sum}`)
+                                                    }
+                                                </script>
+                                                <img src="image/赋值运算符/取余等于/赋值运算符取余等于.png"
+                                                     alt="赋值运算符取余等于"
+                                                     title="赋值运算符取余等于">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h4 id="比较运算符"><a href="#JS运算符">比较运算符</a>
+                                    <ol>
+                                        <li>当两个操作数都是字符串时，进行<span>字典顺序</span>比较</li>
+                                        <li>字典顺序就是按字符的<span>Unicode</span>码点逐个比较，与数字大小无关。<span>所以进行比较操作数最好都是数字</span>
+                                        </li>
+                                        <li>当<span>一个操作数是数字，另一个是字符串时,JS会尝试转为数字，再比较</span>，分三种情况：
+                                            <ul>
+                                                <li>如果字符串是纯数字字符串，<span>转成数字后比较</span></li>
+                                                <li>
+                                                    如果字符串是非数字字符串，<span>转换结果为NaN</span>,比较结果通常是<span>false</span>，(<span>!=除外</span>)
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>操作数均为数字，则直接进行比较</li>
+                                    </ol>
+                                </h4>
+                                <ol>
+                                    <li>
+                                        <h5>相等运算符(<span>==、!=</span>)</h5>
+                                        <ul>
+                                            <li>
+                                                <h5>==</h5>
+                                                <ul>
+                                                    <li>比较符号两边的<span>值是否相等</span>，<span>不管数据类型</span>
+                                                    </li>
+                                                    <li>例如：<code>1 == "1"</code></li>
+                                                    <li>两个的值是一样的，所以得到true</li>
+                                                    <li>
+                                                        正是因为这样比较差异，<span>所以一般不建议用==来比较两侧是否相等，会出现歧义</span>
+                                                    </li>
+                                                    <li>
+                                                        <p>·图例</p>
+                                                        <script type="text/javascript">
+                                                            {
+                                                                let sum = 50
+                                                                let sum2 = "50"
+
+                                                                console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(==)比较的结果是：${sum == sum2}`)
+                                                            }
+                                                        </script>
+                                                        <img src="image/比较运算符/等于等于/比较运算符等于等于.png"
+                                                             alt="比较运算符等于等于"
+                                                             title="比较运算符等于等于">
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <h5>!=</h5>
+                                                <ol>
+                                                    <li>
+                                                        比较符号两边的值是否<span>不相等</span>,<span>不管数据类型</span>
+                                                    </li>
+                                                    <li>例如：<code>1 != "1"</code></li>
+                                                    <li>因为两边的值是相等的，所以最后输出结果是false</li>
+                                                    <li>
+                                                        正是因为这样比较差异，<span>所以一般不建议用!=来比较两侧是否不相等，会出现歧义</span>
+                                                    </li>
+                                                    <li>
+                                                        <p>·图例</p>
+                                                        <script type="text/javascript">
+                                                            {
+                                                                let sum = 50
+                                                                let sum2 = "50"
+
+
+                                                                console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(!=)比较的结果是：${sum != sum2}`)
+                                                            }
+                                                        </script>
+                                                        <img src="image/比较运算符/不等于运算符/比较运算符不等于.png"
+                                                             alt="比较运算符不等于"
+                                                             title="比较运算符不等于">
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>严格运算符(<span>===、!===</span>)</h5>
+                                        <ul>
+                                            <li>
+                                                <h5>===【<span>严格相等运算符</span>】</h5>
+                                                <ol>
+                                                    <li>比较符号两边的<span>值和数据类型</span>是否相等</li>
+                                                    <li>例如：<code>1 === "1"</code></li>
+                                                    <li>它们值是一样的，但是数据类型不一样，所以最后的返回值值是false</li>
+                                                    <li>
+                                                        正是因为这样的严格比较，<span>所以非常建议用===来比较两侧是否相等，避免出现歧义</span>
+                                                    </li>
+                                                    <li>
+                                                        核心规则：<span>先比较类型，类型不同直接false；类型相同再比较值</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>关于不同操作数数据类型的三种情况</span>
+                                                        <ul>
+                                                            <li>
+                                                                <span>类型不同</span>
+                                                                <ol>
+                                                                    <li>例1：<code>123 === "123" </code></li>
+                                                                    <li>例2：<code>true === 1</code></li>
+                                                                    <li>例2：<code>null === undefined</code></li>
+                                                                    <li>直接返回false，不进行任何类型转换</li>
+                                                                </ol>
+                                                            </li>
+                                                            <li>
+                                                                <span>类型相同，且是基本类型(number\string\boolean\symbol\bigint)</span>
+                                                                <ol>
+                                                                    <li>比较值是否相同</li>
+                                                                    <li>
+                                                                        特例1：NaN(<span>一般是非数字字符串转换而成</span>)与任何值(<span>包括自身都不相等</span>)
+                                                                    </li>
+                                                                    <li>特例2：+0 和 -0 视为相等</li>
+                                                                </ol>
+                                                            </li>
+                                                            <li>
+                                                                <span>类型相同，且是引用类型(对象、数组、函数等)</span>
+                                                                <ol>
+                                                                    <li>比较<span>引用地址</span>是否相同(是否指向内存中的同一对象)，<span>而不是比较结构或内容</span>
+                                                                    </li>
+                                                                    <li>例如：<code>{} ===
+                                                                        {} </code><span>值为false,因为它们是两个不同对象</span>
+                                                                    </li>
+                                                                    <li>例如：<code>let obj = {} <br> obj ===
+                                                                        obj</code><br><span>值为true，因为它们同一引用</span>
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <p>·图例</p>
+                                                        <script type="text/javascript">
+                                                            {
+                                                                let sum = 50
+                                                                let sum2 = "50"
+
+                                                                console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(===)比较的结果是：${sum === sum2}`)
+                                                                console.log("=======================================")
+                                                            }
+                                                        </script>
+                                                        <img src="image/比较运算符/严格相等运算符/比较运算符严格相等运算符.png"
+                                                             alt="比较运算符严格相等运算符"
+                                                             title="比较运算符严格相等运算符">
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                <h5>!==【<span>严格不等于运算符</span>】</h5>
+                                                <ol>
+                                                    <li>比较符号两边的<span>值和数据类型</span>是否不相等</li>
+                                                    <li>例如：<code>1 !== "1"</code></li>
+                                                    <li>
+                                                        因为两边的值是相等的，但是数据类型不相等，所有最后输出的结果是true
+                                                    </li>
+                                                    <li>
+                                                        正是因为这样的严格比较，<span>所以非常建议用!==来比较两侧是否不相等，避免出现歧义</span>
+                                                    </li>
+                                                    <li>
+                                                        比较规则：<span>先比较类型，类型不同，直接返回true，类型相同，再比较值，值不同则true，值相同则false</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>关于不同操作数数据类型的三种情况</span>
+                                                        <ul>
+                                                            <li>
+                                                                <span>类型不同</span>
+                                                                <ol>
+                                                                    <li>
+                                                                        类型不同，直接返回true(<span>因为类型不同，那么肯定不相等</span>)
+                                                                    </li>
+                                                                    <li>例1：<code>123 !== "123" </code></li>
+                                                                    <li>例2：<code>true !== 1</code></li>
+                                                                    <li>例2：<code>null !== undefined</code></li>
+                                                                </ol>
+                                                            </li>
+                                                            <li>
+                                                                <span>类型相同，且是基本类型(number\string\boolean\symbol\bigint)</span>
+                                                                <ol>
+                                                                    <li>比较值是否不相同</li>
+                                                                    <li>
+                                                                        特例1：NaN(<span>一般是非数字字符串转换而成</span>)与任何值(<span>包括自身都不相等</span>，所以最后返回值是true)
+                                                                    </li>
+                                                                    <li>特例2：+0 和 -0
+                                                                        视为相等(<span>所以最后返回值是false</span>)
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                            <li>
+                                                                <span>类型相同，且是引用类型(对象、数组、函数等)</span>
+                                                                <ol>
+                                                                    <li>比较<span>引用地址</span>是否相同(是否指向内存中的同一对象)，<span>而不是比较结构或内容</span>
+                                                                    </li>
+                                                                    <li>例如：<code>{} !==
+                                                                        {} </code><span>值为true,因为它们是两个不同对象</span>
+                                                                    </li>
+                                                                    <li>例如：<code>let obj = {} <br> obj !==
+                                                                        obj</code><br><span>值为false，因为它们同一引用</span>
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                            <li><span>整体来说，与严格相等运算符相反</span></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <p>·图例</p>
+                                                        <script type="text/javascript">
+                                                            {
+                                                                let sum = 50
+                                                                let sum2 = "50"
+
+
+                                                                console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|所以它们(!==)比较的结果是：${sum !== sum2}`)
+                                                            }
+                                                        </script>
+                                                        <img src="image/比较运算符/严格不相等运算符/比较运算符严格不相等.png"
+                                                             alt="比较运算符严格不相等"
+                                                             title="比较运算符严格不相等">
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>关系运算符(<span><=、<、>=、></span>)</h5>
+                                        <ul>
+                                            <li>当两个操作数都是字符串，<span>字典顺序(Unicode码点)比较</span></li>
+                                            <li>
+                                                <span>至少一侧是数字，分两种情况</span>
+                                                <ol>
+                                                    <li>将另一侧转为数字，再比较数值</li>
+                                                    <li>
+                                                        转换失败(<span>非数字字符串</span>)则为NaN，比较结果恒等于<span>false(除了!=)</span>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                特殊情况：null、undefined与数字比较时，<span>null转成0，undefined转成NaN</span>
+                                            </li>
+                                            <li>布尔值true转为1，false转为0</li>
+                                            <li>两侧均为数字，正常比较，输出结果即可</li>
+                                            <li>数字的判断与数学一样，只不过多了数据类型之间的判断(null、NaN、undefined)
+                                            </li>
+                                            <li>
+                                                <span>>=</span>
+                                                <ol>
+                                                    <li>比较符号两边的值是否<span>相等或大于右侧的值</span></li>
+                                                    <li>是则输出true，否则false</li>
+                                                    <li>
+                                                        <p>·图例</p>
+                                                        <script type="text/javascript">
+                                                            {
+                                                                let sum = 50
+                                                                let sum2 = "40"
+                                                                let sum3 = null
+                                                                let sum4 = "ABC"
+                                                                let sum5
+
+
+                                                                console.log(`sum：${typeof sum},${sum} |sum2：${typeof sum2},${sum2}|\n所以它们(>=)比较的结果是：${sum >= sum2}`)
+                                                                console.log(`sum：${typeof sum},${sum} |sum4：${typeof sum4},${sum4}|\n所以它们(>=)比较的结果是：${sum >= sum4}`)
+                                                                console.log(`sum3：${typeof sum3},${sum3} |sum5：${typeof sum5},${sum5}|\n所以它们(>=)比较的结果是：${sum >= sum5}`)
+                                                            }
+                                                        </script>
+                                                        <img src="image/比较运算符/严格不相等运算符/比较运算符严格不相等.png"
+                                                             alt="比较运算符严格不相等"
+                                                             title="比较运算符严格不相等">
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                            <li>
+                                                <span><=</span>
+                                                <ul>
+                                                    <li>比较符号两边的值是否<span>相等或小于右侧的值</span></li>
+                                                    <li>是则输出true，否则false</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <span>></span>
+                                                <ul>
+                                                    <li>比较符号两边的值是否<span>大于右侧的值</span></li>
+                                                    <li>是则输出true，否则false</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <span><</span>
+                                                <ul>
+                                                    <li>比较符号两边的值是否<span>小于右侧的值</span></li>
+                                                    <li>是则输出true，否则false</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h4 id="逻辑运算符"><a href="#JS运算符">逻辑运算符</a></h4>
+                                <ul>
+                                    <li>
+                                        <h5>&&(<span>且</span>)</h5>
+                                        <ol>
+                                            <li>进行<span>且</span>的运算</li>
+                                            <li>符号左边必须为<span>true</span>并且右边也是<span>true</span>，才会返回true
+                                            </li>
+                                            <li><span>只要一侧不是true，那么就会返回false</span></li>
+                                            <li><code>true && true</code><span>最后的返回结果是true</span></li>
+                                            <li><code>true && false</code>结果返回的是false</li>
+                                            <li><code>false && true</code>结果返回的是false</li>
+                                            <li><code>false && false</code>结果返回的是false</li>
+                                            <li><span>常用于条件判断，需要多个条件同时满足的情况</span></li>
+                                            <li>
+                                                <span>判断是否用[&&]——只要看条件是否有数据同时满足的可能，有，则用且(比如成绩判定区间，这个区间可以被同时满足)</span>
+                                            </li>
+                                            <li>
+                                                <p>·图例</p>
+                                                <!--<script type="text/javascript">
+                                                    {
+                                                        let score = parseFloat(prompt("请输入你的成绩(0~100)", ""))
+
+                                                        if (score >= 80 && score <= 100) { // 当输入的值 80 =< score <=100(两个条件需要同时满足用&&)
+                                                            document.writeln("成绩评定：<span>优</span>")
+                                                        } else if (score >= 60 && score < 80) {
+                                                            document.writeln("成绩评定：<span>良</span>")  //  60 =< score <=80(两个条件需要同时满足用&&)
+                                                        } else if (score >= 0 && score < 60) {
+                                                            document.writeln("成绩评定：<span>不合格</span>") // 0  =< score < 60(两个条件需要同时满足用&&)
+                                                        } else {  // 当输入内容不在0~100之间
+                                                            document.writeln("<span>你输入的不是0~100的整数，请重新输入!</span>")
+                                                        }
+                                                    }
+                                                </script>-->
+                                                <div class="div_video">
+                                                    <video src="image/逻辑运算符/且运算.mp4" controls></video>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>||(<span>或</span>)</h5>
+                                        <ol>
+                                            <li>进行<span>或</span>的运算</li>
+                                            <li>符号两侧<span>有一侧为true</span>，则返回true</li>
+                                            <li><span>只有两侧是false，那么就会返回false</span></li>
+                                            <li><code>true || true</code><span>最后的返回结果是true</span></li>
+                                            <li><code>true || false</code>结果返回的是true</li>
+                                            <li><code>false || true</code>结果返回的是true</li>
+                                            <li><code>false || false</code>结果返回的是false</li>
+                                            <li><span>常用于条件判断，需要多个条件满足其一的情况</span></li>
+                                            <li>
+                                                <span>判断是否用[||]——只要看条件是否有数据同时满足的可能，没有，则用或</span>
+                                            </li>
+                                            <li>
+                                                <!--<script type="text/javascript">
+                                                    {
+                                                        let score = parseFloat(prompt("请输入你的成绩(0~100)",""))
+                                                        //在且运算示例，多加一个条件，当输入的内容，是非数字，或是非整数
+                                                        //如果用&&，那么只会执行第一个true，判断非整数会失效，因为不会有一个既是非数字，又非整数
+                                                        if (isNaN(score) || !Number.isInteger(score)){ //当输入的值非数字，或不是整数
+                                                            document.writeln("你输入的不是整数，<span>请重新输入!</span>") //输出
+                                                        }
+                                                        else if (score >= 80 && score <= 100){ // 当输入的值 80 =< score <=100(两个条件需要同时满足用&&)
+                                                            document.writeln("成绩评定：<span>优</span>")
+                                                        }
+                                                        else if (score >= 60 && score < 80){
+                                                            document.writeln("成绩评定：<span>良</span>")  //  60 =< score <=80(两个条件需要同时满足用&&)
+                                                        }
+                                                        else if (score >=0 && score < 60){
+                                                            document.writeln("成绩评定：<span>不合格</span>") // 0  =< score < 60(两个条件需要同时满足用&&)
+                                                        }
+                                                        else{  // 当输入数字不在 0~100之间
+                                                            document.writeln("<span>你输入的不是0~100的整数，请重新输入!</span>")
+                                                        }
+                                                    }
+                                                </script>-->
+                                                <div class="div_video">
+                                                    <video src="image/逻辑运算符/或运算.mp4" controls></video>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>!(<span>取反</span>)</h5>
+                                        <ol>
+                                            <li>进行<span>取反</span>的运算</li>
+                                            <li>本身是<span>true</span>，变成false</li>
+                                            <li>本身是<span>false</span>，变成true</li>
+                                            <li><code>!true</code><span>最后的结果是false</span></li>
+                                            <li><code>!false</code><span>最后的结果是true</span></li>
+                                            <li>特殊：<code>!!变量</code>，将变量转为<span>布尔值</span></li>
+                                            <li>
+                                                <p>·图例</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50
+                                                        let sum2 = 80
+
+                                                        document.writeln(`sum:${sum},sum2:${sum2},<span>正常逻辑：sum > sum2 应该是 ${sum > sum2}</span>
+                                                        取反运算后，得出的结果是：<span>${!(sum > sum2)}</span>`)
+                                                    }
+                                                </script>
+                                                <img src="image/逻辑运算符/逻辑运算符取反.png"
+                                                     alt="逻辑运算符取反"
+                                                     title="逻辑运算符取反">
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>关于逻辑运算符注意事项</h5>
+                                        <ol>
+                                            <li>
+                                                <span>返回值不是<span>true/false</span>，而是操作数本身</span>
+                                                <ul>
+                                                    <li>意思就是返回的最终值是<span>决定结果的那个操作数的原值</span>
+                                                    </li>
+                                                    <li>
+                                                        但是在if或white中，<span>这些值会被自动转为布尔值，辨认判断结果没有问题</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>理解且/或运算符规则</span>
+                                                        <ol>
+                                                            <li>
+                                                                <code>&&</code>
+                                                                <ul>
+                                                                    <li><span>返回第一个<a
+                                                                            href="#falsy">falsy</a></span>的值
+                                                                    </li>
+                                                                    <li>
+                                                                        <p>所以分三种情况</p>
+                                                                        <ol>
+                                                                            <li>当所有值是<span>falsy</span>取最左边的值
+                                                                            </li>
+                                                                            <li>包含truthy，取第一个falsy的值(<span>后面的逻辑判断不执行</span>)
+                                                                            </li>
+                                                                            <li>均是truthy，取最右边的值</li>
+                                                                        </ol>
+                                                                    </li>
+                                                                    <li>所以，且运算符最适合用于(<span>密码校验、表单校验[那些只有符合全部条件的场景适用(但是通常并不建议直接使用且运算符进行比较，最好还是用比较运算符)]</span>)
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <code>||</code>
+                                                                <ul>
+                                                                    <li><span>返回第一个<a
+                                                                            href="#truthy">truthy</a></span>的值
+                                                                    </li>
+                                                                    <li>
+                                                                        <p>所以分三种情况</p>
+                                                                        <ol>
+                                                                            <li>当所有值是<span>falsy</span>取最右边的值
+                                                                            </li>
+                                                                            <li>包含truthy，取第一个truthy的值(<span>后面的逻辑判断不执行</span>)
+                                                                            </li>
+                                                                            <li>均是truthy，取最左边的值</li>
+                                                                        </ol>
+                                                                    </li>
+                                                                    <li>
+                                                                        所以，或运算符最适合用于(<span>提供默认值、处理多种错误情况</span>)
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                    <li>
+                                                        <p>·例子：或(默认值)</p>
+                                                        <!--<script type="text/javascript">
+                                                            {
+                                                                let use = prompt("请输出您的姓名：", "")
+                                                                let name = use || "匿名用户"  //sue 为用户输入的内容 ，或运算，遇到第一个truthy，并输出原值，后续不会在逻辑判断既是短路状态
+                                                                //什么也没有输入则是null(false)，往后知道需要truthy，输出原值
+                                                                //若后续均是falsy，则输出最后一个的原值
+                                                                document.writeln(`欢迎登录：<span>${name}</span>`)
+                                                            }
+                                                        </script>-->
+                                                        <div class="div_video">
+                                                            <video src="image/逻辑运算符/或运算实例—默认值.mp4"
+                                                                   controls></video>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h4 id="自增自减运算符"><a href="#JS运算符">自增自减运算符</a></h4>
+                                <ol>
+                                    <li>
+                                        <h5>++</h5>
+                                        <ul>
+                                            <li>进行自增运算</li>
+                                            <li>分成两种，<span>前置++</span>和<span>后置++</span></li>
+                                            <li>前置++，会<span>先把值自动+1，在返回自增后的值</span></li>
+                                            <li>后置++，会<span>先返回原值，在自动+1</span></li>
+                                            <li><span>自增运算符只能用于变量，不能用于字面量（比如 5++ 会报错）</span></li>
+                                            <li>
+                                                注意：<span>一条语句中，一个变量最多只做一次自增，否则代码晦涩且可能产生未定义行为。</span>
+                                            </li>
+                                            <li>
+                                                <p>·例子</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50;
+                                                        document.writeln(`sum：${sum},前置++(自增后输出)：<span>${++sum}</span><br>`) // 会返回51，并且把sum的值变成51
+
+                                                        let sum2 = 50;
+                                                        document.writeln(`sum2：${sum2}后置++(先输出原值再自增)：<span>${sum2++}</span><br>`) // 会返回50，所以输出的结果是50,然后再自增加一。
+                                                        document.writeln(`sum2：${sum2}后置++：<span>${sum2++}</span>`) // 因为上一次已经自增了，所以这一次输出51，然后再自增(依次自增)——主要是先输出，再自增
+                                                    }
+                                                </script>
+                                                <ol>
+                                                    <li>sum原值是50，通过前置自增，<span>最后的输出结果是51</span>。[因为前置自增是先自增(50+1)，再输出现有值(50)]
+                                                    </li>
+                                                    <li>
+                                                        sum2的原值是50，通过第一次后置自增，<span>最后的输出结果是50</span>。[因为后置自增是先输出原值(50)，再自增(50+1)]
+                                                    </li>
+                                                    <li>
+                                                        sum2经过第一次后置自增，所以原值是51，再次后置自增，最后的结果同样是51。
+                                                    </li>
+                                                    <li>综上所述：
+                                                        <span>
+                                                            <br>··前置自增：先自增，再输出自增后的值
+                                                            <br>··后置自增：先输出原值，再自增</span>
+                                                    </li>
+                                                </ol>
+                                                <img src="image/自增自减运算符/自增运算符/自增运算符.png"
+                                                     alt="自增运算符"
+                                                     title="自增运算符">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h5>--</h5>
+                                        <ul>
+                                            <li>进行自减运算</li>
+                                            <li>分成两种，<span>前置--</span>和<span>后置--</span></li>
+                                            <li>前置--，会<span>先把值自动-1，在返回自减后的值</span></li>
+                                            <li>后置--，会<span>先返回原值，在自动-1</span></li>
+                                            <li><span>自减运算符只能用于变量，不能用于字面量（比如 5-- 会报错）</span></li>
+                                            <li>
+                                                注意：<span>一条语句中，一个变量最多只做一次自减，否则代码晦涩且可能产生未定义行为。</span>
+                                            </li>
+                                            <li>
+                                                <p>·例子</p>
+                                                <script type="text/javascript">
+                                                    {
+                                                        let sum = 50;
+                                                        document.writeln(`sum：${sum},前置--(自增后输出)：<span>${--sum}</span><br>`) // 会返回49，并且把sum的值变成49
+
+                                                        let sum2 = 50;
+                                                        document.writeln(`sum2：${sum2}后置--(先输出原值再自增)：<span>${sum2--}</span><br>`) // 会返回50，所以输出的结果是50,然后再自减减一。
+                                                        document.writeln(`sum2：${sum2}后置--：<span>${sum2--}</span>`) // 因为上一次已经自减了，所以这一次输出49，然后再自减(依次自减)——主要是先输出，再自减
+                                                    }
+                                                </script>
+                                                <ol>
+                                                    <li>sum原值是50，通过前置自减，<span>最后的输出结果是49</span>。[因为前置自减是先自减(50-1)，再输出现有值(49)]
+                                                    </li>
+                                                    <li>
+                                                        sum2的原值是50，通过第一次后置自减，<span>最后的输出结果是50</span>。[因为后置自增是先输出原值(50)，再自减(50-1)]
+                                                    </li>
+                                                    <li>
+                                                        sum2经过第一次后置自减，所以原值是49，再次后置自减，最后的结果同样是49。
+                                                    </li>
+                                                    <li>综上所述：
+                                                        <span>
+                                                            <br>··前置自减：先自减，再输出自减后的值
+                                                            <br>··后置自减：先输出原值，再自减</span>
+                                                    </li>
+                                                </ol>
+                                                <img src="image/自增自减运算符/自减运算符/自减运算符.png"
+                                                     alt="自减运算符"
+                                                     title="自减运算符">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h4 id="三元运算符"><a href="#JS运算符">三元运算符</a></h4>
+                                <ol>
+                                    <li>三元运算符，就是用<span>两个符号</span>组成一个语句</li>
+                                    <li>语法：<code>条件 ? 条件为true的时候(表达式1) : 条件为false的时候(表达式2)</code>
+                                    </li>
+                                    <li>先判断"条件"是否为真(truthy/falsy)</li>
+                                    <li>如果为真,则执行表达式1</li>
+                                    <li>如果为假,则执行表达式2</li>
+                                    <li>
+                                        <h5>注意:</h5>
+                                        <ul>
+                                            <li>三目运算符返回的是<span>值(可以是任意类型)</span>,可以直接赋值或参与运算
+                                            </li>
+                                            <li>可以嵌套:<code>条件1 ? 表达式1 : (条件2 ? 表达式2 : (条件3 表达式3
+                                                (....)))</code></li>
+                                            <li>
+                                                只能在false表达式嵌套,用小括号包围。<span>与excel的if函数嵌套一致</span><span>但是最好不要嵌套超过两层，用if/switch</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p>·例子</p>
+                                        <script type="text/javascript">
+                                            {
+                                                //不嵌套
+                                                let sum = 50;
+                                                document.writeln(`sum：${sum},条件是[<code>sum > 60 ? "true" : "false"}</code>]最后的结果是：${sum > 60 ? "true" : "<span>false</span>"}`);
+                                            }
+                                        </script>
+                                        <ul>
+                                            <li>sum的原值是50，所设置的三元运算符是[sum > 60 ? "true" :
+                                                "false"]，最后的结果是false
+                                            </li>
+                                            <li>从条件【sum > 60】可以看出，这肯定是一个假，所以执行表达式2("false")</li>
+                                            <li>
+                                                <span>所以具体运算过程是：</span>
+                                                <ol>
+                                                    <li><span>先判断条件的真假</span>(truthy/falsy)</li>
+                                                    <li>如果为真，<span>输出冒号前一个表达式</span></li>
+                                                    <li>如果为假，<span>输出冒号后一个表达式</span></li>
+                                                </ol>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <img src="image/三元运算符/三元运算符.png"
+                                             alt="三元运算符"
+                                             title="三元运算符">
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>其他内容补充</h2>
+        <ul>
+            <li>
+                <h3>关于打印引用变量的两种方法</h3>
+                <ol>
+                    <li>
+                        <h4>字符串拼接法(<span>非常不建议用</span>)</h4>
+                        <ul>
+                            <li>语法：<code>"内容" + "" + ""</code></li>
+                            <li>
+                                就是将变量值，放在双引号之外，以加号拼接，如果变量在双引号内，<span>会被认为是字符串输出</span>
+                            </li>
+                            <li>
+                                <h5>优点</h5>
+                                <ol>
+                                    <li>极低版本的兼容性(几乎已经完全淘汰了)</li>
+                                    <li>极其简单的拼接(与模板字符串没啥区别)</li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>缺点</h5>
+                                <ol>
+                                    <li>可读性差：引号、加号、变量混在一起，眼花缭乱</li>
+                                    <li>易出错：漏引号、少加号、转义麻烦</li>
+                                    <li>不支持换行：必须<code>+ "\n" +</code></li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>模板字符串(<span>非常建议用</span>)</h4>
+                        <ul>
+                            <li>语法：<code>`字符串${变量}字符串`</code></li>
+                            <li>变量引用方法是<span>${}</span>，大括号内填入变量，其他地方均是字符串</li>
+                            <li>
+                                <h5>优点：</h5>
+                                <ol>
+                                    <li>不需要反复开闭引号和加号</li>
+                                    <li>变量名直接${}里，结构清晰</li>
+                                    <li>支持换行(不用写\n或拼接换行符)</li>
+                                    <li>可以嵌套表达式${a + b}、甚至调用函数</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>Math.floor方法(<span>注意是大写M</span>)</h3>
+                <ol>
+                    <li>向下取整，返回小于或等于一个给定数字的最大整数</li>
+                </ol>
+            </li>
+            <li>同样遵守：<span>先乘除后加减</span></li>
+            <li>
+                <h3>关于let声明变量，遇到重复变量名，报错问题</h3>
+                <ol>
+                    <li>已知，let、const声明的变量，在同一作用域，变量名是唯一的</li>
+                    <li>不是每个<span>script标签单独一个作用域</span>，而是所有script块(以及内联代码)共享全局作用域</li>
+                    <li>解决办法：单独适用大括号(创建块级作用域)</li>
+                </ol>
+            </li>
+            <li>
+                <h3 id="falsy">falsy</h3>
+                <ol>
+                    <li>可以理解为天生的"false"</li>
+                    <li>
+                        共有八种:[<code>""(<span>空字符串</span>)、null、undefined、false(<span>字面量(boolean类型)，不是字符串</span>、0、-0、0n(<span>bigint类型</span>)、NaN)</code>]
+                    </li>
+                    <li>只要出现以上八种类型，在逻辑上就是false</li>
+                </ol>
+            </li>
+            <li>
+                <h3 id="truthy">truthy</h3>
+                <ol>
+                    <li>除了falsy外，其他均是truthy</li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

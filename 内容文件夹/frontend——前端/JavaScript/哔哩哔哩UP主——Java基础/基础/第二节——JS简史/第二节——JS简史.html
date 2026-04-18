@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第二节——JS简史</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>JS简史</h1>
+    </header>
+    <section id="section_1">
+        <h2>前言</h2>
+        <ul>
+            <li>
+                <h3>计算机语言</h3>
+                <p>计算机语言(Computer Language)<span>指用于人与计算机之间通讯的语言。</span>计算机语言是人与计算机之间传递信息的媒
+                    介。计算机系统最大特征是指令通过一种语言传达给机器。为了使电子计算机进行各种工作，就需要有一套用以编写计算机程序的数
+                    字、字符、和语法规划，由这些<span>字符</span>和<span>语法规则</span>组成计算机各种指令(或各种语句)。这些就是计算机能接受的语言
+                </p>
+            </li>
+            <li>
+                <h3>分类</h3>
+                <div class="item">
+                    <img src="image/计算机的时代进程.png"
+                         alt="计算机的时代进程"
+                         title="计算机的时代进程">
+                </div>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>JavaScript基础</h2>
+        <ol>
+            <li>
+                <h3>JavaScript发展历史</h3>
+                <p>34岁的系统程序员Brendan Eich ,1955年4月，用10天时间把JavaScript设计出来</p>
+                <ul>
+                    <li>借鉴C语言的基本语法</li>
+                    <li>借鉴Java语言的数据类型和内存管理</li>
+                    <li>借鉴scheme语言，将函数提升到"第一等公民"(first class)的地位</li>
+                    <li>借鉴self语言,使用基于原型(prototype)的继承机制</li>
+                </ul>
+            </li>
+            <li>
+                <h3>JavaScript的组成</h3>
+                <table>
+                    <tr>
+                        <th>浏览器</th>
+                        <th>内核</th>
+                        <th>JS引擎</th>
+                    </tr>
+                    <tr>
+                        <td>IE</td>
+                        <td>Trident内核</td>
+                        <td>JScript</td>
+                    </tr>
+                    <tr>
+                        <td>Firefox(火狐)</td>
+                        <td>Gecko内核,俗称Firefox内核</td>
+                        <td>
+                            firefox3.0及其以下;
+                            <br/>spiderMonkey
+                            <br/>fireFox3.1及其以上
+                            <br/>TraceMonkey
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Google chrome(谷歌)</td>
+                        <td>Chromium内核或chrome内核,以前是webkit内核,现在是blink内核</td>
+                        <td>V8</td>
+                    </tr>
+                    <tr>
+                        <td>safari(苹果)</td>
+                        <td>Webkit内核</td>
+                        <td>
+                            safari3.1及其以下
+                            <br/>JavaScript core
+                            <br/>safari4.0
+                            <br/>squirrelFish
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Opera(欧朋)</td>
+                        <td>最初是自己的presto内核,后来是webkit,现在是Blink内核</td>
+                        <td>opera9.5及其以上:Futhark</td>
+                    </tr>
+                </table>
+            </li>
+            <li>
+                <h3>JavaScript具体包括什么</h3>
+                <div class="item">
+                    <img src="image/JavaScript具体指的是什么.png"
+                         alt="JavaScript具体指的是什么"
+                         title="JavaScript具体指的是什么">
+                </div>
+                <p>语言解释：</p>
+                <ul>
+                    <li>ECMAScript:定义了JavaScript的语法规范，描述了语言的基本语法和数据类型</li>
+                    <li>BOM (Browser Object Mode):浏览器对象模型 ——
+                        有一套成熟的可以操作浏览器的API,通过BOM可以操作浏览器.比如:弹出框、浏览器跳转、获取分辨率等
+                    </li>
+                    <li>DOM (Document Object Mode):文档对象模型 ——
+                        有一套成熟的可以操作页面元素的API，通过DOM可以操作页面中的元素。比如：增加个div，减少个div，给div换个位置等
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>总结:</h3>
+                <p>JS就是通过固定的语法去操作浏览器和标签结构来实现网页上的各种效果</p>
+            </li>
+            <li>
+                <h3>学习了JavaScript能干什么</h3>
+                <ol>
+                    <li>常见的网页效果[表单验证,轮播图………………]</li>
+                    <li>与H5配合实现游戏[水果忍者]</li>
+                    <li>实现应用级别的程序</li>
+                    <li>实现图表统计效果</li>
+                    <li>JS可以实现人工智能[面部识别]</li>
+                    <li>后端开发、APP开发、桌面端开发……………………</li>
+                </ol>
+            </li>
+            <li>
+                <h3><span>JavaScript代码的书写位置</span></h3>
+                <ul>
+                    <li>和CSS一样,JS可以有多种方式书写在页面上让其生效</li>
+                    <li><span>行内式、内嵌式、外链式</span></li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

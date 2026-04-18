@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>检测数据类型</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>检测数据类型</h1>
+    </header>
+    <section id="section_1">
+        <h2>typeof关键字</h2>
+        <ul>
+            <li>判断存储的数据是什么类型，需要用到<span>typeof关键字进行判断</span></li>
+            <li>语法1:<code>typeof(变量名)</code></li>
+            <li>语法2:<code>typeof 空格符 变量名</code>[使用场景尽量使用这个语法]</li>
+            <li>
+                <h3>演示</h3>
+                <div class="div_video">
+                    <video src="image/检测数据类型.mp4" controls></video>
+                </div>
+            </li>
+            <li>可能遇到的面试题:<span>两个typeof关键字同时使用，最后的输出结果是什么</span>。</li>
+            <li>答案是:不管后面有多少个typeof关键字， 最后输出的结果一定是<span>String类型的</span>
+                <br>因为typeof输出的结果是String类型的，所以再次使用typeof，最后的结果一定是<span>String类型</span>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>试验区</h2>
+        <script type="text/javascript">
+            let name = "李四"
+            let num = 30
+            let name2 = true
+            let name3
+            let name4 = null  //null 可以理解是一个空对象——object，后续可以为他添加对象
+
+            console.log(typeof (name))
+            console.log(typeof (num))
+            console.log(typeof (name2))
+            console.log(typeof (name3))
+            console.log(typeof (name4))
+            console.log(typeof typeof (num))
+        </script>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

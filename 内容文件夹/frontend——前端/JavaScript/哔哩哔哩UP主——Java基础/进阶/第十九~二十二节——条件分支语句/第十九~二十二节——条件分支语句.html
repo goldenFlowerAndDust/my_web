@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件分支语句</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>条件分支语句</h1>
+    </header>
+    <section id="section_1">
+        <h2>条件分支语句共2个(<span>if/switch</span>)</h2>
+        <ul>
+            <li>
+                <h3>分支结构</h3>
+                <ol>
+                    <li>js代码都是顺序执行(<span>从上到下</span>)</li>
+                    <li>逻辑分支：<span>根据设定好的条件来决定要不要执行某些代码</span></li>
+                </ol><!--   一级嵌套   -->
+            </li>
+            <li>
+                <ol>
+                    <li>
+                        <h4>if条件分支结构(<span>重点</span>)</h4>
+                        <ul>
+                            <li>
+                                <h5>if结构</h5>
+                                <ol>
+                                    <li>通过一个<span>if</span>语句来决定代码是否执行</li>
+                                    <li>语法：<code>if(条件){<span>要执行的代码</span>}</code></li>
+                                    <li>通过<span>()</span>里面的条件是否成立来决定<span>{}</span>里面的代码是否执行
+                                    </li>
+                                    <li><span>if必须要有条件</span></li>
+                                    <li>
+                                        <p>·实例</p>
+                                        <!--<script type="text/javascript">
+                                            // 条件为 true 的时候执行{} 里面的代码
+                                            // 条件为 false 的时候后跳过 {} 里面的代码
+                                            {
+                                                let num = parseFloat(prompt("请输出第一个数据："))
+                                                let num2 = parseFloat(prompt("请输出第二个数据："))
+                                                if(num === num2){  // sum = 50 , sum2 = 50 ,执行的是这个条件分支，下面的有关sum与sum2的判断均是false，所以跳过
+                                                    document.writeln(`输入的结果是：${num},${num2}，所以sum 等于 num2`)
+                                                }
+                                                if( num > num2){  //sum = 50 , sum2 = 30 ,执行的是这个if条件分支，上面的都跳过了
+                                                    document.writeln(`输入的结果是：${num},${num2}，所以sum 大于 num2`)
+                                                }
+                                                if( num < num2){ //sum = 50 , sum2 = 60 ,执行的是这个if条件分支，上面的都跳过了
+                                                    document.writeln(`输入的结果是：${num},${num2}，所以sum 小于 num2`)
+                                                }
+                                                //总结就是 遇到true 则执行 {}内的代码  ，false 则跳过，继续往下执行后面的代码
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="image/if条件分支语句/If条件分支语句.mp4" controls></video>
+                                        </div>
+                                    </li>
+                                </ol> <!--  三级嵌套  -->
+                            </li>
+                            <li>
+                                <h5>if-else结构</h5>
+                                <ol>
+                                    <li>
+                                        <span>if-else结构</span>意思是<span>不是if{}内代码运行，就是else{}内代码运行</span>
+                                    </li>
+                                    <li>
+                                        语法：<code>if(条件){要执行的代码}else(注意要放到if大括号结尾处){要执行的代码}</code>
+                                    </li>
+                                    <li><span>if必须要有条件，else不能有条件</span></li>
+                                    <li>
+                                        <p>·实例</p>
+                                        <!--<script type="text/javascript">
+                                            {
+                                                let sum = parseFloat(prompt("请输出数字(0~100)：" , ""))
+                                                if(sum <0 || sum >100 || isNaN(sum)){ //意思是数字小于0，大于100，且是非数字类型，运行if的代码
+                                                    document.writeln("<span>你输出的不是0~100的数</span>")
+                                                }else{ //不符合if的条件，则运行else的代码
+                                                    document.writeln(`<span>你输入的数字是:${sum}</span>`)
+                                                }
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="image/if条件分支语句/If-else结构.mp4" controls></video>
+                                        </div>
+                                    </li>
+                                </ol> <!--三级嵌套-->
+                            </li>
+                            <li>
+                                <h5>if-else(<span>空格</span>)if-else结构</h5>
+                                <ol>
+                                    <li><span>if-else if(<span>else if可以是多个</span>)-else结构</span>意思是<span>从if开始判断，然后从上到下依次[else if]判断，如果均是false，最后运行else{}内的代码</span>
+                                    </li>
+                                    <li>语法：<code>if(条件){}else if(条件){}else if(条件)....else{}</code></li>
+                                    <li><span>if必须要有条件，else if必须要有条件，else不能有条件</span></li>
+                                    <li>if -else if-else(<span>else不是必要的，可以不用写</span>)</li>
+                                    <li>
+                                        <p>·实例</p>
+                                        <!--<script type="text/javascript">
+                                            /*做一个成绩检查脚本(要求)：
+                                            *           1.用户可以自己输出数据(prompt)
+                                            *           2.成绩的数字类型只支持数值类型，且只能在0~100之间
+                                            *           3.有评级：0(等于)~60(等于) 及格   60~90 良 90(等于)~100(等于) 优秀
+                                            * */
+                                            {
+                                                let sum = parseFloat(prompt("请输出你的成绩：", ""))
+
+                                                if (sum < 0 || sum > 100 || isNaN(sum)) {  //成绩的数字类型只支持数值类型，且只能在0~100之间
+                                                    document.writeln("请输出数值类型(0~100)！！！")
+                                                } else if (sum >= 0 && sum <= 60) {
+                                                    document.writeln(`你的成绩是：${sum},评级为<span>合格</span>`)
+                                                } else if (sum > 60 && sum <= 90) {
+                                                    document.writeln(`你的成绩是：${sum},评级为<span>良</span>`)
+                                                } else { //可以省略，else不是必须写的，但是需要另立一个 else if(sum>90 && sum<=100){}这个分支
+                                                    document.writeln(`你的成绩是：${sum},评级为<span>优秀</span>`)
+                                                }
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="image/if条件分支语句/If-else%20If-else结构.mp4"
+                                                   controls></video>
+                                        </div>
+                                    </li>
+                                </ol> <!--  三级嵌套  -->
+                            </li>
+                            <li>
+                                <h5>if案例</h5>
+                                <ol>
+                                    <li>
+                                        <p>·案例1(判断奇偶数)</p>
+                                        <!--<script type="text/javascript">
+                                            // 数学：能整除 2 的数就是偶数 ，否则就是奇数 （一定是整数）!number.isInteger(变量)
+                                            {
+                                                let sum = parseFloat(prompt("请输入一个整数：", ""))
+
+                                                if (isNaN(sum)) {
+                                                    document.writeln("<span>你输入的不是数值类型!!!</span>")
+                                                } else if (!Number.isInteger(sum)) {
+                                                    document.writeln("<span>你输入的不是整数!!!</span>")
+                                                } else if (sum % 2 === 0) {  // 可以将条件替换为 !(sum % 2) 当值返回的是0也就是falsy , 取反就是true，运行{}内的代码
+                                                    document.writeln(`你输入的数值是：<span>${sum}</span>，<span>它是一个偶数</span>`)
+                                                } else if (sum % 2 !== 0) {  // 可以将条件替换为else ,意思就是上面得的值为大于0得数值，也就truthy，取反就是false,运行{}内的代码
+                                                    document.writeln(`你输入的数值是：<spabn>${sum}</spabn>，<span>它是一个奇数</span>`)
+                                                }
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="image/if条件分支语句/案例1——判断奇偶数.mp4" controls></video>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>·案例2(根据0~100的数字输出成绩评级)</p>
+                                        <!--<script type="text/javascript">
+                                            /*
+                                                90~100 A
+                                                80~90 B
+                                                70~80 C
+                                                60~70 D
+                                                0~60 E
+                                            * */
+                                            {
+                                                let sum = parseFloat(prompt("请输出你的成绩(0~100):", ""))
+
+                                                if (isNaN(sum)) {
+                                                    document.writeln("<span>你输出的不是数值类型!!!</span>")
+                                                } else if (sum < 0 || sum > 100) {   // 控制sum在0~100之间
+                                                    document.writeln("<span>数字范围不在0~100之间</span>")
+                                                } else if (sum <= 100 && sum >= 90) {  // 可以简写为 >=90 因为已知sum的范围在0~100之间
+                                                    document.writeln(`你的成绩是：<span>${sum}</span>,成绩评级为:<span>A</span>`)
+                                                } else if (sum < 90 && sum >= 80) { // // 可以简写为 >=80 因为上面限制范围 <90
+                                                    document.writeln(`你的成绩是：<span>${sum}</span>,成绩评级为:<span>B</span>`)
+                                                } else if (sum <80 && sum >=70) { // 可以简写为 >=70 因为上面限制范围 <80
+                                                    document.writeln(`你的成绩是：<span>${sum}</span>,成绩评级为:<span>C</span>`)
+                                                } else if (sum <70 && sum >= 60) { // 可以简写为 >=60 因为上面限制范围 <70
+                                                    document.writeln(`你的成绩是：<span>${sum}</span>,成绩评级为:<span>D</span>`)
+                                                } else {  // 同样是else ,意思就是 小于60 , 因为早已将sum控制在0~100,所以else 的 意思就是 0~60之间的数
+                                                    document.writeln(`你的成绩是：<span>${sum}</span>,成绩评级为:<span>E</span>`)
+                                                }
+
+
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="image/if条件分支语句/案例2——根据0%20100的数字输出成绩评级.mp4"
+                                                   controls></video>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>·案例3(判断闰年)</p>
+                                        <!--<script type="text/javascript">
+                                            /*
+                                            *   什么是闰年？
+                                            *       1.世纪闰年：公历年份是整百数的，必须是400的倍数才是闰年
+                                            *       2.普通闰年：公历年份是4的倍数，且不是100的倍数
+                                            *       3.否则是平年
+                                            * */
+                                            {
+                                                let year = parseFloat(prompt("请输出年份(正数)："))
+
+                                                if (isNaN(year)) {
+                                                    document.writeln("<span>请输出有效年份!!!(数值类型)</span>")
+                                                } else if (year <= 0) {
+                                                    document.writeln("<span>请输出有效年份!!!(正数)</span>")
+                                                } else if (!Number.isInteger(year)) {
+                                                    document.writeln("<span>请输出有效年份!!!(非小数)</span>")
+                                                } else if (year % 400 === 0) {
+                                                    document.writeln(`输入的年份是: <span>${year}</span>,是<span>世纪闰年</span>`)
+                                                } else if (year % 4 === 0 && year % 100 !== 0) {
+                                                    document.writeln(`输入的年份是: <span>${year}</span>,是<span>普通闰年</span>`)
+                                                } else {
+                                                    document.writeln(`输入的年份是: <span>${year}</span>,是<span>平年</span>`)
+                                                }
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="image/if条件分支语句/案例3——判断闰年.mp4" controls></video>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>案例3扩展(判断闰年或平年[<span>主要理解或运算与且运算的优先级</span>])</p>
+                                        <span>·再判断中，且运算的优先级高于或运算</span>
+                                        <!--<script type="text/javascript">
+                                            // 判断闰年或平年[主要理解或运算与且运算的优先级]
+                                            let year = parseFloat(prompt("请输出年份(正数)："))
+
+                                            if (isNaN(year)) {
+                                                document.writeln("<span>请输出有效年份!!!(数值类型)</span>")
+                                            } else if (year <= 0) {
+                                                document.writeln("<span>请输出有效年份!!!(正数)</span>")
+                                            } else if (!Number.isInteger(year)) {
+                                                document.writeln("<span>请输出有效年份!!!(非小数)</span>")
+                                            } else if (year % 400 ===0 || year % 4 === 0 && year % 100 !== 0) { // 会先判断 且运算符 , 再判断或运算符
+                                                document.writeln(`输入的年份是: <span>${year}</span>,是<span>闰年</span>`)
+                                            } else {
+                                                document.writeln(`输入的年份是: <span>${year}</span>,是<span>平年</span>`)
+                                            }
+                                        </script>-->
+                                        <div class="div_video">
+                                            <video src="image/if条件分支语句/案例3——判断闰年或平年.mp4"
+                                                   controls></video>
+                                        </div>
+                                    </li>
+                                </ol> <!--  三级嵌套  -->
+                            </li>
+                        </ul> <!--  二级嵌套  -->
+                    </li>
+                    <li>
+                        <h3>switch条件分支结构(<span>重点</span>)</h3>
+                        <ul>
+                            <li>也是<span>条件判断语句的一种</span></li>
+                            <li>是对于某一变量的判断</li>
+                            <li>switch(要判断的变量){
+                                <br><code>case</code> 情况1:
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;情况1要执行的代码
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;break
+                                <br><code>case</code> 情况2:
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;情况2要执行的代码
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;break
+                                <br>.....
+                                <br><code>default</code>:
+                                <br><span>&nbsp;&nbsp;&nbsp;&nbsp;上述情况均不满足执行代码</span>
+                                <br>}
+                            </li>
+                            <li>
+                                <code>case</code>
+                                <ol>
+                                    <li><span>规定，每个条件分支，必须填写</span></li>
+                                    <li><span>会从上到下自动匹配符合的</span></li>
+                                </ol> <!--  三级嵌套    -->
+                            </li>
+                            <li>
+                                <code>break</code>
+                                <ol>
+                                    <li><span>通常每个case后面要写break，否则会继续执行后面的case(穿透效果)</span></li>
+                                    <li>匹配到符合的，且case结尾有break，则<span>跳出switch,执行switch外的代码</span></li>
+                                    <li>
+                                        (穿透效果——<span>类似与或运算符(当不同分支，但是用到同一代码，可以使用穿透效果，减少重复代码量)</span>)
+                                    </li>
+                                </ol> <!--  三级嵌套    -->
+                            </li>
+                            <li>
+                                <code>default</code>
+                                <ol>
+                                    <li>
+                                        <span>default通常放在switch的最后</span>(可以放在开头或中间<span>但是非常不建议</span>)
+                                    </li>
+                                    <li><span>表示所有case都不匹配时执行的代码</span></li>
+                                </ol> <!--  三级嵌套    -->
+                            </li>
+                            <li>
+                                <span>注意：</span>
+                                <ol>
+                                    <li><span>switch不可以通过或运算符，将两个case合并</span>，需要将两个条件，最后的输出代码为一个，可以使用<span>穿透的办法</span>
+                                    </li>
+                                    <li><span>switch匹配是严格相等匹配【<code>case === switch(变量)</code>】(只有数据类型和值相同，才能匹配成功)</span>
+                                    </li>
+                                    <li>
+                                        case后面一定是表达式(可以计算出"值"的代码片段)——有<span>字面量、变量、包含运算符的运算、函数调用</span>，
+                                        <br>···但是非常不推荐<span>包含运算符的运算和函数调用</span>可读性差、容易出错、性能浪费、维护困难
+                                        <br>···最好用:<span>字面量、变量</span>
+                                    </li>
+                                </ol> <!--  三级嵌套    -->
+                            </li>
+                            <li>
+                                <p>·实例(使用switch条件语句判断)</p>
+                                <!--<script type="text/javascript">
+                                    /*
+                                    *   1.用户可以自己输入日期
+                                    *   2.每个星期有自己提示
+                                    *   3.输出星期外的数据，有提示
+                                    * */
+                                    let date2 = prompt("今天是星期几：", "")
+
+                                    switch (date2) {
+                                        case "星期一":
+                                            document.writeln("<span>噢，新的一周开始了！！！</span>")
+                                            break;
+                                        case "星期二":
+                                            document.writeln("<span>学习的有点痛苦了！！！</span>")
+                                            break;
+                                        case "星期三":
+                                            document.writeln("<span>再坚持一下！！！</span>")
+                                            break;
+                                        case "星期四":
+                                            document.writeln("<span>快周末了！！！</span>")
+                                            break;
+                                        case "星期五":
+                                            document.writeln("<span>太好了，明天休息！！！</span>")
+                                            break;
+                                        case "星期六":
+                                            document.writeln("<span>今天休息，可以睡个懒觉了！！！</span>")
+                                            break;
+                                        case "星期天":
+                                            document.writeln("<span>不好了，明天又要上课了！！！</span>")
+                                            break;
+                                        default:
+                                            document.writeln("<span>您输出的不是有效星期()!!!!</span>")
+                                    }
+                                </script>-->
+                                <div class="div_video">
+                                    <video src="image/switch条件分支语句/Switch条件分支语句实例.mp4"
+                                           controls></video>
+                                </div>
+                            </li>
+                            <li>
+                                <p>·实例(穿透效果演示)</p>
+                                <!--<script type="text/javascript">
+                                    /*
+                                    *   因为星期天还有一个名词是星期日，为了避免出现歧义：
+                                    *                           请用穿透的办法，将星期日归纳到星期天当中
+                                    * */
+                                    {
+                                        let date2 = prompt("今天是星期几：", "")
+
+                                        switch (date2) {
+                                            case "星期一":
+                                                document.writeln("<span>噢，新的一周开始了！！！</span>")
+                                                break;
+                                            case "星期二":
+                                                document.writeln("<span>学习的有点痛苦了！！！</span>")
+                                                break;
+                                            case "星期三":
+                                                document.writeln("<span>再坚持一下！！！</span>")
+                                                break;
+                                            case "星期四":
+                                                document.writeln("<span>快周末了！！！</span>")
+                                                break;
+                                            case "星期五":
+                                                document.writeln("<span>太好了，明天休息！！！</span>")
+                                                break;
+                                            case "星期六":
+                                                document.writeln("<span>今天休息，可以睡个懒觉了！！！</span>")
+                                                break;
+                                            case "星期日" :   //可以在上面新建一个分支，可以加任何代码，但是不能添加break，因为加了break，到运行到break，会自动跳出switch，不再执行下面的代码。
+                                                             // 所以我们可以利用，不加break，继续往下执行代码的特性，为分支添加类似与或运算符的操作。
+                                                            // 只要没有需要break，就会继续往下执行，直到遇到break。
+                                                            //通过输出结果可以看到，星期日和星期天，共用运行同一代码
+                                            case "星期天" : // case后面只能是表达式，所以单纯的使用或运算符不可以。
+                                                document.writeln("<span>不好了，明天又要上课了！！！</span>")
+                                                break;
+                                            default:
+                                                document.writeln("<span>您输出的不是有效星期()!!!!</span>")
+                                        }
+                                    }
+                                </script>-->
+                                <div class="div_video">
+                                    <video src="image/switch条件分支语句/Switch条件分支语句例2_穿透效果.mp4"
+                                           controls></video>
+                                </div>
+                            </li>
+                            <li>
+                                <p>·实例(根据数字1~12输出每个月有多少天，不考虑闰年)</p>
+                                <!--<script type="text/javascript">
+                                    /*
+                                    *   1.用户输入月份
+                                    *   2.根据输入的月份，输出每个月有多少天，不考虑闰年(2月有28天)
+                                    * */
+                                    {
+                                        let date = prompt("请输入月份：" ,"")
+
+                                        switch(date){
+                                            case "1月":
+                                            case "3月":
+                                            case "5月":
+                                            case "7月":
+                                            case "8月":
+                                            case "10月":
+                                            case "12月":
+                                                document.writeln(`输入的是:<span>${date}</span> , <span>共31天</span>`)
+                                                break;
+                                            case "2月":
+                                                document.writeln(`输入的是:<span>${date}</span>, <span>共28天</span>`)
+                                                break;
+                                            case "4月":
+                                            case "6月":
+                                            case "9月":
+                                            case "11月":
+                                                document.writeln(`输入的是:<span>${date}</span>, <span>共30天</span>`)
+                                                break;
+                                            default:
+                                                document.writeln("<span>请输入正确的月份！！！</span>")
+                                        }
+                                    }
+                                </script>-->
+                                <div class="div_video">
+                                    <video src="image/switch条件分支语句/Switch实例月份%20不考虑闰年.mp4"
+                                           controls></video>
+                                </div>
+                            </li>
+                        </ul> <!--  二级嵌套  -->
+                    </li>
+                    <li>
+                        <h5>综合实例(按年份，月份，包括闰年，判断每月天数)</h5>
+                        <script type="text/javascript">
+                            /*
+                            *   1.先判断年份
+                            *   2.再判断月份
+                            *   3.最后输出天数
+                            *   4.包括闰年
+                            * */
+                            {
+                                let year = parseFloat(prompt("请输入年份(正整数)：", ""))
+
+                                if (isNaN(year)) {
+                                    document.writeln("<span>请输入有效年份(数值类型)!!!</span>")
+                                } else if (year <= 0) {
+                                    document.writeln("<span>请输入有效年份(正数)!!!</span>")
+                                } else if (!Number.isInteger(year)) {
+                                    document.writeln("<span>请输入有效年份(正整数)!!!</span>")
+                                } else if (year % 400 === 0 || year % 4 === 0 && year % 100 !== 0) {
+                                    let date = prompt("请输入月份(1~12):", "")
+                                    let day
+
+                                    switch (date) {
+                                        case "1":
+                                        case "3":
+                                        case "5":
+                                        case "7":
+                                        case "8":
+                                        case "10":
+                                        case "12":
+                                            day = 31
+                                            break;
+                                        case "2":
+                                            day = 29
+                                            break;
+                                        case "4":
+                                        case "6":
+                                        case "9":
+                                        case "11":
+                                            day = 30
+                                            break;
+                                        default:
+                                            day = "请输入正确的月份！！！"
+                                    }
+                                    document.writeln(`输入的年份是:<span>${year}年</span>,是<span>闰年</span>，输入的月份是:<span>${date}月</span>,共<span>${day}天</span>`)
+                                } else {
+                                    let date = prompt("请输入月份(1~12):", "")
+                                    let day
+
+                                    switch (date) {
+                                        case "1":
+                                        case "3":
+                                        case "5":
+                                        case "7":
+                                        case "8":
+                                        case "10":
+                                        case "12":
+                                            day = 31
+                                            break;
+                                        case "2":
+                                            day = 28
+                                            break;
+                                        case "4":
+                                        case "6":
+                                        case "9":
+                                        case "11":
+                                            day = 30
+                                            break;
+                                        default:
+                                            day = "请输入正确的月份！！！"
+                                    }
+                                    document.writeln(`输入的年份是:<span>${year}年</span>,是<span>平年</span>，输入的月份是:<span>${date}月</span>,共<span>${day}天</span>`)
+                                }
+                            }
+                        </script>
+                        <div class="div_video">
+                            <video src="image/switch条件分支语句/综合实例(按年份，月份，包括闰年，判断每月天数).mp4"
+                                   controls></video>
+                        </div>
+                    </li>
+                </ol><!--   一级嵌套   -->
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

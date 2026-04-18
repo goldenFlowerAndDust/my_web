@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例：求质数和九九乘法表</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>案例：求质数和九九乘法表</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>
+                <h2>判断质数</h2>
+                <table>
+                    <tr>
+                        <th>请输入数字</th>
+                        <th>
+                            <button type="button" id="bth">确认</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="number"></label>
+                            <input type="text" id="number" placeholder="请输入正整数">
+                        </td>
+                        <td>
+                            <label for="answer"></label>
+                            <input type="text" id="answer">
+                        </td>
+                    </tr>
+                </table>
+                <script type="text/javascript">
+                    {
+                        /*
+                        *   1. 什么是质数：大于1的自然数，并且只能被1和它本身整除的数(1本身不是质数)
+                        *   2. 用户输入数字，并且返回结果 (是否为质数)
+                        * */
+
+                        document.getElementById("bth").onclick = function () {  //获取按钮元素  并且创建点击事件
+
+                            let number = document.getElementById("number") // 获取元素
+                            let answer = document.getElementById("answer") // 获取元素
+
+                            let num = parseFloat(number.value) // 将用户输入的文本转为数值类型
+
+                            document.getElementById("answer").style.color = "red" // 为了好看，添加样式，将字体显示为红色
+
+                            if (num <= 1 || isNaN(num) || !Number.isInteger(num)) {  // !isNaN 判断整数
+                                answer.value = `请输入大于1的正整数`   // 判断 非数值类型 以及 是否大于1 的正整数
+                            } else {
+                                let sPrime = true // 先将用户输入的值永远为true
+                                for (let i = 2; i < num; i++) {  // 通过循环创建除数
+                                    if (num % i === 0) {  // ，将用户输入的数值，除以出自身外的所有数(因为质数只能被1和自身整数的数)
+                                        sPrime = false // 当条件为真，则 将 sPrime的值改为false
+                                        break // 一旦得出结果，停止循环。在循环没有意义
+                                    }
+                                }
+                                answer.value = sPrime ? `${num}：是质数` : `${num}：不是质数` // 通过变量sPrime判断并输出结果
+                            }
+                        }
+                    }
+                </script>
+                <div class="div_video">
+                    <video src="./image/判断质数脚本.mp4" controls></video>
+                </div>
+            </li>
+            <li>
+                <h2>显示1~200之内的所有质数</h2>
+                <script type="text/javascript">
+
+                    for (let i = 2; i <= 200; i++) {  //先将2~200的所有数列出来
+                        let sPrime = true  // 定义一个变量永远为真 ， 为后面判断出false做准备 //同时存储每次循环符合的值
+                        for (let j = 2; j < i; j++) { //创建除数
+                            if (i % j === 0) { // 质数：只能被1且自身整除的数
+                                sPrime = false // 当条件为真，执行代码，将原有值true 赋值为false
+                                break // 查找出需要的结果，退出循环
+                            }
+                        }
+                        if (sPrime) {
+                            document.writeln(`<span>${i}</span>`) // 将为真的值，一次全部输出
+                        }
+                    }
+                </script>
+                <div class="div_video">
+                    <video src="./image/显示1到200之内的所有质数.mp4" controls></video>
+                </div>
+            </li>
+            <li>
+                <h2>案例九九乘法表</h2>
+                <label for="textarea"></label>
+                <textarea id="textarea" cols="9" rows="9" readonly></textarea>
+                <script type="text/javascript">
+                    {
+                        let textarea = document.getElementById("textarea");
+                        let num = ""
+                        for (let i = 1; i <= 9; i++) {
+                            for (let j = 1; j <= i; j++) {
+                                num += `${j} * ${i} = ${i * j}\t`
+                            }
+                            num += '\n'
+                        }
+                        textarea.value = num
+                    }
+                </script>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
