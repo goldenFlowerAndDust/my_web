@@ -211,6 +211,14 @@ textarea {
     font-family:monospace;
 }
 
+.textarea_alone {
+    width : 100%;
+    max-width: 1000px;
+    overflow-X: auto;
+    white-space: pre;
+    font-family: monospace;
+}
+
 footer {
     grid-area: footer;
     display: flex;

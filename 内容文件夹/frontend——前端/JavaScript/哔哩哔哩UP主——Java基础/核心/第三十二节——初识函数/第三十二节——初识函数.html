@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识函数</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>初识函数</h1>
+    </header>
+    <section id="section_1">
+        <h2>初识函数</h2>
+        <ul>
+            <li>
+                <h3>函数概念</h3>
+                <ul>
+                    <li>对于JavaScript来说，<span>函数就是把任意一段代码放在一个盒子里面</span></li>
+                    <li>在需要用到这段代码的时候，直接执行这个盒子里面的代码就行</li>
+                    <li>函数声明:<code>function 函数名(){代码块}</code></li>
+                    <li>函数调用:<code>函数名()</code></li>
+                    <li>
+                        <h3>返回值问题</h3>
+                        <ol>
+                            <li>使用<code>return</code>关键字可以<span>退出函数并返回一个值</span></li>
+                            <li>如果没有<code>return</code>或只写<code>return</code>，函数返回值是<code>undefined</code></li>
+                            <li>调用函数时，可以用变量接受返回值(前提是:<span><code>return</code>接受值变量名</span>),
+                                <br>例如：<code>let result = 函数名()</code>
+                            </li>
+                            <li>
+                                <h4>函数实例:生成九九乘法表字符串</h4>
+                                <ul>
+                                    <li><a href="九九乘法表.js">九九乘法表</a></li>
+                                    <li><a href="#扩展内容">不会的关键字看扩展</a></li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li><span>总结来说就是：重复复用(案例：通过函数，显示4个九九乘法表)</span></li>
+                    <li><label>
+                        <textarea class="textarea_alone" cols="140" rows="9" readonly></textarea>
+                    </label></li>
+                    <li><label>
+                        <textarea class="textarea_alone" cols="140" rows="9" readonly></textarea>
+                    </label></li>
+                    <li><label>
+                        <textarea class="textarea_alone" cols="140" rows="9" readonly></textarea>
+                    </label></li>
+                    <li><label>
+                        <textarea class="textarea_alone" cols="140" rows="9" readonly></textarea>
+                    </label></li>
+                    <script type="text/javascript" src="九九乘法表.js"></script>
+                </ul>
+            </li>
+            <li>
+                <h3>函数定义阶段</h3>
+                <ol>
+                    <li>定义阶段就是把代码<span>放在盒子里面</span></li>
+                    <li>
+                        <h4>定义有两种方式(<span>声明式和赋值式</span>)</h4>
+                        <ul>
+                            <li>
+                                <h5>声明式</h5>
+                                <ol>
+                                    <li>使用<code>function</code>关键字来声明一个函数</li>
+                                    <li>语法：<code>function 函数名(){代码块}</code></li>
+                                    <li>可以先<span>调用再定义</span></li>
+                                </ol> <!--  第二次嵌套(解释声明式)    -->
+                            </li>
+                            <li>
+                                <h5>赋值式</h5>
+                                <ol>
+                                    <li>语法：<code>let(var、cont) 变量名 = function(){代码块}</code></li>
+                                    <li><span>必须先定义再调用</span></li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>函数是自私的，不允许外部调用(函数内部的变量值)</span>
+                        <br>如：<a href="函数是自私的.js">函数是自私的</a>
+                    </li>
+                </ol> <!--  第一次嵌套(解释函数定义阶段) -->
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2 id="扩展内容">扩展内容</h2>
+        <ul>
+            <li>
+                <h3>DOM元素获取和批量操作</h3>
+                <ol>
+                    <li>
+                        <code>querySelectorAll</code>:获取所有匹配指定CSS选择器的元素，返回值<span>NodeList(类似数组)</span>
+                        <br>
+                        <ul>
+                            <li>注意：NodeList不可以直接添加样式:如<code>let NodeList =
+                                document.querySelectorAll().style.</code></li>
+                            <li>需要新建函数，并使用关键字<code>forEach</code></li>
+                        </ul>
+                    </li>
+                    <li><code>forEach</code>：遍历NodeList,对每个元素执行函数</li>
+                    <li><code>value</code>属性：用于读取或写入<span>&lt;textarea&gt;，&lt;input&gt;</span>的内容</li>
+                </ol>
+            </li>
+            <li>
+                <h3>样式设置与cols/rows的注意点</h3>
+                <ol>
+                    <li><span>通过JS设置</span>的样式会<span>覆盖HTML属性cols和rows的默认尺寸效果</span></li>
+                    <li>若希望保留cols/rows的自动尺寸，就不要使用JS设置宽高(或只设置其中一项)</li>
+                    <li>对<span>textarea设置样式(字体、颜色、背景等)</span>是整体生效，<span>无法单独设置内部每个计算的样式(因为<code>textarea只支持纯文本</code>)</span>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>额外接触的新知识点</h3>
+                <ol>
+                    <li><code>void</code>运算符：<span>对表达式求值并返回undefined，常用于阻止链接跳转(<code>javascript:void(0)</code>)</span>
+                    </li>
+                    <li><span>箭头函数:<code>() => {}</code>的简洁写法，与传统<code>function</code>类似，但作用域规则不同(暂未系统学习，仅了解符号为<span>=></span>)</span>
+                    </li>
+                    <li><span><code>return</code>的双重作用</span>① 退出函数；② 返回指定值。</li>
+                </ol>
+            </li>
+            <li>
+                <h3>函数封装的优势</h3>
+                <ol>
+                    <li>将重复代码封装成函数，避免复制粘贴</li>
+                    <li>修改函数内部逻辑，所有调用处自动更新</li>
+                    <li>函数可以返回值，供外部使用，实现数据生成与界面渲染的分离</li>
+                </ol>
+            </li>
+            <li>
+                <h3>学习当中的踩坑点</h3>
+                <ol>
+                    <li>忘记在HTML中引入外部JS文件——→<code>&lt;script src=".js"&gt;&lt;/script&gt;</code></li>
+                    <li>函数忘记写<code>return</code>——→<span>导致变量直接接受到undefined</span></li>
+                    <li>多个元素使用相同的id——→<span>改用class + querySelectorAll</span></li>
+                    <li>直接给 NodeList 设置 .style → 必须遍历每个元素</li>
+                </ol>
+            </li>
+            <li>
+                <h3>获取元素的关键字</h3>
+                <ol>
+                    <li>getElementById(<span>引用id获取元素</span>)</li>
+                    <li>querySelector(<span>获取第一个符合的class元素</span>)</li>
+                    <li>querySelectorAll(<span>获取所有class元素，但是是NodeList(类似与数组)</span>)</li>
+                    <li>注意：<span>获取的是元素，才可以直接更改样式</span>，若获取的是<span>NodeList，不能直接更改样式，需要(新建函数，然后使用forEach，遍历每个元素才行)</span></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
