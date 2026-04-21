@@ -15,7 +15,7 @@
         <h2>初识函数</h2>
         <ul>
             <li>
-                <h3>函数概念</h3>
+                <h3>函数概以及案例(通过函数实现九九乘法表【复用3次】)</h3>
                 <ul>
                     <li>对于JavaScript来说，<span>函数就是把任意一段代码放在一个盒子里面</span></li>
                     <li>在需要用到这段代码的时候，直接执行这个盒子里面的代码就行</li>
@@ -25,7 +25,8 @@
                         <h3>返回值问题</h3>
                         <ol>
                             <li>使用<code>return</code>关键字可以<span>退出函数并返回一个值</span></li>
-                            <li>如果没有<code>return</code>或只写<code>return</code>，函数返回值是<code>undefined</code></li>
+                            <li>如果没有<code>return</code>或只写<code>return</code>，函数返回值是<code>undefined</code>
+                            </li>
                             <li>调用函数时，可以用变量接受返回值(前提是:<span><code>return</code>接受值变量名</span>),
                                 <br>例如：<code>let result = 函数名()</code>
                             </li>
@@ -80,6 +81,7 @@
                     </li>
                     <li>
                         <span>函数是自私的，不允许外部调用(函数内部的变量值)</span>
+                        <br>即:<span>函数内部定义的变量是局部变量，外部不能访问</span>
                         <br>如：<a href="函数是自私的.js">函数是自私的</a>
                     </li>
                 </ol> <!--  第一次嵌套(解释函数定义阶段) -->
@@ -147,7 +149,8 @@
                     <li>getElementById(<span>引用id获取元素</span>)</li>
                     <li>querySelector(<span>获取第一个符合的class元素</span>)</li>
                     <li>querySelectorAll(<span>获取所有class元素，但是是NodeList(类似与数组)</span>)</li>
-                    <li>注意：<span>获取的是元素，才可以直接更改样式</span>，若获取的是<span>NodeList，不能直接更改样式，需要(新建函数，然后使用forEach，遍历每个元素才行)</span></li>
+                    <li>注意：<span>获取的是元素，才可以直接更改样式</span>，若获取的是<span>NodeList，不能直接更改样式，需要(新建函数，然后使用forEach，遍历每个元素才行)</span>
+                    </li>
                 </ol>
             </li>
         </ul>

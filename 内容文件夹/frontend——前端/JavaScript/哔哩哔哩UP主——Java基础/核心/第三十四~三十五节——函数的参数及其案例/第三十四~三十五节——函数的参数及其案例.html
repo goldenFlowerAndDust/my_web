@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数的参数</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>函数的参数</h1>
+    </header>
+    <section id="section_1">
+        <h2>函数的参数及其案例</h2>
+        <ul>
+            <li>
+                <h3>函数的参数定义</h3>
+                <ol>
+                    <li>在定义函数和调用函数的时候都会用到[<span>()</span>]</li>
+                    <li>主要作用：<span>存放参数的位置</span></li>
+                    <li>参数分为：形参(<span>定义函数时：()内的叫形参</span>)和实参(<span>调用行数时：()内的叫实参</span>)
+                    </li>
+                    <li>一次可以传<span>一</span>个或<span>多个</span>参数，<span>中间用英文逗号隔开</span></li>
+                    <li>
+                        <h4>注意事项：</h4>
+                        <ol>
+                            <li><span>最终式实参赋值给形参</span></li>
+                            <li>形参可以理解为变量名：<span>所以，形参与变量名的命名规则相同</span></li>
+                            <li>实参可以理解为变量值：<span>所以，实参可以是所有数据类型</span></li>
+                            <li>
+                                <h5>形参和实参(定义或未定义状态下的注意事项)</h5>
+                                <ul>
+                                    <li>
+                                        <span>形参定义，实参定义</span>
+                                        <ol>
+                                            <li>正常情况</li>
+                                            <li>结果：<span>形参与实参一一对应，正常使用</span></li>
+                                            <li>注意1：<span>实参数量可以多余形参(多余的被忽略)</span></li>
+                                            <li>注意2：<span>实参数量可以少于形参(不足的为<code>undefined</code>)</span></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <span>形参定义，实参未定义</span>
+                                        <ol>
+                                            <li>对应形参数量多余实参数量状态</li>
+                                            <li>结果：<span>形参的参数均为<code>undefined</code></span></li>
+                                            <li>一般不会报错，但是用undefined参与运算可能得到NaN或意外结果</li>
+                                            <li>注意：<span>如果均为undefined，执行数学运算的话，结果始终未<code>NaN</code></span></li>
+                                            <li><a href="#undefined"></a></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <span>形参未定义，实参定义</span>
+                                        <ol>
+                                            <li>若函数内部使用了未声明变量(a,b)，且全局变量没有对应变量名和未使用方法<a href="#arguments">arguments</a><span>直接报错</span></li>
+                                            <li>如果函数内部使用arguments对象，<span>可以访问实参</span></li>
+                                            <li>如果函数内部使用了全局变量(且全局存在)——<span>则引用全局变量，实参被忽略</span></li>
+                                            <li>注意：没有形参时，实参不会自动赋值给任何变量，必须通过arguments获取</li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <span>形参未定义，实参未定义</span>
+                                        <ol>
+                                            <li>如果函数内部使用了未声明的变量，<span>直接报错</span></li>
+                                            <li>如果函数内部没有使用外部变量，<span>正常执行(但无参数可用)</span></li>
+                                            <li>注意：这种情况很少用，通常没有意义</li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol> <!--  第二次嵌套【注意事项】 -->
+                    </li>
+                    <li>
+                        <h4>声明式</h4>
+                        <br><code>function fn(<span>形参写在这里</span>)</code>{
+                        <br> 一段代码
+                        <br>}
+                        <br><code>fn(<span>实参写这里</span>)</code>————调用函数
+                    </li>
+                    <li>
+                        <h4>赋值式</h4>
+                        <br><code>let(var/cont) fn = function (<span>形参写在这里</span>)</code>{
+                        <br> 一段代码
+                        <br>}
+                        <br><code>fn(<span>实参写这里</span>)</code>————调用函数
+                    </li>
+                </ol> <!--  第一次嵌套【函数的参数解释】 -->
+            </li>
+            <li>
+                <h3>案例</h3>
+                <ol>
+                    <li>
+                        <h4>案例1(练习形参和实参的区别[声明式与赋值式])</h4>
+                        <script type="text/javascript">
+                            {
+                                // 声明式
+                                function fn(a, b) {
+                                    document.writeln(`传两个参数(<span>调用函数时:实参为空</span>)：<span>${a},${b}</span>`)
+                                }
+
+                                fn() // 调用函数，实参为空
+
+                                function ln(a, b, c) {
+                                    document.writeln(`<br>传两个参数(<span>调用函数时:实参不为空</span>)：<span>${a},${b},${c}</span>`)
+                                }
+
+                                ln(10, 30)
+                            }
+                            {
+                                // 赋值式
+                                let fn = function (a, b) {
+                                    document.writeln(`<br>传两个参数(<span>调用函数时:实参为空</span>)：<span>${a},${b}</span>`)
+                                }
+                                fn()
+
+                                let ln = function (a, b, c) {
+                                    document.writeln(`<br>传两个参数(<span>调用函数时:实参不为空</span>)：<span>${a},${b},${c}</span>`)
+                                }
+                                ln(50, 100, 30)
+                            }
+                        </script>
+                        <p>
+                            通过输出的结果可以看到：
+                            ·不管是声明式还是赋值式：行参不为空，调动函数时：实参为空，最后传参的值均是undefined。
+                            ·不管式声明式还是赋值式：行参不为空，调动函数时：实参不为空，最后传参的值会按实参顺序一一对应赋给
+                        </p>
+                    </li>
+                </ol> <!--  第一次嵌套【案例】 -->
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>知识补充</h2>
+        <ul>
+            <li id="undefined">
+                <h3>undefined与数据类型、运算符之间的关系</h3>
+                <ol>
+                    <li>与数值类型，<span>undefined转化为NaN，最后的结果永远是<code>NaN</code></span></li>
+                    <li>与字符串类型，<span>undefined转为字符串拼接</span></li>
+                    <li>与布尔类型，<span>true ——→ 1 , false——→ 0，所以undefined转化为NaN，最后的结果永远是<code>NaN</code></span></li>
+                    <li>与逻辑运算符，<span>（&&、||、!）不直接参与数学运算，但会按逻辑规则处理(<code>undefined<span>是</span>falsy</code>)</span></li>
+                    <li>与null的运算：<span>null在算数运算中会转换为0，undefined转换为NaN，所以最后的结果是<code>NaN</code></span></li>
+                    <li>与undefined运算：<span>undefined + undefined = NaN</span></li>
+                    <li>与自增/自减：<span>结果任然是：NaN</span></li>
+                    <li>与比较运算符：
+                        <br>分三种：
+                        <br>第一种：关系比较(>、<，>=，<=)：undefined为NaN，(<span>NaN与数值比较都返回<code>false</code></span>)
+                        <br><span>第二中：相等性：</span>
+                        <ul>
+                            <li><span>undefined == null 为 <code>true(特殊规则)</code></span></li>
+                            <li><span>undefined == undefined 为 <code>true</code></span></li>
+                            <li><span>undefined == 0/undefined == ""/undefiend == false 都为<code>false</code></span></li>
+                        </ul>
+                        <br>第三种：严格相等 ： undefined === undefined 为 <code>true</code>，与其他任何值 === 为 <code>false</code>
+                    </li>
+                    <li>提醒：在实际开发中，避免使用undefined参与数学运算：始终确保变量已初始化，或使用默认值</li>
+                    <li>若必须处理可能为undefined的变量，先判断。</li>
+                </ol>
+            </li>
+            <li id="arguments">
+                <h3>arguments对象</h3>
+                <ol>
+                    <li>暂时理解为：查找索引</li>
+                    <li>语法：arguments[索引]</li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
