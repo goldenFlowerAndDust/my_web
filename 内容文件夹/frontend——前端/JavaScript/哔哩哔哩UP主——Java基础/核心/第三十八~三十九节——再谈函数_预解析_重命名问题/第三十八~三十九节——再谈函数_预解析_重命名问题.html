@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数预解析和重命名问题</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>函数预解析和重命名问题</h1>
+    </header>
+    <section id="section_1">
+        <h2>预解析</h2>
+        <ul>
+            <li><span>预解析</span>其实就是JS的编译和执行</li>
+            <li>
+                JS是一个<span>解释型语言</span>，<span>就是在代码执行之前，先对代码进行通读和解释</span>，<span>然后在执行代码</span>
+            </li>
+            <li>也就是说，JS代码运行的时候，会经历两个环节<span>解释代码</span>和<span>执行代码</span></li>
+            <li>
+                <h3>关于 script 标签与预解析的独立性</h3>
+                <ol>
+                    <li><span>每个 script 标签内部的代码会独立进行预解析</span></li>
+                    <li>浏览器在执行 JS 时，会按顺序处理每个 script 块</li>
+                    <li>每个 script 块在开始执行前，都会先进行自己的“预解析”（变量提升、函数提升等），然后执行该块内的代码。</li>
+                    <li>不同 script 块之间的预解析是相互隔离的，不会混合</li>
+                    <li><span>虽然预解析各自独立，但执行代码时，前面 script 中声明的全局变量或函数，后面 script 是可以访问的（因为全局作用域是同一个）。</span></li>
+                    <li>但预解析阶段，每个 script 只会提升自己内部的声明，不会提前看到另一个 script 中的声明。</li>
+                </ol>
+            </li>
+            <li>
+                <h3>解释代码</h3>
+                <ol>
+                    <li>因为在所有代码执行之前进行解释，所以叫做<span>预解析(预解释)</span></li>
+                    <li>
+                        <h4>需要解析的内容有三个</h4>
+                        <ul>
+                            <li>
+                                <h5>声明式函数</h5>
+                                <ol>
+                                    <li><span>在内存中先声明一个变量名和函数名</span>，并且这个名字代表的内容是一个函数
+                                    </li>
+                                    <li>声明式函数在预解析阶段，会将整个函数提前，这就会导致一种结果：<span>不管是调用声明前还是声明后都不会报错，且是正常执行</span>
+                                    </li>
+                                    <li>因为只是提升整个函数，所以，想要直接访问函数内部的变量依然会出问题，因为不在同一作用域</li>
+                                    <li>
+                                        <p>案例(声明式函数)</p>
+                                        <script type="text/javascript">
+                                            {
+                                                test()
+
+                                                function test() {
+                                                    let myname = "goldenFlowerAndDust"
+                                                    document.writeln(`<br>myname :<span> ${myname}</span>`)
+                                                }
+
+                                                test()
+                                            }
+                                        </script>
+                                        <img src="./image/声明式函数.png"
+                                             alt="声明式函数"
+                                             title="声明式函数">
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>关键字<code>var</code></h5>
+                                <ol>
+                                    <li>在内存中先声明有一个变量名</li>
+                                    <li>
+                                        意思就是：<span>会先将声明的变量，存放在一个内存中，当执行到需要的地方，才会从内存中调用出来，并赋值</span>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            因为是先储存(<span>先重头看到尾，将声明的变量放在前面[可以理解为计算机心中有数]</span>)再执行，所以会有两种情况：
+                                        </p>
+                                        <ul>
+                                            <li><span>若在声明变量前使用变量 → 值为 <code>undefined</code></span></li>
+                                            <li><span>若在声明变量后使用变量 → 值为变量实际值</span></li>
+                                            <li>若变量不存在(<span>使用未声明的变量，会直接报错)</span></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p>赋值式函数同样是的道理</p>
+                                        <ul>
+                                            <li>赋值式函数（函数表达式） 的变量名会预解析（提升），但函数体不会提升。所以：
+                                            </li>
+                                            <li>在赋值之前调用：变量存在但值为 <code>undefined</code>，因此会报错（<span>提示 xxx is not a function</span>）。
+                                            </li>
+                                            <li>
+                                                在赋值之后调用：正常执行。<span>最后的结果就是运行函数内部代码所得结果</span>
+                                            </li>
+                                            <li>
+                                                若赋值式函数未被定义(<span>会报错，但提示是：这个未定义(没有明确说这是一个函数)</span>)
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><span>注意以上结论都是再<code>var</code>关键字为前提</span></li>
+                                    <li>
+                                        <span>案例1(var与变量)</span>
+                                        <script type="text/javascript">
+                                            {
+                                                document.writeln(`<br>已经声明变量，但在声明<span>前</span>使用变量:<span>${myname}</span>`)
+                                                var myname = "goldenFlowerAndDust"
+                                                document.writeln(`<br>已经声明变量，但在声明<span>后</span>使用变量:<span>${myname}</span>`)
+                                            }
+                                            /*{
+                                                console.log(Myname)
+                                            }*/
+                                        </script>
+                                        <img src="./image/声明变量_使用变量两种状态.png"
+                                             alt="声明变量_使用变量两种状态"
+                                             title="声明变量_使用变量两种状态">
+                                        <img src="./image/使用未声明的变量.png"
+                                             alt="使用未声明的变量"
+                                             title="使用未声明的变量">
+                                    </li>
+                                    <li>
+                                        <span>案例2(var与函数)</span>
+                                        <script type="text/javascript">
+                                            {
+                                                // myname()
+
+                                                var myname = function () {
+                                                    console.log("goldenFlowerAndDust")
+                                                }
+
+                                                myname()
+                                            }
+                                            /* {
+                                                 Myname()
+                                             }*/
+                                        </script>
+                                        <img src="./image/在定义的声明函数之前调用函数.png"
+                                             alt="在定义的声明函数之前调用函数"
+                                             title="在定义的声明函数之前调用函数">
+                                        <img src="./image/在定义的赋值式函数后调用函数.png"
+                                             alt="在定义的赋值式函数后调用函数"
+                                             title="在定义的赋值式函数后调用函数">
+                                        <img src="./image/调用未定义的函数.png"
+                                             alt="调用未定义的函数"
+                                             title="调用未定义的函数">
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>关键字<code>let、const</code></h5>
+                                <ol>
+                                    <li><span>变量声明也会被提升，但不会被初始化为 <code>undefined</code>，而是进入“暂时性死区”（TDZ）</span>
+                                    </li>
+                                    <li>在声明之前访问变量会报错 ReferenceError</li>
+                                    <li>这避免了 var 可能带来的意外 undefined 问题</li>
+                                    <li>这也是：let、const<span>在同一作用域下，不能重复声明的原因</span></li>
+                                    <li>
+                                        <p>案例</p>
+                                        <script type="text/javascript">
+                                            {
+                                                // console.log(myname)
+
+                                                let myname = "goldenFlowerAndDust"
+
+                                                console.log(myname)
+                                            }
+                                            {
+                                                // console.log(myname)
+
+                                                const myname = "goldenFlowerAndDust"
+
+                                                console.log(myname)
+                                            }
+                                        </script>
+                                        <img src="./image/let关键字在声明前访问变量.png"
+                                             alt="let关键字在声明前访问变量"
+                                             title="let关键字在声明前访问变量">
+                                        <img src="./image/关键字const访问声明之前的变量.png"
+                                             alt="关键字const访问声明之前的变量"
+                                             title="关键字const访问声明之前的变量">
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <h2>重命名问题</h2>
+        <ul>
+            <li>var声明的变量，可以重复声明，后面声明的会覆盖前面的</li>
+            <li><span>var可以在不同的作用域实现覆盖</span>，所以尽量避免使用var声明变量，会污染函数作用域</li>
+            <li>let，const声明的变量，在同一作用域下，不能重复声明</li>
+            <li>let声明的变量，它的值可以是<code>可以不赋值，能是undefined</code></li>
+            <li>const声明的变量，<span>一定要赋值，不能是undefined，不然会报错</span></li>
+            <li>声明函数，当函数名相同时，<span>不管是前面调用还是后面调用函数，靠后声明的函数会覆盖前面的声明函数</span>
+            </li>
+            <li>
+                <h3>
+                    当声明的变量名与函数名函数名相同相同的时候，调用函数(或访问变量)会产生两种不一样的效果
+                </h3>
+                <span>第一种在，全局作用域下，函数名与变量名重复:</span>
+                <ol>
+                    <li>在全局作用域下，声明式函数会被整体提升（函数提升优先于 var 变量提升）</li>
+                    <li>一般不会报错，会受<span>预解析的影响</span></li>
+                    <li>但是需要注意var的穿透性，它在任意作用域下都会产生效果,会覆盖前面的结果</li>
+                    <li>
+                        <span>案例1(全局作用域下，函数名与变量名重复)</span>
+                        <!--<script type="text/javascript">
+                            myname2()
+
+                            var myname2 = "goldenFlowerAndDust"
+
+                            function myname2() {
+                                console.log("myname is goldenFlowerAndDust")
+                            }
+
+                            console.log(myname2)
+                        </script>-->
+                        <img src="image/在全局作用域——变量名与函数名重复.png"
+                             alt="在全局作用域——变量名与函数名重复——前面没有var声明相同名字"
+                             title="在全局作用域——变量名与函数名重复——前面没有var声明相同名字">
+                    </li>
+                </ol>
+                <span>第二种在，块级作用域下，函数名与变量名重复:</span>
+                <ol>
+                    <li>在 ES6 的块级作用域中，函数声明的行为类似于 let</li>
+                    <li>所以，在未定义函数，直接调用函数，直接报错</li>
+                    <li>
+                        <span>案例2(块级作用域下，函数名与变量名重复)</span>
+                        <script type="text/javascript">
+                            /*{
+                                myname2()
+
+                                var myname2 = "goldenFlowerAndDust"
+
+                                function myname2() {
+                                    console.log("myname is goldenFlowerAndDust")
+                                }
+
+                                console.log(myname2)
+                            }*/
+                        </script>
+                        <img src="image/在块级作用域——变量名与函数名重复.png"
+                             alt="在块级作用域——变量名与函数名重复——前面没有var声明相同名字"
+                             title="在块级作用域——变量名与函数名重复——前面没有var声明相同名字">
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
