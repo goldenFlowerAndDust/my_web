@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数的返回值及其案例</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>函数的返回值及其案例</h1>
+    </header>
+    <section id="section_1">
+        <h2>函数的返回值</h2>
+        <ul>
+            <li>函数调用本身也是一个表达式，<span>表达式就应该有一个值出现</span></li>
+            <li>使用<span><code>return</code>关键字可以给函数执行完毕一个结果</span></li>
+            <li>语法:<code>return
+                需要返回值(<span>可以返回任何在当前函数作用域链上能够访问到的变量、表达式的结果、字符串、字面量、函数调用结果。。。。</span>)</code>
+            </li>
+            <li>
+                <h3>注意：</h3>
+                <ul>
+                    <li>return<span>不是函数必要的，关键看需求(后续需要用到函数的返回值)</span></li>
+                    <li><span>return 后面的代码无法继续执行</span></li>
+                    <li>return<span>可以返回任何数据类型的值</span></li>
+                    <li>
+                        一个函数中可以有多个<code>return</code>，<span>但是只执行第一个遇到的</span>
+                        <br>常用于条件分支，提前退出函数
+                    </li>
+                    <li>没有<code>return</code>或只写<code>return</code>函数返回均是<code>undefined</code></li>
+                    <li><span>返回值可以被任何变量接受，也可以直接参与运算</span></li>
+                    <li>console.log 只是在控制台打印，不影响函数结果；return 才是给调用者值</li>
+                </ul>
+            </li>
+            <li>
+                <h3>不加关键字，将调用的函数赋值给其他变量，是默认结果<code>undefiend</code></h3>
+                <script type="text/javascript">
+                    {
+                        function fn(x, y, z) {
+                            let result = x + y + z
+                            document.writeln(`<span>${result}</span>`)
+                        }
+
+                        let res = fn(1, 2, 3)
+                        document.writeln(res)
+                    }
+                </script>
+                <img src="image/不添加关键字——return.png"
+                     alt="不添加关键字——return"
+                     title="不添加关键字——return">
+            </li>
+            <li>
+                <h4>解决办法(使用关键字<code>return</code>)</h4>
+                <script type="text/javascript">
+                    function fn(x, y, z) {
+                        let result = x + y + z
+                        document.writeln(`<span>${result}</span>`)
+                        return result
+                    }
+
+                    let res = fn(1, 2, 3)
+                    document.writeln(res)
+                </script>
+                <img src="./image/添加关键字——return.png"
+                     alt="添加关键字——return"
+                     title="添加关键字——return">
+            </li>
+        </ul>
+        <h2>案例</h2>
+        <ul>
+            <li>
+                <h3>案例1(通过返回值，判断是否为质数)</h3>
+                <table>
+                    <tr>
+                        <th>请输入数字</th>
+                        <th>输出结果</th>
+                        <th>
+                            <button type="button" id="bth">=</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="number"></label>
+                            <input type="number" id="number">
+                        </td>
+                        <td colspan="2">
+                            <div id="text"></div>
+                        </td>
+                    </tr>
+                </table>
+                <script type="text/javascript">
+                    {
+                        document.getElementById("bth").onclick = function () {
+                            let num = document.getElementById("number")
+                            let text = document.getElementById("text")
+
+                            let number = parseFloat(num.value)
+
+                            function isParime(numb) {
+                                if (!Number.isInteger(numb) || numb <= 1) {
+                                    return false  // 当number小于1，则退出函数，并且返回false
+                                }
+                                for (let i = 2; i < numb; i++) { // 小于i <= numb ,永远成立，也就是说，大于1的数，都会变成不是质数
+                                    if (numb % i === 0) return false
+                                }
+                                return true
+                            }
+
+                            if (isParime(number)) {  // 0 不是质数
+                                text.innerHTML = `<span>${number}：是质数</span>`  // 因为value只能输出纯文本，无法解析HTML。且表单元素内容只能是纯文本，所以，使用div替代
+                                // innerHTML 与value 不同，它可以解析HTML，用它会更方便
+                            } else {
+                                text.innerHTML = `<span>${number}：不是质数</span>`
+                            }
+                        }
+                    }
+                </script>
+                <div class="div_video">
+                    <video src="./image/案例1——通过返回值%20判断是否为质数.mp4" controls></video>
+                </div>
+                <img src="./image/案例1——JS代码修正.png"
+                     alt="案例1——JS代码修正"
+                     title="案例1——JS代码修正">
+            </li>
+            <li>
+                <h3>案例2(写一个判断质数方法，后续使用方法，显示在300~500，1000~1500范围之间的质数)</h3>
+                <div id="sprime"></div>
+                <script>
+                    let text = document.getElementById("sprime")
+                    text.style.margin = "0"
+                    text.style.padding = "0"
+                    // 判断质数方法
+                    function sprime(number) {
+                        if (isNaN(number)) {
+                            text.innerHTML = `<span>请使用数值类型!!!</span>`
+                            return false
+                        } else if (number <= 1 || !Number.isInteger(number)) {
+                            text.innerHTML = `<span>请使用大于1的正正整数!!!</span>`
+                            return false
+                        }
+                        for (let i = 2; i < number; i++) {
+                            if (number % i === 0) return false
+                        }
+                        return true
+                    }
+
+                    // 显示所有质数方法
+                    function showsprime(start, end) {
+                        let result = ""
+                        for (let i = start; i <= end; i++) {
+                            if (sprime(i)) {
+                                result += `<span style="margin-right: 20px;display: inline-block">${i}</span>`
+                            }
+                        }
+                        return result || '无质数'
+                    }
+                    let sprime1 = showsprime(300, 500,40)
+                    let sprime2 = showsprime(1000, 1500,40)
+                    text.innerHTML = `300~500之间的质数:<br><span>${sprime1}</span><br>1000~1500之间的质数:<br><span>${sprime2}</span>`
+                </script>
+                <a href="../../案例JS文件/函数的返回值及其案例/判断质数方法——后续使用方法——显示范围内所有质数.js">JS代码</a>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

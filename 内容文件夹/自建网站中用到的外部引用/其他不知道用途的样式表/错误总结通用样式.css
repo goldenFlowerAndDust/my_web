@@ -1,0 +1,13 @@
+header{
+    font-size: 35px;
+    background-color:yellow;
+    color: black;
+    border: 1px solid red;
+    text-align: center;
+}
+p{
+    font-size: 25px;
+}
+ul,ol{
+    font-size:25px;
+}

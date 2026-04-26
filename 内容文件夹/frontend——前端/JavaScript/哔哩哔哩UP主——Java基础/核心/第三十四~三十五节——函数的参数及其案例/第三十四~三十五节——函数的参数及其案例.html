@@ -25,9 +25,13 @@
                     <li>
                         <h4>注意事项：</h4>
                         <ol>
-                            <li><span>最终式实参赋值给形参</span></li>
+                            <li><span>最终是实参赋值给形参</span></li>
                             <li>形参可以理解为变量名：<span>所以，形参与变量名的命名规则相同</span></li>
                             <li>实参可以理解为变量值：<span>所以，实参可以是所有数据类型</span></li>
+                            <li>
+                                总结就是，<span>形参可以理解为变量名，实参可以理解为变量值，传参这个过程就是:将变量值赋值给变量名的操作。</span>
+                            </li>
+                            <li><span>形参只能在函数内部使用(作用域)</span></li>
                             <li>
                                 <h5>形参和实参(定义或未定义状态下的注意事项)</h5>
                                 <ul>
@@ -37,7 +41,8 @@
                                             <li>正常情况</li>
                                             <li>结果：<span>形参与实参一一对应，正常使用</span></li>
                                             <li>注意1：<span>实参数量可以多余形参(多余的被忽略)</span></li>
-                                            <li>注意2：<span>实参数量可以少于形参(不足的为<code>undefined</code>)</span></li>
+                                            <li>注意2：<span>实参数量可以少于形参(不足的为<code>undefined</code>)</span>
+                                            </li>
                                         </ol>
                                     </li>
                                     <li>
@@ -46,16 +51,20 @@
                                             <li>对应形参数量多余实参数量状态</li>
                                             <li>结果：<span>形参的参数均为<code>undefined</code></span></li>
                                             <li>一般不会报错，但是用undefined参与运算可能得到NaN或意外结果</li>
-                                            <li>注意：<span>如果均为undefined，执行数学运算的话，结果始终未<code>NaN</code></span></li>
+                                            <li>注意：<span>如果均为undefined，执行数学运算的话，结果始终未<code>NaN</code></span>
+                                            </li>
                                             <li><a href="#undefined"></a></li>
                                         </ol>
                                     </li>
                                     <li>
                                         <span>形参未定义，实参定义</span>
                                         <ol>
-                                            <li>若函数内部使用了未声明变量(a,b)，且全局变量没有对应变量名和未使用方法<a href="#arguments">arguments</a><span>直接报错</span></li>
+                                            <li>若函数内部使用了未声明变量(a,b)，且全局变量没有对应变量名和未使用方法<a
+                                                    href="#arguments">arguments</a><span>直接报错</span></li>
                                             <li>如果函数内部使用arguments对象，<span>可以访问实参</span></li>
-                                            <li>如果函数内部使用了全局变量(且全局存在)——<span>则引用全局变量，实参被忽略</span></li>
+                                            <li>
+                                                如果函数内部使用了全局变量(且全局存在)——<span>则引用全局变量，实参被忽略</span>
+                                            </li>
                                             <li>注意：没有形参时，实参不会自动赋值给任何变量，必须通过arguments获取</li>
                                         </ol>
                                     </li>
@@ -126,6 +135,55 @@
                             ·不管式声明式还是赋值式：行参不为空，调动函数时：实参不为空，最后传参的值会按实参顺序一一对应赋给
                         </p>
                     </li>
+                    <li>
+                        <h4>案例2(写一个函数，通过调用函数，返回三种不同的结果)</h4>
+                        <script type="text/javascript">
+                            /*
+                            *   目标：写一个函数，通过调用函数，返回三种不同的结果
+                            * */
+                            function food(a, b) { // 定义两个形参，为后续传参做准备  food 食物
+                                let drink = a === 1 ? "可乐" : "雪碧" // drink 饮料  通过三目运算符，判断传参的结果，最终返回值
+                                let sideDish = b === 2 ? "薯条" : "鸡米花" // sideDish 副食 通过三目运算符，判断传参的结果，最终返回值
+                                let stapleFood = "汉堡" // 主食
+                                document.writeln(`点的饮料是:<span>${drink}</span>,副食是:<span>${sideDish}</span>,主食是:<span>${stapleFood}</span><br>`)
+                            }
+
+                            food(1, 2) // 传参 a=1 ， b = 2 ,所以最后的结果是：饮料：可乐 副食： 薯条 ，主食是： 汉堡  写错原因:三目运算符 ，冒号前的参数是:truthy , 后面才是falsy
+                            food(2, 1) // 传参 a=2 ， b = 1 ,所以最后的结果是：饮料：雪碧 副食： 鸡米花 ，主食是： 汉堡 写错原因:三目运算符 ，冒号前的参数是:truthy , 后面才是falsy
+                            food() // 传参 a=undefined ， b = undefined ,所以最后的结果是：饮料：雪碧 副食： 鸡米花 ，主食是： 汉堡 undefined在条件判断是:falsy。
+                            // 总结就是，形参可以理解为变量名，实参可以理解为变量值，传参这个过程就是:将变量值赋值给变量名的操作。
+                        </script>
+                        <div class="div_video">
+                            <video src="./image/案例2——写一个函数%20通过调用函数%20返回三个不同结果.mp4" controls></video>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>案例3(通过传参的方式，使九九乘法表显示不一样的结果)</h4>
+                        <script type="text/javascript">
+                            /*
+                            * 通过传参的方式，使九九乘法表显示不一样的结果
+                            *
+                            * */
+                            function table(rows) {
+                                let notable = "" // 声明变量，用于存储每次循环后的结果，后续直接打印，提高效率
+                                for (let i = 1; i <= rows; i++) {  // 外层控制行数 1~rows 行
+                                    for (let j = 1; j <= i ; j++) { // 内层控制列出 1~i 列
+                                        notable += `<span style="margin-right: 20px;display: inline-block">${j} * ${i} = ${i*j}</span>` // 将结果赋给notable
+                                    }
+                                    notable += `<br>` // 每次内循环后，换行
+                                }
+                                document.writeln(`${notable}<br>`) // 将结果输出在页面上
+                            }
+                            table(3) // 调用函数，并写入实参
+                            table(5)
+                            table(8)
+                            table(9)
+                            table() // rows为undefined，所以循环条件永远为false，所以没有循环。
+                        </script>
+                        <div class="div_video">
+                            <video src="./image/案例3——通过传参的方式，使九九乘法表显示不一样的结果.mp4" controls></video>
+                        </div>
+                    </li>
                 </ol> <!--  第一次嵌套【案例】 -->
             </li>
         </ul>
@@ -138,9 +196,12 @@
                 <ol>
                     <li>与数值类型，<span>undefined转化为NaN，最后的结果永远是<code>NaN</code></span></li>
                     <li>与字符串类型，<span>undefined转为字符串拼接</span></li>
-                    <li>与布尔类型，<span>true ——→ 1 , false——→ 0，所以undefined转化为NaN，最后的结果永远是<code>NaN</code></span></li>
-                    <li>与逻辑运算符，<span>（&&、||、!）不直接参与数学运算，但会按逻辑规则处理(<code>undefined<span>是</span>falsy</code>)</span></li>
-                    <li>与null的运算：<span>null在算数运算中会转换为0，undefined转换为NaN，所以最后的结果是<code>NaN</code></span></li>
+                    <li>与布尔类型，<span>true ——→ 1 , false——→ 0，所以undefined转化为NaN，最后的结果永远是<code>NaN</code></span>
+                    </li>
+                    <li>与逻辑运算符，<span>（&&、||、!）不直接参与数学运算，但会按逻辑规则处理(<code>undefined<span>是</span>falsy</code>)</span>
+                    </li>
+                    <li>与null的运算：<span>null在算数运算中会转换为0，undefined转换为NaN，所以最后的结果是<code>NaN</code></span>
+                    </li>
                     <li>与undefined运算：<span>undefined + undefined = NaN</span></li>
                     <li>与自增/自减：<span>结果任然是：NaN</span></li>
                     <li>与比较运算符：
@@ -150,7 +211,8 @@
                         <ul>
                             <li><span>undefined == null 为 <code>true(特殊规则)</code></span></li>
                             <li><span>undefined == undefined 为 <code>true</code></span></li>
-                            <li><span>undefined == 0/undefined == ""/undefiend == false 都为<code>false</code></span></li>
+                            <li><span>undefined == 0/undefined == ""/undefiend == false 都为<code>false</code></span>
+                            </li>
                         </ul>
                         <br>第三种：严格相等 ： undefined === undefined 为 <code>true</code>，与其他任何值 === 为 <code>false</code>
                     </li>
