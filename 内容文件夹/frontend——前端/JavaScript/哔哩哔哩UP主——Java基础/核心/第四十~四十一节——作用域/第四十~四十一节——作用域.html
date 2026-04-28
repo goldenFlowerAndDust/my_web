@@ -12,7 +12,7 @@
         <h1>作用域</h1>
     </header>
     <section id="section_1">
-        <h2>作用域1</h2>
+        <h2>什么是作用域</h2>
         <ul>
             <li>作用域<span>就是一个变量可以生效的范围</span></li>
             <li>变量不是在所有地方都可以使用，<span>而是这个变量的使用范围就作用域</span></li>
@@ -24,13 +24,17 @@
                         <ul>
                             <li>全局作用域就是<span>最大的作用域</span></li>
                             <li>在全局作用域下，<span>定义的任何变量和方法在任何地方都可以使用</span></li>
-                            <li>主要是：<span>页面打开的时候，浏览器会自动生成一个全局作用域widows</span></li>
+                            <li>主要是：<span>页面打开的时候，浏览器会自动生成一个全局作用域 window（或者“全局对象”）</span></li>
                             <li>声明周期：<span>页面打开时创建，关闭时销毁</span></li>
                             <li>
                                 <h5>优点</h5>
                                 <ol>
                                     <li>全局<span>任何地方都能访问，方便共享数据</span></li>
-                                    <li><span>适合存储全局配置、工具函数等，<span>但应尽量避免滥用，以免命名冲突</span></span></li>
+                                    <li>
+                                        <span>适合存储全局配置、工具函数等，<span>但应尽量避免滥用，以免命名冲突</span></span>
+                                    </li>
+                                    <li><span>可以直接在浏览器开发者工具中访问</span></li>
+                                    <li><span>局部作用域同样也可以访问</span></li>
                                 </ol>
                                 <h5>缺点</h5>
                                 <ol>
@@ -144,12 +148,107 @@
                 </ol>
             </li>
         </ul>
-        <h2>作用域2</h2>
+        <h2>变量使用规则(<span>分两种:访问规则和赋值规则</span>)</h2>
         <ul>
-            <li></li>
+            <li>
+                <h3>访问规则</h3>
+                <ol>
+                    <li>当想获取一个变量的值的时候，称这个行为叫做<span>访问</span></li>
+                    <li>
+                        <h4>获取变量的规则(读值)</h4>
+                        <ul>
+                            <li>从 当前作用域 开始查找变量</li>
+                            <li>如果有，就直接使用（内层变量遮蔽外层同名变量）</li>
+                            <li>如果没有，就去 外层作用域 查找，直到全局作用域</li>
+                            <li>如果全局也没有，则报错 <span>ReferenceError: xxx is not defined。</span>)</li>
+                            <li>口诀：(<span>从内向外，就近使用</span>)</li>
+                            <li>
+                                <h5>实例</h5>
+                                <script>
+                                    let num = 100
+
+                                    function test1() {
+                                        let num = 200
+
+                                        function child() {
+                                            let num = 300
+
+                                            console.log(num)
+                                        }
+                                        child()  // 调用函数 因为函数内部：num = 300，所以直接访问
+                                        console.log(num) // 因为内部有num = 200 ，所以直接访问
+                                    }
+                                    test1() // 根据从内向外查找的规则，child 函数内部有自己的 num=300，所以输出 300
+                                </script>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>赋值规则(写值)</h3>
+                <ol>
+                    <li>当想给一个变量赋值的时候，需要先找到这个变量，才能给它赋值</li>
+                    <li>
+                        <h4>变量赋值规则</h4>
+                        <ul>
+                            <li>同样从 当前作用域 开始查找变量</li>
+                            <li>如果找到，就直接赋值修改</li>
+                            <li>
+                                <h5>如果一直找到全局作用域都没找到，那么：</h5>
+                                <ol>
+                                    <li>非严格模式：<span>在全局对象上自动创建该变量并赋值（隐式全局变量）</span></li>
+                                    <li>严格模式<span>（"use strict"）：直接报错，不会创建全局变量</span></li>
+                                    <li>注意:<span>赋值不声明变量（例如 x = 10）时，容易意外产生全局变量，强烈建议使用 let / const / var 显式声明。</span>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
         </ul>
     </section>
-    <section id="section_2"></section>
+    <section id="section_2">
+        <h2>补充知识</h2>
+        <ul>
+            <li>
+                <h3>遮蔽(shadow)和覆盖(overwrite)</h3>
+                <table>
+                    <tr>
+                        <th colspan="4">遮蔽(shadow)和覆盖(overwrite)</th>
+                    </tr>
+                    <tr>
+                        <td>术语</td>
+                        <td>含义</td>
+                        <td>典型场景</td>
+                        <td>是否影响外层变量</td>
+                    </tr>
+                    <tr>
+                        <td>遮蔽</td>
+                        <td>内层作用域声明了同名变量，外层变量在内层不可见</td>
+                        <td><code>let、const</code>在嵌套作用域中</td>
+                        <td>否（外层变量值不变，只是被“挡住”）</td>
+                    </tr>
+                    <tr>
+                        <td>覆盖</td>
+                        <td>同一个变量被重新赋值，旧值丢失</td>
+                        <td><code>var </code>重复声明，或 let a=1; a=2;</td>
+                        <td>是（变量本身的值变了）</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <p>注意：</p>
+                            <ol>
+                                <li>遮蔽效果:<span>作用域、嵌套</span></li>
+                                <li>覆盖:<span>var重复声明变量或重复赋值、let重复赋值、const没有覆盖操作</span></li>
+                            </ol>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+        </ul>
+    </section>
     <footer>
         <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
     </footer>
