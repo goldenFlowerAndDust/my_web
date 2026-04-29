@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>年份月份天数脚本</title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+
+			body {}
+
+			span {
+				color: red;
+			}
+
+			#table table {
+				margin: 2.5rem auto;
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+
+			td,
+			th {
+				border: 1px solid black;
+			}
+
+			input {
+				display: block;
+				height: 2rem;
+				border: none;
+			}
+
+			button {
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+
+			#table input[readonly] {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<div id="table">
+				<table>
+					<tr>
+						<th><span>year</span></th>
+						<th><span>month</span></th>
+						<th><button id="button">天数</button></th>
+					</tr>
+					<tr>
+						<td><input type="text" placeholder="请输入年份(正整数)" id="year"></td>
+						<td><input type="text" placeholder="请输入月份(1~12)" id="month"></td>
+						<td><input type="text" readonly></td>
+					</tr>
+				</table>
+				<script type="text/javascript" src="年份月份天数脚本.js"></script>
+			</div>
+		</main>
+	</body>
+</html>

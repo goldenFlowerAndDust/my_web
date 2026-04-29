@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: darkorange;
+			}
+
+			#content {
+				background-color: white;
+				margin: 40px;
+				border: 1px solid black;
+				height: 50vh;
+			}
+
+			ul {
+				margin-left: 100px;
+			}
+
+			li {
+				list-style: none;
+				margin-top: 10px;
+			}
+
+			#content>input {
+				margin-top: 25px;
+				margin-left: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<ul>
+				<li><input type="checkbox" class="furit">苹果</li>
+				<li><input type="checkbox" class="furit">香蕉</li>
+				<li><input type="checkbox" class="furit">梨子</li>
+				<li><input type="checkbox" class="furit">橙子</li>
+				<li><input type="checkbox" class="furit">水蜜桃</li>
+			</ul>
+			<input type="checkbox" id='btn'>全选
+			<input type="submit" id='mybtn' value="显示你喜欢的水果">
+		</div>
+		<script type="text/javascript" src="实现全选_反选_获取元素文本并输出.js"></script>
+	</body>
+</html>

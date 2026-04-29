@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+            width: 610px;
+            min-height: 10rem;
+
+        }
+
+        .input {
+            min-width: 400px;
+            min-height: 2.5rem;
+        }
+
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            min-width: 200px;
+            min-height: 150px;
+            text-align: center;
+        }
+
+        .button {
+            width: 200px;
+            height: 2.5rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <section>
+        <!-- 输入区域 -->
+        <div>
+            <label for="text"></label>
+            <input type="text" id='text' placeholder="请输入需要添加的事件" class="input">
+            <button type="button" id="button" class="button">添加</button>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>
+                    <label>
+                        <input type="checkbox" id="checkbox">全选
+                    </label>
+                </th>
+                <th>待办清单</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            <!-- 内容添加区 -->
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <div id="item1">
+            <!-- 其他操作 -->
+            <div>总计：<span id="total">0</span></div>
+            <div>已完成：<span id="completed">0</span></div>
+            <button type="button" id="btn" class="button">清除清单</button>
+            <button type="button" id="btnS" class="button">反选</button>
+        </div>
+    </section>
+    <script type="text/javascript" src="简化待办清单.js"></script>
+</main>
+</body>
+</html>

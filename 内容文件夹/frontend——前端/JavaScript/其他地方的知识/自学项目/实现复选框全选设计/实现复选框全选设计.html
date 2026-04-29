@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			body{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 45em;
+			}
+			div{
+				display: inline-block;
+				border: 1px solid black;
+				padding: 10px 15px 10px 15px;
+			}
+			table{
+				border: 1px solid black;
+				border-collapse: collapse;
+				text-align: center;
+			}
+			th,td{
+				border: 1px solid black;
+				padding: 10px 15px 10px 15px;
+			}
+			button {
+				display: block;
+				width: 100%;
+				padding: 10px 15px 10px 15px;
+			}
+			#bth{
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<p>请选择前端设计参考书</p>
+			<table>
+				<tr>
+					<th>
+						<input type="checkbox" id='add_checkbox'>全选
+					</th>
+					<th>书称</th>
+					<th>价格(元)</th>
+					<th>数量</th>	
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" class='add_checkbox'>
+					</td>
+					<td>javascript入门与提高</td>
+					<td>39</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" class='add_checkbox'>
+					</td>
+					<td>javascript DOM编程艺术</td>
+					<td>29</td>
+					<td>5</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" class='add_checkbox'>
+					</td>
+					<td>精通JavaScript与jquery</td>
+					<td>49</td>
+					<td>10</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" class='add_checkbox'>
+					</td>
+					<td>锋利的jQuery</td>
+					<td>36</td>
+					<td>10</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" class='add_checkbox'>
+					</td>
+					<td>jQuery实战</td>
+					<td>33</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" class='add_checkbox'>
+					</td>
+					<td>javascript权威</td>
+					<td>59</td>
+					<td>8</td>
+				</tr>
+				<tr>
+					<td colspan="4" id="bth">
+						<button type="button" id="button">删除选中的书</button>
+					</td>
+				</tr>
+			</table>
+			<script type="text/javascript" src="实现复选框全选设计.js"></script>
+		</div>
+	</body>
+</html>

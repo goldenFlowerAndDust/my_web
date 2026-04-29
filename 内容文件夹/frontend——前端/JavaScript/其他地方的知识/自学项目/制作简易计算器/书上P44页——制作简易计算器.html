@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>制作简易计算器</title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				min-height: 30vh;
+			}
+
+			div {
+				border: 1px solid black;
+				padding: 10px;
+				background-color: black;
+			}
+
+			button {
+				min-width: 40px;
+			}
+
+			input,
+			button {
+				height: 25px;
+			}
+
+			#bth {
+				width: 84px;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<table>
+				<tr>
+					<th colspan="4"><input type="text" readonly id="textinput"></th>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="button" value="AC" class="bth2" id="bth">AC</button></td>
+					<td><button type="button" value="/" class="bth">/</button></td>
+					<td><button type="button" value="%" class="bth">%</button></td>
+				</tr>
+				<tr>
+					<td><button type="button" value="7" class="number">7</button></td>
+					<td><button type="button" value="8" class="number">8</button></td>
+					<td><button type="button" value="9" class="number">9</button></td>
+					<td><button type="button" value="+" class="bth">+</button></td>
+				</tr>
+				<tr>
+					<td><button type="button" value="4" class="number">4</button></td>
+					<td><button type="button" value="5" class="number">5</button></td>
+					<td><button type="button" value="6" class="number">6</button></td>
+					<td><button type="button" value="-" class="bth">-</button></td>
+				</tr>
+				<tr>
+					<td><button type="button" value="1" class="number">1</button></td>
+					<td><button type="button" value="2" class="number">2</button></td>
+					<td><button type="button" value="3" class="number">3</button></td>
+					<td><button type="button" value="*" class="bth">*</button></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="button" value="0" class="number" id="bth">0</button></td>
+					<td><button type="button" value="." class="bth">.</button></td>
+					<td><button type="button" value="=" id="bth2">=</button></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script type="text/javascript" src="制作简易计算器.js"></script>
+</html>
