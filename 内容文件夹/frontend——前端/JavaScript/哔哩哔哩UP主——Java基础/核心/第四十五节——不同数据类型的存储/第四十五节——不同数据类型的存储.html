@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不同数据类型的存储</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>不同数据类型的存储</h1>
+    </header>
+    <section id="section_1">
+        <h2>基本数据类型与复杂数据类型之间的区别</h2>
+        <ul>
+            <li>
+                基本数据类型(<span>字符串类型、数值类型、null、undefined、Boolean类型、Symbol数据类型、BigInt数据类型</span>)和复杂数据类型(<span>对象类型、数组类型、函数</span>)之间的最大区别就是<span>存储上的区别</span>
+                <br>Symbol数据类型:<span>表示独一无二的值(ES6引入)</span>
+                <br>BigInt数据类型：<span>表示大整数(ES2020引入)</span>
+                <br>函数(function)：<span>本质是对象</span>
+            </li>
+            <li>存储空间分成两种(<span>栈和堆</span>)</li>
+            <li>栈：<span>主要存储基本数据类型的内容</span></li>
+            <li>堆：<span>主要存储复杂数据类型的内容</span></li>
+            <li>
+                <img src="./img/栈与堆.png"
+                     alt="栈与堆"
+                     title="栈与堆">
+            </li>
+            <li>
+                <h3>基本数据类型在内存中的存储情况</h3>
+                <ol>
+                    <li><code>var(let、const) num = 100 , <span>在内存中的存储情况</span></code></li>
+                    <li>直接在<span>栈空间</span>内有存储一个数据</li>
+                    <li>字面量(变量)和数据都存放在栈内</li>
+                    <li>结论：<span>基本数据类型，相同数据，不同字面量或变量，可以化严格相等，因为都存在栈中</span></li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            {
+                                let num = 100;
+                                let num2 = num;
+                                let num3 = 100;
+
+                                console.log(num === num2);
+                                console.log(num2 === num3);
+                            }
+                        </script>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>复杂数据类型在内存中的存储情况</h3>
+                <ul>
+                    <li>变量(字面量)存放在栈，数据存放在堆中(<span>并生成对应的地址</span>)</li>
+                    <li>访问数据，需要在栈中引用堆中的地址</li>
+                    <li>
+                        所以，在对象类型中，给两个对象赋值相同的键值对，两个对象不能做等号(<span>包括严格相等和双等号</span>)
+                    </li>
+                    <li>同一对象，不同字面量(变量)，在其中一个执行增、删、改操作，都会使其他的键值对更改，因为在同一地址下
+                    </li>
+                    <li>结论：
+                        <br>1. 在同一对象下，即使字面量(变量)不同，是可以做等号的(<span>包括严格相等和双等号</span>)
+                        <br>2. 同一对象：<span>指的是多个变量指向同一个内存地址(比如<code>let obj = obj2</code>，此时的obj严格等于obj2)</span>
+                        <br>3. 在不同对象下，即使数据相同，也不能做等号(<span>包括严格相等和双等号</span>)
+                        <br>4. 不同对象：<span>指的是多个变量指向不同内存地址，尽管内部装的数据是一样的
+                            (比如:<code>let obj = {name:"YLH"} let obj2 = {name:"YLH"}</code>
+                            此时：引用的不是同一对象，所以不能做等号)
+                        </span>
+                        <br>5. <img src="./img/复杂数据类型图解释.png"
+                                    alt="复杂数据类型图解释"
+                                    title="复杂数据类型图解释">
+                    </li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            {
+                                let obj = {
+                                    name: "YLH",
+                                    age: 10,
+                                    like: "敲代码"
+                                }
+
+                                let obj2 = obj; //同一对象(同一堆地址)
+
+                                let obj3 = new Object(); //new一个新对象，这时就是在堆中，创建新数据，新的地址
+                                obj3.name = "YLH"
+                                obj3.age = 10;
+                                obj3.like = "敲代码"
+
+                                console.log(obj === obj2) //同一对象，则相等结果为true
+                                console.log(obj == obj2)
+                                console.log(obj2 === obj3) //不同对象，则结果为false
+                                console.log(obj2 == obj3)
+                            }
+                        </script>
+                        <img src="./img/复杂数据类型的存储方式_实例.png"
+                             alt="复杂数据类型的存储方式_实例"
+                             title="复杂数据类型的存储方式_实例">
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>总结：</h3>
+                <ol>
+                    <li>基本数据类型：只要值相同，则严格相等。<span>且数据以及变量(字面量)均存储在栈内</span>
+                        <br><span>每一个字面量(变量)都是独立的，即使初始值相同，后续更改其中一个，也不会影响其他的值。</span>
+                    </li>
+                    <li>
+                        <h4>复杂数据类型：分两种情况：</h4>
+                        <ul>
+                            <li>同一对象、数组、函数(本质是对象)(指向堆中同一地址)，所以比较结果为true
+                                <br><span>反推:如果多个变量指向同一个对象（即引用同一地址），那么通过任何一个变量修改该对象
+                                    （增、删、改属性），其他变量都会同步反映这些变化</span>(这也是复杂数据类型之间true与false的本质区别)
+                            </li>
+                            <li>不同对象、数组、函数(新建对象，使堆中创建新的地址)，所以比较结果为false</li>
+                            <li>但是数据储存始终是在：堆中</li>
+                            <li>字面量(变量)始终存储在：栈中，通过引用地址获取数据</li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>解决需要复制(拷贝)一个对象的键值对给另一个对象</h3>
+                <ul>
+                    <li>
+                        先说为什么需要解决：都知道多个变量引用，同一对象(同一地址)，<span>更改其中一个，其他都会更新，这会导致数据处理困难</span>
+                    </li>
+                    <li>那么肯定是用<span>新建对象这个方法最好</span>，<span>因为新建对象意味着新建地址</span></li>
+                    <li>那么问题来了：如果原对象的键值对少，只有十几个，辛苦一点，复制粘贴即可，<span>但是如果是100多个或更多，通过直接增操作，太过麻烦了</span>
+                    </li>
+                    <li>所以可以通过遍历的方式(<code>for....in</code>)，挨个添加，本质还是将原对象的键值对复制或拷贝，到新对象
+                    </li>
+                    <li>因为这种方式是浅拷贝(<span>只对基本数据类型有效</span>)，如果原对象内存在子复杂类型，那么拷贝的是地址，所以同样继承了，复杂数据类型之间true的弊端
+                    </li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            {
+                                let obj = { // 创建原对象
+                                    name: "hello",
+                                    age: 20,
+                                    like: "敲代码"
+                                }
+
+                                let obj2 = {} //创建新对象，要求：将原对象的键值对，放入新对象内，且更改新对象的键值对，不影响原对象
+
+                                for (let i in obj) {
+                                    // 这里面的i接受的是，原对象的key，obj[i]接受的是原对象的value
+                                    //键值对 key : value
+                                    obj2[i] = obj[i] //将通过增操作，将原对象key，增加到新对象 ，并且赋值原对象的value(obj[i])
+                                }
+
+                                obj2.name = "goldenFlowerAnDust" // 更改新对象
+
+                                console.log(obj) //打印原对象
+                                console.log(obj2) //打印新对象
+                            }
+                        </script>
+                        <img src="./img/遍历方法拷贝对象.png"
+                             alt="遍历方法拷贝对象"
+                             title="遍历方法拷贝对象">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
