@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组数据类型以及基本操作</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>数组数据类型以及基本操作</h1>
+    </header>
+    <section id="section_1">
+        <h2>数组数据类型</h2>
+        <ul>
+            <li>
+                <h3>什么是数组</h3>
+                <ol>
+                    <li>字面理解就是<span>数字的组合</span></li>
+                    <li>准确来说是<span>数据的集合</span></li>
+                    <li>就是将<span>一些数据放在一个盒子里面，按照顺序排好</span>
+                        <br>如:<code>[1,2,"hello",true,false]</code>
+                        <br><span>由中括号包裹，内部的数据叫元素</span>
+                    </li>
+                </ol>
+                <h3>数据类型分类</h3>
+                <ol>
+                    <li>number、string、Boolean、undefined、null、object、function、array(数组)、BigInt、Symbol、....</li>
+                    <li>数组也是数据类型的一种</li>
+                    <li>同样分：<span>基本数据类型和复杂数据类型</span></li>
+                    <li>基本数据类型：<span>number、string、 、undefined、null、BigInt、Symbol</span></li>
+                    <li>复杂数据类型：<span>object、function、array(数组)、.....</span></li>
+                </ol>
+                <h3>创建数组</h3>
+                <ol>
+                    <li>与对象一样有两种方法(字面量创建数组和通过构造函数的方法(<span>new一个数组</span>)</li>
+                    <li><span>中括号代表一个数组，数组内的数据叫元素</span></li>
+                    <li>
+                        <h4>字面量创建数组(<span>最常用</span>)</h4>
+                        <ul>
+                            <li>语法：<code>let 字面量 = []</code>创建一个空数组</li>
+                            <li>语法：<code>let 字面量 = [1,2,3]</code>创建一个内涵元素数组</li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        let ageArr = []
+                                        let numberArr = [1, 2, 1, 2, 5, 2, 3, 4]
+
+                                        console.log(ageArr)
+                                        console.log(numberArr)
+                                    }
+                                </script>
+                                <img src="img/创建数组的方法/字面量创建数组.png"
+                                     alt="字面量创建数组"
+                                     title="字面量创建数组">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>构造函数创建数组</h4>
+                        <ul>
+                            <li>语法：<code>let 字面量 = new Array()</code>通过内置函数创建空数组</li>
+                            <li>语法：<code>let 字面量 = new Array(1,"hello",5,true,false)</code>通过内置函数创建内涵元素数组
+                            </li>
+                            <li>
+                                <h5>
+                                    当通过构造函数创建数组，且只有一个参数时，有四种状态(<span>只有构造函数创建数组方法有效</span>)
+                                </h5>
+                                <ol>
+                                    <li><span>只有一个参数，如果是数值类型，那么意味着，创建长度为参数的数组</span></li>
+                                    <li><span>第一种状态：参数为正整数，正常创建参数为长度的数组</span>
+                                        <br>如:<code>let 字面量 = new Array(10)</code>,当构造函数方式创建数组，<span>只有一个参数且是正整数数值类型，意思创建内涵10个元素的空数组。length：10</span>
+                                    </li>
+                                    <li>第二中状态：参数为非正整数数值类型(<span>注意只有一个参数</span>)，<span>会直接报错，因为非整数不能作为长度</span>
+                                        <br><code>let 字面量 = new Array(15.6)</code>,当构造函数方式创建数组，<span>只有一个参数且是非正整数数值类型，会直接报错</span>
+                                    </li>
+                                    <li><span>第三种状态：参数为非数值类型，视为创建该参数为元素的数组，索引是0</span>，
+                                        <br>如:<code>let 字面量 = new
+                                            Array("hello")</code>,当构造函数方式创建数组，<span>只有一个参数且是非数值类型，意思创建内涵hello这个元素</span>
+                                    </li>
+                                    <li><span>第四种状态：参数为0，视为创建空数组</span>，
+                                        <br>如：<code>let 字面量 = new Array(0)</code>，当构造函数方式创建数组，<span>只有一个参数且是0，意思创建空数组</span>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>后续可以通过增，删，改的操作，对内部元素做改变</li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        let ageArr = new Array()
+
+                                        let numberArr = new Array(1, 2, 4, 5)
+
+
+                                        let numArr = new Array(10)
+
+                                        let numArr2 = new Array(0)
+
+                                        let strArr = new Array("hello")
+
+                                        // let strArr2 = new Array(15.6)
+
+                                        console.log(`通过构造函数创建数组，且无参数：`)
+                                        console.log(ageArr)
+                                        console.log(`通过构造函数创建数组，且参数为多个：`)
+                                        console.log(numberArr)
+                                        console.log(`通过构造函数创建数组，且参数为单个正整数：`)
+                                        console.log(numArr)
+                                        console.log(`通过构造函数创建数组，且参数为0：`)
+                                        console.log(numArr2)
+                                        console.log(`通过构造函数创建数组，且参数为单个非数值类型：`)
+                                        console.log(strArr)
+                                        // console.log(`通过构造函数创建数组，且参数为单个非正整数：`)
+                                        // console.log(strArr2)
+                                    }
+                                </script>
+                                <img src="img/创建数组的方法/通过构造函数方式创建数组.png"
+                                     alt="通过构造函数方式创建数组"
+                                     title="通过构造函数方式创建数组">
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <h2>基本操作</h2>
+        <ul>
+            <li>
+                <h3>长度(length)</h3>
+                <ol>
+                    <li><span>通过点语法+length</span></li>
+                    <li>语法：<code>字面量.length</code></li>
+                    <li>
+                        <h4>length关键字(可读可写)</h4>
+                        <ul>
+                            <li>读：<span>读取数组长度，并返回结果</span></li>
+                            <li>写：<span>规定数组长度，会先通过索引定位，截断后续的元素，并返回结果</span>
+                            </li>
+                            <li>length写的方式，常用途是：<span>清空数组(<code>字面量.length = 0</code>)</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            {
+                                let ageArr = [1, 5, 6, 9, 11]
+
+                                console.log(ageArr.length) // 直接读取
+
+                                ageArr.length = 3 // 只需要前3个元素
+
+                                console.log(ageArr)
+
+                                ageArr.length = 0 // 清空数组
+
+                                console.log(ageArr)
+                            }
+                        </script>
+                        <img src="img/关于关键字length/关键字length读写.png"
+                             alt="关键字length读写"
+                             title="关键字length读写">
+                        <img src="img/关于关键字length/关键字length清空数组操作以及同一数组的注意事项.png"
+                             alt="关键字length清空数组操作以及同一数组的注意事项"
+                             title="关键字length清空数组操作以及同一数组的注意事项">
+                    </li>
+                </ol>
+                <h3>索引概念(<span>及其重要</span>)</h3>
+                <ol>
+                    <li><span>从左往右，从零开始，每个元素依次自增</span></li>
+                    <li>
+                        <img src="img/什么是索引/索引图例.png"
+                             alt="索引图例"
+                             title="索引图例">
+                    </li>
+                </ol>
+                <h3>查操作</h3>
+                <ol>
+                    <li>
+                        <h4>通过索引的方式</h4>
+                        <ul>
+                            <li>语法：<code>字面量[需要查找元素的索引]</code></li>
+                            <li>如果输入的索引超过上限，则返回的值是：<code>undefiend</code></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        let ageArr = [1, "YLH", 20]
+                                        console.log(`我的名字叫：${ageArr[1]}，今年：${ageArr[2]}岁`)
+                                    }
+                                </script>
+                                <img src="img/通过索引方式——增删改查操作/通过索引查询操作.png"
+                                     alt="通过索引查询操作"
+                                     title="通过索引查询操作">
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                <h3>改操作</h3>
+                <ol>
+                    <li>
+                        <h4>通过索引的方式</h4>
+                        <ul>
+                            <li>语法：<code>字面量[索引](<span>索引元素不能为undefined</span>) = 新元素</code></li>
+                            <li>语法：<code>字面量[索引](<span>当索引元素为undefined，执行增操作</span>) = 新元素</code>
+                            </li>
+                            <li><a href="#关于复杂数据类型扩展">关于复杂数据类型扩展</a></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        let ageArr = [1, "YLH", 20]
+                                        console.log(`我的名字叫：${ageArr[1]}，今年：${ageArr[2]}岁`)
+                                        console.log(ageArr)
+
+                                        ageArr[1] = "goldenFlowerAndDust"
+                                        console.log(`我的名字叫：${ageArr[1]}，今年：${ageArr[2]}岁`)
+                                        console.log(ageArr)
+                                    }
+                                    {
+                                        let obj = {
+                                            name: 'ylh',
+                                            age: 20
+                                        }
+                                        console.log(obj)
+                                        console.log(obj.name)
+
+                                        obj.name = 'gol'
+                                        console.log(obj)
+                                    }
+                                </script>
+                                <img src="img/通过索引方式——增删改查操作/索引方式改操作以及浏览器延迟求值问题.png"
+                                     alt="索引方式改操作以及浏览器延迟求值问题"
+                                     title="索引方式改操作以及浏览器延迟求值问题">
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                <h3>增操作</h3>
+                <ol>
+                    <li>
+                        <h4>通过索引的方式</h4>
+                        <ul>
+                            <li>语法：<code>字面量[索引](<span>索引元素最好是undefined，不然就是改操作了</span>) =
+                                元素</code></li>
+                            <li><span>不是增加元素的标准操作(因为它只能再最后面添加元素，跨索引添加没有意义)</span></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        let ageArr = [1, 2, 4, 5, 20]
+
+                                        ageArr[5] = "goldenFlowerAndDust"
+
+                                        console.log(`我叫：${ageArr[5]},今年${ageArr[4]}岁`)
+                                    }
+                                </script>
+                                <img src="img/通过索引方式——增删改查操作/索引方法增操作.png"
+                                     alt="索引方法增操作"
+                                     title="索引方法增操作">
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                <h3>删操作</h3>
+                <ol>
+                    <li>
+                        <h4>通过索引的方式(不存在)</h4>
+                        <ul>
+                            <li>用 <code>delete arr[索引]</code> 虽然会删除该元素的值，但会留下 <code>empty</code> 空位，不计入
+                                length
+                                但数组长度不变，不是真正的“删除”。
+                            </li>
+                            <li>真正删除数组元素应使用 <code>splice() 方法</code>，例如 <code>arr.splice(索引, 1)</code>
+                                会删除指定位置的元素，后续元素前移，长度减一。
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <h2>数组的遍历</h2>
+        <ul>
+            <li>
+                <h3>方法一：<span>for循环遍历数组</span></h3>
+                <ol>
+                    <li>语法：<code>for(let(var、const) 初始化变量 = 0 ; 初始化变量&lt;字面量.length;
+                        改变逻辑){代码块}</code></li>
+                    <li>
+                        如：
+                        <code>
+                            <br>let ageArr = [1, 2, "hello"]
+                            <br>for(let i = 0; i < ageArr.length; i++){ <br>初始化变量，条件判断，改变逻辑缺一不可
+                            <br>&nbsp;&nbsp;console.log(ageArr[i]) 依次打印所有元素
+                            <br>}
+                        </code>
+                    </li>
+                    <li>
+                        <h4>实例</h4>
+                        <script>
+                            {
+                                let ageArr = [1, 2, "hello"]
+                                for (let i = 0; i < ageArr.length; i++) {
+                                    console.log("索引" + i + ":" + ageArr[i])
+                                }
+                            }
+                        </script>
+                        <img src="./img/遍历数组/通过for循环遍历数组.png"
+                             alt="通过for循环遍历数组"
+                             title="通过for循环遍历数组">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法二：<span>通过for....of遍历数组</span></h3>
+                <ol>
+                    <li>语法：<code>for(let(var、const) 自定义变量接受元素 of 字面量)</code></li>
+                    <li>特点：<span>获取的值，而非索引，所以直接打印即可</span></li>
+                    <li>
+                        如：
+                        <code>
+                            <br>let ageArr = [1, 2, "hello"]
+                            <br>for (let i of ageArr) { //自定义变量接受的是元素而非索引
+                            <br>&nbsp;&nbsp;console.log(i) //所以直接打印即可
+                            <br>}
+                        </code>
+                    </li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            {
+                                let ageArr = [20, 5, "hello"]
+                                for (let i of ageArr) {  //自定义变量接受的是元素而非索引
+                                    console.log(i) // 所以直接打印即可
+                                }
+                            }
+                        </script>
+                        <img src="./img/遍历数组/for...of遍历数组.png"
+                             alt="for...of遍历数组"
+                             title="for...of遍历数组">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法三：<span>forEach方法</span></h3>
+                <ol>
+                    <li>语法：<code>字面量.forEach((value[<span>值</span>],idx[<span>索引</span>])=>{代码块})</code></li>
+                    <li>语法：<code>字面量.forEach(function(value[<span>值</span>],idx[<span>索引</span>]{代码块})</code>
+                    </li>
+                    <li>forEach 的参数是一个回调函数(<span>可以使用箭头函数和function</span>)</li>
+                    <li>
+                        例1(通过箭头函数)：
+                        <br><code>
+                        <br>let ageArr = [1, 2, "hello"]
+                        <br>ageArr.forEach((value ,idx)=>{ <br>// value接受的是元素(自定义变量) ，idx接受的是索引(自定义变量)
+                        采用的箭头函数
+                        <br>&nbsp;&nbsp;console.log(`索引${idx}:${value}`) //用的是模板字符串
+                        <br>})
+                    </code>
+                        <br>例2(通过function)：
+                        <br><code>
+                        <br>let ageArr = [1, 2, "hello"]
+                        <br>ageArr.forEach(function(value,idx){ <br>//value接受的是元素(自定义变量) ，idx接受的是索引(自定义变量)
+                        采用的function
+                        <br>&nbsp;&nbsp;console.log(`索引${idx}:${value}`) //用的是模板字符串
+                        <br>})
+                    </code>
+                    </li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            {
+                                let ageArr = [1, 2, "hello"]
+
+                                ageArr.forEach((value, idx) => {
+                                    console.log(`索引${idx}:${value}`)
+                                })
+                            }
+                            {
+                                let ageArr = [11, 20, "hello"]
+
+                                ageArr.forEach(function (value, idx) {
+                                    console.log(`索引${idx}:${value}`)
+                                })
+                            }
+                        </script>
+                        <img src="./img/遍历数组/方法forEach遍历数组.png"
+                             alt="方法forEach遍历数组"
+                             title="方法forEach遍历数组">
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <h2>数组的拷贝问题</h2>
+        <ul>
+            <li>数组也是复杂数据类型</li>
+            <li>同样分栈存储和堆存储</li>
+            <li>栈的工作：<span>存储字面量和引用地址</span></li>
+            <li>堆的工作：<span>存储数据和生成地址</span></li>
+            <li>
+                <h3>想要拷贝数组，不能直接将原数组赋值给新数组</h3>
+                <ol>
+                    <li>直接赋值，则它们是同一数组，其中一个更改，另一个也会跟着改</li>
+                    <li>这就是，<span>多个变量引用同一数组(同一地址)，其中一个更改，其余均更改</span></li>
+                    <li>解决办法：<span>使用遍历的方式，挨个将元素浅拷贝如新数组，这样它们不在同一地址，不会改变原数组中的元素</span></li>
+                    <li>具体：<a href="../../第四十五节——不同数据类型的存储/第四十五节——不同数据类型的存储.html">不同数据类型的存储</a></li>
+                    <li>因为是浅拷贝，所以只对基本数据类型有效</li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>其他补充知识点</h2>
+        <ul>
+            <li>
+                <h3>数组也是复杂数据类型(引用类型)</h3>
+                <ol>
+                    <li>
+                        字面量存储在栈中，通过引用地址的方式访问数据，数据存储在堆中，
+                        并创建对应地址。所以同一数组，只要地址相同，后续更改影响的原数组。
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3 id="关于复杂数据类型扩展">关于复杂数据类型扩展</h3>
+                <ol>
+                    <li>对象、数组是引用类型。多个变量指向同一地址时，通过任何一个变量修改内部值，所有指向该地址的变量都会同步变化。这是
+                        JS 的规则，与打印无关。
+                    </li>
+                    <li>
+                        <h4>控制台特有行为（延迟求值）</h4>
+                        <ul>
+                            <li>当你在代码中执行 console.log(obj)
+                                时，<span>控制台不会立即将对象的内容“快照”下来，而是保存了该对象的引用。当你点击展开这个打印项时，控制台会去读取对象当前的状态。
+                                因此，如果你在打印之后修改了对象，展开后看到的是修改后的值。</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>这会导致一种错觉：</h4>
+                        <ul>
+                            <li>好像打印出来的对象会自动“更新”，其实不是，是你展开的时候才去读的实时值。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>对比</h4>
+                        <ul>
+                            <li>如果使用模板字符串直接访问属性（如
+                                ${obj.name}），那是在代码执行时立即取值，<span>之后修改不影响已经输出的字符串</span>。
+                            </li>
+                            <li>
+                                如果直接打印对象本身（console.log(obj)），<span>控制台展示的是一个引用，展开后才取最新值。</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>总结</h4>
+                        <ul>
+                            <li>
+                                <span>控制台的延迟求值只是调试工具的便利特性，不会改变 JavaScript
+                                本身的引用传递规则。代码逻辑仍然遵循“修改原对象，所有引用都会变”。</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
