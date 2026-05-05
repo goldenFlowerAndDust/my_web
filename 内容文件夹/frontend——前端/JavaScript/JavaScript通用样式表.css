@@ -183,6 +183,11 @@ td, th {
 code {
     color: var(--color-code);
     font-size: var(--size-span-code);
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+    display: inline-block;
+    max-width: 100%;
 }
 
 input {
