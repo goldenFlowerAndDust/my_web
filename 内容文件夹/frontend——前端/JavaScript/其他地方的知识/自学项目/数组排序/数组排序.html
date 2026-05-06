@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组排序</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        main {
+            max-width: 90vw;
+            height: 90vh;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 90%;
+            height: 90%;
+            margin: 0 auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            max-width: 100%;
+            border: 1px solid black;
+        }
+
+        button {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        #数据, #正序结果, #倒序结果 {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            word-break: break-all;
+            white-space: normal;
+            padding: 8px;
+            box-sizing: border-box;
+            background-color: #dddddd;
+            color: skyblue;
+            font-size: 2rem;
+        }
+
+        th:first-child, td:first-child {
+            width: 40%;
+        }
+
+        th:not(:first-child), td:not(:first-child) {
+            width: 30%;
+        }
+
+        span {
+            color: red;
+            font-size: 3rem;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <table>
+        <tr>
+            <th>请输入数组</th>
+            <th>
+                <button type="button" id="正序">正序</button>
+            </th>
+            <th>
+                <button type="button" id="反序">反序</button>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <div contenteditable="true" id="数据"></div>
+            </td>
+            <td>
+                <div id="正序结果"></div>
+            </td>
+            <td>
+                <div id="倒序结果"></div>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript" src="数组排序.js"></script>
+</main>
+</body>
+</html>
