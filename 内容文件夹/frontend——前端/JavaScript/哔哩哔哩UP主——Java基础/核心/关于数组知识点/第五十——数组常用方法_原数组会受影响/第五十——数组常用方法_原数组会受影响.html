@@ -3,40 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数组常用方法</title>
+    <title>数组常用方法(原数组会受影响)</title>
     <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
 </head>
 <body>
 <main>
     <header>
-        <h1>数组常用方法</h1>
+        <h1>数组常用方法(原数组会受影响)</h1>
     </header>
     <section id="section_1">
-        <h2>数组常用方法</h2>
+        <h2>数组为什么需要方法</h2>
         <ul>
-            <li><h3>数组为什么需要方法</h3></li>
-            <ol>
-                <li>
-                    数组是复杂数据类型，不能通过直接赋值来修改内容（会改变引用地址），必须使用数组方法在原有数组上进行操作。
-                </li>
-                <li>
-                    <p>比如想改变一个数组</p>
-                    <p>
-                        // 创建一个数组
-                        <br><code>var arr = [1, 2, 3]</code>
-                        <br>我们想把数组变成只有1和2两个元素
-                        <br><code>arr = [1, 2]</code>
-                    </p>
-                </li>
-                <li>以上这个操作对吗？<span>显然不对，地址不同，不是一个数组，而是重新创建了一个数组</span></li>
-                <li><span>我们要求的是，在当前数组做更改</span></li>
-                <li>所以，常规手段没有办法，这就需要借助(<span>方法了</span>)</li>
-            </ol>
             <li>
-                <h3>数组常用方法[<code>push、pop、unshift、shift、、</code>]</h3>
+                数组是复杂数据类型，不能通过直接赋值来修改内容（会改变引用地址），必须使用数组方法在原有数组上进行操作。
+            </li>
+            <li>
+                <p>比如想改变一个数组</p>
+                <p>
+                    // 创建一个数组
+                    <br><code>var arr = [1, 2, 3]</code>
+                    <br>我们想把数组变成只有1和2两个元素
+                    <br><code>arr = [1, 2]</code>
+                </p>
+            </li>
+            <li>以上这个操作对吗？<span>显然不对，地址不同，不是一个数组，而是重新创建了一个数组</span></li>
+            <li><span>我们要求的是，在当前数组做更改</span></li>
+            <li>所以，常规手段没有办法，这就需要借助(<span>方法了</span>)</li>
+        </ul>
+        <h2>数组常用方法(原数组会受到影响)</h2>
+        <ul>
+            <li>
+                <h3>数组常用方法(<span>原数组会受到影响</span>):<br><a href="#push">push</a>、<a href="#pop">pop</a>、<a href="#unshift">unshift</a>,<a
+                        href="#shift">shift</a>、<a href="#splice">splice</a>,<a href="#reverse">reverse</a>,<a
+                        href="#sort">sort</a></h3>
                 <ol>
                     <li>
-                        <h4>方法[<code>push</code>]</h4>
+                        <h4>方法[<code id="push">push</code>]</h4>
                         <ul>
                             <li>方法(<code>push</code>):是用来在数组的<span>末尾追加一个元素</span></li>
                             <li>语法：<code>字面量.push()</code><span>()内填需要追加元素</span></li>
@@ -67,7 +69,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h4>方法[<code>pop</code>]</h4>
+                        <h4>方法[<code id="pop">pop</code>]</h4>
                         <ul>
                             <li>方法(<code>pop</code>):是用来<span>删除数组最后的元素</span></li>
                             <li>语法：<code>字面量.pop()</code><span>()为空括号</span></li>
@@ -97,7 +99,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h4>方法[<code>unshift</code>]</h4>
+                        <h4>方法[<code id="unshift">unshift</code>]</h4>
                         <ul>
                             <li>方法(<code>unshift</code>):是用来在<span>数组最前面追加元素</span></li>
                             <li>语法：<code>字面量.unshift()</code><span>()内填需要添加的元素</span></li>
@@ -127,7 +129,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h4>方法[<code>shift</code>]</h4>
+                        <h4>方法[<code id="shift">shift</code>]</h4>
                         <ul>
                             <li>方法(<code>shift</code>):是用来<span>删除数组最前面的元素</span></li>
                             <li>语法：<code>字面量.shift()</code><span>()为空括号</span></li>
@@ -157,7 +159,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h4>方法[<code>splice</code>]</h4>
+                        <h4>方法[<code id="splice">splice</code>]</h4>
                         <ul>
                             <li>方法(<code>splice</code>):是用来<span>追加或删除数组内任意位置元素(<span class="span">首、尾、中间均可</span>)</span>
                             </li>
@@ -264,11 +266,145 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <h4>方法[<code id="reverse">reverse</code>]</h4>
+                        <ul>
+                            <li>方法(<code>reverse</code>):是用来<span>将数组元素，采用倒序的方式排列</span></li>
+                            <li>语法：<code>字面量.reverse()</code><span>()为空括号</span></li>
+                            <li>
+                                返回值是<span>原数组倒序后的数组</span>，因为会更改原数组，所以一般不需要<span>额外声明变量接收返回值</span>
+                            </li>
+                            <li>
+                                <h5>实例</h5>
+                                <p>
+                                    //原数组
+                                    <br><code>let Arr = [1, 2, 3, 4]</code>
+                                    <br>//想将数组元素倒序
+                                    <br><code>Arr.reverse()</code> // 用 一般不需要额外声明变量接收返回值
+                                </p>
+                                <script>
+                                    {
+                                        //原数组
+                                        let Arr = [1, 2, 3, 4]
+                                        console.log("原数组：", Arr)
+                                        //想删除最前面的元素
+                                        let res = Arr.reverse()
+                                        console.log("倒序后：", Arr)
+                                        console.log(Arr === res)
+                                    }
+                                </script>
+                                <img src="./image/reverse/reverse方法.png"
+                                     alt="reverse方法"
+                                     title="reverse方法">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法[<code id="sort">sort</code>]</h4>
+                        <ul>
+                            <li>方法(<code>sort</code>):是用来<span>sort 方法可以用来对数组元素进行排序。
+                                <br>1.如果不传参数，默认按字符串的 Unicode 码点排序（不适合数值排序）。
+                                <br>2.如果希望按数值大小排序。必须传递一个比较函数（回调函数）</span></li>
+                            <li>语法：<code>字面量.sort()</code></li>
+                            <li>
+                                返回值是<span>原数组排序后的数组</span>，因为会更改原数组，所以一般不需要<span>额外声明变量接收返回值</span>
+                            </li>
+                            <li>
+                                <h5>分两种情况</h5>
+                                <ol>
+                                    <li>当括号为空，<span>就是直接使用方法，不加参数<br>(<span
+                                            class="span">sort() 不加参数时：sort() 会将数组元素转为字符串，
+                                            然后按 Unicode 码点（字典序）排序，不适合对数字进行数值排序。</span>)</span>
+                                        <br>比如：
+                                        <code>
+                                            <br>let Arr = [5, 10, 1, 20];
+                                            <br>Arr.sort() //不加参数
+                                            <br><span>最后的结果仍然是：[11,21,32,43,5,7]</span>
+                                        </code>
+                                        <script type="text/javascript">
+                                            {
+                                                let Arr = [5, 10, 1, 20];
+                                                console.log("原数组：", Arr)
+                                                Arr.sort()  // 默认转字符串排序
+                                                console.log("排序后的数组：", Arr) // [1, 10, 20, 5]（不是数值顺序）
+                                            }
+                                        </script>
+                                        <img src="./image/sort/方法sort——不加参数.png"
+                                             alt="方法sort——不加参数"
+                                             title="方法sort——不加参数">
+                                    </li>
+                                    <li>
+                                        当sort方法接受的是一个<a
+                                            href="#回调函数">回调函数</a>，[<span>会是整个元素从大到小，或从小到大排序</span>]
+                                        <ul>
+                                            <li>形参固定两个</li>
+                                            <li>形参命名自定义</li>
+                                            <li>具体操作流程：从数组挑两个元素，进行比较(<span>直到所有元素比较结束</span>)
+                                            </li>
+                                            <li><code>第一个参数 - 第二个参数 </code><span>升序(从小到大)</span></li>
+                                            <li><code>第二个参数 - 第一个参数 </code><span>降序(从大到小)</span></li>
+                                        </ul>
+                                        <br>比如：
+                                        <code>
+                                            <br>let Arr = [11, 21, 32, 43, 5, 7]
+                                            <br>Arr.sort(function(a,b){
+                                            <br>&nbsp;&nbsp;return a-b; // 从小到大排序
+                                            <br>})
+                                            <br>Arr.sort(function(a,b){
+                                            <br>&nbsp;&nbsp;return b-a; // 从大到小排序
+                                            <br>})
+                                        </code>
+                                        <script type="text/javascript">
+                                            {
+                                                let Arr = [11, 21, 32, 43, 5, 7]
+                                                console.log("原数组：", Arr)
+                                                Arr.sort(function (a, b) {
+                                                    return a - b // 从小到大排序
+                                                })
+                                                console.log("从小到大：", Arr)
+                                                Arr.sort(function (a, b) {
+                                                    return b - a // 从大到小排序
+                                                })
+                                                console.log("从大到小：", Arr)
+                                            }
+                                        </script>
+                                        <img src="./image/sort/方法sort——接收回调函数.png"
+                                             alt="方法sort——接收回调函数"
+                                             title="方法sort——接收回调函数">
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
                 </ol>
             </li>
         </ul>
     </section>
-    <section id="section_2"></section>
+    <section id="section_2">
+        <h2>补充知识</h2>
+        <ul>
+            <li>
+                <h3 id="回调函数">回调函数</h3>
+                <ol>
+                    <li><span>形参命名自定义</span></li>
+                    <li><span>形参上限由方法决定</span></li>
+                    <li><span>实参由函数内部决定，编码者无权干涉</span></li>
+                    <li><span>可以使用return，输出返回值</span></li>
+                    <li><span>但是有些方法，会忽略返回值(forEach),返回值始终是undefined</span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>普通函数</h3>
+                <ol>
+                    <li><span>形参命名自定义</span></li>
+                    <li><span>实参可以调用函数，传参</span></li>
+                    <li><span>可以使用return，输出返回值</span></li>
+                    <li>单独使用return，返回值是undefined</li>
+                </ol>
+            </li>
+            <li></li>
+        </ul>
+    </section>
     <footer>
         <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
     </footer>
