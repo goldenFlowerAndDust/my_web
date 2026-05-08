@@ -249,6 +249,9 @@ video{
 
 }
 
+.span {
+    color: skyblue;
+}
 
 @media (max-width: 1500px) {
     h1 {

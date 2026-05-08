@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../JavaScript通用样式表.css">
+</head>
+<body>
+<h1>forEach</h1>
+<script>
+    let Arr = [3, 5, 1]
+    Arr.forEach(function (value,index,array){
+       console.log("当前元素:",value + "\n当前元素索引:",index + "\n数组是:" ,array)
+    })
+</script>
+<h1>for循环遍历</h1>
+<script>
+    {
+        let Arr = [1, 5, 6, 8, 10]
+        for (let i = 0; i < Arr.length; i++) {
+            if (i === 2) continue
+            if (i === 4) break
+            console.log("当前索引是：", i, "\n当前元素是：", Arr[i])
+        }
+    }
+</script>
+<h1>for....of</h1>
+<script type="text/javascript">
+    {
+
+        // 原数组
+        let Arr = [1, 5, 11, 20, 50]
+        for (let i of Arr) {
+            if (i === 11) continue
+            if (i === 50) break
+            console.log("当前元素是:", i)
+
+        }
+    }
+</script>
+<h1>map遍历</h1>
+<script type="text/javascript">
+    {
+
+        //原数组
+        let Arr = [1, 5, 20, 100, 200]
+        let Arr2 = Arr.map(num => num * 2)
+        console.log("原数组：", Arr)
+        console.log("新数组：", Arr2)
+    }
+</script>
+<h1>some</h1>
+<script type="text/javascript">
+    {
+        //原数组
+        let urses = [
+            {name: "张三", age: 17},
+
+            {name: "李四", age: 22}
+
+        ]
+        let cz = urses.some(urse => urse.age >= 18)
+        console.log(cz)
+    }
+</script>
+<h1>find</h1>
+<script type="text/javascript">
+    {
+        //原数组
+        let Arr = [1, 5, 20, 100]
+        let num = Arr.find(nume => nume > 30)
+        console.log(num)
+    }
+</script>
+<h1>findIndex</h1>
+<script type="text/javascript">
+    {
+        let Arr = [1, 2, 5, 20]
+        let SY = Arr.findIndex(num => num > 5)
+        console.log(SY)
+    }
+
+</script>
+<h1>filter</h1>
+<script type="text/javascript">
+    {
+        let Arr = [1, 100, 20, 50, 70]
+        let Arr2 = Arr.filter(num => num > 20)
+        console.log(Arr2)
+    }
+    {
+        let arr = [10, 20, 30];
+        if (arr.length > 2 && arr[0] < arr[1] && arr[1] < arr[2]) {
+            console.log("Increasing");
+        } else if (arr.length > 2 && arr[0] > arr[1] && arr[1] > arr[2]) {
+            console.log("Decreasing");
+        } else {
+            console.log("Other");
+        }
+    }
+    {
+        let str = "Web Development";
+        if (str.includes("web")) {
+            console.log("Found");
+        } else if (str.startsWith("Web")) {
+            console.log("Starts with Web");
+        } else {
+            console.log("Not found");
+        }
+    }
+    {
+        var arr = [1, 2, 3, 4, 5];
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 === 1) {
+                arr.splice(i, 1);
+                i--;
+            }
+        }
+        console.log(arr);
+    }
+</script>
+</body>
+</html>
