@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组案例——数组去重</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>数组案例——数组去重</h1>
+    </header>
+    <section id="section_1">
+        <h2>数组去重</h2>
+        <h3>方法一：使用for、push、indexOf</h3>
+        <div>
+            <code>
+                let Arr = [1, 5, 8, 5, 1, 8, 10, 1, 8, 10, 20]
+                <br>let Arr2 = []  //创建空数组，用于接收去重后的元素
+                <br>for (let i = 0; i < Arr.length; i++) {  // i 为索引
+                <br>&nbsp;&nbsp;if (Arr2.indexOf(Arr[i]) === -1) { <br>indexOf查找第一个匹配的元素，并返回值对应的索引值，反过来说：当没有匹配元素，返回值为-1，所以可以利用这个返回值，通过if做判断，保证只有不匹配的元素，添加进新数组
+                <br>&nbsp;&nbsp;Arr2.push(Arr[i]) // 再通过push方法，逐个添加元素
+                <br>&nbsp;&nbsp;}
+                <br>}
+            </code>
+        </div>
+        <script>
+            {
+                let Arr = [1, 5, 8, 5, 1, 8, 10, 1, 8, 10, 20]
+
+                let Arr2 = []
+                for (let i = 0; i < Arr.length; i++) {
+                    if (Arr2.indexOf(Arr[i]) === -1) {
+                        Arr2.push(Arr[i])
+                    }
+                }
+                console.log("原数组：", Arr)
+                console.log("新数组：", Arr2)
+            }
+        </script>
+        <h3>方法二：使用双for循环</h3>
+        <div>
+            <code>
+                let Arr = [1, 5, 8, 5, 1, 8, 10, 1, 8, 10, 20]
+                <br>let Arr2 = Arr.slice()
+                <br>for (let i = 0; i < Arr2.length; i++) {
+                <br>&nbsp;&nbsp;for (let j = i + 1; j < Arr2.length; j++) {
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;if (Arr2[i] === Arr2[j]) {
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;Arr2.splice(j,1) // 删除当前元素，并更新数组长度
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;// 使用delete 删除不改变长度，最终数组里会留空位
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;j-- // 因为删除了一个元素，索引需要回退
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;}
+                <br>&nbsp;&nbsp;}
+                <br>}
+            </code>
+        </div>
+        <script>
+            {
+                let Arr = [1, 5, 8, 5, 1, 8, 10, 1, 8, 10, 20]
+                let Arr2 = Arr.slice()
+                for (let i = 0; i < Arr2.length; i++) {
+                    for (let j = i + 1; j < Arr2.length; j++) {
+                        if (Arr2[i] === Arr2[j]) {
+                            Arr2.splice(j, 1) // 删除当前元素，并更新数组长度
+                            // 使用delete 删除不改变长度，最终数组里会留空位
+                            j-- // 因为删除了一个元素，索引需要回退
+                        }
+                    }
+                }
+                console.log("原数组：", Arr)
+                console.log("新数组：", Arr2)
+            }
+        </script>
+        <h3>方法三：使用indexOf以及filter</h3>
+        <div>
+            <code>
+                let Arr = [1, 5, 8, 5, 1, 8, 10, 20]
+                <br>let Arr2 = Arr.filter(function (item, index) { <br>通过filter遍历数组并返回符合条件的元素。第一个参数为元素，第二个参数为索引，存在第三个参数，为调用filter方法的原数组
+                <br>&nbsp;&nbsp;return Arr.indexOf(item) === index // 因为indexOf返回第一个匹配的索引值
+                <br>})
+            </code>
+        </div>
+        <script>
+            {
+                let Arr = [1, 5, 8, 5, 1, 8, 10, 20]
+                let Arr2 = Arr.filter(function (item, index) {
+                    return Arr.indexOf(item) === index
+                })
+                console.log("原数组：", Arr)
+                console.log("新数组：", Arr2)
+            }
+        </script>
+        <h3>方法四：利用对象(<span>对象不存相同的键</span>)</h3>
+        <div>
+            <code>
+                let Arr = [1, 5, 8, 5, 1, 8, 10, 20]
+                <br>let obj = {} // 创建空对象
+
+                <br>for (let i = 0; i < Arr.length; i++) { // i为索引
+                <br>&nbsp;&nbsp;obj[Arr[i]] = "随便" <br>// 因为对象，键不能相同，所以可以利用这个规则，将元素等价于键，这样的话，相同的键会被自动忽略
+                <br>}
+                <br>
+
+                <br>let Arr2 = [] // 建立一个空数组
+                <br>for (let i in obj) { // 遍历对象，i是键
+                <br>&nbsp;&nbsp;Arr2.push(Number(i)) //将键从字符串类型转为数值类型，并通过方法push依次追加元素
+                <br>}
+                <br>
+            </code>
+        </div>
+        <script>
+            {
+                let Arr = [1, 5, 8, 5, 1, 8, 10, 20]
+                let obj = {}
+
+                for (let i = 0; i < Arr.length; i++) {
+                    obj[Arr[i]] = "随便"
+                }
+                console.log(obj)
+
+                let Arr2 = []
+                for (let i in obj) {
+                    Arr2.push(Number(i))
+                }
+                console.log(Arr2)
+            }
+        </script>
+        <h3>方法五：set对象</h3>
+        <div>
+            <ul>
+                <li>在ES6后，新出现的<code>set结构</code></li>
+                <li>在set结构种，<span>绝对不会出现，重复的元素，会自动过滤掉重复的元素</span></li>
+                <li><span>set结构类似于数组，但不是数组(<span class="span">因为绝对不会出现重复元素，数组是允许的</span>)</span></li>
+                <li>语法：<code>let(var、const) 字面量(变量) = new Set()</code></li>
+                <li>使用set结构去重后，需要使用方法<code>Array.from()</code>将set结构，重新转为数组</li>
+            </ul>
+            <code>
+                let Arr = [1, 5, 8, 5, 1, 8, 10, 20]
+                <br>let set1 = new Set(Arr) // new一个set结构。自动过滤重复元素
+                <br>let Arr2 = Array.from(set1) // 将set结构，转为数组
+                <br>console.log("原数组：" ,Arr)
+                <br>console.log("set结构：",set1)
+                <br>console.log("将set结构转为数组：",Arr2)
+            </code>
+        </div>
+        <script>
+            {
+                let Arr = [1, 5, 8, 5, 1, 8, 10, 20]
+                let set1 = new Set(Arr) // new一个set结构。自动过滤重复元素
+                let Arr2 = Array.from(set1)  // 将set结构，转为数组
+                console.log("原数组：" ,Arr)
+                console.log("set结构：",set1)
+                console.log("将set结构转为数组：",Arr2)
+            }
+        </script>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
