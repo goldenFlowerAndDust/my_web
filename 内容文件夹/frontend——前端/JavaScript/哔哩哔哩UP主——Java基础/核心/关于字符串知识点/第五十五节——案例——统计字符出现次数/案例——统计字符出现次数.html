@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例——统计字符出现次数</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>案例——统计字符出现次数</h1>
+    </header>
+    <section id="section_1">
+        <script type="text/javascript">
+            {
+                let str = "hello-javascript"
+
+                function str2(string) {
+                    let obj = {}
+                    for (let i = 0; i < string.length; i++) {
+                        let key = string[i]
+                        if (obj[key] === undefined) {
+                            obj[key] = 1
+                        } else {
+                            obj[key] += 1
+                        }
+                    }
+                    return obj
+                }
+
+                console.log(str2(str))
+            }
+            {
+                let str = "goldenFlowerAndDust"
+
+                function str3(string) {
+                    let obj = {}
+                    for (let value of string) {
+                        if (obj[value] === undefined) {
+                            obj[value] = 1
+                        } else {
+                            obj[value]++
+                        }
+                    }
+                    return obj
+                }
+                let str4 = str3(str)
+                console.log(str4)
+
+                function obj(Obj){
+                    let JZD = ""
+                    for (let key in Obj) {
+                        let key2 = key
+                        let value = Obj[key]
+                        JZD += `<li>${key2} 有：${value}个</li>`
+                    }
+                    return JZD
+                }
+                document.writeln(obj(str4))
+            }
+        </script>
+        <img src="./image/案例——统计字符出现的次数.png"
+             alt="案例——统计字符出现的次数"
+             title="案例——统计字符出现的次数">
+    </section>
+    <section id="section_2">
+        <h2>补充知识</h2>
+        <ul>
+            <li><span>存储数据尽量使用对象</span></li>
+            <li>回顾增操作：<code>字面量[键] = value</code><span>其中键不存在</span></li>
+            <li>回顾改操作：<code>字面量[键] = 新value</code><span>其中键存在</span></li>
+            <li>回顾查操作：<code>字面量[键]</code><span>其中键存在，则返回正常值,<span
+                    class="span">若不存在，返回值<code>undefined</code></span></span></li>
+            <li>回顾删操作：<code>delete 字面量[键]</code><span>其中键存在</span></li>
+            <li><span>查不存在的键，返回值是<code>undefined</code>,主要常用于判断键是否存在</span></li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

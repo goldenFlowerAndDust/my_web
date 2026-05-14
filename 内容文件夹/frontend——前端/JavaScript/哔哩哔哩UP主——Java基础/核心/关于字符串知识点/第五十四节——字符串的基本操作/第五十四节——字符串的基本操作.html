@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串的基本操作</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>字符串的基本操作</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>
+                <h2>创建字符串方法</h2>
+                <ol>
+                    <li>
+                        <h3>通过字面量</h3>
+                        <ul>
+                            <li>语法：<code>let(const、var) 字面量 = "内容"</code></li>
+                            <li>总结就是：<span>通过双引号包裹的值，再赋值给字面量(也可以理解位变量)，同样需要先声明</span>
+                            </li>
+                            <li>
+                                <h4>案例</h4>
+                                <code>
+                                    let name = "张三"
+                                    <br><span>name就是字面量，let是声明关键字(同时还有var、const)，【"张三"】这个整体是一个字符串</span>
+                                    <br>就是将这个字符串赋值给字面量存储
+                                </code>
+                                <script>
+                                    let name = "张三"
+                                    console.log(`${name} 是一个${typeof name}类型`)
+                                </script>
+                                <img src="image/创建字符串的方法/通过字面量创建字符串.png"
+                                     alt="通过字面量创建字符串"
+                                     title="通过字面量创建字符串">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>通过构造函数</h3>
+                        <ul>
+                            <li>语法：<code>let(const、var) 字面量 = new String("内容")</code></li>
+                            <li>总结就是：<span>构造函数就是一个函数，配合 new 调用</span></li>
+                            <li><span>new 构造函数() 这个整体是一个表达式，它的值就是新创建的对象。</span></li>
+                            <li><span>值是一个对象，需要通过<code>JSON.stringify()</code>方法，输出成字符串，但是：<span
+                                    class="span">输出结果被双引号包裹,所以实际开发应该避免使用</span>构造函数的方式，创建字符串</span>
+                            </li>
+                            <li>注意：<span>实际开发中，字符串基本都用字面量（"..."），很少用 new String</span></li>
+                            <li>
+                                <h4>案例</h4>
+                                <code>
+                                    let name = new String("李四")
+                                    <br><span>name是字面量，let是声明关键字(同时还有var、const)，[new String()]这个整体就是<span
+                                        class="span">构造函数</span></span>
+                                </code>
+                                <script>
+                                    {
+                                        let name = new String("hello")
+                                        console.log(name, "是一个" + typeof name + "类型")
+                                        console.log(JSON.stringify(name), "是一个" + typeof JSON.stringify(name) + "类型")
+                                    }
+                                </script>
+                                <img src="image/创建字符串的方法/通过构造函数的方法创建字符串.png"
+                                     alt="通过构造函数的方法创建字符串"
+                                     title="通过构造函数的方法创建字符串">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>String类型的注意事项</h3>
+                        <ul>
+                            <li>
+                                <span>使用点语法或中括号访问时，字符串会临时转换为 String 对象</span>
+                            </li>
+                            <li><span>构造函数创建的字符串是永久的 String 对象</span></li>
+                            <li>因为被转换为String对象，<span>所以拥有属性和方法(<span
+                                    class="span">length、slice.....</span>)</span></li>
+                            <li>
+                                <h4>总结</h4>
+                                <ol>
+                                    <li>字符串是原始类型，不是对象，但可以像对象一样调用方法，这是因为 JS
+                                        自动进行了装箱操作。
+                                    </li>
+                                    <li>
+                                        字符串字面量：<span>不可变、能查(索引/方法)</span>、<span>改、增、删都会产生新字符串，无法保留自定义属性</span>
+                                    </li>
+                                    <li>
+                                        自动装箱：<span>点语法和中括号访问时、临时变成对象、用完(<span>调用完方法或使用属性</span>)即毁、所以不能用变量接收String对象，
+                                        但是通过(<span>调用方法或使用属性</span>)所返回的值会被保留下来</span>
+                                    </li>
+                                    <li>
+                                        调用方法或使用属性<span>如果只要使用一次，则最好打输出结果直接使用，并不需要声明变量接收返回值</span><span
+                                            class="span">反之，如果要复用，则声明变量接收返回值</span></li>
+                                    <li>new
+                                        String:<span>创建真实对象，可挂属性，但类型为object，不推荐使用，仅需知道概念</span>
+                                    </li>
+                                    <li>new String 创建的对象与原始字符串类型不同（typeof 为 object），容易引发 === 比较的
+                                        bug，所以实际开发完全不用。
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                <h2>一些常用操作</h2>
+                <ol>
+                    <li>
+                        <h2>属性<code>length</code></h2>
+                        <ol>
+                            <li>该属性作用：<span>返回字符串的长度</span></li>
+                            <li>语法：<code>字面量.length</code></li>
+                            <li>返回值是数字(字符串长度【number类型】)，所以<span>直接引用或声明变量接收返回值【<span
+                                    class="span">按需求来</span>】</span></li>
+                            <li><span>只能读，不能写，也就是无法更改原字符串</span></li>
+                            <li>
+                                <h3>实例</h3>
+                                <script type="text/javascript">
+                                    {
+                                        let str = "hello"
+                                        let Length = str.length
+
+                                        console.log(str + "长度是：", Length)
+                                    }
+                                </script>
+                                <img src="image/length/属性length.png"
+                                     alt="方法length"
+                                     title="方法length">
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h3>访问String对象，字符串的单个字符</h3>
+                        <ul>
+                            <li>通过<span>中括号+索引的方式</span></li>
+                            <li>语法：<code>字面量[索引]</code></li>
+                            <li>注意：<span>索引从0开始</span></li>
+                            <li><span>通过方法<code>JSON.stringify()</code>转成的字符串，双引号也占索引位子</span></li>
+                            <li><span>两种创建字符串的方式，都支持这种方法</span></li>
+                            <li><span>只能读，不能写，也就是无法更改原字符串</span></li>
+                            <li>
+                                <h4>实例</h4>
+                                <script type="text/javascript">
+                                    {
+                                        let str = "hello"
+                                        console.log(str, "第5个字符是：", str[4])
+                                        console.log(JSON.stringify(str), "使用方法，第5个字符是：", JSON.stringify(str)[4])
+                                    }
+                                </script>
+                                <img src="./image/获取单个字符/获取单个字符.png"
+                                     alt="获取单个字符"
+                                     title="获取单个字符">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>字符串的遍历(<span>同样只读，不能更改</span>)</h3>
+                        <ul>
+                            <li>
+                                <h4>for</h4>
+                                <ol>
+                                    <li><span>通过for循环，获取索引，通过中括号依次打印字符</span></li>
+                                    <li>语法：<code>for (let(const、var) 字面量; 字面量 < 字符串的字面量.length;
+                                        字面量++){代码块}</code></li>
+                                    <li>总结就是：<span>声明字面量(变量)，接收索引，循环条件小于字符串的长度(<span
+                                            class="span">因为索引从0开始</span>)，<br>改变逻辑，字面量自增【<span
+                                            class="span">这样就获取了所有索引</span>】，最后通过中括号即可</span></li>
+                                    <li>
+                                        <h5>实例</h5>
+                                        <script type="text/javascript">
+                                            {
+                                                let str = "hello"
+
+                                                for (let i = 0; i < str.length; i++) {
+                                                    console.log(str[i])
+                                                }
+                                            }
+                                        </script>
+                                        <img src="./image/遍历/for循环遍历字符串.png"
+                                             alt="for循环遍历字符串"
+                                             title="for循环遍历字符串">
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h4>for....in</h4>
+                                <ol>
+                                    <li><span>通过for..in循环，获取索引值，然后依次打印字符</span></li>
+                                    <li>语法：<code>for (let(const、var) 字面量 in 字符串的字面量){代码块}</code></li>
+                                    <li>
+                                        总结就是：<span>声明字面量，接收索引值，然后<code>in</code>关键字，字符串的字面量，<span
+                                            class="span">该方法，不需要初始化变量，循环条件，改变逻辑</span>循环次数会自动按字符串长度决定，<span
+                                            class="span">会直接将索引值赋值给字面量(for循环声明的)</span>这样就获取了所有索引值，最后通过中括号方法即可</span>
+                                    </li>
+                                    <li>
+                                        <h5>实例</h5>
+                                        <script type="text/javascript">
+                                            {
+                                                let str = "word"
+
+                                                for (let i in str) {
+                                                    console.log(str[i])
+                                                }
+                                            }
+                                        </script>
+                                        <img src="./image/遍历/for....in方法遍历.png"
+                                             alt="for....in方法遍历"
+                                             title="for....in方法遍历">
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h4>for....of</h4>
+                                <ol>
+                                    <li><span>通过for..of循环，直接获取字符，然后依次打印字符</span></li>
+                                    <li>语法：<code>for (let(const、var) 字面量 of 字符串的字面量){代码块}</code></li>
+                                    <li>
+                                        总结就是：<span>声明字面量，接收索引值，然后<code>of</code>关键字，字符串的字面量，<span
+                                            class="span">该方法，不需要初始化变量，循环条件，改变逻辑</span>循环次数会自动按字符串长度决定，<span
+                                            class="span">会直接将字符赋值给字面量(for循环声明的)</span>这样就获取了所有字符，最后直接打印即可</span>
+                                    </li>
+                                    <li>
+                                        <h5>实例</h5>
+                                        <script type="text/javascript">
+                                            {
+                                                let str = "hello"
+
+                                                for (let chart of str) {
+                                                    console.log(chart)
+                                                }
+                                            }
+                                        </script>
+                                        <img src="./image/遍历/for...of方法遍历.png"
+                                             alt="for...of方法遍历"
+                                             title="for...of方法遍历">
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li></li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
