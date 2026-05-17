@@ -23,10 +23,466 @@
                     <li><span>字符串返回值始终是新字符串，所以使用方法，需要声明变量接收返回值</span></li>
                 </ol>
             </li>
-            <li></li>
+            <li>
+                <h3>String对象的方法</h3>
+                <ol>
+                    <li>
+                        <h4>方法<code>charAt</code></h4>
+                        <ul>
+                            <li>该方法<span>返回索引对应的字符</span></li>
+                            <li>语法：<code>字面量.charAt(索引)</code></li>
+                            <li>返回值是<span>索引对应的字符</span></li>
+                            <li>不会对原字符串产生影响，所以<span>需要直接使用或声明变量接收返回值</span></li>
+                            <li><span>索引从0开始</span></li>
+                            <li>注意通过方法<code>JSON.stringify()</code>转成的字符串，双引号计入索引值</li>
+                            <li><span>创建字符串的两种方法均适用</span></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        const str = new String("helloWord")
+
+                                        const str2 = "hello"
+
+
+                                        const char = str.charAt(6)
+                                        const char2 = str2.charAt(4)
+
+                                        console.log(str, "第6个字符是：", char)
+                                        console.log(str2, "第4个字符是：", char2)
+                                        console.log(JSON.stringify(str), "第6个字符是：", JSON.stringify(str)[6])
+                                    }
+                                </script>
+                                <img src="./image/charAt/方法：charAt().png"
+                                     alt="方法：charAt()"
+                                     title="方法：charAt()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>charCodeAt</code></h4>
+                        <ul>
+                            <li>该方法<span>返回索引对应的字符编码(<span
+                                    class="span"><a href="#ASCII码">ASCII码</a>以及<a
+                                    href="#Unicode编码">unicode编码</a>(<span>也叫万国码</span>)</span>)</span></li>
+                            <li>语法：<code>字面量.charCodeAt(索引)</code></li>
+                            <li>返回值是<span>索引对应的字符编码</span></li>
+                            <li>不会对原字符串产生影响，所以<span>需要直接使用或声明变量接收返回值</span></li>
+                            <li><span>索引从0开始</span></li>
+                            <li>注意通过方法<code>JSON.stringify()</code>转成的字符串，双引号计入索引值</li>
+                            <li>
+                                同时也可以通过方法<code>String.fromCharCode(编码)</code>，<span>将对应编码，转成对应的图形</span>
+                            </li>
+                            <li><span>创建字符串的两种方法均适用</span></li>
+                            <li>
+                                <h5>实例(通过方法，将编码转换成对应字符)</h5>
+                                <script type="text/javascript">
+                                    {
+                                        // 已知大写字母ASCII码：65~90   小写字母 ： 97~122 数字 ： 0~9 48~57
+
+                                        const capital = []
+                                        const lowercase = []
+                                        const number = []
+
+                                        for (let i = 65; i <= 90; i++) {
+                                            capital.push(String.fromCharCode(i))
+                                        }
+                                        for (let i = 97; i <= 122; i++) {
+                                            lowercase.push(String.fromCharCode(i))
+                                        }
+                                        for (let i = 48; i <= 57; i++) {
+                                            number.push(String.fromCharCode(i))
+                                        }
+                                        document.writeln(`大写字母：${capital.join('、')}`)
+                                        document.writeln(`<br>小写字母：${lowercase.join('、')}`)
+                                        document.writeln(`<br>0~9数字：${number.join('、')}`)
+                                    }
+                                </script>
+                                <img src="./image/charCodeAt与String.fromCharCode/方法：charCodeAt与String.fromCharCode().png"
+                                     alt="方法：charCodeAt与String.fromCharCode()"
+                                     title="方法：charCodeAt与String.fromCharCode()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>toUpperCase</code></h4>
+                        <ul>
+                            <li>该方法：<span>将所有字母转换成大写</span></li>
+                            <li>语法：<code>字面量.toUpperCase()</code></li>
+                            <li>返回值是<span>将原字符串的所有字母转成大写，生成的新字符串</span></li>
+                            <li>不会对原字符串产生影响，所以<span>需要直接使用或声明变量接收返回值</span></li>
+                            <li><span>注意：只能将字母转换，汉字和特殊字符不行</span></li>
+                            <li><span>创建字符串的两种方法均适用</span></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        const str = new String("hElIoWOrd-你好世界")
+                                        const str2 = "hElIoWOrd-你好世界"
+
+                                        console.log(str.toUpperCase())
+                                        console.log(str2.toUpperCase())
+                                    }
+                                </script>
+                                <img src="./image/toUpperCase/方法：toUpperCase().png"
+                                     alt="方法：toUpperCase()"
+                                     title="方法：toUpperCase()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>toLowerCase</code></h4>
+                        <ul>
+                            <li>该方法：<span>将所有字母转换成小写</span></li>
+                            <li>语法：<code>字面量.toLowerCase()</code></li>
+                            <li>返回值是<span>将原字符串的所有字母转成小写，生成的新字符串</span></li>
+                            <li>不会对原字符串产生影响，所以<span>需要直接使用或声明变量接收返回值</span></li>
+                            <li><span>注意：只能将字母转换，汉字和特殊字符不行</span></li>
+                            <li><span>创建字符串的两种方法均适用</span></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        const str = new String("hElLoWOrd-你好世界")
+                                        const str2 = "hElLoWOrd-你好世界"
+
+                                        console.log(str.toLowerCase())
+                                        console.log(str2.toLowerCase())
+                                    }
+                                </script>
+                                <img src="./image/toLowerCase/方法：toLowerCase().png"
+                                     alt="方法：toLowerCase()"
+                                     title="方法：toLowerCase()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>substr</code></h4>
+                        <ul>
+                            <li>该方法：<span>主要是截取字符串</span></li>
+                            <li>语法：<code>字面量.substr(开始索引,需要截取字符的<span>个数</span>)</code></li>
+                            <li>返回值是<span>将截取的元素，生成的新字符串</span></li>
+                            <li>不会对原字符串产生影响，所以<span>需要直接使用或声明变量接收返回值</span></li>
+                            <li>注意:<span>第一个参数是：开始索引，<span
+                                    class="span">第二个参数，是需要截取的个数</span></span></li>
+                            <li><span>创建字符串的两种方法均适用</span></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        const str = new String("helloWord-你好世界")
+                                        const str2 = "helloWord-你好世界"
+
+                                        console.log(str.substr(0, 9))
+                                        console.log(str2.substr(10, 4))
+                                    }
+                                </script>
+                                <img src="./image/substr/方法：substr.png"
+                                     alt="方法：substr"
+                                     title="方法：substr">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>substring</code></h4>
+                        <ul>
+                            <li>该方法：<span>主要是截取字符串</span></li>
+                            <li>
+                                语法：<code>字面量.substr(开始索引,结束索引[<span>包含开始索引字符及结束索引之间的字符，不包含结束索引字符</span>])</code>
+                            </li>
+                            <li>返回值是<span>将截取的元素，生成的新字符串</span></li>
+                            <li>不会对原字符串产生影响，所以<span>需要直接使用或声明变量接收返回值</span></li>
+                            <li>注意:<span>第一个参数是：开始索引，<span
+                                    class="span">第二个参数，是结束索引(<span>但是同样是：包前不包后</span>)</span></span>
+                            </li>
+                            <li><span>只写开始索引：<span
+                                    class="span">截取的是开始索引之后的所有字符(包含开始索引字符)</span></span></li>
+                            <li><span>创建字符串的两种方法均适用</span></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        const str = new String("helloWord-你好世界")
+                                        const str2 = "helloWord-你好世界"
+
+                                        console.log(str.substring(0, 9).toLowerCase())
+                                        console.log(str2.substring(10, 14))
+                                    }
+                                </script>
+                                <img src="./image/substring/方法：substring().png"
+                                     alt="方法：substring()"
+                                     title="方法：substring()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>slice</code></h4>
+                        <ul>
+                            <li>该方法：<span>主要是截取字符串</span></li>
+                            <li>
+                                语法：<code>字面量.slice(开始索引,结束索引[<span>包含开始索引字符及结束索引之间的字符，不包含结束索引字符</span>])</code>
+                            </li>
+                            <li>返回值是<span>将截取的元素，生成的新字符串</span></li>
+                            <li>不会对原字符串产生影响，所以<span>需要直接使用或声明变量接收返回值</span></li>
+                            <li>注意:<span>第一个参数是：开始索引，<span
+                                    class="span">第二个参数，是结束索引(<span>但是同样是：包前不包后</span>)</span></span>
+                            </li>
+                            <li><span>只写开始索引：<span
+                                    class="span">截取的是开始索引之后的所有字符(包含开始索引字符)</span></span></li>
+                            <li><span>与substring不同的是：可以传负数</span></li>
+                            <li><span>创建字符串的两种方法均适用</span></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        const str = new String("helloWord-你好世界")
+                                        const str2 = "helloWord-你好世界"
+
+                                        console.log(str.slice(0, -5).toUpperCase())
+                                        console.log(str2.slice(10))
+                                    }
+                                </script>
+                                <img src="./image/slice/方法：slice().png"
+                                     alt="方法：slice()"
+                                     title="方法：slice()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>replace</code></h4>
+                        <ul>
+                            <li>该方法：<span>主要是替换字符串</span></li>
+                            <li>
+                                语法：<code>字面量.replace("需要替换的字符","想要替换成的字符")</code>
+                            </li>
+                            <li>返回值是<span>使用方法替换后，生成的新字符串</span></li>
+                            <li>不会对原字符串产生影响，所以<span>需要直接使用或声明变量接收返回值</span></li>
+                            <li>注意:<span>第一个参数：需要替换的字符，第二个参数：<span
+                                    class="span">想要将第一个参数替换成的字符</span></span>
+                            </li>
+                            <li><span>严格匹配：只有与第一个参数严格相等才会被替换,<br><span
+                                    class="span">只会替换第一个匹配的字符</span></span></li>
+                            <li><span>创建字符串的两种方法均适用</span></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        const str = new String("helloWord-你好世界")
+                                        const str2 = "helloWord-你好世界"
+
+                                        console.log(str.replace("Word", "JavaScript"))
+                                        console.log(str2.replace('世界', "JS"))
+                                    }
+                                </script>
+                                <img src="./image/replace/方法：replace().png"
+                                     alt="方法：replace()"
+                                     title="方法：replace()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>split</code></h4>
+                        <ul>
+                            <li>该方法：<span>主要是将字符串转为数组</span></li>
+                            <li>
+                                语法：<code>字面量.split("分割符")</code>
+                            </li>
+                            <li>返回值是<span>使用方法，生成的数组</span></li>
+                            <li>不会对原字符串产生影响，所以<span>需要直接使用或声明变量接收返回值</span></li>
+                            <li>
+                                <h5>注意：</h5>
+                                <ol>
+                                    <li><span>分割符可以是任何字符</span></li>
+                                    <li><span>数组元素是分割符分割的字符串</span></li>
+                                    <li>数组不会因为，分隔符而改变，规则：<span>数组内的元素由英文逗号隔开</span></li>
+                                    <li>当分割符是：<span>空格的时候<span class="span">是将每个字符，都转成数组元素</span></span>
+                                    </li>
+                                    <li><span>分割符是严格匹配的：中英文标点，字符大小写都会产生意外结果</span></li>
+                                </ol>
+                            </li>
+                            <li><span>创建字符串的两种方法均适用</span></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    {
+                                        const str = new String("你好！我叫！golden-flower！And-Dust")
+                                        const str2 = "你好！我叫！golden-flower！And-Dust"
+
+                                        console.log(str.split("！"))
+                                        console.log(str2.split("！"))
+                                    }
+                                </script>
+                                <img src="./image/split/方法：split().png"
+                                     alt="方法：split()"
+                                     title="方法：split()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 id="indexOf">方法<code>indexOf</code></h3>
+                        <ul>
+                            <li>方法(<code>indexOf</code>):是用来<span>返回查找字符的索引值</span></li>
+                            <li>
+                                语法：<code>字面量.indexOf(需要查找的元素,开始查找索引)</code>
+                            </li>
+                            <li>返回值是<span>一个索引</span></li>
+                            <li><span>需要声明变量接收返回值，或直接使用</span></li>
+                            <li>
+                                <h4>注意：</h4>
+                                <ol>
+                                    <li><span>若有重复的字符，只会查找第一个符合的索引</span></li>
+                                    <li>
+                                        <h5>只传第一参数</h5>
+                                        <ol>
+                                            <li>从索引0开始找</li>
+                                            <li>
+                                                <h5>实例1(只传第一个参数)</h5>
+                                                <script>
+                                                    {
+                                                        //原字符串
+                                                        let str = "goldenFlowerAndDust"
+                                                        console.log("原字符串：", str)
+                                                        // 查找字符F的位置
+                                                        console.log("F的索引：", str.indexOf("F"))
+                                                    }
+                                                </script>
+                                                <img src="./image/indexOf/方法：indexOf()——只传一个参数.png"
+                                                     alt="方法：indexOf()——只传一个参数"
+                                                     title="方法：indexOf()——只传一个参数">
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>当查找字符不存在</h5>
+                                        <ol>
+                                            <li>当返回值是-1的时候，<span>表示没有匹配的字符</span></li>
+                                            <li>
+                                                <h5>案例：</h5>
+                                                <script type="text/javascript">
+                                                    {
+                                                        //原字符串
+                                                        let str = "goldenFlowerAndDust"
+                                                        console.log("原字符串：", str)
+                                                        // 查找字符Z的位置
+                                                        console.log("Z的索引：", str.indexOf("Z"))
+                                                    }
+                                                </script>
+                                                <img src="./image/indexOf/方法：indexOf()——查找不存在的字符.png"
+                                                     alt="方法：indexOf()——查找不存在的字符"
+                                                     title="方法：indexOf()——查找不存在的字符">
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>传入两个参数</h5>
+                                        <ol>
+                                            <li><span>第一个参数：需要查找的字符，第二个参数：<span
+                                                    class="span">开始查找的索引(就是从当前索引开始查找)</span></span>
+                                            </li>
+                                            <li>同样找不到，返回值-1</li>
+                                            <li>
+                                                <h5>案例：</h5>
+                                                <script type="text/javascript">
+                                                    {
+                                                        //原字符串
+                                                        let str = "goldenFlowerAndDust"
+                                                        console.log("原字符串：", str)
+                                                        // 查找字符Z的位置
+                                                        console.log("d的索引：", str.indexOf("d", 8))
+                                                    }
+                                                </script>
+                                                <img src="./image/indexOf/方法：indexOf()——传第二个参数.png"
+                                                     alt="方法：indexOf()——传第二个参数"
+                                                     title="方法：indexOf()——传第二个参数">
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>不传参数</h5>
+                                        <ol>
+                                            <li><span>返回值是-1</span></li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </li>
+                            </l>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3 id="lastIndexOf">方法<code>lastIndexOf</code></h3>
+                        <ul>
+                            <li>与indexOf不同的是，从最后面开始找(第二个参数：从该索引开始向前查找)，其他的知识完全一样</li>
+                        </ul>
+                    </li>
+                    <li>
+                       <h4>方法<code>concat</code></h4>
+                        <ul>
+                            <li>该方法主要用于：<span>连接字符串</span></li>
+                            <li>语法：<code>字面量.concat()</code></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>去除空格方法</h4>
+                        <ul>
+                            <li>
+                                <h5>方法<code>trim</code></h5>
+                                <ol>
+                                    <li><span>去除首尾空格</span></li>
+                                    <li>只去除首尾空格，中间空格不去除</li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>方法<code>trimStart与trimLeft</code></h5>
+                                <ol>
+                                    <li><span>去除首空格</span></li>
+                                    <li>只去除首空格，中间空格不去除</li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>方法<code>trimEnd与trimRight</code></h5>
+                                <ol>
+                                    <li><span>去除首空格</span></li>
+                                    <li>只去除尾空格，中间空格不去除</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
         </ul>
     </section>
-    <section id="section_2"></section>
+    <section id="section_2">
+        <h2>补充知识</h2>
+        <ul>
+            <li>
+                <h3 id="ASCII码">ASCII码</h3>
+                <ol>
+                    <li>ASCII就是一些特殊字符、24个英文字母、0~9数字、一些特殊功能的编码</li>
+                    <li>计算机通过这些编码，才能识别</li>
+                    <li>正常是我们的软件或计算器自动翻译</li>
+                    <li>
+                        <h4>ASCII码对照表</h4>
+                        <img src="./image/ASCII码/ASCII码3.jpg"
+                             alt="ASCII码"
+                             title="ASCII码">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3 id="Unicode编码">Unicode编码</h3>
+                <ol>
+                    <li>ASCII<span>只有128个字符编码结构</span></li>
+                    <li><span>因为ASCII出现的比较早，而且是美国发明的，在早期也够用</span></li>
+                    <li><span>但是对于世界来说这是远远不够用的</span></li>
+                    <li>因为<span>汉字以及一些其他国家的语言没办法存储</span></li>
+                    <li>所以出现了<code>Unicode编码</code>，<span>也叫万国码同一码</span></li>
+                    <li><span>Unicode也有一张对照表，但是体量比ASCII码对照表大很多，<span>它包含了大部分国家的文字，所以
+                    目前文字和字符都是按照Unicode编码转换成数字进行存储</span></span></li>
+                    <li><span>UTF-8就是一种<span class="span">8位的Unicode字符集</span></span></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
     <footer>
         <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
     </footer>
