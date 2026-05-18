@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON格式字符串</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>JSON格式字符串</h1>
+    </header>
+    <section id="section_1">
+        <h2>JSON</h2>
+        <ul>
+            <li>主要用途：<span>方便多个语言，互相交流</span></li>
+            <li>所有语言，都会以JSON字符串的格式，传给对方，对方自己将JSON字符串转为自己能识别的对象</li>
+            <li>语法(<span>JSON字符串转对象</span>)：<code>JSON.parse(字面量)</code></li>
+            <li>语法(<span>对象转JSON字符串</span>)：<code>JSON.stringify(字面量)</code></li>
+            <li>注意：JSON格式是：<span>被引号包裹的对象，其他格式都会报错</span>，如：<code><span class="span">'</span>{"name":"goldenFlower",
+                "age":20, "six":"male"}<span class="span">'</span></code></li>
+            <li><span>如果外层引号是单引号，内层就是双引号，反之外层是双引号，内层就是单引号</span>，不能同时一种引号表示JSON字符串
+            </li>
+            <li><span>键必须双引号或单引号包裹(否则报错)，值按数据类型看，字符串需要加，数字不需要，Boolean不需要</span>
+            </li>
+            <li><span>对象内每个键值对，英文逗号隔开，但是<span class="span">首或尾不能有多余的符号，否则报错</span></span>
+            </li>
+            <li>
+                <h3>实例(JSON字符串转对象)</h3>
+                <script type="text/javascript">
+                    const str = '{"name":"goldenFlower", "age":20, "six":"male"}'
+                    // str是一个通过单引号包裹的对象，但是他就是一个字符串类型，所有没有键来访问值，所以返回的结果是：undefined
+                    console.log(str)
+                    console.log(str.name)
+                    console.log(str.age)
+                    console.log(str.six)
+                    // 通过方法JSON.parse()，将str转为对象类型，后续可以通过键，访问值了
+                    const JS = JSON.parse(str)
+                    console.log(JS)
+                    console.log(JS.name)
+                    console.log(JS.age)
+                    console.log(JS.six)
+                </script>
+                <img src="./image/字符串转对象方法：JSON.parse().png"
+                     alt="字符串转对象方法：JSON.parse()"
+                     title="字符串转对象方法：JSON.parse()">
+            </li>
+            <li>
+                <h3>实例(对象转JSON字符串)</h3>
+                <script type="text/javascript">
+                    const object = {
+                        name: "goldenFlower",
+                        age: 20,
+                        six: "male"
+                    }
+                    console.log(object)
+                    console.log(object.name)
+                    console.log(object.age)
+                    console.log(object.six)
+
+                    const json = JSON.stringify(object)
+                    console.log(json)
+                    console.log(json.name)
+                    console.log(json.age)
+                    console.log(json.six)
+                </script>
+                <img src="./image/对象转JSON字符串：方法：JSON.stringify().png"
+                     alt="对象转JSON字符串：方法：JSON.stringify()"
+                     title="对象转JSON字符串：方法：JSON.stringify()">
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

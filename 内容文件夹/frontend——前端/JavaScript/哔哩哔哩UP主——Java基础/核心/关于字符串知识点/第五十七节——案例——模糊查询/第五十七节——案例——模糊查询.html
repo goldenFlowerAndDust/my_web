@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例模糊查询</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>案例——模糊查询</h1>
+    </header>
+    <section id="section_1">
+        <script type="text/javascript">
+            const str = [
+                "hello",
+                "word",
+                "JavaScript",
+                "你好世界",
+                "你好JS"
+            ]
+            const SJ = prompt("请输入需要查询的字符", "")
+
+            const JS = str.filter(item => { // 返回所有符合条件的元素，返回值：元素组成的集合
+                if (item !== undefined) {
+                    return item.indexOf(SJ) !== -1
+                }
+            })
+            document.writeln(`查询${SJ}的结果是：${JS.join("、")}`)
+        </script>
+        <img src="./image/模糊查询.png"
+             alt="模糊查询"
+             title="模糊查询">
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

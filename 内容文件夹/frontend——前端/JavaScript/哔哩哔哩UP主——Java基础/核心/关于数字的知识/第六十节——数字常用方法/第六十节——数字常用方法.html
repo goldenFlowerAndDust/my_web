@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字的常用方法</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>数字的常用方法</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>与字符串一样，数字的创建有两种方式：<span>1.字面量创建、2.构造函数创建</span></li>
+            <li>字面量创建使用点语法或中括号的方法，会临时转换为number对象，这么一来，就能够使用一些方法</li>
+        </ul>
+        <ul>
+            <li>
+                <h3>数字的常用方法</h3>
+                <ol>
+                    <li>
+                        <h4>方法<code>toFixed</code></h4>
+                        <ul>
+                            <li>该方法主要用于：<span>规定数字的小数点位数</span></li>
+                            <li>语法：<code>字面量.toFixed()</code></li>
+                            <li><span>括号内填写，需要保留的位数</span></li>
+                            <li><span>若保留位数，超过实际小数位数，会自动补零</span></li>
+                            <li>注意：<span>返回值是字符串类型，所以要想将他<span>进行加法运算</span>需要使用方法：<code>Number、parseFloat</code>转成数值类型，才能进行计算</span></li>
+                            <li>
+                                <h5>实例</h5>
+                                <script type="text/javascript">
+                                    const number = 15.36595112522152
+                                    const num = 15.6
+                                    // 保留两位小数
+                                    console.log(number.toFixed(2))
+                                    console.log(num.toFixed(2))
+                                </script>
+                                <img src="./image/toFixed/方法：toFixed().png"
+                                     alt="方法：toFixed()"
+                                     title="方法：toFixed()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>parseInt</code></h4>
+                        <ul>
+                            <li>该方法主要用于：<span>将数值字符串,转成整数</span></li>
+                            <li>语法：<code>parseInt(字面量)</code></li>
+                            <li><span>括号内填写，字面量或变量</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>parseFloat</code></h4>
+                        <ul>
+                            <li>该方法主要用于：<span>将数值字符串,转成小数</span></li>
+                            <li>语法：<code>parseFloat(字面量)</code></li>
+                            <li><span>括号内填写，字面量或变量</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>Number</code></h4>
+                        <ul>
+                            <li>该方法主要用于：<span>将数值字符串,转成数值类型</span></li>
+                            <li>语法：<code>Number(字面量)</code></li>
+                            <li><span>括号内填写，字面量或变量</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>方法<code>isNaN</code></h4>
+                        <ul>
+                            <li>该方法主要用于：<span>判断是不是数值类型</span></li>
+                            <li>语法：<code>isNaN(字面量)</code></li>
+                            <li><span>括号内填写，字面量或变量</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>Math对象</h4>
+                        <ul>
+                            <li>
+                                <h5>方法：<code>random</code></h5>
+                                <ol>
+                                    <li>主要用处是：<span>返回0~1之间的随机数</span></li>
+                                    <li>语法：<code>Math.random()</code></li>
+                                    <li>注意：<span>包0不包1</span></li>
+                                    <li><span>传参无效</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>方法：<code>round</code></h5>
+                                <ol>
+                                    <li>主要用处是：<span>对一个数四舍五入取整</span></li>
+                                    <li>语法：<code>Math.round()</code></li>
+                                    <li><span>括号内数据为数值类型</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>方法：<code>ceil</code></h5>
+                                <ol>
+                                    <li>主要用处是：<span>对一个数向上取整</span></li>
+                                    <li>语法：<code>Math.ceil()</code></li>
+                                    <li><span>括号内数据为数值类型</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>方法：<code>floor</code></h5>
+                                <ol>
+                                    <li>主要用处是：<span>对一个数向下取整</span></li>
+                                    <li>语法：<code>Math.floor()</code></li>
+                                    <li><span>括号内数据为数值类型</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>方法：<code>abs</code></h5>
+                                <ol>
+                                    <li>主要用处是：<span>对一个数取绝对值</span></li>
+                                    <li>语法：<code>Math.abs()</code></li>
+                                    <li><span>括号内数据为数值类型</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>方法：<code>sqrt</code></h5>
+                                <ol>
+                                    <li>主要用处是：<span>对一个数的平方根</span></li>
+                                    <li>语法：<code>Math.sqrt()</code></li>
+                                    <li><span>括号内数据为数值类型</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>方法：<code>pow</code></h5>
+                                <ol>
+                                    <li>主要用处是：<span>对一个数的次幂</span></li>
+                                    <li>语法：<code>Math.pow(底数,指数)</code></li>
+                                    <li><span>括号内数据为数值类型</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>方法：<code>max</code></h5>
+                                <ol>
+                                    <li>主要用处是：<span>取最大值</span></li>
+                                    <li>语法：<code>Math.max()</code></li>
+                                    <li><span>括号内数据可以传多个参数，然后返回最大值</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>方法：<code>min</code></h5>
+                                <ol>
+                                    <li>主要用处是：<span>取最小值</span></li>
+                                    <li>语法：<code>Math.min()</code></li>
+                                    <li><span>括号内数据可以传多个参数，然后返回最小值</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>属性：<code>PI</code></h5>
+                                <ol>
+                                    <li>就是是：<span>∏(3.14.....)</span></li>
+                                    <li>语法：<code>Math.PI</code></li>
+                                    <li><span>是个属性,不是方法,没有括号</span></li>
+                                </ol>
+                            </li>
+                        </ul>
+                        <script type="text/javascript">
+                            const a = ""
+                            document.createElement("tr")
+                            a.append()
+                            document.
+                        </script>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

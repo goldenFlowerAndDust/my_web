@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板字符串</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>模板字符串</h1>
+    </header>
+    <section id="section_1">
+        <h2>模板字符串</h2>
+        <ul>
+            <li>由ES6引入新的字符串</li>
+            <li>主要有反引号构成，变量由<code>${变量}</code>包裹</li>
+            <li>
+                <h3>优点</h3>
+                <ol>
+                    <li><span>换行不报错</span>，传统字符串打印，换行会报错</li>
+                    <li>通过<code>${变量}</code>的方式访问变量、表达式、甚至调用函数，比起传统字符串，返回加号连接，省事很多</li>
+                </ol>
+                <h3>注意事项</h3>
+                <ol>
+                    <li>在模板字符串内的所有内容，不管是字符串还是访问变量的结果，都会被强制转换成字符串</li>
+                    <li>所以，使用，模板字符串<code>控制台</code>打印对象,数组都会被强制转换成字符串</li>
+                    <li>解决办法：<span>在模板字符串后面(反引号后面),逗号变量即可，<span>只要不是在模板字符串内，或用加号连接，就可以。</span></span></li>
+                    <li>使用DOM在页面打印结果，不管怎么样都会被强制转成字符串，若需要显示完整对象，需要使用<span><code>JSON.stringify()</code>或遍历才行</span>
+                    <br><span>数组会按默认逗号分割，显示数组内全部元素</span>，若要自定义分隔符需要使用<code>.join()方法</code></li>
+                </ol>
+                <script type="text/javascript">
+                    const object = {
+                        name: "goldenFlower",
+                        age: 20,
+                        six: "male"
+                    }
+                    const Array = ["name", "goldenFlower", 20]
+                    console.log(`${object}` + object);
+                    console.log(`${Array}`, Array);
+                    document.writeln(`<br>${JSON.stringify(object)}`)
+                    document.writeln(`<br>${Array}`, Array);
+                </script>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
