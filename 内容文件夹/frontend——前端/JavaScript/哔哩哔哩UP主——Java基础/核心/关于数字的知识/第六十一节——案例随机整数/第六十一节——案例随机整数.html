@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>案例随机整数(猜数字)</title>
+</head>
+<body>
+<h1>案例随机整数(猜数字)</h1>
+<script>
+    function guess() {
+        const secret = Math.floor(Math.random() * 101); // 0~100 的随机整数
+        let continueGame = true;
+        do {
+            let input = prompt("请输入数字(0~100)：");
+            if (input === null) break; // 用户点了取消
+            let guessNum = Number(input);
+            if (isNaN(guessNum)) {
+                alert("请输入有效数字！");
+                continue;
+            }
+            if (guessNum > secret) {
+                alert("猜大了");
+                continueGame = confirm("是否继续游戏？");
+            } else if (guessNum < secret) {
+                alert("猜小了");
+                continueGame = confirm("是否继续游戏？");
+            } else {
+                alert(`恭喜猜对了！幸运数字就是 ${secret}`);
+                // 猜对了直接退出循环，不显示“谢谢参与”
+                return;
+            }
+        } while (continueGame);
+        alert("谢谢参与游戏");
+    }
+    guess();
+</script>
+</body>
+</html>

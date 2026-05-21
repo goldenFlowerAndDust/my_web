@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间对象</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>时间对象</h1>
+    </header>
+    <section id="section_1">
+        <h2>Date</h2>
+        <ul>
+            <li>JS提供的内置构造函数，<span>专门用来获取时间</span></li>
+        </ul>
+        <h2>创建时间对象的方法</h2>
+        <ul>
+            <li>方法：<code>new Date()</code></li>
+            <li>
+                <h3>注意事项：</h3>
+                <ol>
+                    <li>
+                        <h4>在不传递参数的情况下是<span>默认返回当前时间</span></h4>
+                        <ul>
+                            <li>语法：<code>new Date()</code></li>
+                            <li><span>不传递参数</span></li>
+                            <li>自动转换为字符串</li>
+                            <li>每次刷新，都会自动将时间更新到现在的时间</li>
+                            <Li>因为它是返回一个时间，<span>所以需要声明变量接收返回值，或直接使用</span></Li>
+                            <li>
+                                <script type="text/javascript">
+                                    const time = new Date()
+                                    document.writeln(`<span>${String(time)}</span>`)
+                                </script>
+                                <img src="./image/创建时间对象/构造Date对象，不传递参数.png"
+                                     alt="构造Date对象，不传递参数"
+                                     title="构造Date对象，不传递参数">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>在传入参数为字符串</h4>
+                        <ul>
+                            <li>语法：<code>new Date('2025-06-03 15:20:6')</code></li>
+                            <li>支持的字符串形式(1)：<code>'2025-06-03 15:20:6'</code></li>
+                            <li>支持的字符串形式(2)：<code>'2025/06/03 15:20:6'</code></li>
+                            <li><span>字符串严格按照形式规范写，否则报错</span></li>
+                            <li><span>返回值是输入参数的时间</span></li>
+                            <li>每次刷新，时间不会自动更新</li>
+                            <Li>因为它是返回一个时间，<span>所以需要声明变量接收返回值，或直接使用</span></Li>
+                            <li>
+                                <script type="text/javascript">
+                                    const time2 = new Date('2025-06-03 15:20:6')
+                                    document.writeln(`<span>${String(time2)}</span>`)
+                                </script>
+                                <img src="./image/创建时间对象/构造Date对象，传递参数为具体时间.png"
+                                     alt="构造Date对象，传递参数为具体时间"
+                                     title="构造Date对象，传递参数为具体时间">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>参数为number类型</h4>
+                        <ol>
+                            <li>
+                                <h4>传递一个参数</h4>
+                                <ul>
+                                    <li>语法：<code>new Date(1000)</code></li>
+                                    <li>参数的意思是：<span>毫秒数</span></li>
+                                    <li>当前时间都是从：<code>1970-1-1 0:0:0</code>开始记时</li>
+                                    <li>
+                                        <span>返回值：秒数由自己决定，小时由所在区域决定，其他都是初始值<code>(1970-1-1 0:0:0)</code></span>
+                                    </li>
+                                    <li>每次刷新，时间不会自动更新</li>
+                                    <Li>因为它是返回一个时间，<span>所以需要声明变量接收返回值，或直接使用</span></Li>
+                                    <li>
+                                        <script type="text/javascript">
+                                            const time3 = new Date(1000)
+                                            document.writeln(`<span>${String(time3)}</span>`)
+                                        </script>
+                                        <img src="./image/创建时间对象/创建Date对象，传递两个参数.png"
+                                             alt="创建Date对象，传递两个参数"
+                                             title="创建Date对象，传递两个参数">
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h4>传递两个参数</h4>
+                                <ul>
+                                    <li>语法：<code>new Date(2026，20)</code></li>
+                                    <li>传递参数两个参数，<span>第一个参数：<span
+                                            class="span">表示年</span>第二个参数<span
+                                            class="span">表示月份</span></span></li>
+                                    <li>注意：<span>月份从0开始记录[<span
+                                            class="span">0表示1月，1表示2月......</span>]</span>
+                                    </li>
+                                    <li><span>返回值：年月日由参数决定，其他都是初始值<code>(1970-1-1 0:0:0)</code></span>
+                                    </li>
+                                    <li>每次刷新，时间不会自动更新</li>
+                                    <Li>因为它是返回一个时间，<span>所以需要声明变量接收返回值，或直接使用</span></Li>
+                                    <li>
+                                        <script type="text/javascript">
+                                            const time4 = new Date(2026, 4)
+                                            document.writeln(`<span>${String(time4)}</span>`)
+                                        </script>
+                                        <img src="./image/创建时间对象/创建Date对象，传递两个参数.png"
+                                             alt="创建Date对象，传递两个参数"
+                                             title="创建Date对象，传递两个参数">
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h4>传递三个参数</h4>
+                                <ul>
+                                    <li>语法：<code>new Date(2026，20)</code></li>
+                                    <li>传递参数两个参数，<span>第一个参数：<span
+                                            class="span">表示年</span>第二个参数<span
+                                            class="span">表示月份</span>第三个参数<span
+                                            class="span">表示日期</span></span></li>
+                                    <li>注意：<span>月份从0开始记录[<span
+                                            class="span">0表示1月，1表示2月......</span>]</span>
+                                    </li>
+                                    <li><span>返回值：年月日由参数决定，其他由浏览器自行决定<code>(1970-1-1 0:0:0)</code></span>
+                                    </li>
+                                    <li>每次刷新，时间不会自动更新</li>
+                                    <Li>因为它是返回一个时间，<span>所以需要声明变量接收返回值，或直接使用</span></Li>
+                                    <li>
+                                        <script type="text/javascript">
+                                            const time5 = new Date(2026, 4, 5)
+                                            document.writeln(`<span>${String(time5)}</span>`)
+                                        </script>
+                                        <img src="./image/创建时间对象/创建Date对象，三个参数.png"
+                                             alt="创建Date对象，三个参数"
+                                             title="创建Date对象，三个参数">
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h4>其他多个参数依次是：<code>年，月，日，小时，分钟，秒</code></h4>
+                                <ul>
+                                    <li>除只传递一个参数为毫秒数以外，<span>其他返回值的最终结果，取决于后续参数的个数(
+                                <span class="span">参数顺序严格按照：<code>年，月，日，小时，分钟，秒</code></span>)</span>
+                                    </li>
+                                    <li>月份始终从0开始计算</li>
+                                    <li>参数不足处，由初始时间替代(1970-1-1 0:0:0)</li>
+                                    <script type="text/javascript">
+                                        const time6 = new Date(2006, 4, 13, 5, 8, 20)
+                                        document.writeln(`<span>${String(time6)}</span>`)
+                                    </script>
+                                    <li>
+                                        <img src="./image/创建时间对象/创建Date对象，多个参数.png"
+                                             alt="创建Date对象，多个参数"
+                                             title="创建Date对象，多个参数" style="display: block">
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

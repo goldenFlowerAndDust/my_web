@@ -1,0 +1,15 @@
+1. 创建环境
+	conda create -n 【自己命名，只能是英文、数字、下划线，但不要用中文（可能导致路径编码问题和某些工具报错）】 python=【自己输入python版本】
+	
+2. 锁定到当前运行环境
+	conda activate 【自己取的名字】
+
+3. 下载：PyTorch 生态的三个核心库，专为 深度学习 和 GPU 加速 配置
+	pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
+
+4.	列出当前激活的 Conda 环境中已安装的所有软件包。
+	conda list
+
+5. 验证是否能正常使用 GPU 输出结果为【True】时，则能使用
+	python -c "import torch; print('PyTorch version:', torch.__version__); print('CUDA available:', torch.cuda.is_available())"
+	
