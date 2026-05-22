@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间对象常用方法</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>时间对象常用方法</h1>
+    </header>
+    <section id="section_1">
+        <h2>get方法：<span>主要是获取而不是更改</span></h2>
+        <ul>
+            <li>getXXX方法：<span>返回值是当前Date对象的具体数据，如果通过setXXX方法更改过，同样会随之更新</span></li>
+            <li>getXXX方法：<span>本身并不具备，自动更新的能力(<span
+                    class="span">也就是：当Date对象确定，便不会再更新</span>)</span></li>
+            <li>但是刷新浏览器，会重新创建一个Date对象，<span>当今对象存储的是刷新的最新时间，<span
+                    class="span">这会导致一种错觉，以为是时间自动更新</span>但是结果是：因为刷新，重新创建Date对象，获取了最新的时间</span>
+            </li>
+            <li>
+                <h3>方法：<code>getFullYear()</code></h3>
+                <ol>
+                    <li><span>提取年份</span></li>
+                    <li>返回值是：<span>数字类型的年份</span></li>
+                    <li>返回值需要: <span>声明变量接收或直接使用</span></li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            const date = new Date()
+                            document.writeln(`<span>${date}</span><br>`)
+                            document.writeln(`今年是：<span>${date.getFullYear()}</span>年`)
+                        </script>
+                        <img src="image/getXXX方法/getFullYear/方法：getFullYear().png"
+                             alt="方法：getFullYear()"
+                             title="方法：getFullYear()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>getMonth()</code></h3>
+                <ol>
+                    <li><span>提取月份</span></li>
+                    <li>返回值是：<span>数字类型的月份</span></li>
+                    <li>返回值需要: <span>声明变量接收或直接使用</span></li>
+                    <li>注意：<span>因为月份是从<code>0</code>开始计算，所以最终结果要加一，才是正确的月份</span></li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            const date2 = new Date()
+                            document.writeln(`<span>${date2}</span><br>`)
+                            document.writeln(`今年是：<span>${date2.getFullYear()}</span>年
+                                                —<span>${date2.getMonth() + 1}</span>月`)
+                        </script>
+                        <img src="image/getXXX方法/getMonth/方法：getMonth().png"
+                             alt="方法：getMonth()"
+                             title="方法：getMonth()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>getDate()</code></h3>
+                <ol>
+                    <li><span>提取日期</span></li>
+                    <li>返回值是：<span>数字类型的日期</span></li>
+                    <li>返回值需要: <span>声明变量接收或直接使用</span></li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            const date3 = new Date()
+                            document.writeln(`<span>${date3}</span><br>`)
+                            document.writeln(`今天是：<span>${date3.getFullYear()}</span>年
+                                                —<span>${date3.getMonth() + 1}</span>月
+                                                —<span>${date3.getDate()}</span>日`)
+                        </script>
+                        <img src="image/getXXX方法/getDate/方法：getDate().png"
+                             alt="方法：getDate()"
+                             title="方法：getDate()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>getDay()</code></h3>
+                <ol>
+                    <li><span>提取星期</span></li>
+                    <li>返回值是：<span>数字类型的星期</span></li>
+                    <li>所以要想输出结果是中文(一、二、三、四、五、六、日)，<span>需要通过数组映射的方式</span></li>
+                    <li>返回值：<span>0代表星期日，1~6代表星期一~星期六</span></li>
+                    <li>所以数组的下标很明确了：<br><span>['星期日', '星期一', '星期二', '星期三', '星期四', '星期五',
+                        '星期六']</span></li>
+                    <li>返回值需要: <span>声明变量接收或直接使用</span></li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            const date4 = new Date()
+                            let weekday = ['日', '一', '二', '三', '四', '五', '六']
+                            document.writeln(`<span>${date4}</span><br>`)
+                            document.writeln(`今天是：<span>${date4.getFullYear()}</span>年
+                                                —<span>${date4.getMonth() + 1}</span>月
+                                                —<span>${date4.getDate()}</span>日
+                                                —星期<span>${weekday[date4.getDay()]}</span>`)
+                        </script>
+                        <img src="image/getXXX方法/getDay/方法：getDay().png"
+                             alt="方法：getDay()"
+                             title="方法：getDay()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>getHours()</code></h3>
+                <ol>
+                    <li><span>提取小时</span></li>
+                    <li>返回值是：<span>数字类型的小时</span></li>
+                    <li>返回值需要: <span>声明变量接收或直接使用</span></li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            const date5 = new Date()
+                            weekday = ['日', '一', '二', '三', '四', '五', '六']
+                            document.writeln(`<span>${date5}</span><br>`)
+                            document.writeln(`现在是：<span>${date5.getFullYear()}</span>年
+                                                —<span>${date5.getMonth() + 1}</span>月
+                                                —<span>${date5.getDate()}</span>日
+                                                —星期<span>${weekday[date5.getDay()]}</span>
+                                                —<span>${date5.getHours()}</span>点`)
+                        </script>
+                        <img src="image/getXXX方法/getHours/方法：getHours().png"
+                             alt="方法：getHours()"
+                             title="方法：getHours()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>getMinutes()</code></h3>
+                <ol>
+                    <li><span>提取分钟</span></li>
+                    <li>返回值是：<span>数字类型的分钟</span></li>
+                    <li>返回值需要: <span>声明变量接收或直接使用</span></li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            const date6 = new Date()
+                            weekday = ['日', '一', '二', '三', '四', '五', '六']
+                            document.writeln(`<span>${date6}</span><br>`)
+                            document.writeln(`现在是：<span>${date6.getFullYear()}</span>年
+                                                —<span>${date6.getMonth() + 1}</span>月
+                                                —<span>${date6.getDate()}</span>日
+                                                —星期<span>${weekday[date6.getDay()]}</span>
+                                                —<span>${date6.getHours()}</span>时
+                                                —<span>${date6.getMinutes()}</span>分`)
+                        </script>
+                        <img src="image/getXXX方法/getMinutes/方法：getMinutes().png"
+                             alt="方法：getMinutes()"
+                             title="方法：getMinutes()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>getSeconds()</code></h3>
+                <ol>
+                    <li><span>提取[<span class="span">秒</span>]</span></li>
+                    <li>返回值是：<span>数字类型的秒</span></li>
+                    <li>返回值需要: <span>声明变量接收或直接使用</span></li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            const date7 = new Date()
+                            weekday = ['日', '一', '二', '三', '四', '五', '六']
+                            document.writeln(`<span>${date6}</span><br>`)
+                            document.writeln(`现在是：<span>${date7.getFullYear()}</span>年
+                                                —<span>${date7.getMonth() + 1}</span>月
+                                                —<span>${date7.getDate()}</span>日
+                                                —星期<span>${weekday[date7.getDay()]}</span>
+                                                —<span>${date7.getHours()}</span>时
+                                                —<span>${date7.getMinutes()}</span>分
+                                                —<span>${date7.getSeconds()}</span>秒`)
+                        </script>
+                        <img src="image/getXXX方法/getSeconds/方法：getSeconds().png"
+                             alt="方法：getSeconds()"
+                             title="方法：getSeconds()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>getMilliseconds()</code></h3>
+                <ol>
+                    <li><span>提取[<span class="span">毫秒</span>]</span></li>
+                    <li>返回值是：<span>数字类型的毫秒</span></li>
+                    <li>返回值需要: <span>声明变量接收或直接使用</span></li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            const date8 = new Date()
+                            weekday = ['日', '一', '二', '三', '四', '五', '六']
+                            document.writeln(`<span>${date8}</span><br>`)
+                            document.writeln(`现在是：<span>${date8.getFullYear()}</span>年
+                                                —<span>${date8.getMonth() + 1}</span>月
+                                                —<span>${date8.getDate()}</span>日
+                                                —星期<span>${weekday[date8.getDay()]}</span>
+                                                —<span>${date8.getHours()}</span>时
+                                                —<span>${date8.getMinutes()}</span>分
+                                                —<span>${date8.getSeconds()}</span>秒
+                                                —<span>${date8.getMilliseconds()}毫秒</span>`)
+                        </script>
+                        <img src="image/getXXX方法/getMilliseconds/方法：getMilliseconds().png"
+                             alt="方法：getMilliseconds()"
+                             title="方法：getMilliseconds()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>getTime()</code></h3>
+                <ol>
+                    <li>获取：<span>时间戳</span></li>
+                    <li>返回值是：<span>1970年1月1日0点0分<span
+                            class="span">直到现在的毫秒数</span></span></li>
+                    <li>返回值需要: <span>声明变量接收或直接使用</span></li>
+                    <li><span>可以通过构造函数的方式将时间戳转换成对应的时间</span>:如：<code>new Date(时间戳)</code>
+                    </li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            const date9 = new Date()
+                            document.writeln(`1970年1月1日0点0分直到现在共过去：<span>${date9.getTime()}</span>毫秒`)
+                        </script>
+                        <img src="image/getXXX方法/getTime/方法：getTime().png"
+                             alt="方法：getTime()"
+                             title="方法：getTime()">
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <h2>set方法：<span>主要是获取的同时可以更改</span></h2>
+        <ul>
+            <li>setXXX方法：<span>获取目前具体数据，然后填入更改后的数据</span></li>
+            <li>setXXX方法：<span>会在原Date对象下更改</span></li>
+            <li>setXXX方法：<span>返回值始终是：<span class="span">时间戳</span></span></li>
+            <li>
+                <h3>时间戳</h3>
+                <ol>
+                    <li>当今Date对象存储的时间与<span>1970年1月1日0点0分的毫秒数</span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>setFullYear()</code></h3>
+                <ol>
+                    <li><span>获取年份可以更改</span></li>
+                    <li>获取Date对象年份，然后更改(在原对象更改)</li>
+                    <li>返回值始终是时间戳</li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            {
+                                const date = new Date()
+                                document.writeln(`原时间：<span>${date.getFullYear()}年</span><br>`)
+                                date.setFullYear(2025)
+                                document.writeln(`更改后时间：<span>${date.getFullYear()}</span>年`)
+                            }
+                        </script>
+                        <img src="./image/setXXX方法/setFullYear/方法：setFullYear().png"
+                             alt="方法：setFullYear()"
+                             title="方法：setFullYear()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>setMonth()</code></h3>
+                <ol>
+                    <li><span>获取月份可以更改</span></li>
+                    <li>获取Date对象月份，然后更改(在原对象更改)</li>
+                    <li>获取的年份也是从0开始计算，<span>但是对于setMonth()没啥影响，因为最终月份是自定义</span></li>
+                    <li>返回值始终是时间戳</li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            {
+                                const date = new Date()
+                                document.writeln(`原时间：<span>${date.getMonth()}月</span><br>`)
+                                date.setMonth(5)
+                                document.writeln(`更改后时间：<span>${date.getMonth()}</span>月`)
+                            }
+                        </script>
+                        <img src="./image/setXXX方法/setMonth/方法：setMonth().png"
+                             alt="方法：setMonth()"
+                             title="方法：setMonth()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>setDate()</code></h3>
+                <ol>
+                    <li><span>获取日期可以更改</span></li>
+                    <li>获取Date对象日期，然后更改(在原对象更改)</li>
+                    <li>返回值始终是时间戳</li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            {
+                                const date = new Date()
+                                document.writeln(`原时间：<span>${date.getDate()}</span>日<br>`)
+                                date.setDate(5)
+                                document.writeln(`更改后时间：<span>${date.getDate()}</span>日`)
+                            }
+                        </script>
+                        <img src="./image/setXXX方法/setDate/方法：setDate().png"
+                             alt="方法：setDate()"
+                             title="方法：setDate()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>setHours()</code></h3>
+                <ol>
+                    <li><span>获取小时可以更改</span></li>
+                    <li>获取Date对象小时，然后更改(在原对象更改)</li>
+                    <li>返回值始终是时间戳</li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            {
+                                const date = new Date()
+                                document.writeln(`原时间：<span>${date.getHours()}</span>时<br>`)
+                                date.setHours(5)
+                                document.writeln(`更改后时间：<span>${date.getHours()}</span>时`)
+                            }
+                        </script>
+                        <img src="./image/setXXX方法/setHours/方法：setHours().png"
+                             alt="方法：setHours()"
+                             title="方法：setHours()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>setMinutes()</code></h3>
+                <ol>
+                    <li><span>获取分钟可以更改</span></li>
+                    <li>获取Date对象分钟，然后更改(在原对象更改)</li>
+                    <li>返回值始终是时间戳</li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            {
+                                const date = new Date()
+                                document.writeln(`原时间：<span>${date.getMinutes()}</span>分<br>`)
+                                date.setMinutes(5)
+                                document.writeln(`更改后时间：<span>${date.getMinutes()}</span>分`)
+                            }
+                        </script>
+                        <img src="./image/setXXX方法/setMinutes/方法：seMinutes().png"
+                             alt="方法：seMinutes()"
+                             title="方法：seMinutes()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>setSeconds()</code></h3>
+                <ol>
+                    <li><span>获取[<span>秒</span>]可以更改</span></li>
+                    <li>获取Date对象的秒数据，然后更改(在原对象更改)</li>
+                    <li>返回值始终是时间戳</li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            {
+                                const date = new Date()
+                                document.writeln(`原时间：<span>${date.getSeconds()}</span>秒<br>`)
+                                date.setSeconds(5)
+                                document.writeln(`更改后时间：<span>${date.getSeconds()}</span>秒`)
+                            }
+                        </script>
+                        <img src="./image/setXXX方法/setSeconds/方法：setSeconds().png"
+                             alt="方法：setSeconds()"
+                             title="方法：setSeconds()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>setMilliseconds()</code></h3>
+                <ol>
+                    <li><span>获取[<span>毫秒</span>]可以更改</span></li>
+                    <li>获取Date对象的毫秒数据，然后更改(在原对象更改)</li>
+                    <li>返回值始终是时间戳</li>
+                    <li>
+                        <h3>实例</h3>
+                        <script type="text/javascript">
+                            {
+                                const date = new Date()
+                                document.writeln(`原时间：<span>${date.getMilliseconds()}</span>毫秒<br>`)
+                                date.setMilliseconds(5)
+                                document.writeln(`更改后时间：<span>${date.getMilliseconds()}</span>毫秒`)
+                            }
+                        </script>
+                        <img src="./image/setXXX方法/setMilliseconds/方法：setMilliseconds().png"
+                             alt="方法：setMilliseconds()"
+                             title="方法：setMilliseconds()">
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <h2>注意：</h2>
+        <ol>
+            <li>通过<code>setXXX方法</code><span>更改数据，是在原对象上更改，也就是后续无论怎么刷新，都不会更改</span></li>
+            <li>
+                通过<code>getXXX方法</code><span>获取的数据，是在原对象上获取，自身无法自动更改，但是可以通过刷新，重新获取新的Date对象，达到更新的目的</span>
+            </li>
+            <li>
+                <script type="text/javascript">
+                    {
+                        const date = new Date()
+                        weekday = ['日', '一', '二', '三', '四', '五', '六']
+                        document.writeln(`原时间：<span>${date.getFullYear()}</span>年
+                                                —<span>${date.getMonth() + 1}</span>月
+                                                —<span>${date.getDate()}</span>日
+                                                —星期<span>${weekday[date.getDay()]}</span>
+                                                —<span>${date.getHours()}</span>时
+                                                —<span>${date.getMinutes()}</span>分
+                                                —<span>${date.getSeconds()}</span>秒
+                                                —<span>${date.getMilliseconds()}毫秒</span><br>`)
+                        date.setFullYear(2021)
+                        date.setMonth(9)
+                        date.setDate(30)
+                        date.setHours(8)
+                        date.setMinutes(50)
+                        date.setSeconds(30)
+                        date.setMilliseconds(900)
+                        document.writeln(`原时间：<span>${date.getFullYear()}</span>年
+                                                —<span>${date.getMonth() + 1}</span>月
+                                                —<span>${date.getDate()}</span>日
+                                                —星期<span>${weekday[date.getDay()]}</span>
+                                                —<span>${date.getHours()}</span>时
+                                                —<span>${date.getMinutes()}</span>分
+                                                —<span>${date.getSeconds()}</span>秒
+                                                —<span>${date.getMilliseconds()}毫秒</span><br>`)
+                    }
+                </script>
+                <img src="./image/时间对象方法总结/时间对象方法总结.png"
+                     alt="时间对象方法总结"
+                     title="时间对象方法总结">
+                <h3>通过对比(可以发现)：</h3>
+                <ol>
+                    <li>在没有setXXX方法之前，输出的时间，就是目前的时间，getXXX方法获取了，目前时间的Date对象数据</li>
+                    <li>用了setXXX方法之后，同样是使用getXXX方法获取Date对象的数据，但是结果确实，更改后的时间</li>
+                    <li>所以证明了，<span>setXXX方法是在原对象上进行更改</span>。</li>
+                    <li>这会导致：<span>当前Date对象永远丢失能通过刷新，更新时间的功能</span></li>
+                    <li>setXXX方法的返回值：<span>始终是时间戳</span></li>
+                </ol>
+            </li>
+        </ol>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
