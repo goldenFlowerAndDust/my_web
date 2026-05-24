@@ -237,6 +237,7 @@
             <li>setXXX方法：<span>获取目前具体数据，然后填入更改后的数据</span></li>
             <li>setXXX方法：<span>会在原Date对象下更改</span></li>
             <li>setXXX方法：<span>返回值始终是：<span class="span">时间戳</span></span></li>
+            <li><a href="#SetXXX方法的简写">SetXXX方法的简写</a></li>
             <li>
                 <h3>时间戳</h3>
                 <ol>
@@ -449,7 +450,21 @@
             </li>
         </ol>
     </section>
-    <section id="section_2"></section>
+    <section id="section_2">
+        <h2>补充知识</h2>
+        <ul>
+            <li>
+                <h3 id="SetXXX方法的简写">SetXXX方法的简写</h3>
+                <ol>
+                    <li><code>setHoures(时，分，秒，毫秒)</code><span>可以写四个参数，依次是：时、分、秒、毫秒</span></li>
+                    <li><code>setMinutes(分，秒，毫秒)</code><span>可以写三个参数，依次是：分、秒、毫秒</span></li>
+                    <li><code>setSeconds(秒，毫秒)</code><span>可以写两个参数，依次是：秒、毫秒</span></li>
+                    <li><code>setMilliseconds(毫秒)</code><span>可以写一个参数，依次是：毫秒</span></li>
+                </ol>
+            </li>
+            <li><span>很遗憾：getXXX方法没有简写，只能获取对应时间段的数据</span></li>
+        </ul>
+    </section>
     <footer>
         <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
     </footer>

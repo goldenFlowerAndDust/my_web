@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器与案例_倒计时</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>定时器与案例_倒计时</h1>
+    </header>
+    <section id="section_1">
+        <h2>定时器</h2>
+        <ul>
+            <li>在JS里面，定时器分为<span>倒计时定时器和间隔定时器</span></li>
+            <li>
+                <h3>倒计时定时器</h3>
+                <ol>
+                    <li><span>倒计时多少以后执行函数</span></li>
+                    <li>语法：<code>setTimeout(要执行的函数,多长时间以后执行)</code></li>
+                    <li>第一个参数：<span>要执行的函数</span>,第二个参数：<span>设置时间：多长时间以后执行</span></li>
+                    <li>清除定时器：<code>clearTimeout()</code></li>
+                    <li>这样就会在设定的时间以后，执行函数</li>
+                    <li>
+                        <h4>注意：</h4>
+                        <ul>
+                            <li>时间是按照<span>毫秒进行计算的</span>，<span class="span">1000毫秒就是1秒钟</span></li>
+                            <li><span>只会执行一次，一次过后就不会再执行</span></li>
+                            <li>返回值是：<span>当前这个定时器是页面中的第几个定时器</span></li>
+                            <li>在函数内部写入<code>document.writenln(``)</code><span>倒计时结束后，会清除页面包括样式、最终结果
+                                以为是：<span
+                                        class="span">倒计时结束后，在新的界面运行函数，其实是将当前页面清除，在运行</span>
+                                所以：在使用倒计时定时器时，回调函数内部避免使用<code>document.writenln(``)</code></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="time">现在时间是：</li>
+                    <li>
+                        <h4>案例</h4>
+                        <script type="text/javascript">
+                            const Timeout = setTimeout(function () {
+                                const time = document.getElementById('time')
+                                time.innerHTML = `现在的时间是：<span>${new Date().getHours()}</span>时
+                                              :<span>${new Date().getMinutes()}</span>分，第<span>${Timeout}</span>个定时器`
+                            }, 3000) // 3秒后执行函数
+                            // 在回调函数内部使用:document.wrilteln()，会清除页面，所以避免使用
+                        </script>
+                        <video src="./image/倒计时定时器.mp4" controls></video>
+                    </li>
+                </ol>
+                <h3>间隔定时器</h3>
+                <ol>
+                    <li><span>间隔一段时间执行函数</span></li>
+                    <li>语法：<code>setInterval(要执行的函数,间隔多长时间以后执行)</code></li>
+                    <li>第一个参数：<span>要执行的函数</span>,第二个参数：<span>设置时间：间隔多长时间以后执行</span></li>
+                    <li>这样就会在设定的时间以后，每次达到指定时间，便会执行函数</li>
+                    <li>清除定时器：<code>clearInterval()</code></li>
+                    <li>
+                        <h4>注意：</h4>
+                        <ul>
+                            <li>时间是按照<span>毫秒进行计算的</span>，<span class="span">1000毫秒就是1秒钟</span></li>
+                            <li><span>每次达到指定时间，便会执行函数</span></li>
+                            <li>返回值是：<span>当前这个定时器是页面中的第几个定时器</span></li>
+                            <li>在函数内部写入<code>document.writenln(``)</code><span>倒计时结束后，会清除页面包括样式、最终结果
+                                以为是：<span
+                                        class="span">倒计时结束后，在新的界面运行函数，其实是将当前页面清除，在运行</span>
+                                所以：在使用倒计时定时器时，回调函数内部避免使用<code>document.writenln(``)</code></span>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <h2>案例——倒计时</h2>
+        <ul>
+            <li>
+                <h3>倒计时本质(重点——顿悟时刻)：</h3>
+                <ol>
+                    <li>倒计时定时器(避免陷入的思维误区)：<span>不是设置固定时间，通过计算减少，达到时间减少的目的</span>
+                    </li>
+                    <li>倒计时的本质：<code>固定目标 - 流动当前 = 递减差值</code></li>
+                    <li>核心公式：<code>const targe = 目标时间点 - 当前时间点</code></li>
+                    <li>目标时间点：<span>固定不变，例如(<code>trage.setSeconds(now.getSeconds() + 90)</code>)先获取当前时间段 + 倒计时初始值</span>
+                    </li>
+                    <li>当前时间：<span>每次执行定时器时重新获取(<code>new Date()</code>)</span></li>
+                    <li>剩余毫秒：<span>随着当前时间向目标靠近，自然递减——>实现'倒计时'效果</span></li>
+                    <li>说白了：<span>目标时间(当前时间 + 倒计时初始值) - 当前时间 = 时间差</span></li>
+                    <li><span>因为当前时间为逐秒增加，目标时间固定，这会导致时间差，逐秒递减(倒计时原理)</span></li>
+                    <li><span>最后将时间差(单位毫秒)转为形式为<span class="span">时：分：秒：毫秒</span>按需求来</span>
+                    </li>
+                    <li>
+                        <h4>单位换算</h4>
+                        <ul>
+                            <li><code>1秒 = 1000毫秒</code></li>
+                            <li><code>1分 = 60秒 = 60000毫秒</code></li>
+                            <li><code>1时 = 60分 = 3600秒 = 3600000毫秒</code></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li id="timeInterval">秒杀倒计时：</li>
+            <li>
+                <h3>案例</h3>
+                <script type="text/javascript">
+                    /*
+                    *   1.做一个倒计时为1分半的计时器
+                    *   2.要求：倒计时完后，显示"活动开始"字样
+                    *
+                    *   提示：
+                    *       1. 获取元素
+                    *       2.倒计时每隔一段时间，都会执行一次函数，所以使用间隔定时器
+                    *       3.函数内部：当秒为0时，退出函数，并且删除间隔定时器(clearInterval)
+                    *       4. 计算：
+                    *               1小时 = 60分 = 3600秒 = 3600000 毫秒
+                    *               1分 = 60秒 = 60000毫秒
+                    *               1秒 = 1000毫秒
+                    *       5.尽量使用取余运算
+                    * */
+
+                    // 获取元素
+                    const TimeElement = document.getElementById('timeInterval')
+
+                    // 创建目标时间——当前时间+倒计时初始值
+                    const targe = new Date() // 获取当前时间
+                    targe.setSeconds(targe.getSeconds() + 90) // 获取当前秒时间段 + 再此基础上加上倒计时初始值 1分半 = 90秒 还是切换成15秒快一点
+
+                    // 创建间隔定时器
+                    const Timeout1 = setInterval(function () {
+                        // 获取时间差： 目标时间 - 当前时间
+                        const now = new Date()  //每次执行回调函数，获取当前Date对象
+                        const time = (targe - now) / 1000 // 获取时间差(单位毫秒) ，为了方便后续转换 将单位替换为秒  1秒 = 1000毫秒
+
+                        if (time <= 0) { // 当时间差为0 也就是 目标时间 与 当前时间 一致的时候
+                            clearInterval(Timeout1) // 删除间隔定时器
+                            TimeElement.innerHTML = `<span>活动开始了！！！</span>` // 倒计时结束，显示结果
+                            return // 退出回调函数
+                        }
+
+                        // 将时间差(毫秒) ———— 转换为分秒形式
+                        const Minutes = Math.floor(time / 60) // floor 向下取整 我们需要的是整数部分
+                        const Seconds = Math.floor(time % 60)  // 取余数
+                        /*
+                        *   设时间差为：80秒
+                        *   则 分 = 80 / 60 = 1.多 ，所以 取整数： 1
+                        *      秒 = 80 % 60 = 1....20 取余数 20
+                        *       所以最后的时间：1分：20秒
+                        *   因为时间差是逐渐减少的，所以，79 ——> 1分19秒 78 ——> 1分18秒 ....... 达到倒计时的目的
+                        * */
+
+                        // 打印结果
+                        TimeElement.innerHTML = `倒计时：<span>${Minutes}分:${Seconds}秒</span>`
+                    },1000) // 每秒执行一次回调函数
+                </script>
+                <video src="./image/案例——倒计时.mp4" controls></video>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>扩展知识</h2>
+        <ul>
+            <li>
+                <h3>异步执行和同步执行</h3>
+                <ol>
+                    <li>
+                        使用定时器，<span>会将定时器的回调函数放入‘任务队列’,只有当主线程上所有同步代码执行完毕(同步执行)，才会去任务队列里取回调执行</span>
+                    </li>
+                    <li>正常情况下：<span>代码的执行顺序是：从上到下依次执行(<span
+                            class="span">这就叫同步执行</span>)</span></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
