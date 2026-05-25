@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 38rem;
+            border: 1px solid black;
+        }
+
+        h1 {
+            margin: 15px;
+        }
+
+        p {
+            margin: 20px;
+        }
+
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 20px;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+        }
+
+        th {
+            padding: 20px;
+            background-color: chocolate;
+        }
+
+        td {
+            background-color: #ffff7f;
+        }
+    </style>
+</head>
+<body>
+<div id='div'>
+    <h1>童书图书查询</h1>
+
+    <p>按照价格查询：<label><input type="text" id="minPrice">-<input type="text" id="maxPrice"></label>
+        <button type="button" id='price'>搜索</button>
+    </p>
+
+    <p>按照图书名称查询<label><input type="text" id="keyWord"></label>
+        <button type="button" id='book'>搜索</button>
+    </p>
+
+    <div id='tbody'></div>
+</div>
+<script type="text/javascript" src="童书图书查询.js"></script>
+</body>
+</html>
