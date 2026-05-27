@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器的弹出层</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>浏览器的弹出层</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>
+                <h2>alert</h2>
+                <ol>
+                    <li><span>它是一个Window对象</span></li>
+                    <li>主要功能：<span>弹出警告框</span></li>
+                    <li>语法：<code>window.alert()</code><span>但是window可以省略，即<code>alert()</code>也可以</span>
+                    </li>
+                    <li>但是注意：<span>alert会阻塞代码的运行，只要它在触发阶段，后续代码就无法运行，相反<span
+                            class="span">异步执行确实先将需要执行的代码运行，再运行异步执行的代码块，避免了阻塞</span></span>
+                    </li>
+                    <li><span>没有返回值,实际返回值是：<code>undefined</code></span></li>
+                    <li>
+                        <button type="button" id="btn"><span>点击一下我，有惊喜！！！</span></button>
+                    </li>
+                    <li>
+                        <h3>实例</h3>
+                        <script>
+                            document.getElementById('btn').onclick = () => {
+                                window.alert(`新的一天也要快乐哦！！！`)
+                            }
+                        </script>
+                        <img src="./image/方法：alert().png"
+                             alt="方法：alert()"
+                             title="方法：alert()">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h2>confirm</h2>
+                <ol>
+                    <li><span>它是一个Window对象</span></li>
+                    <li>主要功能：<span>弹出询问框</span></li>
+                    <li>语法：<code>window.confirm()</code><span>但是window可以省略，即<code>confirm()</code>也可以</span>
+                    </li>
+                    <li>但是注意：<span>confirm会阻塞代码的运行，只要它在触发阶段，后续代码就无法运行，相反<span
+                            class="span">异步执行确实先将需要执行的代码运行，再运行异步执行的代码块，避免了阻塞</span></span>
+                    </li>
+                    <li><span>有返回值：确定返回<code>true</code>，取消返回<code>false</code></span></li>
+                    <li>
+                        <button type="button" id="btn2"><span id="text">点击一下我，有惊喜！！！</span></button>
+                    </li>
+                    <li>
+                        <h3>实例</h3>
+                        <script>
+                            // 询问框：confirm
+                            document.getElementById('btn2').onclick = () => { // 获取元素btn2
+                                let jub = window.confirm("你今天开心吗?") // 有返回值 ：确定返回：true 取消返回：false
+                                if (jub) {
+                                    document.getElementById('text').innerHTML = `看来今天的心情不错呀！！！`
+                                } else {
+                                    document.getElementById('text').innerHTML = `看来今天的心情很糟糕😱😱😱😱`
+                                }
+                            }
+                        </script>
+                        <video src="./image/案例——confirm.mp4" controls></video>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h2>prompt</h2>
+                <ol>
+                    <li><span>它是一个Window对象</span></li>
+                    <li>主要功能：<span>弹出输入框</span></li>
+                    <li>语法：<code>window.prompt()</code><span>但是window可以省略，即<code>prompt()</code>也可以</span>
+                    </li>
+                    <li>有两个参数：<span>第一个参数：<span class="span">输入提示用户的文本</span>，第二个参数<span
+                            class="span">默认输入框内容，用户可以自行删除</span></span></li>
+                    <li>但是注意：<span>prompt会阻塞代码的运行，只要它在触发阶段，后续代码就无法运行，相反<span
+                            class="span">异步执行确实先将需要执行的代码运行，再运行异步执行的代码块，避免了阻塞</span></span>
+                    </li>
+                    <li><span>返回值是：用户输入的内容</span></li>
+                    <li>
+                        <button type="button" id="btn3"><span id="text2">点击一下我，有惊喜！！！</span></button>
+                    </li>
+                    <li>
+                        <h3>实例</h3>
+                        <script>
+                            // 输入框：prompt
+                            document.getElementById('btn3').onclick = () => {
+                                let text = window.prompt(`你今天的心情怎么样!!!`,'666')
+                                document.getElementById('text2').innerHTML = `<span>${text}</span>`
+                            }
+                        </script>
+                        <video src="./image/案例——Prompt.mp4" controls></video>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

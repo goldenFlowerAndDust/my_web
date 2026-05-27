@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器的可视窗口尺寸</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>浏览器的可视窗口尺寸</h1>
+    </header>
+    <section id="section_1">
+        <h2>获取浏览器窗口的尺寸</h2>
+        <ul>
+            <li><span><code>innerHeight</code>和<code>innerWidth</code></span></li>
+            <li><span>这两个方法分别是用来获取浏览器窗口的<span
+                class="span">长度<code>innerHeinght</code>和宽度度<code>innerWidth</code>(包含滚动条,
+                <span>也就是说：不管页面被设置的多宽或多长，最后的结果始终是以：眼睛能看到的尺寸为准</span>)</span>
+                输出结果：会始终跟着宽度/高度，而改变</span></li>
+            <li>
+                <h3>实例</h3>
+                <script type="text/javascript">
+                    // innerHeight 获取视口长度  innerWidth 获取视口宽度
+                    // 它是window对象内，所以要使用Window + 点语法
+
+                    // 从输出结果来看：会始终跟着宽度/高度，而改变
+                    let innerHeight = window.innerHeight
+                    console.log(`视口长度：${innerHeight}`)
+
+                    let innerWidth = window.innerWidth
+                    console.log(`视口宽度：${innerWidth}`)
+                </script>
+                <video src="./image/实例——获取可视窗口尺寸.mp4" controls></video>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

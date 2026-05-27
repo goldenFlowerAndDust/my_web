@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始BOM</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>初始BOM</h1>
+    </header>
+    <section id="section_1">
+        <h2>什么是BOM</h2>
+        <ul>
+            <li>BOM(<span>Browser object Mods</span>):浏览器对象模型</li>
+            <li><span>其实就是操作浏览器的一些能力</span></li>
+            <li>
+                <h3>我们可以操作那些内容</h3>
+                <ol>
+                    <li>获取一些浏览器的相关信息(<span>如：窗口大小</span>)</li>
+                    <li>操作浏览器进行页面跳转</li>
+                    <li>获取当前浏览器地址栏的信息</li>
+                    <li>操作浏览器的滚动条</li>
+                    <li>浏览器的信息(<span>如：浏览器的版本</span>)</li>
+                    <li>让浏览器出现一个弹出框(<span>alter、confirm、prompt</span>)</li>
+                    <li>....</li>
+                </ol>
+            </li>
+            <li><span>BOM的核心就是<span class="span">Windows对象</span></span></li>
+            <li><span>Windows是浏览器内置的一个对象，里面包含着操作浏览器的方法</span></li>
+            <li>
+                <button type="button" id="btn"><span>单击我一下，会有惊喜哦！！！！</span></button>
+            </li>
+            <li>
+                <h3>实例</h3>
+                <script>
+                    document.getElementById('btn').onclick = function () {
+                        alert('你被骗了哈哈哈！！！')
+                    }
+                </script>
+                <img src="./image/使用BOM.png"
+                     alt="使用BOM"
+                     title="使用BOM">
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
