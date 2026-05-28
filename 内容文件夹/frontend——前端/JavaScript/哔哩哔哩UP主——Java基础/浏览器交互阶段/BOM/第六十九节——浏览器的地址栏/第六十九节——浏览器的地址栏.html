@@ -26,7 +26,7 @@
                     <li><span><code>location.href</code>这个属性也可以给他赋值</span></li>
                     <li>语法：<code>window.location.href = 'url'</code></li>
                     <li>这个就会跳转页面到赋值的<code>url</code>地址</li>
-                    <li><button type="button" id="btn"><span>单击一下我！可以跳转至百度</span></button></li>
+                    <li><button type="button" id="btn"><span>单击一下我！可以跳转到其他笔记</span></button></li>
                     <li>当前界面的url地址：<code id="url"></code></li>
                     <li>
                         <h4>实例</h4>
@@ -34,7 +34,10 @@
                             // 获取浏览器地址信息：location.href
                             document.getElementById('url').innerHTML = window.location.href  //可以看到，地址将中文变成了url编码
                             document.getElementById('btn').onclick = () => {
-                                location.href = 'https://www.baidu.com/' // 通过赋值，可以绑定事件的方式，实现跳转功能。
+                                /*location.href = '../第七十三节——浏览器的历史记录/第七十三节——浏览器的历史记录.html'*/ // 通过赋值，可以绑定事件的方式，实现跳转功能。
+                                // 因为当前还没有后退标签页，所以暂时使用 location.href替代
+                                // 现在浏览器存储了，当前标签页的后一个标签页的记录，可以使用 history.forward()了
+                                window.history.forward() // 当前状态因为有前进的记录，可以使用，但是刷新后，记录消失变没有了办法
                             }
                         </script>
                         <video src="./image/获取地址栏信息——location.Href.mp4" controls></video>

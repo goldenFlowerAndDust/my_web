@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器打开标签页</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>浏览器打开标签页</h1>
+    </header>
+    <section id="section_1">
+        <h2>打开标签页的方式</h2>
+        <ul>
+            <li>标签页：<span>就是浏览器顶部的可删除地方，一个标签页代表一个网页</span></li>
+            <li>
+                <h3>打开新的标签页</h3>
+                <ol>
+                    <li>即时<span>在不影响当前页面情况下，跳转新的标签页</span></li>
+                    <li>方法：<code>window.open('url')</code></li>
+                    <li>
+                        <button type="button" id="btn"><span>单击我，切换另一个笔记！！！</span></button>
+                    </li>
+                    <script type="text/javascript">
+                        document.getElementById('btn').addEventListener('click', () => {
+                            window.open('https://baidu.com')
+                        })
+                    </script>
+                </ol>
+            </li>
+            <li>
+                <h3>关闭当前标签页</h3>
+                <ol>
+                    <li>即时<span>在不影响其他页面情况下，关闭当前标签页</span></li>
+                    <li>方法：<code>window.close()</code></li>
+                    <li>
+                        <button type="button" id="btn2"><span>单击我，关闭当前页面！！！</span></button>
+                    </li>
+                    <script type="text/javascript">
+                        document.getElementById('btn2').addEventListener('click', () => {
+                            window.close();
+                        })
+                    </script>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

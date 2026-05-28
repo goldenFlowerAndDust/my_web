@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例——记住用户名</title>
+    <link rel="stylesheet" href="../../../../../JavaScript通用样式表.css">
+    <style>
+        form {
+            margin: 0 auto;
+            width: 25rem;
+            height: 10rem;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <h1>案例——记住用户名</h1>
+    </header>
+    <section id="section_1">
+        <form>
+            <label for="name"></label>
+            姓名：<input type="text" id="name">
+            <label for="password"></label>
+            密码：<input type="password" id="password">
+            <label><input type="button" value="提交自动保存" id="setItem"></label>
+        </form> <!--action属性，用于指定表单数据提交的目标地址-->
+        <div>
+            <label><input type="text" placeholder="请输入需要提取的键" id="key"></label>
+            <button type="button" id="getItem"><span>取值</span></button>
+            <p id="value">值为：</p>
+        </div>
+        <div>
+            <label><input type="text" placeholder="请输入需要删除的键" id="del"></label>
+            <button type="button" id="removeItem"><span>删除</span></button>
+        </div>
+        <br>
+        <button type="button" id="clear"><span>清除所有储存数据</span></button>
+    </section>
+    <script type="text/javascript">
+        document.getElementById('setItem').addEventListener('click', () => {
+            let name = document.getElementById('name')
+            let textName = name.value
+
+            let password = document.getElementById('password')
+            let Str = password.value
+            window.localStorage.setItem(`${textName}`, `${Str}`)
+            alert('保存完成')
+            name.value = ''
+            password.value = ''
+        })
+
+        document.getElementById('getItem').addEventListener('click', () => {
+            let key = document.getElementById('key')
+            let Key = key.value
+            let value = localStorage.getItem(Key)
+            if (value === null) {
+                document.getElementById('value').innerHTML = `<span>键不存在</span>`
+            } else {
+                document.getElementById('value').innerHTML = `${Key}的值为：<span>${value}</span>`
+            }
+            key.value = ''
+        })
+
+        document.getElementById('removeItem').addEventListener('click', () => {
+            let key = document.getElementById('key')
+            let Key = key.value
+            localStorage.removeItem(Key)
+            key.value = ''
+        })
+
+        document.getElementById('clear').addEventListener('click', () => {
+            localStorage.clear()
+            alert('已清空所有本地存储')
+        })
+    </script>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

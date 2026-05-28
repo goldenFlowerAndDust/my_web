@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器的历史记录</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>浏览器的历史记录</h1>
+    </header>
+    <section id="section_1">
+        <h2>历史记录</h2>
+        <ul>
+            <li><code>window</code>中有一个对象叫做<code>history</code></li>
+            <li><span>是专门用来存储历史记录信息的</span></li>
+            <li>
+                <h3>方法：<code>history.back()</code></h3>
+                <ol>
+                    <li><code>history.back</code><span>是用来回退历史记录的，就是回到前一个页面，<span
+                            class="span">相当于浏览器上的<code>←</code>按钮</span></span></li>
+                    <li>语法：<code>window.history.back()</code></li>
+                    <li>window可以省略：<code>history.back()</code>也可以</li>
+                    <li>前提是：存在上一条记录(<span>同一个标签页，有多次页面切换</span>)，否则一直在当前页面，也不会回退
+                    </li>
+                    <li>
+                        <button type="button" id="btn"><span>←—————单机我，返回上一个页面</span></button>
+                    </li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            // 返回上一次网页：window.history.back
+                            document.getElementById('btn').addEventListener('click', () => {
+                                window.history.back()
+                                // 当页面没有上一级历史记录，不会回退
+                                // 反之，当前页面上一级有记录，则回退上一次页面
+                            })
+                        </script>
+                        <video src="./image/案例——回退上一级%20Window.History.Back.mp4" controls></video>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>history.forward()</code></h3>
+                <ol>
+                    <li><code>history.forward</code><span>是用来前进到下一个标签页，就是回到后一个页面，<span
+                            class="span">相当于浏览器上的<code>——→</code>按钮</span></span></li>
+                    <li>语法：<code>window.history.forward()</code></li>
+                    <li>前提是：存在下一条记录(<span>同一个标签页，有多次页面切换</span>)，否则一直在当前页面，也不会前进
+                    </li>
+                    <li>window可以省略：<code>history.forward()</code>也可以</li>
+                    <li>
+                        <button type="button" id="btn2"><span>单击我，返回上一个页面————→</span></button>
+                    </li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            // 返回上一次网页：window.history.back
+                            document.getElementById('btn2').addEventListener('click', () => {
+                                window.history.back()
+                                // 此处为了方便演示，实际调用了 back()；真正的 forward() 用法见单独实例文件
+                            })
+                        </script>
+                        <video src="./image/案例——前进到下一个标签页%20Window.History.Forward.mp4" controls></video>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>history.go()</code></h3>
+                <ol>
+                    <li><code>history.go</code></li>
+                    <li>语法：<code>window.history.go()</code></li>
+                    <li><span>具备前进与回退的两个功能，括号内<span class="span">可以传入一个形参，可以是正负值和零</span>
+                        正值表示前进，负值表示回退，0类似刷新当前标签页<span
+                                class="span">具体前进或后退多少记录，有参数具体值决定</span></span></li>
+                    <li>前提是：<span>存在历史记录，不存在，则只会显示当前标签页，不会执行前进或回退操作</span>
+                    </li>
+                    <li>window可以省略：<code>history.go()</code>也可以</li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

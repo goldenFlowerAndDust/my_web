@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器本地存储</title>
+    <link rel="stylesheet" href="../../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>浏览器本地存储</h1>
+    </header>
+    <section id="section_1">
+        <h2>本地存储</h2>
+        <ul>
+            <li>
+                <h2>localStorage(<span>永久存储</span>)</h2>
+                <ol>
+                    <li>
+                        <h3>增操作：<code>localStorage.setItem()</code></h3>
+                        <ul>
+                            <li>存储的数据，可以在浏览器：<span>应用菜单内的左侧边栏，本地存储空间(localStorage)找到</span>
+                            </li>
+                            <li>必须传两个参数，<span>第一个参数为：<span class="span">键</span>，第二个参数为：<span
+                                    class="span">值</span>,但是千万不要写成键值对的形式</span>
+                            </li>
+                            <li>注意：<span>该方式存储的只能本地且本设备，才能看到，对应的键和值，其他地方看不到</span></li>
+                            <li>返回值：<span>undefined</span></li>
+                            <li><span>只能存储：<code>String类型</code>其他类型会被强制转换成字符串类型(
+                                <code>如：Arary、object、function、()=>{}、Number、Boolean....</code>)
+                                对象可通过方法：<code>JSON.stringify()</code>将对象转换成字符串类型</span></li>
+                            <li>
+                                <button type="button" id="btn_local_setItem"><span>单击我，存储数据</span></button>
+                            </li>
+                            <li><span>相同的键，后者的值会覆盖前面的值,这也就引出了<span
+                                    class="span">改操作</span></span></li>
+                            <li>
+                                <h4>实例</h4>
+                                <script type="text/javascript">
+                                    document.getElementById('btn_local_setItem').addEventListener('click', () => {
+                                        localStorage.setItem('name', 'goldenFlowerAndDust')
+                                        localStorage.setItem('age', '30')
+                                        localStorage.setItem('gender', 'male')
+                                    })
+                                    // 正常来说需要表单辅助，我为了方便，直接在按钮上绑定，当单击按钮后，直接存储。
+                                </script>
+                                <img src="./image/localStorage/本地存储(增操作)：localStorage.setItem().png"
+                                     alt="本地存储(增操作)：localStorage.setItem()"
+                                     title="本地存储(增操作)：localStorage.setItem()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>取操作：<code>localStorage.getItem()</code></h3>
+                        <ul>
+                            <li>该方法主要是：<span>通过键，取出对应的值</span></li>
+                            <li>必须传一个参数，<span>参数为：键</span></li>
+                            <li>返回值是：<span>键对应的值</span></li>
+                            <li><span>当取的键不存在时：<span class="span">返回值是：null</span></span></li>
+                            <li>
+                                当获取的值是：<span>JSON字符串的时候，可以通过方法：<code>JSON.parse()</code>转成对象</span>
+                            </li>
+                            <li>
+                                <button type="button" id="btn_local_getItem"><span>单击我，取出数据</span></button>
+                            </li>
+                            <li><p id="text"></p></li>
+                            <li>
+                                <h4>实例</h4>
+                                <script type="text/javascript">
+                                    document.getElementById('btn_local_getItem').addEventListener('click', () => {
+                                        let key = 'name'
+                                        let value = localStorage.getItem(key)
+                                        document.getElementById('text').innerHTML = `${key}的值是：<span>${value}</span>`
+                                    })
+                                    // 正常来说需要表单辅助，我为了方便，直接在按钮上绑定，当单击按钮后，直接存储。
+                                </script>
+                                <img src="image/localStorage/本地存储(取操作)：localStorage.getItem().png"
+                                     alt="本地存储(取操作)：localStorage.getItem()"
+                                     title="本地存储(取操作)：localStorage.getItem()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>删操作：<code>localStorage.removeItem()</code></h3>
+                        <ul>
+                            <li>该方法主要是：<span>通过键，删除对应的值</span></li>
+                            <li>必须传一个参数，<span>参数为：键</span></li>
+                            <li>返回值：<span>undefined</span></li>
+                            <li>
+                                <button type="button" id="btn_local_removeItem"><span>单击我，删除数据</span></button>
+                            </li>
+                            <li>
+                                <h4>实例</h4>
+                                <script type="text/javascript">
+                                    document.getElementById('btn_local_removeItem').addEventListener('click', () => {
+                                        localStorage.removeItem('name')
+                                    })
+                                    // 正常来说需要表单辅助，我为了方便，直接在按钮上绑定，当单击按钮后，直接存储。
+                                </script>
+                                <img src="./image/localStorage/本地存储(删操作)：localStorage.removeItem().png"
+                                     alt="本地存储(删操作)：localStorage.removeItem()"
+                                     title="本地存储(删操作)：localStorage.removeItem()">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>清空操作：<code>localStorage.clear()</code></h3>
+                        <ul>
+                            <li>该方法主要是：<span>清空本地所有键和值</span></li>
+                            <li><span>不需要传参数</span></li>
+                            <li>返回值：<span>undefined</span></li>
+                            <li>
+                                <button type="button" id="btn_local_clear"><span>单击我，清空本地数据</span></button>
+                            </li>
+                            <li>
+                                <h4>实例</h4>
+                                <script type="text/javascript">
+                                    document.getElementById('btn_local_clear').addEventListener('click', () => {
+                                        localStorage.clear()
+                                    })
+                                </script>
+                                <img src="./image/localStorage/本地存储(清除操作)：localStorage.clear().png"
+                                     alt="本地存储(清除操作)：localStorage.clear()"
+                                     title="本地存储(清除操作)：localStorage.clear()">
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h2>sessionStorage(<span>暂时存储(关闭网页及丢失)</span>)</h2>
+                <ol>
+                    <li><span>增、改、取、删、清空操作与localStorage一致(包括注意事项)</span></li>
+                    <li>区别就是：开发者查看的位置不同(<span>应用菜单内的左侧边栏，会话存储空间(sessionStorage)找到</span>)</li>
+                    <li>还有一个区别就是：本地存储(<code>localStorage</code>)是永久存储(<span>只要不删除浏览器、重装系统</span>)、
+                        而会话存储(<code>sessionStorage</code>)，<span>关闭页面就丢失</span></li>
+                    <li>
+                        <h3>增操作：<code>sessionStorage.setItem()</code></h3>
+                        <ul>
+                            <li>改操作：<span>同样是重新赋值即可</span></li>
+                            <li>同样是：<span>只能才能出字符串类型</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>取操作：<code>sessionStorage.getItem()</code></h3>
+                        <ul>
+                            <li>返回值：<span>同样是对应的值</span></li>
+                            <li><span>若键不存在，则返回值为<code>null</code></span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>删操作：<code>sessionStorage.removeItem()</code></h3>
+                    </li>
+                    <li>
+                        <h3>清空操作：<code>sessionStorage.clear()</code></h3>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+        <p></p>
+    </footer>
+</main>
+</body>
+</html>
