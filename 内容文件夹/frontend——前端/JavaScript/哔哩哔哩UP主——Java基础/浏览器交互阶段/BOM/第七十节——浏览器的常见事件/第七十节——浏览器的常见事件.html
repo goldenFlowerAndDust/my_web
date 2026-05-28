@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器的常见事件</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>浏览器的常见事件</h1>
+        <p id="onload"></p>
+    </header>
+    <section id="section_1">
+        <h2>浏览器的常见事件有：</h2>
+        <ul>
+            <li>注意：<span>BOM 事件（如 <code>onscroll</code>）可以通过属性赋值或 <code>addEventListener(<span
+                    class="span">事件监听器</span>)</code> 绑定。属性赋值只能绑定一个处理函数，后面覆盖前面；
+                    <code>addEventListener(<span
+                            class="span">事件监听器</span>)</code> 可以绑定多个，不会覆盖。两者本质上都是注册回调，由浏览器在事件发生时统一调用。</span>
+            </li>
+            <li>
+                <h3><code>onload</code>事件</h3>
+                <ol>
+                    <li>注意：<span>这个不是一个对象，而是一个事件</span></li>
+                    <li>是在页面所有资源加载完毕后执行——异步执行</li>
+                    <li>页面所有资源包括：<span>图片、视频、DOM</span></li>
+                    <li>主要是：<span>给浏览器绑定事件</span></li>
+                    <li>
+                        代码实例：
+                        <br><code>window.onload = function () {代码块}</code>
+                        <br><code>window.onload = () => {代码块}</code>
+                    </li>
+                    <li>
+                        <h4>代码实例</h4>
+                        <script type="text/javascript">
+                            window.onload = () => {
+                                document.getElementById('onload').innerHTML = '<span>页面的所有资源加载完毕</span>'
+                            }
+                        </script>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3><code>onresize</code>事件</h3>
+                <ol>
+                    <li>注意：<span>这个不是一个对象，而是一个事件</span></li>
+                    <li>当页面长宽变动时，<span>执行该事件</span></li>
+                    <li>
+                        代码实例：
+                        <br><code>window.onresize = function () {代码块}</code>
+                        <br><code>window.onresize = () => {代码块}</code>
+                    </li>
+                    <li>
+                        <h4>代码实例</h4>
+                        <script type="text/javascript">
+                            window.onresize = () => {
+                                console.log('onresize')
+                            }
+                        </script>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3><code>onscroll</code>事件</h3>
+                <ol>
+                    <li>注意：<span>这个不是一个对象，而是一个事件</span></li>
+                    <li>当页面滚动条变动时，<span>执行该事件</span></li>
+                    <li>
+                        代码实例：
+                        <br><code>window.onscroll = function () {代码块}</code>
+                        <br><code>window.onscroll = () => {代码块}</code>
+                    </li>
+                    <li>
+                        <h4>代码实例</h4>
+                        <script type="text/javascript">
+                            window.onscroll = () => {
+                                console.log('onscroll')
+                            }
+                        </script>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>补充知识</h2>
+        <ul>
+            <li>
+                <h3><code>addEventListener</code><span>事件监听器</span></h3>
+                <ol>
+                    <li>与传统的on开头的不同，它可以添加多个回调函数，普通的添加事件(<code>onclick、onload、onresize、onscroll</code>)后面的会覆盖前面的
+                    </li>
+                    <li>语法：<code>window.addEventListener('需要绑定的事件',()=>{代码块})</code></li>
+                    <li>语法：<code>window.addEventListener('需要绑定的事件',function () {代码块})</code></li>
+                    <li>
+                        <h4>目前学过的事件</h4>
+                        <ul>
+                            <li><code>click</code>：<span>点击事件</span></li>
+                            <li><code>scorll</code>：<span>滚动条滚动事件</span></li>
+                            <li><code>resize</code>：<span>窗口大小改变事件</span></li>
+                            <li><code>load</code>：<span>资源加载完成事件</span></li>
+                        </ul>
+                    </li>
+                    <li><span>总结：on开头的会被覆盖，addEventListener可以添加多个事件</span></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

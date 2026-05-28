@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器的滚动距离</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+    <style>
+        body {
+            /*height: 2000px;*/
+            /*width: 2000px;*/
+        }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <h1>浏览器的滚动距离</h1>
+    </header>
+    <section id="section_1">
+        <h2>显示滚动距离</h2>
+        <ul>
+            <li>注意：<span>距离指的是：<span class="span">页面随着滚动后，超出视口的距离</span></span></li>
+            <li>
+                <h3>显示垂直滚动距离</h3>
+                <ol>
+                    <li>属性：<code>window.document.documentElement.scrollTop</code></li>
+                    <li>window可以省略：<code>document.documentElement.scrollTop</code>也可以</li>
+                    <li>需要与<code>onscroll</code>事件绑定或<code>addEventListener</code>事件监听，第一个参数为<code>scroll</code>
+                    </li>
+                    <li>
+                        注意：<span>一些低版本不支持<code>documentElemnt</code>,所以可以写<code>document.body.scrollTop</code></span>
+                    </li>
+                    <li>所以一般最好写成：<code>(document.documentElement.scrollTop || document.body.scrollTop)</code>
+                    </li>
+                    <li>
+                        <h4>实例(在控制台显示滚动距离)</h4>
+                        <script type="text/javascript">
+                            // 显示滚动距离属性：window.document.documentElement.scrollTop
+                            // 需要与onscroll事件绑定使用
+                            addEventListener('scroll', () => {
+                                console.log(`垂直距离：${window.document.documentElement.scrollTop}`)
+                            })
+                        </script>
+                        <video src="./image/显示垂直滚动距离——Window.Document.Documentelement.Scrolltop.mp4"
+                               controls></video>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>显示水平滚动距离</h3>
+                <ol>
+                    <li>属性：<code>window.document.documentElement.scrollLeft</code></li>
+                    <li>window可以省略：<code>document.documentElement.scrollLeft</code>也可以</li>
+                    <li>需要与<code>onscroll</code>事件绑定或<code>addEventListener</code>事件监听，第一个参数为<code>scroll</code>
+                    </li>
+                    <li>
+                        注意：<span>一些低版本不支持<code>documentElemnt</code>,所以可以写<code>document.body.scrollLeft</code></span>
+                    </li>
+                    <li>所以一般最好写成：<code>(document.documentElement.scrollLeft || document.body.scrollLeft)</code>
+                    </li>
+                    <li>
+                        <h4>实例(在控制台显示滚动距离)</h4>
+                        <script type="text/javascript">
+                            // 显示滚动距离属性：window.document.documentElement.scrollLeft
+                            // 需要与onscroll事件绑定使用
+                            addEventListener('scroll', () => {
+                                console.log(`水平距离：${window.document.documentElement.scrollLeft}`)
+                            })
+                        </script>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>规定滚动距离</h3>
+                <ol>
+                    <li>方法：<code>window.scrollTo()</code></li>
+                    <li>window可以省略：<code>scrollTo()</code>也可以</li>
+                    <li>共有两个参数：<span>第一个参数：<span
+                            class="span">X轴距离顶部的距离</span>,第二个参数：<span
+                            class="span">Y轴距离顶部的距离</span></span>
+                    </li>
+                    <li>当然也可以采用，传对象的方法：<code>scroll({top:num , left:num})</code><span>num为具体数值,
+                    且对象中：left,top位置不固定，但是不能重复声明(键不同相同),不能有除<code>left、top</code>以外的键</span>
+                    </li>
+                    <li>
+                        <button type="button" id="top">回到顶部</button>
+                    </li>
+                    <li>
+                        <h4>实例(在控制台显示滚动距离)</h4>
+                        <script type="text/javascript">
+                            document.getElementById('top').addEventListener('click', () => {
+                                scrollTo({top: 0, left: 0})
+                            })
+                        </script>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器的地址栏</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>浏览器的地址栏</h1>
+    </header>
+    <section id="section_1">
+        <h2>浏览器的地址信息</h2>
+        <ul>
+            <li>在<code>window</code>中有一个对象叫做<code>location</code></li>
+            <li>就是专门用来存储浏览器的地址栏内的信息</li>
+            <li>
+                <h3>属性<code>location.href</code></h3>
+                <ol>
+                    <li>location.href这个属性存储的是浏览器地址栏内<code>url</code>地址的信息</li>
+                    <li>语法：<code>console.log(window.location.href)</code></li>
+                    <li>window可以省略，即<code>location.href</code>这种写法也可以</li>
+                    <li>会把中文变成<code>url编码的格式</code></li>
+                    <li><span><code>location.href</code>这个属性也可以给他赋值</span></li>
+                    <li>语法：<code>window.location.href = 'url'</code></li>
+                    <li>这个就会跳转页面到赋值的<code>url</code>地址</li>
+                    <li><button type="button" id="btn"><span>单击一下我！可以跳转至百度</span></button></li>
+                    <li>当前界面的url地址：<code id="url"></code></li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            // 获取浏览器地址信息：location.href
+                            document.getElementById('url').innerHTML = window.location.href  //可以看到，地址将中文变成了url编码
+                            document.getElementById('btn').onclick = () => {
+                                location.href = 'https://www.baidu.com/' // 通过赋值，可以绑定事件的方式，实现跳转功能。
+                            }
+                        </script>
+                        <video src="./image/获取地址栏信息——location.Href.mp4" controls></video>
+                    </li>
+                    <li>可以使用<code>decodeURI()</code>解码——将url编码重新转换成中文或字符</li>
+                    <li>当前界面的url地址(解码后)：<code id="url2"></code></li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            document.getElementById('url2').innerHTML = decodeURI('http://localhost:63342/my_web/' +
+                                '%E5%86%85%E5%AE%B9%E6%96%87%E4%BB%B6%E5%A4%B9' +
+                                '/frontend%E2%80%94%E2%80%94%E5%89%8D%E7%AB%AF/JavaScript/%E5%93%94%E5%93%A9%E5%93%94%' +
+                                'E5%93%A9UP%E4%B8%BB%E2%80%94%E2%80%9' +
+                                '4Java%E5%9F%BA%E7%A1%80/%E6%B5%8F%E8%A7%88%E5%99%A' +
+                                '8%E4%BA%A4%E4%BA%92%E9%98%B6%E6%AE%B5/BOM/%E7%AC%AC%' +
+                                'E5%85%AD%E5%8D%81%E4%B9%9D%E8%8A%82%E2%80%94%E2%80%94%E6%B' +
+                                '5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%9C%B0%E5%9D%80%E6%A0%8F/' +
+                                '%E7%AC%AC%E5%85%AD%E5%8D%81%E4%B9%9D%E8%8A%82%E2%80%94%E2%80%94%E6%B5%8F%E8%A7%88%E5%99' +
+                                '%A8%E7%9A%84%E5%9C%B0%E5%9D%80%E6%A0%8F.html?_ijt=u3qo8lgu395aouh10nqcphombr&_ij_reload' +
+                                '=RELOAD_ON_SAVE')
+                        </script>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>方法：<code>reload</code></h3>
+                <ol>
+                    <li>该方法主要用于<span>刷新页面</span></li>
+                    <li>语法：<code>window.location.reload()</code></li>
+                    <li>同样window可以省略：<code>location.reload()</code>也可以</li>
+                    <li>常搭配按钮使用</li>
+                    <li><button type="button" id="btn3"><span>单击我一下，刷新页面</span></button></li>
+                    <li>
+                        <h4>实例</h4>
+                        <script type="text/javascript">
+                            // 刷新页面方法：loaction.reload()
+                            document.getElementById('btn3').onclick = () => {
+                                window.location.reload()
+                            }
+                        </script>
+                        <video src="./image/刷新页面——location.Reload.mp4" controls></video>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
