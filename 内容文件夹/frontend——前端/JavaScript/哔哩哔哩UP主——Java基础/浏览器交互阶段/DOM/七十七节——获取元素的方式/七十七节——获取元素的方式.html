@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取元素的方式</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>获取元素的方式</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>
+                <h2>非常规的</h2>
+                <ol>
+                    <li><span><code>html、head、body</code> 不需要获取元素，可以直接进行操作</span></li>
+                    <li>语法(<span>获取html</span>)：<code>document.documentElement</code></li>
+                    <li>语法(<span>获取head</span>)：<code>document.head</code></li>
+                    <li>语法(<span>获取body</span>)：<code>document.body</code></li>
+                </ol>
+            </li>
+            <li>
+                <h2>常规的(<span>一般不考虑兼容性问题</span>)</h2>
+                <ol>
+                    <li>
+                        <h3>方法：<code>getElementById()</code></h3>
+                        <ul>
+                            <li><code>getElementById()</code>：<span>通过标签的 <code>id</code>名称获取标签的元素</span>
+                            </li>
+                            <li>语法：<code>document.getElementById('id名')</code></li>
+                            <li>因为在一个页面中id是唯一的，所以<span>所以获取的就是一个元素</span></li>
+                            <li><span>最好声明变量接收(<span
+                                    class="span">因为当需要多次操作的话，需要重复获取元素，增加代码量</span>)
+                                所以声明变量接收，通过这个变量来操作会方便很多，而且后续的 伪数组(也叫类数组)<code>nodeList</code>类型需要遍历。</span>
+                            </li>
+                            <li><span>因为获取的是一个元素，所以可以直接在改元素上直接<span
+                                    class="span">进行操作(如<code>innerHTML、innerText、value...</code>)</span></span>
+                            </li>
+                            <li>
+                                <button type="button" id="btn"><span>单机我有惊喜！！！</span></button>
+                            </li>
+                            <li>
+                                <h4>案例(使用getElementById获取按钮)</h4>
+                                <script type="text/javascript">
+                                    // 获取元素 getElementById ————————→ 通过id获取
+                                    const btn = document.getElementById('btn') // 成功获取到了，button且id为btn的元素，
+                                    // 因为获取的是元素而非 nodeList(类似数组的，所以不需要遍历)
+                                    // 为按钮添加事件 (click[单击事件])
+                                    btn.addEventListener('click', () => {
+                                        alert('你好呀') // alert 警告弹窗 且 只支持 纯文本，不能解析 HTML
+                                        const em = confirm('你今天心情怎么样？') // confirm 弹出选择框 ，确定返回true ，取消分返回false
+                                        if (em) {
+                                            alert('看来今天的心情不错呀！')
+                                        } else {
+                                            alert('看来今天的心情不是很好呀！')
+                                        }
+                                        const Em = prompt(`你的心情是：`, ``) // 弹出输入框 返回值是用户输入的文本
+                                        alert(`你今天的心情是：${Em}`)
+                                    })
+                                    // 从输出结果可以看到：通过id成功获取了，需要要的按钮，也使用事件监听器，成功添加点击事件，随便复习了BOM的弹窗知识
+                                </script>
+                                <video src="./image/getElementById/获取元素——Getelementbyid.mp4" controls></video>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>方法：<code>getElementsByClassName()</code></h3>
+                        <ul>
+                            <li><a href="#伪数组">伪数组具体解释</a></li>
+                            <li><code>document.getElementsByClassName()</code>：<span>通过标签的 <code>class(类)</code>名称获取标签的元素</span>
+                            </li>
+                            <li>语法：<code>getElementsByClassName('class名')</code></li>
+                            <li>因为在一个页面中class是多个的，所以<span>所以获取的就是 <span
+                                    class="span">一个伪数组(<span>也叫类数组</span>)[<code>HTMLCollection</code>]</span></span>
+                            </li>
+                            <li><span>伪数组：是一个class的集合，所组成的集合：<span
+                                    class="span">它有正常数组的 <code>length</code>属性和索引元素，但是缺少数组方法的对象(
+                                <span>意思就是没有数组的方法(<code>forEach、map、filter、reduce、find、findIndex、every、some</code>)
+                                    都无法使用</span>)</span></span></li>
+                            <li><span>使用该方法获取的伪数组是其中一种(<code>HTMLCollction</code>)它不能使用方法 <code>forEach</code>遍历，<span
+                                    class="span">可以使用 <code>for、for-of</code>或直接转成数组，方法：<code>Array.from()——然后使用 <span>forEach遍历</span></code></span></span>
+                            </li>
+                            <li><span>可以使用索引+中括号的方式，单个操作</span></li>
+                            <li><span>最好声明变量接收,减少代码量</span></li>
+                            <li><span>遍历完后，才能进行操作，不然只有第一个生效</span></li>
+                            <li>
+                                <h4>案例(使用getElementByClassName获取元素)</h4>
+                                <ol>
+                                    <li class="ol_li_1"></li>
+                                    <li class="ol_li_2"></li>
+                                    <li class="ol_li_1"></li>
+                                    <li class="ol_li_2"></li>
+                                    <li class="ol_li_1"></li>
+                                    <li class="ol_li_2"></li>
+                                </ol>
+                                <script>
+                                    // 同时获取多个元素 通过类获取 ： getElementsByClassName() 获取的是一个伪数组，需要遍历，才能操作
+
+                                    // 获取 类(ol_li_1)
+                                    const ol_li_1 = document.getElementsByClassName('ol_li_1') // 成功获取 类(ol_li_1)的集合
+                                    // 获取 类(ol_li_2)
+                                    const ol_li_2 = document.getElementsByClassName('ol_li_2') // 成功获取 类(ol_li_2)的集合
+
+                                    // 给 类(ol_li_1) 添加内容：Hello
+                                    // 给 类(ol_li_2) 添加内容：javaScript
+
+                                    // 遍历伪数组
+                                    for (const Array of ol_li_1) {
+                                        Array.innerHTML = `<span>Hello</span>` // innerHTML 操作元素文本，可读可写，可以解析HTML(就是能用样式)
+                                    }
+                                    Array.from(ol_li_2).forEach(Array => {
+                                        Array.innerText = `javaScript` // innerText 操作元素文本，可读可写，不能解析HTML，纯文本
+                                    })
+                                    /*
+                                    *   错误总结：
+                                    *       1.方法(getElementsByClassName) 返回的是伪数组的其中一种(HTMLCollection)
+                                    *       2.它不能使用方法：(forEach)遍历
+                                    *       3.可以使用：for、for-of(直接获取数组元素，而不是索引)、Array.from()——再通过forEach遍历
+                                    *       4.补充知识：for-in(获取元素索引)
+                                    * */
+                                </script>
+                                <video src="./image/getElementsByClassName/获取伪数组——Htmlcollection——方法——Getelementsbyclassname.mp4"
+                                       controls></video>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>方法：<code>getElementsByTagName()</code></h3>
+                        <ul>
+                            <li><a href="#伪数组">伪数组具体解释</a></li>
+                            <li><code>document.getElementsByTagName()</code>：<span>通过标签的名获取对应的元素</span>
+                            </li>
+                            <li>语法：<code>getElementsByTagName('标签名')</code></li>
+                            <li>因为在一个页面中标签是多个的，所以<span>所以获取的就是 <span
+                                    class="span">一个伪数组(<span>也叫类数组</span>)[<code>HTMLCollection</code>]</span></span>
+                            </li>
+                            <li><span>伪数组：是一个class的集合，所组成的集合：<span
+                                    class="span">它有正常数组的 <code>length</code>属性和索引元素，但是缺少数组方法的对象(
+                                <span>意思就是没有数组的方法(<code>forEach、map、filter、reduce、find、findIndex、every、some</code>)
+                                    都无法使用</span>)</span></span></li>
+                            <li><span>使用该方法获取的伪数组是其中一种(<code>HTMLCollction</code>)它不能使用方法 <code>forEach</code>遍历，<span
+                                    class="span">可以使用 <code>for、for-of</code>或直接转成数组，方法：<code>Array.from()——然后使用 <span>forEach遍历</span></code></span></span>
+                            </li>
+                            <li><span>可以使用索引+中括号的方式，单个操作</span></li>
+                            <li><span>最好声明变量接收,减少代码量</span></li>
+                            <li><span>遍历完后，才能进行操作，不然只有第一个生效</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>方法：<code>getElementsByName()</code></h3>
+                        <ul>
+                            <li><a href="#伪数组">伪数组具体解释</a></li>
+                            <li><code>document.getElementsByName()</code>：<span>通过name名获取对应的元素</span>
+                            </li>
+                            <li>语法：<code>getElementsByName('name名')</code></li>
+                            <li>因为在表单<code>input</code>内那么可以是多个的，所以<span>所以获取的就是 <span
+                                    class="span">一个伪数组(<span>也叫类数组</span>)[<code>NodeList</code>]</span></span>
+                            </li>
+                            <li><span>伪数组：是一个class的集合，所组成的集合：<span
+                                    class="span">它有正常数组的 <code>length</code>属性和索引元素，但是缺少数组方法的对象(
+                                <span>意思就是没有数组的方法(<code>forEach、map、filter、reduce、find、findIndex、every、some</code>)
+                                    都无法使用</span>)</span></span></li>
+                            <li><span>使用该方法获取的伪数组是其中一种(<code>NodeList</code>)浏览器支持 <code>forEach</code>遍历，<span
+                                    class="span">当蓝也可以使用 <code>for、for-of</code>或直接转成数组，方法：<code>Array.from()——然后使用 <span>forEach遍历</span></code></span></span>
+                            </li>
+                            <li><span>可以使用索引+中括号的方式，单个操作</span></li>
+                            <li>
+                                <span>该方法常用于表单，其他地方没有 <code>name</code>属性，当然可以自己定义 <code>name</code>属性，但是没有任何意义</span>
+                            </li>
+                            <li><span>最好声明变量接收,减少代码量</span></li>
+                            <li><span>遍历完后，才能进行操作，不然只有第一个生效</span></li>
+
+                        </ul>
+                    </li>
+                </ol>
+                <h2>非常规的(<span>需要考虑兼容性问题</span>)</h2>
+                <ol>
+                    <li>
+                        <h3>方法：<code>querySelector()</code></h3>
+                        <ul>
+                            <li>语法：<code>document.querySelector()</code></li>
+                            <li><span>获取单个元素(<span class="span">获取第一个匹配的元素</span>)</span></li>
+                            <li>可以获取：<span>除伪元素选择器外的所有选择器(<span
+                                    class="span">类选择器、id选择器、伪类选择器、兄弟选择器、子选择器....</span>)</span>
+                            </li>
+                            <li><span>但是需要添加前缀(<span
+                                    class="span">类 <code>.</code>、id <code>#</code>、伪类 <code>:</code></span>)</span>
+                            </li>
+                            <li><span>因为获取的单个元素，而不是伪数组，所以可以直接操作该元素</span></li>
+                            <li><span>最好声明变量接收</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>方法：<code>querySelectorAll()</code></h3>
+                        <ul>
+                            <li>语法：<code>document.querySelectorAll()</code></li>
+                            <li><span>获取所有匹配的元素</span></li>
+                            <li>可以获取：<span>除伪元素选择器外的所有选择器(<span
+                                    class="span">类选择器、id选择器、伪类选择器、兄弟选择器、子选择器....</span>)</span>
+                            </li>
+                            <li><span>但是需要添加前缀(<span
+                                    class="span">类 <code>.</code>、id <code>#</code>、伪类 <code>:</code></span>)</span>
+                            </li>
+                            <li><span>因为获取的所有匹配的元素，是伪数组，所以不可以直接操作该元素，需要遍历</span></li>
+                            <li><span>使用该方法获取的伪数组的其中一种 <code>NodeList</code>，所以可以使用
+                                <code>forEach、for、for-of以及方法：Array.from()再使用forEach【<span>当然这是多此一举的</span>】
+                                </code></span>
+                            </li>
+                            <li><span>最好声明变量接收</span></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>知识补充</h2>
+        <ul>
+            <li>
+                <h3 id="伪数组">伪数组</h3>
+                <table>
+                    <tr>
+                        <th>名称</th>
+                        <th>来源/示例</th>
+                        <th>是否有 <code>length</code></th>
+                        <th>是否通过索引访问</th>
+                        <th>是否有 <code>forEach</code></th>
+                        <th>是否可迭代(for、for-of)</th>
+                        <th>
+                            是否真数组(<span>但是有<code>length</code>属性可以通过 <code>Array.from()</code>转为真数组</span>)
+                        </th>
+                    </tr>
+                    <tr>
+                        <td><code>NodeList</code></td>
+                        <td><code style="color: #b893f3">document.querySelectorAll('div')</code></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅（现代浏览器）</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><code>HTMLCollection</code></td>
+                        <td><code
+                                style="color: #b893f3">document.getElementsByClassName('test')<br>element.children</code>
+                        </td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><code>arguments</code></td>
+                        <td>函数内部<code style="color: #b893f3">function() { console.log(arguments) }</code></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌（但可转数组）</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><code>DOMTokenList</code></td>
+                        <td><code style="color: #b893f3">element.classList</code></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅（现代浏览器）</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><code>NamedNodeMap</code></td>
+                        <td><code style="color: #b893f3">element.attributes</code></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌（老式）</td>
+                        <td>❌（部分可迭代）</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><code>HTMLFormControlsCollection</code></td>
+                        <td><code style="color: #b893f3">form.elements</code></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span">字符串</span></td>
+                        <td><code style="color: #b893f3">'abc'</code></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌（字符串有 for...of 但没有 forEach）</td>
+                        <td>✅</td>
+                        <td>❌（字符串是原始类型，但具有类数组特性）</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span">自定义类数组</span></td>
+                        <td><code style="color: #b893f3">let obj = {0:'a',1:'b',length:2}</code></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌（默认不可迭代，除非实现 [Symbol.iterator]）</td>
+                        <td>❌</td>
+                    </tr>
+                </table>
+            </li>
+            <li>
+                <h3>知识复习</h3>
+                <ul>
+                    <li><code>for</code>：<span>需要初始话变量、循环条件、改变逻辑，可嵌套</span></li>
+                    <li><code>for-in</code>：<span>需要声明变量用于接收索引</span></li>
+                    <li><code>for-of</code>：<span>需要声明变量用于接收元素</span></li>
+                    <li><code>Array.from()</code>：<span>将存在 <code>length</code>属性的类型，转为真数组</span></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
