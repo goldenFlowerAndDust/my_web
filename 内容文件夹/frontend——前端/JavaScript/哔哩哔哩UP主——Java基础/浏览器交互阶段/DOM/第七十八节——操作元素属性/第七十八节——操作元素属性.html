@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>操作元素属性</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>操作元素属性</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>
+                <h2><span>元素属性分类</span></h2>
+                <ol>
+                    <li>第一类：<span>元素自带的属性(<span
+                            class="span">原生属性</span>)如：
+                        <code>id、class、name.....</code></span></li>
+                    <li>第二类：<span>自定义属性(<span
+                            class="span">自己创建的属性</span>)一般没有意义</span></li>
+                </ol>
+            </li>
+            <li>
+                <h2>操作原生属性</h2>
+                <ol>
+                    <li>
+                        <h3>更改属性值</h3>
+                        <ul>
+                            <li>先获取元素</li>
+                            <li>然后使用<span>点语法+属性名</span></li>
+                            <li>语法：1.先获取元素<code>const Hello = document.getElementById('hello')</code>
+                                <br> 2.假设获取的是表单，且 type = 'text' , 要求改为 password
+                                <br> 则：<code>Hello.type =
+                                    'password'</code>，<br><span>获取元素的属性名 = 新属性值</span>即可
+                            </li>
+                            <li><span>说白了，就是获取元素对应的属性名，然后重新赋值(<span>所以首要前提是：获取元素,<a
+                                    href="../七十七节——获取元素的方式/七十七节——获取元素的方式.html">获取元素的方法</a></span>)</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>自定义属性的(<span>增、获取、删</span>)</h3>
+                        <ul>
+                            <li>
+                                增/修改(<span>重新赋值</span>)：<code>节点元素.setAttribute('自定义属性名',‘自定义属性值’)</code>顾名思义：<span>就是在当前节点，添加一个自定义属性</span>
+                            </li>
+                            <li>
+                                获取：<code>节点元素.getAtttribute('自定义属性名')</code>顾名思义：<span>就是获取当前节点，的自定义属性名</span>
+                            </li>
+                            <li>
+                                删：<code>节点元素.removeAttribite('自定义属性名')</code>>顾名思义：<span>就是删除当前节点，的自定义属性名</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>自定义属性的命名约定，以及对应的的方法</h3>
+                        <ul>
+                            <li><span>自定义属性约定，最好加上前缀 <code>data-自定义属性</code>，但是自定义属性命名规则与变量一致，不合法字符会自动忽略，组成一个新的属性名</span>
+                            </li>
+                            <li>那么采用这种命名形式，<span>增/修改、获取、删略有不同</span></li>
+                            <li>获取：<code>节点元素.dataset</code>：注意点：<span>获取的当前节点所有 <code>data</code>的自定义属性,<span
+                                    class="span">但是返回的是一个 <code>DOMStringMap</code>对象</span></span>
+                            </li>
+                            <li><span>已经知道返回的是一个对象了，那么 <span>增/改、删、查与对象一致</span></span></li>
+                            <li>
+                                增/改(<span>重新赋值</span>)：<code>字面量.dataset.属性名 = "属性值"</code>
+                            </li>
+                            <li>查：<code>字面量.dataset.属性名</code></li>
+                            <li>删：<code>delete 字面量.dataset.属性名</code></li>
+                            <li>注意(字面量)：<span>是获取的节点元素，可能是一个元素(<span
+                                    class="span">可以直接操作：增/改、删、查</span>)，
+                                    若返回的是伪数组(<span class="span">需要先遍历，再执行操作</span>)</span>
+                            </li>
+                            <li>注意(属性名)：<span>不需要前缀 <code>data-</code></span></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li></li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>补充知识</h2>
+        <ul>
+            <li>
+                <h3>表单知识回顾</h3>
+                <ol>
+                    <li><span>大部分表单控件通过 &lt;input&gt; 的 type 属性来定义（如文本、密码、单选框等），但 &lt;select&gt;、&lt;textarea&gt;、&lt;button&gt; 等是独立标签。</span>
+                    </li>
+                    <li><span>label标签有两种写法：
+                        <br>显式：<span>就是所有标签写在 <code>label</code>标签内</span>
+                        <br>隐式：<span>就是所有标签写在 <code>label</code>标签外</span>、<span>
+                            但是 <code>label</code>不能缺少，外label标签内设置 <code>for=""</code>属性，然后其他标签设置
+                            <code>id=""</code>属性，<span>确保 <code>for</code>属性值与<code>id</code>值一致</span>
+                        </span>
+                    </span></li>
+                    <li><span>所有 <code>input</code>标签都是在<code>label</code>标签内或使用隐式</span></li>
+                    <li>
+                        <span>所有特殊功能标签如：<code>select、textarea</code>标签都是在<code>label</code>标签内或隐式</span>
+                    </li>
+                    <li>
+                        <h4>form标签内属性</h4>
+                        <ul>
+                            <li>
+                                <h5>属性：<code>action</code></h5>
+                                <ol>
+                                    <li><span>是一个地址(url)</span></li>
+                                    <li><span>用于当表单提交(传交)到后端地址接收</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>属性：<code>method</code></h5>
+                                <ol>
+                                    <li><span>主要用于传交方式</span></li>
+                                    <li>
+                                        属性值一：<code>get：</code><span>通过地址url传参，参数会暴露在地址栏上；安全性更低；传输数据小；</span>
+                                    </li>
+                                    <li>
+                                        属性二：<code>post：</code><span>通过浏览器内部机制传输参数；参数不会暴露在url中；相对于来说安全性更高；传输数据大；</span>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4><code>input</code>属性</h4>
+                        <ul>
+                            <li>
+                                <h4>input：<code>type</code>属性</h4>
+                                <ul>
+                                    <li><span>它的规定表单内控件的：<code>input</code>的类别</span></li>
+                                    <li>
+                                        <h5>属性 <code>name</code></h5>
+                                        <ol>
+                                            <li>用于传输参数给后端接收该表单字段使用</li>
+                                            <li><span>在单选框内，可能充当<span class="span">互斥</span>的作用，即<span
+                                                    class="span">name属性值相同，只能选中其中一个，避免多选问题</span></span>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>属性 <code>submit</code></h5>
+                                        <ol>
+                                            <li>提交按钮</li>
+                                            <li><span>submit 按钮用于提交表单，会触发表单的提交事件并执行浏览器内置验证（如 required）。普通按钮（type="button"）不会触发任何验证或提交。</span>
+                                            </li>
+                                            <li><span>可以使用：属性 <code>value</code>定义按钮的初始文本</span></li>
+                                            <li><span>最好只在，from标签内使用，其他地方跟普通按钮没区别</span></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>属性 <code>button</code></h5>
+                                        <ol>
+                                            <li>普通按钮</li>
+                                            <li><span>没有特殊效果，按了之后不会有任何变化</span></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>属性 <code>reset</code></h5>
+                                        <ol>
+                                            <li>重置按钮</li>
+                                            <li><span>顾名思义就是将所填写的信息全部重置，重新填写表单 </span></li>
+                                            <li><span>最好只在，from标签内使用，其他地方跟普通按钮没区别</span></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>属性 <code>radio</code></h5>
+                                        <ol>
+                                            <li>单选框</li>
+                                            <li><span>输入的文本在input前或后</span></li>
+                                            <li><span>placeholder没有效果</span></li>
+                                            <li><span>value 用于定义选项的值（提交时使用），不显示在页面上。</span></li>
+                                            <li><span>name互斥(相同的name只能选中一个)</span></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>属性 <code>checkbox</code></h5>
+                                        <ol>
+                                            <li><span>复选框(多选框)</span></li>
+                                            <li><span>输入的文本在input前或后</span></li>
+                                            <li><span>placeholder没有效果</span></li>
+                                            <li><span>value 用于定义选项的值（提交时使用），不显示在页面上。</span></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>属性 <code>number</code></h5>
+                                        <ol>
+                                            <li><span>只能输入数字，特征右边会有加减数字按钮</span></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>属性 <code>date</code></h5>
+                                        <ol>
+                                            <li><span>只能输入日期，特征会显示日期特有的年月日</span></li>
+                                            <li><span>可以调出日历</span></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>属性 <code>email</code></h5>
+                                        <ol>
+                                            <li><span>只能输入邮箱，系统默认情况会校验</span></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>属性 <code>color</code></h5>
+                                        <ol>
+                                            <li><span>会显示颜色调色板</span></li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h5>属性 <code>range</code></h5>
+                                        <ol>
+                                            <li><span>会显示一个拉条</span></li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h5>input：<code>required</code>属性</h5>
+                                <ol>
+                                    <li><span>表单必填才能提交</span></li>
+                                    <li>也就是说，必须输入内容，才会被提交，由浏览器验证</li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>input：<code>placeholder</code>属性</h5>
+                                <ol>
+                                    <li><span>提示输入框的文案内容，当用户输入内容时，提示文案会消失</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>input：<code>value</code>属性</h5>
+                                <ol>
+                                    <li><span>控件的初始显示文本，常用于提示用户当前按钮是什么功能</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>input：<code>checked</code>属性</h5>
+                                <ol>
+                                    <li><span>默认选中状态(可以手动更改到其他的选项)</span></li>
+                                    <li><span>在标签内使用，不管是<span
+                                            class="span">直接属性本身、赋值 <code>false还是true</code>都是表示默认选中状态</span></span>
+                                    </li>
+                                    <li><span>但是在JavaScript中，获取的元素，通过点语法.<code>checked</code><span
+                                            class="span">可以通过赋值控制选中状态：<code>false——未选中</code>、<code>true——选中</code>
+                                            </span>属性本省不赋值则表示实时获取当前单选框。复选框的选中状态，返回值 <code>true或false</code></span>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>form标签内的特殊标签</h4>
+                        <ul>
+                            <li>
+                                <h5>标签：<code>select</code></h5>
+                                <ol>
+                                    <li><span>创建下拉选择列表</span></li>
+                                    <li><span>必须在label内</span></li>
+                                    <li>每一个选择列表由标签 <code>option</code>包裹</li>
+                                    <li>语法(写在 <code>label标签内——显式</code>)：<code style="display: block">
+                                        &lt;label&gt;
+                                        &lt;select name=""&gt;
+                                        &lt;option&gt;广州&lt;/option&gt;
+                                        &lt;option&gt;深圳&lt;/option&gt;
+                                        &lt;/select&gt;
+                                        &lt;/label&gt;
+                                    </code></li>
+                                    <li>语法(写在 <code>label标签外——隐式</code>)：<code style="display: block">
+                                        &lt;label for="city"&gt;城市&lt;/label&gt;
+                                        &lt;select name="" id="city"&gt;
+                                        &lt;option&gt;广州&lt;/option&gt;
+                                        &lt;option&gt;深圳&lt;/option&gt;
+                                        &lt;/select&gt;
+                                    </code></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>标签：<code>textarea</code></h5>
+                                <ol>
+                                    <li><span>多行文本</span></li>
+                                    <li>
+                                        <span>内含两个属性：<code>cols——宽度，值越大，宽度越大</code>、<code>rows——行数，值越大，高度越长 </code></span>
+                                    </li>
+                                    <li><span>必须在label内</span></li>
+                                    <li>语法(写在 <code>label标签内——显式</code>)：<code style="display: block">
+                                        &lt;label&gt;
+                                        &lt;textarea name="" cols="30" rows="10"&gt;&lt;/textarea&gt;
+                                        &lt;/label&gt;
+                                    </code></li>
+                                    <li>语法(写在 <code>label标签外——隐式</code>)：<code style="display: block">
+                                        &lt;label for="introduce"&gt;XXX&lt;/label&gt;
+                                        &lt;textarea name="introduce" id="introduce" cols="30" rows="10"&gt;&lt;/textarea&gt;
+                                    </code></li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——Java基础</p>
+    </footer>
+</main>
+</body>
+</html>
