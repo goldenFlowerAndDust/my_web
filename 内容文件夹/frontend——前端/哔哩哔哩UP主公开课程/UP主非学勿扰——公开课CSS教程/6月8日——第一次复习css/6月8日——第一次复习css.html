@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6月8日——第一次复习css</title>
+    <link rel="stylesheet" href="../../../JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🎨 CSS 属性完全手册</h1>
+        <div class="sub">基于你的 <code>JavaScript通用样式表.css</code> —— 属性、取值、作用详解</div>
+    </div>
+
+    <div class="div_table">
+        <table>
+            <thead>
+                <tr>
+                    <th width="22%">属性 / 选择器</th>
+                    <th width="28%">常用取值（<span style="font-weight:normal">你的取值加粗</span>）</th>
+                    <th>作用 & 详细说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- :root 与 CSS 变量 -->
+                <tr><td><code>:root</code></td><td>伪类选择器</td><td>匹配文档根元素 <code>&lt;html&gt;</code>，这里定义全局 CSS 变量（<code>--color-*</code>、<code>--size-*</code>），通过 <code>var()</code> 调用，方便统一修改主题。</td></tr>
+                <tr><td><code>--color-h1-footer</code><br><code>--background-color-main</code><br>等</td><td>自定义属性 (CSS变量)</td><td>以 <code>--</code> 开头，任意命名。例如 <code>--color-span: red;</code>，使用时 <code>color: var(--color-span);</code>。实现设计令牌（design tokens），一处改全局变。</td></tr>
+
+                <!-- 通配符 -->
+                <tr><td><code>*</code> 通配符</td><td><strong><code>margin: 0;</code> <code>padding: 0;</code> <code>box-sizing: border-box;</code></strong></td><td><strong>margin/padding清零</strong>：消除所有元素默认边距；<strong>box-sizing: border-box</strong>：元素的宽高包含边框和内边距，布局不再意外撑大，强烈推荐。</td></tr>
+
+                <!-- html / body -->
+                <tr><td><code>html</code></td><td><strong><code>font-size: 20px;</code></strong></td><td>设置根字号，后续 <code>rem</code> 单位以此为基准（1rem = 20px）。有利于响应式缩放。</td></tr>
+                <tr><td><code>body</code></td><td><code>font-family</code>, <strong><code>font-size: 1rem</code></strong> (20px)<br><strong><code>line-height: var(--line-height-p)</code></strong><br><code>white-space: normal</code></td><td>基础字体、行高。行高1.6倍易读；<code>white-space: normal</code> 保证普通文本正常换行。</td></tr>
+                <tr><td><code>html, body</code></td><td><strong><code>max-width: 100%;</code> <code>overflow-x: hidden !important;</code></strong></td><td>禁止页面级横向滚动条，防止被某些超大内容撑出滚动条（但表格滚动在内部容器处理）。</td></tr>
+
+                <!-- Grid 布局 -->
+                <tr><td><code>display: grid</code></td><td><code>grid</code> / <code>inline-grid</code></td><td>启用网格布局，轻松划分二维区域。</td></tr>
+                <tr><td><code>grid-template-columns</code></td><td><strong><code>1fr</code></strong></td><td>定义列宽：<code>1fr</code> 表示剩余空间的一份，这里只有一列占满。</td></tr>
+                <tr><td><code>grid-template-rows</code></td><td><strong><code>auto auto auto 1fr</code></strong></td><td>定义四行，前三行高度由内容撑开，最后一行占满剩余高度。</td></tr>
+                <tr><td><code>grid-template-areas</code></td><td><strong><code>"header" "section_1" "section_2" "footer"</code></strong></td><td>用名字定义网格区域，通过 <code>grid-area</code> 把元素放入对应区域。</td></tr>
+                <tr><td><code>grid-area</code></td><td>自定义名称（如 <code>header</code>）</td><td>分配给子元素，告知它属于哪个网格区域。</td></tr>
+
+                <!-- flex -->
+                <tr><td><code>display: flex</code></td><td><code>flex</code> / <code>inline-flex</code></td><td>弹性盒布局，一维排列。</td></tr>
+                <tr><td><code>align-items: center</code></td><td><code>flex-start</code> / <code>center</code> / <code>flex-end</code></td><td>交叉轴（默认垂直方向）居中对齐。</td></tr>
+                <tr><td><code>justify-content: center</code></td><td><code>center</code> / <code>space-between</code> / <code>flex-start</code> …</td><td>主轴方向（默认水平）居中对齐。</td></tr>
+
+                <!-- 文本 & 标题 -->
+                <tr><td><code>font-size</code></td><td><code>rem</code>, <code>px</code>, <code>em</code><br>你的：<strong>3rem / 2rem / 1.5rem</strong> 等</td><td>设置文字大小。使用 <code>rem</code> 相对根字号，响应式友好。</td></tr>
+                <tr><td><code>color</code></td><td>颜色值（十六进制、变量等）</td><td>文字颜色。</td></tr>
+                <tr><td><code>font-weight</code></td><td><code>normal</code>, <code>bold</code>, <code>bolder</code>, <code>100~900</code></td><td>字体粗细，<code>bolder</code> 相对父级更粗。</td></tr>
+                <tr><td><code>line-height</code></td><td><code>1.6</code> (无单位倍数) / <code>normal</code> / <code>px</code></td><td>行高，数值时相对于当前字体大小。1.6 倍是舒适阅读比例。</td></tr>
+                <tr><td><code>text-align</code></td><td><code>left</code>, <code>center</code>, <code>right</code></td><td>水平对齐（在表格单元格中常用）。</td></tr>
+
+                <!-- 边距 -->
+                <tr><td><code>margin</code> / <code>margin-top</code></td><td><code>0</code>, <code>auto</code>, <code>1.3rem</code> 等</td><td>元素外边距。例如 <code>margin: 0 auto</code> 水平居中。</td></tr>
+                <tr><td><code>padding</code> / <code>padding-left</code></td><td>长度值，如 <code>2rem</code> , <code>8px</code></td><td>元素内边距。列表中用 <code>padding-left</code> 预留前缀空间。</td></tr>
+
+                <!-- 列表 -->
+                <tr><td><code>list-style</code><br><code>list-style-type</code></td><td><code>disc</code> (圆点) , <code>decimal</code> (数字) , <code>none</code></td><td>设置列表项标记（前缀）。你曾遇到前缀消失是因为给 <code>ul/li</code> 加了 <code>overflow-x: hidden</code> 裁剪了标记，现在已经规避。</td></tr>
+                <tr><td><code>display: list-item</code></td><td><code>list-item</code> (默认), <code>block</code>, <code>inline</code></td><td>必须为 <code>list-item</code> 才会显示标记。你的 <code>li</code> 默认就是此值。</td></tr>
+
+                <!-- 表格滚动核心属性 -->
+                <tr><td><code>overflow-x: auto</code></td><td><code>auto</code> / <code>scroll</code> / <code>hidden</code></td><td>父容器（<code>.div_table</code>）设置水平溢出滚动，当表格过宽时出现横向滚动条，防止撑破布局。</td></tr>
+                <tr><td><code>-webkit-overflow-scrolling: touch</code></td><td><code>touch</code> / <code>auto</code></td><td>移动端专属，使滚动条具有惯性滚动效果，提升触屏滑动体验。</td></tr>
+                <tr><td><code>white-space: nowrap</code></td><td><code>nowrap</code> / <code>normal</code> / <code>pre-wrap</code></td><td>强制表格内单元格内容不换行，这样表格宽度完全由内容撑开，配合父容器滚动即可完整查看。</td></tr>
+                <tr><td><code>min-width: 100%</code></td><td>百分比 / 长度</td><td>让表格至少和父容器一样宽，避免窄表格缩成一小团；内容多时自动扩展超出触发滚动。</td></tr>
+                <tr><td><code>border-collapse: collapse</code></td><td><code>collapse</code> / <code>separate</code></td><td>合并相邻单元格边框，使表格边框单线显示，常用。</td></tr>
+                <tr><td><code>table-layout: fixed</code> / <code>auto</code></td><td><code>auto</code>（默认） / <code>fixed</code></td><td><code>auto</code>：宽度由内容决定；<code>fixed</code>：由第一行或设定宽度决定，更稳定但可能溢出。</td></tr>
+                <tr><td><code>padding</code> (th, td)</td><td><code>8px 12px</code></td><td>单元格内边距，让内容不贴边，视觉舒适。</td></tr>
+                <tr><td><code>vertical-align</code></td><td><code>middle</code> / <code>top</code> / <code>bottom</code></td><td>单元格内容垂直对齐方式，<code>middle</code> 让内容居中。</td></tr>
+
+                <!-- 其他元素 -->
+                <tr><td><code>word-break: break-all</code></td><td><code>break-all</code> / <code>keep-all</code> / <code>normal</code></td><td>让长单词或URL在必要时断开换行，防止溢出。你应用于 <code>code</code> 元素，但表格滚动场景下通常需保持 <code>nowrap</code>。</td></tr>
+                <tr><td><code>display: inline-block</code></td><td><code>inline-block</code></td><td>像行内元素一样排列，但可以设置宽高，常用于 <code>code</code> 或 <code>span</code>。</td></tr>
+                <tr><td><code>max-width: 100%</code></td><td>百分比 / 长度</td><td>限制元素最大宽度不超过父容器，防止图片或代码块溢出。</td></tr>
+                <tr><td><code>opacity</code> / <code>background-color</code></td><td>（你未使用但常见）</td><td>不透明度、背景色。</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 特别提醒：你亲身踩过的坑总结 -->
+    <div class="tip">
+        <strong>🧠 来自实战的经验（表格+列表终极结论）</strong><br>
+        ✅ <strong>表格滚动</strong>：父容器 <code>.div_table { overflow-x: auto; }</code> + 表格 <code>white-space: nowrap; min-width: 100%;</code>。<br>
+        ✅ <strong>列表前缀消失</strong>：绝对不要对 <code>ul, ol, li</code> 设置 <code>overflow-x: hidden</code>，因为标记显示在元素外侧，会被裁剪。<br>
+        ✅ <strong>全局防撑开</strong>：只对 <code>body, main, section</code> 这类结构容器使用 <code>overflow-x: hidden</code>，避免误伤列表。<br>
+        ✅ <strong>CSS变量</strong>：统一管理主题，修改一处处处生效，适合暗色模式切换。
+    </div>
+
+    <div class="tip" style="background: #e6f7ec; border-left-color: #2ecc71;">
+        <strong>📖 快速查阅 — 你常用属性值含义</strong><br>
+        • <code>rem</code> : 相对根元素字号（你的根是20px）<br>
+        • <code>vw/vh</code> : 视口宽度/高度的百分比（如 <code>95vw</code> 占视口宽95%）<br>
+        • <code>!important</code> : 强制提升优先级，覆盖其他声明（谨慎使用）<br>
+        • <code>auto</code> : 浏览器自动计算（如 <code>margin: auto</code> 居中）<br>
+        • <code>inherit</code> : 继承父级属性值
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem; font-size: 0.8rem; color: #5b6e8c;">
+        🧩 基于你自己的 <code>JavaScript通用样式表.css</code> 整理 · 告别表格溢出和列表失踪
+    </div>
+</div>
+</body>
+</html>

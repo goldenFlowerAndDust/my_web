@@ -218,106 +218,213 @@
     </section>
     <section id="section_2">
         <h2>知识补充</h2>
+        <h3 id="伪数组">伪数组</h3>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th>名称</th>
+                    <th>来源/示例</th>
+                    <th>是否有 <code>length</code></th>
+                    <th>是否通过索引访问</th>
+                    <th>是否有 <code>forEach</code></th>
+                    <th>是否可迭代(for、for-of)</th>
+                    <th>
+                        是否真数组(<span>但是有<code>length</code>属性可以通过 <code>Array.from()</code>转为真数组</span>)
+                    </th>
+                </tr>
+                <tr>
+                    <td><code>NodeList</code></td>
+                    <td><code style="color: #b893f3">document.querySelectorAll('div')</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                    <td>✅（现代浏览器）</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td><code>HTMLCollection</code></td>
+                    <td><code
+                            style="color: #b893f3">document.getElementsByClassName('test')<br>element.children</code>
+                    </td>
+                    <td>✅</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td><code>arguments</code></td>
+                    <td>函数内部<code style="color: #b893f3">function() { console.log(arguments) }</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                    <td>❌（但可转数组）</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td><code>DOMTokenList</code></td>
+                    <td><code style="color: #b893f3">element.classList</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                    <td>✅（现代浏览器）</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td><code>NamedNodeMap</code></td>
+                    <td><code style="color: #b893f3">element.attributes</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                    <td>❌（老式）</td>
+                    <td>❌（部分可迭代）</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td><code>HTMLFormControlsCollection</code></td>
+                    <td><code style="color: #b893f3">form.elements</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td><span class="span">字符串</span></td>
+                    <td><code style="color: #b893f3">'abc'</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                    <td>❌（字符串有 for...of 但没有 forEach）</td>
+                    <td>✅</td>
+                    <td>❌（字符串是原始类型，但具有类数组特性）</td>
+                </tr>
+                <tr>
+                    <td><span class="span">自定义类数组</span></td>
+                    <td><code style="color: #b893f3">let obj = {0:'a',1:'b',length:2}</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                    <td>❌（默认不可迭代，除非实现 [Symbol.iterator]）</td>
+                    <td>❌</td>
+                </tr>
+            </table>
+        </div>
+        <h3>表格属性复习</h3>
+        <div class="div_table">
+            <table>
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th>CSS 属性</th>
+                    <th>常用取值</th>
+                    <th>作用 / 详细说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 1. table-layout -->
+                <tr>
+                    <td><code>table-layout</code></td>
+                    <td><code>auto</code> | <code>fixed</code></td>
+                    <td>
+                        <strong>auto</strong>：默认值。表格宽度由单元格内容决定，内容越多列越宽，容易撑破容器。<br>
+                        <strong>fixed</strong>：表格宽度由第一行或设定的 <code>width</code> 决定；内容过长会溢出或被裁剪，但布局稳定，适合配合滚动。
+                    </td>
+                </tr>
+                <!-- 2. border-collapse -->
+                <tr>
+                    <td><code>border-collapse</code></td>
+                    <td><code>separate</code> | <code>collapse</code></td>
+                    <td>
+                        <strong>separate</strong>：相邻单元格保留独立边框，边框间有间距（可用 <code>border-spacing</code> 控制）。<br>
+                        <strong>collapse</strong>：合并相邻边框，边框重叠为单线，最常用。
+                    </td>
+                </tr>
+                <!-- 3. border-spacing -->
+                <tr>
+                    <td><code>border-spacing</code></td>
+                    <td><code>长度</code> (如 <code>2px</code>)<br><code>水平 垂直</code> (如 <code>5px 10px</code>)</td>
+                    <td>仅当 <code>border-collapse: separate</code> 时生效。控制相邻单元格边框之间的间距。</td>
+                </tr>
+                <!-- 4. caption-side -->
+                <tr>
+                    <td><code>caption-side</code></td>
+                    <td><code>top</code> | <code>bottom</code></td>
+                    <td>控制 <code>&lt;caption&gt;</code> 标签（表格标题）显示在表格的上方还是下方。</td>
+                </tr>
+                <!-- 5. empty-cells -->
+                <tr>
+                    <td><code>empty-cells</code></td>
+                    <td><code>show</code> | <code>hide</code></td>
+                    <td>仅当 <code>border-collapse: separate</code> 时生效。决定空单元格的边框和背景是否显示。</td>
+                </tr>
+                <!-- 6. vertical-align (用于td/th) -->
+                <tr>
+                    <td><code>vertical-align</code></td>
+                    <td><code>top</code> | <code>middle</code> | <code>bottom</code> | <code>baseline</code></td>
+                    <td>设置单元格内容的垂直对齐方式（默认 <code>middle</code>）。</td>
+                </tr>
+                <!-- 7. text-align (用于td/th) -->
+                <tr>
+                    <td><code>text-align</code></td>
+                    <td><code>left</code> | <code>center</code> | <code>right</code> | <code>justify</code></td>
+                    <td>设置单元格内容的水平对齐方式（<code>&lt;th&gt;</code> 默认居中，<code>&lt;td&gt;</code> 默认左对齐）。</td>
+                </tr>
+                <!-- 8. white-space (表格滚动关键) -->
+                <tr>
+                    <td><code>white-space</code></td>
+                    <td><code>normal</code> | <code>nowrap</code> | <code>pre</code> | <code>pre-wrap</code> | <code>pre-line</code></td>
+                    <td>
+                        <strong>nowrap</strong>：强制单元格内容不换行，整个表格宽度由内容撑开，配合父容器 <code>overflow-x: auto</code> 实现横向滚动。<br>
+                        <strong>normal</strong>：默认换行行为。
+                    </td>
+                </tr>
+                <!-- 9. overflow-x (滚动容器) -->
+                <tr>
+                    <td><code>overflow-x</code></td>
+                    <td><code>auto</code> | <code>scroll</code> | <code>hidden</code> | <code>visible</code></td>
+                    <td>用于表格的<strong>父容器</strong>（例如 <code>.table-wrapper</code>）。<br>
+                        设置 <code>auto</code> 或 <code>scroll</code> 可在表格过宽时显示横向滚动条，防止撑破页面。</td>
+                </tr>
+                <!-- 10. width / min-width / max-width -->
+                <tr>
+                    <td><code>width</code><br><code>min-width</code><br><code>max-width</code></td>
+                    <td>长度值 / 百分比</td>
+                    <td>
+                        <strong>表格本身</strong>：设 <code>min-width: 100%</code> 保证至少和父容器一样宽，内容少时不窄；<br>
+                        <strong>父容器</strong>：设 <code>width: 100%</code> 限制滚动区域宽度。
+                    </td>
+                </tr>
+                <!-- 11. padding (在td/th) -->
+                <tr>
+                    <td><code>padding</code></td>
+                    <td>长度值</td>
+                    <td>控制单元格内容与边框之间的距离，提升可读性。默认多为 <code>0</code> 或浏览器内置值。</td>
+                </tr>
+                <!-- 12. word-break / word-wrap (备用) -->
+                <tr>
+                    <td><code>word-break</code><br><code>overflow-wrap</code></td>
+                    <td><code>break-all</code> / <code>break-word</code></td>
+                    <td>当不想滚动而希望内容换行时使用，强制长单词或URL断开换行。但与 <code>white-space: nowrap</code> 冲突，通常二选一。</td>
+                </tr>
+                <!-- 13. 滚动容器额外属性 -->
+                <tr>
+                    <td><code>-webkit-overflow-scrolling</code></td>
+                    <td><code>touch</code> | <code>auto</code></td>
+                    <td>移动端专用：使滚动容器具有惯性滚动效果，提升滑动体验（<code>touch</code>）。</td>
+                </tr>
+                <!-- 14. display (备用方案) -->
+                <tr>
+                    <td><code>display</code></td>
+                    <td><code>block</code> / <code>table</code></td>
+                    <td>极少情况下将 <code>table</code> 改为 <code>block</code> 并设置滚动，但会丢失表格语义（推荐使用父容器滚动方案）。</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <h3>知识复习</h3>
         <ul>
-            <li>
-                <h3 id="伪数组">伪数组</h3>
-                <table>
-                    <tr>
-                        <th>名称</th>
-                        <th>来源/示例</th>
-                        <th>是否有 <code>length</code></th>
-                        <th>是否通过索引访问</th>
-                        <th>是否有 <code>forEach</code></th>
-                        <th>是否可迭代(for、for-of)</th>
-                        <th>
-                            是否真数组(<span>但是有<code>length</code>属性可以通过 <code>Array.from()</code>转为真数组</span>)
-                        </th>
-                    </tr>
-                    <tr>
-                        <td><code>NodeList</code></td>
-                        <td><code style="color: #b893f3">document.querySelectorAll('div')</code></td>
-                        <td>✅</td>
-                        <td>✅</td>
-                        <td>✅（现代浏览器）</td>
-                        <td>✅</td>
-                        <td>❌</td>
-                    </tr>
-                    <tr>
-                        <td><code>HTMLCollection</code></td>
-                        <td><code
-                                style="color: #b893f3">document.getElementsByClassName('test')<br>element.children</code>
-                        </td>
-                        <td>✅</td>
-                        <td>✅</td>
-                        <td>❌</td>
-                        <td>✅</td>
-                        <td>❌</td>
-                    </tr>
-                    <tr>
-                        <td><code>arguments</code></td>
-                        <td>函数内部<code style="color: #b893f3">function() { console.log(arguments) }</code></td>
-                        <td>✅</td>
-                        <td>✅</td>
-                        <td>❌（但可转数组）</td>
-                        <td>✅</td>
-                        <td>❌</td>
-                    </tr>
-                    <tr>
-                        <td><code>DOMTokenList</code></td>
-                        <td><code style="color: #b893f3">element.classList</code></td>
-                        <td>✅</td>
-                        <td>✅</td>
-                        <td>✅（现代浏览器）</td>
-                        <td>✅</td>
-                        <td>❌</td>
-                    </tr>
-                    <tr>
-                        <td><code>NamedNodeMap</code></td>
-                        <td><code style="color: #b893f3">element.attributes</code></td>
-                        <td>✅</td>
-                        <td>✅</td>
-                        <td>❌（老式）</td>
-                        <td>❌（部分可迭代）</td>
-                        <td>❌</td>
-                    </tr>
-                    <tr>
-                        <td><code>HTMLFormControlsCollection</code></td>
-                        <td><code style="color: #b893f3">form.elements</code></td>
-                        <td>✅</td>
-                        <td>✅</td>
-                        <td>❌</td>
-                        <td>✅</td>
-                        <td>❌</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span">字符串</span></td>
-                        <td><code style="color: #b893f3">'abc'</code></td>
-                        <td>✅</td>
-                        <td>✅</td>
-                        <td>❌（字符串有 for...of 但没有 forEach）</td>
-                        <td>✅</td>
-                        <td>❌（字符串是原始类型，但具有类数组特性）</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span">自定义类数组</span></td>
-                        <td><code style="color: #b893f3">let obj = {0:'a',1:'b',length:2}</code></td>
-                        <td>✅</td>
-                        <td>✅</td>
-                        <td>❌</td>
-                        <td>❌（默认不可迭代，除非实现 [Symbol.iterator]）</td>
-                        <td>❌</td>
-                    </tr>
-                </table>
-            </li>
-            <li>
-                <h3>知识复习</h3>
-                <ul>
-                    <li><code>for</code>：<span>需要初始话变量、循环条件、改变逻辑，可嵌套</span></li>
-                    <li><code>for-in</code>：<span>需要声明变量用于接收索引</span></li>
-                    <li><code>for-of</code>：<span>需要声明变量用于接收元素</span></li>
-                    <li><code>Array.from()</code>：<span>将存在 <code>length</code>属性的类型，转为真数组</span></li>
-                </ul>
-            </li>
+            <li><code>for</code>：<span>需要初始话变量、循环条件、改变逻辑，可嵌套</span></li>
+            <li><code>for-in</code>：<span>需要声明变量用于接收索引</span></li>
+            <li><code>for-of</code>：<span>需要声明变量用于接收元素</span></li>
+            <li><code>Array.from()</code>：<span>将存在 <code>length</code>属性的类型，转为真数组</span></li>
         </ul>
     </section>
     <footer>

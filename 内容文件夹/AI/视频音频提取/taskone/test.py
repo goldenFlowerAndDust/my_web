@@ -7,10 +7,10 @@ import os
 # 无声视频输出：../video/搞笑视频/newVideo/搞笑视频1.mp4
 # 音频输出：../video/搞笑视频/mp3/搞笑视频1.mp3
 
-video_name = "搞笑视频1.mp4"  # 可以根据需要改
-video_path = f"../video/搞笑视频/原文件/{video_name}"
-silent_video_path = f"../video/搞笑视频/newVideo/{video_name}"  # 保持相同文件名
-audio_path = f"../video/搞笑视频/mp3/{video_name.replace('.mp4', '.mp3')}"
+video_name = "第二次考察——英式.mp4"  # 可以根据需要改
+video_path = f"../video/English/第二次考察/英式/源文件/{video_name}"  # 可更改项：English/第二次考察/源文件 (原视频文件地址)
+silent_video_path = f"../video/English/第二次考察/英式/newVideo/{video_name}"  # 保持相同文件名 # 可更改项 ：English/第二次考察/newVideo (提取视频存放地)
+audio_path = f"../video/English/第二次考察/英式/mp3/{video_name.replace('.mp4', '.mp3')}" # 可更改项：English/第二次考察/mp3 (提取音频存放地)
 
 # 自动创建输出目录（如果不存在）
 os.makedirs(os.path.dirname(silent_video_path), exist_ok=True)

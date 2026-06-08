@@ -52,14 +52,13 @@
 }
 
 
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html{
+html {
     font-size: 20px;
 }
 
@@ -68,6 +67,12 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem; /* 20px 基于 html 20px */
     line-height: var(--line-height-p);
+    white-space: normal;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden !important;
 }
 
 main {
@@ -121,7 +126,7 @@ h4 {
     color: var(--color-h4);
 }
 
-h5{
+h5 {
     font-size: var(--size-h5);
     color: var(--color-h5);
 }
@@ -165,29 +170,63 @@ p {
     line-height: 1.6;
 }
 
-table {
-    margin: 10px auto;
-    border: 1px solid var(--border-color-table-td);
-    border-collapse: collapse;
-    width: 80%;
-}
-
-td, th {
-    border: 1px solid var(--border-color-table-td);
-    text-align: center;
-    vertical-align: middle;
-    padding: 0;
-
-}
 
 code {
     color: var(--color-code);
     font-size: var(--size-span-code);
-    white-space: pre-wrap;
+    /*white-space: pre-wrap;*/
     word-break: break-all;
     word-wrap: break-word;
     display: inline-block;
     max-width: 100%;
+}
+
+/* ========== 表格滚动终极方案 ========== */
+.div_table {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.div_table table {
+    display: table;
+    width: auto;
+    min-width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.div_table th,
+.div_table td {
+    border: 1px solid var(--border-color-table-td);
+    padding: 8px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+th {
+    background-color: orange;
+}
+
+td {
+    background-color:  #FDF5E6;
+}
+
+/* 确保表格内部任何元素都不换行 */
+.div_table table,
+.div_table tbody,
+.div_table tr,
+.div_table th,
+.div_table td {
+    white-space: nowrap;
+}
+
+/* 防止所有祖先被撑开 */
+body, main, section {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 input {
@@ -212,12 +251,12 @@ textarea {
     margin: 0;
     padding: 4px;
     height: 100%;
-    resize : vertical;
-    font-family:monospace;
+    resize: vertical;
+    font-family: monospace;
 }
 
 .textarea_alone {
-    width : 100%;
+    width: 100%;
     max-width: 1000px;
     overflow-X: auto;
     white-space: pre;
@@ -238,14 +277,15 @@ footer p {
     font-size: var(--size-h1-footer);
 }
 
-.div_video{
+.div_video {
     width: 80%;
     margin: 10px auto;
 }
 
-video{
+video {
     width: 100%;
     height: auto;
+    overflow-x: auto;
 
 }
 
@@ -270,7 +310,7 @@ video{
         font-size: var(--size-h4-ipad);
     }
 
-    h5{
+    h5 {
         font-size: var(--size-h5-ipad);
     }
 
@@ -316,7 +356,7 @@ video{
         font-size: var(--size-h4-mobile_phone);
     }
 
-    h5{
+    h5 {
         font-size: var(--size-h5-mobile_phone);
     }
 
@@ -348,4 +388,21 @@ video{
         font-size: 0.5rem;
     }
 
+    .div_table {
+        -webkit-overflow-scrolling: touch;
+    }
+
+}
+
+/* ========== 强制恢复列表前缀 ========== */
+ul, ol {
+    padding: 0 0 0 2rem ;/
+}
+ol {
+    list-style-type: decimal !important; /* ol 数字 */
+}
+li {
+    /* 确保 li 不会意外继承 nowrap 或影响前缀显示 */
+    white-space: normal;
+    display: list-item;
 }

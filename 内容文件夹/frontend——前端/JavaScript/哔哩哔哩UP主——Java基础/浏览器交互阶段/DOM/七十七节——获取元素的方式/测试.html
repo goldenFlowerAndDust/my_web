@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../../JavaScript通用样式表.css">
+</head>
+<body>
+<div class="div_table">
+    <table>
+        <tr>
+            <th>名称</th>
+            <th>来源/示例</th>
+            <th>是否有 <code>length</code></th>
+            <th>是否通过索引访问</th>
+            <th>是否有 <code>forEach</code></th>
+            <th>是否可迭代(for、for-of)</th>
+            <th>
+                是否真数组(<span>但是有<code>length</code>属性可以通过 <code>Array.from()</code>转为真数组</span>)
+            </th>
+        </tr>
+        <tr>
+            <td><code>NodeList</code></td>
+            <td><code style="color: #b893f3">document.querySelectorAll('div')</code></td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅（现代浏览器）</td>
+            <td>✅</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <td><code>HTMLCollection</code></td>
+            <td><code
+                    style="color: #b893f3">document.getElementsByClassName('test')<br>element.children</code>
+            </td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <td><code>arguments</code></td>
+            <td>函数内部<code style="color: #b893f3">function() { console.log(arguments) }</code></td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌（但可转数组）</td>
+            <td>✅</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <td><code>DOMTokenList</code></td>
+            <td><code style="color: #b893f3">element.classList</code></td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅（现代浏览器）</td>
+            <td>✅</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <td><code>NamedNodeMap</code></td>
+            <td><code style="color: #b893f3">element.attributes</code></td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌（老式）</td>
+            <td>❌（部分可迭代）</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <td><code>HTMLFormControlsCollection</code></td>
+            <td><code style="color: #b893f3">form.elements</code></td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>❌</td>
+        </tr>
+        <tr>
+            <td><span class="span">字符串</span></td>
+            <td><code style="color: #b893f3">'abc'</code></td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌（字符串有 for...of 但没有 forEach）</td>
+            <td>✅</td>
+            <td>❌（字符串是原始类型，但具有类数组特性）</td>
+        </tr>
+        <tr>
+            <td><span class="span">自定义类数组</span></td>
+            <td><code style="color: #b893f3">let obj = {0:'a',1:'b',length:2}</code></td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌（默认不可迭代，除非实现 [Symbol.iterator]）</td>
+            <td>❌</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
