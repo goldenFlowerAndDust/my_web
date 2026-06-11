@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据存储与运算</title>
+    <link rel="stylesheet" href="../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+    <style>
+        .contents {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <h1>数据存储与运算</h1>
+    </header>
+    <section id="section_1">
+        <article>
+            <h2 id="目录">目录</h2>
+            <ul class="contents">
+                <li><a href="#字面量与变量">字面量</a></li>
+                <li><a href="#">常见数据类型</a></li>
+                <li><a href="#">输入与输出</a></li>
+                <li><a href="#">运算符</a></li>
+            </ul>
+        </article>
+    </section>
+    <section id="section_2">
+        <article>
+            <h2>学习笔记</h2>
+            <ul>
+                <li id="字面量与变量">
+                    <h3><a href="#目录">字面量与变量</a></h3>
+                    <ol>
+                        <li>
+                            <h4>字面量</h4>
+                            <ul>
+                                <li>字面量：<span>指程序中，直接书写的固定值(数据),就称为<span class="span">字面量</span></span>
+                                </li>
+                                <li>字面量有许多种类，每个种类的写法不同</li>
+                                <li>
+                                    <h5>字面量的种类以及写法</h5>
+                                    <div class="div_table">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3">字面量类型书写格式</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td rowspan="2">数子类型</td>
+                                                <td>整数(<code>int</code>)</td>
+                                                <td style="text-align: left">例子：<code>10 18 -5 0</code></td>
+                                            </tr>
+                                            <tr>
+                                                <!--<td></td>-->
+                                                <td>浮点数/小数(<code>float</code>)</td>
+                                                <td style="text-align: left">例子：<code>8.5 3.14 1.0 -3.5</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    布尔(<code>bool</code><span>JavaScript叫(<code>boolean</code>)</span>)
+                                                </td>
+                                                <td><span>表达现实生活中的逻辑。真或假</span></td>
+                                                <td style="text-align: left">
+                                                    <span>
+                                                        1.python(<span>大写</span>)：</span><code>True/False</code><span>
+                                                        <br>
+                                                        <br>2.JavaScript(<span>小写</span>)：<code>true/false</code>
+                                                        <br>
+                                                        <br>3.与JavaScript一致，<code>True/true <===> 1</code><br><code>False/false <===> 0</code>
+                                                        <br>
+                                                        <br>4.<span>但是 <code>python</code>布尔是(<code>int</code>)类型的子类，它们就是 <code>1/0</code>另外一种写法</span>
+                                                        <br>
+                                                        <br>5.<span>而 <code>JavaScript</code>是通过 <span class="span">隐式转换而成 <code>1/0</code></span></span>
+                                                        <br>
+                                                        <br>6.这就引出了后续运算符的：
+                                                            <br>
+                                                            <br>&nbsp;&nbsp;1)<span>进行数学运算，自动 <code>True 为 1</code>，<code>False 为 0</code></span>
+                                                            <br>
+                                                            <br>&nbsp;&nbsp;2)<span>python的<code>==</code>与JavaScript的<code>===/==</code>的区别</span>
+                                                     </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    字符串(<code>str</code>)<span>JavaScript叫(<code>String</code>)</span>
+                                                </td>
+                                                <td><span>描述文本的一种数据类型</span></td>
+                                                <td style="text-align: left">
+                                                    <code>1.例子："人生苦短，我用python"</code>
+                                                    <br>
+                                                    <br>2.<span>所有双引号或单引号包裹的均是 <code>str/String</code>类型</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>空值(<code>NoneType</code><span>注意：与JavaScript的
+                                                    <code>undefined/null</code>并不完全相似</span>)
+                                                </td>
+                                                <td><span>表示空或无值，仅包含一个值 <code>None</code></span></td>
+                                                <td style="text-align: left">
+                                                    <code>1.None</code>
+                                                    <br>
+                                                    <br>2.Python的<span>None</span>更像是<span>null（人为的空）</span>，但
+                                                    JavaScript还有<code>undefined（未定义）</code>，<span>None 没有这种双重性</span>。
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>数据容器</td>
+                                                <td><span>存储多项数据的容器</span></td>
+                                                <td style="text-align: left">
+                                                    <span>
+                                                            1.列表<code>list</code><span
+                                                            class="span">类似JavaScript的：<code>Array</code>数组</span>
+                                                        <br>
+                                                        <br>2.元组<code>tuple</code><span
+                                                            class="span">类似JavaScript的：<code>object.freeze()</code>冻结的数组</span>
+                                                        <br>
+                                                        <br>3.集合<code>set</code><span
+                                                            class="span">类似JavaScript的：<code>new Set()</code>无序、元素唯一的数组</span>
+                                                        <br>
+                                                        <br>4.字典<code>dict</code><span
+                                                            class="span">类似JavaScript的：<code>object</code>对象</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h5>注释</h5>
+                                    <div class="div_table">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th colspan="5">注释写法</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>语言</td>
+                                                <td colspan="2">单行注释</td>
+                                                <td colspan="2">多行注释</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>python</code></td>
+                                                <td><code>#</code></td>
+                                                <td style="text-align: left">
+                                                    1.例子：<code># 学习python</code>
+                                                    <br>
+                                                    <br>2.总结：<span>就是在符号后，当前行内，为注释(不能换行)</span>
+                                                </td>
+                                                <td><span>三单引号或三双引号</span></td>
+                                                <td style="text-align: left">
+                                                    1.例子：<code>"""学习python"""或'''学习python'''</code>
+                                                    <br>
+                                                    <br>2.总结：<span>只要在符号内，均是注释，可以换行</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>JavaScript</code></td>
+                                                <td><code>//</code></td>
+                                                <td style="text-align: left">
+                                                    1.例子：<code>// 学习JavaScript</code>
+                                                    <br>
+                                                    <br>2.总结：<span>就是在符号后，当前行内，为注释(不能换行)</span>
+                                                </td>
+                                                <td><code>/* */</code></td>
+                                                <td style="text-align: left">
+                                                    1.例子：<code>/* 学习JavaScript */</code>
+                                                    <br>
+                                                    <br>2.总结：<span>只要在符号内，均是注释，可以换行</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>MySQL</code></td>
+                                                <td><code>--</code></td>
+                                                <td style="text-align: left">
+                                                    1.例子：<code>-- 学习MySQL</code>
+                                                    <br>
+                                                    <br>2.<span>注意符号后面必须要有一个空格</span>
+                                                    <br>
+                                                    <br>3.总结：<span>就是在符号后，当前行内，为注释(不能换行)</span>
+                                                </td>
+                                                <td><code>/* */</code></td>
+                                                <td style="text-align: left">
+                                                    1.例子：<code>/* 学习MySQL */</code>
+                                                    <br>
+                                                    <br>2.总结：<span>只要在符号内，均是注释，可以换行</span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>变量</h4>
+                            <ul>
+                                <li>变量：<span>程序中用来存储<span class="span">单个数据的容器</span>，通常会把<span
+                                        class="span">经常发生变化的数据存储在变量中</span></span>
+                                </li>
+                                <li>
+                                    注意：<span>变量是指存储数据的容器(<span class="span">空间</span>)，而不是容器里面存储的数据(<span
+                                        class="span">字面量</span>)</span>
+                                </li>
+                                <li>
+                                    <h5>变量的格式</h5>
+                                    <div class="div_table">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th colspan="7">变量的格式</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>语言</td>
+                                                <td colspan="2">变量格式(<span>单个赋值</span>)</td>
+                                                <td colspan="2">变量格式(<span>同时赋值多个变量</span>)</td>
+                                                <td colspan="2">交换</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>python</code></td>
+                                                <td>格式：<code>变量名 = 变量值(<span>可以理解为字面量</span>)</code>
+                                                </td>
+                                                <td style="text-align: left">
+                                                    1.例子：<code>name = "繁花与尘埃"</code>
+                                                    <br>
+                                                    <br>2.注意：与<code>JavaScript</code>不同的是：<span>它不需要声明</span>
+                                                    <br>
+                                                    <br>3. 具体流程是：<span>等号右边的值，赋值给左侧变量名</span>
+                                                    <br>
+                                                    <br>4. <span>可以通过重新赋值，更改容器内的数据</span>
+                                                    <br>
+                                                    <br>5. <span>当然也可以通过<span class="span">变量名</span>，访问容器内的数据</span>
+                                                    <br>
+                                                    <br>6.
+                                                    <span>是动态类型语言，一个变量可以<span
+                                                            class="span">赋值不同类型的字面量</span>
+                                                            但是：在一个项目中，不建议，一个变量存储不同类型字面量，最好新建变量存储。
+                                                    </span>
+                                                    <br>
+                                                    <br><img src="./image/变量/变量演示.png"
+                                                         alt="变量演示"
+                                                         title="变量演示">
+                                                </td>
+                                                <td>格式：
+                                                    <br>
+                                                    <br>1.<code>变量名,变量名,... = 变量值,变量值,...</code><span>同时赋值多个变量</span>
+                                                </td>
+                                                <td style="text-align: left">
+                                                    1.例子：<code>name,age = "繁花与尘埃",20</code>
+                                                    <br>
+                                                    <br>2. <span>赋值顺序与变量名一一对应，如上：<code>name = "繁花与尘埃"，age = 20</code></span>
+                                                    <br>
+                                                    <br>3. <span>每一个变量名与变量值，用逗号隔开</span>
+                                                </td>
+                                                <td>格式：<code>变量1,变量2 = 变量2,变量1</code><span>前提是：变量已赋值</span></td>
+                                                <td>例子：<code>a,b = 100,20 <span>[交换==>]</span>a,b = b,a</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>JavaScript</code></td>
+                                                <td>格式：<code>声明 变量名 =
+                                                    变量值(<span>可以理解为字面量</span>)</code></td>
+                                                <td style="text-align: left">
+                                                    1.例子：<code>let name = "繁花与尘埃"</code>
+                                                    <br>
+                                                    <br>2. 注意：JavaScript声明关键字有3个：<code>let/const/var</code>
+                                                    <br>
+                                                    <br>3. 与 <code>python</code>的区别是：<span>他需要先声明</span>
+                                                    <br>
+                                                    <br>4. 具体流程是：<span>等号右边的值，赋值给左侧变量名</span>
+                                                    <br>
+                                                    <br>5. <span>可以通过重新赋值，更改容器内的数据</span>
+                                                    <br>
+                                                    <br>6. <span>当然也可以通过<span class="span">变量名</span>，访问容器内的数据</span>
+                                                    <br>
+                                                    <br>7. <span>是动态类型语言，一个变量可以<span class="span">赋值不同类型的字面量</span></span>
+                                                </td>
+                                                <td style="text-align: left">格式：
+                                                    <br>
+                                                    <br>1.<code>声明 [name,age] = ["繁花与尘埃",20]</code><span>称为：数组解构</span>
+                                                    <br>
+                                                    <br>2.<code>声明 {name,age} = {name:"繁花与尘埃,age:20}</code><span>称为：对象解构</span>
+                                                </td>
+                                                <td style="text-align: left">
+                                                    例子：
+                                                    <br>
+                                                    <br>1.<code>let [name,age] = ["繁花与尘埃",20]</code>
+                                                    <br>
+                                                    <br>2.<code>let {name,age} = {name:"繁花与尘埃,age:20}</code>
+                                                    <br>
+                                                    <br>注意：
+                                                    <br>
+                                                    <br>1. <span><code>JavaScript</code>并没有像<code>python</code>一样的创建多个变量的同时分别赋值</span>
+                                                    <br>
+                                                    <br>2. 但是：<span>SE6新增了，<span class="span">解构赋值</span>这个概念，使用它可以达到类似的效果</span>
+                                                    <br>
+                                                    <br>2. 常见的解构赋值有：<span>数组解构，对象解构，函数解构，字符串解构，Set解构，Map解构....</span>
+                                                </td>
+                                                <td>格式：<code>[a,b] = [b,a]</code><span>前提是：变量已赋值</span></td>
+                                                <td>例子：<code>[name,age] = [20,"繁花与尘埃"] <span>交换==></span>[name,age] = [age,name]</code></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

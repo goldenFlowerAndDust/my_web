@@ -47,7 +47,9 @@
                             }, 3000) // 3秒后执行函数
                             // 在回调函数内部使用:document.wrilteln()，会清除页面，所以避免使用
                         </script>
-                        <video src="./image/倒计时定时器.mp4" controls></video>
+                        <div class="div_video">
+                            <video src="./image/倒计时定时器.mp4" controls></video>
+                        </div>
                     </li>
                 </ol>
                 <h3>间隔定时器</h3>
@@ -153,7 +155,9 @@
                         TimeElement.innerHTML = `倒计时：<span>${Minutes}分:${Seconds}秒</span>`
                     },1000) // 每秒执行一次回调函数
                 </script>
-                <video src="./image/案例——倒计时.mp4" controls></video>
+               <div class="div_video">
+                    <video src="./image/案例——倒计时.mp4" controls></video>
+               </div>
             </li>
         </ul>
     </section>
