@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串进阶</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>字符串进阶</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>字符：<span>是文本世界的基本单位，一个字母，一个数字，一个标点符号，一个汉字等都是 <span
+                    class="span">都是一个字符</span></span>
+            </li>
+            <li>
+                <h2>字符串的三种定义方式</h2>
+                <ol>
+                    <li>第一种：<span>双引号包裹</span></li>
+                    <li>第二种：<span>单引号包裹</span></li>
+                    <li>第三种：<span>三引号包裹(<span class="span">同样有单/双之分，但是效果一致</span>)</span></li>
+                    <li>注意：<span>正常来说：单/双引号包裹的字符串，<span class="span">只在一行有效</span>，但是IDE在换行的时候会自动创建，单/双引号</span>
+                        <br>尽管会自动换行，但是输出结果也是在一行
+                    </li>
+                    <li>注意：三引号<span>在不赋值给变量的时候，可以当注释使用，因为它的换行特性，<span class="span">最主要的是：输出的形式与字符串形式一致</span></span>
+                    </li>
+                    <li>
+                        <img src="./image/字符串三种创建方式.png"
+                             alt="字符串三种创建方式"
+                             title="字符串三种创建方式">
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h2>注意事项</h2>
+                <ul>
+                    <li>字符串三种方法，可以混在一起使用，<span>但是最外层的方法不能重复使用</span></li>
+                    <li>
+                        <h2>注意事项：引号嵌套规则</h2>
+                        <ul>
+                            <li><span>最外层的引号决定了字符串的边界，内层不能出现相同引号，否则会提前结束字符串。</span>
+                            </li>
+                            <li>✅ 正确：<code>name = "外层双引号，内层可以使用'单引号'或\"转义双引号\""</code></li>
+                            <li>❌ 错误：<code>name = "外层双引号，内层"再写双引号"就会报错"</code></li>
+                            <li><span>最佳实践：避免多层嵌套，必要时使用转义符 <code>\</code> 或换一种外层引号。</span>
+                            </li>
+                            <li>
+                                <img src="./image/字符串三种创建方式——注意事项.png"
+                                     alt="字符串嵌套示例"
+                                     title="字符串嵌套示例">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>常见转义字符</h2>
+                        <div class="div_table">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>转义字符</th>
+                                    <th>名称</th>
+                                    <th>作用</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><code>\'</code></td>
+                                    <td>单引号</td>
+                                    <td>表示单引号 <code>'</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>\"</code></td>
+                                    <td>双引号</td>
+                                    <td>表示双引号 <code>"</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>\n</code></td>
+                                    <td>换行符</td>
+                                    <td><span>开始新的一行(<span class="span">换行</span>)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>\t</code></td>
+                                    <td>制表符</td>
+                                    <td><span>增加缩进，缩进一个制表符(<code>tab</code>)的大小</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">注意没有 <code>\"""</code></td>
+                                    <td>但是可以：<code>\"\"\"或\'\'\'</code>代替</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>字符串的拼接</h2>
+        <ul>
+            <li>第一种：<span>多个字符串字面量自动拼接</span></li>
+            <li>第二种：<span>跟<code>JavaScript</code>一样，可以使用运算符<code>+</code>号，进行拼接</span></li>
+            <li>注意：运算符 <code>+</code>号，无法将非字符串与字符串进行拼接(<span>非字符串类型需要转为字符串类型</span>)
+            </li>
+            <li><span>这就是 <code>python</code>与 <code>JavaScript</code>的不同，python不具备隐式转换的形式 <span
+                    class="span"><br>&nbsp;&nbsp;JavaScript只要一边是字符串，另一边会隐式转换成字符串，进行拼接
+                    <span><br>&nbsp;&nbsp;python不会隐式转换，需要自己手动的将非字符串类型转为字符串，最后再拼接，这也为后续运算符的区别埋下伏笔</span></span></span>
+            </li>
+            <li><a href="../代码/字符串拼接案例.py">字符拼接案例</a></li>
+        </ul>
+        <h2>字符串的格式化</h2>
+        <ul>
+            <li>
+                <h3>方法一：<code>%s</code>占位符</h3>
+                <ol>
+                    <li>通过 <code>%s占位符</code>的形式完成字符串和变量的快速拼接</li>
+                    <li>其中 <code>%</code>表示我要占位，<code>s</code>表示将变量转为字符串放入占位的位置</li>
+                    <li><span>注意：s是小写，不是大写</span></li>
+                    <li>语法：<code style="display: inline"><br>s1 = "繁花与尘埃"<br>print("大叫好，我叫 %s，现在再学python"
+                        % s1)</code>
+                    </li>
+                    <li>
+                        <span>尤其注意：结尾需要 <code>% 变量</code>，变量是需要拼接的变量名，字符串内 <code>%s</code>固定搭配</span>
+                    </li>
+                    <li><span>可以多个占位符一起使用，字符串内占位符数量，与后续的<span>变量名</span>数量一致，占位顺序一一对应，且需要英文括号括起来</span>
+                    </li>
+                    <li>
+                        <img src="./image/字符串的格式化.png"
+                             alt="字符串的格式化"
+                             title="字符串的格式化">
+                    </li>
+                    <li><span>由图可见，使用字符串的格式化，比使用运算符 <span>+</span>号可读性更好</span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>字符串格式化——f-string</h3>
+                <ol>
+                    <li>
+                        <div class="div_table">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th colspan="3">JavaScript的模板字符串与python的<code>f-string</code></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>语言</td>
+                                    <td>语法</td>
+                                    <td>示例</td>
+                                </tr>
+                                <tr>
+                                    <td><code>JavaScript</code></td>
+                                    <td><code>`${变量名}`</code></td>
+                                    <td style="text-align: left">
+                                        <code style="display: inline">
+                                            let name = "繁花与尘埃"
+                                            <br>console.log(`大家好。我叫${name}`)
+                                        </code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>python</code></td>
+                                    <td><code>f"{变量名}"</code></td>
+                                    <td style="text-align: left">
+                                        <code style="display: inline">
+                                            name = "繁花与尘埃"
+                                            <br>print(f"大家好，我叫{name}")
+                                        </code>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th colspan="3">它们之间的区别</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>特性</td>
+                                    <td><code>JavaScript</code>模板字符串 <code>`${}`</code></td>
+                                    <td><code>python</code>f-string <code>f"{}"</code></td>
+                                </tr>
+                                <tr>
+                                    <td>变量</td>
+                                    <td>✅</td>
+                                    <td>✅</td>
+                                </tr>
+                                <tr>
+                                    <td>算术运算</td>
+                                    <td>✅<code>`${a + b}`</code></td>
+                                    <td>✅<code>f"{a + b}"</code></td>
+                                </tr>
+                                <tr>
+                                    <td>函数调用</td>
+                                    <td>✅<code>`${fn()}`</code></td>
+                                    <td>✅<code>f"{fn()}"</code></td>
+                                </tr>
+                                <tr>
+                                    <td>对象/数组特性</td>
+                                    <td><code>`${obj.prop}`、`${arr[0]}`</code></td>
+                                    <td>✅<code>f"{obj.prop}"、f"{arr[0]}"</code></td>
+                                </tr>
+                                <tr>
+                                    <td>方法调用</td>
+                                    <td>✅<code>`${str.toUpperCase()}`</code></td>
+                                    <td>✅<code>f"{str.upper()}"</code></td>
+                                </tr>
+                                <tr>
+                                    <td>列表/字段推导</td>
+                                    <td>❌不能直接写推导式，但可以先定义变量</td>
+                                    <td>✅<code>f"{[x*2 for x in range(5)]}"</code></td>
+                                </tr>
+                                <tr>
+                                    <td>三元表达式</td>
+                                    <td>✅<code>`${cond ? a : b}`</code></td>
+                                    <td>✅<code>f"{'a' if cond else 'b'}"</code></td>
+                                </tr>
+                                <tr>
+                                    <td>转义字符</td>
+                                    <td>✅支持反斜杠</td>
+                                    <td>❌大括号内不允许反斜杠，需要变量中转</td>
+                                </tr>
+                                <tr>
+                                    <td>嵌套模板</td>
+                                    <td>✅<code>`${`${nested}`}`</code></td>
+                                    <td>❌不能嵌套f-string，但可调用格式化函数</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据存储与运算——标识符</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>数据存储与运算——标识符</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>标识符：<span>是程序员在代码中为变量、函数、类等元素所起的名字</span></li>
+            <li>
+                <h2>命名规则</h2>
+                <ul>
+                    <li>
+                        <h3>命名规则——<span>规定</span></h3>
+                        <ol>
+                            <li>规定：<span>必须遵守，不遵守，会报错</span></li>
+                            <li><span>该规定与 <code>JavaScript</code>一致</span></li>
+                            <li>
+                                <ul>
+                                    <li><span>最好包含字母(<code>a~z，A~Z</code>)、数字(0~9)、下划线(<code>_</code>)</span>
+                                    </li>
+                                    <li><span>不能以数字开头</span></li>
+                                    <li>
+                                        <span>不能使用关键字，如python：<code>(True、False、None、and、or、if、else、elif、for、while....)</code></span>
+                                    </li>
+                                    <li><span>严格区分大小写，比如：age、Age以及AGE它们都是不同的变量(容器)</span></li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <h3>命名规则——<span>建议</span></h3>
+                        <ol>
+                            <li>建议：<span>不必严格遵守，不遵守，不会报错</span></li>
+                            <li>
+                                <ul>
+                                    <li><span>尽量不要中文命名</span></li>
+                                    <li>需要做到：<span>见名知意</span></li>
+                                    <li>
+                                        <div class="div_table">
+                                            <table>
+                                                <thead>
+                                                <tr>
+                                                    <th colspan="4">开发着社区约定"<span>行规</span>"</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td colspan="4"><b>同样不必严格遵守——<span>但是开发当中，为了更好的团队协作，建议遵守</span></b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>命名对象</td>
+                                                    <td><code>python(PEP 8)</code></td>
+                                                    <td><code>JavaScript</code></td>
+                                                    <td>示例</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>变量、函数、方法、模块</td>
+                                                    <td style="text-align: left">
+                                                        <span>
+                                                            蛇形命名法(<code>snake_case</code>)：
+                                                            <br>全部小写，单词间用下划线连接
+                                                        </span>
+                                                    </td>
+                                                    <td style="text-align: left">
+                                                        <span>
+                                                            小驼峰命名法(<code>camelCase</code>):
+                                                            <br>首单词小写，后续单词首字母大写
+                                                        </span>
+                                                    </td>
+                                                    <td style="text-align: left">
+                                                       <span>
+                                                            python：<code>user_name</code>
+                                                            <br>JavaScript：<code>userName</code>
+                                                       </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>类(<code>Class</code>)</td>
+                                                    <td style="text-align: left">
+                                                        <span>
+                                                            大驼峰/帕斯卡命名法(<code>PascalCase</code>):
+                                                            <br>每个单词首字母大写
+                                                        </span>
+                                                    </td>
+                                                    <td style="text-align: left">
+                                                        <span>
+                                                            大驼峰/帕斯卡命名法(<code>PascalCase</code>):
+                                                            <br>每个单词首字母大写
+                                                        </span>
+                                                    </td>
+                                                    <td style="text-align: left">
+                                                        <span>
+                                                            python：<code>MyNewClass</code>
+                                                            <br>JavaScript：<code>MyNewClass</code>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>常量(<code>Constant</code>)</td>
+                                                    <td style="text-align: left">
+                                                        <span>
+                                                            全大写下划线分割(<code>CONSTANT_CASE</code>):
+                                                            <br>全部大写，单词间下划线分割
+                                                        </span>
+                                                    </td>
+                                                    <td style="text-align: left">
+                                                        <span>
+                                                            全大写下划线分割(<code>CONSTANT_CASE</code>):
+                                                            <br>全部大写，单词间下划线分割
+                                                        </span>
+                                                    </td>
+                                                    <td style="text-align: left">
+                                                        <span>
+                                                            python：<code>MAX_VALUE</code>
+                                                            <br>JavaScript：<code>MAX_VALUE</code>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="span">私有属性/方法</span></td>
+                                                    <td>
+                                                        <span>
+                                                            前缀单下划线(<code>_internal</code>)
+                                                        </span>
+                                                    </td>
+                                                    <td style="text-align: left">
+                                                        <span>
+                                                            前缀单下划线(<code>_internal</code>):
+                                                            <br>社区参考：<code>TypeScript</code>
+                                                        </span>
+                                                    </td>
+                                                    <td style="text-align: left">
+                                                        <span>
+                                                            python：<code>_private</code>
+                                                            <br>JavaScript：<code>_private</code>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>补充知识</h2>
+        <ul>
+            <li>关键字：<code>Error</code><span>表示错误(长见于输出控制台)</span></li>
+            <li>关键子：<code>SyntaxError</code><span>表示语法错误</span></li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

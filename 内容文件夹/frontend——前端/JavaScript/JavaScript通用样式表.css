@@ -138,7 +138,8 @@ h5 {
 }
 
 img {
-    width: 100%;
+    display: block;
+    width: 70%;
     height: auto;
 }
 
@@ -211,7 +212,7 @@ th {
 }
 
 td {
-    background-color:  #FDF5E6;
+    background-color: #FDF5E6;
 }
 
 /* 确保表格内部任何元素都不换行 */
@@ -397,11 +398,14 @@ video {
 
 /* ========== 强制恢复列表前缀 ========== */
 ul, ol {
-    padding: 0 0 0 2rem ;/
+    padding: 0 0 0 2rem;
+/
 }
+
 ol {
     list-style-type: decimal !important; /* ol 数字 */
 }
+
 li {
     /* 确保 li 不会意外继承 nowrap 或影响前缀显示 */
     white-space: normal;

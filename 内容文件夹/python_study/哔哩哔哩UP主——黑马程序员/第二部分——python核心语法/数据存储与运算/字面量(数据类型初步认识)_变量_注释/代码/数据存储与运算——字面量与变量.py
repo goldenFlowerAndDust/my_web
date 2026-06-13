@@ -53,3 +53,8 @@ twoMonthViews = oneMonthViews + addViews
 
 print(f"基础播放量：{basisViews}万，第一个月播放量：{oneMonthViews}万，第二个月播放量：{twoMonthViews}万")
 
+# 查询字面量，数据类型
+print(type([10,"hello"]))
+
+# 判断是否为既定数据类型
+print(isinstance([],list))
