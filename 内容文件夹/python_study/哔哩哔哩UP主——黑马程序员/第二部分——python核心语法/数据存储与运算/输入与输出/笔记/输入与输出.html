@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>输入与输出</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>输入与输出</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>
+                <h2>输入</h2>
+                <ol>
+                    <li>输入：<span>将用户输入的数据，存放进一个容器</span></li>
+                    <li>语句：<code>变量(容器) = input("提示用户输入的内容")</code></li>
+                    <li>返回值是：<span>用户输入的内容，<span
+                            class="span">默认是字符串，所以要进行数学运算，需要转成数字类型(
+                            <code>int/float</code>)</span></span>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h2>输出</h2>
+                <ol>
+                    <li>输出：<span>将容器(变量)存储的数据，输出到控制台</span></li>
+                    <li>语句：<code>print()</code></li>
+                    <li>返回值是：<code>None</code></li>
+                    <li>注意：<span>输出的只能是字符串，<span
+                            class="span">也就说，括号内只能是字符串以及转型成字符串的变量</span></span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>案例(<span>计算BMI值</span>)</h3>
+                <img src="./image/输入输出案例.png"
+                     alt="输入输出案例"
+                     title="输入输出案例">
+            </li>
+            <li>
+                <h3>案例(<span>求取款后余额(<code>balance</code>)</span>)</h3>
+                <img src="./image/输入输出案例2.png"
+                     alt="输入输出案例2"
+                     title="输入输出案例2">
+            </li>
+            <li>
+                <h3>案例(<span>求取款后余额(<code>balance</code>)</span>)——扩展</h3>
+                <img src="./image/输入输出案例2——扩展.png"
+                     alt="输入输出案例2——扩展"
+                     title="输入输出案例2——扩展">
+            </li>
+            <li>
+                <div class="div_table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th colspan="3">python数据类型之间的转换</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>数据类型</td>
+                            <td>语法</td>
+                            <td>注意</td>
+                        </tr>
+                        <tr>
+                            <td>字符串(<code>str</code>)类型</td>
+                            <td colspan="2">语法：<code>str()</code></td>
+                        </tr>
+                        <tr>
+                            <td>整型(<code>int</code>)</td>
+                            <td>语法：<code>int()</code></td>
+                            <td><span>当强制转换的是非数字类型，且是浮点型的时候，直接报错</span></td>
+                        </tr>
+                        <tr>
+                            <td>浮点型(<code>float</code>)</td>
+                            <td>语法：<code>float()</code></td>
+                            <td style="text-align: left"><span>当强制转换的是非数字类型，直接报错(<span
+                                    class="span"><br>也就是说：如果是整型不会报错，会自动转成浮点型</span>)</span></td>
+                        </tr>
+                        <tr>
+                            <td>布尔(<code>bool</code>)</td>
+                            <td>语法：<code>bool()</code></td>
+                            <td>
+                                <span>正常情况都会强制转换成<code>True</code></span>
+                                <br>遇到一下情况转成<code>False</code>: <code>None、False、零值、空容器</code>
+                                <br>但是会通过：<span><code>__bool__</code>或 <code>__len__</code>改变行为</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <span>以上的方法，都是将非对应方法的数据类型，强制转换成对应方法的数据类型</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th colspan="3"><code>JavaScript</code>与<code>python</code>对于<span>整数强转的区别</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>输入</td>
+                            <td>JavaScript(<code>parseInt()</code>)</td>
+                            <td>python(<code>int()</code>)</td>
+                        </tr>
+                        <tr>
+                            <td>浮点数(如 <code>3.14</code>)</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>字符串(如：<code>"3.14"</code>)</td>
+                            <td>3</td>
+                            <td>❌ 报错</td>
+                        </tr>
+                        <tr>
+                            <td>字符串(如：<code>"3"</code>)</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>JavaScript复习</h2>
+        <div class="div_table">
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="3">JavaScript的输入输出方式</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>输出</td>
+                    <td style="text-align: left">
+                        浏览器控制台输出：
+                        <br><code>console.log()</code>
+                    </td>
+                    <td style="text-align: left">
+                        DOM输出：
+                        <br><code>document.write()</code>
+                        <br><code>获取元素节点.innerHTML/outerHTML/insertAdjacentHTML</code>
+                        <br><code>获取元素节点.innerText/textContent/insertAdjacentText</code>
+                        <br><code>表单输出：value</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td>获取</td>
+                    <td style="text-align: left">
+                        BOM获取：
+                        <br><code>prompt()</code>
+                    </td>
+                    <td style="text-align: left">
+                        DOM获取：
+                        <br><code>document.write()</code>
+                        <br><code>获取元素节点.innerHTML/outerHTML/insertAdjacentHTML</code>
+                        <br><code>获取元素节点.innerText/textContent/insertAdjacentText</code>
+                        <br><code>表单获取：value</code>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="3">JavaScript的数据类型转换</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="text-align: left">
+                    <td rowspan="2">数值类型</td>
+                    <td>整数方法：<code>parseInt()</code></td>
+                    <td rowspan="2">包含整数与浮点数：<code>Number()</code></td>
+                </tr>
+                <tr>
+                    <td>浮点数方法：<code>parseFloat()</code></td>
+                </tr>
+                <tr style="text-align: left">
+                    <td>字符串(String)</td>
+                    <td>方法：<code>String()</code></td>
+                    <td>方法：<code>.toString()</code></td>
+                </tr>
+                <tr>
+                    <td>布尔(<code>Boolean</code>)</td>
+                    <td>方法：Boolean()</td>
+                    <td style="text-align: left">
+                        <code>false、0、-0、0n(<span>BigInt零</span>)、""(<span>空字符串</span>)、null、undefined、NaN</code>
+                        <br><span>以上数据类型或数据：都叫(<span class="span">假值——<code>falsy</code></span>)共同点，显示转换(<code>Boolean()</code>)与隐式转换都是<code>flase</code></span>
+                        <br><span>除了以上数据类型或数据，都叫(<span class="span">真值——<code>truthy</code></span>)共同点，显示转换(<code>Boolean()</code>)与隐式转换都是<code>true</code></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>
