@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let Array = ["张三","李四","王五"]
+    console.log(Array)
+    // 1.
+    Array.push("赵六")
+    console.log(Array)
+    // 2.
+    Array.shift()
+    console.log(Array)
+    // 3.
+    for (i in Array){
+        if (Array[i] === "王五"){
+            Array[i] = "王小五"
+        }
+    }
+    console.log(Array)
+    // 4.
+    console.log(Array)
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>求10以内质数</title>
+</head>
+<body>
+<div id="prime"></div>
+<script type="text/javascript">
+    // 获取袁术
+    let prime = document.getElementById("prime")
+    // 新建输出，用于接受结果
+    let Primes = []
+
+    // 质数：大于1，只有1和自身两个因数：说白了就是余数是自身或1
+
+    for (let i = 2; i <= 10; i++) {
+        // 外层循环：除数——最后结果值
+        let isPrime = true // 初始化布尔值，用于后续判断
+
+        for (let j = 2; j <= Math.sqrt(i); j++) { // 求平方根，保证是奇数，偶数没有质数
+            // 内层循环：被除数
+            if (i % j === 0) {
+                // 当余数为0，则不是质数
+                isPrime = false // 将布尔值替换为false
+                break; // 遇到第一个，退出循环，降低性能
+            }
+
+        }
+        if (isPrime) Primes.push(i) // 做判断，当布尔值为true时，将除数放入数组
+    }
+    prime.innerHTML = `10以内的质数是：${Primes.join()}`
+</script>
+</body>
+</html>

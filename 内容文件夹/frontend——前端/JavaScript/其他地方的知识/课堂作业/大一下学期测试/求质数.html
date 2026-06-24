@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10以内质数</title>
+</head>
+<body>
+<div id="prime"></div>
+<script type="text/javascript">
+    // 获取元素
+    let prime = document.getElementById("prime");
+    let Primes = [] // 创建空数组，用于接受结果
+    // 质数：大于1，且只有1和本身两个因数
+    for(let i = 2; i <= 10; i++) {
+        // 外层：除数。
+        let isPrime = true // 设置初始布尔值，用于后续判断
+        for (let j = 2; j <= Math.sqrt(i); j++) {
+            // 内层：被除数
+            if (i % j === 0) {
+                // 当余数为0时，代表这除数除自身外还有别的因数
+                isPrime = false // 切换布尔值
+                break; // 当匹配到第一个，直接退出循环，节省性能
+            }
+        }
+        if (isPrime) Primes.push(i) // 判断，将符合值存入数组
+    }
+        // 输出结果
+       prime.innerHTML = `10以内质数：${Primes.join()}`
+</script>
+<script type="text/javascript">
+    // 收集结果：
+    let Primes = []
+    for (let i = 2; i <= 100;i++){
+        let isPrime = true
+        for (let j = 2; j <= Math.sqrt(i);j++){
+            if (i % j === 0){
+                if(i % j === 0){
+                    isPrime = false
+                    break;
+                }
+            }
+        }
+        if (isPrime) Primes.push(i)
+    }
+    console.log(Primes)
+</script>
+</body>
+</html>

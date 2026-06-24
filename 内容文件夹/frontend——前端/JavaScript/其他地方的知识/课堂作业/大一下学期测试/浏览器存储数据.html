@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>临时保存数据</title>
+</head>
+<body>
+<label>
+    <input type="text" id="text">
+    <input type="button" id="btn" value="保存临时数据">
+</label>
+<div>
+    <button type="button" id="go0">刷新</button>
+    <div id="content"></div>
+</div>
+<script>
+    // 获取用户输入值
+    let text = document.getElementById("text") // 因为是表单，读取使用value
+    // 获取按钮，并添加时间监听
+    document.getElementById("btn").addEventListener('click', () => {
+        let Text = text.value // 实时获取用户输入的值
+        // 使用本地存储(sessionStorage)
+        //增/改：setItem()，查：getItem() ,删：removeItem() 清除：clear()
+        sessionStorage.setItem('tempData', `${Text}`) // 键默认：tempData 值为用户输入的
+        alert("临时数据保存成功") // 弹出提示框
+        text.value = '' // 单击按钮清空文本输入框
+    })
+    // 第二部分：刷新显示存储"
+    // 获取数据显示节点
+    let content = document.getElementById("content")
+    // 获取刷新按钮
+    document.getElementById("go0").addEventListener("click", () => {
+        // 获取 getItem
+        let value = sessionStorage.getItem("tempData")
+        // 键获取到的值，显示出来
+        content.innerHTML = `存储的临时数据是：${value}`
+    })
+</script>
+</body>
+</html>

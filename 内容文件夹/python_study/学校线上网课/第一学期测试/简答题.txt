@@ -1,0 +1,38 @@
+1.简述Python中列表、元组和字典的主要区别。
+答案：
+	1. 列表（List）：
+		使用方括号 [] 定义，元素可变（可增删改）。
+		有序，支持索引和切片。
+	2. 元组（Tuple）：
+		使用圆括号 () 定义，元素不可变。
+		有序，支持索引和切片，常用于存储不可修改的数据。
+	3. 字典（Dictionary）：
+		使用花括号 {} 定义，存储键值对，键必须为不可变类型（如字符串、数字）。
+		无序，通过键快速访问值。
+
+2.简述Python中类和对象的关系，以及类属性和实例属性的区别。 
+	答案： 	类是对象的模板，定义了对象的属性和方法；对象是类的实例。
+			类属性是类的所有实例共享的属性，定义在类中；实例属性是每个实例独有的属性，通过实例对象赋值。
+
+3. 请列出Python语言的三个主要优点，并简要说明。 
+答案： 1. 语法简洁：代码可读性高，学习成本低；2. 生态圈强大：拥有丰富的第三方库，如NumPy、Pandas；3. 跨平台性：可在Windows、macOS、Linux等系统上运行。
+
+4. 请简述类和对象的关系，并举例说明如何在Python中定义类和创建对象。 
+	答案： 类是对象的模板，定义了对象的属性和方法；对象是类的实例。例如，定义Student类：
+			class Student: name = ''; age = 0；创建对象：stu1 = Student()。
+
+5. 什么是Python中的多态？请举例说明。
+答案：
+	多态指不同类的对象对同一方法调用做出不同响应。例如： class Animal: def speak(self): 
+	pass class Dog(Animal): def speak(self): return 'Woof' class Cat(Animal): def speak
+	(self): return 'Meow' def make_speak(animal): print(animal.speak()) make_speak(Dog()) # 
+	输出Woof make_speak(Cat()) # 输出Meow
+
+6. 在Python中，全局变量和局部变量的作用域有何不同？请分别举例说明如何在函数内部访问全局变量以及如何在函数内部修改全局变量。
+答案：
+		全局变量的作用域是整个程序，
+		局部变量的作用域仅限于定义它的函数内部。
+		访问全局变量时，函数内部可直接使用；
+		修改全局变量时，需在函数内用global关键字声明。
+	示例： 全局变量访问： a = 10 def func(): print(a) # 访问全局变量a func()
+	全局变量修改： b = 20 def func(): global b b = 30 # 修改全局变量b func() print(b)

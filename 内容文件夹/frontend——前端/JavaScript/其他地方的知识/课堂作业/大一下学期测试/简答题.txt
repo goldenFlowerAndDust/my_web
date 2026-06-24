@@ -1,0 +1,16 @@
+1.请简单介绍history对象的属性和方法有哪些及用法
+	history方法有：back()、forword()、go()
+	其中：
+		back()方法是：执行回退操作，一次只能回退上一个网页历史记录
+		forword()方法是：执行前进操作，一次只能前进后一个网页历史记录
+		go()方法是：正值：前进、负值：回退、0：刷新当前页。与back()和forword不同的是：具体前进或回退多少，由参数决定
+		
+		
+2.请说出offset和style的区别有哪些。
+	1.值的格式不同：style带单位(px)、offset不带单位(纯数字)
+	2.可读写性不同：style可以读可写、offset只读不写
+	3.获取的范围不同：
+			*style：只能获取行内样式，外部样式与内嵌样式拿不到
+			*offset：获取最终渲染尺寸(包含padding和border)
+	4.	style：只读width/height本身，不管padding和border
+	5.	offset：包含padding和border，但不包含margin
