@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运算符</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>运算符</h1>
+    </header>
+    <section id="section_1">
+        <article>
+            <h2>算术运算符</h2>
+            <div class="div_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="4">所有 <span>操作数均为数值类型</span> 才能<span>进行数学运算</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>运算符</td>
+                        <td>描述</td>
+                        <td>举例说明（<span>python为主</span>）</td>
+                        <td><code>python<span>、</span>JavaScript</code><span>以及 <code>MySQL</code></span>注意事项</td>
+                    </tr>
+                    <tr>
+                        <td><code>+</code></td>
+                        <td>加法</td>
+                        <td><code>1 + 5 ==> 1加上5</code></td>
+                        <td rowspan="7" style="text-align: left">
+                            <ol>
+                                <li>
+                                    <h3>python</h3>
+                                    <ul>
+                                        <li><code>python</code>没有隐式转换，所以所有操作数需要
+                                            <span>先转成数字类型(<code>int()、float()</code>)</span></li>
+                                        <li>
+                                            <span><code>【+】</code>支持字符串拼接，前提两侧均是字符串(<code>str()</code>)<span
+                                                    class="span">如果遇到数字，会直接报错：<br>如(<code>b = "5" + 2</code>)</span></span>
+                                        </li>
+                                        <li>
+                                            <span>关于取整：<code>python</code>有专门的运算符 <code>//</code>，写法：<code>a // b</code></span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <h3>JavaScript</h3>
+                                    <ul>
+                                        <li>
+                                            <code>JavaScript</code>有隐式转换会将<code>非全数字字符串的truthy</code>转换为1，<code>falsy(<span>除<code>null\undefined</code></span>)</code>转换为0
+                                        </li>
+                                        <li><a href="#拓展——JavaScript运算特殊规则">拓展：JavaScript的运算特殊规则</a>
+                                        </li>
+                                        <li>
+                                            <span><code>【+】</code>一方为字符串，则执行字符串拼接，(<span>只有加号，其他会隐式转换</span>)</span>
+                                        </li>
+                                        <li>
+                                            <span>关于取整：<code>JavaScript</code>没有运算符，但是有方法：<code>Math.trunc()</code>，写法：<code>Math.trunc(a/b)</code></span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <h3>MySQL</h3>
+                                    <ul>
+                                        <li>
+                                            <code>MySQL</code>同样有隐式转换会将<span>会最高限度的将非数值类型转成数值并计算</span>
+                                        </li>
+                                        <li>
+                                            <span><code>【+】</code>永远执行加法运算，不能拼接字符串。<span
+                                                    class="span">如果遇到字符串，会尝试转成数字</span></span>
+                                        </li>
+                                        <li>
+                                            <span>关于取整：<code>MySQL</code>，有专门的运算符：<code>DIV</code>,写法：<code>a DIV b</code></span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>-</code></td>
+                        <td>减法</td>
+                        <td><code>8 - 3 ==> 8减3</code></td>
+
+                    </tr>
+                    <tr>
+                        <td><code>*</code></td>
+                        <td>乘法</td>
+                        <td><code>3 * 8 ==> 3乘以8</code></td>
+
+                    </tr>
+                    <tr>
+                        <td><code>/</code></td>
+                        <td>除法</td>
+                        <td style="text-align: left">
+                            例子：<code>10 / 5 ==> 10 除以 5 = 2.0</code>
+                            <br>注意：<span>除法结果是小数</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>//</code></td>
+                        <td>整除</td>
+                        <td style="text-align: left">
+                            例子：<code>10 // 3 ==> 10 整除 3 = 3</code>
+                            <br>注意：<span>整除结果为整数</span>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td><code>%</code></td>
+                        <td>取余</td>
+                        <td style="text-align: left">
+                            例子：<code>10 % 3 ==> 10 模于 3 = 1</code>
+                            <br>注意：<span>取余数</span>
+                            <br><code>python</code>例外：<span>答案始终为整数，会自动将负数取绝对值</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>**</code></td>
+                        <td>幂指数</td>
+                        <td style="text-align: left">
+                            例子：<code>10 ** 3 ==> 10 的三次方 = 1000</code>
+                            <br><span>说白了，就是幂运算</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        <article>
+            <h2>赋值运算符</h2>
+            <ul>
+                <li><code>=</code></li>
+            </ul>
+        </article>
+        <article>
+            <h2>比较运算符</h2>
+            <ul>
+                <li><code> > </code></li>
+                <li><code> >= </code></li>
+                <li><code> < </code></li>
+                <li><code> <= </code></li>
+                <li><code> == </code></li>
+                <li><code> != </code></li>
+            </ul>
+        </article>
+        <article>
+            <h2>逻辑运算符</h2>
+            <ul>
+                <li><code>or</code></li>
+                <li><code>and</code></li>
+            </ul>
+        </article>
+    </section>
+    <section id="section_2">
+        <h2>拓展</h2>
+        <article>
+            <div class="div_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="4"><h3 id="拓展——JavaScript运算特殊规则"></h3></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>场景</td>
+                        <td>规则</td>
+                        <td>示例</td>
+                        <td>结果</td>
+                    </tr>
+                    <tr>
+                        <td><span>字符串 + 任何类型</span></td>
+                        <td>【<code>+</code>】优先做 <span>字符拼接</span>，非字符串会被转成字符串</td>
+                        <td>
+                            <code>
+                                "5" + 2
+                                <br>"5" + true
+                                <br>"5" + null
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                "52"
+                                <br>"5true"
+                                <br>"5null"
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>字符串 接 <code>【-】【/】【*】【%】【**】</code></span></td>
+                        <td>非【<code>+</code>】的运算符，会 <span>把字符串转化为数字</span>再运算</td>
+                        <td>
+                            <code>
+                                "5" - 2
+                                <br>"5" * 2
+                                <br>"5" / "2"
+                                <br>"5" % "2"
+                                <br>"5" ** "3"
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                3
+                            <br>10
+                            <br>2.0
+                            <br>1
+                            <br>75
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>纯数字字符串</span></td>
+                        <td>转数字成功</td>
+                        <td><code>"123" * 1</code></td>
+                        <td><span>123</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>非纯数字字符串</span></td>
+                        <td><span>转数字失败 ——————> 得到 <code>NaN</code></span></td>
+                        <td><code>"123abc" + 1</code></td>
+                        <td>NaN</td>
+                    </tr>
+                    <tr>
+                        <td><span>合法例外字符串</span></td>
+                        <td><span class="span">科学计数法、十六进制、带空格的数字可转数字</span></td>
+                        <td style="text-align: left">
+                            <code>
+                                "1e3" ——————> 10 ** 3 = 1000
+                                <br>"0x10" ——————> 0x【<span>表示是十六进制数</span>】 <br>1 * 【16**1】 + 0 * 【16**0】 = 16
+                                <br>"&nbsp;5&nbsp;" ——————> 5
+                            </code>
+                        </td>
+                        <td><span>合法字符</span></td>
+                    </tr>
+                    <tr>
+                        <td><span><code>null</code>参与算术</span></td>
+                        <td>转为 <code>0</code></td>
+                        <td>
+                            <code>
+                                null * 10
+                                <br> null + 5
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                0
+                                <br>5
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span><code>undefined</code>参与算术</span></td>
+                        <td>转为 <code>NaN</code></td>
+                        <td>
+                            <code>
+                                undefined * 10
+                                <br>undefined + 5
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                NaN
+                                <br>NaN
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>true/false</code>参与算术</td>
+                        <td>转为 <code>1 / 0</code></td>
+                        <td>
+                            <code>
+                                true * 10
+                                <br>false + 5
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                0
+                                <br>5
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span><code>NaN</code>参与任何算术</span></td>
+                        <td><code>NaN</code>会 <span>传染。整个结果变成 <code>NaN</code></span></td>
+                        <td>
+                            <code>
+                                NaN * 10
+                                <br>NaN + "abc"
+                                <br>"abc" + NaN
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                NaN
+                                <br>"NaNabc"
+                                <br>"abcNaN"
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>NaN</code><span>与字符串拼接</span></td>
+                        <td>如果 <code>NaN</code>与字符串用 【+】 ，走拼接规则</td>
+                        <td><code>"abc" + NaN</code></td>
+                        <td><span>"abcNaN"</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>加号作为一元运算符</span></td>
+                        <td>相当于 <code>Number()</code><span>强制转数字</span></td>
+                        <td>
+                            <code>
+                                +"158"
+                                <br>+"abc"
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                158
+                                <br>NaN
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span><code>【==】</code>宽松相等(<span>隐式类型转换</span>)</span></td>
+                        <td>会进行类型转换后比较(如字符串转数字)</td>
+                        <td>
+                            <code>
+                                "5" == 5
+                                <br>false == 0
+                                <br>null == undefined
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                true
+                                <br>true
+                                <br>true
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span><code>【===】</code>严格相等，禁止隐式转换</span></td>
+                        <td>禁止隐式转换，类型不同直接 <code>false</code></td>
+                        <td>
+                            <code>
+                                "5" === 5
+                                <br>false === 0
+                                <br>null === undefined
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                false
+                                <br>false
+                                <br>false
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>typeof null</code></td>
+                        <td>历史遗留bug，返回"object"</td>
+                        <td><code>typeof null</code></td>
+                        <td><span>"object"</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>typeof NaN</code></td>
+                        <td><span>虽然叫"<code>Not a Number</code>",但类型是 <code>number</code></span></td>
+                        <td><code>typeof NaN</code></td>
+                        <td><span>"number"</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>isNaN()</code>的坑</td>
+                        <td>会先尝试吧参数转为数字，再判断是否是 <code>NaN</code></td>
+                        <td><code>isNaN("123abc")</code></td>
+                        <td><span>true (<span>因为转数字失败</span>)</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>NaN===NaN</code></td>
+                        <td><code>NaN</code>不等于自身(<span>唯一有此特性的值</span>)</td>
+                        <td><code>NaN===NaN</code></td>
+                        <td><span>false</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>Number.isNaN()</code>推荐</td>
+                        <td><span>不会进行隐式转换，直接判断类型</span></td>
+                        <td><code>Number.isNaN("123abc")</code></td>
+                        <td><span>false（因为它是字符串）</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>[] + []</code></td>
+                        <td>空数组转字符串————>"",拼接</td>
+                        <td><code>[] + []</code></td>
+                        <td><span>""</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>[] + {}</code></td>
+                        <td><code>[] ————> ""</code>,{} ————> "[object Object]"</td>
+                        <td><code>[] + {}</code></td>
+                        <td><span>"object Object"</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>{} + []</code></td>
+                        <td><span>在表达式中，{} 被解析为空代码块，忽略; 【<code>+ []</code>转为数字0】</span></td>
+                        <td><code>{} + []</code></td>
+                        <td>0 (<span>非常规，考试基本不考</span>)</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        <article>
+            <h3 id="JavaScript隐式转换">JavaScript的隐式转换</h3>
+            <ul>
+                <li>JavaScript的隐式转换分为<span>真值(<code>truthy</code>)与假值(<code>falsy</code>)</span></li>
+                <li>falsy有：<code>null、undefined、""、0、-0、false、NaN</code></li>
+                <li>
+                    <div class="div_table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th colspan="4"><span>算术运算中Falsy值的转换规则</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Falsy值</td>
+                                <td>转换为数字</td>
+                                <td>蒜素运算示例</td>
+                                <td>结果</td>
+                            </tr>
+                            <tr>
+                                <td>false</td>
+                                <td>0</td>
+                                <td><code>false * 10</code></td>
+                                <td><span>0</span></td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><code>0 * 10</code></td>
+                                <td><span>0</span></td>
+                            </tr>
+                            <tr>
+                                <td>-0</td>
+                                <td>-0</td>
+                                <td><code>-0 * 10</code></td>
+                                <td>-0</td>
+                            </tr>
+                            <tr>
+                                <td>""(<span>空字符串</span>)</td>
+                                <td>0</td>
+                                <td>"" * 10</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>null</td>
+                                <td>0</td>
+                                <td><code>null * 10</code></td>
+                                <td><span>0</span></td>
+                            </tr>
+                            <tr>
+                                <td>undefined</td>
+                                <td>NaN</td>
+                                <td><code>undefined</code></td>
+                                <td><span>NaN</span></td>
+                            </tr>
+                            <tr>
+                                <td>NaN</td>
+                                <td>NaN</td>
+                                <td><code>NaN * 10</code></td>
+                                <td><span>NaN</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><span>除以上Falsy值意外，均是【truthy】</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>
