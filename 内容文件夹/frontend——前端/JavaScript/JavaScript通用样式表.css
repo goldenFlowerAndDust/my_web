@@ -411,3 +411,8 @@ li {
     white-space: normal;
     display: list-item;
 }
+
+.div_table li {
+    text-align: left;
+    white-space: nowrap;
+}

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if基础语法</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>if基础语法</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li><span>正常情况，代码都是从上到下依次执行</span></li>
+            <li><span>if语法：可以理解为，开辟一个或多个分支，通过判断，运行具体分支</span></li>
+            <li>
+                <h2>形式一：</h2>
+                <ol>
+                    <li><code>if-else</code></li>
+                    <li><span>先判断if内的条件，如果符合则，执行<code>if</code>内的代码块，否则执行<code>else</code>内的代码块</span>
+                    </li>
+                    <li>当然 <code>else</code>并不是必须写的，当条件不成立，会跳过 if 内的代码块，继续向下执行</li>
+                </ol>
+                <h2>形式二：</h2>
+                <ol>
+                    <li><code>if-elif-...-else</code></li>
+                    <li>
+                        <span>同样先判断<code>if</code>，然后依次判断<code>elif</code>，以上均不成立，则执行<code>else</code>内的代码块</span>
+                    </li>
+                    <li><span>同样，<code>else</code>不是必须的，以上条件均不成立，会跳过条件分支，继续向下执行</span></li>
+                </ol>
+                <h2><code>python</code>的条件分支与<code>JavaScript</code>条件分支的区别</h2>
+                <ol>
+                    <li>多条件分支，<code>python</code>的写法是：<code>elif</code>，<code>JavaScript</code>的写法是：<code>else
+                        if</code></li>
+                    <li>在<code>JavaScript</code>中每个独立分支都是一个作用域，作用域内的：除去<code>var</code>关键字声明的变量，只在作用域内有效
+                    </li>
+                    <li><code>python</code>的条件分支语句，没有作用域，条件分支内的变量，外部同样可以访问。</li>
+                    <li><code>JavaScript</code>存在第二种分支语句：<code>switch-case-default</code>，python并没有</li>
+                    <li>
+                        <a href="../../../../../../../frontend——前端/JavaScript/哔哩哔哩UP主——Java基础/基础/第十九~二十二节——条件分支语句/第十九~二十二节——条件分支语句.html">JavaScript条件分支语句</a>
+                    </li>
+                </ol>
+                <div class="div_table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th colspan="3"><h2>python VS JavaScript 条件分支对照表</h2></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>对比维度</td>
+                            <td>python</td>
+                            <td>JavaScript</td>
+                        </tr>
+                        <tr>
+                            <td>基本语法</td>
+                            <td>
+                                <code>
+                                    if 条件：
+                                    <br>&nbsp;&nbsp;代码块
+                                </code>
+                            </td>
+                            <td>
+                                <code>
+                                    if (条件) {
+                                    <br>&nbsp;&nbsp;代码块
+                                    }
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>多分支写法</td>
+                            <td><code>elif</code></td>
+                            <td><code>else if(<span>注意有空格</span>)</code></td>
+                        </tr>
+                        <tr>
+                            <td>结束标记</td>
+                            <td><span>缩进(<b>取消缩进即结束</b>)</span></td>
+                            <td><span>花括号(<b>{}</b>)</span></td>
+                        </tr>
+                        <tr>
+                            <td>分支是否生成作用域</td>
+                            <td><span>❌ 不生成。if 内部变量外部可访问</span></td>
+                            <td><span>✅ 生成（let/const）。if 内部变量外部访问会报错</span></td>
+                        </tr>
+                        <tr>
+                            <td>变量泄露问题</td>
+                            <td><span><code>if</code>内声明的变量会泄露到外部作用域</span></td>
+                            <td>
+                                <span>用<code>let/const</code>不会泄露;但用<code>var</code>会泄露(<span>函数级作用域</span>)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>条件表达式(<span>三元</span>)</td>
+                            <td><code>a if 条件 else b</code></td>
+                            <td><code>条件 ? a : b</code></td>
+                        </tr>
+                        <tr>
+                            <td>switch替代方案</td>
+                            <td><span>python 3.10+ 有 <code>match-case</code>，一般使用：<code>if-elif-else</code></span>
+                            </td>
+                            <td><span>有<code>switch-case-default</code>,支持穿透效果</span></td>
+                        </tr>
+                        <tr>
+                            <td>条件中类型转换</td>
+                            <td><span>不会自动转换类型，如：<code>if '5' == 5 ————> False</code></span></td>
+                            <td>宽松相等 <code>== </code>会隐式转换，严格相等<code>===</code>不会</td>
+                        </tr>
+                        <tr>
+                            <td>真值/假值规则</td>
+                            <td><code>False、None、0、""、[]、()、{}、set()</code>为假，其余为真</td>
+                            <td>
+                                <code>false、null、undefined、0、""、NaN</code>为假，其余为真(<span>包括<code>[]</code>和<code>{}</code></span>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>链式比较</td>
+                            <td>✅ 支持：if 10 < num < 20</td>
+                            <td>❌ 不支持，必须拆开：if (10 < num && num < 20)</td>
+                        </tr>
+                        <tr>
+                            <td>缩进敏感</td>
+                            <td>✅ 缩进错误会导致 IndentationError</td>
+                            <td>❌ 缩进不影响逻辑，仅影响可读性</td>
+                        </tr>
+                        <tr>
+                            <td>代码块结构</td>
+                            <td>冒号 : + 缩进</td>
+                            <td>花括号 {}（可省略但强烈不推荐）</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="div_table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th colspan="2"><h2>python专属特性(<span>JS没有</span>)</h2></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>特性</td>
+                            <td>示例</td>
+                        </tr>
+                        <tr>
+                            <td>链式比较</td>
+                            <td><code>if 10 < num < 20:</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>in</code>成员检查</td>
+                            <td><code>if "a" in "abc":</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>is / is not</code>身份比较</td>
+                            <td><code>if x is None:</code></td>
+                        </tr>
+                        <tr>
+                            <td>真假值判断(<b>空容器</b>)</td>
+                            <td><code>if []: —————>
+                                False</code>(<span>JavaScript中<code>[]</code>是<code>true</code></span>)
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="div_table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th colspan="2"><h2>JS专属特性(<span>python没有</span>)</h2></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>特性</td>
+                            <td>示例</td>
+                        </tr>
+                        <tr>
+                            <td>switch-case-default</td>
+                            <td><span>支持穿透效果(<code>fall-through</code>)</span></td>
+                        </tr>
+                        <tr>
+                            <td><code>===</code>严格相等</td>
+                            <td>不进行隐式转换</td>
+                        </tr>
+                        <tr>
+                            <td>条件中声明变量</td>
+                            <td><code>if (let x = 5) {}（ES6 后不推荐）</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>!!</code>转布尔值</td>
+                            <td><code>if (!!value)</code></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="div_table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th colspan="3"><h2>避坑指南(<span>从JS转python最容易踩的雷</span>)</h2></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>坑</td>
+                            <td>说明</td>
+                            <td>正确做法</td>
+                        </tr>
+                        <tr>
+                            <td>忘记写冒号 <b>:</b></td>
+                            <td>python的 <code>if</code>行尾必须有冒号</td>
+                            <td><code>if 条件 :</code></td>
+                        </tr>
+                        <tr>
+                            <td>缩进不一致</td>
+                            <td><span>混用Tab和空格会报错</span></td>
+                            <td>统一用4个空格</td>
+                        </tr>
+                        <tr>
+                            <td>误以为 <code>if</code>有作用域</td>
+                            <td>python 的 <code>if</code>不会隔离变量</td>
+                            <td>想要隔离数据用 <code>def</code>函数</td>
+                        </tr>
+                        <tr>
+                            <td>习惯写 <code>else if</code></td>
+                            <td>python里这样写会报错</td>
+                            <td>写成 <code>elif</code></td>
+                        </tr>
+                        <tr>
+                            <td>习惯写 <code>switch</code></td>
+                            <td>python没有(3.10前)</td>
+                            <td>用 <code>if-elif-else</code>代替</td>
+                        </tr>
+                        <tr>
+                            <td>误用 <code>==</code> 判断 <code>None</code></td>
+                            <td>虽然不报错，但不严谨</td>
+                            <td>用 <code>is / is not</code></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

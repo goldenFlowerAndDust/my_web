@@ -13,148 +13,591 @@
     </header>
     <section id="section_1">
         <article>
-            <h2>算术运算符</h2>
             <div class="div_table">
                 <table>
                     <thead>
                     <tr>
-                        <th colspan="4">所有 <span>操作数均为数值类型</span> 才能<span>进行数学运算</span></th>
+                        <th colspan="6" style="font-size: 2.5rem;text-align: left">
+                            python没有隐式转换，JavaScript、MySQL有。但是最终，只有<span>操作数均为数值类型</span>
+                            才能<span>进行数学运算(<span>请注意：整张表以python为主</span>)</span>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>运算符</td>
-                        <td>描述</td>
-                        <td>举例说明（<span>python为主</span>）</td>
-                        <td><code>python<span>、</span>JavaScript</code><span>以及 <code>MySQL</code></span>注意事项</td>
+                        <td>作用</td>
+                        <td>规则</td>
+                        <td>示例</td>
+                        <td>结果</td>
+                        <td>区别</td>
                     </tr>
                     <tr>
-                        <td><code>+</code></td>
-                        <td>加法</td>
-                        <td><code>1 + 5 ==> 1加上5</code></td>
-                        <td rowspan="7" style="text-align: left">
-                            <ol>
-                                <li>
-                                    <h3>python</h3>
-                                    <ul>
-                                        <li><code>python</code>没有隐式转换，所以所有操作数需要
-                                            <span>先转成数字类型(<code>int()、float()</code>)</span></li>
-                                        <li>
-                                            <span><code>【+】</code>支持字符串拼接，前提两侧均是字符串(<code>str()</code>)<span
-                                                    class="span">如果遇到数字，会直接报错：<br>如(<code>b = "5" + 2</code>)</span></span>
-                                        </li>
-                                        <li>
-                                            <span>关于取整：<code>python</code>有专门的运算符 <code>//</code>，写法：<code>a // b</code></span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <h3>JavaScript</h3>
-                                    <ul>
-                                        <li>
-                                            <code>JavaScript</code>有隐式转换会将<code>非全数字字符串的truthy</code>转换为1，<code>falsy(<span>除<code>null\undefined</code></span>)</code>转换为0
-                                        </li>
-                                        <li><a href="#拓展——JavaScript运算特殊规则">拓展：JavaScript的运算特殊规则</a>
-                                        </li>
-                                        <li>
-                                            <span><code>【+】</code>一方为字符串，则执行字符串拼接，(<span>只有加号，其他会隐式转换</span>)</span>
-                                        </li>
-                                        <li>
-                                            <span>关于取整：<code>JavaScript</code>没有运算符，但是有方法：<code>Math.trunc()</code>，写法：<code>Math.trunc(a/b)</code></span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <h3>MySQL</h3>
-                                    <ul>
-                                        <li>
-                                            <code>MySQL</code>同样有隐式转换会将<span>会最高限度的将非数值类型转成数值并计算</span>
-                                        </li>
-                                        <li>
-                                            <span><code>【+】</code>永远执行加法运算，不能拼接字符串。<span
-                                                    class="span">如果遇到字符串，会尝试转成数字</span></span>
-                                        </li>
-                                        <li>
-                                            <span>关于取整：<code>MySQL</code>，有专门的运算符：<code>DIV</code>,写法：<code>a DIV b</code></span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ol>
+                        <td colspan="6"><h2 style="font-size: 2.5rem;text-align: left">算术运算符</h2></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>+</code>】</td>
+                        <td>加法/拼接</td>
+                        <td>
+                            <ul>
+                                <li>两侧同类型：数字相加，字符串拼接</li>
+                                <li>不同类型报错(<code>TypeError</code>)</li>
+                            </ul>
+                        </td>
+                        <td>
+                            "1 + 2"
+                            <br>'a' + 'b'
+                            <br>'5' + 2
+                        </td>
+                        <td>
+                            <span>
+                                3
+                                <br>'ab'
+                                <br><span class="span">报错(TypeError)</span>
+                            </span>
+                        </td>
+                        <td rowspan="33" style="text-align: left">
+                            <ul>
+                                <li><a href="#拓展——JavaScript运算特殊规则">拓展——JavaScript运算特殊规则</a></li>
+                                <li><a href="#JavaScript隐式转换">JavaScript隐式转换</a></li>
+                                <li><a href="#MySQL运算符规则速查表">MySQL运算符规则速查表</a></li>
+                                <li><a href="#MySQL隐式转换规则速查表">MySQL隐式转换规则速查表</a></li>
+                                <li><span>JavaScript没有取整运算符，但是可以用方法：<code>Math.trunc()</code></span></li>
+                                <li>同样求余数：<span>-5 % 3 = </span><code>-5 - (3 * ( -5 / 3[<span>向零取整</span>])) =
+                                    -5-( 3 * -1) = -2</code></li>
+                                <li>同样求余数：<span>5 % -3 = </span><code>5 - (-3 * ( 5 / -3[<span>向零取整</span>])) =
+                                    5-( -3 * -1) = 2</code></li>
+                            </ul>
                         </td>
                     </tr>
                     <tr>
-                        <td><code>-</code></td>
+                        <td>【<code>-</code>】</td>
                         <td>减法</td>
-                        <td><code>8 - 3 ==> 8减3</code></td>
-
+                        <td>数值运算</td>
+                        <td><code>5 - 2 </code></td>
+                        <td><span>3</span></td>
                     </tr>
                     <tr>
-                        <td><code>*</code></td>
-                        <td>乘法</td>
-                        <td><code>3 * 8 ==> 3乘以8</code></td>
-
-                    </tr>
-                    <tr>
-                        <td><code>/</code></td>
-                        <td>除法</td>
-                        <td style="text-align: left">
-                            例子：<code>10 / 5 ==> 10 除以 5 = 2.0</code>
-                            <br>注意：<span>除法结果是小数</span>
+                        <td>【<code>*</code>】</td>
+                        <td>乘法/重复</td>
+                        <td>
+                            <ul>
+                                <li><span>数值相乘</span></li>
+                                <li><span>字符串 * 整数 = 重复</span></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>3 * 4</code></li>
+                                <li><code>'ab' * 3</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>12</span></li>
+                                <li><span>'ababab'</span></li>
+                            </ul>
                         </td>
                     </tr>
                     <tr>
-                        <td><code>//</code></td>
+                        <td>【<code>/</code>】</td>
+                        <td>真除</td>
+                        <td>结果永远是<span>浮点数</span></td>
+                        <td><code>5 / 2</code></td>
+                        <td><span>2.5</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>//</code>】</td>
                         <td>整除</td>
-                        <td style="text-align: left">
-                            例子：<code>10 // 3 ==> 10 整除 3 = 3</code>
-                            <br>注意：<span>整除结果为整数</span>
+                        <td><span>向下取整(<b>向下取整（向负无穷方向取整）</b>)</span>，结果为整数</td>
+                        <td>
+                            <ul>
+                                <li><code>5 // 2</code></li>
+                                <li><code>-5 // 2</code></li>
+                            </ul>
                         </td>
-
+                        <td>
+                            <ul>
+                                <li><span>2</span></li>
+                                <li><span>-3(<b>向下取整</b>)</span></li>
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
-                        <td><code>%</code></td>
+                        <td>【<code>%</code>】</td>
                         <td>取余</td>
-                        <td style="text-align: left">
-                            例子：<code>10 % 3 ==> 10 模于 3 = 1</code>
-                            <br>注意：<span>取余数</span>
-                            <br><code>python</code>例外：<span>答案始终为整数，会自动将负数取绝对值</span>
+                        <td>返回余数，<span>结果符号与除数一致</span></td>
+                        <td>
+                            <ul>
+                                <li><code>-5 % 3</code></li>
+                                <li><code>5 % -3</code></li>
+                                <li><code>余数 = 被除数 - 除数*商</code></li>
+                                <li><span>注意：python余数符号与除数一致，因为(<b>商向下取整</b>)</span></li>
+                                <li><span>JavaScript与MySQL余数正负由被除数决定，因为(<b>商向零取整</b>)</span></li>
+                                <li>但是：<span>被除数与除数同为正，MySQL、JavaScript、python取余结果一致</span></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>-5 % 3 = -5 - (3 ( -5 / 3[<span>向上取整</span>])) = -5 - ( 3 * -2) = 1</code>
+                                </li>
+                                <li><code>5 % -3 = 5 - (-3 (5 / (-3)[<span>向上取整</span>])) = 5 - (-3 * -2) =
+                                    -1</code></li>
+                            </ul>
                         </td>
                     </tr>
                     <tr>
-                        <td><code>**</code></td>
-                        <td>幂指数</td>
-                        <td style="text-align: left">
-                            例子：<code>10 ** 3 ==> 10 的三次方 = 1000</code>
-                            <br><span>说白了，就是幂运算</span>
+                        <td>【<code>**</code>】</td>
+                        <td>幂运算</td>
+                        <td>计算次方</td>
+                        <td><code>2**3</code></td>
+                        <td><span>8</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><h2 style="font-size: 2.5rem;text-align: left">赋值运算符</h2></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>=、+=、-=、*=、/=、//=、**=</code>】</td>
+                        <td>赋值</td>
+                        <td>将右边的值，赋值给左边的变量</td>
+                        <td><code>a = 10</code></td>
+                        <td><span>10</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><h2 style="font-size: 2.5rem;text-align: left">比较运算符</h2></td>
+                    </tr>
+                    <tr>
+                        <td>【<code> > </code>】</td>
+                        <td>符号左边的值与右边进行比较</td>
+                        <td>左边比右边大，则返回[<code>True</code>]，否则[<code>False</code>]</td>
+                        <td>
+                            <ul>
+                                <li><code>5 > 3</code></li>
+                                <li><code>2 > 3</code></li>
+                            </ul>
                         </td>
+                        <td>
+                            <ul>
+                                <li><span>True</span></li>
+                                <li><span>False</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code> >= </code>】</td>
+                        <td>符号左边的值与右边进行比较</td>
+                        <td>左边比右边大或<span>相等</span>，则返回[<code>True</code>]，否则[<code>False</code>]</td>
+                        <td>
+                            <ul>
+                                <li><code>5 > 5</code></li>
+                                <li><code>5 >= 5</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>False</span></li>
+                                <li><span>True</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code> < </code>】</td>
+                        <td>符号左边的值与右边进行比较</td>
+                        <td>左边比右边小，则返回[<code>True</code>]，否则[<code>False</code>]</td>
+                        <td>
+                            <ul>
+                                <li><code>5 < 3</code></li>
+                                <li><code>2 < 5</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>False</span></li>
+                                <li><span>True</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code> <= </code>】</td>
+                        <td>符号左边的值与右边进行比较</td>
+                        <td>左边比右边小或 <span>等于</span>，则返回[<code>True</code>]，否则[<code>False</code>]</td>
+                        <td>
+                            <ul>
+                                <li><code>5 < 5</code></li>
+                                <li><code>5 <= 5</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>False</span></li>
+                                <li><span>True</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code> == </code>】</td>
+                        <td>相等比较</td>
+                        <td>
+                            <ul>
+                                <li>左边与右边相等，则返回[<code>True</code>]，否则[<code>False</code>]</li>
+                                <li>调用方法：<code>__eq__</code></li>
+                                <li>比较范围：<span>内容/值</span></li>
+                                <li>注意：<span>python没有严格相等符[<code>===</code>]</span></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>1 == True</code></li>
+                                <li><code>0 == False</code></li>
+                                <li><code>1 == 1.0</code></li>
+                                <li><span>注意：True和False是int类型的子类</span></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>True</span></li>
+                                <li><span>True</span></li>
+                                <li><span>True</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code> != </code>】</td>
+                        <td>不相等比较</td>
+                        <td>
+                            <ul>
+                                <li>左边与右边不相等，则返回[<code>True</code>]，否则[<code>False</code>]</li>
+                                <li>调用方法：<code>_eq_</code></li>
+                                <li>比较范围：<span>内容/值</span></li>
+                                <li>注意：<span>python没有严格<span>不</span>相等符[<code>!==</code>]</span></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>1 != True</code></li>
+                                <li><code>0 != False</code></li>
+                                <li><code>1 != 1.0</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>False</span></li>
+                                <li><span>False</span></li>
+                                <li><span>False</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><h2 style="font-size: 2.5rem;text-align: left">身份运算符</h2></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>is</code>】</td>
+                        <td>身份比较</td>
+                        <td>
+                            <ul>
+                                <li>比较 <span>内存地址</span>是否相同</li>
+                                <li>判断：<code>id()是否相等</code></li>
+                                <li>主要判断：<span>内存地址</span>请与比较运算符<code>==</code>区分</li>
+                                <li>内存地址：在JavaScript理解为<span>栈</span>和<span>堆</span></li>
+                                <li><span>栈负责储存变量，堆负责储存数据（简化理解，便于类比JS）</span></li>
+                                <li>在JavaScript中，只有非基本数据类型具备(<span>数组、对象.....</span>)</li>
+                                <li>类似：<span>JavaScript的(<code>===</code>)</span></li>
+                                <li><span><code>None</code>全局只有一个对象，用 <span
+                                        class="span">身份运算符效果更好</span>，
+                                    <br>避免重复建类(_eq_)欺骗，但是 <code>==</code>不会报错</span>
+                                </li>
+                            </ul>
+                        </td>
+                        <td><code>a is b</code></td>
+                        <td><span>True / False</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>is not</code>】</td>
+                        <td>身份比较</td>
+                        <td>
+                            <ul>
+                                <li>比较 <span>内存地址</span>是否<span>不</span>相同</li>
+                                <li>判断：<code>id()是否<span>不</span>相等</code></li>
+                                <li>主要判断：<span>内存地址</span>请与比较运算符<code>==</code>区分</li>
+                                <li>类似：<span>JavaScript的(<code>!==</code>)</span></li>
+                                <li><span><code>None</code>全局只有一个对象，用 <span
+                                        class="span">身份运算符效果更好</span>，
+                                    <br>避免重复建类(_eq_)欺骗，但是 <code>!=</code>不会报错</span>
+                                </li>
+                            </ul>
+                        </td>
+                        <td><code>a is not b</code></td>
+                        <td><span>True / False</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><h2 style="font-size: 2.5rem;text-align: left">逻辑运算符</h2></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>and</code>】</td>
+                        <td>逻辑与</td>
+                        <td>
+                            <ul>
+                                <li><span>短路求值，返回 <span>决定操作数的结果</span></span></li>
+                                <li>注意：<span>返回的是操作数而不是布尔值</span></li>
+                                <li><code>and</code>两侧是本身是布尔值(<a href="#python的真值与假值">真值或假值</a>)
+                                </li>
+                                <li>短路求值：<span>返回第一个假值(本身——操作数)</span></li>
+                                <ol>
+                                    <li>第一种情况：所有操作数<span>均为真</span>，<span
+                                            class="span">返回最后一个操作数</span></li>
+                                    <li>第二种情况：<span>存在操作数为假</span>，<span class="span">返回第一个假值</span>，后续短路(不执行任何操作)
+                                    </li>
+                                    <li>第三种情况：所有操作数<span>均为假</span>，<span
+                                            class="span">返回第一个操作数</span>，后续短路(不执行任何操作)
+                                    </li>
+                                </ol>
+                                <li>if判断流程：<span>逻辑运算符返回值——if判断真值还是假值——真值执行代码块<span
+                                        class="span">/</span>假值继续判断(<code>else/elif</code>)</span></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>0 and 5</code></li>
+                                <li><code>2 and 3</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>0</span></li>
+                                <li><span>3</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code>or</code>】</td>
+                        <td>逻辑或</td>
+                        <td>
+                            <ul>
+                                <li><span>短路求值，返回 <span>决定操作数的结果</span></span></li>
+                                <li>注意：<span>返回的是操作数而不是布尔值</span></li>
+                                <li><code>or</code>两侧是本身是布尔值(<a href="#python的真值与假值">真值或假值</a>)</li>
+                                <li>短路求值：<span>返回第一个真值(本身——操作数)</span></li>
+                                <ol>
+                                    <li>第一种情况：所有操作数<span>均为真</span>，<span
+                                            class="span">返回第一个操作数</span></li>
+                                    <li>第二种情况：<span>存在操作数为真</span>，<span class="span">返回第一个真值</span>，后续短路(不执行任何操作)
+                                    </li>
+                                    <li>第三种情况：所有操作数<span>均为假</span>，<span
+                                            class="span">返回最后一个操作数</span>，后续短路(不执行任何操作)
+                                    </li>
+                                </ol>
+                                <li>if判断流程：<span>逻辑运算符返回值——if判断真值还是假值——真值执行代码块<span
+                                        class="span">/</span>假值继续判断(<code>else/elif</code>)</span></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>0 or 5</code></li>
+                                <li><code>2 or 3</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>5</span></li>
+                                <li><span>2</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code>not</code>】</td>
+                        <td>逻辑非</td>
+                        <td>
+                            <ul>
+                                <li><span>返回布尔值<code>True/False</code></span></li>
+                                <li>执行取反操作，真值————>假值，假值——————>真值</li>
+                                <li>注意区分：<span><code>and</code>与<code>or</code>是返回操作数</span></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>not 0</code></li>
+                                <li><code>not "abc"</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span><code>0</code>是假值(<code>False</code>)所以取反为真值<code>True</code></span>
+                                </li>
+                                <li>
+                                    <span><code>"abc"</code>是真值(<code>True</code>)所以取反为假值<code>False</code></span>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"><h2 style="font-size: 2.5rem;text-align: left">成员运算符</h2></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>in</code>】</td>
+                        <td>成员检查</td>
+                        <td>
+                            <ul>
+                                <li><span>检查元素是否在<span class="span">序列或集合中</span></span></li>
+                                <li>返回值是布尔值</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>'a' in 'abc'</code></li>
+                                <li><code>5 in [1,2,3]</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>True</span></li>
+                                <li><span>False</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code>not in</code>】</td>
+                        <td>成员检查</td>
+                        <td>
+                            <ul>
+                                <li><span>检查元素是否<span>不</span>在<span class="span">序列或集合中</span></span>
+                                </li>
+                                <li>返回值是布尔值</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>'a' not in 'abc'</code></li>
+                                <li><code>5 not in [1,2,3]</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>False</span></li>
+                                <li><span>True</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"><h2 style="font-size: 2.5rem;text-align: left">位运算符</h2></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>&</code>】</td>
+                        <td>按位与/集合交集</td>
+                        <td>
+                            <ul>
+                                <li>整数位运算;集合取交集</li>
+                                <li>二进制，单个比较，<span>两者都为 1 时结果为 1，否则为 0</span></li>
+                                <li>集合取相同部分</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>5 & 3</code></li>
+                                <li><code>{1,2} & {2,3}</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>5(d) ————>101(2)</span></li>
+                                <li><span>3(d) ————>011(2)</span></li>
+                                <li>所以最后的结果是：<code>001 = 1</code></li>
+                                <li><span>{1,2}————1 , 2 两个元素</span></li>
+                                <li><span>{2,3}————2 , 3 两个元素</span></li>
+                                <li>所以最后的结果是：相同元素<code>{2}</code></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code>|</code>】</td>
+                        <td>按位或/集合并集</td>
+                        <td>
+                            <ul>
+                                <li>整数位运算;集合取并集</li>
+                                <li>二进制，单个比较，<span>有<code>1</code>为<code>1</code>,否则为<code>0</code></span>
+                                </li>
+                                <li>集合取所有部分，排除重复</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>5 | 3</code></li>
+                                <li><code>{1,2} | {2,3}</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>5(d) ————>101(2)</span></li>
+                                <li><span>3(d) ————>011(2)</span></li>
+                                <li>所以最后的结果是：<code>111 = 7</code></li>
+                                <li><span>{1,2}————1 , 2 两个元素</span></li>
+                                <li><span>{2,3}————2 , 3 两个元素</span></li>
+                                <li>所以最后的结果是：取所有数，且去重<code>{1,2,3}</code></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code style="font-size: 2.5rem">^</code>】</td>
+                        <td>按位异或/集合取对称差集</td>
+                        <td>
+                            <ul>
+                                <li>整数位运算;集合取对称差集</li>
+                                <li>二进制：<span>相同位0，不同为1</span></li>
+                                <li>对称差集，保留集合A与集合B，所有独自的元素，去掉相同的</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>5 ^ 3</code></li>
+                                <li><code>{1,2} ^ {2,3}</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>5(d) ————>101(2)</span></li>
+                                <li><span>3(d) ————>011(2)</span></li>
+                                <li>所以最后的结果是：<code> 110 = 6</code></li>
+                                <li><span>{1,2,4,5}————1,2,3,4,5 元素</span></li>
+                                <li><span>{2,3.5,6,7}————2,3,5,6,7 元素</span></li>
+                                <li>所以最后的结果是：取出相同元素<code>{1,4,6,7}</code></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code style="font-size: 2.5rem">~</code>】</td>
+                        <td>按位取反（NOT）</td>
+                        <td>
+                            <ul>
+                                <li>整数位运算，<span class="span">单目运算符</span>（只能有一个操作数，且写在符号右侧）</li>
+                                <li>二进制：<span>0 变 1，1 变 0</span></li>
+                                <li>在 Python / JavaScript 中：<code>~x == -x - 1</code>（补码规则）</li>
+                                <li>在 MySQL 中：结果按 <span>64 位无符号整数</span> 处理，返回巨大正数</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><code>~5</code></li>
+                                <li><code>~-3</code></li>
+                                <li><code>~0</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span>Python / JS：<code>-6</code></span></li>
+                                <li><span>Python / JS：<code>2</code></span></li>
+                                <li><span>Python / JS：<code>-1</code></span></li>
+                                <li><span>MySQL：巨大无符号整数</span></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="font-size: 2.5rem;text-align: left"><a href="#关于位运算符解析">三种语言的位运算符速查表</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="font-size: 2.5rem;text-align: left"><a href="#python运算符优先级">运算符优先级完整表</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-        </article>
-        <article>
-            <h2>赋值运算符</h2>
-            <ul>
-                <li><code>=</code></li>
-            </ul>
-        </article>
-        <article>
-            <h2>比较运算符</h2>
-            <ul>
-                <li><code> > </code></li>
-                <li><code> >= </code></li>
-                <li><code> < </code></li>
-                <li><code> <= </code></li>
-                <li><code> == </code></li>
-                <li><code> != </code></li>
-            </ul>
-        </article>
-        <article>
-            <h2>逻辑运算符</h2>
-            <ul>
-                <li><code>or</code></li>
-                <li><code>and</code></li>
-            </ul>
         </article>
     </section>
     <section id="section_2">
@@ -212,6 +655,7 @@
                             <br>1
                             <br>75
                             </span>
+                            <br>注意【<code>%</code>】：被除数 在左边，除数在右边。余数正负由 <span>被除数决定</span>
                         </td>
                     </tr>
                     <tr>
@@ -431,7 +875,7 @@
                             <tr>
                                 <td>Falsy值</td>
                                 <td>转换为数字</td>
-                                <td>蒜素运算示例</td>
+                                <td>算术运算示例</td>
                                 <td>结果</td>
                             </tr>
                             <tr>
@@ -484,6 +928,769 @@
                     </div>
                 </li>
             </ul>
+        </article>
+        <article>
+            <div class="div_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="5"><h3 id="MySQL运算符规则速查表"><span>MySQL运算符规则速查表</span></h3></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>运算符</td>
+                        <td>作用</td>
+                        <td>规则</td>
+                        <td>示例</td>
+                        <td>结果</td>
+                    </tr>
+                    <tr>
+                        <td>【<code>+</code>】</td>
+                        <td>加法</td>
+                        <td><span>只做加法，不做拼接</span></td>
+                        <td><code>SELECT 1 + 2;</code></td>
+                        <td><span>3</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>-</code>】</td>
+                        <td>减法</td>
+                        <td>数值运算</td>
+                        <td><code>SELECT 5 - 2;</code></td>
+                        <td><span>3</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>*</code>】</td>
+                        <td>乘法</td>
+                        <td>数值运算</td>
+                        <td><code>SELECT 5 * 2;</code></td>
+                        <td><span>10</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>/</code>】</td>
+                        <td>除法</td>
+                        <td>结果永远是<span>小数(浮点数)</span></td>
+                        <td><code>SELECT 5 / 2;</code></td>
+                        <td><span>2.5000</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>DIV</code>】</td>
+                        <td>整数除法</td>
+                        <td>结果<span>取整数部分(截断)</span></td>
+                        <td><code>SELECT 5 DIV 2;</code></td>
+                        <td><span>2</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>% / MOD()</code>】</td>
+                        <td>取余</td>
+                        <td>返回<span>余数，符合与被除数相同</span></td>
+                        <td>
+                            <code>
+                                SELECT -5 % 3;
+                                <br>SELECT MOD(-5,-3);
+                                <br>SELECT 5 % -3;
+                                <br>SELECT MOD(5,3);
+                            </code>
+                        </td>
+                        <td>
+                           <span>
+                               -2
+                               <br>-2
+                               <br>2
+                               <br>2
+                               <br>注意：被除数 在左边，除数在右边。余数正负由 <span>被除数决定</span>
+                           </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code>=</code>】</td>
+                        <td>安全比较</td>
+                        <td>比较两个值是否相等</td>
+                        <td><code>SELECT 1 = 1;</code></td>
+                        <td><span>1(TRUE)</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>!= / <></code>】</td>
+                        <td>不等比较</td>
+                        <td>比较两个值是否不相等</td>
+                        <td>
+                            <code>
+                                SELECT 1 != 1;
+                                <br>SELECT 2 <> 1;
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                0(FALSE)
+                                <br>1(TRUE)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>【<code><=></code>】</td>
+                        <td>安全等于</td>
+                        <td>可安全比较 <code>NULL</code>值</td>
+                        <td><code>SELECT NULL <=> NULL;</code></td>
+                        <td><span>1(TRUE)</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>AND</code>】</td>
+                        <td>逻辑与</td>
+                        <td>两侧均为真则真，支持短路求值</td>
+                        <td><code>SELECT 1 AND 1;</code></td>
+                        <td><span>1</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>OR</code>】</td>
+                        <td>逻辑或</td>
+                        <td>一侧为真则真，支持短路求值</td>
+                        <td><code>SELECT 1 OR 0;</code></td>
+                        <td><span>1</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>NOT</code>】</td>
+                        <td>逻辑非</td>
+                        <td>取反</td>
+                        <td><code>SELECT NOT 1;</code></td>
+                        <td><span>0</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>LIKE</code>】</td>
+                        <td>模糊匹配</td>
+                        <td>配合 <code>%</code>和<code>_</code>通配符</td>
+                        <td><code>SELECT 'abc' LIKE 'a%';</code></td>
+                        <td><span>1(TRUE)</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>IN</code>】</td>
+                        <td>成员检查</td>
+                        <td>检查值是否在列表中</td>
+                        <td><code>SELECT 2 IN (1,2,3);</code></td>
+                        <td><span>1(TRUE)</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>BETWEEN</code>】</td>
+                        <td>范围检查</td>
+                        <td>检查值是否在闭区间内</td>
+                        <td><code>SELECT 5 BETWEEN 1 AND 10;</code></td>
+                        <td><span>5在[1,10]以内，则返回值是：1(TRUE)</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>IS NULL</code>】</td>
+                        <td>空值检查</td>
+                        <td>检查是否为 <code>NULL</code></td>
+                        <td><code>SELECT NULL IS NULL;</code></td>
+                        <td><span>1(TRUE)</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>IS NOT NULL</code>】</td>
+                        <td>非空检查</td>
+                        <td>检查是否为 <code>NULL</code></td>
+                        <td><code>SELECT 1 IS NOT NULL;</code></td>
+                        <td><span>1(TRUE)</span></td>
+                    </tr>
+                    <tr>
+                        <td>【<code>CONCAT</code>】</td>
+                        <td>字符串拼接</td>
+                        <td>函数，用于拼接字符串</td>
+                        <td><code>SELECT CONCAT('25','ABC')</code></td>
+                        <td><span>"25ABC"</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        <article>
+            <div class="div_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="4"><h3 id="MySQL隐式转换规则速查表">MySQL隐式转换规则速查表</h3></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>场景</td>
+                        <td>转换规则</td>
+                        <td>示例</td>
+                        <td>结果/说明</td>
+                    </tr>
+                    <tr>
+                        <td>算术运算中的字符串</td>
+                        <td style="text-align: left">
+                            1.字符串会尝试转为数字；
+                            <br>2.以数字开头则截取开头到第一个非数字部分;
+                            <br>3.不以数字开头则转为 <code>0</code>
+                        </td>
+                        <td>
+                            <code>
+                                '10' + 1
+                                <br>'10a' + 1
+                                <br>'a10' + 1
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                11
+                                <br>11
+                                <br>1
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>算术运算中的 <code>NULL</code></td>
+                        <td><span>任何算术运算包含 <code>NULL</code>，结果均为 <code>NULL</code></span></td>
+                        <td>
+                            <code>
+                                NULL + 10
+                                <br>1 + NULL
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                NULL
+                                <br>NULL
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>比较运算中的字符串 ————> 数字</td>
+                        <td>字符串与数字比较时，字符串转为数字</td>
+                        <td>
+                            <code>
+                                '6' = 6
+                                <br>'6a' = 6
+                                <br>'a6' = 0
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                1(TRUE)
+                                <br>1(TRUE)
+                                <br>1(TRUE)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>比较运算中的字符串 ————> 字符串</td>
+                        <td>按字符的ANSI编码逐位比较</td>
+                        <td>
+                            <code>
+                                'a' = 'A'
+                                <br>'abc' > 'ab'
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                0(FALSE)
+                                <br>1(TRUE)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>逻辑运算中的 <code>NULL</code></td>
+                        <td>
+                            1.AND : 一侧为0则结果为0;否则为NULL
+                            <br>2.OR ： 一侧为1则结果为1;否则为NULL
+                        </td>
+                        <td>
+                            <code>
+                                0 AND NULL
+                                <br>1 AND NULL
+                                <br>1 OR NULL
+                                <br>0 OR NULL
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                0
+                                <br>NULL
+                                <br>1
+                                <br>NULL
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>比较运算符中的 <code>NULL</code></td>
+                        <td>除 <code><=></code>外，任何与 <code>NULL</code>的比较结果都是 <code>NULL</code></td>
+                        <td>
+                            <code>
+                                1 = NULL
+                                <br>1 != NULL
+                                <br>NULL = NULL
+                                <br>NULL <=> NULL
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                0(false)
+                                <br>0(false)
+                                <br>0(false)
+                                <br>1(TRUE)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>NOT 与 NULL</td>
+                        <td>NOT NULL 的结果是 NULL</td>
+                        <td><code>SELECT NOT NULL</code></td>
+                        <td><span>NULL</span></td>
+                    </tr>
+                    <tr>
+                        <td>显式类型转换</td>
+                        <td>使用 CAST() 或 CONVERT() 可安全转换</td>
+                        <td>
+                            <code>
+                                CAST('123' AS SIGNED);
+                                <br>CONVERT('abc' AS SIGNED);
+                            </code>
+                        </td>
+                        <td>
+                            <span>
+                                123(整数)
+                                <br>0(转换失败返回0)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>日期与字符串比较</td>
+                        <td>字符串会被尝试转为日期格式</td>
+                        <td><code>'2026-01-01' = DATE('2026-01-01');</code></td>
+                        <td><span>1(TRUE)</span></td>
+                    </tr>
+                    <tr>
+                        <td>DISTINCT/GROUP BY</td>
+                        <td>比较时会进行隐式转换，可能会导致效率下降</td>
+                        <td><code>SELECT DISTINCT 1,'1';</code></td>
+                        <td><span>两者被视为不同值</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        <article>
+            <div class="div_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="2"><h3 id="python的真值与假值">python的真值与假值</h3></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>假值(<code>Falsy</code>)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>布尔值本身：<code>False</code></li>
+                                <li>数字：<code>0、0.0、0j</code></li>
+                                <li>空字符串：<code>""</code></li>
+                                <li>
+                                    <span>空容器：</span>
+                                    <ol>
+                                        <li>空列表：<code>[]</code></li>
+                                        <li>空元组：<code>()</code></li>
+                                        <li>空字典：<code>{}</code></li>
+                                        <li>空集合：<code>set()</code></li>
+                                    </ol>
+                                </li>
+                                <li><code>None</code>本身</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span>除以上假值以外，<span class="span">其余均是真值(<code>Truthy</code>)</span></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        <article>
+            <div class="div_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <td colspan="5"><h3 id="关于位运算符解析">三种语言位运算符速查表</h3></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>运算名称</td>
+                        <td>作用</td>
+                        <td>JavaScript</td>
+                        <td>python</td>
+                        <td>MySQL</td>
+                    </tr>
+                    <tr>
+                        <td>按位与(<code>AND</code>)</td>
+                        <td>
+                            <ul>
+                                <li>二进制：<li>二进制：<span>两者都为1时结果为1，否则为0</span></li>
+                                <li>集合：取交集：<span>集合A与集合B相同的元素，组成的集合</span></li>
+                                <li>至少两个操作数</li>
+                            </ul>
+                        </td>
+                        <td><code>&</code></td>
+                        <td><code>&</code></td>
+                        <td><code>&</code></td>
+                        <td>✅ 完全一致</td>
+                    </tr>
+                    <tr>
+                        <td>按位或(<code>OR</code>)</td>
+                        <td>
+                            <ul>
+                                <li>二进制：<span>存在<code>1</code>即是<code>1</code>，否则为<code>0</code></span></li>
+                                <li>集合：取并集：<span>集合A与集合B所有元素，去重组成的集合</span></li>
+                                <li>至少两个操作数</li>
+                            </ul>
+                        </td>
+                        <td><code>|</code></td>
+                        <td><code>|</code></td>
+                        <td><code>|</code></td>
+                        <td>✅ 完全一致</td>
+                    </tr>
+                    <tr>
+                        <td>按位异或(<code>XOR</code>)</td>
+                        <td>
+                            <ul>
+                                <li>二进制：<span>相同为<code>0</code>，不同为<code>1</code></span></li>
+                                <li>集合：取对称差集：<span>取集合A与集合B不相同的元素，组成的集合</span></li>
+                                <li>至少两个操作数</li>
+                            </ul>
+                        </td>
+                        <td><code style="font-size: 2.5rem">^</code></td>
+                        <td><code style="font-size: 2.5rem">^</code></td>
+                        <td><code style="font-size: 2.5rem">^</code></td>
+                        <td>✅ 完全一致</td>
+                    </tr>
+                    <tr>
+                        <td>按位取反(<code>NOT</code>)</td>
+                        <td>
+                            <ul>
+                                <li>二进制：<span><code>1</code>为<code>0</code>，<code>0</code>为<code>1</code></span>
+                                </li>
+                                <li>集合：取差集(<code>&~</code>)：<span>取集合A中集合B不相同的元素，组成的集合</span></li>
+                                <li>只有一个操作数，<span>且在符号右边</span></li>
+                                <li>注意：<span>多个操作数需要(<code>&、|、^</code>~)连接</span></li>
+                            </ul>
+                        </td>
+                        <td><code style="font-size: 2.5rem">~</code></td>
+                        <td><code style="font-size: 2.5rem">~</code></td>
+                        <td><code style="font-size: 2.5rem">~</code></td>
+                        <td>⚠️ 符号一致，但结果不同</td>
+                    </tr>
+                    <tr>
+                        <td>左移(<code>SHIFT LEFT</code>)</td>
+                        <td>
+                            <ul>
+                                <li><span>数学意义：*2ⁿ</span></li>
+                                <li>编程里真正拿来干啥：<span>造位：把标志放到指定的二进制位</span></li>
+                                <li>经典场景：<span>权限定义、位掩码</span></li>
+                            </ul>
+                        </td>
+                        <td><code style="font-size: 2.5rem"><<</code></td>
+                        <td><code style="font-size: 2.5rem"><<</code></td>
+                        <td><code style="font-size: 2.5rem"><<</code></td>
+                        <td>✅ 完全一致</td>
+                    </tr>
+                    <tr>
+                        <td>右移(<code>SHIFT RIGHT</code>)</td>
+                        <td>
+                            <ul>
+                                <li><span>数学意义：÷ 2ⁿ（向下取整）</span></li>
+                                <li>编程里真正拿来干啥：<span>拆解：把压缩的数据提取出来</span></li>
+                                <li>经典场景：<span>颜色值解析、协议解码</span></li>
+                            </ul>
+                        </td>
+                        <td><code style="font-size: 2.5rem">>></code></td>
+                        <td><code style="font-size: 2.5rem">>></code></td>
+                        <td><code style="font-size: 2.5rem">>></code></td>
+                        <td>✅ 完全一致</td>
+                    </tr>
+                    <tr>
+                        <td>无符号右移</td>
+                        <td>
+                            <ul>
+                                <li><span>数学意义：无符号除法</span></li>
+                                <li>编程里真正拿来干啥：<span>消毒：保证结果是正数</span></li>
+                                <li>经典场景：<span>数组索引、哈希、数值规范化</span></li>
+                            </ul>
+                        </td>
+                        <td><code style="font-size: 2.5rem">>>></code></td>
+                        <td><code style="font-size: 2.5rem">❌ 没有</code></td>
+                        <td><code style="font-size: 2.5rem">❌ 没有</code></td>
+                        <td>⚠️ 仅 JavaScript 独有</td>
+                    </tr>
+                    <tr>
+                        <td>按位清除(<code>AND NOT</code>)</td>
+                        <td>
+                            <ul>
+                                <li><span>就是按位取反的进阶操作</span></li>
+                                <li><span>主要是先取反，然后选取需要的操作数，主要与集合搭配使用：
+                                        <br>差集：只保留符号左边集合，但符合右边集合中没有的元素</span></li>
+                            </ul>
+                        </td>
+                        <td><code style="font-size: 2.5rem">&~</code></td>
+                        <td><code style="font-size: 2.5rem">&~</code></td>
+                        <td><code style="font-size: 2.5rem">&~</code></td>
+                        <td>⚠️ 组合写法，功能一致，但 MySQL 的 ~ 结果不同</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><h4>三大"<span>不一致</span>"陷阱(<span>考试/面试必记</span>)</h4></td>
+                    </tr>
+                    <tr>
+                        <td>运算符</td>
+                        <td>问题</td>
+                        <td>JavaScript</td>
+                        <td>python</td>
+                        <td>MySQL</td>
+                    </tr>
+                    <tr>
+                        <td><code style="font-size: 2.5rem">~</code>取反</td>
+                        <td>结果示例 (<code style="font-size: 2.5rem">~5</code>)</td>
+                        <td><span>-6</span></td>
+                        <td><span>-6</span></td>
+                        <td><span>巨大无符号正数（比如 18446744073709551610）</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>>>>（无符号右移）</span></td>
+                        <td>是否存在</td>
+                        <td>✅ 存在</td>
+                        <td>❌ 不存在</td>
+                        <td>❌ 不存在</td>
+                    </tr>
+                    <tr>
+                        <td><span>位运算前的类型处理</span></td>
+                        <td>浮点数/非整数</td>
+                        <td>先转成 32位有符号整数</td>
+                        <td>报错（浮点数不支持位运算）</td>
+                        <td>报错（字符串不支持位运算）</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><h4>集合与位运算对应的关系</h4></td>
+                    </tr>
+                    <tr>
+                        <td>集合</td>
+                        <td colspan="2">位运算写法</td>
+                        <td colspan="2">含义</td>
+                    </tr>
+                    <tr>
+                        <td>并集（Union）</td>
+                        <td colspan="2"><code>A | B</code></td>
+                        <td colspan="2"><span>保留 A 和 B 中所有元素</span></td>
+                    </tr>
+                    <tr>
+                        <td>交集（Intersection）</td>
+                        <td colspan="2"><code>A & B</code></td>
+                        <td colspan="2"><span>只保留同时存在于 A 和 B 中的元素</span></td>
+                    </tr>
+                    <tr>
+                        <td>差集（Difference）</td>
+                        <td colspan="2"><code>A & ~B</code>（仅限整数位运算）</td>
+                        <td colspan="2"><span>只保留 A 中有、但 B 中没有的元素</span></td>
+                    </tr>
+                    <tr>
+                        <td>对称差集（Symmetric Difference）</td>
+                        <td colspan="2"><code>A ^ B</code></td>
+                        <td colspan="2"><span>保留 A 和 B 各自独有的元素（去掉共有的）</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        <article>
+            <div class="div_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="5"><h3 id="python运算符优先级">python运算符优先级(<span>从高到底</span>)</h3></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>优先级</td>
+                        <td>运算符</td>
+                        <td>说明</td>
+                        <td>结合性(<span>多个运算符出现，计算的先后顺序</span>)</td>
+                        <td>示例</td>
+                    </tr>
+                    <tr>
+                        <td>1(<span><b>最高</b></span>)</td>
+                        <td>
+                            <ul>
+                                <li><code>(expressions.....)</code></li>
+                                <li><code>[expressions.....]</code></li>
+                                <li><code>{key:value.....}</code></li>
+                                <li><code>{expressions.....}</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>括号</li>
+                                <li>列表</li>
+                                <li>字典</li>
+                                <li>集合显示</li>
+                            </ul>
+                        </td>
+                        <td><span>左</span></td>
+                        <td>( a + b ) * c</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <ul>
+                                <li><code>x[index]</code></li>
+                                <li><code>x[index:index]</code></li>
+                                <li><code>x[arguments....]</code></li>
+                                <li><code>x.attribute</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>下标</li>
+                                <li>切片</li>
+                                <li>调用</li>
+                                <li>属性访问</li>
+                            </ul>
+                        </td>
+                        <td>左</td>
+                        <td>
+                            <ul>
+                                <li>a[0]</li>
+                                <li>boj.name</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><code>await x</code></td>
+                        <td>等待表达式</td>
+                        <td>右</td>
+                        <td>await future</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><code>**</code></td>
+                        <td>幂运算(指数)</td>
+                        <td>右</td>
+                        <td>2 ** 3 ** 2 ————>2 ** (3 ** 2)</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><code>+x、-x、~x</code></td>
+                        <td>一元正/负/按位取反</td>
+                        <td>右</td>
+                        <td>-5、~3</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><code>*、@、/、//、%</code></td>
+                        <td>乘法、矩阵乘、除法、整除、取余</td>
+                        <td>左</td>
+                        <td>10 / 2 、 5 // 2</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><code>+、-</code></td>
+                        <td>加法\减法(<span>二元</span>)</td>
+                        <td>左</td>
+                        <td>a + b、c-d</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><code><<、>></code></td>
+                        <td>左移、右移</td>
+                        <td>左</td>
+                        <td>5 << 1</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><code>&</code></td>
+                        <td>按位与</td>
+                        <td>左</td>
+                        <td>5 & 3</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><code>^</code></td>
+                        <td>按位异或</td>
+                        <td>左</td>
+                        <td>5 ^ 3</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td> | </td>
+                        <td>按位或</td>
+                        <td>左</td>
+                        <td> 5 | 3 </td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>
+                            <ul>
+                                <li><code>in、not in</code></li>
+                                <li><code>is、is not</code></li>
+                                <li><code><、<=</code></li>
+                                <li><code>>、>=</code></li>
+                                <li><code>!=、==</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>比较</li>
+                                <li>身份</li>
+                                <li>成员检查</li>
+                            </ul>
+                        </td>
+                        <td>左</td>
+                        <td>
+                            <ul>
+                                <li> x in y </li>
+                                <li> x is None </li>
+                                <li> 5 > 3 </li>
+                                <li> (支持链式：a < b < c)【<span>python独有</span>】</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td><code>not x</code></td>
+                        <td>逻辑非</td>
+                        <td>右</td>
+                        <td>not True</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td><code>and</code></td>
+                        <td>逻辑与</td>
+                        <td>左</td>
+                        <td> x and y </td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td><code>or</code></td>
+                        <td>逻辑或</td>
+                        <td>左</td>
+                        <td> x or y </td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td><code>if - else</code></td>
+                        <td>条件表达式(<span>三元运算符</span>)</td>
+                        <td>右</td>
+                        <td>a if condition else b</td>
+                    </tr>
+                    <tr>
+                        <td>17(<span>最低</span>)</td>
+                        <td><code>:=</code></td>
+                        <td>海象运算符(<span>赋值表达式</span>)</td>
+                        <td>右</td>
+                        <td>if (n := len(a)) > 10</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </article>
     </section>
     <footer>
