@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于安装包位置装入虚拟环境</title>
+    <link rel="stylesheet" href="../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>关于安装包位置装入虚拟环境</h1>
+    </header>
+    <section id="section_1">
+        <div class="div_table">
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="2"><h2>关于安装包位置装入虚拟环境(<span>非常建议以后，将包安装在虚拟环境，项目之间包隔开，防止冲突</span>)</h2></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="2"><h3>检查与确认环境</h3></td>
+                </tr>
+                <tr>
+                    <td>命令</td>
+                    <td>作用</td>
+                </tr>
+                <tr>
+                    <td><code>dir</code></td>
+                    <td>查看<span>当前项目下的文件和文件夹，确认是否有虚拟环境文件夹(如 <code>venv</code>)</span></td>
+                </tr>
+                <tr>
+                    <td><code>pip list</code></td>
+                    <td><span>列出当前激活环境下已安装的所有<span class="span">包</span></span></td>
+                </tr>
+                <tr>
+                    <td><code>pip show 包名</code></td>
+                    <td><span>查看指定包的详细信息，<span
+                            class="span">尤其是安装路径(<code>Location</code>)</span></span></td>
+                </tr>
+                <tr>
+                    <td><code>where python</code></td>
+                    <td>
+                        <span>查看当前终端使用的是哪个<code>python</code>解释器(<span>确认是全局还是虚拟环境</span>)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><h3>创建虚拟环境</h3></td>
+                </tr>
+                <tr>
+                    <td>命令</td>
+                    <td>作用</td>
+                </tr>
+                <tr>
+                    <td><code>python -m venv venv</code></td>
+                    <td>
+                        <span>在当前目录下创建一个名为<code>venv</code>的虚拟环境(<span
+                                class="span">可以自定义名称，如 myvenv</span>)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>python -m venv myenv</code></td>
+                    <td><span>创建名为 <code>myenv</code>的虚拟环境(<span
+                            class="span">其他名称同理</span>)</span></td>
+                </tr>
+                <tr>
+                    <td><code>dir</code></td>
+                    <td><span>创建后再次查看，<code>venv</code>文件夹已经生成</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><h3>激活虚拟环境</h3></td>
+                </tr>
+                <tr>
+                    <td>命令</td>
+                    <td>作用</td>
+                </tr>
+                <tr>
+                    <td><code>.\venv\Scripts\Activate</code></td>
+                    <td><span><code>Windows</code>下激活 venv 虚拟环境（注意 .\ 和首字母大写 Activate）</span></td>
+                </tr>
+                <tr>
+                    <td><code>source venv/bin/activate</code></td>
+                    <td><span>macOS / Linux 下激活虚拟环境</span></td>
+                </tr>
+                <tr>
+                    <td><code>deactivate</code></td>
+                    <td><span>退出当前环境，回到全局<code>python</code></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><h3>管理包(安装与卸载)</h3></td>
+                </tr>
+                <tr>
+                    <td>命令</td>
+                    <td>作用</td>
+                </tr>
+                <tr>
+                    <td><code>pip install 包名</code></td>
+                    <td><span>安装指定包</span>在激活虚拟后安装，会装到当前环境里</td>
+                </tr>
+                <tr>
+                    <td><code>pip install 包名1 包名2 ...</code></td>
+                    <td><span>可以同时安装多个包</span></td>
+                </tr>
+                <tr>
+                    <td><code>pip uninstall 包名</code></td>
+                    <td><span>卸载指定包(<span class="span">会提示确认</span>)</span></td>
+                </tr>
+                <tr>
+                    <td><code>pip uninstall 包名 -y</code></td>
+                    <td><span>卸载指定包(<span class="span">跳过确认，直接卸载</span>)</span></td>
+                </tr>
+                <tr>
+                    <td><code>pip uninstall 包名1 包名2 ... -y</code></td>
+                    <td><span>可以同时卸载多个包，跳过确认</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><h3>验证与检查</h3></td>
+                </tr>
+                <tr>
+                    <td>命令</td>
+                    <td>作用</td>
+                </tr>
+                <tr>
+                    <td><code>pip show 包名</code></td>
+                    <td><span>查看指定包的安装路径，确认是否安装到虚拟环境（路径里包含 venv 就是成功了）</span></td>
+                </tr>
+                <tr>
+                    <td><code>pip list</code></td>
+                    <td><span>列出当前环境下所有已安装的包，用来确认包是否已经卸载或安装成功</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><h3>清理全局环境</h3></td>
+                </tr>
+                <tr>
+                    <td>命令</td>
+                    <td>作用</td>
+                </tr>
+                <tr>
+                    <td><code>pip uninstall 包名 -y</code></td>
+                    <td>在全局环境下卸载包，清理全局环境里误装的包（<span>确保先 deactivate 退出虚拟环境</span>）</td>
+                </tr>
+                <tr>
+                    <td><code>pip list</code></td>
+                    <td><span>再次查看全局环境，确认已清理干净</span></td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <h2>具体步骤</h2>
+                <ul>
+                    <li>先确认环境：用 pip show 包名 确认装到了哪里。</li>
+                    <li>清理误装：在全局环境下执行 pip uninstall，去掉误装的包。</li>
+                    <li>创建虚拟环境：用 python -m venv venv 创建项目专属环境。</li>
+                    <li>激活虚拟环境：用 .\venv\Scripts\Activate 进入环境。</li>
+                    <li>安装包：在激活的环境里执行 pip install。</li>
+                    <li>验证：再次用 pip show 确认路径包含 venv。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>match模式匹配</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>match模式匹配</h1>
+    </header>
+    <section id="section_1">
+        <article>
+            <h2>自行总结</h2>
+            <ul>
+                <li><span>在<code>JavaScript</code>存在第二个条件分支语句， <code>switch-case-default</code></span></li>
+                <li><span><code>python</code>功能类似：<code>match-case</code></span></li>
+                <li>
+                    <h3>不同点</h3>
+                    <ol>
+                        <li><code>JavaScript</code>存在穿透效果，<code>case</code>必须由<code>break</code>结束</li>
+                        <li>
+                            <h4>如：</h4>
+                            <br><code>
+                            <br>switch(要判断的变量){
+                            <br>&nbsp;&nbsp;case 情况1:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;代码块
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;break &nbsp;&nbsp; <span>// 因为有关键字 break
+                            所以如果符合条件，执行完代码块，则退出switch</span>
+                            <br>&nbsp;&nbsp;case 情况2:
+                            <br>&nbsp;&nbsp;case 情况3:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;代码块
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;break &nbsp;&nbsp;
+                            <span>// 情况2与情况3之间没有关键字 break</span>
+                            所以它们共用一个代码块。
+                            <br>&nbsp;&nbsp;....
+                            <br>&nbsp;&nbsp;default: &nbsp;&nbsp;
+                            <span>// 类似于 else 当所有条件均不满足时，执行内部代码块</span>
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;上述情况均不满足执行代码
+                            <br>}
+                        </code>
+                        </li>
+                        <li><span>说到底，<code>JavaScript</code>必须由break退出，否则会一直穿透，直到最后，那样就没有任何意义了。</span>
+                        </li>
+                        <li><span><code>JavaScript</code>没有JavaScript的穿透效果，每个 <code>case</code>分支，都是退出条件，只要符合就退出<code>match</code></span>
+                        </li>
+                        <li>
+                            <h4>如：</h4>
+                            <br><code>
+                            <br>match 需要判断的变量(如变量<code>day</code>):
+                            <br>&nbsp;&nbsp;case 情况1:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;代码块 &nbsp;&nbsp;
+                            <span># 符合执行代码块，并退出match模式匹配</span>
+                            <br>&nbsp;&nbsp;case 情况2: &nbsp;&nbsp;
+                            <span># 符合执行代码块(没有照样执行)，并退出match模式匹配，不会穿透到下一个case</span>
+                            <br>&nbsp;&nbsp;case 情况3 | 情况4: &nbsp;&nbsp; <span># <span>【|】</span>，match特有的，类似于逻辑或，多个条件满足一个即可</span>
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;代码块
+                        </code>
+                        </li>
+                        <li><span>所到底，<code>python</code>case本身就是退出匹配关键字，不会由穿透效果，如果多个条件共享同一代码块，可以使用符号：<code>【|】</code></span>
+                        </li>
+                    </ol>
+                    <h3>相同点</h3>
+                    <ol>
+                        <li><span>都是为了应对，同一个事件，多种状态的判断</span></li>
+                        <li>
+                            <h4>如：</h4>
+                            <br><code>
+                            match day:
+                            <br>&nbsp;&nbsp;case 1:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;print("新的星期开始了")
+                            <br>&nbsp;&nbsp;case 2 | 3 | 4:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;print("痛苦的上课")
+                            <br>&nbsp;&nbsp;case 5:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;print("明天就休息了")
+                            <br>&nbsp;&nbsp;case 6:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;print("愉快的休息")
+                            <br>&nbsp;&nbsp;case 7:
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;print("是个坏消息，明天要上课了")
+                        </code>
+                        </li>
+                        <li><span>可以看到，都是以<code>day</code>这个关键变量开始的。</span></li>
+                    </ol>
+                </li>
+            </ul>
+        </article>
+        <article>
+            <div class="div_table">
+                <table>
+                    <tr>
+                        <th colspan="3"><span>python<code>match-case</code> VS JavaScript <code>switch-case</code>对照表</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>对比维度</td>
+                        <td>python<code>match-case</code></td>
+                        <td>JavaScript<code>switch-case</code></td>
+                    </tr>
+                    <tr>
+                        <td>匹配后行为</td>
+                        <td>匹配成功后立即退<code>match</code>，不会执行下一个<code>case</code></td>
+                        <td>匹配成功后 <span>继续穿透(<code>fall-through</code>)</span>,会执行后续<code>case</code>，知道遇到<code>break</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>退出机制</td>
+                        <td><code>case</code>自带退出，无需额外关键字</td>
+                        <td>必须手动写 <code>break</code>退出，否则会一直执行到<code>switch</code>结尾</td>
+                    </tr>
+                    <tr>
+                        <td>多条件共享同一代码块</td>
+                        <td>
+                            <ul>
+                                <li>使用 <code>【|】</code>组合：</li>
+                                <li>如：<code>case "周六" | "周日":</code></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>连续写 <code>case(<span>穿透</span>)</code></li>
+                                <li>
+                                    <code style="display: block">
+                                        如：
+                                        <br>&nbsp;&nbsp;case "周六":
+                                        <br>&nbsp;&nbsp;case "周日":
+                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;代码块
+                                    </code>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>通配符(<span>默认分支</span>)</td>
+                        <td><code>case _:</code>(<span>相当于 <code>else</code></span>)</td>
+                        <td><code>default:</code>(<span>相当于 <code>else</code></span>)</td>
+                    </tr>
+                    <tr>
+                        <td>是否支持结构匹配</td>
+                        <td>✅ 支持（<span>可匹配列表、元组、字典等结构</span>）</td>
+                        <td>❌ 不支持（<span>只能匹配值</span>）</td>
+                    </tr>
+                    <tr>
+                        <td>守卫条件（附加判断）</td>
+                        <td>
+                            <ul>
+                                <li>✅ 支持 if：</li>
+                                <li>case x if x > 0:</li>
+                            </ul>
+                        </td>
+                        <td>❌ 不支持</td>
+                    </tr>
+                    <tr>
+                        <td>引入版本</td>
+                        <td>Python 3.10（2021年）</td>
+                        <td>ES3（1999年，JavaScript 诞生初期）</td>
+                    </tr>
+                    <tr>
+                        <td>设计哲学</td>
+                        <td><span>匹配即退出，安全、显式、无副作用</span></td>
+                        <td><span>默认穿透，灵活但容易出错，需人工 <code>break</code></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><h3>核心区别一句话总结</h3></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><span>Python：匹配即退出，多个值用 | 组合；JavaScript：默认穿透，多个值靠连续 case 共享，必须用 break 阻止。</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </article>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>
