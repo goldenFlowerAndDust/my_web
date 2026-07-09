@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>while循环</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>while循环</h1>
+    </header>
+    <section id="section_1">
+        <article>
+            <h2>自己总结</h2>
+            <ul>
+                <li><code>python</code>的while循环与<code>JavaScript</code>的while循环基本一致</li>
+                <li>
+                    <h3>python写法</h3>
+                    <ol>
+                        <li>
+                            <code style="display: block">
+                                while 循环条件:
+                                <br><span>&nbsp;&nbsp;# <span class="span">循环条件</span>可以设置为True(但是内部需要break退出，否则陷入死循环)，也可以自行设置边界，达到某个阈值便停止循环</span>
+                                <br>&nbsp;&nbsp;代码块
+                                <br>&nbsp;&nbsp;;break
+                                <br><span>&nbsp;&nbsp# break是退出循环的一种方式</span>
+                            </code>
+                        </li>
+                        <li>
+                            <code style="display: block">
+                                while 循环条件:
+                                <br>&nbsp;&nbsp;代码块
+                                <br>else: # <span>当while循环结束(<span class="span">不被break提前终止</span>)后，执行else内的代码块</span>
+                                <br>&nbsp;&nbsp;代码块
+                            </code>
+                        </li>
+                        <li>
+                            <h3>总结：</h3>
+                            <ol>
+                                <li>循环顾名思义在某一个范围内重复执行代码块，停止有两种方法：</li>
+                                <li>在写入循环条件时：<span>规定好边界，达到阈值退出循环</span></li>
+                                <li>
+                                    循环条件写为：<code>True</code>，代码块内部由：<code>break</code><span>关键字退出循环</span>
+                                </li>
+                                <li>python独有的：<code>while-else</code>结构，当循环不是被<code>break</code>关键字退出循环或死循环，则循环结束，执行else内代码块
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <h3>JavaScript写法</h3>
+                    <ol>
+                        <li>
+                            <code style="display: block">
+                                while (循环条件){
+                                <br><span>&nbsp;&nbsp;# <span class="span">循环条件</span>可以设置为True(但是内部需要break退出，否则陷入死循环)，也可以自行设置边界，达到某个阈值便停止循环</span>
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;代码块
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;break
+                                <br><span>&nbsp;&nbsp;&nbsp;&nbsp;# break是退出循环的一种方式</span>
+                                <br>&nbsp;&nbsp;}
+                            </code>
+                        </li>
+                        <li>
+                            <code style="display: block">
+                                <br>num = 0 // <span>初始化变量</span>
+                                <br>do { // <span>do-while，特性：不管条件是否成立，代码块都会执行一次</span>
+                                <br>&nbsp;&nbsp;console.log(num)
+                                <br>&nbsp;&nbsp;if (num === 20){
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;break;
+                                <br>&nbsp;&nbsp;}
+                                <br>&nbsp;&nbsp;num++
+                                <br>}while (循环条件)
+                            </code>
+                        </li>
+                        <li>
+                            <h3>总结：</h3>
+                            <ol>
+                                <li>同样循环停止有两种方法：</li>
+                                <li>在写入循环条件时：<span>规定好边界，达到阈值退出循环</span></li>
+                                <li>
+                                    循环条件写为：<code>True</code>，代码块内部由：<code>break</code><span>关键字退出循环</span>
+                                </li>
+                                <li>
+                                    JavaScript有但python没有：<code>do-while</code>结构，<span>不管循环条件是否成立，都会执行一次代码块</span>。
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    综上所述：<span>python的循环条件不需要括号，代码由缩进控制。JavaScript的循环条件小括号，代码块由大括号包裹</span>
+                </li>
+            </ul>
+            <script>
+                // 测试回顾
+                num = 0
+                while (true) {
+                    console.log(num)
+                    if (num === 20) {
+                        break;
+                    }
+                    num++
+                }
+                do {
+                    console.log(num)
+                    if (num === 0) {
+                        break;
+                    }
+                    num--
+                } while (true)
+            </script>
+        </article>
+    </section>
+    <section id="section_2">
+        <h2>AI总结</h2>
+        <article>
+            <div class="div_table">
+                <table>
+                    <tr>
+                        <th colspan="3"><h3>python<code>while</code> VS JavaScript<code>while</code>对照表</h3></th>
+                    </tr>
+                    <tr>
+                        <td>对比维度</td>
+                        <td>python <code>while</code></td>
+                        <td>JavaScript <code>while</code></td>
+                    </tr>
+                    <tr>
+                        <td>基本语法</td>
+                        <td>
+                            <code style="text-align: left">
+                                while 条件:
+                                <br>&nbsp;&nbsp;代码块
+                            </code>
+                        </td>
+                        <td>
+                            <code style="text-align: left">
+                                while (条件){
+                                <br>&nbsp;&nbsp;代码块
+                                <br>}
+                            </code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>条件写法</td>
+                        <td>条件后接冒号<code>:</code>无需括号</td>
+                        <td>条件用<code>()</code>包裹，代码块用<code>{}</code></td>
+                    </tr>
+                    <tr>
+                        <td>代码块边界</td>
+                        <td>缩进控制</td>
+                        <td>花括号<code>{}</code>控制</td>
+                    </tr>
+                    <tr>
+                        <td>退出方式</td>
+                        <td>条件变为 <code>False</code>或<code>break</code></td>
+                        <td>条件变为 <code>false</code>或<code>break</code></td>
+                    </tr>
+                    <tr>
+                        <td>循环结束后执行</td>
+                        <td>
+                            <span>✅ while-else（不被 break 中断时执行）</span>
+                        </td>
+                        <td>❌ 不支持</td>
+                    </tr>
+                    <tr>
+                        <td>至少执行一次</td>
+                        <td><span>❌ 不支持（需用 while True + 末尾 break 模拟）</span></td>
+                        <td>✅ do-while （先执行一次，再判断条件）</td>
+                    </tr>
+                    <tr>
+                        <td>作用域</td>
+                        <td><span>❌ 不生成作用域循环内定义的变量外部可访问</span>（<span
+                                class="span">与 if 一致</span>）</td>
+                        <td>✅ 块级作用域（let/const） 循环内定义的变量外部不可访问</td>
+                    </tr>
+                    <tr>
+                        <td>continue 影响 else/do-while</td>
+                        <td>continue 不跳过 else （循环正常结束仍会执行 else）</td>
+                        <td>continue 不影响 do-while （仍会再次判断条件）</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><span>切记不要让整个循环永远为 <code>True</code>或<code>true</code>陷入死循环</span></td>
+                    </tr>
+                </table>
+            </div>
+        </article>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

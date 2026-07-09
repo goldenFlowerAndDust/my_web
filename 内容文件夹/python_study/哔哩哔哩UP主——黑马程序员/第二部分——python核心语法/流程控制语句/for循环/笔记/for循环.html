@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for循环</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>for循环</h1>
+    </header>
+    <section id="section_1">
+        <h2>自行总结</h2>
+        <article>
+            <ul>
+                <li>
+                    <h3>关于JavaScript的 <code>for</code>循环几种形式</h3>
+                    <ol>
+                        <li>
+                            <h4>默认形式</h4>
+                            <ul>
+                                <li>语法：for (初始化变量; 循环条件; 步长更新){代码块}</li>
+                                <li>初始化变量：<span>声明变量并赋值。<span
+                                        class="span">主要为后续循环条件与改变逻辑做参考</span></span></li>
+                                <li>循环条件：<span>退出循环的条件</span></li>
+                                <li>步长更新：<span>一般与初始化变量有关，<span class="span">主要与循环条件配合，步长更改变量值，
+                                    变量值影响循环条件，最终达到循环条件，退出循环</span></span>
+                                </li>
+                                <li>
+                                    <h5>需要注意事项</h5>
+                                    <ol>
+                                        <li><span>三个参数，非必须写</span></li>
+                                        <li>初始化变量可以是<span>外部变量</span></li>
+                                        <li>
+                                            循环条件：<span>省略不写/true</span>如果代码块内部没有<code>break</code>
+                                            则陷入死循环
+                                        </li>
+                                        <li>
+                                            步长更新：<span>省略不写，或故意往循环条件反向更新</span>如果代码块内部没有<code>break</code>
+                                            则陷入死循环
+                                        </li>
+                                        <li>支持：<code>for (;;;){代码块}</code>写法，内部没有<code>break</code>同样死循环
+                                        </li>
+                                        <li>所以最好：<span>循环条件为<code>true</code> + 内部<code>break</code>或则三个参数写全，从而避免死循环</span>
+                                        </li>
+                                        <li>可以嵌套：
+                                            <br><code>for (let i=0; i < 10 ; i++){
+                                                <br>&nbsp;&nbsp;for (let j = 0; j < 10 ; j++){代码块)
+                                                }</code>
+                                            <br>通过嵌套可以解决多层问题，比如画一个三角形(分外层和内层，<span>这就需要用到双层循环</span>)....
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>for-in形式</h4>
+                            <ul>
+                                <li>语法：for (声明变量 in 需要迭代的容器){代码块}</li>
+                                <li>声明变量：<span>声明变量不要赋值，<span
+                                        class="span">主要用于接受索引，索引从<code>0</code>开始，随着迭代次数增加而自增</span></span>
+                                </li>
+                                <li>需要迭代(<span>遍历</span>)的容器：<span>可以是数组、字符串、对象、Set()....</span></li>
+                                <li>
+                                    <h5>需要注意事项</h5>
+                                    <ol>
+                                        <li>
+                                            <span>声明变量是必须要操作的，不能忽略，主要用于计入索引，方便后续调用对象、字符串、数组</span>
+                                        </li>
+                                        <li><span><code>in</code>关键字不能忽略</span></li>
+                                        <li><span>迭代器必须存在</span></li>
+                                        <li>
+                                            默认<code>for</code>循环，需要步长更新，来规划循环次数，<code>for-in</code><span>不需要，他的循环次数由迭代容器的长度决定</span>
+                                        </li>
+                                        <li>
+                                            其实只要记住：<span><code>for-in</code>的返回值是索引，需要调用原迭代容器。</span>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>for-of形式</h4>
+                            <ul>
+                                <li>语法：for (声明变量 of 需要迭代的容器){代码块}</li>
+                                <li>声明变量：<span>声明变量不要赋值，<span class="span">主要用于接受每次迭代的元素</span></span>
+                                </li>
+                                <li>需要迭代(<span>遍历</span>)的容器：<span>可以是数组、字符串、对象、Set()....</span></li>
+                                <li>
+                                    <h5>需要注意事项</h5>
+                                    <ol>
+                                        <li>
+                                            <span>声明变量是必须要操作的，不能忽略，主要用于临时存储，当前迭代次数的元素</span>
+                                        </li>
+                                        <li><span><code>of</code>关键字不能忽略</span></li>
+                                        <li><span>迭代器必须存在</span></li>
+                                        <li>
+                                            默认<code>for</code>循环，需要步长更新，来规划循环次数，<code>for-of</code><span>不需要，他的循环次数由迭代容器的长度决定</span>
+                                        </li>
+                                        <li>其实只要记住：<span><code>for-of</code>的返回值是当前迭代的元素，可以直接使用</span>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+            <script>
+                for (let i = 0; i < 10; i++) {
+                    console.log(i);
+                }
+                let array = ["hello", 20, 50, "@"]
+                for (let i in array) {
+                    console.log(array[i])
+                }
+            </script>
+        </article>
+        <article>
+            <h2>python的 <code>for</code>循环的几种显示效果</h2>
+            <ul>
+                <li>python的<code>for</code>的循环没有<code>JavaScript</code>有那么多形式</li>
+                <li>
+                    <h3>第一种写法，标准写法(<code>for-in</code>)</h3>
+                    <ol>
+                        <li>标准写法：<code>for 变量 in 迭代容器</code></li>
+                        <li>变量：<span>变量不赋值，<span class="span">主要用于接收，迭代元素，迭代出的元素就是容器内的原数据类型(<code>list、dict、set、str......</code>)</span></span>
+                        </li>
+                        <li>迭代容器：<span>可以是任何可迭代对象，<code>list、dict、set、str.....</code></span></li>
+                        <li>
+                            <h4>注意事项</h4>
+                            <ul>
+                                <li>在标准写法中，变量接收的是元素，而非索引</li>
+                                <li>
+                                    当迭代容器中，包含多种数据类型，如：<code>["hello",20,{"name":"张三"}]</code>，通过迭代，结果依次是：<code>str、int、dict</code>数据类型
+                                    <br>当我们要对其中一个数据类型进行操作的时候，需要先判断数据类型，使用方法：<code>isinstance(变量,数据类型)</code>
+                                    <br>第一个参数：需要判断的变量，第二个参数：需要判断的数据类型。
+                                    <br>返回值是布尔值，符合条件返回 <code>True</code>，否则 <code>False</code>
+                                    <br>可以同时判断多个数据类型：<code>isinstance(变量,(int,str,dict...))</code>，只要变量符合其中一种，就返回<code>True</code>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <h3>第二种写法：变体(<code>for-in-range()</code>)</h3>
+                    <ol>
+                        <li>写法：<code>for 变量 in range()</code></li>
+                        <li>该写法：<span>变量接收的是索引</span></li>
+                        <li>
+                            <ul>
+                                <li>range(起始值,结束值,步长)</li>
+                                <li><span>起始值、步长非必要写，结束值必须写</span></li>
+                                <li>起始值：<span>顾名思义就是迭代过程中，开头值(<span class="span">能取到(默认为0)</span>)</span>
+                                </li>
+                                <li>结束值：<span>顾名思义就是迭代过程中，结束的值(<span
+                                        class="span">取不到，在当前值前一个值结束(必须写)</span>)</span></li>
+                                <li>步长：<span>就是每一次迭代值的变化，<span
+                                        class="span">负数则递减，正数则递增，0则直接报错(默认为1)</span></span></li>
+                                <li>其实只要记住：<span>结束值必须写，值区间：左开右闭，步长不为零即可</span></li>
+                            </ul>
+                        </li>
+                        <li>总结：<span>python的 <code>for</code>循环只有<code>for...in</code>一种形式</span>，
+                            <br>具体的变化是，最后的辅助工具的不同，所迭代的结果不同，如：<code>range()</code>结果为索引
+                            <br><a href="#循环辅助工具" style="font-size: 2rem">python<code
+                                    style="font-size: 2rem">for</code>循环辅助工具</a>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <section id="section_2">
+        <article>
+            <div class="div_table">
+                <table>
+                    <tr>
+                        <th colspan="4"><h2>JavaScript<code>for</code>循环回顾</h2></th>
+                    </tr>
+                    <tr>
+                        <td>对比维度</td>
+                        <td>传统<code>for</code></td>
+                        <td><code>for-in</code></td>
+                        <td><code>for-of</code></td>
+                    </tr>
+                    <tr>
+                        <td>核心用途</td>
+                        <td>通过索引精确控制循环</td>
+                        <td>遍历对象的 <span>可枚举属性名(含原型链)</span></td>
+                        <td>遍历可迭代对象的<span>元素本身</span></td>
+                    </tr>
+                    <tr>
+                        <td>使用对象</td>
+                        <td>数组、类数组、任何需索引访问的结构</td>
+                        <td>普通对象(<code>{}</code>)、数组(不推荐)</td>
+                        <td>数组、字符串、Set、Map、DOM集合等</td>
+                    </tr>
+                    <tr>
+                        <td>迭代内容</td>
+                        <td>索引(数值，从0开始)</td>
+                        <td>
+                            <ul>
+                                <li>属性名(字符串，也可以叫<span>键名</span>)，数组索引也以字符串形式返回</li>
+                                <li><span>记住返回的是字符串</span></li>
+                                <li>
+                                    数组、字符串其实都是一个对象，<span>是对象，就会有键值对，数组、字符串的键就是索引，本质也是字符串</span>
+                                </li>
+                                <li>平常写：<code>arr[0]</code>，这里面的 <code>0</code>在后台会转成字符串<code>"0"</code>，然后访问值
+                                </li>
+                            </ul>
+                        </td>
+                        <td>元素值</td>
+                    </tr>
+                    <tr>
+                        <td>能否修改原数据</td>
+                        <td>✅ 可以（通过索引直接修改）</td>
+                        <td>✅ 可以（通过 obj[key] 修改）</td>
+                        <td>❌ 不可以（只能读取值）</td>
+                    </tr>
+                    <tr>
+                        <td>控制步长方式</td>
+                        <td>手动：i++、i+=2、i-- 等</td>
+                        <td>自动按枚举顺序</td>
+                        <td>自动按迭代器顺序</td>
+                    </tr>
+                    <tr>
+                        <td>break / continue</td>
+                        <td>✅ 支持</td>
+                        <td>✅ 支持</td>
+                        <td>✅ 支持</td>
+                    </tr>
+                    <tr>
+                        <td>典型写法</td>
+                        <td><code>for (let i=0; i< arr.length; i++)</code></td>
+                        <td><code>for (let key in obj)</code></td>
+                        <td><code>for (let val of arr)</code></td>
+                    </tr>
+                    <tr>
+                        <td>常见陷阱</td>
+                        <td>忘记更新步长 → 死循环</td>
+                        <td>会遍历原型链属性，需配合 hasOwnProperty 过滤</td>
+                        <td>无法直接获取索引（需用 entries()）</td>
+                    </tr>
+                    <tr>
+                        <td>配套工具</td>
+                        <td>无，需手动实现</td>
+                        <td><code>Object.keys()、Object.values()、Object.entries()</code></td>
+                        <td><code>entries()、keys()、values()</code></td>
+                    </tr>
+                    <tr>
+                        <td>使用建议</td>
+                        <td>需要索引或精确控制次数时使用</td>
+                        <td>遍历对象属性时使用，避免用于数组</td>
+                        <td>遍历数组或可迭代对象的值时首选</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="div_table">
+                <table>
+                    <tr>
+                        <th colspan="4"><h2>python<code>for</code>循环总结</h2></th>
+                    </tr>
+                    <tr>
+                        <td>对比维度</td>
+                        <td><code>for...in(<span>直接迭代</span>)</code></td>
+                        <td><code>for ... in range(...)（<span>按索引</span>）</code></td>
+                        <td>配套工具</td>
+                    </tr>
+                    <tr>
+                        <td>核心用途</td>
+                        <td>直接遍历可迭代对象的元素本身</td>
+                        <td>按<code>range()</code>生成的数值序列循环</td>
+                        <td>辅助迭代、增强灵活性</td>
+                    </tr>
+                    <tr>
+                        <td>适用对象</td>
+                        <td>列表、元组、字符串、字典、集合、生成器、文件对象等一切可迭代对象</td>
+                        <td>range() 生成数值序列</td>
+                        <td><code>enumerate()、zip()、reversed()、sorted() 等</code></td>
+                    </tr>
+                    <tr>
+                        <td>迭代内容</td>
+                        <td>
+                            <ul>
+                                <li>元素本身（字典为键，集合为元素）</li>
+                                <li>在<code>python</code>中字典是通过键名查找值，本质与<code>JavaScript</code>的对象一致</li>
+                                <li>在<code>python</code>中列表，字符串，集合都是通过数字索引直接提取对应元素，与<code>JavaScript</code>数组有本质区别</li>
+                                <li><span>python</span>不存在隐式转换，<span>JavaScript</span>数组是一个对象，键名是字符串，且会隐式转换，所以：</li>
+                                <li>JavaScript：<code>arr["0"] <span>等价于</span>arr[0]</code></li>
+                                <li>python：<code>arr["0"] <span>不等于</span> arr[0]</code>，强行写会报错[<code>TypeError</code>]</li>
+                            </ul>
+                        </td>
+                        <td>range() 生成的数值序列（0, 1, 2, ...）</td>
+                        <td>索引+元素、多序列并行、反向、排序等</td>
+                    </tr>
+                    <tr>
+                        <td>能否修改原数据</td>
+                        <td>❌ 不可以直接修改（但可通过其他方式操作原对象）</td>
+                        <td>❌ 不可以（range 生成新序列，不修改原对象）</td>
+                        <td>视具体工具而定</td>
+                    </tr>
+                    <tr>
+                        <td>控制步长方式</td>
+                        <td>自动按迭代器顺序</td>
+                        <td>手动：range(起始, 结束, 步长)</td>
+                        <td>自动或手动结合</td>
+                    </tr>
+                    <tr>
+                        <td>break / continue</td>
+                        <td>✅ 支持</td>
+                        <td>✅ 支持</td>
+                        <td>✅ 支持</td>
+                    </tr>
+                    <tr>
+                        <td>典型写法</td>
+                        <td><code>for item in my_list:</code></td>
+                        <td><code>for i in range(len(arr)):</code></td>
+                        <td><code>for i, item in enumerate(arr):</code></td>
+                    </tr>
+                    <tr>
+                        <td>配套工具</td>
+                        <td>可配合 enumerate()、zip()、reversed()、sorted() 使用</td>
+                        <td>range() 本身就是一个工具</td>
+                        <td>enumerate()、zip()、reversed()、sorted()</td>
+                    </tr>
+                    <tr>
+                        <td>使用建议</td>
+                        <td>大多数情况下的首选写法</td>
+                        <td>需要索引或精确控制次数时使用</td>
+                        <td>根据需求灵活组合</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="div_table">
+                <table>
+                    <tr>
+                        <th colspan="2"><h2 id="循环辅助工具">python<code>for</code>的辅助工具速查</h2></th>
+                    </tr>
+                    <tr>
+                        <td>想要实现的功能</td>
+                        <td>写法</td>
+                    </tr>
+                    <tr>
+                        <td>遍历元素</td>
+                        <td><code>for item in iterable:</code></td>
+                    </tr>
+                    <tr>
+                        <td>遍历索引</td>
+                        <td><code>for i in range(len(iterable)):</code></td>
+                    </tr>
+                    <tr>
+                        <td>同时遍历索引和元素</td>
+                        <td><code>for i,item in enumerate(iterable):</code></td>
+                    </tr>
+                    <tr>
+                        <td>并行遍历多个序列</td>
+                        <td><code>for a,b in zip(list1,list2):</code></td>
+                    </tr>
+                    <tr>
+                        <td>反向遍历</td>
+                        <td><code>for item in reversed(iterable):</code></td>
+                    </tr>
+                    <tr>
+                        <td>按顺序遍历(排序后)</td>
+                        <td><code>for item in sorted(iterable):</code></td>
+                    </tr>
+                    <tr>
+                        <td>按步长遍历索引</td>
+                        <td>
+                            <ul>
+                                <li><code>for i in range(起始值, 结束值, 步长):</code></li>
+                                <li><code>for i in range(0, len(iterable), 2):</code></li>
+                                <li>左闭右开，从起始值开始，结束值前一位结束，步长不为零</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </article>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>
