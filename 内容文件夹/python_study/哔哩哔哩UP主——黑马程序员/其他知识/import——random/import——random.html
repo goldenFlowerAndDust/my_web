@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>其他知识——random模块</title>
+    <link rel="stylesheet" href="../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>其他知识——random模块</h1>
+    </header>
+    <section id="section_1">
+        <h2>随机数模块 · JavaScript vs Python</h2>
+        <div class="div_table">
+            <table>
+                <thead>
+                <tr>
+                    <th>对比维度</th>
+                    <th>JavaScript</th>
+                    <th>Python</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <!-- 模块导入 -->
+                <tr>
+                    <td><strong>模块/对象</strong></td>
+                    <td>全局对象 <code>Math</code>（无需导入）</td>
+                    <td><code>random</code> 模块（需导入）<br>
+                        <code>import random</code>
+                    </td>
+                </tr>
+
+                <!-- 基础随机数 -->
+                <tr>
+                    <td><strong>生成 [0, 1) 浮点数</strong></td>
+                    <td><code>Math.random()</code><br>
+                        返回 <code>0 ≤ x &lt; 1</code>
+                    </td>
+                    <td><code>random.random()</code><br>
+                        返回 <code>0.0 ≤ x &lt; 1.0</code>
+                    </td>
+                </tr>
+
+                <!-- 指定范围整数 -->
+                <tr>
+                    <td><strong>生成指定范围整数</strong></td>
+                    <td>需手动计算：<br>
+                        <code>Math.floor(Math.random() * (max - min + 1)) + min</code><br>
+                        含两端，需配合 <code>Math.floor()</code>
+                    </td>
+                    <td><code>random.randint(min, max)</code><br>
+                        含两端，直接返回整数<br>
+                        例：<code>random.randint(1, 100)</code> → 可拿到 100
+                    </td>
+                </tr>
+
+                <!-- 指定范围浮点数 -->
+                <tr>
+                    <td><strong>生成指定范围浮点数</strong></td>
+                    <td><code>Math.random() * (max - min) + min</code><br>
+                        含左不含右（近似）
+                    </td>
+                    <td><code>random.uniform(min, max)</code><br>
+                        理论含两端（浮点精度影响）
+                    </td>
+                </tr>
+
+                <!-- 随机选取 -->
+                <tr>
+                    <td><strong>从序列中随机选一个</strong></td>
+                    <td>需手动计算索引：<br>
+                        <code>arr[Math.floor(Math.random() * arr.length)]</code>
+                    </td>
+                    <td><code>random.choice(arr)</code><br>
+                        一行搞定
+                    </td>
+                </tr>
+
+                <!-- 随机选取多个 -->
+                <tr>
+                    <td><strong>随机选多个（不重复）</strong></td>
+                    <td>需手动实现（洗牌或抽选逻辑）</td>
+                    <td><code>random.sample(arr, k)</code><br>
+                        返回 k 个不重复元素
+                    </td>
+                </tr>
+
+                <!-- 打乱顺序 -->
+                <tr>
+                    <td><strong>打乱列表顺序（洗牌）</strong></td>
+                    <td><code>arr.sort(() => Math.random() - 0.5)</code><br>
+                        ⚠️ 不严谨，分布不均匀
+                    </td>
+                    <td><code>random.shuffle(arr)</code><br>
+                        原地打乱，真随机洗牌
+                    </td>
+                </tr>
+
+                <!-- range 风格 -->
+                <tr>
+                    <td><strong>类 range 随机整数</strong></td>
+                    <td>无原生方法，需手动 <code>Math.floor()</code></td>
+                    <td><code>random.randrange(start, stop[, step])</code><br>
+                        左闭右开，同 <code>range()</code> 规则<br>
+                        例：<code>randrange(1, 100)</code> → 取不到 100
+                    </td>
+                </tr>
+
+                <!-- 种子 -->
+                <tr>
+                    <td><strong>随机种子（可复现）</strong></td>
+                    <td>不支持（无原生种子机制）</td>
+                    <td><code>random.seed(a)</code><br>
+                        设置种子后，随机序列可复现
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="div_table">
+            <h2>区间规则速查</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>函数</th>
+                    <th>区间规则</th>
+                    <th>示例</th>
+                    <th>是否包含右边界</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>Math.random()</code> (JS)</td>
+                    <td>[0, 1)</td>
+                    <td><code>Math.random()</code></td>
+                    <td>❌ 不包含</td>
+                </tr>
+                <tr>
+                    <td><code>random.random()</code> (Py)</td>
+                    <td>[0.0, 1.0)</td>
+                    <td><code>random.random()</code></td>
+                    <td>❌ 不包含</td>
+                </tr>
+                <tr>
+                    <td><code>random.randint(a, b)</code> (Py)</td>
+                    <td><strong>全闭</strong> [a, b]</td>
+                    <td><code>randint(1, 100)</code></td>
+                    <td>✅ 包含</td>
+                </tr>
+                <tr>
+                    <td><code>random.randrange(start, stop)</code> (Py)</td>
+                    <td><strong>左闭右开</strong> [start, stop)</td>
+                    <td><code>randrange(1, 100)</code></td>
+                    <td>❌ 不包含</td>
+                </tr>
+                <tr>
+                    <td><code>random.uniform(a, b)</code> (Py)</td>
+                    <td>[a, b]（理论全闭，浮点精度影响）</td>
+                    <td><code>uniform(1.5, 2.5)</code></td>
+                    <td>⚠️ 理论包含，实际近似</td>
+                </tr>
+                <tr>
+                    <td><code>Math.floor(Math.random() * (max - min + 1)) + min</code> (JS)</td>
+                    <td><strong>全闭</strong> [min, max]</td>
+                    <td>手动实现</td>
+                    <td>✅ 包含</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <h2>记忆口诀</h2>
+        <ul>
+            <li><strong>Python：</strong><br>
+                · 要整数 → <code>randint</code>（全闭）<br>
+                · 要范围步长 → <code>randrange</code>（左闭右开）<br>
+                · 要随机选 → <code>choice</code> / <code>sample</code> / <code>shuffle</code>
+            </li>
+            <li><strong>JavaScript：</strong><br>
+                · 只有 <code>Math.random()</code>（左闭右开）<br>
+                · 整数、选元素、洗牌 → 全部手动封装
+            </li>
+            <li><strong>核心区别：</strong><br>
+                · Python 功能丰富，自带种子、洗牌、抽样<br>
+                · JavaScript 只有基础随机数，其他需自己实现
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

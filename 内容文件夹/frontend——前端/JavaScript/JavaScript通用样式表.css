@@ -1,17 +1,17 @@
 :root {
     /*  color  */
-    --color-h1-footer: #1e1e1e;
-    --color-span: red;
-    --color-h2: #2c3e50;
-    --color-h3: #4A5568;
-    --color-code: #6f42c1;
+    --color-h1-footer: #2D2D2D;
+    --color-span: #C0392B;
+    --color-h2: #2C3E50;
+    --color-h3: #5D6D7E;
+    --color-code: #8E44AD;
     --color-h4: #4A4A4A;
-    --color-h5: #95A5A6;
+    --color-h5: #7F8C8D;
     --color-li: #3E3A39;
 
     /*  backgroun-color  */
-    --background-color-main: #FDF5E6;
-    --background-color-header-footer: orange;
+    --background-color-main: #F0F0EC;
+    --background-color-header-footer: #5D6D7E;
 
     /*  font-size  */
     --size-h1-footer: 3rem;
@@ -26,7 +26,7 @@
     --line-height-p: 1.6;
 
     /* border */
-    --border-color-table-td: black;
+    --border-color-table-td: #BDC3C7;
 
     /*  响应式设计板块  */
 
@@ -164,7 +164,11 @@ li {
 
 a {
     text-decoration: none;
-    color: green;
+    color: #2C3E50;
+}
+
+a:hover {
+    color: #8E44AD; /* 悬停时变紫色 */
 }
 
 p {
@@ -208,11 +212,12 @@ code {
 }
 
 th {
-    background-color: orange;
+    background-color: #5D6D7E;
+    color: white;
 }
 
 td {
-    background-color: #FDF5E6;
+    background-color: var(--background-color-main);
 }
 
 /* 确保表格内部任何元素都不换行 */

@@ -160,6 +160,8 @@
                                 <li>步长：<span>就是每一次迭代值的变化，<span
                                         class="span">负数则递减，正数则递增，0则直接报错(默认为1)</span></span></li>
                                 <li>其实只要记住：<span>结束值必须写，值区间：左开右闭，步长不为零即可</span></li>
+                                <li><span> for循环同样支持，<code>for-else</code>功能与<code>while-else</code>一致</span>
+                                </li>
                             </ul>
                         </li>
                         <li>总结：<span>python的 <code>for</code>循环只有<code>for...in</code>一种形式</span>，
@@ -285,11 +287,16 @@
                         <td>
                             <ul>
                                 <li>元素本身（字典为键，集合为元素）</li>
-                                <li>在<code>python</code>中字典是通过键名查找值，本质与<code>JavaScript</code>的对象一致</li>
-                                <li>在<code>python</code>中列表，字符串，集合都是通过数字索引直接提取对应元素，与<code>JavaScript</code>数组有本质区别</li>
-                                <li><span>python</span>不存在隐式转换，<span>JavaScript</span>数组是一个对象，键名是字符串，且会隐式转换，所以：</li>
+                                <li>在<code>python</code>中字典是通过键名查找值，本质与<code>JavaScript</code>的对象一致
+                                </li>
+                                <li>在<code>python</code>中列表，字符串，集合都是通过数字索引直接提取对应元素，与<code>JavaScript</code>数组有本质区别
+                                </li>
+                                <li><span>python</span>不存在隐式转换，<span>JavaScript</span>数组是一个对象，键名是字符串，且会隐式转换，所以：
+                                </li>
                                 <li>JavaScript：<code>arr["0"] <span>等价于</span>arr[0]</code></li>
-                                <li>python：<code>arr["0"] <span>不等于</span> arr[0]</code>，强行写会报错[<code>TypeError</code>]</li>
+                                <li>python：<code>arr["0"] <span>不等于</span>
+                                    arr[0]</code>，强行写会报错[<code>TypeError</code>]
+                                </li>
                             </ul>
                         </td>
                         <td>range() 生成的数值序列（0, 1, 2, ...）</td>
@@ -330,6 +337,9 @@
                         <td>大多数情况下的首选写法</td>
                         <td>需要索引或精确控制次数时使用</td>
                         <td>根据需求灵活组合</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">for循环同样支持，<code>for-else</code>功能与<code>while-else</code>一致</td>
                     </tr>
                 </table>
             </div>
@@ -378,6 +388,41 @@
                     </tr>
                 </table>
             </div>
+            <script>
+                // 乘法表
+                function table(n) {
+                    let total = ""
+                    for (let i = 1; i <= n; i++) {
+                        total += "\n"
+                        for (let j = 1; j <= i; j++) {
+                            total += `${j} * ${i} = ${j * i}  `
+                        }
+                    }
+                    return total
+                }
+
+                console.log(table(9))
+
+                // 打印菱形
+                function diamond(n) {
+                    if (n % 2 === 0) n++;
+                    for (let i = 0; i < n; i++) {
+                        let start = Math.min(i, n - i - 1)
+                        let starts = 2 * start + 1
+                        let space = (n - starts) / 2
+                        let remove = starts - 2
+                        if (starts === 1) {
+                            console.log(' '.repeat(space) + '*')
+                        } else {
+                            console.log(`${' '.repeat(space)}*${' '.repeat(remove)}*`)
+                        }
+
+                        // python重复运算符是：* JavaScript需要方法：repeat()
+                    }
+                }
+
+                diamond(50)
+            </script>
         </article>
     </section>
     <footer>

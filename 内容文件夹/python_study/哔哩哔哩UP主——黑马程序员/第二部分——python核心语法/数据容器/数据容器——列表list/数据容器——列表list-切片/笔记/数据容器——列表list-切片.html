@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表list-切片</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>列表list-切片</h1>
+    </header>
+    <section id="section_1">
+        <h2>课堂笔记</h2>
+        <ul>
+            <li>切片：<span>是对操作的数据截取其中一部分的操作。</span></li>
+            <li>语法：<code>字面量 = 原容器[起始索引 : 结束索引 : 步长]</code></li>
+            <li>与<code>range</code>一样，<span>包前不包后，左闭右开</span></li>
+            <li>步长默认是：<code>1</code>，<span>当步长设置为<code>0</code>直接报错</span></li>
+            <li>特殊写法：<code>::</code>、<code>0:</code>都表示切片整个列表，正向。<code>::-1</code>表示切片整个列表，并反向</li>
+            <li>可以切片的的容器必须是：<span>有序(支持下标)的</span></li>
+            <li>所以可切片的容器有：<code>list、tuple、str、(以及 range
+                等序列类型）</code>，不能切片的有：<code>dict、set(<span>无序的</span>)</code></li>
+            <li>
+                <h3>自行总结，关于切片的知识</h3>
+                <ul>
+                    <li>
+                        <h4>步骤一：</h4>
+                        <ol>
+                            <li>
+                                计算机关于切片的工作原理：<span>会先将起始索引和结束索引，转成正向索引，步长不变</span>
+                            </li>
+                            <li>公式1：<span>正向索引 = 正向索引</span></li>
+                            <li>公式2：<span>正向索引 = 容器长度 + 反向索引</span></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h4>步骤二(判断是否为空切片)：</h4>
+                        <ol>
+                            <li>
+                                都理解为正向索引后：
+                            </li>
+                            <li>
+                                <span>起始索引 > 结束索引，且步长为正数，则为空切片(<span
+                                        class="span">切片容器与原容器一致</span>)</span>
+                            </li>
+                            <li>
+                                <span>起始索引 < 结束索引，且步长为负数，则为空切片(<span
+                                        class="span">切片容器与原容器一致</span>)</span>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h4>步骤三(推算出切片内元素)：</h4>
+                        <ol>
+                            <li>
+                                <span>起始索引 > 结束索引，且步长为为负数，则从起始索引开始往左按顺序，直到结束索引停止(<span
+                                        class="span">注意左闭右开</span>)</span>
+                            </li>
+                            <li>
+                                <span>起始索引 < 结束索引，且步长为为正数，则从起始索引开始往右按顺序，直到结束索引停止(<span
+                                        class="span">注意左闭右开</span>)</span>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <img src="./image/切片补充.png"
+                     alt="切片补充"
+                     title="切片补充">
+                 <img src="./image/切片运行.png"
+                     alt="切片运行"
+                     title="切片运行">
+            </li>
+        </ul>
+        <div class="div_table">
+    <table>
+        <tr>
+            <th>特殊写法</th>
+            <th>含义</th>
+            <th>示例（s = [10,20,30,40,50]）</th>
+        </tr>
+        <tr>
+            <td><code>[:]</code> 或 <code>[::]</code></td>
+            <td>正向整个列表</td>
+            <td><code>[10,20,30,40,50]</code></td>
+        </tr>
+        <tr>
+            <td><code>[0:]</code></td>
+            <td>从索引0到末尾</td>
+            <td><code>[10,20,30,40,50]</code></td>
+        </tr>
+        <tr>
+            <td><code>[::-1]</code></td>
+            <td>反向整个列表</td>
+            <td><code>[50,40,30,20,10]</code></td>
+        </tr>
+        <tr>
+            <td><code>[::2]</code></td>
+            <td>正向每隔一个取一个</td>
+            <td><code>[10,30,50]</code></td>
+        </tr>
+        <tr>
+            <td><code>[::-2]</code></td>
+            <td>反向每隔一个取一个</td>
+            <td><code>[50,30,10]</code></td>
+        </tr>
+        <tr>
+            <td><code>[2::-1]</code></td>
+            <td>从索引2向左取到开头</td>
+            <td><code>[30,20,10]</code></td>
+        </tr>
+        <tr>
+            <td><code>[:2:-1]</code></td>
+            <td>从末尾向左取到索引2（不包含索引2）</td>
+            <td><code>[50,40]</code></td>
+        </tr>
+    </table>
+</div>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

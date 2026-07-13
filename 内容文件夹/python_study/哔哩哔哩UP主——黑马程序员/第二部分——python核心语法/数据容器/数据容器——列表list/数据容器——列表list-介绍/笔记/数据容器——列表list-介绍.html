@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表list——介绍</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>列表list——介绍</h1>
+    </header>
+    <section id="section_1">
+        <h2>课堂笔记</h2>
+        <ul>
+            <li>列表是<span>数据容器中的一类，是支持<span class="span">一次性存储多个数据(元素)</span></span></li>
+            <li>定义(<span>语法</span>)：<code>列表名称 = [元素1, 元素2, 元素3, 元素4, 元素5...]</code></li>
+            <li>具体示例：<code>score = [90, 100, 100, 90, 100, 80]</code></li>
+            <li>
+                <h3>特点</h3>
+                <ol>
+                    <li><span>可以存储不同类型的元素——包容已知所有数据类型(<code>str、int、float、bool、None、list、dict、set、tuple...</code>)</span>
+                    </li>
+                    <li><span>元素可重复，可更改，有序</span></li>
+                    <li>可重复：<span>可以存储相同的元素</span></li>
+                    <li>可更改：<span>可以通过方法，更改对应的元素</span></li>
+                    <li>有序(<span>理解为有索引[<span class="span">也叫下标</span>]概念</span>)：<span>意味者可以通过索引找到对应的值，顺序与存储的先后顺序一致，通常与方法配合执行(<span>增、删、改、查</span>操作)</span>
+                    </li>
+                    <li><span>正向索引从左到右，依次自增，从(<code>0</code>)开始</span></li>
+                    <li><span>反向索引从右到左，依次自减，从(<code>-1</code>)开始</span></li>
+                    <li>
+                        <img src="./image/索引的正向与反向.png"
+                             alt="索引的正向与反向"
+                             title="索引的正向与反向">
+                    </li>
+                    <li>重点：<span>容器中的元素按特定顺序排列的，可通过索引访问的容器类型称之为序列</span></li>
+                    <li>注意：<span>从前向后(正向索引)，下标从<code>0</code>开始，从后往前(反向索引)</span>，下表从
+                        <code>-1</code>开始
+                    </li>
+                    <li><span>如果指定的索引值超出范围，将会报错</span></li>
+                    <li>访问元素办法：<code>列表名[下标]</code></li>
+                    <li>修改元素办法：<code>列表名[下标] = 新值</code></li>
+                    <li>删除元素办法：<code>del 列表名[下标]</code><span>注意空格</span></li>
+                    <li><a href="#">增加列表元素</a></li>
+                    <li>
+                        <h4>遍历列表</h4>
+                        <code>
+
+                            ·score = [90, False, "hello", ["list2"], ("元组", "tuple"), {"集合", "set"}, {"字典":
+                            "dict"}, 80, True]
+                            <br>·for item in score:
+                            <br>&nbsp;&nbsp;print(item)
+                        </code>
+                        <img src="./image/列表的改、查、删.png"
+                             alt="列表的改、查、删"
+                             title="列表的改、查、删">
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

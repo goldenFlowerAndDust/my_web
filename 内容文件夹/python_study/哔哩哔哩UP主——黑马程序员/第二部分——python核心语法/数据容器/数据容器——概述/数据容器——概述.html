@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据容器概述</title>
+    <link rel="stylesheet" href="../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>数据容器概述</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>已知，一个变量只能存储一个数据，<span>总结：存储多个数据，需要定义多个变量，非常麻烦</span></li>
+            <li>这就需要数据容器：<span>一种可以容纳多份数据的数据类型(容器)，容纳的每一份数据称之为<code>一</code>个元素，<span
+                    class="span">每一个元素都可以是任意类型的数据，如：字符串、数字、布尔等</span></span></li>
+            <li>数据容器以：<span>是否支持重复元素、是否可以修改、是否有序分类</span></li>
+            <li>
+                常见的数据容器有：<span>列表(<code>list</code>)、字符串(<code>str</code>)、元组(<code>tuple</code>)、集合(<code>set</code>)、字典(<code>dict</code>)</span>
+            </li>
+            <li><span>他们都是可迭代对象，在<code>JavaScript</code>中，叫遍历</span></li>
+        </ul>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="5"><h2>常见的五种数据容器</h2></th>
+                </tr>
+                <tr>
+                    <td>容器类型</td>
+                    <td>是否有序</td>
+                    <td>是否可变</td>
+                    <td>是否允许重复元素</td>
+                    <td>典型用途</td>
+                </tr>
+                <tr>
+                    <td><span>列表(<code>list</code>)</span></td>
+                    <td>✅ 有序</td>
+                    <td>✅ 可修改</td>
+                    <td>✅ 允许重复</td>
+                    <td><span class="span">存储有序的、可变的元素序列</span></td>
+                </tr>
+                <tr>
+                    <td><span>元组(<code>tuple</code>)</span></td>
+                    <td>✅ 有序</td>
+                    <td>❌ 不可修改</td>
+                    <td>✅ 允许重复</td>
+                    <td><span class="span">存储有序的、不可变的元素序列</span></td>
+                </tr>
+                <tr>
+                    <td><span>字符串(<code>str</code>)</span></td>
+                    <td>✅ 有序</td>
+                    <td>❌ 不可修改</td>
+                    <td>✅ 允许重复</td>
+                    <td><span class="span">存储字符序列</span></td>
+                </tr>
+                <tr>
+                    <td><span>集合(<code>set</code>)</span></td>
+                    <td>❌ 无序</td>
+                    <td>✅ 可修改</td>
+                    <td>❌ 不允许重复</td>
+                    <td><span class="span">去重、集合运算</span></td>
+                </tr>
+                <tr>
+                    <td><span>字典(<code>dict</code>)</span></td>
+                    <td>✅ 有序（Python 3.7+）</td>
+                    <td>✅ 可修改</td>
+                    <td>❌ 键不允许重复</td>
+                    <td><span class="span">键值对存储、快速查找</span></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

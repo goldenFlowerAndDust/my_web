@@ -78,4 +78,4 @@ def  square_diamond(g) :
             print("*  " * stars)
         else:
             print("*" + " " * (3*g -4)+ "*")
-square_diamond(40)
+square_diamond(10)
