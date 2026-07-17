@@ -17,8 +17,11 @@
             <li>切片：<span>是对操作的数据截取其中一部分的操作。</span></li>
             <li>语法：<code>字面量 = 原容器[起始索引 : 结束索引 : 步长]</code></li>
             <li>与<code>range</code>一样，<span>包前不包后，左闭右开</span></li>
+            <li><span>开始索引未指定默认是<code>0</code></span></li>
+            <li><span>结束索引未指定默认是<span class="span">容器长度</span></span></li>
             <li>步长默认是：<code>1</code>，<span>当步长设置为<code>0</code>直接报错</span></li>
-            <li>特殊写法：<code>::</code>、<code>0:</code>都表示切片整个列表，正向。<code>::-1</code>表示切片整个列表，并反向</li>
+            <li>特殊写法：<code>::</code>、<code>0:</code>都表示切片整个列表，正向。<code>::-1</code>表示切片整个列表，并反向
+            </li>
             <li>可以切片的的容器必须是：<span>有序(支持下标)的</span></li>
             <li>所以可切片的容器有：<code>list、tuple、str、(以及 range
                 等序列类型）</code>，不能切片的有：<code>dict、set(<span>无序的</span>)</code></li>
@@ -42,13 +45,14 @@
                                 都理解为正向索引后：
                             </li>
                             <li>
-                                <span>起始索引 > 结束索引，且步长为正数，则为空切片(<span
+                                <span>起始索引 > 结束索引，步长为正数，且切片不与原列表产生任何交集，则为空切片(<span
                                         class="span">切片容器与原容器一致</span>)</span>
                             </li>
                             <li>
-                                <span>起始索引 < 结束索引，且步长为负数，则为空切片(<span
+                                <span>起始索引 < 结束索引，步长为负数，且切片不与原列表产生任何交集，则为空切片(<span
                                         class="span">切片容器与原容器一致</span>)</span>
                             </li>
+                            <li>当切片范围被裁剪后为空<code>即起始索引 == 结束索引</code> ）时，返回空列表。</li>
                         </ol>
                     </li>
                     <li>
@@ -64,63 +68,91 @@
                             </li>
                         </ol>
                     </li>
+                    <li>
+                        总结：<span>切片取值时，先裁剪索引到有效边界。如果裁剪后的范围不为空，则返回交集部分；如果裁剪后的范围为空，则返回空列表。</span>
+                    </li>
                 </ul>
             </li>
             <li>
                 <img src="./image/切片补充.png"
                      alt="切片补充"
                      title="切片补充">
-                 <img src="./image/切片运行.png"
+                <img src="./image/切片运行.png"
                      alt="切片运行"
                      title="切片运行">
             </li>
         </ul>
         <div class="div_table">
-    <table>
-        <tr>
-            <th>特殊写法</th>
-            <th>含义</th>
-            <th>示例（s = [10,20,30,40,50]）</th>
-        </tr>
-        <tr>
-            <td><code>[:]</code> 或 <code>[::]</code></td>
-            <td>正向整个列表</td>
-            <td><code>[10,20,30,40,50]</code></td>
-        </tr>
-        <tr>
-            <td><code>[0:]</code></td>
-            <td>从索引0到末尾</td>
-            <td><code>[10,20,30,40,50]</code></td>
-        </tr>
-        <tr>
-            <td><code>[::-1]</code></td>
-            <td>反向整个列表</td>
-            <td><code>[50,40,30,20,10]</code></td>
-        </tr>
-        <tr>
-            <td><code>[::2]</code></td>
-            <td>正向每隔一个取一个</td>
-            <td><code>[10,30,50]</code></td>
-        </tr>
-        <tr>
-            <td><code>[::-2]</code></td>
-            <td>反向每隔一个取一个</td>
-            <td><code>[50,30,10]</code></td>
-        </tr>
-        <tr>
-            <td><code>[2::-1]</code></td>
-            <td>从索引2向左取到开头</td>
-            <td><code>[30,20,10]</code></td>
-        </tr>
-        <tr>
-            <td><code>[:2:-1]</code></td>
-            <td>从末尾向左取到索引2（不包含索引2）</td>
-            <td><code>[50,40]</code></td>
-        </tr>
-    </table>
-</div>
+            <table>
+                <tr>
+                    <th>特殊写法</th>
+                    <th>含义</th>
+                    <th>示例（s = [10,20,30,40,50]）</th>
+                </tr>
+                <tr>
+                    <td><code>[:]</code> 或 <code>[::]</code></td>
+                    <td>正向整个列表</td>
+                    <td><code>[10,20,30,40,50]</code></td>
+                </tr>
+                <tr>
+                    <td><code>[0:]</code></td>
+                    <td>从索引0到末尾</td>
+                    <td><code>[10,20,30,40,50]</code></td>
+                </tr>
+                <tr>
+                    <td><code>[::-1]</code></td>
+                    <td>反向整个列表</td>
+                    <td><code>[50,40,30,20,10]</code></td>
+                </tr>
+                <tr>
+                    <td><code>[::2]</code></td>
+                    <td>正向每隔一个取一个</td>
+                    <td><code>[10,30,50]</code></td>
+                </tr>
+                <tr>
+                    <td><code>[::-2]</code></td>
+                    <td>反向每隔一个取一个</td>
+                    <td><code>[50,30,10]</code></td>
+                </tr>
+                <tr>
+                    <td><code>[2::-1]</code></td>
+                    <td>从索引2向左取到开头</td>
+                    <td><code>[30,20,10]</code></td>
+                </tr>
+                <tr>
+                    <td><code>[:2:-1]</code></td>
+                    <td>从末尾向左取到索引2（不包含索引2）</td>
+                    <td><code>[50,40]</code></td>
+                </tr>
+            </table>
+        </div>
     </section>
-    <section id="section_2"></section>
+    <section id="section_2">
+        <h2>切片的作用</h2>
+        <h3>访问范围内的元素</h3>
+        <ol>
+            <li>单纯使用切片，打印，结果是原列表被切的部分</li>
+        </ol>
+        <h3>替换切片在原列表的元素</h3>
+        <ol>
+            <li>当访问切片后，又重新赋值</li>
+            <li>
+                情况一：<span>重新赋值的元素与切片元素，数量一致，则按顺序重新给切片依次重新赋值，[视觉效果(<span>原列表长度与原来一致</span>)]</span>
+            </li>
+            <li>
+                情况二：<span>重新赋值的元素与切片元素，数量不一致，完全替换，<br>多的情况[视觉效果(<span>原列表长度增加</span>)]、<br>少的情况[视觉效果(<span>原列表长度减少</span>)]</span>
+            </li>
+            <li><span>其实只要理解：<span class="span">切片重新赋值后，将完全替换原列表的切片部分</span></span></li>
+            <li><span>切片赋值会先删除切片范围内的元素，然后在同一位置插入新元素。 这也是为什么长度会变化的原因</span>
+            </li>
+            <li><span>重新赋值，更改原列表，没有返回值</span></li>
+        </ol>
+        <h3>切片报错与不报错的场景</h3>
+        <ol>
+            <li><span>切片取值：完全超出范围时返回空列表，不会报错。</span></li>
+            <li><span>切片赋值：如果切片范围完全超出列表边界，会报错（因为赋值操作会尝试在不存在的位置插入元素）。[<code>indexError: cannot assign to a slice that is completely out of bounds</code>]</span></li>
+        </ol>
+    </section>
     <footer>
         <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
         <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
