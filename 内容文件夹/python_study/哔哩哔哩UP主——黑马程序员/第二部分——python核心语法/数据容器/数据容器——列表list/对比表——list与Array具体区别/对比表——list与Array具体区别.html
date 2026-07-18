@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对比表——list与Array具体区别</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>对比表——list与Array具体区别</h1>
+    </header>
+    <section id="section_1">
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="3"><h2><code>python</code>列表VS<code>JavaScript</code>数组 <span>完整对比表</span>
+                    </h2>
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>一、<span>类型与定义</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>本质</td>
+                    <td>内置数据类型</td>
+                    <td>内置对象(<code>Array</code>)</td>
+                </tr>
+                <tr>
+                    <td>定义方式</td>
+                    <td><code>lst = [1, 2, 3]</code></td>
+                    <td><code>let arr = [1, 2, 3]</code></td>
+                </tr>
+                <tr>
+                    <td>长度获取</td>
+                    <td><code>len(lst)</code></td>
+                    <td><code>arr.length</code></td>
+                </tr>
+                <tr>
+                    <td>是否支持不同类型</td>
+                    <td><span>✅ 支持混合类型</span></td>
+                    <td><span>✅ 支持混合类型</span></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>二、<span>索引机制</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>正向索引</td>
+                    <td><span>✅ 从 0 开始</span></td>
+                    <td><span>✅ 从 0 开始</span></td>
+                </tr>
+                <tr>
+                    <td>反向索引</td>
+                    <td><span class="span">✅ 支持（-1 表示最后一个）</span></td>
+                    <td><span class="span">❌ 不支持（直接用 -1 会访问键名为 "-1" 的属性）</span></td>
+                </tr>
+                <tr>
+                    <td>索引类型</td>
+                    <td><span>必须是整数</span></td>
+                    <td><span>自动转为字符串属性名(<span class="span">因为是对象</span>)</span></td>
+                </tr>
+                <tr>
+                    <td>越界访问(<span>指的的是：访问不存在的索引</span>)</td>
+                    <td>报错：<code>IndexError</code></td>
+                    <td>返回：<code>undefined</code>，不报错</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>三、<span>数据类型与存储</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>元素类型</td>
+                    <td><span>任意类型混合</span></td>
+                    <td><span>任意类型混合</span></td>
+                </tr>
+                <tr>
+                    <td>索引本质</td>
+                    <td><span class="span">整数位置偏移</span></td>
+                    <td><span class="span">字符串属性名(<span>后台转换</span>)</span></td>
+                </tr>
+                <tr>
+                    <td>内存结构</td>
+                    <td><span>连续存储</span></td>
+                    <td><span>对象 + 特殊<code>length</code>属性</span></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>四、<span>可变性</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>元素可变</td>
+                    <td>✅ 是</td>
+                    <td>✅ 是</td>
+                </tr>
+                <tr>
+                    <td>长度可变</td>
+                    <td>✅ 是</td>
+                    <td>✅ 是</td>
+                </tr>
+                <tr>
+                    <td>赋值边界</td>
+                    <td><span>索引必须存在，否则报错</span></td>
+                    <td><span>索引不存在会自动扩展，中间补<code>empty</code></span></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>五、<span>增操作</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>末尾添加单个元素</td>
+                    <td>
+                        <ul>
+                            <li><code>append(x)</code></li>
+                            <li><span>整体添加，可迭代对象为一个元素</span></li>
+                            <li><span>更改原列表，无返回值</span></li>
+                            <li><span>只能接收一个参数</span></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ol>
+                            <li>
+                                <code>push(item, item2...)</code>
+                                <ul>
+                                    <li><span>可以添加多个元素，均在末尾按顺序逐个添加</span></li>
+                                    <li><span>非展开添加，可迭代对象为一个元素</span></li>
+                                    <li><span>无返回值，更改原数组</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <code>push(...arr)</code>
+                                <ol>
+                                    <li><code>...</code>JavaScript的扩展运算符</li>
+                                    <li>与python的<code>*/**</code>类似</li>
+                                    <li>在这理解就是：<span>将可迭代对象拆开，然后逐个添加</span></li>
+                                    <li><span>更改原数组</span></li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td>首添加单个元素</td>
+                    <td><code>insert(0, item)</code></td>
+                    <td><code>unshift()</code></td>
+                </tr>
+                <tr>
+                    <td>指定位置插入</td>
+                    <td>
+                        <ul>
+                            <li><code>insert(index, item)</code></li>
+                            <li><span>整体添加，可迭代对象为一个元素</span></li>
+                            <li><span>更改原列表</span></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ol>
+                            <li>
+                                <code>splice(start,deleteCount)</code>：
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;<span>从<code>start</code>删除 <code>deleteCount</code>个元素</span>
+                            </li>
+                            <li>
+                                <code>splice(start,deleteCount, item, item2...)</code>：
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;<span>从<code>start</code>删除 <code>deleteCount</code>个元素,然后逐个添加元素<code>item</code></span>
+                            </li>
+                            <li>
+                                <code>splice(start, 0, item, item2...)</code>：
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;<span>从 <code>start</code>后，逐个插入元素<code>item</code>不删除元素</span>
+                            </li>
+                            <li>
+                                <code>splice(start)</code>:
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;<span>删除<code>start</code>后所有元素</span>
+                            </li>
+                            <li>
+                                <span>一般情况，第二个参数 <code>deleteCount</code>不能忽略，但是<code>splice(start)</code>例外</span>
+                            </li>
+                            <li><span class="span">更改原数组</span></li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td>末尾添加多个元素</td>
+                    <td><code>extend(iterable)</code>,br<code>iterable:<span>可迭代对象</span></code></td>
+                    <td>
+                        <code style="text-align: left;display:block;">push(...arr)<span>或</span>concat()</code>
+                        <ol>
+                            <li><code>push(...arr)</code>更改原数组，无返回值</li>
+                            <li><code>concat()</code>创建新数组对象，不更改原数组，有返回值</li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td>合并列表</td>
+                    <td><code>+/extend()/[*a, *b]</code></td>
+                    <td><code>concat()/[...a, ...b]</code></td>
+                </tr>
+                <tr>
+                    <td>返回值</td>
+                    <td>增方法大多的返回<code>None</code></td>
+                    <td>push()<span>返回新长度</span></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>六、<span>删操作</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>按值删除</td>
+                    <td><code>remove(x)</code></td>
+                    <td>无直接方法(可用 <code>splice + indexOf()</code>)</td>
+                </tr>
+                <tr>
+                    <td>按索引删除</td>
+                    <td><code>pop(index)</code></td>
+                    <td><code>splice(start,index)</code></td>
+                </tr>
+                <tr>
+                    <td>删除最后一个</td>
+                    <td>pop()<span>默认</span></td>
+                    <td><code>pop()</code></td>
+                </tr>
+                <tr>
+                    <td>删除第一个</td>
+                    <td><code>pop(0)</code></td>
+                    <td><code>shift()</code></td>
+                </tr>
+                <tr>
+                    <td>删除多个</td>
+                    <td><code>del lst[切片]</code></td>
+                    <td>
+                        <code style="display: block;text-align: left">splice(start, deleteCount)</code>
+                        <ol>
+                            <li>start：<span>起始索引</span></li>
+                            <li>deleteCount：<span>需要删除元素的个数</span></li>
+                            、
+                            <li>记住没有：<code>delete slice()</code>这个概念</li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td>清空列表/数组</td>
+                    <td><code>clear()</code></td>
+                    <td><code>length = 0</code>或<code>splice(0)</code></td>
+                </tr>
+                <tr>
+                    <td>删除整个列表</td>
+                    <td><code>del lst</code></td>
+                    <td><code>arr = null</code>或<code>delete</code>(<span>不推荐</span>)</td>
+                </tr>
+                <tr>
+                    <td>返回值</td>
+                    <td><code>pop()</code><span>返回被删元素</span></td>
+                    <td><code>splice()</code>返回被删元素数组</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>七、<span>改操作</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>索引赋值</td>
+                    <td><code>lst[index] = 新值</code></td>
+                    <td><code>arr[index] = 新值</code></td>
+                </tr>
+                <tr>
+                    <td>切片赋值</td>
+                    <td>✅ lst[1:3] = [a, b]</td>
+                    <td>❌ 不支持（可用 splice 替代）</td>
+                </tr>
+                <tr>
+                    <td>排序</td>
+                    <td>
+                        <ol>
+                            <li>升序：<code>sort()</code>(原地)数字排序，容器内必须是数字类型</li>
+                            <li>降序：<code>sort(reverse = True)</code>(原地)数字排序，容器内必须是数字类型</li>
+                        </ol>
+                    </td>
+                    <td><code>sort()</code>(原地)，不传函数，默认按：<code>unicode</code>编码正序排序</td>
+                </tr>
+                <tr>
+                    <td>反转</td>
+                    <td><code>reverse()</code>(原地)</td>
+                    <td><code>reverse()</code>(原地)</td>
+                </tr>
+                <tr>
+                    <td>自定义排序</td>
+                    <td><code>sort(key = 函数)</code>具体按什么排序由函数决定</td>
+                    <td>
+                        <ul>
+                            <li>升序：<code>sort((a, b) => a - b)</code>数字升序</li>
+                            <li>降序：<code>sort((a, b) => b - a)</code>数字降序</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>返回值</td>
+                    <td>均更改原列表</td>
+                    <td>均更改原数组</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>八、<span>查操作</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>索引访问</td>
+                    <td><code>lst[index]</code></td>
+                    <td><code>arr[index]</code></td>
+                </tr>
+                <tr>
+                    <td>切片访问</td>
+                    <td><code>lst[start:end]</code>,<span>左闭右开</span></td>
+                    <td>❌ 不支持（可用 <code>slice(start, end)</code><span>同样左闭右开</span>）</td>
+                </tr>
+                <tr>
+                    <td>查找索引</td>
+                    <td>
+                        <ol>
+                            <li><code>index(item)</code></li>
+                            <li><span>只会返回第一个匹配值的索引。</span></li>
+                        </ol>
+                    </td>
+                    <td>
+                        <ol>
+                            <li><code>indexOf(item, start)/findIndexOf(item. start)</code></li>
+                            <li>findIndexOf()：反向操作，从后往前查找</li>
+                            <li>indexOf：<code>start</code>可以省略，主要是以索引(<code>start</code>)开始往后查找</li>
+                            <li>findIndexOf：<code>start</code>可以省略，主要是以索引(<code>start</code>)开始往前查找</li>
+                            <li><span>只会返回第一个匹配值的索引。</span></li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td>统计次数</td>
+                    <td><code>count(item)</code></td>
+                    <td>无直接方法(可用 <code>filter().length</code>)</td>
+                </tr>
+                <tr>
+                    <td>包含检查</td>
+                    <td><code>x in lst</code></td>
+                    <td><code>arr.include(x)</code></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>九、<span>复制</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>浅拷贝</td>
+                    <td><code>copy()/ lst[:] / lst[0:]</code></td>
+                    <td><code>slice() / [...arr]</code></td>
+                </tr>
+                <tr>
+                    <td>深拷贝</td>
+                    <td><code>copy.deepcopy()</code></td>
+                    <td>JSON.parse(JSON.stringify())</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>十、<span>遍历方式</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>按值遍历</td>
+                    <td><code>for item in lst:</code></td>
+                    <td><code>for (let item of arr){}</code></td>
+                </tr>
+                <tr>
+                    <td>按索引遍历</td>
+                    <td><code>for i in range(len(lst)):</code></td>
+                    <td><code>for (let i = 0; i < arr.length; i++){}</code></td>
+                </tr>
+                <tr>
+                    <td>同时获取索引和值</td>
+                    <td><code>for index, item in enumberate(lst):</code></td>
+                    <td><code>arr.forEach((item,index) => {})</code></td>
+                </tr>
+                <tr>
+                    <td>遍历对象属性</td>
+                    <td>不适用</td>
+                    <td>for (let key in arr)(<span>不推荐</span>)</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>十一、<span>推导式/简介生成</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>列表推导式</td>
+                    <td>✅ <code>[表达式 for x in 可迭代对象 if 条件]</code></td>
+                    <td>❌ 无原生支持</td>
+                </tr>
+                <tr>
+                    <td>函数式生成</td>
+                    <td>❌</td>
+                    <td>✅ <code>map()、filter()、reduce()</code></td>
+                </tr>
+                <tr>
+                    <td>生成器表达式</td>
+                    <td>✅ <code>(表达式 for x in 可迭代对象 if 条件)</code></td>
+                    <td>❌ 无原生支持</td>
+                </tr>
+                <tr>
+                    <td>集合/字典推导式</td>
+                    <td>✅ 支持</td>
+                    <td>❌ 无原生支持</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>十二、<span>解包</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>基本解包</td>
+                    <td><code>a, b = [1, 2]</code></td>
+                    <td><code>[a, b] = [1, 2]</code></td>
+                </tr>
+                <tr>
+                    <td>收集剩余元素</td>
+                    <td><code>frist, *rest = [1, 2, 3, 4]</code></td>
+                    <td><code>[first, ...rest] = [1, 2, 3, 4]</code></td>
+                </tr>
+                <tr>
+                    <td>展开合并</td>
+                    <td><code>[*a, *b]</code></td>
+                    <td><code>[...a, ...b]</code></td>
+                </tr>
+                <tr>
+                    <td>多星号限制</td>
+                    <td>只能出现一次</td>
+                    <td>多个<code>...</code>可以同时出现</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>十三、<span>去重方式</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>顺序无关</td>
+                    <td><code>list(set(lst))</code></td>
+                    <td><code>[...new Set(arr)]</code></td>
+                </tr>
+                <tr>
+                    <td>保留顺序</td>
+                    <td><code>list(dict.fromkeys(lst))</code></td>
+                    <td><code>[...new Set(arr)]</code>保留插入顺序</td>
+                </tr>
+                <tr>
+                    <td>手动去重</td>
+                    <td><code>for + not in</code></td>
+                    <td><code>filter + indexOf</code></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>十四、<span>常见陷阱</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td>遍历时修改长度</td>
+                    <td>可能导致错误</td>
+                    <td>可能导致问题</td>
+                </tr>
+                <tr>
+                    <td>pop(0)性能</td>
+                    <td>O(n)</td>
+                    <td>O(n)</td>
+                </tr>
+                <tr>
+                    <td>索引错误</td>
+                    <td>会报错</td>
+                    <td>返回<code>undefined</code>，不报错</td>
+                </tr>
+                <tr>
+                    <td>负索引</td>
+                    <td>支持</td>
+                    <td>不支持(<span>会当作字符串属性</span>)</td>
+                </tr>
+                <tr>
+                    <td>稀疏数组</td>
+                    <td>无</td>
+                    <td>有 <code>([,,]) 或 <code>arr[5] = 1</code></code></td>
+                </tr>
+                <tr>
+                    <td>sort()<span>默认行为</span></td>
+                    <td>按数值/字符串升序</td>
+                    <td>按字符串 <code>Unicode</code>码点排序</td>
+                </tr>
+                <tr>
+                    <td colspan="3">十五、<span>方法是否存在</span></td>
+                </tr>
+                <tr>
+                    <td>方法</td>
+                    <td><code>python</code>列表</td>
+                    <td><code>JavaScript</code>数组</td>
+                </tr>
+                <tr>
+                    <td><code>append/push</code></td>
+                    <td><code>✅ append()</code></td>
+                    <td><code>✅ push()</code></td>
+                </tr>
+                <tr>
+                    <td><code>insert/splice</code></td>
+                    <td><code>✅ insert()</code></td>
+                    <td><code>✅ splice()</code></td>
+                </tr>
+                <tr>
+                    <td><code>extend/concat</code></td>
+                    <td><code>✅ extend()</code></td>
+                    <td><code>✅ concat()</code></td>
+                </tr>
+                <tr>
+                    <td><code>pop</code></td>
+                    <td><code>✅ pop()</code></td>
+                    <td><code>✅ pop()</code></td>
+                </tr>
+                <tr>
+                    <td><code>remove/splice</code></td>
+                    <td><code>✅ remove()</code></td>
+                    <td><code>✅ splice()</code></td>
+                </tr>
+                <tr>
+                    <td><code>clear</code></td>
+                    <td><code>✅ clear()</code></td>
+                    <td><code>✅ length=0 / splice(0)</code></td>
+                </tr>
+                <tr>
+                    <td><code>copy / slice</code></td>
+                    <td><code>✅ copy()</code></td>
+                    <td><code>✅ slice()</code></td>
+                </tr>
+                <tr>
+                    <td><code>sort</code></td>
+                    <td><code>✅ sort()</code></td>
+                    <td><code>✅ sort()</code></td>
+                </tr>
+                <tr>
+                    <td><code>reverse</code></td>
+                    <td><code>✅ reverse()</code></td>
+                    <td><code>✅ reverse()</code></td>
+                </tr>
+                <tr>
+                    <td><code>index / indexOf</code></td>
+                    <td><code>✅ index()</code></td>
+                    <td><code>✅ indexOf()</code></td>
+                </tr>
+                <tr>
+                    <td><code>count</code></td>
+                    <td><code>✅ count()</code></td>
+                    <td><span>❌ 无</span></td>
+                </tr>
+                <tr>
+                    <td><code>find</code></td>
+                    <td><code>❌ 无</code></td>
+                    <td><code>✅ find()</code></td>
+                </tr>
+                <tr>
+                    <td><code>findIndex</code></td>
+                    <td><span>❌ 无</span></td>
+                    <td><span>✅ findIndex()</span></td>
+                </tr>
+                <tr>
+                    <td><code>includes / in</code></td>
+                    <td><code>✅ in</code></td>
+                    <td><code>✅ includes()</code></td>
+                </tr>
+                <tr>
+                    <td><code>join</code></td>
+                    <td>❌ 无,可用<code>（' '.join(lst)）</code></td>
+                    <td><code>✅ join()</code></td>
+                </tr>
+                <tr>
+                    <td><code>map / filter / reduce</code></td>
+                    <td><span>❌ 无（可用推导式）</span></td>
+                    <td><code>✅ 有</code></td>
+                </tr>
+                <tr>
+                    <td><code>every / some</code></td>
+                    <td><span>❌ 无</span></td>
+                    <td><span>✅ 有</span></td>
+                </tr>
+                <tr>
+                    <td><code>forEach</code></td>
+                    <td><span>❌ 无</span></td>
+                    <td><code>✅ forEach()</code></td>
+                </tr>s
+                <tr>
+                    <td><code>flat</code></td>
+                    <td><span>❌ 无</span></td>
+                    <td><span>✅ flat()</span></td>
+                </tr>
+                <tr>
+                    <td colspan="3">总结</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Python 列表：<span>功能集中在“增删改查 + 切片 + 推导式”，强调简洁直观，适合数据处理。</span></td>
+                </tr>
+                <tr>
+                    <td colspan="3">JavaScript 数组：：<span>功能集中在“方法链 + 函数式编程”，强调灵活操作，适合前端交互。</span></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

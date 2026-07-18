@@ -8,6 +8,7 @@
     --color-h4: #4A4A4A;
     --color-h5: #7F8C8D;
     --color-li: #3E3A39;
+    --color-th-color: #E67E22;
 
     /*  backgroun-color  */
     --background-color-main: #F0F0EC;
@@ -229,6 +230,31 @@ td {
     white-space: nowrap;
 }
 
+table th h1 code,
+table th h1 span {
+    font-size: var(--size-h1-footer);
+}
+
+table th h2 code,
+table th h2 span {
+    font-size: var(--size-h2);
+}
+
+table th h3 code,
+table th h3 span {
+    font-size: var(--size-h3);
+}
+
+table th h4 code,
+table th h4 span {
+    font-size: var(--size-h4);
+}
+
+table th h5 code,
+table th h5 span {
+    font-size: var(--size-h5);
+}
+
 /* 防止所有祖先被撑开 */
 body, main, section {
     max-width: 100%;
@@ -300,6 +326,14 @@ video {
     color: skyblue;
 }
 
+table tr td h1 span,
+table tr td h2 span,
+table tr td h3 span,
+table tr td h4 span,
+table tr td h5 span{
+    color:var(--color-th-color)
+}
+
 @media (max-width: 1500px) {
     h1 {
         font-size: var(--size-h1-footer-ipad);
@@ -343,6 +377,31 @@ video {
 
     .item {
         width: calc(50% - 20px);
+    }
+
+    table th h1 code,
+    table th h1 span {
+        font-size: var(--size-h1-footer-ipad);
+    }
+
+    table th h2 code,
+    table th h2 span {
+        font-size: var(--size-h2-ipad);
+    }
+
+    table th h3 code,
+    table th h3 span {
+        font-size: var(--size-h3-ipad);
+    }
+
+    table th h4 code,
+    table th h4 span {
+        font-size: var(--size-h4-ipad);
+    }
+
+    table th h5 code,
+    table th h5 span {
+        font-size: var(--size-h5-ipad);
     }
 }
 
@@ -397,6 +456,31 @@ video {
 
     .div_table {
         -webkit-overflow-scrolling: touch;
+    }
+
+    table th h1 code,
+    table th h1 span {
+        font-size: var(--size-h1-footer-mobile_phone);
+    }
+
+    table th h2 code,
+    table th h2 span {
+        font-size: var(--size-h2-mobile_phone);
+    }
+
+    table th h3 code,
+    table th h3 span {
+        font-size: var(--size-h3-mobile_phone);
+    }
+
+    table th h4 code,
+    table th h4 span {
+        font-size: var(--size-h4-mobile_phone);
+    }
+
+    table th h5 code,
+    table th h5 span {
+        font-size: var(--size-h5-mobile_phone);
     }
 
 }
