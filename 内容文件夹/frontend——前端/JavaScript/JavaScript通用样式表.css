@@ -8,7 +8,8 @@
     --color-h4: #4A4A4A;
     --color-h5: #7F8C8D;
     --color-li: #3E3A39;
-    --color-th-color: #E67E22;
+    --color-td-color: #E67E22;
+    --color-th-color: #F4D03F;
 
     /*  backgroun-color  */
     --background-color-main: #F0F0EC;
@@ -330,8 +331,16 @@ table tr td h1 span,
 table tr td h2 span,
 table tr td h3 span,
 table tr td h4 span,
-table tr td h5 span{
-    color:var(--color-th-color)
+table tr td h5 span {
+    color: var(--color-td-color)
+}
+
+table tr th h1 span,
+table tr th h2 span,
+table tr th h3 span,
+table tr th h4 span,
+table tr th h5 span {
+    color: var(--color-th-color)
 }
 
 @media (max-width: 1500px) {

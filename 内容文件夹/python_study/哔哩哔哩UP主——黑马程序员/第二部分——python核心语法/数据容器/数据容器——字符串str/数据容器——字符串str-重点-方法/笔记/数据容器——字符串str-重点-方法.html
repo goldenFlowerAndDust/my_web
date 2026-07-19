@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python与JavaScript字符串方法对比表</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>Python 与 JavaScript 字符串方法完整对比表</h1>
+    </header>
+    <section id="section_1">
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="3"><h2>一、<span>大小写转换</span></h2></th>
+                </tr>
+                <tr>
+                    <td>功能</td>
+                    <td><code>Python</code> 方法</td>
+                    <td><code>JavaScript</code> 方法</td>
+                </tr>
+                <tr>
+                    <td>全部转大写</td>
+                    <td><code>s.upper()</code></td>
+                    <td><code>s.toUpperCase()</code></td>
+                </tr>
+                <tr>
+                    <td>全部转小写</td>
+                    <td><code>s.lower()</code></td>
+                    <td><code>s.toLowerCase()</code></td>
+                </tr>
+                <tr>
+                    <td>首字母大写</td>
+                    <td><code>s.capitalize()</code></td>
+                    <td><span style="color: red;">无直接方法</span>（需组合）</td>
+                </tr>
+                <tr>
+                    <td>每个单词首字母大写</td>
+                    <td><code>s.title()</code></td>
+                    <td><span style="color: red;">无直接方法</span>（需组合）</td>
+                </tr>
+                <tr>
+                    <td>大小写互换</td>
+                    <td><code>s.swapcase()</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+
+                <tr>
+                    <th colspan="3"><h2>二、<span>查找与索引</span></h2></th>
+                </tr>
+                <tr>
+                    <td>功能</td>
+                    <td><code>Python</code> 方法</td>
+                    <td><code>JavaScript</code> 方法</td>
+                </tr>
+                <tr>
+                    <td>查找子串首次出现位置</td>
+                    <td><code>s.find(sub)</code></td>
+                    <td><code>s.indexOf(sub)</code></td>
+                </tr>
+                <tr>
+                    <td>查找子串首次出现（无容错）</td>
+                    <td><code>s.index(sub)</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+                <tr>
+                    <td>查找子串最后一次出现</td>
+                    <td><code>s.rfind(sub)</code></td>
+                    <td><code>s.lastIndexOf(sub)</code></td>
+                </tr>
+                <tr>
+                    <td>检查是否以指定子串开头</td>
+                    <td><code>s.startswith(sub)</code></td>
+                    <td><code>s.startsWith(sub)</code></td>
+                </tr>
+                <tr>
+                    <td>检查是否以指定子串结尾</td>
+                    <td><code>s.endswith(sub)</code></td>
+                    <td><code>s.endsWith(sub)</code></td>
+                </tr>
+                <tr>
+                    <td>检查是否包含子串</td>
+                    <td><code>sub in s</code></td>
+                    <td><code>s.includes(sub)</code></td>
+                </tr>
+                <tr>
+                    <td>统计子串出现次数</td>
+                    <td><code>s.count(sub)</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+
+                <tr>
+                    <th colspan="3"><h2>三、<span>替换</span></h2></th>
+                </tr>
+                <tr>
+                    <td>功能</td>
+                    <td><code>Python</code> 方法</td>
+                    <td><code>JavaScript</code> 方法</td>
+                </tr>
+                <tr>
+                    <td>替换子串（全部）</td>
+                    <td><code>s.replace(old, new)</code></td>
+                    <td><span style="color: blue;">需正则</span> <code>/old/g</code></td>
+                </tr>
+                <tr>
+                    <td>替换子串（指定次数）</td>
+                    <td><code>s.replace(old, new, count)</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+                <tr>
+                    <td>翻译/映射替换</td>
+                    <td><code>s.translate(table)</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+
+                <tr>
+                    <th colspan="3"><h2>四、<span>拆分与合并</span></h2></th>
+                </tr>
+                <tr>
+                    <td>功能</td>
+                    <td><code>Python</code> 方法</td>
+                    <td><code>JavaScript</code> 方法</td>
+                </tr>
+                <tr>
+                    <td>按分隔符拆分为列表</td>
+                    <td><code>s.split(sep)</code></td>
+                    <td><code>s.split(sep)</code></td>
+                </tr>
+                <tr>
+                    <td>按分隔符拆分（限制次数）</td>
+                    <td><code>s.split(sep, maxsplit)</code></td>
+                    <td><code>s.split(sep, limit)</code></td>
+                </tr>
+                <tr>
+                    <td>从右按分隔符拆分</td>
+                    <td><code>s.rsplit(sep, maxsplit)</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+                <tr>
+                    <td>按换行拆分为列表</td>
+                    <td><code>s.splitlines()</code></td>
+                    <td><span style="color: blue;">需正则</span> <code>s.split(/\r?\n/)</code></td>
+                </tr>
+                <tr>
+                    <td>将列表/可迭代对象合并为字符串</td>
+                    <td><code>sep.join(iterable)</code>（字符串方法）</td>
+                    <td><code>arr.join(sep)</code>（数组方法）</td>
+                </tr>
+                <tr>
+                    <td>按空白字符拆分</td>
+                    <td><code>s.split()</code>（默认）</td>
+                    <td><span style="color: blue;">需正则</span> <code>s.split(/\s+/)</code></td>
+                </tr>
+
+                <tr>
+                    <th colspan="3"><h2>五、<span>去除空白字符</span></h2></th>
+                </tr>
+                <tr>
+                    <td>功能</td>
+                    <td><code>Python</code> 方法</td>
+                    <td><code>JavaScript</code> 方法</td>
+                </tr>
+                <tr>
+                    <td>去除首尾空白</td>
+                    <td><code>s.strip()</code></td>
+                    <td><code>s.trim()</code></td>
+                </tr>
+                <tr>
+                    <td>去除左侧空白</td>
+                    <td><code>s.lstrip()</code></td>
+                    <td><code>s.trimStart()</code></td>
+                </tr>
+                <tr>
+                    <td>去除右侧空白</td>
+                    <td><code>s.rstrip()</code></td>
+                    <td><code>s.trimEnd()</code></td>
+                </tr>
+                <tr>
+                    <td>去除指定字符</td>
+                    <td><code>s.strip(chars)</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+
+                <tr>
+                    <th colspan="3"><h2>六、<span>填充与对齐</span></h2></th>
+                </tr>
+                <tr>
+                    <td>功能</td>
+                    <td><code>Python</code> 方法</td>
+                    <td><code>JavaScript</code> 方法</td>
+                </tr>
+                <tr>
+                    <td>左侧填充到指定长度</td>
+                    <td><code>s.rjust(width, fillchar)</code></td>
+                    <td><code>s.padStart(width, fillString)</code></td>
+                </tr>
+                <tr>
+                    <td>右侧填充到指定长度</td>
+                    <td><code>s.ljust(width, fillchar)</code></td>
+                    <td><code>s.padEnd(width, fillString)</code></td>
+                </tr>
+                <tr>
+                    <td>居中填充</td>
+                    <td><code>s.center(width, fillchar)</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+                <tr>
+                    <td>填充零（数字）</td>
+                    <td><code>str(num).zfill(width)</code></td>
+                    <td><code>num.toString().padStart(width, '0')</code></td>
+                </tr>
+
+                <tr>
+                    <th colspan="3"><h2>七、<span>判断类型</span></h2></th>
+                </tr>
+                <tr>
+                    <td>功能</td>
+                    <td><code>Python</code> 方法</td>
+                    <td><code>JavaScript</code> 方法</td>
+                </tr>
+                <tr>
+                    <td>是否全为数字</td>
+                    <td><code>s.isdigit()</code></td>
+                    <td><span style="color: blue;">需正则</span> <code>/^\d+$/</code></td>
+                </tr>
+                <tr>
+                    <td>是否全为字母</td>
+                    <td><code>s.isalpha()</code></td>
+                    <td><span style="color: blue;">需正则</span> <code>/^[a-zA-Z]+$/</code></td>
+                </tr>
+                <tr>
+                    <td>是否全为字母或数字</td>
+                    <td><code>s.isalnum()</code></td>
+                    <td><span style="color: blue;">需正则</span> <code>/^[a-zA-Z0-9]+$/</code></td>
+                </tr>
+                <tr>
+                    <td>是否全为小写</td>
+                    <td><code>s.islower()</code></td>
+                    <td><code>s === s.toLowerCase()</code></td>
+                </tr>
+                <tr>
+                    <td>是否全为大写</td>
+                    <td><code>s.isupper()</code></td>
+                    <td><code>s === s.toUpperCase()</code></td>
+                </tr>
+                <tr>
+                    <td>是否全为空白字符</td>
+                    <td><code>s.isspace()</code></td>
+                    <td><span style="color: blue;">需正则</span> <code>/^\s+$/</code></td>
+                </tr>
+                <tr>
+                    <td>是否为数字（含Unicode）</td>
+                    <td><code>s.isnumeric()</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+                <tr>
+                    <td>是否为十进制数字</td>
+                    <td><code>s.isdecimal()</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+                <tr>
+                    <td>是否为首字母大写</td>
+                    <td><code>s.istitle()</code></td>
+                    <td><span style="color: red;">无直接方法</span></td>
+                </tr>
+
+                <tr>
+                    <th colspan="3"><h2>八、<span>编码与转换</span></h2></th>
+                </tr>
+                <tr>
+                    <td>功能</td>
+                    <td><code>Python</code> 方法</td>
+                    <td><code>JavaScript</code> 方法</td>
+                </tr>
+                <tr>
+                    <td>编码为字节</td>
+                    <td><code>s.encode(encoding)</code></td>
+                    <td><code>new TextEncoder().encode(s)</code></td>
+                </tr>
+                <tr>
+                    <td>解码为字符串</td>
+                    <td><code>bytes.decode(encoding)</code></td>
+                    <td><code>new TextDecoder().decode(bytes)</code></td>
+                </tr>
+                <tr>
+                    <td>ASCII码转字符</td>
+                    <td><code>chr(code)</code></td>
+                    <td><code>String.fromCharCode(code)</code></td>
+                </tr>
+                <tr>
+                    <td>字符转ASCII码</td>
+                    <td><code>ord(char)</code></td>
+                    <td><code>char.charCodeAt(0)</code></td>
+                </tr>
+
+                <tr>
+                    <th colspan="3"><h2>九、<span>其他常用方法</span></h2></th>
+                </tr>
+                <tr>
+                    <td>功能</td>
+                    <td><code>Python</code> 方法</td>
+                    <td><code>JavaScript</code> 方法</td>
+                </tr>
+                <tr>
+                    <td>获取字符串长度</td>
+                    <td><code>len(s)</code></td>
+                    <td><code>s.length</code></td>
+                </tr>
+                <tr>
+                    <td>反转字符串</td>
+                    <td><code>s[::-1]</code></td>
+                    <td><code>s.split('').reverse().join('')</code></td>
+                </tr>
+                <tr>
+                    <td>重复字符串</td>
+                    <td><code>s * n</code></td>
+                    <td><code>s.repeat(n)</code></td>
+                </tr>
+                <tr>
+                    <td>字符串格式化</td>
+                    <td><code>f"{var}"</code> 或 <code>"{}".format(var)</code></td>
+                    <td><code>`${var}`</code>（模板字符串）</td>
+                </tr>
+                <tr>
+                    <td>转换为字符串</td>
+                    <td><code>str(obj)</code></td>
+                    <td><code>String(obj)</code> 或 <code>obj.toString()</code></td>
+                </tr>
+                <tr>
+                    <td>连接多个字符串</td>
+                    <td><code>' '.join([s1, s2])</code></td>
+                    <td><code>arr.join(' ')</code> 或 <code>s1 + ' ' + s2</code></td>
+                </tr>
+                <tr>
+                    <td>检查字符串是否为空</td>
+                    <td><code>if not s:</code></td>
+                    <td><code>if (!s || s.length === 0)</code></td>
+                </tr>
+
+                <tr>
+                    <th colspan="3"><h2>十、<span>方法存在性对比</span></h2></th>
+                </tr>
+                <tr>
+                    <td>方法</td>
+                    <td><code>Python</code></td>
+                    <td><code>JavaScript</code></td>
+                </tr>
+                <tr>
+                    <td><code>upper()</code> / <code>toUpperCase()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>lower()</code> / <code>toLowerCase()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>capitalize()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>title()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>swapcase()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>find()</code> / <code>indexOf()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>index()</code>（无容错）</td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>rfind()</code> / <code>lastIndexOf()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>startswith()</code> / <code>startsWith()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>endswith()</code> / <code>endsWith()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>includes()</code> / <code>in</code></td>
+                    <td>✅（<code>in</code>）</td>
+                    <td>✅（<code>includes()</code>）</td>
+                </tr>
+                <tr>
+                    <td><code>count()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>replace()</code></td>
+                    <td>✅（全部替换）</td>
+                    <td>✅（默认仅第一个）</td>
+                </tr>
+                <tr>
+                    <td><code>split()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>rsplit()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>splitlines()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>join()</code></td>
+                    <td>✅（字符串方法）</td>
+                    <td>✅（数组方法）</td>
+                </tr>
+                <tr>
+                    <td><code>strip()</code> / <code>trim()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>lstrip()</code> / <code>trimStart()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>rstrip()</code> / <code>trimEnd()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>rjust()</code> / <code>padStart()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>ljust()</code> / <code>padEnd()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>center()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>zfill()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>isdigit()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span>（需正则）</td>
+                </tr>
+                <tr>
+                    <td><code>isalpha()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span>（需正则）</td>
+                </tr>
+                <tr>
+                    <td><code>isalnum()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span>（需正则）</td>
+                </tr>
+                <tr>
+                    <td><code>islower()</code></td>
+                    <td>✅</td>
+                    <td>✅（需手动比较）</td>
+                </tr>
+                <tr>
+                    <td><code>isupper()</code></td>
+                    <td>✅</td>
+                    <td>✅（需手动比较）</td>
+                </tr>
+                <tr>
+                    <td><code>isspace()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span>（需正则）</td>
+                </tr>
+                <tr>
+                    <td><code>isnumeric()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>istitle()</code></td>
+                    <td>✅</td>
+                    <td><span style="color: red;">❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>encode()</code> / <code>TextEncoder</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>decode()</code> / <code>TextDecoder</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>chr()</code> / <code>fromCharCode()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>ord()</code> / <code>charCodeAt()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>repeat()</code> / <code>*</code></td>
+                    <td>✅（<code>*</code>）</td>
+                    <td>✅（<code>repeat()</code>）</td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>总结</h3></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>Python 字符串：</strong>方法更丰富，尤其在大小写判断、填充、拆分等场景下提供了许多原生方法。</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>JavaScript 字符串：</strong>核心功能完整，部分操作需要组合方法或正则实现，优势在于与数组方法的配合。</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均为学习笔记整理，结合 Python 与 JavaScript 官方文档。</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span></p>
+    </footer>
+</main>
+</body>
+</html>
