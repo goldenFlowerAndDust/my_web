@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集合set-基本操作</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>集合set-基本操作</h1>
+    </header>
+    <section id="section_1">
+        <h2>集合<code>set</code>概念</h2>
+        <ul>
+            <li>集合：<span>同样是可以存储<span class="span">多个数据类型</span></span></li>
+            <li>特点：<span>同一个集合内，<span class="span">元素不能重复</span></span></li>
+            <li>不能重复：<span>同一种数据类型，且值相同</span></li>
+            <li>
+                <h3>概念</h3>
+                <ol>
+                    <li><span>集合(<code>set</code>)是一种<span class="span">无序的、不可重复、可修改的容器</span></span>
+                    </li>
+                    <li><span>既然无序，则不存在序列，也不能使用索引访问元素</span></li>
+                    <li>定义集合：<code>字面量 = {元素1, 元素2, ...}</code></li>
+                    <li>定义空集合：<code>字面量 = set()</code>，注意：<code>字面量 = {}</code>，是创建空字典，并不是空集合
+                    </li>
+                    <li>
+                        <span>集合推导式(<span
+                                class="span">不添加条件</span>)：<code>字面量 = {s for s in 可迭代容器}</code>
+                        </span>
+                    </li>
+                    <li>
+                        <span>集合推导式(<span
+                                class="span">添加条件</span>)：<code>字面量 = {s for s in 可迭代容器 if 条件}</code>
+                        </span>
+                    </li>
+                    <li><span>推导式都分为：<span class="span">无条件与有条件两种写法</span></span></li>
+                    <li>
+                        <h4>注意：</h4>
+                        <ul>
+                            <li>
+                                方法：<code>set()</code>，只能传一个参数，这个参数可以是：<span>单个元素，也可以是一个可迭代对象</span>
+                            </li>
+                            <li><span>因为无法获取具体元素，所以修改元素值只能：<code>remove() + add()</code></span></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="3"><h2><code>python</code>集合常用方法</h2></th>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td>含义</td>
+                    <td>样例</td>
+                </tr>
+                <tr>
+                    <td><code>add(...)</code></td>
+                    <td>添加元素到集合中：<span>只能传一个参数，将参数视为一个整体添加</span></td>
+                    <td><code>s1.add('t')</code></td>
+                </tr>
+                <tr>
+                    <td><code>update(...)</code></td>
+                    <td>添加多个元素到集合中：<span>只能传一个参数，参数必须是可迭代对象，<br>先将参数遍历，然后逐个增加进集合</span>
+                    </td>
+                    <td><code>s1.update(可迭代对象)</code></td>
+                </tr>
+                <tr>
+                    <td><code>remove(...)</code></td>
+                    <td>移除集合中的指定元素(<span>指定元素不存在<span class="span">将报错</span></span>)</td>
+                    <td><code>s1.remove('t')</code></td>
+                </tr>
+                <tr>
+                    <td><code>discard(...)</code></td>
+                    <td>移除集合中的指定元素(<span>指定元素不存在<span class="span">不会报错</span></span>)</td>
+                    <td><code>s1.discard('t')</code></td>
+                </tr>
+                <tr>
+                    <td><code>pop()</code></td>
+                    <td>随机删除集合中的元素并返回</td>
+                    <td><code>e = s1.pop()</code></td>
+                </tr>
+                <tr>
+                    <td><code>clear()</code></td>
+                    <td>清空集合</td>
+                    <td><code>s1.clear()</code></td>
+                </tr>
+                <tr>
+                    <td><code>del set()</code></td>
+                    <td>
+                        <ol>
+                            <li><span>删除集合这个对象</span>，永久删除，访问不存在的对象，报错</li>
+                            <li><span>关于<code>del</code>关键字，结论：<span
+                                    class="span">万物皆可删除整个对象，但只有 <span
+                                    class="span">可变序列才能删除其中的单个元素或切片</span></span></span>
+                            </li>
+                            <li><span>删除容器：<code>del list、del str、del tuple、del set、del dict、...</code></span></li>
+                            <li>
+                                <span>删除元素：<code>del container[索引]、del container[切片]</code>，<code>container</code>可变序列的容器</span>
+                            </li>
+                        </ol>
+                    </td>
+                    <td><code>del s1</code></td>
+                </tr>
+                <tr>
+                    <th colspan="3"><h3><a
+                            href="../../../../../第二部分——python核心语法/数据存储与运算/运算符/笔记/运算符.html/#集合与位运算对应的关系">两个集合之间的关系</a>
+                    </h3></th>
+                </tr>
+                <tr>
+                    <td><code>difference()</code></td>
+                    <td>求取两个集合的差集(<span>包含在第一个集合但不包含第二个集合的元素</span>)</td>
+                    <td><code>s1.difference(s2)</code> 等价于 <code> s1 - s2</code></td>
+                </tr>
+                <tr>
+                    <td><code>union()</code></td>
+                    <td>求两个集合的并集(<span>两个集合当中，所有元素，自动去重</span>)</td>
+                    <td><code>s1.union(s2)</code> 等价于 <code>s1 | s2</code></td>
+                </tr>
+                <tr>
+                    <td><code>intersection()</code></td>
+                    <td>求取两个集合的交集(<span>两个集合，都存在的元素</span>)</td>
+                    <td><code>s1.intersection(s2)</code> 等价于 <code>s1 & s2</code></td>
+                </tr>
+                <tr>
+                    <td><code>symmetric_difference()</code></td>
+                    <td>求取两个集合的对称差集(<span>保留两个集合，各自独有的元素(去掉共有的元素)</span>)</td>
+                    <td><code>s1.symmetric_difference(s2)</code> 等价于 <code>s1 ^ s2</code></td>
+                </tr>
+                <tr>
+                    <th colspan="3">
+                        集合运算(判断支持多个参数的方法)——<span>注意：下列方法均有返回值，不更改原集合，需要字面量接收返回值</span>
+                    </th>
+                </tr>
+                <tr>
+                    <td>方法</td>
+                    <td>支持多参数吗</td>
+                    <td>示例</td>
+                </tr>
+                <tr>
+                    <td><code>union()</code></td>
+                    <td>✅ 是</td>
+                    <td><code>s1.union(s2, s3, s4)</code></td>
+                </tr>
+                <tr>
+                    <td><code>intersection()</code></td>
+                    <td>✅ 是</td>
+                    <td><code>s1.intersection(s2, s3, s4)</code></td>
+                </tr>
+                <tr>
+                    <td><code>difference()</code></td>
+                    <td>✅ 是</td>
+                    <td><code>s1.difference(s2)</code></td>
+                </tr>
+                <tr>
+                    <td><code>symmetric_difference()</code></td>
+                    <td>❌ 否</td>
+                    <td><code>s1.symmetric_difference(s2)（<span>只能一个</span>）</code></td>
+                </tr>
+                <tr>
+                    <th colspan="3">集合运算，更改原列表<span>注意：下列方法均无返回值，更改原集合</span></th>
+                </tr>
+                <tr>
+                    <td>集合运算</td>
+                    <td>方法</td>
+                    <td>示例</td>
+                </tr>
+                <tr>
+                    <td>并集</td>
+                    <td><code>update()</code>，因为自身，迭代添加元素特性，天然适配并集</td>
+                    <td><code>s1.update(s2)</code></td>
+                </tr>
+                <tr>
+                    <td>交集</td>
+                    <td><code>intersection_update()</code></td>
+                    <td><code>s1.intersection_update(s2, s3, s4)</code></td>
+                </tr>
+                <tr>
+                    <td>差集</td>
+                    <td><code>difference_update()</code></td>
+                    <td><code>s1.difference_update(s2)</code></td>
+                </tr>
+                <tr>
+                    <td>对称差集</td>
+                    <td><code>symmetric_difference_update()</code></td>
+                    <td><code>s1.symmetric_difference_update(s2)（<span>只能一个</span>）</code></td>
+                </tr>
+                <tr>
+                    <th colspan="3"><span>以上方法，本质与正常集合运算并无差别，<span
+                            class="span">唯一区别，更改原列表</span></span></th>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <section id="section_2">
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="3"><h2>Python 集合 vs JavaScript Set 完整对比表</h2></th>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>一、<span>概念与定义</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>Python</code> 集合</td>
+                    <td><code>JavaScript</code> Set</td>
+                </tr>
+                <tr>
+                    <td>本质</td>
+                    <td>内置数据类型</td>
+                    <td>内置对象（<code>Set</code>）</td>
+                </tr>
+                <tr>
+                    <td>定义方式</td>
+                    <td><code>s = {1, 2, 3}</code></td>
+                    <td><code>let s = new Set([1, 2, 3])</code></td>
+                </tr>
+                <tr>
+                    <td>空集合</td>
+                    <td><code>s = set()</code></td>
+                    <td><code>let s = new Set()</code></td>
+                </tr>
+                <tr>
+                    <td>元素是否唯一</td>
+                    <td>✅ 是</td>
+                    <td>✅ 是</td>
+                </tr>
+                <tr>
+                    <td>是否有序</td>
+                    <td><span>❌ 无序</span></td>
+                    <td>✅ 按插入顺序</td>
+                </tr>
+                <tr>
+                    <td>是否可修改</td>
+                    <td>✅ 可修改</td>
+                    <td>✅ 可修改</td>
+                </tr>
+                <tr>
+                    <td>是否支持索引</td>
+                    <td><span>❌ 不支持</span></td>
+                    <td><span>❌ 不支持</span></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>二、<span>增操作</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 集合</td>
+                    <td><code>JavaScript</code> Set</td>
+                </tr>
+                <tr>
+                    <td>添加单个元素</td>
+                    <td><code>s.add(x)</code></td>
+                    <td><code>s.add(x)</code></td>
+                </tr>
+                <tr>
+                    <td>添加多个元素</td>
+                    <td><code>s.update([1, 2, 3])</code></td>
+                    <td><span>无直接方法</span>（需循环）</td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>三、<span>删操作</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 集合</td>
+                    <td><code>JavaScript</code> Set</td>
+                </tr>
+                <tr>
+                    <td>删除指定元素</td>
+                    <td><code>s.remove(x)</code>（不存在报错）<br><code>s.discard(x)</code>（不存在不报错）</td>
+                    <td><code>s.delete(x)</code>（返回 <code>true/false</code>）</td>
+                </tr>
+                <tr>
+                    <td>删除并返回一个元素</td>
+                    <td><code>e = s.pop()</code>（随机）</td>
+                    <td><span>无直接方法</span>（需手动迭代）</td>
+                </tr>
+                <tr>
+                    <td>清空集合</td>
+                    <td><code>s.clear()</code></td>
+                    <td><code>s.clear()</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>四、<span>查操作</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 集合</td>
+                    <td><code>JavaScript</code> Set</td>
+                </tr>
+                <tr>
+                    <td>检查元素是否存在</td>
+                    <td><code>x in s</code></td>
+                    <td><code>s.has(x)</code></td>
+                </tr>
+                <tr>
+                    <td>获取集合大小</td>
+                    <td><code>len(s)</code></td>
+                    <td><code>s.size</code></td>
+                </tr>
+                <tr>
+                    <td>遍历所有元素</td>
+                    <td><code>for item in s:</code></td>
+                    <td><code>for (let item of s) {}</code><br><code>s.forEach(item => {})</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>五、<span>集合运算</span></h3></td>
+                </tr>
+                <tr>
+                    <td>运算</td>
+                    <td><code>Python</code> 集合</td>
+                    <td><code>JavaScript</code> Set</td>
+                </tr>
+                <tr>
+                    <td>交集</td>
+                    <td><code>s1 & s2</code> 或 <code>s1.intersection(s2)</code></td>
+                    <td><span>无原生方法</span>（需手动实现）</td>
+                </tr>
+                <tr>
+                    <td>并集</td>
+                    <td><code>s1 | s2</code> 或 <code>s1.union(s2)</code></td>
+                    <td><span>无原生方法</span>（需手动实现）</td>
+                </tr>
+                <tr>
+                    <td>差集</td>
+                    <td><code>s1 - s2</code> 或 <code>s1.difference(s2)</code></td>
+                    <td><span>无原生方法</span>（需手动实现）</td>
+                </tr>
+                <tr>
+                    <td>对称差集</td>
+                    <td><code>s1 ^ s2</code> 或 <code>s1.symmetric_difference(s2)</code></td>
+                    <td><span>无原生方法</span>（需手动实现）</td>
+                </tr>
+                <tr>
+                    <td>判断子集</td>
+                    <td><code>s1.issubset(s2)</code></td>
+                    <td><span>无原生方法</span></td>
+                </tr>
+                <tr>
+                    <td>判断父集</td>
+                    <td><code>s1.issuperset(s2)</code></td>
+                    <td><span>无原生方法</span></td>
+                </tr>
+                <tr>
+                    <td>判断是否无交集</td>
+                    <td><code>s1.isdisjoint(s2)</code></td>
+                    <td><span>无原生方法</span></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>六、<span>转换</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 集合</td>
+                    <td><code>JavaScript</code> Set</td>
+                </tr>
+                <tr>
+                    <td>转列表/数组</td>
+                    <td><code>list(s)</code></td>
+                    <td><code>[...s]</code> 或 <code>Array.from(s)</code></td>
+                </tr>
+                <tr>
+                    <td>从列表/数组创建</td>
+                    <td><code>set([1, 2, 3])</code></td>
+                    <td><code>new Set([1, 2, 3])</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>七、<span>方法存在性对比</span></h3></td>
+                </tr>
+                <tr>
+                    <td>方法</td>
+                    <td><code>Python</code> 集合</td>
+                    <td><code>JavaScript</code> Set</td>
+                </tr>
+                <tr>
+                    <td><code>add()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>remove()</code> / <code>delete()</code></td>
+                    <td>✅ <code>remove()</code>（不存在报错）</td>
+                    <td>✅ <code>delete()</code>（返回布尔值）</td>
+                </tr>
+                <tr>
+                    <td><code>discard()</code></td>
+                    <td>✅（不存在不报错）</td>
+                    <td><span>❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>pop()</code></td>
+                    <td>✅（随机删除）</td>
+                    <td><span>❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>clear()</code></td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>intersection()</code> / <code>&</code></td>
+                    <td>✅</td>
+                    <td><span>❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>union()</code> / <code>|</code></td>
+                    <td>✅</td>
+                    <td><span>❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>difference()</code> / <code>-</code></td>
+                    <td>✅</td>
+                    <td><span>❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>symmetric_difference()</code> / <code>^</code></td>
+                    <td>✅</td>
+                    <td><span>❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>issubset()</code></td>
+                    <td>✅</td>
+                    <td><span>❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>issuperset()</code></td>
+                    <td>✅</td>
+                    <td><span>❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>isdisjoint()</code></td>
+                    <td>✅</td>
+                    <td><span>❌</span></td>
+                </tr>
+                <tr>
+                    <td><code>has()</code> / <code>in</code></td>
+                    <td>✅ <code>in</code></td>
+                    <td>✅ <code>has()</code></td>
+                </tr>
+                <tr>
+                    <td><code>size</code> / <code>len()</code></td>
+                    <td>✅ <code>len()</code></td>
+                    <td>✅ <code>size</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>总结</h3></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>Python 集合：</strong>功能丰富，支持交集、并集、差集、对称差集、子集判断等原生运算，适合数学集合操作。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>JavaScript Set：</strong>基础功能完整，但集合运算需要手动实现，适合存储唯一值，但不适合复杂集合操作。
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

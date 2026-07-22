@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元组tuple-基本操作</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>元组tuple-基本操作</h1>
+    </header>
+    <section id="section_1">
+        <h2>元组概念</h2>
+        <ul>
+            <li>列表特点：<span>元素可重复、有序、可以修改的</span></li>
+            <li>
+                字符串特点：<span>一个字符串内可以有多个字符，且能重复、有序、不可以修改、只能是字符、不能是其他数据容器</span>
+            </li>
+            <li>元组介绍：<span>元组是<span class="span">不可变</span>的序列，类似于列表、但创建后不能修改</span></li>
+            <li>
+                <h3>元组特点</h3>
+                <ol>
+                    <li>可以存储不同类型的元素</li>
+                    <li>元素可以：<span>重复、有序(<span class="span">支持索引访问、切片</span>)、不可以修改</span></li>
+                    <li>定义：列表：<code>列表名 = [元素1, 元素2, ...]</code>、元组：<code>元组名 = (元素1, 元素2,
+                        ...)</code></li>
+                    <li>定义空元组：<code>元组名 = ()</code>，也可以：<code>元组名 = tuple()</code></li>
+                    <li>定义空列表：<code>列表名 = []</code>，但是列表没有：<code>列表名 = list[]</code></li>
+                    <li>定义空字符串：<code>字面量 = ""(<span>不要有空格</span>)，也可以：<code>字面量 =
+                        str()</code></code></li>
+                    <li>方法一、<code>count(slef,value)</code>：<span>统计某元素在元组中出现的次数</span></li>
+                    <li>方法二、<code>index(self,value)</code>：<span>查找某个元素在元组中的索引位置(<span
+                            class="span">第一次出现的位置</span>)</span></li>
+                    <li>方法两种形式：<code>字面量.count(value)</code>/<code>count(字面量,value)</code></li>
+                </ol>
+                <h4>注意事项：</h4>
+                <ol>
+                    <li>当定义元组且只有一个元素：<code>字面量 = (100)/ 字面量 = ("hello")</code>，这种写法，<span>定义不是元组，而是数据本身的数据类型</span>
+                    </li>
+                    <li>解决上述问题,只需要在<span>元素后加一个英文逗号</span>即可：<code>字面量 = (100<code>,</code>)/
+                        字面量 = ("hello"<code>,</code>)</code></li>
+                    <li>
+                        <img src="./image/问你题-元素定义单个元素.png"
+                             alt="问题-元素定义单个元素"
+                             title="问题-元素定义单个元素" style="display: block">
+                        <img src="./image/解决：定义单个元素，数据容器问题.png"
+                             alt="解决：定义单个元素，数据容器问题"
+                             title="解决：定义单个元素，数据容器问题" style="display: block">
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="3"><h2>Python 元组 vs JavaScript 数组（模拟元组）完整对比表</h2></th>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>一、<span>概念与定义</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>Python</code> 元组</td>
+                    <td><code>JavaScript</code> 数组（模拟元组）</td>
+                </tr>
+                <tr>
+                    <td>本质</td>
+                    <td>内置数据类型</td>
+                    <td>内置对象（<code>Array</code>）</td>
+                </tr>
+                <tr>
+                    <td>定义方式</td>
+                    <td><code>t = (1, 2, 3)</code> 或 <code>t = 1, 2, 3</code></td>
+                    <td><code>let arr = [1, 2, 3]</code></td>
+                </tr>
+                <tr>
+                    <td>空元组/空数组</td>
+                    <td><code>t = ()</code> 或 <code>t = tuple()</code></td>
+                    <td><code>let arr = []</code></td>
+                </tr>
+                <tr>
+                    <td>单元素定义</td>
+                    <td><code>t = (1,)</code>（逗号必须）</td>
+                    <td><code>let arr = [1]</code>（无需特殊处理）</td>
+                </tr>
+                <tr>
+                    <td>是否可变</td>
+                    <td><span>❌ 不可变</span></td>
+                    <td>✅ 可变（但可通过 <code>Object.freeze(arr)</code> 模拟不可变）</td>
+                </tr>
+                <tr>
+                    <td>是否有序</td>
+                    <td>✅ 有序</td>
+                    <td>✅ 有序</td>
+                </tr>
+                <tr>
+                    <td>元素是否可重复</td>
+                    <td>✅ 允许重复</td>
+                    <td>✅ 允许重复</td>
+                </tr>
+                <tr>
+                    <td>是否支持索引</td>
+                    <td>✅ 支持（正向和反向）</td>
+                    <td>✅ 支持（正向，不支持反向负索引）</td>
+                </tr>
+                <tr>
+                    <td>是否支持切片</td>
+                    <td>✅ 支持</td>
+                    <td>✅ 支持（<code>slice()</code> 方法）</td>
+                </tr>
+                <tr>
+                    <td>是否可哈希</td>
+                    <td>✅ 是（元素必须可哈希）</td>
+                    <td><span>❌ 否</span></td>
+                </tr>
+                <tr>
+                    <td>是否可作为字典键</td>
+                    <td>✅ 可以</td>
+                    <td><span>❌ 不可以</span></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>二、<span>访问与操作</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 元组</td>
+                    <td><code>JavaScript</code> 数组</td>
+                </tr>
+                <tr>
+                    <td>索引访问</td>
+                    <td><code>t[index]</code>（支持负数索引）</td>
+                    <td><code>arr[index]</code>（不支持负数索引）</td>
+                </tr>
+                <tr>
+                    <td>切片</td>
+                    <td><code>t[start:end:step]</code></td>
+                    <td><code>arr.slice(start, end)</code></td>
+                </tr>
+                <tr>
+                    <td>获取长度</td>
+                    <td><code>len(t)</code></td>
+                    <td><code>arr.length</code></td>
+                </tr>
+                <tr>
+                    <td>遍历</td>
+                    <td><code>for item in t:</code></td>
+                    <td><code>for (let item of arr) {}</code><br><code>arr.forEach(item => {})</code></td>
+                </tr>
+                <tr>
+                    <td>同时获取索引和值</td>
+                    <td><code>for i, item in enumerate(t):</code></td>
+                    <td><code>arr.forEach((item, i) => {})</code></td>
+                </tr>
+                <tr>
+                    <td>检查元素是否存在</td>
+                    <td><code>x in t</code></td>
+                    <td><code>arr.includes(x)</code> 或 <code>arr.indexOf(x) !== -1</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>三、<span>增删改操作</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 元组</td>
+                    <td><code>JavaScript</code> 数组</td>
+                </tr>
+                <tr>
+                    <td>增</td>
+                    <td><span>❌ 不支持</span>（不可变）</td>
+                    <td><code>push()</code>、<code>unshift()</code>、<code>splice()</code></td>
+                </tr>
+                <tr>
+                    <td>删</td>
+                    <td><span>❌ 不支持</span>（不可变）</td>
+                    <td><code>pop()</code>、<code>shift()</code>、<code>splice()</code></td>
+                </tr>
+                <tr>
+                    <td>改</td>
+                    <td><span>❌ 不支持</span>（不可变）</td>
+                    <td><code>arr[index] = newValue</code></td>
+                </tr>
+                <tr>
+                    <td>连接/合并</td>
+                    <td><code>t1 + t2</code>（返回新元组）</td>
+                    <td><code>arr1.concat(arr2)</code> 或 <code>[...arr1, ...arr2]</code></td>
+                </tr>
+                <tr>
+                    <td>重复</td>
+                    <td><code>t * n</code>（返回新元组）</td>
+                    <td><span>无原生方法</span>（需用循环或 <code>Array.from()</code>）</td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>四、<span>解包</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 元组</td>
+                    <td><code>JavaScript</code> 数组</td>
+                </tr>
+                <tr>
+                    <td>基础解包</td>
+                    <td><code>a, b = (1, 2)</code></td>
+                    <td><code>[a, b] = [1, 2]</code></td>
+                </tr>
+                <tr>
+                    <td>收集剩余元素</td>
+                    <td><code>first, *rest = (1, 2, 3, 4)</code></td>
+                    <td><code>[first, ...rest] = [1, 2, 3, 4]</code></td>
+                </tr>
+                <tr>
+                    <td>展开合并</td>
+                    <td><code>(*t1, *t2)</code></td>
+                    <td><code>[...arr1, ...arr2]</code></td>
+                </tr>
+                <tr>
+                    <td>交换变量</td>
+                    <td><code>a, b = b, a</code></td>
+                    <td><code>[a, b] = [b, a]</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>五、<span>转换</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 元组</td>
+                    <td><code>JavaScript</code> 数组</td>
+                </tr>
+                <tr>
+                    <td>转列表/数组</td>
+                    <td><code>list(t)</code></td>
+                    <td><span>已经是数组</span></td>
+                </tr>
+                <tr>
+                    <td>从列表/数组创建</td>
+                    <td><code>tuple([1, 2, 3])</code></td>
+                    <td><span>已经是数组</span></td>
+                </tr>
+                <tr>
+                    <td>转字符串（拼接）</td>
+                    <td><code>','.join(t)</code>（元素需为字符串）</td>
+                    <td><code>arr.join(',')</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>六、<span>方法存在性对比</span></h3></td>
+                </tr>
+                <tr>
+                    <td>方法</td>
+                    <td><code>Python</code> 元组</td>
+                    <td><code>JavaScript</code> 数组</td>
+                </tr>
+                <tr>
+                    <td><code>count()</code></td>
+                    <td>✅</td>
+                    <td><span>❌</span>（可用 <code>filter().length</code>）</td>
+                </tr>
+                <tr>
+                    <td><code>index()</code> / <code>indexOf()</code></td>
+                    <td>✅ <code>index()</code></td>
+                    <td>✅ <code>indexOf()</code></td>
+                </tr>
+                <tr>
+                    <td><code>len()</code> / <code>length</code></td>
+                    <td>✅ <code>len()</code></td>
+                    <td>✅ <code>length</code></td>
+                </tr>
+                <tr>
+                    <td><code>push()</code> / <code>append()</code></td>
+                    <td><span>❌</span></td>
+                    <td>✅ <code>push()</code></td>
+                </tr>
+                <tr>
+                    <td><code>pop()</code></td>
+                    <td><span>❌</span></td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><code>slice()</code></td>
+                    <td>✅ 切片语法 <code>t[start:end]</code></td>
+                    <td>✅ <code>slice()</code></td>
+                </tr>
+                <tr>
+                    <td><code>concat()</code> / <code>+</code></td>
+                    <td>✅ <code>t1 + t2</code></td>
+                    <td>✅ <code>concat()</code></td>
+                </tr>
+                <tr>
+                    <td><code>reverse()</code></td>
+                    <td>✅ 切片反转 <code>t[::-1]</code></td>
+                    <td>✅ <code>reverse()</code></td>
+                </tr>
+                <tr>
+                    <td><code>includes()</code> / <code>in</code></td>
+                    <td>✅ <code>in</code></td>
+                    <td>✅ <code>includes()</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>总结</h3></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>Python 元组：</strong>不可变、有序、可哈希，适合作为字典键或集合元素，支持负索引和切片，常用作“只读列表”。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>JavaScript 数组（模拟元组）：</strong>可变、有序，可通过
+                        <code>Object.freeze()</code> 模拟不可变，但不具备可哈希性，无法作为对象键。功能更灵活，但缺少元组的“不可变性保障”。
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

@@ -75,3 +75,13 @@ h5 {
     font-size: 2rem;
     color: #8B7355;
 }
+
+code {
+    color: #8E44AD;
+    font-size: inherit
+}
+
+span {
+    font-size: inherit;
+    color: #C0392B
+}

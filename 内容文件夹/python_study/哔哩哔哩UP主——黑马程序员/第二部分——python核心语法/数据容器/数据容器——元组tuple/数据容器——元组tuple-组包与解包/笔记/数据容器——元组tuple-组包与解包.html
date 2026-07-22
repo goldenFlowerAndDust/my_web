@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元组tuple-组包与解包</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>元组tuple-组包与解包</h1>
+    </header>
+    <section id="section_1">
+        <h2>组包与解包概念</h2>
+        <ul>
+            <li>组包(<code>Packing</code>)：<span>将多个值合并到一个容器(元组、列表)中</span></li>
+            <li>解包(<code>Unpacking</code>)：<span>将容器(元组、列表)解开成独立的元素，分别赋值给多个变量</span></li>
+            <li>解包高阶操作：<code>*</code>：<span>扩展运算符</span></li>
+            <li><a href="../../../数据容器——列表list/数据容器——列表list-解包/笔记/数据容器——列表list-解包.html">列表list-解包</a>
+            </li>
+            <li>
+                <img src="./image/解包与组包详解.png"
+                     alt="解包与组包详解"
+                     title="解包与组包详解">
+            </li>
+        </ul>
+        <h2>关于容器的组包操作</h2>
+        <ul>
+            <li>列表只有一种方法(<code>字面量 = [元素1, 元素2, ...])</code></li>
+            <li>字符串只有一种(<code>字面量 = "字符"</code>) <span>注意： <code>字面量 = "字符" + "字符" + ...</code>
+                执行的是字符串拼接操作，不是组包</span></li>
+            <li>元组有两种 (<code>字面量 = (元素1, 元素2, ...)</code>)和<code>字面量 = 值1, 值2, ...</code></li>
+        </ul>
+        <h2>关于容器解包操作</h2>
+        <ul>
+            <li>
+                <h3>基础解包：</h3>
+                <ol>
+                    <li><code>字面量1, 字面量2, ... = 容器</code></li>
+                    <li><span> 注意：字面量的数量 = 容器元素数量 否则报错</span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>扩展运算符(<code>[*]</code>)解包</h3>
+                <ol>
+                    <li><span>扩展运算符在字面量前面，那个字面量就会接收剩余所有元素，然后组包成列表</span></li>
+                    <li><span>扩展运算符在最前面(<code>*字面量, 字面量2 ... = 容器</code>)：先分配(<code>*</code>)以外的字面量，容器元素从右往左按顺序<span
+                            class="span">字面量从右往左赋值</span>，最后多余元素，重新组包成列表</span></li>
+                    <li>
+                        <span>扩展运算符在最中间(<code>字面量, *字面量2, 字面量3 ... = 容器</code>)：先分配(<code>*</code>)以外的字面量,以扩展运算符为中心，<span
+                                class="span">左边，容器元素从左往右按顺序字面从左往右赋值</span>，右边，容器元素从右往左按顺字面量从右往左赋值，最后多余元素，重新组包成列表</span>
+                    </li>
+                    <li><span>扩展运算符在最后面(<code>字面量, ..., *字面量2 = 容器</code>)：先分配(<code>*</code>)以外的字面量，容器元素从左往右按顺序<span
+                            class="span">字面量从左往右赋值</span>，最后多余元素，重新组包成列表</span></li>
+                    <li>
+                        <h4>总结</h4>
+                        <ul>
+                            <li><span>始终最后分配：先把其他变量分配完，<code>*</code> 再接收剩余的部分</span></li>
+                            <li><span>以 * 为基准：<code>*</code> 在左边，就从左往右取；<code>*</code> 在右边，就从右往左取。</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>解包与解包同时操作(<span>也叫合并</span>)</h3>
+                <ol>
+                    <li><code>c, b, a = a, b, c</code></li>
+                    <li>
+                        具体的工作流程：<code>a = 100, b = 200, c =300</code>
+                        <br>
+                        <code>
+                            先组包：t = a, b, c # <span>那么：t = (100,200,300)</span>
+                            <br>再解包: c, a, b = t # <span>对应的：c=100，a=200, b=300</span>
+                            <br>那么成功的将：<code>a = c = 100, b = a = 200, c = b = 300</code>进行了交换
+                            <br>既然都是t作为中间变量，其实可以省略为：<code>c, b, a = a, b, c</code>这即使组包与解包的合并
+                        </code>
+                    </li>
+                    <li>说白了就是：<span>先将右边的值，临时组包成元组，再解包赋值给左侧</span></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>
