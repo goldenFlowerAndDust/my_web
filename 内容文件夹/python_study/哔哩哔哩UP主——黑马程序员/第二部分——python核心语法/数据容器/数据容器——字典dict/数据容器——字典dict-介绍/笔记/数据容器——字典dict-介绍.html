@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字典dict-介绍</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>字典dict-介绍</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>现实字典本意：<span>通过[<span class="span">字/词语</span>]，找到对应的 [<span
+                    class="span">解释</span>]</span>
+            </li>
+            <li>在<code>python</code>中字典：<span>【字/词语】定义为 【<span class="span">键</span>】，【解释】定义为 【<span
+                    class="span">值</span>】</span>
+            </li>
+            <li><span>所以，字典的元素称为 【<span class="span">键值对</span>】，通过 【<span class="span">键</span>】访问对应的【<span
+                    class="span">值</span>】</span>
+            </li>
+            <li>
+                <h2>字典的特点</h2>
+                <ol>
+                    <li>定义字典：<code>字面量 = {key:value,key:value, ...}</code></li>
+                    <li>定义空字典：<code>字面量 = dict()<span>或</span>字面量 = {}</code></li>
+                    <li>
+                        字典存储的是：<span>键值对——<code>key:value</code>，<code>key</code>:键、<code>value</code>：值</span>
+                    </li>
+                    <li><span>通过键，访问对应的值</span></li>
+                    <li><span>键值对存储、键不能重复、可修改、值可以是任何数据类型</span></li>
+                </ol>
+                <h2>字典的注意事项</h2>
+                <ol>
+                    <li><span>键必须是唯一的，同一个字典，不能出现两个或多个完全相同的键</span></li>
+                    <li><span>字典的键，必须是可(<span class="span">哈希的</span>)</span></li>
+                    <li><span>哈希值：它是通过算法：<span class="span">哈希函数</span>计算出来的，哈希值是唯一的</span>
+                    </li>
+                    <li><span>每当定义一个键，就会执行一次函数，存储哈希值，<span class="span">每当访问一个键，会先将键转哈希值，然后通过哈希值，查找对应的值</span></span>
+                    </li>
+                    <li>已知哈希值必须是不变的，所以可哈希的有：<span>字符串、元组(内部元素必须不可变)、数字</span>,不可哈希的有：<span>列表、集合</span>
+                    </li>
+                    <li>值：<span>与变量值一致，可以是任何数据类型、容器</span></li>
+                    <li>总结来说：<span>键——哈希值：<span class="span">就是值的身份证</span>，通过身份证找到对应的值、而每个人的身份证都不一致，所以键——哈希值也是唯一，不能随意更改的</span>
+                    </li>
+                    <li><span>不能通过下标访问，字典没有序列</span></li>
+                </ol>
+            </li>
+        </ul>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="2">是否能作为键</th>
+                </tr>
+                <tr>
+                    <td>可以作为键<span>(可哈希)</span></td>
+                    <td>不可以作为<span>(不可哈希)</span></td>
+                </tr>
+                <tr>
+                    <td><code>✅ int、float、bool</code></td>
+                    <td><span>❌ <code>list</code>（可变，哈希值会变）</span></td>
+                </tr>
+                <tr>
+                    <td><code>✅ str、bytes</code></td>
+                    <td><span>❌ <code>dict</code>（可变，哈希值会变）</span></td>
+                </tr>
+                <tr>
+                    <td><span>✅ <code>tuple</code>（但必须内部元素都是可哈希的）</span></td>
+                    <td>❌ <code>set</code>（可变，哈希值会变）</td>
+                </tr>
+                <tr>
+                    <td><span>✅ <code>frozenset</code>（不可变集合）</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: left"><code>✅ None</code></td>
+                </tr>
+                <tr>
+                    <td colspan="2">额外补充：<span>❌ 自定义对象（默认是可哈希的，但如果实现了 __eq__ 而未实现 __hash__，则不可哈希</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

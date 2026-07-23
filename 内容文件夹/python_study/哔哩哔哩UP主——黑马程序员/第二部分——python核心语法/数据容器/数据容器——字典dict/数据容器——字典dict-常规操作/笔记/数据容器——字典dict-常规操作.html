@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字典dict-常规操作</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>字典dict-常规操作</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>
+                <h2>创建字典</h2>
+                <ol>
+                    <li>非空字典：<code>字面量 = {key:value, key:value, key:value ...}</code></li>
+                    <li>空字典：<code>字面量 = {}</code>/ <code>字面量 = dict()</code></li>
+                </ol>
+            </li>
+        </ul>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h2>字典的<span>增删改查</span></h2></th>
+                </tr>
+                <tr>
+                    <td>类型</td>
+                    <td>操作</td>
+                    <td>含义</td>
+                    <td>示例</td>
+                </tr>
+                <tr>
+                    <td>增(<span>添加</span>)</td>
+                    <td><code>字典名称[key] = value</code></td>
+                    <td>
+                        <ol>
+                            <li>往指定字典中添加<code>key-value</code>键值对</li>
+                            <li><span>键在原列表必须不存在，否则修改操作</span></li>
+                        </ol>
+                    </td>
+                    <td><code>dict1["姓名"] = "name"</code></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">删(<span>删除</span>)</td>
+                    <td><code>字典名称.pop(key)</code></td>
+                    <td><span>删除字典中指定的<code>key</code>,并返回该<code>key</code>对应的<code>value</code></span>
+                    </td>
+                    <td><code>name = dict1.pop("name")</code></td>
+                </tr>
+                <tr>
+                    <td><code>del 字典名称[key]</code></td>
+                    <td><span>删除字典中指定的键值对</span></td>
+                    <td><code>del dict["name"]</code></td>
+                </tr>
+                <tr>
+                    <td>改(<span>修改</span>)</td>
+                    <td><code>字典名称[key] = 新值</code></td>
+                    <td>
+                        <ol>
+                            <li>修改字典中指定的<code>key</code>对应的值</li>
+                            <li><span>键必须存在，否则就是添加操作</span></li>
+                        </ol>
+                    </td>
+                    <td><code>dict["name"] = "小明"</code></td>
+                </tr>
+                <tr>
+                    <td rowspan="5">查(<span>查询</span>)</td>
+                    <td><code>字典名称[key]</code></td>
+                    <td>
+                        <ol>
+                            <li><span>通过键访问(查询)对应的值</span></li>
+                            <li>注意：<span>键必须存在，否则报错</span></li>
+                        </ol>
+                    </td>
+                    <td><code>name = dict["name"]</code></td>
+                </tr>
+                <tr>
+                    <td><code>字典名称.get(key)</code></td>
+                    <td>
+                        <ol>
+                            <li><span>通过键访问(查询)对应的值</span></li>
+                            <li>注意：<span class="span">键不是必须存在，当键不存在不会报错</span></li>
+                        </ol>
+                    </td>
+                    <td><code>name = dict.get("name")</code></td>
+                </tr>
+                <tr>
+                    <td><code>字典名称.keys()</code></td>
+                    <td>
+                        <ol>
+                            <li><span>获取所有的键(<code>key</code>)，并返回动态视图</span></li>
+                            <li>动态视图<span>目前暂定理解为字典方法(<code>keys()、values()、items()</code>)存在</span>
+                            </li>
+                            <li>动态视图(<code>keys()</code>)：<span>与字典的变化而产生变化，当原字典的<span>键</span>更改，动态视图会实时更新</span>
+                            </li>
+                            <li>可以直接理解为：<span>实时查看所有键</span></li>
+                        </ol>
+                    </td>
+                    <td><code>view = dict.keys()</code></td>
+                </tr>
+                <tr>
+                    <td><code>字典名称.values()</code></td>
+                    <td>
+                        <ol>
+                            <li><span>获取所有的值(<code>values</code>)，并返回动态视图</span></li>
+                            <li>动态视图<span>目前暂定理解为字典方法(<code>keys()、values()、items()</code>)存在</span>
+                            </li>
+                            <li>动态视图(<code>values()</code>):<span>与字典的变化而产生变化，当原字典<span class="span">值</span>更改，动态视图会实时更新</span>
+                            </li>
+                            <li>可以直接理解为：<span>实时查看所有值</span></li>
+                        </ol>
+                    </td>
+                    <td><code>view = dict.values()</code></td>
+                </tr>
+                <tr>
+                    <td><code>字典名称.items()</code></td>
+                    <td>
+                        <ol>
+                            <li><span>获取所有的键值对(<code>key:values</code>)，并返回动态视图</span></li>
+                            <li>动态视图<span>目前暂定理解为字典方法(<code>keys()、values()、items()</code>)存在</span>
+                            </li>
+                            <li>动态视图(<code>values()</code>):<span>与字典的变化而产生变化，当原字典<span class="span">值、键</span>更改，动态视图会实时更新</span>
+                            </li>
+                            <li>可以直接理解为：<span>实时查看所有键值对(<span class="span">但是是以元组形式：<code>(key,value)</code></span>)</span>
+                            </li>
+                            <li><span>元组本身无法修改，但是视图是字典的一个动态窗口，它会随字典的变化而实时更新。</span>
+                            </li>
+                        </ol>
+                    </td>
+                    <td><code>view = dict.items()</code></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <section id="section_2">
+        <h2>其他知识点补充</h2>
+        <ul>
+            <li><span>字典不是序列，但是有序(<span class="span">与插入的顺序一致</span>)</span></li>
+            <li>
+                <div class="div_table">
+                    <table>
+                        <tr>
+                            <th colspan="2">其他二级常考方法</th>
+                        </tr>
+                        <tr>
+                            <td>方法</td>
+                            <td>作用</td>
+                        </tr>
+                        <tr>
+                            <td><code>dict.setdefault(key, default)</code></td>
+                            <td><span>如果键存在，返回对应的值；<span
+                                    class="span">如果不存在，插入键并设置默认值</span></span></td>
+                        </tr>
+                        <tr>
+                            <td><code>dict1.update(dict2)</code></td>
+                            <td><span>合并另一个字典到当前字典(<span class="span">有相同键则覆盖</span>)</span></td>
+                        </tr>
+                        <tr>
+                            <td><code>dict_new = dict.romkeys(iterable, value)</code></td>
+                            <td>
+                                <ol>
+                                    <li><span>从可迭代对象创建字典，所有键共享一个初始值:<code>value</code>，注意：iterable内的元素，均是键</span>
+                                    </li>
+                                    <li>它是一个类方法，dict类中，必须是：<code>dict.fromkeys(keys, 默认值)</code></li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>dict.popitem()</code></td>
+                            <td><span>删除并返回最后一个插入的键值对(<span
+                                    class="span">python 3.7+有序，之前是随机</span>)</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+        </ul>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="3"><h2>Python 字典 vs JavaScript 对象 vs Map 完整对比表</h2></th>
+                </tr>
+                <tr>
+                    <td colspan="3"><h3>一、<span>概念与定义</span></h3></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td><code>Python</code> 字典</td>
+                    <td><code>JavaScript</code> 对象 / Map</td>
+                </tr>
+                <tr>
+                    <td>本质</td>
+                    <td>内置数据类型</td>
+                    <td>对象（<code>Object</code>）/ 内置对象（<code>Map</code>）</td>
+                </tr>
+                <tr>
+                    <td>定义方式</td>
+                    <td><code>d = {"name": "张三"}</code></td>
+                    <td>对象：<code>let obj = {name: "张三"}</code><br>Map：<code>let map = new Map([["name",
+                        "张三"]])</code></td>
+                </tr>
+                <tr>
+                    <td>空容器</td>
+                    <td><code>d = {}</code> 或 <code>d = dict()</code></td>
+                    <td>对象：<code>let obj = {}</code><br>Map：<code>let map = new Map()</code></td>
+                </tr>
+                <tr>
+                    <td>键的类型</td>
+                    <td>必须是可哈希的（不可变类型）</td>
+                    <td>对象：只能是字符串或 <code>Symbol</code><br>Map：可以是任意类型</td>
+                </tr>
+                <tr>
+                    <td>键是否保持顺序</td>
+                    <td>✅ 保持插入顺序（Python 3.7+）</td>
+                    <td>对象：字符串键保持插入顺序，数字键会排序<br>Map：✅ 保持插入顺序</td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>二、<span>增删改查</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 字典</td>
+                    <td><code>JavaScript</code> 对象 / Map</td>
+                </tr>
+                <tr>
+                    <td>增/改</td>
+                    <td><code>d["key"] = value</code></td>
+                    <td>对象：<code>obj["key"] = value</code> 或 <code>obj.key = value</code><br>Map：<code>map.set("key",
+                        value)</code></td>
+                </tr>
+                <tr>
+                    <td>查（键存在时）</td>
+                    <td><code>d["key"]</code>（键不存在报错）</td>
+                    <td>对象：<code>obj["key"]</code>（不存在返回
+                        <code>undefined</code>）<br>Map：<code>map.get("key")</code>（不存在返回 <code>undefined</code>）
+                    </td>
+                </tr>
+                <tr>
+                    <td>查（安全方式）</td>
+                    <td><code>d.get("key")</code>（不存在返回 <code>None</code>）</td>
+                    <td>对象：<code>obj["key"] ?? defaultValue</code><br>Map：<code>map.get("key")</code>（可配合
+                        <code>??</code>）
+                    </td>
+                </tr>
+                <tr>
+                    <td>删除指定键</td>
+                    <td><code>del d["key"]</code> 或 <code>d.pop("key")</code></td>
+                    <td>对象：<code>delete obj["key"]</code><br>Map：<code>map.delete("key")</code></td>
+                </tr>
+                <tr>
+                    <td>删除并返回</td>
+                    <td><code>d.pop("key")</code></td>
+                    <td>Map：<code>map.delete("key")</code>（返回布尔值）<br>对象：无原生方法</td>
+                </tr>
+                <tr>
+                    <td>清空</td>
+                    <td><code>d.clear()</code></td>
+                    <td>对象：<code>obj = {}</code> 或逐属性删除<br>Map：<code>map.clear()</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>三、<span>查询与遍历</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 字典</td>
+                    <td><code>JavaScript</code> 对象 / Map</td>
+                </tr>
+                <tr>
+                    <td>检查键是否存在</td>
+                    <td><code>"key" in d</code></td>
+                    <td>对象：<code>"key" in obj</code> 或 <code>obj.hasOwnProperty("key")</code><br>Map：<code>map.has("key")</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td>获取所有键</td>
+                    <td><code>d.keys()</code>（返回视图）</td>
+                    <td>对象：<code>Object.keys(obj)</code>（返回数组）<br>Map：<code>map.keys()</code>（返回迭代器）</td>
+                </tr>
+                <tr>
+                    <td>获取所有值</td>
+                    <td><code>d.values()</code>（返回视图）</td>
+                    <td>对象：<code>Object.values(obj)</code>（返回数组）<br>Map：<code>map.values()</code>（返回迭代器）</td>
+                </tr>
+                <tr>
+                    <td>获取所有键值对</td>
+                    <td><code>d.items()</code>（返回视图）</td>
+                    <td>对象：<code>Object.entries(obj)</code>（返回数组）<br>Map：<code>map.entries()</code>（返回迭代器）
+                    </td>
+                </tr>
+                <tr>
+                    <td>遍历</td>
+                    <td><code>for key in d:</code><br><code>for key, value in d.items():</code></td>
+                    <td>对象：<code>for (let key in obj) {}</code>（需配合 <code>hasOwnProperty</code>）<br>Map：<code>for
+                        (let [key, value] of map) {}</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>四、<span>其他常用方法</span></h3></td>
+                </tr>
+                <tr>
+                    <td>操作</td>
+                    <td><code>Python</code> 字典</td>
+                    <td><code>JavaScript</code> 对象 / Map</td>
+                </tr>
+                <tr>
+                    <td>合并/更新</td>
+                    <td><code>d1.update(d2)</code></td>
+                    <td>对象：<code>Object.assign(obj1, obj2)</code> 或 <code>{...obj1, ...obj2}</code><br>Map：<code>new
+                        Map([...map1, ...map2])</code></td>
+                </tr>
+                <tr>
+                    <td>创建新对象/字典</td>
+                    <td><code>dict.fromkeys(iterable, value)</code></td>
+                    <td>对象：手动创建<br>Map：<code>new Map()</code> 配合循环</td>
+                </tr>
+                <tr>
+                    <td>获取大小</td>
+                    <td><code>len(d)</code></td>
+                    <td>对象：<code>Object.keys(obj).length</code><br>Map：<code>map.size</code></td>
+                </tr>
+                <tr>
+                    <td>浅拷贝</td>
+                    <td><code>d.copy()</code></td>
+                    <td>对象：<code>{...obj}</code> 或 <code>Object.assign({}, obj)</code><br>Map：<code>new
+                        Map(map)</code></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><h3>总结</h3></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>Python 字典：</strong>键必须可哈希，保持插入顺序，支持丰富的视图操作（<code>keys()</code>、<code>values()</code>、<code>items()</code>）。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>JavaScript 对象：</strong>键只能是字符串或 <code>Symbol</code>，适合作为数据容器，但遍历时需要小心原型链。
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>JavaScript Map：</strong>键可以是任意类型，保持插入顺序，是 Python
+                        字典最接近的对应结构，但方法命名不同。
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>
