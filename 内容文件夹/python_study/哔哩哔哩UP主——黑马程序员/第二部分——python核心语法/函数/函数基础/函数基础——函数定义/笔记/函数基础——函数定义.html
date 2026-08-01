@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数基础——函数定义</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>函数基础——函数定义</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li><h2>定义函数与调用函数</h2></li>
+            <li>
+                <h3>定义函数(<span>有参函数</span>)</h3>
+                <code>
+                    <br>def 函数名(参数列表):
+                    <br> &nbsp;&nbsp;函数体
+                    <br> &nbsp;&nbsp;......
+                    <br> &nbsp;&nbsp;return 返回值
+                    <br>
+                    <br># 调用函数
+                    <br>函数名(参数)
+                </code>
+            </li>
+            <li>
+                <h3>定义函数(<span>无参函数</span>)</h3>
+                <code>
+                    <br>def 函数名():
+                    <br> &nbsp;&nbsp;函数体
+                    <br> &nbsp;&nbsp;......
+                    <br>
+                    <br># 调用函数
+                    <br>函数名()
+                </code>
+            </li>
+            <li>
+                <h3 id="return关键字"><code>return</code>关键字</h3>
+                <ol>
+                    <li>作用：<span>退出函数，并返回结果，唯一途径</span></li>
+                    <li>特征：<span>return后面代码，均不会被执行</span></li>
+                    <li>语法：<code>return 返回值</code></li>
+                    <li>返回值：<span>可以是一个单独的数字、也可以是变量、也可以是容器</span></li>
+                    <li><span>同样也可以，多个变量、容器同时返回，用英文逗号隔开，<span
+                            class="span">会组包成元组，后续需要(<span>遍历、下标、切片、解包</span>)按需处理....</span></span>
+                    </li>
+                    <li>
+                        <span>若没有关键字(<code>return</code>)或只写(return)</span>，函数默认返回值是<code>None</code>
+                    </li>
+                    <li>
+                        <span class="span">因为退出函数这个特性，当函数内部出现多层循环，因为关键字<code>break、continue</code>
+                            都是只对最近一个循环分支起效，所以想要退出怎个循环，非常麻烦，<span>但是使用 <code>return</code>，
+                            直接退出函数，会强制退出整个循环，不管嵌套的有多深</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span>💡 <strong>补充说明</strong>：</span>
+                        <code>return</code> 的本职是<span class="span">“退出函数并返回结果”</span>，<br>
+                        利用它跳出多层循环只是“副作用”。如果函数内还有其他代码需要执行，用 <code>return</code> 就不合适了。
+                    </li>
+                    <li><span>一个函数，在未使用条件分支语句(<code>if、match-case</code>)，
+                        只能出现一次<code>return</code>，因为<code>return</code>后续所有代码，均不会被执行</span>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>注意</h3>
+                <ol>
+                    <li><span>函数定义时的参数列表与返回值语句是<span class="span">可有可无的(由需求确定)</span>、函数必须先定义后调用执行(<span
+                            class="span">函数定义时，内部代码未执行，在调用时才执行</span>)</span>
+                    </li>
+                    <li>
+                        <span>🔍 Python 是“运行时解析”语言：函数定义语句被执行后，函数名才会被创建。
+                            因此必须 <strong>先定义，后调用</strong>，否则报 <code>NameError</code></span>
+                    </li>
+                    <li><span>先定义，后调用是<code>python</code>的规则、<span class="span">JavaScript
+                        </span>的声明式函数，可以先调用，后定义(<span>专业术语叫：声明提升</span>)</span>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>课堂小结——函数使用的注意事项</h2>
+        <ul>
+            <li><span>函数必须先定义，在调用</span></li>
+            <li><span>函数定义，并不会执行，只有在调用函数时，函数体的逻辑才会运行</span></li>
+            <li><span>函数中通过缩进来描述归属关系</span></li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

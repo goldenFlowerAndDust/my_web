@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript函数与python函数对比表</title>
+    <link rel="stylesheet" href="../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>JavaScript函数与python函数对比表</h1>
+    </header>
+    <section id="section_1">
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h2>一、<span>函数定义方式</span></h2></th>
+                </tr>
+                <tr>
+                    <td>对比维度</td>
+                    <td><code>python</code></td>
+                    <td><code>JavaScript</code></td>
+                    <td>核心差异</td>
+                </tr>
+                <tr>
+                    <td>声明式定义</td>
+                    <td><code>def 函数名(参数):</code></td>
+                    <td><code>function 函数名(参数){ }</code></td>
+                    <td><span><code>python</code>用冒号 + 缩进，<code>JavaScript</code>用花括号</span></td>
+                </tr>
+                <tr>
+                    <td>赋值式定义</td>
+                    <td><code>函数名 = lambda 参数: 返回值(<span>仅限单表达式</span>)</code></td>
+                    <td><code>const 函数名 = function(参数){ }</code></td>
+                    <td><span><code>JavaScript</code>支持完整函数体，<code>python lambda</code>只能写一行</span></td>
+                </tr>
+                <tr>
+                    <td>匿名函数</td>
+                    <td><code>lambda 参数: 返回值</code></td>
+                    <td><code>function(参数) { }</code>或<code>(参数) => { }</code></td>
+                    <td><span><code>python lambda</code>天生匿名，<code>JavaScript</code>匿名函数需要赋值给变量或作为回调函数使用</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>箭头函数(<code>ES6</code>)</td>
+                    <td>❌ 无（lambda 是类似但功能受限）</td>
+                    <td><code>(参数) => {函数体}</code></td>
+                    <td><span>箭头函数没有自己的<code>this</code>，<code>lambda</code>也没有<code>self</code>概念</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>类中方法</td>
+                    <td><code>def 方法名(self,参数):</code></td>
+                    <td><code>方法名(参数) { }</code></td>
+                    <td>
+                        <span><code>python</code>必须显式写<code>self</code>,<code>JavaScript</code>不用(但是在类中可用<code>this</code>)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>内置函数</td>
+                    <td><code>print()、len()、input()、max()、min()...</code></td>
+                    <td><code>console.log()、Math.max()、Array.map()...</code></td>
+                    <td><span>python</span>内置函数在全局可用，<code>JavaScript</code>多在<code>Math、Array</code>等原型上
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h2>二、<span>参数系统</span></h2></th>
+                </tr>
+                <tr>
+                    <td>对比维度</td>
+                    <td><code>python</code></td>
+                    <td><code>JavaScript</code></td>
+                    <td>核心差异</td>
+                </tr>
+                <tr>
+                    <td>无参函数</td>
+                    <td><code>def 函数名():</code></td>
+                    <td><code>function 函数名() { }</code></td>
+                    <td><span>写法相似，都是空括号</span></td>
+                </tr>
+                <tr>
+                    <td>有参函数</td>
+                    <td><code>def 函数名(a,b):</code></td>
+                    <td><code>function 函数名(a,b) { }</code></td>
+                    <td><span>写法相似，形参在括号内</span></td>
+                </tr>
+                <tr>
+                    <td>默认参数</td>
+                    <td><code>def 函数名(a, b=10):</code></td>
+                    <td><code>function 函数名(a, b=10) { }</code></td>
+                    <td><span><code>ES6+</code>支持默认参数，语法几乎一样</span></td>
+                </tr>
+                <tr>
+                    <td>默认参数求值时机</td>
+                    <td><span>定义时求值(<code>def</code>执行时)</span></td>
+                    <td><span>调用时求值(<span class="span">每次调用重新计算</span>)</span></td>
+                    <td><span>⚠️ <code>Python</code> 默认参数是单例模式，可变对象有坑</span></td>
+                </tr>
+                <tr>
+                    <td>关键字参数</td>
+                    <td><code>✅ 函数名(a=1, b=2)</code></td>
+                    <td><span>❌ 不支持（只能传对象模拟）</span></td>
+                    <td><span><code>Python</code> 独有，调用时可通过参数名传值</span></td>
+                </tr>
+                <tr>
+                    <td>位置参数</td>
+                    <td><code>函数名(1,2)</code></td>
+                    <td><code>函数名(1,2)</code></td>
+                    <td><span>两者都支持</span></td>
+                </tr>
+                <tr>
+                    <td>不定长参数</td>
+                    <td><code>*args(<span>元组</span>)、**kwargs(<span>字典</span>)</code></td>
+                    <td><span><code>arguments</code>对象(类数组)或<code>...rest(<span>ES6真数组</span>)</code></span>
+                    </td>
+                    <td>
+                        <span><code>JavaScript</code> 的 <code>...rest</code> 更接近 <code>Python</code> 的 <code>*args</code></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>实参个数校验</td>
+                    <td><span>✅ 必须与形参个数匹配（默认参数除外）</span></td>
+                    <td><span>❌ 实参可少于或多于形参，少的为 undefined，多的在 arguments 中</span></td>
+                    <td><span>⚠️ Python 更严格，JS 更灵活（但容易出错)</span></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <h3 style="text-align: left">名词解释(<code>python</code>为主)：</h3>
+                        <ul>
+                            <li>默认参数：<span>定义函数时，给形参定义的默认值，后续会被调用传入的实参覆盖，若后续形参未传参，则使用默认值，<span
+                                    class="span">并且一定在，非默认形参之后</span></span></li>
+                            <li>
+                                如：
+                                <code style="display:block;">
+                                    <br>def num(a, b=10, c=20):
+                                    <br> &nbsp;&nbsp;print(a, b, c)
+                                    <br>num(10, 30) # 最后的结果是：10,30,20 因为没有给c 传实参，所以是默认值20
+                                </code>
+                            </li>
+                            <li>
+                                <h3 id="关键字参数">关键字参数：</h3>
+                                <ul>
+                                    <li><span>调用函数时，直接给形参赋值。</span></li>
+                                    <li>
+                                        <h4>规则</h4>
+                                        <ol>
+                                            <li>
+                                                关键字参数一定在位置参数后面，<span>否则报错，语法错误：<code>SyntaxError</code></span>
+                                            </li>
+                                            <li>传参顺序：<span>先匹配位置参数，再匹配关键字参数(<span class="span">关键字参数顺序可以打乱，但与位置参数无关</span>)</span>
+                                            </li>
+                                            <li><span>所以请确保：关键字参数的关键字，不与前面已被传参的形参重复，<span>否则报错，运行错误：<code>TypeError</code></span></span>
+                                            </li>
+                                            <li>
+                                                最好解决办法：<span>要么全部采用，关键字参数，要么定义函数的同时，将关键字形参放在最后面</span>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                如：
+                                <code style="display:block;">
+                                    <br>def num(a, b, c, d):
+                                    <br> &nbsp;&nbsp;print(a, b, c, d)
+                                    <br>num(10, 50, c=20, b=30) # 最后的结果是：10,30,20,50 ，# 看顺序，位置参数在前，关键字参数在后
+                                </code>
+                            </li>
+                            <li>
+                                位置参数：<span>调用函数时，根据传入的实参顺序，逐个按顺序给形参赋值,一一对应</span>
+                            </li>
+                            <li>
+                                如：
+                                <code style="display:block;">
+                                    <br>def num(a, b, c, d):
+                                    <br> &nbsp;&nbsp;print(a, b, c, d)
+                                    <br>num(10, 50, 20, 40) # 最后结果是：10, 50, 20, 40
+                                    实参与形参数量一致，且没有关键字参数干预，则实参赋值给形参顺序一一对应
+                                </code>
+                            </li>
+                            <li>
+                                不定长参数：<span>当形参中定义了 <code>*args</code> 或 <code>**kwargs</code> 时，多余的实参会被打包。
+                                <br><span>python中<code>*tuple[<span>主要是运算符<code>*</code></span>]</code>——打包元组</span>,<code>**dict[<span>主要是运算符<code>**</code></span>]</code>——打包字典</span>
+                                <br><span>JavaScript中<code>arugments</code>——类数组,<code>...Array[<span>主要是运算符<code>...</code></span>]</code>——打包真数组</span>
+                            </li>
+                            <li>
+                                <h3>所以</h3>
+                                <ul>
+                                    <li>
+                                        <span>python中，当实参个数，多余形参个数，且形参没有定义：<span
+                                                class="span">不定长参数</span>，直接报错，</span>
+                                    </li>
+                                    <li><span><code>python</code>，零容忍，实参超过形参个数</span></li>
+                                    <li><code>JavaScript</code>则没那么多规矩，
+                                        <br>&nbsp;&nbsp;<span>实参个数多余形参个数：则，多余的参数，放入对象：<code>arguments</code>
+                                        </span><br>&nbsp;&nbsp;<span>实参个数少于形参个数，则，未被传参的形参，默认为<code>undefined</code></span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h2>三、<span>返回值</span></h2></th>
+                </tr>
+                <tr>
+                    <td>对比维度</td>
+                    <td><code>python</code></td>
+                    <td><code>JavaScript</code></td>
+                    <td>核心差异</td>
+                </tr>
+                <tr>
+                    <td>返回单个值</td>
+                    <td><code>return 10</code></td>
+                    <td><code>return 10</code></td>
+                    <td><span>一样，可以返回任何数据类型</span></td>
+                </tr>
+                <tr>
+                    <td>返回多个值</td>
+                    <td><code>return 10,20</code>——><span>自动打包成元组<code>(10,20)</code></span></td>
+                    <td>
+                        <span>需要手动包成对象,<code>return {a,b}</code>或数组<code>return [a,b]</code>...任何数据类型</span>
+                    </td>
+                    <td><span>其实按真正返回多了值的概念，只有<code>python</code>，<code>JavaScript</code>本质返回一个容器，<code>python</code>同样能做到</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>无<code>return</code>关键字</td>
+                    <td><span>默认返回：<code>None</code></span></td>
+                    <td><span>默认返回：<code>undefined</code></span></td>
+                    <td><span>语义不同但都是："空值"</span></td>
+                </tr>
+                <tr>
+                    <td><code>return</code>后面代码</td>
+                    <td><span>不再执行</span></td>
+                    <td><span>不再执行</span></td>
+                    <td><span>一样</span></td>
+                </tr>
+                <tr>
+                    <td>无返回值函数</td>
+                    <td><span>常称“过程”（procedure），返回 <code>None</code></span></td>
+                    <td><span>常称“过程”，返回 <code>undefined</code></span></td>
+                    <td><span>语义相识</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4">四、<span>作用域与闭包</span></th>
+                </tr>
+                <tr>
+                    <td>对比维度</td>
+                    <td><code>python</code></td>
+                    <td><code>JavaScript</code></td>
+                    <td>核心差异</td>
+                </tr>
+                <tr>
+                    <td>函数作用域</td>
+                    <td><span>✅ 函数会生成新作用域</span></td>
+                    <td><span>✅ 函数会生成新作用域</span></td>
+                    <td><span>一样</span></td>
+                </tr>
+                <tr>
+                    <td>块级作用域</td>
+                    <td><span>❌ <code>if、for</code> 不生成新作用域</span></td>
+                    <td><span>✅ <code>let/const</code> 支持块级作用域</span></td>
+                    <td><span><code>JavaScript</code>更精细</span></td>
+                </tr>
+                <tr>
+                    <td>全局变量读取</td>
+                    <td><span>✅ 直接读取外部变量</span></td>
+                    <td><span>✅ 直接读取外部变量</span></td>
+                    <td><span>一样</span></td>
+                </tr>
+                <tr>
+                    <td>修改全局变量</td>
+                    <td><span>⚠️ 需要 <code>global</code> 关键字</span></td>
+                    <td><span>✅ 直接修改（无需关键字）</span></td>
+                    <td><span>Python 更严格，必须显式声明</span></td>
+                </tr>
+                <tr>
+                    <td>修改外层函数变量</td>
+                    <td><span>⚠️ 需要 <code>nonlocal</code> 关键字</span></td>
+                    <td>✅ 直接修改（闭包中)</td>
+                    <td><span>Python 更严格，必须显式声明</span></td>
+                </tr>
+                <tr>
+                    <td>闭包</td>
+                    <td><span>✅ 支持（内部函数引用外部变量）</span></td>
+                    <td><span>✅ 支持（内部函数引用外部变量）</span></td>
+                    <td><span>概念一致，实现细节不同</span></td>
+                </tr>
+                <tr>
+                    <td>变量提升 (Hoisting)</td>
+                    <td><span>❌ 不存在，必须先定义后使用</span></td>
+                    <td><span>✅ var 声明的变量和函数声明会提升</span></td>
+                    <td><span>Python 无提升概念，JS 有（易踩坑）</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h2>五、<span>特殊函数类型</span></h2></th>
+                </tr>
+                <tr>
+                    <td>对比维度</td>
+                    <td><code>python</code></td>
+                    <td><code>JavaScript</code></td>
+                    <td>核心差异</td>
+                </tr>
+                <tr>
+                    <td>递归函数</td>
+                    <td><code>def func(): func()</code></td>
+                    <td><code>function func() { func() }</code></td>
+                    <td><span>两者都支持，但 Python 有递归深度限制（默认 1000 层）</span></td>
+                </tr>
+                <tr>
+                    <td>回调函数</td>
+                    <td><span>✅ 函数作为参数传递</span></td>
+                    <td><span>✅ 函数作为参数传递</span></td>
+                    <td><span>概念一致，JS 更常见（事件监听、异步操作）</span></td>
+                </tr>
+                <tr>
+                    <td>高阶函数</td>
+                    <td><code>map、filter、reduce</code> 等</td>
+                    <td><code>map、filter、reduce</code> 等</td>
+                    <td><span>两者都支持函数式编程</span></td>
+                </tr>
+                <tr>
+                    <td>生成器函数</td>
+                    <td><code>yield</code> 关键字</td>
+                    <td><code>function*</code> + <code>yield</code></td>
+                    <td><span>都有，语法略有差异</span></td>
+                </tr>
+                <tr>
+                    <td>异步函数</td>
+                    <td><code>async def</code> + <code>await</code></td>
+                    <td><code>async function</code> + <code>await</code></td>
+                    <td><span>都有，Python 3.5+ 支持，JS ES8 支持</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h2>六、<span>函数调用与 <code>this</code> / <code>self</code></span></h2></th>
+                </tr>
+                <tr>
+                    <td>对比维度</td>
+                    <td><code>python</code></td>
+                    <td><code>JavaScript</code></td>
+                    <td>核心差异</td>
+                </tr>
+                <tr>
+                    <td>实例方法中的 <code>self</code> / <code>this</code></td>
+                    <td><span>✅ 必须显式写 <code>self</code> 作为第一个参数</span></td>
+                    <td><span>❌ 隐式 <code>this</code>，无需在参数列表声明</span></td>
+                    <td><span>Python 显式更清晰，JS 隐式更灵活（也更容易迷惑）</span></td>
+                </tr>
+                <tr>
+                    <td><code>this</code> 指向</td>
+                    <td><span>❌ 无 <code>this</code> 概念（用 <code>self</code> 代替）</span></td>
+                    <td><span>✅ <code>this</code> 指向调用者，动态绑定</span></td>
+                    <td><span>JS 的 <code>this</code> 是出了名的坑，Python 的 <code>self</code> 更直观</span></td>
+                </tr>
+                <tr>
+                    <td>调用时传参</td>
+                    <td><code>实例.方法(实参)</code>（<code>self</code> 自动传入）</td>
+                    <td><code>实例.方法(实参)</code>（<code>this</code> 自动绑定）</td>
+                    <td><span>调用方式相似</span></td>
+                </tr>
+                <tr>
+                    <td>类方法 / 静态方法</td>
+                    <td><code>@classmethod</code> + <code>cls</code> / <code>@staticmethod</code></td>
+                    <td><code>static</code> 关键字（ES6+）</td>
+                    <td><span>概念不同，Python 区分实例方法/类方法/静态方法</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h2>七、<span>⚠️ 特别提醒（初学者最容易踩的坑）</span></h2></th>
+                </tr>
+                <tr>
+                    <td>陷阱</td>
+                    <td><code>python</code></td>
+                    <td><code>JavaScript</code></td>
+                    <td>说明</td>
+                </tr>
+                <tr>
+                    <td><span>默认参数可变对象</span></td>
+                    <td><span>⚠️ 经典大坑！<code>def func(lst=[]):</code> 会累积数据</span></td>
+                    <td><span>✅ 每次调用重新求值，无此问题</span></td>
+                    <td><span>Python 需用 <code>None</code> 来规避</span></td>
+                </tr>
+                <tr>
+                    <td><span>修改外部变量</span></td>
+                    <td><span>⚠️ 必须 <code>global</code> / <code>nonlocal</code></span></td>
+                    <td><span>✅ 直接修改（闭包中）</span></td>
+                    <td><span>Python 初学者容易忘加关键字</span></td>
+                </tr>
+                <tr>
+                    <td><span>实参数量不匹配</span></td>
+                    <td><span>⚠️ 报 <code>TypeError</code></span></td>
+                    <td><span>⚠️ 少传为 <code>undefined</code>，多传忽略或存 <code>arguments</code></span></td>
+                    <td><span>Python 更严格，JS 更宽容（但容易产生隐蔽 bug）</span></td>
+                </tr>
+                <tr>
+                    <td><span>闭包中的变量</span></td>
+                    <td><span>⚠️ <code>nonlocal</code> 声明后才能修改</span></td>
+                    <td><span>⚠️ 容易形成"循环引用"，注意内存泄漏</span></td>
+                    <td><span>两者都有坑，但场景不同</span></td>
+                </tr>
+                <tr>
+                    <td><span>递归深度限制</span></td>
+                    <td><span>⚠️ 默认 1000 层，超了报错</span></td>
+                    <td><span>⚠️ 浏览器引擎限制不同，但也会爆栈</span></td>
+                    <td><span>大递归需手动优化或改用迭代</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="2"><h2>🎯 最终总结：Python 函数 vs JavaScript 函数</h2></th>
+                </tr>
+                <tr>
+                    <td style="width: 50%;"><strong>对比角度</strong></td>
+                    <td style="width: 50%;"><strong>一句话总结</strong></td>
+                </tr>
+                <tr>
+                    <td><span>函数定义</span></td>
+                    <td><span><code>def</code> + 缩进 vs <code>function</code> + 花括号（或箭头函数）</span></td>
+                </tr>
+                <tr>
+                    <td><span><code>self</code> / <code>this</code></span></td>
+                    <td>
+                        <span>Python 显式 <code>self</code>（清晰，不易出错）vs JS 隐式 <code>this</code>（灵活，容易迷惑）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>作用域</span></td>
+                    <td>
+                        <span>Python 函数作用域 + LEGB 规则 vs JS 函数作用域 + 块级作用域（<code>let</code>/<code>const</code>）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>参数系统</span></td>
+                    <td>
+                        <span>Python 严格匹配，支持关键字参数 vs JS 宽松匹配，支持 <code>arguments</code> / <code>...rest</code></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>返回值</span></td>
+                    <td><span>Python 多值自动打包元组 vs JS 需手动打包对象/数组</span></td>
+                </tr>
+                <tr>
+                    <td><span>变量提升</span></td>
+                    <td><span>Python ❌ 必须先定义后使用 vs JS ✅ 函数声明和 <code>var</code> 会提升</span></td>
+                </tr>
+                <tr>
+                    <td><span>综合评价</span></td>
+                    <td><span><strong>Python</strong>：严谨、统一、适合新手入门<br><strong>JavaScript</strong>：灵活、多范式、但对新手不友好</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <section id="section_2">
+        <h2>其他需要注意事项</h2>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h3><code>python</code><span>扩展运算符</span><code>*</code>不同环境的打包容器变化</h3></th>
+                </tr>
+                <tr>
+                    <td>语境</td>
+                    <td>示例</td>
+                    <td><code>*</code>的作用</td>
+                    <td>结果容器</td>
+                </tr>
+                <tr>
+                    <td>函数定义</td>
+                    <td><code>def f(*args):</code></td>
+                    <td>收集多余实参</td>
+                    <td>元组</td>
+                </tr>
+                <tr>
+                    <td>赋值解包</td>
+                    <td><code>a, *b , c = 100, 50, 10, 60, 70</code></td>
+                    <td>捕获剩余元素</td>
+                    <td>列表</td>
+                </tr>
+                <tr>
+                    <td>函数调用</td>
+                    <td><code>f(*[1, 2, 3])</code></td>
+                    <td><span>展开可迭代对象</span></td>
+                    <td><span>不打包，展开</span></td>
+                </tr>
+                <tr>
+                    <td><code>f-string</code></td>
+                    <td><code>f"{a, c, *number}"</code></td>
+                    <td>展开 + 重新组包</td>
+                    <td>元组(<span>因为有逗号</span>)</td>
+                </tr>
+            </table>
+        </div>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h3><code>python</code><span>扩展运算符</span><code>**</code>规则</h3></th>
+                </tr>
+                <tr>
+                    <td>语境</td>
+                    <td>示例</td>
+                    <td><code>**</code>的作用</td>
+                    <td>结果容器</td>
+                </tr>
+                <tr>
+                    <td>函数定义</td>
+                    <td><code>def f(**kwargs):</code></td>
+                    <td>
+                        <ul>
+                            <li>收集多余关键字实参</li>
+                            <li><span>键值对与实参一致，<code>a = 10 则 键值对 ：{'a':10}</code></span></li>
+                            <li><span>实参必须是：<code>变量 = 值</code>形式，<span
+                                    class="span">最后打包，变量为键，值为字典的值</span></span></li>
+                        </ul>
+                    </td>
+                    <td><span>字典</span></td>
+                </tr>
+                <tr>
+                    <td>函数调用</td>
+                    <td><code>f{**{'a':1, 'b':2}}</code></td>
+                    <td>
+                        <ul>
+                            <li>展开字典作为关键字参数</li>
+                            <li>其中：<span>键对应形参，值对应实参</span></li>
+                            <li><span>当函数形参没有(**)，请确保，键有对应形参，否则报错</span></li>
+                            <li>因为采取的是：关键字参数，需要放在位置参数后面，规则与：<a
+                                    href="#关键字参数">关键字参数一致</a></li>
+                        </ul>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>赋值解包</td>
+                    <td><span>❌ 不支持</span></td>
+                    <td>————</td>
+                    <td>————</td>
+                </tr>
+                <tr>
+                    <td><code>f-string</code></td>
+                    <td><span>❌ 不支持</span></td>
+                    <td>————</td>
+                    <td>————</td>
+                </tr>
+            </table>
+        </div>
+        <article>
+            <ul>
+                <li>
+                    <h2>概述</h2>
+                    <p>以下为编程中常见的特殊函数类型，涵盖 <strong>Python</strong> 与 <strong>JavaScript</strong>
+                        中的对应实现。</p>
+                </li>
+                <!-- ======== 表格：特殊函数类型 ======== -->
+                <li>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th>类型</th>
+                                <th>定义</th>
+                                <th>特征</th>
+                                <th>作用</th>
+                                <th>示例</th>
+                            </tr>
+
+                            <!-- 1. 递归函数 -->
+                            <tr>
+                                <td><strong>递归函数</strong></td>
+                                <td>函数在其定义中<strong>调用自身</strong></td>
+                                <td>
+                                    <ul>
+                                        <li>必须设置<strong>终止条件</strong>（基线条件）</li>
+                                        <li>每次调用会创建新的栈帧</li>
+                                        <li>Python 默认递归深度 <code>1000</code></li>
+                                    </ul>
+                                </td>
+                                <td>解决可分解为<strong>相同子问题</strong>的问题（如树遍历、阶乘、斐波那契）</td>
+                                <td>
+                                    <code>def fac(n):<br>
+                                        &nbsp;&nbsp;return 1 if n &lt;= 1 else n * fac(n-1)</code>
+                                </td>
+                            </tr>
+
+                            <!-- 2. 回调函数 -->
+                            <tr>
+                                <td><strong>回调函数</strong></td>
+                                <td>作为<strong>参数</strong>传递给另一个函数，并在<strong>特定时机</strong>被调用</td>
+                                <td>
+                                    <ul>
+                                        <li>编码者定义，<strong>由其他函数</strong>触发执行</li>
+                                        <li>常用于<strong>异步</strong>或<strong>事件驱动</strong>场景</li>
+                                        <li>形参固定，实参由调用方注入</li>
+                                    </ul>
+                                </td>
+                                <td>实现<strong>依赖反转</strong>，让调用方决定具体行为（如事件监听、数组遍历）</td>
+                                <td>
+                                    <code>btn.onclick = function() {<br>
+                                        &nbsp;&nbsp;console.log('点击了');<br>
+                                        };</code>
+                                </td>
+                            </tr>
+
+                            <!-- 3. 高阶函数 -->
+                            <tr>
+                                <td><strong>高阶函数</strong></td>
+                                <td>接收一个或多个函数作为<strong>参数</strong>，或<strong>返回</strong>一个函数</td>
+                                <td>
+                                    <ul>
+                                        <li>以函数为<strong>一等公民</strong>的语言特性</li>
+                                        <li>典型代表：<code>map</code>、<code>filter</code>、<code>reduce</code></li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    将<strong>行为</strong>作为数据传递，实现<strong>函数组合</strong>与<strong>抽象</strong>
+                                </td>
+                                <td>
+                                    <code>arr.map(x => x * 2)</code> —— 将每个元素映射为原值的2倍
+                                </td>
+                            </tr>
+
+                            <!-- 4. 匿名函数 / Lambda -->
+                            <tr>
+                                <td><strong>匿名函数（Lambda）</strong></td>
+                                <td>没有函数名的<strong>简短</strong>函数定义</td>
+                                <td>
+                                    <ul>
+                                        <li><strong>单表达式</strong>，不能写多条语句</li>
+                                        <li>Python: <code>lambda</code>；JS: 箭头函数 <code>() => {}</code></li>
+                                        <li>通常作为<strong>临时</strong>回调或高阶函数的参数</li>
+                                    </ul>
+                                </td>
+                                <td>快速定义<strong>一次性</strong>逻辑，避免额外命名函数</td>
+                                <td>
+                                    <code>sorted(list, key=lambda x: x['age'])</code><br>
+                                    —— 按年龄排序
+                                </td>
+                            </tr>
+
+                            <!-- 5. 闭包 -->
+                            <tr>
+                                <td><strong>闭包（Closure）</strong></td>
+                                <td><strong>内部函数</strong>引用了<strong>外部函数</strong>的变量，且外部函数已执行完毕
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>内部函数“<strong>记住</strong>”了外部作用域的变量</li>
+                                        <li>Python 修改外部变量需 <code>nonlocal</code></li>
+                                        <li>常用于<strong>工厂函数</strong>、<strong>装饰器</strong></li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    创建<strong>私有变量</strong>，实现<strong>数据封装</strong>与<strong>状态保持</strong>
+                                </td>
+                                <td>
+                                    <code>def counter():<br>
+                                        &nbsp;&nbsp;count = 0<br>
+                                        &nbsp;&nbsp;def inner():<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;nonlocal count<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;return count<br>
+                                        &nbsp;&nbsp;return inner</code>
+                                </td>
+                            </tr>
+
+                            <!-- 6. 生成器函数 -->
+                            <tr>
+                                <td><strong>生成器函数</strong></td>
+                                <td>使用 <code>yield</code> 关键字<strong>逐步产生</strong>值的函数</td>
+                                <td>
+                                    <ul>
+                                        <li><strong>惰性求值</strong>：每次调用 <code>next()</code> 才执行</li>
+                                        <li>Python: <code>def func(): yield ...</code></li>
+                                        <li>JS: <code>function* func() { yield ... }</code></li>
+                                    </ul>
+                                </td>
+                                <td>处理<strong>大数据流</strong>或<strong>无限序列</strong>，节省内存</td>
+                                <td>
+                                    <code>def gen():<br>
+                                        &nbsp;&nbsp;for i in range(3):<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;yield i</code>
+                                </td>
+                            </tr>
+
+                            <!-- 7. 异步函数 -->
+                            <tr>
+                                <td><strong>异步函数</strong></td>
+                                <td>使用 <code>async</code> / <code>await</code> 进行<strong>非阻塞</strong>操作</td>
+                                <td>
+                                    <ul>
+                                        <li>Python: <code>async def func(): await ...</code></li>
+                                        <li>JS: <code>async function func() { await ... }</code></li>
+                                        <li>返回 <strong>Promise</strong> 或 <strong>协程</strong>对象</li>
+                                    </ul>
+                                </td>
+                                <td>在<strong>IO密集型</strong>任务中提高并发效率，不阻塞主线程</td>
+                                <td>
+                                    <code>async def fetch():<br>
+                                        &nbsp;&nbsp;data = await get_data()<br>
+                                        &nbsp;&nbsp;return data</code>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

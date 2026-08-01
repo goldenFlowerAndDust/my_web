@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数基础——函数说明文档</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>函数基础——函数说明文档</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li><span>函数的说明文档(<code>Docstring</code>)是写在函数开头，用三个引号包裹的字符串，
+                用户解释函数的功能、参数、返回值等信息，方便调用者清楚函数的具体作用及细节</span>
+            </li>
+            <li><span>主要用于，解释函数功能、参数、返回值</span></li>
+            <li>
+                <h2>查看函数说明文档：</h2>
+                <ul>
+                    <li><span>使用<code>help</code>函数：<code>help(函数名)</code></span></li>
+                    <li><span>鼠标悬浮在函数上，自动展示(<span class="span">推荐</span>)</span></li>
+                </ul>
+            </li>
+            <li>注意：<span>好的文档，能让你的代码更容易理解、使用和维护！！</span></li>
+            <li>
+                <h2>例如</h2>
+                <code style="display:block;">
+                    <br>def judge_number(num):
+                    <br>"""
+                    <br> &nbsp;&nbsp;该函数用于判断，数据类型是否为数字
+                    <br> &nbsp;&nbsp;:num:为需要判断的数据
+                    <br> &nbsp;&nbsp;:return:是数字，返回原数据，不是则返回None
+                    <br>"""
+                    <br> &nbsp;&nbsp;try:
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp;num = float(num)
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp;return num
+                    <br> &nbsp;&nbsp;expect ValueError:
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp;return None
+                    <br>num = 20
+                    <br>fault = judge_number(num)
+                    <br>if fault：
+                    <br> &nbsp;&nbsp;print(f"{num}是数字")
+                    <br>else:
+                    <br> &nbsp;&nbsp;print(f"{num}不是数字")
+                </code>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

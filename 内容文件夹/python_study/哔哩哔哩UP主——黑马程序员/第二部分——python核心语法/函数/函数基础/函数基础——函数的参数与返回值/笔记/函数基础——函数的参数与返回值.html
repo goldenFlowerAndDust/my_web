@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数基础——函数的参数与返回值</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>函数基础——函数的参数与返回值</h1>
+    </header>
+    <section id="section_1">
+        <h2>函数的参数种类</h2>
+        <ul>
+            <li>
+                <h3><span>位置参数</span></h3>
+                <ol>
+                    <li><span>函数的传递参数是有顺序的，<span class="span">位置参数</span>优先级最高</span></li>
+                    <li>在定义函数的时候：<code>def num(a, b, c, d)</code><span>其中，<code>a, b, c, d</code>这个整体就是位置参数<span
+                            class="span">传入实参的顺序，严格按照定义顺序</span></span>
+                    </li>
+                    <li>在调用函数的时候：<code>num(10, 50, 100,
+                        "hello")</code>，<span>其中，<code>10, 50, 100, "hello"</code>这个整体就是位置参数 <span
+                            class="span">传入实参的顺序，严格遵守定义形参的顺序</span></span>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3><span>默认参数</span></h3>
+                <ol>
+                    <li>顾名思义：<span>定义函数的时候，形参的默认值</span></li>
+                    <li><code>def num(a, b, c=10):</code><span>其中，<code>c的默认值是10</code>,
+                        <code>c = 10</code>这个整体就是一个默认参数——形参</span>
+                    </li>
+                    <li>
+                        特点：<span>只在定义函数有此概念，且永远在<span class="span">位置参数后面</span>，后续会被传入的实参覆盖，未被传入实参，则取默认值</span>
+                    </li>
+                    <li><span>因为有默认参数兜底，只要<code>实际传参数量 <= 形参数量</code>，就不会报错</span></li>
+                    <li>一但：<code>实际传参数量 > 形参数量</code>，照样报错</li>
+                </ol>
+            </li>
+            <li>
+                <h3><span id="关键字参数">关键字参数</span></h3>
+                <ol>
+                    <li>在调用函数的时候有此概念，<span>直接指定关键字(形参)，然后为其赋值</span></li>
+                    <li><span>位置参数优先级最高，会先匹配<span>位置参数</span>，然后匹配<span>关键字参数</span></span>
+                    </li>
+                    <li><code>python</code>规则：<span>已经被传参的形参，不能再次被传参，<span
+                            class="span">所以关键字避免与被传参的形参一致</span></span></li>
+                    <li><span>关键字参数始终在<span
+                            class="span">位置参数后面，且顺序可以打乱(<span>只是关键字参数可以打乱，前面的位置参数不能</span>)</span></span>
+                    </li>
+                    <li>关键字参数的形式：<span>键值对、<code>key = value</code>表达式，除此之外均是位置参数</span></li>
+                    <li>
+                        <code style="display:block;">
+                            <br>def num(a, b, c, d):
+                            <br>&nbsp;&nbsp;return
+                            <br>num(10, 50, d=30, c=10) <br># 先匹配位置参数 a = 10 , b =50, 然后匹配关键字参数，c = 10 ,
+                            d = 30
+                            <br><br>错误示范1：num(10, d=30, 30, c=10) <br># <span>位置参数必须在关键参数之前</span>，10，30为位置参数，键值对或key
+                            = value形式为关键字参数，报错：语法错误：<code>SyntaxError</code>
+                            <br><br>错误示范2：num(10, 30, b=50, c=10) <br># 先位置参数赋值，a = 10, b=30, 然后关键字参数，
+                            请注意：<span>b已经被传入过实参，后面的 <code>b = 50</code>，重新赋值，python不支持，报错：运行错误：<code>TypeError</code><code></code></span>
+                        </code>
+                    </li>
+                    <li>提醒：<span>最好全部使用关键字参数，<span
+                            class="span">或定义函数时，将需要传关键字参数的形参放在后面</span>,能有效避免，重复传参而报错</span>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3><span>无定长参数</span></h3>
+                <ol>
+                    <li><span>在定义函数的时，收集多余实参组包成容器的形参</span></li>
+                    <li>
+                        <h4><span class="span">无参函数(<code>*</code>)</span></h4>
+                        <ul>
+                            <li><span>多余<span class="span">位置参数</span> ，打包成元组</span></li>
+                            <li>写在形参内部：<code>*字面量</code></li>
+                            <li>
+                                <code style="display:block;">
+                                    <br>def num(a, b, c, *tuples):
+                                    <br>&nbsp;&nbsp;return
+                                    <br>num(10, 50, 100, 30, *[30, 40, 50], *(60, 70, 80), *{60, 70, 80}, *"hello")
+                                    <br># <span>原本定义的形参是：<code>a, b, c</code>共三个，但是传参明显超过三个</span>
+                                    <br>按照python规则：<code>在实际传参数量 > 形参数量</code>，直接报错
+                                    <br><span>🍊🍊🍊🍊因为有：无定长参数：<code>*tuples</code>的存在，多余的非关键字参数，会被收集，打包成元组，赋值给tuple这个字面量</span>
+                                    <br><span>🍊🍊🍊🍊不难看出，<code>*</code>在当前案例有两个作用，<span class="span">在形参中作用：组包成元组</span>，在调用函数中作用：解包，展开容器</span>
+                                </code>
+                            </li>
+                            <li>
+                                <h5>以上案例，具体的执行流程</h5>
+                                <ol>
+                                    <li>先解包，每个容器元素单独领出来：<code>num(10, 50, 100, 30, 30, 40, 50, 60, 70, 80,
+                                        60, 70, 80, "h", "e", "l", "l", "o")</code></li>
+                                    <li>然后先赋值位置参数：<code>a = 10 , b = 50, c = 100</code></li>
+                                    <li>多余的其他位置参数，会被重新打包成元组，赋值给字面量：<code>tuples = (0, 30, 40,
+                                        50,
+                                        60, 70, 80, 60, 70, 80, "h", "e", "l", "l", "o")</code></li>
+                                    <li><span>说白了：就是将多余的，非<span class="span">键值对、key = value</span>表达式，重新打包成元组，并赋值给字面量</span>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h5>注意事项</h5>
+                                <ol>
+                                    <li><span>一个函数只能出现，一次，<code>*</code></span></li>
+                                    <li><span>位置不固定，但是在，<code>*</code>后面的参数，全部会被转化为：<span
+                                            class="span">强制关键字参数</span></span></li>
+                                    <li>
+                                        强制关键字参数：<span>被转化为强制关键字参数，意味着，该形参只能接收关键字参数，不能接收位置参数</span>
+                                    </li>
+                                    <li><span>正常使用<code>*</code>，为多余的位置参数兜底</span>：<code>def num(a, b,
+                                        *tuples):</code></li>
+                                    <li><span>使用位置参数 + 关键字参数组合：<code>def num(a, *tuple, b, c):</code>
+                                        <br>&nbsp;&nbsp;b, c 都被强制关键字参数，只能接收关键字参数,所以对应的传参是：<code>num(10, *(50, 100, 30, 40), {'b':50}, c=40)</code><span>注意：关键字不能与已传参形参相同</span></span>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                        <h4><span class="span">无参函数(<code>**</code>)</span></h4>
+                        <ul>
+                            <li><span>多余<span class="span">关键字参数</span> ，打包成字典</span></li>
+                            <li>写在形参内部：<code>**字面量</code></li>
+                            <li><a href="#关键字参数">关键字参数</a>：<code>key =
+                                value</code>表达式中，<span><code>key</code> 对应 字典的键,<code>value</code>对应字典的值</span>
+                            </li>
+                            <li>写法：<code>def num(a, b, *dicts):</code></li>
+                            <li>
+                                <h5>注意事项</h5>
+                                <ol>
+                                    <li><span>一个函数只能出现一次，且只能在最后一个形参</span></li>
+                                    <li><span>只会打包关键字参数：<code>键值对，key = value</code>表达式</span></li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="div_table">
+                            <table>
+                                <tr>
+                                    <th colspan="3"><h4>关于无定长参数，合法与不合法</h4></th>
+                                </tr>
+                                <tr>
+                                    <td>定义方式</td>
+                                    <td>是否合法</td>
+                                    <td>说明</td>
+                                </tr>
+                                <tr>
+                                    <td><code>def f(a, *b):</code></td>
+                                    <td>✅ 合法</td>
+                                    <td>只有一个</td>
+                                </tr>
+                                <tr>
+                                    <td><code>def f(a, **b):</code></td>
+                                    <td>✅ 合法</td>
+                                    <td>只有一个</td>
+                                </tr>
+                                <tr>
+                                    <td><code>def f(a, *b, **c):</code></td>
+                                    <td>✅ 合法</td>
+                                    <td>经典组合，顺序正确</td>
+                                </tr>
+                                <tr>
+                                    <td><code>def f(a, *, b, **c):</code></td>
+                                    <td>✅ 合法</td>
+                                    <td>带有强制关键字分隔符</td>
+                                </tr>
+                                <tr>
+                                    <td><code>def f(a, *b, *c):</code></td>
+                                    <td>❌ 报错</td>
+                                    <td>两个 * 冲突</td>
+                                </tr>
+                                <tr>
+                                    <td><code>def f(a, **b, *c):</code></td>
+                                    <td>❌ 报错</td>
+                                    <td>顺序反了</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                </ol>
+            </li>
+            <li>最后补充参数优先级规则：<code>位置参数 > 默认参数 > * > 强制关键字 > **</code></li>
+            <li><a href="../../函数基础——函数定义/笔记/函数基础——函数定义.html/#return关键字" style="font-size: 3.2rem">关键字return</a>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>课堂注意事项</h2>
+        <ul>
+            <li><span>函数定义时，如果有多个参数，多个参数之间使用英文逗号(<code>,</code>)分隔</span></li>
+            <li><span><code>return</code>语句只有返回功能，没有输出打印的功能，如果要输出，需要结合<code>print()</code>函数来实现。</span>
+            </li>
+            <li>形参（形式参数）：<span>函数定义时括号里的参数，只能在函数内使用(<span class="span">局部变量</span>)</span>
+            </li>
+            <li>实参（实际参数）：<span>函数调用时括号内的参数，通常给形参赋值</span></li>
+            <li><span>实参与形参顺序一一对应，位置参数</span></li>
+            <li><span>多个返回值，用英文逗号，结果会组包成元组。<</span></li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数基础——案例</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>函数基础——案例</h1>
+    </header>
+    <section id="section_1">
+        <h2>整个案例，运用到的知识</h2>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h3><span>案例知识体系全景表</span></h3></th>
+                </tr>
+                <tr>
+                    <td>知识点分类</td>
+                    <td>具体内容</td>
+                    <td>新/老状态</td>
+                    <td>在案例中的具体应用</td>
+                </tr>
+                <tr>
+                    <td><h4><span>异常处理</span></h4></td>
+                    <td><code>try... except ValueError[<span>捕获非数字输入</span>]</code></td>
+                    <td>老知识(<span>强化：<code>raise</code>使用</span>)</td>
+                    <td>三角形面积计算：<span class="span">拦截用户输入的非数字和零值</span></td>
+                </tr>
+                <tr>
+                    <td><h4><span>条件判断</span></h4></td>
+                    <td><code>if/elif/else</code>分支逻辑</td>
+                    <td>老知识</td>
+                    <td>成绩合法性校验(<span class="span">0~100范围</span>)</td>
+                </tr>
+                <tr>
+                    <td><h4><span>逻辑运算符</span></h4></td>
+                    <td><code>all()/any()</code>的区别与使用场景</td>
+                    <td>老知识(<span>提升</span>)</td>
+                    <td><span
+                            class="span">用<code>any()</code>检查成绩是否越界，避免误用<code>all()</code>导致校验</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4><span>循环结构</span></h4></td>
+                    <td><code>for</code>循环遍历列表、字典、字符串</td>
+                    <td>老知识</td>
+                    <td>遍历学科列表、遍历学生字典、遍历成绩列表</td>
+                </tr>
+                <tr>
+                    <td><h4><span>字符串操作</span></h4></td>
+                    <td><code>in</code>成员判断</td>
+                    <td>老知识</td>
+                    <td>元音字母统计</td>
+                </tr>
+                <tr>
+                    <td><h4><span>列表推导式</span></h4></td>
+                    <td><code>[float(s) for s in score]</code></td>
+                    <td>老知识(<span>提升</span>)</td>
+                    <td><span>将输入成绩字符串转为浮点数列表，用于后续校验和存储</span></td>
+                </tr>
+                <tr>
+                    <td><h4><span>字典推导式</span></h4></td>
+                    <td><code>{sub:[] for sub in subjects}</code></td>
+                    <td><span>新知识</span></td>
+                    <td><span class="span">批量生成各科成绩的"空容器"骨架，避免手动逐个写<code>{}</code></span></td>
+                </tr>
+                <tr>
+                    <td><h4><span><code>zip()</code>函数</span></h4></td>
+                    <td><code>dict(zip(subjects,score_list))</code></td>
+                    <td><span>新知识</span></td>
+                    <td><span class="span">用<code>zip</code>将“学科名列表”和“分数列表”压缩成元组，并直接生成字典，消除手动循环赋值的冗余代码</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4><span>字典构造</span></h4></td>
+                    <td>
+                        <ul>
+                            <li>使用<code>score_dict = dict(zip(....))</code></li>
+                            <li>取代：<code>{subjects[i]: score_list[i] for i in range(...)}</code></li>
+                        </ul>
+                    </td>
+                    <td><span>新知识</span></td>
+                    <td><span class="span">用 <code>zip</code> 一行构造完整成绩字典，代码更简洁、更易读</span></td>
+                </tr>
+                <tr>
+                    <td><h4><span>数据结构设计</span></h4></td>
+                    <td><span>三层嵌套字典：<code>{班级:{姓名:{学科:分数}}}</code></span></td>
+                    <td><span>老思路(<span>但是设计方法，提升</span>)</span></td>
+                    <td><span class="span">宛城：学生管理系统案例的核心数据结构，体现“分组-存储-查询”的完整流程</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4><span>数据访问模式</span></h4></td>
+                    <td><span>“剥洋葱”式多层遍历：班级→学生→学科→分数</span></td>
+                    <td> 老方法（但昨天形成了系统化认知）</td>
+                    <td><span class="span">统计各科最高/最低/平均分，通过三层循环逐级提取数据</span></td>
+                </tr>
+                <tr>
+                    <td><h4><span>面向对象</span></h4></td>
+                    <td><span>类定义、__init__、实例方法、self</span></td>
+                    <td>✅ 老知识（但昨天第一次独立完成多方法协作）</td>
+                    <td><span
+                            class="span">用 StudentSystem 类封装 add 和 max_min_avg 方法，实现数据与逻辑的统一管理</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4><span>用户交互</span></h4></td>
+                    <td><span><code>while True + match-case</code>菜单循环</span></td>
+                    <td><span>✅ 老知识（但昨天第一次全流程整合）</span></td>
+                    <td><span class="span">构建完整的“添加-查询-统计-退出”交互闭环，提升代码可用性</span></td>
+                </tr>
+                <tr>
+                    <td><h4><span>调试与修正</span></h4></td>
+                    <td>
+                        <ul>
+                            <li><code>all</code> 误用 → 发现后改为 <code>any()</code></li>
+                            <li>判断元音时，将字符串未加引号————>错误使用变量进行成员判断、导致未定义变量产生错误</li>
+                        </ul>
+                    </td>
+                    <td>调式经验：<span>提升</span></td>
+                    <td><span class="span">在案例编写过程中，通过多次运行和排查，修正了逻辑错误和命名问题</span></td>
+                </tr>
+                <tr>
+                    <td><h4><span>内置函数 + 生成器表达式</span></h4></td>
+                    <td>
+                        <ul>
+                            <li><code>max(score_list)</code></li>
+                            <li><code>min(score_list)</code></li>
+                            <li><code>sum(score_list) / len(score_list)</code></li>
+                        </ul>
+                    </td>
+                    <td>老知识</td>
+                    <td><span class="span">统计各科最高分、最低分、平均分</span></td>
+                </tr>
+                <tr>
+                    <td><h4><span>生成器表达式作为参数</span></h4></td>
+                    <td>
+                        <ul>
+                            <li><code>max(s for s in score_list)</code></li>
+                            <li><code>sum(1 for n in word if n in yuanYin)</code></li>
+                        </ul>
+                    </td>
+                    <td>新知识</td>
+                    <td><span
+                            class="span">元音字母计数（一行搞定）成绩合法性校验（<code>any(s > 100 for s in score_list)</code>）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4><span>就是方法内部使用生成器（函数式编程）</span></h4></td>
+                    <td><span>max() / min() / sum() 直接接收生成器表达式作为参数，无需先构造列表</span></td>
+                    <td>新知识</td>
+                    <td>
+                        <ul>
+                            <li><code>max(score[subj] for score in students.values())</code></li>
+                            <li><code>sum(score["数学"] for score in students.values())</code></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4><span>生成器</span></h4></td>
+                    <td><code>(s for s in iteration (if ...)可选)</code></td>
+                    <td>老知识 <span>巩固</span></td>
+                    <td>
+                        <h5>特点</h5>
+                        <ul>
+                            <li><span>惰性：只有被 <code>for</code>或 <code>sum()...方法</code>消费时才逐个产生</span>
+                            </li>
+                            <li><span>没有元组推导式，可以使用：<code>tuple(s for s in iteration)</code>，强制转元组</span>
+                            </li>
+                            <li>内存占用：<span>极小(<span class="span">只存一个元素</span>)</span></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4><span>推导式</span></h4></td>
+                    <td>
+                        <ul>
+                            <li><span>列表推导式：</span><code>[s for s in iteration (if ...)可选]</code></li>
+                            <li><span>集合推导式：</span><code>{s for s in iteration (if ...)可选}</code></li>
+                            <li><span>字典推导式：</span><code>{s:default for s in iteration (if ...)可选}</code></li>
+                        </ul>
+                    </td>
+                    <td>老知识：<span>巩固</span></td>
+                    <td>
+                        <h5>特点</h5>
+                        <ul>
+                            <li><span>急性：<span class="span">立即生成全部</span></span></li>
+                            <li><span>内存占用：<span class="span">巨大（存一百万个元素）</span></span></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>
