@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可传参参数类型</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>可传参参数类型</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>普通参数：<span>数字、布尔、字符串、列表、元组、集合、字典等</span></li>
+            <li>特殊参数：<span>函数</span></li>
+            <li><span>说白了：<span class="span">就是将函数名作为参数传给另一个函数作为实参</span></span></li>
+            <li>
+                <h2>例如</h2>
+                <code style="display:block;">
+                    <br>def add(*args):
+                    <br>try:
+                    <br> &nbsp;&nbsp;args = [float(s) for s in args]
+                    <br> &nbsp;&nbsp;return sum(args)
+                    <br>except ValueError:
+                    <br>print("包含非数字！！！")
+                    <br>
+                    <br>
+                    <br>
+                    <br>def subtracts(*args):
+                    <br> &nbsp;&nbsp;try:
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp;args = [float(s) for s in args]
+                    <br> &nbsp;&nbsp;except ValueError:
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp;print("包含非数字！！！")
+                    <br> &nbsp;&nbsp;subtract = 0
+                    <br> &nbsp;&nbsp;for i in range(len(args)):
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp;if i == 0:
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;subtract = args[0]
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp;else:
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;subtract -= args[i]
+                    <br> &nbsp;&nbsp;return subtract
+                    <br>
+                    <br>
+                    <br>def calc(oper, *args): # 计算器：具体执行什么运算由，传参决定
+                    <br> &nbsp;&nbsp;if len(args) == 1 and isinstance(args[0], (list, tuple, set)):
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp;data = args[0]
+                    <br> &nbsp;&nbsp;elif any(isinstance(arg, (list, tuple, set)) for arg in args):
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp;return None
+                    <br> &nbsp;&nbsp;else:
+                    <br> &nbsp;&nbsp; &nbsp;&nbsp;data = args
+                    <br> &nbsp;&nbsp;return oper(*data) # 注意需要展开元组
+                    <br>
+                    <br>
+                    <br>number = [100, 80, 50, 60, 70]
+                    <br>result = calc(add, number)
+                    <br>result2 = calc(subtracts, 10, 50, 60, 100, 5)
+                    <br>if result is None:
+                    <br> &nbsp;&nbsp;print("参数只能是多个元素或只能是一个容器")
+                    <br>else:
+                    <br> &nbsp;&nbsp;print(result)
+                    <br>
+                    <br>if result2 is None:
+                    <br> &nbsp;&nbsp;print("参数只能是多个元素或只能是一个容器")
+                    <br>else:
+                    <br> &nbsp;&nbsp;print(result2)
+                </code>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

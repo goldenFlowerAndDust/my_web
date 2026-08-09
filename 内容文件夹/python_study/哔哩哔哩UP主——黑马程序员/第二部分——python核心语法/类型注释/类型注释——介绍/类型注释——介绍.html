@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类型注解——价绍</title>
+    <link rel="stylesheet" href="../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>类型注解——价绍</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>类型注解是：<span><code>python</code>的一种语法特征，用于(明确标识变量、函数参数和返回值的数据类型)，从而使代码<span
+                    class="span">更清晰、更安全、更易维护</span></span></li>
+            <li>语法结构(<span>变量</span>)：<code>字面量:数据类型 = 变量值</code></li>
+            <li>语法结构(<span>容器[列表]</span>)：<code>字面量:list[数据类型] = 值</code></li>
+            <li>语法结构(<span>容器[集合]</span>)：<code>字面量:set[数据类型] = 值</code></li>
+            <li>语法结构(<span>容器[字典]</span>)：<code>字面量:dict[【键】数据类型,【值】数据类型] = 值</code></li>
+            <li>语法结构(<span>容器[元组]</span>)：<code>字面量:tuple[下标1数据类型,下标2数据类型, ...] = 值</code></li>
+            <li><span>扩展：可以使用<span class="span">或运算符【<code>|</code>】</span>或 <span
+                    class="span">导入模块[<code>from typing import Union</code>]，语法：<code>[Union[str,int,...]]</code></span></span>
+            </li>
+            <li><code>Any</code>关键字，关闭python类型检查，暂时理解为：<span class="span">所有数据类型都可以</span></li>
+            <li>
+                <h2>关于<code>...</code>的规范</h2>
+                <ol>
+                    <li>
+                        <span><code>...</code>不能当作类型使用，要想规定元素可以是多种数据类型，只能单独列出来，<code>|</code>隔开，或 <code>Union()</code></span>
+                    </li>
+                    <li>但是：<span><code>...</code>在<code>tuple</code>有特殊作用：<span class="span">表示后续所有元素，匹配符号前一个数据类型。</span></span>
+                    </li>
+                    <li>注意：<span>其他容器没有<code>...</code>，要想定义所有数据类型用<code>Any</code></span></li>
+                    <li><span><code>tuple</code>可以使用：<code>...</code>，<span
+                            class="span">但是只能在最后一个，且只能出现一次</span></span></li>
+                </ol>
+            </li>
+            <li>
+                <h2>注意事项</h2>
+                <ol>
+                    <li>
+                        <span>所有结构都能使用：<span class="span">或运算符【<code>|</code>】或 <code>Union</code>达成一个元素可以是多种数据类型</span></span>
+                    </li>
+                    <li><span>包括键和值(<span class="span">同样是可以指定多个数据类型</span>)：<span class="span">但是注意键必须是可哈希的，必须是不可变的，比如：(<code>str、int、float、tuple...</code>)</span></span>
+                    </li>
+                    <li>
+                        <h3><span>在非使用多种数据类型写法状态下：</span></h3>
+                        <ol>
+                            <li>
+                                <span><code>字面量、list、set、dict</code>对应的变量值、元素、键和值必须是指定的数据类型</span>
+                            </li>
+                            <li><span><code>tuple</code>同样是使用【<code>|或Union</code>】指定单个元素的多种数据类型，逗号分隔是指定对应下标的数据类型，<span
+                                    class="span">这是元组独有的</span></span>
+                            </li>
+                        </ol>
+                    </li>
+                    <li><span>注释不能作用于解包场景：比如：(<code>name:str , age:int = "YLH",20</code>)直接报错/(<code>name, age:int = "YLH", 20</code>)同样继续报错</span>
+                    </li>
+                    <li>
+                        <span>整个过程是注释的过程，重在提醒操作或调用者需要赋值或传参的数据类型，并不是规定数据类型，不按指定的数据类型赋值或传参，<b>并不会报错</b></span>
+                    </li>
+                    <li><span>同一个字面量的注释,后面的会覆盖前面的</span></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2><code>python</code>——类型推断</h2>
+        <ul>
+            <li>类型推断是指：<span><code>python</code>解释器自动推断出变量，表达式或函数返回值的数据类型的能力，而无需开发者显示声明</span>
+            </li>
+            <li><span>通过值的数据类型，推断出字面量的数据类型</span></li>
+            <li><span>在对变量进行直接赋值，或涉及到变量的运算，容器的推导式等场景时，解释器会自动推导出变量的类型</span>
+            </li>
+            <li><span>所以正常写代码可以不必写注释，主要是：<a
+                    href="../函数的类型注释/函数的类型注释.html/#函数的类型注解" onclick="loadContent('../函数的类型注释/函数的类型注释.html','container','#函数的类型注解'); return false">函数参数</a>的注释</span>
+            </li>
+        </ul>
+        <div id="container"></div>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+<script src="../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js">
+    // 写法：<a href="目标相对地址" onclick="loadIframe(this);return false;">连接提示</a>
+</script>
+</body>
+</html>

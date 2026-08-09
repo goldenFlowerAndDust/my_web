@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数的类型注释</title>
+    <link rel="stylesheet" href="../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>函数的类型注释</h1>
+    </header>
+    <section id="section_1">
+        <ul id="函数的类型注解">
+            <li>定义：<span>为函数的参数和返回值添加类型注解</span></li>
+            <li>
+                <h2>语法</h2>
+                <code style="display:block;">
+                    <br>def calc(score: list[int]) -> float: # <span>注释形参列表元素数据类型，<code>-> float</code>表示返回值的数据类型</span>
+                    <br> &nbsp;&nbsp;return sum(score)/len(score)
+                    <br>
+                    <br>def calc_data(scores: list[int]) -> tuple[int,int,float]: <span><code>list[int]</code>注释列表元素数据类型，<code>-></code>注释返回值的数据类型</span>
+                    <br> &nbsp;&nbsp;max_v = max(scores)
+                    <br> &nbsp;&nbsp;min_v = min(scores)
+                    <br> &nbsp;&nbsp;avg_v = sum(scores) / len(scores)
+                    <br> &nbsp;&nbsp;return max_v, min_v, avg_v
+                </code>
+            </li>
+            <li>
+                <h2>总结</h2>
+                <ol>
+                    <li>如上代码所见：<span>函数的注释主要在：<span class="span">参数注释、返回值注释(提醒)</span></span>
+                    </li>
+                    <li><span>参数注释与<a href="../类型注释——介绍/类型注释——介绍.html">普通注释一致</a></span></li>
+                    <li><span>可以单个注释，也可以多个注释，多个注释用<code>|</code>隔开，或<code>Union[]</code>。</span>
+                    </li>
+                    <li><span>元组规则一致：逗号隔开：<span class="span">对应下标注释</span>、<span class="span"><code>|或Union[]</code>：对应下标元素多个数据类型注释、<code>...</code>后续元素匹配前一个数据类型</span></span>
+                    </li>
+                    <li><code>...</code>必须放在最后面，且只能出现一次</li>
+                    <li><span>返回值注释</span>：<span class="span">形参后面添加：<code>-> 普通注释</code></span></li>
+                </ol>
+            </li>
+            <li>注意：<span>默认参数类型推断机制，默认参数的字面量的类型注释就是值的数据类型</span></li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>扩展——不定长参数的注释</h2>
+        <ul>
+            <li>
+                <h3>不定长参数——位置参数</h3>
+                <ol>
+                    <li>常规注释：<code>def calc(*args: int) -> float</code></li>
+                    <li>含义：<span>每个多余的实参都应是 <code>int</code> 类型</span></li>
+                    <li>也可写成：<code>def calc(*args: tuple[int, ...]) -> float</code>（但不如上面的写法常用）</li>
+                    <li><span>同样：类型固定且多个可以用：<code>|或Union[]</code>，如果类型不固定可以用：<code>Any</code></span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>不定长参数——关键字参数</h3>
+                <ol>
+                    <li>常规注释：<code>def student(**kwargs: int) -> tuple[list[str], list[int]]</code></li>
+                    <li><span>表示多余的关键字参数，键默认为<code>str</code>类型、值注释为<code>int</code>类型</span></li>
+                    <li><span>Python 3.12+</span> <span class="span">可写成：<code>def student(**kwargs: dict[str, int]) -> ...</code></span></li>
+                    <li><span>如果值类型不固定，用 <code>def student(**kwargs: Any)/def student(**kwargs:dict[str,Any])</code></span></li>
+                    <li><span><span>也就是：类型固定且多个可以用：<code>|或Union[]</code>，如果类型不固定可以用：<code>Any</code></span>，但是仅限于值的注释，键必须是：<code>str</code>类型——<span class="span">不定长参数——关键字的硬性要求</span></span></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+<script src="../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID'); return false;">链接</a>
+    //<div id="容器ID"></div>
+</script>
+</body>
+</html>

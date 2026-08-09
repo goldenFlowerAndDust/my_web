@@ -96,9 +96,9 @@
                                     <li>先解包，每个容器元素单独领出来：<code>num(10, 50, 100, 30, 30, 40, 50, 60, 70, 80,
                                         60, 70, 80, "h", "e", "l", "l", "o")</code></li>
                                     <li>然后先赋值位置参数：<code>a = 10 , b = 50, c = 100</code></li>
-                                    <li>多余的其他位置参数，会被重新打包成元组，赋值给字面量：<code>tuples = (0, 30, 40,
-                                        50,
-                                        60, 70, 80, 60, 70, 80, "h", "e", "l", "l", "o")</code></li>
+                                    <li>多余的其他位置参数，会被重新打包成元组，赋值给字面量：<code>tuples = (30, 30, 40,
+                                        50, 60, 70, 80,
+                                        60, 70, 80, "h", "e", "l", "l", "o")</code></li>
                                     <li><span>说白了：就是将多余的，非<span class="span">键值对、key = value</span>表达式，重新打包成元组，并赋值给字面量</span>
                                     </li>
                                 </ol>
@@ -184,9 +184,12 @@
                 </ol>
             </li>
             <li>最后补充参数优先级规则：<code>位置参数 > 默认参数 > * > 强制关键字 > **</code></li>
-            <li><a href="../../函数基础——函数定义/笔记/函数基础——函数定义.html/#return关键字" style="font-size: 3.2rem">关键字return</a>
+            <li>
+                <a href="../../函数基础——函数定义/笔记/函数基础——函数定义.html/#return关键字" style="font-size: 3.2rem"
+                   onclick="loadContent('../../函数基础——函数定义/笔记/函数基础——函数定义.html','container','#return关键字');return false">关键字return</a>
             </li>
         </ul>
+        <div id="container"></div>
     </section>
     <section id="section_2">
         <h2>课堂注意事项</h2>
@@ -207,5 +210,6 @@
         </p>
     </footer>
 </main>
+<script src="../../../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js"></script>
 </body>
 </html>

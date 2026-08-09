@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匿名函数</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>匿名函数</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>
+                什么是匿名函数：<span>没有名字的函数，需要通过 <code>lambda</code>表达式来声明函数，可以简化简单函数的缩写(单行表达式)</span>
+            </li>
+            <li><span>含参数(<span class="span">可以是多个，英文逗号间隔</span>)</span>语法：<code>sqrt = lambda 参数:
+                函数体</code></li>
+            <li><span>不含参数</span>语法：<code>sqrt = lambda : 函数体</code></li>
+            <li><span>字面量接收的是函数对象，不能直接<code>print(字面量)</code></span></li>
+            <li>无参调用：
+                <code style="display:block;">
+                    result = lambda :'|'*50
+                    <br>print(result()) # 调用无参函数
+                </code>
+            </li>
+            <li>有参调用：
+                <code style="display:block;">
+                    result = lambda x,y,z:(x+y+z) ** 0.5
+                    <br>print(result(10,50,30)) # 调用有参函数,需要传参
+                </code>
+            </li>
+            <li>直接打印字面量：
+                <code style="display:block;">
+                    result = lambda x,y,z:(x+y+z) ** 0.5
+                    <br>print(result) # 打印的是函数对象，一串地址。
+                </code>
+            </li>
+            <li>
+                <h2>特点</h2>
+                <ol>
+                    <li><span>没有函数名，只有关键字<code>lambda</code></span></li>
+                    <li><code>lambda 参数:函数体</code></li>
+                    <li><span>不需要<code>return</code>关键字，传递返回值，本身就可以</span></li>
+                    <li><span>可以字面量接收返回值，或直接调用</span></li>
+                    <li><span>只能一行写完，有点类似于：<span class="span">元组生成器的函数版本</span></span></li>
+                    <li>局限性：<span>不能写语句：<span class="span"><code>try-except，if-elif-else，for...</code></span></span></li>
+                    <li>但是可以内部调用函数和方法：<code>print()、len()、自定义函数、...</code></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>匿名函数与方法之间的联系</h2>
+        <div class=div_table>
+            <table>
+                <tr>
+                    <th colspan="3"><h3><span> 匿名函数（<code>lambda</code>）与相关核心用法总结表</span></h3></th>
+                </tr>
+                <tr>
+                    <td>知识点</td>
+                    <td>核心语法/作用</td>
+                    <td>关键特点</td>
+                </tr>
+                <tr>
+                    <td><code>lambda</code>基础</td>
+                    <td><code>lambda 参数:返回值</code></td>
+                    <td><span>单行函数，无需<code>def</code>和<code>return</code></span></td>
+                </tr>
+                <tr>
+                    <td><code>lambda VS def</code></td>
+                    <td><code>def</code>可以多行、有函数名，<code>lambda</code>是匿名表达式</td>
+                    <td><span><code>def</code>更灵活，<code>lambda</code>更简洁</span></td>
+                </tr>
+                <tr>
+                    <td><code>sort/ sorted() + key</code></td>
+                    <td>
+                        <ul>
+                            <li><code>list.sort(key=lambda x: x["score"],reverse = True)</code></li>
+                            <li><code>new_list = sorted(list,key=lambda x: x["score"])</code></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ol>
+                            <li>知识回顾：<code>sort(key=None,reverse=False)</code></li>
+                            <li><span>key默认None,reverse默认False(<span class="span">升序</span>)</span></li>
+                            <li><span>注意：<code>key</code>接收的是函数对象，而不是函数调用结果</span></li>
+                            <li>新知识(<code>sorted</code>)：<code>sorted(iteration,key=None,reverse)</code></li>
+                            <li><span>与<code>sort</code>不同，它有返回值，不更改原容器</span></li>
+                            <li>主要作用：<span>指定排序依据，不改变元素结构(<span class="span">只排序</span>)</span></li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>filter() + lambda</code></td>
+                    <td><code>filter(lambda x:x["score"] >= 80, dict)</code></td>
+                    <td>
+                        <ol>
+                            <li><span>筛选符合条件的元素，返回<span class="span">迭代器</span>，想要正确显示结果需要转成容器，或遍历</span>
+                            </li>
+                            <li><span>只是筛选，返回值是原容器数据类型</span></li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>map() + lambda</code></td>
+                    <td><code>students = map(lambda s:{'name':s["name"],'score':s['score'] + 5},iteration)</code></td>
+                    <td>
+                        <ol>
+                            <li><span>映射原列表，并通过函数，更改原容器数据</span></li>
+                            <li><span>映射新容器，不会更改原容器，需要字面量接收返回值(<span
+                                    class="span">迭代器</span>)</span></li>
+                            <li><span>返回数据类型，以函数更改的数据类型为主(<span
+                                    class="span">可以理解为以返回值类型为主</span>)。</span></li>
+                            <li><span>所以需要注意：到底需要<code>map</code>返回什么？</span></li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>lambda</code>与推导式/生成器的关系</td>
+                    <td>
+                        <ol>
+                            <li><span>推导式是"<span class="span">批量生成</span>"</span></li>
+                            <li><span>与生成器：<code>(x for i in range(5))</code>都是"输出一个结果"</span></li>
+                            <li><span>与生成器的区别：<span class="span"><code>lambda</code> 是函数对象，生成器是惰性迭代器</span></span>
+                            </li>
+                            <li><span>与生成器不同的是：<span
+                                    class="span">它没有惰性与急性之分，在定义匿名函数的时候，对象就一直生成，等待调用执行</span></span>
+                            </li>
+                            <li><span>但是会受到：<code>filter()/map()</code>等高阶函数，影响是惰性的，
+                                <br>因为 <code>filter()/map()</code>只有在被遍历或打印才会操作</span>
+                            </li>
+                        </ol>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><code>lambda</code>的限制</td>
+                    <td><span>不能包含语句(如：<code>print</code>)，不能有 <code>if-else</code>复杂分支</span></td>
+                    <td><span>只能写表达式</span></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

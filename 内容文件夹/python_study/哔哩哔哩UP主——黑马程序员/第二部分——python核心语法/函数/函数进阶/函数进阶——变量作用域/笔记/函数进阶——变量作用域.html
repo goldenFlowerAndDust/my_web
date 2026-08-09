@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变量作用域</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>变量作用域</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>变量的作用域指的是：<span>变量的作用范围(<span
+                    class="span">标识这个变量在哪里可以使用，在哪里不能使用</span>)</span></li>
+            <li><span>说白了，就是变量的存活周期</span></li>
+            <li>
+                <ol>
+                    <li>
+                        <h2>全局作用域</h2>
+                        <ul>
+                            <li>全局作用域也叫：<span>全局变量</span></li>
+                            <li>全局变量：<span>在函数之外定义的变量，称之为全局变量</span></li>
+                            <li>特点：<span>存活周期：整个文件(<span class="sapn">包括函数内</span>)都可以使用(<span
+                                    class="span">全局变量始终在顶层</span>)</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>局部作用域</h2>
+                        <ul>
+                            <li>局部作用域也叫：<span>局部变量</span></li>
+                            <li>局部变量：<span>在函数内部定义的变量，称之为局部变量</span></li>
+                            <li>特点：<span>存活周期：只在函数才能使用的变量</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>注意</h2>
+                        <ul>
+                            <li><span>变量有严格的作用域划分</span></li>
+                            <li><span>局部变量，外部绝对无法访问</span></li>
+                            <li>
+                                <h3>函数访问变量的坑</h3>
+                                <ol>
+                                    <li><span>函数内部，可以访问，全局变量，<span
+                                            class="span">正常情况只是能访问，不能修改</span></span></li>
+                                    <li>
+                                        <h4>函数修改外部变量的方法</h4>
+                                        <ul>
+                                            <li><span>修改全局变量：使用关键字：<code>global</code></span></li>
+                                            <li><code style="display:block;">
+                                                <br>x = 10
+                                                <br>def num():
+                                                <br> &nbsp;&nbsp;global x
+                                                <br> &nbsp;&nbsp;x = 20
+                                                <br>num()
+                                                <br>print(x) # 最后结果为 20
+                                            </code></li>
+                                            <li>
+                                                <span>内层函数修改外层函数变量的局部变量：使用关键字：<code>nonlocal</code></span>
+                                            </li>
+                                            <li>
+                                                <code style="display:block;">
+                                                    <br>def num1():
+                                                    <br> &nbsp;&nbsp;x = 50
+                                                    <br> &nbsp;&nbsp;def nun2():
+                                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;nonlocal x
+                                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;x = 30
+                                                    <br> &nbsp;&nbsp;num2()
+                                                    <br> &nbsp;&nbsp;print(x)
+                                                    <br>num1() 最后的输出结果是 30
+                                                </code>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h4>自己画的<code>python</code>作用域</h4>
+                                <img src="image/变量作用域.png"
+                                     alt="python变量作用域"
+                                     title="python变量作用域" style="display:block;">
+                                <span>注意：1.全局作用域可以有多个函数作用域</span>
+                                <br><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.每个函数作用域都有嵌套的多个函数作用域</span>
+                            </li>
+                            <li>
+                                <h4>自己画的<code>JavaScript</code>作用域</h4>
+                                <img src="image/JavaScript变量作用域.png"
+                                     alt="JavaScript变量作用域"
+                                     title="JavaScript变量作用域" style="display:block;">
+                                <span>注意：1.全局作用域可以有多个函数作用域</span>
+                                <br><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.每个函数作用域都有嵌套的多个函数作用域</span>
+                                <br><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.每个函数作用域都可能出现块级作用域</span>
+                                <br><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.全局作用域只有一个块级作用域</span>
+                                <br><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.块级作用域内可以有函数作用域、块级作用域</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h2>作用域核心对比</h2></th>
+                </tr>
+                <tr>
+                    <td><strong>对比维度</strong></td>
+                    <td><strong>JavaScript</strong></td>
+                    <td><strong>Python</strong></td>
+                    <td><strong>核心差异</strong></td>
+                </tr>
+
+                <!-- 1. 作用域类型 -->
+                <tr>
+                    <td><span>作用域类型</span></td>
+                    <td>
+                        <ul>
+                            <li><strong>全局作用域</strong>（Global）</li>
+                            <li><strong>函数作用域</strong>（Function）</li>
+                            <li><strong>块级作用域</strong>（Block，ES6+，由 <code>let</code>/<code>const</code> 创建）</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li><strong>全局作用域</strong>（Global）</li>
+                            <li><strong>函数作用域</strong>（Function）</li>
+                            <li><span>❌ 没有块级作用域</span>（<code>if</code>、<code>for</code> 等不创建作用域）</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span>JS 有块级作用域（<code>let</code>/<code>const</code>），Python 没有块级作用域</span>
+                    </td>
+                </tr>
+
+                <!-- 2. 变量提升（Hoisting） -->
+                <tr>
+                    <td><span>变量提升</span></td>
+                    <td>
+                        <ul>
+                            <li><code>var</code> 声明的变量会<strong>提升</strong>（Hoisted），初始化前值为
+                                <code>undefined</code></li>
+                            <li><code>let</code>/<code>const</code> 也会提升，但进入<strong>暂时性死区</strong>（TDZ），声明前访问报错
+                            </li>
+                            <li><strong>函数声明</strong>会整体提升（函数体也提升）</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>❌ 没有变量提升</li>
+                            <li>变量必须<strong>先定义后使用</strong>，否则报 <code>NameError</code></li>
+                            <li>函数定义（<code>def</code>）在运行时执行，必须先定义后调用</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span>JS 有变量提升（尤其是 <code>var</code> 和函数声明），Python 完全没有</span>
+                    </td>
+                </tr>
+
+                <!-- 3. 全局变量与修改 -->
+                <tr>
+                    <td><span>全局变量修改</span></td>
+                    <td>
+                        <ul>
+                            <li>在全局声明的变量，在函数内部<strong>可直接修改</strong>（无需关键字）</li>
+                            <li>如果函数内部使用 <code>var</code>/<code>let</code>/<code>const</code>
+                                重新声明同名变量，则创建局部变量，不影响全局
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>在函数内部<strong>读取</strong>全局变量无需关键字</li>
+                            <li>在函数内部<strong>修改</strong>全局变量需使用 <code>global</code> 关键字</li>
+                            <li>否则会在函数内部创建新的局部变量</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span>JS 修改全局变量无需关键字（但需注意重新声明会遮蔽），Python 必须用 <code>global</code></span>
+                    </td>
+                </tr>
+
+                <!-- 4. 闭包与修改外层变量 -->
+                <tr>
+                    <td><span>闭包中修改外层变量</span></td>
+                    <td>
+                        <ul>
+                            <li>在嵌套函数中，直接修改外层函数的变量<strong>无需关键字</strong></li>
+                            <li>但如果在外层作用域中<strong>重新声明</strong>同名变量，则会遮蔽外层变量</li>
+                            <li>闭包会“记住”外层变量</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>在嵌套函数中，<strong>读取</strong>外层函数变量无需关键字</li>
+                            <li>在嵌套函数中，<strong>修改</strong>外层函数变量需使用 <code>nonlocal</code> 关键字</li>
+                            <li>否则会在当前函数内部创建新的局部变量</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span>Python 修改外层变量必须用 <code>nonlocal</code>，JS 无需关键字（但要避免遮蔽）</span>
+                    </td>
+                </tr>
+
+                <!-- 5. 局部变量外部访问 -->
+                <tr>
+                    <td><span>局部变量外部访问</span></td>
+                    <td>
+                        <ul>
+                            <li>函数内部的局部变量（<code>var</code>/<code>let</code>/<code>const</code>）外部无法访问
+                            </li>
+                            <li>但可通过 <strong>返回值</strong>、<strong>闭包</strong> 或 <strong>全局变量</strong> 间接暴露
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>函数内部的局部变量外部无法访问</li>
+                            <li>但可通过 <strong>返回值</strong> 或 <strong>闭包</strong> 间接暴露</li>
+                            <li>无法通过全局变量暴露（除非显式声明 <code>global</code>）</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span>两者局部变量外部都无法直接访问，但都有间接方式传递数据</span>
+                    </td>
+                </tr>
+
+                <!-- 6. LEGB vs 作用域链 -->
+                <tr>
+                    <td><span>变量查找顺序</span></td>
+                    <td>
+                        <ul>
+                            <li><strong>作用域链</strong>：当前作用域 → 外层作用域 → 全局作用域 → 报错</li>
+                            <li>没有类似 LEGB 的官方缩写，但逻辑一致</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li><strong>LEGB 规则</strong>：</li>
+                            <li>Local → Enclosing → Global → Built-in</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span>Python 明确规定了 LEGB 顺序，JS 则是隐式的作用域链，但本质相同</span>
+                    </td>
+                </tr>
+
+                <!-- 7. 块级作用域示例 -->
+                <tr>
+                    <td><span>块级作用域（<code>if</code> / <code>for</code>）</span></td>
+                    <td>
+                        <ul>
+                            <li>ES6+ 中，<code>let</code>/<code>const</code> 在 <code>{}</code> 内创建块级作用域</li>
+                            <li><code>var</code> 忽略块级作用域，只受函数作用域限制</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>❌ <code>if</code>、<code>for</code>、<code>while</code> 等<strong>不创建</strong>作用域
+                            </li>
+                            <li>在块内定义的变量，在块外依然可访问</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span>JS 有块级作用域（<code>let</code>/<code>const</code>），Python 完全没有</span>
+                    </td>
+                </tr>
+
+                <!-- 8. 严格模式影响 -->
+                <tr>
+                    <td><span>严格模式</span></td>
+                    <td>
+                        <ul>
+                            <li><code>"use strict"</code> 禁止隐式全局变量，避免意外创建全局变量</li>
+                            <li>其他影响：禁止重复参数名、禁止 <code>with</code> 等</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>Python 默认就是“严格”的，没有隐式全局变量（赋值即声明）</li>
+                            <li>函数内部赋值未声明的变量会创建局部变量，而非全局</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span>JS 需要 <code>"use strict"</code> 来避免隐式全局，Python 天生如此</span>
+                    </td>
+                </tr>
+
+                <!-- 9. 全局对象 -->
+                <tr>
+                    <td><span>全局对象</span></td>
+                    <td>
+                        <ul>
+                            <li>浏览器环境：<code>window</code>（或 <code>globalThis</code>）</li>
+                            <li>Node.js 环境：<code>global</code></li>
+                            <li>在全局作用域声明的变量会成为全局对象的属性</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>Python 没有“全局对象”的概念</li>
+                            <li>全局变量存储在内置的 <code>globals()</code> 字典中，但一般不直接操作</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span>JS 有明确的全局对象（<code>window</code>/<code>global</code>），Python 无类似概念</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="2"><h2>🎯 一句话总结</h2></th>
+                </tr>
+                <tr>
+                    <td><strong>JavaScript</strong></td>
+                    <td>
+                        <span>作用域灵活，有块级作用域和变量提升，修改外层变量无需关键字，但需小心 <code>var</code> 的遮蔽和提升陷阱。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Python</strong></td>
+                    <td>
+                        <span>作用域严格，无块级作用域和变量提升，修改全局变量需 <code>global</code>，修改外层函数变量需 <code>nonlocal</code>，规则明确，不易出错。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>核心差异</strong></td>
+                    <td>
+                        <span>JS 更灵活（但坑多），Python 更严谨（但规则清晰）。两者闭包机制相似，但修改外层变量的方式完全不同。</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

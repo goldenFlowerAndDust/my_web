@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>递归</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>递归</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>递归：<span>就是函数返回值是函数自身</span></li>
+            <li>与常规函数区别：<code>return 自身</code></li>
+            <li>
+                <h2>注意事项</h2>
+                <ol>
+                    <li>重点：<span><code>return 自身</code></span></li>
+                    <li><span>必须写入退出递归的条件：<code>return 非自身</code></span></li>
+                    <li><code>python</code><span>默认递归上限：1000次</span></li>
+                    <li>
+                        <code style="display:block;">
+                            <br>def subtract(num):
+                            <br>try:
+                            <br> &nbsp;&nbsp;num = float(num)
+                            <br> &nbsp;&nbsp;print(f"当前 num: {num}")
+                            <br> &nbsp;&nbsp;if num >= 1000:
+                            <br> &nbsp;&nbsp; &nbsp;&nbsp;return subtract(num - 10) # return 自身 递归
+                            <br> &nbsp;&nbsp;elif num >= 500:
+                            <br> &nbsp;&nbsp; &nbsp;&nbsp;return subtract(num - 5) # return 自身 递归
+                            <br> &nbsp;&nbsp;elif num >= 200:
+                            <br> &nbsp;&nbsp; &nbsp;&nbsp;return subtract(num - 3) # return 自身 递归
+                            <br> &nbsp;&nbsp;elif num > 0:
+                            <br> &nbsp;&nbsp; &nbsp;&nbsp;return subtract(num - 1) # return 自身 递归
+                            <br> &nbsp;&nbsp;else:
+                            <br> &nbsp;&nbsp; &nbsp;&nbsp;return num # return 非自身 结束递归
+                            <br>except ValueError:
+                            <br> &nbsp;&nbsp;return "请输入数字类型"
+                            <br>print(subtract(600))
+                        </code>
+                    </li>
+                    <li>递归本身简单，主要是要考虑：<span>递归想干什么，什么情况下结束递归</span></li>
+                    <li>
+                        <h3>自行总结：递归整个过程(以上案例为主)</h3>
+                        <ol>
+                            <li><span>入栈过程(<span class="span">递推</span>)：<span class="span">无法完成完整计算，因为当前函数需要等待子调用的返回值。这个过程实际上是在“列出所有需要被执行的函数”。</span></span>
+                            </li>
+                            <li><span>出栈过程（<span class="span">回调</span>）：<span>计算从最上层（栈顶，即最内层）开始，逐层向下（向栈底）推进，直到到达栈底（最外层）。</span></span>
+                            </li>
+                            <li><span>栈底计算出最终结果后，按照正常函数的流程返回，并在返回时依次销毁栈帧。</span></li>
+                            <li>
+                                <img src="./image/阶乘递归过程.png"
+                                     alt="阶乘递归过程"
+                                     title="阶乘递归过程" style="display:block;">
+                            </li>
+                            <li>
+                                <img src="./image/递归过程——python.png"
+                                     alt="递归过程——python"
+                                     title="递归过程——python" style="display:block;">
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>过程：(<code style="font-size: 3.5rem">递归 = 入栈挂起 + 出栈计算 + 逐层传递</code>)</h2>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+</body>
+</html>

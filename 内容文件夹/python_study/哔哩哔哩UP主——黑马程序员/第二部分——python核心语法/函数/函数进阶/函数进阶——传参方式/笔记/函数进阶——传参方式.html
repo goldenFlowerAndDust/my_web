@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传参方式 - 总结</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>传参方式 — 总结</h1>
+        <p style="font-size: 1.8rem; color: #666;">本页只列要点，详细示例请参阅下方链接。</p>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>
+                <h2>传参方式总览</h2>
+                <ul>
+                    <li><span>位置参数</span>：按形参定义顺序一一对应传入。</li>
+                    <li><span>默认参数</span>：定义时给形参赋默认值，调用时可省略。</li>
+                    <li><span>关键字参数</span>：调用时指名道姓赋值，顺序可打乱。</li>
+                    <li><span>不定长参数</span>：
+                        <ul>
+                            <li><code>*args</code> —— 收集多余位置参数，打包为元组。</li>
+                            <li><code>**kwargs</code> —— 收集多余关键字参数，打包为字典。</li>
+                        </ul>
+                    </li>
+                    <li><span>强制关键字参数</span>：在 <code>*</code> 或 <code>*args</code> 之后的形参只能通过关键字传参。
+                    </li>
+                    <li><span>参数优先级</span>：<code>位置参数 > 默认参数 > * > 强制关键字 > **</code></li>
+                </ul>
+            </li>
+            <li>
+                <h2>合法定义方式（速查）</h2>
+                <ul>
+                    <li><code>def f(a, *b):</code> ✅</li>
+                    <li><code>def f(a, **b):</code> ✅</li>
+                    <li><code>def f(a, *b, **c):</code> ✅</li>
+                    <li><code>def f(a, *, b, **c):</code> ✅</li>
+                    <li><code>def f(a, *b, *c):</code> ❌（两个 * 冲突）</li>
+                    <li><code>def f(a, **b, *c):</code> ❌（顺序反了）</li>
+                </ul>
+            </li>
+            <li>
+                <h2>详细笔记（含完整示例）</h2>
+                <p><a href="../../../函数基础/函数基础——函数的参数与返回值/笔记/函数基础——函数的参数与返回值.html">👉
+                    点击查看完整笔记《函数基础——函数的参数与返回值》</a>
+                </p>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>课后总结</h2>
+        <ul>
+            <li>
+                <h3>位置参数</h3>
+                <ol>
+                    <li><span>调用函数时，传入的实参的顺序与定义函数形参的顺序完全一致</span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>关键字参数</h3>
+                <ol>
+                    <li><span>调用函数时，通过 <code>"形参名 = 值"</code>的形式传递参数，顺序没有要求</span></li>
+                    <li><span class="span">如果同时存在位置参数与关键字参数，位置参数在前，关键字参数在后</span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>默认值参数</h3>
+                <ol>
+                    <li>默认值参数也称为缺省参数，用于在定义函数时，为参数提供默认值，调用函数时，可以不传递有默认值的参数
+                    </li>
+                    <li><span>默认值参数必须放在没有默认值的参数列表的后面，一个函数可以设置多个默认值</span></li>
+                    <li>
+                        <span>函数调用时，如果默认参数传递了值。则会修改默认的参数值，如果没有传递参数，则直接使用默认值</span>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h4>无定长参数</h4>
+                <ol>
+                    <li>不定长参数也叫 <span>可变参数</span>，用于函数定义及调用时参数个数不确定(<span>零或多个</span>)的场景
+                    </li>
+                    <li>类型一(<span>无定长参数——位置参数</span>)：<code>*args</code>，多余<span>位置参数收集</span>，组包成元组，然后赋值给形参。位置不固定，但是符号后面，均为<span>强制关键字参数</span>。
+                    </li>
+                    <li>
+                        类型二(<span>无定长参数——关键字参数</span>)：<code>**kwargs</code>,多余<span>关键字参数收集</span>，组包成字典，然后赋值给形参，位置固定最后一个
+                    </li>
+                    <li>优先级：<code>* > 强制关键字 > **</code></li>
+                    <li><span>无定长参数——关键字参数 <span class="span">一定在</span>无定长参数——位置参数 <span
+                            class="span">后面</span></span></li>
+                    <li>
+                        <h5>无定长参数——关键字参数(<span>附加规则</span>)</h5>
+                        <ul>
+                            <li>一般字典的键名：<span>必须是可哈希的(<span class="span">不可变对象</span>)、数字、字符串、元组均是可以作为键名的</span>
+                            </li>
+                            <li>但是无定长参数：<span>添加一条硬性规则：<span class="span">键名必须是字符串</span></span>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>传参方式的适用场景</h3>
+                <ol>
+                    <li><span>一切以代码结构清晰为主(<span>可读性</span>)、便于维护(<span>维护性</span>)为目标</span>
+                    </li>
+                    <li>如果参数比较少(<span>不超过三个</span>)，<span>可直接使用位置参数</span></li>
+                    <li><span>如果参数数量较多，建议使用关键字参数。</span></li>
+                    <li><code>*args</code>适用于处理数量不确定的数据</li>
+                    <li><code>**kwargs</code>适用于处理数量不确定的选型(<span>函数的配置参数，用来定制函数的行为</span>)
+                    </li>
+                </ol>
+            </li>
+            <li><span>额外注意事项：<span class="span">只要多出数据被无定长参数收集，要么是元组，要么是字典。
+                <br>也就是说：尽管是一个位置参数，同样是元组。
+                <br>一个关键字参数，同样是字典。</span></span></li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均为学习笔记，详细内容请参阅基础笔记。</p>
+        <p><span>我采用 Python 语法与 JavaScript 语法类比的方式记录。</span></p>
+    </footer>
+</main>
+</body>
+</html>
