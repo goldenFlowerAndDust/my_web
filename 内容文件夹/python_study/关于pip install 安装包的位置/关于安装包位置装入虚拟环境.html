@@ -16,7 +16,9 @@
             <table>
                 <thead>
                 <tr>
-                    <th colspan="2"><h2>关于安装包位置装入虚拟环境(<span>非常建议以后，将包安装在虚拟环境，项目之间包隔开，防止冲突</span>)</h2></th>
+                    <th colspan="2"><h2>
+                        关于安装包位置装入虚拟环境(<span>非常建议以后，将包安装在虚拟环境，项目之间包隔开，防止冲突</span>)
+                    </h2></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -158,6 +160,36 @@
                     <li>验证：再次用 pip show 确认路径包含 venv。</li>
                 </ul>
             </div>
+        </div>
+        <div id="删除虚拟环境的方法">
+            <table class="div_table" style="border-collapse: collapse;">
+                <tbody>
+                <tr>
+                    <td colspan="2"><h3>删除虚拟环境的方法</h3></td>
+                </tr>
+                <tr>
+                    <td colspan="2">方法一：<span>直接删除文件夹(<span class="span">最常用、最彻底</span>)</span></td>
+                </tr>
+                <tr>
+                    <td>命令</td>
+                    <td>作用</td>
+                </tr>
+                <tr>
+                    <td><code>rmdir /s /q venv(<span>虚拟环境名</span>)，在<code>[Windows CMD]，路径为虚拟环境位置</code></code>
+                    </td>
+                    <td><span>强制删除 <code>venv</code> 文件夹及其所有内容</span></td>
+                </tr>
+                <tr>
+                    <td><code>Remove-Item -Recurse -Force venv(虚拟环境名)</code>,在<code>[Windows PowerShell]</code>
+                    </td>
+                    <td><span>强制删除 <code>venv</code> 文件夹及其所有内容</span></td>
+                </tr>
+                <tr>
+                    <td><code>rm -rf venv（Mac / Linux）</code></td>
+                    <td><span>强制删除 venv 文件夹</span></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </section>
     <section id="section_2"></section>

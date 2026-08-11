@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模块介绍</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>模块介绍</h1>
+    </header>
+    <section id="section_1">
+        <h2>什么是模块</h2>
+        <ul>
+            <li>引入：<span>当一个项目需要计算面积、周长，当其他文件内有计算结构的函数(<span
+                    class="span">方法</span>)，我不想再写一次，想直接拿过来复用怎么办</span></li>
+            <li>模块概念：<span>将其他文件内的数据，导入到当前文件，实现多个文件数据共享。</span></li>
+            <li><span>主要是实现：<span class="span">主程序与功能分离，提高代码质量，减少代码冗余。</span></span></li>
+        </ul>
+        <h2>使用模块需要的注意事项</h2>
+        <ul>
+            <li><span>命名：<span>与字面量的命名规则一致：硬性规则：<span class="span">不能以数字开头、只能包含：<code>A-Z、a-z、非数字开头数字、下划线、中文(<span>不建议用，虽然不会报错、但是运行可能会出BUG</span>)</code></span></span></span>
+            </li>
+            <li><span>模块的存储位置必须与导入模块为兄弟(<span class="span">同一个文件夹内</span>)，否则获取不到</span>
+            </li>
+            <li>
+                <span>模块识别顺序：<span class="span">最先查询同一文件夹内——><code>sys.path</code>查询————>系统自带的模块</span></span>
+            </li>
+            <li>
+                <span>因为系统模块是最后查找的，所以自定义模块不能与系统自带模块重名，自定义模块会覆盖系统模块，导致功能出问题</span>
+            </li>
+        </ul>
+        <h2>导入模块</h2>
+        <ul>
+            <li>导入模块：<code>import</code>关键字</li>
+            <li>语法1：<code>import 模块名</code></li>
+            <li><span>直接导入整个模块，包含模块内的所有方法、类、变量...</span></li>
+            <li>语法2：<code>from 模块名 import [方法、类、变量....]</code></li>
+            <li><span>选择形导入，可以一次多个导入，中间用逗号分隔</span></li>
+            <li>可以使用<code>as</code>关键字重命名，后面使用模块的时候，就用重命名，否则默认模块名字</li>
+            <li>语法：<code>improt math as shuxue</code></li>
+            <li>这样的话，模块名字就变成了，<code>shuxue</code>，往后使用就用新的名字，但是注意：<span class="span">功能与原模块一致，且不会更改原模块名字，只能作用于当前文件。</span>
+        </ul>
+        <h2>使用模块</h2>
+        <ul>
+            <li>使用模块非常简单：<code>模块名.需要的操作</code></li>
+            <li><span>这个需要的操作可以是：<code>Class、def、字面量...</code>具体用什么由自己决定</span></li>
+        </ul>
+        <h2>包机制</h2>
+        <ul>
+            <li>所谓的包就是：<span>将多个模块封装成一个文件夹，这个文件夹就叫包</span></li>
+            <li><span>主要作用是：使模块不那么碎片话，整理</span></li>
+            <li>硬性要求：<span>文件夹必须含有：<code>__init__.py</code>文件，内容是空的也没有关系。主要作用：包名初始化，就是告诉python，这是一个包，先查询里面的模块</span>
+            </li>
+            <li>
+                <span>包名可以是任何字符只要内部有：<code>__init__.py</code>文件即可，但是同样建议：<span>使用字面量命名规则：<code>A-Z，a-z，非数字开头数字，下划线，中文(正常项目同样不建议采用)</code></span></span>
+            </li>
+            <li>
+                <span><span class="span">默认</span>包必须与主程序(<span class="span">导入它的文件</span>)为兄弟关系，必须在同一个文件夹下。<span
+                        class="span">即使是兄弟子文件夹内都是不行</span></span>
+            </li>
+            <li><span>后续可以使用：<code>sys.path</code>进行在所有文件夹下进行查询</span></li>
+        </ul>
+        <h2>导入包</h2>
+        <ul>
+            <li>导入包和模块：<code>from 包名 import 模块</code></li>
+            <li>导入包和模块的同时选择需要导入的内容：<code>from 包名.模块 import 内容</code></li>
+            <li><span>内容可以是：<span>类、变量、函数...</span>，可以多个导入，之间用英文逗号隔开</span></li>
+        </ul>
+        <h2>使用sys模块，使包/模块在任何文件被访问</h2>
+        <ul>
+            <li><span>介绍模块：<code>sys</code>:本质是 <code>python</code>进程启动时初始化的<span
+                    class="span">内存列表</span></span></li>
+            <li><span>使用它其中一个功能，就能实现包/模块任何地方被找到：先导入：<code>improt sys</code>，然后再使用：<code>sys.path.append(r'包的父目录')</code></span>
+            </li>
+            <li>实现上面这两个操作后，就能正常导入：<code>from 包名 improt
+                模块</code>/ <code>improt 模块</code>....<span>在IDE上，需要先写全，IDE才会识别</span></li>
+            <li>
+                整个过程：就是使用模块<code>sys</code>其中 <code>sys.path.append()</code>方法，
+                为python插入一个锚点，让python在查询包的同时，在添加的锚点也查询一遍，实现任何地方都能使用包内的模块
+            </li>
+            <li>
+                <span>只有在控制台，<code>sys</code>才会执行，离开控制台，便会消失</span>
+                <br><span class="span"><code>sys</code>的存活周期：运行文件(生命开始)————过程——————结束运行(或终止运行)【声明周期结束】</span>
+            </li>
+            <li>
+                复习查询过程：<code>导入文件父文件夹————>sys内存列表(本质是列表：append、insert、extend行为一致)——————>系统自带模块</code>
+            </li>
+        </ul>
+        <h2>其他模块知识</h2>
+        <ul>
+            <li>调试：<code>if __name__ :
+                "__main__":</code>运行程序会重里面开始+条件分支语句，可以指定需要运行的代码。(<span>前提是它上面没有运行的代码【提示：函数只有被调用才会执行】。</span>)
+            </li>
+            <li><code>__init__</code>在包中叫包名初始化(<span>告诉：<code>python</code>这是一个包</span>)、在类中叫构造函数：<code>def
+                __init__(self)</code></li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>其他内容</h2>
+        <ul>
+            <li>
+                <span>模块、方法显示异常问题、警告异常问题。主要是父文件夹包含非ASCII码字符。解决办法——重命名、删除.idea文件、重新配置解释器</span>
+            </li>
+            <li><span>导入模块问题：同级下import是直接文件名，文件名不能是：[<code>-</code>]连接。</span></li>
+            <li><span>导入模块没有提醒问题：虚拟环境背污染，解决办法：<a
+                    href="../../../../../关于pip%20install%20安装包的位置/关于安装包位置装入虚拟环境.html/#删除虚拟环境的方法"
+                    onclick="loadContent(this,'container','#删除虚拟环境的方法');return false">删除虚拟环境</a>，重装、重新配置解释器</span>
+            </li>
+            <li>
+                <div id="container"></div>
+            </li>
+            <li><span>关于模块知识：导入关键字：import、重命名模块：as 名字，后续可以通过新定义的名字进行操作</span></li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+<script src="../../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+</script>
+</body>
+</html>

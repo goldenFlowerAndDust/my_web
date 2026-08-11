@@ -381,5 +381,3 @@ def students():
             case _:
                 print("请输入规定的操作")
 
-
-students()
