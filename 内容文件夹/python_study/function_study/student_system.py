@@ -17,16 +17,7 @@ def triangle(bed, height):
         return None
 
 
-# 注意缩进，下面的代码不在函数内部
-bed_input, height_input = input("请输入三角形的底(不能为零，负数取绝对值)：bed="), input(
-    "请输入三角形的高(不能为零，负数取绝对值)：height=")
 
-result = triangle(bed_input, height_input)
-
-if result is None:
-    print("包含非法数字，或数字为零")
-else:
-    print(f"三角形：高:{height_input}cm，底:{bed_input}cm，面积为：{result}cm²")
 
 
 def vowels(word):
@@ -42,8 +33,7 @@ def vowels(word):
     return sum(1 for v in word if v in ('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'))
 
 
-word_input = input("请输入一串单词：word=")
-print(f"单词：{word_input}\n 元音字母有：{vowels(word_input)}个")
+
 
 
 # 成绩管理器：增、删、改、查、退出
@@ -380,4 +370,25 @@ def students():
 
             case _:
                 print("请输入规定的操作")
+
+if __name__ == "__main__":
+
+    # 注意缩进，下面的代码不在函数内部
+    bed_input, height_input = input("请输入三角形的底(不能为零，负数取绝对值)：bed="), input(
+        "请输入三角形的高(不能为零，负数取绝对值)：height=")
+
+    result = triangle(bed_input, height_input)
+
+    if result is None:
+        print("包含非法数字，或数字为零")
+    else:
+        print(f"三角形：高:{height_input}cm，底:{bed_input}cm，面积为：{result}cm²")
+
+    word_input = input("请输入一串单词：word=")
+    print(f"单词：{word_input}\n 元音字母有：{vowels(word_input)}个")
+
+    students()
+
+
+
 

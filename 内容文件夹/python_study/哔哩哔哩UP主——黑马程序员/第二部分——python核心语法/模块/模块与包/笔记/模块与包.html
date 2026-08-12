@@ -15,18 +15,26 @@
         <h2>什么是模块</h2>
         <ul>
             <li>引入：<span>当一个项目需要计算面积、周长，当其他文件内有计算结构的函数(<span
-                    class="span">方法</span>)，我不想再写一次，想直接拿过来复用怎么办</span></li>
-            <li>模块概念：<span>将其他文件内的数据，导入到当前文件，实现多个文件数据共享。</span></li>
+                    class="span">方法</span>)，我不想再写一次，想直接拿过来复用怎么办</span>
+            </li>
+            <li>
+                <span>模块定义：<code>python模块(module):</code>一个<code>.py</code>文件就是一个模块，模块是<code>python</code>程序的基本组织单位。</span>
+            </li>
+            <li>在模块中<span>可以定义变量、函数、类，以及可执行的代码</span></li>
+            <li>模块用法：<span>将其他文件内的数据，导入到当前文件，实现多个文件数据共享。</span></li>
             <li><span>主要是实现：<span class="span">主程序与功能分离，提高代码质量，减少代码冗余。</span></span></li>
         </ul>
         <h2>使用模块需要的注意事项</h2>
         <ul>
             <li><span>命名：<span>与字面量的命名规则一致：硬性规则：<span class="span">不能以数字开头、只能包含：<code>A-Z、a-z、非数字开头数字、下划线、中文(<span>不建议用，虽然不会报错、但是运行可能会出BUG</span>)</code></span></span></span>
             </li>
-            <li><span>模块的存储位置必须与导入模块为兄弟(<span class="span">同一个文件夹内</span>)，否则获取不到</span>
+            <li><span>模块的存储位置必须与导入模块为兄弟(<span
+                    class="span">同一个文件夹内</span>)，否则获取不到</span>
             </li>
             <li>
-                <span>模块识别顺序：<span class="span">最先查询同一文件夹内——><code>sys.path</code>查询————>系统自带的模块</span></span>
+                <a href="#模块识别顺序"
+                   onclick="loadContent(this,'containers','#模块识别顺序');return false">模块识别顺序</a>
+                <div id="containers"></div>
             </li>
             <li>
                 <span>因为系统模块是最后查找的，所以自定义模块不能与系统自带模块重名，自定义模块会覆盖系统模块，导致功能出问题</span>
@@ -36,23 +44,116 @@
         <ul>
             <li>导入模块：<code>import</code>关键字</li>
             <li>语法1：<code>import 模块名</code></li>
-            <li><span>直接导入整个模块，包含模块内的所有方法、类、变量...</span></li>
+            <li>
+                <span>直接导入整个模块，模块内的所有方法、类、变量...都存在模块名这个对象中，使用方式<code>模块名.需要的功能</code></span>
+            </li>
             <li>语法2：<code>from 模块名 import [方法、类、变量....]</code></li>
-            <li><span>选择形导入，可以一次多个导入，中间用逗号分隔</span></li>
+            <li><span>显示指定导入，可以一次多个导入，中间用逗号分隔</span></li>
+            <li>
+                <h3>通配符导入，初学者不容易分辨</h3>
+                <ul>
+                    <li>语法3：<code>from 模块名 import *</code></li>
+                    <li><span>通配符导入，受制于被导入文件的：<code>__all__ = [需要导入的功能]</code></span></li>
+                    <li>需要的功能可以是：<span>变量、函数、类...</span></li>
+                    <li>
+                        与语法1和语法2不同，<span>它导入的模块内如果有：<code>__all__ = [需要导入的功能]</code>，导入时只会导入指定的功能</span>
+                    </li>
+                    <li>
+                        <span>如果被导入文件，写法是<code>__all__ = []</code>空列表，则不会导入任何字面量</span>
+                    </li>
+                    <li>
+                        <span>如果被导入文件，没有<code>__all__</code>的同时使用通配符导入，则导入所有非下划线开头的字面量</span>
+                    </li>
+                    <li>
+                        <span>所以非常不建议用，<span class="span">语法1和语法2，将所有需要的内容放入一个命名的袋子，要想使用就必须：<code>袋子名.需要的功能</code></span>
+                        重根本上就杜绝了，污染全局字面量的可能</span>
+                    </li>
+                    <li>
+                        <span>正常项目中，使用通配符导入的字面量，如果导入文件重名，会被导入文件覆盖，而且不会报错，完全是定时炸弹</span>
+                    </li>
+                    <li><span>综上所述：应该避免使用</span></li>
+                </ul>
+            </li>
             <li>可以使用<code>as</code>关键字重命名，后面使用模块的时候，就用重命名，否则默认模块名字</li>
-            <li>语法：<code>improt math as shuxue</code></li>
+            <li>语法：<code>import math as shuxue</code></li>
             <li>这样的话，模块名字就变成了，<code>shuxue</code>，往后使用就用新的名字，但是注意：<span class="span">功能与原模块一致，且不会更改原模块名字，只能作用于当前文件。</span>
         </ul>
-        <h2>使用模块</h2>
-        <ul>
-            <li>使用模块非常简单：<code>模块名.需要的操作</code></li>
-            <li><span>这个需要的操作可以是：<code>Class、def、字面量...</code>具体用什么由自己决定</span></li>
-        </ul>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><h2><span>使用模块</span></h2></th>
+                </tr>
+                <tr>
+                    <td>导入形式</td>
+                    <td>代码样例</td>
+                    <td>调用方式</td>
+                    <td>调用方式样例</td>
+                </tr>
+                <tr>
+                    <td><code>import 模块名</code></td>
+                    <td><span>import random</span></td>
+                    <td>模块名.功能名</td>
+                    <td><code>random.randint(10,100)</code></td>
+                </tr>
+                <tr>
+                    <td><code>import 模块名 as 别名</code></td>
+                    <td><span>import random as rd</span></td>
+                    <td>别名.功能名</td>
+                    <td><code>rd.randint(10,100)</code></td>
+                </tr>
+                <tr>
+                    <td><code>from 模块名 import 功能名</code></td>
+                    <td><span>from random import randint,choice</span></td>
+                    <td>功能名</td>
+                    <td><code>randint(10,100)</code></td>
+                </tr>
+                <tr>
+                    <td><code>from 模块名 import 功能名 as 别名</code></td>
+                    <td><span>from random import randint as ints</span></td>
+                    <td>别名</td>
+                    <td><code>ints(10, 100)</code></td>
+                </tr>
+                <tr id="模块通配符">
+                    <td><code>from 模块名 import *</code></td>
+                    <td><span>from random import *</span></td>
+                    <td>
+                        <ul>
+                            <li>功能名</li>
+                            <li><span>受到被导入文件中：<code>__all__</code>的<span class="span">完全控制</span></span>
+                            </li>
+                            <li>正常情况：<code>__all__ = [功能名]</code>，只会导入规定的功能名</li>
+                            <li>正常情况2：<code>__all__ = []</code>，什么也不会导入</li>
+                            <li>异常情况：被导入文件没有：<code>__all__</code>，导入所有<span>非下划线开头的字面量[公有字面量，<br><span
+                                    class="span">以下划线开头的是私有字面量，外部无法访问</span>]</span>，污染全局作用域
+                            </li>
+                        </ul>
+                    </td>
+                    <td><code>randint(10, 100)</code></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <h3> 总上总结，建议采用的方式是：</h3>
+                        <ul>
+                            <li><code>import 模块名</code></li>
+                            <li><code>import 模块名 as 别名</code></li>
+                            <li><code>from 模块名 import 功能名 as 别名</code></li>
+                            <li><span>主要保证：功能名可控即可</span></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">默认情况：导入文件与被导入文件必须在同一文件夹内，但是可以通过<code>sys</code>模块，插入锚点，达到随时随地可被导入
+                    </td>
+                </tr>
+            </table>
+        </div>
         <h2>包机制</h2>
         <ul>
             <li>所谓的包就是：<span>将多个模块封装成一个文件夹，这个文件夹就叫包</span></li>
             <li><span>主要作用是：使模块不那么碎片话，整理</span></li>
-            <li>硬性要求：<span>文件夹必须含有：<code>__init__.py</code>文件，内容是空的也没有关系。主要作用：包名初始化，就是告诉python，这是一个包，先查询里面的模块</span>
+            <li>
+                <span>在 Python 中，一个文件夹若要被视为常规包，通常需要包含 <code>__init__.py</code> 文件（内容可以为空），它的作用是告诉Python ‘这是一个包’。<span
+                        class="span">虽然 Python 3.3+ 支持没有 __init__.py 的命名空间包，<span>但在考试和常规项目中，建议始终保留 __init__.py 以确保兼容性和清晰性。</span></span></span>
             </li>
             <li>
                 <span>包名可以是任何字符只要内部有：<code>__init__.py</code>文件即可，但是同样建议：<span>使用字面量命名规则：<code>A-Z，a-z，非数字开头数字，下划线，中文(正常项目同样不建议采用)</code></span></span>
@@ -61,24 +162,136 @@
                 <span><span class="span">默认</span>包必须与主程序(<span class="span">导入它的文件</span>)为兄弟关系，必须在同一个文件夹下。<span
                         class="span">即使是兄弟子文件夹内都是不行</span></span>
             </li>
-            <li><span>后续可以使用：<code>sys.path</code>进行在所有文件夹下进行查询</span></li>
+            <li>
+                <span>后续可以使用：<code>sys.path(<span>中文名叫模块搜索路径</span>)</code>进行在所有文件夹下进行查询</span>
+            </li>
         </ul>
         <h2>导入包</h2>
         <ul>
-            <li>导入包和模块：<code>from 包名 import 模块</code></li>
-            <li>导入包和模块的同时选择需要导入的内容：<code>from 包名.模块 import 内容</code></li>
+            <li>语法1[<span>导入包和模块</span>]：<code>from 包名 import 模块</code></li>
+            <li>语法2[<span>导入包和模块的同时选择需要导入的内容</span>]：<code>from 包名.模块 import 内容</code></li>
+            <li>
+                <h3>通配符导入包，初学者容易出错</h3>
+                <ul>
+                    <li>语法3[<span>通配符导入</span>]：<code>from 包名 import *</code></li>
+                    <li>
+                        <span>注意导入的不是所有包内的模块，而是导入：<code>__init__.py</code>文件内，<code>__all__ = [需要导入的模块]</code>的模块</span>，<span
+                            class="span">如果导入[]外的模块，尽管模块存在，同样报错</span></li>
+                    <li>
+                        <span>如果：<code>__init__.py</code>文件中 <code>__all__ = []</code>，<code>[]</code>是空列表，则什么都不会导入，且不会报错</span>
+                    </li>
+                    <li>
+                        <span>如果：<code>__init__.py</code>文件中没有<code>__all__</code>，且使用通配符导入，则导入所有非下划线开头的模块</span>
+                    </li>
+                    <li><span>使用这种方法，也可以，对比模块的导入，不会污染全局字面量，但是为未写<code>__all__</code>,几乎一次导入所有模块，看情况写</span>
+                    </li>
+                </ul>
+                <h3>导入包的模块采用通配符导入</h3>
+                <ul>
+                    <li><code>from 包.模块 import *</code></li>
+                    <li><span>与单纯的：<code>from 模块 import *</code>行为一致，污染全局字面量，应避免使用</span></li>
+                </ul>
+            </li>
             <li><span>内容可以是：<span>类、变量、函数...</span>，可以多个导入，之间用英文逗号隔开</span></li>
         </ul>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="4"><span>导入包方式对比</span></th>
+                </tr>
+                <tr>
+                    <td>导入形式</td>
+                    <td>代码样例</td>
+                    <td>调用方式</td>
+                    <td>调用方式案例</td>
+                </tr>
+                <tr>
+                    <td><code>import 包名.模块名</code></td>
+                    <td><span>import utils.my_fun</span></td>
+                    <td>包名.模块名.功能名</td>
+                    <td><code>utils.my_fun.log_separator1()</code></td>
+                </tr>
+                <tr>
+                    <td><code>from 包名 import 模块名</code></td>
+                    <td><span>from utils import my_fun</span></td>
+                    <td>模块名.功能名</td>
+                    <td><code>my_fun.log_separator1()</code></td>
+                </tr>
+                <tr>
+                    <td><code>from 包名 import 模块名 as 别名</code></td>
+                    <td><span>from utils import my_fun as function</span></td>
+                    <td>别名.功能名</td>
+                    <td><code>function.log_separator1()</code></td>
+                </tr>
+                <tr>
+                    <td><code>from 包名.模块名 import 功能名</code></td>
+                    <td><span>from utils.my_fun import log_separator1</span></td>
+                    <td>功能名</td>
+                    <td>log_separator1</td>
+                </tr>
+                <tr>
+                    <td>from 包名 import *</td>
+                    <td>from utils import *</td>
+                    <td>模块名.功能名</td>
+                    <td>
+                        <ul>
+                            <li><code>my_fun.log_separator1()</code></li>
+                            <li>包通配符导入看的是包中的：<code>__init__.py</code>文件中的：<code>
+                                __all__ = [模块名]</code></li>
+                            <li>当：<code>__all__ = [模块名]</code>，导入指定的模块名，若指定其他模块名，尽管在包中，同样报错
+                            </li>
+                            <li>当：<code>__all__ = []</code>,空列表，不会执行导入操作</li>
+                            <li>当：文件内没有：<code>__all__</code>，则导入全部公有模块(非下划线开头的模块)</li>
+                            <li>
+                                与模块通配符导入不同，<span>包通配符导入不会将模块内部的函数/变量直接暴露到全局，只会导入模块对象本身（或 __all__ 指定的模块）</span>，因此污染风险远低于模块级通配符。
+                                <br><span>而且还有一个非常实用的功能：一次导入所有公有模块(<span
+                                    class="span">非下划线开头的模块</span>)</span>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>from 包名.模块 import *</code></td>
+                    <td><span>from utils.my_fun import *</span></td>
+                    <td>功能名</td>
+                    <td>
+                        <ul>
+                            <li><code>log_separtor1()</code></li>
+                            <li>
+                                与<a href="#模块通配符"
+                                     onclick="loadContent(this,'container2','#模块通配符');return false">模块通配符(单击链接显示具体内容)</a>导入一致，污染全局字面量，避免使用
+                                <div id="container2"></div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"><span>导入包没有那么多建议，看使用情况即可</span></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><span>
+                        默认包文件与与导入文件必须为同一文件夹下，但是可以通过<code>sys</code>模块，插入锚点，随时可以导入</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <a href="#模块识别顺序" onclick="loadContent(this,'container3','#模块识别顺序'); return false">模块识别顺序</a>
+                        <div id="container3"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <h2>使用sys模块，使包/模块在任何文件被访问</h2>
         <ul>
             <li><span>介绍模块：<code>sys</code>:本质是 <code>python</code>进程启动时初始化的<span
                     class="span">内存列表</span></span></li>
-            <li><span>使用它其中一个功能，就能实现包/模块任何地方被找到：先导入：<code>improt sys</code>，然后再使用：<code>sys.path.append(r'包的父目录')</code></span>
+            <li><span>使用它其中一个功能，就能实现包/模块任何地方被找到：先导入：<code>import sys</code>，然后再使用：<code>sys.path(<span>中文名叫模块搜索路径</span>).append(r'包的父目录')</code></span>
             </li>
-            <li>实现上面这两个操作后，就能正常导入：<code>from 包名 improt
-                模块</code>/ <code>improt 模块</code>....<span>在IDE上，需要先写全，IDE才会识别</span></li>
+            <li>实现上面这两个操作后，就能正常导入：<code>from 包名 import
+                模块</code>/ <code>import 模块</code>....<span>在IDE上，需要先写全，IDE才会识别</span></li>
             <li>
-                整个过程：就是使用模块<code>sys</code>其中 <code>sys.path.append()</code>方法，
+                整个过程：就是使用模块<code>sys</code>其中
+                <code>sys.path(<span>中文名叫模块搜索路径</span>).append()</code>方法，
                 为python插入一个锚点，让python在查询包的同时，在添加的锚点也查询一遍，实现任何地方都能使用包内的模块
             </li>
             <li>
@@ -86,16 +299,74 @@
                 <br><span class="span"><code>sys</code>的存活周期：运行文件(生命开始)————过程——————结束运行(或终止运行)【声明周期结束】</span>
             </li>
             <li>
-                复习查询过程：<code>导入文件父文件夹————>sys内存列表(本质是列表：append、insert、extend行为一致)——————>系统自带模块</code>
+                <ul id="模块识别顺序">
+                    <li><code>sys.path[0]————>sys.path[1:]————>sys.path[-1]——————均找不到会报错</code></li>
+                    <li><span><code>sys.path[0]</code>:当前执行脚本所在的目录(<span
+                            class="span">默认自动加入</span>)</span></li>
+                    <li>
+                        <span><code>sys.path[1:]</code>:环境变量<code>PYTHONPATH</code>或手动 <code>append、inset、extend</code>添加的路径</span>
+                    </li>
+                    <li><span><code>sys.path[-1]</code>:系统标准库路径(最后查找)</span></li>
+                    <li><span>所有位置搜索均没有，模块，则报错，显示未定义</span></li>
+                </ul>
             </li>
         </ul>
         <h2>其他模块知识</h2>
         <ul>
-            <li>调试：<code>if __name__ :
-                "__main__":</code>运行程序会重里面开始+条件分支语句，可以指定需要运行的代码。(<span>前提是它上面没有运行的代码【提示：函数只有被调用才会执行】。</span>)
+            <li>
+                <h3>调试：<code>if __name__ == "__main__":</code></h3>
+                <ol>
+                    <li><code>__name__</code><span>python内置的变量,<span class="span">表示当前模块的名字</span></span>
+                    </li>
+                    <li>定义：<span>直接运行当前模块：<code>__name__ 的值为 "__main__"</code></span></li>
+                    <li><span>当导入模块时：<code>__name__ 的值就是模块名字</code></span></li>
+                    <li>总结就是：<span>只有当该文件被直接运行时，<code>__name__ 的值才会等于 "__main__"</code>，该块内的代码才执行。</span>
+                        <span>如果被导入，__name__ 的值是模块名，该块内的代码跳过不执行</span>
+                    </li>
+                    <li>
+                        用处1(<span>被导入模块测试</span>)：可以使用条件分支语句，指定需要运行的代码。(
+                        <span>前提是它上面没有运行的代码【提示：函数只有被调用才会执行】。</span>)
+                    </li>
+                    <li>
+                        用处2（被导入模块的安全防护）：<span>将被导入模块中的测试代码或顶层调用放入 <code>if __name__ == "__main__":</code> 中，
+                        确保模块被导入时不会意外执行这些代码，避免干扰导入方。</span>
+                    </li>
+                </ol>
             </li>
-            <li><code>__init__</code>在包中叫包名初始化(<span>告诉：<code>python</code>这是一个包</span>)、在类中叫构造函数：<code>def
-                __init__(self)</code></li>
+            <li>
+                <code>__init__</code>在包中叫包名初始化(<span>告诉：<code>python</code>这是一个包</span>)、在类中叫构造函数：<code>def
+                __init__(self)</code>
+            </li>
+            <li>
+                <h3>__all__</h3>
+                <ol>
+                    <li><code>__all__ = [需要导入的功能]</code><span>
+                        用来显式声明，当用户使用 <code>from math import *</code>时，默认导入哪些名称</span>
+                    </li>
+                    <li><span>当：<code>__all__ = []</code>为列表为空的时候，则什么都不会导入</span></li>
+                    <li>
+                        <span>当：没有 <code>__all__</code>的同时，使用通配符导入，则导入所有非下划线开头字面量/模块</span>
+                    </li>
+                    <li>
+                        <span>__all__ 只在 <code>from 模块 import *</code> 或 <code>from 包 import *</code> 时生效，普通<code>import 和 from ... import 具体名称</code> 不受影响。</span>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3><span><code>pycharm</code>新建文件时，用 <code>/</code> 构建层级路径</span></h3>
+                <ol>
+                    <li><code>/</code> 前面的路径视为文件夹（若不存在则自动创建，支持多层嵌套）</li>
+                    <li><span><code>/</code> 最后一段是实际创建的内容（文件或文件夹）</span></li>
+                    <li><span>注意：只有路径的最后一段可以是文件；文件不能作为“容器”继续往下嵌套。</span></li>
+                    <li>
+                        说白了：<span>路径中，<span>只有最后一个“节点”可以是文件</span>，前面的所有“节点”都<span>必须是文件夹</span><span
+                            class="span">（如果不存在则自动创建）。一旦某个节点是文件，它后面就不能再跟 <code>/</code> 了。</span></span>
+                    </li>
+                </ol>
+            </li>
+            <li><span>常量：<span
+                    class="span">不会产生变化的量，写法规范是字母全部大写</span>，如：<code>PI = 3.1414926</code></span>
+            </li>
         </ul>
     </section>
     <section id="section_2">
@@ -114,6 +385,168 @@
             </li>
             <li><span>关于模块知识：导入关键字：import、重命名模块：as 名字，后续可以通过新定义的名字进行操作</span></li>
         </ul>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="2"><h3><span>扩展——python中常见的模块(python自带的)</span></h3></th>
+                </tr>
+                <tr>
+                    <td>模块名</td>
+                    <td>对应作用</td>
+                </tr>
+                <tr>
+                    <td><code>math</code></td>
+                    <td><span>数学计算</span></td>
+                </tr>
+                <tr>
+                    <td><code>random</code></td>
+                    <td><span>随机数</span></td>
+                </tr>
+                <tr>
+                    <td><code>os</code></td>
+                    <td><span>操作系统</span></td>
+                </tr>
+                <tr>
+                    <td><code>datetime</code></td>
+                    <td><span>日期时间</span></td>
+                </tr>
+                <tr>
+                    <td><code>time</code></td>
+                    <td><span>时间访问</span></td>
+                </tr>
+                <tr>
+                    <td><code>re</code></td>
+                    <td><span>正则</span></td>
+                </tr>
+                <tr>
+                    <td><code>csv</code></td>
+                    <td><span>csv文件操作[<span class="span">逗号分隔值文件</span>]</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><h3><span>自定义模块</span></h3></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span>自定义模块就是：自己创建的<code>.py</code>文件</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#模块识别顺序" onclick="loadContent(this,'container4','#模块识别顺序'); return false">模块识别顺序</a>
+                        <div id="container4"></div>
+                    </td>
+                    <td><span>这个顺序仅适用于 import 和 from ... import ... 语句，与 __all__ 无关。</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="div_table">
+            <table>
+                <tr>
+                    <th colspan="3"><h3><span><code>python</code>导入与浏览器请求对比(非常重要)</span></h3></th>
+                </tr>
+                <tr>
+                    <td>对比维度</td>
+                    <td><span><code>python</code>导入(<code>import</code>)</span></td>
+                    <td><span>浏览器请求(<code>html/css/js</code>)</span></td>
+                </tr>
+                <tr>
+                    <td>一句话看本质</td>
+                    <td><span>逻辑寻址，在<span class="span">命名空间树</span>里从上往下找</span></td>
+                    <td><span>物理寻址，在<span class="span">文档夹树</span>里根据当前位置找</span></td>
+                </tr>
+                <tr>
+                    <td>锚点(起点)</td>
+                    <td><span><code>sys.path</code>列表里的每一个路径，
+                        <code>pycharm</code>自动把'<span class="span">源根</span>'加载进列表内</span></td>
+                    <td><span>当前文件所在的目录(<span
+                            class="span">浏览器没有：<span>项目根目录的概念</span></span>)</span></td>
+                </tr>
+                <tr>
+                    <td>方向规则</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <span>只能从锚点开始，往'<span class="span">内层</span>'走(<span
+                                        class="span">用<code>.</code>分隔</span>)</span>
+                            </li>
+                            <li><code>from 包.子包 import 模块</code></li>
+                            <li>不支持：<code>../或./</code></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li><span>既可以往内，也可以往外（用 / 或 ../）。</span></li>
+                            <li><code>✅ ./style.css（<span>当前目录</span>）</code></li>
+                            <li><code>✅ ../style.css（<span>上级目录</span>）</code></li>
+                            <li><code>✅ /style.css（<span>根目录</span>）。</code></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>分隔符</td>
+                    <td><span>点好(<code>.</code>)，表示"<span class="span">进入下一层命名空间</span>"</span></td>
+                    <td><span>斜杠(<code>/</code>)，表示"<span class="span">进入下一层文件夹</span>"</span></td>
+                </tr>
+                <tr>
+                    <td>能否用<code>../</code></td>
+                    <td><span>❌ 绝对不行，这是语法错误。</span></td>
+                    <td><span>✅ 可以，../ 表示“<span class="span">回到上一层文件夹</span>”。</span></td>
+                </tr>
+                <tr>
+                    <td>能否用<code>./</code></td>
+                    <td><span>❌ 不行，Python 导入不支持这个写法。</span></td>
+                    <td><span>✅ 可以，./ 表示“<span class="span">当前文件夹</span>”。</span></td>
+                </tr>
+                <tr>
+                    <td>能不能写完整物理路径</td>
+                    <td>❌ 不能写 <code>C:/my_project/utils.py</code>，只能写逻辑路径 <code>utils</code>。</td>
+                    <td><span>✅ 可以写完整 URL 或相对路径。</span></td>
+                </tr>
+                <tr>
+                    <td>谁帮定锚点</td>
+                    <td><span>PyCharm 的“源根”设置（或者手动 sys.path.append）。</span></td>
+                    <td><span>文件所在的位置，由你自己决定。</span></td>
+                </tr>
+                <tr>
+                    <td>最终用的写法</td>
+                    <td><span>from 包名 import 模块名</span>（从源根开始，一直往里点）。</td>
+                    <td><code>href="./style.css"</code> 或 <code>href="../style.css"</code>（从当前位置开始，上下找）。</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><span>因为有正常开发有IDE，可以在IDE设置源根，然后从源根向内点到包或模块，说白了就是将从源根开始，包嵌套包结构，源根也是包，<code>from 包.子包.子子包... import *</code></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <ul>
+                            <li>
+                                <h4><span>在一些强大的IDE中使用：<code>pycharm、VScode...</code></span></h4>
+                                <ol>
+                                    <li>
+                                        因为：<code>sys.path</code>是运行当中，才会正确添加，这会导致，pyCharm的检查出问题：<span>比如：错误提示、使用模块不会提示模块内的变量、类、函数等。</span>
+                                    </li>
+                                    <li>
+                                        <span>所以，正常开发，将包的父文件夹设置为源根，或更上面设为源根，最后通过源根点到包名即可，这样 <code>pycharm不会报错，提示功能正常使用</code></span>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h4><span>在一些比较基础的开放环境中使用：<code>IDLE...</code></span></h4>
+                                <ol>
+                                    <li><span>这类开发环境有一个共同特点：<span class="span">无法设置源根</span></span>
+                                    </li>
+                                    <li>方法一：<span>老方法：<code>import sys</code>+<code>sys.path</code></span></li>
+                                    <li><span>坏处：每个文件都要导入</span></li>
+                                    <li>方法二：<span>修改环境变量：<span
+                                            class="span">在系统变量查找<code>PYTHONPATH(<span>如果没有自己创建一个</span>)</code>，添加需要导入包的绝对地址即可</span></span>
+                                    </li>
+                                    <li>查找环境变量设置：<span>此电脑右键单击属性——找到高级系统设置——单击环境变量——知道系统变量——新建或双击<code>PYTHONPATH</code>然后添加即可</span>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </section>
     <footer>
         <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>

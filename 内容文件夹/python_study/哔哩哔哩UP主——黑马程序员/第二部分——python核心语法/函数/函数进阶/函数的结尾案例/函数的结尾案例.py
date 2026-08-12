@@ -6,7 +6,7 @@
 
     具体规则如下：
         1.优惠券需要商品金额满5000才可以使用，且优惠券金额打八折。
-        2.积分抵扣：100积分抵扣1元(且抵扣金额不能超过商品总价，积分只能整百抵扣)
+        2.积分抵扣：100 积分抵扣1元(且抵扣金额不能超过商品总价，积分只能整百抵扣)
 
 """
 
@@ -35,7 +35,7 @@ class Shooping:
             print("实参应为数字类型")
             return None
 
-    def calc(self, freight, loyalty_card=0):
+    def calc(self, freight, loyalty_card='0'):
         """
             该函数计算总价，包括优惠后的价格
             
@@ -64,7 +64,7 @@ class Shooping:
 
 
 def shop():
-    shop = Shooping()
+    shops = Shooping()
 
     print("===============欢迎使用购物车计算器=================")
     while True:
@@ -75,18 +75,18 @@ def shop():
                 name = input("请输入添加商品姓名：name=")
                 price = input(f"请输入 【{name}】 单价，price=")
                 counts = input(f"请输入 【{name}】 购买数量，counts=")
-                result = shop.add(name, price, counts)
+                result = shops.add(name, price, counts)
                 if result is None:
                     continue
             case '2':
                 freight = input("请输入运费，freight=")
                 loyalty_card = input("请输入账户积分，loyalty_card=")
                 if loyalty_card == "":
-                    result = shop.calc(freight)
+                    result = shops.calc(freight)
                     if result is None:
                         continue
                 else:
-                    result = shop.calc(freight, loyalty_card)
+                    result = shops.calc(freight, loyalty_card)
                     if result is None:
                         continue
             case '3':
@@ -118,7 +118,7 @@ class Shopping:
             print("价格和数量必须是数字")
             return None
 
-    def calc(self, freight, points=0):
+    def calc(self, freight, points='0'):
         """
         计算订单总金额
         :param freight: 运费
@@ -145,7 +145,7 @@ class Shopping:
                 coupon_discount = total * 0.2
                 print(f"✅ 满5000，可使用优惠券，优惠：{coupon_discount:.2f} 元")
 
-                # 积分抵扣：100积分 = 1元
+                # 积分抵扣：100 积分 = 1元
                 point_discount = (points // 100) * 1
                 # 积分抵扣不能超过“优惠后金额”
                 max_point_discount = total - coupon_discount
@@ -157,8 +157,8 @@ class Shopping:
                 after_discount = total - coupon_discount - point_discount
             else:
                 print("未满5000，无优惠")
-                coupon_discount = 0
-                point_discount = 0
+                # coupon_discount = 0
+                # point_discount = 0
                 after_discount = total
 
             # 3. 加运费

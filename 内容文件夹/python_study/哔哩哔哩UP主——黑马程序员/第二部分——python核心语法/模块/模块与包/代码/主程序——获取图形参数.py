@@ -1,7 +1,7 @@
 import function_area_surfaceArea_volume_perimeter as go
-import sys
-sys.path.append(r'../../../../../../python_study')
-from function_study import student_system as st
+
+from python_study.function_study import student_system
+
 # 园的面积
 def circle():
     print("欢迎使用计算圆面积、周长计算器")
@@ -97,7 +97,7 @@ if __name__ == "__main__":
         "============================================================控制台===========================================================================")
     while True:
         print(
-            """==================1.圆计算器=========2.矩形/正方形计算器=========3.球体计算器=========4.长方体/正方体计算器=========5.退出控制台==================""")
+            """==================1.圆计算器=========2.矩形/正方形计算器=========3.球体计算器=========4.长方体/正方体计算器=========5.学生管理系统==========6.退出控制台==================""")
         result2 = input("请输入要执行的操作：")
 
         match result2:
@@ -110,6 +110,8 @@ if __name__ == "__main__":
             case '4':
                 cuboid()
             case '5':
+                student_system.students()
+            case '6':
                 print("已退出控台，欢迎下次使用")
                 break
             case _:
