@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数高阶——类方法、静态方法、继承、多态、封装</title>
+    <link rel="stylesheet" href="../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>函数高阶——类方法、静态方法、继承、多态、封装</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li>
+                <h2>一、封装（Encapsulation）</h2>
+                <ul>
+                    <li><span>定义</span>：将数据（属性）和操作数据的方法（行为）捆绑在一起，并隐藏内部实现细节，只对外暴露必要的接口。
+                    </li>
+                    <li><span>实现方式</span>：
+                        <ul>
+                            <li><strong>私有属性</strong>：以双下划线 <code>__</code> 开头的属性（如
+                                <code>self.__score</code>），Python 会进行名称修饰（变为 <code>_类名__score</code>），防止外部直接访问。
+                            </li>
+                            <li><strong>公有属性</strong>：普通属性，外部可直接访问，但应通过方法控制读写。</li>
+                            <li><strong>`@property`</strong>：将方法变成属性调用，可自定义 getter、setter、deleter，实现受控访问。
+                            </li>
+                            <li><strong>`__slots__`</strong>：限制实例允许的属性名，节省内存并防止随意添加属性。</li>
+                        </ul>
+                    </li>
+                    <li><span>目的</span>：
+                        <ul>
+                            <li>保护数据完整性，避免被随意修改。</li>
+                            <li>降低耦合度，内部变化不影响外部调用。</li>
+                            <li>提高代码可维护性和安全性。</li>
+                        </ul>
+                    </li>
+                    <li><span>示例</span>：
+                        <pre><code>class Person:
+    __slots__ = ('name', '__age')  # 限制属性
+    def __init__(self, name, age):
+        self.name = name
+        self.__age = age          # 私有属性
+
+    @property
+    def age(self):
+        return self.__age
+
+    @age.setter
+    def age(self, value):
+        if value > 0:
+            self.__age = value
+        else:
+            raise ValueError("年龄必须为正")</code></pre>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>二、继承（Inheritance）</h2>
+                <ul>
+                    <li><span>定义</span>：子类（派生类）可以复用父类（基类）的属性和方法，并可以扩展或重写。</li>
+                    <li><span>语法</span>：<code>class 子类(父类1, 父类2, ...):</code>（支持多重继承）</li>
+                    <li><span>关键点</span>：
+                        <ul>
+                            <li><strong>查找顺序</strong>：实例 → 子类 → 父类 → ... → <code>object</code>（遵循 <code>__mro__</code>
+                                顺序，C3线性化）
+                            </li>
+                            <li><code>super()</code>：调用父类的方法，常用于 <code>__init__</code> 中初始化父类属性，避免重复代码。
+                            </li>
+                            <li><strong>方法重写（Override）</strong>：子类重新定义父类的方法，实现多态。</li>
+                            <li><strong>`__bases__`</strong>：类属性，记录直接父类。</li>
+                            <li><strong>抽象基类（ABC）</strong>：通过 <code>abc</code> 模块，定义抽象方法，强制子类实现。
+                            </li>
+                        </ul>
+                    </li>
+                    <li><span>目的</span>：代码复用、层次化组织、扩展功能。</li>
+                    <li><span>示例</span>：
+                        <pre><code>class Animal:
+    def speak(self):
+        pass
+
+class Dog(Animal):
+    def speak(self):
+        return "汪汪"
+
+class Cat(Animal):
+    def speak(self):
+        return "喵喵"
+
+# super() 用法
+class Student(Person):
+    def __init__(self, name, age, grade):
+        super().__init__(name, age)  # 调用父类初始化
+        self.grade = grade</code></pre>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>三、多态（Polymorphism）</h2>
+                <ul>
+                    <li><span>定义</span>：同一个方法名在不同类中可以有不同的实现，调用时根据对象实际类型决定执行哪个方法。
+                    </li>
+                    <li><span>实现条件</span>：
+                        <ul>
+                            <li>继承（子类重写父类方法）</li>
+                            <li>不同的类具有同名方法（不一定要继承，只要具有相同接口，即“鸭子类型”）</li>
+                        </ul>
+                    </li>
+                    <li><span>表现形式</span>：
+                        <ul>
+                            <li>方法重写（子类覆盖父类方法）</li>
+                            <li>运算符重载（魔法方法，如 <code>__add__</code>、<code>__eq__</code>）</li>
+                            <li>鸭子类型：只要对象支持某个方法，就可以直接调用，不关心其类型。</li>
+                        </ul>
+                    </li>
+                    <li><span>底层原理</span>：通过 <code>__dict__</code> 和查找链实现，同名方法在不同的类字典中独立存在。
+                    </li>
+                    <li><span>示例</span>：
+                        <pre><code>def make_sound(animal):
+    print(animal.speak())
+
+dog = Dog()
+cat = Cat()
+make_sound(dog)  # 汪汪
+make_sound(cat)  # 喵喵</code></pre>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>四、类的三种方法</h2>
+                <ul>
+                    <li>
+                        <h3>1. 实例方法（Instance Method）</h3>
+                        <ul>
+                            <li><span>定义</span>：最常用的方法，第一个参数为 <code>self</code>（实例对象）。</li>
+                            <li><span>调用</span>：<code>实例.方法()</code> 或 <code>类.方法(实例)</code>。</li>
+                            <li><span>访问权限</span>：可以访问实例属性、类属性以及其他方法。</li>
+                            <li><span>用途</span>：操作具体对象的数据，是OOP的主力。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>2. 类方法（Class Method）</h3>
+                        <ul>
+                            <li><span>定义</span>：使用 <code>@classmethod</code> 装饰，第一个参数为 <code>cls</code>（类本身）。
+                            </li>
+                            <li><span>调用</span>：<code>类.方法()</code> 或 <code>实例.方法()</code>（自动传入类）。</li>
+                            <li><span>访问权限</span>：只能访问类属性和其他类方法，不能访问实例属性。</li>
+                            <li><span>用途</span>：工厂方法、修改类属性、替代构造函数等。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>3. 静态方法（Static Method）</h3>
+                        <ul>
+                            <li><span>定义</span>：使用 <code>@staticmethod</code> 装饰，无 <code>self</code> 或
+                                <code>cls</code> 参数。
+                            </li>
+                            <li><span>调用</span>：<code>类.方法()</code> 或 <code>实例.方法()</code>（无需自动传参）。</li>
+                            <li><span>访问权限</span>：不能访问类或实例的任何属性，只是一个放在类中的普通函数。</li>
+                            <li><span>用途</span>：工具函数，与类相关但不需要类数据，方便组织代码。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>对比总结</span>
+                        <div class="div_table">
+                            <table>
+                                <tr>
+                                    <th>类型</th>
+                                    <th>装饰器</th>
+                                    <th>第一参数</th>
+                                    <th>可访问</th>
+                                    <th>调用示例</th>
+                                </tr>
+                                <tr>
+                                    <td>实例方法</td>
+                                    <td>无</td>
+                                    <td><code>self</code></td>
+                                    <td>实例属性、类属性</td>
+                                    <td><code>obj.method()</code></td>
+                                </tr>
+                                <tr>
+                                    <td>类方法</td>
+                                    <td><code>@classmethod</code></td>
+                                    <td><code>cls</code></td>
+                                    <td>类属性、其他类方法</td>
+                                    <td><code>Class.method()</code></td>
+                                </tr>
+                                <tr>
+                                    <td>静态方法</td>
+                                    <td><code>@staticmethod</code></td>
+                                    <td>无</td>
+                                    <td>不能访问类或实例属性</td>
+                                    <td><code>Class.method()</code></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>五、关联总结</h2>
+                <ul>
+                    <li><span>封装、继承、多态是 OOP 的三大基石，它们共同支撑代码的可复用性、可扩展性和可维护性。</span></li>
+                    <li><span>实例方法、类方法、静态方法提供了不同粒度的访问和控制，根据实际需求选择合适的方法类型。</span>
+                    </li>
+                    <li><span>底层实现均依赖于 <code>__dict__</code>、<code>__class__</code>、<code>__bases__</code> 的查找链，理解这些有助于深入理解动态行为。</span>
+                    </li>
+                    <li><span>魔法方法（如 <code>__init__</code>、<code>__str__</code>、<code>__add__</code>）是 Python 提供的内置钩子，允许类与语言特性无缝集成，本质上是多态的特例。</span>
+                    </li>
+                    <li><span>推荐实践：</span>
+                        <ul>
+                            <li>优先使用实例方法处理对象特定行为。</li>
+                            <li>类方法用于工厂模式或修改类状态。</li>
+                            <li>静态方法用于逻辑上与类相关但独立于实例/类的工具。</li>
+                            <li>使用 <code>@property</code> 控制属性访问，替代直接暴露属性。</li>
+                            <li>使用 <code>__slots__</code> 优化内存并防止误新增属性（在大量实例时有效）。</li>
+                            <li>利用抽象基类定义接口，确保子类实现必要方法。</li>
+                        </ul>
+                    </li>
+                    <li><span>你已经掌握了面向对象的核心机制，后续的框架、设计模式将建立在此基础之上。</span></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <!-- 可保留为空或补充额外内容 -->
+    </section>
+    <footer>
+        <p>以上知识基于 Python 面向对象编程体系整理</p>
+        <p><span>结合个人学习笔记与补充理解</span></p>
+    </footer>
+</main>
+<script src="../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    // 锚点不能其他符号，只能是字符
+</script>
+</body>
+</html>

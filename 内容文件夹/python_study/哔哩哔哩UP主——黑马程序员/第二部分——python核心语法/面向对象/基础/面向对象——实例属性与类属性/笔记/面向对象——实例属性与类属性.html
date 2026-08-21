@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类属性与实例属性</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>类属性与实例属性</h1>
+    </header>
+    <section id="section_1">
+        <ul>
+            <li><span>实例属性：<span
+                    class="span">实例属性属于每个具体对象的属性，每个对象都是独立的。(各个对象特有的数据)</span></span>
+            </li>
+            <li><span>类属性：<span
+                    class="span">类属性是属于类本身的属性，所有实例共享的。(所有对象共享的数据或配置)</span></span></li>
+            <li>
+                <h2>具体区分</h2>
+                <ol>
+                    <li>
+                        实例属性：<span>类中通过魔法方法：<code>__init__</code>创建的实例属性</span>和<span>单独在实例对象添加的属性</span>
+                    </li>
+                    <li>
+                        类属性：<span>类属性只有一个，在类中 <span>方法外定义的变量(属性)</span></span>
+                    </li>
+                    <li>
+                        <h3>注意分辨：</h3>
+                        <ul>
+                            <li>
+                                <h4>局部变量</h4>
+                                <ol>
+                                    <li><span>局部变量：<span class="span">方法内部，非<code>self</code>定义的变量</span></span>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h4>实例属性</h4>
+                                <ol>
+                                    <li><span>实例属性：<span class="span">通过<code>self</code>定义的属性(变量)</span>，不管是类中还是实例对象</span>
+                                    </li>
+                                    <li>还有在类中，实例属性统一在：初始化方法<code>__init__</code>中定义</li>
+                                    <li><span>不要到实例方法内单独定义<span class="span">实例属性</span></span></li>
+                                    <li><code>__init__</code><span>同样可以定义局部变量</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h4>类属性</h4>
+                                <ol>
+                                    <li><span>类属性本质就是存储在，类的<code>__dict__</code>属性</span></li>
+                                    <li><h5>定义同样有两种方法：</h5>
+                                        <ul>
+                                            <li><span>在类中，方法外，非<code>self</code>定义的属性(变量)</span></li>
+                                            <li><span>在类外，通过：<code>类名.属性 = 值</code>的方式定义。</span></li>
+                                            <li>
+                                                注意如果是：<span><code>实例对象.类属性 = 值</code>，会在实例对象的<code>__dict__</code>添加对应的属性,
+                                                不会影响类的<code>__dict__</code></span>
+                                            </li>
+                                            <li>
+                                                <span>类属性适合存储“所有实例共享的数据”</span>，比如默认配置、常量、学校名称等。实例属性适合存储“每个实例各自不同的数据”，比如姓名、成绩等。
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><span>全部实例对象共享</span></li>
+                                </ol>
+                            </li>
+                            <li>
+                                <h3>回顾属性和方法的查找顺序</h3>
+                                <ol>
+                                    <li>
+                                        <h4>方法</h4>
+                                        <ul>
+                                            <li>
+                                                <span>对象通过：<code>__class__</code>在类的<code>__dict__</code>查找————>
+                                                <br>通过 <code>__bases__</code>在父类查找的<code>__dict__</code>查找——————>
+                                                <br>最后通过<code>__bases__</code>在基类查找的<code>__dict__</code>查找——————>
+                                                <br>均没找到报错</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h4>属性</h4>
+                                        <ul>
+                                            <li>
+                                                <span>对象本身<code>__dict__</code>查找——————>
+                                                <br>通过 <code>__class__</code>在类的<code>__dict__</code>查找————>
+                                                <br>通过 <code>__bases__</code>在父类的 <code>__dict__</code>查找——————>
+                                                <br>最后通过 <code>__bases__</code>在基类的<code>__dict__</code>查找—————>
+                                                <br>均没找到报错</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2"></section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+<script src="../../../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    // 锚点不能其他符号，只能是字符
+</script>
+</body>
+</html>

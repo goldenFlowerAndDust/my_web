@@ -85,8 +85,11 @@
                                 <li><span>数值相乘</span></li>
                                 <li><span>字符串 * 整数 = 重复</span></li>
                                 <li><span>进行字符串重复，必须是整数，否则报错</span></li>
-                                <li><span><code>JavaScript</code>的重复运算符不是乘号，而是方法：<code>repeat(数值/纯数字字符串)</code></span></li>
-                                <li><span>JavaScript同样只能是整数，但是会隐式转换，小数部分直接截断，相当于方法：<code>Math.trunc()</code>【取整】</span></li>
+                                <li>
+                                    <span><code>JavaScript</code>的重复运算符不是乘号，而是方法：<code>repeat(数值/纯数字字符串)</code></span>
+                                </li>
+                                <li><span>JavaScript同样只能是整数，但是会隐式转换，小数部分直接截断，相当于方法：<code>Math.trunc()</code>【取整】</span>
+                                </li>
                             </ul>
                         </td>
                         <td>
@@ -345,15 +348,18 @@
                                 <li><code>and</code>两侧是本身是布尔值(<a href="#python的真值与假值">真值或假值</a>)
                                 </li>
                                 <li>短路求值：<span>返回第一个假值(本身——操作数)</span></li>
-                                <ol>
-                                    <li>第一种情况：所有操作数<span>均为真</span>，<span
-                                            class="span">返回最后一个操作数</span></li>
-                                    <li>第二种情况：<span>存在操作数为假</span>，<span class="span">返回第一个假值</span>，后续短路(不执行任何操作)
-                                    </li>
-                                    <li>第三种情况：所有操作数<span>均为假</span>，<span
-                                            class="span">返回第一个操作数</span>，后续短路(不执行任何操作)
-                                    </li>
-                                </ol>
+                                <li>
+                                    <ol>
+                                        <li>第一种情况：所有操作数<span>均为真</span>，<span
+                                                class="span">返回最后一个操作数</span></li>
+                                        <li>第二种情况：<span>存在操作数为假</span>，<span
+                                                class="span">返回第一个假值</span>，后续短路(不执行任何操作)
+                                        </li>
+                                        <li>第三种情况：所有操作数<span>均为假</span>，<span
+                                                class="span">返回第一个操作数</span>，后续短路(不执行任何操作)
+                                        </li>
+                                    </ol>
+                                </li>
                                 <li>if判断流程：<span>逻辑运算符返回值——if判断真值还是假值——真值执行代码块<span
                                         class="span">/</span>假值继续判断(<code>else/elif</code>)</span></li>
                             </ul>
@@ -380,15 +386,18 @@
                                 <li>注意：<span>返回的是操作数而不是布尔值</span></li>
                                 <li><code>or</code>两侧是本身是布尔值(<a href="#python的真值与假值">真值或假值</a>)</li>
                                 <li>短路求值：<span>返回第一个真值(本身——操作数)</span></li>
-                                <ol>
-                                    <li>第一种情况：所有操作数<span>均为真</span>，<span
-                                            class="span">返回第一个操作数</span></li>
-                                    <li>第二种情况：<span>存在操作数为真</span>，<span class="span">返回第一个真值</span>，后续短路(不执行任何操作)
-                                    </li>
-                                    <li>第三种情况：所有操作数<span>均为假</span>，<span
-                                            class="span">返回最后一个操作数</span>，后续短路(不执行任何操作)
-                                    </li>
-                                </ol>
+                                <li>
+                                    <ol>
+                                        <li>第一种情况：所有操作数<span>均为真</span>，<span
+                                                class="span">返回第一个操作数</span></li>
+                                        <li>第二种情况：<span>存在操作数为真</span>，<span
+                                                class="span">返回第一个真值</span>，后续短路(不执行任何操作)
+                                        </li>
+                                        <li>第三种情况：所有操作数<span>均为假</span>，<span
+                                                class="span">返回最后一个操作数</span>，后续短路(不执行任何操作)
+                                        </li>
+                                    </ol>
+                                </li>
                                 <li>if判断流程：<span>逻辑运算符返回值——if判断真值还是假值——真值执行代码块<span
                                         class="span">/</span>假值继续判断(<code>else/elif</code>)</span></li>
                             </ul>
@@ -570,7 +579,8 @@
                         <td>按位取反（NOT）</td>
                         <td>
                             <ul>
-                                <li>整数位运算，<span class="span">单目运算符</span>（只能有一个操作数，且写在符号右侧）</li>
+                                <li>整数位运算，<span class="span">单目运算符</span>（只能有一个操作数，且写在符号右侧）
+                                </li>
                                 <li>二进制：<span>0 变 1，1 变 0</span></li>
                                 <li>在 Python / JavaScript 中：<code>~x == -x - 1</code>（补码规则）</li>
                                 <li>在 MySQL 中：结果按 <span>64 位无符号整数</span> 处理，返回巨大正数</li>
@@ -593,10 +603,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="6" style="font-size: 2.5rem;text-align: left"><a href="#关于位运算符解析">三种语言的位运算符速查表</a></td>
+                        <td colspan="6" style="font-size: 2.5rem;text-align: left"><a href="#关于位运算符解析">三种语言的位运算符速查表</a>
+                        </td>
                     </tr>
                     <tr>
-                        <td colspan="6" style="font-size: 2.5rem;text-align: left"><a href="#python运算符优先级">运算符优先级完整表</a></td>
+                        <td colspan="6" style="font-size: 2.5rem;text-align: left"><a href="#python运算符优先级">运算符优先级完整表</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -1329,7 +1341,8 @@
                         <td>按位与(<code>AND</code>)</td>
                         <td>
                             <ul>
-                                <li>二进制：<li>二进制：<span>两者都为1时结果为1，否则为0</span></li>
+                                <li>二进制：
+                                <li>二进制：<span>两者都为1时结果为1，否则为0</span></li>
                                 <li>集合：取交集：<span>集合A与集合B相同的元素，组成的集合</span></li>
                                 <li>至少两个操作数</li>
                             </ul>
@@ -1623,10 +1636,10 @@
                     </tr>
                     <tr>
                         <td>11</td>
-                        <td> | </td>
+                        <td> |</td>
                         <td>按位或</td>
                         <td>左</td>
-                        <td> 5 | 3 </td>
+                        <td> 5 | 3</td>
                     </tr>
                     <tr>
                         <td>12</td>
@@ -1649,9 +1662,9 @@
                         <td>左</td>
                         <td>
                             <ul>
-                                <li> x in y </li>
-                                <li> x is None </li>
-                                <li> 5 > 3 </li>
+                                <li> x in y</li>
+                                <li> x is None</li>
+                                <li> 5 > 3</li>
                                 <li> (支持链式：a < b < c)【<span>python独有</span>】</li>
                             </ul>
                         </td>
@@ -1668,14 +1681,14 @@
                         <td><code>and</code></td>
                         <td>逻辑与</td>
                         <td>左</td>
-                        <td> x and y </td>
+                        <td> x and y</td>
                     </tr>
                     <tr>
                         <td>15</td>
                         <td><code>or</code></td>
                         <td>逻辑或</td>
                         <td>左</td>
-                        <td> x or y </td>
+                        <td> x or y</td>
                     </tr>
                     <tr>
                         <td>16</td>

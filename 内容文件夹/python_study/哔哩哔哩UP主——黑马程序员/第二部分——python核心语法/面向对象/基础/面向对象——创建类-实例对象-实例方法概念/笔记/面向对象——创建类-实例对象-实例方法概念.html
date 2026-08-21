@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类与对象</title>
+    <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>类与对象</h1>
+    </header>
+    <section id="section_1">
+        <h2>怎么定义类</h2>
+        <ul>
+            <li>语法：<code>class 类名: 代码块</code></li>
+            <li>类名建议：<span>正常来说，类名与字面量规则一致，但是为了方便识别，尽量首字母大写</span></li>
+            <li>
+                <a href="../../../../数据存储与运算/标识符/笔记/标识符.html#命名开发者约定"
+                   onclick="loadContent(this,'container','#命名开发者约定');return false">命名开发者社区约定</a>
+                <div id="container"></div>
+            </li>
+            <li>
+                <h3>实例对象操作</h3>
+                <ol>
+                    <li>
+                        <h4>创建实例对象(<span>重点</span>)</h4>
+                        <ul>
+                            <li><code>对象名 = 类名()</code></li>
+                            <li><span>这个对象名，就是实例对象，后续操作通过它来完成</span></li>
+                            <li><span>前提是类必须存在</span></li>
+                            <li><span>一个类中，实例对象可以是无数个，重名则覆盖</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>创建(添加)实例属性(<span>了解即可</span>)</h4>
+                        <ul>
+                            <li><code>对象名.属性名 = 属性值</code></li>
+                            <li><span>支持动态添加属性(<span class="span">前提是属性名本身未定义</span>)</span></li>
+                            <li>执行该操作需要先创建实例对象</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>输出(查询)实例对象属性/属性值(<span>独特场景会用到</span>)</h4>
+                        <ul>
+                            <li><code>对象名.属性</code>：<span>只适用单个属性查询，<span
+                                    class="span">返回值是属性值</span></span></li>
+                            <li><span>注意直接打印实例对象，<span
+                                    class="span">结果是内存地址而不是</span>打印所有属性值</span>
+                            </li>
+                            <li><span>可以使用：<a href="#__dict__"
+                                                  onclick="loadContent(this,'container2','#__dict__');return false">_dict__</a>以字典形式打印出来 <span
+                                    class="span">属性名为键，属性值为值</span></span>
+                                <div id="container2"></div>
+                            </li>
+                            <li>执行该操作需要先创建实例对象</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>修改实例对象属性值(<span>独特场景会用到</span>)</h4>
+                        <ul>
+                            <li><code>对象名.属性名 = 新属性值</code></li>
+                            <li><span>前提是属性名，已经定义</span></li>
+                            <li>执行该操作需要先创建实例对象</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>删除实例对象（<span>本身/属性</span>）</h4>
+                        <ul>
+                            <li>删除属性：<code>del 对象名.属性名</code></li>
+                            <li><span>前提是实例对象已经创建，且属性名，已经定义</span></li>
+                            <li>删除实例对象：<code>del 对象名</code></li>
+                            <li>前提是实例对象已创建，永久删除</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>注释事项</h4>
+                        <ul>
+                            <li>类可以有无数个实例对象</li>
+                            <li>实例对象执行的任何操作与类没有任何影响，只会对实例对象本身产生影响</li>
+                            <li>
+                                但是类中：通过创建的实例对象，以及内部方法的更改，将对全部实例对象产生影响
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li><span>实例对象属性与实例属性是同一个意思</span></li>
+            <li>
+                <h3>示例</h3>
+                <code>
+                    <br>class Student:
+                    <br> &nbsp;&nbsp;pass
+                    <br>
+                    <br>students = Student()
+                    <br>students.name = 'YLH'
+                    <br>students.age = 20
+                    <br>students.gender = '男'
+                    <br>print(students.__dict__)
+                </code>
+            </li>
+        </ul>
+        <h2>在上面，我们理解了，怎么创建类、怎么创建实例对象，怎么对实例对象进行操作</h2>
+        <ul>
+            <li>
+                <h3>那么我们来解决两个问题：</h3>
+                <ol>
+                    <li><span>方法写哪里，怎么用方法，能不能使用操作实例对象那样，进行方法的操作</span></li>
+                    <li>
+                        <span>类的定义是实现复用，类可以有无数个实例对象，通过上面所学习的操作，怎么的发挥类的最大用处吗？</span>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>问题1(解决)</h3>
+                <ol>
+                    <li><span>很遗憾，类外面的方法，无法用于实例对象使用</span></li>
+                    <li><span>那么很明确了，类的方法（函数）必须在类中定义</span></li>
+                    <li><span>好处也及其明显，统一修改，统一增加，统一删除、实例对象统一调用</span></li>
+                    <li>实例方法的使用：<code>对象名.方法名()</code></li>
+                    <li>实例方法：<span>第一个形参必须是：<code>self</code></span></li>
+                    <li>
+                        <h4>注意</h4>
+                        <ul>
+                            <li>如果通过实例属性修改的操作，将原本定义好的实例方法赋值会怎么样</li>
+                            <li>比如(<span>假设<code>calc</code>是一个实例方法</span>)：<code>对象名.calc = 值</code>
+                            </li>
+                            <li>
+                                结果是：<span>原本实例方法(<code>calc</code>)变为了实例属性，后续改对象再次使用它，便是属性，失去原有功能</span>
+                            </li>
+                            <li><span>所以避免，给实例方法赋值</span></li>
+                            <li><span>实例方法跟普通方法一样，只有在被调用才会执行</span></li>
+                            <li>也就是实例对象可以根据自己需要调用对应的实例方法，而不是创建实例对象就执行</li>
+                            <li>
+                                <span>定义在类的外面的称之为<span class="span">函数</span> ，定义在<span class="span">类中的函数称之为方法</span></span>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h2>问题2(解决)</h2>
+                <ol>
+                    <li><span>实例方法必须在类中定义，所以可以：统一修改、统一增加、统一删除，达到方法统一管理的目的</span>
+                    </li>
+                    <li>
+                        类的最大优点就是：<span>统一管理</span>，当每个实例对象的属性，均为不同，极其分散，违背了类的定义
+                    </li>
+                    <li>类的定义：<span>它是所有实例对象的'<span class="span">蓝图/模板</span>'</span></li>
+                    <li>
+                        <h3>__init__</h3>
+                        <ul>
+                            <li>
+                                <code>__init__</code>：<span>初始化方法，对象创建后自动调用，主要用于设置对象的初始状态(<span
+                                    class="span">设置对象属性</span>)</span>
+                            </li>
+                            <li>可以在类的开头使用构造函数：<code>def __init__(self,参数列表):</code>，为每个实例对象设置默认的属性
+                            </li>
+                            <li>这么一来：<span>属性与方法一致：统一增加、统一删除、统一修改</span></li>
+                            <li>
+                                <h4>注意事项</h4>
+                                <ol>
+                                    <li>既然是函数，就不要将<code>def</code>忘记了</li>
+                                    <li>既然是函数，就能被传参，但是<code>self</code>始终排在第一位</li>
+                                    <li>
+                                        且后续使用对应属性也必须是：<code>self.属性</code>的形式，外部就是：<code>对象名.属性</code>的形式
+                                    </li>
+                                    <li>
+                                        <h5>例如</h5>
+                                        <code>
+                                            <br>class Student:
+                                            <br> &nbsp;&nbsp;def __init__(self,name,age,gender):
+                                            <br> &nbsp;&nbsp; &nbsp;&nbsp;self.姓名 = name # 定义属性
+                                            <br> &nbsp;&nbsp; &nbsp;&nbsp;self.年龄 = age # 定义属性
+                                            <br> &nbsp;&nbsp; &nbsp;&nbsp;self.性别 = gender # 定义属性
+                                            <br>students = Student('小明',20,'男') # 创建实例对象
+                                            <br>students2 = Student('小红',20,'女') #创建实例对象
+                                            <br><span>注意：实例对象重名，后定义的覆盖前定义的</span>
+                                        </code>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li><span>总结：<code>def __init__(self)</code>，
+                                就是跳过先定义实例对象再增加属性这个弊端，规定每个实例对象初始属性，方便类内统一管理</span>
+                            </li>
+                            <li><span><code>self</code>就是实例对象本身</span></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h2>关键字解释(<span>用于后续复习</span>)</h2>
+                <ul>
+                    <li>面向过程：<span>以过程为主，每一步都有迹可循。(比如函数、条件分支、循环体)从上到下每一步都清晰</span>
+                    </li>
+                    <li>
+                        面向对象：<span>对外暴露清晰的接口，使用者通过调用方法获取结果，内部具体如何实现被封装隐藏，对调用者不可见。</span>
+                    </li>
+                    <li>类：<span>就是<span class="span">蓝图/模板</span> ，定义了属性和方法的"<span
+                            class="span">规范</span>"</span></li>
+                    <li>实例对象：<span>以类为蓝图，通过 <code>实例对象名 = 类名</code>,实例化的对象，对象内包含(<span
+                            class="span">属性和方法</span>)，一个类可以有无数个实例对象</span></li>
+                    <li>
+                        实例属性：<span>每个实例对象都拥有自己独立的一份属性，互不干扰，就像同一个列表中不同位置的元素，各自保存各自的值。</span>
+                    </li>
+                    <li>实例方法：<span>必须再类中定义，注意不要给方法重新赋值，且第一个参数永远是：<code>self</code></span>
+                    </li>
+                    <li><code>__init__</code>：<span>就是这个蓝图上指定的"<span>初始设置</span>"，确保每个实例生来就拥有完整的属性</span>
+                    </li>
+                    <li><code>self</code>：<span>就是将来要创建的实例对象本身，它暂时还没有名字，所以用<code>self</code>指代，创建完成后，self就是实例对象名</span>
+                    </li>
+                    <li>
+                        <span>在类中，<span>实例方法的第一个参数必须是 <span>self</span>，<span
+                                class="span">但调用时不需要传入</span>，Python 会自动把调用对象传进去</span></span>
+                    </li>
+                    <li>
+                        <span>最后，最好将属性和方法均放入到类中，方便统一管理，除非项目必要操作，尽量不要在类外，增加属性、删除属性、有必要可以适当修改属性值</span>
+                        <br><span
+                            class="span">实例对象的修改，不会对类产生影响，但是类中的变化，将导致所有实例对象，产生影响。</span>
+                        <br><span>但要注意： 如果是通过类名修改类属性，则会影响所有实例；如果是通过实例修改类属性，
+                        则只会影响该实例自己的副本（如果该实例没有同名属性，则会新建一个实例属性覆盖）。</span>
+                    </li>
+                    <li><span>实例对象属性，尽量遵守：字面量的硬性规则：<span
+                            class="span">A-Z,a-z,非数字开头数字，中文同样不建议使用。</span></span></li>
+                    <li><span>还需要注意的是：<span class="span">注意公有与私有的关系，</span>私有为下划线开头的字面量(属性)，公有则反之</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>扩展</h2>
+        <ul>
+            <li id="__dict__">
+                <h3><code>__dict__</code></h3>
+                <ol>
+                    <li>说明：<span><code>__dict__</code>是<code>python</code>中自定义类实例的一个特殊属性，<span
+                            class="span">用于以字典形式存储对象的所有属性</span></span>
+                    </li>
+                    <li>
+                        本身是字典：<span>所以：<code>__dict__.keys()、__dict__.values、__dict__.items()</code>功能一致。返回视图</span>
+                    </li>
+                    <li>
+                        删除写法略有不同：<code>__dict__.popitem()</code>,<span>无法传参，默认删除最后一个，返回值是对应的元组(属性,属性值)</span>
+                    </li>
+                    <li>
+                        <a href="../../../../数据容器/数据容器——字典dict/数据容器——字典dict-常规操作/笔记/数据容器——字典dict-常规操作.html#字典操作"
+                           onclick="loadContent(this,'container3','#字典操作');return false">字典操作回顾</a>
+                        <div id="container3" class="div_table"></div>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <h2>扩展2——类与实例对象的关系</h2>
+        <ul>
+            <li>
+                <h3>类与实例的关系</h3>
+                <ul>
+                    <li>实例对象通过 <code>__class__</code> 指向类对象（存储的是类对象的内存地址）。</li>
+                    <li>当访问实例属性/方法时，查找顺序：
+                        <ol>
+                            <li>先在实例自己的 <code>__dict__</code> 里找。</li>
+                            <li>没找到则通过 <code>__class__</code> 去类对象的 <code>__dict__</code> 里找。</li>
+                            <li>还没找到则继续通过 <code>__bases__</code> 往父类找。</li>
+                        </ol>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>实例对象的结构</h3>
+                <ul>
+                    <li>实例对象由属性组成，属性以 <strong>键值对</strong> 形式存储。</li>
+                    <li>属性存放在 <code>__dict__</code> 中：
+                        <ul>
+                            <li>属性名 → 键</li>
+                            <li>属性值 → 值</li>
+                        </ul>
+                    </li>
+                    <li><strong>所以：实例对象本质上就是一个字典。</strong></li>
+                </ul>
+            </li>
+            <li>
+                <h3>类对象的结构</h3>
+                <ul>
+                    <li>类对象也有 <code>__dict__</code>，存储类的属性和方法。</li>
+                    <li>类对象还有 <code>__bases__</code>，指向父类。</li>
+                    <li>类对象属性查找顺序：先 <code>__dict__</code>，再 <code>__bases__</code>。</li>
+                </ul>
+            </li>
+            <li>
+                <h3>__class__ 的可变性</h3>
+                <ul>
+                    <li><code>__class__</code> <strong>不是只读的</strong>，你可以修改它，让实例切换到另一个类：<br>
+                        <code>实例.__class__ = 其他类</code></li>
+                    <li>切换后，该实例的行为（方法调用）会立刻变成新类的行为，但自身已有的属性（<code>__dict__</code>）保持不变。
+                    </li>
+                    <li><strong>正常开发中不建议这样做</strong>，会降低代码可读性和可维护性，属于高阶技巧（如框架中的动态代理）。
+                    </li>
+                    <li>知道它存在即可，作用是帮助你理解“实例通过引用指向类”这个机制的灵活性。</li>
+                </ul>
+            </li>
+            <li>
+                <h3>关键结论</h3>
+                <ul>
+                    <li><strong>实例属性来源一（自身）</strong>：<code>__dict__</code> —— 修改只影响当前实例。</li>
+                    <li><strong>实例属性来源二（共享）</strong>：<code>__class__</code> —— 类修改影响所有实例。</li>
+                    <li><strong>修改实例自身</strong> → 只改 <code>__dict__</code>，不影响类和其他实例。</li>
+                    <li><strong>修改类</strong> → 改 <code>__class__</code> 指向的内容，影响所有实例。</li>
+                    <li><strong>更换类</strong> → 改 <code>__class__</code> 指向另一个类，实例行为随之改变，自身属性保留。
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>__init__ 的实际操作（本质）</h3>
+                <ul>
+                    <li><code>__init__</code> 在实例对象创建后自动执行。</li>
+                    <li>它做的操作是：在实例的 <code>__dict__</code> 里添加键值对（属性名 → 属性值）。</li>
+                    <li>它的核心逻辑就是：
+                        <ul>
+                            <li><code>self.属性名 = 值</code> → 等价于 <code>self.__dict__['属性名'] = 值</code></li>
+                            <li>所以，<code>self</code> 就是将来要创建的那个实例对象本身。</li>
+                        </ul>
+                    </li>
+                    <li>调用时不需要手动传入 <code>self</code>，Python 会自动把当前实例传进去。</li>
+                    <li><strong>所以：__init__ 不是“构造函数”，而是“初始化方法”。</strong>
+                        <ul>
+                            <li>实例对象由 Python 底层（<code>__new__</code>）创建。</li>
+                            <li><code>__init__</code> 只负责给创建好的实例添加初始属性，不负责创建实例本身。</li>
+                        </ul>
+                    </li>
+                    <li>这也是为什么 <code>__init__</code> 里必须通过 <code>self.属性 = 值</code>
+                        来定义属性——因为它是在给实例这个字典添加键值对。
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+<script src="../../../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+</script>
+</body>
+</html>
