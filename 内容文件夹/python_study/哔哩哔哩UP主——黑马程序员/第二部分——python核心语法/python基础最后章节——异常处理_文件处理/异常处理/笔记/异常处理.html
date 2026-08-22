@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>异常处理</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>异常处理</h1>
+    </header>
+    <section id="section_1">
+        <h2>当用户输入的数据不符合规定，为了避免程序报错，而终止程序运行怎么办</h2>
+        <ul>
+            <li><span>这时就可以通过<span class="span">异常处理</span>来提前预测——<span
+                    class="span">也叫防御性编程</span></span></li>
+            <li>常见用到异常处理的地方：<span>[<code>int()，float()</code>]，已知它们传参只能是：数字或数字字符串。<span
+                    class="span">当传入数字字符串时，便会报错</span>，且<code>int()</code>只能是整数字符串或浮点数、整数</span>
+            </li>
+            <li>语法：<code>try:自认为有风险代码块-except:发生错误执行内代码块</code></li>
+            <li><span><code>try-except</code>的作用是：当 <code>try</code> 块中的代码出错时，程序不会崩溃，而是跳转到 <code>except</code> 执行。<span
+                    class="span_warn">但不要把整个主程序都塞进 try 里，那样会掩盖错误的具体位置，不利于调试。</span>
+                只把‘可能出错的那几行’（比如类型转换、文件打开、字典取值）放进去即可。</span>
+            </li>
+            <li>
+                <h3>以上面：<code>int()、float()</code>为例</h3>
+                <code>
+                    <br># 异常处理
+                    <br>def judgment_number(a, b, c):
+                    <br>&nbsp;&nbsp;try:
+                    <br>&nbsp;&nbsp; &nbsp;&nbsp;int(a)
+                    <br>&nbsp;&nbsp; &nbsp;&nbsp;float(b)
+                    <br>&nbsp;&nbsp; &nbsp;&nbsp;int(float(a))
+                    <br>&nbsp;&nbsp;except:
+                    <br>&nbsp;&nbsp; &nbsp;&nbsp;print('应为数字或非数字字符串，a必须是整数字符串')
+                    <br>&nbsp;&nbsp; &nbsp;&nbsp;return None
+                    <br>&nbsp;&nbsp;
+                    <br>&nbsp;&nbsp;return a,b,c
+                    <br>result = judgment_number('50',30,'15.6') # 调用1
+                    <br>if result : print(result)
+                    <br>result2 = judgment_number('50.6',30,'15.6') # 调用2
+                    <br>if result2 is not None : print(result2)
+                </code>
+                <ol>
+                    <li>
+                        调用1结果：<span>传入的参数均符合预期，所以在：<code>try</code>内正常执行，
+                        最后通过<code>return</code>输出结果：<code>(50,30.0,15)</code></span>
+                    </li>
+                    <li>
+                        调用2结果：<span>传入的第一个参数不符合预期，int()参数不能是非整数字符串，所以在：<code>except</code>内的代码块，
+                        先打印：'应为数字或非数字字符串，a必须是整数字符串',最后通过<code>return</code>退出函数：返回值是：None，if条件不执行</span>
+                    </li>
+                    <li>提醒：<span><code>int(float())</code>向零取整，直接截断小数部分</span></li>
+                </ol>
+            </li>
+            <li>上面案例就写了：<span><code>except</code>，它涵盖了所有运行时异常类型（比如 TypeError、ValueError 等）。<span
+                    class="span_warn">但需要注意：语法错误（<code>SyntaxError</code>）无法被 try 捕获，因为它在程序运行前就已经被检测到了。</span></span>
+            </li>
+            <li>因为：<code>except</code>涵盖所有异常类型。实际开发应是：
+                <code style="display:block;">
+                    try:
+                    <br> &nbsp;&nbsp;代码块
+                    <br>except 具体异常类型:
+                    <br> &nbsp;&nbsp;代码块
+                </code>
+            </li>
+        </ul>
+        <div class="div_table">
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="4"><h2><span><code>python</code>常见异常类型速查表</span></h2></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>异常类型</td>
+                    <td>触发场景</td>
+                    <td>实例代码</td>
+                    <td>常见原因</td>
+                </tr>
+                <tr>
+                    <td><code>TypeError</code></td>
+                    <td><span>操作或函数应用于<span class="span_warn">不兼容的类型</span></span></td>
+                    <td><code class="code_instancing">'s' + 2</code></td>
+                    <td><span class="span">字符串于整数相加</span></td>
+                </tr>
+                <tr>
+                    <td><code>ValueError</code></td>
+                    <td><span>函数或方法接收到<span class="span_warn">类型正确但值不合法</span>的参数</span></td>
+                    <td><code class="code_instancing">int('15.6')、float('abc')</code></td>
+                    <td><span class="span">参数不能是非数字字符串、<code>int()</code>不能是非整数字符串</span></td>
+                </tr>
+                <tr>
+                    <td><code>NameError</code></td>
+                    <td><span>访问<span class="span_warn">未定义的变量/函数/类</span></span></td>
+                    <td><code class="code_instancing">print(abc)</code></td>
+                    <td><span class="span">变量名拼写错误或未定义</span></td>
+                </tr>
+                <tr>
+                    <td><code>IndexError</code></td>
+                    <td><span>序列索引<span class="span_warn">超出范围</span></span></td>
+                    <td><code class="code_instancing">[1,2][5]</code></td>
+                    <td><span class="span">列表索引超出范围</span></td>
+                </tr>
+                <tr>
+                    <td><code>KeyError</code></td>
+                    <td><span>访问字典中<span class="span_warn">不存在的键</span></span></td>
+                    <td><code class="code_instancing">{'a':1}['b']</code></td>
+                    <td><span class="span">键不存在</span></td>
+                </tr>
+                <tr>
+                    <td><code>AttributeError</code></td>
+                    <td><span>访问对象<span class="span_warn">不存在的属性/方法</span></span></td>
+                    <td><code class="code_instancing">'abc'.len()</code></td>
+                    <td><span class="span">字符串没有<code>len</code>方法</span></td>
+                </tr>
+                <tr>
+                    <td><code>ZeroDivisionError</code></td>
+                    <td><span class="span_warn">除数为0</span></td>
+                    <td><code class="code_instancing">5/0</code></td>
+                    <td><span class="span">除法或取余时除数为0</span></td>
+                </tr>
+                <tr>
+                    <td><code>FileNotFoundError</code></td>
+                    <td><span>打开<span class="span_warn">不存在的文件</span></span></td>
+                    <td><code class="code_instancing">open('no.text')</code></td>
+                    <td><span class="span">文件路径错误或文件不存在</span></td>
+                </tr>
+                <tr>
+                    <td><code>ModuleNotFoundError</code></td>
+                    <td><span>导入<span class="span_warn">不存在的模块</span></span></td>
+                    <td><code class="code_instancing">import no_module</code></td>
+                    <td><span class="span">模块名错误或未安装</span></td>
+                </tr>
+                <tr>
+                    <td><code>ImportError</code></td>
+                    <td><span>从模块中导入<span class="span_warn">不存在的名称</span></span></td>
+                    <td><code class="code_instancing">from math import no_func</code></td>
+                    <td><span class="span">函数名拼写错误</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code><a href=""
+                                 onclick="loadContent(this,'container','#SyntaxError');return false">SyntaxError</a></code>
+                        <div id="container"></div>
+                    </td>
+                    <td><span>代码 <span class="span_warn">语法错误(无法被：<code>try</code> 捕获)</span></span></td>
+                    <td><code class="code_instancing">if True print('hi')</code></td>
+                    <td><span class="span">缺少冒号、括号不匹配等</span></td>
+                </tr>
+                <tr>
+                    <td><code>IndentationError</code></td>
+                    <td><span><span class="span_warn">缩进错误</span>(<code>SyntaxError</code>的子类),同样无法被<code>try</code>捕获</span>
+                    </td>
+                    <td><code class="code_instancing">混用空格和<code>Tab</code></code></td>
+                    <td><span class="span">缩进不一致</span></td>
+                </tr>
+                <tr>
+                    <td><code>StopIteration</code></td>
+                    <td><span>迭代器<span class="span_warn">没有下一个元素</span></span></td>
+                    <td><code class="code_instancing">next(iter([]))</code></td>
+                    <td><span class="span">迭代器已耗尽</span></td>
+                </tr>
+                <tr>
+                    <td><code>RecursionError</code></td>
+                    <td><span>递归 <span class="span_warn">超过最大深度</span>(默认1000层)</span></td>
+                    <td><code class="code_instancing">递归函数无终止条件</code></td>
+                    <td><span class="span">递归深度超限</span></td>
+                </tr>
+                <tr>
+                    <td><code>KeyboardInterrupt</code></td>
+                    <td><span>用户按下 <span class="span_warn">Ctrl + C</span>中断程序</span></td>
+                    <td><code class="code_instancing">手动中断</code></td>
+                    <td><span class="span">程序运行中用户强制退出</span></td>
+                </tr>
+                <tr>
+                    <td><code>MemoryError</code></td>
+                    <td><span class="span_warn">内存不足</span></td>
+                    <td><code class="code_instancing">创建超大的数据结构</code></td>
+                    <td><span class="span">内存耗尽</span></td>
+                </tr>
+                <tr>
+                    <td><code>OSError</code></td>
+                    <td><span class="span_warn">操作系统相关错误</span></td>
+                    <td><code class="code_instancing">文件权限不足、磁盘满等</code></td>
+                    <td><span class="span">系统调用失败</span></td>
+                </tr>
+                <tr>
+                    <td><code>OverflowError</code></td>
+                    <td>数值运算<span class="span_warn">结果过大</span></td>
+                    <td><code class="code_instancing">import math; math.exp(10000)</code></td>
+                    <td><span class="span">数值超出表示范围</span></td>
+                </tr>
+                <tr>
+                    <td><code>AssertionError</code></td>
+                    <td><span><span class="span_warn">assert</span>断言失败</span></td>
+                    <td><code class="code_instancing">assert 1 == 2</code></td>
+                    <td><span class="span">断言条件为<code>False</code></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section id="section_2">
+        <h2>扩展——主要是工具和规范</h2>
+        <ul>
+            <li>
+                <h3>正常项目——指定捕获特定异常类型</h3>
+                <ol>
+                    <li>已知：<span><code>except</code>包含所有异常类型(<code>SyntaxError</code>以及它的子类除外)</span>
+                    </li>
+                    <li>但是正常项目不会单独使用：<code>except</code>，而是指定异常类型，每一种异常类型，一个提示</li>
+                    <li>原因：<span class="span">裸的 except: 会捕获包括 KeyboardInterrupt（用户按 Ctrl+C）在内的所有异常，可能会让程序在应该退出的时候“卡住”。所以实际开发中总是指定具体的异常类型</span>
+                    </li>
+                    <li>意义：<span>可以针对不同类型的错误做不同处理，而不是笼统地提示</span></li>
+                    <li>语法：<code>try-except 具体异常类型</code></li>
+                    <li>
+                        <h4>实例</h4>
+                        <code style="display:block;" class="code_instancing">
+                            try:
+                            <br> &nbsp;&nbsp;int('abc')
+                            <br>except ValueError:
+                            <br> &nbsp;&nbsp;print('正常数据类型，但是参数不支持非数字字符串')
+                            <br>except NameError:
+                            <br> &nbsp;&nbsp;print('变量/函数/类未定义')
+                        </code>
+                    </li>
+                    <li>可见：<span>可以给单个异常处理，添加不一样的错误提示</span></li>
+                    <li><span>也是在正常开发中极其常见的写法，规范</span></li>
+                    <li><span class="span_warn">不要直接使用；<code>except</code>，直接定义多个错误提示</span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>进阶语法——获取异常对象本身</h3>
+                <ul>
+                    <li>意义：<span>可以获取<code>python</code>给出的原始错误信息，用于调试或记录日志</span></li>
+                    <li>语法：<code>try-except 具体异常类型 as 收集错误字面量</code></li>
+                    <li>
+                        <h4>实例</h4>
+                        <code style="display:block;" class="code_instancing">
+                            try:
+                            <br> &nbsp;&nbsp;int('abc')
+                            <br>except ValueError as e:
+                            <br> &nbsp;&nbsp;print(f'错误信息：{e}')
+                        </code>
+                    </li>
+                    <li>
+                        可以：<span>可以通过 <code>as 收集错误字面量</code> 将原本错误信息，赋值给字面量，用于打印</span>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>进阶语法——else子句：没有异常时执行</h3>
+                <ul>
+                    <li>意义：<span>区分“<span class="span_warn">异常处理逻辑</span>”和“<span
+                            class="span_warn">正常执行逻辑</span>”，代码更清晰。</span></li>
+                    <li>语法：<code>try-except 具体异常类-else</code></li>
+                    <li>
+                        <h4>实例</h4>
+                        <code style="display:block;" class="code_instancing">
+                            try:
+                            <br> &nbsp;&nbsp;int('abc')
+                            <br>except ValueError as e:
+                            <br> &nbsp;&nbsp;print(f'错误信息：{e}')
+                            <br>else:
+                            <br> &nbsp;&nbsp;print('没有异常')
+                        </code>
+                    </li>
+                    <li>
+                        注意：<span>是当所有：<code>except</code>语句没有执行，才会执行：<code>else</code>语句</span>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>进阶语法——finally子句：无论是否异常，始终执行</h3>
+                <ul>
+                    <li><span>一般用于：<span class="span_warn">清理资源(<span class="span">关闭文件、释放连接</span>)，保证无论是否出错都会执行</span></span>
+                    </li>
+                    <li>语法：<code>try-except 具体异常类-finally</code></li>
+                    <li>
+                        <h4>实例</h4>
+                        <code style="display:block;" class="code_instancing">
+                            try:
+                            <br> &nbsp;&nbsp;f = open('data.text','r')
+                            <br> &nbsp;&nbsp;data = f.read()
+                            <br>except FileNotFoundError:
+                            <br> &nbsp;&nbsp;print('文件不存在')
+                            <br>finally:
+                            <br> &nbsp;&nbsp;if f:
+                            <br> &nbsp;&nbsp;&nbsp;&nbsp; f.close() # 无论是否出错，都会关闭文件
+                        </code>
+                    </li>
+                    <li>
+                        注意：<span>是不管是否执行：<code>except</code>语句，都会执行：<code>finally</code>语句</span>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>进阶语法——抛出异常：<code>raise</code></h3>
+                <ul>
+                    <li>
+                        <span>当自己检测到错误条件，可以主动抛出异常</span>
+                    </li>
+                    <li>语法：<code>raise 异常类型(抛出内容)</code></li>
+                    <li><span class="span_warn">不是必须在<code>try-except</code>内写入</span></li>
+                    <li>
+                        <h4>分两种情况</h4>
+                        <ol>
+                            <li>
+                                <h5>在：<code>try-except</code>内写入</h5>
+                                <ul>
+                                    <li><span class="span_warn">功能一致，抛出对应异常类型的异常</span></li>
+                                    <li><span>但是会被：<code>except</code>捕获</span></li>
+                                    <li>所以有：<code>except</code>兜底，不会终止整个程序的运行</li>
+                                    <li>
+                                        <p>实例</p>
+                                        <code style="display:block;" class="code_instancing">
+                                            try:
+                                            <br> &nbsp;&nbsp;float('abc')
+                                            <br> &nbsp;&nbsp;raise ValueError('请输入数字或数字字符串')
+                                            <br>except ValueError as e:
+                                            <br> &nbsp;&nbsp;print(f'错误信息是：{e}') # 当热这是多次一举的写法，只是为了方便演示
+                                        </code>
+                                    </li>
+                                    <li><span class="span_warn">主要特点：抛出的异常会被<code>except</code>捕获，所以并不会终止程序的运行</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h5>在：<code>try-except</code>外写入</h5>
+                                <ul>
+                                    <li><span class="span_warn">功能一致：抛出对应异常类型的异常</span></li>
+                                    <li><span>但是没有<code>except</code>捕获异常</span></li>
+                                    <li><span>所以会立刻终止程序运行，并输出终止的原因。</span></li>
+                                    <li>
+                                        <p>实例</p>
+                                        <code style="display:block;" class="code_instancing">
+                                            def set_age(age):
+                                            <br>if age < 0:
+                                            <br> &nbsp;&nbsp;raise ValueError('年龄不能为负数') # 会直接终止后续程序执行，并输出报错提示
+                                            <br>elif age < 18:
+                                            <br> &nbsp;&nbsp;print('未成年')
+                                            <br> &nbsp;&nbsp;return True
+                                            <br>else:
+                                            <br> &nbsp;&nbsp;print('成年')
+                                            <br> &nbsp;&nbsp;return True
+                                        </code>
+                                    </li>
+                                    <li>
+                                        <span class="span_warn">主要特点：抛出的异常没有<code>except</code>捕获，直接终止后续所有程序运行，输出报错原因</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>进阶语法——自定义异常类</h3>
+                <ul>
+                    <li><span>二级考试不要求，但是实际项目中常用</span>
+                    </li>
+                    <li>语法：<code>class 类名(Exception):自定义异常类</code></li>
+                    <li>
+                        <h4>实例</h4>
+                        <code style="display:block;" class="code_instancing">
+                            class MyError(Exception):
+                            <br>&nbsp;&nbsp;pass
+                            <br>raise MyError('自定义错误')
+                        </code>
+                    </li>
+                    <li>
+                        <span class="span_warn">暂时理解写法即可，后续用到在说</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <h2>额外补充——<code>SyntaxError</code>具体指的是什么</h2>
+        <ul id="SyntaxError">
+            <li><span><code>SyntaxError（语法错误）</code>：“Python 看不懂你这行字。”</span></li>
+            <li><span><code>运行时异常（ValueError 等）</code>：“Python 看懂了，但执行到这一步时发现数据有问题。”</span></li>
+            <li>
+                <h3>大部分是：<code>python</code>语法层面的硬性规则</h3>
+                <ol>
+                    <li>
+                        <h4>缩进问题</h4>
+                        <ul>
+                            <li><span>忘记缩进，或则混用<code>Tab</code>和空格，导致<code>python</code>找不到代码块</span>
+                            </li>
+                            <li><code><span>例</span>：if True:\nprint('hi')（<span class="span_warn"></span>）</code></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>关键字错误命名</h4>
+                        <ul>
+                            <li><span>把 Python 的保留关键字（如 <code>class、if、def</code>）用作变量名</span></li>
+                            <li><span>例：<code>class = 1</code>（<span
+                                    class="span_warn">报错，因为 class 是创造类的硬性关键词</span>）。</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>
+                            <a href="../../../数据存储与运算/标识符/笔记/标识符.html/#标识符的规范"
+                               onclick="loadContent(this,'container2','#标识符的规范');return false">无效的标识符命名（非法字面量命名）</a>
+                        </h4>
+                        <ul>
+                            <li><span>变量名以数字开头，或者包含不允许的特殊符号（除了 _）。</span></li>
+                            <li>例：1a = 10（报错，变量名不能以数字开头）。</li>
+                            <li>
+                                <div id="container2"></div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>缺少必要的语法符号</h4>
+                        <ul>
+                            <li><span>忘记写冒号 :（if True 后面没写冒号）。</span></li>
+                            <li><span>括号、引号不匹配（print("Hello 缺少右引号）</span></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+<script src="../../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    // 锚点不能其他符号，只能是字符
+</script>
+</body>
+</html>

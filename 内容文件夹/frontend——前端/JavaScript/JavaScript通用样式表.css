@@ -2,15 +2,20 @@
     /*  color  */
     --color-h1-footer: #2D2D2D;
     --color-span: #C0392B;
+    --color-class-span: skyblue;
+    --color-class-span_warn: #F39C12;
     --color-h2: #2C3E50;
     --color-h3: #5D6D7E;
-    --color-code: #8E44AD;
+    --color-code: #6C3483;
+    --color-class-instancing: #1A5276;
     --color-h4: #4A4A4A;
     --color-h5: #7F8C8D;
     --color-li: #3E3A39;
     --color-td-color: #E67E22;
     --color-th-color: #F4D03F;
-    --color-p:  #2C3E50;
+    --color-p: #2C3E50;
+    --color-a: #0d9488;
+    --color-a-hover: #8E44AD;
 
     /*  backgroun-color  */
     --background-color-main: #F0F0EC;
@@ -167,11 +172,11 @@ li {
 
 a {
     text-decoration: none;
-    color: #0d9488;
+    color: var(--color-a);
 }
 
 a:hover {
-    color: #8E44AD; /* 悬停时变紫色 */
+    color: var(--color-a-hover); /* 悬停时变紫色 */
 }
 
 p {
@@ -326,7 +331,11 @@ video {
 }
 
 .span {
-    color: skyblue;
+    color: var(--color-class-span);
+}
+
+.span_warn {
+    color: var(--color-class-span_warn);
 }
 
 table tr td h1 span,
@@ -515,6 +524,10 @@ li {
 .div_table li {
     text-align: left;
     white-space: nowrap;
+}
+
+.code_instancing {
+    color: var(--color-class-instancing);
 }
 
 [id^="container"] {
