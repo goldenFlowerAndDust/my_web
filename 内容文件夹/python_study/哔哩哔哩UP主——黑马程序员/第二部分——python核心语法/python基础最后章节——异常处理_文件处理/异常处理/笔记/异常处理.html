@@ -203,6 +203,29 @@
                 </tbody>
             </table>
         </div>
+        <h2>异常处理——异常传递</h2>
+        <ul>
+            <li><span>异常传递的其实就是：<span class="span_warn">函数嵌套知识扩展</span></span></li>
+            <li><span>栈模型：<span class="span_warn">先进后出，出栈时，将返回值返回给下一个栈帧，依次类推</span></span>
+            </li>
+            <li>
+                <span>异常传递，只是将返回值替换为异常结果，逐层传递，直到最后出栈也没有异常捕获，则直接终止程序，显示错误。<span
+                        class="span"></span></span>
+            </li>
+            <li>
+                <h3>栈模型1——异常处理用这个理解</h3>
+                <img src="./image/入栈出栈模型1.png" alt="入栈出栈模型1" class="item">
+            </li>
+            <li>说白了：<span>内层的异常，向上报，当最外层也处理不了，就报错</span></li>
+            <li><span class="span_warn">因为是异常地方开始，所以，报错总是能指出错误的路径</span></li>
+            <li>
+                建议：<span>小项目——可以单独设置异常处理</span>、<span>大型项目——建议在主程序，异常处理，减少代码冗余。</span>
+            </li>
+            <li>
+                <h3>栈模型2——该模型以递归为主(主要解释的是递归运行逻辑)</h3>
+                <img src="./image/入栈出栈模型2.png" alt="入栈出栈模型2" class="item">
+            </li>
+        </ul>
     </section>
     <section id="section_2">
         <h2>扩展——主要是工具和规范</h2>
@@ -210,7 +233,10 @@
             <li>
                 <h3>正常项目——指定捕获特定异常类型</h3>
                 <ol>
-                    <li>已知：<span><code>except</code>包含所有异常类型(<code>SyntaxError</code>以及它的子类除外)</span>
+                    <li>已知：<span>裸的 <code>except</code>: 会捕获所有运行时异常（<code>SyntaxError 及其子类除外</code>），但实际开发中应避免使用。</span>，<span
+                            class="span_warn"><a href="#异常类型结构扩展"
+                                                 onclick="loadContent(this,'container3','#异常类型结构扩展'); return false">但也不是很专业的写法</a></span>
+                        <div id="container3"></div>
                     </li>
                     <li>但是正常项目不会单独使用：<code>except</code>，而是指定异常类型，每一种异常类型，一个提示</li>
                     <li>原因：<span class="span">裸的 except: 会捕获包括 KeyboardInterrupt（用户按 Ctrl+C）在内的所有异常，可能会让程序在应该退出的时候“卡住”。所以实际开发中总是指定具体的异常类型</span>
@@ -246,6 +272,12 @@
                             <br>except ValueError as e:
                             <br> &nbsp;&nbsp;print(f'错误信息：{e}')
                         </code>
+                    </li>
+                    <li>
+                        <span class="span_warn">通常搭配：<code><a href="#BaseException"
+                                                                  onclick="loadContent(this,'container4','#BaseException');return false">BaseException</a>、<a
+                                href="#Exception" onclick="loadContent(this,'container4','#Exception');return false">Exception</a></code>使用，用于捕获所有异常(一般情况：<code>SyntaxError</code>除外)</span>
+                        <div id="container4"></div>
                     </li>
                     <li>
                         可以：<span>可以通过 <code>as 收集错误字面量</code> 将原本错误信息，赋值给字面量，用于打印</span>
@@ -296,6 +328,8 @@
                     <li>
                         注意：<span>是不管是否执行：<code>except</code>语句，都会执行：<code>finally</code>语句</span>
                     </li>
+                    <li><span>还需要注意：<code>finally</code>内，使用 <code>return</code>会覆盖原本错误提示，所以应避免在 <code>finally</code>使用：<code>return</code></span>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -304,13 +338,16 @@
                     <li>
                         <span>当自己检测到错误条件，可以主动抛出异常</span>
                     </li>
-                    <li>语法：<code>raise 异常类型(抛出内容)</code></li>
+                    <li>语法1：<code>raise 异常类型(抛出内容)</code></li>
+                    <li>语法2:：<code>raise 新异常类型() from 旧异常类型</code></li>
+                    <li>语法2：<span>语义是：新异常类型报错的原因是，就异常类型</span></li>
+                    <li><span>最后的输出结果是：<span>两种异常信息合并，同时打印</span></span></li>
                     <li><span class="span_warn">不是必须在<code>try-except</code>内写入</span></li>
                     <li>
-                        <h4>分两种情况</h4>
+                        <h4>分三种情况</h4>
                         <ol>
                             <li>
-                                <h5>在：<code>try-except</code>内写入</h5>
+                                <h5>在：<code>try-except</code>内的<code>try</code>写入</h5>
                                 <ul>
                                     <li><span class="span_warn">功能一致，抛出对应异常类型的异常</span></li>
                                     <li><span>但是会被：<code>except</code>捕获</span></li>
@@ -326,6 +363,30 @@
                                         </code>
                                     </li>
                                     <li><span class="span_warn">主要特点：抛出的异常会被<code>except</code>捕获，所以并不会终止程序的运行</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h5>在：<code>try-except</code>内的<code>except</code>写入</h5>
+                                <ul>
+                                    <li><span class="span_warn">功能一致，抛出对应异常类型的异常</span></li>
+                                    <li><span>因为在：<code>except</code>内，若内部没有<code>try-except</code>，会直接报错</span>
+                                    </li>
+                                    <li>所以有：<code>except</code>会终止整个程序的运行</li>
+                                    <li><span>常与语法2(<code class="code_instancing">raise 新异常 from 旧异常</code>)搭配使用：</span>
+                                    </li>
+                                    <li>
+                                        <h4>语法2：实例</h4>
+                                        <code>
+                                            try:
+                                            <br> &nbsp;&nbsp;int('15.6')
+                                            <br>except ValueError as e:
+                                            <br> &nbsp;&nbsp;raise TypeError('转换失败') from e # 因为在except
+                                            内，所以会直接中断程序
+                                        </code>
+                                    </li>
+                                    <li><span
+                                            class="span_warn">主要特点：旧异常会被<code>except</code>捕获并命名，在<code>except</code>内抛出异常，通常与语法2搭配使用</span>
                                     </li>
                                 </ul>
                             </li>
@@ -377,6 +438,34 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <h3>扩展——异常处理嵌套</h3>
+                <ul>
+                    <li><span>异常处理是可以嵌套的，且同一个作用也可以是多个异常处理</span></li>
+                    <li>
+                        <code style="display:block;" class="code_instancing">
+                            def judge_num(num,num2,num3):
+                            <br>&nbsp;&nbsp;try:
+                            <br>&nbsp;&nbsp; &nbsp;&nbsp;int(num)
+                            <br>&nbsp;&nbsp;except Exception as e:
+                            <br>&nbsp;&nbsp; &nbsp;&nbsp;raise TypeError('转换错误') from e
+                            <br>&nbsp;&nbsp; &nbsp;&nbsp;try:
+                            <br>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;int(num2)
+                            <br>&nbsp;&nbsp; &nbsp;&nbsp;except Exception as e:
+                            <br>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;print('num,num2,必须是数字或整数字符串')
+                            <br>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;return None
+                            <br>
+                            <br>&nbsp;&nbsp;try:
+                            <br>&nbsp;&nbsp; &nbsp;&nbsp;float(num3)
+                            <br>&nbsp;&nbsp;except ValueError:
+                            <br>&nbsp;&nbsp; &nbsp;&nbsp;print('num3必须是数字或数字字符串')
+                        </code>
+                    </li>
+                    <li>
+                        <span>只是为了方便演示，正常项目写的会通顺一点，只要理解可以<span class="span_warn">同级写异常处理、子集嵌套即可</span></span>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <h2>额外补充——<code>SyntaxError</code>具体指的是什么</h2>
         <ul id="SyntaxError">
@@ -385,6 +474,8 @@
             <li>
                 <h3>大部分是：<code>python</code>语法层面的硬性规则</h3>
                 <ol>
+                    <li>说白了：<span><code>python</code>运行程序，需要解释器、硬性规则是程序运行底线，发生此错误，<code>try-except</code>根本来不及运行，就已经报错</span>
+                    </li>
                     <li>
                         <h4>缩进问题</h4>
                         <ul>
@@ -419,6 +510,91 @@
                         <ul>
                             <li><span>忘记写冒号 :（if True 后面没写冒号）。</span></li>
                             <li><span>括号、引号不匹配（print("Hello 缺少右引号）</span></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+        <h3>异常类型结构扩展</h3>
+        <ul id="异常类型结构扩展">
+            <li>
+                <span>要想捕获所有异常(<code>SyntaxError</code>除外)，应该是：<code>try-except Exception</code></span>
+            </li>
+            <li>
+                <h4>Exception</h4>
+                <ol id="Exception">
+                    <li><span
+                            class="span_warn"><code><a
+                            href="#Exception1">Exception</a></code>包含非：<code>SystemExit、KeyboardInterror、GeneratorExit</code>外所有异常类型</span>
+                    </li>
+                    <li><span>注意：<code>SyntaxError</code> 虽然继承自 <code>Exception</code>，但它发生在代码运行之前，所以无法被运行时的 <code>except</code> 捕获。</span>
+                    </li>
+                </ol>
+            </li>
+            <li><span class="span_warn"
+                      id="BaseException">异常类型的基类：<code>BaseException</code>，包含所有异常类型</span></li>
+            <li><code>BaseException</code>
+                <ol>
+                    <li><code>SystemExit</code></li>
+                    <li><code>KeyboardInterrupt</code></li>
+                    <li><code>GeneratorExit</code></li>
+                    <li id="Exception1"><code>Exception</code> —— 所有常规异常的父类
+                        <ul>
+                            <li><code>StopIteration</code></li>
+                            <li><code>StopAsyncIteration</code></li>
+                            <li><code>ArithmeticError</code>
+                                <ol>
+                                    <li><code>FloatingPointError</code></li>
+                                    <li><code>OverflowError</code></li>
+                                    <li><code>ZeroDivisionError</code></li>
+                                </ol>
+                            </li>
+                            <li><code>AttributeError</code></li>
+                            <li><code>BufferError</code></li>
+                            <li><code>EOFError</code></li>
+                            <li><code>ImportError</code>
+                                <ol>
+                                    <li><code>ModuleNotFoundError</code></li>
+                                </ol>
+                            </li>
+                            <li><code>LookupError</code>
+                                <ol>
+                                    <li><code>IndexError</code></li>
+                                    <li><code>KeyError</code></li>
+                                </ol>
+                            </li>
+                            <li><code>MemoryError</code></li>
+                            <li><code>NameError</code>
+                                <ol>
+                                    <li><code>UnboundLocalError</code></li>
+                                </ol>
+                            </li>
+                            <li><code>OSError</code></li>
+                            <li><code>ReferenceError</code></li>
+                            <li><code>RuntimeError</code>
+                                <ol>
+                                    <li><code>RecursionError</code></li>
+                                </ol>
+                            </li>
+                            <li><code>SyntaxError</code>
+                                <ol>
+                                    <li><code>IndentationError</code></li>
+                                </ol>
+                            </li>
+                            <li><code>SystemError</code></li>
+                            <li><code>TypeError</code></li>
+                            <li><code>ValueError</code>
+                                <ol>
+                                    <li><code>UnicodeError</code>
+                                        <ul>
+                                            <li><code>UnicodeEncodeError</code></li>
+                                            <li><code>UnicodeDecodeError</code></li>
+                                            <li><code>UnicodeTranslateError</code></li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li><code>ZeroDivisionError</code></li>
                         </ul>
                     </li>
                 </ol>

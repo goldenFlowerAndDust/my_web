@@ -3,9 +3,12 @@ def judgment_number(a, b, c):
         int(a)
         float(b)
         int(float(c))
-    except:
+        float(D)
+    except ValueError:
         print("只能是数字或数字字符串、a只能是整数字符串")
         return None
+    except NameError:
+        print('包含未定义的变量')
 
     return a, b, c
 
