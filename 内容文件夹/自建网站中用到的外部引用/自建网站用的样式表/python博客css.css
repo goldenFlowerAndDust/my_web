@@ -1,0 +1,404 @@
+/* ===== 重置样式 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f0eb;
+    font-family: system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px;
+}
+
+.page-title {
+    color: #2C3E50;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* ===== 导航容器 ===== */
+nav {
+    width: 100%;
+    max-width: 1200px;
+    background: #2C3E50;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    overflow: visible;
+}
+
+/* ============================================================
+   桌面端（宽度 > 768px）—— 水平布局，子菜单向右展开
+   ============================================================ */
+@media (min-width: 769px) {
+
+    /* 一级菜单 - 水平排列 */
+    nav > ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        background: #2C3E50;
+        padding: 0;
+        margin: 0;
+        position: relative; /* 为二级菜单定位提供基准，但不是必须，因为二级相对于li */
+    }
+
+    nav > ul > li {
+        position: relative; /* 关键：二级菜单将相对于这个 li 定位 */
+        flex: 0 1 auto;
+        min-width: 120px;
+        background: #2C3E50;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        border-right: 1px solid #3d566e;
+    }
+
+    nav > ul > li:last-child {
+        border-right: none;
+    }
+
+    nav > ul > li > a {
+        display: block;
+        color: #f0f0f0;
+        font-size: 1.6rem; /* 放大字体 */
+        padding: 0 20px;
+        white-space: nowrap;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    nav > ul > li > a:hover {
+        background: #0d9488;
+        color: #fff;
+    }
+
+    /* 二级菜单 - 出现在父 li 下方 */
+    nav > ul > li > ul {
+        position: absolute;
+        top: 100%; /* 紧贴父 li 底部 */
+        left: 0;
+        width: 240px;
+        background: #34495e;
+        transform: scaleY(0);
+        transform-origin: top center;
+        transition: transform 0.25s ease;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        border-radius: 0 0 8px 8px;
+        padding: 0;
+    }
+
+    nav > ul > li:hover > ul {
+        transform: scaleY(1);
+    }
+
+    /* 二级菜单项 - 每个 li 都是三级菜单的父级 */
+    nav > ul > li > ul > li {
+        position: relative; /* 为三级菜单定位提供基准 */
+        height: 44px;
+        line-height: 44px;
+        background: #34495e;
+        text-align: left;
+        padding-left: 16px;
+        border-bottom: 1px solid #3d566e;
+    }
+
+    nav > ul > li > ul > li:last-child {
+        border-bottom: none;
+    }
+
+    nav > ul > li > ul > li > a {
+        color: #f0f0f0;
+        font-size: 1.3rem; /* 放大字体 */
+        display: block;
+        transition: background 0.15s;
+    }
+
+    nav > ul > li > ul > li > a:hover {
+        background: #0d9488;
+    }
+
+    /* 三级菜单 - 出现在父 li 右侧 */
+    nav > ul > li > ul > li > ul {
+        position: absolute;
+        top: 0; /* 与父 li 顶部对齐 */
+        left: 100%; /* 紧贴父 li 右侧 */
+        width: 240px;
+        background: #3d566e;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.2s ease;
+        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+        border-radius: 0 8px 8px 0;
+        z-index: 150;
+        padding: 0;
+    }
+
+    nav > ul > li > ul > li:hover > ul {
+        transform: scaleX(1);
+    }
+
+    /* 三级菜单项 */
+    nav > ul > li > ul > li > ul > li {
+        position: relative; /* 为四级菜单定位提供基准 */
+        height: 40px;
+        line-height: 40px;
+        background: #3d566e;
+        text-align: left;
+        padding-left: 16px;
+        border-bottom: 1px solid #4a657f;
+    }
+
+    nav > ul > li > ul > li > ul > li:last-child {
+        border-bottom: none;
+    }
+
+    nav > ul > li > ul > li > ul > li > a {
+        color: #f0f0f0;
+        font-size: 1.1rem; /* 放大字体 */
+        display: block;
+        transition: background 0.15s;
+    }
+
+    nav > ul > li > ul > li > ul > li > a:hover {
+        background: #0d9488;
+    }
+
+    /* 四级菜单 - 出现在三级菜单项的右侧 */
+    nav > ul > li > ul > li > ul > li > ul {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 240px;
+        background: #4a657f;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.2s ease;
+        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+        border-radius: 0 8px 8px 0;
+        z-index: 200;
+        padding: 0;
+    }
+
+    nav > ul > li > ul > li > ul > li:hover > ul {
+        transform: scaleX(1);
+    }
+
+    /* 四级菜单项 */
+    nav > ul > li > ul > li > ul > li > ul > li {
+        position: relative; /* 为五级菜单定位提供基准 */
+        height: 36px;
+        line-height: 36px;
+        background: #4a657f;
+        text-align: left;
+        padding-left: 16px;
+        border-bottom: 1px solid #5a7a94;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li:last-child {
+        border-bottom: none;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li > a {
+        color: #f0f0f0;
+        font-size: 1rem; /* 放大字体 */
+        display: block;
+        transition: background 0.15s;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li > a:hover {
+        background: #0d9488;
+    }
+
+    /* 五级菜单 - 出现在四级菜单项的右侧 */
+    nav > ul > li > ul > li > ul > li > ul > li > ul {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 240px;
+        background: #5a7a94;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.2s ease;
+        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+        border-radius: 0 8px 8px 0;
+        z-index: 250;
+        padding: 0;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li:hover > ul {
+        transform: scaleX(1);
+    }
+
+    /* 五级菜单项 */
+    nav > ul > li > ul > li > ul > li > ul > li > ul > li {
+        height: 32px;
+        line-height: 32px;
+        background: #5a7a94;
+        text-align: left;
+        padding-left: 16px;
+        border-bottom: 1px solid #6a8aa4;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li > ul > li:last-child {
+        border-bottom: none;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li > ul > li > a {
+        color: #f0f0f0;
+        font-size: 0.9rem; /* 放大字体 */
+        display: block;
+        transition: background 0.15s;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li > ul > li > a:hover {
+        background: #0d9488;
+    }
+}
+
+/* ============================================================
+   响应式（移动端）—— 保持你认可的浮动覆盖行为
+   ============================================================ */
+@media (max-width: 768px) {
+    /* 一级菜单纵向排列 */
+    nav > ul {
+        flex-direction: column;
+        align-items: stretch;
+        position: relative;
+    }
+
+    nav > ul > li {
+        border-right: none;
+        border-bottom: 1px solid #3d566e;
+        height: 50px;
+        line-height: 50px;
+        position: relative; /* 为子菜单提供定位基准 */
+    }
+
+    /* 所有子菜单绝对定位，覆盖在父项下方 */
+    nav > ul > li > ul,
+    nav > ul > li > ul > li > ul,
+    nav > ul > li > ul > li > ul > li > ul,
+    nav > ul > li > ul > li > ul > li > ul > li > ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 70vh;
+        overflow-y: auto;
+        transform: scaleY(0);
+        transform-origin: top center;
+        transition: transform 0.25s ease;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        border-radius: 0 0 8px 8px;
+        padding: 0;
+        background: #34495e; /* 默认背景，各层级可覆盖 */
+    }
+
+    /* 各层级背景色区分 */
+    nav > ul > li > ul {
+        background: #34495e;
+        z-index: 100;
+    }
+
+    nav > ul > li > ul > li > ul {
+        background: #3d566e;
+        z-index: 150;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul {
+        background: #4a657f;
+        z-index: 200;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li > ul {
+        background: #5a7a94;
+        z-index: 250;
+    }
+
+    /* 悬停展开 */
+    nav > ul > li:hover > ul,
+    nav > ul > li > ul > li:hover > ul,
+    nav > ul > li > ul > li > ul > li:hover > ul,
+    nav > ul > li > ul > li > ul > li > ul > li:hover > ul {
+        transform: scaleY(1);
+    }
+
+    /* 移动端菜单项高度与缩进 */
+    nav > ul > li > ul > li {
+        height: 44px;
+        line-height: 44px;
+        padding-left: 16px;
+    }
+
+    nav > ul > li > ul > li > ul > li {
+        height: 40px;
+        line-height: 40px;
+        padding-left: 24px;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li {
+        height: 36px;
+        line-height: 36px;
+        padding-left: 32px;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li > ul > li {
+        height: 32px;
+        line-height: 32px;
+        padding-left: 40px;
+    }
+
+    /* 移动端字体调整（保持可读） */
+    nav > ul > li > a {
+        font-size: 1.2rem;
+    }
+
+    nav > ul > li > ul > li > a {
+        font-size: 1.1rem;
+    }
+
+    nav > ul > li > ul > li > ul > li > a {
+        font-size: 1rem;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li > a {
+        font-size: 0.9rem;
+    }
+
+    nav > ul > li > ul > li > ul > li > ul > li > ul > li > a {
+        font-size: 0.8rem;
+    }
+
+    /* 滚动条美化 */
+    nav > ul > li > ul::-webkit-scrollbar,
+    nav > ul > li > ul > li > ul::-webkit-scrollbar,
+    nav > ul > li > ul > li > ul > li > ul::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    nav > ul > li > ul::-webkit-scrollbar-thumb,
+    nav > ul > li > ul > li > ul::-webkit-scrollbar-thumb,
+    nav > ul > li > ul > li > ul > li > ul::-webkit-scrollbar-thumb {
+        background: #0d9488;
+        border-radius: 3px;
+    }
+}
+
+footer {
+    margin-top: 40px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+a {
+    cursor: pointer;
+}

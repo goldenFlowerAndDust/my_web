@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>读文件及注意事项</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>读文件及注意事项</h1>
+    </header>
+    <section id="section_1">
+        <h2>文件操作</h2>
+        <ul>
+            <li>在学习文件操作之前，需要先回顾编码与数据类型相关的知识</li>
+            <li>
+                <h3>字符串类型</h3>
+                <ol>
+                    <li><span>字符串类型(<code>str</code>)：在程序中用于表示文档信息，本质上是：<code>Unicode</code>编码中的二进制</span>
+                    </li>
+                    <li>如：<code class="code_instancing">name = 'YLH'</code></li>
+                </ol>
+            </li>
+            <li>
+                <h4>字节类型</h4>
+                <ol>
+                    <li><span>
+                        字节类型(<code>bytes</code>):可表示文字信息，本质上是：<code>utf-8/gbk</code>等编码的二进制，<span
+                            class="span_warn">[对 <code>Unicode</code>进行压缩，方便文件存储和网络传输]</span>
+                    </span></li>
+                    <li>
+                        <code class="code_instancing" style="display:block;">
+                            <br>name = '你好'
+                            <br>
+                            <br>data = name.encode('utf-8') <span
+                                class="span_warn"># encode 将Unicode编码压缩成对应编码</span>。
+                            <br>
+                            <br>print(data) <span class="span_warn"> # 输出结果是： b'\xe4\xbd\xa0\xe5\xa5\xbd'</span>
+                            <br>
+                            <br>result = data.decode('utf-8') <span
+                                class="span_warn"># decode 将其他编码，转为Unicode编码</span>
+                            <br>
+                            <br>print(result) <span class="span_warn"># 输出结果是：你好</span>
+                        </code>
+                    </li>
+                    <li><span>可表示原始二进制(<span class="span">图片、文件等信息</span>)</span></li>
+                    <li>以上案例：<span><code>encode</code>:将<code>Unicode</code>编码压缩成对应编码,
+                        <br><code>decode</code>将其他编码，转为<code>Unicode</code>编码</span></li>
+                </ol>
+            </li>
+        </ul>
+        <h2>读取文件</h2>
+        <ul>
+            <li>先要了解：<span class="span_warn">绝对地址与相对地址</span></li>
+            <li>
+                <h3>绝对地址</h3>
+                <ol>
+                    <li><span>绝对地址：<span class="span_warn">从本地盘符开始，直到文件的地址</span></span></li>
+                    <li>好处：<span>一步到位，直接复制可用</span></li>
+                    <li>坏处：<span>一但定义，当文件移动位置，原本路径失效，需要自行再次更改</span></li>
+                    <li><span>常用于本地读取，上传到：<code>GitHub</code>等静态托管会出大问题</span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>相对地址</h3>
+                <ul>
+                    <li>
+                        <span>相对地址：通过 <code>./（当前目录）</code>、<code>../（上级目录）</code>或直接写文件夹名来定位文件。例如：./data/file.txt 表示当前目录下的 data 文件夹中的 file.txt。</span>
+                    </li>
+                    <li>好处：<span>一但定义，当文件移动位置，原本路径会跟着改变，无需后续再次更改</span></li>
+                    <li>
+                        坏处：<span>坏处：当脚本的运行目录发生变化时（例如被其他位置的脚本调用），相对路径的基准会改变，可能导致文件找不到。项目内嵌套过深时，路径可读性会下降。</span>
+                    </li>
+                    <li><span>自认为这是最好的写法，一劳永逸，上传网页也不会出大问题</span></li>
+                </ul>
+            </li>
+            <li>
+                <a href="../../../模块/模块与包/笔记/模块与包.html/#模块引用与文件地址引用区别"
+                   onclick="loadContent(this,'container','#模块引用与文件地址引用区别');return false">需要注意的是：模块引用地址与文件引用地址有区别</a>
+                <div id="container" class="div_table"></div>
+            </li>
+            <li>
+                <h3>打开文件方式</h3>
+                <ol>
+                    <li>
+                        打开文件：<span>使用<code>open(路径,mode='读取模式',encoding='解码类型')</code>的方式打开文件</span>
+                    </li>
+                    <li><span class="span_warn"><code>rb</code>：表示读取文件原始二进制</span></li>
+                    <li><span class="span_warn"><code>r,rt</code>：表示读取文件文本，最好需要通过：<code>encoding</code>指定解码类型</span>
+                    </li>
+                    <li>
+                        <span><code>b</code>：二进制：<code class="code_instancing">binary:</code>，单写一个'b',不会报错，等价于'rb'</span>
+                    </li>
+                    <li>
+                        <span>使用<code>open</code>打开文件，默认解码与操作系统挂钩，<code>Windows</code>默认是：<code>GBK</code>,<code>Linux</code>默认是：<code>utf-8</code></span>
+                    </li>
+                    <li>
+                        <h4>也就是设文件以：<code>utf-8</code>存储：</h4>
+                        <ol>
+                            <li><span class="span_warn"><code>Windows</code>:必须写：<code>encding='utf-8'</code></span>
+                            </li>
+                            <li><span class="span_warn">Linux</span>：可以不写：<code>encoding='utf-8'</code></li>
+                            <li>当文件存储是：<code>GBK</code>：则 <code>Windows</code>不需要、<code>Linux</code>需要</li>
+                            <li>其余任何编码格式都需要：<span>写：<code>encoding('解码类型')</code></span></li>
+                            <li>未指定解码类型则报错：<code>UnicodeDecodeError</code></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h4>文件的整个过程</h4>
+                        <ol>
+                            <li>所有模式(<code>r,rb,rt</code>)<span>最开始都是读取硬盘上的原始二进制</span></li>
+                            <li><span><code>rb</code>模式：<span
+                                    class="span_warn">直接输出原始二进制，不会进行后续解码</span></span></li>
+                            <li>其他模式：<span class="span_warn">后续会自动解码，默认解码器与操作系统挂钩</span></li>
+                            <li>Windows默认：<code>GBK</code>、Linux默认：<code>utf-8</code></li>
+                            <li>其实最好的写法是：<span>都写<code>encoding</code>指定解码类型</span>,默认有这个概念即可
+                            </li>
+                            <li>最重要的是：过程</li>
+                        </ol>
+                    </li>
+                    <li>注意：<span>当文件路径不存在或输入错误，会报错：<code>FileNotFoundError</code></span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>读文本文件</h3>
+                <ol>
+                    <li>可以用：<code>rb</code>，<span class="span_warn">但是后续需要自行：<code>decode()</code>转成字符串</span>
+                    </li>
+                    <li>
+                        <code class="code_instancing" style="display:block;">
+                            <br>file_object = open('info.txt',mode='rb') <span
+                                class="span_warn"># 打开文件，指定模式为只读二进制</span>
+                            <br>
+                            <br>data = file_object.read() <span class="span_warn"># 读取文件，并赋值给 data</span>
+                            <br>
+                            <br>file_object.close()
+                            <span># 当文件操作结束后，用 <code>close()</code>关闭文件，释放资源</span>
+                            <br>print(data) <span class="span_warn"># 打印的是压缩的编码</span>
+                            <br>text = data.decode('utf-8') <span
+                                class="span_warn"># 通过decode('utf-8')，重新转成字符串</span>
+                            <br>
+                            <br>print(text) <span>打印读取的文件</span>
+                        </code>
+                    </li>
+                    <li>
+                        以上方法极其麻烦：<span>当只要读取文本，因为：open()在Windows默认是GBK解码，当不是GBK编码文件，后续要通过：decode()，转成可见的字符串</span>
+                    </li>
+                    <li>所以读文件一般用：<code>r,rt</code></li>
+                    <li>
+                        <code class="code_instancing" style="display:block;">
+                            <br>file_object = open('info.txt',mode='rt',encoding='utf-8') <span class="span_warn"># 打开文件，并指定模式，只读，原始二进制、还是后续的写入</span>
+                            <br>
+                            <br>data = file_object.read() <span class="span_warn"># 读取文件，并赋值给 data</span>
+                            <br>
+                            <br>file_object.close()
+                            <span># 当文件操作结束后，用 <code>close()</code>关闭文件，释放资源</span>
+                            <br>
+                            <br>
+                            <br>print(data) <span>打印读取的文件</span>
+                        </code>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>读图片等非文本内容</h3>
+                <ol>
+                    <li><span class="span_warn">读非文本文内容必须：<code>rb</code></span></li>
+                    <li>
+                        <code class="code_instancing" style="display:block;">
+                            <br>file_object = open('info.png',mode='rb') <span class="span_warn"># 打开文件，并指定模式，只读，原始二进制、还是后续的写入</span>
+                            <br>
+                            <br>data = file_object.read() <span class="span_warn"># 读取文件，并赋值给 data</span>
+                            <br>
+                            <br>file_object.close()
+                            <span># 当文件操作结束后，用 <code>close()</code>关闭文件，释放资源</span>
+                            <br>
+                            <br>
+                            <br>print(data) <span>打印读取的文件</span>
+                        </code>
+                    </li>
+                </ol>
+            </li>
+            <li></li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>以上内容总结</h2>
+        <div class="div_table">
+            <table>
+                <thead>
+                <tr>
+                    <th>类别</th>
+                    <th>关键字/方法</th>
+                    <th>说明</th>
+                    <th>示例</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>编码基础</td>
+                    <td><code>str</code></td>
+                    <td>字符串类型，程序中文档信息的表示方式</td>
+                    <td><code>name = 'YLH'</code></td>
+                    <td>本质是 Unicode 编码的二进制</td>
+                </tr>
+                <tr>
+                    <td>编码基础</td>
+                    <td><code>bytes</code></td>
+                    <td>字节类型，可表示文字信息或原始二进制</td>
+                    <td><code>data = name.encode('utf-8')</code></td>
+                    <td>本质是 utf-8/gbk 等编码的二进制；对 Unicode 进行压缩，方便文件存储和网络传输</td>
+                </tr>
+                <tr>
+                    <td>编码基础</td>
+                    <td><code>encode()</code></td>
+                    <td>将 Unicode 编码压缩成指定编码（如 utf-8）</td>
+                    <td><code>data = name.encode('utf-8')</code></td>
+                    <td>返回值是 <code>bytes</code> 类型</td>
+                </tr>
+                <tr>
+                    <td>编码基础</td>
+                    <td><code>decode()</code></td>
+                    <td>将其他编码（如 utf-8）转回 Unicode 编码</td>
+                    <td><code>result = data.decode('utf-8')</code></td>
+                    <td>返回值是 <code>str</code> 类型</td>
+                </tr>
+                <tr>
+                    <td>路径基础</td>
+                    <td>绝对路径</td>
+                    <td>从本地盘符或根目录开始，直到文件的完整地址</td>
+                    <td><code>C:/Users/info.txt</code></td>
+                    <td>好处：一步到位；坏处：文件移动后路径失效，不适合部署</td>
+                </tr>
+                <tr>
+                    <td>路径基础</td>
+                    <td>相对路径</td>
+                    <td>基于当前脚本所在目录的路径</td>
+                    <td><code>./data/file.txt</code></td>
+                    <td>好处：项目移动后路径依然有效；坏处：脚本运行目录变化时基准会改变</td>
+                </tr>
+                <tr>
+                    <td>路径符号</td>
+                    <td><code>./</code></td>
+                    <td>当前目录（同级）</td>
+                    <td><code>./info.txt</code></td>
+                    <td>可以直接写文件名，省略 <code>./</code></td>
+                </tr>
+                <tr>
+                    <td>路径符号</td>
+                    <td><code>../</code></td>
+                    <td>上级目录</td>
+                    <td><code>../data/info.txt</code></td>
+                    <td>可多次使用，如 <code>../../</code></td>
+                </tr>
+                <tr>
+                    <td>路径符号</td>
+                    <td><code>文件夹名/</code></td>
+                    <td>进入下一级文件夹</td>
+                    <td><code>data/info.txt</code></td>
+                    <td>相当于 <code>./文件夹名/</code></td>
+                </tr>
+                <tr>
+                    <td>文件打开</td>
+                    <td><code>open()</code></td>
+                    <td>打开文件，返回文件对象</td>
+                    <td><code>open('info.txt', mode='r')</code></td>
+                    <td>文件路径不存在时抛出 <code>FileNotFoundError</code></td>
+                </tr>
+                <tr>
+                    <td>文件模式</td>
+                    <td><code>r</code></td>
+                    <td>只读模式（文本）——<span class="span_warn">单写不会报错，等价于：'rt'</span></td>
+                    <td><code>mode='r'</code></td>
+                    <td>默认模式，读取文本文件</td>
+                </tr>
+                <tr>
+                    <td>文件模式</td>
+                    <td><code>b</code></td>
+                    <td>二进制模式——<span class="span_warn">单写不会报错，等价于：'rb'</span></td>
+                    <td><code>mode='rb'</code></td>
+                    <td>一般需与其他模式组合使用，如 <code>rb</code>、<code>wb</code></td>
+                </tr>
+                <tr>
+                    <td>文件模式</td>
+                    <td><code>rb</code></td>
+                    <td>以原始二进制格式读取文件</td>
+                    <td><code>open('info.png', mode='rb')</code></td>
+                    <td>用于图片、视频等非文本文件</td>
+                </tr>
+                <tr>
+                    <td>文件读取</td>
+                    <td><code>read()</code></td>
+                    <td>读取文件内容</td>
+                    <td><code>data = file_object.read()</code></td>
+                    <td>返回字符串（文本模式）或字节（二进制模式）</td>
+                </tr>
+                <tr>
+                    <td>文件管理</td>
+                    <td><code>close()</code></td>
+                    <td>关闭文件，释放系统资源</td>
+                    <td><code>file_object.close()</code></td>
+                    <td>操作完成后必须调用，否则可能造成资源泄漏</td>
+                </tr>
+                <tr>
+                    <td>异常处理</td>
+                    <td><code>FileNotFoundError</code></td>
+                    <td>文件路径不存在或输入错误时抛出的异常</td>
+                    <td><code>open('不存在的文件.txt')</code></td>
+                    <td>可通过 <code>try-except</code> 捕获处理</td>
+                </tr>
+                <tr>
+                    <td>编码注意事项</td>
+                    <td>默认编码</td>
+                    <td><span>open()</span> 默认解码器与操作系统挂钩：<code>Windows</code> 默认 <code>GBK</code>，(<span
+                            class="span_warn">Linux/macOS 默认 utf-8</span>)。
+                    </td>
+                    <td><code>open('info.txt')</code></td>
+                    <td><span>open() 默认解码器与操作系统挂钩：Windows 默认 GBK，Linux/macOS 默认 utf-8。</span></td>
+                </tr>
+                <tr>
+                    <td>编码注意事项</td>
+                    <td>二进制文件</td>
+                    <td>图片、视频等非文本文件必须以 <code>rb</code> 模式打开</td>
+                    <td><code>open('info.png', mode='rb')</code></td>
+                    <td>否则会因编码问题报错</td>
+                </tr>
+                <tr>
+                    <td>资源管理</td>
+                    <td>释放资源</td>
+                    <td>文件操作结束后必须调用 <code>close()</code></td>
+                    <td><code>file_object.close()</code></td>
+                    <td>推荐使用 <code>with</code> 语句自动管理，后续学习</td>
+                </tr>
+                <tr>
+                    <td>文件模式</td>
+                    <td><code>rt</code></td>
+                    <td>以文本模式读取文件（显式写法）</td>
+                    <td><code>open('info.txt', mode='rt', encoding='utf-8')</code></td>
+                    <td><code>r</code> 的显式写法，两者等价</td>
+                </tr>
+                <tr>
+                    <td>编码注意事项</td>
+                    <td>默认编码规则</td>
+                    <td><code>open()</code> 默认解码器与操作系统挂钩</td>
+                    <td>Windows 默认 <code>gbk</code>，Linux 默认 <code>utf-8</code></td>
+                    <td>文件编码与系统默认编码不匹配时会报错</td>
+                </tr>
+                <tr>
+                    <td>编码异常</td>
+                    <td><code>UnicodeDecodeError</code></td>
+                    <td>读取文件时，编码不匹配导致的解码错误</td>
+                    <td>用 <code>gbk</code> 解码 <code>utf-8</code> 的中文文件</td>
+                    <td>显式指定 <code>encoding</code> 可避免此问题</td>
+                </tr>
+                <tr>
+                    <td>编码规则</td>
+                    <td>文件编码 vs 系统默认编码</td>
+                    <td>如果文件编码 ≠ 系统默认编码，必须显式指定 <code>encoding</code></td>
+                    <td>utf-8 文件在 Windows 上需写 <code>encoding='utf-8'</code></td>
+                    <td>否则抛出 <code>UnicodeDecodeError</code></td>
+                </tr>
+                <tr>
+                    <td>读取过程</td>
+                    <td>文件读取完整流程</td>
+                    <td>所有模式都从读取硬盘原始二进制开始</td>
+                    <td><code>rb</code> 直接返回 <code>bytes</code>；<code>r/rt</code> 自动解码返回 <code>str</code></td>
+                    <td><code>rb</code> 不自动解码，需手动 <code>decode()</code></td>
+                </tr>
+                <tr>
+                    <td>最佳实践</td>
+                    <td>显式指定 <code>encoding</code></td>
+                    <td>无论什么系统，都显式指定 <code>encoding='utf-8'</code></td>
+                    <td><code>open('info.txt', 'r', encoding='utf-8')</code></td>
+                    <td>保证代码跨平台运行一致</td>
+                </tr>
+                <tr>
+                    <td>额外提示</td>
+                    <td><code>utf-8</code>等价于<code>UTF-8</code>等价于<code>uTf-8</code></td>
+                    <td><span>无论编码怎么写法，<code>python</code>最终都会将大写字母转为小写字母</span></td>
+                    <td colspan="2">
+                        <span>尽管python并没有限制，可以按自己的习惯，但建议同一写法，不要三种写法用在一个项目</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——python大王艾雷克斯</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+<script src="../../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    // 锚点不能其他符号，只能是字符
+</script>
+</body>
+</html>

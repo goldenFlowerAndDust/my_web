@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>读写、写入、追加操作-open-read-write-close解析</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>读写、写入、追加操作-open-read-write-close解析</h1>
+    </header>
+    <section id="section_1">
+        <h2>回顾读模式</h2>
+        <ul>
+            <li>只读文本：<code>r,rt</code>、读取原始二进制：<code>b,rb</code></li>
+            <li>共同特点：<span>当文件不存在或路径写错，会报错：<code>FileNotFoundError</code></span></li>
+        </ul>
+        <h2>open()、read()、write()、close()</h2>
+        <ul>
+            <li>
+                <h3>open()</h3>
+                <ol>
+                    <li>主要作用：<span>返回一个'文件对象'(<code>File Object</code>)</span></li>
+                    <li>可以理解为：<span>链接到这个文件的遥控器/管道</span></li>
+                    <li>
+                        <h4>内含</h4>
+                        <ul>
+                            <li><span>文件在操作系统中的 <span class="span_warn">句柄</span>[也叫编号]</span></li>
+                            <li><span>当前的<span class="span_warn">读写位置</span>(光标/指针)</span></li>
+                            <li>以及编码着指定的：<span>编码规则(encoding)和读写模式(<span
+                                    class="span_warn">读、写、追加</span>)</span></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>read()</h3>
+                <ol>
+                    <li>主要作用：<span>只读取文件对象所指文件内容</span></li>
+                    <li>语法：<code>字面量 = 文件对象.read()</code></li>
+                    <li>扩展：<span>只可以传一个参数，指向的文档开头开始，读取与参数相同数量的字符</span></li>
+                    <li>所以：<span>参数必须是整数，如果是浮点数或字符串，会报错：<code><a href="#TypeError与ValueError"
+                                                                                       onclick="loadContent(this,'container','#TypeError与ValueError');return false">TypeError</a></code></span>
+                        <div id="container"></div>
+                    </li>
+                    <li><span>如果参数为负数，读取整个文件内容，等价于：<code>文件对象.read()</code></span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>write()</h3>
+                <ol>
+                    <li>主要作用：<span>可以写入操作</span></li>
+                    <li>语法：<code>字面量 = 文件对象.write('内容')</code></li>
+                    <li>扩展：<span>只可以传一个参数，具体内容</span></li>
+                    <li>具体内容有什么限制由：<code>mode</code>决定</li>
+                    <li><span>如果写入的数据与 <code>mode</code>不匹配，则会报错，<code>TypeError</code></span></li>
+                </ol>
+            </li>
+            <li>
+                <h3>close()</h3>
+                <ol>
+                    <li>主要作用：<span>关闭文件、销毁文件对象，释放资源</span></li>
+                    <li>语法：<code>字面量 = 文件对象.close()</code></li>
+                    <li>注意：<span>不能传参</span></li>
+                    <li><span>如果传参则报错：<code>TypeError</code>,原因：操作数类型不匹配</span></li>
+                </ol>
+            </li>
+        </ul>
+        <h2>读写（r+、rb+、rt+）</h2>
+        <ul>
+            <li><span>r+：可读可写，文件必须存在，光标在开头，写入时会覆盖原有内容</span></li>
+            <li>模式：<span>r+、rb+</span></li>
+            <li>语法：<code>open(文件地址,mode='模式',encoding='解码器')</code></li>
+            <li>注意：<span>先读后写，所以 <span
+                    class="span_warn">文件必须真是存在，否则报错：<code>FileNotFoundError</code></span></span></li>
+            <li>
+                <h3>运行过程</h3>
+                <ol>
+                    <li><code>r+/rb+/rt+</code> <span class="span_warn">打开文件时，光标位于文件开头。写入时从光标位置开始覆盖（<span>写几个字符就覆盖几个字符</span>），不会自动清空原文件。读取操作会从当前光标位置开始读取。</span>
+                    </li>
+                    <li>
+                        <code>r+/rt+</code>写入必须是字符串、<code>rb+</code>写入必须是：二进制。不会自动将<code>Unicode</code>字符转为<code>bytes</code>
+                    </li>
+                    <li>不懂二进制要想写入二进制可以采用：<code>b'字符串'</code>的形式，自动转为二进制写入</li>
+                </ol>
+            </li>
+        </ul>
+        <h2>写入（w、wt、wb）</h2>
+        <ul>
+            <li>文本写入模式：<code>w、wt</code></li>
+            <li><span>文本写入，所以：<code>write()</code>必须是字符串</span>，否则报错：<code>TypeError</code></li>
+            <li>二进制写入：<code>wb</code></li>
+            <li><span>二进制写入，所以：<code>write()</code>必须是二进制</span>,否则报错：<code>TypeError</code></li>
+            <li>
+                <h3>共同特点</h3>
+                <ol>
+                    <li><span>文件不存在，自动创建。</span></li>
+                    <li>清空原文件内容，新内容覆盖</li>
+                </ol>
+            </li>
+            <li><code>w</code>等价于<code>wt</code></li>
+            <li>注意：<span>文本写入/二进制写入，<code>write()</code>，传参是字符串/二进制</span></li>
+        </ul>
+        <h2>追加（a、at、ab）</h2>
+        <ul>
+            <li>文本追加模式：<code>a、at</code></li>
+            <li><span>文本写入，所以：<code>write()</code>必须是字符串</span>，否则报错：<code>TypeError</code></li>
+            <li>二进制写入：<code>ab</code></li>
+            <li><span>二进制写入，所以：<code>write()</code>必须是二进制</span>,否则报错：<code>TypeError</code></li>
+            <li>
+                <h3>共同特点</h3>
+                <ol>
+                    <li><span>文件不存在，自动创建。</span></li>
+                    <li>保留原文件内容，且指针在文件在最后面，新内容在指针后面追加</li>
+                </ol>
+            </li>
+            <li><code>a</code>等价于<code>at</code></li>
+            <li>注意：<span>文本写入/二进制写入，<code>write()</code>，传参是字符串/二进制</span></li>
+        </ul>
+        <h2>读写 (w+、wt+、wb+、a+、at+、ab+)</h2>
+        <ul>
+            <li>顾名思义：<span>可读可写</span></li>
+            <li><span><code>w</code>:覆盖写入、<code>a</code>：结尾追加、<code>t</code>：字符串、<code>b</code>：二进制，<span
+                    class="span_warn">概念完全相同</span></span></li>
+            <li>注意：<span><code>w</code>是覆盖写入，打开文件，内容就已经清空了、如果确实需要读，必须先 <code>write()</code> 写入新数据，再 <code>seek(0)</code> 才能读到。直接 <code>read()</code> 读到的永远是空字符串。</span>
+            </li>
+            <li>注意：<span><code>a</code>是追加写入，打开文件，内容就存在，但是光标在结尾、要想读取，需要将光标移动至最前面。使用方法：<code><a
+                    href="../../with语句以及扩展方法/笔记/with语句以及扩展方法.html/#seek"
+                    onclick="loadContent(this,'container2','#seek');return false">seek(0,0)</a></code>，写的时候又要重新将光标移动至最后，<code>seek(0,2)</code></span>
+                <code><a href="../../with语句以及扩展方法/笔记/with语句以及扩展方法.html/#tell"
+                         onclick="loadContent(this,'container2','#tell');return false">tell()</a></code>
+                <div id="container2"></div>
+            </li>
+            <li>
+                注意：<span>与 <code>r+、rb+、rt+</code> 不同，<code>w+、wt+、wb+、a+、at+、ab+</code> 在文件不存在时不会报错(<code>FileNotFoundError</code>)，而是新建文件。</span>
+            </li>
+            <li><span class="span_warn">所以除非有特殊目的，最好还是读写分开</span></li>
+        </ul>
+        <h2>建议</h2>
+        <ul>
+            <li><code>open()——打开、read()——读取、write()——写、close()——关闭</code><span>是文件处理的方法、是本质。</span>
+            </li>
+            <li><code
+                    class="code_instancing">r、b、rt、rb、w、wt、wb、a、at、ab</code>是<code>open()</code><span>内的：<code>mode</code>的值</span>
+                <span class="span_warn">控制的是模式。只读、读写、写入、追加</span>
+            </li>
+            <li><span class="span_warn"><code>open</code>返回的是文件对象，包含模式</span></li>
+            <li><span class="span_warn"><code>read</code>返回的是文件内容，只要是提取内容都需要它</span></li>
+            <li><span class="span_warn"><code>write</code>没有返回值，只要是写入内容都需要它</span></li>
+            <li><span class="span_warn"><code>close</code>没有返回值，每个文件打开，必须要关闭，避免浪费资源、避免内容泄露损失</span>
+            </li>
+            <li>注意：<span><code>r、rt、rb、b</code>模式打开的文件，只能读：<code>read()、readlines()</code>，使用：<code>write()、writelines()</code>
+                会报错(<code>io.UnsupportedOperation： not writeable</code>)</span>
+            </li>
+            <li>
+                注意：<span><code>w、wt、wb、a、at、ab</code>模式打开的文件，只能写：<code>write()、writelines()</code>，使用：<code>read()、readlines()</code>
+                会报错(<code>io.UnsupportedOperation： not readable</code>)</span>
+            </li>
+            <li>注意：<span><code>r+、rb+、w+、wt+、wb+、a+、at+、ab+</code>模式打开的文件，可读可写：<code>write()、writelines()、read()、readlines()、</code>
+                不会报错(<code>io.UnsupportedOperation： not readable(<span>或</span>not writeable)</code>)</span>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <div class="div_table">
+            <table>
+                <thead>
+                <tr>
+                    <th>学习顺序</th>
+                    <th>分类</th>
+                    <th>内容</th>
+                    <th>说明</th>
+                    <th>示例</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- ======== 第一层：前置基础 ======== -->
+                <tr>
+                    <td rowspan="4">1. 前置基础</td>
+                    <td rowspan="2">编码基础</td>
+                    <td><code>str</code></td>
+                    <td>字符串类型，本质是 <span class="span">Unicode 编码的二进制</span></td>
+                    <td><code class="code_instancing">name = 'YLH'</code></td>
+                </tr>
+                <tr>
+                    <td><code>bytes</code></td>
+                    <td>字节类型，本质是 <span class="span">utf-8/gbk 等编码的二进制</span>（对 Unicode 压缩）</td>
+                    <td><code class="code_instancing">data = name.encode('utf-8')</code></td>
+                </tr>
+                <tr>
+                    <td>编码转换</td>
+                    <td><code>encode()</code></td>
+                    <td>将 <span class="span">Unicode</span> 按指定编码（返回 <code>bytes</code>）</td>
+                    <td><code class="code_instancing">data = name.encode('utf-8')</code></td>
+                </tr>
+                <tr>
+                    <td>编码转换</td>
+                    <td><code>decode()</code></td>
+                    <td>将其他编码转回 <span class="span">Unicode</span>（返回 <code>str</code>）</td>
+                    <td><code class="code_instancing">result = data.decode('utf-8')</code></td>
+                </tr>
+
+                <!-- ======== 第二层：路径规则 ======== -->
+                <tr>
+                    <td rowspan="2">2. 路径规则</td>
+                    <td>绝对路径</td>
+                    <td>从盘符或根目录开始的完整路径</td>
+                    <td>好处：一步到位；坏处：文件移动后路径失效，不适合部署</td>
+                    <td><code>C:/Users/info.txt</code></td>
+                </tr>
+                <tr>
+                    <td>相对路径</td>
+                    <td>基于当前脚本所在目录的路径</td>
+                    <td>好处：项目移动后依然有效；坏处：脚本运行目录变化时基准改变</td>
+                    <td><code>./data/file.txt</code></td>
+                </tr>
+                <tr>
+                    <td rowspan="3">3. 路径符号</td>
+                    <td><code>./</code></td>
+                    <td>当前目录（同级）</td>
+                    <td>可直接写文件名，省略 <code>./</code></td>
+                    <td><code>./info.txt</code></td>
+                </tr>
+                <tr>
+                    <td><code>../</code></td>
+                    <td>上级目录</td>
+                    <td>可多次使用，如 <code>../../</code></td>
+                    <td><code>../data/info.txt</code></td>
+                </tr>
+                <tr>
+                    <td><code>文件夹名/</code></td>
+                    <td>进入下一级文件夹</td>
+                    <td>相当于 <code>./文件夹名/</code></td>
+                    <td><code>data/info.txt</code></td>
+                </tr>
+
+                <!-- ======== 第四层：核心方法 ======== -->
+                <tr>
+                    <td rowspan="4">4. 核心方法</td>
+                    <td><code>open()</code></td>
+                    <td>返回 <span class="span_warn">文件对象</span>（“遥控器/管道”）</td>
+                    <td>内含：句柄、读写位置、编码规则、模式</td>
+                    <td><code class="code_instancing">open('info.txt', mode='r', encoding='utf-8')</code></td>
+                </tr>
+                <tr>
+                    <td><code>read()</code></td>
+                    <td><span class="span_warn">读取</span>文件内容</td>
+                    <td>只传 1 个参数（整数/负数）；<span class="span">负数等价于读取全部</span></td>
+                    <td><code class="code_instancing">data = file.read(10)</code></td>
+                </tr>
+                <tr>
+                    <td><code>write()</code></td>
+                    <td><span class="span_warn">写入</span>内容</td>
+                    <td>只传 1 个参数；<span class="span_warn">内容类型由 <code>mode</code> 决定</span></td>
+                    <td><code class="code_instancing">file.write('hello')</code></td>
+                </tr>
+                <tr>
+                    <td><code>close()</code></td>
+                    <td><span class="span_warn">关闭</span>文件，释放资源</td>
+                    <td>不能传参；否则 <code>TypeError</code></td>
+                    <td><code class="code_instancing">file.close()</code></td>
+                </tr>
+
+                <!-- ======== 第五层：模式分类 ======== -->
+                <tr>
+                    <td rowspan="4">5. 模式分类</td>
+                    <td>只读模式</td>
+                    <td><code>r</code>（等价于 <code>rt</code>）<br><code>rb</code></td>
+                    <td><span class="span_warn">文件不存在 → <code>FileNotFoundError</code></span></td>
+                    <td><code class="code_instancing">open('info.txt', 'r')</code></td>
+                </tr>
+                <tr>
+                    <td>写入模式</td>
+                    <td><code>w</code>（等价于 <code>wt</code>）<br><code>wb</code></td>
+                    <td><span class="span_warn">文件不存在自动创建</span>，<span class="span">清空原内容再写</span></td>
+                    <td><code class="code_instancing">open('info.txt', 'w')</code></td>
+                </tr>
+                <tr>
+                    <td>追加模式</td>
+                    <td><code>a</code>（等价于 <code>at</code>）<br><code>ab</code></td>
+                    <td><span class="span_warn">文件不存在自动创建</span>，<span
+                            class="span">光标在末尾，追加新内容</span></td>
+                    <td><code class="code_instancing">open('info.txt', 'a')</code></td>
+                </tr>
+                <tr>
+                    <td>读写模式</td>
+                    <td><code>r+</code>（文本）<br><code>rb+</code>（二进制）</td>
+                    <td><span class="span_warn">文件必须存在</span>，<span class="span">光标在开头，写几个覆盖几个</span>
+                    </td>
+                    <td><code class="code_instancing">open('info.txt', 'r+')</code></td>
+                </tr>
+
+                <!-- ======== 第六层：编码陷阱 ======== -->
+                <tr>
+                    <td rowspan="3">6. 编码注意事项</td>
+                    <td>默认编码</td>
+                    <td><code>open()</code> 默认编码与操作系统挂钩</td>
+                    <td><span class="span_warn">Windows: <code>GBK</code></span>，<span class="span">Linux/macOS: <code>utf-8</code></span>
+                    </td>
+                    <td><code class="code_instancing">open('info.txt')</code></td>
+                </tr>
+                <tr>
+                    <td>编码规则</td>
+                    <td>文件编码 ≠ 系统默认编码时，<span class="span_warn">必须显式指定 <code>encoding</code></span></td>
+                    <td>否则抛出 <code>UnicodeDecodeError</code></td>
+                    <td><code class="code_instancing">open('info.txt', encoding='utf-8')</code></td>
+                </tr>
+                <tr>
+                    <td>编码写法</td>
+                    <td><code>utf-8</code> 等价于 <code>UTF-8</code> 等价于 <code>uTf-8</code></td>
+                    <td><span class="span_warn">建议统一写法</span>，不要混用</td>
+                    <td><code class="code_instancing">encoding='utf-8'</code></td>
+                </tr>
+
+                <!-- ======== 第七层：异常类型 ======== -->
+                <tr>
+                    <td rowspan="4">7. 异常处理</td>
+                    <td><code>FileNotFoundError</code></td>
+                    <td>文件路径不存在或输入错误</td>
+                    <td><span class="span_warn">只读/读写模式（<code>r</code> / <code>r+</code>）</span>下抛出</td>
+                    <td><code class="code_instancing">open('不存在的文件.txt', 'r')</code></td>
+                </tr>
+                <tr>
+                    <td><code>UnicodeDecodeError</code></td>
+                    <td>读取时编码不匹配（<span class="span_warn">解码失败</span>）</td>
+                    <td>通常发生在 <span class="span">Windows 读 UTF-8 文件</span>时未指定 <code>encoding</code></td>
+                    <td><code class="code_instancing">open('utf-8文件.txt', 'r')</code>（Windows）</td>
+                </tr>
+                <tr>
+                    <td><code>TypeError</code></td>
+                    <td><span class="span_warn">操作数的“类型”不对</span></td>
+                    <td>数量错误（如 <code>read(10, 20)</code>）<br>类型错误（如 <code>1 + 'abc'</code>）</td>
+                    <td><code class="code_instancing">open('info.txt', mode=123)</code></td>
+                </tr>
+                <tr>
+                    <td><code>ValueError</code></td>
+                    <td><span class="span_warn">类型对了，但“值”不对</span></td>
+                    <td>如 <code>int('abc')</code> → 类型对了（字符串），但值不合法</td>
+                    <td><code class="code_instancing">int('abc')</code></td>
+                </tr>
+
+                <!-- ======== 第八层：最佳实践 ======== -->
+                <tr>
+                    <td>8. 最佳实践</td>
+                    <td>显式指定 <code>encoding</code></td>
+                    <td>无论什么系统，都显式指定 <code>encoding='utf-8'</code></td>
+                    <td><span class="span_warn">保证代码跨平台运行一致</span></td>
+                    <td><code class="code_instancing">open('info.txt', 'r', encoding='utf-8')</code></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <h2>扩展——异常类型：TypeError 和 ValueError</h2>
+        <ul id="TypeError与ValueError">
+            <li>
+                <h3>TypeError</h3>
+                <ol>
+                    <li><code>TypeError</code>: <span>'操作数'的类型本身不匹配（类型错误）</span></li>
+                    <li>操作数：<span>传参的实参、运算符号两边的字符</span></li>
+                    <li>类型：<span>可以是运算时数据类型错误、传参时数据类型错误、传参数量错误</span></li>
+                    <li>
+                        <h4>比如</h4>
+                        <code class="code_instancing">open("info.txt", mode=123)，
+                            <span>这里面<code>mode</code>必须是字符串，类型错误，所以：<code>TypeError</code></span></code>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3>ValueError</h3>
+                <ol>
+                    <li><code>ValueError</code>: <span>'操作数'的类型本身匹配（类型错误），但是结果/值错误</span></li>
+                    <li>操作数：<span>传参的实参、运算符号两边的字符</span></li>
+                    <li>类型：<span>可以是运算时数据类型错误、传参时数据类型错误、传参数量错误</span></li>
+                    <li>
+                        <h4>比如</h4>
+                        <code class="code_instancing">int('abc')，<span>int()方法支持传字符串，但是实参是非数字字符串，值错误，所以：<code>ValueError</code></span></code>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+        <!--
+               学习吐槽
+            🧡🧡好奇怪，不知不觉已经走了这么远了吗？跟异常处理一样，几乎一天就的差不多了，知识确实简单啊。加上学习了异常处理，
+            🧡🧡  对于：TypeError、ValueError、FileNotFoundError、UnicodeDecodeError并不陌生已经可以被下来了。
+            🧡🧡  r、rt、rb、w、wt、wb、a、at、ab也不难记。t文件、b二进制。r只读、w覆盖写入、a追加。
+            🧡🧡  open()——打开文件返回文件对象、read()、write()、close()。encode——Unicode转其他二进制编码。decode()——其他二进制编码转Unicode编码。
+            🧡🧡  open('文件地址', mode='模式',encoding='解码类型')。绝对地址、相对地址。
+            🧡🧡这就是今天学习的东西。不难才一点。难道是因为有学习了函数、模块、面向对象后，接受能力加强了吗？前面这三个部分，我真是遭老罪了，
+            🧡🧡不过也是学习最爽的时候——正反馈最强的时候。
+        -->
+    </footer>
+</main>
+<script src="../../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    // 锚点不能其他符号，只能是字符
+</script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>with语句以及扩展啊方法</title>
+    <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>with语句以及扩展啊方法</h1>
+    </header>
+    <section id="section_1">
+        <h2>with语句</h2>
+        <ul>
+            <li><span>已知每次用<code>open()</code>都需要使用<code>close()</code>关闭释放资源</span></li>
+            <li><span><code>with</code>主要作用是省略<code>close()</code>步骤</span></li>
+            <li><span>语法：<code>with open('文件地址',mode='',encodeing='') as 字面量</code></span></li>
+            <li><span>字面量存储文件对象</span></li>
+        </ul>
+        <h2>扩展方法</h2>
+        <ul>
+            <li>
+                <div id="seek">
+                    <h4>扩展方法——seek()</h4>
+                    <ol>
+                        <li><code>指定光标位置</code></li>
+                        <li>语法：<code>seek(偏移量,whence)</code></li>
+                        <li>
+                            偏移量：<span>正整数：向右/向后/向文档末尾方向移动。负整数：向左/向前/向文档首方向移动。0：不移动</span>
+                        </li>
+                        <li>偏移量参数不能是：<span>字符串、浮点数，否则会报错：<code>TypeError</code></span></li>
+                        <li>
+                            <span>起始位置三个参数固定：<code>whence</code> 参数：<code>0</code>（默认，相对于文件开头）、<code>1</code>（相对于当前位置）、<code>2</code>（相对于文件末尾）。在文本模式下，建议只使用 whence=0，避免因编码问题导致光标位置错乱。</span>
+                        </li>
+                        <li>第二参数除：<span>【<code>0、1、2</code>】均报错，<code>TypeError</code></span></li>
+                        <li><span><code>seek(0,1)</code>一般很少用，主要搭配：<a href="#tell"
+                                                                               onclick="loadContent(this,'container3','#tell');return false">tell()</a>、输出光标坐标</span>
+                            <div id="container3"></div>
+                        </li>
+                        <li><span>seek() 以 字节 为单位移动光标。在文本模式下，建议只使用 seek(0)（移到开头）或 seek(0, 2)（移到末尾），避免移动到非 ASCII 字符中间导致解码错误。</span>
+                        </li>
+                    </ol>
+                </div>
+            </li>
+            <li>
+                <div id="tell">
+                    <h4>扩展方法——tell()</h4>
+                    <ol>
+                        <li><code>返回当前光标的位置</code></li>
+                        <li>语法：<code>tell()</code></li>
+                        <li><span>不能传参，否则：<code>TypeError</code></span></li>
+                        <li><span>会受到：<code>seek()</code>影响</span></li>
+                    </ol>
+                </div>
+            </li>
+
+            <li>
+                <h4>扩展方法——readlines()</h4>
+                <ol>
+                    <li><span>将读取的文本/二进制转成列表，以换行符为基准，每一行代表一个元素</span></li>
+                    <li>语法：<code>readlines(size)</code></li>
+                    <li>注意：<span>readlines() 适用于文件不大且需要随机访问各行的场景。如果文件很大，建议用 for line in f: 逐行读取，更节省内存。</span>
+                    </li>
+                    <li>常用于：筛选等等</li>
+                    <li><span>size：可选参数且只能传整数参数，只能传一个参数。<span
+                            class="span_warn">意思是：size：，表示读取大约 size 个字节的数据，然后返回这些数据中包含的所有行（不精确，一般不建议传参）</span></span>
+                    </li>
+                    <li><span>所以一般不建议传参、直接获取整行组成列表即可</span></li>
+                    <li><span>多行读取</span></li>
+                </ol>
+            </li>
+            <li>
+                <h4>扩展方法——readline()</h4>
+                <ol>
+                    <li><span>读取光标所在的那一行的文本</span></li>
+                    <li>语法：<code>readline(size)</code></li>
+                    <li><span>返回值是字符串，而不是：<code>readines()</code>返回的是列表</span></li>
+                    <li><span>size：可以传整数参数，且只能传一个参数。<span
+                            class="span_warn">意思是：readline(size) 表示“读取当前行的前 size 个字节”。由于中文字符可能占多个字节，建议不要依赖这个参数来精确按字符读取。</span></span>
+                    </li>
+                    <li><span><code>readline()</code> 读取到末尾时返回空字符串 <code>''</code>，不是 <code>None</code>。这个在写“逐行处理”时很关键，</span>
+                    </li>
+                    <li><span>光标由：<code>seek()</code>控制，光标是以字节移动，正常情况，无法准确识别每行字符个数，所以光标位置不可控</span>
+                    </li>
+                    <li>所以一般使用：<code>seek()</code>控制光标位置</li>
+                    <li>
+                        而是使用：<span><code>for i in range(n-1) : return f.readline()</code>提前提过前面的行数，只打印需要的行数</span>
+                    </li>
+                    <li><span>单行读取</span></li>
+                </ol>
+            </li>
+            <li>
+                <h4>扩展方法——writelines()</h4>
+                <ol>
+                    <li><span>将指定的字符串或二进制，写入文件(注意：不会自动添加符号)。</span></li>
+                    <li>语法：<code>writelines(可迭代对象（如列表、元组、生成器等)</code></li>
+                    <li>注意：<span>不会自动添加符号，需要自行写：换行：<code>\n</code>、制表：<code>\t</code>...</span></li>
+                    <li>
+                        <span><code>r</code>：光标在最前面、<code>w</code>：光标在最前面、<code>a</code>：光标在最后面</span>
+                    </li>
+                    <li></li>
+                    <li><span><code>writelines()</code> 只接受一个参数，必须是一个可迭代对象（比如列表、元组、生成器），每个元素是要写入的一行内容。不能同时传入多个独立的字符串。</span>
+                    </li>
+                    <li><span>注意写入没有：<code>writeline()</code></span></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section id="section_2">
+        <h2>文件处理方法扩展</h2>
+        <div class="div_table">
+            <table>
+                <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>方法/属性</th>
+                    <th>说明</th>
+                    <th>示例</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- ========== 文件状态检查 ========== -->
+                <tr>
+                    <td rowspan="4">文件状态检查</td>
+                    <td><code>closed</code></td>
+                    <td>判断文件是否已关闭</td>
+                    <td><code class="code_instancing">f.closed</code></td>
+                    <td>返回 <span class="span">True</span> 或 <span class="span">False</span></td>
+                </tr>
+                <tr>
+                    <td><code>mode</code></td>
+                    <td>文件打开模式（只读）</td>
+                    <td><code class="code_instancing">f.mode</code></td>
+                    <td>如 <span class="span">'r'</span>、<span class="span">'w'</span> 等</td>
+                </tr>
+                <tr>
+                    <td><code>readable()</code></td>
+                    <td>检查文件是否可读</td>
+                    <td><code class="code_instancing">f.readable()</code></td>
+                    <td>返回 <span class="span">True</span> 或 <span class="span">False</span></td>
+                </tr>
+                <tr>
+                    <td><code>writable()</code></td>
+                    <td>检查文件是否可写</td>
+                    <td><code class="code_instancing">f.writable()</code></td>
+                    <td>返回 <span class="span">True</span> 或 <span class="span">False</span></td>
+                </tr>
+
+                <!-- ========== 指针操作 ========== -->
+                <tr>
+                    <td rowspan="3">指针操作</td>
+                    <td><code>tell()</code></td>
+                    <td>返回当前光标位置（字节数）</td>
+                    <td><code class="code_instancing">pos = f.tell()</code></td>
+                    <td>从文件开头算起的字节偏移量</td>
+                </tr>
+                <tr>
+                    <td><code>seek(offset, whence)</code></td>
+                    <td>移动光标到指定位置</td>
+                    <td><code class="code_instancing">f.seek(0)</code> 回到开头</td>
+                    <td><span class="span_warn">文本模式只能从开头偏移（whence=0）</span></td>
+                </tr>
+                <tr>
+                    <td><code>seekable()</code></td>
+                    <td>检查是否支持随机访问（<code>seek()</code>）</td>
+                    <td><code class="code_instancing">f.seekable()</code></td>
+                    <td>管道、终端等可能返回 <span class="span">False</span></td>
+                </tr>
+
+                <!-- ========== 数据读写 ========== -->
+                <tr>
+                    <td rowspan="7">数据读写</td>
+                    <td><code>read(size)</code></td>
+                    <td>读取指定字符数/字节数</td>
+                    <td><code class="code_instancing">data = f.read(10)</code></td>
+                    <td>负数或省略 = 读取全部</td>
+                </tr>
+                <tr>
+                    <td><code>readline(size)</code></td>
+                    <td>读取一行（含换行符 <code>\n</code>）</td>
+                    <td><code class="code_instancing">line = f.readline()</code></td>
+                    <td>返回空字符串 <span class="span">''</span> 表示文件结束</td>
+                </tr>
+                <tr>
+                    <td><code>readlines(hint)</code></td>
+                    <td>读取所有行，返回字符串列表</td>
+                    <td><code class="code_instancing">lines = f.readlines()</code></td>
+                    <td>可传 <span class="span">hint</span> 限制读取的字节数</td>
+                </tr>
+                <tr>
+                    <td><code>write(str)</code></td>
+                    <td>写入字符串（文本模式）</td>
+                    <td><code class="code_instancing">f.write('hello')</code></td>
+                    <td>返回写入的字符数</td>
+                </tr>
+                <tr>
+                    <td><code>writelines(lines)</code></td>
+                    <td>写入字符串列表（不自动加换行）</td>
+                    <td><code class="code_instancing">f.writelines(['a\n', 'b\n'])</code></td>
+                    <td><span class="span_warn">需要自己添加 <code>\n</code></span></td>
+                </tr>
+                <tr>
+                    <td><code>flush()</code></td>
+                    <td>将缓冲区数据强制写入硬盘</td>
+                    <td><code class="code_instancing">f.flush()</code></td>
+                    <td>通常不需要手动调用，<code>close()</code> 会自动执行</td>
+                </tr>
+                <tr>
+                    <td><code>truncate(size)</code></td>
+                    <td>将文件截断到指定长度</td>
+                    <td><code class="code_instancing">f.truncate(10)</code></td>
+                    <td>从文件开头保留前 <span class="span">10</span> 个字节，其余删除</td>
+                </tr>
+
+                <!-- ========== 底层接口 ========== -->
+                <tr>
+                    <td>底层接口</td>
+                    <td><code>fileno()</code></td>
+                    <td>返回操作系统的文件描述符（整数）</td>
+                    <td><code class="code_instancing">fd = f.fileno()</code></td>
+                    <td>底层编程时使用，二级不涉及</td>
+                </tr>
+                <tr>
+                    <td>终端检查</td>
+                    <td><code>isatty()</code></td>
+                    <td>检查文件是否连接到终端设备</td>
+                    <td><code class="code_instancing">f.isatty()</code></td>
+                    <td>通常用于交互式输入，考试基本不涉及</td>
+                </tr>
+
+                <!-- ========== 逐行读取（遍历方式） ========== -->
+                <tr>
+                    <td>迭代读取</td>
+                    <td><code>for line in f</code></td>
+                    <td>逐行遍历文件（内存友好）</td>
+                    <td><code class="code_instancing">for line in f: print(line)</code></td>
+                    <td><span class="span_warn">推荐方式</span>，自动处理换行</td>
+                </tr>
+                <tr>
+                    <td>上下文管理</td>
+                    <td><code>with open(...) as f</code></td>
+                    <td>自动关闭文件，即使发生异常也会释放资源</td>
+                    <td><code class="code_instancing">with open('info.txt', 'r') as f: data = f.read()</code></td>
+                    <td><span class="span_warn">推荐始终使用</span>，避免忘记 <code>close()</code></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <footer>
+        <p>以上知识均是学习笔记来源于哔哩哔哩UP主——黑马程序员</p>
+        <p><span>因为我并不是第一次接触编程(<code>javaScript</code>)，会采用python语法与 <code>javaScript</code>语法类比的方式，记笔记</span>
+        </p>
+    </footer>
+</main>
+<script src="../../../../../../frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    // 锚点不能其他符号，只能是字符
+</script>
+</body>
+</html>
