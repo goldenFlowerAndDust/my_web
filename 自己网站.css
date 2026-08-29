@@ -151,9 +151,8 @@ header {
 }
 .main-container .carousel nav img {
     width: 100%;
-    height:var(--main-container-height);
-    background-repeat: no-repeat;
-    background-size: cover;
+    height: var(--main-container-height);
+    object-fit: cover;           /* ★ 关键修复：替代 background-size，保持比例填充 */
     animation: carousel 25s ease-out infinite;
     animation-delay: 0.5s;
 }
@@ -201,59 +200,57 @@ footer{
 
     /* 2. 导航栏：项目间距缩小，字体减小，防止换行 */
     .nav_container ul {
-        justify-content: space-around;  /* 改为均匀分布 */
-        gap: 0.5rem;                    /* 添加间距控制 */
+        justify-content: space-around;
+        gap: 0.5rem;
     }
     .nav_container ul li a {
-        font-size: 1.2rem;              /* 减小字体 */
-        line-height: 3rem;               /* 减小行高 */
+        font-size: 1.2rem;
+        line-height: 3rem;
         padding: 0 0.5rem;
     }
     /* 音频播放器宽度自适应 */
     .audio_left {
-        width: 180px;                    /* 固定一个合适宽度 */
+        width: 180px;
         height: 40px;
     }
 
     /* 3. 中间区域改为纵向排列（侧边栏在上，轮播图在下） */
     .main-container {
-        flex-direction: column;          /* 改为列方向 */
+        flex-direction: column;
         min-height: auto;
     }
 
     /* 4. 侧边栏占满宽度，背景色稍作调整 */
     .main-container aside {
-        flex: none;                      /* 取消flex伸缩 */
+        flex: none;
         width: 100%;
-        background-color: lightblue;      /* 保持原有色系 */
+        background-color: lightblue;
     }
 
     /* 5. 侧边栏一级菜单改为水平滚动或网格，避免过长 */
     .main-container aside ul {
-        flex-direction: row;              /* 改为水平排列 */
-        flex-wrap: wrap;                  /* 允许换行 */
+        flex-direction: row;
+        flex-wrap: wrap;
         justify-content: flex-start;
         min-height: auto;
         padding: 0.5rem;
     }
     .main-container aside ul li {
-        width: auto;                      /* 宽度由内容决定 */
+        width: auto;
         margin: 0.2rem;
         text-align: center;
         font-size: 1rem;
         line-height: 2.5rem;
         background-color: rgba(255,255,255,0.3);
-        border-radius: 20px;               /* 圆角标签样式 */
+        border-radius: 20px;
         padding: 0 0.8rem;
     }
 
-    /* 6. 子菜单（二级菜单）的交互改为点击展开（利用 checkbox hack） */
-    /* 注意：需要你在每个包含子菜单的 li 中添加一个 checkbox 和 label，但为了不改动 HTML，这里用 :focus-within 模拟点击（需给 li 设置 tabindex） */
-    /* 我们使用 :focus-within 方案，只需给每个有子菜单的 li 添加 tabindex="0" 属性（在 HTML 中加） */
+    /* 6. 子菜单（二级菜单）的交互改为点击展开 */
     .main-container aside ul li:focus-within ol,
     .main-container aside ul li:hover ol {
         transform: scale(1);
-        position: static;                 /* 改为静态定位，避免溢出屏幕 */
+        position: static;
         width: 100%;
         margin-top: 0.5rem;
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
@@ -261,7 +258,7 @@ footer{
         border-radius: 8px;
     }
     .main-container aside ul li ol {
-        position: static;                 /* 手机端取消绝对定位，改用普通流 */
+        position: static;
         transform: scale(0);
         transform-origin: top;
         transition: transform 0.3s;
@@ -288,10 +285,10 @@ footer{
         background: none;
     }
 
-    /* 7. 轮播图在手机上默认显示（之前隐藏了，现在重新显示） */
+    /* 7. 轮播图在手机上隐藏（保持不变） */
     .main-container .carousel {
         display: none;
-        height: 200px;                    /* 固定高度，避免太高 */
+        height: 200px;
         margin: 1rem 0;
     }
     .main-container .carousel nav {
@@ -299,7 +296,7 @@ footer{
     }
     .main-container .carousel nav img {
         height: 200px;
-        object-fit: cover;                /* 确保图片覆盖，不变形 */
+        object-fit: cover;
         animation: carousel-mobile 15s ease-out infinite;
     }
     /* 手机轮播动画重新计算（只移动5张图片的高度） */
@@ -318,4 +315,3 @@ footer{
         font-size: 1rem;
     }
 }
-
