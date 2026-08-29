@@ -6,41 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1f5561d0-0649-48dc-90c3-e89ff28ac45b" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index1.html" beforeDir="false" afterPath="$PROJECT_DIR$/index1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/frontend——前端/JavaScript/JavaScript通用a标签跳转指定内容.js" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建网站中用到的外部引用/JS文件/JavaScript通用a标签跳转指定内容.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/frontend——前端/JavaScript/哔哩哔哩UP主——Java基础/基础/第二十三~二十八节——循环分支语句/第二十三~三十一节——循环分支语句.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/frontend——前端/JavaScript/哔哩哔哩UP主——Java基础/基础/第二十三~二十八节——循环分支语句/第二十三~三十一节——循环分支语句.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/笔记通用模板.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/笔记通用模板.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/异常处理.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/异常处理.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/with语句以及扩展方法/笔记/with语句以及扩展方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/with语句以及扩展方法/笔记/with语句以及扩展方法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/读写、写入、追加操作-open-read-write-close解析/笔记/读写、写入、追加操作-open-read-write-close解析.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/读写、写入、追加操作-open-read-write-close解析/笔记/读写、写入、追加操作-open-read-write-close解析.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/读文件及注意事项/笔记/读文件及注意事项.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/读文件及注意事项/笔记/读文件及注意事项.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/函数/函数基础/函数基础——函数嵌套调用/笔记/函数基础——函数嵌套调用.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/函数/函数基础/函数基础——函数嵌套调用/笔记/函数基础——函数嵌套调用.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/函数/函数基础/函数基础——函数的参数与返回值/笔记/函数基础——函数的参数与返回值.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/函数/函数基础/函数基础——函数的参数与返回值/笔记/函数基础——函数的参数与返回值.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/数据存储与运算/标识符/笔记/标识符.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/数据存储与运算/标识符/笔记/标识符.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/模块/模块与包/笔记/模块与包.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/模块/模块与包/笔记/模块与包.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/for循环/笔记/for循环.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/for循环/笔记/for循环.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/if条件分支语句/if基础语法/笔记/if基础语法.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/if条件分支语句/if基础语法/笔记/if基础语法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/match模式匹配/笔记/match模式匹配.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/match模式匹配/笔记/match模式匹配.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/while循环/笔记/while循环.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/while循环/笔记/while循环.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/类型注释/函数的类型注释/函数的类型注释.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/类型注释/函数的类型注释/函数的类型注释.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/类型注释/类型注释——介绍/类型注释——介绍.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/类型注释/类型注释——介绍/类型注释——介绍.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象——创建类-实例对象-实例方法概念/笔记/面向对象——创建类-实例对象-实例方法概念.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象——创建类-实例对象-实例方法概念/笔记/面向对象——创建类-实例对象-实例方法概念.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象——实例属性与类属性/笔记/面向对象——实例属性与类属性.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象——实例属性与类属性/笔记/面向对象——实例属性与类属性.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象——魔法方法/笔记/面向对象——魔法方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象——魔法方法/笔记/面向对象——魔法方法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例/面向对象基础案例.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例/面向对象基础案例.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向过程-面向对象-对象-类之间的关系/笔记/面向过程-面向对象-对象-类之间的关系.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向过程-面向对象-对象-类之间的关系/笔记/面向过程-面向对象-对象-类之间的关系.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/高阶/函数高阶——类方法、静态方法、继承、多态、封装.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/高阶/函数高阶——类方法、静态方法、继承、多态、封装.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/自学内容/相对单位/相对单位.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/自学内容/相对单位/相对单位.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/excel步骤错题总结.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/excel步骤错题总结.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/ppt步骤错题总结.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/ppt步骤错题总结.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/word步骤错题总结.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/word步骤错题总结.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/上网步骤错题总结.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/上网步骤错题总结.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/计算机一级考试通用样式表.css" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建网站中用到的外部引用/自建网站用的样式表/计算机一级考试笔记样式表.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/选择题总结.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/选择题总结.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/计算机一级考试.css" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建网站中用到的外部引用/自建网站用的样式表/计算机一级考试-目录.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/计算机一级考试.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/计算机一级考试-MS.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/自建网站中用到的外部引用/JS文件/JavaScript通用a标签跳转指定内容.js" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建网站中用到的外部引用/JS文件/JavaScript通用a标签跳转指定内容.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,126 +166,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="面向对象——魔法方法" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码/面向对象——魔法方法.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="异常处理" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码/异常处理.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="面向对象——魔法方法" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码/面向对象——魔法方法.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="面向对象——类与对象" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——类与对象/代码" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——类与对象/代码/面向对象——类与对象.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="异常处理" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码/异常处理.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="面向对象基础案例" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="my_web" />
       <option name="ENV_FILES" value="" />
@@ -456,6 +302,126 @@
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——实例属性与类属性/代码/面向对象——实例属性与类属性.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="面向对象——魔法方法" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码/面向对象——魔法方法.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="异常处理" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码/异常处理.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="面向对象——魔法方法" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码/面向对象——魔法方法.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="面向对象——类与对象" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——类与对象/代码" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——类与对象/代码/面向对象——类与对象.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="异常处理" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码/异常处理.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
