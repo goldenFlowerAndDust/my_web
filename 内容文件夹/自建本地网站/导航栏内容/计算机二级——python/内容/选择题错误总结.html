@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二级python选择题</title>
+    <link rel="stylesheet" href="../../../../自建网站中用到的外部引用/自建网站用的样式表/二级python样式表.css">
+</head>
+<body>
+<!--
+    二级菜单：class='nav_2'
+-->
+<main>
+    <section class="transition" id="transition">
+        <nav id="目录">
+            <ul>
+                <li><a href="#子程序调用的数据结构">子程序调用的数据结构</a></li>
+                <li><a href="#叉树">叉树</a></li>
+                <li><a href="#线性结构">线性结构</a></li>
+                <li><a href="#字面量规范">字面量规范</a></li>
+                <li id="异常处理"><a href="#"><p>异常处理相关</p></a>
+                    <ol>
+                        <li><a href="#异常处理——TypeError">TypeError</a></li>
+                        <li><a href="#异常处理——ValueError">ValueError</a></li>
+                        <li><a href="#异常处理——NameError">NameError</a></li>
+                        <li><a href="#异常处理——FileNotFoundError">FileNotFoundError</a></li>
+                        <li><a href="#异常处理——UnicodeDecodeError">UnicodeDecodeError</a></li>
+                        <li><a href="#异常处理——io.UsupportedOperation">io.UsupportedOperation</a></li>
+                    </ol>
+                </li>
+                <li id="关系题型"><a href="#"><p>关系题型</p></a>
+                    <ol>
+                        <li style="color: white;">
+                            <p id="多对多关系">多对多关系</p>
+                            <ol class="nav_2">
+                                <li><a href="#实体之间多对多在关系模型实现方式">实体之间多对多在关系模型实现方式</a>
+                                </li>
+                                <li><a href="#实体与实体之间的关系-多对多">实体与实体之间的关系-多对多</a></li>
+                            </ol>
+                        </li>
+                        <li style="color: white;">
+                            <p id="关系模型">关系模型</p>
+                            <ol class="nav_2">
+                                <li><a href="#E-R图">E-R图转关系模型</a></li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li><a href="#" id="其他知识导航栏"><p>其他知识导航栏</p></a>
+                    <ol>
+                        <li><a href="#其他知识">其他知识</a></li>
+                        <li><a href="#python常见的结构">python常见的结构</a></li>
+                    </ol>
+                </li>
+                <li id="程序控制结构目录"><a href="#"><p>程序控制结构目录</p></a>
+                    <ol>
+                        <li><a href="#程序控制结构">程序控制结构——顺序结构、选择(分支)结构、循环结构</a></li>
+                        <li><a href="#程序控制结构题型1">程序控制结构题一</a></li>
+                    </ol>
+                </li>
+                <li id="习题"><a href="#"><p>习题</p></a>
+                    <ol>
+                        <li><a href="#逻辑结构、储存结构、排序算法题型一">逻辑结构、储存结构、排序算法题型一</a></li>
+                        <li><a href="#软件三要素">软件三要素</a></li>
+                        <li><a href="#扇入数与扇出数">扇入数与扇出数</a></li>
+                        <li><a href="#程序设计语言类别">程序设计语言类别</a></li>
+                    </ol>
+                </li>
+            </ul>
+        </nav>
+        <div>
+            <p>二级python选择题</p>
+        </div>
+    </section>
+    <!--主体部分-->
+    <section class="SingleChoiceQuestion">
+        <div>
+            <ul>
+                <li>
+                    <h2 id="叉树"><a
+                            href="#目录">某二叉树中有15个度为1的结点，16个度为2的结点，则该二叉树中总的结点数为（）。</a>
+                    </h2>
+                    <ol>
+                        <li><span>套公式：<code>总结点 = 度0 + 度1 + 度2</code></span></li>
+                        <li><span>公式2：<code>度0 = 度2 + 1</code></span></li>
+                        <li><span>公式3：<code>度2 = 度0 - 1</code></span></li>
+                        <li><span>公式4：<code>总分支个数 = 度0 * 0 + 度1 * 1 + 度2 * 2</code></span></li>
+                        <li><span>公式5(公式4扩展)：<code>总分支个数 = N - 1</code></span></li>
+                        <li>
+                            <h3>度1 的两种情况</h3>
+                            <ul>
+                                <li>
+                                    <h4>在非完全二叉树状态下</h4>
+                                    <ol>
+                                        <li><span class="span_warn">度0，无法计算</span></li>
+                                        <li>
+                                            <img src="../image/叉数/非完全二叉树.png"
+                                                 alt="非完全二叉树.png"
+                                                 title="非完全二叉树.png">
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <h4>在完全完全二叉数状态下</h4>
+                                    <ol>
+                                        <li>
+                                        <span>在普通二叉树里，<span class="span_warn">叶子(<code>n0</code>)可以长在任何地方</span>。但在完全二叉树里，<span
+                                                class="span_warn">叶子只能出现在最后两层（倒数第一层和倒数第二层），而且必须从左往右紧密排列</span>。</span>
+                                        </li>
+                                        <li><span>说白了：<span
+                                                class="span_warn">就是当前节点，右边有分支，左边必须有分支</span></span>
+                                        </li>
+                                        <li><span class="span_warn">度1：<span>只有<code
+                                                class="code_Instancing">0</code>和<code
+                                                class="code_Instancing">1</code></span></span></li>
+                                        <li><span>当总节点数<code>N</code>是偶数：<span
+                                                class="span_warn">度1 = 1</span></span></li>
+                                        <li><span>当总节点数<code>N</code>是奇数：<span
+                                                class="span_warn">度1 = 0</span></span>
+                                        </li>
+                                        <li>
+                                            <img src="../image/叉数/完全二叉树.png"
+                                                 alt="完全二叉树"
+                                                 title="完全二叉树">
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <h3>名词解释</h3>
+                                    <ol>
+                                        <li>
+                                        <span>度(<code>Degree</code>一般用小写<code>n</code>表示)：就是指当前节点<span
+                                                class="span_warn">伸出去的分叉(<span>子节点</span>)的个数</span></span>
+                                        </li>
+                                        <li><span>通常用<code>N</code>表示总节点数</span></li>
+                                        <li><h4>度0(<code>n0</code>)：</h4>
+                                            <ul>
+                                                <li>名词：表示当前节点 <span
+                                                        class="span_warn">一根树枝都没伸出去</span>，它就是这跟树枝的末端。<span
+                                                        class="span_warn">也叫："叶子节点"</span></li>
+                                                <li>数量(<span
+                                                        class="span_warn">非常重要</span>)：<span>表示，节点分支数量是<code>0</code>，节点之和</span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <h4>度1(<code>n1</code>)</h4>
+                                            <ul>
+                                                <li>表示当前节点 <span
+                                                        class="span_warn">只伸出了一根树枝</span>（要么只有左孩子，要么只有右孩子）。——<span
+                                                        class="span_warn">也叫“独苗”</span>。
+                                                </li>
+                                                <li>数量(<span
+                                                        class="span_warn">非常重要</span>)：<span>表示，节点分支数量是<code>1</code>，节点之和</span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <h4>度2(<code>n2</code>)</h4>
+                                            <ul>
+                                                <li>表示当前节点 <span
+                                                        class="span_warn">只伸出了两根树枝</span>（左边一根，右边一根）。——<span
+                                                        class="span_warn">也叫“双全”</span>。
+                                                </li>
+                                                <li>数量(<span
+                                                        class="span_warn">非常重要</span>)：<span>表示，节点分支数量是<code>2</code>，节点之和</span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><span>总边数(总分支数) = 每个分支数量对应的<span
+                                                class="span_warn">节点数量(<code>nk</code>)，k为分支数量</span>之和</span>。
+                                        </li>
+                                        <li><code>总边数(总分支数) = 0 * n0 + 1 * n1 + 2 * n2</code></li>
+                                        <li>
+                                            <span>总边数(<span class="span_warn">总分支个数</span>)：因为根节点不会有分支与它相连，所以总分数个数，始终比总节点数少1</span>
+                                        </li>
+                                        <li><span>所以：<code>总边数(总结点数) = N - 1</code></span></li>
+                                        <li><span>所以：<code class="code_Instancing">N = n0 + n1 + n2</code></span></li>
+                                        <li><span>所以：<code class="code_Instancing">n0 = n2 + 1</code></span></li>
+                                        <li>注意：<span><code>n1</code>要看是在 <span class="span_warn">完全二叉树</span>，还是在：<span
+                                                class="span_warn">非完全二叉树</span>内，它们的状态不一样</span></li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3>例题：题目：一棵完全二叉树共有 700 个节点，请问叶子节点（度0）有多少个？</h3>
+                            <code style="display:block;">
+                                解：
+                                <br>&nbsp;&nbsp;已知N = 700
+                                <br>&nbsp;&nbsp;因为是完全二叉树，N是偶数，所以:
+                                <br>&nbsp;&nbsp; &nbsp;&nbsp;700 = n0 + 1 + n2
+                                <br>&nbsp;&nbsp;已知n2比n0少1则：
+                                <br>&nbsp;&nbsp; &nbsp;&nbsp;2n1 + 1 = 699
+                                <br>&nbsp;&nbsp; &nbsp;&nbsp;n1 = 698 / 2 = 349
+                                <br>&nbsp;&nbsp; &nbsp;&nbsp;no = 350
+                                <br>&nbsp;&nbsp;综上所述：叶子节点数(no) = 350
+                            </code>
+                        </li>
+                        <li>
+                            <h3>通过二叉树——推导K叉树</h3>
+                            <ul>
+                                <li><span>已知二叉树只能有两个分支(<code>n1、n2</code>)</span></li>
+                                <li><span>反推K叉树可以有K个分支(<code>n1、n2、n3 ... nk</code>)</span></li>
+                                <li><span>总节点不必多说：<code>N = n0 + n1 + n2 + n3 + ... + nk</code></span></li>
+                                <li>
+                                    <h4>n0的推导过程</h4>
+                                    <code>
+                                        <br>
+                                        <br>&nbsp;&nbsp;N = n0 + n1 + n2 + n3 + ... + nk
+                                        <br>&nbsp;&nbsp;总边数(总分支数) = 每个分支数量对应的<span class="span_warn">节点数量(<code>nk</code>)，k为分支数量</span>之和
+                                        <br>&nbsp;&nbsp;总分支数 = 0 * n0 + 1 * n1 + 2 * n2 + 3 * n3 + ... + n * nk
+                                        <br>&nbsp;&nbsp;总边数(总分支数) = N - 1
+                                        <br>&nbsp;&nbsp;
+                                        <br>&nbsp;&nbsp;可得：
+                                        <br>&nbsp;&nbsp; &nbsp;&nbsp;N - 1 = n1 + 2n1 + 3n3 + ... + knk
+                                        <br>&nbsp;&nbsp; &nbsp;&nbsp;n0 + n1 + n2 + n3 + ... + nk = n1 + 2n2 + 3n3 + ...
+                                        +
+                                        knk + 1
+                                        <br>&nbsp;&nbsp; &nbsp;&nbsp;n0 = n2 + 2n3 + 3n4 + ... + (k-1)nk + 1
+                                    </code>
+                                </li>
+                                <li><span>所以K叉树的<code>n0</code>公式是：<code class="code_Instancing">n2 + 2n3 + 3n4 + ... + (k-1)nk + 1</code></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="子程序调用的数据结构"><a href="#目录">子程序调用的数据结构</a></h2>
+            <ul>
+                <li><span>子程序调用的数据结构是：<span class="span_warn"><a
+                        href="../../../../python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/函数/函数基础/函数基础——函数嵌套调用/笔记/函数基础——函数嵌套调用.html/#python栈与JavaScript栈对比"
+                        onclick="loadContent(this,'container','#python栈与JavaScript栈对比');return false">python栈与JavaScript栈对比</a></span></span>
+                </li>
+                <li><span><a
+                        href="../../../../python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/异常处理.html/#栈模型"
+                        onclick="loadContent(this,'container','#栈模型');return false">栈模型</a></span>
+                </li>
+                <li>
+                    <div class="div_table" id="container"></div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="线性结构"><a href="#目录">线性结构</a></h2>
+            <ul>
+                <li><span>线性结构定义：数据排列方式是一对一，<span
+                        class="span">意在：有序、可索引（或逻辑上按顺序排列）的数据结构，才是线性结构。</span></span></li>
+                <li>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th colspan="5"><h3>线性结构</h3></th>
+                            </tr>
+                            <tr>
+                                <td>数据结构</td>
+                                <td>是否有序</td>
+                                <td>是否可索引(通过位置)</td>
+                                <td>操作方式</td>
+                                <td>是否属于线性结构</td>
+                            </tr>
+                            <tr>
+                                <td><span>列表(<code>list</code>)</span></td>
+                                <td><span class="span_warn">有序</span></td>
+                                <td><span class="span_warn">可索引(<code class="code_instancing">[0]</code>)</span></td>
+                                <td><span class="span">任意位置操作</span></td>
+                                <td><span>是</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>元组(<code>tuple</code>)</span></td>
+                                <td><span class="span_warn">有序</span></td>
+                                <td><span class="span_warn">可索引(<code class="code_instancing">[0]</code>)</span></td>
+                                <td><span class="span">不可变、只能读</span></td>
+                                <td><span>是</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>字符串(<code>str</code>)</span></td>
+                                <td><span class="span_warn">有序</span></td>
+                                <td><span class="span_warn">可索引(<code class="code_instancing">[0]</code>)</span></td>
+                                <td><span class="span">不可变、只能读</span></td>
+                                <td><span>是</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>字典(<code>dict</code>)</span></td>
+                                <td><span class="span_warn">插入有序(<code>3.7+</code>)</span></td>
+                                <td><span class="span_warn">不可索引(<span>只能通过键</span>)</span></td>
+                                <td><span class="span">键值对映射</span></td>
+                                <td><span>❌是散列结构</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>集合(<code>set</code>)</span></td>
+                                <td><span class="span_warn">插入有序(<code>3.7+</code>)</span></td>
+                                <td><span class="span_warn">不可索引</span></td>
+                                <td><span class="span">元素去重、集合运算</span></td>
+                                <td><span>是散列结构</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>栈(<code>Stack</code>)</span></td>
+                                <td><span class="span_warn">有序(<span>入栈顺序固定——插队入栈</span>)</span></td>
+                                <td><span class="span_warn">不可索引</span></td>
+                                <td><span class="span">后进先出——插队先出栈</span></td>
+                                <td>
+                                    <ul>
+                                        <li><span>可以理解为叠盘子，后面的放在上面，取盘子先出上面取出</span></li>
+                                        <li><span class="span_warn">逻辑按排序排列</span></li>
+                                        <li><span class="span">同样有前后顺序——是线性结构</span></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>队列(<code>Queue</code>)</span></td>
+                                <td><span class="span_warn">有序(<span>排队入队</span>)</span></td>
+                                <td><span class="span_warn">不可索引</span></td>
+                                <td><span class="span">先入先出——排队先出</span></td>
+                                <td>
+                                    <ul>
+                                        <li><span>可以理解为，排队付款，先到先付款，付完款先离队</span></li>
+                                        <li><span class="span_warn">逻辑按顺序排列</span></li>
+                                        <li><span class="span">同样有前后顺序——是线性结构</span></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>叉树</span></td>
+                                <td><span class="span_warn">在节点上看是有序的，但整体看是嵌套层级</span></td>
+                                <td><span class="span_warn">不可索引</span></td>
+                                <td colspan="2">
+                                    <ul>
+                                        <li><span class="span">一对多，从定义上就不是线性结构</span></li>
+                                        <li>
+                                            <span class="span">每个节点可以存在多个分支，分支数量由(<code>K叉树的K决定</code>)</span>
+                                        </li>
+                                        <li><span>所以叉树，不是线性结构，而是 <span
+                                                class="span_warn">树形结构</span></span></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">总结</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">最简单分辨：<span>是否有序、能不能索引</span></td>
+                                <td colspan="3">特殊：<span>看是否有前后顺序、比如：排队有前后顺序、叠盘子有前后顺序</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="逻辑结构、储存结构、排序算法题型一"><a href="#习题">逻辑结构、储存结构、排序算法题型一</a></h2>
+            <img src="../image/逻辑结构、顺序结构、排序算法题型/逻辑结构、顺序结构、排序算法题型一_在第一张单选题卷子——第五题.png"
+                 alt="逻辑结构、顺序结构、排序算法题型一"
+                 title="逻辑结构、顺序结构、排序算法题型一">
+        </div>
+        <div>
+            <h2 id="软件三要素"><a href="#习题">软件三要素</a></h2>
+            <ul>
+                <li>软件三要素是：<span>程序、数据及相关文档</span></li>
+            </ul>
+        </div>
+        <div>
+            <h2><a href="#习题" id="扇入数与扇出数">扇入数与扇出数</a></h2>
+            <ul>
+                <li><span>在python中模块指的是：<span class="span_warn">名为<code>.py</code>的文件</span></span></li>
+                <li><span>在软件工程里面(考试)里指的是：<span class="span_warn">一个相对独立的功能单元</span></span></li>
+                <li>
+                    <h3>软件工程模块可以是：</h3>
+                    <ol>
+                        <li><span>一个<code>.py</code>文件</span></li>
+                        <li><span>一个文件里的函数</span></li>
+                        <li><span>一个文件里的类</span></li>
+                        <li><span>一个类里面的方法</span></li>
+                    </ol>
+                </li>
+                <li><span>扇入数与扇出数的概念是在软件工程</span></li>
+                <li><span>扇入数：<span class="span_warn">指的是'模块'被调用的次数</span></span></li>
+                <li><span>扇出数：<span class="span_warn">指的是自身调用其他'模块'的次数</span></span></li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="E-R图"><a href="#习题">E-R图</a></h2>
+            <ol>
+                <li>表示实体与属性之间的关系</li>
+                <li>题目：<span>将E－R图转换为关系模式时，实体和联系都可以表示为：<span class="span">关系</span></span></li>
+            </ol>
+        </div>
+        <div>
+            <h2 id="表结构"><a href="#习题">表结构</a></h2>
+            <ol>
+                <li>题目：<code>采用表结构来表示数据及数据间联系的模型是(<span>关系模型</span>)。</code></li>
+            </ol>
+        </div>
+        <div>
+            <h2 id="实体与实体之间的关系-多对多"><a href="#习题">实体与实体之间的关系——多对多</a></h2>
+            <img src="../image/关系/实体与实体之间的关系-单选题第一套卷子-9.png"
+                 alt="实体与实体之间的关系"
+                 title="实体与实体之间的关系">
+        </div>
+        <div>
+            <h2 id="三种基本的数字类型"><a href="#习题">Python语言提供三种基本的数字类型</a></h2>
+            <ul>
+                <li><span>Python语言提供三种基本的数字类型：<span
+                        class="span_warn">整数型、浮点型、复数型('<span>实数 + 虚数</span>')</span></span></li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="字面量规范"><a href="#目录">字面量规范</a></h2>
+            <ul>
+                <li>
+                    <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/数据存储与运算/标识符/笔记/标识符.html/#命名规则"
+                       onclick="loadContent(this,'container2','#命名规则');return false">命名规则</a>
+                </li>
+                <li>
+                    <div id="container2"></div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="异常处理——TypeError"><a href="#异常处理">TypeError</a></h2>
+            <ul>
+                <li>
+                    <img src="../image/小型简单题目/TypeError题型1.png"
+                         alt="TypeError"
+                         title="TypeError">
+                </li>
+                <li><span
+                        class="span_warn"><code>TypeError</code>：操作数数据类型不匹配、函数调用传参数量/类型不匹配</span>
+                </li>
+            </ul>
+            <h2 id="异常处理——NameError"><a href="#异常处理">NameError</a></h2>
+            <ul>
+                <li><span class="span_warn"><code>NameError</code>：访问未定义字面量、调用为定义函数、类</span></li>
+            </ul>
+            <h2 id="异常处理——FileNotFoundError"><a href="#异常处理">FileNotFoundError</a></h2>
+            <ul>
+                <li><span class="span_warn"><code>FileNotFoundError</code>：文件路径不匹配</span></li>
+            </ul>
+            <h2 id="异常处理——UnicodeDecodeError"><a href="#异常处理">UnicodeDecodeError</a></h2>
+            <ul>
+                <li><span class="span_warn"><code>UnicodeDecodeError</code>：读取文件时，指定的编码方式与实际文件编码不匹配，导致解码失败。</span>
+                </li>
+            </ul>
+            <h2 id="异常处理——ValueError"><a href="#异常处理">ValueError</a></h2>
+            <ul>
+                <li><span class="span_warn"><code>ValueError</code>：函数传参传入支持数据类型、当时值错误。</span></li>
+                <li>比如：<span>int()</span>：本身支持传入字符串，但是字符串限制为整数字符串、如果参数浮点数、非数字字符串，就会报错：<code>ValueError</code>
+                </li>
+            </ul>
+            <h2 id="异常处理——io.UsupportedOperation"><a href="#异常处理">io.UnsupportedOperation</a></h2>
+            <ul>
+                <li><span
+                        class="span_warn"><code>io.UsuportedOperation</code>：文件操作模式与调用的方法不匹配”时触发。</span>
+                </li>
+                <li>比如：<span>文件操作模式是：<code>r、b、rt、rb</code>——均是只读模式，如果使用：<code>write()</code>写入方法就会报错，内容是：<code
+                        class="code_instancing">not writable</code></span></li>
+                <li>比如：<span>文件操作模式是：<code>w、wt、wb、a、at、ab</code>——均是写入模式，如果使用：<code>read()</code>写入方法就会报错，内容是：<code
+                        class="code_instancing">not readable</code></span></li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="实体之间多对多在关系模型实现方式"><a href="#关系题型">将实体-联系模型转换为关系模型时，实体之间多对多联系在关系模型中的实现方式是（<span>建立新的关系</span>）</a>。
+            </h2>
+        </div>
+        <div>
+            <h2 id="程序设计语言类别"><a href="#习题">程序设计语言类别</a></h2>
+            <ul>
+                <li><span>汇编语言、机器语言、高级语言</span></li>
+                <li>
+                    <h3>机器语言</h3>
+                    <ol>
+                        <li><span>也叫二进制语言</span></li>
+                        <li>特点：<span class="span_warn">计算机能直接识别的语言</span></li>
+                    </ol>
+                    <h3>汇编语言</h3>
+                    <ol>
+                        <li><span>用助记符（如 <code>MOV</code>、<code>ADD</code>）表示机器指令</span></li>
+                        <li><span>汇编语言通过汇编器翻译成机器语言（二进制），计算机才能直接识别。</span></li>
+                    </ol>
+                    <h3>高级语言</h3>
+                    <ol>
+                        <li><span>目前接触的语言均是高级语言：<span class="span_warn">python、JavaScript、(HTML、CSS)<span>也叫标记语言</span>、MySQL...</span></span>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="程序控制结构"><a href="#程序控制结构目录">程序控制结构</a></h2>
+            <ul>
+                <li>程序结构：<span>是以某种顺序执行的一系动作，用于解决某个问题</span></li>
+                <li><span>理论已经证明，<span
+                        class="span_warn">无论多复杂的算法，都可以通过三种基本控制结构构造出来。<span
+                        class="span">这就是“结构化程序设计”的理论基础</span></span></span>
+                </li>
+                <li><span>三大结构层：<a href="#顺序结构">顺序结构</a>、<a
+                        href="#选择结构">选择结构</a>、<a
+                        href="#循环结构">循环结构</a>、</span></li>
+                <li>
+                    <h3 id="顺序结构">顺序结构</h3>
+                    <ol>
+                        <li><span>程序按照代码的 <span class="span_warn">书写顺序、从上到下依次执行</span></span></li>
+                        <li>特点：<span>最简单、最基础，没有分支和循环。一个语句执行完，控制自动转到下一句</span></li>
+                    </ol>
+                </li>
+                <li>
+                    <h3 id="选择结构">选择结构</h3>
+                    <ol>
+                        <li><span>程序根据 <span class="span_warn">某个条件是否成立</span>，决定执行那一段代码。<span
+                                class="span">选择结构在考试中常被称为 <span
+                                class="span_warn">分支结构</span></span></span>
+                        </li>
+                        <li>特点：<span>程序执行到此处，会根据条件判断，选择一个分支执行。一个结构，<span
+                                class="span_warn">只会执行一个分支</span></span>
+                        </li>
+                        <li>
+                            <h4>常见形式</h4>
+                            <ul>
+                                <li><span>单分支(<code>if</code>)：<span class="span_warn">条件成立就执行，否则跳过</span></span>
+                                </li>
+                                <li><span>双分支(<code>if-else</code>)：<span
+                                        class="span_warn">条件成立执行<code>if</code>代码块，否则执行<code>else</code>代码块</span></span>
+                                </li>
+                                <li><span>多分支(<code>if-elif-else/match-case</code>/ <span>非python结构</span>：switch-case)：<span
+                                        class="span_warn">先判断<code>if</code>、然后逐个判断<code>elif</code>直到符合条件执行对应代码块，均不符合，则执行：<code>else</code>内代码块</span></span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>考试容易模糊点：<span>双分支结构，也能通过嵌套的方式，达成多分支结构</span></li>
+                        <li>
+                            <pre style="color: #6c5ce7">
+                                                    ❤️<span>多分支结构本质是：从多个条件，执行符合条件的代码块</span>
+                                ❤️if-else完全可以做到：
+                                if 条件：                                      if 条件:                match 条件:
+                                    代码块                                           代码块                 case 模式1:
+                                else:                                         elif 条件:                          代码块
+                                    if 条件:                                         代码块                 case 模式2:
+                                        代码块:                                elif 条件:                          代码块
+                                    else:                                            代码块                 case _:
+                                        if 条件:                                   else:                          代码块
+                                            代码块                                    代码块
+                                                else:
+                                                    代码块
+                            </pre>
+                        </li>
+                        <li><span>以上这种嵌套结构，与 <code>if-elif-else</code>/ <code>match-case</code>本质是一样的，多个条件分支，运行符合的代码块，所以if-else嵌套同样可以实现多分支结构</span>
+                        </li>
+                        <li>
+                            <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/if条件分支语句/if基础语法/笔记/if基础语法.html/#if基础语法"
+                               onclick="loadContent(this,'container3','#if基础语法');return false">if基础语法</a>
+                        </li>
+                        <li>
+                            <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/match模式匹配/笔记/match模式匹配.html/#match模式匹配"
+                               onclick="loadContent(this,'container3','#match模式匹配');return false">match模式匹配-python特有与
+                                <code>switch-case</code>相似</a>
+                        </li>
+                        <li>
+                            <div id="container3"></div>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <h3 id="循环结构">循环结构</h3>
+                    <ul>
+                        <li><span>程序满足某个条件时，<span class="span_warn">重复执行一段代码</span></span></li>
+                        <li>
+                            <h4>三种主要类型</h4>
+                            <div class="div_table">
+                                <table>
+                                    <tr>
+                                        <th colspan="5"><h5>循环结构的三种类型(软件工程标准分类)</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td>类型</td>
+                                        <td>名称</td>
+                                        <td>判断时机</td>
+                                        <td>执行特点</td>
+                                        <td>伪代码/示例</td>
+                                    </tr>
+                                    <tr>
+                                        <td>当型循环</td>
+                                        <td><code><a
+                                                href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/while循环/笔记/while循环.html/#while循环"
+                                                onclick="loadContent(this,'container4','#while循环');return false">while</a></code>
+                                        </td>
+                                        <td><span>先判断，后执行</span></td>
+                                        <td><span
+                                                class="span">条件为真才执行，条件不成立则，<span>依次都不会执行</span></span>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                <li>
+                                                    <p>JavaScript写法</p>
+                                                    <code class="code_instancing">while (条件) {循环体}</code>
+                                                </li>
+                                                <li>
+                                                    <p>python写法</p>
+                                                    <code class="code_instancing">while 条件 : 循环体</code>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>直到型循环</td>
+                                        <td><code>do...until/ <a
+                                                href="../../../../../内容文件夹/frontend——前端/JavaScript/哔哩哔哩UP主——Java基础/基础/第二十三~二十八节——循环分支语句/第二十三~三十一节——循环分支语句.html/#do-while"
+                                                onclick="loadContent(this,'container4','#do-while');return false">do...while</a></code>
+                                        </td>
+                                        <td><span>先执行，后判断</span></td>
+                                        <td><span class="span_warn">至少执行一次，直到条件为假才停止</span></td>
+                                        <td>
+                                            <ul>
+                                                <li>
+                                                    <p>JavaScript、C++...写法</p>
+                                                    <code class="code_instancing">do {代码块} while (条件)</code>
+                                                </li>
+                                                <li>
+                                                    <p>其他写法</p>
+                                                    <code class="code_instancing">do {循环体} until (条件)</code>
+                                                </li>
+                                                <li>
+                                                    <p><span>注意 <code>python</code>并没有内置的直到型循环</span></p>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>计数/遍历型循环</td>
+                                        <td><code><a
+                                                href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/for循环/笔记/for循环.html/#for循环"
+                                                onclick="loadContent(this,'container4','#for循环');return false">for</a></code>
+                                        </td>
+                                        <td><span>遍历完指定序列/集合后结束</span></td>
+                                        <td><span
+                                                class="span_warn">循环次数由遍历对象的元素个数决定，不依赖条件判断</span>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                <li>
+                                                    <p>JavaScript写法</p>
+                                                    <code class="code_instancing">for (变量初始化,循环条件,改变逻辑)
+                                                        {代码块}</code>
+                                                    <br><code class="code_instancing">for 字面量 in 可遍历</code>
+                                                    <br><code class="code_instancing">for 字面量 of 可遍历</code>
+                                                </li>
+                                                <li>
+                                                    <p>python写法</p>
+                                                    <code class="code_instancing">for 字面量 in 可迭代对象</code>
+                                                    <br><code class="code_instancing">for 字面量 in
+                                                    range(开始下标,结束下标,步长)</code>...
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <p>通过链接，动态显示的内容，除 <code>do-while</code>，其他均是以python为主</p>
+                            <div id="container4"></div>
+                            <div class="div_table">
+                                <table>
+                                    <tr>
+                                        <th colspan="3"><h5><code>python</code>对应这三种类型</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td>类型</td>
+                                        <td>python实现</td>
+                                        <td>是否原生支持</td>
+                                    </tr>
+                                    <tr>
+                                        <td>当型循环</td>
+                                        <td><code>while 条件:</code></td>
+                                        <td><span>原生支持</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>直到型循环</td>
+                                        <td><span>python没有 <code>do..until</code>语法</span></td>
+                                        <td>
+                                            <ul>
+                                                <li><span>需要手动模拟</span></li>
+                                                <li><code>while True: 循环体; if 条件: break</code>模拟</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>计数/遍历型循环</td>
+                                        <td><code>for 变量 in 可迭代对象:</code></td>
+                                        <td><span>原生支持</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3 id="程序控制结构题型1"><a href="#程序控制结构目录">程序控制结构题型1</a></h3>
+                    <img src="../image/程序控制结构/程序控制结构题一_选择一卷-12.png"
+                         alt="程序控制结构题一"
+                         title="程序控制结构题一">
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!--其他部分-->
+    <section class="SingleChoiceQuestion">
+        <p id="其他知识"><a href="#其他知识导航栏">其他知识</a></p>
+        <ul>
+            <li><span class="span">解决一个问题可以有不同的算法，且它们的时间复杂度可以是不同的</span></li>
+            <li>
+                <h2 id="python常见的结构"><a href="#其他知识导航栏">python常见的结构</a></h2>
+                <div class="div_table">
+                    <table>
+                        <tr>
+                            <th colspan="3"><h2>常见逻辑结构</h2></th>
+                        </tr>
+                        <tr>
+                            <td>结构</td>
+                            <td>关系</td>
+                            <td>二级常考代表</td>
+                        </tr>
+                        <tr>
+                            <td><span><a href="#线性结构">线性结构</a></span></td>
+                            <td><span class="span_warn">一对一</span></td>
+                            <td><code>Stack、Queue、list、tuple、str</code></td>
+                        </tr>
+                        <tr>
+                            <td><span>树形结构</span></td>
+                            <td><span class="span_warn">一对多</span></td>
+                            <td><span class="span">叉树</span></td>
+                        </tr>
+                        <tr>
+                            <td><span>图形结构</span></td>
+                            <td><span class="span_warn">多对多</span></td>
+                            <td><span class="span">二级不考、听过就行</span></td>
+                        </tr>
+                        <tr>
+                            <td><span>散列结构</span></td>
+                            <td><span class="span_warn">无直接关系</span></td>
+                            <td><code>dict、set</code></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="div_table">
+                    <table>
+                        <tr>
+                            <th colspan="4"><h2>存储结构与排序算法对照表（二级常考）</h2></th>
+                        </tr>
+                        <tr>
+                            <td><strong>分类</strong></td>
+                            <td><strong>名称</strong></td>
+                            <td><strong>核心特点</strong></td>
+                            <td><strong>二级常考代表</strong></td>
+                        </tr>
+                        <!-- 存储结构部分 -->
+                        <tr>
+                            <td rowspan="4"><span class="span_warn">存储结构</span></td>
+                            <td><span class="span">顺序存储</span></td>
+                            <td>内存连续，通过下标直接访问</td>
+                            <td>数组（list）、字符串（str）</td>
+                        </tr>
+                        <tr>
+                            <td><span class="span">链式存储</span></td>
+                            <td>内存不连续，通过指针/地址链接</td>
+                            <td>链表（LinkedList）</td>
+                        </tr>
+                        <tr>
+                            <td><span class="span">索引存储</span></td>
+                            <td>通过索引表快速定位数据</td>
+                            <td>数据库索引、文件系统目录</td>
+                        </tr>
+                        <tr>
+                            <td><span class="span">散列存储</span></td>
+                            <td>通过哈希函数直接计算地址</td>
+                            <td>字典（dict）、集合（set）</td>
+                        </tr>
+                        <!-- 排序算法部分 -->
+                        <tr>
+                            <td rowspan="4"><span class="span_warn">排序算法</span></td>
+                            <td><span class="span">插入排序</span></td>
+                            <td>逐个插入已排序序列</td>
+                            <td>直接插入排序</td>
+                        </tr>
+                        <tr>
+                            <td><span class="span">交换排序</span></td>
+                            <td>通过交换元素来排序</td>
+                            <td>冒泡排序、快速排序</td>
+                        </tr>
+                        <tr>
+                            <td><span class="span">选择排序</span></td>
+                            <td>每次选出最大/最小元素</td>
+                            <td>简单选择排序、堆排序</td>
+                        </tr>
+                        <tr>
+                            <td><span class="span">归并排序</span></td>
+                            <td>分治合并有序子序列</td>
+                            <td>二路归并排序</td>
+                        </tr>
+                        <!-- 补充说明 -->
+                        <tr>
+                            <td colspan="4">
+                                <strong>关键区分：</strong>
+                                <span class="span_warn">存储结构</span> 关注数据在内存中的存放方式；
+                                <span class="span_warn">排序算法</span> 关注数据如何按大小重新排列。
+                                两者属于不同维度，可独立选择组合。
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="div_table">
+                    <table>
+                        <tr>
+                            <th colspan="4">逻辑结构、存储结构、排序算法 对照表（二级常考）</th>
+                        </tr>
+                        <tr>
+                            <td><strong>分类</strong></td>
+                            <td><strong>核心问题</strong></td>
+                            <td><strong>常见形式</strong></td>
+                            <td><strong>二级常考代表</strong></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4"><span class="span_warn">逻辑结构</span></td>
+                            <td rowspan="4">数据之间是什么关系？</td>
+                            <td>一对一</td>
+                            <td>线性结构（栈、队列、列表）</td>
+                        </tr>
+                        <tr>
+                            <td>一对多</td>
+                            <td>树形结构（二叉树）</td>
+                        </tr>
+                        <tr>
+                            <td>多对多</td>
+                            <td>图形结构（二级不考）</td>
+                        </tr>
+                        <tr>
+                            <td>无直接关系</td>
+                            <td>散列结构（字典、集合）</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4"><span class="span_warn">存储结构</span></td>
+                            <td rowspan="4">数据在内存里怎么放？</td>
+                            <td>顺序存储</td>
+                            <td>数组、列表（连续内存）</td>
+                        </tr>
+                        <tr>
+                            <td>链式存储</td>
+                            <td>链表（不连续，靠指针）</td>
+                        </tr>
+                        <tr>
+                            <td>索引存储</td>
+                            <td>数据库索引、文件目录</td>
+                        </tr>
+                        <tr>
+                            <td>散列存储</td>
+                            <td>字典、集合（哈希表）</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4"><span class="span_warn">排序算法</span></td>
+                            <td rowspan="4">数据怎么按大小重新排列？</td>
+                            <td>插入排序</td>
+                            <td>直接插入排序</td>
+                        </tr>
+                        <tr>
+                            <td>交换排序</td>
+                            <td>冒泡排序、快速排序</td>
+                        </tr>
+                        <tr>
+                            <td>选择排序</td>
+                            <td>简单选择排序、堆排序</td>
+                        </tr>
+                        <tr>
+                            <td>归并排序</td>
+                            <td>二路归并排序</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <strong>关键结论：</strong>
+                                <span class="span_warn">逻辑结构</span> 管“关系”，
+                                <span class="span_warn">存储结构</span> 管“存放”，
+                                <span class="span_warn">排序算法</span> 管“操作”。
+                                三者属于不同维度，可以独立组合。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <h3>考试注意</h3>
+                                <ul>
+                                    <li><span>考试注意维度，不要维度混搭</span></li>
+                                    <li><span>存储结构是物理结构，它不能采用逻辑结构，也就是看到是<span class="span_warn">存储结构采用逻辑结构，直接是错的</span></span>
+                                    </li>
+                                    <li><span>正确形式是：<span
+                                            class="span_warn">逻辑结构采用存储结构</span>，这是对的</span></li>
+                                    <li>还需要注意:<span>被采用</span>、反正记住：<span
+                                            class="span_warn">存储结构主动采用就是错的</span></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+            <li>
+                <h2 id="链表"><a href="#其他知识导航栏">链表</a></h2>
+                <ol>
+                    <li><span>链表</span>是链式存储结构：<span class="span">内部是以：<span
+                            class="span_warn">"数据 + 地址(指针)"为元素的形式存储</span></span>
+                    </li>
+                    <li><span class="span">每一个数据节点都有对应的指针，指向下一个节点</span></li>
+                    <li>
+                        <span>最后一个节点的指针为空（None / NULL），表示链表结束，不会报错。</span>
+                    </li>
+                    <li><span>空指针后面的元素不会被访问到。</span></li>
+                    <li><span class="span_warn">链式存储本身是无序的，但可以与线性结构组合，使数据在逻辑上有序</span></li>
+                    <li><span>所以链式存储既可以有序，也可以无序</span></li>
+                    <li>注意：<span>存储结构结构不能是主动方、不能主动采用逻辑结构</span></li>
+                    <li>习题：<span>线性结构(规定有序)也能采用链式存储结构，<span>这句话是对的</span></span></li>
+                    <li>比如：<span>线性结构(规定有序)一定能能采用链式结构，<span>这句话也是对的</span></span></li>
+                    <li>比如：<span>链式存储结构一定被能线性结构(规定有序)采用，<span>这句话也是对的</span></span></li>
+                    <li>比如：<span>链式存储结构一定能被线性结构(规定有序)采用，<span>这句话也是对的</span></span></li>
+                    <li>反例：<span>线性结构被链式存储结构采用，<span>这句话是错的，存储结构变为了主动方</span></span></li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        <p>以上均为个人整理，具体结合操作验证</p>
+    </footer>
+</main>
+<script src="../../../../自建网站中用到的外部引用/JS文件/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    // 锚点不能其他符号，只能是字符
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+:root {
+    --border-color-table-td: #BDC3C7;
+
+    --background-color-main: #F0F0EC;
+
+
+    --size-h1-footer: 3rem;
+    --size-li: 1rem;
+    --size-h2: 2rem;
+    --size-h3: 1.5rem;
+    --size-h4: 1.25rem;
+    --size-h5: 1.125rem;
+}
+
+.div_table {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.div_table table {
+    display: table;
+    width: auto;
+    min-width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.div_table th,
+.div_table td {
+    border: 1px solid var(--border-color-table-td);
+    padding: 8px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #5D6D7E;
+    color: white;
+}
+
+td {
+    background-color: var(--background-color-main);
+}
+
+/* 确保表格内部任何元素都不换行 */
+.div_table table,
+.div_table tbody,
+.div_table tr,
+.div_table th,
+.div_table td {
+    white-space: nowrap;
+}
+
+table th h1 code,
+table th h1 span {
+    font-size: var(--size-h1-footer);
+}
+
+table th h2 code,
+table th h2 span {
+    font-size: var(--size-h2);
+}
+
+table th h3 code,
+table th h3 span {
+    font-size: var(--size-h3);
+}
+
+table th h4 code,
+table th h4 span {
+    font-size: var(--size-h4);
+}
+
+table th h5 code,
+table th h5 span {
+    font-size: var(--size-h5);
+}

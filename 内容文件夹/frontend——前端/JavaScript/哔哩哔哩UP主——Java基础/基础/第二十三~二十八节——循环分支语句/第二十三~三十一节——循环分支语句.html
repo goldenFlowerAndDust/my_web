@@ -288,132 +288,135 @@
                 </ol> <!--  第一次嵌套(while)   -->
             </li>
             <li>
-                <h3>do-while</h3>
-                <ol>
-                    <li>是一个和while循环类似的循环</li>
-                    <li>while会<span>先进行条件判断，满足就执行，不满足直接就不执行</span></li>
-                    <li>但是do-while循环是：<span>先不管条件，先执行一回，然后在开始进行条件判断</span></li>
-                    <li>语法：<code>do{要执行的代码} while (条件)</code></li>
-                    <li>
-                        <h4>do-while案例</h4>
-                        <ul>
-                            <li>
-                                <h5>案例1(求1~100之间的数求和)</h5>
-                                <script>
+                <div id="do-while">
+                    <h3>do-while</h3>
+                    <ol>
+                        <li>是一个和while循环类似的循环</li>
+                        <li>while会<span>先进行条件判断，满足就执行，不满足直接就不执行</span></li>
+                        <li>但是do-while循环是：<span>先不管条件，先执行一回，然后在开始进行条件判断</span></li>
+                        <li>语法：<code>do{要执行的代码} while (条件)</code></li>
+                        <li>
+                            <h4>do-while案例</h4>
+                            <ul>
+                                <li>
+                                    <h5>案例1(求1~100之间的数求和)</h5>
+                                    <script>
 
-                                    /*
-                                    *   与while循环不同的是，先写要执行的代码，再写条件
-                                    *   所以带来的变化是：不管怎么样，代码都会执行一次。
-                                    *   同样，当条件为false，循环结束
-                                    *
-                                    *   同样有：初始化变量、执行代码、改变逻辑以及条件判断
-                                    * */
-                                    {
-                                        let num = 0; // 接受每次循环后的累加值
-                                        let i = 1;  //初始变量 (计入循环次数，且是求和的数据)
+                                        /*
+                                        *   与while循环不同的是，先写要执行的代码，再写条件
+                                        *   所以带来的变化是：不管怎么样，代码都会执行一次。
+                                        *   同样，当条件为false，循环结束
+                                        *
+                                        *   同样有：初始化变量、执行代码、改变逻辑以及条件判断
+                                        * */
+                                        {
+                                            let num = 0; // 接受每次循环后的累加值
+                                            let i = 1;  //初始变量 (计入循环次数，且是求和的数据)
 
-                                        do {  // do开头，{内写运行代码}while(条件)
-                                            num = num + i // 与while一样，累加赋值给num用于储存
-                                            i++ // 改变逻辑 ，每次循环自增
-                                        } while (i <= 100) // 当条件为false，循环结束
-                                        document.writeln(`1~100之间的数求和是:<span>${num}</span>`);
-                                    }
-                                </script>
-                                <div class="div_video">
-                                    <video src="image/do-while/Do-While案例1%20求1到100之间数求和.mp4"
-                                           controls></video>
-                                </div>
-                            </li>
-                            <li>
-                                <h5>案例2(求1~100之间奇数或偶数求和)</h5>
-                                <script type="text/javascript">
-                                    {
-                                        let num = 2; // 用于接受每次循环偶数求和值
-                                        let i = 4; // 以第二个偶数开头
-
-                                        do {
-                                            num = num + i
-
-                                            i += 2 // 改变逻辑，每次增加2，保证求和数据，都是偶数
-                                        } while (i <= 100)
-                                        document.writeln(`1~100偶数求和值:<span>${num}</span>`);
-
-
-                                        let num2 = 1 // 用于接受每次循环奇数求和值
-                                        let j = 3 // 以第二个奇数开头
-
-                                        do {
-                                            num2 = num2 + j
-                                            j += 2 //每循环加2，保证求和数据，都是奇数
-                                        } while (j <= 100)
-                                        document.writeln(`<br>1~100奇数求和值:<span>${num2}</span>`);
-                                    }
-                                </script>
-                                <div class="div_video">
-                                    <video src="image/do-while/Do-While案例2%20求1到100之间数奇数或偶数求和.mp4"
-                                           controls></video>
-                                </div>
-                            </li>
-                            <li>
-                                <h5>案例3(求一个数的阶层)</h5>
-                                <table>
-                                    <tr>
-                                        <th>请输入一个数据</th>
-                                        <th>
-                                            <button type="button" id="factorialBth">求数值阶层</button>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="factorialNumber"></label>
-                                            <input type="text" name="" id="factorialNumber"
-                                                   placeholder="请输入数字(正整数)">
-                                        </td>
-                                        <td>
-                                            <label>
-                                                <textarea id="factorial" rows="3" readOnly></textarea>
-                                            </label>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <script type="text/javascript">
-                                    {
-                                        // 先获取元素 id : factorialBth(按钮) factorialNumber(输入数据的地方)  factorial(显示最终结果的地方)
-                                        document.getElementById("factorialBth").onclick = function () {  // 创建函数，单击事件
-                                            let numberInput = document.getElementById("factorialNumber");
-                                            let factorialInput = document.getElementById("factorial");
-
-                                            // 将用户输入的值，转为数值类型
-                                            let number = parseFloat(numberInput.value) // .value 暂时理解为获取用户输入值
-
-                                            if (isNaN(number)) {
-                                                alert("请输入数值类型！！！") // 当用户输入非数值类型 用于提示
-                                                factorialInput.value = "" // 输入结果窗口默认为空
-                                            } else if (number < 0 || !Number.isInteger(number)) {
-                                                alert("请输入正整数")  // 当用户输入负数或小数，提示
-                                                factorialInput.value = ""
-                                            } else {
-                                                let num = 1 // 阶层 n! = 1 * 2 * 3 * 4 * ...... * n 1开头 用于存储阶层计算最终结构
-                                                let i = 1  // 具体多少阶层， 用户决定
-
-                                                do {
-                                                    num = num * i // 计算每次循环后的阶层值，并赋值给num存储
-                                                    i++ //  每次循环自增
-                                                } while (i <= number) // 当i 的值超过 用户输入的值 ，循环结束
-
-                                                factorialInput.value = `${number}的阶层是：${num}`
-                                            }
-
+                                            do {  // do开头，{内写运行代码}while(条件)
+                                                num = num + i // 与while一样，累加赋值给num用于储存
+                                                i++ // 改变逻辑 ，每次循环自增
+                                            } while (i <= 100) // 当条件为false，循环结束
+                                            document.writeln(`1~100之间的数求和是:<span>${num}</span>`);
                                         }
-                                    }
-                                </script>
-                                <div class="div_video">
-                                    <video src="image/do-while/Do-While案例3%20求一个数的阶层.mp4" controls></video>
-                                </div>
-                            </li>
-                        </ul> <!--  第二次嵌套(do-while)案例    -->
-                    </li>
-                </ol> <!--  第一次嵌套(-dowhile) -->
+                                    </script>
+                                    <div class="div_video">
+                                        <video src="../../../../../../内容文件夹/frontend——前端/JavaScript/哔哩哔哩UP主——Java基础/基础/第二十三~二十八节——循环分支语句/image/do-while/Do-While案例1%20求1到100之间数求和.mp4"
+                                               controls></video>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h5>案例2(求1~100之间奇数或偶数求和)</h5>
+                                    <script type="text/javascript">
+                                        {
+                                            let num = 2; // 用于接受每次循环偶数求和值
+                                            let i = 4; // 以第二个偶数开头
+
+                                            do {
+                                                num = num + i
+
+                                                i += 2 // 改变逻辑，每次增加2，保证求和数据，都是偶数
+                                            } while (i <= 100)
+                                            document.writeln(`1~100偶数求和值:<span>${num}</span>`);
+
+
+                                            let num2 = 1 // 用于接受每次循环奇数求和值
+                                            let j = 3 // 以第二个奇数开头
+
+                                            do {
+                                                num2 = num2 + j
+                                                j += 2 //每循环加2，保证求和数据，都是奇数
+                                            } while (j <= 100)
+                                            document.writeln(`<br>1~100奇数求和值:<span>${num2}</span>`);
+                                        }
+                                    </script>
+                                    <div class="div_video">
+                                        <video src="../../../../../../内容文件夹/frontend——前端/JavaScript/哔哩哔哩UP主——Java基础/基础/第二十三~二十八节——循环分支语句/image/do-while/Do-While案例2%20求1到100之间数奇数或偶数求和.mp4"
+                                               controls></video>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h5>案例3(求一个数的阶层)</h5>
+                                    <table>
+                                        <tr>
+                                            <th>请输入一个数据</th>
+                                            <th>
+                                                <button type="button" id="factorialBth">求数值阶层</button>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="factorialNumber"></label>
+                                                <input type="text" name="" id="factorialNumber"
+                                                       placeholder="请输入数字(正整数)">
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <textarea id="factorial" rows="3" readOnly></textarea>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <script type="text/javascript">
+                                        {
+                                            // 先获取元素 id : factorialBth(按钮) factorialNumber(输入数据的地方)  factorial(显示最终结果的地方)
+                                            document.getElementById("factorialBth").onclick = function () {  // 创建函数，单击事件
+                                                let numberInput = document.getElementById("factorialNumber");
+                                                let factorialInput = document.getElementById("factorial");
+
+                                                // 将用户输入的值，转为数值类型
+                                                let number = parseFloat(numberInput.value) // .value 暂时理解为获取用户输入值
+
+                                                if (isNaN(number)) {
+                                                    alert("请输入数值类型！！！") // 当用户输入非数值类型 用于提示
+                                                    factorialInput.value = "" // 输入结果窗口默认为空
+                                                } else if (number < 0 || !Number.isInteger(number)) {
+                                                    alert("请输入正整数")  // 当用户输入负数或小数，提示
+                                                    factorialInput.value = ""
+                                                } else {
+                                                    let num = 1 // 阶层 n! = 1 * 2 * 3 * 4 * ...... * n 1开头 用于存储阶层计算最终结构
+                                                    let i = 1  // 具体多少阶层， 用户决定
+
+                                                    do {
+                                                        num = num * i // 计算每次循环后的阶层值，并赋值给num存储
+                                                        i++ //  每次循环自增
+                                                    } while (i <= number) // 当i 的值超过 用户输入的值 ，循环结束
+
+                                                    factorialInput.value = `${number}的阶层是：${num}`
+                                                }
+
+                                            }
+                                        }
+                                    </script>
+                                    <div class="div_video">
+                                        <video src="../../../../../../内容文件夹/frontend——前端/JavaScript/哔哩哔哩UP主——Java基础/基础/第二十三~二十八节——循环分支语句/image/do-while/Do-While案例3%20求一个数的阶层.mp4"
+                                               controls></video>
+                                    </div>
+                                </li>
+                            </ul> <!--  第二次嵌套(do-while)案例    -->
+                        </li>
+                    </ol> <!--  第一次嵌套(-dowhile) -->
+                </div>
             </li>
             <li>
                 <h3>for</h3>
@@ -504,9 +507,11 @@
                                             triangle.value = rest
                                         }
                                     }
+
                                     function setAlign(align) {
-                                        document.getElementById("triangle").style.textAlign =  align
+                                        document.getElementById("triangle").style.textAlign = align
                                     }
+
                                     document.getElementById("triangle").style.fontSize = "1rem"
                                 </script>
                             </li>
