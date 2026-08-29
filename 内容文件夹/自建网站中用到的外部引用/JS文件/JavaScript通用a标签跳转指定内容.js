@@ -1,36 +1,59 @@
 // ============================================================
 // JavaScript通用a标签跳转指定内容.js
-// 功能：通过 fetch 动态加载目标 HTML 中的指定内容，并插入到当前页面
-// 增强：自动将相对路径转为绝对路径，兼容本地、Vercel、GitHub Pages
+// 自动适配本地、Vercel、GitHub Pages（子目录）
 // ============================================================
 
 function loadContent(url, id, selector) {
-    // ---- 1. 处理 url 参数（可能直接传入字符串，也可能传入 DOM 元素 this） ----
+    // ---- 处理 url 参数 ----
     if (typeof url !== 'string') {
-        // 如果 url 是 DOM 元素（如 a 标签），取它的 href 或 getAttribute('href')
         url = url.href || url.getAttribute('href') || '';
     }
 
-    // ---- 2. 获取容器元素 ----
     const container = document.getElementById(id);
     if (!container) {
-        console.error(`容器元素 #${id} 不存在`);
+        console.error(`容器 #${id} 不存在`);
         return;
     }
 
-    // ---- 3. 将相对路径转为绝对路径（关键修复） ----
-    // 使用 new URL() 基于当前页面的 URL 解析，确保在任何部署环境下都能正确访问
+    // ---- 自动获取项目根路径（关键逻辑） ----
+    // 从 window.location.pathname 中提取第一个目录作为项目根
+    // 例如：/my_web/自建本地网站/.../ -> 项目根为 /my_web/
+    const pathname = window.location.pathname;
+    const match = pathname.match(/^\/[^\/]+\//);
+    const projectRoot = match ? match[0] : '/';
+    // 得到类似 /my_web/ 或 / （如果部署在根目录）
+
+    // ---- 将相对路径转换为绝对路径 ----
     let absoluteUrl;
-    try {
-        absoluteUrl = new URL(url, window.location.href).href;
-        console.log('[loadContent] 解析后的绝对路径:', absoluteUrl);
-    } catch (e) {
-        console.error('[loadContent] URL 解析失败:', url, e);
-        container.innerHTML = '<p style="color: red;">无效的链接地址。</p>';
-        return;
+    if (url.startsWith('/')) {
+        // 如果用户写了以 / 开头的绝对路径，我们自动加上项目根
+        absoluteUrl = window.location.origin + projectRoot + url.substring(1);
+    } else {
+        // 相对路径：基于当前页面所在目录拼接
+        const currentDir = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+        // 但这样拼接出来的路径可能包含多余的子目录，需要简化
+        // 最好的办法是：如果 url 不包含项目根目录，则自动基于项目根拼接
+        // 但我们使用 new URL(url, currentDir) 也能工作，但可能出现多级目录问题
+        // 我们可以先尝试 new URL，如果结果包含 projectRoot 则保留，否则重新拼接
+        const tempUrl = new URL(url, currentDir).href;
+        // 检查 tempUrl 是否包含 projectRoot（排除域名部分）
+        const pathAfterOrigin = tempUrl.replace(window.location.origin, '');
+        if (pathAfterOrigin.startsWith(projectRoot)) {
+            absoluteUrl = tempUrl;
+        } else {
+            // 如果 tempUrl 没有包含项目根，则手动拼接
+            absoluteUrl = window.location.origin + projectRoot + url;
+        }
     }
 
-    // ---- 4. 发起 fetch 请求 ----
+    // 修正：如果 url 本身是绝对路径（完整 URL），直接使用
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+        absoluteUrl = url;
+    }
+
+    console.log('[loadContent] 解析后的绝对路径:', absoluteUrl);
+
+    // ---- 发起请求 ----
     fetch(absoluteUrl)
         .then(response => {
             if (!response.ok) {
@@ -39,7 +62,6 @@ function loadContent(url, id, selector) {
             return response.text();
         })
         .then(html => {
-            // ---- 5. 解析 HTML，提取目标内容 ----
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             const content = doc.querySelector(selector);
@@ -49,10 +71,9 @@ function loadContent(url, id, selector) {
                 return;
             }
 
-            // ---- 6. 插入内容到容器 ----
             container.innerHTML = content.innerHTML;
 
-            // ---- 7. 添加“清除内容”按钮（原有功能） ----
+            // ---- 清除按钮 ----
             const clearBtn = document.createElement('button');
             clearBtn.textContent = '清除内容';
             clearBtn.style.marginTop = '10px';
@@ -63,8 +84,7 @@ function loadContent(url, id, selector) {
             };
             container.appendChild(clearBtn);
 
-            // ---- 8. 提取目标页面的内联样式（如果有） ----
-            // 避免重复注入相同样式，使用 data-origin 标记
+            // ---- 提取目标页面内联样式（避免重复） ----
             const styles = doc.querySelectorAll('style');
             styles.forEach(style => {
                 if (!document.querySelector(`style[data-origin="target"]`)) {
@@ -76,8 +96,7 @@ function loadContent(url, id, selector) {
             });
         })
         .catch(error => {
-            // ---- 9. 错误处理 ----
-            console.error('[loadContent] 加载失败:', error);
-            container.innerHTML = `<p style="color: red;">内容加载失败，请刷新重试。<br>错误信息：${error.message}</p>`;
+            console.error('加载失败:', error);
+            container.innerHTML = `<p style="color: red;">加载失败: ${error.message}</p>`;
         });
 }
