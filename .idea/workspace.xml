@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="1f5561d0-0649-48dc-90c3-e89ff28ac45b" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/自己网站.css" beforeDir="false" afterPath="$PROJECT_DIR$/自己网站.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/frontend——前端/JavaScript/JavaScript通用样式表.css" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/frontend——前端/JavaScript/JavaScript通用样式表.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/数据存储与运算/运算符/笔记/运算符.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/数据存储与运算/运算符/笔记/运算符.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/数据容器/数据容器——列表list/数据容器——列表list-切片/笔记/数据容器——列表list-切片.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/数据容器/数据容器——列表list/数据容器——列表list-切片/笔记/数据容器——列表list-切片.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/word步骤错题总结.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机一级考试/内容/word步骤错题总结.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/小型简单题目/TypeError题型1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/内容/选择题错误总结.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/内容/选择题错误总结.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/自建网站中用到的外部引用/自建网站用的样式表/二级python样式表.css" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建网站中用到的外部引用/自建网站用的样式表/二级python样式表.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +22,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
         <option value="CSS File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -46,48 +52,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;JavaScript 调试.模块与包.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript 调试.笔记通用模板.html.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.主程序——获取图形参数.executor&quot;: &quot;Run&quot;,
-    &quot;Python.异常处理.executor&quot;: &quot;Run&quot;,
-    &quot;Python.读写、写入、追加操作-open-read-write-close解析.executor&quot;: &quot;Run&quot;,
-    &quot;Python.读文件及注意事项.executor&quot;: &quot;Run&quot;,
-    &quot;Python.面向对象——创建类-实例对象-实例方法概念.executor&quot;: &quot;Run&quot;,
-    &quot;Python.面向对象——实例属性与类属性.executor&quot;: &quot;Run&quot;,
-    &quot;Python.面向对象——类与对象.executor&quot;: &quot;Run&quot;,
-    &quot;Python.面向对象——魔法方法.executor&quot;: &quot;Run&quot;,
-    &quot;Python.面向对象基础案例.executor&quot;: &quot;Run&quot;,
-    &quot;Python.面向对象案例——课后作业.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/GitHub/my_web/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/内容&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript 调试.模块与包.html.executor": "Run",
+    "JavaScript 调试.笔记通用模板.html.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.主程序——获取图形参数.executor": "Run",
+    "Python.异常处理.executor": "Run",
+    "Python.读写、写入、追加操作-open-read-write-close解析.executor": "Run",
+    "Python.读文件及注意事项.executor": "Run",
+    "Python.选择题.executor": "Run",
+    "Python.面向对象——创建类-实例对象-实例方法概念.executor": "Run",
+    "Python.面向对象——实例属性与类属性.executor": "Run",
+    "Python.面向对象——类与对象.executor": "Run",
+    "Python.面向对象——魔法方法.executor": "Run",
+    "Python.面向对象基础案例.executor": "Run",
+    "Python.面向对象案例——课后作业.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/GitHub/my_web/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/内容",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.jshint": "true",
+    "node.js.selected.package.jshint": "",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.sync"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\GitHub\my_web\内容文件夹\自建本地网站\导航栏内容\计算机二级——python\内容" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GitHub\my_web\内容文件夹\自建本地网站\导航栏内容\计算机二级——python\image\代码片段题" />
       <recent name="D:\GitHub\my_web\内容文件夹\自建网站中用到的外部引用\自建网站用的样式表" />
       <recent name="D:\GitHub\my_web\内容文件夹\自建网站中用到的外部引用" />
       <recent name="D:\GitHub\my_web\内容文件夹\自建网站中用到的外部引用\JS文件" />
       <recent name="D:\GitHub\my_web\内容文件夹\python_study\哔哩哔哩UP主——黑马程序员\第二部分——python核心语法\python基础——异常处理" />
-      <recent name="D:\GitHub\my_web\内容文件夹\python_study\哔哩哔哩UP主——黑马程序员\第二部分——python核心语法\面向对象\基础" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.读写、写入、追加操作-open-read-write-close解析">
+  <component name="RunManager" selected="Python.选择题">
     <configuration name="笔记通用模板.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/my_web/哔哩哔哩UP主——黑马程序员/笔记通用模板.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -158,6 +165,102 @@
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/模块/模块与包/代码/主程序——获取图形参数.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="面向对象——实例属性与类属性" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——实例属性与类属性/代码" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——实例属性与类属性/代码/面向对象——实例属性与类属性.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="面向对象——魔法方法" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码/面向对象——魔法方法.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="异常处理" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码/异常处理.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -358,80 +461,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="面向对象——实例属性与类属性" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——实例属性与类属性/代码" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——实例属性与类属性/代码/面向对象——实例属性与类属性.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="面向对象——魔法方法" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码/面向对象——魔法方法.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="异常处理" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础最后章节——异常处理_文件处理/异常处理/代码/异常处理.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.选择题" />
         <item itemvalue="Python.读写、写入、追加操作-open-read-write-close解析" />
         <item itemvalue="Python.面向对象——创建类-实例对象-实例方法概念" />
         <item itemvalue="JavaScript 调试.笔记通用模板.html" />

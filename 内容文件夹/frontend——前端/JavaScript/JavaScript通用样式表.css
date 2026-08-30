@@ -1,15 +1,15 @@
 :root {
     /*  color  */
-    --color-h1-footer: #2D2D2D;
+    --color-h1-footer: #FFFFFF;
     --color-span: #C0392B;
     --color-class-span: skyblue;
     --color-class-span_warn: #F39C12;
-    --color-h2: #2C3E50;
-    --color-h3: #5D6D7E;
+    --color-h2:  #F1C40F;
+    --color-h3: #85C1E9;
     --color-code: #6C3483;
     --color-class-instancing: #1A5276;
-    --color-h4: #4A4A4A;
-    --color-h5: #7F8C8D;
+    --color-h4: #82E0AA;
+    --color-h5:  #D7BDE2;
     --color-li: #3E3A39;
     --color-td-color: #E67E22;
     --color-th-color: #F4D03F;
@@ -19,7 +19,7 @@
 
     /*  backgroun-color  */
     --background-color-main: #F0F0EC;
-    --background-color-header-footer: #5D6D7E;
+    --background-color-header-footer: #5D6D7E;  /* 原本 #5D6D7E */
 
     /*  font-size  */
     --size-h1-footer: 3rem;

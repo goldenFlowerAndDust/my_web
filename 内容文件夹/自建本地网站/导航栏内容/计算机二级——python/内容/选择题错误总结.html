@@ -14,24 +14,36 @@
     <section class="transition" id="transition">
         <nav id="目录">
             <ul>
-                <li><a href="#子程序调用的数据结构">子程序调用的数据结构</a></li>
-                <li><a href="#叉树">叉树</a></li>
-                <li><a href="#线性结构">线性结构</a></li>
-                <li><a href="#字面量规范">字面量规范</a></li>
-                <li id="异常处理"><a href="#"><p>异常处理相关</p></a>
+                <!--注意4的倍数，不要有二级列表，无法显示-->
+                <li><a href="#子程序调用的数据结构">子程序调用的数据结构</a></li> <!--单链接-->
+                <li><a href="#叉树">叉树</a></li> <!--单链接-->
+                <li><a href="#线性结构">线性结构</a></li> <!--单链接-->
+                <li><a href="#字面量规范">字面量规范</a></li> <!--单链接-->
+                <li id="异常处理"><a href="#">异常处理知识</a>
                     <ol>
-                        <li><a href="#异常处理——TypeError">TypeError</a></li>
-                        <li><a href="#异常处理——ValueError">ValueError</a></li>
-                        <li><a href="#异常处理——NameError">NameError</a></li>
-                        <li><a href="#异常处理——FileNotFoundError">FileNotFoundError</a></li>
-                        <li><a href="#异常处理——UnicodeDecodeError">UnicodeDecodeError</a></li>
-                        <li><a href="#异常处理——io.UsupportedOperation">io.UsupportedOperation</a></li>
+                        <li id="异常处理知识">
+                            <a href="#异常处理知识" onclick="return false" style="color:#f1c40f">异常处理知识</a>
+                            <ol class="nav_2">
+                                <li><a href="#异常处理——TypeError">TypeError</a></li>
+                                <li><a href="#异常处理——ValueError">ValueError</a></li>
+                                <li><a href="#异常处理——NameError">NameError</a></li>
+                                <li><a href="#异常处理——FileNotFoundError">FileNotFoundError</a></li>
+                                <li><a href="#异常处理——UnicodeDecodeError">UnicodeDecodeError</a></li>
+                                <li><a href="#异常处理——io.UsupportedOperation">io.UsupportedOperation</a></li>
+                            </ol>
+                        </li>
+                        <li>
+                            <a href="#" onclick="return false">异常处理习题</a>
+                            <ol class="nav_2">
+                                <li><a href="#异常处理题一">异常处理题一</a></li>
+                            </ol>
+                        </li>
                     </ol>
-                </li>
-                <li id="关系题型"><a href="#"><p>关系题型</p></a>
+                </li> <!--包含二级列表-->
+                <li id="关系题型"><a href="#">关系题型</a>
                     <ol>
                         <li style="color: white;">
-                            <p id="多对多关系">多对多关系</p>
+                            <a href="#" id="多对多关系" onclick="return false">多对多关系</a>
                             <ol class="nav_2">
                                 <li><a href="#实体之间多对多在关系模型实现方式">实体之间多对多在关系模型实现方式</a>
                                 </li>
@@ -39,31 +51,84 @@
                             </ol>
                         </li>
                         <li style="color: white;">
-                            <p id="关系模型">关系模型</p>
+                            <a id="关系模型" href="#" onclick="return false">关系模型</a>
                             <ol class="nav_2">
                                 <li><a href="#E-R图">E-R图转关系模型</a></li>
                             </ol>
                         </li>
                     </ol>
-                </li>
-                <li><a href="#" id="其他知识导航栏"><p>其他知识导航栏</p></a>
-                    <ol>
-                        <li><a href="#其他知识">其他知识</a></li>
-                        <li><a href="#python常见的结构">python常见的结构</a></li>
-                    </ol>
-                </li>
-                <li id="程序控制结构目录"><a href="#"><p>程序控制结构目录</p></a>
+                </li> <!--包含二级列表-->
+                <li id="其他知识区快捷跳转"><a href="#其他知识">其他知识区快捷跳转</a></li>
+                <li id="程序控制结构目录"><a href="#">程序控制结构目录</a>
                     <ol>
                         <li><a href="#程序控制结构">程序控制结构——顺序结构、选择(分支)结构、循环结构</a></li>
                         <li><a href="#程序控制结构题型1">程序控制结构题一</a></li>
                     </ol>
-                </li>
-                <li id="习题"><a href="#"><p>习题</p></a>
+                </li> <!--一级列表-->
+                <li id="列表知识总结"><a href="#">列表知识总结</a>
+                    <ol>
+                        <li>
+                            <a href="#" onclick="return false">列表知识</a>
+                            <ol class="nav_2">
+                                <li><a href="#remove">列表方法remove</a></li>
+                            </ol>
+                        </li>
+                        <li>
+                            <a href="#" onclick="return false">列表习题</a>
+                            <ol class="nav_2">
+                                <li><a href="#列表方法题一">列表方法题一</a></li>
+                                <li><a href="#列表习题二">列表习题二——<span>巨坑</span>-建议反复看</a></li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li> <!--包含二级列表-->
+                <li id="运算符"><a href="#">运算符</a>
+                    <ol>
+                        <li>
+                            <a href="#" onclick="return false">运算符知识</a>
+                            <ol class="nav_2">
+                                <li><a href="#运算符——%取余">运算符——%取余</a></li>
+                            </ol>
+                        </li>
+                        <li>
+                            <a href="#" onclick="return false">运算符习题</a>
+                            <ol class="nav_2">
+                                <li><a href="#运算符习题一">运算符习题一</a></li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li> <!--包含二级列表-->
+                <li id="切片"><a href="#">切片</a>
+                    <ol>
+                        <li>
+                            <a href="#" onclick="return false">切片知识</a>
+                            <ol class="nav_2">
+                                <li><a href="#切片知识">切片知识</a></li>
+                            </ol>
+                        </li>
+                        <li></li>
+                    </ol>
+                </li> <!--包含二级列表-->
+                <li id="其他常考知识点"><a href="#" onclick="return false">其他常考以及补充知识点</a>
                     <ol>
                         <li><a href="#逻辑结构、储存结构、排序算法题型一">逻辑结构、储存结构、排序算法题型一</a></li>
                         <li><a href="#软件三要素">软件三要素</a></li>
                         <li><a href="#扇入数与扇出数">扇入数与扇出数</a></li>
                         <li><a href="#程序设计语言类别">程序设计语言类别</a></li>
+                        <li><a href="#python常见的结构">python常见的结构</a></li>
+                        <li><a href="#链表">链表</a></li>
+                    </ol>
+                </li> <!--一级列表-->
+                <li id="单选题代码片段题"><a href="#" onclick="return false">单选题代码片段题</a>
+                    <ol>
+                        <li><a href="#代码片段题一">代码片段题一</a></li>
+                        <li><a href="#代码片段题二">代码片段题二——<span>巨坑建议反复看</span></a></li>
+                        <li><a href="#代码片段题三">代码片段题三</a></li>
+                    </ol>
+                </li>
+                <li><a href="#" onclick="return false">循环-真值假知识</a>
+                    <ol>
+                        <li><a href="#循环-真值假">循环-真值假</a></li>
                     </ol>
                 </li>
             </ul>
@@ -352,19 +417,20 @@
             </ul>
         </div>
         <div>
-            <h2 id="逻辑结构、储存结构、排序算法题型一"><a href="#习题">逻辑结构、储存结构、排序算法题型一</a></h2>
+            <h2 id="逻辑结构、储存结构、排序算法题型一"><a href="#其他常考知识点">逻辑结构、储存结构、排序算法题型一</a>
+            </h2>
             <img src="../image/逻辑结构、顺序结构、排序算法题型/逻辑结构、顺序结构、排序算法题型一_在第一张单选题卷子——第五题.png"
                  alt="逻辑结构、顺序结构、排序算法题型一"
                  title="逻辑结构、顺序结构、排序算法题型一">
         </div>
         <div>
-            <h2 id="软件三要素"><a href="#习题">软件三要素</a></h2>
+            <h2 id="软件三要素"><a href="#其他常考知识点">软件三要素</a></h2>
             <ul>
                 <li>软件三要素是：<span>程序、数据及相关文档</span></li>
             </ul>
         </div>
         <div>
-            <h2><a href="#习题" id="扇入数与扇出数">扇入数与扇出数</a></h2>
+            <h2><a href="#其他常考知识点" id="扇入数与扇出数">扇入数与扇出数</a></h2>
             <ul>
                 <li><span>在python中模块指的是：<span class="span_warn">名为<code>.py</code>的文件</span></span></li>
                 <li><span>在软件工程里面(考试)里指的是：<span class="span_warn">一个相对独立的功能单元</span></span></li>
@@ -383,26 +449,26 @@
             </ul>
         </div>
         <div>
-            <h2 id="E-R图"><a href="#习题">E-R图</a></h2>
+            <h2 id="E-R图"><a href="#关系题型">E-R图</a></h2>
             <ol>
                 <li>表示实体与属性之间的关系</li>
                 <li>题目：<span>将E－R图转换为关系模式时，实体和联系都可以表示为：<span class="span">关系</span></span></li>
             </ol>
         </div>
         <div>
-            <h2 id="表结构"><a href="#习题">表结构</a></h2>
+            <h2 id="表结构"><a href="#其他常考知识点">表结构</a></h2>
             <ol>
                 <li>题目：<code>采用表结构来表示数据及数据间联系的模型是(<span>关系模型</span>)。</code></li>
             </ol>
         </div>
         <div>
-            <h2 id="实体与实体之间的关系-多对多"><a href="#习题">实体与实体之间的关系——多对多</a></h2>
+            <h2 id="实体与实体之间的关系-多对多"><a href="#其他常考知识点">实体与实体之间的关系——多对多</a></h2>
             <img src="../image/关系/实体与实体之间的关系-单选题第一套卷子-9.png"
                  alt="实体与实体之间的关系"
                  title="实体与实体之间的关系">
         </div>
         <div>
-            <h2 id="三种基本的数字类型"><a href="#习题">Python语言提供三种基本的数字类型</a></h2>
+            <h2 id="三种基本的数字类型"><a href="#其他常考知识点">Python语言提供三种基本的数字类型</a></h2>
             <ul>
                 <li><span>Python语言提供三种基本的数字类型：<span
                         class="span_warn">整数型、浮点型、复数型('<span>实数 + 虚数</span>')</span></span></li>
@@ -423,11 +489,6 @@
         <div>
             <h2 id="异常处理——TypeError"><a href="#异常处理">TypeError</a></h2>
             <ul>
-                <li>
-                    <img src="../image/小型简单题目/TypeError题型1.png"
-                         alt="TypeError"
-                         title="TypeError">
-                </li>
                 <li><span
                         class="span_warn"><code>TypeError</code>：操作数数据类型不匹配、函数调用传参数量/类型不匹配</span>
                 </li>
@@ -467,7 +528,7 @@
             </h2>
         </div>
         <div>
-            <h2 id="程序设计语言类别"><a href="#习题">程序设计语言类别</a></h2>
+            <h2 id="程序设计语言类别"><a href="#其他常考知识点">程序设计语言类别</a></h2>
             <ul>
                 <li><span>汇编语言、机器语言、高级语言</span></li>
                 <li>
@@ -703,14 +764,100 @@
                 </li>
             </ul>
         </div>
+        <div>
+            <h2 id="remove"><a href="#列表知识总结">列表方法：remove()</a></h2>
+            <ul>
+                <li>方法：<code>remove(元素值)</code></li>
+                <li>传参要求：<span>必须且只能传 1 个参数。</span></li>
+                <li>查找方向：<span>从左往右。</span></li>
+                <li>
+                    <h3>执行逻辑</h3>
+                    <ol>
+                        <li>若参数数量不对（如 remove() 或 remove(1,2)） → 触发 TypeError。</li>
+                        <li>若参数类型正确，但列表中不存在该元素 → 触发 ValueError。</li>
+                        <li>若匹配成功 → 删除第一个匹配的元素，无返回值。</li>
+                    </ol>
+                </li>
+            </ul>
+            <h2 id="列表方法题一"><a href="#列表知识总结">列表方法题一</a></h2>
+            <img src="../image/列表方法/列表方法题一.png"
+                 alt="列表方法题一"
+                 title="列表方法题一">
+        </div>
+        <div>
+            <h2 id="异常处理题一"><a href="#异常处理">异常处理题一</a></h2>
+            <img src="../image/异常处理/异常处理习题一.png"
+                 alt="异常处理习题一"
+                 title="异常处理习题一">
+        </div>
+        <div>
+            <h2 id="运算符——%取余"><a href="#运算符">运算符——%取余</a></h2>
+            <ul>
+                <li>运算符(%)：<span>取余</span></li>
+                <li>当操作数均为整型：<span>则返回值是整型</span></li>
+                <li>当操作数其中一方为浮点型：<span>则返回值一定是浮点型</span></li>
+            </ul>
+            <h2 id="运算符习题一"><a href="#运算符">运算符习题一</a></h2>
+            <img src="../image/运算符/运算符习题一.png"
+                 alt="运算符习题一"
+                 title="运算符习题一">
+        </div>
+        <div>
+            <h2 id="切片知识"><a href="#切片">切片</a></h2>
+            <ul>
+                <li>切片：<span>切片由：<code>[起始索引,结束索引]</code>表示</span></li>
+                <li>注意：<span class="span_warn">起始索引能取到，结束索引无法取到。包前不包后</span></li>
+                <li><span>索引从0开始</span></li>
+                <li>
+                    <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/数据容器/数据容器——列表list/数据容器——列表list-切片/笔记/数据容器——列表list-切片.html/#切片"
+                       onclick="loadContent(this,'container5','#切片');return false">关于切片</a>
+                    <div id="container5"></div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="列表习题二"><a href="#列表知识总结">列表习题二</a></h2>
+            <img src="../image/列表方法/列表习题二.png"
+                 alt="列表习题二"
+                 title="列表习题二">
+        </div>
+        <div>
+            <h2 id="代码片段题二"><a href="#单选题代码片段题">代码片段题二</a></h2>
+            <img src="../image/代码片段题/代码片段题二.png"
+                 alt="代码片段题二"
+                 title="代码片段题二">
+        </div>
+        <div>
+            <h2 id="循环-真值假"><a href="#">循环-真值假</a></h2>
+            <ol>
+                <li>
+                    <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/for循环/笔记/for循环.html/#for循环"
+                       onclick="loadContent(this,'container6','#for循环');return false">for循环</a></li>
+                <li>
+                    <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/流程控制语句/while循环/笔记/while循环.html/#while循环"
+                       onclick="loadContent(this,'container6','#while循环');return false">while循环</a></li>
+                <li>
+                    <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/数据存储与运算/运算符/笔记/运算符.html/#真值与假值"
+                       onclick="loadContent(this,'container6','#真值与假值');return false">真值与假值</a></li>
+                <li>
+                    <div id="container6"></div>
+                </li>
+            </ol>
+        </div>
+        <div>
+            <h2 id="代码片段题三"><a href="#单选题代码片段题">代码片段题三</a></h2>
+            <img src="../image/代码片段题/代码片段题三.png"
+                 alt="代码片段题三"
+                 title="代码片段题三">
+        </div>
     </section>
     <!--其他部分-->
     <section class="SingleChoiceQuestion">
-        <p id="其他知识"><a href="#其他知识导航栏">其他知识</a></p>
+        <p id="其他知识"><a href="#其他知识区快捷跳转">其他知识</a></p>
         <ul>
             <li><span class="span">解决一个问题可以有不同的算法，且它们的时间复杂度可以是不同的</span></li>
             <li>
-                <h2 id="python常见的结构"><a href="#其他知识导航栏">python常见的结构</a></h2>
+                <h2 id="python常见的结构"><a href="#其他常考知识点">python常见的结构</a></h2>
                 <div class="div_table">
                     <table>
                         <tr>
@@ -901,7 +1048,7 @@
                 </div>
             </li>
             <li>
-                <h2 id="链表"><a href="#其他知识导航栏">链表</a></h2>
+                <h2 id="链表"><a href="#其他常考知识点">链表</a></h2>
                 <ol>
                     <li><span>链表</span>是链式存储结构：<span class="span">内部是以：<span
                             class="span_warn">"数据 + 地址(指针)"为元素的形式存储</span></span>
@@ -920,6 +1067,13 @@
                     <li>比如：<span>链式存储结构一定能被线性结构(规定有序)采用，<span>这句话也是对的</span></span></li>
                     <li>反例：<span>线性结构被链式存储结构采用，<span>这句话是错的，存储结构变为了主动方</span></span></li>
                 </ol>
+            </li>
+            <li><span>Python语言中用来表示代码块所属关系的语法是(<span>缩进</span>)。</span></li>
+            <li>
+                <h2 id="代码片段题一"><a href="#单选题代码片段题">代码片段题一</a></h2>
+                <img src="../image/代码片段题/代码片段题一.png"
+                     alt="代码片段题一"
+                     title="代码片段题一">
             </li>
         </ul>
     </section>
