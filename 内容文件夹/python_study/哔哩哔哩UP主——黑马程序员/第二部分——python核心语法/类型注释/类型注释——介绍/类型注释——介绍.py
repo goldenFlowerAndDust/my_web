@@ -17,7 +17,7 @@ print(my_list)
 
 my_list2: list[str | int] = ["hello", 50, "必须是字符串"]  # 使用 或运算符 | 指定元素可以是多个数据类型
 print(my_list)
-my_list3: list[Union[str, int, float]] = ["hello", 50, "必须是字符串", (50, 100)]  # 使用 模块 Union 指定元素可以是多个数据了类型
+my_list3: list[Union[str, int, float]] = ["hello", 50, "必须是字符串", (50, 100)]  # 使用 模块与包 Union 指定元素可以是多个数据了类型
 print(my_list3)
 # 集合注释
 
@@ -30,7 +30,7 @@ my_set2.add(50)
 my_set2.add("hello")
 print(my_set)
 # 同一个字面量，后面的注释会覆盖前面的注释
-my_set2: set[Union[str, int, float, tuple]] = set()  # 使用 模块 Union 指定元素可以是多个数据了类型
+my_set2: set[Union[str, int, float, tuple]] = set()  # 使用 模块与包 Union 指定元素可以是多个数据了类型
 my_set2.add(50)
 my_set2.add("hello")
 my_set2.add((50, 100))

@@ -6,7 +6,7 @@
     <title>模块介绍</title>
     <link rel="stylesheet" href="../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
 </head>
-<body>
+<body id="模块与包">
 <main>
     <header>
         <h1>模块介绍</h1>
@@ -32,9 +32,9 @@
                     class="span">同一个文件夹内</span>)，否则获取不到</span>
             </li>
             <li>
-                <a href="#模块识别顺序"
-                   onclick="loadContent(this,'containers','#模块识别顺序');return false">模块识别顺序</a>
-                <div id="containers"></div>
+                <a href="../../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/模块/模块与包/笔记/模块与包.html/#模块识别顺序"
+                   onclick="loadContent(this,'container-模块与包s','#模块识别顺序');return false">模块识别顺序</a>
+                <div id="container-模块与包s"></div>
             </li>
             <li>
                 <span>因为系统模块是最后查找的，所以自定义模块不能与系统自带模块重名，自定义模块会覆盖系统模块，导致功能出问题</span>
@@ -78,7 +78,7 @@
             <li>语法：<code>import math as shuxue</code></li>
             <li>这样的话，模块名字就变成了，<code>shuxue</code>，往后使用就用新的名字，但是注意：<span class="span">功能与原模块一致，且不会更改原模块名字，只能作用于当前文件。</span>
         </ul>
-        <div class="div_table">
+        <div class="div_table" id="模块导入">
             <table>
                 <tr>
                     <th colspan="4"><h2><span>使用模块</span></h2></th>
@@ -194,7 +194,7 @@
             </li>
             <li><span>内容可以是：<span>类、变量、函数...</span>，可以多个导入，之间用英文逗号隔开</span></li>
         </ul>
-        <div class="div_table">
+        <div class="div_table" id="包导入">
             <table>
                 <tr>
                     <th colspan="4"><span>导入包方式对比</span></th>
@@ -258,9 +258,9 @@
                         <ul>
                             <li><code>log_separtor1()</code></li>
                             <li>
-                                与<a href="#模块通配符"
-                                     onclick="loadContent(this,'container2','#模块通配符');return false">模块通配符(单击链接显示具体内容)</a>导入一致，污染全局字面量，避免使用
-                                <div id="container2"></div>
+                                与<a href="../../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/模块/模块与包/笔记/模块与包.html/#模块通配符"
+                                     onclick="loadContent(this,'container-模块与包2','#模块通配符');return false">模块通配符(单击链接显示具体内容)</a>导入一致，污染全局字面量，避免使用
+                                <div id="container-模块与包2"></div>
                             </li>
                         </ul>
                     </td>
@@ -275,8 +275,9 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <a href="#模块识别顺序" onclick="loadContent(this,'container3','#模块识别顺序'); return false">模块识别顺序</a>
-                        <div id="container3"></div>
+                        <a href="../../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/模块/模块与包/笔记/模块与包.html/#模块识别顺序"
+                           onclick="loadContent(this,'container-模块与包3','#模块识别顺序'); return false">模块识别顺序</a>
+                        <div id="container-模块与包3"></div>
                     </td>
                 </tr>
             </table>
@@ -377,11 +378,11 @@
             </li>
             <li><span>导入模块问题：同级下import是直接文件名，文件名不能是：[<code>-</code>]连接。</span></li>
             <li><span>导入模块没有提醒问题：虚拟环境背污染，解决办法：<a
-                    href="../../../../../关于pip%20install%20安装包的位置/关于安装包位置装入虚拟环境.html/#删除虚拟环境的方法"
-                    onclick="loadContent(this,'container','#删除虚拟环境的方法');return false">删除虚拟环境</a>，重装、重新配置解释器</span>
+                    href="../../../../../../../内容文件夹/python_study/关于pip%20install%20安装包的位置/关于安装包位置装入虚拟环境.html/#删除虚拟环境的方法"
+                    onclick="loadContent(this,'container-模块与包','#删除虚拟环境的方法');return false">删除虚拟环境</a>，重装、重新配置解释器</span>
             </li>
             <li>
-                <div id="container" class="div_table"></div>
+                <div id="container-模块与包" class="div_table"></div>
             </li>
             <li><span>关于模块知识：导入关键字：import、重命名模块：as 名字，后续可以通过新定义的名字进行操作</span></li>
         </ul>
@@ -430,8 +431,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <a href="#模块识别顺序" onclick="loadContent(this,'container4','#模块识别顺序'); return false">模块识别顺序</a>
-                        <div id="container4"></div>
+                        <a href="../../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/模块/模块与包/笔记/模块与包.html/#模块识别顺序"
+                           onclick="loadContent(this,'container-模块与包4','#模块识别顺序'); return false">模块识别顺序</a>
+                        <div id="container-模块与包4"></div>
                     </td>
                     <td><span>这个顺序仅适用于 import 和 from ... import ... 语句，与 __all__ 无关。</span></td>
                 </tr>
@@ -557,7 +559,7 @@
 <script src="../../../../../../自建网站中用到的外部引用/JS文件/JavaScript通用a标签跳转指定内容.js">
     //写法
     //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
-    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    //<div id="容器ID"></div> container-模块与包开头均为锚点提示，锚点只能用ID表示
 </script>
 </body>
 </html>

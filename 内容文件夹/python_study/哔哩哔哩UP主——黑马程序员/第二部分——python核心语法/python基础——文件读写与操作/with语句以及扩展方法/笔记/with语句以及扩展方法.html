@@ -35,8 +35,9 @@
                             <span>起始位置三个参数固定：<code>whence</code> 参数：<code>0</code>（默认，相对于文件开头）、<code>1</code>（相对于当前位置）、<code>2</code>（相对于文件末尾）。在文本模式下，建议只使用 whence=0，避免因编码问题导致光标位置错乱。</span>
                         </li>
                         <li>第二参数除：<span>【<code>0、1、2</code>】均报错，<code>TypeError</code></span></li>
-                        <li><span><code>seek(0,1)</code>一般很少用，主要搭配：<a href="#tell"
-                                                                               onclick="loadContent(this,'container3','#tell');return false">tell()</a>、输出光标坐标</span>
+                        <li><span><code>seek(0,1)</code>一般很少用，主要搭配：<a
+                                href="../../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/with语句以及扩展方法/笔记/with语句以及扩展方法.html/#tell"
+                                onclick="loadContent(this,'container3','#tell');return false">tell()</a>、输出光标坐标</span>
                             <div id="container3"></div>
                         </li>
                         <li><span>seek() 以 字节 为单位移动光标。在文本模式下，建议只使用 seek(0)（移到开头）或 seek(0, 2)（移到末尾），避免移动到非 ASCII 字符中间导致解码错误。</span>

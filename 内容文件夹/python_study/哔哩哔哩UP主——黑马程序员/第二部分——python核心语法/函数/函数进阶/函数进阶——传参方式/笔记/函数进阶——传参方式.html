@@ -6,7 +6,7 @@
     <title>传参方式 - 总结</title>
     <link rel="stylesheet" href="../../../../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
 </head>
-<body>
+<body id="函数传参方式">
 <main>
     <header>
         <h1>传参方式 — 总结</h1>
@@ -44,9 +44,12 @@
             </li>
             <li>
                 <h2>详细笔记（含完整示例）</h2>
-                <p><a href="../../../函数基础/函数基础——函数的参数与返回值/笔记/函数基础——函数的参数与返回值.html">👉
-                    点击查看完整笔记《函数基础——函数的参数与返回值》</a>
+                <p>
+                    <a href="../../../../../../../python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/函数/函数基础/函数基础——函数的参数与返回值/笔记/函数基础——函数的参数与返回值.html/#函数的参数与返回值"
+                       onclick="loadContent(this,'container-传参方式','#函数的参数与返回值');return false">👉
+                        点击查看完整笔记《函数基础——函数的参数与返回值》</a>
                 </p>
+                <div id="container-传参方式"></div>
             </li>
         </ul>
     </section>
@@ -123,5 +126,11 @@
         <p><span>我采用 Python 语法与 JavaScript 语法类比的方式记录。</span></p>
     </footer>
 </main>
+<script src="../../../../../../../自建网站中用到的外部引用/JS文件/JavaScript通用a标签跳转指定内容.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    // 锚点不能其他符号，只能是字符
+</script>
 </body>
 </html>

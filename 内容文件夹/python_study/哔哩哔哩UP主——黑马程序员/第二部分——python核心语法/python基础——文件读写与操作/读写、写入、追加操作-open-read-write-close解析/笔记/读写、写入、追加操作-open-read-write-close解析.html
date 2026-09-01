@@ -41,8 +41,9 @@
                     <li>主要作用：<span>只读取文件对象所指文件内容</span></li>
                     <li>语法：<code>字面量 = 文件对象.read()</code></li>
                     <li>扩展：<span>只可以传一个参数，指向的文档开头开始，读取与参数相同数量的字符</span></li>
-                    <li>所以：<span>参数必须是整数，如果是浮点数或字符串，会报错：<code><a href="#TypeError与ValueError"
-                                                                                       onclick="loadContent(this,'container','#TypeError与ValueError');return false">TypeError</a></code></span>
+                    <li>所以：<span>参数必须是整数，如果是浮点数或字符串，会报错：<code><a
+                            href="../../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/读写、写入、追加操作-open-read-write-close解析/笔记/读写、写入、追加操作-open-read-write-close解析.html/#TypeError与ValueError"
+                            onclick="loadContent(this,'container','#TypeError与ValueError');return false">TypeError</a></code></span>
                         <div id="container"></div>
                     </li>
                     <li><span>如果参数为负数，读取整个文件内容，等价于：<code>文件对象.read()</code></span></li>
@@ -127,10 +128,11 @@
             <li>注意：<span><code>w</code>是覆盖写入，打开文件，内容就已经清空了、如果确实需要读，必须先 <code>write()</code> 写入新数据，再 <code>seek(0)</code> 才能读到。直接 <code>read()</code> 读到的永远是空字符串。</span>
             </li>
             <li>注意：<span><code>a</code>是追加写入，打开文件，内容就存在，但是光标在结尾、要想读取，需要将光标移动至最前面。使用方法：<code><a
-                    href="../../with语句以及扩展方法/笔记/with语句以及扩展方法.html/#seek"
+                    href="../../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/with语句以及扩展方法/笔记/with语句以及扩展方法.html/#seek"
                     onclick="loadContent(this,'container2','#seek');return false">seek(0,0)</a></code>，写的时候又要重新将光标移动至最后，<code>seek(0,2)</code></span>
-                <code><a href="../../with语句以及扩展方法/笔记/with语句以及扩展方法.html/#tell"
-                         onclick="loadContent(this,'container2','#tell');return false">tell()</a></code>
+                <code><a
+                        href="../../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/with语句以及扩展方法/笔记/with语句以及扩展方法.html/#tell"
+                        onclick="loadContent(this,'container2','#tell');return false">tell()</a></code>
                 <div id="container2"></div>
             </li>
             <li>
@@ -164,7 +166,7 @@
         </ul>
     </section>
     <section id="section_2">
-        <div class="div_table">
+        <div class="div_table" id="文件处理总结表格一">
             <table>
                 <thead>
                 <tr>
@@ -392,7 +394,7 @@
             🧡🧡  r、rt、rb、w、wt、wb、a、at、ab也不难记。t文件、b二进制。r只读、w覆盖写入、a追加。
             🧡🧡  open()——打开文件返回文件对象、read()、write()、close()。encode——Unicode转其他二进制编码。decode()——其他二进制编码转Unicode编码。
             🧡🧡  open('文件地址', mode='模式',encoding='解码类型')。绝对地址、相对地址。
-            🧡🧡这就是今天学习的东西。不难才一点。难道是因为有学习了函数、模块、面向对象后，接受能力加强了吗？前面这三个部分，我真是遭老罪了，
+            🧡🧡这就是今天学习的东西。不难才一点。难道是因为有学习了函数、模块与包、面向对象后，接受能力加强了吗？前面这三个部分，我真是遭老罪了，
             🧡🧡不过也是学习最爽的时候——正反馈最强的时候。
         -->
     </footer>

@@ -144,8 +144,8 @@
                 <tr>
                     <td>
                         <code><a href=""
-                                 onclick="loadContent(this,'container','#SyntaxError');return false">SyntaxError</a></code>
-                        <div id="container"></div>
+                                 onclick="loadContent(this,'container-异常处理','#SyntaxError');return false">SyntaxError</a></code>
+                        <div id="container-异常处理"></div>
                     </td>
                     <td><span>代码 <span class="span_warn">语法错误(无法被：<code>try</code> 捕获)</span></span></td>
                     <td><code class="code_instancing">if True print('hi')</code></td>
@@ -214,7 +214,8 @@
             </li>
             <li>
                 <h3>栈模型1——异常处理用这个理解</h3>
-                <img src="../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/image/入栈出栈模型1.png" alt="入栈出栈模型1" class="item">
+                <img src="../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/image/入栈出栈模型1.png"
+                     alt="入栈出栈模型1" class="item">
             </li>
             <li>说白了：<span>内层的异常，向上报，当最外层也处理不了，就报错</span></li>
             <li><span class="span_warn">因为是异常地方开始，所以，报错总是能指出错误的路径</span></li>
@@ -223,20 +224,23 @@
             </li>
             <li>
                 <h3>栈模型2——该模型以递归为主(主要解释的是递归运行逻辑)</h3>
-                <img src="../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/image/入栈出栈模型2.png" alt="入栈出栈模型2" class="item">
+                <img src="../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/image/入栈出栈模型2.png"
+                     alt="入栈出栈模型2" class="item">
             </li>
         </ul>
     </section>
     <section id="section_2">
         <h2>扩展——主要是工具和规范</h2>
-        <ul>
+        <div id="异常处理进阶用法">
+            <ul>
             <li>
                 <h3>正常项目——指定捕获特定异常类型</h3>
                 <ol>
                     <li>已知：<span>裸的 <code>except</code>: 会捕获所有运行时异常（<code>SyntaxError 及其子类除外</code>），但实际开发中应避免使用。</span>，<span
-                            class="span_warn"><a href="#异常类型结构扩展"
-                                                 onclick="loadContent(this,'container3','#异常类型结构扩展'); return false">但也不是很专业的写法</a></span>
-                        <div id="container3"></div>
+                            class="span_warn"><a
+                            href="../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/异常处理.html/#异常类型结构扩展"
+                            onclick="loadContent(this,'container-异常处理3','#异常类型结构扩展'); return false">但也不是很专业的写法</a></span>
+                        <div id="container-异常处理3"></div>
                     </li>
                     <li>但是正常项目不会单独使用：<code>except</code>，而是指定异常类型，每一种异常类型，一个提示</li>
                     <li>原因：<span class="span">裸的 except: 会捕获包括 KeyboardInterrupt（用户按 Ctrl+C）在内的所有异常，可能会让程序在应该退出的时候“卡住”。所以实际开发中总是指定具体的异常类型</span>
@@ -274,10 +278,12 @@
                         </code>
                     </li>
                     <li>
-                        <span class="span_warn">通常搭配：<code><a href="#BaseException"
-                                                                  onclick="loadContent(this,'container4','#BaseException');return false">BaseException</a>、<a
-                                href="#Exception" onclick="loadContent(this,'container4','#Exception');return false">Exception</a></code>使用，用于捕获所有异常(一般情况：<code>SyntaxError</code>除外)</span>
-                        <div id="container4"></div>
+                        <span class="span_warn">通常搭配：<code><a
+                                href="../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/异常处理.html/#BaseException"
+                                onclick="loadContent(this,'container-异常处理4','#BaseException');return false">BaseException</a>、<a
+                                href="../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/异常处理.html/#Exception"
+                                onclick="loadContent(this,'container-异常处理4','#Exception');return false">Exception</a></code>使用，用于捕获所有异常(一般情况：<code>SyntaxError</code>除外)</span>
+                        <div id="container-异常处理4"></div>
                     </li>
                     <li>
                         可以：<span>可以通过 <code>as 收集错误字面量</code> 将原本错误信息，赋值给字面量，用于打印</span>
@@ -468,6 +474,7 @@
                 </ul>
             </li>
         </ul>
+        </div>
         <h2>额外补充——<code>SyntaxError</code>具体指的是什么</h2>
         <ul id="SyntaxError">
             <li><span><code>SyntaxError（语法错误）</code>：“Python 看不懂你这行字。”</span></li>
@@ -495,14 +502,14 @@
                     </li>
                     <li>
                         <h4>
-                            <a href="../../数据存储与运算/标识符/笔记/标识符.html#标识符的规范"
-                               onclick="loadContent(this,'container2','#标识符的规范');return false">无效的标识符命名（非法字面量命名）</a>
+                            <a href="../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/数据存储与运算/标识符/笔记/标识符.html#标识符的规范"
+                               onclick="loadContent(this,'container-异常处理2','#标识符的规范');return false">无效的标识符命名（非法字面量命名）</a>
                         </h4>
                         <ul>
                             <li><span>变量名以数字开头，或者包含不允许的特殊符号（除了 _）。</span></li>
                             <li>例：1a = 10（报错，变量名不能以数字开头）。</li>
                             <li>
-                                <div id="container2"></div>
+                                <div id="container-异常处理2"></div>
                             </li>
                         </ul>
                     </li>
@@ -526,7 +533,7 @@
                 <ol id="Exception">
                     <li><span
                             class="span_warn"><code><a
-                            href="#Exception1">Exception</a></code>包含非：<code>SystemExit、KeyboardInterror、GeneratorExit</code>外所有异常类型</span>
+                            href="../../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——异常处理/笔记/异常处理.html/#Exception1">Exception</a></code>包含非：<code>SystemExit、KeyboardInterror、GeneratorExit</code>外所有异常类型</span>
                     </li>
                     <li><span>注意：<code>SyntaxError</code> 虽然继承自 <code>Exception</code>，但它发生在代码运行之前，所以无法被运行时的 <code>except</code> 捕获。</span>
                     </li>
@@ -611,7 +618,7 @@
 <script src="../../../../../自建网站中用到的外部引用/JS文件/JavaScript通用a标签跳转指定内容.js">
     //写法
     //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
-    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    //<div id="容器ID"></div> container-异常处理开头均为锚点提示，锚点只能用ID表示
     // 锚点不能其他符号，只能是字符
 </script>
 </body>
