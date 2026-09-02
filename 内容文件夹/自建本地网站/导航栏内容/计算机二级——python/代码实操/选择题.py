@@ -53,33 +53,57 @@ print(type(dict_1))
 ser_1 = set()
 print(type(ser_1))
 
-
 # 文件处理-创建文件夹，以及对应操作
 file_path = '文件处理/文件存放/text.txt'
 os.makedirs(os.path.dirname(file_path), exist_ok=True)
-fo = open("../代码实操/文件处理/文件存放/text.txt",'w')
+fo = open("../代码实操/文件处理/文件存放/text.txt", 'w')
 
-x = [90,87,93]
+x = [90, 87, 93]
 
 print(str(x))
 print(','.join(str(x)))
-x1 = ','.join(map(str,sorted(x)))
+x1 = ','.join(map(str, sorted(x)))
 x2 = ','.join(str(i) for i in x)
-fo. write(x1)
+fo.write(x1)
 fo.close()
-
 
 # 第一套卷子：40题
 L = 'abcd'
 
-def f(x,result=['a','b','c','d']):
 
+def f(x, result=['a', 'b', 'c', 'd']):
     if x:
-
         result.remove(x[-1])
 
         f(x[:-1])
 
     return result
 
+
 print(f(L))
+
+# 队列AI出题1
+"""
+    一个队列初始为空，依次执行以下操作：
+    入队 A、入队 B、出队、入队 C、入队 D、出队、出队
+    请问最终队列中还剩哪些元素？
+        A. A, B
+        B. C, D
+        C. A, C
+        D. 队列为空
+    queue = [] 
+    选择：D。牢记：先进先出
+"""
+
+# 队列AI出题2
+"""
+    一个循环队列的存储空间为 Q(1:20)——不是切片(没有包前不包后)，意思是：下标 1 到 20。共 20个存储位。 
+    经过多次入队和出队操作后，front = 15，rear = 8。请问当前队列中有多少个元素？
+        A. 7
+        B. 13
+        C. 12
+        D. 8
+    公式：队列长度 = (rear - front + Q) % Q 
+         items = (8 - 15 + 20) % 20 = 13 % 20 = 13
+     所以选择：B
+"""
