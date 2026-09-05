@@ -107,3 +107,47 @@ print(f(L))
          items = (8 - 15 + 20) % 20 = 13 % 20 = 13
      所以选择：B
 """
+
+t = ("cat", "dog", "tiger", "human")
+
+print(t[::-1])
+
+
+def fun(s):
+    return s.split('a')
+
+
+s2 = "Happy birthday to you"
+print(fun(s2))
+
+num = 0.1 + 0.2
+result = (num == 0.3)
+print(round(0.1 + 0.2, 1) == 0.3)
+print(0.1 + 0.2)
+print(result)
+num = 0.3
+print(num == 0.3)
+
+print('{:*^10.4}'.format('Flower'))
+
+chs = "|'\'-'|"
+
+for ch in chs:
+    print(ch, end='')
+
+print()
+print("hello 'word'")
+print(id(chs))
+
+import time
+
+t = time.gmtime()
+print(f"{','.join(map(str,t))}")
+print(time.strftime("%Y-%m-%d %H:%M:%S", t))
+
+
+str1 = "Nanjing University"
+
+str2 = str1[:7] + " Normal " + str1[-10:]
+
+print(str2)

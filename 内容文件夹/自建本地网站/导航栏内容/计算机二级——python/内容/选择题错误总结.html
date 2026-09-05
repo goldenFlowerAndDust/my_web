@@ -12,6 +12,7 @@
 -->
 <main>
     <section class="transition" id="transition">
+        <h1>黑色链接会跳转、黄色展开子菜单</h1>
         <nav id="目录">
             <ul>
                 <!--注意4的倍数，不要有二级列表，无法显示-->
@@ -30,7 +31,19 @@
                             <a href="#" onclick="return false">栈与堆习题</a>
                             <ol class="nav_2">
                                 <li><a href="#栈与堆习题一">栈与堆习题一</a></li>
+
+                            </ol>
+                        </li>
+                        <li>
+                            <a href="#" onclick="return false">队列习题</a>
+                            <ol class="nav_2">
                                 <li><a href="#队列习题一">队列习题一</a></li>
+                            </ol>
+                        </li>
+                        <li>
+                            <a href="#" onclick="return false">栈习题</a>
+                            <ol class="nav_2">
+                                <li><a href="#栈习题一">栈习题一</a></li>
                             </ol>
                         </li>
                     </ol>
@@ -49,6 +62,7 @@
                             <ol class="nav_2">
                                 <li><a href="#叉树习题一">叉树习题一</a></li>
                                 <li><a href="#叉树习题二">叉树习题二——<span>重点，建议反复看</span></a></li>
+                                <li><a href="#叉树习题三">叉树习题三——<span>重点，建议反复看</span></a></li>
                             </ol>
                         </li>
                     </ol>
@@ -97,10 +111,11 @@
                     </ol>
                 </li> <!--包含二级列表-->
                 <li id="其他知识区快捷跳转"><a href="#其他知识">其他知识区快捷跳转</a></li>
-                <li id="程序控制结构目录"><a href="#">程序控制结构目录</a>
+                <li id="程序控制结构目录"><a href="#" onclick="return false">程序控制结构目录</a>
                     <ol>
                         <li><a href="#程序控制结构">程序控制结构——顺序结构、选择(分支)结构、循环结构</a></li>
                         <li><a href="#程序控制结构题型1">程序控制结构题一</a></li>
+                        <li><a href="#程序控制结构题二">程序控制结构题二</a></li>
                     </ol>
                 </li> <!--一级列表-->
                 <li id="单选题代码片段题"><a href="#" onclick="return false">单选题代码片段题</a>
@@ -111,6 +126,11 @@
                         <li><a href="#代码片段题四">代码片段题四</a></li>
                         <li><a href="#代码片段题五">代码片段题五[<span>坑</span>]——<span>包含方法：count()</span></a>
                         </li>
+                        <li><a href="#代码片段题六">代码片段题六[<span>有坑</span>]</a></li>
+                        <li><a href="#代码片段题七">代码片段题七[<span>有坑</span>]</a></li>
+                        <li><a href="#代码片段题八">代码片段题八[<span>反斜杠陷阱</span>]</a></li>
+                        <li><a href="#代码片段题九">代码片段题九</a></li>
+                        <li><a href="#代码片段题十">代码片段题十——<span>建议至少回来看一次</span></a></li>
                     </ol>
                 </li>
                 <li id="运算符"><a href="#">运算符</a>
@@ -127,6 +147,37 @@
                             <ol class="nav_2">
                                 <li><a href="#运算符习题一">运算符习题一</a></li>
                                 <li><a href="#运算符习题二">运算符习题二——<span>有意义建议反复观看</span></a></li>
+                                <li><a href="#运算符习题三">运算符习题三——<span>浮点数计算坑点</span></a></li>
+                            </ol>
+                        </li>
+                        <li><a href="#" onclick="return false">运算符与容器</a>
+                            <ol class="nav_2">
+                                <li><a href="#" onclick="return false">运算符与容器知识</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#运算符与容器" style="color: skyblue">运算符与容器知识</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#" onclick="return false">运算符与容器习题</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#运算符与容器习题一" style="color: skyblue">运算符与容器习题一</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li id="格式说明符"><a href="#" onclick="return false">格式说明符</a>
+                            <ol class="nav_2">
+                                <li><a href="#" onclick="return false">格式说明符知识</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#格式说明符知识" style="color: skyblue">格式说明符知识</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#" onclick="return false">格式说明符习题</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#格式说明符习题一" style="color: skyblue">格式说明符习题一——<span>包含方法:</span>format()</a>
+                                        </li>
+                                    </ol>
+                                </li>
                             </ol>
                         </li>
                     </ol>
@@ -143,19 +194,129 @@
                             <a href="#" onclick="return false">切片习题</a>
                             <ol class="nav_2">
                                 <li><a href="#切片习题一">切片习题一</a></li>
+                                <li><a href="#切片习题二">切片习题二——<span>有坑</span></a></li>
+                                <li><a href="#切片习题三">切片习题三——<span>建议至少回来看一次</span></a></li>
                             </ol>
                         </li>
                     </ol>
                 </li> <!--包含二级列表-->
                 <li id="其他常考知识点"><a href="#" onclick="return false">其他常考以及补充知识点</a>
                     <ol>
-                        <li><a href="#逻辑结构、储存结构、排序算法题型一">逻辑结构、储存结构、排序算法题型一</a></li>
+                        <li><a href="#" onclick="return false">结构化程序设计</a>
+                            <ol class="nav_2">
+                                <li><a href="#逻辑结构、储存结构、排序算法题型一">逻辑结构、储存结构、排序算法题型一</a>
+                                </li>
+                                <li><a href="#结构化程序设计习题一">结构化程序设计习题一</a></li>
+                            </ol>
+                        </li>
                         <li><a href="#软件三要素">软件三要素</a></li>
+                        <li><a href="#软件工程三要素">软件工程三要素</a></li>
+                        <li><a href="#软件集成测试组装方式">软件集成测试组装方式</a></li>
                         <li><a href="#扇入数与扇出数">扇入数与扇出数</a></li>
                         <li><a href="#程序设计语言类别">程序设计语言类别</a></li>
                         <li><a href="#python常见的结构">python常见的结构</a></li>
                         <li><a href="#链表">链表</a></li>
                         <li><a href="#作用域">作用域</a></li>
+                        <li><a href="#" onclick="return false">数据流图</a>
+                            <ol class="nav_2">
+                                <li><a href="#" onclick="return false">数据流图知识</a>
+                                    <ol>
+                                        <li><a href="#数据流图">数据流图</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#" onclick="return false">数据流图习题</a>
+                                    <ol>
+                                        <li><a href="#数据流图">数据流图</a></li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li id="数据库关系模式类型题"><a href="#" onclick="return false">数据库关系模式类型题</a>
+                            <ol class="nav_2">
+                                <li>
+                                    <a href="#" onclick="return false">数据库关系范式题</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#数据库范式"
+                                               style="color:dodgerblue">数据库范式</a></li>
+                                    </ol>
+                                </li>
+                                <li id="关系模式">
+                                    <a href="#" onclick="return false">关系模式</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#关系模式知识"
+                                               style="color:dodgerblue">关系模式知识</a>
+                                        </li>
+                                        <li><a href="#关系模式习题一"
+                                               style="color:dodgerblue">关系模式习题一</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li><a href="#静态语言与脚本语言">静态语言与脚本语言</a></li>
+                        <li><a href="#" onclick="return false">软件工程文档</a>
+                            <ol class="nav_2">
+                                <li id="软件工程文档"><a href="#" onclick="return false">软件工程文档总结</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#软件工程文档总结" style="color: skyblue">软件工程文档总结</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#" onclick="return false">软件工程文档习题</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#软件工程文档习题一" style="color: skyblue">软件工程文档习题一</a>
+                                        </li>
+                                        <li><a href="#软件工程文档习题二" style="color: skyblue">软件工程文档习题二</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li id="软件测试方法分类目录"><a href="#" onclick="return false">软件测试方法分类</a>
+                            <ol class="nav_2">
+                                <li><a href="#" onclick="return false">软件测试方法分类知识</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#软件测试方法分类" style="color: skyblue">软件测试方法分类</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#" onclick="return false">软件测试方法分类习题</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#基本路径测试习题一" style="color: skyblue">基本路径测试习题一</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li id="软件详细设计工具"><a href="#" onclick="return false">软件详细设计工具</a>
+                            <ol class="nav_2">
+                                <li><a href="#" onclick="return false">软件详细设计工具知识</a>
+                                    <ol>
+                                        <li><a href="#软件设计工具分类" style="color: skyblue">软件设计工具分类</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#" onclick="return false">软件详细设计工具习题</a>
+                                    <ol>
+                                        <li><a href="#软件详细设计工具习题一"
+                                               style="color: skyblue">软件详细设计工具习题一</a></li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li id="四种测试对应的阶段"><a href="#" onclick="return false">四种测试对应的阶段</a>
+                            <ol class="nav_2">
+                                <li><a href="#" onclick="return false">四种测试对应的阶段知识</a>
+                                    <ol>
+                                        <li><a href="#四种测试对应的阶段知识"
+                                               style="color: skyblue">四种测试对应的阶段</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#" onclick="return false">四种测试对应的阶段习题</a>
+                                    <ol>
+                                        <li><a href="#四种测试对应阶段习题一"
+                                               style="color: skyblue">四种测试对应阶段习题一</a></li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
                     </ol>
                 </li> <!--一级列表-->
                 <li id="文件处理"><a href="#" onclick="return false">文件处理</a>
@@ -182,8 +343,9 @@
                         <li>
                             <a href="#" onclick="return false">文件处理习题</a>
                             <ol class="nav_2">
-                                <li><a href="#方法pow习题一">文件处理习题一——<span>有意义建议反复观看</span></a></li>
+                                <li><a href="#文件处理习题一">文件处理习题一——<span>有意义建议反复观看</span></a></li>
                                 <li><a href="#文件处理习题二">文件处理习题二</a></li>
+                                <li><a href="#文件处理习题三">文件处理习题三——<span>建议至少回来看一次</span></a></li>
                             </ol>
                         </li>
                     </ol>
@@ -201,6 +363,10 @@
                                 <li><a href="#方法-pow">方法——<code>pow</code></a></li>
                                 <li><a href="#方法——map()">方法——<code>map()</code></a></li>
                                 <li><a href="#方法——join()">方法——<code>join()</code></a></li>
+                                <li><a href="#方法——format()">方法——<code>format()</code></a></li>
+                                <li><a href="#eval、exec、except辨析">eval、exec、except辨析</a></li>
+                                <li><a href="#内置函数五虎将-sorted() type() id() all() any()">内置函数五虎将-sorted()
+                                    type() id() all() any()</a></li>
                             </ol>
                         </li>
                         <li>
@@ -208,11 +374,13 @@
                             <ol class="nav_2">
                                 <li><a href="#方法pow习题一">方法<code>pow</code>习题一</a></li>
                                 <li><a href="#方法map()+join()">方法map()+join()习题</a></li>
+                                <li><a href="#方法sorted()、type()、id()、all()、any()混合习题">方法sorted()、type()、id()、all()、any()混合习题</a>
+                                </li>
                             </ol>
                         </li>
                     </ol>
                 </li>
-                <li id="列表知识总结"><a href="#">列表知识总结</a>
+                <li id="列表知识总结"><a href="#" onclick="return false">列表知识总结</a>
                     <ol>
                         <li>
                             <a href="#" onclick="return false">列表知识</a>
@@ -229,7 +397,7 @@
                         </li>
                     </ol>
                 </li> <!--包含二级列表-->
-                <li id="元组"><a href="#">元组</a>
+                <li id="元组"><a href="#" onclick="return false">元组</a>
                     <ol>
                         <li>
                             <a href="#" onclick="return false">元组知识</a>
@@ -247,7 +415,7 @@
                         </li>
                     </ol>
                 </li> <!--包含二级列表-->
-                <li id="字典"><a href="#">字典</a>
+                <li id="字典"><a href="#" onclick="return false">字典</a>
                     <ol>
                         <li>
                             <a href="#" onclick="return false">字典知识</a>
@@ -262,11 +430,14 @@
                             <ol class="nav_2">
                                 <li><a href="#字典习题一">字典习题一</a></li>
                                 <li><a href="#字典习题二">字典习题二</a></li>
+                                <li><a href="#字典习题三">字典习题三</a></li>
+                                <li><a href="#字典习题四">字典习题四</a></li>
+                                <li><a href="#字典习题五">字典习题五——<code>get()</code>方法</a></li>
                             </ol>
                         </li>
                     </ol>
                 </li> <!--包含二级列表-->
-                <li id="三方库"><a href="#">三方库</a>
+                <li id="三方库"><a href="#" onclick="return false">三方库</a>
                     <ol>
                         <li>
                             <a href="#" onclick="return false">三方库知识</a>
@@ -280,11 +451,16 @@
                             <ol class="nav_2">
                                 <li><a href="#三方库习题一">三方库习题一</a></li>
                                 <li><a href="#三方库习题二">三方库习题二——包含为总结库——<code>Networkx</code></a></li>
+                                <li><a href="#三方库习题三">三方库习题三</a></li>
+                                <li><a href="#三方库习题四">三方库习题四</a></li>
+                                <li><a href="#三方库习题五">三方库习题五</a></li>
+                                <li><a href="#三方库习题六">三方库习题六</a></li>
+                                <li><a href="#三方库习题七">三方库习题七</a></li>
                             </ol>
                         </li>
                     </ol>
                 </li> <!--包含二级列表-->
-                <li id="模块与包导航"><a href="#">模块与包</a>
+                <li id="模块与包导航"><a href="#" onclick="return false">模块与包</a>
                     <ol>
                         <li>
                             <a href="#" onclick="return false">模块知识</a>
@@ -302,7 +478,7 @@
                         </li>
                     </ol>
                 </li> <!--包含二级列表-->
-                <li id="函数"><a href="#">函数</a>
+                <li id="函数"><a href="#" onclick="return false">函数</a>
                     <ol>
                         <li>
                             <a href="#" onclick="return false">函数知识</a>
@@ -324,10 +500,59 @@
                             <ol class="nav_2">
                                 <li><a href="#函数习题一">函数习题一</a></li>
                                 <li><a href="#函数习题二">函数习题二</a></li>
+                                <li><a href="#函数习题三">函数习题三——<span>有坑</span></a></li>
+                                <li><a href="#函数习题四">函数习题四</a></li>
+                                <li><a href="#函数习题五">函数习题五</a></li>
+                                <li><a href="#函数习题五">函数习题六——<span>有坑</span></a></li>
                             </ol>
                         </li>
                     </ol>
                 </li> <!--包含二级列表-->
+                <li id="模块目录"><a href="#" onclick="return false">模块</a>
+                    <ol>
+                        <li>
+                            <a href="#" onclick="return false">模块random</a>
+                            <ol class="nav_2">
+                                <li><a href="#" onclick="return false">模块random知识</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#模块random知识" style="color: skyblue">模块random知识</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#" onclick="return false">模块random习题</a>
+                                    <ol class="nav_2">
+                                        <li><a href="#模块random习题一" style="color: skyblue">模块random习题一</a></li>
+                                        <li><a href="#模块random习题二" style="color: skyblue">模块random习题二</a></li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li> <!--包含二级列表-->
+                <li id="容器习题"><a href="#" onclick="return false">容器习题(所有容器综合题)</a>
+                    <ol>
+                        <li><a href="#容器习题一">容器习题一</a></li>
+                    </ol>
+                </li>
+                <li id="面向对象"><a href="#" onclick="return false">面向对象</a>
+                    <ol>
+                        <li><a href="#" onclick="return false">面向对象知识</a>
+                            <ol class="nav_2">
+                                <li><a href="#面向对象——概述">面向对象——概述</a></li>
+                                <li><a href="#面向对象-类与对象">类与对象</a></li>
+                                <li><a href="#面向对象-魔法方法">面向对象-魔法方法</a></li>
+                                <li><a href="#面向对象-类属性与实例属性">类属性与实例属性</a></li>
+                                <li>
+                                    <a href="#面向对象-面向对象高阶-类方法、静态方法、继承、多态、封装">类方法、静态方法、继承、多态、封装</a>
+                                </li>
+                            </ol>
+                        </li>
+                        <li><a href="#" onclick="return false">面向对象习题</a>
+                            <ol class="nav_2">
+                                <li><a href="#面向对象习题一">面向对象习题一</a></li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
             </ul>
         </nav>
         <div>
@@ -2184,6 +2409,1325 @@
                 </li>
                 <li>案例：<a href="#叉树习题二">叉树习题二——<span>重点，建议反复看</span></a></li>
             </ul>
+        </div>
+        <div>
+            <h2 id="软件工程三要素"><a href="#其他常考知识点">软件工程三要素</a></h2>
+            <ul>
+                <li>软件工程三要素是：<span class="span_warn">方法、工具、过程</span></li>
+                <li><span>记忆口诀：</span>“方法工具过程，软件工程三要素”</li>
+                <li><span>注意区分：</span><a href="#软件三要素">软件三要素</a> 是“程序、数据、文档”</li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="软件集成测试组装方式"><a href="#其他常考知识点">软件集成测试组装方式</a></h2>
+            <ul>
+                <li>
+                    <h3>一、非增量式集成（一次性组装）</h3>
+                    <ul>
+                        <li><span>定义：</span>把所有模块一次性组装成完整的系统，然后整体测试</li>
+                        <li><span>优点：</span>操作简单、测试效率高</li>
+                        <li><span>缺点：</span>一旦发现错误，<span
+                                class="span_warn">很难快速定位到底是哪个模块或接口出了问题</span>，排错和维护成本极高
+                        </li>
+                        <li><span>结论：</span><span class="span_warn">不推荐使用</span>，考试中“不采用”的选项就是它</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>二、增量式集成（主流方式）</h3>
+                    <ul>
+                        <li>逐步加入模块进行测试，更容易定位错误</li>
+                        <li>
+                            <h4>1. 自顶向下增量组装</h4>
+                            <ul>
+                                <li><span>定义：</span>从<span class="span_warn">主控模块（根节点）</span>开始，逐步将下一层模块加入测试
+                                </li>
+                                <li><span>优点：</span>早期验证系统的主要控制结构和逻辑</li>
+                                <li><span>缺点：</span>底层桩模块开发工作量大，底层关键模块可能测试不充分</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>2. 自底向上增量组装</h4>
+                            <ul>
+                                <li><span>定义：</span>从<span class="span_warn">最底层模块（叶子模块）</span>开始，逐步向上组装
+                                </li>
+                                <li><span>优点：</span>早期验证底层模块功能，驱动模块开发相对简单</li>
+                                <li><span>缺点：</span>系统整体框架和主控逻辑的验证被推迟到后期</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>3. 三明治式集成（混合增量组装）</h4>
+                            <ul>
+                                <li><span>定义：</span><span class="span_warn">同时使用</span>自顶向下和自底向上两种策略
+                                </li>
+                                <li><span>策略：</span>上层用自顶向下，底层关键模块用自底向上，在中间汇合</li>
+                                <li><span>优点：</span>结合两者优点，早期验证高层逻辑和底层核心功能</li>
+                                <li><span>缺点：</span>测试协调工作较为复杂</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>4. 迭代式组装（连续集成）</h4>
+                            <ul>
+                                <li><span>定义：</span>持续、频繁地将代码变更集成到主干，<span class="span_warn">每次集成都进行自动化测试</span>
+                                </li>
+                                <li><span>核心思想：</span>尽早发现集成问题，快速修复</li>
+                                <li><span>优点：</span>风险低、反馈快</li>
+                                <li><span>缺点：</span>对自动化测试要求很高</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th colspan="4"><h3>集成测试组装方式速查表</h3></th>
+                            </tr>
+                            <tr>
+                                <td><strong>类型</strong></td>
+                                <td><strong>组装方向</strong></td>
+                                <td><strong>优点</strong></td>
+                                <td><strong>缺点</strong></td>
+                            </tr>
+                            <tr>
+                                <td><span class="span_warn">一次性组装</span></td>
+                                <td>全部一起</td>
+                                <td>操作简单</td>
+                                <td>错误难以定位</td>
+                            </tr>
+                            <tr>
+                                <td><span>自顶向下</span></td>
+                                <td>根 → 叶</td>
+                                <td>早期验证主控逻辑</td>
+                                <td>桩模块工作量大</td>
+                            </tr>
+                            <tr>
+                                <td><span>自底向上</span></td>
+                                <td>叶 → 根</td>
+                                <td>早期验证底层功能</td>
+                                <td>主控逻辑验证晚</td>
+                            </tr>
+                            <tr>
+                                <td><span>三明治式</span></td>
+                                <td>上下同时</td>
+                                <td>兼具两者优点</td>
+                                <td>协调复杂</td>
+                            </tr>
+                            <tr>
+                                <td><span>迭代式</span></td>
+                                <td>持续集成</td>
+                                <td>风险低、反馈快</td>
+                                <td>自动化要求高</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <h3>💡 记忆口诀</h3>
+                    <ul>
+                        <li><span
+                                class="span_warn">“集成策略想分清，先看增量与一次。增量四种往下记：顶、底、混合、迭代式。”</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="软件集成组装策略习题"><a href="#其他常考知识点">软件集成组装策略习题</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/其他常考知识点/软件集成测试/软件继承测试-组装.png"
+                 alt="软件继承测试-组装"
+                 title="软件继承测试-组装">
+        </div>
+        <div>
+            <h2 id="数据流图"><a href="#其他常考知识点">数据流图（DFD）</a></h2>
+            <ul>
+                <li>
+                    <h3>定义</h3>
+                    <ul>
+                        <li>数据流图是<span class="span_warn">描述系统数据流向</span>的图形化工具</li>
+                        <li>从数据传递和加工的角度，描绘数据在系统中流动的逻辑过程</li>
+                        <li><span class="span">结构化分析方法中最重要的建模工具</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>四大核心要素（二级必考）</h3>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th>符号</th>
+                                <th>名称</th>
+                                <th>含义</th>
+                                <th>例子</th>
+                            </tr>
+                            <tr>
+                                <td><span>矩形</span></td>
+                                <td><span class="span_warn">外部实体</span></td>
+                                <td>系统外部的组织或人，数据的来源或去向</td>
+                                <td>顾客、银行、仓库</td>
+                            </tr>
+                            <tr>
+                                <td><span>圆角矩形/圆形</span></td>
+                                <td><span class="span_warn">处理过程（加工）</span></td>
+                                <td>对数据进行的变换或操作</td>
+                                <td>验证订单、计算工资</td>
+                            </tr>
+                            <tr>
+                                <td><span>开口矩形</span></td>
+                                <td><span class="span_warn">数据存储</span></td>
+                                <td>数据的存放处</td>
+                                <td>订单表、员工档案</td>
+                            </tr>
+                            <tr>
+                                <td><span>带箭头线段</span></td>
+                                <td><span class="span_warn">数据流</span></td>
+                                <td>数据的流动方向</td>
+                                <td>订单信息、付款金额</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <h3>数据流图 vs 程序流程图（必区分！）</h3>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th>对比维度</th>
+                                <th><span class="span_warn">数据流图（DFD）</span></th>
+                                <th><span>程序流程图（PFC）</span></th>
+                            </tr>
+                            <tr>
+                                <td><span>核心描述</span></td>
+                                <td><span class="span_warn">数据</span>的流动和处理过程</td>
+                                <td><span>程序</span>的执行逻辑和顺序</td>
+                            </tr>
+                            <tr>
+                                <td><span>关注点</span></td>
+                                <td>系统要“<span class="span_warn">做什么</span>”（逻辑模型）</td>
+                                <td>程序怎么“<span class="span">一步步做</span>”（物理实现）</td>
+                            </tr>
+                            <tr>
+                                <td><span>包含元素</span></td>
+                                <td>只有四种：实体、加工、存储、数据流</td>
+                                <td>包含判断框、循环框、箭头等控制流元素</td>
+                            </tr>
+                            <tr>
+                                <td><span>关键词</span></td>
+                                <td>数据的<span class="span_warn">来源</span>和<span class="span_warn">去向</span></td>
+                                <td>先判断、再循环、执行步骤</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <h3>分层结构</h3>
+                    <ul>
+                        <li><span class="span_warn">顶层图（上下文图）</span>：一个处理过程，代表整个系统，展示与外部实体的数据交换
+                        </li>
+                        <li><span>0层图</span>：将顶层图展开成多个主要过程，显示系统主要功能模块</li>
+                        <li><span>子层图</span>：对0层图中某个过程继续展开细化</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>记忆口诀</h3>
+                    <ul>
+                        <li><span class="span_warn">“数据流图看‘物流’，程序流程图看‘工序’”</span></li>
+                        <li><span>“数据流图四要素：实体、加工、存储、流”</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="数据库范式"><a href="#其他常考知识点">数据库范式</a></h2>
+            <ul>
+                <li>
+                    <h3>题目</h3>
+                    <ul>
+                        <li>定义学生的关系模式如下：<br>
+                            <code>S(S#, Sn, Sex, Age, D#, Da)</code><br>
+                            属性分别为：学号、姓名、性别、年龄、所属学院、院长<br>
+                            <span>该关系的范式最高是（ ）。</span>
+                        </li>
+                        <li>
+                            <h4>答案：<span class="span_warn">2NF（第二范式）</span></h4>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>解题思路</h3>
+                    <ul>
+                        <li>
+                            <h4>第一步：找依赖关系</h4>
+                            <ul>
+                                <li>候选键：<span class="span_warn">S#（学号）</span></li>
+                                <li>S# → Sn（学号决定姓名）</li>
+                                <li>S# → Sex、S# → Age、S# → D#</li>
+                                <li><span class="span_warn">D# → Da（学院编号决定院长）</span></li>
+                                <li>存在传递依赖：<span class="span_warn">S# → D# → Da</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>第二步：判断范式等级</h4>
+                            <ul>
+                                <li><span class="span">1NF</span>：属性不可再分 → ✅ 满足</li>
+                                <li><span class="span">2NF</span>：非主属性完全依赖于候选键 → ✅ 满足（S#是单属性候选键）
+                                </li>
+                                <li><span class="span_warn">3NF</span>：不存在传递依赖 → ❌ 不满足（存在 S# → D# → Da）</li>
+                                <li><span class="span_warn">结论：最高为 2NF</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>范式速查表</h3>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th>范式</th>
+                                <th>要求</th>
+                                <th>不满足时的问题</th>
+                            </tr>
+                            <tr>
+                                <td><span>1NF</span></td>
+                                <td>属性不可再分</td>
+                                <td>数据冗余</td>
+                            </tr>
+                            <tr>
+                                <td><span>2NF</span></td>
+                                <td>1NF + 非主属性完全依赖于候选键</td>
+                                <td>部分依赖</td>
+                            </tr>
+                            <tr>
+                                <td><span class="span_warn">3NF</span></td>
+                                <td>2NF + 不存在传递依赖</td>
+                                <td>传递依赖</td>
+                            </tr>
+                            <tr>
+                                <td><span>BCNF</span></td>
+                                <td>3NF + 所有决定因素都是候选键</td>
+                                <td>主属性部分依赖</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <h3>记忆口诀</h3>
+                    <ul>
+                        <li><span class="span_warn">“学号决定学院，学院决定院长”——传递依赖 → 最高 2NF</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="静态语言与脚本语言"><a href="#其他常考知识点">静态语言与脚本语言</a></h2>
+            <div class="div_table">
+                <table>
+                    <tr>
+                        <th colspan="3">静态语言 VS 脚本语言(解释型语言)</th>
+                    </tr>
+                    <tr>
+                        <td>对比维度</td>
+                        <td>静态语言(编译型)</td>
+                        <td>脚本语言(解释型)</td>
+                    </tr>
+                    <tr>
+                        <td>执行方式</td>
+                        <td><span>编译(<span class="span_warn">一次性翻译成机器码</span>)</span></td>
+                        <td><span>解释(<span class="span">逐行翻译并执行</span>)</span></td>
+                    </tr>
+                    <tr>
+                        <td>是否生成可执行文件</td>
+                        <td>✅ 生成如<code>（.exe）</code></td>
+                        <td><span>❌ 不生成，依赖解释器</span></td>
+                    </tr>
+                    <tr>
+                        <td>运行速度</td>
+                        <td>块(<span class="span_warn">已提前编译好</span>)</td>
+                        <td>慢(<span class="span_warn">边翻译边执行</span>)</td>
+                    </tr>
+                    <tr>
+                        <td>典型代表</td>
+                        <td><code>C、C++、Java</code></td>
+                        <td><code>python、JavaScript、PHP</code></td>
+                    </tr>
+                    <tr>
+                        <td>以来什么执行</td>
+                        <td><span>直接由操作系统执行机器码</span></td>
+                        <td>需要<span>解释器(如：python解释器)</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><img
+                                src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/其他常考知识点/语言类型/语言类型习题一.png"
+                                alt="语言类型习题一.png"
+                                title="语言类型习题一.png"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+            <h2 id="函数习题三"><a href="#函数">函数习题三</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/函数/函数习题三.png"
+                 alt="函数习题三"
+                 title="函数习题三">
+        </div>
+        <div>
+            <h2 id="代码片段题六"><a href="#单选题代码片段题">代码片段题六</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/代码片段题/代码片段题六.png"
+                 alt="代码片段题六"
+                 title="代码片段题六">
+        </div>
+        <div>
+            <h2 id="代码片段题七"><a href="#单选题代码片段题">代码片段题七</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/代码片段题/代码片段题七.png"
+                 alt="代码片段题七"
+                 title="代码片段题七">
+        </div>
+        <div>
+            <h2 id="程序控制结构题二"><a href="#程序控制结构目录">程序控制结构题二</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/程序控制结构/程序控制结构题二.png"
+                 alt="程序控制结构题二"
+                 title="程序控制结构题二">
+        </div>
+        <div>
+            <h2 id="模块random知识"><a href="#模块目录">模块random知识</a></h2>
+            <ul>
+                <li>
+                    <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/其他知识/import——random/import——random.html/#random"
+                       onclick="loadContent(this,'container-二级python选择题15','#random');return false">random知识</a>
+                </li>
+                <li>
+                    <div id="container-二级python选择题15"></div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="模块random习题一"><a href="#模块目录">模块random习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/模块/模块——random/模块random习题一.png"
+                 alt="模块random习题一"
+                 title="模块random习题一">
+        </div>
+        <div>
+            <h2 id="运算符与容器"><a href="#运算符">运算符习题三——包括知识</a></h2>
+            <ol>
+                <li>
+                    在自定义类创建的实例对象比较：<span>如果没没有显式写魔法方法：<code>__lt__、__gt__、__le__、__ge__、__eq__</code>，直接进行比较，则报错。</span>
+                </li>
+                <li>但如果是：内置容器：列表、字符串、元组、字典、集合有自己的内置判断方式</li>
+                <li>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th colspan="5"><h3>python容器比较速查表</h3></th>
+                            </tr>
+                            <tr>
+                                <td>类型</td>
+                                <td><code>== / !=</code></td>
+                                <td><code> > / < / >= / <= </code></td>
+                                <td>比较规则</td>
+                                <td>类型不匹配时</td>
+                            </tr>
+                            <tr>
+                                <td>列表(list)</td>
+                                <td>支持</td>
+                                <td>支持</td>
+                                <td><span>字典序：<span
+                                        class="span_warn">逐个元素比较，同类型比大小，分出结构即停止</span></span>
+                                </td>
+                                <td><code>TypeError</code></td>
+                            </tr>
+                            <tr>
+                                <td>元组(tuple)</td>
+                                <td>支持</td>
+                                <td>支持</td>
+                                <td><span>字典序：<span class="span_warn">与列表相同</span></span></td>
+                                <td><code>TypeError</code></td>
+                            </tr>
+                            <tr>
+                                <td>字典(dict)</td>
+                                <td>支持</td>
+                                <td>不支持</td>
+                                <td><span>只比键值对是否完全相同</span></td>
+                                <td>直接报：<code>TypeError</code></td>
+                            </tr>
+                            <tr>
+                                <td>集合(set)</td>
+                                <td>支持</td>
+                                <td>支持(<span>含义不同</span>)</td>
+                                <td><span><code>></code>是超集，<code><</code>是子集，不是大小比较</span></td>
+                                <td><span>与集合外类型比较时报：<code>TypeError</code></span></td>
+                            </tr>
+                            <tr>
+                                <td>字符串(str)</td>
+                                <td>支持</td>
+                                <td>支持</td>
+                                <td><span>字典序：逐字符按 Unicode 码点比较</span></td>
+                                <td><span>只和字符串比较，其他类型报 <code>TypeError</code></span></td>
+                            </tr>
+                            <tr>
+                                <td>数字(int/float)</td>
+                                <td>支持</td>
+                                <td>支持</td>
+                                <td>按数值大小比较</td>
+                                <td><span>数字之间可以跨类型比较（1 < 2.0 合法），非数字报错：<code>TypeError</code></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>三大区间：<code>数字(0~9) < 大写字母(A-Z) < 小写字母(a-z)</code></li>
+                <li>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th colspan="3">常用字码点参考(不用背、心里有数就行)</th>
+                            </tr>
+                            <tr>
+                                <td>字符</td>
+                                <td>码点</td>
+                                <td>记忆法</td>
+                            </tr>
+                            <tr>
+                                <td>'0'</td>
+                                <td>48</td>
+                                <td>数字起点是：48</td>
+                            </tr>
+                            <tr>
+                                <td>'9'</td>
+                                <td>57</td>
+                                <td>数字终点是：57</td>
+                            </tr>
+                            <tr>
+                                <td>'A'</td>
+                                <td>65</td>
+                                <td>大写的起点是：65</td>
+                            </tr>
+                            <tr>
+                                <td>‘Z’</td>
+                                <td>90</td>
+                                <td>大写的终点是：90</td>
+                            </tr>
+                            <tr>
+                                <td>'a'</td>
+                                <td>97</td>
+                                <td>小写的起点是：97</td>
+                            </tr>
+                            <tr>
+                                <td>‘z’</td>
+                                <td>122</td>
+                                <td>小写的终点是：122</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+            </ol>
+        </div>
+        <div>
+            <h2 id="运算符与容器习题一">><a href="#运算符">运算符与容器习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/其他常考知识点/无法分类/容器与运算符习题一.png"
+                 alt="容器与运算符习题一"
+                 title="容器与运算符习题一">
+        </div>
+        <div>
+            <h2 id="三方库习题三">><a href="#三方库">三方库习题三</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/三方库/三方库习题三.png"
+                 alt="三方库习题三"
+                 title="三方库习题三">
+        </div>
+        <div>
+            <h2 id="三方库习题四">><a href="#三方库">三方库习题四</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/三方库/三方库习题四.png"
+                 alt="三方库习题四"
+                 title="三方库习题四">
+        </div>
+        <div>
+            <h2 id="三方库习题五">><a href="#三方库">三方库习题五</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/三方库/三方库习题五.png"
+                 alt="三方库习题五"
+                 title="三方库习题五">
+        </div>
+        <div>
+            <h2 id="三方库习题六">><a href="#三方库">三方库习题六</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/三方库/三方库习题六.png"
+                 alt="三方库习题六"
+                 title="三方库习题六">
+        </div>
+        <div>
+            <h2 id="三方库习题七">><a href="#三方库">三方库习七</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/三方库/三方库习题七.png"
+                 alt="三方库习题七"
+                 title="三方库习题七">
+        </div>
+        <div>
+            <h2 id="叉树习题三"><a href="#叉树">叉树习题三</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/叉数/叉树习题/叉树习题三.png"
+                 alt="叉树习题三"
+                 title="叉树习题三">
+        </div>
+        <div>
+            <h2 id="栈习题一"><a href="#栈、堆、队列">栈习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/栈、堆、队列/栈题型/栈习题一.png"
+                 alt="栈习题一"
+                 title="栈习题一">
+        </div>
+        <div>
+            <h2 id="结构化程序设计习题一"><a href="#其他常考知识点">结构化程序设计习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/逻辑结构、顺序结构、排序算法题型/结构化程序设计习题一.png"
+                 alt="结构化程序设计习题一"
+                 title="结构化程序设计习题一">
+        </div>
+        <div>
+            <h2 id="软件工程文档总结"><a href="#软件工程文档">软件工程常见文档速查表</a></h2>
+            <div class="div_table">
+                <table>
+                    <tr>
+                        <th>文档名称</th>
+                        <th>核心作用</th>
+                        <th>产生阶段</th>
+                        <th>一句话记忆</th>
+                    </tr>
+                    <tr>
+                        <td><span class="span_warn">可行性研究报告</span></td>
+                        <td>确定项目<span class="span_warn">是否值得做</span>（技术、经济、法律可行性）</td>
+                        <td>项目立项前</td>
+                        <td>“做不做？”</td>
+                    </tr>
+                    <tr>
+                        <td><span>软件开发计划</span></td>
+                        <td>规划项目<span class="span">如何开展</span>（人员、进度、资源、预算）</td>
+                        <td>项目启动初期</td>
+                        <td>“怎么做？”</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_warn">软件需求规格说明书</span></td>
+                        <td>明确系统<span class="span_warn">要做什么</span>（功能需求、性能需求、接口需求）</td>
+                        <td>需求分析阶段</td>
+                        <td>“做什么？”</td>
+                    </tr>
+                    <tr>
+                        <td><span>概要设计说明书</span></td>
+                        <td>确定系统<span class="span">整体架构</span>（模块划分、接口设计、数据库设计）</td>
+                        <td>概要设计阶段</td>
+                        <td>“大框架”</td>
+                    </tr>
+                    <tr>
+                        <td><span>详细设计说明书</span></td>
+                        <td>描述每个模块<span class="span">具体实现</span>（算法、数据结构、接口细节）</td>
+                        <td>详细设计阶段</td>
+                        <td>“细节实现”</td>
+                    </tr>
+                    <tr>
+                        <td><span>用户手册</span></td>
+                        <td>教用户<span class="span">如何使用</span>系统（操作步骤、功能说明）</td>
+                        <td>开发后期/交付前</td>
+                        <td>“用户怎么用”</td>
+                    </tr>
+                    <tr>
+                        <td><span>操作手册</span></td>
+                        <td>指导运维人员<span class="span">如何部署和维护</span>系统</td>
+                        <td>开发后期/交付前</td>
+                        <td>“运维怎么管”</td>
+                    </tr>
+                    <tr>
+                        <td><span>测试计划</span></td>
+                        <td>制定<span class="span">测试策略</span>（测试范围、方法、资源、进度）</td>
+                        <td>测试阶段前</td>
+                        <td>“怎么测”</td>
+                    </tr>
+                    <tr>
+                        <td><span>测试分析报告</span></td>
+                        <td>记录<span class="span">测试结果</span>（缺陷统计、测试覆盖率、通过/失败情况）</td>
+                        <td>测试阶段后</td>
+                        <td>“测的结果”</td>
+                    </tr>
+                    <tr>
+                        <td><span>项目开发总结报告</span></td>
+                        <td>总结<span class="span">项目经验</span>（进度偏差、成本偏差、经验教训）</td>
+                        <td>项目验收阶段</td>
+                        <td>“干得怎么样”</td>
+                    </tr>
+                    <tr>
+                        <td><span>维护手册</span></td>
+                        <td>指导<span class="span">后期维护</span>（Bug修复、功能扩展、版本升级）</td>
+                        <td>交付后</td>
+                        <td>“后期怎么修”</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>🧠 二级考试常考（选择题速记）</h3>
+            <div class="div_table">
+                <table>
+                    <tr>
+                        <th>常考问题</th>
+                        <th>正确答案</th>
+                    </tr>
+                    <tr>
+                        <td>确定项目是否进行开发的文档</td>
+                        <td><span class="span_warn">可行性研究报告</span></td>
+                    </tr>
+                    <tr>
+                        <td>确定系统“做什么”的文档</td>
+                        <td><span class="span_warn">软件需求规格说明书</span></td>
+                    </tr>
+                    <tr>
+                        <td>描述系统“整体架构”的文档</td>
+                        <td><span>概要设计说明书</span></td>
+                    </tr>
+                    <tr>
+                        <td>描述“具体模块实现”的文档</td>
+                        <td><span>详细设计说明书</span></td>
+                    </tr>
+                    <tr>
+                        <td>制定测试策略的文档</td>
+                        <td><span>测试计划</span></td>
+                    </tr>
+                    <tr>
+                        <td>记录测试结果的文档</td>
+                        <td><span>测试分析报告</span></td>
+                    </tr>
+                    <tr>
+                        <td>规划项目进度的文档</td>
+                        <td><span>软件开发计划</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>💡 记忆口诀</h3>
+            <ul>
+                <li><span
+                        class="span_warn">“可行性定生死，需求定功能，概要定架构，详细定实现，测试定质量，报告定结果。”</span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="软件测试方法分类"><a href="#软件测试方法分类目录">软件测试方法分类</a></h2>
+            <ul>
+                <li>
+                    <h3>一、按测试方法分类</h3>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th>测试方法</th>
+                                <th>核心思想</th>
+                                <th>常见代表</th>
+                            </tr>
+                            <tr>
+                                <td><span class="span_warn">黑盒测试</span></td>
+                                <td>只关注<span class="span_warn">输入/输出</span>，不关心内部代码逻辑</td>
+                                <td>功能测试、等价类划分、边界值分析</td>
+                            </tr>
+                            <tr>
+                                <td><span class="span_warn">白盒测试</span></td>
+                                <td>关注<span class="span_warn">内部代码逻辑</span>和结构</td>
+                                <td><span class="span_warn">基本路径测试</span>、逻辑覆盖（语句覆盖、分支覆盖、条件覆盖）
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <h3>二、按测试方式分类</h3>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th>测试方式</th>
+                                <th>核心思想</th>
+                                <th>常见代表</th>
+                            </tr>
+                            <tr>
+                                <td><span class="span_warn">静态测试</span></td>
+                                <td><span class="span_warn">不运行程序</span>，只检查代码、文档等</td>
+                                <td>代码审查、走查、桌面检查</td>
+                            </tr>
+                            <tr>
+                                <td><span class="span_warn">动态测试</span></td>
+                                <td><span class="span_warn">实际运行程序</span>，输入数据验证</td>
+                                <td>基本路径测试、功能测试、集成测试</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <h3>三、两种维度组合（核心考点）</h3>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th>静态测试</th>
+                                <th>动态测试</th>
+                            </tr>
+                            <tr>
+                                <td><span class="span_warn">黑盒测试</span></td>
+                                <td>❌ 很少见</td>
+                                <td>✅ 功能测试、等价类划分、边界值分析</td>
+                            </tr>
+                            <tr>
+                                <td><span class="span_warn">白盒测试</span></td>
+                                <td>✅ 代码审查</td>
+                                <td>✅ <span class="span_warn">基本路径测试</span>、逻辑覆盖</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <h3>🎯 二级考试最常考的一句话</h3>
+                    <ul>
+                        <li><span class="span_warn">基本路径测试 = 白盒测试 + 动态测试</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="基本路径测试习题一"><a href="#软件测试方法分类目录">基本路径测试习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/其他常考知识点/软件测试方法分类/基本路径测试.png"
+                 alt="基本路径测试"
+                 title="基本路径测试">
+        </div>
+        <div>
+            <h2 id="软件工程文档习题一"><a href="#软件工程文档">软件工程文档习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/其他常考知识点/软件工程文档总结/软件工程文档习题一.png"
+                 alt="软件工程文档习题一"
+                 title="软件工程文档习题一">
+        </div>
+        <div>
+            <h2 id="软件工程文档习题二"><a href="#软件工程文档">软件工程文档习题二</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/其他常考知识点/软件工程文档总结/软件工程文档习题二.png"
+                 alt="软件工程文档习题二"
+                 title="软件工程文档习题二">
+        </div>
+        <div>
+            <h2 id="关系模式知识"><a href="#数据库关系模式类型题">关系模式类型题</a></h2>
+            <ul>
+                <li>关系模式：<span>一般通过 <code>#</code>来确定主键、如果有多个则<code>#</code>组合成一个主键</span>
+                </li>
+                <li>主属性：<span>就是组成主键的各个字段（如 S#、C#）”。</span></li>
+                <li>非主属性：<span>就是主键以外的所有字段</span></li>
+                <li>部分依赖：<span>某个字段、与主键其中一个产生依赖</span></li>
+                <li>完全依赖：<span>某个字段、与主键所有产生依赖</span></li>
+                <li>平凡依赖：<span>某个字段是集合的子集(主键、字段集合)</span></li>
+                <li>传递依赖：<span>某个字段通过其他非主属性字段，将自身依赖主键</span></li>
+                <li>
+                    第一范式(1NF)：<span>所有属性(字段)都 <span class="span_warn">不可再分</span>，每个单元格只有一个数据</span>
+                </li>
+                <li>
+                    第二范式(2NF)：<span>在满足1NF的基础上、<span
+                        class="span">不允许非主属性依赖主键的一部分（但允许依赖主键的全部，或者通过别的字段传递依赖）</span></span>
+                </li>
+                <li>
+                    第三范式(3NF)：<span>在满足2NF的基础上，<span
+                        class="span">不允许非主属性依赖主键的一部分，也不允许非主属性传递依赖于主键</span></span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="关系模式习题一"><a href="#数据库关系模式类型题">关系模式类型题</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/其他常考知识点/关系模式/关系模式习题一.png"
+                 alt="关系模式习题一"
+                 title="关系模式习题一">
+        </div>
+        <div>
+            <h2 id="运算符习题三"><a href="#运算符">运算符习题三——浮点数运算坑点</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/运算符/运算符习题三.png"
+                 alt="/运算符习题三"
+                 title="/运算符习题三">
+        </div>
+        <div>
+            <h2 id="方法——format()"><a href="#方法">方法——format()</a></h2>
+            <ul>
+                <li><code>format()</code> <span>是 Python 字符串（str）自带的一个实例方法。</span></li>
+                <li>它的作用就是：<span>用括号里的参数，替换掉字符串中写好的 {} 占位符。</span></li>
+                <li>语法：<code>format('字符串')</code>，必须是字符串，否则TypeError</li>
+                <li>通常和 <a href="#格式说明符知识">格式说明符</a>一起使用</li>
+                <li>如：<code>print(':*^10.4').format('flower')</code>
+                    <ol>
+                        <li>
+                            <h3>再看:format()部分：</h3>
+                            <ol>
+                                <li>format(‘flower’)</li>
+                                <li>其中：flower是实参</li>
+                            </ol>
+                        </li>
+                        <li>
+                            <h3>再看：字符串(str)部分：</h3>
+                            <ol>
+                                <li>大括号包括-格式说明符</li>
+                                <li><span>没有参数序号，所以默认是第一个参数</span></li>
+                                <li><code>:</code><span>后面说明符规则</span></li>
+                                <li>填充是：<code>*</code>——说明，当字符串宽度有剩余，*补充</li>
+                                <li><code>^</code>——表示居中(字符串在中间-两边往中间填充)</li>
+                                <li>字符串宽度是：<code>10</code></li>
+                                <li>精度是：<code>4</code></li>
+                                <li>类型默认是：字符串，所以，精度+类型：<span>告诉我们的是：截取前4个字符</span></li>
+                            </ol>
+                        </li>
+                        <li>说以整个框架是：<span>先截取实参前4个字符——(flow)为字符串，然后采用说明符规则</span></li>
+                        <li>
+                            已知规则是：宽度：10，，所以需要填充(6个<code>*</code>)，又因为居中，所以最后的输出结果是：<code>***flow***</code>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="格式说明符知识"><a href="#格式说明符">格式说明符</a></h2>
+            <ul>
+                <li>
+                    <h3>格式说明符：<span>专门用来控制填入的内容长什么样（对齐、宽度、截断、填充）</span></h3>
+                    <ol>
+                        <li>
+                            写法格式：<code>{ {参数序号(可选)} + : + 填充 + 对齐 + 宽度 + 千位分隔符-，(可选) + .精度 + 类型
+                            }</code>
+                        </li>
+                        <li><span>必须是大括号内</span></li>
+                        <li><span>参数序号：<span>可以理解为索引，主要与后续方法：<code>format()</code>打配合，<span
+                                class="span_warn">序号是0，则是方法第一个参数、1，则是第二个参数，依次类推</span></span></span>
+                        </li>
+                        <li><span><code>:</code>后面跟着的都是格式规则</span></li>
+                        <li><span>填充：<span class="span_warn">当字符串长度与规定长度短时，由填充(字符)替代</span></span>
+                        </li>
+                        <li><span>对齐：<span
+                                class="span_warn"><code>^</code>:居中(<span
+                                class="span">代表占位符，两边填充</span>)、<code><</code>：<span
+                                class="span">代表占位符，末尾填充</span>，<code>></code>，<span
+                                class="span"></span>代表占位符，左边填充</span></span>
+                        </li>
+                        <li>width：<span>顾名思义：<span class="span_warn">代表该字符串长度</span></span></li>
+                        <li>
+                            <h4>精度的效果与类型挂钩、精度必须是整数</h4>
+                            <div class="div_table">
+                                <table>
+                                    <tr>
+                                        <th colspan="3"><h5>类型(决定 [.] 后面根什么字母)</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td>类型代码</td>
+                                        <td>使用数据</td>
+                                        <td>含义</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>s</code></td>
+                                        <td><span>字符串</span></td>
+                                        <td><span
+                                                class="span_warn">字符串格式(默认，通常省略不写),与精度打配合，截取前[]个字符</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>d</code></td>
+                                        <td><span>整数</span></td>
+                                        <td><span class="span_warn">十进制整数(常用)</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>f</code></td>
+                                        <td><span>浮点数</span></td>
+                                        <td><span
+                                                class="span_warn">定点小数(常用，显式小数点)，与精度打配合，确定输出浮点数的小数位数</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>e</code></td>
+                                        <td><span>浮点数</span></td>
+                                        <td><span class="span_warn">科学计数法(如：1.23e+02)</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>%</code></td>
+                                        <td><span>浮点数</span></td>
+                                        <td><span
+                                                class="span_warn">转成百分比格式(如：0.5 变成 50.000000%),通过精度，规定小数位数</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>x/ o / b</code></td>
+                                        <td><span>整数</span></td>
+                                        <td><span class="span_warn">十六进制/八进制/二进制(二级偶尔考识别)</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                        <li>外加补充，千位分隔符——<span
+                                class="span">只能作用于整数部分(从后往前，每3个字符一个,)，<span
+                                class="span_warn">如果存在浮点数，需要(.精度f)规定小数位数</span></span>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="格式说明符习题一"><a href="#格式说明符">格式说明符习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/运算符/格式说明符/格式说明符习题一.png"
+                 alt="格式说明符习题一"
+                 title="格式说明符习题一">
+        </div>
+        <div>
+            <h2 id="代码片段题八"><a href="#单选题代码片段题">代码片段题八</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/代码片段题/代码片段题八.png"
+                 alt="代码片段题八"
+                 title="代码片段题八">
+        </div>
+        <div>
+            <h2 id="eval、exec、except辨析"><a href="#方法">eval、exec、except —— 三大“易容术”辨析</a></h2>
+            <ul>
+                <li>
+                    <h3>一、<code>except</code> —— “保护伞”</h3>
+                    <ul>
+                        <li><span class="span_warn">本质</span>：<span>关键字（语句）</span>，不是函数。</li>
+                        <li><span class="span_warn">作用</span>：<span>捕获并处理异常</span>，防止程序崩溃。</li>
+                        <li><span class="span_warn">固定搭配</span>：<span>必须和 <code>try</code> 一起出现</span>。</li>
+                        <li>
+                            <span class="span_warn">代码形态</span>：
+                            <code style="display:block; margin-top:5px;">
+                                try: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;x = int(input("输入数字：")) <br>
+                                except ValueError: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;print("输入的不是数字！")
+                            </code>
+                        </li>
+                        <li><span class="span_warn">考场定位</span>：<span>必考！操作题和选择题都爱考，必须掌握 <code>try-except-else-finally</code> 的结构。</span>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <h3>二、<code>eval</code> —— “执行器”（危险！）</h3>
+                    <ul>
+                        <li><span class="span_warn">本质</span>：<span>内置函数</span>，不是语句。</li>
+                        <li><span class="span_warn">作用</span>：<span>把字符串当成 Python 表达式执行，并返回结果</span>。
+                        </li>
+                        <li>
+                            <span class="span_warn">代码形态</span>：
+                            <code style="display:block; margin-top:5px;">
+                                result = eval("2 + 3 * 4") &nbsp;&nbsp;# 返回 14 <br>
+                                lst = eval("[1, 2, 3]") &nbsp;&nbsp;# 返回真正的列表
+                            </code>
+                        </li>
+                        <li><span class="span_warn">⚠️ 致命风险</span>：<span class="span_warn">代码注入！</span> <span>如果处理用户输入，攻击者可传入 <code>__import__('os').system('rm -rf /')</code> 等恶意代码。</span>
+                        </li>
+                        <li><span class="span_warn">安全替代</span>：<span>用 <code>ast.literal_eval()</code> 或 <code>json.loads()</code> 代替。</span>
+                        </li>
+                        <li><span class="span_warn">考场定位</span>：<span>极少考。考也只会问“能不能用”（答案通常是 <span
+                                class="span_warn">不能</span>，有安全风险）或返回值是什么。</span></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <h3>三、<code>exec</code> —— “执行器Pro版”</h3>
+                    <ul>
+                        <li><span class="span_warn">本质</span>：<span>内置函数</span>，和 <code>eval</code> 是“兄弟”。
+                        </li>
+                        <li><span class="span_warn">作用</span>：<span>执行字符串里的代码块（可含多行语句），但 <span
+                                class="span_warn">没有返回值</span>（永远返回 <code>None</code>）</span>。
+                        </li>
+                        <li>
+                            <span class="span_warn">代码形态</span>：
+                            <code style="display:block; margin-top:5px;">
+                                exec("print('Hello')") &nbsp;&nbsp;# 直接输出 Hello <br>
+                                exec("a = 10") &nbsp;&nbsp;# 没有返回值，但会创建变量 a
+                            </code>
+                        </li>
+                        <li><span
+                                class="span_warn">考场定位</span>：<span>几乎不考。记住它有“无返回值”和“同样危险”这两个特征就够了。</span>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <h3>四、<code>eval</code> VS <code>exec</code> 速查表</h3>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th>对比维度</th>
+                                <th><code>eval()</code></th>
+                                <th><code>exec()</code></th>
+                            </tr>
+                            <tr>
+                                <td><span>处理对象</span></td>
+                                <td><span class="span_warn">表达式</span></td>
+                                <td><span>代码块（含多行语句）</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>是否有返回值</span></td>
+                                <td><span class="span_warn">✅ 有</span>（返回表达式结果）</td>
+                                <td><span class="span_warn">❌ 无</span>（永远返回 <code>None</code>）</td>
+                            </tr>
+                            <tr>
+                                <td><span>危险性</span></td>
+                                <td colspan="2"><span class="span_warn">⚠️ 极高</span>（代码注入风险）</td>
+                            </tr>
+                            <tr>
+                                <td><span>常见用途</span></td>
+                                <td><span>计算表达式的值</span></td>
+                                <td><span>执行动态逻辑语句</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+
+                <li>
+                    <h3>🎯 考场速记口诀（别再把它们搞混了！）</h3>
+                    <ul>
+                        <li><span
+                                class="span_warn">“except 是抓虫子的网，eval 是开保险柜的钥匙，exec 是开保险柜的炸药包。”</span>
+                        </li>
+                        <li>
+                            <span>看到 <code>try</code> 必选 <code>except</code>；看到字符串里套代码，先想 <code>eval</code> 和 <code>exec</code> 哪个更危险。</span>
+                        </li>
+                        <li><span>二级考试里，<code>except</code> 是常客，<code>eval</code> 和 <code>exec</code> 是“背景板”，认识就行，别深交！</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="方法sorted()、type()、id()、all()、any()混合习题"><a
+                    href="#方法">方法sorted()、type()、id()、all()、any()混合习题</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/其他常考知识点/方法/方法sorted()、type()、id()、all()、any()混合习题.png"
+                 alt="方法sorted()、type()、id()、all()、any()混合习题"
+                 title="方法sorted()、type()、id()、all()、any()混合习题">
+        </div>
+        <div>
+            <h2 id="内置函数五虎将-sorted() type() id() all() any()"><a href="#方法">内置函数五虎将 —— sorted() type()
+                id() all() any()</a></h2>
+            <div class="div_table">
+                <table>
+                    <tr>
+                        <th>函数</th>
+                        <th>一句话考点</th>
+                        <th>坑点/陷阱</th>
+                    </tr>
+                    <tr>
+                        <td><code>sorted()</code></td>
+                        <td><span class="span_warn">拍照不碰原图</span></td>
+                        <td>返回新列表，原变量不变；<code>list.sort()</code> 才改原列表</td>
+                    </tr>
+                    <tr>
+                        <td><code>type()</code></td>
+                        <td><span class="span_warn">查户口</span></td>
+                        <td>返回类型对象；<code>isinstance()</code> 返回布尔值</td>
+                    </tr>
+                    <tr>
+                        <td><code>id()</code></td>
+                        <td><span class="span_warn">查门牌号</span></td>
+                        <td>返回内存地址的十进制整数，<code>is</code> 就是比地址</td>
+                    </tr>
+                    <tr>
+                        <td><code>all()</code></td>
+                        <td><span class="span_warn">一假则假</span></td>
+                        <td>遇 False 立即返回 False；常与生成器搭配</td>
+                    </tr>
+                    <tr>
+                        <td><code>any()</code></td>
+                        <td><span class="span_warn">一真则真</span></td>
+                        <td>遇 True 立即返回 True；常与生成器搭配</td>
+                    </tr>
+                    <tr>
+                        <td><code>isinstance()</code></td>
+                        <td><span class="span_warn">认亲（连儿子也认）</span></td>
+                        <td>
+                            <span>对比：<code>type()</code> 不认子类，<code>isinstance()</code> 认子类。</span><br>
+                            <span class="span_warn">大招</span>：<span>第二个参数可以是元组 <code>(int, float)</code>，满足其一即 True。</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+            <h2 id="函数习题四"><a href="#函数">函数习题四</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/函数/函数习题四.png"
+                 alt="函数习题四.png"
+                 title="函数习题四.png">
+        </div>
+        <div>
+            <h2 id="函数习题五"><a href="#函数">函数习题五</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/函数/函数习题五.png"
+                 alt="函数习题五"
+                 title="函数习题五">
+        </div>
+        <div>
+            <h2 id="函数习题六"><a href="#函数">函数习题六</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/函数/函数习题六.png"
+                 alt="函数习题六"
+                 title="函数习题六">
+        </div>
+        <div>
+            <h2 id="容器习题一"><a href="#容器习题">容器习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/容器/容器习题/容器习题一.png"
+                 alt="容器习题一"
+                 title="容器习题一">
+        </div>
+        <div>
+            <h2 id="字典习题三"><a href="#字典">字典习题三</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/容器/字典方法/字典习题三.png"
+                 alt="字典习题三"
+                 title="字典习题三">
+        </div>
+        <div>
+            <h2 id="模块random习题二"><a href="#模块目录">模块random习题二</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/模块/模块——random/模块random习题二.png"
+                 alt="模块random习题二"
+                 title="模块random习题二">
+        </div>
+        <div>
+            <h2 id="字典习题四"><a href="#字典">字典习题四</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/容器/字典方法/字典习题四.png"
+                 alt="字典习题四"
+                 title="字典习题四">
+        </div>
+        <div>
+            <h2 id="切片习题二"><a href="#切片">切片习题二</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/切片/切片习题二.png"
+                 alt="切片习题二"
+                 title="切片习题二">
+        </div>
+        <div>
+            <h2 id="软件详细设计工具习题一"><a href="#软件详细设计工具">软件详细设计工具习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/其他常考知识点/软件详细设计工具/软件详细工具习题一.png"
+                 alt="软件详细工具习题一"
+                 title="软件详细工具习题一">
+        </div>
+        <div>
+            <h2 id="软件设计工具分类"><a href="#软件详细设计工具">软件设计工具分类 —— 概要设计 vs 详细设计</a></h2>
+            <ul>
+                <li>
+                    <span class="span_warn">核心区分</span>：
+                    <span>“概要设计”决定<span class="span_warn">系统架构（模块划分）</span>；“详细设计”决定<span
+                            class="span_warn">模块内部逻辑（具体实现）</span>。</span>
+                </li>
+                <li>
+                    <div class="div_table">
+                        <table>
+                            <tr>
+                                <th>设计阶段</th>
+                                <th>核心任务</th>
+                                <th>常用工具（考点）</th>
+                                <th>一句话比喻</th>
+                            </tr>
+                            <tr>
+                                <td><span class="span_warn">概要设计</span><br>（总体设计）</td>
+                                <td>确定系统的<span class="span_warn">模块结构</span>（分几个部分，怎么调用）</td>
+                                <td>
+                                    <span class="span_warn">系统结构图</span>、层次图、HIPO图
+                                </td>
+                                <td>大楼的<span class="span_warn">“平面图”</span><br>（几层楼，几个房间）</td>
+                            </tr>
+                            <tr>
+                                <td><span class="span_warn">详细设计</span></td>
+                                <td>确定每个模块内部的<span class="span_warn">算法和执行逻辑</span></td>
+                                <td>
+                                    <span>程序流程图、N-S图（盒图）、PAD图、伪代码、判定表</span>
+                                </td>
+                                <td>大楼的<span class="span_warn">“施工图”</span><br>（钢筋怎么走，水电怎么布）</td>
+                            </tr>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <span class="span_warn">考场秒杀口诀</span>：
+                    <span>“问详细设计，排除<span class="span_warn">系统结构图</span>；看到<span class="span_warn">流程图/N-S/PAD</span>，秒选详细设计！”</span>
+                </li>
+                <li>
+                    <span class="span_warn">常见干扰项</span>：
+                    <span>如果选项里同时出现“系统结构图”和“程序流程图”，问“不属于详细设计”的，直接选 <span
+                            class="span_warn">系统结构图</span>（它是概要设计的）。</span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ol>
+                <li><h2><a href="#面向对象">面向对象导航栏</a></h2>
+                    <ul>
+                        <li id="面向对象——概述">
+                            <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向过程-面向对象-对象-类之间的关系/笔记/面向过程-面向对象-对象-类之间的关系.html/#面向对象——概述"
+                               onclick="loadContent(this,'container-二级python选择题16','#面向对象——概述');return false">面向对象——概述</a>
+                        </li>
+                        <li id="面向对象-类与对象">
+                            <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象——创建类-实例对象-实例方法概念/笔记/面向对象——创建类-实例对象-实例方法概念.html/#类与对象"
+                               onclick="loadContent(this,'container-二级python选择题16','#类与对象');return false">类与对象</a>
+                        </li>
+                        <li id="面向对象-魔法方法">
+                            <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象——魔法方法/笔记/面向对象——魔法方法.html/#魔法方法"
+                               onclick="loadContent(this,'container-二级python选择题16','#魔法方法');return false">魔法方法</a>
+                        </li>
+                        <li id="面向对象-类属性与实例属性">
+                            <a href="../../../../../内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象——实例属性与类属性/笔记/面向对象——实例属性与类属性.html/#类属性与实例属性"
+                               onclick="loadContent(this,'container-二级python选择题16','#类属性与实例属性');return false">类属性与实例属性</a>
+                        </li>
+                        <li id="面向对象-面向对象高阶-类方法、静态方法、继承、多态、封装">
+                            <a href="../../../../python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/高阶/面向对象高阶——类方法、静态方法、继承、多态、封装.html/#面向对象高阶——类方法、静态方法、继承、多态、封装"
+                               onclick="loadContent(this,'container-二级python选择题16','#面向对象高阶——类方法、静态方法、继承、多态、封装');return false">面向对象高阶——类方法、静态方法、继承、多态、封装</a>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <div id="container-二级python选择题16"></div>
+        </div>
+        <div>
+            <h2 id="面向对象习题一"><a href="#面向对象">面向对象习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/面向对象/面向对象习题一.png"
+                 alt="面向对象习题一"
+                 title="面向对象习题一">
+        </div>
+        <div>
+            <h2 id="四种测试对应的阶段知识"><a href="#四种测试对应的阶段">四种测试对应的阶段</a></h2>
+            <div class="div_table">
+                <table>
+                    <tr>
+                        <th colspan="2"><h3>软件工程 V 模型</h3></th>
+                    </tr>
+                    <tr>
+                        <td>测试阶段</td>
+                        <td>对应发现那个阶段的错误</td>
+                    </tr>
+                    <tr>
+                        <td><span>单元测试</span></td>
+                        <td><span class="span_warn">详细设计(<span>模块内部的算法和逻辑</span>)</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>集成测试</span></td>
+                        <td><span class="span_warn">概要设计(<span>模块间的接口和架构</span>)</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>系统设计</span></td>
+                        <td><span class="span_warn">需求分析(<span>软件规格说明书</span>)</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>验收测试</span></td>
+                        <td><span class="span_warn">用户需求(<span>用户的真实诉求</span>)</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+            <h2 id="四种测试对应阶段习题一"><a href="#四种测试对应的阶段">四种测试对应阶段习题一</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/其他常考知识点/四种测试对应阶段/四种测试对应阶段习题一.png"
+                 alt="四种测试对应阶段习题一"
+                 title="四种测试对应阶段习题一">
+        </div>
+        <div>
+            <h2 id="切片习题三"><a href="#切片">切片习题三</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/切片/切片习题三.png"
+                 alt="切片习题三"
+                 title="切片习题三">
+        </div>
+        <div>
+            <h2 id="字典习题五"><a href="#字典">字典习题五</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/容器/字典方法/字典习题五.png"
+                 alt="字典习题五"
+                 title="字典习题五">
+        </div>
+        <div>
+            <h2 id="代码片段题九"><a href="#单选题代码片段题">代码片段题九</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/代码片段题/代码片段题九.png"
+                 alt="代码片段题九"
+                 title="代码片段题九">
+        </div>
+        <div>
+            <h2 id="代码片段题十"><a href="#单选题代码片段题">代码片段题十</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/代码片段题/代码片段题十.png"
+                 alt="代码片段题十"
+                 title="代码片段题十">
+        </div>
+        <div>
+            <h2 id="文件处理习题三"><a href="#文件处理">文件处理习题三</a></h2>
+            <img src="../../../../../内容文件夹/自建本地网站/导航栏内容/计算机二级——python/image/文件处理/文件处理习题三.png"
+                 alt="文件处理习题三"
+                 title="文件处理习题三">
         </div>
     </section>
     <!--其他部分-->
