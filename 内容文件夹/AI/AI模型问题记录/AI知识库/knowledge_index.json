@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "categories": {
+    "Python基础": [
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\python基础——异常处理\\代码\\异常处理.py",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\python基础——文件读写与操作\\with语句以及扩展方法\\代码\\with语句以及扩展方法.py",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\python基础——文件读写与操作\\读写、写入、追加操作-open-read-write-close解析\\笔记\\读写、写入、追加操作-open-read-write-close解析.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\python基础——文件读写与操作\\读文件及注意事项\\笔记\\读文件及注意事项.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\函数\\函数基础\\函数基础——介绍\\笔记\\函数基础——介绍.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\函数\\函数基础\\函数基础——函数定义\\笔记\\函数基础——函数定义.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\函数\\函数基础\\函数基础——函数嵌套调用\\笔记\\函数基础——函数嵌套调用.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\函数\\函数基础\\函数基础——函数的参数与返回值\\笔记\\函数基础——函数的参数与返回值.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\函数\\函数基础\\函数基础——函数说明文档\\笔记\\函数基础——函数说明文档.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\函数\\函数基础\\函数基础——案例\\函数基础——案例.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\函数\\函数进阶\\函数进阶——传参方式\\笔记\\函数进阶——传参方式.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\函数\\函数进阶\\函数进阶——变量作用域\\笔记\\函数进阶——变量作用域.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\函数\\函数进阶\\函数进阶——可传参参数类型\\笔记\\函数进阶——可传参参数类型.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\函数\\函数进阶\\函数进阶——递归\\笔记\\函数进阶——递归.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据存储与运算\\字符串进阶\\笔记\\字符串进阶.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据存储与运算\\字面量(数据类型初步认识)_变量_注释\\笔记\\字面量(数据类型初步认识)_变量_注释.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据存储与运算\\标识符\\笔记\\标识符.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据存储与运算\\输入与输出\\笔记\\输入与输出.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据存储与运算\\运算符\\笔记\\运算符.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——元组tuple\\数据容器——元组tuple-基本操作\\笔记\\数据容器——元组tuple-基本操作.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——元组tuple\\数据容器——元组tuple-组包与解包\\笔记\\数据容器——元组tuple-组包与解包.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——列表list\\数据容器——列表list-介绍\\笔记\\数据容器——列表list-介绍.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——列表list\\数据容器——列表list-切片\\笔记\\数据容器——列表list-切片.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——列表list\\数据容器——列表list-列表推导式\\笔记\\数据容器——列表list-列表推导式.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——列表list\\数据容器——列表list-方法\\笔记\\数据容器——列表list-方法.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——列表list\\数据容器——列表list-解包\\笔记\\数据容器——列表list-解包.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——字典dict\\数据容器——字典dict-介绍\\笔记\\数据容器——字典dict-介绍.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——字典dict\\数据容器——字典dict-常规操作\\笔记\\数据容器——字典dict-常规操作.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——字符串str\\数据容器——字符串str-基本操作\\笔记\\数据容器——字符串str-基本操作.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——字符串str\\数据容器——字符串str-重点-方法\\笔记\\数据容器——字符串str-重点-方法.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——概述\\数据容器——概述.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——结尾-总结\\数据容器——结尾-总结.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\数据容器\\数据容器——集合set\\数据容器——集合set-基本操作\\笔记\\数据容器——集合set-基本操作.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\模块\\模块与包\\笔记\\模块与包.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\流程控制语句\\for循环\\笔记\\for循环.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\流程控制语句\\if条件分支语句\\if基础语法\\笔记\\if基础语法.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\流程控制语句\\match模式匹配\\笔记\\match模式匹配.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\流程控制语句\\while循环\\笔记\\while循环.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\类型注释\\函数的类型注释\\函数的类型注释.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\类型注释\\类型注释——介绍\\类型注释——介绍.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\面向对象\\基础\\面向对象——创建类-实例对象-实例方法概念\\笔记\\面向对象——创建类-实例对象-实例方法概念.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\面向对象\\基础\\面向对象——实例属性与类属性\\笔记\\面向对象——实例属性与类属性.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\面向对象\\基础\\面向对象——魔法方法\\笔记\\面向对象——魔法方法.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\面向对象\\基础\\面向对象基础案例\\面向对象基础案例.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\python_study\\哔哩哔哩UP主——黑马程序员\\第二部分——python核心语法\\面向对象\\基础\\面向过程-面向对象-对象-类之间的关系\\笔记\\面向过程-面向对象-对象-类之间的关系.html",
+      "D:\\GitHub\\my_web\\内容文件夹\\自建本地网站\\导航栏内容\\计算机二级——python\\内容\\选择题错误总结.html"
+    ],
+    "二级备考": [
+      "D:\\GitHub\\my_web\\内容文件夹\\自建本地网站\\导航栏内容\\计算机二级——python\\内容\\选择题错误总结.html"
+    ]
+  },
+  "conversations": {
+    "二级考试错题回顾": [
+      "D:\\GitHub\\my_web\\内容文件夹\\AI\\AI模型问题记录\\存放记录\\python二级备考\\笔记聊天.md"
+    ]
+  },
+  "odd_dialogs": [
+    "D:\\GitHub\\my_web\\内容文件夹\\AI\\AI模型问题记录\\源代码\\临时对话框.txt"
+  ]
+}

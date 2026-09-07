@@ -151,3 +151,23 @@ str1 = "Nanjing University"
 str2 = str1[:7] + " Normal " + str1[-10:]
 
 print(str2)
+
+
+a = 10.99
+
+print(complex(a))
+
+
+# import turtle as t
+#
+# for i in range(1,4):
+#
+#     t.fd(50)
+#
+#     t.right(120)
+
+n = eval(input("数字:"))
+print(type(n))
+
+print(1.23e-4 + 5.67e+8j.real)
+
