@@ -29,18 +29,28 @@ function loadContent(url, id, selector) {
         return;
     }
 
-    // ---- 3. 构建完整的绝对 URL ----
-    // 如果已经是完整 URL，直接使用
+    // ---- 3. 构建完整的绝对 URL（含 GitHub Pages 路径智能修复） ----
     if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
         var absoluteUrl = filePath;
     } else {
+        // 【核心修复逻辑】如果在 GitHub Pages 环境下
+        let finalPath = filePath;
+        if (window.location.hostname.includes('github.io')) {
+            const pathParts = window.location.pathname.split('/');
+            if (pathParts.length > 1 && pathParts[1] !== '') {
+                const repoName = pathParts[1]; // 自动提取仓库名，例如 my_web
+                // 将开头的连续的 ../../ 替换为 /仓库名/
+                finalPath = filePath.replace(/^(\.\.\/)+/, '/' + repoName + '/');
+                console.log(`[loadContent] 检测到 GitHub Pages 环境，路径已自动修复: ${filePath} -> ${finalPath}`);
+            }
+        }
+
         // 获取当前页面的目录（不包含文件名）
         const currentDir = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
-        // 使用 new URL() 基于当前目录解析相对路径
         try {
-            var absoluteUrl = new URL(filePath, currentDir).href;
+            var absoluteUrl = new URL(finalPath, currentDir).href;
         } catch (e) {
-            console.error('路径解析失败:', filePath, e);
+            console.error('路径解析失败:', finalPath, e);
             container.innerHTML = '<p style="color: red;">无效的路径。</p>';
             return;
         }
