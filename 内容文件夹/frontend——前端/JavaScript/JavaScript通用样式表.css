@@ -508,7 +508,6 @@ table tr th h5 span {
 /* ========== 强制恢复列表前缀 ========== */
 ul, ol {
     padding: 0 0 0 2rem;
-/
 }
 
 ol {
@@ -533,4 +532,8 @@ li {
 [id^="container"] {
     border: 1px solid black;
     margin-top: 1.1rem;
+}
+
+.word_div > span{
+    display: block;
 }

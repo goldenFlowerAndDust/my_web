@@ -142,9 +142,8 @@ print(id(chs))
 import time
 
 t = time.gmtime()
-print(f"{','.join(map(str,t))}")
+print(f"{','.join(map(str, t))}")
 print(time.strftime("%Y-%m-%d %H:%M:%S", t))
-
 
 str1 = "Nanjing University"
 
@@ -152,11 +151,9 @@ str2 = str1[:7] + " Normal " + str1[-10:]
 
 print(str2)
 
-
 a = 10.99
 
 print(complex(a))
-
 
 # import turtle as t
 #
@@ -171,3 +168,19 @@ print(type(n))
 
 print(1.23e-4 + 5.67e+8j.real)
 
+
+def maxcount():
+    a, b = 1000, 99
+
+    for i in range(10):
+        a *= b + 1
+
+        b *= a - 1
+
+        return a
+
+
+maxcount()
+
+s ='中华人民共和国国庆日是10月1日'
+print(s[-5:])

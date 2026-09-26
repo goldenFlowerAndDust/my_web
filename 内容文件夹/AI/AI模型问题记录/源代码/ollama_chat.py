@@ -70,7 +70,7 @@ def load_history_from_file(file_path):
                 if ai_content:
                     messages.append({"role": "assistant", "content": ai_content})
         if messages:
-            print(f"✅ 已从文件中加载 {len(messages)//2} 轮对话历史")
+            print(f"✅ 已从文件中加载 {len(messages) // 2} 轮对话历史")
         return messages
     except Exception as e:
         print(f"⚠️ 加载历史记录失败：{e}")
@@ -87,10 +87,10 @@ def save_to_markdown(file_path, messages, last_idx):
             if msg.get("skip_save", False):
                 continue
             if msg["role"] == "user":
-                f.write(f"\n## {idx//2 + 1}. 🧑 用户\n\n")
+                f.write(f"\n## {idx // 2 + 1}. 🧑 用户\n\n")
                 f.write(f"{msg['content']}\n\n")
             else:
-                f.write(f"### {idx//2 + 1}. 🤖 模型\n\n")
+                f.write(f"### {idx // 2 + 1}. 🤖 模型\n\n")
                 f.write(f"{msg['content']}\n\n")
         f.write("---\n*当前会话结束*\n")
     print(f"💾 已追加保存 {len(messages) - last_idx} 条新消息到：{file_path}")
@@ -292,6 +292,9 @@ def scan_current_level(base_dir, rel_path=''):
 def navigate_conversations(base_dir):
     """
     交互式导航对话记录，返回 (folder_rel_path, file_name) 或 (None, None)
+    - 如果用户选择了一个已有文件，返回 (路径, 文件名)
+    - 如果用户在当前目录新建文件，返回 (当前路径, 新文件名)
+    - 如果用户选择手动输入（0），返回 (None, None)
     """
     current_path = ''  # 相对于 BASE_DIR 的路径
     while True:
@@ -309,14 +312,14 @@ def navigate_conversations(base_dir):
         print("  操作：")
         print("    输入文件夹编号进入子文件夹")
         print("    输入文件字母选择文件")
+        print("    输入 n 在当前目录新建文件")
         print("    输入 .. 返回上级目录")
-        print("    输入 0 新建对话（手动输入）")
+        print("    输入 0 放弃选择，进入手动输入")
         choice = input("\n请选择：").strip()
         if choice == '0':
             return None, None
         if choice == '..':
             if current_path:
-                # 返回上级
                 current_path = os.path.dirname(current_path)
                 if current_path == '.':
                     current_path = ''
@@ -324,14 +327,26 @@ def navigate_conversations(base_dir):
             else:
                 print("⚠️ 已在根目录，无法返回上级。")
                 continue
+        # 判断是否是 'n'（新建文件）
+        if choice.lower() == 'n':
+            new_filename = input("请输入新文件名（不需要后缀，自动补 .md）：").strip()
+            if not new_filename:
+                print("⚠️ 文件名不能为空。")
+                continue
+            if not new_filename.endswith(".md"):
+                new_filename += ".md"
+            # 检查是否与现有文件重名（可选的提醒）
+            if new_filename in md_files:
+                print(f"⚠️ 文件 '{new_filename}' 已存在，将加载已有文件。")
+            return current_path, new_filename
         # 判断是否是数字（进入子文件夹）
         if choice.isdigit():
             idx = int(choice)
             if 1 <= idx <= len(subdirs):
                 if current_path:
-                    current_path = os.path.join(current_path, subdirs[idx-1])
+                    current_path = os.path.join(current_path, subdirs[idx - 1])
                 else:
-                    current_path = subdirs[idx-1]
+                    current_path = subdirs[idx - 1]
                 continue
             else:
                 print("⚠️ 无效的文件夹编号。")
@@ -471,7 +486,8 @@ def main():
             kb_context = load_knowledge_by_category(selected_files)
             if kb_context:
                 messages.append({"role": "user", "content": kb_context, "skip_save": True})
-                messages.append({"role": "assistant", "content": f"好的，已加载 {len(selected_files)} 个文件的内容。", "skip_save": True})
+                messages.append({"role": "assistant", "content": f"好的，已加载 {len(selected_files)} 个文件的内容。",
+                                 "skip_save": True})
                 print(f"✅ 已加载 {len(selected_files)} 个文件到知识库（不保存到对话记录）")
         else:
             print("📝 未选择任何文件，将进行纯对话。")

@@ -1,0 +1,50 @@
+/* ================= 1. 全局隐藏逻辑（缺失的关键部分！） ================= */
+/* 当 body 具有 hide-zh 类时，隐藏所有中文和注释 */
+body.hide-zh .zh,
+body.hide-zh .note {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* ================= 2. 局部点击展开逻辑（分步展开） ================= */
+/* 步骤一：显示词义 */
+body.hide-zh li.show-zh .zh {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 步骤二：显示注释 */
+body.hide-zh li.show-zh.show-note .note {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ================= 3. 交互样式升级 ================= */
+/* 整行鼠标悬停提示 */
+.word_div li {
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+    margin-bottom: 4px;
+}
+
+.word_div li:hover {
+    background-color: rgba(93, 109, 126, 0.15); /* 悬停时稍微加深一点，明显能看出可点 */
+}
+
+/* 【关键引导】当已经显示词义，但还没显示注释时，给词义加一个虚线底边，提示“这里还能点” */
+body.hide-zh li.show-zh:not(.show-note) .zh {
+    border-bottom: 2px dashed #E67E22; /* 橙色虚线 */
+    padding-bottom: 2px;
+    cursor: pointer;
+}
+
+.note {
+    color: #F39C12;
+}
+
+.en {
+    color: #6C3483;
+}
