@@ -1,6 +1,6 @@
 // ============================================================
 // JavaScript通用a标签跳转指定内容.js
-// 正确处理 href 中的 # 锚点，并适配子目录部署
+// 正确处理 href 中的 # 锚点，并适配子目录部署（含 GitHub Pages 智能修复）
 // ============================================================
 
 function loadContent(url, id, selector) {
@@ -16,14 +16,15 @@ function loadContent(url, id, selector) {
     }
 
     // ---- 2. 分离文件路径和锚点 ----
-    // 如果 url 包含 #，取出 # 之前的部分作为文件路径
     const hashIndex = url.indexOf('#');
-    const filePath = hashIndex > -1 ? url.substring(0, hashIndex) : url;
+    let filePath = hashIndex > -1 ? url.substring(0, hashIndex) : url;
     const anchor = hashIndex > -1 ? url.substring(hashIndex) : '';
+
+    // 【修复1】去除文件路径末尾的斜杠，防止请求 "xxx.html/" 导致 404
+    filePath = filePath.replace(/\/+$/, '');
 
     // 如果 filePath 为空，说明是一个纯粹的页面内跳转（如 <a href="#目录">）
     if (!filePath) {
-        // 直接滚动到锚点，不加载内容
         const target = document.querySelector(anchor);
         if (target) target.scrollIntoView({ behavior: 'smooth' });
         return;
@@ -33,19 +34,27 @@ function loadContent(url, id, selector) {
     if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
         var absoluteUrl = filePath;
     } else {
-        // 【核心修复逻辑】如果在 GitHub Pages 环境下
         let finalPath = filePath;
+
+        // 【修复2】GitHub Pages 环境下的子目录路径处理
         if (window.location.hostname.includes('github.io')) {
             const pathParts = window.location.pathname.split('/');
             if (pathParts.length > 1 && pathParts[1] !== '') {
                 const repoName = pathParts[1]; // 自动提取仓库名，例如 my_web
-                // 将开头的连续的 ../../ 替换为 /仓库名/
-                finalPath = filePath.replace(/^(\.\.\/)+/, '/' + repoName + '/');
-                console.log(`[loadContent] 检测到 GitHub Pages 环境，路径已自动修复: ${filePath} -> ${finalPath}`);
+
+                // 如果是以 ../ 开头，替换为 /仓库名/
+                if (finalPath.startsWith('../')) {
+                    finalPath = finalPath.replace(/^(\.\.\/)+/, '/' + repoName + '/');
+                    console.log(`[loadContent] 检测到 GitHub Pages 环境，路径已自动修复: ${filePath} -> ${finalPath}`);
+                }
+                // 如果是以 / 开头但缺少仓库名，补全仓库名
+                else if (finalPath.startsWith('/') && !finalPath.startsWith(`/${repoName}/`)) {
+                    finalPath = `/${repoName}${finalPath}`;
+                    console.log(`[loadContent] 检测到根路径开头，路径已自动补全: ${filePath} -> ${finalPath}`);
+                }
             }
         }
 
-        // 获取当前页面的目录（不包含文件名）
         const currentDir = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
         try {
             var absoluteUrl = new URL(finalPath, currentDir).href;
@@ -80,7 +89,7 @@ function loadContent(url, id, selector) {
 
             container.innerHTML = content.innerHTML;
 
-            // ---- 5. 清除按钮 ----
+            // ---- 5. 添加清除按钮 ----
             const clearBtn = document.createElement('button');
             clearBtn.textContent = '清除内容';
             clearBtn.style.marginTop = '10px';
