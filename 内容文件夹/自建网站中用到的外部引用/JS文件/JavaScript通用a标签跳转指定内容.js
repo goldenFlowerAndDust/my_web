@@ -50,7 +50,14 @@ function loadContent(url, id, selector) {
             if (pathParts.length > 1 && pathParts[1] !== '') {
                 const repoName = pathParts[1];
                 if (finalPath.startsWith('../')) {
-                    finalPath = finalPath.replace(/^(\.\.\/)+/, '/' + repoName + '/');
+                    // 智能判断：原始路径里有没有"内容文件夹"？
+                    // 有 → 替换为 /仓库名/
+                    // 没有 → 替换为 /仓库名/内容文件夹/（自动补上）
+                    const hasContentFolder = filePath.includes('内容文件夹');
+                    const replacement = hasContentFolder
+                        ? '/' + repoName + '/'
+                        : '/' + repoName + '/内容文件夹/';
+                    finalPath = finalPath.replace(/^(\.\.\/)+/, replacement);
                     console.log(`[loadContent] GitHub 路径修复: ${filePath} → ${finalPath}`);
                 }
             }
