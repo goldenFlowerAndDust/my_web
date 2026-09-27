@@ -1,7 +1,7 @@
 // ============================================================
-// JavaScript通用a标签跳转指定内容.js (嵌套 fetch 优化版)
-// 兼容：本地 / Vercel / GitHub Pages
-// 支持：递归加载（A 页面内 fetch B，B 页面内 fetch C）
+// JavaScript通用a标签跳转指定内容.js (终极完整版)
+// 兼容：本地 Live Server / Vercel / GitHub Pages
+// 支持：无限嵌套 fetch + 路径智能修复
 // ============================================================
 
 function loadContent(url, id, selector) {
@@ -9,10 +9,8 @@ function loadContent(url, id, selector) {
     let baseUrl = null;
     if (typeof url !== 'string') {
         const el = url;
-        // 【关键】优先读原始 href 属性，避免被浏览器解析成绝对 URL
         const rawHref = el.getAttribute && el.getAttribute('href');
         url = rawHref || el.href || '';
-        // 读取之前注入时打上的 baseUrl（用于嵌套 fetch）
         baseUrl = el.dataset ? el.dataset.baseUrl : null;
     }
 
@@ -27,43 +25,77 @@ function loadContent(url, id, selector) {
     let filePath = hashIndex > -1 ? url.substring(0, hashIndex) : url;
     const anchor = hashIndex > -1 ? url.substring(hashIndex) : '';
 
-    // 【修复1】去掉末尾的斜杠（.html/ → .html）
+    // 去掉末尾斜杠，防 "xxx.html/" 导致 404
     filePath = filePath.replace(/\/+$/, '');
 
-    // 纯锚点跳转
+    // 纯锚点跳转（如 <a href="#目录">）
     if (!filePath) {
         const target = document.querySelector(anchor);
         if (target) target.scrollIntoView({ behavior: 'smooth' });
         return;
     }
 
-    // ============ 3. 构建绝对 URL ============
+    // ============ 3. 路径标准化（核心） ============
     let absoluteUrl;
-    if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
+
+    // 情况 A：完整 URL，直接使用
+    if (/^https?:\/\//i.test(filePath)) {
         absoluteUrl = filePath;
     } else {
         let finalPath = filePath;
 
-        // GitHub Pages 环境下把 ../ 序列替换为 /仓库名/
-        if (window.location.hostname.includes('github.io')) {
-            const pathParts = window.location.pathname.split('/');
-            if (pathParts.length > 1 && pathParts[1] !== '') {
-                const repoName = pathParts[1];
-                if (finalPath.startsWith('../')) {
-                    // 智能判断：原始路径里有没有"内容文件夹"？
-                    // 有 → 替换为 /仓库名/
-                    // 没有 → 替换为 /仓库名/内容文件夹/（自动补上）
-                    const hasContentFolder = filePath.includes('内容文件夹');
-                    const replacement = hasContentFolder
-                        ? '/' + repoName + '/'
-                        : '/' + repoName + '/内容文件夹/';
-                    finalPath = finalPath.replace(/^(\.\.\/)+/, replacement);
-                    console.log(`[loadContent] GitHub 路径修复: ${filePath} → ${finalPath}`);
+        // ---- 3.1 判断是否在 GitHub Pages ----
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        let repoName = '';
+        if (isGitHubPages) {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            if (parts.length > 0) repoName = parts[0]; // 第一个路径段就是仓库名
+        }
+
+        // ---- 3.2 路径标准化 ----
+        // 统一处理三种原始路径写法：
+        //   ① ../ 开头（相对路径）
+        //   ② / 开头（绝对路径，可能缺仓库名）
+        //   ③ 其他（裸相对路径）
+
+        if (isGitHubPages && repoName) {
+            const rootPrefix = '/' + repoName + '/';
+            const contentMarker = '内容文件夹';
+
+            if (finalPath.startsWith('../')) {
+                // ① 相对路径 → 计算它在 my_web/ 下的真实位置
+                // 先数 ../ 的数量，再配合 baseUrl 推算
+                // 但因为不知道当前文件在仓库的深度，改用"内容文件夹"锚定法：
+                // 只要路径里出现"内容文件夹"，就保留它后面的部分；
+                // 否则，假设它应该在"内容文件夹"下。
+                const idx = finalPath.indexOf(contentMarker);
+                if (idx > -1) {
+                    finalPath = rootPrefix + finalPath.substring(idx);
+                } else {
+                    // 没有"内容文件夹"，自动补上
+                    const cleaned = finalPath.replace(/^(\.\.\/)+/, '');
+                    finalPath = rootPrefix + contentMarker + '/' + cleaned;
+                }
+            } else if (finalPath.startsWith('/')) {
+                // ② 绝对路径（/开头）→ 补上仓库名
+                if (!finalPath.startsWith(rootPrefix)) {
+                    // 如果路径里已有"内容文件夹"，就只补仓库名
+                    if (finalPath.includes(contentMarker)) {
+                        finalPath = rootPrefix + finalPath.substring(finalPath.indexOf(contentMarker));
+                    } else {
+                        finalPath = rootPrefix + contentMarker + finalPath;
+                    }
+                }
+            } else {
+                // ③ 裸相对路径：交给 new URL 处理
+                // 但同样要补"内容文件夹"（如果缺）
+                if (!finalPath.includes(contentMarker) && !finalPath.startsWith('http')) {
+                    // 注意：这种情况很少，一般裸路径是相对当前文件的，不补
                 }
             }
         }
 
-        // 【核心】有 baseUrl 用它作为起点，否则用当前页面目录
+        // ---- 3.3 用 baseUrl 或当前页面目录解析 ----
         const baseForResolve = baseUrl
             ? baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1)
             : window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
@@ -71,21 +103,18 @@ function loadContent(url, id, selector) {
         try {
             absoluteUrl = new URL(finalPath, baseForResolve).href;
         } catch (e) {
-            console.error('路径解析失败:', finalPath, e);
+            console.error('[loadContent] 路径解析失败:', finalPath, e);
             container.innerHTML = '<p style="color: red;">无效的路径。</p>';
             return;
         }
     }
 
     console.log('[loadContent] 请求 URL:', absoluteUrl);
-    console.log('[loadContent] 锚点:', anchor);
 
     // ============ 4. fetch 并注入 ============
     fetch(absoluteUrl)
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status} ${response.statusText}`);
-            }
+            if (!response.ok) throw new Error(`HTTP ${response.status} ${response.statusText}`);
             return response.text();
         })
         .then(html => {
@@ -101,12 +130,11 @@ function loadContent(url, id, selector) {
             container.innerHTML = content.innerHTML;
 
             // 【核心】给注入内容里所有 loadContent 链接打上 baseUrl
-            // 这样下次点击它们时，会以"被 fetch 的页面"为起点解析相对路径
             container.querySelectorAll('[onclick*="loadContent"]').forEach(el => {
                 el.dataset.baseUrl = absoluteUrl;
             });
 
-            // 如果目标有锚点，滚动到锚点位置
+            // 锚点滚动
             if (anchor) {
                 const targetInContainer = container.querySelector(anchor);
                 if (targetInContainer) {
@@ -114,7 +142,7 @@ function loadContent(url, id, selector) {
                 }
             }
 
-            // 添加清除按钮
+            // 清除按钮
             const clearBtn = document.createElement('button');
             clearBtn.textContent = '清除内容';
             clearBtn.style.cssText = 'margin-top:10px;padding:5px 15px;cursor:pointer;';
