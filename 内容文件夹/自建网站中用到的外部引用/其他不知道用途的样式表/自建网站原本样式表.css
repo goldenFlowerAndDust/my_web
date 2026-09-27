@@ -1,0 +1,317 @@
+/*css文件各个布局顺序*/
+/*=================== 第一部分：CSS变量定义(必须最前面！) =====================*/
+:root {
+    /* ====================== 设计系统变量 ====================== */
+
+    /*  颜色系统  */
+    --color-text-header: white;
+    --color-backgrond-header-ul: orange;
+    --color-background-header-li-hover: #ddd;
+    --color-background-aside: skyblue;
+    --color-background-color-mian: red;
+    /*  间距系统  */
+    --container-width: 100vw; /* container(容器) 61.25rem=980px */
+    --container-height: 100vh;
+    --header-height: 7.5rem;
+    --main-container-height: 66.5rem;
+    --main-container-a-padding: 1rem;
+    --main-container-a-height: 7.5rem;
+    --main-container-ol-width: 23rem;
+    --main-container-carousel-height:333rem;
+
+    /*  字体大小  */
+    --font-size-text-header: 2.5rem;
+    --font-size-text-aside: 2.2rem;
+    --font-size-text-aside-media: 1.5rem;
+    --font-size-text-aside-media-2: 0.9rem;
+
+    /*  定位  */
+    --main-container-ol-top:0;
+    --main-container-ol-left:100%;
+}
+
+/*=================== 第二部分：重置样式  ==================================*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*=================== 第三部分：基础样式(使用变量) ===========================*/
+body {
+    min-width: var(--container-width);
+    min-height: var(--container-height);
+    box-sizing: border-box;
+}
+
+/*=================== 第四部分：组件样式(使用变量) ===========================*/
+main {
+    max-width: var(--container-width);
+    min-height: var(--container-height);
+    background-color:var(--color-background-color-mian);
+    margin: 0 auto;
+}
+
+/*header部分*/
+header {
+    min-width: var(--container-width);
+    height: var(--header-height);
+}
+
+.nav_container ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--color-backgrond-header-ul);
+}
+
+.nav_container ul li a {
+    text-decoration: none;
+    display: block;
+    color: var(--color-text-header);
+    font-size: var(--font-size-text-header);
+    line-height: var(--header-height);
+    text-align: center;
+}
+/*响应设计(电脑端悬停)*/
+
+/*中间区域——mian-container*/
+.main-container {
+    display: flex;
+    justify-content: flex-start;
+    /*align-items: center;*/
+    min-height: var(--main-container-height);
+}
+
+/*侧边栏——aside*/
+.main-container aside {
+    flex: 1.2;
+    background-color: var(--color-background-aside);
+
+}
+
+.main-container aside ul{
+    display: flex;
+    justify-content: space-evenly; /*需要有高度才会平分空间*/
+    /*align-items: center;*/
+    flex-direction: column;
+    /*min-height: 100vh;*/
+}
+
+.main-container aside ul li {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: var(--header-height);
+    font-size: var(--font-size-text-aside);
+
+}
+
+.main-container aside ul li a {
+    display: block;
+    line-height: var(--main-container-a-height);
+    padding: var(--main-container-a-padding);
+    font-size: var(--font-size-text-aside);
+    background-color: var(--color-background-aside)
+}
+
+.main-container aside ul li ol {
+    position: absolute;
+    top: var(--main-container-ol-top);
+    left: var(--main-container-ol-left);
+    width: var(--main-container-ol-width);
+    transform: scale(0);
+    transform-origin: center center;
+    transition: all 0.5s ease;
+    z-index: 10;
+}
+.main-container aside ul>li:hover ol {
+    transform: scale(1);
+}
+/*轮播图*/
+.main-container .carousel {
+    flex: 2;
+    height: var(--main-container-height);
+    overflow: hidden;
+}
+.main-container .carousel nav {
+    height: var(--main-container-carousel-height);
+}
+.main-container .carousel nav img {
+    width: 100%;
+    height: var(--main-container-height);
+    object-fit: cover;           /* ★ 关键修复：替代 background-size，保持比例填充 */
+    animation: carousel 25s ease-out infinite;
+    animation-delay: 0.5s;
+}
+@keyframes carousel {
+    20%{
+        transform: translateY(0rem);
+    }
+    40%{
+        transform: translateY(-66.5rem);
+    }
+    60%{
+        transform: translateY(-133rem);
+    }
+    80%{
+        transform: translateY(-199.5rem);
+    }
+    to{
+        transform: translateY(-266rem);
+    }
+}
+footer{
+    height: 20rem;
+    width: 100%;
+    text-align: center;
+    line-height: 20rem;
+    background-color:orange;
+    font-size: 3rem;
+}
+@media (max-width: 1800px) {
+    main{
+        min-width: 100vw;
+    }
+    .nav_container{
+        min-width:100vw;
+    }
+    .main-container aside ul li{
+        font-size: var(--font-size-text-aside-media);
+    }
+}
+@media (max-width: 768px) {
+    /* 1. 整体容器取消固定高度，让内容自然流动 */
+    main {
+        min-height: auto;
+    }
+
+    /* 2. 导航栏：项目间距缩小，字体减小，防止换行 */
+    .nav_container ul {
+        justify-content: space-around;
+        gap: 0.5rem;
+    }
+    .nav_container ul li a {
+        font-size: 1.2rem;
+        line-height: 3rem;
+        padding: 0 0.5rem;
+    }
+    /* 音频播放器宽度自适应 */
+    .audio_left {
+        width: 180px;
+        height: 40px;
+    }
+
+    /* 3. 中间区域改为纵向排列（侧边栏在上，轮播图在下） */
+    .main-container {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    /* 4. 侧边栏占满宽度，背景色稍作调整 */
+    .main-container aside {
+        flex: none;
+        width: 100%;
+        background-color: lightblue;
+    }
+
+    /* 5. 侧边栏一级菜单改为水平滚动或网格，避免过长 */
+    .main-container aside ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        min-height: auto;
+        padding: 0.5rem;
+    }
+    .main-container aside ul li {
+        width: auto;
+        margin: 0.2rem;
+        text-align: center;
+        font-size: 1rem;
+        line-height: 2.5rem;
+        background-color: rgba(255,255,255,0.3);
+        border-radius: 20px;
+        padding: 0 0.8rem;
+    }
+
+    /* 6. 子菜单（二级菜单）的交互改为点击展开 */
+    .main-container aside ul li:focus-within ol,
+    .main-container aside ul li:hover ol {
+        transform: scale(1);
+        position: static;
+        width: 100%;
+        margin-top: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        background-color: white;
+        border-radius: 8px;
+    }
+    .main-container aside ul li ol {
+        position: static;
+        transform: scale(0);
+        transform-origin: top;
+        transition: transform 0.3s;
+        width: 100%;
+        left: auto;
+        top: auto;
+        background-color: white;
+        border-radius: 8px;
+        z-index: 10;
+        padding: 0.5rem 0;
+    }
+    .main-container aside ul li ol li {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        background: none;
+        text-align: left;
+        padding-left: 1rem;
+    }
+    .main-container aside ul li ol li a {
+        font-size: 0.9rem;
+        line-height: 2rem;
+        padding: 0;
+        background: none;
+    }
+
+    /* 7. 轮播图在手机上隐藏（保持不变） */
+    .main-container .carousel {
+        display: none;
+        height: 200px;
+        margin: 1rem 0;
+    }
+    .main-container .carousel nav {
+        height: auto;
+    }
+    .main-container .carousel nav img {
+        height: 200px;
+        object-fit: cover;
+        animation: carousel-mobile 15s ease-out infinite;
+    }
+    /* 手机轮播动画重新计算（只移动5张图片的高度） */
+    @keyframes carousel-mobile {
+        20% { transform: translateY(0); }
+        40% { transform: translateY(-200px); }
+        60% { transform: translateY(-400px); }
+        80% { transform: translateY(-600px); }
+        to  { transform: translateY(-800px); }
+    }
+
+    /* 8. 页脚 */
+    footer {
+        height: 5rem;
+        line-height: 5rem;
+        font-size: 1rem;
+    }
+}
