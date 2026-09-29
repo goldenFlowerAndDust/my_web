@@ -1,0 +1,14 @@
+1.  json标准-不允许注释
+2.  json不支持单引号字符串
+3.  在python，JavaScript、node.js中，读取json文件需要先，使用 json.loads()/JSON.parse() 转成 列表/数组。然后进行增删改查
+4.  python,JavaScript,node.js，操作后的  列表(字典)/数组/对象 必选使用，json.dumps()/JSON.stringify() 转成 字符串，再进行写入
+5.  方法：json.loads()：python方法：将json字符串转成列表对象 ———————— 变形：json.load() —————— 从文件对象读取并转成 Python 对象
+6.  方法：json.dumps()：python方法：将列表对象重新转成字符串。共有二个形参：object(可迭代对象本身，indent=2)——>第二个参数表示多行，一般就是2。—————— 变形：json.dump() —————— 把 Python 对象转成 JSON 字符串并写入文件对象
+7.  方法：JSON.parse()：node.js/JavaScript方法：将json字符串转成数组对象。
+8.  方法：JSON.stringify()：node.js/JavaScript方法：将数组对象转成字符串。共三个参数：object(可迭代对象本身，需要过滤的属性，行数)。第二个参数可以是数组，会过滤掉所有匹配的属性，行数一般是：2
+9.  所以：python可以写入对象，node.js/JavaScript没有直接写入对象的API，所以就转成字符串再写入。
+10. 提醒：
+        (1).node.js/JavaScript，写入必须是字符串
+        (2).node.js/JavaScript/python:JSON操作(增删改查)必须是覆盖模式。
+        (3).因为是覆盖写入，一旦保存，原文件内容全部丢失，所以尽量自行创建文件，以防万一。
+        (4).整个读取步骤(node.js/JavaScript)：获取文件内容——JSON.parse()——执行对应操作(增删改查)——JSON.stringify()——覆盖写入。（再次提醒：创建新文件覆盖写入，防止原文件内容丢失，追悔莫及）
