@@ -1,18 +1,18 @@
-/* ================= 1. 全局隐藏 ================= */
-body.hide-zh .zh,
-body.hide-zh .note {
+/* ================= 1. 隐藏 ================= */
+.hide-zh .zh,
+.hide-zh .note {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 /* ================= 2. 局部展开 ================= */
-body.hide-zh .zh.show-zh {
+.hide-zh .zh.show-zh {
     opacity: 1;
     visibility: visible;
 }
 
-body.hide-zh .note.show-note {
+.hide-zh .note.show-note {
     opacity: 1;
     visibility: visible;
 }
@@ -30,15 +30,20 @@ body.hide-zh .note.show-note {
     background-color: rgba(93, 109, 126, 0.15);
 }
 
-/* 已显示的 zh：加虚线，提示可点 */
-body.hide-zh .zh.show-zh {
+/* 只有带 note 的 zh 才加虚线下划线 */
+.hide-zh .zh.show-zh.has-note {
     text-decoration: underline dashed #E67E22;
     padding-bottom: 2px;
     cursor: pointer;
 }
 
-/* 已显示的 note：弱化颜色，区别于 zh */
-body.hide-zh .note.show-note {
+/* 没有 note 的 zh 就是普通文字，不加任何提示 */
+.hide-zh .zh.show-zh:not(.has-note) {
+    text-decoration: none;
+    cursor: default;
+}
+
+.hide-zh .note.show-note {
     color: #F39C12;
     padding-bottom: 2px;
 }

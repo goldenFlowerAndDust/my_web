@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单词结构分类：原子词 / 本体词 / 变体 / 词根族 / 复合词</title>
+    <link rel="stylesheet" href="../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+    <link rel="stylesheet" href="../单词独有样式表.css">
+    <style>
+        .diagram {
+            background: #FDF6E3;
+            border-left: 4px solid #E67E22;
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+            line-height: 1.8;
+            color: #2C3E50;
+            font-size: 1rem;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        .compare-table th,
+        .compare-table td {
+            border: 1px solid #BDC3C7;
+            padding: 10px 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .compare-table th {
+            background-color: #5D6D7E;
+            color: white;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .tag-atom {
+            background: #FADBD8;
+            color: #922B21;
+        }
+
+        .tag-root {
+            background: #D4EFDF;
+            color: #186A3B;
+        }
+
+        .tag-derive {
+            background: #D6EAF8;
+            color: #1B4F72;
+        }
+
+        .tag-family {
+            background: #E8DAEF;
+            color: #6C3483;
+        }
+
+        .tag-compound {
+            background: #FDEBD0;
+            color: #B9770E;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <h1>单词结构分类</h1>
+    </header>
+    <section id="section_1">
+
+        <h2>一、五种类型的定义</h2>
+        <div class="diagram">
+            【原子词】 不可拆，本身就是一个整体
+            例：apple / book / table / abandon
+
+            【本体词】 能独立存在，且能接前后缀（词根）
+            例：use / care / law / help
+
+            【变体】 本体词 + 前后缀 派生出来的新词
+            例：usable / careless / lawful / helpful
+
+            【词根族】 词根不能独立成词，必须整族一起记
+            例：intelligent / intelligence / intelligible
+
+            【复合词】 两个（或更多）能独立成词的词根，拼成新词
+            例：notebook / homework / sunflower / law-breaker
+        </div>
+
+        <h2>二、五者关系</h2>
+        <div class="diagram">
+            原子词 本体词 变体
+            │ │ │
+            │ │ + 后缀 │
+            │ ├────────────────>│
+            │ │ + 前缀 │
+            │ ├────────────────>│
+            │ │ │
+            独立记忆 核心 + 规则 从本体推导
+
+            ─────────────────────────────────────────
+
+            词根族（词根不能独立，整族一起记）
+            │
+            └─→ intelligent / intelligence / intelligible
+
+            ─────────────────────────────────────────
+
+            复合词（两个独立词根拼合）
+            │
+            ├─→ notebook = note + book
+            ├─→ homework = home + work
+            └─→ law-breaker = law + break + er
+        </div>
+
+        <p>用编程类比：</p>
+        <ul>
+            <li><strong>原子词</strong> = 硬编码的常量，改不动，只能记</li>
+            <li><strong>本体词</strong> = 基础函数，能独立跑，也能被调用扩展</li>
+            <li><strong>变体</strong> = 函数调用后的返回值，由本体 + 参数（前后缀）生成</li>
+            <li><strong>词根族</strong> = 私有内部模块，不能单独调用，必须整包引入</li>
+            <li><strong>复合词</strong> = 两个模块组合成一个新模块，各自还能独立调用</li>
+        </ul>
+
+        <h2>三、对比表</h2>
+        <div class="div_table">
+            <table class="compare-table">
+                <thead>
+                <tr>
+                    <th>类型</th>
+                    <th>词根能独立吗</th>
+                    <th>结构</th>
+                    <th>能否派生</th>
+                    <th>记忆方式</th>
+                    <th>例子</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span class="tag tag-atom">原子词</span></td>
+                    <td>—（无词根）</td>
+                    <td>不可拆</td>
+                    <td>❌ 不能</td>
+                    <td>归类 / 造句 / 记搭配</td>
+                    <td>apple, book, table</td>
+                </tr>
+                <tr>
+                    <td><span class="tag tag-root">本体词</span></td>
+                    <td>✅ 能</td>
+                    <td>本身是词根</td>
+                    <td>✅ 能接前后缀</td>
+                    <td>记本意 + 扩展变体</td>
+                    <td>use, care, law</td>
+                </tr>
+                <tr>
+                    <td><span class="tag tag-derive">变体</span></td>
+                    <td>✅ 能（追溯到本体）</td>
+                    <td>本体 + 词缀</td>
+                    <td>⚠️ 少数能再派生</td>
+                    <td>反推本体 + 后缀规则</td>
+                    <td>usable, careless, lawful</td>
+                </tr>
+                <tr>
+                    <td><span class="tag tag-family">词根族</span></td>
+                    <td>❌ 不能</td>
+                    <td>词根（不独立）+ 词缀</td>
+                    <td>⚠️ 整族扩展</td>
+                    <td>整族一起记 + 后缀对应</td>
+                    <td>intelligent, intelligence</td>
+                </tr>
+                <tr>
+                    <td><span class="tag tag-compound">复合词</span></td>
+                    <td>✅ 都能</td>
+                    <td>词 + 词</td>
+                    <td>✅ 能再接词缀</td>
+                    <td>拆成两个词分别记</td>
+                    <td>notebook, law-breaker</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>四、为什么这样分</h2>
+        <ol class="word_div">
+            <li>
+                <span class="en">原子词</span>
+                (<span class="zh">没有可拆的词素，本身就是一个整体</span>)
+                <span class="note">遇到这种词，别硬拆。按语义场 / 句子 / 搭配记</span>
+            </li>
+            <li>
+                <span class="en">本体词</span>
+                (<span class="zh">是最小的、能独立使用的词根</span>)
+                <span class="note">它是整个词族的核心，所有变体都从它派生</span>
+            </li>
+            <li>
+                <span class="en">变体</span>
+                (<span class="zh">本体 + 前缀 / 后缀 组成的新词</span>)
+                <span class="note">能拆就拆，拆不动就当特例单独记</span>
+            </li>
+            <li>
+                <span class="en">词根族</span>
+                (<span class="zh">词根不能独立成词，但整族共享一个词根</span>)
+                <span class="note">不能从本体推，要记后缀对应关系。如 -ent → -ence</span>
+            </li>
+            <li>
+                <span class="en">复合词</span>
+                (<span class="zh">两个能独立成词的词根，拼成新词</span>)
+                <span class="note">拆成两部分分别记，意思往往不是简单相加</span>
+            </li>
+        </ol>
+
+        <h2>五、判断流程</h2>
+        <div class="diagram">
+            拿到一个单词
+            │
+            ├─ 能拆成两个独立单词吗？
+            │ │
+            │ ├─ 能 → 【复合词】→ 分别记两个词的本意
+            │ │
+            │ └─ 不能 → 往下
+            │
+            ├─ 能看出本体 + 前后缀吗？
+            │ │
+            │ ├─ 能 → 【变体】→ 反推本体，验证后缀规则
+            │ │
+            │ └─ 不能 → 往下
+            │
+            ├─ 它能独立成词吗？
+            │ │
+            │ ├─ 能 → 能接前后缀吗？
+            │ │ │
+            │ │ ├─ 能 → 【本体词】→ 记本意 + 拆变体
+            │ │ │
+            │ │ └─ 不能 → 【原子词】→ 归类 / 造句
+            │ │
+            │ └─ 不能 → 【词根族】→ 整族一起记
+        </div>
+
+        <h2>六、复合词的三种写法</h2>
+        <div class="div_table">
+            <table class="compare-table">
+                <thead>
+                <tr>
+                    <th>写法</th>
+                    <th>例子</th>
+                    <th>说明</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>合写</td>
+                    <td>notebook / bedroom / homework</td>
+                    <td>最常见</td>
+                </tr>
+                <tr>
+                    <td>连字符</td>
+                    <td>law-breaker / well-known / hard-working</td>
+                    <td>常见于形容词、部分名词</td>
+                </tr>
+                <tr>
+                    <td>空格</td>
+                    <td>New York / ice cream / high school</td>
+                    <td>松散的复合，看成一个整体记</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>七、举例</h2>
+        <div class="div_table">
+            <table class="compare-table">
+                <thead>
+                <tr>
+                    <th>单词</th>
+                    <th>分类</th>
+                    <th>原因</th>
+                    <th>处理方式</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code class="en">law</code></td>
+                    <td><span class="tag tag-root">本体词</span></td>
+                    <td>能接 -ful / -less / -yer</td>
+                    <td>拆：lawful / lawless / lawyer</td>
+                </tr>
+                <tr>
+                    <td><code class="en">usable</code></td>
+                    <td><span class="tag tag-derive">变体</span></td>
+                    <td>use + able</td>
+                    <td>反推 use，验证“去 e + able”</td>
+                </tr>
+                <tr>
+                    <td><code class="en">apple</code></td>
+                    <td><span class="tag tag-atom">原子词</span></td>
+                    <td>拆不动</td>
+                    <td>归类到“食物”语义场</td>
+                </tr>
+                <tr>
+                    <td><code class="en">abandon</code></td>
+                    <td><span class="tag tag-atom">原子词</span></td>
+                    <td>拆不动</td>
+                    <td>放句子里记：abandon the plan</td>
+                </tr>
+                <tr>
+                    <td><code class="en">care</code></td>
+                    <td><span class="tag tag-root">本体词</span></td>
+                    <td>能接 -ful / -less / -ing</td>
+                    <td>拆：careful / careless / caring</td>
+                </tr>
+                <tr>
+                    <td><code class="en">careless</code></td>
+                    <td><span class="tag tag-derive">变体</span></td>
+                    <td>care + less</td>
+                    <td>反推 care，验证“直接加”</td>
+                </tr>
+                <tr>
+                    <td><code class="en">intelligent</code></td>
+                    <td><span class="tag tag-family">词根族</span></td>
+                    <td>词根 intellig- 不能独立</td>
+                    <td>整族记：intelligence / intelligible</td>
+                </tr>
+                <tr>
+                    <td><code class="en">notebook</code></td>
+                    <td><span class="tag tag-compound">复合词</span></td>
+                    <td>note + book，两个都能独立</td>
+                    <td>拆成 note 和 book 分别记</td>
+                </tr>
+                <tr>
+                    <td><code class="en">law-breaker</code></td>
+                    <td><span class="tag tag-compound">复合词</span></td>
+                    <td>law + break + er</td>
+                    <td>既是复合（law + break），又是派生（+ er）</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>八、记忆口诀</h2>
+        <div class="diagram">
+            原子词：拆不动，就归类
+            本体词：能拆，就全力拆
+            变体： 看得出拆法，就反推验证
+            词根族：词根不独立，整族一起记
+            复合词：两个独立词，分开记再加合
+        </div>
+
+        <h2>九、剩下的特殊情况</h2>
+        <p>以下三类数量少，不用单独建分类，<strong>当原子词记就行</strong>：</p>
+        <div class="div_table">
+            <table class="compare-table">
+                <thead>
+                <tr>
+                    <th>类型</th>
+                    <th>说明</th>
+                    <th>例子</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>缩略词</td>
+                    <td>截取原词一部分</td>
+                    <td>phone (telephone) / exam (examination)</td>
+                </tr>
+                <tr>
+                    <td>首字母词</td>
+                    <td>首字母拼成</td>
+                    <td>TV / DNA / UN / CPU</td>
+                </tr>
+                <tr>
+                    <td>混成词</td>
+                    <td>两个词各取一半</td>
+                    <td>brunch (breakfast + lunch) / smog (smoke + fog)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+    <section id="section_2">
+        <button class="toggle-btn">隐藏中文 (开始测试)</button>
+    </section>
+</main>
+<script src="../../专升本可用的动态a标签显示.js"></script>
+<script src="../显示或隐藏.js"></script>
+</body>
+</html>

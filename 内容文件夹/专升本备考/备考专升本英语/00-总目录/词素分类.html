@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词素分类</title>
+    <link rel="stylesheet" href="../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+
+    <!--单词独有样式-->
+    <link rel="stylesheet" href="../单词独有样式表.css">
+    <style>
+        a {
+            font-size: 1.4rem;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <!--例子由：word_div包裹(ol,ul)，单词用en类，词义用zh类，注释/额外提示用：note类-->
+    <header>
+        <h1>词素分类</h1>
+    </header>
+    <section id="section_1">
+        <h2>主要以四种分类：<span>本体词、派生词、原子词、词根族、复合词</span></h2>
+        <a href="../语法体系/词素分类.html" style="display:block; font-size: 3.5rem">具体解释请单击我</a>
+    </section>
+    <section id="section_2">
+        <ol>
+            <li>
+                <h3>本体词、派生词</h3>
+                <ul>
+                    <li><a href="../词素/词根-本体-变体【派生词】/本体-law、以及它的变体.html">本体-law、以及它的变体</a></li>
+                </ul>
+            </li>
+            <li>
+                <h3>原子词</h3>
+            </li>
+            <li>
+                <h3>词根族</h3>
+            </li>
+            <li>
+                <h3>复合词</h3>
+            </li>
+        </ol>
+    </section>
+</main>
+<script src="../../专升本可用的动态a标签显示.js">
+    //写法
+    //<a href="目标.html" onclick="loadContent('目标.html', '容器ID','锚点ID'); return false;">链接</a>
+    //<div id="容器ID"></div> container开头均为锚点提示，锚点只能用ID表示
+    // 锚点不能其他符号，只能是字符
+</script>
+<!--单词显示与隐藏-->
+<script src="../显示或隐藏.js"></script>
+</body>
+</html>
