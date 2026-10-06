@@ -1,14 +1,29 @@
-// ================= 0. 确保页面至少有一个按钮 =================
-function hasToggleBtn() {
-    return document.querySelector('#btn, .toggle-btn');
-}
+// ================= 0. 确保主按钮存在且挂在 body 下 =================
+function ensureMainButton() {
+    // 找 body 直接子级的按钮
+    let mainBtn = Array.from(document.body.children).find(
+        el => el.matches && el.matches('#btn, .toggle-btn')
+    );
 
-if (!hasToggleBtn()) {
+    if (mainBtn) return;
+
+    // 页面里有没有非注入的按钮？
+    const anyBtn = Array.from(document.querySelectorAll('#btn, .toggle-btn'))
+        .find(b => !b.closest('[id^="container"]'));
+
+    if (anyBtn) {
+        document.body.appendChild(anyBtn);
+        return;
+    }
+
+    // 完全没有 → 创建一个
     const b = document.createElement('button');
     b.className = 'toggle-btn';
     b.textContent = '隐藏中文 (开始测试)';
     document.body.appendChild(b);
 }
+
+ensureMainButton();
 
 // ================= 1. 工具函数 =================
 function findOwnerNote(zhEl) {
@@ -27,31 +42,38 @@ function findOwnerNote(zhEl) {
 }
 
 // 找按钮的作用范围
-// 优先级：data-target > 最近的"包含 word_div 的祖先" > body
+// 优先级：data-target > 注入容器 > 最近的 word_div 祖先 > main > body
 function getScope(btn) {
-    // 1. data-target 显式指定
-    const sel = btn.dataset.target;
-    if (sel) {
-        const el = document.querySelector(sel);
+    // 1. data-target：值是 id（不带 #）
+    const targetId = btn.dataset.target;
+    if (targetId) {
+        const el = document.getElementById(targetId);
         if (el) return el;
     }
 
-    // 2. 从按钮往上找：第一个包含 .word_div 的祖先
+    // 2. 按钮在注入容器里 → 用容器作范围
+    const container = btn.closest('[id^="container"]');
+    if (container) return container;
+
+    // 3. 往上找最近的、包含 .word_div 的祖先（不含 body）
     let p = btn.parentElement;
-    while (p && p !== document.documentElement) {
+    while (p && p !== document.body) {
         if (p.querySelector && p.querySelector('.word_div')) {
             return p;
         }
         p = p.parentElement;
     }
 
-    // 3. 兜底
+    // 4. 主按钮 → 用 main
+    const main = btn.closest('main');
+    if (main) return main;
+
     return document.body;
 }
 
-// 更新一个按钮的文案和颜色
 function refreshBtn(btn) {
     const scope = getScope(btn);
+    if (!scope) return;
     const isHidden = scope.classList.contains('hide-zh');
     btn.textContent = isHidden ? '显示中文 (核对答案)' : '隐藏中文 (开始测试)';
     btn.style.backgroundColor = isHidden ? '#E67E22' : '#5D6D7E';
@@ -64,10 +86,11 @@ document.addEventListener('click', function (event) {
     const btnEl = event.target.closest('#btn, .toggle-btn');
     if (btnEl) {
         const scope = getScope(btnEl);
+        if (!scope) return;
         scope.classList.toggle('hide-zh');
         refreshBtn(btnEl);
 
-        // 收起时清空该范围内的局部展开
+        // 收起时清空该范围内所有局部展开
         if (!scope.classList.contains('hide-zh')) {
             scope.querySelectorAll('.word_div > li').forEach(li => {
                 li.querySelectorAll('.zh.show-zh').forEach(z => z.classList.remove('show-zh'));
@@ -125,7 +148,6 @@ document.addEventListener('click', function (event) {
                 const ownerNote = findOwnerNote(thisZh);
                 if (ownerNote) ownerNote.classList.remove('show-note');
             } else {
-                // 刚显示：有 note 就加 has-note，没有就清掉
                 const ownerNote = findOwnerNote(thisZh);
                 if (ownerNote) {
                     thisZh.classList.add('has-note');
@@ -136,5 +158,17 @@ document.addEventListener('click', function (event) {
         }
     }
 });
+
+// ================= 3. 默认隐藏 =================
+(function defaultHide() {
+    const mainBtn = Array.from(document.body.children).find(
+        el => el.matches && el.matches('#btn, .toggle-btn')
+    );
+    if (!mainBtn) return;
+    const scope = getScope(mainBtn);
+    if (!scope) return;
+    scope.classList.add('hide-zh');
+    refreshBtn(mainBtn);
+})();
 
 console.log('[显示或隐藏] 脚本已加载');

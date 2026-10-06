@@ -238,28 +238,28 @@ td {
     white-space: nowrap;
 }
 
-table th h1 code,
-table th h1 span {
+h1 code,
+h1 span {
     font-size: var(--size-h1-footer);
 }
 
-table th h2 code,
-table th h2 span {
+h2 code,
+h2 span {
     font-size: var(--size-h2);
 }
 
-table th h3 code,
-table th h3 span {
+h3 code,
+h3 span {
     font-size: var(--size-h3);
 }
 
-table th h4 code,
-table th h4 span {
+h4 code,
+h4 span {
     font-size: var(--size-h4);
 }
 
-table th h5 code,
-table th h5 span {
+h5 code,
+h5 span {
     font-size: var(--size-h5);
 }
 

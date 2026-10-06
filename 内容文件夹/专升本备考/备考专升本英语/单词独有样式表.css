@@ -1,23 +1,36 @@
-/* ================= 1. 隐藏 ================= */
-.hide-zh .zh,
-.hide-zh .note {
-    opacity: 0;
-    visibility: hidden;
+/* ================= 1. 隐藏状态（CSS 变量驱动） ================= */
+.zh, .note {
+    opacity: var(--zh-op, 1);
+    visibility: var(--zh-vis, visible);
     transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-/* ================= 2. 局部展开 ================= */
-.hide-zh .zh.show-zh {
+/* 隐藏状态：定义变量，让所有后代 .zh/.note 继承 */
+.hide-zh {
+    --zh-op: 0;
+    --zh-vis: hidden;
+}
+
+/* 注入容器：隔离边界，重置变量回可见 */
+[data-isolated] {
+    --zh-op: 1;
+    --zh-vis: visible;
+}
+
+/* 注入容器自身隐藏状态 */
+[data-isolated].hide-zh {
+    --zh-op: 0;
+    --zh-vis: hidden;
+}
+
+/* 局部展开：直接设可见，覆盖一切 */
+.zh.show-zh,
+.note.show-note {
     opacity: 1;
     visibility: visible;
 }
 
-.hide-zh .note.show-note {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* ================= 3. 交互提示 ================= */
+/* ================= 2. 交互提示 ================= */
 .word_div > li {
     cursor: pointer;
     padding: 6px 10px;
@@ -30,23 +43,82 @@
     background-color: rgba(93, 109, 126, 0.15);
 }
 
-/* 只有带 note 的 zh 才加虚线下划线 */
-.hide-zh .zh.show-zh.has-note {
+/* 展开的 zh：有 note 时加下划线（提示可点） */
+.zh.show-zh.has-note {
     text-decoration: underline dashed #E67E22;
     padding-bottom: 2px;
     cursor: pointer;
 }
 
-/* 没有 note 的 zh 就是普通文字，不加任何提示 */
-.hide-zh .zh.show-zh:not(.has-note) {
-    text-decoration: none;
-    cursor: default;
-}
-
-.hide-zh .note.show-note {
-    color: #F39C12;
-    padding-bottom: 2px;
-}
-
 .note { color: #F39C12; }
 .en   { color: #6C3483; }
+
+li > span > code:first-of-type {
+    display: block;
+}
+
+/* ================= 3. 悬浮固定按钮 ================= */
+#btn,
+.toggle-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+    width: auto;
+    height: auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    background: #5D6D7E;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s, background 0.2s;
+}
+
+#btn:hover,
+.toggle-btn:hover {
+    transform: scale(1.06);
+}
+
+/* ================= 4. 注入内容里的局部按钮 ================= */
+.toggle-btn-local {
+    position: static !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 10px 0;
+    display: inline-block;
+    width: auto;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #5D6D7E;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.toggle-btn-local:hover {
+    transform: none;
+    background: #4A5866;
+}
+
+.clear-content-btn {
+    margin-top: 10px;
+    padding: 5px 15px;
+    cursor: pointer;
+    background: #C0392B;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+/* ================= 5. 空 footer 隐藏 ================= */
+footer:not(:has(*)) {
+    min-height: 0;
+    background: transparent;
+    padding: 0;
+}

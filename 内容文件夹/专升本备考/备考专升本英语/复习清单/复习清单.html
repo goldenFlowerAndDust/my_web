@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复习打卡</title>
+    <link rel="stylesheet" href="复习打卡.css">
+</head>
+<body>
+<main>
+    <header>
+        <h1>复习打卡</h1>
+    </header>
+    <section id="section_1">
+
+        <div id="status"></div>
+
+        <div class="toolbar">
+            <button id="btn-reload">🔄 重新加载</button>
+            <button id="btn-save">💾 保存</button>
+            <button id="btn-undo">↩ 撤销上一步</button>
+            <button id="btn-undo-all">⏪ 撤销全部</button>
+            <button id="btn-export">📥 导出 data.json</button>
+        </div>
+
+        <h2 id="today-title">今天要复习的</h2>
+        <ul id="due-list" class="review-list"></ul>
+
+        <h2>全部词根</h2>
+        <ul id="all-list" class="review-list"></ul>
+
+    </section>
+</main>
+<script src="复习打卡.js"></script>
+</body>
+</html>
