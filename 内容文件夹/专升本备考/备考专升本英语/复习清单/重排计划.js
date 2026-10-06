@@ -12,7 +12,7 @@ const path = require('path');
 const DAILY_QUOTA = 2;
 
 // ⭐ 从第几天开始排（1 = 明天）
-const START_OFFSET_DAYS = 0;
+const START_OFFSET_DAYS = 1;
 
 const DATA_FILE = path.join(__dirname, 'data.json');
 
