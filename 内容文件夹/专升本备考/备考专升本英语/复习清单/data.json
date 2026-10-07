@@ -4,9 +4,9 @@
       "name": "fish以及扩展",
       "path": "../单词家族/fish以及扩展.html",
       "category": "单词家族",
-      "level": 0,
-      "nextDate": "2026-10-07",
-      "lastReviewed": null,
+      "level": 1,
+      "nextDate": "2026-10-08",
+      "lastReviewed": "2026-10-07",
       "created": "2026-09-26",
       "modified": "2026-09-29"
     }
@@ -16,9 +16,9 @@
       "name": "以[er]结尾的单词",
       "path": "../构词法案例/以-er结尾.html",
       "category": "构词法案例",
-      "level": 0,
-      "nextDate": "2026-10-07",
-      "lastReviewed": null,
+      "level": 1,
+      "nextDate": "2026-10-08",
+      "lastReviewed": "2026-10-07",
       "created": "2026-09-26",
       "modified": "2026-10-02"
     },
