@@ -1,5 +1,5 @@
 // ================== 配置 ==================
-const DATA_URL = 'data.json';
+const DATA_URL = '../复习清单/data.json';
 const PENDING_KEY = 'reviewPendingChanges';
 const INTERVALS = [1, 3, 7, 15, 30, 60, 90];
 const START_DATE = '2026-09-01';
@@ -8,7 +8,7 @@ let reviewData = {};
 let dataBaseUrl = '';
 let undoStack = [];
 let isDirty = false;
-let originalSnapshot = {};   // ⭐ data.json 加载时的原始状态
+let originalSnapshot = {};
 
 // ================== 工具 ==================
 function todayStr() {
@@ -59,7 +59,14 @@ function getSavedPending() {
     catch (e) { return {}; }
 }
 
-// ⭐ 重建 pending：只记录"和 data.json 原始值不同"的条目
+// ⭐ level 徽章：新 / 第N次
+function levelBadge(level) {
+    const lv = level || 0;
+    if (lv === 0) return '<span class="badge">新</span>';
+    const cls = lv <= 2 ? 'level-low' : lv <= 4 ? 'level-mid' : 'level-high';
+    return '<span class="badge ' + cls + '">第' + lv + '次</span>';
+}
+
 function rebuildPending() {
     const pending = {};
     for (const cat of Object.keys(reviewData)) {
@@ -142,7 +149,6 @@ async function loadData() {
         }
     }
 
-    // ⭐ 记录原始快照（注入 pending 之前）
     originalSnapshot = {};
     for (const cat of Object.keys(reviewData)) {
         for (const item of reviewData[cat]) {
@@ -154,7 +160,6 @@ async function loadData() {
         }
     }
 
-    // 叠加 pending
     const pending = getSavedPending();
     let applied = 0;
     for (const cat of Object.keys(reviewData)) {
@@ -213,7 +218,6 @@ function exportData() {
     a.click();
     URL.revokeObjectURL(url);
 
-    // 导出后清空 pending（已经落到 data.json 里了）
     localStorage.removeItem(PENDING_KEY);
     isDirty = false;
     undoStack = [];
@@ -252,7 +256,6 @@ function resetReview(name) {
         name, level: rec.level, nextDate: rec.nextDate, lastReviewed: rec.lastReviewed
     });
 
-    // ⭐ 恢复到 data.json 里的原始值
     const orig = originalSnapshot[name];
     if (orig) {
         rec.level = orig.level;
@@ -362,7 +365,7 @@ function renderDueList(items, today) {
         return [
             '<li class="review-item ' + (overdue ? 'overdue' : '') + '">',
             '<span class="name"><a href="' + href + '" target="_blank">' + cat + item.name + '</a></span>',
-            '<span class="badge">Lv.' + item.level + '</span>',
+            levelBadge(item.level),
             '<span class="badge">' + diffText + '</span>',
             '<button class="btn-done" onclick="completeReview(\'' + escapeStr(item.name) + '\')">✓ 已复习</button>',
             '</li>'
@@ -418,7 +421,7 @@ function renderAllList(items, today) {
                 '<li class="review-item' + (isPast ? ' overdue' : '') + '">',
                 '<span class="name"><a href="' + href + '" target="_blank">' +
                 cat + item.name + '</a></span>',
-                '<span class="badge">Lv.' + item.level + '</span>',
+                levelBadge(item.level),
                 '<button class="btn-reset" onclick="resetReview(\'' +
                 escapeStr(item.name) + '\')">重置</button>',
                 '</li>'
@@ -428,16 +431,17 @@ function renderAllList(items, today) {
     ul.innerHTML = html;
 }
 
-// ================== 启动 ==================
-const btnReload = document.getElementById('btn-reload');
-const btnSave = document.getElementById('btn-save');
-const btnExport = document.getElementById('btn-export');
-const btnUndo = document.getElementById('btn-undo');
-const btnUndoAll = document.getElementById('btn-undo-all');
-if (btnReload) btnReload.addEventListener('click', reloadData);
-if (btnSave) btnSave.addEventListener('click', saveNow);
-if (btnExport) btnExport.addEventListener('click', exportData);
-if (btnUndo) btnUndo.addEventListener('click', undoLast);
-if (btnUndoAll) btnUndoAll.addEventListener('click', undoAll);
+// ================== 启动（事件委托，避免 DOM 报错） ==================
+document.addEventListener('click', function (e) {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    switch (btn.id) {
+        case 'btn-reload': reloadData(); break;
+        case 'btn-save': saveNow(); break;
+        case 'btn-export': exportData(); break;
+        case 'btn-undo': undoLast(); break;
+        case 'btn-undo-all': undoAll(); break;
+    }
+});
 
 loadData();

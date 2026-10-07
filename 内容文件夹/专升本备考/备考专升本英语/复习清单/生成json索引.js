@@ -1,11 +1,7 @@
 // 生成json索引.js
-// 用法：node 生成json索引.js
-// 新词根自动排在"当前最晚复习日期"之后，不再堆在一起
-
 const fs = require('fs');
 const path = require('path');
 
-// ================== 向上查找「内容文件夹」 ==================
 function findContentFolder(startDir) {
     let dir = startDir;
     while (true) {
@@ -18,35 +14,29 @@ function findContentFolder(startDir) {
 
 const SCRIPT_DIR = __dirname;
 const CONTENT_ROOT = findContentFolder(SCRIPT_DIR);
-
 if (!CONTENT_ROOT) {
-    console.error('❌ 从 ' + SCRIPT_DIR + ' 向上找不到「内容文件夹」');
+    console.error('❌ 向上找不到「内容文件夹」');
     process.exit(1);
 }
 
 console.log('📁 内容文件夹:', CONTENT_ROOT);
-console.log('📁 data.json 目录:', SCRIPT_DIR);
 
-// ================== 配置 ==================
 const OUTPUT = path.join(SCRIPT_DIR, 'data.json');
 const CATEGORY_ANCHOR = '备考专升本英语';
 
-// ⭐ 新词根：排在当前最晚 nextDate 之后的第几天
-// 比如最新排到 10-15，新词根排到 10-16（加 1）
+// ⭐ 每天配额
+const DAILY_QUOTA = 2;
+// ⭐ 新词根从最晚日期往后第几天开始找
 const NEW_ROOT_OFFSET_DAYS = 1;
 
-// 跳过的目录名
 const EXCLUDE_DIRS = [
     'AI','frontend——前端','MySql','node.js','python_study','自建本地网站','自建网站中用到的外部引用',
     '复习清单','每月打卡','00-总目录'
 ];
-
-// 跳过的文件名
 const EXCLUDE_FILES = [
     '专升本可用的动态a标签显示.js','模板.html','笔记模板.html'
 ];
 
-// ================== 工具 ==================
 function todayStr() {
     const d = new Date();
     return d.getFullYear() + '-' +
@@ -76,31 +66,24 @@ function extractCategory(fullPath) {
     return '其他';
 }
 
-// ================== 递归扫描 ==================
 function scanDir(dir) {
     const results = [];
     if (!fs.existsSync(dir)) return results;
-
     for (const item of fs.readdirSync(dir)) {
         if (EXCLUDE_DIRS.includes(item)) continue;
-
         const full = path.join(dir, item);
         const stat = fs.statSync(full);
-
         if (stat.isDirectory()) {
             results.push(...scanDir(full));
         } else if (item.endsWith('.html')) {
             if (EXCLUDE_FILES.includes(item)) continue;
-
             const html = fs.readFileSync(full, 'utf-8');
             const h1 = extractH1(html);
             if (!h1) {
                 console.warn('  ⚠ 跳过（无 h1）:', full);
                 continue;
             }
-
             const relPath = path.relative(SCRIPT_DIR, full).replace(/\\/g, '/');
-
             results.push({
                 name: h1,
                 path: relPath,
@@ -113,14 +96,13 @@ function scanDir(dir) {
     return results;
 }
 
-// ================== 主流程 ==================
+// ================== 扫描 ==================
 const entries = [];
 for (const item of fs.readdirSync(CONTENT_ROOT)) {
     if (EXCLUDE_DIRS.includes(item)) continue;
     const full = path.join(CONTENT_ROOT, item);
     if (fs.statSync(full).isDirectory()) entries.push(...scanDir(full));
 }
-
 console.log('扫描到 ' + entries.length + ' 个 HTML');
 
 // ================== 读旧数据 ==================
@@ -128,10 +110,8 @@ let existingMap = new Map();
 if (fs.existsSync(OUTPUT)) {
     try {
         const parsed = JSON.parse(fs.readFileSync(OUTPUT, 'utf-8'));
-
         if (Array.isArray(parsed)) {
             for (const item of parsed) existingMap.set(item.name, item);
-            console.log('  ℹ 旧数据：数组格式');
         } else {
             const values = Object.values(parsed);
             if (values.length > 0 && Array.isArray(values[0])) {
@@ -139,31 +119,48 @@ if (fs.existsSync(OUTPUT)) {
                     if (!Array.isArray(list)) continue;
                     for (const item of list) existingMap.set(item.name, item);
                 }
-                console.log('  ℹ 旧数据：分类分组格式');
             } else {
                 for (const [name, rec] of Object.entries(parsed)) {
-                    existingMap.set(name, {name, ...rec});
+                    existingMap.set(name, { name, ...rec });
                 }
-                console.log('  ℹ 旧数据：对象格式');
             }
         }
+        console.log('  ℹ 旧数据加载完成：' + existingMap.size + ' 条');
     } catch (e) {
         console.warn('旧 data.json 解析失败，将重建');
     }
 }
 
-// ⭐ 计算当前所有条目里最大的 nextDate
+// ================== ⭐ 统计 + 分配器（修正核心） ==================
 let maxNextDate = todayStr();
+const dateCount = {};   // 每个日期已有多少条
+
 for (const rec of existingMap.values()) {
-    if (rec.nextDate && rec.nextDate > maxNextDate) {
-        maxNextDate = rec.nextDate;
+    if (rec.nextDate) {
+        if (rec.nextDate > maxNextDate) maxNextDate = rec.nextDate;
+        dateCount[rec.nextDate] = (dateCount[rec.nextDate] || 0) + 1;
     }
 }
-console.log('  📅 当前最晚复习日期:', maxNextDate);
+console.log('  📅 当前最晚日期:', maxNextDate);
 
-// 新词根的 nextDate
-const newRootNextDate = addDaysFromDate(maxNextDate, NEW_ROOT_OFFSET_DAYS);
-console.log('  📅 新词根将排在:', newRootNextDate);
+// 显示每个日期的占用情况
+console.log('  📅 已有日期分布:');
+Object.keys(dateCount).sort().forEach(d => {
+    console.log('     ' + d + '：' + dateCount[d] + ' 个');
+});
+
+// ⭐ 分配器：从 maxNextDate 之后开始，找第一个未满的日期
+let cursor = addDaysFromDate(maxNextDate, NEW_ROOT_OFFSET_DAYS);
+
+function findNextSlot() {
+    while ((dateCount[cursor] || 0) >= DAILY_QUOTA) {
+        cursor = addDaysFromDate(cursor, 1);
+    }
+    dateCount[cursor] = (dateCount[cursor] || 0) + 1;   // ⭐ 立即占用！
+    return cursor;
+}
+
+console.log('  📅 新词根起始查找:', cursor);
 
 // ================== 合并 ==================
 const grouped = {};
@@ -174,7 +171,6 @@ for (const e of entries) {
     if (!grouped[cat]) grouped[cat] = [];
 
     if (existingMap.has(e.name)) {
-        // 旧条目：保留进度，只更新路径/分类/修改时间
         const old = existingMap.get(e.name);
         grouped[cat].push({
             ...old,
@@ -185,23 +181,22 @@ for (const e of entries) {
         });
         existingMap.delete(e.name);
     } else {
-        // 新条目：排在 maxNextDate 之后
+        const slot = findNextSlot();
         grouped[cat].push({
             name: e.name,
             path: e.path,
             category: cat,
             level: 0,
-            nextDate: newRootNextDate,
+            nextDate: slot,
             lastReviewed: null,
             created: e.created,
             modified: e.modified
         });
         added++;
-        console.log('  + [' + cat + '] ' + e.name + '  →  ' + newRootNextDate);
+        console.log('  + [' + cat + '] ' + e.name + '  →  ' + slot);
     }
 }
 
-// ================== 清理 ==================
 let removed = 0;
 for (const [name] of existingMap) {
     removed++;
