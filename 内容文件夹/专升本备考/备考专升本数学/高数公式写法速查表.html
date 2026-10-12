@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高数公式写法速查表</title>
+
+    <!-- 引入 KaTeX (保持你之前的本地相对路径) -->
+    <link rel="stylesheet" href="一些必备脚本/数学公式js/libs/katex.min.css">
+    <script defer src="一些必备脚本/数学公式js/libs/katex.min.js"></script>
+    <script defer src="一些必备脚本/数学公式js/libs/auto-render.min.js"></script>
+
+    <style>
+        /* 基础样式，干净清爽 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fcfcfc;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            border-left: 4px solid #2980b9;
+            padding-left: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        th, td {
+            border: 1px solid #e1e4e8;
+            padding: 10px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+            font-weight: bold;
+        }
+        code {
+            background-color: #f1f2f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #c0392b;
+            font-family: Consolas, monospace;
+        }
+        .render-box {
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+<h1>高数公式写法速查表 (LaTeX)</h1>
+
+<h2>1. 基础结构（上下标、分数、根号、括号）</h2>
+<table>
+    <thead>
+    <tr><th>说明</th><th>LaTeX 代码</th><th>渲染效果</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>上标</td><td><code>x^2</code></td><td class="render-box">\(x^2\)</td></tr>
+    <tr><td>下标</td><td><code>x_1</code></td><td class="render-box">\(x_1\)</td></tr>
+    <tr><td>多字符上标</td><td><code>x^{2n}</code></td><td class="render-box">\(x^{2n}\)</td></tr>
+    <tr><td>分数</td><td><code>\frac{a}{b}</code></td><td class="render-box">\(\frac{a}{b}\)</td></tr>
+    <tr><td>根号</td><td><code>\sqrt{x}</code></td><td class="render-box">\(\sqrt{x}\)</td></tr>
+    <tr><td>n次根号</td><td><code>\sqrt[3]{x}</code></td><td class="render-box">\(\sqrt[3]{x}\)</td></tr>
+    <tr><td>花括号（转义）</td><td><code>\{a, b\}</code></td><td class="render-box">\(\{a, b\}\)</td></tr>
+    <tr><td>绝对值</td><td><code>|x|</code></td><td class="render-box">\(|x|\)</td></tr>
+    </tbody>
+</table>
+
+<h2>2. 高数核心符号（极限、微积分）</h2>
+<table>
+    <thead>
+    <tr><th>说明</th><th>LaTeX 代码</th><th>渲染效果</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>趋于</td><td><code>x \to 0</code></td><td class="render-box">\(x \to 0\)</td></tr>
+    <tr><td>趋于无穷</td><td><code>x \to \infty</code></td><td class="render-box">\(x \to \infty\)</td></tr>
+    <tr><td>极限</td><td><code>\lim_{x \to 0}</code></td><td class="render-box">\(\lim_{x \to 0}\)</td></tr>
+    <tr><td>导数</td><td><code>\frac{dy}{dx}</code></td><td class="render-box">\(\frac{dy}{dx}\)</td></tr>
+    <tr><td>二阶导数</td><td><code>\frac{d^2y}{dx^2}</code></td><td class="render-box">\(\frac{d^2y}{dx^2}\)</td></tr>
+    <tr><td>定积分</td><td><code>\int_a^b</code></td><td class="render-box">\(\int_a^b\)</td></tr>
+    <tr><td>不定积分</td><td><code>\int f(x) dx</code></td><td class="render-box">\(\int f(x) dx\)</td></tr>
+    <tr><td>求和</td><td><code>\sum_{i=1}^n</code></td><td class="render-box">\(\sum_{i=1}^n\)</td></tr>
+    <tr><td>连乘</td><td><code>\prod_{i=1}^n</code></td><td class="render-box">\(\prod_{i=1}^n\)</td></tr>
+    <tr><td>偏导数</td><td><code>\frac{\partial f}{\partial x}</code></td><td class="render-box">\(\frac{\partial f}{\partial x}\)</td></tr>
+    </tbody>
+</table>
+
+<h2>3. 常用希腊字母</h2>
+<table>
+    <thead>
+    <tr><th>字母</th><th>代码</th><th>字母</th><th>代码</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>\(\alpha\)</td><td><code>\alpha</code></td><td>\(\beta\)</td><td><code>\beta</code></td></tr>
+    <tr><td>\(\gamma\)</td><td><code>\gamma</code></td><td>\(\delta\)</td><td><code>\delta</code></td></tr>
+    <tr><td>\(\Delta\)</td><td><code>\Delta</code></td><td>\(\theta\)</td><td><code>\theta</code></td></tr>
+    <tr><td>\(\lambda\)</td><td><code>\lambda</code></td><td>\(\mu\)</td><td><code>\mu</code></td></tr>
+    <tr><td>\(\pi\)</td><td><code>\pi</code></td><td>\(\sigma\)</td><td><code>\sigma</code></td></tr>
+    <tr><td>\(\varphi\)</td><td><code>\varphi</code></td><td>\(\omega\)</td><td><code>\omega</code></td></tr>
+    <tr><td>\(\infty\)</td><td><code>\infty</code></td><td>\(\varepsilon\)</td><td><code>\varepsilon</code></td></tr>
+    </tbody>
+</table>
+
+<h2>4. 函数与运算符</h2>
+<table>
+    <thead>
+    <tr><th>说明</th><th>LaTeX 代码</th><th>渲染效果</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>正弦</td><td><code>\sin x</code></td><td class="render-box">\(\sin x\)</td></tr>
+    <tr><td>余弦</td><td><code>\cos x</code></td><td class="render-box">\(\cos x\)</td></tr>
+    <tr><td>正切</td><td><code>\tan x</code></td><td class="render-box">\(\tan x\)</td></tr>
+    <tr><td>对数</td><td><code>\ln x</code></td><td class="render-box">\(\ln x\)</td></tr>
+    <tr><td>对数（底数）</td><td><code>\log_a x</code></td><td class="render-box">\(\log_a x\)</td></tr>
+    <tr><td>指数</td><td><code>e^x</code></td><td class="render-box">\(e^x\)</td></tr>
+    <tr><td>乘号</td><td><code>\times</code></td><td class="render-box">\(\times\)</td></tr>
+    <tr><td>点乘</td><td><code>\cdot</code></td><td class="render-box">\(\cdot\)</td></tr>
+    <tr><td>不等号</td><td><code>\neq</code></td><td class="render-box">\(\neq\)</td></tr>
+    <tr><td>大于等于</td><td><code>\ge</code></td><td class="render-box">\(\ge\)</td></tr>
+    <tr><td>小于等于</td><td><code>\le</code></td><td class="render-box">\(\le\)</td></tr>
+    <tr><td>属于</td><td><code>\in</code></td><td class="render-box">\(\in\)</td></tr>
+    <tr><td>并集</td><td><code>\cup</code></td><td class="render-box">\(\cup\)</td></tr>
+    <tr><td>交集</td><td><code>\cap</code></td><td class="render-box">\(\cap\)</td></tr>
+    </tbody>
+</table>
+
+<h2>5. 排版技巧（空格与换行）</h2>
+<table>
+    <thead>
+    <tr><th>说明</th><th>LaTeX 代码</th><th>渲染效果</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>小空格</td><td><code>a \ b</code></td><td class="render-box">\(a \ b\)</td></tr>
+    <tr><td>中空格</td><td><code>a \quad b</code></td><td class="render-box">\(a \quad b\)</td></tr>
+    <tr><td>大空格</td><td><code>a \qquad b</code></td><td class="render-box">\(a \qquad b\)</td></tr>
+    <tr><td>换行（行间公式内）</td><td><code>\\</code></td><td class="render-box">（换行符）</td></tr>
+    </tbody>
+</table>
+
+<!-- 核心：等页面加载完毕，主动触发渲染 -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\]', display: true}
+            ]
+        });
+    });
+</script>
+
+</body>
+</html>

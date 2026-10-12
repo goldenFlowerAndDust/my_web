@@ -1,0 +1,13 @@
+<div>
+    <!-- 1. 外层容器：整个卡片 -->
+    <details class="math-card">
+
+        <!-- 2. 内层标题：点击触发的提示语（点击感全靠它） -->
+        <summary>点击查看：第一个重要极限</summary>
+
+        <!-- 3. 内容区域：包裹公式（用 div 包裹，方便做动画和间距） -->
+        <div class="math-body">
+            <p>公式内容：\( \lim_{x \to 0} \frac{\sin x}{x} = 1 \)</p>
+        </div>
+    </details>
+</div>

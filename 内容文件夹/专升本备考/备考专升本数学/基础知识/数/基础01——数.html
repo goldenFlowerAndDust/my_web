@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专升本数学笔记——基础01——数</title>
+
+    <!-- 样式表 -->
+    <link rel="stylesheet" href="../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+    <link rel="stylesheet" href="../../一些必备脚本/数学公式显示隐藏样式表.css">
+
+    <!-- 核心：KaTeX 本地离线引入（相对路径）-->
+    <link rel="stylesheet" href="../../一些必备脚本/数学公式js/libs/katex.min.css">
+    <script defer src="../../一些必备脚本/数学公式js/libs/katex.min.js"></script>
+    <!-- ★ 新增：auto-render 才提供 renderMathInElement -->
+    <script defer src="../../一些必备脚本/数学公式js/libs/auto-render.min.js"></script>
+</head>
+<body>
+<main>
+    <header>
+        <h1>基础01——数</h1>
+    </header>
+
+    <section id="section_1">
+         <div data-mindmap="数"></div>
+    </section>
+    <section id="section_2"></section>
+</main>
+
+<!-- 原有的脚本 -->
+<script src="../../../专升本可用的动态a标签显示.js"></script>
+<script src="../../一些必备脚本/数学公式js/markmap-render.js"></script>
+<!-- 核心：等所有 defer 脚本就绪后，渲染页面公式 -->
+<script src="../../一些必备脚本/等待所有脚本执行后，渲染公式.js"></script>
+</body>
+</html>

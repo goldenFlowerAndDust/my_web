@@ -1,0 +1,49 @@
+/* 针对卡片整体 */
+.math-card {
+    margin: 15px 0;
+    border-left: 4px solid #E67E22;
+    background-color: #f9fbfc;
+    border-radius: 4px;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.math-card[open] {
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 提示语 */
+.math-card summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #E67E22;
+    list-style: none;
+    position: relative;
+    padding-left: 25px;
+    user-select: none;
+}
+
+/* 小箭头和旋转动画（你原本的代码保留） */
+.math-card summary::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease;
+    font-size: 0.8em;
+}
+.math-card[open] summary::before {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+/* 内容区域的淡入动画 */
+.math-card .math-body {
+    animation: slideFadeIn 0.4s ease-out;
+    padding-top: 10px;
+}
+@keyframes slideFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

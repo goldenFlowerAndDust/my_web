@@ -1,0 +1,6 @@
+# This file records the segment order used by Manim.
+file 'file:D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/media/videos/二次函数图像/720p30/partial_movie_files/PlotSin/b8a7fa317f4d94b86a003f85fd0407215c04b8f2ed1606613b2cdfbf83663b81.mp4'
+file 'file:D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/media/videos/二次函数图像/720p30/partial_movie_files/PlotSin/d098679824b89e1ae193bd8702cf7d91687ccd57f0ae6137b288cf0b44a4f7b6.mp4'
+file 'file:D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/media/videos/二次函数图像/720p30/partial_movie_files/PlotSin/af2e57045a8a80032dcb577258808edb0488583ca01af7f4bca3e2f895ae9e62.mp4'
+file 'file:D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/media/videos/二次函数图像/720p30/partial_movie_files/PlotSin/9fa5e488e1e384ee7db2ac821b90067aaa32f32d6da6138adff0623ad9ce4844.mp4'
+file 'file:D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/media/videos/二次函数图像/720p30/partial_movie_files/PlotSin/3e9d177d9eb1dada85c593c2e1c7b522ba81ff39925cee11f176d4a244791838.mp4'

@@ -1,0 +1,6 @@
+# This file records the segment order used by Manim.
+file 'file:D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/media/videos/二次函数图像/720p30/partial_movie_files/PlotQuadratic/5e595c481eb5b1d130a6a1e918035d3acf7c5b3645df8a47baeb6f09005e9b24.mp4'
+file 'file:D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/media/videos/二次函数图像/720p30/partial_movie_files/PlotQuadratic/48f27851c6751be4dfd1f1a66e43fb0fe6cb2dbd554f77a363bcb9c3bade7ff6.mp4'
+file 'file:D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/media/videos/二次函数图像/720p30/partial_movie_files/PlotQuadratic/32a0fa980b2b8daf117f371210015332de9b15ed645f206f55a70417118adb81.mp4'
+file 'file:D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/media/videos/二次函数图像/720p30/partial_movie_files/PlotQuadratic/7c654e003b40cc9388a7bb0e670486942941999d4d0a9ceb74831c2c05a9f17f.mp4'
+file 'file:D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/media/videos/二次函数图像/720p30/partial_movie_files/PlotQuadratic/493a4ff9919349a45ba0cbeee6bc81c00c82ef3972ee17bfaaaed16cc7b06d55.mp4'
