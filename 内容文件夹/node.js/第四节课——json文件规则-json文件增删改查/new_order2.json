@@ -1,0 +1,21 @@
+[
+  {
+    "name": "苹果",
+    "price": 18,
+    "quantity": 20,
+    "date": "20200-10-08"
+  },
+  {
+    "name": "香蕉",
+    "price": 30,
+    "quantity": 40,
+    "date": "20230-10-08"
+  },
+  null,
+  {
+    "name": "草莓",
+    "price": "60",
+    "quantity": 50,
+    "date": "2006-09-09"
+  }
+]
