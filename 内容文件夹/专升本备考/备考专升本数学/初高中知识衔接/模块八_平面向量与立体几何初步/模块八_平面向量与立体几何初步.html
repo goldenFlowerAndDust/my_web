@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="初高中衔接模块八：平面向量加减、数乘、数量积与坐标运算，圆柱圆锥球的表面积和体积，以及高数中的法向量和体积微元。">
+  <meta name="color-scheme" content="light dark">
+  <title>初高中衔接模块八：平面向量与立体几何初步</title>
+  <style>
+:root {
+  --bg: #fbfcfe;
+  --text: #172033;
+  --muted: #5e6a7d;
+  --panel: #ffffff;
+  --panel-soft: #f3f7fc;
+  --line: #dce5ef;
+  --accent: #0f766e;
+  --accent-soft: #ecfdf5;
+  --accent-2: #7c3aed;
+  --warm: #fff7e8;
+  --warm-line: #f1cf8a;
+  --danger: #b42318;
+  --shadow: 0 18px 50px rgba(23, 32, 51, 0.08);
+  --radius: 16px;
+}
+
+html[data-theme="dark"] {
+  --bg: #0b1220;
+  --text: #e6edf7;
+  --muted: #aab7c9;
+  --panel: #111a2b;
+  --panel-soft: #0d1728;
+  --line: #2b3a52;
+  --accent: #5eead4;
+  --accent-soft: #0f2e2b;
+  --accent-2: #c4b5fd;
+  --warm: #2a2415;
+  --warm-line: #6b5422;
+  --danger: #fca5a5;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --bg: #0b1220;
+    --text: #e6edf7;
+    --muted: #aab7c9;
+    --panel: #111a2b;
+    --panel-soft: #0d1728;
+    --line: #2b3a52;
+    --accent: #5eead4;
+    --accent-soft: #0f2e2b;
+    --accent-2: #c4b5fd;
+    --warm: #2a2415;
+    --warm-line: #6b5422;
+    --danger: #fca5a5;
+    --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 30rem),
+    radial-gradient(circle at 95% 12%, color-mix(in srgb, var(--accent-2) 7%, transparent), transparent 28rem),
+    var(--bg);
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.progress-container {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 100;
+  background: transparent;
+}
+
+.progress-bar {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.12s linear;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 286px) minmax(0, 1fr);
+  gap: 38px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 34px 28px 80px;
+}
+
+.sidebar {
+  position: sticky;
+  top: 22px;
+  align-self: start;
+  max-height: calc(100vh - 44px);
+  overflow: auto;
+  padding: 22px 18px;
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  scrollbar-width: thin;
+  z-index: 30;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.brand strong {
+  display: block;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.brand small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+}
+
+.sidebar-title {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+.toc {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.toc li {
+  margin: 2px 0;
+}
+
+.toc a {
+  display: block;
+  padding: 5px 8px;
+  color: var(--muted);
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.toc-level-3 {
+  padding-left: 12px;
+}
+
+.toc-level-3 a {
+  font-size: 12px;
+  opacity: 0.88;
+}
+
+.content {
+  min-width: 0;
+  padding: 44px 54px 64px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  position: relative;
+  margin: -8px 0 32px;
+  padding: 30px 32px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, var(--panel)), color-mix(in srgb, var(--accent-2) 7%, var(--panel)));
+}
+
+.hero::after {
+  content: "△";
+  position: absolute;
+  right: 24px;
+  bottom: -30px;
+  color: color-mix(in srgb, var(--accent) 12%, transparent);
+  font-family: Georgia, serif;
+  font-size: 132px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.hero-kicker {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.hero h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-size: clamp(30px, 4vw, 45px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.hero-stats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+}
+
+.hero-stats span {
+  padding: 6px 11px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--panel) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  border-radius: 999px;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.35;
+  scroll-margin-top: 24px;
+}
+
+h2 {
+  margin: 54px 0 18px;
+  padding-top: 8px;
+  font-size: 28px;
+}
+
+h2::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 10px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  vertical-align: 0.18em;
+}
+
+h3 {
+  margin: 34px 0 12px;
+  color: color-mix(in srgb, var(--text) 82%, var(--accent));
+  font-size: 21px;
+}
+
+h4 {
+  margin: 26px 0 8px;
+  font-size: 18px;
+}
+
+.heading-anchor {
+  float: right;
+  margin-left: 12px;
+  color: color-mix(in srgb, var(--muted) 48%, transparent);
+  font-weight: 400;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+h2:hover .heading-anchor,
+h3:hover .heading-anchor,
+h4:hover .heading-anchor {
+  opacity: 1;
+}
+
+p {
+  margin: 0.75em 0;
+}
+
+strong {
+  color: color-mix(in srgb, var(--text) 84%, var(--accent));
+}
+
+.callout {
+  margin: 20px 0;
+  padding: 16px 20px;
+  color: var(--text);
+  background: var(--warm);
+  border: 1px solid var(--warm-line);
+  border-left: 5px solid #e8a317;
+  border-radius: 10px;
+}
+
+.callout p {
+  margin: 0;
+}
+
+ul, ol {
+  margin: 0.75em 0;
+  padding-left: 1.7em;
+}
+
+li {
+  margin: 0.32em 0;
+}
+
+li > p {
+  margin: 0.35em 0;
+}
+
+.math-display {
+  margin: 20px 0;
+  padding: 14px 18px;
+  overflow-x: auto;
+  max-width: 100%;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.05em;
+  scrollbar-width: thin;
+}
+
+.math-display .katex-display,
+.math-display .katex {
+  margin: 0;
+  display: block;
+}
+
+.math-display math {
+  font-size: 1.08em;
+}
+
+.katex {
+  font-size: 1.06em;
+}
+
+.katex math {
+  font-size: 1.06em;
+}
+
+.math-error {
+  color: var(--danger);
+  font-family: monospace;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+}
+
+code {
+  padding: 0.12em 0.36em;
+  color: #9f1239;
+  background: #fff1f2;
+  border-radius: 5px;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.table-wrap {
+  margin: 22px 0;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+th, td {
+  padding: 10px 13px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: var(--text);
+  background: var(--accent-soft);
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--panel-soft) 72%, transparent);
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+hr.section-rule {
+  margin: 36px 0;
+  border: 0;
+  border-top: 1px dashed color-mix(in srgb, var(--line) 82%, transparent);
+}
+
+.footer-note {
+  margin-top: 48px;
+  padding-top: 18px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+}
+
+.toolbar {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  gap: 8px;
+  z-index: 60;
+}
+
+.toolbar button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  box-shadow: 0 8px 24px rgba(23, 32, 51, 0.12);
+  cursor: pointer;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  backdrop-filter: blur(10px);
+}
+
+.toolbar button:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.mobile-note {
+  display: none;
+  color: var(--muted);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+}
+
+.overlay {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .layout {
+    display: block;
+    max-width: none;
+    padding: 18px;
+  }
+
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(82vw, 320px);
+    max-height: none;
+    border-radius: 0 18px 18px 0;
+    transform: translateX(-105%);
+    transition: transform 0.28s ease;
+    z-index: 80;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 10, 22, 0.48);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 70;
+  }
+
+  .overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  body.drawer-open {
+    overflow: hidden;
+  }
+
+  .content {
+    padding: 32px 24px 48px;
+  }
+
+  .mobile-note {
+    display: block;
+  }
+
+  .print-btn {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    left: 16px;
+    bottom: 18px;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--text);
+    background: color-mix(in srgb, var(--panel) 94%, transparent);
+    box-shadow: 0 10px 28px rgba(23, 32, 51, 0.2);
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 65;
+    backdrop-filter: blur(10px);
+  }
+
+  .toc-level-3 {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  body {
+    font-size: 16px;
+  }
+
+  .layout {
+    padding: 12px;
+  }
+
+  .content {
+    padding: 24px 17px 38px;
+    border-radius: 16px;
+  }
+
+  .hero {
+    padding: 24px 20px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 19px;
+  }
+
+  .toolbar {
+    top: 10px;
+    right: 10px;
+  }
+
+  .toolbar button {
+    padding: 8px 11px;
+  }
+}
+
+#back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+  box-shadow: 0 10px 28px rgba(23, 32, 51, 0.2);
+  cursor: pointer;
+  font-size: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+  z-index: 65;
+  backdrop-filter: blur(10px);
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+
+  .layout {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+
+  .sidebar,
+  .toolbar,
+  .progress-container,
+  .heading-anchor,
+  .mobile-note,
+  .overlay,
+  .menu-toggle,
+  #back-to-top {
+    display: none !important;
+  }
+
+  .content {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: #fff;
+  }
+
+  .hero {
+    border: 1px solid #ccc;
+    background: #fff;
+  }
+
+  .hero::after {
+    display: none;
+  }
+
+  .math-display {
+    background: #fff;
+    break-inside: avoid;
+  }
+
+  h2, h3 {
+    break-after: avoid;
+  }
+
+  table, blockquote {
+    break-inside: avoid;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+
+
+
+/* 模块五专用细节 */
+.sidebar { scrollbar-color: var(--line) transparent; }
+.toc a.active {
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 700;
+}
+.content > .callout:first-of-type {
+  margin-top: 24px;
+}
+.callout strong { color: var(--text); }
+.callout + .callout { margin-top: 12px; }
+.math-display {
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.math-display .katex { display: block; min-width: max-content; }
+.math-display math { display: block; min-width: max-content; }
+.table-wrap table { min-width: 520px; }
+@media (max-width: 980px) {
+  .sidebar {
+    visibility: hidden;
+    transition: transform .28s ease, visibility 0s linear .28s;
+  }
+  .sidebar.open {
+    visibility: visible;
+    transition: transform .28s ease, visibility 0s;
+  }
+}
+@media (max-width: 620px) {
+  .hero p { font-size: 15px; }
+  .toolbar #theme-toggle { padding-inline: 10px; }
+  .callout { padding: 14px 15px; }
+}
+@media print {
+  @page { size: A4; margin: 16mm; }
+  .content > .callout:first-of-type { margin-top: 12px; }
+  html, html[data-theme="dark"] {
+    --bg: #fff;
+    --text: #000;
+    --muted: #333;
+    --panel: #fff;
+    --panel-soft: #fff;
+    --line: #ccc;
+    --accent: #000;
+    --accent-soft: #fff;
+    --accent-2: #000;
+    --warm: #fff;
+    --warm-line: #bbb;
+    color-scheme: light;
+  }
+  body, h1, h2, h3, h4, p, li, td, th, strong, .hero p, .callout {
+    color: #000;
+  }
+  .hero-stats span, .callout {
+    background: #fff;
+    border-color: #bbb;
+  }
+  .callout { border-left-color: #000; }
+  .math-display { border-color: #ccc; overflow: visible; }
+  code { color: #000; background: #fff; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="progress-container" aria-hidden="true"><span class="progress-bar" id="progress-bar"></span></div>
+
+  <div class="toolbar">
+    <button type="button" id="theme-toggle" aria-label="切换深色模式">☾ 深色模式</button>
+    <button type="button" id="print-button" class="print-btn">打印 / 保存为 PDF</button>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="本页目录">
+      <div class="brand">
+        <div class="brand-mark">△</div>
+        <div><strong>初高中衔接<br>模块八</strong><small>平面向量与立体几何初步</small></div>
+      </div>
+      <p class="sidebar-title">本页目录</p>
+      <ul class="toc">
+<li class="toc-level-2"><a href="#一平面向量的概念" data-target="一平面向量的概念">一、平面向量的概念</a></li>
+<li class="toc-level-3"><a href="#section-1-1" data-target="section-1-1">1.1 向量的定义</a></li>
+<li class="toc-level-3"><a href="#section-1-2" data-target="section-1-2">1.2 零向量与单位向量</a></li>
+<li class="toc-level-3"><a href="#section-1-3" data-target="section-1-3">1.3 相等向量与相反向量</a></li>
+<li class="toc-level-2"><a href="#二向量的加减法与数乘" data-target="二向量的加减法与数乘">二、向量的加减法与数乘</a></li>
+<li class="toc-level-3"><a href="#section-2-1" data-target="section-2-1">2.1 向量加法</a></li>
+<li class="toc-level-3"><a href="#section-2-2" data-target="section-2-2">2.2 向量减法</a></li>
+<li class="toc-level-3"><a href="#section-2-3" data-target="section-2-3">2.3 数乘</a></li>
+<li class="toc-level-3"><a href="#section-2-4" data-target="section-2-4">2.4 共线向量</a></li>
+<li class="toc-level-3"><a href="#section-2-5" data-target="section-2-5">2.5 坐标运算</a></li>
+<li class="toc-level-2"><a href="#三数量积及其坐标运算" data-target="三数量积及其坐标运算">三、数量积及其坐标运算</a></li>
+<li class="toc-level-3"><a href="#section-3-1" data-target="section-3-1">3.1 数量积的定义</a></li>
+<li class="toc-level-3"><a href="#section-3-2" data-target="section-3-2">3.2 坐标公式</a></li>
+<li class="toc-level-3"><a href="#section-3-3" data-target="section-3-3">3.3 数量积的性质</a></li>
+<li class="toc-level-3"><a href="#section-3-4" data-target="section-3-4">3.4 垂直条件</a></li>
+<li class="toc-level-3"><a href="#section-3-5" data-target="section-3-5">3.5 夹角公式</a></li>
+<li class="toc-level-3"><a href="#section-3-6" data-target="section-3-6">3.6 投影</a></li>
+<li class="toc-level-3"><a href="#section-3-7" data-target="section-3-7">3.7 与模有关的重要恒等式</a></li>
+<li class="toc-level-2"><a href="#四常见几何体的表面积与体积" data-target="四常见几何体的表面积与体积">四、常见几何体的表面积与体积</a></li>
+<li class="toc-level-3"><a href="#section-4-1" data-target="section-4-1">4.1 圆柱</a></li>
+<li class="toc-level-3"><a href="#section-4-2" data-target="section-4-2">4.2 圆锥</a></li>
+<li class="toc-level-3"><a href="#section-4-3" data-target="section-4-3">4.3 球</a></li>
+<li class="toc-level-3"><a href="#section-4-4" data-target="section-4-4">4.4 三类公式对照</a></li>
+<li class="toc-level-2"><a href="#五高数关联度" data-target="五高数关联度">五、高数关联度</a></li>
+<li class="toc-level-3"><a href="#section-5-1" data-target="section-5-1">5.1 向量代数与线性运算</a></li>
+<li class="toc-level-3"><a href="#section-5-2" data-target="section-5-2">5.2 空间解析几何中的法向量</a></li>
+<li class="toc-level-3"><a href="#section-5-3" data-target="section-5-3">5.3 梯度与切平面</a></li>
+<li class="toc-level-3"><a href="#section-5-4" data-target="section-5-4">5.4 体积微元与重积分</a></li>
+<li class="toc-level-3"><a href="#section-5-5" data-target="section-5-5">5.5 向量场与通量</a></li>
+<li class="toc-level-3"><a href="#section-5-6" data-target="section-5-6">5.6 从平面到空间</a></li>
+<li class="toc-level-2"><a href="#六典型例题" data-target="六典型例题">六、典型例题</a></li>
+<li class="toc-level-3"><a href="#section-6-1" data-target="section-6-1">例 1：向量的坐标运算</a></li>
+<li class="toc-level-3"><a href="#section-6-2" data-target="section-6-2">例 2：求两向量的夹角</a></li>
+<li class="toc-level-3"><a href="#section-6-3" data-target="section-6-3">例 3：平行与垂直的坐标条件</a></li>
+<li class="toc-level-3"><a href="#section-6-4" data-target="section-6-4">例 4：数量积与做功</a></li>
+<li class="toc-level-3"><a href="#section-6-5" data-target="section-6-5">例 5：用向量表示三角形中的点</a></li>
+<li class="toc-level-3"><a href="#section-6-6" data-target="section-6-6">例 6：圆柱的表面积与体积</a></li>
+<li class="toc-level-3"><a href="#section-6-7" data-target="section-6-7">例 7：圆锥的表面积与体积</a></li>
+<li class="toc-level-3"><a href="#section-6-8" data-target="section-6-8">例 8：球的表面积与体积</a></li>
+<li class="toc-level-2"><a href="#七易错点提示" data-target="七易错点提示">七、易错点提示</a></li>
+<li class="toc-level-3"><a href="#section-7-1" data-target="section-7-1">1. 把数量积当成向量</a></li>
+<li class="toc-level-3"><a href="#section-7-2" data-target="section-7-2">2. 向量不能直接相除</a></li>
+<li class="toc-level-3"><a href="#section-7-3" data-target="section-7-3">3. 混淆向量相等与模相等</a></li>
+<li class="toc-level-3"><a href="#section-7-4" data-target="section-7-4">4. 向量减法的方向写反</a></li>
+<li class="toc-level-3"><a href="#section-7-5" data-target="section-7-5">5. 误用 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>a</mi><mo>+</mo><mi>b</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi mathvariant="normal">∣</mi><mi>a</mi><mi mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mi>b</mi><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">|a+b|=|a|+|b|</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#section-7-6" data-target="section-7-6">6. 垂直条件漏掉非零前提</a></li>
+<li class="toc-level-3"><a href="#section-7-7" data-target="section-7-7">7. 夹角公式漏写分母</a></li>
+<li class="toc-level-3"><a href="#section-7-8" data-target="section-7-8">8. 共线条件与垂直条件混淆</a></li>
+<li class="toc-level-3"><a href="#section-7-9" data-target="section-7-9">9. 投影是数量还是向量分不清</a></li>
+<li class="toc-level-3"><a href="#section-7-10" data-target="section-7-10">10. 圆锥侧面积误用高</a></li>
+<li class="toc-level-3"><a href="#section-7-11" data-target="section-7-11">11. 圆柱全面积漏掉两个底面</a></li>
+<li class="toc-level-3"><a href="#section-7-12" data-target="section-7-12">12. 球面积与球体积公式混淆</a></li>
+<li class="toc-level-3"><a href="#section-7-13" data-target="section-7-13">13. 直径与半径混用</a></li>
+<li class="toc-level-3"><a href="#section-7-14" data-target="section-7-14">14. 表面积与体积单位混用</a></li>
+<li class="toc-level-2"><a href="#八课后练习" data-target="八课后练习">八、课后练习</a></li>
+<li class="toc-level-2"><a href="#九练习答案与解析" data-target="九练习答案与解析">九、练习答案与解析</a></li>
+<li class="toc-level-3"><a href="#section-9-1" data-target="section-9-1">1. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(2,2)</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>7</mn><mo separator="true">,</mo><mo>−</mo><mn>8</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(7,-8)</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>11</mn></mrow><annotation encoding="application/x-tex">-11</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mn>13</mn></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{13}</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#section-9-2" data-target="section-9-2">2. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo separator="true">,</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left(\frac35,\frac45\right)</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#section-9-3" data-target="section-9-3">3. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k=2</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#section-9-4" data-target="section-9-4">4. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">k=6</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#section-9-5" data-target="section-9-5">5. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>4</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi4</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#section-9-6" data-target="section-9-6">6. 答案：数量投影为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span>，投影向量为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(3,0)</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#section-9-7" data-target="section-9-7">7. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mn>24</mn><mi>π</mi><mo separator="true">,</mo><mtext> </mtext><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mn>32</mn><mi>π</mi><mo separator="true">,</mo><mtext> </mtext><mi>V</mi><mo>=</mo><mn>24</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">S_{\text{侧}}=24\pi,\ S_{\text{全}}=32\pi,\ V=24\pi</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#section-9-8" data-target="section-9-8">8. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mo>=</mo><mn>5</mn><mo separator="true">,</mo><mtext> </mtext><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mn>24</mn><mi>π</mi><mo separator="true">,</mo><mtext> </mtext><mi>V</mi><mo>=</mo><mn>12</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">l=5,\ S_{\text{全}}=24\pi,\ V=12\pi</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#section-9-9" data-target="section-9-9">9. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mn>16</mn><mi>π</mi><mo separator="true">,</mo><mtext> </mtext><mi>V</mi><mo>=</mo><mfrac><mrow><mn>32</mn><mi>π</mi></mrow><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">S=16\pi,\ V=\frac{32\pi}{3}</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#section-9-10" data-target="section-9-10">10. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span></a></li>
+<li class="toc-level-2"><a href="#十公式速查" data-target="十公式速查">十、公式速查</a></li>
+<li class="toc-level-3"><a href="#section-10-1" data-target="section-10-1">10.1 向量坐标运算</a></li>
+<li class="toc-level-3"><a href="#section-10-2" data-target="section-10-2">10.2 模与单位向量</a></li>
+<li class="toc-level-3"><a href="#section-10-3" data-target="section-10-3">10.3 数量积</a></li>
+<li class="toc-level-3"><a href="#section-10-4" data-target="section-10-4">10.4 平行与垂直</a></li>
+<li class="toc-level-3"><a href="#section-10-5" data-target="section-10-5">10.5 夹角与投影</a></li>
+<li class="toc-level-3"><a href="#section-10-6" data-target="section-10-6">10.6 几何体公式</a></li>
+<li class="toc-level-3"><a href="#section-10-7" data-target="section-10-7">10.7 高数关键词</a></li>
+<li class="toc-level-2"><a href="#section-11" data-target="section-11">结语</a></li>
+      </ul>
+      <p class="mobile-note">点击目录可快速跳转；阅读时也可用左下角按钮随时打开目录。</p>
+    </aside>
+
+    <main class="content">
+      <header class="hero">
+        <p class="hero-kicker">初高中衔接 · MODULE 08</p>
+        <h1>平面向量与立体几何初步</h1>
+        <p>用向量统一处理方向、长度、夹角与投影，再把平面图形推向圆柱、圆锥和球；最后连接到空间法向量、梯度、重积分与体积微元。</p>
+        <div class="hero-stats" aria-label="内容概览">
+          <span>向量运算</span>
+          <span>数量积</span>
+          <span>坐标方法</span>
+          <span>几何体公式</span>
+          <span>8 道例题 · 10 道练习</span>
+        </div>
+      </header>
+
+<div class="callout"><p><strong>模块定位</strong>：向量把“方向”和“大小”统一起来，是从平面几何走向空间解析几何、重积分与场论的桥梁；圆柱、圆锥、球的体积公式，则是重积分中“体积微元”思想的最初原型。</p></div>
+<div class="callout"><p><strong>学习建议</strong>：始终分清“向量”和“数量”。向量运算可以画图检查方向，数量积的结果一定是一个数；立体几何公式先辨认半径、高、母线分别是谁，再代入。</p></div>
+<hr class="section-rule">
+<h2 id="一平面向量的概念"><a class="heading-anchor" href="#一平面向量的概念" aria-label="回到本小节">#</a>一、平面向量的概念</h2>
+<h3 id="section-1-1"><a class="heading-anchor" href="#section-1-1" aria-label="回到本小节">#</a>1.1 向量的定义</h3>
+<p>既有大小、又有方向的量称为<strong>向量</strong>。向量通常记作</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a,\qquad \overrightarrow{AB}.</annotation></semantics></math></span></div>
+<p>向量 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover></mrow><annotation encoding="application/x-tex">\overrightarrow{AB}</annotation></semantics></math></span> 的起点是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span>，终点是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span>，方向由 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span> 指向 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span>。</p>
+<p>向量的大小称为<strong>模</strong>，记作</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo separator="true">,</mo><mspace width="2em"/><mi mathvariant="normal">∣</mi><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|\vec a|,\qquad |\overrightarrow{AB}|.</annotation></semantics></math></span></div>
+<p>模是一个非负实数：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>≥</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">|\vec a|\ge0.</annotation></semantics></math></span></div>
+<h3 id="section-1-2"><a class="heading-anchor" href="#section-1-2" aria-label="回到本小节">#</a>1.2 零向量与单位向量</h3>
+<p>模为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span> 的向量称为零向量，记作</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mn>0</mn><mo>⃗</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec0.</annotation></semantics></math></span></div>
+<p>零向量的方向不确定，规定它与任意向量平行。</p>
+<p>模为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span> 的向量称为单位向量。若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo mathvariant="normal">≠</mo><mover accent="true"><mn>0</mn><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a\ne\vec0</annotation></semantics></math></span>，则与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a</annotation></semantics></math></span> 同方向的单位向量为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mover accent="true"><mi>e</mi><mo>⃗</mo></mover><mi>a</mi></msub><mo>=</mo><mfrac><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\vec e_a=\frac{\vec a}{|\vec a|}}.</annotation></semantics></math></span></div>
+<h3 id="section-1-3"><a class="heading-anchor" href="#section-1-3" aria-label="回到本小节">#</a>1.3 相等向量与相反向量</h3>
+<p>两个向量相等，当且仅当它们的大小相等、方向相同：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>⟺</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mspace width="1em"/><mtext>且方向相同</mtext><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a=\vec b
+\Longleftrightarrow
+|\vec a|=|\vec b|
+\quad\text{且方向相同}.</annotation></semantics></math></span></div>
+<p>大小相等、方向相反的向量称为相反向量：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo>−</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec b=-\vec a.</annotation></semantics></math></span></div>
+<p>例如</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mrow><mi>B</mi><mi>A</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mo>−</mo><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\overrightarrow{BA}=-\overrightarrow{AB}.</annotation></semantics></math></span></div>
+<p>向量可以在平面内平移而不改变，因此向量是“自由向量”；但 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover></mrow><annotation encoding="application/x-tex">\overrightarrow{AB}</annotation></semantics></math></span> 与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mrow><mi>B</mi><mi>A</mi></mrow><mo stretchy="true">→</mo></mover></mrow><annotation encoding="application/x-tex">\overrightarrow{BA}</annotation></semantics></math></span> 方向相反，并不相等。</p>
+<hr class="section-rule">
+<h2 id="二向量的加减法与数乘"><a class="heading-anchor" href="#二向量的加减法与数乘" aria-label="回到本小节">#</a>二、向量的加减法与数乘</h2>
+<h3 id="section-2-1"><a class="heading-anchor" href="#section-2-1" aria-label="回到本小节">#</a>2.1 向量加法</h3>
+<p><strong>三角形法则</strong>：把 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec b</annotation></semantics></math></span> 的起点移到 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a</annotation></semantics></math></span> 的终点，则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a+\vec b</annotation></semantics></math></span></div>
+<p>是从 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a</annotation></semantics></math></span> 的起点指向 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec b</annotation></semantics></math></span> 的终点的向量。</p>
+<p><strong>平行四边形法则</strong>：以 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a,\vec b</annotation></semantics></math></span> 为邻边作平行四边形，则对角线向量为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a+\vec b.</annotation></semantics></math></span></div>
+<p>向量加法满足：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec a+\vec b=\vec b+\vec a,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mo>+</mo><mover accent="true"><mi>c</mi><mo>⃗</mo></mover><mo>=</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mo stretchy="false">(</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>c</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">(\vec a+\vec b)+\vec c
+=
+\vec a+(\vec b+\vec c),</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mn>0</mn><mo>⃗</mo></mover><mo>=</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a+\vec0=\vec a.</annotation></semantics></math></span></div>
+<h3 id="section-2-2"><a class="heading-anchor" href="#section-2-2" aria-label="回到本小节">#</a>2.2 向量减法</h3>
+<p>定义</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>−</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a-\vec b=\vec a+(-\vec b).</annotation></semantics></math></span></div>
+<p>若</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mrow><mi>O</mi><mi>A</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mrow><mi>O</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\overrightarrow{OA}=\vec a,
+\qquad
+\overrightarrow{OB}=\vec b,</annotation></semantics></math></span></div>
+<p>则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>−</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\overrightarrow{AB}=\vec b-\vec a}.</annotation></semantics></math></span></div>
+<p>口诀：<strong>终点减起点</strong>。</p>
+<h3 id="section-2-3"><a class="heading-anchor" href="#section-2-3" aria-label="回到本小节">#</a>2.3 数乘</h3>
+<p>实数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span> 与向量 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a</annotation></semantics></math></span> 的乘积 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\lambda\vec a</annotation></semantics></math></span> 仍是向量：</p>
+<ul><li>模为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>λ</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">|\lambda||\vec a|</annotation></semantics></math></span>；</li><li>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda&gt;0</annotation></semantics></math></span> 时，方向与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a</annotation></semantics></math></span> 相同；</li><li>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda&lt;0</annotation></semantics></math></span> 时，方向与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a</annotation></semantics></math></span> 相反；</li><li>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda=0</annotation></semantics></math></span> 或 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mover accent="true"><mn>0</mn><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a=\vec0</annotation></semantics></math></span> 时，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mover accent="true"><mn>0</mn><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\lambda\vec a=\vec0</annotation></semantics></math></span>。</li></ul>
+<p>数乘满足：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>λ</mi><mo stretchy="false">(</mo><mi>μ</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>μ</mi><mo stretchy="false">)</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\lambda(\mu\vec a)=(\lambda\mu)\vec a,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mi>λ</mi><mo>+</mo><mi>μ</mi><mo stretchy="false">)</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mi>λ</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mi>μ</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">(\lambda+\mu)\vec a=\lambda\vec a+\mu\vec a,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>λ</mi><mo stretchy="false">(</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mo>=</mo><mi>λ</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mi>λ</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lambda(\vec a+\vec b)=\lambda\vec a+\lambda\vec b.</annotation></semantics></math></span></div>
+<h3 id="section-2-4"><a class="heading-anchor" href="#section-2-4" aria-label="回到本小节">#</a>2.4 共线向量</h3>
+<p>若存在实数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span>，使</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mi>λ</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{\vec b=\lambda\vec a},</annotation></semantics></math></span></div>
+<p>则 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a,\vec b</annotation></semantics></math></span> 共线（平行）。</p>
+<p>在平面直角坐标系中，若</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec a=(x_1,y_1),\qquad \vec b=(x_2,y_2),</annotation></semantics></math></span></div>
+<p>则共线的坐标条件是</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><msub><mi>y</mi><mn>1</mn></msub><mo>=</mo><mn>0</mn></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{x_1y_2-x_2y_1=0}.</annotation></semantics></math></span></div>
+<p>这就是“交叉相乘相等”。</p>
+<h3 id="section-2-5"><a class="heading-anchor" href="#section-2-5" aria-label="回到本小节">#</a>2.5 坐标运算</h3>
+<p>设</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>λ</mi><mo>∈</mo><mi mathvariant="double-struck">R</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a=(x_1,y_1),\qquad
+\vec b=(x_2,y_2),\qquad
+\lambda\in\mathbb R.</annotation></semantics></math></span></div>
+<p>则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><mtext> </mtext><msub><mi>y</mi><mn>1</mn></msub><mo>+</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{\vec a+\vec b=(x_1+x_2,\ y_1+y_2)},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>−</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><mtext> </mtext><msub><mi>y</mi><mn>1</mn></msub><mo>−</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{\vec a-\vec b=(x_1-x_2,\ y_1-y_2)},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>λ</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>λ</mi><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><mtext> </mtext><mi>λ</mi><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{\lambda\vec a=(\lambda x_1,\ \lambda y_1)},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mrow><msubsup><mi>x</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>y</mi><mn>1</mn><mn>2</mn></msubsup></mrow></msqrt></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{|\vec a|=\sqrt{x_1^2+y_1^2}}.</annotation></semantics></math></span></div>
+<p>若</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>B</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">A(x_1,y_1),\qquad B(x_2,y_2),</annotation></semantics></math></span></div>
+<p>则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo>−</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><mtext> </mtext><msub><mi>y</mi><mn>2</mn></msub><mo>−</mo><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\overrightarrow{AB}=(x_2-x_1,\ y_2-y_1),</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mi>B</mi><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo>−</mo><msub><mi>x</mi><mn>1</mn></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><msub><mi>y</mi><mn>2</mn></msub><mo>−</mo><msub><mi>y</mi><mn>1</mn></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{|AB|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}}.</annotation></semantics></math></span></div>
+<p>这与两点间距离公式完全一致。</p>
+<hr class="section-rule">
+<h2 id="三数量积及其坐标运算"><a class="heading-anchor" href="#三数量积及其坐标运算" aria-label="回到本小节">#</a>三、数量积及其坐标运算</h2>
+<h3 id="section-3-1"><a class="heading-anchor" href="#section-3-1" aria-label="回到本小节">#</a>3.1 数量积的定义</h3>
+<p>设两个非零向量 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a,\vec b</annotation></semantics></math></span> 的夹角为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span>，定义它们的数量积（点乘）为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi>cos</mi><mo>⁡</mo><mi>θ</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\vec a\cdot\vec b=|\vec a||\vec b|\cos\theta}.</annotation></semantics></math></span></div>
+<p>夹角 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span> 的取值范围是</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>θ</mi><mo>≤</mo><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">0\le\theta\le\pi.</annotation></semantics></math></span></div>
+<p><strong>数量积的结果是一个实数，不是向量。</strong></p>
+<h3 id="section-3-2"><a class="heading-anchor" href="#section-3-2" aria-label="回到本小节">#</a>3.2 坐标公式</h3>
+<p>若</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec a=(x_1,y_1),\qquad \vec b=(x_2,y_2),</annotation></semantics></math></span></div>
+<p>则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><msub><mi>y</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\vec a\cdot\vec b=x_1x_2+y_1y_2}.</annotation></semantics></math></span></div>
+<p>例如：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>⋅</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><mo>⋅</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>⋅</mo><mn>3</mn><mo>=</mo><mo>−</mo><mn>5.</mn></mrow><annotation encoding="application/x-tex">(2,-1)\cdot(-1,3)
+=
+2\cdot(-1)+(-1)\cdot3
+=
+-5.</annotation></semantics></math></span></div>
+<h3 id="section-3-3"><a class="heading-anchor" href="#section-3-3" aria-label="回到本小节">#</a>3.3 数量积的性质</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b=\vec b\cdot\vec a,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mi>λ</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mi>λ</mi><mo stretchy="false">(</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">(\lambda\vec a)\cdot\vec b
+=
+\lambda(\vec a\cdot\vec b),</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mo>⋅</mo><mover accent="true"><mi>c</mi><mo>⃗</mo></mover><mo>=</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>c</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>c</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">(\vec a+\vec b)\cdot\vec c
+=
+\vec a\cdot\vec c+\vec b\cdot\vec c.</annotation></semantics></math></span></div>
+<p>另外：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec a=|\vec a|^2,</annotation></semantics></math></span></div>
+<p>因此</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow></msqrt><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|\vec a|=\sqrt{\vec a\cdot\vec a}.</annotation></semantics></math></span></div>
+<h3 id="section-3-4"><a class="heading-anchor" href="#section-3-4" aria-label="回到本小节">#</a>3.4 垂直条件</h3>
+<p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a,\vec b</annotation></semantics></math></span> 都是非零向量，则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⊥</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>⟺</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mn>0</mn></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\vec a\perp\vec b
+\Longleftrightarrow
+\vec a\cdot\vec b=0}.</annotation></semantics></math></span></div>
+<p>坐标形式：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><msub><mi>y</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub><mo>=</mo><mn>0</mn></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{x_1x_2+y_1y_2=0}.</annotation></semantics></math></span></div>
+<p>注意：若其中一个向量是零向量，则点乘为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span>，但零向量与任意向量都平行，方向不确定，不能简单说“零向量与任意向量垂直”。</p>
+<h3 id="section-3-5"><a class="heading-anchor" href="#section-3-5" aria-label="回到本小节">#</a>3.5 夹角公式</h3>
+<p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a,\vec b</annotation></semantics></math></span> 都是非零向量，则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo>=</mo><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><msub><mi>y</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub></mrow><mrow><msqrt><mrow><msubsup><mi>x</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>y</mi><mn>1</mn><mn>2</mn></msubsup></mrow></msqrt><msqrt><mrow><msubsup><mi>x</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>y</mi><mn>2</mn><mn>2</mn></msubsup></mrow></msqrt></mrow></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\cos\theta
+=
+\frac{\vec a\cdot\vec b}{|\vec a||\vec b|}
+=
+\frac{x_1x_2+y_1y_2}
+{\sqrt{x_1^2+y_1^2}\sqrt{x_2^2+y_2^2}}
+}.</annotation></semantics></math></span></div>
+<p>由 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>θ</mi></mrow><annotation encoding="application/x-tex">\cos\theta</annotation></semantics></math></span> 的符号可以判断夹角：</p>
+<ul><li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b&gt;0</annotation></semantics></math></span>：锐角；</li><li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b=0</annotation></semantics></math></span>：直角；</li><li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b&lt;0</annotation></semantics></math></span>：钝角。</li></ul>
+<h3 id="section-3-6"><a class="heading-anchor" href="#section-3-6" aria-label="回到本小节">#</a>3.6 投影</h3>
+<p>向量 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a</annotation></semantics></math></span> 在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec b</annotation></semantics></math></span> 方向上的<strong>数量投影</strong>为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mrow><mi mathvariant="normal">proj</mi><mo>⁡</mo></mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></msub><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\operatorname{proj}_{\vec b}\vec a
+=
+\frac{\vec a\cdot\vec b}{|\vec b|}}.</annotation></semantics></math></span></div>
+<p>它是实数，可以为负。</p>
+<p>对应的<strong>投影向量</strong>为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow><mo fence="true">(</mo><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup></mrow></mfrac><mo fence="true">)</mo></mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\left(\frac{\vec a\cdot\vec b}{|\vec b|^2}\right)\vec b
+}.</annotation></semantics></math></span></div>
+<h3 id="section-3-7"><a class="heading-anchor" href="#section-3-7" aria-label="回到本小节">#</a>3.7 与模有关的重要恒等式</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mo>=</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>+</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">|\vec a+\vec b|^2
+=
+|\vec a|^2+2\vec a\cdot\vec b+|\vec b|^2,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>−</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mo>=</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>+</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|\vec a-\vec b|^2
+=
+|\vec a|^2-2\vec a\cdot\vec b+|\vec b|^2.</annotation></semantics></math></span></div>
+<p>因此</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo fence="true">(</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mo>−</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mo>−</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b
+=
+\frac12\left(|\vec a+\vec b|^2-|\vec a|^2-|\vec b|^2\right).</annotation></semantics></math></span></div>
+<p>注意一般地</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo mathvariant="normal">≠</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">|\vec a+\vec b|\ne|\vec a|+|\vec b|,</annotation></semantics></math></span></div>
+<p>只有当两向量同向时等号成立。正确的普遍关系是三角不等式：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>≤</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|\vec a+\vec b|\le|\vec a|+|\vec b|.</annotation></semantics></math></span></div>
+<hr class="section-rule">
+<h2 id="四常见几何体的表面积与体积"><a class="heading-anchor" href="#四常见几何体的表面积与体积" aria-label="回到本小节">#</a>四、常见几何体的表面积与体积</h2>
+<h3 id="section-4-1"><a class="heading-anchor" href="#section-4-1" aria-label="回到本小节">#</a>4.1 圆柱</h3>
+<p>设底面半径为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span>，高为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math></span>。</p>
+<p>侧面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mn>2</mn><mi>π</mi><mi>r</mi><mi>h</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{S_{\text{侧}}=2\pi rh}.</annotation></semantics></math></span></div>
+<p>两个底面积之和：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">2\pi r^2.</annotation></semantics></math></span></div>
+<p>全面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mn>2</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>π</mi><mi>r</mi><mi>h</mi><mo>=</mo><mn>2</mn><mi>π</mi><mi>r</mi><mo stretchy="false">(</mo><mi>r</mi><mo>+</mo><mi>h</mi><mo stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{S_{\text{全}}=2\pi r^2+2\pi rh=2\pi r(r+h)}.</annotation></semantics></math></span></div>
+<p>体积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>V</mi><mo>=</mo><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{V=\pi r^2h}.</annotation></semantics></math></span></div>
+<p>圆柱可以看成“底面积乘高”。</p>
+<h3 id="section-4-2"><a class="heading-anchor" href="#section-4-2" aria-label="回到本小节">#</a>4.2 圆锥</h3>
+<p>设底面半径为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span>，高为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math></span>，母线长为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span>。母线、半径、高构成直角三角形：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msup><mi>l</mi><mn>2</mn></msup><mo>=</mo><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><msup><mi>h</mi><mn>2</mn></msup></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{l^2=r^2+h^2}.</annotation></semantics></math></span></div>
+<p>侧面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mi>π</mi><mi>r</mi><mi>l</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{S_{\text{侧}}=\pi rl}.</annotation></semantics></math></span></div>
+<p>底面积为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\pi r^2</annotation></semantics></math></span>，所以全面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mi>π</mi><mi>r</mi><mi>l</mi><mo>=</mo><mi>π</mi><mi>r</mi><mo stretchy="false">(</mo><mi>r</mi><mo>+</mo><mi>l</mi><mo stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{S_{\text{全}}=\pi r^2+\pi rl=\pi r(r+l)}.</annotation></semantics></math></span></div>
+<p>体积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>V</mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{V=\frac13\pi r^2h}.</annotation></semantics></math></span></div>
+<p>注意：侧面积用<strong>母线</strong> <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span>，体积用<strong>高</strong> <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math></span>，两者不能混用。</p>
+<h3 id="section-4-3"><a class="heading-anchor" href="#section-4-3" aria-label="回到本小节">#</a>4.3 球</h3>
+<p>设球的半径为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span>。</p>
+<p>表面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>S</mi><mo>=</mo><mn>4</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{S=4\pi r^2}.</annotation></semantics></math></span></div>
+<p>体积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>V</mi><mo>=</mo><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>3</mn></msup></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{V=\frac43\pi r^3}.</annotation></semantics></math></span></div>
+<p>若已知直径为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span>，则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>r</mi><mo>=</mo><mfrac><mi>d</mi><mn>2</mn></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">r=\frac d2,</annotation></semantics></math></span></div>
+<p>代入公式即可。</p>
+<h3 id="section-4-4"><a class="heading-anchor" href="#section-4-4" aria-label="回到本小节">#</a>4.4 三类公式对照</h3>
+<div class="table-wrap"><table><thead><tr><th>几何体</th><th>侧面积</th><th>全面积</th><th>体积</th></tr></thead><tbody><tr><td>圆柱</td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi><mi>r</mi><mi>h</mi></mrow><annotation encoding="application/x-tex">2\pi rh</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi><mi>r</mi><mo stretchy="false">(</mo><mi>r</mi><mo>+</mo><mi>h</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">2\pi r(r+h)</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi></mrow><annotation encoding="application/x-tex">\pi r^2h</annotation></semantics></math></span></td></tr><tr><td>圆锥</td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><mi>r</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">\pi rl</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><mi>r</mi><mo stretchy="false">(</mo><mi>r</mi><mo>+</mo><mi>l</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\pi r(r+l)</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi></mrow><annotation encoding="application/x-tex">\frac13\pi r^2h</annotation></semantics></math></span></td></tr><tr><td>球</td><td>无“侧面”概念</td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">4\pi r^2</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">\frac43\pi r^3</annotation></semantics></math></span></td></tr></tbody></table></div>
+<p>做题时先明确题目要的是“侧面积”“全面积”还是“体积”，再看单位是平方单位还是立方单位。</p>
+<hr class="section-rule">
+<h2 id="五高数关联度"><a class="heading-anchor" href="#五高数关联度" aria-label="回到本小节">#</a>五、高数关联度</h2>
+<h3 id="section-5-1"><a class="heading-anchor" href="#section-5-1" aria-label="回到本小节">#</a>5.1 向量代数与线性运算</h3>
+<p>高数中的向量不再局限于平面，而是推广到三维空间：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>a</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>a</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>a</mi><mn>3</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>b</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>b</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>b</mi><mn>3</mn></msub><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a=(a_1,a_2,a_3),
+\qquad
+\vec b=(b_1,b_2,b_3).</annotation></semantics></math></span></div>
+<p>点乘推广为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><msub><mi>a</mi><mn>1</mn></msub><msub><mi>b</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mn>2</mn></msub><msub><mi>b</mi><mn>2</mn></msub><mo>+</mo><msub><mi>a</mi><mn>3</mn></msub><msub><mi>b</mi><mn>3</mn></msub><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b=a_1b_1+a_2b_2+a_3b_3.</annotation></semantics></math></span></div>
+<p>三维中还会出现叉乘</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>×</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec a\times\vec b,</annotation></semantics></math></span></div>
+<p>它的结果仍是一个向量，常用来求平面的法向量。</p>
+<h3 id="section-5-2"><a class="heading-anchor" href="#section-5-2" aria-label="回到本小节">#</a>5.2 空间解析几何中的法向量</h3>
+<p>平面可以写成</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><mo stretchy="false">)</mo><mo>+</mo><mi>B</mi><mo stretchy="false">(</mo><mi>y</mi><mo>−</mo><msub><mi>y</mi><mn>0</mn></msub><mo stretchy="false">)</mo><mo>+</mo><mi>C</mi><mo stretchy="false">(</mo><mi>z</mi><mo>−</mo><msub><mi>z</mi><mn>0</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">A(x-x_0)+B(y-y_0)+C(z-z_0)=0,</annotation></semantics></math></span></div>
+<p>其法向量为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>n</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo separator="true">,</mo><mi>C</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec n=(A,B,C).</annotation></semantics></math></span></div>
+<p>若点 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>z</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(x_0,y_0,z_0)</annotation></semantics></math></span> 在平面上，则平面方程也可写成</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mi>n</mi><mo>⃗</mo></mover><mo>⋅</mo><mo stretchy="false">(</mo><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>−</mo><msub><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mn>0</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\vec n\cdot(\vec r-\vec r_0)=0}.</annotation></semantics></math></span></div>
+<p>这正说明：<strong>法向量与平面内任意向量都垂直</strong>。</p>
+<p>直线、平面的位置关系、点到平面的距离、两平面夹角，都离不开法向量和点乘。</p>
+<h3 id="section-5-3"><a class="heading-anchor" href="#section-5-3" aria-label="回到本小节">#</a>5.3 梯度与切平面</h3>
+<p>多元函数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(x,y,z)</annotation></semantics></math></span> 的梯度</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∇</mi><mi>F</mi><mo>=</mo><mo stretchy="false">(</mo><msub><mi>F</mi><mi>x</mi></msub><mo separator="true">,</mo><msub><mi>F</mi><mi>y</mi></msub><mo separator="true">,</mo><msub><mi>F</mi><mi>z</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\nabla F=(F_x,F_y,F_z)</annotation></semantics></math></span></div>
+<p>是等值面 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">F(x,y,z)=C</annotation></semantics></math></span> 的法向量。</p>
+<p>曲面在点 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">P_0</annotation></semantics></math></span> 处的切平面方程为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∇</mi><mi>F</mi><mo stretchy="false">(</mo><msub><mi>P</mi><mn>0</mn></msub><mo stretchy="false">)</mo><mo>⋅</mo><mo stretchy="false">(</mo><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>−</mo><msub><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mn>0</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">\nabla F(P_0)\cdot(\vec r-\vec r_0)=0.</annotation></semantics></math></span></div>
+<p>因此，高中所学的“点乘法向量”会在高数中反复出现。</p>
+<h3 id="section-5-4"><a class="heading-anchor" href="#section-5-4" aria-label="回到本小节">#</a>5.4 体积微元与重积分</h3>
+<p>二重积分可以理解为“把平面区域切成小面积微元 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">dA</annotation></semantics></math></span>，再把高度累加”：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo>=</mo><msub><mo>∬</mo><mi>D</mi></msub><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>A</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">V=\iint_D f(x,y)\,dA.</annotation></semantics></math></span></div>
+<p>三重积分则把空间区域切成小体积微元 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>V</mi></mrow><annotation encoding="application/x-tex">dV</annotation></semantics></math></span>：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∭</mo><mi mathvariant="normal">Ω</mi></msub><mi>d</mi><mi>V</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iiint_\Omega dV.</annotation></semantics></math></span></div>
+<p>在柱面坐标中，</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>d</mi><mi>V</mi><mo>=</mo><mi>r</mi><mtext> </mtext><mi>d</mi><mi>r</mi><mtext> </mtext><mi>d</mi><mi>θ</mi><mtext> </mtext><mi>d</mi><mi>z</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{dV=r\,dr\,d\theta\,dz}.</annotation></semantics></math></span></div>
+<p>这里多出的因子 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span> 来自极坐标面积微元 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>A</mi><mo>=</mo><mi>r</mi><mtext> </mtext><mi>d</mi><mi>r</mi><mtext> </mtext><mi>d</mi><mi>θ</mi></mrow><annotation encoding="application/x-tex">dA=r\,dr\,d\theta</annotation></semantics></math></span>。</p>
+<p>在球面坐标中，</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>d</mi><mi>V</mi><mo>=</mo><msup><mi>ρ</mi><mn>2</mn></msup><mi>sin</mi><mo>⁡</mo><mi>φ</mi><mtext> </mtext><mi>d</mi><mi>ρ</mi><mtext> </mtext><mi>d</mi><mi>φ</mi><mtext> </mtext><mi>d</mi><mi>θ</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{dV=\rho^2\sin\varphi\,d\rho\,d\varphi\,d\theta}.</annotation></semantics></math></span></div>
+<p>圆柱、圆锥、球的体积公式，都可以通过累加这些体积微元得到。例如球的体积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mrow><mn>2</mn><mi>π</mi></mrow></msubsup><msubsup><mo>∫</mo><mn>0</mn><mi>π</mi></msubsup><msubsup><mo>∫</mo><mn>0</mn><mi>R</mi></msubsup><msup><mi>ρ</mi><mn>2</mn></msup><mi>sin</mi><mo>⁡</mo><mi>φ</mi><mtext> </mtext><mi>d</mi><mi>ρ</mi><mtext> </mtext><mi>d</mi><mi>φ</mi><mtext> </mtext><mi>d</mi><mi>θ</mi><mo>=</mo><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>R</mi><mn>3</mn></msup><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">V
+=
+\int_0^{2\pi}\int_0^\pi\int_0^R
+\rho^2\sin\varphi\,d\rho\,d\varphi\,d\theta
+=
+\frac43\pi R^3.</annotation></semantics></math></span></div>
+<h3 id="section-5-5"><a class="heading-anchor" href="#section-5-5" aria-label="回到本小节">#</a>5.5 向量场与通量</h3>
+<p>高数中的向量场</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>P</mi><mo separator="true">,</mo><mi>Q</mi><mo separator="true">,</mo><mi>R</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec F(x,y,z)=(P,Q,R)</annotation></semantics></math></span></div>
+<p>描述每一点处的方向与大小，例如速度场、电场、磁场。</p>
+<p>曲面积分中的通量</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi>S</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">\iint_S \vec F\cdot\vec n\,dS</annotation></semantics></math></span></div>
+<p>本质上就是“向量场在法向量方向上的投影”的累加，仍然以数量积为核心。</p>
+<h3 id="section-5-6"><a class="heading-anchor" href="#section-5-6" aria-label="回到本小节">#</a>5.6 从平面到空间</h3>
+<p>本模块建立的三层认识：</p>
+<ol><li><strong>代数层</strong>：向量可以坐标化，运算可以逐分量进行；</li><li><strong>几何层</strong>：向量可以表示方向、平行、垂直、夹角和投影；</li><li><strong>分析层</strong>：高数用向量描述曲线、曲面、梯度、通量和体积微元。</li></ol>
+<hr class="section-rule">
+<h2 id="六典型例题"><a class="heading-anchor" href="#六典型例题" aria-label="回到本小节">#</a>六、典型例题</h2>
+<h3 id="section-6-1"><a class="heading-anchor" href="#section-6-1" aria-label="回到本小节">#</a>例 1：向量的坐标运算</h3>
+<p>已知</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a=(2,-1),\qquad \vec b=(-1,3).</annotation></semantics></math></span></div>
+<p>求：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mspace width="2em"/><mn>2</mn><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>−</mo><mn>3</mn><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mspace width="2em"/><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a+\vec b,\qquad
+2\vec a-3\vec b,\qquad
+\vec a\cdot\vec b,\qquad
+|\vec a+\vec b|.</annotation></semantics></math></span></div>
+<p><strong>解</strong></p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>2</mn><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mtext> </mtext><mo>−</mo><mn>1</mn><mo>+</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a+\vec b
+=
+(2-1,\ -1+3)
+=
+(1,2).</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>4</mn><mo separator="true">,</mo><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mn>3</mn><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mo>−</mo><mn>3</mn><mo separator="true">,</mo><mn>9</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">2\vec a=(4,-2),
+\qquad
+3\vec b=(-3,9).</annotation></semantics></math></span></div>
+<p>所以</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>−</mo><mn>3</mn><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>4</mn><mo separator="true">,</mo><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo>−</mo><mo stretchy="false">(</mo><mo>−</mo><mn>3</mn><mo separator="true">,</mo><mn>9</mn><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>7</mn><mo separator="true">,</mo><mo>−</mo><mn>11</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">2\vec a-3\vec b
+=
+(4,-2)-(-3,9)
+=
+(7,-11).</annotation></semantics></math></span></div>
+<p>数量积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mn>2</mn><mo>⋅</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>⋅</mo><mn>3</mn><mo>=</mo><mo>−</mo><mn>5.</mn></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b
+=
+2\cdot(-1)+(-1)\cdot3
+=
+-5.</annotation></semantics></math></span></div>
+<p>最后</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mrow><msup><mn>1</mn><mn>2</mn></msup><mo>+</mo><msup><mn>2</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><msqrt><mn>5</mn></msqrt><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|\vec a+\vec b|
+=
+\sqrt{1^2+2^2}
+=
+\sqrt5.</annotation></semantics></math></span></div>
+<p>因此</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="1em"/><mn>2</mn><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>−</mo><mn>3</mn><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>7</mn><mo separator="true">,</mo><mo>−</mo><mn>11</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="1em"/><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo>−</mo><mn>5</mn><mo separator="true">,</mo><mspace width="1em"/><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mn>5</mn></msqrt></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\vec a+\vec b=(1,2),\quad
+2\vec a-3\vec b=(7,-11),\quad
+\vec a\cdot\vec b=-5,\quad
+|\vec a+\vec b|=\sqrt5
+}.</annotation></semantics></math></span></div>
+<h3 id="section-6-2"><a class="heading-anchor" href="#section-6-2" aria-label="回到本小节">#</a>例 2：求两向量的夹角</h3>
+<p>已知</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><msqrt><mn>3</mn></msqrt><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msqrt><mn>3</mn></msqrt><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec a=(1,\sqrt3),\qquad \vec b=(\sqrt3,1),</annotation></semantics></math></span></div>
+<p>求两向量的夹角 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span>。</p>
+<p><strong>解</strong></p>
+<p>先求数量积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mn>1</mn><mo>⋅</mo><msqrt><mn>3</mn></msqrt><mo>+</mo><msqrt><mn>3</mn></msqrt><mo>⋅</mo><mn>1</mn><mo>=</mo><mn>2</mn><msqrt><mn>3</mn></msqrt><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b
+=
+1\cdot\sqrt3+\sqrt3\cdot1
+=
+2\sqrt3.</annotation></semantics></math></span></div>
+<p>再求模：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mrow><mn>1</mn><mo>+</mo><mn>3</mn></mrow></msqrt><mo>=</mo><mn>2</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">|\vec a|=\sqrt{1+3}=2,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mrow><mn>3</mn><mo>+</mo><mn>1</mn></mrow></msqrt><mo>=</mo><mn>2.</mn></mrow><annotation encoding="application/x-tex">|\vec b|=\sqrt{3+1}=2.</annotation></semantics></math></span></div>
+<p>因此</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo>=</mo><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>2</mn><msqrt><mn>3</mn></msqrt></mrow><mrow><mn>2</mn><mo>⋅</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos\theta
+=
+\frac{\vec a\cdot\vec b}{|\vec a||\vec b|}
+=
+\frac{2\sqrt3}{2\cdot2}
+=
+\frac{\sqrt3}{2}.</annotation></semantics></math></span></div>
+<p>由于</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>θ</mi><mo>≤</mo><mi>π</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">0\le\theta\le\pi,</annotation></semantics></math></span></div>
+<p>所以</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>θ</mi><mo>=</mo><mfrac><mi>π</mi><mn>6</mn></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\theta=\frac\pi6}.</annotation></semantics></math></span></div>
+<h3 id="section-6-3"><a class="heading-anchor" href="#section-6-3" aria-label="回到本小节">#</a>例 3：平行与垂直的坐标条件</h3>
+<p>已知</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mo>−</mo><mn>6</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a=(2,3),\qquad \vec b=(x,-6).</annotation></semantics></math></span></div>
+<p>分别求使 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>∥</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a\parallel\vec b</annotation></semantics></math></span> 和 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⊥</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a\perp\vec b</annotation></semantics></math></span> 的 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span>。</p>
+<p><strong>解</strong></p>
+<p><strong>平行条件</strong>：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><msub><mi>y</mi><mn>1</mn></msub><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">x_1y_2-x_2y_1=0.</annotation></semantics></math></span></div>
+<p>代入得</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mo>⋅</mo><mo stretchy="false">(</mo><mo>−</mo><mn>6</mn><mo stretchy="false">)</mo><mo>−</mo><mi>x</mi><mo>⋅</mo><mn>3</mn><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">2\cdot(-6)-x\cdot3=0.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mn>12</mn><mo>−</mo><mn>3</mn><mi>x</mi><mo>=</mo><mn>0</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">-12-3x=0,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mn>4.</mn></mrow><annotation encoding="application/x-tex">x=-4.</annotation></semantics></math></span></div>
+<p><strong>垂直条件</strong>：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b=0.</annotation></semantics></math></span></div>
+<p>即</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn><mo>⋅</mo><mo stretchy="false">(</mo><mo>−</mo><mn>6</mn><mo stretchy="false">)</mo><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">2x+3\cdot(-6)=0.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mi>x</mi><mo>−</mo><mn>18</mn><mo>=</mo><mn>0</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">2x-18=0,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mn>9.</mn></mrow><annotation encoding="application/x-tex">x=9.</annotation></semantics></math></span></div>
+<p>因此</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>∥</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mtext> 时 </mtext><mi>x</mi><mo>=</mo><mo>−</mo><mn>4</mn><mo separator="true">;</mo><mspace width="2em"/><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⊥</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mtext> 时 </mtext><mi>x</mi><mo>=</mo><mn>9</mn></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\vec a\parallel\vec b\text{ 时 }x=-4;
+\qquad
+\vec a\perp\vec b\text{ 时 }x=9
+}.</annotation></semantics></math></span></div>
+<h3 id="section-6-4"><a class="heading-anchor" href="#section-6-4" aria-label="回到本小节">#</a>例 4：数量积与做功</h3>
+<p>物体在力</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>3</mn><mo separator="true">,</mo><mn>4</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec F=(3,4)</annotation></semantics></math></span></div>
+<p>的作用下产生位移</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>s</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>5</mn><mo separator="true">,</mo><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec s=(5,-2).</annotation></semantics></math></span></div>
+<p>求力所做的功，并求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>F</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec F</annotation></semantics></math></span> 在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>s</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec s</annotation></semantics></math></span> 方向上的数量投影。</p>
+<p><strong>解</strong></p>
+<p>功等于力与位移的数量积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>W</mi><mo>=</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>s</mi><mo>⃗</mo></mover><mo>=</mo><mn>3</mn><mo>⋅</mo><mn>5</mn><mo>+</mo><mn>4</mn><mo>⋅</mo><mo stretchy="false">(</mo><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo>=</mo><mn>15</mn><mo>−</mo><mn>8</mn><mo>=</mo><mn>7.</mn></mrow><annotation encoding="application/x-tex">W=\vec F\cdot\vec s
+=
+3\cdot5+4\cdot(-2)
+=
+15-8
+=
+7.</annotation></semantics></math></span></div>
+<p>所以做功为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn></mrow><annotation encoding="application/x-tex">7</annotation></semantics></math></span>。</p>
+<p>位移的模：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>s</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mrow><msup><mn>5</mn><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt><mo>=</mo><msqrt><mn>29</mn></msqrt><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|\vec s|=\sqrt{5^2+(-2)^2}=\sqrt{29}.</annotation></semantics></math></span></div>
+<p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>F</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec F</annotation></semantics></math></span> 在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>s</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec s</annotation></semantics></math></span> 方向上的数量投影：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mrow><mi mathvariant="normal">proj</mi><mo>⁡</mo></mrow><mover accent="true"><mi>s</mi><mo>⃗</mo></mover></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mfrac><mrow><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>s</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>s</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac><mo>=</mo><mfrac><mn>7</mn><msqrt><mn>29</mn></msqrt></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\operatorname{proj}_{\vec s}\vec F
+=
+\frac{\vec F\cdot\vec s}{|\vec s|}
+=
+\frac7{\sqrt{29}}.</annotation></semantics></math></span></div>
+<p>因此</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>W</mi><mo>=</mo><mn>7</mn><mo separator="true">,</mo><mspace width="2em"/><msub><mrow><mi mathvariant="normal">proj</mi><mo>⁡</mo></mrow><mover accent="true"><mi>s</mi><mo>⃗</mo></mover></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mfrac><mn>7</mn><msqrt><mn>29</mn></msqrt></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+W=7,
+\qquad
+\operatorname{proj}_{\vec s}\vec F=\frac7{\sqrt{29}}
+}.</annotation></semantics></math></span></div>
+<h3 id="section-6-5"><a class="heading-anchor" href="#section-6-5" aria-label="回到本小节">#</a>例 5：用向量表示三角形中的点</h3>
+<p>在三角形 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">ABC</annotation></semantics></math></span> 中，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span> 是边 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">BC</annotation></semantics></math></span> 的中点。设</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mspace width="2em"/><mover accent="true"><mrow><mi>A</mi><mi>C</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mi>c</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\overrightarrow{AB}=\vec b,\qquad
+\overrightarrow{AC}=\vec c.</annotation></semantics></math></span></div>
+<p>用 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo separator="true">,</mo><mover accent="true"><mi>c</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec b,\vec c</annotation></semantics></math></span> 表示向量 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mrow><mi>A</mi><mi>M</mi></mrow><mo stretchy="true">→</mo></mover></mrow><annotation encoding="application/x-tex">\overrightarrow{AM}</annotation></semantics></math></span>。</p>
+<p><strong>解</strong></p>
+<p>因为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span> 是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">BC</annotation></semantics></math></span> 的中点，</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mrow><mi>B</mi><mi>M</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mover accent="true"><mrow><mi>B</mi><mi>C</mi></mrow><mo stretchy="true">→</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\overrightarrow{BM}
+=
+\frac12\overrightarrow{BC}.</annotation></semantics></math></span></div>
+<p>而</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mrow><mi>B</mi><mi>C</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mrow><mi>A</mi><mi>C</mi></mrow><mo stretchy="true">→</mo></mover><mo>−</mo><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mi>c</mi><mo>⃗</mo></mover><mo>−</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\overrightarrow{BC}
+=
+\overrightarrow{AC}-\overrightarrow{AB}
+=
+\vec c-\vec b.</annotation></semantics></math></span></div>
+<p>所以</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mrow><mi>A</mi><mi>M</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mo>+</mo><mover accent="true"><mrow><mi>B</mi><mi>M</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><mover accent="true"><mi>c</mi><mo>⃗</mo></mover><mo>−</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\overrightarrow{AM}
+=
+\overrightarrow{AB}+\overrightarrow{BM}
+=
+\vec b+\frac12(\vec c-\vec b).</annotation></semantics></math></span></div>
+<p>化简：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mrow><mi>A</mi><mi>M</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mover accent="true"><mi>c</mi><mo>⃗</mo></mover><mo>=</mo><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>c</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\overrightarrow{AM}
+=
+\frac12\vec b+\frac12\vec c
+=
+\boxed{\frac12(\vec b+\vec c)}.</annotation></semantics></math></span></div>
+<p>这说明三角形一边中线的向量，等于从同一顶点出发的两边向量之和的一半。</p>
+<h3 id="section-6-6"><a class="heading-anchor" href="#section-6-6" aria-label="回到本小节">#</a>例 6：圆柱的表面积与体积</h3>
+<p>已知圆柱的底面半径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">r=3</annotation></semantics></math></span>，高 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">h=5</annotation></semantics></math></span>。求它的侧面积、全面积和体积。</p>
+<p><strong>解</strong></p>
+<p>侧面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mn>2</mn><mi>π</mi><mi>r</mi><mi>h</mi><mo>=</mo><mn>2</mn><mi>π</mi><mo>⋅</mo><mn>3</mn><mo>⋅</mo><mn>5</mn><mo>=</mo><mn>30</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_{\text{侧}}
+=
+2\pi rh
+=
+2\pi\cdot3\cdot5
+=
+30\pi.</annotation></semantics></math></span></div>
+<p>全面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mn>2</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>π</mi><mi>r</mi><mi>h</mi><mo>=</mo><mn>2</mn><mi>π</mi><mo>⋅</mo><mn>9</mn><mo>+</mo><mn>30</mn><mi>π</mi><mo>=</mo><mn>48</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_{\text{全}}
+=
+2\pi r^2+2\pi rh
+=
+2\pi\cdot9+30\pi
+=
+48\pi.</annotation></semantics></math></span></div>
+<p>体积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo>=</mo><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi><mo>=</mo><mi>π</mi><mo>⋅</mo><mn>9</mn><mo>⋅</mo><mn>5</mn><mo>=</mo><mn>45</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">V=\pi r^2h
+=
+\pi\cdot9\cdot5
+=
+45\pi.</annotation></semantics></math></span></div>
+<p>因此</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mn>30</mn><mi>π</mi><mo separator="true">,</mo><mspace width="1em"/><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mn>48</mn><mi>π</mi><mo separator="true">,</mo><mspace width="1em"/><mi>V</mi><mo>=</mo><mn>45</mn><mi>π</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+S_{\text{侧}}=30\pi,\quad
+S_{\text{全}}=48\pi,\quad
+V=45\pi
+}.</annotation></semantics></math></span></div>
+<h3 id="section-6-7"><a class="heading-anchor" href="#section-6-7" aria-label="回到本小节">#</a>例 7：圆锥的表面积与体积</h3>
+<p>已知圆锥的底面半径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">r=3</annotation></semantics></math></span>，高 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">h=4</annotation></semantics></math></span>。求母线长、侧面积、全面积和体积。</p>
+<p><strong>解</strong></p>
+<p>母线、半径、高满足</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>l</mi><mn>2</mn></msup><mo>=</mo><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><msup><mi>h</mi><mn>2</mn></msup><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">l^2=r^2+h^2.</annotation></semantics></math></span></div>
+<p>所以</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>l</mi><mo>=</mo><msqrt><mrow><msup><mn>3</mn><mn>2</mn></msup><mo>+</mo><msup><mn>4</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><mn>5.</mn></mrow><annotation encoding="application/x-tex">l=\sqrt{3^2+4^2}=5.</annotation></semantics></math></span></div>
+<p>侧面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mi>π</mi><mi>r</mi><mi>l</mi><mo>=</mo><mi>π</mi><mo>⋅</mo><mn>3</mn><mo>⋅</mo><mn>5</mn><mo>=</mo><mn>15</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_{\text{侧}}=\pi rl=\pi\cdot3\cdot5=15\pi.</annotation></semantics></math></span></div>
+<p>全面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mi>π</mi><mi>r</mi><mi>l</mi><mo>=</mo><mn>9</mn><mi>π</mi><mo>+</mo><mn>15</mn><mi>π</mi><mo>=</mo><mn>24</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_{\text{全}}
+=
+\pi r^2+\pi rl
+=
+9\pi+15\pi
+=
+24\pi.</annotation></semantics></math></span></div>
+<p>体积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mi>π</mi><mo>⋅</mo><mn>9</mn><mo>⋅</mo><mn>4</mn><mo>=</mo><mn>12</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">V
+=
+\frac13\pi r^2h
+=
+\frac13\pi\cdot9\cdot4
+=
+12\pi.</annotation></semantics></math></span></div>
+<p>因此</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>l</mi><mo>=</mo><mn>5</mn><mo separator="true">,</mo><mspace width="1em"/><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mn>15</mn><mi>π</mi><mo separator="true">,</mo><mspace width="1em"/><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mn>24</mn><mi>π</mi><mo separator="true">,</mo><mspace width="1em"/><mi>V</mi><mo>=</mo><mn>12</mn><mi>π</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+l=5,\quad
+S_{\text{侧}}=15\pi,\quad
+S_{\text{全}}=24\pi,\quad
+V=12\pi
+}.</annotation></semantics></math></span></div>
+<h3 id="section-6-8"><a class="heading-anchor" href="#section-6-8" aria-label="回到本小节">#</a>例 8：球的表面积与体积</h3>
+<p>已知球的半径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">r=3</annotation></semantics></math></span>。求球的表面积和体积。</p>
+<p><strong>解</strong></p>
+<p>表面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo>=</mo><mn>4</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo>=</mo><mn>4</mn><mi>π</mi><mo>⋅</mo><mn>9</mn><mo>=</mo><mn>36</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S=4\pi r^2=4\pi\cdot9=36\pi.</annotation></semantics></math></span></div>
+<p>体积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo>=</mo><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>3</mn></msup><mo>=</mo><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>π</mi><mo>⋅</mo><mn>27</mn><mo>=</mo><mn>36</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">V
+=
+\frac43\pi r^3
+=
+\frac43\pi\cdot27
+=
+36\pi.</annotation></semantics></math></span></div>
+<p>因此</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>S</mi><mo>=</mo><mn>36</mn><mi>π</mi><mo separator="true">,</mo><mspace width="2em"/><mi>V</mi><mo>=</mo><mn>36</mn><mi>π</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{S=36\pi,\qquad V=36\pi}.</annotation></semantics></math></span></div>
+<p>这个例子中表面积与体积的数值恰好相同，但它们的单位不同：表面积是平方单位，体积是立方单位。</p>
+<hr class="section-rule">
+<h2 id="七易错点提示"><a class="heading-anchor" href="#七易错点提示" aria-label="回到本小节">#</a>七、易错点提示</h2>
+<h3 id="section-7-1"><a class="heading-anchor" href="#section-7-1" aria-label="回到本小节">#</a>1. 把数量积当成向量</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b</annotation></semantics></math></span></div>
+<p>的结果是一个<strong>实数</strong>，不是向量。不能写成</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b=(x,y).</annotation></semantics></math></span></div>
+<h3 id="section-7-2"><a class="heading-anchor" href="#section-7-2" aria-label="回到本小节">#</a>2. 向量不能直接相除</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mfrac></mrow><annotation encoding="application/x-tex">\frac{\vec a}{\vec b}</annotation></semantics></math></span></div>
+<p>没有定义。只有向量的数乘，例如</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\frac12\vec a,</annotation></semantics></math></span></div>
+<p>才有意义。</p>
+<h3 id="section-7-3"><a class="heading-anchor" href="#section-7-3" aria-label="回到本小节">#</a>3. 混淆向量相等与模相等</h3>
+<p>两个向量模相等，不代表向量相等。例如</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo><mspace width="1em"/><mtext>与</mtext><mspace width="1em"/><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(1,0)\quad\text{与}\quad(-1,0)</annotation></semantics></math></span></div>
+<p>模都为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span>，但方向相反，不相等。</p>
+<h3 id="section-7-4"><a class="heading-anchor" href="#section-7-4" aria-label="回到本小节">#</a>4. 向量减法的方向写反</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mrow><mi>A</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mrow><mi>O</mi><mi>B</mi></mrow><mo stretchy="true">→</mo></mover><mo>−</mo><mover accent="true"><mrow><mi>O</mi><mi>A</mi></mrow><mo stretchy="true">→</mo></mover><mo>=</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>−</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\overrightarrow{AB}
+=
+\overrightarrow{OB}-\overrightarrow{OA}
+=
+\vec b-\vec a.</annotation></semantics></math></span></div>
+<p>一定要“终点减起点”。</p>
+<h3 id="section-7-5"><a class="heading-anchor" href="#section-7-5" aria-label="回到本小节">#</a>5. 误用 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>a</mi><mo>+</mo><mi>b</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi mathvariant="normal">∣</mi><mi>a</mi><mi mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mi>b</mi><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">|a+b|=|a|+|b|</annotation></semantics></math></span></h3>
+<p>一般地，</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo mathvariant="normal">≠</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|\vec a+\vec b|\ne|\vec a|+|\vec b|.</annotation></semantics></math></span></div>
+<p>正确关系是</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>≤</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|\vec a+\vec b|\le|\vec a|+|\vec b|.</annotation></semantics></math></span></div>
+<h3 id="section-7-6"><a class="heading-anchor" href="#section-7-6" aria-label="回到本小节">#</a>6. 垂直条件漏掉非零前提</h3>
+<p>对非零向量，</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⊥</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>⟺</mo><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">\vec a\perp\vec b
+\Longleftrightarrow
+\vec a\cdot\vec b=0.</annotation></semantics></math></span></div>
+<p>若允许零向量，则零向量与任意向量的点乘都是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span>，但零向量方向不确定。</p>
+<h3 id="section-7-7"><a class="heading-anchor" href="#section-7-7" aria-label="回到本小节">#</a>7. 夹角公式漏写分母</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo>=</mo><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\cos\theta
+=
+\frac{\vec a\cdot\vec b}{|\vec a||\vec b|},</annotation></semantics></math></span></div>
+<p>不能只写成</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b.</annotation></semantics></math></span></div>
+<h3 id="section-7-8"><a class="heading-anchor" href="#section-7-8" aria-label="回到本小节">#</a>8. 共线条件与垂直条件混淆</h3>
+<p>共线：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><msub><mi>y</mi><mn>1</mn></msub><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">x_1y_2-x_2y_1=0.</annotation></semantics></math></span></div>
+<p>垂直：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><msub><mi>y</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">x_1x_2+y_1y_2=0.</annotation></semantics></math></span></div>
+<p>一个是“交叉相减”，一个是“对应相乘再相加”。</p>
+<h3 id="section-7-9"><a class="heading-anchor" href="#section-7-9" aria-label="回到本小节">#</a>9. 投影是数量还是向量分不清</h3>
+<p>数量投影：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\vec a\cdot\vec b}{|\vec b|}</annotation></semantics></math></span></div>
+<p>是实数。</p>
+<p>投影向量：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup></mrow></mfrac><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\frac{\vec a\cdot\vec b}{|\vec b|^2}\vec b</annotation></semantics></math></span></div>
+<p>是向量。</p>
+<h3 id="section-7-10"><a class="heading-anchor" href="#section-7-10" aria-label="回到本小节">#</a>10. 圆锥侧面积误用高</h3>
+<p>圆锥侧面积是</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>π</mi><mi>r</mi><mi>l</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\pi rl,</annotation></semantics></math></span></div>
+<p>其中 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span> 是母线长；体积才是</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\frac13\pi r^2h,</annotation></semantics></math></span></div>
+<p>其中 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math></span> 是高。</p>
+<h3 id="section-7-11"><a class="heading-anchor" href="#section-7-11" aria-label="回到本小节">#</a>11. 圆柱全面积漏掉两个底面</h3>
+<p>圆柱全面积为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>π</mi><mi>r</mi><mi>h</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">2\pi r^2+2\pi rh,</annotation></semantics></math></span></div>
+<p>不是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>π</mi><mi>r</mi><mi>h</mi></mrow><annotation encoding="application/x-tex">\pi r^2+2\pi rh</annotation></semantics></math></span>。</p>
+<h3 id="section-7-12"><a class="heading-anchor" href="#section-7-12" aria-label="回到本小节">#</a>12. 球面积与球体积公式混淆</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo>=</mo><mn>4</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo separator="true">,</mo><mspace width="2em"/><mi>V</mi><mo>=</mo><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>3</mn></msup><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S=4\pi r^2,
+\qquad
+V=\frac43\pi r^3.</annotation></semantics></math></span></div>
+<p>一个含 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>r</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">r^2</annotation></semantics></math></span>，一个含 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>r</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">r^3</annotation></semantics></math></span>。</p>
+<h3 id="section-7-13"><a class="heading-anchor" href="#section-7-13" aria-label="回到本小节">#</a>13. 直径与半径混用</h3>
+<p>所有公式中的 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span> 都是半径。若题目给出直径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span>，必须先算</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>r</mi><mo>=</mo><mfrac><mi>d</mi><mn>2</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">r=\frac d2.</annotation></semantics></math></span></div>
+<h3 id="section-7-14"><a class="heading-anchor" href="#section-7-14" aria-label="回到本小节">#</a>14. 表面积与体积单位混用</h3>
+<p>面积单位是平方单位，体积单位是立方单位。即使数值相同，也不能说“面积等于体积”。</p>
+<hr class="section-rule">
+<h2 id="八课后练习"><a class="heading-anchor" href="#八课后练习" aria-label="回到本小节">#</a>八、课后练习</h2>
+<ol><li>已知 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>3</mn><mo separator="true">,</mo><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mtext> </mtext><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>4</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec a=(3,-2),\ \vec b=(-1,4)</annotation></semantics></math></span>，求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a+\vec b</annotation></semantics></math></span>、<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>−</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">2\vec a-\vec b</annotation></semantics></math></span>、<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b</annotation></semantics></math></span>、<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">|\vec a|</annotation></semantics></math></span>。</li><li>求与向量 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>6</mn><mo separator="true">,</mo><mn>8</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(6,8)</annotation></semantics></math></span> 同方向的单位向量。</li><li>已知 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mtext> </mtext><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>k</mi><mo separator="true">,</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec a=(1,2),\ \vec b=(k,-1)</annotation></semantics></math></span>，且 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⊥</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a\perp\vec b</annotation></semantics></math></span>，求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span>。</li><li>已知 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">)</mo><mo separator="true">,</mo><mtext> </mtext><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>4</mn><mo separator="true">,</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec a=(2,3),\ \vec b=(4,k)</annotation></semantics></math></span>，且 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>∥</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a\parallel\vec b</annotation></semantics></math></span>，求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span>。</li><li>求向量 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec a=(1,0)</annotation></semantics></math></span> 与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec b=(1,1)</annotation></semantics></math></span> 的夹角。</li><li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>3</mn><mo separator="true">,</mo><mn>4</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec a=(3,4)</annotation></semantics></math></span> 在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec b=(1,0)</annotation></semantics></math></span> 方向上的数量投影和投影向量。</li><li>圆柱底面半径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">r=2</annotation></semantics></math></span>，高 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">h=6</annotation></semantics></math></span>，求侧面积、全面积和体积。</li><li>圆锥底面半径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">r=3</annotation></semantics></math></span>，高 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">h=4</annotation></semantics></math></span>，求母线长、全面积和体积。</li><li>球的半径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">r=2</annotation></semantics></math></span>，求表面积和体积。</li><li>力 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mn>5</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec F=(2,5)</annotation></semantics></math></span> 作用在物体上，产生位移 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>s</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>4</mn><mo separator="true">,</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec s=(4,-1)</annotation></semantics></math></span>，求力所做的功。</li></ol>
+<hr class="section-rule">
+<h2 id="九练习答案与解析"><a class="heading-anchor" href="#九练习答案与解析" aria-label="回到本小节">#</a>九、练习答案与解析</h2>
+<h3 id="section-9-1"><a class="heading-anchor" href="#section-9-1" aria-label="回到本小节">#</a>1. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(2,2)</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>7</mn><mo separator="true">,</mo><mo>−</mo><mn>8</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(7,-8)</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>11</mn></mrow><annotation encoding="application/x-tex">-11</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mn>13</mn></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{13}</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>3</mn><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mtext> </mtext><mo>−</mo><mn>2</mn><mo>+</mo><mn>4</mn><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a+\vec b=(3-1,\ -2+4)=(2,2).</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>−</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>6</mn><mo separator="true">,</mo><mo>−</mo><mn>4</mn><mo stretchy="false">)</mo><mo>−</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>4</mn><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>7</mn><mo separator="true">,</mo><mo>−</mo><mn>8</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">2\vec a-\vec b
+=
+(6,-4)-(-1,4)
+=
+(7,-8).</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mn>3</mn><mo>⋅</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo>⋅</mo><mn>4</mn><mo>=</mo><mo>−</mo><mn>11.</mn></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b
+=
+3\cdot(-1)+(-2)\cdot4
+=
+-11.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mrow><msup><mn>3</mn><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt><mo>=</mo><msqrt><mn>13</mn></msqrt><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|\vec a|=\sqrt{3^2+(-2)^2}=\sqrt{13}.</annotation></semantics></math></span></div>
+<h3 id="section-9-2"><a class="heading-anchor" href="#section-9-2" aria-label="回到本小节">#</a>2. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo separator="true">,</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left(\frac35,\frac45\right)</annotation></semantics></math></span></h3>
+<p>向量 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>6</mn><mo separator="true">,</mo><mn>8</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(6,8)</annotation></semantics></math></span> 的模为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mrow><msup><mn>6</mn><mn>2</mn></msup><mo>+</mo><msup><mn>8</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><mn>10.</mn></mrow><annotation encoding="application/x-tex">\sqrt{6^2+8^2}=10.</annotation></semantics></math></span></div>
+<p>所以同方向的单位向量为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mn>10</mn></mfrac><mo stretchy="false">(</mo><mn>6</mn><mo separator="true">,</mo><mn>8</mn><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">(</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo separator="true">,</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac1{10}(6,8)
+=
+\left(\frac35,\frac45\right).</annotation></semantics></math></span></div>
+<h3 id="section-9-3"><a class="heading-anchor" href="#section-9-3" aria-label="回到本小节">#</a>3. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k=2</annotation></semantics></math></span></h3>
+<p>垂直条件是数量积为零：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b=0.</annotation></semantics></math></span></div>
+<p>即</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mo>⋅</mo><mi>k</mi><mo>+</mo><mn>2</mn><mo>⋅</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">1\cdot k+2\cdot(-1)=0.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>k</mi><mo>−</mo><mn>2</mn><mo>=</mo><mn>0</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">k-2=0,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2.</mn></mrow><annotation encoding="application/x-tex">k=2.</annotation></semantics></math></span></div>
+<h3 id="section-9-4"><a class="heading-anchor" href="#section-9-4" aria-label="回到本小节">#</a>4. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">k=6</annotation></semantics></math></span></h3>
+<p>平行条件是</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><msub><mi>y</mi><mn>1</mn></msub><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">x_1y_2-x_2y_1=0.</annotation></semantics></math></span></div>
+<p>即</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mi>k</mi><mo>−</mo><mn>3</mn><mo>⋅</mo><mn>4</mn><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">2k-3\cdot4=0.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mi>k</mi><mo>−</mo><mn>12</mn><mo>=</mo><mn>0</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">2k-12=0,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>k</mi><mo>=</mo><mn>6.</mn></mrow><annotation encoding="application/x-tex">k=6.</annotation></semantics></math></span></div>
+<h3 id="section-9-5"><a class="heading-anchor" href="#section-9-5" aria-label="回到本小节">#</a>5. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>4</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi4</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mn>1</mn><mo>⋅</mo><mn>1</mn><mo>+</mo><mn>0</mn><mo>⋅</mo><mn>1</mn><mo>=</mo><mn>1.</mn></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b=1\cdot1+0\cdot1=1.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mspace width="2em"/><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mrow><msup><mn>1</mn><mn>2</mn></msup><mo>+</mo><msup><mn>1</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><msqrt><mn>2</mn></msqrt><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|\vec a|=1,
+\qquad
+|\vec b|=\sqrt{1^2+1^2}=\sqrt2.</annotation></semantics></math></span></div>
+<p>所以</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>⋅</mo><msqrt><mn>2</mn></msqrt></mrow></mfrac><mo>=</mo><mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos\theta
+=
+\frac{1}{1\cdot\sqrt2}
+=
+\frac{\sqrt2}{2}.</annotation></semantics></math></span></div>
+<p>因此</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>θ</mi><mo>=</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\theta=\frac\pi4.</annotation></semantics></math></span></div>
+<h3 id="section-9-6"><a class="heading-anchor" href="#section-9-6" aria-label="回到本小节">#</a>6. 答案：数量投影为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span>，投影向量为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(3,0)</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>3</mn><mo>⋅</mo><mn>1</mn><mo>+</mo><mn>4</mn><mo>⋅</mo><mn>0</mn></mrow><mn>1</mn></mfrac><mo>=</mo><mn>3.</mn></mrow><annotation encoding="application/x-tex">\frac{\vec a\cdot\vec b}{|\vec b|}
+=
+\frac{3\cdot1+4\cdot0}{1}
+=
+3.</annotation></semantics></math></span></div>
+<p>所以数量投影为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span>。</p>
+<p>投影向量为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup></mrow></mfrac><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mn>3</mn><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>3</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac{\vec a\cdot\vec b}{|\vec b|^2}\vec b
+=
+3(1,0)
+=
+(3,0).</annotation></semantics></math></span></div>
+<h3 id="section-9-7"><a class="heading-anchor" href="#section-9-7" aria-label="回到本小节">#</a>7. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mn>24</mn><mi>π</mi><mo separator="true">,</mo><mtext> </mtext><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mn>32</mn><mi>π</mi><mo separator="true">,</mo><mtext> </mtext><mi>V</mi><mo>=</mo><mn>24</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">S_{\text{侧}}=24\pi,\ S_{\text{全}}=32\pi,\ V=24\pi</annotation></semantics></math></span></h3>
+<p>侧面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mn>2</mn><mi>π</mi><mi>r</mi><mi>h</mi><mo>=</mo><mn>2</mn><mi>π</mi><mo>⋅</mo><mn>2</mn><mo>⋅</mo><mn>6</mn><mo>=</mo><mn>24</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_{\text{侧}}=2\pi rh=2\pi\cdot2\cdot6=24\pi.</annotation></semantics></math></span></div>
+<p>全面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mn>2</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>π</mi><mi>r</mi><mi>h</mi><mo>=</mo><mn>8</mn><mi>π</mi><mo>+</mo><mn>24</mn><mi>π</mi><mo>=</mo><mn>32</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_{\text{全}}=2\pi r^2+2\pi rh
+=8\pi+24\pi=32\pi.</annotation></semantics></math></span></div>
+<p>体积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo>=</mo><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi><mo>=</mo><mi>π</mi><mo>⋅</mo><mn>4</mn><mo>⋅</mo><mn>6</mn><mo>=</mo><mn>24</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">V=\pi r^2h=\pi\cdot4\cdot6=24\pi.</annotation></semantics></math></span></div>
+<h3 id="section-9-8"><a class="heading-anchor" href="#section-9-8" aria-label="回到本小节">#</a>8. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mo>=</mo><mn>5</mn><mo separator="true">,</mo><mtext> </mtext><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mn>24</mn><mi>π</mi><mo separator="true">,</mo><mtext> </mtext><mi>V</mi><mo>=</mo><mn>12</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">l=5,\ S_{\text{全}}=24\pi,\ V=12\pi</annotation></semantics></math></span></h3>
+<p>母线长：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>l</mi><mo>=</mo><msqrt><mrow><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><msup><mi>h</mi><mn>2</mn></msup></mrow></msqrt><mo>=</mo><msqrt><mrow><msup><mn>3</mn><mn>2</mn></msup><mo>+</mo><msup><mn>4</mn><mn>2</mn></msup></mrow></msqrt><mo>=</mo><mn>5.</mn></mrow><annotation encoding="application/x-tex">l=\sqrt{r^2+h^2}
+=
+\sqrt{3^2+4^2}
+=
+5.</annotation></semantics></math></span></div>
+<p>全面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mi>π</mi><mi>r</mi><mi>l</mi><mo>=</mo><mn>9</mn><mi>π</mi><mo>+</mo><mn>15</mn><mi>π</mi><mo>=</mo><mn>24</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_{\text{全}}
+=
+\pi r^2+\pi rl
+=
+9\pi+15\pi
+=
+24\pi.</annotation></semantics></math></span></div>
+<p>体积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mi>π</mi><mo>⋅</mo><mn>9</mn><mo>⋅</mo><mn>4</mn><mo>=</mo><mn>12</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">V=\frac13\pi r^2h
+=
+\frac13\pi\cdot9\cdot4
+=
+12\pi.</annotation></semantics></math></span></div>
+<h3 id="section-9-9"><a class="heading-anchor" href="#section-9-9" aria-label="回到本小节">#</a>9. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mn>16</mn><mi>π</mi><mo separator="true">,</mo><mtext> </mtext><mi>V</mi><mo>=</mo><mfrac><mrow><mn>32</mn><mi>π</mi></mrow><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">S=16\pi,\ V=\frac{32\pi}{3}</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo>=</mo><mn>4</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo>=</mo><mn>4</mn><mi>π</mi><mo>⋅</mo><mn>4</mn><mo>=</mo><mn>16</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S=4\pi r^2=4\pi\cdot4=16\pi.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo>=</mo><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>3</mn></msup><mo>=</mo><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>π</mi><mo>⋅</mo><mn>8</mn><mo>=</mo><mfrac><mrow><mn>32</mn><mi>π</mi></mrow><mn>3</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">V=\frac43\pi r^3
+=
+\frac43\pi\cdot8
+=
+\frac{32\pi}{3}.</annotation></semantics></math></span></div>
+<h3 id="section-9-10"><a class="heading-anchor" href="#section-9-10" aria-label="回到本小节">#</a>10. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span></h3>
+<p>功等于力与位移的数量积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>W</mi><mo>=</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>s</mi><mo>⃗</mo></mover><mo>=</mo><mn>2</mn><mo>⋅</mo><mn>4</mn><mo>+</mo><mn>5</mn><mo>⋅</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>8</mn><mo>−</mo><mn>5</mn><mo>=</mo><mn>3.</mn></mrow><annotation encoding="application/x-tex">W=\vec F\cdot\vec s
+=
+2\cdot4+5\cdot(-1)
+=
+8-5
+=
+3.</annotation></semantics></math></span></div>
+<p>所以做功为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span>。</p>
+<hr class="section-rule">
+<h2 id="十公式速查"><a class="heading-anchor" href="#十公式速查" aria-label="回到本小节">#</a>十、公式速查</h2>
+<h3 id="section-10-1"><a class="heading-anchor" href="#section-10-1" aria-label="回到本小节">#</a>10.1 向量坐标运算</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>+</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><mtext> </mtext><msub><mi>y</mi><mn>1</mn></msub><mo>+</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec a+\vec b=(x_1+x_2,\ y_1+y_2),</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>−</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><mtext> </mtext><msub><mi>y</mi><mn>1</mn></msub><mo>−</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec a-\vec b=(x_1-x_2,\ y_1-y_2),</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>λ</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>λ</mi><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><mtext> </mtext><mi>λ</mi><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lambda\vec a=(\lambda x_1,\ \lambda y_1).</annotation></semantics></math></span></div>
+<h3 id="section-10-2"><a class="heading-anchor" href="#section-10-2" aria-label="回到本小节">#</a>10.2 模与单位向量</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mo>=</mo><msqrt><mrow><msubsup><mi>x</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>y</mi><mn>1</mn><mn>2</mn></msubsup></mrow></msqrt><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">|\vec a|=\sqrt{x_1^2+y_1^2},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mover accent="true"><mi>e</mi><mo>⃗</mo></mover><mi>a</mi></msub><mo>=</mo><mfrac><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec e_a=\frac{\vec a}{|\vec a|}.</annotation></semantics></math></span></div>
+<h3 id="section-10-3"><a class="heading-anchor" href="#section-10-3" aria-label="回到本小节">#</a>10.3 数量积</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo>=</mo><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><msub><mi>y</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b
+=
+|\vec a||\vec b|\cos\theta
+=
+x_1x_2+y_1y_2.</annotation></semantics></math></span></div>
+<h3 id="section-10-4"><a class="heading-anchor" href="#section-10-4" aria-label="回到本小节">#</a>10.4 平行与垂直</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>∥</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>⟺</mo><msub><mi>x</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><msub><mi>y</mi><mn>1</mn></msub><mo>=</mo><mn>0</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec a\parallel\vec b
+\Longleftrightarrow
+x_1y_2-x_2y_1=0,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⊥</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>⟺</mo><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><msub><mi>y</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">\vec a\perp\vec b
+\Longleftrightarrow
+x_1x_2+y_1y_2=0.</annotation></semantics></math></span></div>
+<h3 id="section-10-5"><a class="heading-anchor" href="#section-10-5" aria-label="回到本小节">#</a>10.5 夹角与投影</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo>=</mo><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\cos\theta
+=
+\frac{\vec a\cdot\vec b}{|\vec a||\vec b|},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mrow><mi mathvariant="normal">proj</mi><mo>⁡</mo></mrow><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></msub><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>=</mo><mfrac><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover></mrow><mrow><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi mathvariant="normal">∣</mi></mrow></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\operatorname{proj}_{\vec b}\vec a
+=
+\frac{\vec a\cdot\vec b}{|\vec b|}.</annotation></semantics></math></span></div>
+<h3 id="section-10-6"><a class="heading-anchor" href="#section-10-6" aria-label="回到本小节">#</a>10.6 几何体公式</h3>
+<p>圆柱：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mn>2</mn><mi>π</mi><mi>r</mi><mi>h</mi><mo separator="true">,</mo><mspace width="2em"/><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mn>2</mn><mi>π</mi><mi>r</mi><mo stretchy="false">(</mo><mi>r</mi><mo>+</mo><mi>h</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>V</mi><mo>=</mo><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_{\text{侧}}=2\pi rh,
+\qquad
+S_{\text{全}}=2\pi r(r+h),
+\qquad
+V=\pi r^2h.</annotation></semantics></math></span></div>
+<p>圆锥：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>l</mi><mn>2</mn></msup><mo>=</mo><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><msup><mi>h</mi><mn>2</mn></msup><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">l^2=r^2+h^2,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mi>π</mi><mi>r</mi><mi>l</mi><mo separator="true">,</mo><mspace width="2em"/><msub><mi>S</mi><mtext>全</mtext></msub><mo>=</mo><mi>π</mi><mi>r</mi><mo stretchy="false">(</mo><mi>r</mi><mo>+</mo><mi>l</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>V</mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mi>h</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_{\text{侧}}=\pi rl,
+\qquad
+S_{\text{全}}=\pi r(r+l),
+\qquad
+V=\frac13\pi r^2h.</annotation></semantics></math></span></div>
+<p>球：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo>=</mo><mn>4</mn><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mo separator="true">,</mo><mspace width="2em"/><mi>V</mi><mo>=</mo><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>π</mi><msup><mi>r</mi><mn>3</mn></msup><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S=4\pi r^2,
+\qquad
+V=\frac43\pi r^3.</annotation></semantics></math></span></div>
+<h3 id="section-10-7"><a class="heading-anchor" href="#section-10-7" aria-label="回到本小节">#</a>10.7 高数关键词</h3>
+<p>向量代数、法向量、点乘、叉乘、梯度、切平面、二重积分、三重积分、柱面坐标、球面坐标、体积微元、通量。</p>
+<hr class="section-rule">
+<h2 id="section-11"><a class="heading-anchor" href="#section-11" aria-label="回到本小节">#</a>结语</h2>
+<p>平面向量与立体几何初步可以概括为：</p>
+<ol><li><strong>一个核心对象</strong>：向量同时携带大小和方向；</li><li><strong>三种基本运算</strong>：加减法、数乘、数量积；</li><li><strong>两个判定条件</strong>：交叉相减判平行，对应相乘再相加判垂直；</li><li><strong>三组几何公式</strong>：圆柱、圆锥、球，先认清半径、高、母线；</li><li><strong>一座高数桥梁</strong>：法向量、梯度与体积微元，把平面几何推向空间解析几何和重积分。</li></ol>
+<p>做题时，向量题先画方向、再算坐标；立体几何题先写已知量、再选公式，最后检查单位。</p>
+
+      <p class="footer-note">说明：本页公式由 KaTeX 预渲染为 MathML，CSS 与 JavaScript 已全部内嵌，不依赖任何外部字体、脚本或网络连接。</p>
+    </main>
+  </div>
+
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-label="打开目录" aria-controls="sidebar">☰</button>
+
+  <script>
+(() => {
+  const root = document.documentElement;
+  const themeToggle = document.getElementById("theme-toggle");
+  const progressBar = document.getElementById("progress-bar");
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const menuToggle = document.getElementById("menu-toggle");
+  const printButton = document.getElementById("print-button");
+  const tocLinks = Array.from(document.querySelectorAll(".toc a[data-target]"));
+
+  const storageGet = (key) => {
+    try { return localStorage.getItem(key); } catch (error) { return null; }
+  };
+  const storageSet = (key, value) => {
+    try { localStorage.setItem(key, value); } catch (error) { /* file:// 环境可能禁用存储 */ }
+  };
+
+  const savedTheme = storageGet("geometry-theme");
+  if (savedTheme === "light" || savedTheme === "dark") {
+    root.dataset.theme = savedTheme;
+  } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    root.dataset.theme = "dark";
+  }
+
+  const updateThemeButton = () => {
+    const dark = root.dataset.theme === "dark";
+    themeToggle.textContent = dark ? "☀ 浅色模式" : "☾ 深色模式";
+    themeToggle.setAttribute("aria-pressed", String(dark));
+    themeToggle.setAttribute("aria-label", dark ? "切换到浅色模式" : "切换到深色模式");
+  };
+  updateThemeButton();
+
+  themeToggle.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    storageSet("geometry-theme", next);
+    updateThemeButton();
+  });
+
+  const updateProgress = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = height > 0 ? scrollTop / height : 0;
+    progressBar.style.width = Math.min(100, Math.max(0, ratio * 100)) + "%";
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress);
+  updateProgress();
+
+  const backToTop = document.createElement("button");
+  backToTop.id = "back-to-top";
+  backToTop.type = "button";
+  backToTop.setAttribute("aria-label", "返回顶部");
+  backToTop.textContent = "↑";
+  document.body.appendChild(backToTop);
+
+  const updateBackToTop = () => {
+    backToTop.classList.toggle("show", window.scrollY > 300);
+  };
+  window.addEventListener("scroll", updateBackToTop, { passive: true });
+  updateBackToTop();
+  backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  const openDrawer = () => {
+    sidebar.classList.add("open");
+    overlay.classList.add("open");
+    document.body.classList.add("drawer-open");
+    menuToggle.setAttribute("aria-expanded", "true");
+  };
+  const closeDrawer = () => {
+    sidebar.classList.remove("open");
+    overlay.classList.remove("open");
+    document.body.classList.remove("drawer-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  };
+
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.addEventListener("click", () => {
+    sidebar.classList.contains("open") ? closeDrawer() : openDrawer();
+  });
+  overlay.addEventListener("click", closeDrawer);
+  tocLinks.forEach((link) => link.addEventListener("click", closeDrawer));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeDrawer();
+  });
+
+  if (printButton) {
+    printButton.addEventListener("click", () => window.print());
+  }
+
+  if ("IntersectionObserver" in window) {
+    const headings = Array.from(document.querySelectorAll(".content h2[id], .content h3[id]"));
+    const linkMap = new Map(tocLinks.map((link) => [link.dataset.target, link]));
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (!visible.length) return;
+      tocLinks.forEach((link) => link.classList.remove("active"));
+      const active = linkMap.get(visible[0].target.id);
+      if (active) active.classList.add("active");
+    }, { rootMargin: "-12% 0px -78% 0px", threshold: [0, 1] });
+    headings.forEach((heading) => observer.observe(heading));
+  }
+})();
+  </script>
+</body>
+</html>

@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="高等数学第十二章无穷级数：常数项级数、正项级数审敛法、交错级数、幂级数、泰勒展开、傅里叶级数。">
+    <title>第十二章 无穷级数：完整学习资料</title>
+    <link rel="stylesheet" href="../../一些必备脚本/AI生成响应式/style.css">
+    <style>
+        :root {
+            --bg: #fbfcfe;
+            --text: #172033;
+            --muted: #5e6a7d;
+            --panel: #fff;
+            --panel-soft: #f3f7fc;
+            --line: #dce5ef;
+            --accent: #7c3aed;
+            --accent-soft: #f5f3ff;
+            --accent-2: #0f766e;
+            --warm: #fff7e8;
+            --warm-line: #f1cf8a;
+            --danger: #b42318;
+            --shadow: 0 18px 50px rgba(23, 32, 51, .08);
+            --radius: 16px
+        }
+
+        html[data-theme="dark"] {
+            --bg: #0b1220;
+            --text: #e6edf7;
+            --muted: #aab7c9;
+            --panel: #111a2b;
+            --panel-soft: #0d1728;
+            --line: #2b3a52;
+            --accent: #c4b5fd;
+            --accent-soft: #2e1b5b;
+            --accent-2: #5eead4;
+            --warm: #2a2415;
+            --warm-line: #6b5422;
+            --danger: #fca5a5;
+            --shadow: 0 18px 50px rgba(0, 0, 0, .28)
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="light"]) {
+                --bg: #0b1220;
+                --text: #e6edf7;
+                --muted: #aab7c9;
+                --panel: #111a2b;
+                --panel-soft: #0d1728;
+                --line: #2b3a52;
+                --accent: #c4b5fd;
+                --accent-soft: #2e1b5b;
+                --accent-2: #5eead4;
+                --warm: #2a2415;
+                --warm-line: #6b5422;
+                --danger: #fca5a5;
+                --shadow: 0 18px 50px rgba(0, 0, 0, .28)
+            }
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 30rem), radial-gradient(circle at 95% 12%, color-mix(in srgb, var(--accent-2) 7%, transparent), transparent 28rem), var(--bg);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+            font-size: 17px;
+            line-height: 1.85
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px
+        }
+
+        .reading-progress {
+            position: fixed;
+            inset: 0 0 auto 0;
+            height: 3px;
+            z-index: 100
+        }
+
+        .reading-progress span {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            transition: width .12s linear
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns:minmax(220px, 286px) minmax(0, 1fr);
+            gap: 38px;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 34px 28px 80px
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 22px;
+            align-self: start;
+            max-height: calc(100vh - 44px);
+            overflow: auto;
+            padding: 22px 18px;
+            background: color-mix(in srgb, var(--panel) 90%, transparent);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            scrollbar-width: thin
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .brand-mark {
+            display: grid;
+            place-items: center;
+            width: 43px;
+            height: 43px;
+            border-radius: 13px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 19px;
+            font-weight: 700
+        }
+
+        .brand strong {
+            display: block;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 15px;
+            line-height: 1.35
+        }
+
+        .brand small {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        .sidebar-title {
+            margin: 0 0 10px;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px;
+            letter-spacing: .12em
+        }
+
+        .toc {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            line-height: 1.45
+        }
+
+        .toc li {
+            margin: 2px 0
+        }
+
+        .toc a {
+            display: block;
+            padding: 5px 8px;
+            color: var(--muted);
+            border-radius: 8px;
+            text-decoration: none
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+            background: var(--accent-soft)
+        }
+
+        .toc-level-3 {
+            padding-left: 12px
+        }
+
+        .toc-level-3 a {
+            font-size: 12px;
+            opacity: .88
+        }
+
+        .content {
+            min-width: 0;
+            padding: 44px 54px 64px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            box-shadow: var(--shadow)
+        }
+
+        .hero {
+            position: relative;
+            margin: -8px 0 32px;
+            padding: 30px 32px;
+            overflow: hidden;
+            border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+            border-radius: 20px;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, var(--panel)), color-mix(in srgb, var(--accent-2) 7%, var(--panel)))
+        }
+
+        .hero::after {
+            content: "∑";
+            position: absolute;
+            right: 24px;
+            bottom: -30px;
+            color: color-mix(in srgb, var(--accent) 12%, transparent);
+            font-family: Georgia, serif;
+            font-size: 132px;
+            line-height: 1;
+            pointer-events: none
+        }
+
+        .hero-kicker {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 8px;
+            color: var(--accent);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .13em
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            border: 0;
+            padding: 0;
+            font-size: clamp(30px, 4vw, 45px);
+            line-height: 1.15;
+            letter-spacing: -.02em
+        }
+
+        .hero p {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 16px
+        }
+
+        .hero-stats {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 18px;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        .hero-stats span {
+            padding: 6px 11px;
+            color: var(--accent);
+            background: color-mix(in srgb, var(--panel) 72%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+            border-radius: 999px
+        }
+
+        h2, h3, h4 {
+            font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.35;
+            scroll-margin-top: 24px
+        }
+
+        h2 {
+            margin: 54px 0 18px;
+            padding-top: 8px;
+            font-size: 28px
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            margin-right: 10px;
+            border-radius: 3px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            vertical-align: .18em
+        }
+
+        h3 {
+            margin: 34px 0 12px;
+            color: color-mix(in srgb, var(--text) 82%, var(--accent));
+            font-size: 21px
+        }
+
+        h4 {
+            margin: 26px 0 8px;
+            font-size: 18px
+        }
+
+        .heading-anchor {
+            float: right;
+            margin-left: 12px;
+            color: color-mix(in srgb, var(--muted) 48%, transparent);
+            font-weight: 400;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity .15s ease
+        }
+
+        h2:hover .heading-anchor, h3:hover .heading-anchor, h4:hover .heading-anchor {
+            opacity: 1
+        }
+
+        p {
+            margin: .75em 0
+        }
+
+        strong {
+            color: color-mix(in srgb, var(--text) 84%, var(--accent))
+        }
+
+        .callout {
+            margin: 20px 0;
+            padding: 16px 20px;
+            color: var(--text);
+            background: var(--warm);
+            border: 1px solid var(--warm-line);
+            border-left: 5px solid #e8a317;
+            border-radius: 10px
+        }
+
+        .callout p {
+            margin: 0
+        }
+
+        ul, ol {
+            margin: .75em 0;
+            padding-left: 1.7em
+        }
+
+        li {
+            margin: .32em 0
+        }
+
+        li > p {
+            margin: .35em 0
+        }
+
+        .math-display {
+            margin: 20px 0;
+            padding: 14px 18px;
+            overflow-x: auto;
+            background: var(--panel-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.05em
+        }
+
+        .math-display .katex-display, .math-display .katex {
+            margin: 0;
+            display: block
+        }
+
+        .math-display math {
+            font-size: 1.08em
+        }
+
+        .katex {
+            font-size: 1.06em
+        }
+
+        .katex math {
+            font-size: 1.06em
+        }
+
+        .math-error {
+            color: var(--danger);
+            font-family: monospace;
+            font-size: .9em;
+            white-space: pre-wrap
+        }
+
+        code {
+            padding: .12em .36em;
+            color: #9f1239;
+            background: #fff1f2;
+            border-radius: 5px;
+            font-family: "Cascadia Code", Consolas, monospace;
+            font-size: .9em
+        }
+
+        .table-wrap {
+            margin: 22px 0;
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 12px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px
+        }
+
+        th, td {
+            padding: 10px 13px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+            vertical-align: top
+        }
+
+        th {
+            color: var(--text);
+            background: var(--accent-soft);
+            font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            font-size: 14px;
+            white-space: nowrap
+        }
+
+        tbody tr:nth-child(even) {
+            background: color-mix(in srgb, var(--panel-soft) 72%, transparent)
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0
+        }
+
+        hr.section-rule {
+            margin: 36px 0;
+            border: 0;
+            border-top: 1px dashed color-mix(in srgb, var(--line) 82%, transparent)
+        }
+
+        .footer-note {
+            margin-top: 48px;
+            padding-top: 18px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px
+        }
+
+        .toolbar {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            display: flex;
+            gap: 8px;
+            z-index: 60
+        }
+
+        .toolbar button {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 10px 14px;
+            color: var(--text);
+            background: color-mix(in srgb, var(--panel) 92%, transparent);
+            box-shadow: 0 8px 24px rgba(23, 32, 51, .12);
+            cursor: pointer;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            backdrop-filter: blur(10px)
+        }
+
+        .toolbar button:hover {
+            color: var(--accent);
+            border-color: var(--accent)
+        }
+
+        .mobile-note {
+            display: none;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        @media (max-width: 980px) {
+            .layout {
+                grid-template-columns:1fr;
+                gap: 18px;
+                padding: 18px
+            }
+
+            .sidebar {
+                position: static;
+                max-height: none
+            }
+
+            .content {
+                padding: 32px 24px 48px
+            }
+
+            .mobile-note {
+                display: block
+            }
+        }
+
+        @media (max-width: 620px) {
+            body {
+                font-size: 16px
+            }
+
+            .content {
+                padding: 24px 17px 38px;
+                border-radius: 16px
+            }
+
+            .hero {
+                padding: 24px 20px
+            }
+
+            .hero h1 {
+                font-size: 30px
+            }
+
+            h2 {
+                font-size: 24px
+            }
+
+            h3 {
+                font-size: 19px
+            }
+
+            .toolbar {
+                top: 10px;
+                right: 10px
+            }
+
+            .toolbar button {
+                padding: 8px 11px
+            }
+
+            .toc-level-3 {
+                display: none
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+                font-size: 11pt
+            }
+
+            .layout {
+                display: block;
+                max-width: none;
+                padding: 0
+            }
+
+            .sidebar, .toolbar, .reading-progress, .heading-anchor, .mobile-note {
+                display: none !important
+            }
+
+            .content {
+                padding: 0;
+                border: 0;
+                box-shadow: none;
+                background: #fff
+            }
+
+            .hero {
+                border: 1px solid #ccc;
+                background: #fff
+            }
+
+            .hero::after {
+                display: none
+            }
+
+            .math-display {
+                background: #fff;
+                break-inside: avoid
+            }
+
+            h2, h3 {
+                break-after: avoid
+            }
+
+            table, blockquote {
+                break-inside: avoid
+            }
+
+            a {
+                color: #000;
+                text-decoration: none
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="reading-progress" aria-hidden="true"><span id="progress-bar"></span></div>
+<div class="toolbar">
+    <button type="button" id="theme-toggle" aria-label="切换深色模式">深色模式</button>
+    <button type="button" onclick="window.print()">打印 / 保存为 PDF</button>
+</div>
+<div class="layout">
+    <aside class="sidebar" aria-label="章节目录">
+        <div class="brand">
+            <div class="brand-mark">∑</div>
+            <div><strong>高等数学<br>第十二章</strong><small>无穷级数 · 学习资料</small></div>
+        </div>
+        <p class="sidebar-title">本页目录</p>
+        <ul class="toc">
+            <li class="toc-level-2"><a href="#基础衔接">🌉 基础知识衔接</a></li>
+            <li class="toc-level-3"><a href="#1-数列极限">1. 数列极限</a></li>
+            <li class="toc-level-3"><a href="#2-等比数列求和">2. 等比数列求和</a></li>
+            <li class="toc-level-3"><a href="#3-常用不等式">3. 常用不等式</a></li>
+            <li class="toc-level-3"><a href="#4-三角函数公式">4. 三角函数公式</a></li>
+            <li class="toc-level-3"><a href="#5-定积分与奇偶性">5. 定积分与奇偶性</a></li>
+            <li class="toc-level-3"><a href="#6-常见极限">6. 常见极限</a></li>
+            <li class="toc-level-3"><a href="#7-自检清单">7. 自检清单</a></li>
+            <li class="toc-level-2"><a href="#一常数项级数的概念与性质">一、常数项级数的概念与性质</a></li>
+            <li class="toc-level-3"><a href="#11-级数与部分和">1.1 级数与部分和</a></li>
+            <li class="toc-level-3"><a href="#12-收敛的必要条件">1.2 收敛的必要条件</a></li>
+            <li class="toc-level-3"><a href="#13-几何级数">1.3 几何级数</a></li>
+            <li class="toc-level-3"><a href="#14-调和级数">1.4 调和级数</a></li>
+            <li class="toc-level-3"><a href="#15-级数的基本性质">1.5 级数的基本性质</a></li>
+            <li class="toc-level-3"><a href="#16-柯西收敛准则">1.6 柯西收敛准则</a></li>
+            <li class="toc-level-3"><a href="#17-余项">1.7 余项</a></li>
+            <li class="toc-level-2"><a href="#二正项级数及其审敛法">二、正项级数及其审敛法</a></li>
+            <li class="toc-level-3"><a href="#21-正项级数">2.1 正项级数</a></li>
+            <li class="toc-level-3"><a href="#22-比较判别法">2.2 比较判别法</a></li>
+            <li class="toc-level-3"><a href="#23-极限比较判别法">2.3 极限比较判别法</a></li>
+            <li class="toc-level-3"><a href="#24-p-级数">2.4 p-级数</a></li>
+            <li class="toc-level-3"><a href="#25-比值判别法">2.5 比值判别法</a></li>
+            <li class="toc-level-3"><a href="#26-根值判别法">2.6 根值判别法</a></li>
+            <li class="toc-level-3"><a href="#27-积分判别法">2.7 积分判别法</a></li>
+            <li class="toc-level-3"><a href="#28-常用判断顺序">2.8 常用判断顺序</a></li>
+            <li class="toc-level-2"><a href="#三交错级数与绝对收敛">三、交错级数与绝对收敛</a></li>
+            <li class="toc-level-3"><a href="#31-交错级数">3.1 交错级数</a></li>
+            <li class="toc-level-3"><a href="#32-莱布尼茨判别法">3.2 莱布尼茨判别法</a></li>
+            <li class="toc-level-3"><a href="#33-绝对收敛与条件收敛">3.3 绝对收敛与条件收敛</a></li>
+            <li class="toc-level-3"><a href="#34-绝对收敛的判别">3.4 绝对收敛的判别</a></li>
+            <li class="toc-level-2"><a href="#四幂级数">四、幂级数</a></li>
+            <li class="toc-level-3"><a href="#41-幂级数的形式">4.1 幂级数的形式</a></li>
+            <li class="toc-level-3"><a href="#42-收敛半径">4.2 收敛半径</a></li>
+            <li class="toc-level-3"><a href="#43-收敛区间">4.3 收敛区间</a></li>
+            <li class="toc-level-3"><a href="#44-幂级数的性质">4.4 幂级数的性质</a></li>
+            <li class="toc-level-3"><a href="#45-常用幂级数">4.5 常用幂级数</a></li>
+            <li class="toc-level-2"><a href="#五函数展开成幂级数">五、函数展开成幂级数</a></li>
+            <li class="toc-level-3"><a href="#51-泰勒级数">5.1 泰勒级数</a></li>
+            <li class="toc-level-3"><a href="#52-展开的条件">5.2 展开的条件</a></li>
+            <li class="toc-level-3"><a href="#53-常用展开">5.3 常用展开</a></li>
+            <li class="toc-level-3"><a href="#54-展开方法">5.4 展开方法</a></li>
+            <li class="toc-level-3"><a href="#55-应用">5.5 应用</a></li>
+            <li class="toc-level-2"><a href="#六傅里叶级数">六、傅里叶级数</a></li>
+            <li class="toc-level-3"><a href="#61-周期为-的傅里叶级数">6.1 周期为 … 的傅里叶级数</a></li>
+            <li class="toc-level-3"><a href="#62-收敛定理狄利克雷条件">6.2 收敛定理（狄利克雷条件）</a></li>
+            <li class="toc-level-3"><a href="#63-奇偶性与简化">6.3 奇偶性与简化</a></li>
+            <li class="toc-level-3"><a href="#64-周期为-的傅里叶级数">6.4 周期为 … 的傅里叶级数</a></li>
+            <li class="toc-level-3"><a href="#65-半幅展开">6.5 半幅展开</a></li>
+            <li class="toc-level-2"><a href="#七典型例题">七、典型例题</a></li>
+            <li class="toc-level-3"><a href="#例-1裂项级数">例 1：裂项级数</a></li>
+            <li class="toc-level-3"><a href="#例-2比较判别法">例 2：比较判别法</a></li>
+            <li class="toc-level-3"><a href="#例-3比值判别法">例 3：比值判别法</a></li>
+            <li class="toc-level-3"><a href="#例-4交错级数">例 4：交错级数</a></li>
+            <li class="toc-level-3"><a href="#例-5幂级数收敛域">例 5：幂级数收敛域</a></li>
+            <li class="toc-level-3"><a href="#例-6利用已知展开">例 6：利用已知展开</a></li>
+            <li class="toc-level-3"><a href="#例-7傅里叶级数">例 7：傅里叶级数</a></li>
+            <li class="toc-level-3"><a href="#例-8幂级数求和">例 8：幂级数求和</a></li>
+            <li class="toc-level-2"><a href="#八易错点提示">八、易错点提示</a></li>
+            <li class="toc-level-3"><a href="#1-把通项趋于-当成收敛">1. 把通项趋于 … 当成收敛</a></li>
+            <li class="toc-level-3"><a href="#2-不先检查通项">2. 不先检查通项</a></li>
+            <li class="toc-level-3"><a href="#3-比较判别法方向用反">3. 比较判别法方向用反</a></li>
+            <li class="toc-level-3"><a href="#4-比值根值判别法-时下结论">4. 比值/根值判别法 … 时下结论</a></li>
+            <li class="toc-level-3"><a href="#5-交错级数只看通项">5. 交错级数只看通项</a></li>
+            <li class="toc-level-3"><a href="#6-绝对收敛与条件收敛混淆">6. 绝对收敛与条件收敛混淆</a></li>
+            <li class="toc-level-3"><a href="#7-幂级数只求半径不查端点">7. 幂级数只求半径不查端点</a></li>
+            <li class="toc-level-3"><a href="#8-幂级数逐项求导积分后忘记重新检查端点">8.
+                幂级数逐项求导/积分后忘记重新检查端点</a></li>
+            <li class="toc-level-3"><a href="#9-泰勒展开忘记余项">9. 泰勒展开忘记余项</a></li>
+            <li class="toc-level-3"><a href="#10-傅里叶系数公式漏掉">10. 傅里叶系数公式漏掉 …</a></li>
+            <li class="toc-level-3"><a href="#11-傅里叶级数在间断点的值写错">11. 傅里叶级数在间断点的值写错</a></li>
+            <li class="toc-level-3"><a href="#12-奇偶性用错">12. 奇偶性用错</a></li>
+            <li class="toc-level-3"><a href="#13-端点代入后不判断通项">13. 端点代入后不判断通项</a></li>
+            <li class="toc-level-3"><a href="#14-只记公式不理解收敛域">14. 只记公式不理解收敛域</a></li>
+            <li class="toc-level-2"><a href="#九课后练习">九、课后练习</a></li>
+            <li class="toc-level-2"><a href="#十练习答案与解析">十、练习答案与解析</a></li>
+            <li class="toc-level-3"><a href="#1-答案">1. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#2-答案收敛">2. 答案：收敛</a></li>
+            <li class="toc-level-3"><a href="#3-答案收敛">3. 答案：收敛</a></li>
+            <li class="toc-level-3"><a href="#4-答案绝对收敛">4. 答案：绝对收敛</a></li>
+            <li class="toc-level-3"><a href="#5-答案条件收敛">5. 答案：条件收敛</a></li>
+            <li class="toc-level-3"><a href="#6-答案">6. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#7-答案">7. 答案：</a></li>
+            <li class="toc-level-3"><a href="#8-答案">8. 答案：</a></li>
+            <li class="toc-level-3"><a href="#9-答案">9. 答案：</a></li>
+            <li class="toc-level-3"><a href="#10-答案收敛">10. 答案：收敛</a></li>
+            <li class="toc-level-2"><a href="#十一公式速查">十一、公式速查</a></li>
+            <li class="toc-level-3"><a href="#111-常数项级数">11.1 常数项级数</a></li>
+            <li class="toc-level-3"><a href="#112-p-级数">11.2 p-级数</a></li>
+            <li class="toc-level-3"><a href="#113-比值与根值">11.3 比值与根值</a></li>
+            <li class="toc-level-3"><a href="#114-莱布尼茨判别法">11.4 莱布尼茨判别法</a></li>
+            <li class="toc-level-3"><a href="#115-常用展开">11.5 常用展开</a></li>
+            <li class="toc-level-3"><a href="#116-傅里叶系数">11.6 傅里叶系数</a></li>
+            <li class="toc-level-2"><a href="#结语">结语</a></li>
+        </ul>
+        <p class="mobile-note">小屏幕下目录可上下滚动。</p>
+    </aside>
+    <main class="content">
+        <section class="hero">
+            <p class="hero-kicker">CALCULUS · INFINITE SERIES</p>
+            <h1>第十二章 无穷级数</h1>
+            <p>从部分和与审敛法，到幂级数、函数展开和傅里叶级数。先看通项，再判断类型，最后确定收敛范围。</p>
+            <div class="hero-stats"><span>初高中衔接</span><span>8 个典型例题</span><span>10 道课后练习</span><span>KaTeX · MathML 离线渲染</span>
+            </div>
+        </section>
+        <blockquote class="callout">
+            <p><strong>本章主线</strong>： 常数项级数 <span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟶</mo></mrow><annotation
+                    encoding="application/x-tex">\longrightarrow</annotation></semantics></math></span> 正项级数审敛法
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟶</mo></mrow><annotation
+                        encoding="application/x-tex">\longrightarrow</annotation></semantics></math></span> 交错级数与绝对收敛
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟶</mo></mrow><annotation
+                        encoding="application/x-tex">\longrightarrow</annotation></semantics></math></span> 幂级数 <span
+                        class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟶</mo></mrow><annotation
+                        encoding="application/x-tex">\longrightarrow</annotation></semantics></math></span> 函数展开成幂级数
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟶</mo></mrow><annotation
+                        encoding="application/x-tex">\longrightarrow</annotation></semantics></math></span> 傅里叶级数。
+            </p>
+        </blockquote>
+        <blockquote class="callout"><p><strong>学习建议</strong>：级数研究的核心是“部分和是否有极限”。判断敛散性时先看通项是否趋于零，再根据级数类型选择比较、比值、根值、积分或莱布尼茨判别法。
+        </p></blockquote>
+        <hr class="section-rule">
+        <h2 id="基础衔接"><a class="heading-anchor" href="#基础衔接" aria-label="回到本小节">#</a>🌉 基础知识衔接</h2>
+        <p>无穷级数会大量用到数列极限、等比数列、不等式、三角函数和定积分。下面快速复习关键工具。</p>
+        <h3 id="1-数列极限"><a class="heading-anchor" href="#1-数列极限" aria-label="回到本小节">#</a>1. 数列极限</h3>
+        <p>数列 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">{</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><annotation
+                encoding="application/x-tex">\{a_n\}</annotation></semantics></math></span> 收敛于 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation
+                encoding="application/x-tex">A</annotation></semantics></math></span>，记作
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mi>A</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\lim_{n\to\infty}a_n=A.</annotation></semantics></math></span></div>
+        <p>级数的收敛，本质上就是部分和数列的收敛。</p>
+        <h3 id="2-等比数列求和"><a class="heading-anchor" href="#2-等比数列求和" aria-label="回到本小节">#</a>2. 等比数列求和
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mo>+</mo><mi>a</mi><mi>q</mi><mo>+</mo><mi>a</mi><msup><mi>q</mi><mn>2</mn></msup><mo>+</mo><mo>⋯</mo><mo>+</mo><mi>a</mi><msup><mi>q</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mfrac><mrow><mi>a</mi><mo
+                stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>q</mi><mi>n</mi></msup><mo stretchy="false">)</mo></mrow><mrow><mn>1</mn><mo>−</mo><mi>q</mi></mrow></mfrac><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>q</mi><mo mathvariant="normal">≠</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">a+aq+aq^2+\cdots+aq^{n-1}
+=
+\frac{a(1-q^n)}{1-q}\quad(q\ne1).</annotation></semantics></math></span></div>
+        <p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>q</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">|q|&lt;1</annotation></semantics></math></span> 时，
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mi>a</mi><msup><mi>q</mi><mi>n</mi></msup><mo>=</mo><mfrac><mi>a</mi><mrow><mn>1</mn><mo>−</mo><mi>q</mi></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sum_{n=0}^{\infty}aq^n
+=
+\frac{a}{1-q}.</annotation></semantics></math></span></div>
+        <p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>q</mi><mi mathvariant="normal">∣</mi><mo>≥</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">|q|\ge1</annotation></semantics></math></span> 时，等比级数发散。
+        </p>
+        <h3 id="3-常用不等式"><a class="heading-anchor" href="#3-常用不等式" aria-label="回到本小节">#</a>3. 常用不等式
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>n</mi><mo
+                stretchy="false">!</mo><mo>≤</mo><msup><mi>n</mi><mi>n</mi></msup><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">n!\le n^n,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>ln</mi><mo>⁡</mo><mi>n</mi><mo>&lt;</mo><mi>n</mi><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>n</mi><mo>≥</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\ln n&lt;n\quad(n\ge1),</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><msup><mi>n</mi><mi>p</mi></msup></mfrac><mo>&gt;</mo><mn>0</mn><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\frac1{n^p}&gt;0,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo
+                fence="true">∣</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo fence="true">∣</mo></mrow><mo>≤</mo><mn>1</mn><mo
+                separator="true">,</mo><mspace width="2em"/><mrow><mo fence="true">∣</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo
+                fence="true">∣</mo></mrow><mo>≤</mo><mn>1.</mn></mrow><annotation encoding="application/x-tex">\left|\sin x\right|\le1,\qquad
+\left|\cos x\right|\le1.</annotation></semantics></math></span></div>
+        <p>比较判别法中经常需要放缩。</p>
+        <h3 id="4-三角函数公式"><a class="heading-anchor" href="#4-三角函数公式" aria-label="回到本小节">#</a>4. 三角函数公式
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>x</mi><mo>+</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>x</mi><mo>=</mo><mn>1</mn><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\sin^2x+\cos^2x=1,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mo>=</mo><mn>2</mn><mi>sin</mi><mo>⁡</mo><mi>x</mi><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\sin2x=2\sin x\cos x,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mo>=</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>x</mi><mo>−</mo><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>x</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\cos2x=\cos^2x-\sin^2x,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>a</mi><mi>sin</mi><mo>⁡</mo><mi>b</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo
+                stretchy="false">[</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><mo
+                stretchy="false">)</mo><mo>−</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo
+                stretchy="false">)</mo><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\sin a\sin b
+=
+\frac12[\cos(a-b)-\cos(a+b)].</annotation></semantics></math></span></div>
+        <p>傅里叶系数计算会反复使用这些公式。</p>
+        <h3 id="5-定积分与奇偶性"><a class="heading-anchor" href="#5-定积分与奇偶性" aria-label="回到本小节">#</a>5.
+            定积分与奇偶性</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>a</mi></mrow><mi>a</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>=</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">\int_{-a}^{a}f(x)dx=0</annotation></semantics></math></span></div>
+        <p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation
+                encoding="application/x-tex">f</annotation></semantics></math></span> 为奇函数时成立；偶函数则等于两倍半区间积分。
+        </p>
+        <p>傅里叶系数常利用奇偶性简化。</p>
+        <h3 id="6-常见极限"><a class="heading-anchor" href="#6-常见极限" aria-label="回到本小节">#</a>6. 常见极限</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><msup><mrow><mo fence="true">(</mo><mn>1</mn><mo>+</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mo
+                fence="true">)</mo></mrow><mi>n</mi></msup><mo>=</mo><mi>e</mi><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\lim_{n\to\infty}\left(1+\frac1n\right)^n=e,</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><mroot><mi>n</mi><mi>n</mi></mroot><mo>=</mo><mn>1</mn><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\lim_{n\to\infty}\sqrt[n]{n}=1,</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><mfrac><mrow><mi>ln</mi><mo>⁡</mo><mi>n</mi></mrow><mi>n</mi></mfrac><mo>=</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">\lim_{n\to\infty}\frac{\ln n}{n}=0.</annotation></semantics></math></span>
+        </div>
+        <h3 id="7-自检清单"><a class="heading-anchor" href="#7-自检清单" aria-label="回到本小节">#</a>7. 自检清单</h3>
+        <ul>
+            <li>[ ] 会求数列极限吗？</li>
+            <li>[ ] 记得等比级数求和公式吗？</li>
+            <li>[ ] 会用简单不等式放缩吗？</li>
+            <li>[ ] 记得三角函数基本公式吗？</li>
+            <li>[ ] 会用奇偶性简化积分吗？</li>
+            <li>[ ] 知道“通项趋于零”是收敛的必要条件吗？</li>
+        </ul>
+        <hr class="section-rule">
+        <h2 id="一常数项级数的概念与性质"><a class="heading-anchor" href="#一常数项级数的概念与性质"
+                                             aria-label="回到本小节">#</a>一、常数项级数的概念与性质</h2>
+        <h3 id="11-级数与部分和"><a class="heading-anchor" href="#11-级数与部分和" aria-label="回到本小节">#</a>1.1
+            级数与部分和</h3>
+        <p>给定数列 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">{</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><annotation
+                encoding="application/x-tex">\{a_n\}</annotation></semantics></math></span>，表达式
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><msub><mi>a</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mn>2</mn></msub><mo>+</mo><msub><mi>a</mi><mn>3</mn></msub><mo>+</mo><mo>⋯</mo></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}a_n
+=
+a_1+a_2+a_3+\cdots</annotation></semantics></math></span></div>
+        <p>叫做无穷级数。</p>
+        <p>部分和：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><msub><mi>a</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mn>2</mn></msub><mo>+</mo><mo>⋯</mo><mo>+</mo><msub><mi>a</mi><mi>n</mi></msub><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">S_n=a_1+a_2+\cdots+a_n.</annotation></semantics></math></span></div>
+        <p>若部分和数列 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">{</mo><msub><mi>S</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><annotation
+                encoding="application/x-tex">\{S_n\}</annotation></semantics></math></span> 收敛于 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi></mrow><annotation
+                encoding="application/x-tex">S</annotation></semantics></math></span>，则称级数收敛，且
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mi>S</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}a_n=S.</annotation></semantics></math></span></div>
+        <p>若部分和数列发散，则称级数发散。</p>
+        <h3 id="12-收敛的必要条件"><a class="heading-anchor" href="#12-收敛的必要条件" aria-label="回到本小节">#</a>1.2
+            收敛的必要条件</h3>
+        <p>若级数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 收敛，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mn>0</mn></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\lim_{n\to\infty}a_n=0}.</annotation></semantics></math></span>
+        </div>
+        <p>这是必要条件，不是充分条件。例如调和级数</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}\frac1n</annotation></semantics></math></span></div>
+        <p>的通项趋于 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">0</annotation></semantics></math></span>，但级数发散。
+        </p>
+        <h3 id="13-几何级数"><a class="heading-anchor" href="#13-几何级数" aria-label="回到本小节">#</a>1.3 几何级数
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mi>a</mi><msup><mi>q</mi><mi>n</mi></msup></mrow><annotation
+                encoding="application/x-tex">\sum_{n=0}^{\infty}aq^n</annotation></semantics></math></span></div>
+        <p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>q</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">|q|&lt;1</annotation></semantics></math></span> 时收敛，和为
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mi>a</mi><mrow><mn>1</mn><mo>−</mo><mi>q</mi></mrow></mfrac><mo
+                separator="true">;</mo></mrow><annotation
+                encoding="application/x-tex">\frac{a}{1-q};</annotation></semantics></math></span></div>
+        <p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>q</mi><mi mathvariant="normal">∣</mi><mo>≥</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">|q|\ge1</annotation></semantics></math></span> 时发散。
+        </p>
+        <h3 id="14-调和级数"><a class="heading-anchor" href="#14-调和级数" aria-label="回到本小节">#</a>1.4 调和级数
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}\frac1n</annotation></semantics></math></span></div>
+        <p>发散。它是最重要的反例之一。</p>
+        <h3 id="15-级数的基本性质"><a class="heading-anchor" href="#15-级数的基本性质" aria-label="回到本小节">#</a>1.5
+            级数的基本性质</h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span>、<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum b_n</annotation></semantics></math></span> 都收敛，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∑</mo><mo
+                stretchy="false">(</mo><mi>α</mi><msub><mi>a</mi><mi>n</mi></msub><mo>+</mo><mi>β</mi><msub><mi>b</mi><mi>n</mi></msub><mo
+                stretchy="false">)</mo><mo>=</mo><mi>α</mi><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub><mo>+</mo><mi>β</mi><mo>∑</mo><msub><mi>b</mi><mi>n</mi></msub><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sum(\alpha a_n+\beta b_n)
+=
+\alpha\sum a_n+\beta\sum b_n.</annotation></semantics></math></span></div>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 收敛，<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum b_n</annotation></semantics></math></span> 发散，则 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><mo
+                stretchy="false">(</mo><msub><mi>a</mi><mi>n</mi></msub><mo>+</mo><msub><mi>b</mi><mi>n</mi></msub><mo
+                stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">\sum(a_n+b_n)</annotation></semantics></math></span> 发散。
+        </p>
+        <p>改变有限项不影响级数的敛散性，但会影响收敛时的和。</p>
+        <h3 id="16-柯西收敛准则"><a class="heading-anchor" href="#16-柯西收敛准则" aria-label="回到本小节">#</a>1.6
+            柯西收敛准则</h3>
+        <p>级数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 收敛的充要条件是：对任意
+            <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">\varepsilon&gt;0</annotation></semantics></math></span>，存在 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation
+                    encoding="application/x-tex">N</annotation></semantics></math></span>，当 <span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>&gt;</mo><mi>n</mi><mo>&gt;</mo><mi>N</mi></mrow><annotation
+                    encoding="application/x-tex">m&gt;n&gt;N</annotation></semantics></math></span> 时，
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo
+                fence="true">∣</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo>+</mo><mo>⋯</mo><mo>+</mo><msub><mi>a</mi><mi>m</mi></msub><mo
+                fence="true">∣</mo></mrow><mo>&lt;</mo><mi>ε</mi><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\left|a_{n+1}+a_{n+2}+\cdots+a_m\right|&lt;\varepsilon.</annotation></semantics></math></span>
+        </div>
+        <h3 id="17-余项"><a class="heading-anchor" href="#17-余项" aria-label="回到本小节">#</a>1.7 余项</h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 收敛于 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi></mrow><annotation
+                encoding="application/x-tex">S</annotation></semantics></math></span>，则余项
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>R</mi><mi>n</mi></msub><mo>=</mo><mi>S</mi><mo>−</mo><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><msub><mi>a</mi><mi>k</mi></msub><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">R_n=S-S_n
+=
+\sum_{k=n+1}^{\infty}a_k.</annotation></semantics></math></span></div>
+        <p>收敛级数的余项满足</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>R</mi><mi>n</mi></msub><mo>→</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">R_n\to0.</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="二正项级数及其审敛法"><a class="heading-anchor" href="#二正项级数及其审敛法"
+                                         aria-label="回到本小节">#</a>二、正项级数及其审敛法</h2>
+        <h3 id="21-正项级数"><a class="heading-anchor" href="#21-正项级数" aria-label="回到本小节">#</a>2.1 正项级数
+        </h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>≥</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a_n\ge0</annotation></semantics></math></span>，则称 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 为正项级数。
+        </p>
+        <p>正项级数的部分和 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">{</mo><msub><mi>S</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><annotation
+                encoding="application/x-tex">\{S_n\}</annotation></semantics></math></span> 单调递增，因此：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mtext>正项级数收敛</mtext><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mtext>部分和有上界</mtext></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\text{正项级数收敛}\iff\text{部分和有上界}
+}.</annotation></semantics></math></span></div>
+        <h3 id="22-比较判别法"><a class="heading-anchor" href="#22-比较判别法" aria-label="回到本小节">#</a>2.2 比较判别法
+        </h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><msub><mi>a</mi><mi>n</mi></msub><mo>≤</mo><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">0\le a_n\le b_n</annotation></semantics></math></span>：
+        </p>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                    encoding="application/x-tex">\sum b_n</annotation></semantics></math></span> 收敛，则 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                    encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 收敛；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                    encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 发散，则 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                    encoding="application/x-tex">\sum b_n</annotation></semantics></math></span> 发散。
+            </li>
+        </ul>
+        <h3 id="23-极限比较判别法"><a class="heading-anchor" href="#23-极限比较判别法" aria-label="回到本小节">#</a>2.3
+            极限比较判别法</h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo
+                separator="true">,</mo><msub><mi>b</mi><mi>n</mi></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a_n,b_n&gt;0</annotation></semantics></math></span>，且
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><mfrac><msub><mi>a</mi><mi>n</mi></msub><msub><mi>b</mi><mi>n</mi></msub></mfrac><mo>=</mo><mi>c</mi><mspace
+                width="1em"/><mo stretchy="false">(</mo><mn>0</mn><mo>&lt;</mo><mi>c</mi><mo>&lt;</mo><mi
+                mathvariant="normal">∞</mi><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\lim_{n\to\infty}\frac{a_n}{b_n}=c
+\quad(0&lt;c&lt;\infty),</annotation></semantics></math></span></div>
+        <p>则 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 与 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum b_n</annotation></semantics></math></span> 同敛散。
+        </p>
+        <p>若极限为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">0</annotation></semantics></math></span>，且 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum b_n</annotation></semantics></math></span> 收敛，则 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 收敛。
+        </p>
+        <p>若极限为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∞</mi></mrow><annotation
+                encoding="application/x-tex">\infty</annotation></semantics></math></span>，且 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum b_n</annotation></semantics></math></span> 发散，则 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 发散。
+        </p>
+        <h3 id="24-p-级数"><a class="heading-anchor" href="#24-p-级数" aria-label="回到本小节">#</a>2.4 p-级数</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mn>1</mn><msup><mi>n</mi><mi>p</mi></msup></mfrac><mtext> 收敛</mtext><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>p</mi><mo>&gt;</mo><mn>1</mn></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\sum_{n=1}^{\infty}\frac1{n^p}
+\text{ 收敛}\iff p&gt;1
+}.</annotation></semantics></math></span></div>
+        <p>特别地：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∑</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mtext> 发散</mtext><mo
+                separator="true">,</mo><mspace width="2em"/><mo>∑</mo><mfrac><mn>1</mn><msup><mi>n</mi><mn>2</mn></msup></mfrac><mtext> 收敛</mtext><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sum\frac1n\text{ 发散},
+\qquad
+\sum\frac1{n^2}\text{ 收敛}.</annotation></semantics></math></span></div>
+        <h3 id="25-比值判别法"><a class="heading-anchor" href="#25-比值判别法" aria-label="回到本小节">#</a>2.5 比值判别法
+        </h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a_n&gt;0</annotation></semantics></math></span>，且
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><mfrac><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><msub><mi>a</mi><mi>n</mi></msub></mfrac><mo>=</mo><mi>L</mi><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\lim_{n\to\infty}\frac{a_{n+1}}{a_n}=L,</annotation></semantics></math></span>
+        </div>
+        <p>则：</p>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">L&lt;1</annotation></semantics></math></span>：收敛；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">L&gt;1</annotation></semantics></math></span>：发散；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">L=1</annotation></semantics></math></span>：失效。
+            </li>
+        </ul>
+        <h3 id="26-根值判别法"><a class="heading-anchor" href="#26-根值判别法" aria-label="回到本小节">#</a>2.6 根值判别法
+        </h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a_n&gt;0</annotation></semantics></math></span>，且
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><mroot><msub><mi>a</mi><mi>n</mi></msub><mi>n</mi></mroot><mo>=</mo><mi>L</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\lim_{n\to\infty}\sqrt[n]{a_n}=L,</annotation></semantics></math></span>
+        </div>
+        <p>则：</p>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">L&lt;1</annotation></semantics></math></span>：收敛；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">L&gt;1</annotation></semantics></math></span>：发散；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">L=1</annotation></semantics></math></span>：失效。
+            </li>
+        </ul>
+        <h3 id="27-积分判别法"><a class="heading-anchor" href="#27-积分判别法" aria-label="回到本小节">#</a>2.7 积分判别法
+        </h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">f(x)</annotation></semantics></math></span> 在 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>1</mn><mo
+                separator="true">,</mo><mo>+</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">[1,+\infty)</annotation></semantics></math></span> 上非负、连续、单调递减，且
+            <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mi>f</mi><mo
+                    stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">a_n=f(n)</annotation></semantics></math></span>，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><msub><mi>a</mi><mi>n</mi></msub><mtext> 与 </mtext><msubsup><mo>∫</mo><mn>1</mn><mrow><mo>+</mo><mi
+                mathvariant="normal">∞</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo
+                stretchy="false">)</mo><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\sum_{n=1}^{\infty}a_n
+\text{ 与 }
+\int_1^{+\infty}f(x)dx</annotation></semantics></math></span></div>
+        <p>同敛散。</p>
+        <h3 id="28-常用判断顺序"><a class="heading-anchor" href="#28-常用判断顺序" aria-label="回到本小节">#</a>2.8
+            常用判断顺序</h3>
+        <ol>
+            <li>先看通项是否趋于 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">0</annotation></semantics></math></span>；
+            </li>
+            <li>看是否为等比级数或 p-级数；</li>
+            <li>尝试比较或极限比较；</li>
+            <li>含阶乘、指数、幂时试比值法；</li>
+            <li>含 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation
+                    encoding="application/x-tex">n</annotation></semantics></math></span> 次方时试根值法；
+            </li>
+            <li>含可积函数时试积分法。</li>
+        </ol>
+        <hr class="section-rule">
+        <h2 id="三交错级数与绝对收敛"><a class="heading-anchor" href="#三交错级数与绝对收敛"
+                                         aria-label="回到本小节">#</a>三、交错级数与绝对收敛</h2>
+        <h3 id="31-交错级数"><a class="heading-anchor" href="#31-交错级数" aria-label="回到本小节">#</a>3.1 交错级数
+        </h3>
+        <p>形如</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>b</mi><mi>n</mi></msub><mspace
+                width="1em"/><mo stretchy="false">(</mo><msub><mi>b</mi><mi>n</mi></msub><mo>&gt;</mo><mn>0</mn><mo
+                stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sum_{n=1}^{\infty}(-1)^{n-1}b_n
+\quad(b_n&gt;0)</annotation></semantics></math></span></div>
+        <p>的级数叫做交错级数。</p>
+        <h3 id="32-莱布尼茨判别法"><a class="heading-anchor" href="#32-莱布尼茨判别法" aria-label="回到本小节">#</a>3.2
+            莱布尼茨判别法</h3>
+        <p>若</p>
+        <ol>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                    encoding="application/x-tex">b_n</annotation></semantics></math></span> 单调递减；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                    mathvariant="normal">∞</mi></mrow></msub><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">\lim_{n\to\infty}b_n=0</annotation></semantics></math></span>；
+            </li>
+        </ol>
+        <p>则交错级数</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}(-1)^{n-1}b_n</annotation></semantics></math></span>
+        </div>
+        <p>收敛。</p>
+        <p>并且余项满足</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><msub><mi>R</mi><mi>n</mi></msub><mi mathvariant="normal">∣</mi><mo>≤</mo><msub><mi>b</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">|R_n|\le b_{n+1}.</annotation></semantics></math></span></div>
+        <h3 id="33-绝对收敛与条件收敛"><a class="heading-anchor" href="#33-绝对收敛与条件收敛"
+                                          aria-label="回到本小节">#</a>3.3 绝对收敛与条件收敛</h3>
+        <p>若</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∑</mo><mi
+                mathvariant="normal">∣</mi><msub><mi>a</mi><mi>n</mi></msub><mi mathvariant="normal">∣</mi></mrow><annotation
+                encoding="application/x-tex">\sum |a_n|</annotation></semantics></math></span></div>
+        <p>收敛，则称 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 绝对收敛。
+        </p>
+        <p>绝对收敛一定收敛。</p>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 收敛，但 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><mi
+                mathvariant="normal">∣</mi><msub><mi>a</mi><mi>n</mi></msub><mi mathvariant="normal">∣</mi></mrow><annotation
+                encoding="application/x-tex">\sum |a_n|</annotation></semantics></math></span> 发散，则称 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum a_n</annotation></semantics></math></span> 条件收敛。
+        </p>
+        <p><strong>例</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><mi>n</mi></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}</annotation></semantics></math></span>
+        </div>
+        <p>条件收敛，因为原级数收敛，但调和级数发散。</p>
+        <h3 id="34-绝对收敛的判别"><a class="heading-anchor" href="#34-绝对收敛的判别" aria-label="回到本小节">#</a>3.4
+            绝对收敛的判别</h3>
+        <p>通常先判断 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><mi
+                mathvariant="normal">∣</mi><msub><mi>a</mi><mi>n</mi></msub><mi mathvariant="normal">∣</mi></mrow><annotation
+                encoding="application/x-tex">\sum |a_n|</annotation></semantics></math></span> 是否收敛：
+        </p>
+        <ul>
+            <li>若绝对收敛，则原级数收敛；</li>
+            <li>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><mi
+                    mathvariant="normal">∣</mi><msub><mi>a</mi><mi>n</mi></msub><mi mathvariant="normal">∣</mi></mrow><annotation
+                    encoding="application/x-tex">\sum |a_n|</annotation></semantics></math></span>
+                发散，不能直接说原级数发散，需要再用莱布尼茨或其他方法判断条件收敛。
+            </li>
+        </ul>
+        <hr class="section-rule">
+        <h2 id="四幂级数"><a class="heading-anchor" href="#四幂级数" aria-label="回到本小节">#</a>四、幂级数</h2>
+        <h3 id="41-幂级数的形式"><a class="heading-anchor" href="#41-幂级数的形式" aria-label="回到本小节">#</a>4.1
+            幂级数的形式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><msub><mi>a</mi><mi>n</mi></msub><msup><mi>x</mi><mi>n</mi></msup><mo>=</mo><msub><mi>a</mi><mn>0</mn></msub><mo>+</mo><msub><mi>a</mi><mn>1</mn></msub><mi>x</mi><mo>+</mo><msub><mi>a</mi><mn>2</mn></msub><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mo>⋯</mo></mrow><annotation
+                encoding="application/x-tex">\sum_{n=0}^{\infty}a_nx^n
+=
+a_0+a_1x+a_2x^2+\cdots</annotation></semantics></math></span></div>
+        <p>叫做幂级数。</p>
+        <p>更一般地，</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><msup><mo
+                stretchy="false">)</mo><mi>n</mi></msup><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\sum_{n=0}^{\infty}a_n(x-x_0)^n.</annotation></semantics></math></span>
+        </div>
+        <h3 id="42-收敛半径"><a class="heading-anchor" href="#42-收敛半径" aria-label="回到本小节">#</a>4.2 收敛半径
+        </h3>
+        <p>若</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><mrow><mo fence="true">∣</mo><mfrac><msub><mi>a</mi><mi>n</mi></msub><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mfrac><mo
+                fence="true">∣</mo></mrow><mo>=</mo><mi>R</mi><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\lim_{n\to\infty}\left|\frac{a_n}{a_{n+1}}\right|=R,</annotation></semantics></math></span>
+        </div>
+        <p>则幂级数在</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>R</mi></mrow><annotation
+                encoding="application/x-tex">|x|&lt;R</annotation></semantics></math></span></div>
+        <p>内绝对收敛，在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&gt;</mo><mi>R</mi></mrow><annotation
+                encoding="application/x-tex">|x|&gt;R</annotation></semantics></math></span> 发散。<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation
+                encoding="application/x-tex">R</annotation></semantics></math></span> 叫做收敛半径。
+        </p>
+        <p>也可用</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>R</mi><mo>=</mo><mfrac><mn>1</mn><mstyle
+                scriptlevel="0" displaystyle="true"><munder><mrow><mi mathvariant="normal">lim sup</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><mroot><mrow><mi mathvariant="normal">∣</mi><msub><mi>a</mi><mi>n</mi></msub><mi
+                mathvariant="normal">∣</mi></mrow><mi>n</mi></mroot></mstyle></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">R=\frac1{\displaystyle\limsup_{n\to\infty}\sqrt[n]{|a_n|}}.</annotation></semantics></math></span>
+        </div>
+        <h3 id="43-收敛区间"><a class="heading-anchor" href="#43-收敛区间" aria-label="回到本小节">#</a>4.3 收敛区间
+        </h3>
+        <p>求出 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation
+                encoding="application/x-tex">R</annotation></semantics></math></span> 后，还要单独判断端点
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mo>±</mo><mi>R</mi></mrow><annotation
+                encoding="application/x-tex">x=\pm R</annotation></semantics></math></span></div>
+        <p>的敛散性，才能得到完整收敛区间。</p>
+        <h3 id="44-幂级数的性质"><a class="heading-anchor" href="#44-幂级数的性质" aria-label="回到本小节">#</a>4.4
+            幂级数的性质</h3>
+        <p>在收敛区间内部，幂级数可以逐项求导和逐项积分：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mrow><mo
+                fence="true">(</mo><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub><msup><mi>x</mi><mi>n</mi></msup><mo
+                fence="true">)</mo></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mo>∑</mo><mi>n</mi><msub><mi>a</mi><mi>n</mi></msub><msup><mi>x</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\left(\sum a_nx^n\right)&#x27;
+=
+\sum na_nx^{n-1},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msubsup><mo>∫</mo><mn>0</mn><mi>x</mi></msubsup><mrow><mo
+                fence="true">(</mo><mo>∑</mo><msub><mi>a</mi><mi>n</mi></msub><msup><mi>t</mi><mi>n</mi></msup><mo
+                fence="true">)</mo></mrow><mi>d</mi><mi>t</mi><mo>=</mo><mo>∑</mo><mfrac><msub><mi>a</mi><mi>n</mi></msub><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><msup><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int_0^x\left(\sum a_nt^n\right)dt
+=
+\sum\frac{a_n}{n+1}x^{n+1}.</annotation></semantics></math></span></div>
+        <p>逐项求导、逐项积分后收敛半径不变（端点可能改变）。</p>
+        <h3 id="45-常用幂级数"><a class="heading-anchor" href="#45-常用幂级数" aria-label="回到本小节">#</a>4.5 常用幂级数
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow></mfrac><mo>=</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mo>⋯</mo><mspace
+                width="2em"/><mo stretchy="false">(</mo><mi mathvariant="normal">∣</mi><mi>x</mi><mi
+                mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\frac1{1-x}
+=
+1+x+x^2+\cdots
+\qquad(|x|&lt;1),</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>e</mi><mi>x</mi></msup><mo>=</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>+</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mrow><mn>2</mn><mo
+                stretchy="false">!</mo></mrow></mfrac><mo>+</mo><mfrac><msup><mi>x</mi><mn>3</mn></msup><mrow><mn>3</mn><mo
+                stretchy="false">!</mo></mrow></mfrac><mo>+</mo><mo>⋯</mo><mspace width="2em"/><mo
+                stretchy="false">(</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mo>+</mo><mi
+                mathvariant="normal">∞</mi><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">e^x
+=
+1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots
+\qquad(-\infty&lt;x&lt;+\infty),</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mi>x</mi><mo>−</mo><mfrac><msup><mi>x</mi><mn>3</mn></msup><mrow><mn>3</mn><mo
+                stretchy="false">!</mo></mrow></mfrac><mo>+</mo><mfrac><msup><mi>x</mi><mn>5</mn></msup><mrow><mn>5</mn><mo
+                stretchy="false">!</mo></mrow></mfrac><mo>−</mo><mo>⋯</mo><mspace width="2em"/><mo
+                stretchy="false">(</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mo>+</mo><mi
+                mathvariant="normal">∞</mi><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\sin x
+=
+x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots
+\qquad(-\infty&lt;x&lt;+\infty),</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mrow><mn>2</mn><mo
+                stretchy="false">!</mo></mrow></mfrac><mo>+</mo><mfrac><msup><mi>x</mi><mn>4</mn></msup><mrow><mn>4</mn><mo
+                stretchy="false">!</mo></mrow></mfrac><mo>−</mo><mo>⋯</mo><mspace width="2em"/><mo
+                stretchy="false">(</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mo>+</mo><mi
+                mathvariant="normal">∞</mi><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\cos x
+=
+1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots
+\qquad(-\infty&lt;x&lt;+\infty),</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>ln</mi><mo>⁡</mo><mo
+                stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><mo>−</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mn>2</mn></mfrac><mo>+</mo><mfrac><msup><mi>x</mi><mn>3</mn></msup><mn>3</mn></mfrac><mo>−</mo><mo>⋯</mo><mspace
+                width="2em"/><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo>&lt;</mo><mi>x</mi><mo>≤</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\ln(1+x)
+=
+x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots
+\qquad(-1&lt;x\le1).</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="五函数展开成幂级数"><a class="heading-anchor" href="#五函数展开成幂级数" aria-label="回到本小节">#</a>五、函数展开成幂级数
+        </h2>
+        <h3 id="51-泰勒级数"><a class="heading-anchor" href="#51-泰勒级数" aria-label="回到本小节">#</a>5.1 泰勒级数
+        </h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">f(x)</annotation></semantics></math></span> 在 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>0</mn></msub></mrow><annotation
+                encoding="application/x-tex">x_0</annotation></semantics></math></span> 处有任意阶导数，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo
+                stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo
+                stretchy="false">)</mo></mrow><mrow><mi>n</mi><mo stretchy="false">!</mo></mrow></mfrac><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><msup><mo
+                stretchy="false">)</mo><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\sum_{n=0}^{\infty}
+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n</annotation></semantics></math></span></div>
+        <p>叫做 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation
+                encoding="application/x-tex">f</annotation></semantics></math></span> 的泰勒级数。
+        </p>
+        <p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>0</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">x_0=0</annotation></semantics></math></span> 时，称为麦克劳林级数。
+        </p>
+        <h3 id="52-展开的条件"><a class="heading-anchor" href="#52-展开的条件" aria-label="回到本小节">#</a>5.2 展开的条件
+        </h3>
+        <p>函数能展开成泰勒级数，需要余项</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>R</mi><mi>n</mi></msub><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>→</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">R_n(x)\to0.</annotation></semantics></math></span></div>
+        <p>不能只因为函数无穷次可导，就断定它等于自己的泰勒级数。</p>
+        <h3 id="53-常用展开"><a class="heading-anchor" href="#53-常用展开" aria-label="回到本小节">#</a>5.3 常用展开
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>e</mi><mi>x</mi></msup><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><msup><mi>x</mi><mi>n</mi></msup><mrow><mi>n</mi><mo
+                stretchy="false">!</mo></mrow></mfrac><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!},</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mi>n</mi></msup><msup><mi>x</mi><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mrow><mo
+                stretchy="false">(</mo><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">!</mo></mrow></mfrac><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\sin x=\sum_{n=0}^{\infty}
+\frac{(-1)^n x^{2n+1}}{(2n+1)!},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mi>n</mi></msup><msup><mi>x</mi><mrow><mn>2</mn><mi>n</mi></mrow></msup></mrow><mrow><mo
+                stretchy="false">(</mo><mn>2</mn><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">!</mo></mrow></mfrac><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\cos x=\sum_{n=0}^{\infty}
+\frac{(-1)^n x^{2n}}{(2n)!},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow></mfrac><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><msup><mi>x</mi><mi>n</mi></msup><mspace width="2em"/><mo
+                stretchy="false">(</mo><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\frac1{1-x}=\sum_{n=0}^{\infty}x^n
+\qquad(|x|&lt;1),</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>ln</mi><mo>⁡</mo><mo
+                stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>x</mi><mi>n</mi></msup></mrow><mi>n</mi></mfrac><mspace
+                width="2em"/><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo>&lt;</mo><mi>x</mi><mo>≤</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\ln(1+x)=\sum_{n=1}^{\infty}
+\frac{(-1)^{n-1}x^n}{n}
+\qquad(-1&lt;x\le1),</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>x</mi><msup><mo stretchy="false">)</mo><mi>α</mi></msup><mo>=</mo><mn>1</mn><mo>+</mo><mi>α</mi><mi>x</mi><mo>+</mo><mfrac><mrow><mi>α</mi><mo
+                stretchy="false">(</mo><mi>α</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mrow><mn>2</mn><mo
+                stretchy="false">!</mo></mrow></mfrac><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mo>⋯</mo><mspace
+                width="2em"/><mo stretchy="false">(</mo><mi mathvariant="normal">∣</mi><mi>x</mi><mi
+                mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">(1+x)^\alpha
+=
+1+\alpha x
++\frac{\alpha(\alpha-1)}{2!}x^2+\cdots
+\qquad(|x|&lt;1).</annotation></semantics></math></span></div>
+        <h3 id="54-展开方法"><a class="heading-anchor" href="#54-展开方法" aria-label="回到本小节">#</a>5.4 展开方法
+        </h3>
+        <ol>
+            <li>直接求导并代入泰勒公式；</li>
+            <li>利用已知展开式进行代换、乘除、逐项求导或积分；</li>
+            <li>利用待定系数或恒等变形。</li>
+        </ol>
+        <p>通常优先用已知展开式，避免高阶导数计算。</p>
+        <h3 id="55-应用"><a class="heading-anchor" href="#55-应用" aria-label="回到本小节">#</a>5.5 应用</h3>
+        <ul>
+            <li>近似计算；</li>
+            <li>求极限；</li>
+            <li>求积分；</li>
+            <li>求微分方程的解；</li>
+            <li>估计误差。</li>
+        </ul>
+        <hr class="section-rule">
+        <h2 id="六傅里叶级数"><a class="heading-anchor" href="#六傅里叶级数" aria-label="回到本小节">#</a>六、傅里叶级数
+        </h2>
+        <h3 id="61-周期为-的傅里叶级数"><a class="heading-anchor" href="#61-周期为-的傅里叶级数"
+                                           aria-label="回到本小节">#</a>6.1 周期为 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi></mrow><annotation
+                encoding="application/x-tex">2\pi</annotation></semantics></math></span> 的傅里叶级数
+        </h3>
+        <p>设 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">f(x)</annotation></semantics></math></span> 以 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi></mrow><annotation
+                encoding="application/x-tex">2\pi</annotation></semantics></math></span> 为周期，且在 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">[</mo><mo>−</mo><mi>π</mi><mo separator="true">,</mo><mi>π</mi><mo
+                stretchy="false">]</mo></mrow><annotation
+                encoding="application/x-tex">[-\pi,\pi]</annotation></semantics></math></span> 上可积，则傅里叶系数为
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>=</mo><mfrac><mn>1</mn><mi>π</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mi>π</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi></mrow></mstyle></mstyle></mstyle></menclose><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{
+a_0=\frac1\pi\int_{-\pi}^{\pi}f(x)dx
+},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>π</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mi>π</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>cos</mi><mo>⁡</mo><mi>n</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi></mrow></mstyle></mstyle></mstyle></menclose><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{
+a_n=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx
+},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>π</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mi>π</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>sin</mi><mo>⁡</mo><mi>n</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+b_n=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin nx\,dx
+}.</annotation></semantics></math></span></div>
+        <p>傅里叶级数为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mfrac><msub><mi>a</mi><mn>0</mn></msub><mn>2</mn></mfrac><mo>+</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mo stretchy="false">(</mo><msub><mi>a</mi><mi>n</mi></msub><mi>cos</mi><mo>⁡</mo><mi>n</mi><mi>x</mi><mo>+</mo><msub><mi>b</mi><mi>n</mi></msub><mi>sin</mi><mo>⁡</mo><mi>n</mi><mi>x</mi><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\frac{a_0}{2}
++\sum_{n=1}^{\infty}
+(a_n\cos nx+b_n\sin nx)
+}.</annotation></semantics></math></span></div>
+        <h3 id="62-收敛定理狄利克雷条件"><a class="heading-anchor" href="#62-收敛定理狄利克雷条件"
+                                            aria-label="回到本小节">#</a>6.2 收敛定理（狄利克雷条件）</h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation
+                encoding="application/x-tex">f</annotation></semantics></math></span> 在 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mi>π</mi><mo
+                separator="true">,</mo><mi>π</mi><mo stretchy="false">]</mo></mrow><annotation
+                encoding="application/x-tex">[-\pi,\pi]</annotation></semantics></math></span> 上分段光滑，则其傅里叶级数在连续点收敛于
+            <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                    stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">f(x)</annotation></semantics></math></span>，在间断点收敛于
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mo>−</mo></msup><mo stretchy="false">)</mo><mo>+</mo><mi>f</mi><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mo>+</mo></msup><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\frac{f(x^-)+f(x^+)}2.</annotation></semantics></math></span></div>
+        <h3 id="63-奇偶性与简化"><a class="heading-anchor" href="#63-奇偶性与简化" aria-label="回到本小节">#</a>6.3
+            奇偶性与简化</h3>
+        <ul>
+            <li>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation
+                    encoding="application/x-tex">f</annotation></semantics></math></span> 是奇函数，则 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>=</mo><mn>0</mn><mo
+                    separator="true">,</mo><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">a_0=0,a_n=0</annotation></semantics></math></span>，只剩正弦项；
+            </li>
+            <li>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation
+                    encoding="application/x-tex">f</annotation></semantics></math></span> 是偶函数，则 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">b_n=0</annotation></semantics></math></span>，只剩余弦项。
+            </li>
+        </ul>
+        <h3 id="64-周期为-的傅里叶级数"><a class="heading-anchor" href="#64-周期为-的傅里叶级数"
+                                           aria-label="回到本小节">#</a>6.4 周期为 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>l</mi></mrow><annotation
+                encoding="application/x-tex">2l</annotation></semantics></math></span> 的傅里叶级数
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>=</mo><mfrac><mn>1</mn><mi>l</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>l</mi></mrow><mi>l</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">a_0=\frac1l\int_{-l}^{l}f(x)dx,</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>l</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>l</mi></mrow><mi>l</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>cos</mi><mo>⁡</mo><mfrac><mrow><mi>n</mi><mi>π</mi><mi>x</mi></mrow><mi>l</mi></mfrac><mi>d</mi><mi>x</mi><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">a_n=\frac1l\int_{-l}^{l}
+f(x)\cos\frac{n\pi x}{l}dx,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>l</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>l</mi></mrow><mi>l</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>sin</mi><mo>⁡</mo><mfrac><mrow><mi>n</mi><mi>π</mi><mi>x</mi></mrow><mi>l</mi></mfrac><mi>d</mi><mi>x</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">b_n=\frac1l\int_{-l}^{l}
+f(x)\sin\frac{n\pi x}{l}dx.</annotation></semantics></math></span></div>
+        <p>级数为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><msub><mi>a</mi><mn>0</mn></msub><mn>2</mn></mfrac><mo>+</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mrow><mo fence="true">(</mo><msub><mi>a</mi><mi>n</mi></msub><mi>cos</mi><mo>⁡</mo><mfrac><mrow><mi>n</mi><mi>π</mi><mi>x</mi></mrow><mi>l</mi></mfrac><mo>+</mo><msub><mi>b</mi><mi>n</mi></msub><mi>sin</mi><mo>⁡</mo><mfrac><mrow><mi>n</mi><mi>π</mi><mi>x</mi></mrow><mi>l</mi></mfrac><mo
+                fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\frac{a_0}{2}
++\sum_{n=1}^{\infty}
+\left(
+a_n\cos\frac{n\pi x}{l}
++b_n\sin\frac{n\pi x}{l}
+\right).</annotation></semantics></math></span></div>
+        <h3 id="65-半幅展开"><a class="heading-anchor" href="#65-半幅展开" aria-label="回到本小节">#</a>6.5 半幅展开
+        </h3>
+        <p>若只给出 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">f(x)</annotation></semantics></math></span> 在 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo
+                separator="true">,</mo><mi>l</mi><mo stretchy="false">]</mo></mrow><annotation
+                encoding="application/x-tex">[0,l]</annotation></semantics></math></span> 上的定义，可以：
+        </p>
+        <ul>
+            <li>奇延拓，得到正弦级数；</li>
+            <li>偶延拓，得到余弦级数。</li>
+        </ul>
+        <hr class="section-rule">
+        <h2 id="七典型例题"><a class="heading-anchor" href="#七典型例题" aria-label="回到本小节">#</a>七、典型例题</h2>
+        <h3 id="例-1裂项级数"><a class="heading-anchor" href="#例-1裂项级数" aria-label="回到本小节">#</a>例 1：裂项级数
+        </h3>
+        <p>判断并求</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mn>1</mn><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo
+                stretchy="false">)</mo></mrow></mfrac><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}\frac1{n(n+1)}.</annotation></semantics></math></span>
+        </div>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><mi>n</mi><mo
+                stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac1{n(n+1)}
+=
+\frac1n-\frac1{n+1}.</annotation></semantics></math></span></div>
+        <p>部分和：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><mrow><mo
+                fence="true">(</mo><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo fence="true">)</mo></mrow><mo>+</mo><mrow><mo
+                fence="true">(</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>−</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo
+                fence="true">)</mo></mrow><mo>+</mo><mo>⋯</mo><mo>+</mo><mrow><mo fence="true">(</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_n=
+\left(1-\frac12\right)
++\left(\frac12-\frac13\right)
++\cdots
++\left(\frac1n-\frac1{n+1}\right)
+=
+1-\frac1{n+1}.</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">\lim_{n\to\infty}S_n=1.</annotation></semantics></math></span></div>
+        <p>级数收敛，和为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{1}.</annotation></semantics></math></span></div>
+        <h3 id="例-2比较判别法"><a class="heading-anchor" href="#例-2比较判别法" aria-label="回到本小节">#</a>例 2：比较判别法
+        </h3>
+        <p>判断</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mn>1</mn><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn></mrow></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}\frac1{n^2+1}</annotation></semantics></math></span>
+        </div>
+        <p>的敛散性。</p>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mfrac><mn>1</mn><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn></mrow></mfrac><mo>&lt;</mo><mfrac><mn>1</mn><msup><mi>n</mi><mn>2</mn></msup></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">0&lt;\frac1{n^2+1}&lt;\frac1{n^2}.</annotation></semantics></math></span>
+        </div>
+        <p>而</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∑</mo><mfrac><mn>1</mn><msup><mi>n</mi><mn>2</mn></msup></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum\frac1{n^2}</annotation></semantics></math></span></div>
+        <p>是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>2</mn><mo>&gt;</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">p=2&gt;1</annotation></semantics></math></span> 的 p-级数，收敛。由比较判别法，原级数收敛。
+        </p>
+        <h3 id="例-3比值判别法"><a class="heading-anchor" href="#例-3比值判别法" aria-label="回到本小节">#</a>例 3：比值判别法
+        </h3>
+        <p>判断</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mi>n</mi><mo stretchy="false">!</mo></mrow><msup><mi>n</mi><mi>n</mi></msup></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}\frac{n!}{n^n}</annotation></semantics></math></span>
+        </div>
+        <p>的敛散性。</p>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mfrac><mrow><mi>n</mi><mo
+                stretchy="false">!</mo></mrow><msup><mi>n</mi><mi>n</mi></msup></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">a_n=\frac{n!}{n^n}.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><msub><mi>a</mi><mi>n</mi></msub></mfrac><mo>=</mo><mfrac><mrow><mo
+                stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">!</mo></mrow><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mfrac><mo>⋅</mo><mfrac><msup><mi>n</mi><mi>n</mi></msup><mrow><mi>n</mi><mo
+                stretchy="false">!</mo></mrow></mfrac><mo>=</mo><mfrac><msup><mi>n</mi><mi>n</mi></msup><mrow><mo
+                stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mi>n</mi></msup></mrow></mfrac><mo>=</mo><msup><mrow><mo
+                fence="true">(</mo><mfrac><mi>n</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo fence="true">)</mo></mrow><mi>n</mi></msup><mo>→</mo><msup><mi>e</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>&lt;</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">\frac{a_{n+1}}{a_n}
+=
+\frac{(n+1)!}{(n+1)^{n+1}}\cdot\frac{n^n}{n!}
+=
+\frac{n^n}{(n+1)^n}
+=
+\left(\frac{n}{n+1}\right)^n
+\to e^{-1}&lt;1.</annotation></semantics></math></span></div>
+        <p>所以级数收敛。</p>
+        <h3 id="例-4交错级数"><a class="heading-anchor" href="#例-4交错级数" aria-label="回到本小节">#</a>例 4：交错级数
+        </h3>
+        <p>判断</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><msqrt><mi>n</mi></msqrt></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{\sqrt n}</annotation></semantics></math></span>
+        </div>
+        <p>的敛散性，并判断是否绝对收敛。</p>
+        <p><strong>解</strong></p>
+        <p>令</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><msqrt><mi>n</mi></msqrt></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">b_n=\frac1{\sqrt n}.</annotation></semantics></math></span></div>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">b_n</annotation></semantics></math></span> 单调递减且趋于 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">0</annotation></semantics></math></span>，由莱布尼茨判别法，原级数收敛。
+        </p>
+        <p>但</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∑</mo><mrow><mo
+                fence="true">∣</mo><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><msqrt><mi>n</mi></msqrt></mfrac><mo
+                fence="true">∣</mo></mrow><mo>=</mo><mo>∑</mo><mfrac><mn>1</mn><msup><mi>n</mi><mrow><mn>1</mn><mi
+                mathvariant="normal">/</mi><mn>2</mn></mrow></msup></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum\left|\frac{(-1)^{n-1}}{\sqrt n}\right|
+=
+\sum\frac1{n^{1/2}}</annotation></semantics></math></span></div>
+        <p>是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>≤</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">p=\frac12\le1</annotation></semantics></math></span> 的 p-级数，发散。
+        </p>
+        <p>所以原级数条件收敛。</p>
+        <h3 id="例-5幂级数收敛域"><a class="heading-anchor" href="#例-5幂级数收敛域" aria-label="回到本小节">#</a>例
+            5：幂级数收敛域</h3>
+        <p>求</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><msup><mi>x</mi><mi>n</mi></msup><mrow><mi>n</mi><msup><mn>3</mn><mi>n</mi></msup></mrow></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}\frac{x^n}{n3^n}</annotation></semantics></math></span>
+        </div>
+        <p>的收敛半径和收敛区间。</p>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mi>n</mi><msup><mn>3</mn><mi>n</mi></msup></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">a_n=\frac1{n3^n}.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>R</mi><mo>=</mo><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><mrow><mo fence="true">∣</mo><mfrac><msub><mi>a</mi><mi>n</mi></msub><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mfrac><mo
+                fence="true">∣</mo></mrow><mo>=</mo><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>n</mi><mo>→</mo><mi
+                mathvariant="normal">∞</mi></mrow></munder><mfrac><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo
+                stretchy="false">)</mo><msup><mn>3</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mrow><mi>n</mi><msup><mn>3</mn><mi>n</mi></msup></mrow></mfrac><mo>=</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">R=
+\lim_{n\to\infty}
+\left|\frac{a_n}{a_{n+1}}\right|
+=
+\lim_{n\to\infty}
+\frac{(n+1)3^{n+1}}{n3^n}
+=
+3.</annotation></semantics></math></span></div>
+        <p>所以 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>3</mn></mrow><annotation
+                encoding="application/x-tex">|x|&lt;3</annotation></semantics></math></span> 时绝对收敛。
+        </p>
+        <p>端点：</p>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>3</mn></mrow><annotation
+                    encoding="application/x-tex">x=3</annotation></semantics></math></span>：级数为 <span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><mn>1</mn><mi
+                    mathvariant="normal">/</mi><mi>n</mi></mrow><annotation
+                    encoding="application/x-tex">\sum 1/n</annotation></semantics></math></span>，发散；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mn>3</mn></mrow><annotation
+                    encoding="application/x-tex">x=-3</annotation></semantics></math></span>：级数为 <span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                    stretchy="false">)</mo><mi>n</mi></msup><mi mathvariant="normal">/</mi><mi>n</mi></mrow><annotation
+                    encoding="application/x-tex">\sum(-1)^n/n</annotation></semantics></math></span>，收敛。
+            </li>
+        </ul>
+        <p>所以收敛区间为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">[</mo><mo>−</mo><mn>3</mn><mo
+                separator="true">,</mo><mn>3</mn><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{[-3,3)}.</annotation></semantics></math></span>
+        </div>
+        <h3 id="例-6利用已知展开"><a class="heading-anchor" href="#例-6利用已知展开" aria-label="回到本小节">#</a>例
+            6：利用已知展开</h3>
+        <p>将</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac></mrow><annotation
+                encoding="application/x-tex">f(x)=\frac1{1+x^2}</annotation></semantics></math></span></div>
+        <p>展开成幂级数，并求收敛区间。</p>
+        <p><strong>解</strong></p>
+        <p>利用</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mi>t</mi></mrow></mfrac><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><msup><mi>t</mi><mi>n</mi></msup><mspace width="1em"/><mo
+                stretchy="false">(</mo><mi mathvariant="normal">∣</mi><mi>t</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\frac1{1-t}=\sum_{n=0}^{\infty}t^n\quad(|t|&lt;1),</annotation></semantics></math></span>
+        </div>
+        <p>令 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation
+                encoding="application/x-tex">t=-x^2</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mi>n</mi></msup><msup><mi>x</mi><mrow><mn>2</mn><mi>n</mi></mrow></msup><mspace
+                width="2em"/><mo stretchy="false">(</mo><mi mathvariant="normal">∣</mi><mi>x</mi><mi
+                mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac1{1+x^2}
+=
+\sum_{n=0}^{\infty}(-1)^nx^{2n}
+\qquad(|x|&lt;1).</annotation></semantics></math></span></div>
+        <p>端点 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mo>±</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">x=\pm1</annotation></semantics></math></span> 时通项不趋于 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">0</annotation></semantics></math></span>，所以收敛区间为 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo
+                stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(-1,1)</annotation></semantics></math></span>。
+        </p>
+        <h3 id="例-7傅里叶级数"><a class="heading-anchor" href="#例-7傅里叶级数" aria-label="回到本小节">#</a>例 7：傅里叶级数
+        </h3>
+        <p>求</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><mspace width="1em"/><mo
+                stretchy="false">(</mo><mo>−</mo><mi>π</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>π</mi><mo
+                stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">f(x)=x\quad(-\pi&lt;x&lt;\pi)</annotation></semantics></math></span></div>
+        <p>的傅里叶级数。</p>
+        <p><strong>解</strong></p>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation
+                encoding="application/x-tex">f</annotation></semantics></math></span> 是奇函数，所以
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>=</mo><mn>0</mn><mo
+                separator="true">,</mo><mspace width="2em"/><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">a_0=0,\qquad a_n=0.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>π</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mi>π</mi></msubsup><mi>x</mi><mi>sin</mi><mo>⁡</mo><mi>n</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">b_n=
+\frac1\pi\int_{-\pi}^{\pi}x\sin nx\,dx.</annotation></semantics></math></span></div>
+        <p>分部积分：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mfrac><mrow><mn>2</mn><mo
+                stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mi>n</mi></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">b_n=
+\frac{2(-1)^{n+1}}{n}.</annotation></semantics></math></span></div>
+        <p>因此</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mi>x</mi><mo>∼</mo><mn>2</mn><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mi>n</mi></mfrac><mi>sin</mi><mo>⁡</mo><mi>n</mi><mi>x</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+x\sim
+2\sum_{n=1}^{\infty}
+\frac{(-1)^{n+1}}{n}\sin nx
+}.</annotation></semantics></math></span></div>
+        <h3 id="例-8幂级数求和"><a class="heading-anchor" href="#例-8幂级数求和" aria-label="回到本小节">#</a>例 8：幂级数求和
+        </h3>
+        <p>求</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mi>n</mi><msup><mn>2</mn><mi>n</mi></msup></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sum_{n=1}^{\infty}\frac{n}{2^n}.</annotation></semantics></math></span>
+        </div>
+        <p><strong>解</strong></p>
+        <p>已知</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mi>n</mi><msup><mi>x</mi><mi>n</mi></msup><mo>=</mo><mfrac><mi>x</mi><mrow><mo
+                stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>x</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac><mspace
+                width="2em"/><mo stretchy="false">(</mo><mi mathvariant="normal">∣</mi><mi>x</mi><mi
+                mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sum_{n=1}^{\infty}nx^n
+=
+\frac{x}{(1-x)^2}
+\qquad(|x|&lt;1).</annotation></semantics></math></span></div>
+        <p>令 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><annotation
+                encoding="application/x-tex">x=\frac12</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mi>n</mi><msup><mn>2</mn><mi>n</mi></msup></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn><mi
+                mathvariant="normal">/</mi><mn>2</mn></mrow><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mn>1</mn><mi
+                mathvariant="normal">/</mi><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn><mi
+                mathvariant="normal">/</mi><mn>2</mn></mrow><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mn>4</mn></mrow></mfrac><mo>=</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}\frac{n}{2^n}
+=
+\frac{1/2}{(1-1/2)^2}
+=
+\frac{1/2}{1/4}
+=
+2.</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="八易错点提示"><a class="heading-anchor" href="#八易错点提示" aria-label="回到本小节">#</a>八、易错点提示
+        </h2>
+        <h3 id="1-把通项趋于-当成收敛"><a class="heading-anchor" href="#1-把通项趋于-当成收敛"
+                                          aria-label="回到本小节">#</a>1. 把通项趋于 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">0</annotation></semantics></math></span> 当成收敛
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>→</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a_n\to0</annotation></semantics></math></span></div>
+        <p>只是收敛的必要条件。调和级数就是反例。</p>
+        <h3 id="2-不先检查通项"><a class="heading-anchor" href="#2-不先检查通项" aria-label="回到本小节">#</a>2. 不先检查通项
+        </h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>↛</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a_n\not\to0</annotation></semantics></math></span>，级数一定发散。这是最快的第一步。
+        </p>
+        <h3 id="3-比较判别法方向用反"><a class="heading-anchor" href="#3-比较判别法方向用反"
+                                         aria-label="回到本小节">#</a>3. 比较判别法方向用反</h3>
+        <p>要“大级数收敛推小级数收敛”“小级数发散推大级数发散”。</p>
+        <h3 id="4-比值根值判别法-时下结论"><a class="heading-anchor" href="#4-比值根值判别法-时下结论"
+                                              aria-label="回到本小节">#</a>4. 比值/根值判别法 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">L=1</annotation></semantics></math></span> 时下结论
+        </h3>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">L=1</annotation></semantics></math></span> 时判别法失效，必须换方法。
+        </p>
+        <h3 id="5-交错级数只看通项"><a class="heading-anchor" href="#5-交错级数只看通项" aria-label="回到本小节">#</a>5.
+            交错级数只看通项</h3>
+        <p>莱布尼茨判别法需要 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">b_n</annotation></semantics></math></span> 单调递减且趋于 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">0</annotation></semantics></math></span>。只趋于 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">0</annotation></semantics></math></span> 不够。
+        </p>
+        <h3 id="6-绝对收敛与条件收敛混淆"><a class="heading-anchor" href="#6-绝对收敛与条件收敛混淆"
+                                             aria-label="回到本小节">#</a>6. 绝对收敛与条件收敛混淆</h3>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><mi
+                mathvariant="normal">∣</mi><msub><mi>a</mi><mi>n</mi></msub><mi mathvariant="normal">∣</mi></mrow><annotation
+                encoding="application/x-tex">\sum|a_n|</annotation></semantics></math></span>
+            收敛才是绝对收敛；若原级数收敛但绝对值级数发散，是条件收敛。
+        </p>
+        <h3 id="7-幂级数只求半径不查端点"><a class="heading-anchor" href="#7-幂级数只求半径不查端点"
+                                             aria-label="回到本小节">#</a>7. 幂级数只求半径不查端点</h3>
+        <p>收敛半径只给出开区间，端点必须单独判断。</p>
+        <h3 id="8-幂级数逐项求导积分后忘记重新检查端点"><a class="heading-anchor"
+                                                           href="#8-幂级数逐项求导积分后忘记重新检查端点"
+                                                           aria-label="回到本小节">#</a>8. 幂级数逐项求导/积分后忘记重新检查端点
+        </h3>
+        <p>收敛半径不变，但端点敛散性可能改变。</p>
+        <h3 id="9-泰勒展开忘记余项"><a class="heading-anchor" href="#9-泰勒展开忘记余项" aria-label="回到本小节">#</a>9.
+            泰勒展开忘记余项</h3>
+        <p>函数等于泰勒级数需要余项趋于 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">0</annotation></semantics></math></span>。不能只写形式展开。
+        </p>
+        <h3 id="10-傅里叶系数公式漏掉"><a class="heading-anchor" href="#10-傅里叶系数公式漏掉"
+                                          aria-label="回到本小节">#</a>10. 傅里叶系数公式漏掉 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mi>π</mi></mfrac></mrow><annotation
+                encoding="application/x-tex">\frac1\pi</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>π</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mi>π</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>cos</mi><mo>⁡</mo><mi>n</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">a_n=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx.</annotation></semantics></math></span>
+        </div>
+        <p>周期为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>l</mi></mrow><annotation
+                encoding="application/x-tex">2l</annotation></semantics></math></span> 时系数是 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mi>l</mi></mfrac></mrow><annotation
+                encoding="application/x-tex">\frac1l</annotation></semantics></math></span>。
+        </p>
+        <h3 id="11-傅里叶级数在间断点的值写错"><a class="heading-anchor" href="#11-傅里叶级数在间断点的值写错"
+                                                  aria-label="回到本小节">#</a>11. 傅里叶级数在间断点的值写错</h3>
+        <p>间断点处收敛于左右极限的平均值：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mo>−</mo></msup><mo stretchy="false">)</mo><mo>+</mo><mi>f</mi><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mo>+</mo></msup><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\frac{f(x^-)+f(x^+)}2.</annotation></semantics></math></span></div>
+        <h3 id="12-奇偶性用错"><a class="heading-anchor" href="#12-奇偶性用错" aria-label="回到本小节">#</a>12. 奇偶性用错
+        </h3>
+        <p>奇函数只含正弦项，偶函数只含余弦项；不要把奇偶性用在非对称区间。</p>
+        <h3 id="13-端点代入后不判断通项"><a class="heading-anchor" href="#13-端点代入后不判断通项"
+                                            aria-label="回到本小节">#</a>13. 端点代入后不判断通项</h3>
+        <p>幂级数端点处可能变成 p-级数、交错级数或通项不趋于零的级数，要具体判断。</p>
+        <h3 id="14-只记公式不理解收敛域"><a class="heading-anchor" href="#14-只记公式不理解收敛域"
+                                            aria-label="回到本小节">#</a>14. 只记公式不理解收敛域</h3>
+        <p>所有展开式都有收敛范围。例如</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow></mfrac><mo>=</mo><mo>∑</mo><msup><mi>x</mi><mi>n</mi></msup></mrow><annotation
+                encoding="application/x-tex">\frac1{1-x}=\sum x^n</annotation></semantics></math></span></div>
+        <p>只在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">|x|&lt;1</annotation></semantics></math></span> 成立。
+        </p>
+        <hr class="section-rule">
+        <h2 id="九课后练习"><a class="heading-anchor" href="#九课后练习" aria-label="回到本小节">#</a>九、课后练习</h2>
+        <ol>
+            <li>判断并求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                    mathvariant="normal">∞</mi></munderover><mfrac><mn>1</mn><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo
+                    stretchy="false">)</mo><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>2</mn><mo
+                    stretchy="false">)</mo></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle\sum_{n=1}^{\infty}\frac1{(n+1)(n+2)}</annotation></semantics></math></span>。
+            </li>
+            <li>判断 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                    mathvariant="normal">∞</mi></munderover><msup><mrow><mo fence="true">(</mo><mfrac><mi>n</mi><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo
+                    fence="true">)</mo></mrow><mi>n</mi></msup></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle\sum_{n=1}^{\infty}\left(\frac{n}{2n+1}\right)^n</annotation></semantics></math></span>
+                的敛散性。
+            </li>
+            <li>判断 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                    mathvariant="normal">∞</mi></munderover><mfrac><mn>1</mn><msup><mi>n</mi><mrow><mn>3</mn><mi
+                    mathvariant="normal">/</mi><mn>2</mn></mrow></msup></mfrac></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\sum_{n=1}^{\infty}\frac1{n^{3/2}}</annotation></semantics></math></span>
+                的敛散性。
+            </li>
+            <li>判断 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                    mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                    stretchy="false">)</mo><mi>n</mi></msup></mrow><msup><mi>n</mi><mn>2</mn></msup></mfrac></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}</annotation></semantics></math></span>
+                是否绝对收敛。
+            </li>
+            <li>判断 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                    mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                    stretchy="false">)</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><mi>n</mi></mfrac></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}</annotation></semantics></math></span>
+                的敛散性。
+            </li>
+            <li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                    mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo
+                    stretchy="false">)</mo><mi>n</mi></msup></mrow><mrow><mi>n</mi><msup><mn>2</mn><mi>n</mi></msup></mrow></mfrac></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\sum_{n=1}^{\infty}\frac{(x-1)^n}{n2^n}</annotation></semantics></math></span>
+                的收敛区间。
+            </li>
+            <li>将 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ln</mi><mo>⁡</mo><mo
+                    stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">\ln(1+x)</annotation></semantics></math></span> 展开成幂级数，并写出收敛区间。
+            </li>
+            <li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                    stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi></mrow><annotation
+                    encoding="application/x-tex">f(x)=x</annotation></semantics></math></span> 在 <span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo>−</mo><mi>π</mi><mo
+                    separator="true">,</mo><mi>π</mi><mo stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">(-\pi,\pi)</annotation></semantics></math></span> 上的傅里叶级数。
+            </li>
+            <li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                    mathvariant="normal">∞</mi></munderover><mfrac><msup><mi>x</mi><mi>n</mi></msup><mi>n</mi></mfrac></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\sum_{n=1}^{\infty}\frac{x^n}{n}</annotation></semantics></math></span>
+                在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                        mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation
+                        encoding="application/x-tex">|x|&lt;1</annotation></semantics></math></span> 时的和函数，并求
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mn>1</mn></mrow><annotation
+                        encoding="application/x-tex">x=-1</annotation></semantics></math></span> 时的和。
+            </li>
+            <li>判断 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                    mathvariant="normal">∞</mi></munderover><mfrac><msup><mn>2</mn><mi>n</mi></msup><mrow><mi>n</mi><mo
+                    stretchy="false">!</mo></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle\sum_{n=1}^{\infty}\frac{2^n}{n!}</annotation></semantics></math></span>
+                的敛散性。
+            </li>
+        </ol>
+        <hr class="section-rule">
+        <h2 id="十练习答案与解析"><a class="heading-anchor" href="#十练习答案与解析" aria-label="回到本小节">#</a>十、练习答案与解析
+        </h2>
+        <h3 id="1-答案"><a class="heading-anchor" href="#1-答案" aria-label="回到本小节">#</a>1. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0"
+                                                                                                        displaystyle="true"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle></mrow><annotation
+                encoding="application/x-tex">\dfrac12</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><mo
+                stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac1{(n+1)(n+2)}
+=
+\frac1{n+1}-\frac1{n+2}.</annotation></semantics></math></span></div>
+        <p>部分和：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></mfrac><mo>→</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S_n=\frac12-\frac1{n+2}\to\frac12.</annotation></semantics></math></span>
+        </div>
+        <h3 id="2-答案收敛"><a class="heading-anchor" href="#2-答案收敛" aria-label="回到本小节">#</a>2. 答案：收敛</h3>
+        <p>根值判别法：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mroot><msup><mrow><mo
+                fence="true">(</mo><mfrac><mi>n</mi><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mi>n</mi></msup><mi>n</mi></mroot><mo>=</mo><mfrac><mi>n</mi><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>→</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>&lt;</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">\sqrt[n]{\left(\frac{n}{2n+1}\right)^n}
+=
+\frac{n}{2n+1}
+\to\frac12&lt;1.</annotation></semantics></math></span></div>
+        <p>所以收敛。</p>
+        <h3 id="3-答案收敛"><a class="heading-anchor" href="#3-答案收敛" aria-label="回到本小节">#</a>3. 答案：收敛</h3>
+        <p>这是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo>&gt;</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">p=\frac32&gt;1</annotation></semantics></math></span> 的 p-级数。
+        </p>
+        <h3 id="4-答案绝对收敛"><a class="heading-anchor" href="#4-答案绝对收敛" aria-label="回到本小节">#</a>4. 答案：绝对收敛
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∑</mo><mrow><mo
+                fence="true">∣</mo><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mi>n</mi></msup></mrow><msup><mi>n</mi><mn>2</mn></msup></mfrac><mo
+                fence="true">∣</mo></mrow><mo>=</mo><mo>∑</mo><mfrac><mn>1</mn><msup><mi>n</mi><mn>2</mn></msup></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum\left|\frac{(-1)^n}{n^2}\right|
+=
+\sum\frac1{n^2}</annotation></semantics></math></span></div>
+        <p>收敛。</p>
+        <h3 id="5-答案条件收敛"><a class="heading-anchor" href="#5-答案条件收敛" aria-label="回到本小节">#</a>5. 答案：条件收敛
+        </h3>
+        <p>原级数是交错调和级数，由莱布尼茨判别法收敛。</p>
+        <p>但</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∑</mo><mrow><mo
+                fence="true">∣</mo><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><mi>n</mi></mfrac><mo
+                fence="true">∣</mo></mrow><mo>=</mo><mo>∑</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow><annotation
+                encoding="application/x-tex">\sum\left|\frac{(-1)^{n-1}}n\right|
+=
+\sum\frac1n</annotation></semantics></math></span></div>
+        <p>发散，所以条件收敛。</p>
+        <h3 id="6-答案"><a class="heading-anchor" href="#6-答案" aria-label="回到本小节">#</a>6. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">[</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>3</mn><mo
+                stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">[-1,3)</annotation></semantics></math></span></h3>
+        <p>令 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mi>x</mi><mo>−</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">t=x-1</annotation></semantics></math></span>，级数为
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∑</mo><mfrac><msup><mi>t</mi><mi>n</mi></msup><mrow><mi>n</mi><msup><mn>2</mn><mi>n</mi></msup></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\sum\frac{t^n}{n2^n}.</annotation></semantics></math></span></div>
+        <p>收敛半径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mn>2</mn></mrow><annotation
+                encoding="application/x-tex">R=2</annotation></semantics></math></span>。
+        </p>
+        <p>端点：</p>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mo>−</mo><mn>2</mn></mrow><annotation
+                    encoding="application/x-tex">t=-2</annotation></semantics></math></span>：<span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                    stretchy="false">)</mo><mi>n</mi></msup><mi mathvariant="normal">/</mi><mi>n</mi></mrow><annotation
+                    encoding="application/x-tex">\sum(-1)^n/n</annotation></semantics></math></span> 收敛；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow><annotation
+                    encoding="application/x-tex">t=2</annotation></semantics></math></span>：<span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><mn>1</mn><mi
+                    mathvariant="normal">/</mi><mi>n</mi></mrow><annotation
+                    encoding="application/x-tex">\sum1/n</annotation></semantics></math></span> 发散。
+            </li>
+        </ul>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mn>2</mn><mo>≤</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo>&lt;</mo><mn>2</mn><mo>⟹</mo><mo>−</mo><mn>1</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">-2\le x-1&lt;2
+\Longrightarrow
+-1\le x&lt;3.</annotation></semantics></math></span></div>
+        <h3 id="7-答案"><a class="heading-anchor" href="#7-答案" aria-label="回到本小节">#</a>7. 答案：</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>ln</mi><mo>⁡</mo><mo
+                stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>x</mi><mi>n</mi></msup></mrow><mi>n</mi></mfrac><mo
+                separator="true">,</mo><mspace width="2em"/><mo>−</mo><mn>1</mn><mo>&lt;</mo><mi>x</mi><mo>≤</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">\ln(1+x)
+=
+\sum_{n=1}^{\infty}
+\frac{(-1)^{n-1}x^n}{n},
+\qquad -1&lt;x\le1.</annotation></semantics></math></span></div>
+        <h3 id="8-答案"><a class="heading-anchor" href="#8-答案" aria-label="回到本小节">#</a>8. 答案：</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>∼</mo><mn>2</mn><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mi>n</mi></mfrac><mi>sin</mi><mo>⁡</mo><mi>n</mi><mi>x</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">x\sim
+2\sum_{n=1}^{\infty}
+\frac{(-1)^{n+1}}{n}\sin nx.</annotation></semantics></math></span></div>
+        <h3 id="9-答案"><a class="heading-anchor" href="#9-答案" aria-label="回到本小节">#</a>9. 答案：</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><msup><mi>x</mi><mi>n</mi></msup><mi>n</mi></mfrac><mo>=</mo><mo>−</mo><mi>ln</mi><mo>⁡</mo><mo
+                stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo><mspace width="2em"/><mi mathvariant="normal">∣</mi><mi>x</mi><mi
+                mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1.</mn></mrow><annotation encoding="application/x-tex">\sum_{n=1}^{\infty}\frac{x^n}{n}
+=
+-\ln(1-x),\qquad |x|&lt;1.</annotation></semantics></math></span></div>
+        <p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">x=-1</annotation></semantics></math></span> 时，
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mi>n</mi></msup></mrow><mi>n</mi></mfrac><mo>=</mo><mo>−</mo><mi>ln</mi><mo>⁡</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}\frac{(-1)^n}{n}
+=
+-\ln2.</annotation></semantics></math></span></div>
+        <h3 id="10-答案收敛"><a class="heading-anchor" href="#10-答案收敛" aria-label="回到本小节">#</a>10. 答案：收敛
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><msub><mi>a</mi><mi>n</mi></msub></mfrac><mo>=</mo><mfrac><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mrow><mo
+                stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">!</mo></mrow></mfrac><mo>⋅</mo><mfrac><mrow><mi>n</mi><mo
+                stretchy="false">!</mo></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac><mo>=</mo><mfrac><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>→</mo><mn>0</mn><mo>&lt;</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">\frac{a_{n+1}}{a_n}
+=
+\frac{2^{n+1}}{(n+1)!}\cdot\frac{n!}{2^n}
+=
+\frac{2}{n+1}\to0&lt;1.</annotation></semantics></math></span></div>
+        <p>所以收敛。</p>
+        <hr class="section-rule">
+        <h2 id="十一公式速查"><a class="heading-anchor" href="#十一公式速查" aria-label="回到本小节">#</a>十一、公式速查
+        </h2>
+        <h3 id="111-常数项级数"><a class="heading-anchor" href="#111-常数项级数" aria-label="回到本小节">#</a>11.1 常数项级数
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><msub><mi>a</mi><mi>n</mi></msub><mtext> 收敛</mtext><mo>⟹</mo><msub><mi>a</mi><mi>n</mi></msub><mo>→</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">\sum_{n=1}^{\infty}a_n
+\text{ 收敛}
+\Longrightarrow
+a_n\to0.</annotation></semantics></math></span></div>
+        <h3 id="112-p-级数"><a class="heading-anchor" href="#112-p-级数" aria-label="回到本小节">#</a>11.2 p-级数</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∑</mo><mfrac><mn>1</mn><msup><mi>n</mi><mi>p</mi></msup></mfrac><mtext> 收敛</mtext><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>p</mi><mo>&gt;</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">\sum\frac1{n^p}
+\text{ 收敛}\iff p&gt;1.</annotation></semantics></math></span></div>
+        <h3 id="113-比值与根值"><a class="heading-anchor" href="#113-比值与根值" aria-label="回到本小节">#</a>11.3 比值与根值
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>L</mi><mo>=</mo><mi>lim</mi><mo>⁡</mo><mrow><mo
+                fence="true">∣</mo><mfrac><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><msub><mi>a</mi><mi>n</mi></msub></mfrac><mo
+                fence="true">∣</mo></mrow><mspace width="1em"/><mtext>或</mtext><mspace width="1em"/><mi>L</mi><mo>=</mo><mi>lim</mi><mo>⁡</mo><mroot><mrow><mi
+                mathvariant="normal">∣</mi><msub><mi>a</mi><mi>n</mi></msub><mi mathvariant="normal">∣</mi></mrow><mi>n</mi></mroot><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">L=\lim\left|\frac{a_{n+1}}{a_n}\right|
+\quad\text{或}\quad
+L=\lim\sqrt[n]{|a_n|}.</annotation></semantics></math></span></div>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">L&lt;1</annotation></semantics></math></span> 收敛，<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">L&gt;1</annotation></semantics></math></span> 发散。
+        </p>
+        <h3 id="114-莱布尼茨判别法"><a class="heading-anchor" href="#114-莱布尼茨判别法" aria-label="回到本小节">#</a>11.4
+            莱布尼茨判别法</h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>↓</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">b_n\downarrow0</annotation></semantics></math></span>，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∑</mo><mo
+                stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>b</mi><mi>n</mi></msub></mrow><annotation
+                encoding="application/x-tex">\sum(-1)^{n-1}b_n</annotation></semantics></math></span></div>
+        <p>收敛。</p>
+        <h3 id="115-常用展开"><a class="heading-anchor" href="#115-常用展开" aria-label="回到本小节">#</a>11.5 常用展开
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>e</mi><mi>x</mi></msup><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><msup><mi>x</mi><mi>n</mi></msup><mrow><mi>n</mi><mo
+                stretchy="false">!</mo></mrow></mfrac><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!},</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mi>n</mi></msup><msup><mi>x</mi><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mrow><mo
+                stretchy="false">(</mo><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">!</mo></mrow></mfrac><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\sin x=\sum_{n=0}^{\infty}
+\frac{(-1)^nx^{2n+1}}{(2n+1)!},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><mfrac><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mi>n</mi></msup><msup><mi>x</mi><mrow><mn>2</mn><mi>n</mi></mrow></msup></mrow><mrow><mo
+                stretchy="false">(</mo><mn>2</mn><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">!</mo></mrow></mfrac><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\cos x=\sum_{n=0}^{\infty}
+\frac{(-1)^nx^{2n}}{(2n)!},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow></mfrac><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi
+                mathvariant="normal">∞</mi></munderover><msup><mi>x</mi><mi>n</mi></msup><mspace width="1em"/><mo
+                stretchy="false">(</mo><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac1{1-x}=\sum_{n=0}^{\infty}x^n\quad(|x|&lt;1).</annotation></semantics></math></span>
+        </div>
+        <h3 id="116-傅里叶系数"><a class="heading-anchor" href="#116-傅里叶系数" aria-label="回到本小节">#</a>11.6 傅里叶系数
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>=</mo><mfrac><mn>1</mn><mi>π</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mi>π</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">a_0=\frac1\pi\int_{-\pi}^{\pi}f(x)dx,</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>π</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mi>π</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>cos</mi><mo>⁡</mo><mi>n</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">a_n=\frac1\pi\int_{-\pi}^{\pi}f(x)\cos nx\,dx,</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>π</mi></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mi>π</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>sin</mi><mo>⁡</mo><mi>n</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">b_n=\frac1\pi\int_{-\pi}^{\pi}f(x)\sin nx\,dx.</annotation></semantics></math></span>
+        </div>
+        <hr class="section-rule">
+        <h2 id="结语"><a class="heading-anchor" href="#结语" aria-label="回到本小节">#</a>结语</h2>
+        <p>无穷级数的核心是“部分和极限 + 类型判别 + 收敛范围”：</p>
+        <ol>
+            <li><strong>先看通项</strong>：不趋于零直接发散；</li>
+            <li><strong>正项级数</strong>：比较、极限比较、比值、根值、积分；</li>
+            <li><strong>交错级数</strong>：莱布尼茨判别，再判断绝对/条件收敛；</li>
+            <li><strong>幂级数</strong>：先求半径，再单独查端点；</li>
+            <li><strong>傅里叶级数</strong>：先看周期和奇偶性，再算系数。</li>
+        </ol>
+        <p>做题时不要只套公式，要明确级数类型、适用条件和收敛区间。</p>
+        <p class="footer-note">说明：本页公式已由 KaTeX 预渲染为 MathML，HTML 为单文件、纯离线版本，不依赖外部字体、脚本或网络。若浏览器较旧，个别
+            MathML 符号可能显示不完整。</p>
+    </main>
+</div>
+<script>
+    (() => {
+        const root = document.documentElement, toggle = document.getElementById('theme-toggle');
+        const saved = (() => {
+            try {
+                return localStorage.getItem('ch12-theme')
+            } catch (e) {
+                return null
+            }
+        })();
+        if (saved) root.dataset.theme = saved; else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme = 'dark';
+        const update = () => {
+            const dark = root.dataset.theme === 'dark';
+            toggle.textContent = dark ? '浅色模式' : '深色模式';
+            toggle.setAttribute('aria-pressed', String(dark));
+        };
+        update();
+        toggle.addEventListener('click', () => {
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            try {
+                localStorage.setItem('ch12-theme', next)
+            } catch (e) {
+            }
+            update();
+        });
+        const bar = document.getElementById('progress-bar');
+        const progress = () => {
+            const doc = document.documentElement, total = doc.scrollHeight - doc.clientHeight;
+            bar.style.width = (total > 0 ? doc.scrollTop / total * 100 : 0).toFixed(2) + '%';
+        };
+        document.addEventListener('scroll', progress, {passive: true});
+        progress();
+    })();
+</script>
+<script src="../../一些必备脚本/AI生成响应式/script.js"></script>
+</body>
+</html>

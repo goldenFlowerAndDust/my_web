@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="高等数学第十一章曲线积分与曲面积分：第一类/第二类曲线积分、曲面积分、格林公式、高斯公式、斯托克斯公式。">
+    <title>第十一章 曲线积分与曲面积分：完整学习资料</title>
+    <link rel="stylesheet" href="../../一些必备脚本/AI生成响应式/style.css">
+    <style>
+        :root {
+            --bg: #fbfcfe;
+            --text: #172033;
+            --muted: #5e6a7d;
+            --panel: #fff;
+            --panel-soft: #f3f7fc;
+            --line: #dce5ef;
+            --accent: #0f766e;
+            --accent-soft: #ecfdf5;
+            --accent-2: #7c3aed;
+            --warm: #fff7e8;
+            --warm-line: #f1cf8a;
+            --danger: #b42318;
+            --shadow: 0 18px 50px rgba(23, 32, 51, .08);
+            --radius: 16px
+        }
+
+        html[data-theme="dark"] {
+            --bg: #0b1220;
+            --text: #e6edf7;
+            --muted: #aab7c9;
+            --panel: #111a2b;
+            --panel-soft: #0d1728;
+            --line: #2b3a52;
+            --accent: #5eead4;
+            --accent-soft: #0f2e2b;
+            --accent-2: #c4b5fd;
+            --warm: #2a2415;
+            --warm-line: #6b5422;
+            --danger: #fca5a5;
+            --shadow: 0 18px 50px rgba(0, 0, 0, .28)
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="light"]) {
+                --bg: #0b1220;
+                --text: #e6edf7;
+                --muted: #aab7c9;
+                --panel: #111a2b;
+                --panel-soft: #0d1728;
+                --line: #2b3a52;
+                --accent: #5eead4;
+                --accent-soft: #0f2e2b;
+                --accent-2: #c4b5fd;
+                --warm: #2a2415;
+                --warm-line: #6b5422;
+                --danger: #fca5a5;
+                --shadow: 0 18px 50px rgba(0, 0, 0, .28)
+            }
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 30rem), radial-gradient(circle at 95% 12%, color-mix(in srgb, var(--accent-2) 7%, transparent), transparent 28rem), var(--bg);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+            font-size: 17px;
+            line-height: 1.85
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px
+        }
+
+        .reading-progress {
+            position: fixed;
+            inset: 0 0 auto 0;
+            height: 3px;
+            z-index: 100
+        }
+
+        .reading-progress span {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            transition: width .12s linear
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns:minmax(220px, 286px) minmax(0, 1fr);
+            gap: 38px;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 34px 28px 80px
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 22px;
+            align-self: start;
+            max-height: calc(100vh - 44px);
+            overflow: auto;
+            padding: 22px 18px;
+            background: color-mix(in srgb, var(--panel) 90%, transparent);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            scrollbar-width: thin
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .brand-mark {
+            display: grid;
+            place-items: center;
+            width: 43px;
+            height: 43px;
+            border-radius: 13px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 19px;
+            font-weight: 700
+        }
+
+        .brand strong {
+            display: block;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 15px;
+            line-height: 1.35
+        }
+
+        .brand small {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        .sidebar-title {
+            margin: 0 0 10px;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px;
+            letter-spacing: .12em
+        }
+
+        .toc {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            line-height: 1.45
+        }
+
+        .toc li {
+            margin: 2px 0
+        }
+
+        .toc a {
+            display: block;
+            padding: 5px 8px;
+            color: var(--muted);
+            border-radius: 8px;
+            text-decoration: none
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+            background: var(--accent-soft)
+        }
+
+        .toc-level-3 {
+            padding-left: 12px
+        }
+
+        .toc-level-3 a {
+            font-size: 12px;
+            opacity: .88
+        }
+
+        .content {
+            min-width: 0;
+            padding: 44px 54px 64px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            box-shadow: var(--shadow)
+        }
+
+        .hero {
+            position: relative;
+            margin: -8px 0 32px;
+            padding: 30px 32px;
+            overflow: hidden;
+            border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+            border-radius: 20px;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, var(--panel)), color-mix(in srgb, var(--accent-2) 7%, var(--panel)))
+        }
+
+        .hero::after {
+            content: "∮";
+            position: absolute;
+            right: 24px;
+            bottom: -30px;
+            color: color-mix(in srgb, var(--accent) 12%, transparent);
+            font-family: Georgia, serif;
+            font-size: 132px;
+            line-height: 1;
+            pointer-events: none
+        }
+
+        .hero-kicker {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 8px;
+            color: var(--accent);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .13em
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            border: 0;
+            padding: 0;
+            font-size: clamp(30px, 4vw, 45px);
+            line-height: 1.15;
+            letter-spacing: -.02em
+        }
+
+        .hero p {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 16px
+        }
+
+        .hero-stats {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 18px;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        .hero-stats span {
+            padding: 6px 11px;
+            color: var(--accent);
+            background: color-mix(in srgb, var(--panel) 72%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+            border-radius: 999px
+        }
+
+        h2, h3, h4 {
+            font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.35;
+            scroll-margin-top: 24px
+        }
+
+        h2 {
+            margin: 54px 0 18px;
+            padding-top: 8px;
+            font-size: 28px
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            margin-right: 10px;
+            border-radius: 3px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            vertical-align: .18em
+        }
+
+        h3 {
+            margin: 34px 0 12px;
+            color: color-mix(in srgb, var(--text) 82%, var(--accent));
+            font-size: 21px
+        }
+
+        h4 {
+            margin: 26px 0 8px;
+            font-size: 18px
+        }
+
+        .heading-anchor {
+            float: right;
+            margin-left: 12px;
+            color: color-mix(in srgb, var(--muted) 48%, transparent);
+            font-weight: 400;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity .15s ease
+        }
+
+        h2:hover .heading-anchor, h3:hover .heading-anchor, h4:hover .heading-anchor {
+            opacity: 1
+        }
+
+        p {
+            margin: .75em 0
+        }
+
+        strong {
+            color: color-mix(in srgb, var(--text) 84%, var(--accent))
+        }
+
+        .callout {
+            margin: 20px 0;
+            padding: 16px 20px;
+            color: var(--text);
+            background: var(--warm);
+            border: 1px solid var(--warm-line);
+            border-left: 5px solid #e8a317;
+            border-radius: 10px
+        }
+
+        .callout p {
+            margin: 0
+        }
+
+        ul, ol {
+            margin: .75em 0;
+            padding-left: 1.7em
+        }
+
+        li {
+            margin: .32em 0
+        }
+
+        li > p {
+            margin: .35em 0
+        }
+
+        .math-display {
+            margin: 20px 0;
+            padding: 14px 18px;
+            overflow-x: auto;
+            background: var(--panel-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.05em
+        }
+
+        .math-display .katex-display, .math-display .katex {
+            margin: 0;
+            display: block
+        }
+
+        .math-display math {
+            font-size: 1.08em
+        }
+
+        .katex {
+            font-size: 1.06em
+        }
+
+        .katex math {
+            font-size: 1.06em
+        }
+
+        .math-error {
+            color: var(--danger);
+            font-family: monospace;
+            font-size: .9em;
+            white-space: pre-wrap
+        }
+
+        code {
+            padding: .12em .36em;
+            color: #9f1239;
+            background: #fff1f2;
+            border-radius: 5px;
+            font-family: "Cascadia Code", Consolas, monospace;
+            font-size: .9em
+        }
+
+        .table-wrap {
+            margin: 22px 0;
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 12px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px
+        }
+
+        th, td {
+            padding: 10px 13px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+            vertical-align: top
+        }
+
+        th {
+            color: var(--text);
+            background: var(--accent-soft);
+            font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            font-size: 14px;
+            white-space: nowrap
+        }
+
+        tbody tr:nth-child(even) {
+            background: color-mix(in srgb, var(--panel-soft) 72%, transparent)
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0
+        }
+
+        hr.section-rule {
+            margin: 36px 0;
+            border: 0;
+            border-top: 1px dashed color-mix(in srgb, var(--line) 82%, transparent)
+        }
+
+        .footer-note {
+            margin-top: 48px;
+            padding-top: 18px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px
+        }
+
+        .toolbar {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            display: flex;
+            gap: 8px;
+            z-index: 60
+        }
+
+        .toolbar button {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 10px 14px;
+            color: var(--text);
+            background: color-mix(in srgb, var(--panel) 92%, transparent);
+            box-shadow: 0 8px 24px rgba(23, 32, 51, .12);
+            cursor: pointer;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            backdrop-filter: blur(10px)
+        }
+
+        .toolbar button:hover {
+            color: var(--accent);
+            border-color: var(--accent)
+        }
+
+        .mobile-note {
+            display: none;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        @media (max-width: 980px) {
+            .layout {
+                grid-template-columns:1fr;
+                gap: 18px;
+                padding: 18px
+            }
+
+            .sidebar {
+                position: static;
+                max-height: none
+            }
+
+            .content {
+                padding: 32px 24px 48px
+            }
+
+            .mobile-note {
+                display: block
+            }
+        }
+
+        @media (max-width: 620px) {
+            body {
+                font-size: 16px
+            }
+
+            .content {
+                padding: 24px 17px 38px;
+                border-radius: 16px
+            }
+
+            .hero {
+                padding: 24px 20px
+            }
+
+            .hero h1 {
+                font-size: 30px
+            }
+
+            h2 {
+                font-size: 24px
+            }
+
+            h3 {
+                font-size: 19px
+            }
+
+            .toolbar {
+                top: 10px;
+                right: 10px
+            }
+
+            .toolbar button {
+                padding: 8px 11px
+            }
+
+            .toc-level-3 {
+                display: none
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+                font-size: 11pt
+            }
+
+            .layout {
+                display: block;
+                max-width: none;
+                padding: 0
+            }
+
+            .sidebar, .toolbar, .reading-progress, .heading-anchor, .mobile-note {
+                display: none !important
+            }
+
+            .content {
+                padding: 0;
+                border: 0;
+                box-shadow: none;
+                background: #fff
+            }
+
+            .hero {
+                border: 1px solid #ccc;
+                background: #fff
+            }
+
+            .hero::after {
+                display: none
+            }
+
+            .math-display {
+                background: #fff;
+                break-inside: avoid
+            }
+
+            h2, h3 {
+                break-after: avoid
+            }
+
+            table, blockquote {
+                break-inside: avoid
+            }
+
+            a {
+                color: #000;
+                text-decoration: none
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="reading-progress" aria-hidden="true"><span id="progress-bar"></span></div>
+<div class="toolbar">
+    <button type="button" id="theme-toggle" aria-label="切换深色模式">深色模式</button>
+    <button type="button" onclick="window.print()">打印 / 保存为 PDF</button>
+</div>
+<div class="layout">
+    <aside class="sidebar" aria-label="章节目录">
+        <div class="brand">
+            <div class="brand-mark">∮</div>
+            <div><strong>高等数学<br>第十一章</strong><small>曲线积分 · 曲面积分</small></div>
+        </div>
+        <p class="sidebar-title">本页目录</p>
+        <ul class="toc">
+            <li class="toc-level-2"><a href="#基础衔接">🌉 基础知识衔接</a></li>
+            <li class="toc-level-3"><a href="#1-向量与点积">1. 向量与点积</a></li>
+            <li class="toc-level-3"><a href="#2-参数方程与弧长">2. 参数方程与弧长</a></li>
+            <li class="toc-level-3"><a href="#3-曲面参数化">3. 曲面参数化</a></li>
+            <li class="toc-level-3"><a href="#4-定积分与重积分">4. 定积分与重积分</a></li>
+            <li class="toc-level-3"><a href="#5-偏导数与向量场">5. 偏导数与向量场</a></li>
+            <li class="toc-level-3"><a href="#6-方向与右手法则">6. 方向与右手法则</a></li>
+            <li class="toc-level-3"><a href="#7-自检清单">7. 自检清单</a></li>
+            <li class="toc-level-2"><a href="#一第一类曲线积分">一、第一类曲线积分</a></li>
+            <li class="toc-level-3"><a href="#11-定义">1.1 定义</a></li>
+            <li class="toc-level-3"><a href="#12-参数化计算">1.2 参数化计算</a></li>
+            <li class="toc-level-3"><a href="#13-基本性质">1.3 基本性质</a></li>
+            <li class="toc-level-3"><a href="#14-几何与物理意义">1.4 几何与物理意义</a></li>
+            <li class="toc-level-2"><a href="#二第二类曲线积分">二、第二类曲线积分</a></li>
+            <li class="toc-level-3"><a href="#21-定义与向量形式">2.1 定义与向量形式</a></li>
+            <li class="toc-level-3"><a href="#22-参数化计算">2.2 参数化计算</a></li>
+            <li class="toc-level-3"><a href="#23-与第一类曲线积分的关系">2.3 与第一类曲线积分的关系</a></li>
+            <li class="toc-level-3"><a href="#24-方向性">2.4 方向性</a></li>
+            <li class="toc-level-3"><a href="#25-物理意义">2.5 物理意义</a></li>
+            <li class="toc-level-3"><a href="#26-保守场与势函数">2.6 保守场与势函数</a></li>
+            <li class="toc-level-2"><a href="#三格林公式与路径无关">三、格林公式与路径无关</a></li>
+            <li class="toc-level-3"><a href="#31-格林公式">3.1 格林公式</a></li>
+            <li class="toc-level-3"><a href="#32-正向边界">3.2 正向边界</a></li>
+            <li class="toc-level-3"><a href="#33-用格林公式求面积">3.3 用格林公式求面积</a></li>
+            <li class="toc-level-3"><a href="#34-路径无关的条件">3.4 路径无关的条件</a></li>
+            <li class="toc-level-3"><a href="#35-有洞区域的提醒">3.5 有洞区域的提醒</a></li>
+            <li class="toc-level-2"><a href="#四第一类曲面积分">四、第一类曲面积分</a></li>
+            <li class="toc-level-3"><a href="#41-定义">4.1 定义</a></li>
+            <li class="toc-level-3"><a href="#42-参数化计算">4.2 参数化计算</a></li>
+            <li class="toc-level-3"><a href="#43-显式曲面">4.3 显式曲面</a></li>
+            <li class="toc-level-3"><a href="#44-几何与物理意义">4.4 几何与物理意义</a></li>
+            <li class="toc-level-2"><a href="#五第二类曲面积分与通量">五、第二类曲面积分与通量</a></li>
+            <li class="toc-level-3"><a href="#51-定义">5.1 定义</a></li>
+            <li class="toc-level-3"><a href="#52-与第一类曲面积分的关系">5.2 与第一类曲面积分的关系</a></li>
+            <li class="toc-level-3"><a href="#53-显式曲面的计算">5.3 显式曲面的计算</a></li>
+            <li class="toc-level-3"><a href="#54-方向">5.4 方向</a></li>
+            <li class="toc-level-3"><a href="#55-物理意义">5.5 物理意义</a></li>
+            <li class="toc-level-2"><a href="#六高斯公式与斯托克斯公式">六、高斯公式与斯托克斯公式</a></li>
+            <li class="toc-level-3"><a href="#61-高斯公式">6.1 高斯公式</a></li>
+            <li class="toc-level-3"><a href="#62-高斯公式的条件">6.2 高斯公式的条件</a></li>
+            <li class="toc-level-3"><a href="#63-斯托克斯公式">6.3 斯托克斯公式</a></li>
+            <li class="toc-level-3"><a href="#64-旋度">6.4 旋度</a></li>
+            <li class="toc-level-3"><a href="#65-三个公式的统一">6.5 三个公式的统一</a></li>
+            <li class="toc-level-2"><a href="#七典型例题">七、典型例题</a></li>
+            <li class="toc-level-3"><a href="#例-1第一类曲线积分">例 1：第一类曲线积分</a></li>
+            <li class="toc-level-3"><a href="#例-2第二类曲线积分">例 2：第二类曲线积分</a></li>
+            <li class="toc-level-3"><a href="#例-3格林公式">例 3：格林公式</a></li>
+            <li class="toc-level-3"><a href="#例-4路径无关与势函数">例 4：路径无关与势函数</a></li>
+            <li class="toc-level-3"><a href="#例-5第一类曲面积分">例 5：第一类曲面积分</a></li>
+            <li class="toc-level-3"><a href="#例-6第二类曲面积分">例 6：第二类曲面积分</a></li>
+            <li class="toc-level-3"><a href="#例-7高斯公式">例 7：高斯公式</a></li>
+            <li class="toc-level-3"><a href="#例-8斯托克斯公式">例 8：斯托克斯公式</a></li>
+            <li class="toc-level-2"><a href="#八易错点提示">八、易错点提示</a></li>
+            <li class="toc-level-3"><a href="#1-第一类与第二类积分混淆">1. 第一类与第二类积分混淆</a></li>
+            <li class="toc-level-3"><a href="#2-第二类曲线积分忘记方向">2. 第二类曲线积分忘记方向</a></li>
+            <li class="toc-level-3"><a href="#3-格林公式方向弄反">3. 格林公式方向弄反</a></li>
+            <li class="toc-level-3"><a href="#4-格林公式用于非闭曲线">4. 格林公式用于非闭曲线</a></li>
+            <li class="toc-level-3"><a href="#5-忘记-的顺序">5. 忘记 … 的顺序</a></li>
+            <li class="toc-level-3"><a href="#6-路径无关条件用错">6. 路径无关条件用错</a></li>
+            <li class="toc-level-3"><a href="#7-曲面积分忘记面积元">7. 曲面积分忘记面积元</a></li>
+            <li class="toc-level-3"><a href="#8-第二类曲面积分方向写错">8. 第二类曲面积分方向写错</a></li>
+            <li class="toc-level-3"><a href="#9-高斯公式用于非闭曲面">9. 高斯公式用于非闭曲面</a></li>
+            <li class="toc-level-3"><a href="#10-高斯公式法向量方向错误">10. 高斯公式法向量方向错误</a></li>
+            <li class="toc-level-3"><a href="#11-斯托克斯公式边界方向错误">11. 斯托克斯公式边界方向错误</a></li>
+            <li class="toc-level-3"><a href="#12-旋度计算符号错误">12. 旋度计算符号错误</a></li>
+            <li class="toc-level-3"><a href="#13-奇点未处理">13. 奇点未处理</a></li>
+            <li class="toc-level-3"><a href="#14-参数范围写错">14. 参数范围写错</a></li>
+            <li class="toc-level-2"><a href="#九课后练习">九、课后练习</a></li>
+            <li class="toc-level-2"><a href="#十练习答案与解析">十、练习答案与解析</a></li>
+            <li class="toc-level-3"><a href="#1-答案">1. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#2-答案">2. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#3-答案">3. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#4-答案">4. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#5-答案">5. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#6-答案">6. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#7-答案">7. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#8-答案">8. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#9-答案">9. 答案：</a></li>
+            <li class="toc-level-3"><a href="#10-答案">10. 答案：…</a></li>
+            <li class="toc-level-2"><a href="#十一公式速查">十一、公式速查</a></li>
+            <li class="toc-level-3"><a href="#111-第一类曲线积分">11.1 第一类曲线积分</a></li>
+            <li class="toc-level-3"><a href="#112-第二类曲线积分">11.2 第二类曲线积分</a></li>
+            <li class="toc-level-3"><a href="#113-格林公式">11.3 格林公式</a></li>
+            <li class="toc-level-3"><a href="#114-第一类曲面积分">11.4 第一类曲面积分</a></li>
+            <li class="toc-level-3"><a href="#115-第二类曲面积分">11.5 第二类曲面积分</a></li>
+            <li class="toc-level-3"><a href="#116-高斯公式">11.6 高斯公式</a></li>
+            <li class="toc-level-3"><a href="#117-斯托克斯公式">11.7 斯托克斯公式</a></li>
+            <li class="toc-level-2"><a href="#结语">结语</a></li>
+        </ul>
+        <p class="mobile-note">小屏幕下目录可上下滚动。</p>
+    </aside>
+    <main class="content">
+        <section class="hero">
+            <p class="hero-kicker">CALCULUS · LINE &amp; SURFACE INTEGRALS</p>
+            <h1>第十一章 曲线积分与曲面积分</h1>
+            <p>
+                区分第一类与第二类曲线/曲面积分，掌握格林、高斯、斯托克斯三大公式。先判断类型，再判断方向，最后参数化或套公式。</p>
+            <div class="hero-stats"><span>初高中衔接</span><span>8 个典型例题</span><span>10 道课后练习</span><span>KaTeX · MathML 离线渲染</span>
+            </div>
+        </section>
+        <blockquote class="callout">
+            <p><strong>本章主线</strong>： 第一类曲线积分 <span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟶</mo></mrow><annotation
+                    encoding="application/x-tex">\longrightarrow</annotation></semantics></math></span> 第二类曲线积分
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟶</mo></mrow><annotation
+                        encoding="application/x-tex">\longrightarrow</annotation></semantics></math></span> 格林公式
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟶</mo></mrow><annotation
+                        encoding="application/x-tex">\longrightarrow</annotation></semantics></math></span> 第一类曲面积分
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟶</mo></mrow><annotation
+                        encoding="application/x-tex">\longrightarrow</annotation></semantics></math></span> 第二类曲面积分
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟶</mo></mrow><annotation
+                        encoding="application/x-tex">\longrightarrow</annotation></semantics></math></span> 高斯公式与斯托克斯公式。
+            </p>
+        </blockquote>
+        <blockquote class="callout"><p><strong>学习建议</strong>：本章最关键的是“方向”和“参数化”。第一类积分与方向无关，第二类积分与方向有关；曲线看切向量，曲面看法向量。做题时先判断类型，再判断方向，最后选择参数化或公式。
+        </p></blockquote>
+        <hr class="section-rule">
+        <h2 id="基础衔接"><a class="heading-anchor" href="#基础衔接" aria-label="回到本小节">#</a>🌉 基础知识衔接</h2>
+        <p>本章会用到向量、参数方程、弧长、曲面参数化、重积分和偏导数。下面快速复习关键工具。</p>
+        <h3 id="1-向量与点积"><a class="heading-anchor" href="#1-向量与点积" aria-label="回到本小节">#</a>1. 向量与点积
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>a</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mo>=</mo><mi
+                mathvariant="normal">∣</mi><mover accent="true"><mi>a</mi><mo>⃗</mo></mover><mi
+                mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mover accent="true"><mi>b</mi><mo>⃗</mo></mover><mi
+                mathvariant="normal">∣</mi><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo>=</mo><msub><mi>a</mi><mi>x</mi></msub><msub><mi>b</mi><mi>x</mi></msub><mo>+</mo><msub><mi>a</mi><mi>y</mi></msub><msub><mi>b</mi><mi>y</mi></msub><mo>+</mo><msub><mi>a</mi><mi>z</mi></msub><msub><mi>b</mi><mi>z</mi></msub><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec a\cdot\vec b
+=
+|\vec a||\vec b|\cos\theta
+=
+a_xb_x+a_yb_y+a_zb_z.</annotation></semantics></math></span></div>
+        <p>第二类曲线积分的被积表达式</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>+</mo><mi>R</mi><mtext> </mtext><mi>d</mi><mi>z</mi></mrow><annotation
+                encoding="application/x-tex">P\,dx+Q\,dy+R\,dz</annotation></semantics></math></span></div>
+        <p>可以看成向量场</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>P</mi><mo
+                separator="true">,</mo><mi>Q</mi><mo separator="true">,</mo><mi>R</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">\vec F=(P,Q,R)</annotation></semantics></math></span></div>
+        <p>与位移微元</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>d</mi><mi>x</mi><mo
+                separator="true">,</mo><mi>d</mi><mi>y</mi><mo separator="true">,</mo><mi>d</mi><mi>z</mi><mo
+                stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">d\vec r=(dx,dy,dz)</annotation></semantics></math></span></div>
+        <p>的点积。</p>
+        <h3 id="2-参数方程与弧长"><a class="heading-anchor" href="#2-参数方程与弧长" aria-label="回到本小节">#</a>2.
+            参数方程与弧长</h3>
+        <p>平面曲线</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mi>x</mi><mo
+                stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace
+                width="2em"/><mi>y</mi><mo>=</mo><mi>y</mi><mo stretchy="false">(</mo><mi>t</mi><mo
+                stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x=x(t),\qquad y=y(t)</annotation></semantics></math></span>
+        </div>
+        <p>的弧微分：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>s</mi><mo>=</mo><msqrt><mrow><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><msup><mi>y</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>t</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">ds=\sqrt{(x&#x27;)^2+(y&#x27;)^2}\,dt.</annotation></semantics></math></span>
+        </div>
+        <p>空间曲线</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mi>x</mi><mo
+                stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace
+                width="2em"/><mi>y</mi><mo>=</mo><mi>y</mi><mo stretchy="false">(</mo><mi>t</mi><mo
+                stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>z</mi><mo>=</mo><mi>z</mi><mo
+                stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">x=x(t),\qquad y=y(t),\qquad z=z(t)</annotation></semantics></math></span>
+        </div>
+        <p>的弧微分：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>s</mi><mo>=</mo><msqrt><mrow><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><msup><mi>y</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo
+                stretchy="false">(</mo><msup><mi>z</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>t</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">ds=\sqrt{(x&#x27;)^2+(y&#x27;)^2+(z&#x27;)^2}\,dt.</annotation></semantics></math></span>
+        </div>
+        <h3 id="3-曲面参数化"><a class="heading-anchor" href="#3-曲面参数化" aria-label="回到本小节">#</a>3. 曲面参数化
+        </h3>
+        <p>曲面</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo stretchy="false">(</mo><mi>u</mi><mo
+                separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo
+                stretchy="false">(</mo><mi>u</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo><mi>y</mi><mo stretchy="false">(</mo><mi>u</mi><mo separator="true">,</mo><mi>v</mi><mo
+                stretchy="false">)</mo><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">(</mo><mi>u</mi><mo
+                separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">\vec r(u,v)=(x(u,v),y(u,v),z(u,v))</annotation></semantics></math></span>
+        </div>
+        <p>的面积元：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>S</mi><mo>=</mo><mi
+                mathvariant="normal">∣</mi><msub><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mi>u</mi></msub><mo>×</mo><msub><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mi>v</mi></msub><mi mathvariant="normal">∣</mi><mtext> </mtext><mi>d</mi><mi>u</mi><mtext> </mtext><mi>d</mi><mi>v</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">dS=|\vec r_u\times\vec r_v|\,du\,dv.</annotation></semantics></math></span>
+        </div>
+        <p>若曲面由</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>z</mi><mo>=</mo><mi>z</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">z=z(x,y)</annotation></semantics></math></span></div>
+        <p>给出，则</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>S</mi><mo>=</mo><msqrt><mrow><mn>1</mn><mo>+</mo><msubsup><mi>z</mi><mi>x</mi><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>z</mi><mi>y</mi><mn>2</mn></msubsup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">dS=\sqrt{1+z_x^2+z_y^2}\,dx\,dy.</annotation></semantics></math></span>
+        </div>
+        <h3 id="4-定积分与重积分"><a class="heading-anchor" href="#4-定积分与重积分" aria-label="回到本小节">#</a>4.
+            定积分与重积分</h3>
+        <p>曲线积分是沿着一条曲线的累积；曲面积分是沿着一张曲面的累积。</p>
+        <ul>
+            <li>第一类曲线积分：对弧长积分；</li>
+            <li>第二类曲线积分：对坐标积分；</li>
+            <li>第一类曲面积分：对面积积分；</li>
+            <li>第二类曲面积分：对通量积分。</li>
+        </ul>
+        <h3 id="5-偏导数与向量场"><a class="heading-anchor" href="#5-偏导数与向量场" aria-label="回到本小节">#</a>5.
+            偏导数与向量场</h3>
+        <p>向量场</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>P</mi><mo
+                separator="true">,</mo><mi>Q</mi><mo separator="true">,</mo><mi>R</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">\vec F=(P,Q,R)</annotation></semantics></math></span></div>
+        <p>的散度：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">div</mi><mo>⁡</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><msub><mi>P</mi><mi>x</mi></msub><mo>+</mo><msub><mi>Q</mi><mi>y</mi></msub><mo>+</mo><msub><mi>R</mi><mi>z</mi></msub><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\operatorname{div}\vec F=P_x+Q_y+R_z.</annotation></semantics></math></span>
+        </div>
+        <p>旋度：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">curl</mi><mo>⁡</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mrow><mo
+                fence="true">∣</mo><mtable rowspacing="0.16em" columnalign="center center center" columnspacing="1em"><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi mathvariant="bold">i</mi></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi mathvariant="bold">j</mi></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi mathvariant="bold">k</mi></mstyle></mtd></mtr><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><msub><mi mathvariant="normal">∂</mi><mi>x</mi></msub></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><msub><mi mathvariant="normal">∂</mi><mi>y</mi></msub></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><msub><mi mathvariant="normal">∂</mi><mi>z</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi>P</mi></mstyle></mtd><mtd><mstyle scriptlevel="0"
+                                                                                           displaystyle="false"><mi>Q</mi></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi>R</mi></mstyle></mtd></mtr></mtable><mo
+                fence="true">∣</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\operatorname{curl}\vec F
+=
+\begin{vmatrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+\partial_x&amp;\partial_y&amp;\partial_z\\
+P&amp;Q&amp;R
+\end{vmatrix}.</annotation></semantics></math></span></div>
+        <h3 id="6-方向与右手法则"><a class="heading-anchor" href="#6-方向与右手法则" aria-label="回到本小节">#</a>6.
+            方向与右手法则</h3>
+        <p>第二类积分与方向有关：</p>
+        <ul>
+            <li>曲线反向，积分变号；</li>
+            <li>曲面换侧，通量变号；</li>
+            <li>格林公式要求正向边界；</li>
+            <li>斯托克斯公式要求边界方向与曲面法向量满足右手法则。</li>
+        </ul>
+        <h3 id="7-自检清单"><a class="heading-anchor" href="#7-自检清单" aria-label="回到本小节">#</a>7. 自检清单</h3>
+        <ul>
+            <li>[ ] 会计算向量点积吗？</li>
+            <li>[ ] 会写曲线参数方程和弧微分吗？</li>
+            <li>[ ] 会写曲面参数化和面积元吗？</li>
+            <li>[ ] 会求偏导数吗？</li>
+            <li>[ ] 知道第一类与第二类积分的区别吗？</li>
+            <li>[ ] 会判断曲线、曲面的方向吗？</li>
+        </ul>
+        <hr class="section-rule">
+        <h2 id="一第一类曲线积分"><a class="heading-anchor" href="#一第一类曲线积分" aria-label="回到本小节">#</a>一、第一类曲线积分
+        </h2>
+        <h3 id="11-定义"><a class="heading-anchor" href="#11-定义" aria-label="回到本小节">#</a>1.1 定义</h3>
+        <p>设 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 是一条可求长的曲线，<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">f(x,y)</annotation></semantics></math></span> 在 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 上有定义。把 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 分成小弧段，长度分别为 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">Δ</mi><msub><mi>s</mi><mi>i</mi></msub></mrow><annotation
+                encoding="application/x-tex">\Delta s_i</annotation></semantics></math></span>，在小弧段上任取一点 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">(</mo><msub><mi>ξ</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>η</mi><mi>i</mi></msub><mo
+                stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(\xi_i,\eta_i)</annotation></semantics></math></span>，作和
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>f</mi><mo
+                stretchy="false">(</mo><msub><mi>ξ</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>η</mi><mi>i</mi></msub><mo
+                stretchy="false">)</mo><mi mathvariant="normal">Δ</mi><msub><mi>s</mi><mi>i</mi></msub><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sum_{i=1}^n f(\xi_i,\eta_i)\Delta s_i.</annotation></semantics></math></span>
+        </div>
+        <p>当最大弧长趋于 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">0</annotation></semantics></math></span> 时，若极限存在，则称为 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation
+                encoding="application/x-tex">f</annotation></semantics></math></span> 在 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 上的第一类曲线积分：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∫</mo><mi>L</mi></msub><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>s</mi><mo>=</mo><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>λ</mi><mo>→</mo><mn>0</mn></mrow></munder><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>f</mi><mo
+                stretchy="false">(</mo><msub><mi>ξ</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>η</mi><mi>i</mi></msub><mo
+                stretchy="false">)</mo><mi mathvariant="normal">Δ</mi><msub><mi>s</mi><mi>i</mi></msub></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\int_L f(x,y)\,ds
+=
+\lim_{\lambda\to0}
+\sum_{i=1}^n f(\xi_i,\eta_i)\Delta s_i
+}.</annotation></semantics></math></span></div>
+        <p>空间曲线类似：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∫</mo><mi>L</mi></msub><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo
+                stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>s</mi><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\int_L f(x,y,z)\,ds.</annotation></semantics></math></span></div>
+        <h3 id="12-参数化计算"><a class="heading-anchor" href="#12-参数化计算" aria-label="回到本小节">#</a>1.2 参数化计算
+        </h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 由
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mi>x</mi><mo
+                stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace
+                width="2em"/><mi>y</mi><mo>=</mo><mi>y</mi><mo stretchy="false">(</mo><mi>t</mi><mo
+                stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>α</mi><mo>≤</mo><mi>t</mi><mo>≤</mo><mi>β</mi></mrow><annotation
+                encoding="application/x-tex">x=x(t),\qquad y=y(t),\qquad \alpha\le t\le\beta</annotation></semantics></math></span>
+        </div>
+        <p>给出，则</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∫</mo><mi>L</mi></msub><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>s</mi><mo>=</mo><msubsup><mo>∫</mo><mi>α</mi><mi>β</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo><mi>y</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">)</mo><msqrt><mrow><mo stretchy="false">(</mo><msup><mi>x</mi><mo mathvariant="normal"
+                                                                                                   lspace="0em"
+                                                                                                   rspace="0em">′</mo></msup><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><msup><mi>y</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>t</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\int_L f(x,y)\,ds
+=
+\int_\alpha^\beta
+f(x(t),y(t))
+\sqrt{(x&#x27;)^2+(y&#x27;)^2}\,dt
+}.</annotation></semantics></math></span></div>
+        <p>空间曲线：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∫</mo><mi>L</mi></msub><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo
+                stretchy="false">)</mo><mi>d</mi><mi>s</mi><mo>=</mo><msubsup><mo>∫</mo><mi>α</mi><mi>β</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo><mi>y</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo><mi>z</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">)</mo><msqrt><mrow><mo stretchy="false">(</mo><msup><mi>x</mi><mo mathvariant="normal"
+                                                                                                   lspace="0em"
+                                                                                                   rspace="0em">′</mo></msup><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><msup><mi>y</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo
+                stretchy="false">(</mo><msup><mi>z</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>t</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\int_L f(x,y,z)ds
+=
+\int_\alpha^\beta
+f(x(t),y(t),z(t))
+\sqrt{(x&#x27;)^2+(y&#x27;)^2+(z&#x27;)^2}\,dt
+}.</annotation></semantics></math></span></div>
+        <h3 id="13-基本性质"><a class="heading-anchor" href="#13-基本性质" aria-label="回到本小节">#</a>1.3 基本性质
+        </h3>
+        <ul>
+            <li><p>与曲线方向无关：</p>
+                <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"
+                                                                    display="block"><semantics><mrow><msub><mo>∫</mo><msup><mi>L</mi><mo>−</mo></msup></msub><mi>f</mi><mtext> </mtext><mi>d</mi><mi>s</mi><mo>=</mo><msub><mo>∫</mo><mi>L</mi></msub><mi>f</mi><mtext> </mtext><mi>d</mi><mi>s</mi><mo
+                        separator="true">;</mo></mrow><annotation encoding="application/x-tex">\int_{L^-}f\,ds=\int_L f\,ds;</annotation></semantics></math></span>
+                </div>
+            </li>
+            <li>线性性质；</li>
+            <li><p>路径可加性：</p>
+                <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"
+                                                                    display="block"><semantics><mrow><msub><mo>∫</mo><mrow><msub><mi>L</mi><mn>1</mn></msub><mo>+</mo><msub><mi>L</mi><mn>2</mn></msub></mrow></msub><mi>f</mi><mtext> </mtext><mi>d</mi><mi>s</mi><mo>=</mo><msub><mo>∫</mo><msub><mi>L</mi><mn>1</mn></msub></msub><mi>f</mi><mtext> </mtext><mi>d</mi><mi>s</mi><mo>+</mo><msub><mo>∫</mo><msub><mi>L</mi><mn>2</mn></msub></msub><mi>f</mi><mtext> </mtext><mi>d</mi><mi>s</mi><mi
+                        mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int_{L_1+L_2}f\,ds
+  =
+  \int_{L_1}f\,ds+\int_{L_2}f\,ds.</annotation></semantics></math></span></div>
+            </li>
+        </ul>
+        <h3 id="14-几何与物理意义"><a class="heading-anchor" href="#14-几何与物理意义" aria-label="回到本小节">#</a>1.4
+            几何与物理意义</h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>=</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">f=1</annotation></semantics></math></span>，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∫</mo><mi>L</mi></msub><mn>1</mn><mtext> </mtext><mi>d</mi><mi>s</mi></mrow><annotation
+                encoding="application/x-tex">\int_L1\,ds</annotation></semantics></math></span></div>
+        <p>是曲线 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 的弧长。
+        </p>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation
+                encoding="application/x-tex">f</annotation></semantics></math></span> 是线密度，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>m</mi><mo>=</mo><msub><mo>∫</mo><mi>L</mi></msub><mi>f</mi><mtext> </mtext><mi>d</mi><mi>s</mi></mrow><annotation
+                encoding="application/x-tex">m=\int_L f\,ds</annotation></semantics></math></span></div>
+        <p>是曲线形物体的质量。</p>
+        <hr class="section-rule">
+        <h2 id="二第二类曲线积分"><a class="heading-anchor" href="#二第二类曲线积分" aria-label="回到本小节">#</a>二、第二类曲线积分
+        </h2>
+        <h3 id="21-定义与向量形式"><a class="heading-anchor" href="#21-定义与向量形式" aria-label="回到本小节">#</a>2.1
+            定义与向量形式</h3>
+        <p>第二类曲线积分</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∫</mo><mi>L</mi></msub><mi>P</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>+</mo><mi>R</mi><mtext> </mtext><mi>d</mi><mi>z</mi></mrow><annotation
+                encoding="application/x-tex">\int_L P\,dx+Q\,dy+R\,dz</annotation></semantics></math></span></div>
+        <p>可以写成向量形式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∫</mo><mi>L</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><msub><mo>∫</mo><mi>L</mi></msub><mi>P</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>+</mo><mi>R</mi><mtext> </mtext><mi>d</mi><mi>z</mi></mrow></mstyle></mstyle></mstyle></menclose><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{
+\int_L \vec F\cdot d\vec r
+=
+\int_L P\,dx+Q\,dy+R\,dz
+},</annotation></semantics></math></span></div>
+        <p>其中</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>P</mi><mo
+                separator="true">,</mo><mi>Q</mi><mo separator="true">,</mo><mi>R</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo><mspace width="2em"/><mi>d</mi><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><mo
+                stretchy="false">(</mo><mi>d</mi><mi>x</mi><mo separator="true">,</mo><mi>d</mi><mi>y</mi><mo
+                separator="true">,</mo><mi>d</mi><mi>z</mi><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec F=(P,Q,R),\qquad
+d\vec r=(dx,dy,dz).</annotation></semantics></math></span></div>
+        <h3 id="22-参数化计算"><a class="heading-anchor" href="#22-参数化计算" aria-label="回到本小节">#</a>2.2 参数化计算
+        </h3>
+        <p>若曲线为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo stretchy="false">(</mo><mi>t</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo
+                stretchy="false">)</mo><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">(</mo><mi>t</mi><mo
+                stretchy="false">)</mo><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">(</mo><mi>t</mi><mo
+                stretchy="false">)</mo><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>α</mi><mo>≤</mo><mi>t</mi><mo>≤</mo><mi>β</mi><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\vec r(t)=(x(t),y(t),z(t)),
+\qquad \alpha\le t\le\beta,</annotation></semantics></math></span></div>
+        <p>则</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∫</mo><mi>L</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><msubsup><mo>∫</mo><mi>α</mi><mi>β</mi></msubsup><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo stretchy="false">(</mo><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mo
+                stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>⋅</mo><msup><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo mathvariant="normal" lspace="0em"
+                                                              rspace="0em">′</mo></msup><mo stretchy="false">(</mo><mi>t</mi><mo
+                stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>t</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\int_L\vec F\cdot d\vec r
+=
+\int_\alpha^\beta
+\vec F(\vec r(t))\cdot\vec r&#x27;(t)\,dt
+}.</annotation></semantics></math></span></div>
+        <p>平面情形：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∫</mo><mi>L</mi></msub><mi>P</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>=</mo><msubsup><mo>∫</mo><mi>α</mi><mi>β</mi></msubsup><mrow><mo
+                fence="true">[</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo
+                stretchy="false">)</mo><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">(</mo><mi>t</mi><mo
+                stretchy="false">)</mo><mo stretchy="false">)</mo><msup><mi>x</mi><mo mathvariant="normal" lspace="0em"
+                                                                                      rspace="0em">′</mo></msup><mo
+                stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>+</mo><mi>Q</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo><mi>y</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">)</mo><msup><mi>y</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo
+                stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow><mi>d</mi><mi>t</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int_L P\,dx+Q\,dy
+=
+\int_\alpha^\beta
+\left[
+P(x(t),y(t))x&#x27;(t)
++Q(x(t),y(t))y&#x27;(t)
+\right]dt.</annotation></semantics></math></span></div>
+        <h3 id="23-与第一类曲线积分的关系"><a class="heading-anchor" href="#23-与第一类曲线积分的关系"
+                                              aria-label="回到本小节">#</a>2.3 与第一类曲线积分的关系</h3>
+        <p>若曲线 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 的单位切向量为 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>T</mi><mo>⃗</mo></mover></mrow><annotation
+                encoding="application/x-tex">\vec T</annotation></semantics></math></span>，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∫</mo><mi>L</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><msub><mo>∫</mo><mi>L</mi></msub><mo
+                stretchy="false">(</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>T</mi><mo>⃗</mo></mover><mo
+                stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>s</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\int_L\vec F\cdot d\vec r
+=
+\int_L(\vec F\cdot\vec T)\,ds
+}.</annotation></semantics></math></span></div>
+        <h3 id="24-方向性"><a class="heading-anchor" href="#24-方向性" aria-label="回到本小节">#</a>2.4 方向性</h3>
+        <p>曲线反向：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∫</mo><msup><mi>L</mi><mo>−</mo></msup></msub><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><mo>−</mo><msub><mo>∫</mo><mi>L</mi></msub><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover accent="true"><mi>r</mi><mo>⃗</mo></mover></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\int_{L^-}\vec F\cdot d\vec r
+=
+-\int_L\vec F\cdot d\vec r
+}.</annotation></semantics></math></span></div>
+        <p>第二类曲线积分与方向有关，这是与第一类积分最重要的区别。</p>
+        <h3 id="25-物理意义"><a class="heading-anchor" href="#25-物理意义" aria-label="回到本小节">#</a>2.5 物理意义
+        </h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover></mrow><annotation
+                encoding="application/x-tex">\vec F</annotation></semantics></math></span> 是力场，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>W</mi><mo>=</mo><msub><mo>∫</mo><mi>L</mi></msub><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover accent="true"><mi>r</mi><mo>⃗</mo></mover></mrow><annotation
+                encoding="application/x-tex">W=\int_L\vec F\cdot d\vec r</annotation></semantics></math></span></div>
+        <p>是力沿曲线所做的功。</p>
+        <h3 id="26-保守场与势函数"><a class="heading-anchor" href="#26-保守场与势函数" aria-label="回到本小节">#</a>2.6
+            保守场与势函数</h3>
+        <p>若存在函数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo
+                stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">u(x,y,z)</annotation></semantics></math></span>，使得
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mi mathvariant="normal">∇</mi><mi>u</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\vec F=\nabla u,</annotation></semantics></math></span></div>
+        <p>则称 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover></mrow><annotation
+                encoding="application/x-tex">\vec F</annotation></semantics></math></span> 为保守场，<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation
+                encoding="application/x-tex">u</annotation></semantics></math></span> 为势函数。
+        </p>
+        <p>此时</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∫</mo><mi>L</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><mi>u</mi><mo stretchy="false">(</mo><mi>B</mi><mo
+                stretchy="false">)</mo><mo>−</mo><mi>u</mi><mo stretchy="false">(</mo><mi>A</mi><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose></mrow><annotation
+                encoding="application/x-tex">\boxed{
+\int_L\vec F\cdot d\vec r
+=
+u(B)-u(A)
+}</annotation></semantics></math></span></div>
+        <p>只与起点、终点有关，与路径无关。</p>
+        <p>平面情形：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>=</mo><mi>d</mi><mi>u</mi><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>P</mi><mo>=</mo><msub><mi>u</mi><mi>x</mi></msub><mo
+                separator="true">,</mo><mspace width="1em"/><mi>Q</mi><mo>=</mo><msub><mi>u</mi><mi>y</mi></msub><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">P\,dx+Q\,dy=du
+\iff
+P=u_x,\quad Q=u_y.</annotation></semantics></math></span></div>
+        <p>若区域单连通且 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo
+                separator="true">,</mo><mi>Q</mi></mrow><annotation
+                encoding="application/x-tex">P,Q</annotation></semantics></math></span> 有连续偏导，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mi>Q</mi><mi>x</mi></msub><mo>=</mo><msub><mi>P</mi><mi>y</mi></msub></mrow></mstyle></mstyle></mstyle></menclose></mrow><annotation
+                encoding="application/x-tex">\boxed{
+Q_x=P_y
+}</annotation></semantics></math></span></div>
+        <p>是路径无关的充要条件。</p>
+        <hr class="section-rule">
+        <h2 id="三格林公式与路径无关"><a class="heading-anchor" href="#三格林公式与路径无关"
+                                         aria-label="回到本小节">#</a>三、格林公式与路径无关</h2>
+        <h3 id="31-格林公式"><a class="heading-anchor" href="#31-格林公式" aria-label="回到本小节">#</a>3.1 格林公式
+        </h3>
+        <p>设 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation
+                encoding="application/x-tex">D</annotation></semantics></math></span> 是由分段光滑简单闭曲线 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 围成的平面区域，<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 取正向（逆时针，区域在左侧），<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo
+                separator="true">,</mo><mi>Q</mi></mrow><annotation
+                encoding="application/x-tex">P,Q</annotation></semantics></math></span> 在 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation
+                encoding="application/x-tex">D</annotation></semantics></math></span> 上有连续偏导，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∮</mo><mi>L</mi></msub><mi>P</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>=</mo><msub><mo>∬</mo><mi>D</mi></msub><mrow><mo
+                fence="true">(</mo><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>Q</mi></mrow><mrow><mi
+                mathvariant="normal">∂</mi><mi>x</mi></mrow></mfrac><mo>−</mo><mfrac><mrow><mi
+                mathvariant="normal">∂</mi><mi>P</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>y</mi></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\oint_L P\,dx+Q\,dy
+=
+\iint_D
+\left(
+\frac{\partial Q}{\partial x}
+-
+\frac{\partial P}{\partial y}
+\right)dx\,dy
+}.</annotation></semantics></math></span></div>
+        <h3 id="32-正向边界"><a class="heading-anchor" href="#32-正向边界" aria-label="回到本小节">#</a>3.2 正向边界
+        </h3>
+        <p>正向边界的意思是：沿曲线行走时，区域始终在左侧。</p>
+        <ul>
+            <li>外边界逆时针；</li>
+            <li>有洞区域的内边界顺时针。</li>
+        </ul>
+        <h3 id="33-用格林公式求面积"><a class="heading-anchor" href="#33-用格林公式求面积" aria-label="回到本小节">#</a>3.3
+            用格林公式求面积</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mi>A</mi><mi>D</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mo>∮</mo><mi>L</mi></msub><mo
+                stretchy="false">(</mo><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>−</mo><mi>y</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+A_D
+=
+\frac12\oint_L(x\,dy-y\,dx)
+}.</annotation></semantics></math></span></div>
+        <p>也可写成</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>A</mi><mi>D</mi></msub><mo>=</mo><msub><mo>∮</mo><mi>L</mi></msub><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>=</mo><mo>−</mo><msub><mo>∮</mo><mi>L</mi></msub><mi>y</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">A_D=\oint_L x\,dy
+=
+-\oint_L y\,dx.</annotation></semantics></math></span></div>
+        <h3 id="34-路径无关的条件"><a class="heading-anchor" href="#34-路径无关的条件" aria-label="回到本小节">#</a>3.4
+            路径无关的条件</h3>
+        <p>在单连通区域 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation
+                encoding="application/x-tex">D</annotation></semantics></math></span> 内，若 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo separator="true">,</mo><mi>Q</mi></mrow><annotation
+                encoding="application/x-tex">P,Q</annotation></semantics></math></span> 有连续偏导，则以下条件等价：
+        </p>
+        <ol>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∫</mo><mi>L</mi></msub><mi>P</mi><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mi>d</mi><mi>y</mi></mrow><annotation
+                    encoding="application/x-tex">\int_L P dx+Q dy</annotation></semantics></math></span> 与路径无关；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∮</mo><mi>C</mi></msub><mi>P</mi><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mi>d</mi><mi>y</mi><mo>=</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">\oint_C P dx+Q dy=0</annotation></semantics></math></span> 对任意闭曲线成立；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>x</mi></msub><mo>=</mo><msub><mi>P</mi><mi>y</mi></msub></mrow><annotation
+                    encoding="application/x-tex">Q_x=P_y</annotation></semantics></math></span>；
+            </li>
+            <li>存在势函数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation
+                    encoding="application/x-tex">u</annotation></semantics></math></span>，使得 <span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>u</mi><mo>=</mo><mi>P</mi><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mi>d</mi><mi>y</mi></mrow><annotation
+                    encoding="application/x-tex">du=Pdx+Qdy</annotation></semantics></math></span>。
+            </li>
+        </ol>
+        <h3 id="35-有洞区域的提醒"><a class="heading-anchor" href="#35-有洞区域的提醒" aria-label="回到本小节">#</a>3.5
+            有洞区域的提醒</h3>
+        <p>若区域不是单连通，即使 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>x</mi></msub><mo>=</mo><msub><mi>P</mi><mi>y</mi></msub></mrow><annotation
+                encoding="application/x-tex">Q_x=P_y</annotation></semantics></math></span>，闭曲线积分也可能不为零。例如
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mo>−</mo><mi>y</mi></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></mfrac><mi>d</mi><mi>x</mi><mo>+</mo><mfrac><mi>x</mi><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></mfrac><mi>d</mi><mi>y</mi></mrow><annotation
+                encoding="application/x-tex">\frac{-y}{x^2+y^2}dx
++
+\frac{x}{x^2+y^2}dy</annotation></semantics></math></span></div>
+        <p>在去掉原点的区域上满足 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>x</mi></msub><mo>=</mo><msub><mi>P</mi><mi>y</mi></msub></mrow><annotation
+                encoding="application/x-tex">Q_x=P_y</annotation></semantics></math></span>，但绕原点一周的积分是 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi></mrow><annotation
+                encoding="application/x-tex">2\pi</annotation></semantics></math></span>。
+        </p>
+        <hr class="section-rule">
+        <h2 id="四第一类曲面积分"><a class="heading-anchor" href="#四第一类曲面积分" aria-label="回到本小节">#</a>四、第一类曲面积分
+        </h2>
+        <h3 id="41-定义"><a class="heading-anchor" href="#41-定义" aria-label="回到本小节">#</a>4.1 定义</h3>
+        <p>设 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">Σ</mi></mrow><annotation
+                encoding="application/x-tex">\Sigma</annotation></semantics></math></span> 是一张可求面积的曲面，<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo
+                stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x,y,z)</annotation></semantics></math></span>
+            在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                    mathvariant="normal">Σ</mi></mrow><annotation
+                    encoding="application/x-tex">\Sigma</annotation></semantics></math></span> 上有定义。把曲面分成小片，面积分别为
+            <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                    mathvariant="normal">Δ</mi><msub><mi>S</mi><mi>i</mi></msub></mrow><annotation
+                    encoding="application/x-tex">\Delta S_i</annotation></semantics></math></span>，在小片上取点，作和
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>f</mi><mo
+                stretchy="false">(</mo><msub><mi>ξ</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>η</mi><mi>i</mi></msub><mo
+                separator="true">,</mo><msub><mi>ζ</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mi
+                mathvariant="normal">Δ</mi><msub><mi>S</mi><mi>i</mi></msub><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\sum_{i=1}^n f(\xi_i,\eta_i,\zeta_i)\Delta S_i.</annotation></semantics></math></span>
+        </div>
+        <p>极限存在时，称为第一类曲面积分：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∬</mo><mi mathvariant="normal">Σ</mi></msub><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo
+                stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>S</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\iint_\Sigma f(x,y,z)\,dS
+}.</annotation></semantics></math></span></div>
+        <h3 id="42-参数化计算"><a class="heading-anchor" href="#42-参数化计算" aria-label="回到本小节">#</a>4.2 参数化计算
+        </h3>
+        <p>若曲面由</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo stretchy="false">(</mo><mi>u</mi><mo
+                separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo
+                stretchy="false">(</mo><mi>u</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo><mi>y</mi><mo stretchy="false">(</mo><mi>u</mi><mo separator="true">,</mo><mi>v</mi><mo
+                stretchy="false">)</mo><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">(</mo><mi>u</mi><mo
+                separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">\vec r(u,v)=(x(u,v),y(u,v),z(u,v))</annotation></semantics></math></span>
+        </div>
+        <p>给出，则</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∬</mo><mi mathvariant="normal">Σ</mi></msub><mi>f</mi><mtext> </mtext><mi>d</mi><mi>S</mi><mo>=</mo><msub><mo>∬</mo><mi>D</mi></msub><mi>f</mi><mo
+                stretchy="false">(</mo><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mo stretchy="false">(</mo><mi>u</mi><mo
+                separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mi
+                mathvariant="normal">∣</mi><msub><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mi>u</mi></msub><mo>×</mo><msub><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mi>v</mi></msub><mi mathvariant="normal">∣</mi><mtext> </mtext><mi>d</mi><mi>u</mi><mtext> </mtext><mi>d</mi><mi>v</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\iint_\Sigma f\,dS
+=
+\iint_D
+f(\vec r(u,v))
+|\vec r_u\times\vec r_v|
+\,du\,dv
+}.</annotation></semantics></math></span></div>
+        <h3 id="43-显式曲面"><a class="heading-anchor" href="#43-显式曲面" aria-label="回到本小节">#</a>4.3 显式曲面
+        </h3>
+        <p>若曲面由</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>z</mi><mo>=</mo><mi>z</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo><mspace width="2em"/><mo stretchy="false">(</mo><mi>x</mi><mo
+                separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>D</mi></mrow><annotation
+                encoding="application/x-tex">z=z(x,y),\qquad (x,y)\in D</annotation></semantics></math></span></div>
+        <p>给出，则</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mi>d</mi><mi>S</mi><mo>=</mo><msqrt><mrow><mn>1</mn><mo>+</mo><msubsup><mi>z</mi><mi>x</mi><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>z</mi><mi>y</mi><mn>2</mn></msubsup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+dS=
+\sqrt{1+z_x^2+z_y^2}\,dx\,dy
+}.</annotation></semantics></math></span></div>
+        <p>因此</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo
+                separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo><mi>d</mi><mi>S</mi><mo>=</mo><msub><mo>∬</mo><mi>D</mi></msub><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">)</mo><msqrt><mrow><mn>1</mn><mo>+</mo><msubsup><mi>z</mi><mi>x</mi><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>z</mi><mi>y</mi><mn>2</mn></msubsup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma f(x,y,z)dS
+=
+\iint_D
+f(x,y,z(x,y))
+\sqrt{1+z_x^2+z_y^2}\,dx\,dy.</annotation></semantics></math></span></div>
+        <h3 id="44-几何与物理意义"><a class="heading-anchor" href="#44-几何与物理意义" aria-label="回到本小节">#</a>4.4
+            几何与物理意义</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mn>1</mn><mtext> </mtext><mi>d</mi><mi>S</mi></mrow><annotation
+                encoding="application/x-tex">\iint_\Sigma1\,dS</annotation></semantics></math></span></div>
+        <p>是曲面面积。</p>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation
+                encoding="application/x-tex">f</annotation></semantics></math></span> 是面密度，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>m</mi><mo>=</mo><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mi>f</mi><mtext> </mtext><mi>d</mi><mi>S</mi></mrow><annotation
+                encoding="application/x-tex">m=\iint_\Sigma f\,dS</annotation></semantics></math></span></div>
+        <p>是曲面薄片的质量。</p>
+        <hr class="section-rule">
+        <h2 id="五第二类曲面积分与通量"><a class="heading-anchor" href="#五第二类曲面积分与通量"
+                                           aria-label="回到本小节">#</a>五、第二类曲面积分与通量</h2>
+        <h3 id="51-定义"><a class="heading-anchor" href="#51-定义" aria-label="回到本小节">#</a>5.1 定义</h3>
+        <p>第二类曲面积分：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mi>P</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>R</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma P\,dy\,dz
++Q\,dz\,dx
++R\,dx\,dy.</annotation></semantics></math></span></div>
+        <p>向量形式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∬</mo><mi mathvariant="normal">Σ</mi></msub><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi></mrow></mstyle></mstyle></mstyle></menclose><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{
+\iint_\Sigma \vec F\cdot\vec n\,dS
+},</annotation></semantics></math></span></div>
+        <p>其中</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>P</mi><mo
+                separator="true">,</mo><mi>Q</mi><mo separator="true">,</mo><mi>R</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\vec F=(P,Q,R),</annotation></semantics></math></span></div>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>n</mi><mo>⃗</mo></mover></mrow><annotation
+                encoding="application/x-tex">\vec n</annotation></semantics></math></span> 是曲面的单位法向量。这个积分表示向量场穿过曲面的<strong>通量</strong>。
+        </p>
+        <h3 id="52-与第一类曲面积分的关系"><a class="heading-anchor" href="#52-与第一类曲面积分的关系"
+                                              aria-label="回到本小节">#</a>5.2 与第一类曲面积分的关系</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∬</mo><mi mathvariant="normal">Σ</mi></msub><mi>P</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>R</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>=</mo><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mo stretchy="false">(</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover
+                accent="true"><mi>n</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mi>d</mi><mi>S</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\iint_\Sigma P\,dy\,dz+Q\,dz\,dx+R\,dx\,dy
+=
+\iint_\Sigma(\vec F\cdot\vec n)dS
+}.</annotation></semantics></math></span></div>
+        <h3 id="53-显式曲面的计算"><a class="heading-anchor" href="#53-显式曲面的计算" aria-label="回到本小节">#</a>5.3
+            显式曲面的计算</h3>
+        <p>若曲面为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>z</mi><mo>=</mo><mi>z</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">z=z(x,y),</annotation></semantics></math></span></div>
+        <p>取上侧时，向量面积元为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mo>−</mo><msub><mi>z</mi><mi>x</mi></msub><mo
+                separator="true">,</mo><mo>−</mo><msub><mi>z</mi><mi>y</mi></msub><mo separator="true">,</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+(-z_x,-z_y,1)\,dx\,dy
+}.</annotation></semantics></math></span></div>
+        <p>因此</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mi>P</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>R</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>=</mo><msub><mo>∬</mo><mi>D</mi></msub><mrow><mo
+                fence="true">[</mo><mo>−</mo><mi>P</mi><msub><mi>z</mi><mi>x</mi></msub><mo>−</mo><mi>Q</mi><msub><mi>z</mi><mi>y</mi></msub><mo>+</mo><mi>R</mi><mo
+                fence="true">]</mo></mrow><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma P\,dy\,dz+Q\,dz\,dx+R\,dx\,dy
+=
+\iint_D
+\left[
+-P z_x-Q z_y+R
+\right]dx\,dy.</annotation></semantics></math></span></div>
+        <p>取下侧时整体变号。</p>
+        <h3 id="54-方向"><a class="heading-anchor" href="#54-方向" aria-label="回到本小节">#</a>5.4 方向</h3>
+        <p>曲面换侧，通量变号：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><msup><mi
+                mathvariant="normal">Σ</mi><mo>−</mo></msup></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover
+                accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi><mo>=</mo><mo>−</mo><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover
+                accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_{\Sigma^-}\vec F\cdot\vec n\,dS
+=
+-\iint_\Sigma\vec F\cdot\vec n\,dS.</annotation></semantics></math></span></div>
+        <h3 id="55-物理意义"><a class="heading-anchor" href="#55-物理意义" aria-label="回到本小节">#</a>5.5 物理意义
+        </h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover></mrow><annotation
+                encoding="application/x-tex">\vec F</annotation></semantics></math></span> 是流速场，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover
+                accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi></mrow><annotation
+                encoding="application/x-tex">\iint_\Sigma\vec F\cdot\vec n\,dS</annotation></semantics></math></span>
+        </div>
+        <p>是单位时间穿过曲面的流体体积（流量）。</p>
+        <hr class="section-rule">
+        <h2 id="六高斯公式与斯托克斯公式"><a class="heading-anchor" href="#六高斯公式与斯托克斯公式"
+                                             aria-label="回到本小节">#</a>六、高斯公式与斯托克斯公式</h2>
+        <h3 id="61-高斯公式"><a class="heading-anchor" href="#61-高斯公式" aria-label="回到本小节">#</a>6.1 高斯公式
+        </h3>
+        <p>设 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">Ω</mi></mrow><annotation
+                encoding="application/x-tex">\Omega</annotation></semantics></math></span> 是由分片光滑闭曲面 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">Σ</mi></mrow><annotation
+                encoding="application/x-tex">\Sigma</annotation></semantics></math></span> 围成的空间区域，<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">Σ</mi></mrow><annotation
+                encoding="application/x-tex">\Sigma</annotation></semantics></math></span> 取外侧，<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo separator="true">,</mo><mi>Q</mi><mo
+                separator="true">,</mo><mi>R</mi></mrow><annotation
+                encoding="application/x-tex">P,Q,R</annotation></semantics></math></span> 有连续偏导，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∬</mo><mi mathvariant="normal">Σ</mi></msub><mi>P</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>R</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>=</mo><msub><mo>∭</mo><mi
+                mathvariant="normal">Ω</mi></msub><mrow><mo fence="true">(</mo><mfrac><mrow><mi
+                mathvariant="normal">∂</mi><mi>P</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>x</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><mi
+                mathvariant="normal">∂</mi><mi>Q</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>y</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><mi
+                mathvariant="normal">∂</mi><mi>R</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>z</mi></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mi>d</mi><mi>V</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\iint_\Sigma P\,dy\,dz
++Q\,dz\,dx
++R\,dx\,dy
+=
+\iiint_\Omega
+\left(
+\frac{\partial P}{\partial x}
++\frac{\partial Q}{\partial y}
++\frac{\partial R}{\partial z}
+\right)dV
+}.</annotation></semantics></math></span></div>
+        <p>向量形式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∬</mo><mi mathvariant="normal">Σ</mi></msub><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi><mo>=</mo><msub><mo>∭</mo><mi
+                mathvariant="normal">Ω</mi></msub><mi mathvariant="normal">div</mi><mo>⁡</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>V</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\iint_\Sigma\vec F\cdot\vec n\,dS
+=
+\iiint_\Omega\operatorname{div}\vec F\,dV
+}.</annotation></semantics></math></span></div>
+        <h3 id="62-高斯公式的条件"><a class="heading-anchor" href="#62-高斯公式的条件" aria-label="回到本小节">#</a>6.2
+            高斯公式的条件</h3>
+        <ul>
+            <li>曲面必须闭合；</li>
+            <li>取外侧法向量；</li>
+            <li>向量场在区域内要有连续偏导；</li>
+            <li>若区域有洞，要挖去奇点或分块处理。</li>
+        </ul>
+        <h3 id="63-斯托克斯公式"><a class="heading-anchor" href="#63-斯托克斯公式" aria-label="回到本小节">#</a>6.3
+            斯托克斯公式</h3>
+        <p>设 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">Σ</mi></mrow><annotation
+                encoding="application/x-tex">\Sigma</annotation></semantics></math></span> 是分片光滑的有向曲面，其边界为分段光滑闭曲线
+            <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                    mathvariant="normal">Γ</mi></mrow><annotation
+                    encoding="application/x-tex">\Gamma</annotation></semantics></math></span>，<span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Γ</mi></mrow><annotation
+                    encoding="application/x-tex">\Gamma</annotation></semantics></math></span> 的方向与 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                    mathvariant="normal">Σ</mi></mrow><annotation
+                    encoding="application/x-tex">\Sigma</annotation></semantics></math></span> 的法向量满足右手法则，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∮</mo><mi mathvariant="normal">Γ</mi></msub><mi>P</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>+</mo><mi>R</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mo>=</mo><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mrow><mo fence="true">(</mo><mfrac><mrow><mi
+                mathvariant="normal">∂</mi><mi>R</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>y</mi></mrow></mfrac><mo>−</mo><mfrac><mrow><mi
+                mathvariant="normal">∂</mi><mi>Q</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>z</mi></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mi>d</mi><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mo>+</mo><mrow><mo
+                fence="true">(</mo><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>P</mi></mrow><mrow><mi
+                mathvariant="normal">∂</mi><mi>z</mi></mrow></mfrac><mo>−</mo><mfrac><mrow><mi
+                mathvariant="normal">∂</mi><mi>R</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>x</mi></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mi>d</mi><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mrow><mo
+                fence="true">(</mo><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>Q</mi></mrow><mrow><mi
+                mathvariant="normal">∂</mi><mi>x</mi></mrow></mfrac><mo>−</mo><mfrac><mrow><mi
+                mathvariant="normal">∂</mi><mi>P</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>y</mi></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\oint_\Gamma P\,dx+Q\,dy+R\,dz
+=
+\iint_\Sigma
+\left(
+\frac{\partial R}{\partial y}
+-
+\frac{\partial Q}{\partial z}
+\right)dy\,dz
++\left(
+\frac{\partial P}{\partial z}
+-
+\frac{\partial R}{\partial x}
+\right)dz\,dx
++\left(
+\frac{\partial Q}{\partial x}
+-
+\frac{\partial P}{\partial y}
+\right)dx\,dy
+}.</annotation></semantics></math></span></div>
+        <p>向量形式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msub><mo>∮</mo><mi mathvariant="normal">Γ</mi></msub><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mo stretchy="false">(</mo><mi mathvariant="normal">curl</mi><mo>⁡</mo><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mo>⋅</mo><mover accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\oint_\Gamma\vec F\cdot d\vec r
+=
+\iint_\Sigma(\operatorname{curl}\vec F)\cdot\vec n\,dS
+}.</annotation></semantics></math></span></div>
+        <h3 id="64-旋度"><a class="heading-anchor" href="#64-旋度" aria-label="回到本小节">#</a>6.4 旋度</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">curl</mi><mo>⁡</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mrow><mo
+                fence="true">∣</mo><mtable rowspacing="0.16em" columnalign="center center center" columnspacing="1em"><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi mathvariant="bold">i</mi></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi mathvariant="bold">j</mi></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi mathvariant="bold">k</mi></mstyle></mtd></mtr><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><msub><mi mathvariant="normal">∂</mi><mi>x</mi></msub></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><msub><mi mathvariant="normal">∂</mi><mi>y</mi></msub></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><msub><mi mathvariant="normal">∂</mi><mi>z</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi>P</mi></mstyle></mtd><mtd><mstyle scriptlevel="0"
+                                                                                           displaystyle="false"><mi>Q</mi></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi>R</mi></mstyle></mtd></mtr></mtable><mo
+                fence="true">∣</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\operatorname{curl}\vec F
+=
+\begin{vmatrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+\partial_x&amp;\partial_y&amp;\partial_z\\
+P&amp;Q&amp;R
+\end{vmatrix}.</annotation></semantics></math></span></div>
+        <h3 id="65-三个公式的统一"><a class="heading-anchor" href="#65-三个公式的统一" aria-label="回到本小节">#</a>6.5
+            三个公式的统一</h3>
+        <ul>
+            <li>格林公式：平面区域的边界；</li>
+            <li>高斯公式：空间区域的边界曲面；</li>
+            <li>斯托克斯公式：空间曲面的边界曲线。</li>
+        </ul>
+        <p>它们都把“边界上的积分”转化为“内部或曲面上的积分”。</p>
+        <hr class="section-rule">
+        <h2 id="七典型例题"><a class="heading-anchor" href="#七典型例题" aria-label="回到本小节">#</a>七、典型例题</h2>
+        <h3 id="例-1第一类曲线积分"><a class="heading-anchor" href="#例-1第一类曲线积分" aria-label="回到本小节">#</a>例
+            1：第一类曲线积分</h3>
+        <p>计算</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∫</mo><mi>L</mi></msub><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>s</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\int_L(x+y)\,ds,</annotation></semantics></math></span></div>
+        <p>其中 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 是从 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>0</mn><mo
+                separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(0,0)</annotation></semantics></math></span> 到 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>1</mn><mo
+                separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(1,1)</annotation></semantics></math></span> 的直线段。
+        </p>
+        <p><strong>解</strong></p>
+        <p>参数化：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mi>t</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>y</mi><mo>=</mo><mi>t</mi><mo separator="true">,</mo><mspace
+                width="2em"/><mn>0</mn><mo>≤</mo><mi>t</mi><mo>≤</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">x=t,\qquad y=t,\qquad 0\le t\le1.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>s</mi><mo>=</mo><msqrt><mrow><msup><mn>1</mn><mn>2</mn></msup><mo>+</mo><msup><mn>1</mn><mn>2</mn></msup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>t</mi><mo>=</mo><msqrt><mn>2</mn></msqrt><mtext> </mtext><mi>d</mi><mi>t</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">ds=\sqrt{1^2+1^2}\,dt=\sqrt2\,dt.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∫</mo><mi>L</mi></msub><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mi>d</mi><mi>s</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><mo
+                stretchy="false">(</mo><mn>2</mn><mi>t</mi><mo stretchy="false">)</mo><msqrt><mn>2</mn></msqrt><mtext> </mtext><mi>d</mi><mi>t</mi><mo>=</mo><mn>2</mn><msqrt><mn>2</mn></msqrt><mo>⋅</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>=</mo><msqrt><mn>2</mn></msqrt><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int_L(x+y)ds
+=
+\int_0^1(2t)\sqrt2\,dt
+=
+2\sqrt2\cdot\frac12
+=
+\sqrt2.</annotation></semantics></math></span></div>
+        <h3 id="例-2第二类曲线积分"><a class="heading-anchor" href="#例-2第二类曲线积分" aria-label="回到本小节">#</a>例
+            2：第二类曲线积分</h3>
+        <p>计算</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∮</mo><mi>L</mi></msub><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>−</mo><mi>y</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\oint_L x\,dy-y\,dx,</annotation></semantics></math></span>
+        </div>
+        <p>其中 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 是单位圆 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">x^2+y^2=1</annotation></semantics></math></span>，逆时针方向。
+        </p>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>t</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>y</mi><mo>=</mo><mi>sin</mi><mo>⁡</mo><mi>t</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mn>0</mn><mo>≤</mo><mi>t</mi><mo>≤</mo><mn>2</mn><mi>π</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">x=\cos t,\qquad y=\sin t,\qquad 0\le t\le2\pi.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>x</mi><mo>=</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>t</mi><mtext> </mtext><mi>d</mi><mi>t</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>d</mi><mi>y</mi><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>t</mi><mtext> </mtext><mi>d</mi><mi>t</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">dx=-\sin t\,dt,\qquad dy=\cos t\,dt.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>−</mo><mi>y</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>=</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>t</mi><mo>+</mo><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>t</mi><mo>=</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">x\,dy-y\,dx
+=
+\cos^2t+\sin^2t
+=
+1.</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∮</mo><mi>L</mi></msub><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>−</mo><mi>y</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mrow><mn>2</mn><mi>π</mi></mrow></msubsup><mn>1</mn><mtext> </mtext><mi>d</mi><mi>t</mi><mo>=</mo><mn>2</mn><mi>π</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\oint_L x\,dy-y\,dx
+=
+\int_0^{2\pi}1\,dt
+=
+2\pi.</annotation></semantics></math></span></div>
+        <h3 id="例-3格林公式"><a class="heading-anchor" href="#例-3格林公式" aria-label="回到本小节">#</a>例 3：格林公式
+        </h3>
+        <p>计算</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∮</mo><mi>L</mi></msub><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mi>y</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>+</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo stretchy="false">)</mo><mi>d</mi><mi>y</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\oint_L(x^2-y)dx+(x+y^2)dy,</annotation></semantics></math></span></div>
+        <p>其中 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                encoding="application/x-tex">L</annotation></semantics></math></span> 是单位圆逆时针方向。
+        </p>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mi>y</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>Q</mi><mo>=</mo><mi>x</mi><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">P=x^2-y,\qquad Q=x+y^2.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>Q</mi><mi>x</mi></msub><mo>=</mo><mn>1</mn><mo
+                separator="true">,</mo><mspace width="2em"/><msub><mi>P</mi><mi>y</mi></msub><mo>=</mo><mo>−</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">Q_x=1,\qquad P_y=-1.</annotation></semantics></math></span></div>
+        <p>由格林公式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∮</mo><mi>L</mi></msub><mi>P</mi><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mi>d</mi><mi>y</mi><mo>=</mo><msub><mo>∬</mo><mi>D</mi></msub><mo
+                stretchy="false">(</mo><mn>1</mn><mo>−</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mo stretchy="false">)</mo><mi>d</mi><mi>A</mi><mo>=</mo><mn>2</mn><msub><mo>∬</mo><mi>D</mi></msub><mi>d</mi><mi>A</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\oint_L Pdx+Qdy
+=
+\iint_D(1-(-1))dA
+=
+2\iint_D dA.</annotation></semantics></math></span></div>
+        <p>单位圆面积 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation
+                encoding="application/x-tex">\pi</annotation></semantics></math></span>，所以
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mn>2</mn><mi>π</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{2\pi}.</annotation></semantics></math></span></div>
+        <h3 id="例-4路径无关与势函数"><a class="heading-anchor" href="#例-4路径无关与势函数"
+                                         aria-label="回到本小节">#</a>例 4：路径无关与势函数</h3>
+        <p>计算</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msubsup><mo>∫</mo><mrow><mo
+                stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><mrow><mo
+                stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msubsup><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mi>y</mi><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo
+                stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>+</mo><mo stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mi>y</mi><mo
+                stretchy="false">)</mo><mi>d</mi><mi>y</mi><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\int_{(0,0)}^{(1,2)}
+(2xy+y^2)dx+(x^2+2xy)dy.</annotation></semantics></math></span></div>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo>=</mo><mn>2</mn><mi>x</mi><mi>y</mi><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo
+                separator="true">,</mo><mspace width="2em"/><mi>Q</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">P=2xy+y^2,\qquad Q=x^2+2xy.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>P</mi><mi>y</mi></msub><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>2</mn><mi>y</mi><mo>=</mo><msub><mi>Q</mi><mi>x</mi></msub><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">P_y=2x+2y=Q_x.</annotation></semantics></math></span></div>
+        <p>所以积分与路径无关，存在势函数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation
+                encoding="application/x-tex">u</annotation></semantics></math></span>。
+        </p>
+        <p>由</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>u</mi><mi>x</mi></msub><mo>=</mo><mn>2</mn><mi>x</mi><mi>y</mi><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow><annotation
+                encoding="application/x-tex">u_x=2xy+y^2</annotation></semantics></math></span></div>
+        <p>积分得</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>u</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mi>y</mi><mo>+</mo><mi>x</mi><msup><mi>y</mi><mn>2</mn></msup><mo>+</mo><mi>C</mi><mo
+                stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">u=x^2y+xy^2+C(y).</annotation></semantics></math></span></div>
+        <p>再由</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>u</mi><mi>y</mi></msub><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mi>y</mi></mrow><annotation
+                encoding="application/x-tex">u_y=x^2+2xy</annotation></semantics></math></span></div>
+        <p>可得 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>C</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><mi>y</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">C&#x27;(y)=0</annotation></semantics></math></span>，所以
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>u</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mi>y</mi><mo>+</mo><mi>x</mi><msup><mi>y</mi><mn>2</mn></msup><mo>+</mo><mi>C</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">u=x^2y+xy^2+C.</annotation></semantics></math></span></div>
+        <p>因此</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msubsup><mo>∫</mo><mrow><mo
+                stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><mrow><mo
+                stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msubsup><mi>P</mi><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mi>d</mi><mi>y</mi><mo>=</mo><mi>u</mi><mo
+                stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo><mo>−</mo><mi>u</mi><mo
+                stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><mo>+</mo><mn>4</mn><mo>=</mo><mn>6.</mn></mrow><annotation
+                encoding="application/x-tex">\int_{(0,0)}^{(1,2)}
+Pdx+Qdy
+=
+u(1,2)-u(0,0)
+=
+2+4
+=
+6.</annotation></semantics></math></span></div>
+        <h3 id="例-5第一类曲面积分"><a class="heading-anchor" href="#例-5第一类曲面积分" aria-label="回到本小节">#</a>例
+            5：第一类曲面积分</h3>
+        <p>计算</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo
+                stretchy="false">)</mo><mi>d</mi><mi>S</mi><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\iint_\Sigma(x+y)dS,</annotation></semantics></math></span></div>
+        <p>其中</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">Σ</mi><mo>:</mo><mtext> </mtext><mi>z</mi><mo>=</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mn>0</mn><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>1</mn><mo
+                separator="true">,</mo><mtext> </mtext><mn>0</mn><mo>≤</mo><mi>y</mi><mo>≤</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">\Sigma:\ z=x+y,\qquad 0\le x\le1,\ 0\le y\le1.</annotation></semantics></math></span>
+        </div>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>z</mi><mi>x</mi></msub><mo>=</mo><mn>1</mn><mo
+                separator="true">,</mo><mspace width="2em"/><msub><mi>z</mi><mi>y</mi></msub><mo>=</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">z_x=1,\qquad z_y=1.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>S</mi><mo>=</mo><msqrt><mrow><mn>1</mn><mo>+</mo><mn>1</mn><mo>+</mo><mn>1</mn></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>=</mo><msqrt><mn>3</mn></msqrt><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">dS=\sqrt{1+1+1}\,dx\,dy=\sqrt3\,dx\,dy.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo
+                stretchy="false">)</mo><mi>d</mi><mi>S</mi><mo>=</mo><msqrt><mn>3</mn></msqrt><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mi>d</mi><mi>y</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma(x+y)dS
+=
+\sqrt3\int_0^1\int_0^1(x+y)dy\,dx.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><msqrt><mn>3</mn></msqrt><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><mrow><mo
+                fence="true">(</mo><mi>x</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo fence="true">)</mo></mrow><mi>d</mi><mi>x</mi><mo>=</mo><msqrt><mn>3</mn></msqrt><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">=
+\sqrt3\int_0^1\left(x+\frac12\right)dx
+=
+\sqrt3.</annotation></semantics></math></span></div>
+        <h3 id="例-6第二类曲面积分"><a class="heading-anchor" href="#例-6第二类曲面积分" aria-label="回到本小节">#</a>例
+            6：第二类曲面积分</h3>
+        <p>计算向量场</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn><mo
+                separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">\vec F=(0,0,z)</annotation></semantics></math></span></div>
+        <p>穿过上半球面</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">Σ</mi><mo>:</mo><mtext> </mtext><mi>z</mi><mo>=</mo><msqrt><mrow><mn>1</mn><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></msqrt></mrow><annotation
+                encoding="application/x-tex">\Sigma:\ z=\sqrt{1-x^2-y^2}</annotation></semantics></math></span></div>
+        <p>向上侧的通量。</p>
+        <p><strong>解</strong></p>
+        <p>曲面显式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>z</mi><mi>x</mi></msub><mo>=</mo><mo>−</mo><mfrac><mi>x</mi><mi>z</mi></mfrac><mo
+                separator="true">,</mo><mspace width="2em"/><msub><mi>z</mi><mi>y</mi></msub><mo>=</mo><mo>−</mo><mfrac><mi>y</mi><mi>z</mi></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">z_x=-\frac{x}{z},\qquad z_y=-\frac{y}{z}.</annotation></semantics></math></span>
+        </div>
+        <p>上侧向量面积元：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mo>−</mo><msub><mi>z</mi><mi>x</mi></msub><mo separator="true">,</mo><mo>−</mo><msub><mi>z</mi><mi>y</mi></msub><mo
+                separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mi>d</mi><mi>y</mi><mo>=</mo><mrow><mo
+                fence="true">(</mo><mfrac><mi>x</mi><mi>z</mi></mfrac><mo separator="true">,</mo><mfrac><mi>y</mi><mi>z</mi></mfrac><mo
+                separator="true">,</mo><mn>1</mn><mo fence="true">)</mo></mrow><mi>d</mi><mi>x</mi><mi>d</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">(-z_x,-z_y,1)dxdy
+=
+\left(\frac xz,\frac yz,1\right)dxdy.</annotation></semantics></math></span></div>
+        <p>与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn><mo
+                separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">\vec F=(0,0,z)</annotation></semantics></math></span> 点积：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi><mo>=</mo><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec F\cdot\vec n\,dS
+=
+z\,dx\,dy.</annotation></semantics></math></span></div>
+        <p>投影区域为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>≤</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">x^2+y^2\le1</annotation></semantics></math></span>。极坐标：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover
+                accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mrow><mn>2</mn><mi>π</mi></mrow></msubsup><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><msqrt><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></msqrt><mtext> </mtext><mi>r</mi><mtext> </mtext><mi>d</mi><mi>r</mi><mtext> </mtext><mi>d</mi><mi>θ</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma\vec F\cdot\vec n\,dS
+=
+\int_0^{2\pi}\int_0^1
+\sqrt{1-r^2}\,r\,dr\,d\theta.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mn>2</mn><mi>π</mi><mo>⋅</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>=</mo><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mn>3</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">=
+2\pi\cdot\frac13
+=
+\frac{2\pi}{3}.</annotation></semantics></math></span></div>
+        <h3 id="例-7高斯公式"><a class="heading-anchor" href="#例-7高斯公式" aria-label="回到本小节">#</a>例 7：高斯公式
+        </h3>
+        <p>计算</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><msup><mi>x</mi><mn>2</mn></msup><mi>d</mi><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mi>d</mi><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><msup><mi>z</mi><mn>2</mn></msup><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\iint_\Sigma x^2dy\,dz+y^2dz\,dx+z^2dx\,dy,</annotation></semantics></math></span>
+        </div>
+        <p>其中 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">Σ</mi></mrow><annotation
+                encoding="application/x-tex">\Sigma</annotation></semantics></math></span> 是立方体 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo
+                separator="true">,</mo><mn>1</mn><msup><mo stretchy="false">]</mo><mn>3</mn></msup></mrow><annotation
+                encoding="application/x-tex">[0,1]^3</annotation></semantics></math></span> 的外表面。
+        </p>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo
+                separator="true">,</mo><mspace width="2em"/><mi>Q</mi><mo>=</mo><msup><mi>y</mi><mn>2</mn></msup><mo
+                separator="true">,</mo><mspace width="2em"/><mi>R</mi><mo>=</mo><msup><mi>z</mi><mn>2</mn></msup><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">P=x^2,\qquad Q=y^2,\qquad R=z^2.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>P</mi><mi>x</mi></msub><mo>+</mo><msub><mi>Q</mi><mi>y</mi></msub><mo>+</mo><msub><mi>R</mi><mi>z</mi></msub><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>2</mn><mi>y</mi><mo>+</mo><mn>2</mn><mi>z</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">P_x+Q_y+R_z=2x+2y+2z.</annotation></semantics></math></span></div>
+        <p>由高斯公式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mo>=</mo><msub><mo>∭</mo><mi mathvariant="normal">Ω</mi></msub><mn>2</mn><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo>+</mo><mi>z</mi><mo stretchy="false">)</mo><mi>d</mi><mi>V</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma
+=
+\iiint_\Omega 2(x+y+z)dV.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mn>2</mn><mrow><mo
+                fence="true">[</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo
+                fence="true">]</mo></mrow><mo>=</mo><mn>3.</mn></mrow><annotation encoding="application/x-tex">=
+2\left[
+\frac12+\frac12+\frac12
+\right]
+=
+3.</annotation></semantics></math></span></div>
+        <h3 id="例-8斯托克斯公式"><a class="heading-anchor" href="#例-8斯托克斯公式" aria-label="回到本小节">#</a>例
+            8：斯托克斯公式</h3>
+        <p>计算</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∮</mo><mi
+                mathvariant="normal">Γ</mi></msub><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>+</mo><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\oint_\Gamma z\,dx+x\,dy+y\,dz,</annotation></semantics></math></span>
+        </div>
+        <p>其中 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">Γ</mi></mrow><annotation
+                encoding="application/x-tex">\Gamma</annotation></semantics></math></span> 是 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mi>y</mi></mrow><annotation
+                encoding="application/x-tex">xy</annotation></semantics></math></span> 平面上的单位圆，逆时针方向。
+        </p>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mi>z</mi><mo
+                separator="true">,</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\vec F=(z,x,y).</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">curl</mi><mo>⁡</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mrow><mo
+                fence="true">∣</mo><mtable rowspacing="0.16em" columnalign="center center center" columnspacing="1em"><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi mathvariant="bold">i</mi></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi mathvariant="bold">j</mi></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi mathvariant="bold">k</mi></mstyle></mtd></mtr><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><msub><mi mathvariant="normal">∂</mi><mi>x</mi></msub></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><msub><mi mathvariant="normal">∂</mi><mi>y</mi></msub></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><msub><mi mathvariant="normal">∂</mi><mi>z</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi>z</mi></mstyle></mtd><mtd><mstyle scriptlevel="0"
+                                                                                           displaystyle="false"><mi>x</mi></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mi>y</mi></mstyle></mtd></mtr></mtable><mo
+                fence="true">∣</mo></mrow><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo
+                separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\operatorname{curl}\vec F
+=
+\begin{vmatrix}
+\mathbf i&amp;\mathbf j&amp;\mathbf k\\
+\partial_x&amp;\partial_y&amp;\partial_z\\
+z&amp;x&amp;y
+\end{vmatrix}
+=
+(1,1,1).</annotation></semantics></math></span></div>
+        <p>取平面 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">z=0</annotation></semantics></math></span> 上的单位圆盘为 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">Σ</mi></mrow><annotation
+                encoding="application/x-tex">\Sigma</annotation></semantics></math></span>，法向量 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>n</mi><mo>⃗</mo></mover><mo>=</mo><mo
+                stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo
+                stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">\vec n=(0,0,1)</annotation></semantics></math></span>。由斯托克斯公式：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∮</mo><mi
+                mathvariant="normal">Γ</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo
+                separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mo>⋅</mo><mo stretchy="false">(</mo><mn>0</mn><mo
+                separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mi>d</mi><mi>S</mi><mo>=</mo><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mn>1</mn><mtext> </mtext><mi>d</mi><mi>S</mi><mo>=</mo><mi>π</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\oint_\Gamma\vec F\cdot d\vec r
+=
+\iint_\Sigma(1,1,1)\cdot(0,0,1)dS
+=
+\iint_\Sigma1\,dS
+=
+\pi.</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="八易错点提示"><a class="heading-anchor" href="#八易错点提示" aria-label="回到本小节">#</a>八、易错点提示
+        </h2>
+        <h3 id="1-第一类与第二类积分混淆"><a class="heading-anchor" href="#1-第一类与第二类积分混淆"
+                                             aria-label="回到本小节">#</a>1. 第一类与第二类积分混淆</h3>
+        <ul>
+            <li>第一类曲线积分对弧长 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>s</mi></mrow><annotation
+                    encoding="application/x-tex">ds</annotation></semantics></math></span>，与方向无关；
+            </li>
+            <li>第二类曲线积分对坐标 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>x</mi><mo
+                    separator="true">,</mo><mi>d</mi><mi>y</mi><mo separator="true">,</mo><mi>d</mi><mi>z</mi></mrow><annotation
+                    encoding="application/x-tex">dx,dy,dz</annotation></semantics></math></span>，与方向有关。
+            </li>
+        </ul>
+        <h3 id="2-第二类曲线积分忘记方向"><a class="heading-anchor" href="#2-第二类曲线积分忘记方向"
+                                             aria-label="回到本小节">#</a>2. 第二类曲线积分忘记方向</h3>
+        <p>曲线反向，积分变号。参数化时必须按题目指定方向取参数范围。</p>
+        <h3 id="3-格林公式方向弄反"><a class="heading-anchor" href="#3-格林公式方向弄反" aria-label="回到本小节">#</a>3.
+            格林公式方向弄反</h3>
+        <p>格林公式要求边界正向：沿边界走时区域在左侧。外边界逆时针，内边界顺时针。</p>
+        <h3 id="4-格林公式用于非闭曲线"><a class="heading-anchor" href="#4-格林公式用于非闭曲线"
+                                           aria-label="回到本小节">#</a>4. 格林公式用于非闭曲线</h3>
+        <p>格林公式适用于闭曲线围成的区域。非闭曲线要补线，或者直接参数化计算。</p>
+        <h3 id="5-忘记-的顺序"><a class="heading-anchor" href="#5-忘记-的顺序" aria-label="回到本小节">#</a>5. 忘记
+            <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>x</mi></msub><mo>−</mo><msub><mi>P</mi><mi>y</mi></msub></mrow><annotation
+                    encoding="application/x-tex">Q_x-P_y</annotation></semantics></math></span> 的顺序
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∮</mo><mi>P</mi><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mi>d</mi><mi>y</mi><mo>=</mo><mo>∬</mo><mo
+                stretchy="false">(</mo><msub><mi>Q</mi><mi>x</mi></msub><mo>−</mo><msub><mi>P</mi><mi>y</mi></msub><mo
+                stretchy="false">)</mo><mi>d</mi><mi>A</mi><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\oint Pdx+Qdy
+=
+\iint(Q_x-P_y)dA.</annotation></semantics></math></span></div>
+        <p>不是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mi>x</mi></msub><mo>−</mo><msub><mi>Q</mi><mi>y</mi></msub></mrow><annotation
+                encoding="application/x-tex">P_x-Q_y</annotation></semantics></math></span>。
+        </p>
+        <h3 id="6-路径无关条件用错"><a class="heading-anchor" href="#6-路径无关条件用错" aria-label="回到本小节">#</a>6.
+            路径无关条件用错</h3>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>x</mi></msub><mo>=</mo><msub><mi>P</mi><mi>y</mi></msub></mrow><annotation
+                encoding="application/x-tex">Q_x=P_y</annotation></semantics></math></span> 需要在单连通区域上才保证路径无关。有洞区域要特别小心。
+        </p>
+        <h3 id="7-曲面积分忘记面积元"><a class="heading-anchor" href="#7-曲面积分忘记面积元"
+                                         aria-label="回到本小节">#</a>7. 曲面积分忘记面积元</h3>
+        <p>第一类曲面积分：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>S</mi><mo>=</mo><msqrt><mrow><mn>1</mn><mo>+</mo><msubsup><mi>z</mi><mi>x</mi><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>z</mi><mi>y</mi><mn>2</mn></msubsup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>x</mi><mi>d</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">dS=\sqrt{1+z_x^2+z_y^2}\,dxdy.</annotation></semantics></math></span>
+        </div>
+        <p>不要漏掉根号。</p>
+        <h3 id="8-第二类曲面积分方向写错"><a class="heading-anchor" href="#8-第二类曲面积分方向写错"
+                                             aria-label="回到本小节">#</a>8. 第二类曲面积分方向写错</h3>
+        <p>上侧与下侧、外侧与内侧会差一个负号。要明确题目要求哪一侧。</p>
+        <h3 id="9-高斯公式用于非闭曲面"><a class="heading-anchor" href="#9-高斯公式用于非闭曲面"
+                                           aria-label="回到本小节">#</a>9. 高斯公式用于非闭曲面</h3>
+        <p>高斯公式要求闭合曲面。若曲面不闭合，要补面，或者直接用第二类曲面积分。</p>
+        <h3 id="10-高斯公式法向量方向错误"><a class="heading-anchor" href="#10-高斯公式法向量方向错误"
+                                              aria-label="回到本小节">#</a>10. 高斯公式法向量方向错误</h3>
+        <p>高斯公式使用外法向量。若题目要求内侧，要加负号。</p>
+        <h3 id="11-斯托克斯公式边界方向错误"><a class="heading-anchor" href="#11-斯托克斯公式边界方向错误"
+                                                aria-label="回到本小节">#</a>11. 斯托克斯公式边界方向错误</h3>
+        <p>曲线方向与曲面法向量必须满足右手法则。方向反了，结果变号。</p>
+        <h3 id="12-旋度计算符号错误"><a class="heading-anchor" href="#12-旋度计算符号错误" aria-label="回到本小节">#</a>12.
+            旋度计算符号错误</h3>
+        <p>旋度行列式展开时注意第二项的负号：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">curl</mi><mo>⁡</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo
+                stretchy="false">(</mo><msub><mi>R</mi><mi>y</mi></msub><mo>−</mo><msub><mi>Q</mi><mi>z</mi></msub><mo
+                separator="true">,</mo><mtext> </mtext><msub><mi>P</mi><mi>z</mi></msub><mo>−</mo><msub><mi>R</mi><mi>x</mi></msub><mo
+                separator="true">,</mo><mtext> </mtext><msub><mi>Q</mi><mi>x</mi></msub><mo>−</mo><msub><mi>P</mi><mi>y</mi></msub><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\operatorname{curl}\vec F
+=
+(R_y-Q_z,\ P_z-R_x,\ Q_x-P_y).</annotation></semantics></math></span></div>
+        <h3 id="13-奇点未处理"><a class="heading-anchor" href="#13-奇点未处理" aria-label="回到本小节">#</a>13. 奇点未处理
+        </h3>
+        <p>若向量场在区域内有奇点，不能直接使用高斯公式或格林公式，要挖去奇点或分块处理。</p>
+        <h3 id="14-参数范围写错"><a class="heading-anchor" href="#14-参数范围写错" aria-label="回到本小节">#</a>14.
+            参数范围写错</h3>
+        <p>曲线参数、曲面参数的范围决定了积分区域，漏掉一段或方向反了都会出错。</p>
+        <hr class="section-rule">
+        <h2 id="九课后练习"><a class="heading-anchor" href="#九课后练习" aria-label="回到本小节">#</a>九、课后练习</h2>
+        <ol>
+            <li>计算 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><msub><mo>∫</mo><mi>L</mi></msub><mo stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo
+                    stretchy="false">)</mo><mi>d</mi><mi>s</mi></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle\int_L(x^2+y^2)ds</annotation></semantics></math></span>，其中
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                        encoding="application/x-tex">L</annotation></semantics></math></span> 是从 <span class="katex"><math
+                        xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>0</mn><mo
+                        separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation
+                        encoding="application/x-tex">(0,0)</annotation></semantics></math></span> 到 <span
+                        class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                        stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo
+                        stretchy="false">)</mo></mrow><annotation
+                        encoding="application/x-tex">(1,1)</annotation></semantics></math></span> 的直线段。
+            </li>
+            <li>计算 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><msub><mo>∫</mo><mi>L</mi></msub><mi>y</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\int_L y\,dx+x\,dy</annotation></semantics></math></span>，其中
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                        encoding="application/x-tex">L</annotation></semantics></math></span> 是抛物线 <span
+                        class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation
+                        encoding="application/x-tex">y=x^2</annotation></semantics></math></span> 从 <span
+                        class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                        stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo
+                        stretchy="false">)</mo></mrow><annotation
+                        encoding="application/x-tex">(0,0)</annotation></semantics></math></span> 到 <span
+                        class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                        stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo
+                        stretchy="false">)</mo></mrow><annotation
+                        encoding="application/x-tex">(1,1)</annotation></semantics></math></span>。
+            </li>
+            <li>用格林公式计算 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><msub><mo>∮</mo><mi>L</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo
+                    stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>−</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><mo
+                    stretchy="false">)</mo><mi>d</mi><mi>y</mi></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle\oint_L(x+y)dx-(x-y)dy</annotation></semantics></math></span>，其中
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation
+                        encoding="application/x-tex">L</annotation></semantics></math></span> 是单位圆逆时针方向。
+            </li>
+            <li>计算 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><msubsup><mo>∫</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo
+                    separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><mrow><mo stretchy="false">(</mo><mn>2</mn><mo
+                    separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msubsup><mo
+                    stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>+</mo><mo
+                    stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mi>y</mi><mo stretchy="false">)</mo><mi>d</mi><mi>y</mi></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\int_{(0,0)}^{(2,1)}(2x+y)dx+(x+2y)dy</annotation></semantics></math></span>。
+            </li>
+            <li>求曲面 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow><annotation
+                    encoding="application/x-tex">z=x^2+y^2</annotation></semantics></math></span> 在 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>≤</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">x^2+y^2\le1</annotation></semantics></math></span> 上的面积。
+            </li>
+            <li>计算向量场 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover
+                    accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn><mo
+                    separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mi>z</mi><mo
+                    stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">\vec F=(0,0,z)</annotation></semantics></math></span> 穿过上半球面
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><msqrt><mrow><mn>1</mn><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></msqrt></mrow><annotation
+                        encoding="application/x-tex">z=\sqrt{1-x^2-y^2}</annotation></semantics></math></span> 向上侧的通量。
+            </li>
+            <li>用高斯公式计算 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><msub><mo>∬</mo><mi mathvariant="normal">Σ</mi></msub><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mo>+</mo><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\iint_\Sigma x\,dy\,dz+y\,dz\,dx+z\,dx\,dy</annotation></semantics></math></span>，其中
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                        mathvariant="normal">Σ</mi></mrow><annotation
+                        encoding="application/x-tex">\Sigma</annotation></semantics></math></span> 是立方体 <span
+                        class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                        stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><msup><mo
+                        stretchy="false">]</mo><mn>3</mn></msup></mrow><annotation
+                        encoding="application/x-tex">[0,1]^3</annotation></semantics></math></span> 的外表面。
+            </li>
+            <li>用斯托克斯公式计算 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><msub><mo>∮</mo><mi mathvariant="normal">Γ</mi></msub><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>+</mo><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\oint_\Gamma z\,dx+x\,dy+y\,dz</annotation></semantics></math></span>，其中
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                        mathvariant="normal">Γ</mi></mrow><annotation
+                        encoding="application/x-tex">\Gamma</annotation></semantics></math></span> 是 <span
+                        class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mi>y</mi></mrow><annotation
+                        encoding="application/x-tex">xy</annotation></semantics></math></span> 平面上的单位圆，逆时针方向。
+            </li>
+            <li>用格林公式证明椭圆 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><msup><mi>x</mi><mn>2</mn></msup><msup><mi>a</mi><mn>2</mn></msup></mfrac><mo>+</mo><mfrac><msup><mi>y</mi><mn>2</mn></msup><msup><mi>b</mi><mn>2</mn></msup></mfrac><mo>=</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">\frac{x^2}{a^2}+\frac{y^2}{b^2}=1</annotation></semantics></math></span>
+                的面积为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><mi>a</mi><mi>b</mi></mrow><annotation
+                        encoding="application/x-tex">\pi ab</annotation></semantics></math></span>。
+            </li>
+            <li>计算 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><msub><mo>∬</mo><mi mathvariant="normal">Σ</mi></msub><mo
+                    stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo
+                    stretchy="false">)</mo><mi>d</mi><mi>S</mi></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle\iint_\Sigma(x^2+y^2)dS</annotation></semantics></math></span>，其中
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                        mathvariant="normal">Σ</mi></mrow><annotation
+                        encoding="application/x-tex">\Sigma</annotation></semantics></math></span> 是圆柱面 <span
+                        class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn><mo
+                        separator="true">,</mo><mtext> </mtext><mn>0</mn><mo>≤</mo><mi>z</mi><mo>≤</mo><mn>1</mn></mrow><annotation
+                        encoding="application/x-tex">x^2+y^2=1,\ 0\le z\le1</annotation></semantics></math></span>。
+            </li>
+        </ol>
+        <hr class="section-rule">
+        <h2 id="十练习答案与解析"><a class="heading-anchor" href="#十练习答案与解析" aria-label="回到本小节">#</a>十、练习答案与解析
+        </h2>
+        <h3 id="1-答案"><a class="heading-anchor" href="#1-答案" aria-label="回到本小节">#</a>1. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0"
+                                                                                                        displaystyle="true"><mfrac><mrow><mn>2</mn><msqrt><mn>2</mn></msqrt></mrow><mn>3</mn></mfrac></mstyle></mrow><annotation
+                encoding="application/x-tex">\dfrac{2\sqrt2}{3}</annotation></semantics></math></span></h3>
+        <p>参数化 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mi>t</mi><mo
+                separator="true">,</mo><mi>y</mi><mo>=</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">x=t,y=t</annotation></semantics></math></span>，<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>t</mi><mo>≤</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">0\le t\le1</annotation></semantics></math></span>，<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>s</mi><mo>=</mo><msqrt><mn>2</mn></msqrt><mi>d</mi><mi>t</mi></mrow><annotation
+                encoding="application/x-tex">ds=\sqrt2dt</annotation></semantics></math></span>。
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><mn>2</mn><msup><mi>t</mi><mn>2</mn></msup><msqrt><mn>2</mn></msqrt><mtext> </mtext><mi>d</mi><mi>t</mi><mo>=</mo><mfrac><mrow><mn>2</mn><msqrt><mn>2</mn></msqrt></mrow><mn>3</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int_0^1 2t^2\sqrt2\,dt
+=
+\frac{2\sqrt2}{3}.</annotation></semantics></math></span></div>
+        <h3 id="2-答案"><a class="heading-anchor" href="#2-答案" aria-label="回到本小节">#</a>2. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">1</annotation></semantics></math></span></h3>
+        <p>参数化 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mi>t</mi><mo
+                separator="true">,</mo><mi>y</mi><mo>=</mo><msup><mi>t</mi><mn>2</mn></msup></mrow><annotation
+                encoding="application/x-tex">x=t,y=t^2</annotation></semantics></math></span>，<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>x</mi><mo>=</mo><mi>d</mi><mi>t</mi><mo
+                separator="true">,</mo><mi>d</mi><mi>y</mi><mo>=</mo><mn>2</mn><mi>t</mi><mi>d</mi><mi>t</mi></mrow><annotation
+                encoding="application/x-tex">dx=dt,dy=2tdt</annotation></semantics></math></span>。
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><mo
+                stretchy="false">(</mo><mi>y</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo
+                stretchy="false">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><mo
+                stretchy="false">(</mo><msup><mi>t</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><msup><mi>t</mi><mn>2</mn></msup><mo
+                stretchy="false">)</mo><mi>d</mi><mi>t</mi><mo>=</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">\int_0^1(y\,dx+x\,dy)
+=
+\int_0^1(t^2+2t^2)dt
+=
+1.</annotation></semantics></math></span></div>
+        <h3 id="3-答案"><a class="heading-anchor" href="#3-答案" aria-label="回到本小节">#</a>3. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>2</mn><mi>π</mi></mrow><annotation
+                encoding="application/x-tex">-2\pi</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo>=</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>Q</mi><mo>=</mo><mo>−</mo><mi>x</mi><mo>+</mo><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">P=x+y,\qquad Q=-x+y.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>Q</mi><mi>x</mi></msub><mo>=</mo><mo>−</mo><mn>1</mn><mo
+                separator="true">,</mo><mspace width="2em"/><msub><mi>P</mi><mi>y</mi></msub><mo>=</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">Q_x=-1,\qquad P_y=1.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∮</mo><mi>P</mi><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mi>d</mi><mi>y</mi><mo>=</mo><msub><mo>∬</mo><mi>D</mi></msub><mo
+                stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mi>d</mi><mi>A</mi><mo>=</mo><mo>−</mo><mn>2</mn><mi>π</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\oint Pdx+Qdy
+=
+\iint_D(-1-1)dA
+=
+-2\pi.</annotation></semantics></math></span></div>
+        <h3 id="4-答案"><a class="heading-anchor" href="#4-答案" aria-label="回到本小节">#</a>4. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn></mrow><annotation
+                encoding="application/x-tex">7</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>y</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>Q</mi><mo>=</mo><mi>x</mi><mo>+</mo><mn>2</mn><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">P=2x+y,\qquad Q=x+2y.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>P</mi><mi>y</mi></msub><mo>=</mo><mn>1</mn><mo>=</mo><msub><mi>Q</mi><mi>x</mi></msub><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">P_y=1=Q_x.</annotation></semantics></math></span></div>
+        <p>势函数：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>u</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>x</mi><mi>y</mi><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">u=x^2+xy+y^2.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>u</mi><mo
+                stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mo>−</mo><mi>u</mi><mo
+                stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mn>4</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>7.</mn></mrow><annotation
+                encoding="application/x-tex">u(2,1)-u(0,0)=4+2+1=7.</annotation></semantics></math></span></div>
+        <h3 id="5-答案"><a class="heading-anchor" href="#5-答案" aria-label="回到本小节">#</a>5. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0"
+                                                                                                        displaystyle="true"><mfrac><mi>π</mi><mn>6</mn></mfrac></mstyle><mo
+                stretchy="false">(</mo><mn>5</mn><msqrt><mn>5</mn></msqrt><mo>−</mo><mn>1</mn><mo
+                stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">\dfrac{\pi}{6}(5\sqrt5-1)</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>S</mi><mo>=</mo><msqrt><mrow><mn>1</mn><mo>+</mo><mn>4</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>4</mn><msup><mi>y</mi><mn>2</mn></msup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>x</mi><mi>d</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">dS=\sqrt{1+4x^2+4y^2}\,dxdy.</annotation></semantics></math></span></div>
+        <p>极坐标：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mrow><mn>2</mn><mi>π</mi></mrow></msubsup><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><msqrt><mrow><mn>1</mn><mo>+</mo><mn>4</mn><msup><mi>r</mi><mn>2</mn></msup></mrow></msqrt><mtext> </mtext><mi>r</mi><mtext> </mtext><mi>d</mi><mi>r</mi><mtext> </mtext><mi>d</mi><mi>θ</mi><mo>=</mo><mn>2</mn><mi>π</mi><mo>⋅</mo><mfrac><mn>1</mn><mn>12</mn></mfrac><mo
+                stretchy="false">(</mo><msup><mn>5</mn><mrow><mn>3</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msup><mo>−</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S=\int_0^{2\pi}\int_0^1
+\sqrt{1+4r^2}\,r\,dr\,d\theta
+=
+2\pi\cdot\frac1{12}(5^{3/2}-1).</annotation></semantics></math></span></div>
+        <p>即</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mi>π</mi><mn>6</mn></mfrac><mo
+                stretchy="false">(</mo><mn>5</mn><msqrt><mn>5</mn></msqrt><mo>−</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac\pi6(5\sqrt5-1).</annotation></semantics></math></span>
+        </div>
+        <h3 id="6-答案"><a class="heading-anchor" href="#6-答案" aria-label="回到本小节">#</a>6. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0"
+                                                                                                        displaystyle="true"><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mn>3</mn></mfrac></mstyle></mrow><annotation
+                encoding="application/x-tex">\dfrac{2\pi}{3}</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mi>d</mi><mi>y</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mrow><mn>2</mn><mi>π</mi></mrow></msubsup><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><msqrt><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></msqrt><mtext> </mtext><mi>r</mi><mtext> </mtext><mi>d</mi><mi>r</mi><mtext> </mtext><mi>d</mi><mi>θ</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mn>3</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma z\,dxdy
+=
+\int_0^{2\pi}\int_0^1
+\sqrt{1-r^2}\,r\,dr\,d\theta
+=
+\frac{2\pi}{3}.</annotation></semantics></math></span></div>
+        <h3 id="7-答案"><a class="heading-anchor" href="#7-答案" aria-label="回到本小节">#</a>7. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation
+                encoding="application/x-tex">3</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">div</mi><mo>⁡</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>=</mo><mn>1</mn><mo>+</mo><mn>1</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">\operatorname{div}\vec F=1+1+1=3.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∭</mo><mi
+                mathvariant="normal">Ω</mi></msub><mn>3</mn><mtext> </mtext><mi>d</mi><mi>V</mi><mo>=</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">\iiint_\Omega3\,dV=3.</annotation></semantics></math></span></div>
+        <h3 id="8-答案"><a class="heading-anchor" href="#8-答案" aria-label="回到本小节">#</a>8. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation
+                encoding="application/x-tex">\pi</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">curl</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>z</mi><mo separator="true">,</mo><mi>x</mi><mo
+                separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo
+                separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\operatorname{curl}(z,x,y)=(1,1,1).</annotation></semantics></math></span>
+        </div>
+        <p>取单位圆盘，法向量 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover
+                accent="true"><mi>n</mi><mo>⃗</mo></mover><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn><mo
+                separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">\vec n=(0,0,1)</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mo stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo
+                separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mo>⋅</mo><mo stretchy="false">(</mo><mn>0</mn><mo
+                separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mi>d</mi><mi>S</mi><mo>=</mo><mi>π</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma(1,1,1)\cdot(0,0,1)dS
+=
+\pi.</annotation></semantics></math></span></div>
+        <h3 id="9-答案"><a class="heading-anchor" href="#9-答案" aria-label="回到本小节">#</a>9. 答案：</h3>
+        <p>参数化椭圆：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mi>a</mi><mi>cos</mi><mo>⁡</mo><mi>t</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>y</mi><mo>=</mo><mi>b</mi><mi>sin</mi><mo>⁡</mo><mi>t</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mn>0</mn><mo>≤</mo><mi>t</mi><mo>≤</mo><mn>2</mn><mi>π</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">x=a\cos t,\qquad y=b\sin t,\qquad 0\le t\le2\pi.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>−</mo><mi>y</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>=</mo><mi>a</mi><mi>b</mi><mo
+                stretchy="false">(</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>t</mi><mo>+</mo><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>t</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mi>a</mi><mi>b</mi><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">x\,dy-y\,dx
+=
+ab(\cos^2t+\sin^2t)
+=
+ab.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>∮</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>−</mo><mi>y</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msubsup><mo>∫</mo><mn>0</mn><mrow><mn>2</mn><mi>π</mi></mrow></msubsup><mi>a</mi><mi>b</mi><mtext> </mtext><mi>d</mi><mi>t</mi><mo>=</mo><mi>π</mi><mi>a</mi><mi>b</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">A=\frac12\oint(x\,dy-y\,dx)
+=
+\frac12\int_0^{2\pi}ab\,dt
+=
+\pi ab.</annotation></semantics></math></span></div>
+        <h3 id="10-答案"><a class="heading-anchor" href="#10-答案" aria-label="回到本小节">#</a>10. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi></mrow><annotation
+                encoding="application/x-tex">2\pi</annotation></semantics></math></span></h3>
+        <p>圆柱面参数化：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>y</mi><mo>=</mo><mi>sin</mi><mo>⁡</mo><mi>θ</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>z</mi><mo>=</mo><mi>z</mi><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">x=\cos\theta,\qquad y=\sin\theta,\qquad z=z,</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>θ</mi><mo>≤</mo><mn>2</mn><mi>π</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mn>0</mn><mo>≤</mo><mi>z</mi><mo>≤</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">0\le\theta\le2\pi,\qquad 0\le z\le1.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn><mo
+                separator="true">,</mo><mspace width="2em"/><mi>d</mi><mi>S</mi><mo>=</mo><mi>d</mi><mi>θ</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">x^2+y^2=1,\qquad dS=d\theta\,dz.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mn>1</mn><mtext> </mtext><mi>d</mi><mi>S</mi><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mrow><mn>2</mn><mi>π</mi></mrow></msubsup><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><mi>d</mi><mi>z</mi><mtext> </mtext><mi>d</mi><mi>θ</mi><mo>=</mo><mn>2</mn><mi>π</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma1\,dS
+=
+\int_0^{2\pi}\int_0^1dz\,d\theta
+=
+2\pi.</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="十一公式速查"><a class="heading-anchor" href="#十一公式速查" aria-label="回到本小节">#</a>十一、公式速查
+        </h2>
+        <h3 id="111-第一类曲线积分"><a class="heading-anchor" href="#111-第一类曲线积分" aria-label="回到本小节">#</a>11.1
+            第一类曲线积分</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∫</mo><mi>L</mi></msub><mi>f</mi><mtext> </mtext><mi>d</mi><mi>s</mi><mo>=</mo><msubsup><mo>∫</mo><mi>α</mi><mi>β</mi></msubsup><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo><mi>y</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">)</mo><msqrt><mrow><mo stretchy="false">(</mo><msup><mi>x</mi><mo mathvariant="normal"
+                                                                                                   lspace="0em"
+                                                                                                   rspace="0em">′</mo></msup><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><msup><mi>y</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>t</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int_L f\,ds
+=
+\int_\alpha^\beta
+f(x(t),y(t))
+\sqrt{(x&#x27;)^2+(y&#x27;)^2}\,dt.</annotation></semantics></math></span></div>
+        <h3 id="112-第二类曲线积分"><a class="heading-anchor" href="#112-第二类曲线积分" aria-label="回到本小节">#</a>11.2
+            第二类曲线积分</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∫</mo><mi>L</mi></msub><mi>P</mi><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mi>d</mi><mi>y</mi><mo>=</mo><msubsup><mo>∫</mo><mi>α</mi><mi>β</mi></msubsup><mo
+                stretchy="false">(</mo><mi>P</mi><msup><mi>x</mi><mo mathvariant="normal" lspace="0em"
+                                                                     rspace="0em">′</mo></msup><mo>+</mo><mi>Q</mi><msup><mi>y</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mi>d</mi><mi>t</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int_L Pdx+Qdy
+=
+\int_\alpha^\beta
+(Px&#x27;+Qy&#x27;)dt.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∫</mo><mi>L</mi></msub><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><msub><mo>∫</mo><mi>L</mi></msub><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover accent="true"><mi>T</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>s</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int_L\vec F\cdot d\vec r
+=
+\int_L\vec F\cdot\vec T\,ds.</annotation></semantics></math></span></div>
+        <h3 id="113-格林公式"><a class="heading-anchor" href="#113-格林公式" aria-label="回到本小节">#</a>11.3 格林公式
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∮</mo><mi>L</mi></msub><mi>P</mi><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mi>d</mi><mi>y</mi><mo>=</mo><msub><mo>∬</mo><mi>D</mi></msub><mo
+                stretchy="false">(</mo><msub><mi>Q</mi><mi>x</mi></msub><mo>−</mo><msub><mi>P</mi><mi>y</mi></msub><mo
+                stretchy="false">)</mo><mi>d</mi><mi>A</mi><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\oint_L Pdx+Qdy
+=
+\iint_D(Q_x-P_y)dA.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mo>∮</mo><mi>L</mi></msub><mo
+                stretchy="false">(</mo><mi>x</mi><mi>d</mi><mi>y</mi><mo>−</mo><mi>y</mi><mi>d</mi><mi>x</mi><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">A=\frac12\oint_L(xdy-ydx).</annotation></semantics></math></span>
+        </div>
+        <h3 id="114-第一类曲面积分"><a class="heading-anchor" href="#114-第一类曲面积分" aria-label="回到本小节">#</a>11.4
+            第一类曲面积分</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>S</mi><mo>=</mo><mi
+                mathvariant="normal">∣</mi><msub><mover accent="true"><mi>r</mi><mo>⃗</mo></mover><mi>u</mi></msub><mo>×</mo><msub><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mi>v</mi></msub><mi mathvariant="normal">∣</mi><mi>d</mi><mi>u</mi><mtext> </mtext><mi>d</mi><mi>v</mi><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">dS=|\vec r_u\times\vec r_v|du\,dv,</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>d</mi><mi>S</mi><mo>=</mo><msqrt><mrow><mn>1</mn><mo>+</mo><msubsup><mi>z</mi><mi>x</mi><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>z</mi><mi>y</mi><mn>2</mn></msubsup></mrow></msqrt><mtext> </mtext><mi>d</mi><mi>x</mi><mi>d</mi><mi>y</mi><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>z</mi><mo>=</mo><mi>z</mi><mo stretchy="false">(</mo><mi>x</mi><mo
+                separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">dS=\sqrt{1+z_x^2+z_y^2}\,dxdy
+\quad(z=z(x,y)).</annotation></semantics></math></span></div>
+        <h3 id="115-第二类曲面积分"><a class="heading-anchor" href="#115-第二类曲面积分" aria-label="回到本小节">#</a>11.5
+            第二类曲面积分</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mi>P</mi><mi>d</mi><mi>y</mi><mtext> </mtext><mi>d</mi><mi>z</mi><mo>+</mo><mi>Q</mi><mi>d</mi><mi>z</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>+</mo><mi>R</mi><mi>d</mi><mi>x</mi><mtext> </mtext><mi>d</mi><mi>y</mi><mo>=</mo><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover
+                accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma Pdy\,dz+Qdz\,dx+Rdx\,dy
+=
+\iint_\Sigma\vec F\cdot\vec n\,dS.</annotation></semantics></math></span></div>
+        <p>上侧：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover
+                accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi><mo>=</mo><mo
+                stretchy="false">(</mo><mo>−</mo><msub><mi>z</mi><mi>x</mi></msub><mo separator="true">,</mo><mo>−</mo><msub><mi>z</mi><mi>y</mi></msub><mo
+                separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mi>d</mi><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\vec n\,dS=(-z_x,-z_y,1)dxdy.</annotation></semantics></math></span></div>
+        <h3 id="116-高斯公式"><a class="heading-anchor" href="#116-高斯公式" aria-label="回到本小节">#</a>11.6 高斯公式
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mover
+                accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi><mo>=</mo><msub><mo>∭</mo><mi
+                mathvariant="normal">Ω</mi></msub><mi mathvariant="normal">div</mi><mo>⁡</mo><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>V</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\iint_\Sigma\vec F\cdot\vec n\,dS
+=
+\iiint_\Omega\operatorname{div}\vec F\,dV.</annotation></semantics></math></span></div>
+        <h3 id="117-斯托克斯公式"><a class="heading-anchor" href="#117-斯托克斯公式" aria-label="回到本小节">#</a>11.7
+            斯托克斯公式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mo>∮</mo><mi
+                mathvariant="normal">Γ</mi></msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>⋅</mo><mi>d</mi><mover
+                accent="true"><mi>r</mi><mo>⃗</mo></mover><mo>=</mo><msub><mo>∬</mo><mi
+                mathvariant="normal">Σ</mi></msub><mo stretchy="false">(</mo><mi mathvariant="normal">curl</mi><mo>⁡</mo><mover
+                accent="true"><mi>F</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo><mo>⋅</mo><mover accent="true"><mi>n</mi><mo>⃗</mo></mover><mtext> </mtext><mi>d</mi><mi>S</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\oint_\Gamma\vec F\cdot d\vec r
+=
+\iint_\Sigma(\operatorname{curl}\vec F)\cdot\vec n\,dS.</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="结语"><a class="heading-anchor" href="#结语" aria-label="回到本小节">#</a>结语</h2>
+        <p>曲线积分与曲面积分的核心是“类型、方向、参数化”：</p>
+        <ol>
+            <li><strong>类型</strong>：第一类对弧长/面积，第二类对坐标/通量；</li>
+            <li><strong>方向</strong>：第二类积分与方向有关，反向变号；</li>
+            <li><strong>参数化</strong>：曲线看 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>s</mi></mrow><annotation
+                    encoding="application/x-tex">ds</annotation></semantics></math></span>，曲面看 <span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>S</mi></mrow><annotation
+                    encoding="application/x-tex">dS</annotation></semantics></math></span>；
+            </li>
+            <li><strong>公式</strong>：闭曲线用格林，闭曲面用高斯，空间曲面用斯托克斯；</li>
+            <li><strong>检查</strong>：方向、符号、奇点和积分限。</li>
+        </ol>
+        <p>做题时先画图，明确方向，再选择直接参数化或使用三大公式。</p>
+        <p class="footer-note">说明：本页公式已由 KaTeX 预渲染为 MathML，HTML 为单文件、纯离线版本，不依赖外部字体、脚本或网络。若浏览器较旧，个别
+            MathML 符号可能显示不完整。</p>
+    </main>
+</div>
+<script>
+    (() => {
+        const root = document.documentElement, toggle = document.getElementById('theme-toggle');
+        const saved = (() => {
+            try {
+                return localStorage.getItem('ch11-theme')
+            } catch (e) {
+                return null
+            }
+        })();
+        if (saved) root.dataset.theme = saved; else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme = 'dark';
+        const update = () => {
+            const dark = root.dataset.theme === 'dark';
+            toggle.textContent = dark ? '浅色模式' : '深色模式';
+            toggle.setAttribute('aria-pressed', String(dark));
+        };
+        update();
+        toggle.addEventListener('click', () => {
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            try {
+                localStorage.setItem('ch11-theme', next)
+            } catch (e) {
+            }
+            update();
+        });
+        const bar = document.getElementById('progress-bar');
+        const progress = () => {
+            const doc = document.documentElement, total = doc.scrollHeight - doc.clientHeight;
+            bar.style.width = (total > 0 ? doc.scrollTop / total * 100 : 0).toFixed(2) + '%';
+        };
+        document.addEventListener('scroll', progress, {passive: true});
+        progress();
+    })();
+</script>
+<script src="../../一些必备脚本/AI生成响应式/script.js"></script>
+</body>
+</html>

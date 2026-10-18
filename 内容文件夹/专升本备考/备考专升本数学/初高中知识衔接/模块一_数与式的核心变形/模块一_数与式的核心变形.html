@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="初高中衔接模块一：实数与绝对值、乘法公式、因式分解、分式化简、根式化简及其高数应用。">
+    <title>初高中衔接模块一：数与式的核心变形</title>
+    <link rel="stylesheet" href="../../一些必备脚本/AI生成响应式/style.css">
+    <style>
+        :root {
+            --bg: #fbfcfe;
+            --text: #172033;
+            --muted: #5e6a7d;
+            --panel: #fff;
+            --panel-soft: #f3f7fc;
+            --line: #dce5ef;
+            --accent: #0f766e;
+            --accent-soft: #ecfdf5;
+            --accent-2: #7c3aed;
+            --warm: #fff7e8;
+            --warm-line: #f1cf8a;
+            --danger: #b42318;
+            --shadow: 0 18px 50px rgba(23, 32, 51, .08);
+            --radius: 16px
+        }
+
+        html[data-theme="dark"] {
+            --bg: #0b1220;
+            --text: #e6edf7;
+            --muted: #aab7c9;
+            --panel: #111a2b;
+            --panel-soft: #0d1728;
+            --line: #2b3a52;
+            --accent: #5eead4;
+            --accent-soft: #0f2e2b;
+            --accent-2: #c4b5fd;
+            --warm: #2a2415;
+            --warm-line: #6b5422;
+            --danger: #fca5a5;
+            --shadow: 0 18px 50px rgba(0, 0, 0, .28)
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="light"]) {
+                --bg: #0b1220;
+                --text: #e6edf7;
+                --muted: #aab7c9;
+                --panel: #111a2b;
+                --panel-soft: #0d1728;
+                --line: #2b3a52;
+                --accent: #5eead4;
+                --accent-soft: #0f2e2b;
+                --accent-2: #c4b5fd;
+                --warm: #2a2415;
+                --warm-line: #6b5422;
+                --danger: #fca5a5;
+                --shadow: 0 18px 50px rgba(0, 0, 0, .28)
+            }
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 30rem), radial-gradient(circle at 95% 12%, color-mix(in srgb, var(--accent-2) 7%, transparent), transparent 28rem), var(--bg);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+            font-size: 17px;
+            line-height: 1.85
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px
+        }
+
+        .reading-progress {
+            position: fixed;
+            inset: 0 0 auto 0;
+            height: 3px;
+            z-index: 100
+        }
+
+        .reading-progress span {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            transition: width .12s linear
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns:minmax(220px, 286px) minmax(0, 1fr);
+            gap: 38px;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 34px 28px 80px
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 22px;
+            align-self: start;
+            max-height: calc(100vh - 44px);
+            overflow: auto;
+            padding: 22px 18px;
+            background: color-mix(in srgb, var(--panel) 90%, transparent);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            scrollbar-width: thin
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .brand-mark {
+            display: grid;
+            place-items: center;
+            width: 43px;
+            height: 43px;
+            border-radius: 13px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 19px;
+            font-weight: 700
+        }
+
+        .brand strong {
+            display: block;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 15px;
+            line-height: 1.35
+        }
+
+        .brand small {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        .sidebar-title {
+            margin: 0 0 10px;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px;
+            letter-spacing: .12em
+        }
+
+        .toc {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            line-height: 1.45
+        }
+
+        .toc li {
+            margin: 2px 0
+        }
+
+        .toc a {
+            display: block;
+            padding: 5px 8px;
+            color: var(--muted);
+            border-radius: 8px;
+            text-decoration: none
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+            background: var(--accent-soft)
+        }
+
+        .toc-level-3 {
+            padding-left: 12px
+        }
+
+        .toc-level-3 a {
+            font-size: 12px;
+            opacity: .88
+        }
+
+        .content {
+            min-width: 0;
+            padding: 44px 54px 64px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            box-shadow: var(--shadow)
+        }
+
+        .hero {
+            position: relative;
+            margin: -8px 0 32px;
+            padding: 30px 32px;
+            overflow: hidden;
+            border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+            border-radius: 20px;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, var(--panel)), color-mix(in srgb, var(--accent-2) 7%, var(--panel)))
+        }
+
+        .hero::after {
+            content: "√";
+            position: absolute;
+            right: 24px;
+            bottom: -30px;
+            color: color-mix(in srgb, var(--accent) 12%, transparent);
+            font-family: Georgia, serif;
+            font-size: 132px;
+            line-height: 1;
+            pointer-events: none
+        }
+
+        .hero-kicker {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 8px;
+            color: var(--accent);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .13em
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            border: 0;
+            padding: 0;
+            font-size: clamp(30px, 4vw, 45px);
+            line-height: 1.15;
+            letter-spacing: -.02em
+        }
+
+        .hero p {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 16px
+        }
+
+        .hero-stats {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 18px;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        .hero-stats span {
+            padding: 6px 11px;
+            color: var(--accent);
+            background: color-mix(in srgb, var(--panel) 72%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+            border-radius: 999px
+        }
+
+        h2, h3, h4 {
+            font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.35;
+            scroll-margin-top: 24px
+        }
+
+        h2 {
+            margin: 54px 0 18px;
+            padding-top: 8px;
+            font-size: 28px
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            margin-right: 10px;
+            border-radius: 3px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            vertical-align: .18em
+        }
+
+        h3 {
+            margin: 34px 0 12px;
+            color: color-mix(in srgb, var(--text) 82%, var(--accent));
+            font-size: 21px
+        }
+
+        h4 {
+            margin: 26px 0 8px;
+            font-size: 18px
+        }
+
+        .heading-anchor {
+            float: right;
+            margin-left: 12px;
+            color: color-mix(in srgb, var(--muted) 48%, transparent);
+            font-weight: 400;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity .15s ease
+        }
+
+        h2:hover .heading-anchor, h3:hover .heading-anchor, h4:hover .heading-anchor {
+            opacity: 1
+        }
+
+        p {
+            margin: .75em 0
+        }
+
+        strong {
+            color: color-mix(in srgb, var(--text) 84%, var(--accent))
+        }
+
+        .callout {
+            margin: 20px 0;
+            padding: 16px 20px;
+            color: var(--text);
+            background: var(--warm);
+            border: 1px solid var(--warm-line);
+            border-left: 5px solid #e8a317;
+            border-radius: 10px
+        }
+
+        .callout p {
+            margin: 0
+        }
+
+        ul, ol {
+            margin: .75em 0;
+            padding-left: 1.7em
+        }
+
+        li {
+            margin: .32em 0
+        }
+
+        li > p {
+            margin: .35em 0
+        }
+
+        .math-display {
+            margin: 20px 0;
+            padding: 14px 18px;
+            overflow-x: auto;
+            background: var(--panel-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.05em
+        }
+
+        .math-display .katex-display, .math-display .katex {
+            margin: 0;
+            display: block
+        }
+
+        .math-display math {
+            font-size: 1.08em
+        }
+
+        .katex {
+            font-size: 1.06em
+        }
+
+        .katex math {
+            font-size: 1.06em
+        }
+
+        .math-error {
+            color: var(--danger);
+            font-family: monospace;
+            font-size: .9em;
+            white-space: pre-wrap
+        }
+
+        code {
+            padding: .12em .36em;
+            color: #9f1239;
+            background: #fff1f2;
+            border-radius: 5px;
+            font-family: "Cascadia Code", Consolas, monospace;
+            font-size: .9em
+        }
+
+        .table-wrap {
+            margin: 22px 0;
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 12px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px
+        }
+
+        th, td {
+            padding: 10px 13px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+            vertical-align: top
+        }
+
+        th {
+            color: var(--text);
+            background: var(--accent-soft);
+            font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            font-size: 14px;
+            white-space: nowrap
+        }
+
+        tbody tr:nth-child(even) {
+            background: color-mix(in srgb, var(--panel-soft) 72%, transparent)
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0
+        }
+
+        hr.section-rule {
+            margin: 36px 0;
+            border: 0;
+            border-top: 1px dashed color-mix(in srgb, var(--line) 82%, transparent)
+        }
+
+        .footer-note {
+            margin-top: 48px;
+            padding-top: 18px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px
+        }
+
+        .toolbar {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            display: flex;
+            gap: 8px;
+            z-index: 60
+        }
+
+        .toolbar button {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 10px 14px;
+            color: var(--text);
+            background: color-mix(in srgb, var(--panel) 92%, transparent);
+            box-shadow: 0 8px 24px rgba(23, 32, 51, .12);
+            cursor: pointer;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            backdrop-filter: blur(10px)
+        }
+
+        .toolbar button:hover {
+            color: var(--accent);
+            border-color: var(--accent)
+        }
+
+        .mobile-note {
+            display: none;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        @media (max-width: 980px) {
+            .layout {
+                grid-template-columns:1fr;
+                gap: 18px;
+                padding: 18px
+            }
+
+            .sidebar {
+                position: static;
+                max-height: none
+            }
+
+            .content {
+                padding: 32px 24px 48px
+            }
+
+            .mobile-note {
+                display: block
+            }
+        }
+
+        @media (max-width: 620px) {
+            body {
+                font-size: 16px
+            }
+
+            .content {
+                padding: 24px 17px 38px;
+                border-radius: 16px
+            }
+
+            .hero {
+                padding: 24px 20px
+            }
+
+            .hero h1 {
+                font-size: 30px
+            }
+
+            h2 {
+                font-size: 24px
+            }
+
+            h3 {
+                font-size: 19px
+            }
+
+            .toolbar {
+                top: 10px;
+                right: 10px
+            }
+
+            .toolbar button {
+                padding: 8px 11px
+            }
+
+            .toc-level-3 {
+                display: none
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+                font-size: 11pt
+            }
+
+            .layout {
+                display: block;
+                max-width: none;
+                padding: 0
+            }
+
+            .sidebar, .toolbar, .reading-progress, .heading-anchor, .mobile-note {
+                display: none !important
+            }
+
+            .content {
+                padding: 0;
+                border: 0;
+                box-shadow: none;
+                background: #fff
+            }
+
+            .hero {
+                border: 1px solid #ccc;
+                background: #fff
+            }
+
+            .hero::after {
+                display: none
+            }
+
+            .math-display {
+                background: #fff;
+                break-inside: avoid
+            }
+
+            h2, h3 {
+                break-after: avoid
+            }
+
+            table, blockquote {
+                break-inside: avoid
+            }
+
+            a {
+                color: #000;
+                text-decoration: none
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="reading-progress" aria-hidden="true"><span id="progress-bar"></span></div>
+<div class="toolbar">
+    <button type="button" id="theme-toggle" aria-label="切换深色模式">深色模式</button>
+    <button type="button" onclick="window.print()">打印 / 保存为 PDF</button>
+</div>
+<div class="layout">
+    <aside class="sidebar" aria-label="模块目录">
+        <div class="brand">
+            <div class="brand-mark">√</div>
+            <div><strong>初高中衔接<br>模块一</strong><small>数与式的核心变形</small></div>
+        </div>
+        <p class="sidebar-title">本页目录</p>
+        <ul class="toc">
+            <li class="toc-level-2"><a href="#一实数与绝对值">一、实数与绝对值</a></li>
+            <li class="toc-level-3"><a href="#11-实数与数轴">1.1 实数与数轴</a></li>
+            <li class="toc-level-3"><a href="#12-绝对值的定义">1.2 绝对值的定义</a></li>
+            <li class="toc-level-3"><a href="#13-绝对值的基本性质">1.3 绝对值的基本性质</a></li>
+            <li class="toc-level-3"><a href="#14-绝对值方程与不等式">1.4 绝对值方程与不等式</a></li>
+            <li class="toc-level-3"><a href="#15-含绝对值的分段讨论">1.5 含绝对值的分段讨论</a></li>
+            <li class="toc-level-2"><a href="#二乘法公式">二、乘法公式</a></li>
+            <li class="toc-level-3"><a href="#21-平方公式">2.1 平方公式</a></li>
+            <li class="toc-level-3"><a href="#22-完全立方公式">2.2 完全立方公式</a></li>
+            <li class="toc-level-3"><a href="#23-立方和与立方差">2.3 立方和与立方差</a></li>
+            <li class="toc-level-3"><a href="#24-三项平方">2.4 三项平方</a></li>
+            <li class="toc-level-3"><a href="#25-恒等式">2.5 恒等式</a></li>
+            <li class="toc-level-2"><a href="#三因式分解">三、因式分解</a></li>
+            <li class="toc-level-3"><a href="#31-提公因式">3.1 提公因式</a></li>
+            <li class="toc-level-3"><a href="#32-公式法">3.2 公式法</a></li>
+            <li class="toc-level-3"><a href="#33-十字相乘法">3.3 十字相乘法</a></li>
+            <li class="toc-level-3"><a href="#34-分组分解">3.4 分组分解</a></li>
+            <li class="toc-level-3"><a href="#35-拆项添项">3.5 拆项添项</a></li>
+            <li class="toc-level-3"><a href="#36-双十字相乘">3.6 双十字相乘</a></li>
+            <li class="toc-level-3"><a href="#37-因式分解的一般顺序">3.7 因式分解的一般顺序</a></li>
+            <li class="toc-level-2"><a href="#四分式化简">四、分式化简</a></li>
+            <li class="toc-level-3"><a href="#41-分式有意义的条件">4.1 分式有意义的条件</a></li>
+            <li class="toc-level-3"><a href="#42-约分">4.2 约分</a></li>
+            <li class="toc-level-3"><a href="#43-通分">4.3 通分</a></li>
+            <li class="toc-level-3"><a href="#44-繁分式">4.4 繁分式</a></li>
+            <li class="toc-level-3"><a href="#45-分式化简的注意事项">4.5 分式化简的注意事项</a></li>
+            <li class="toc-level-2"><a href="#五根式化简">五、根式化简</a></li>
+            <li class="toc-level-3"><a href="#51-二次根式的性质">5.1 二次根式的性质</a></li>
+            <li class="toc-level-3"><a href="#52-化简根式">5.2 化简根式</a></li>
+            <li class="toc-level-3"><a href="#53-分母有理化">5.3 分母有理化</a></li>
+            <li class="toc-level-3"><a href="#54-双重根式">5.4 双重根式</a></li>
+            <li class="toc-level-3"><a href="#55-根式化简的注意事项">5.5 根式化简的注意事项</a></li>
+            <li class="toc-level-2"><a href="#六高数关联度">六、高数关联度</a></li>
+            <li class="toc-level-3"><a href="#61-求极限约分与有理化">6.1 求极限：约分与有理化</a></li>
+            <li class="toc-level-3"><a href="#62-求导代数变形与合并">6.2 求导：代数变形与合并</a></li>
+            <li class="toc-level-3"><a href="#63-积分部分分式">6.3 积分：部分分式</a></li>
+            <li class="toc-level-3"><a href="#64-绝对值与误差估计">6.4 绝对值与误差估计</a></li>
+            <li class="toc-level-3"><a href="#65-根式与三角代换">6.5 根式与三角代换</a></li>
+            <li class="toc-level-2"><a href="#七典型例题">七、典型例题</a></li>
+            <li class="toc-level-3"><a href="#例-1绝对值不等式">例 1：绝对值不等式</a></li>
+            <li class="toc-level-3"><a href="#例-2完全立方公式">例 2：完全立方公式</a></li>
+            <li class="toc-level-3"><a href="#例-3十字相乘">例 3：十字相乘</a></li>
+            <li class="toc-level-3"><a href="#例-4拆项分解">例 4：拆项分解</a></li>
+            <li class="toc-level-3"><a href="#例-5分式化简">例 5：分式化简</a></li>
+            <li class="toc-level-3"><a href="#例-6有理化">例 6：有理化</a></li>
+            <li class="toc-level-3"><a href="#例-7双重根式">例 7：双重根式</a></li>
+            <li class="toc-level-3"><a href="#例-8因式分解求极限">例 8：因式分解求极限</a></li>
+            <li class="toc-level-2"><a href="#八易错点提示">八、易错点提示</a></li>
+            <li class="toc-level-3"><a href="#1-忘记绝对值">1. 忘记绝对值</a></li>
+            <li class="toc-level-3"><a href="#2-解绝对值不等式时忘记取交集">2. 解绝对值不等式时忘记取交集</a></li>
+            <li class="toc-level-3"><a href="#3-平方差符号写反">3. 平方差符号写反</a></li>
+            <li class="toc-level-3"><a href="#4-立方和立方差第二个因式写错">4. 立方和、立方差第二个因式写错</a></li>
+            <li class="toc-level-3"><a href="#5-约分时忽略定义域">5. 约分时忽略定义域</a></li>
+            <li class="toc-level-3"><a href="#6-通分时分子忘记加括号">6. 通分时分子忘记加括号</a></li>
+            <li class="toc-level-3"><a href="#7-有理化时乘错共轭">7. 有理化时乘错共轭</a></li>
+            <li class="toc-level-3"><a href="#8-根号内负号处理错误">8. 根号内负号处理错误</a></li>
+            <li class="toc-level-3"><a href="#9-因式分解不彻底">9. 因式分解不彻底</a></li>
+            <li class="toc-level-3"><a href="#10-分式方程去分母后不检验">10. 分式方程去分母后不检验</a></li>
+            <li class="toc-level-3"><a href="#11-绝对值等式直接平方">11. 绝对值等式直接平方</a></li>
+            <li class="toc-level-3"><a href="#12-忽略根式定义域">12. 忽略根式定义域</a></li>
+            <li class="toc-level-2"><a href="#九课后练习">九、课后练习</a></li>
+            <li class="toc-level-2"><a href="#十练习答案与解析">十、练习答案与解析</a></li>
+            <li class="toc-level-3"><a href="#1-答案-或">1. 答案：… 或 …</a></li>
+            <li class="toc-level-3"><a href="#2-答案">2. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#3-答案">3. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#4-答案">4. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#5-答案">5. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#6-答案">6. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#7-答案">7. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#8-答案">8. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#9-答案">9. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#10-答案">10. 答案：…</a></li>
+            <li class="toc-level-2"><a href="#十一公式速查">十一、公式速查</a></li>
+            <li class="toc-level-3"><a href="#111-乘法公式">11.1 乘法公式</a></li>
+            <li class="toc-level-3"><a href="#112-绝对值">11.2 绝对值</a></li>
+            <li class="toc-level-3"><a href="#113-根式">11.3 根式</a></li>
+            <li class="toc-level-3"><a href="#114-高数常用">11.4 高数常用</a></li>
+            <li class="toc-level-2"><a href="#结语">结语</a></li>
+        </ul>
+        <p class="mobile-note">小屏幕下目录可上下滚动。</p>
+    </aside>
+    <main class="content">
+        <section class="hero">
+            <p class="hero-kicker">PRECALCULUS · ALGEBRAIC TRANSFORMATIONS</p>
+            <h1>初高中衔接模块一</h1>
+            <p>把绝对值、乘法公式、因式分解、分式和根式打通。它们不是初中旧知识，而是高数极限、求导、积分计算的底层工具。</p>
+            <div class="hero-stats"><span>高数关联</span><span>8 个典型例题</span><span>10 道课后练习</span><span>KaTeX · MathML 离线渲染</span>
+            </div>
+        </section>
+        <blockquote class="callout"><p><strong>模块定位</strong>：大学数学里的很多“不会做”，并不是高数概念没懂，而是代数变形不熟。极限中的约分、有理化，求导中的展开与合并，积分中的部分分式，都依赖本模块。
+        </p></blockquote>
+        <blockquote class="callout"><p><strong>学习建议</strong>：不要只背公式。每做一步变形，都问自己：我用了哪条公式？它的适用条件是什么？变形前后定义域有没有改变？
+        </p></blockquote>
+        <hr class="section-rule">
+        <h2 id="一实数与绝对值"><a class="heading-anchor" href="#一实数与绝对值" aria-label="回到本小节">#</a>一、实数与绝对值
+        </h2>
+        <h3 id="11-实数与数轴"><a class="heading-anchor" href="#11-实数与数轴" aria-label="回到本小节">#</a>1.1 实数与数轴
+        </h3>
+        <p>实数与数轴上的点一一对应。常见的数集：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="double-struck">N</mi><mo>:</mo><mtext>自然数</mtext><mo separator="true">,</mo><mspace
+                width="2em"/><mi mathvariant="double-struck">Z</mi><mo>:</mo><mtext>整数</mtext><mo
+                separator="true">,</mo><mspace width="2em"/><mi mathvariant="double-struck">Q</mi><mo>:</mo><mtext>有理数</mtext><mo
+                separator="true">,</mo><mspace width="2em"/><mi mathvariant="double-struck">R</mi><mo>:</mo><mtext>实数</mtext><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\mathbb N:\text{自然数},\qquad
+\mathbb Z:\text{整数},\qquad
+\mathbb Q:\text{有理数},\qquad
+\mathbb R:\text{实数}.</annotation></semantics></math></span></div>
+        <p>区间：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>b</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">(a,b)=a&lt;x&lt;b,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">[</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo stretchy="false">]</mo><mo>=</mo><mi>a</mi><mo>≤</mo><mi>x</mi><mo>≤</mo><mi>b</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">[a,b]=a\le x\le b,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mo>+</mo><mi mathvariant="normal">∞</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mi>x</mi><mo>&gt;</mo><mi>a</mi><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">(a,+\infty)=x&gt;a.</annotation></semantics></math></span></div>
+        <h3 id="12-绝对值的定义"><a class="heading-anchor" href="#12-绝对值的定义" aria-label="回到本小节">#</a>1.2
+            绝对值的定义</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mrow><mo
+                fence="true">{</mo><mtable rowspacing="0.36em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mrow><mi>x</mi><mo separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mrow><mi>x</mi><mo>≥</mo><mn>0</mn><mo
+                separator="true">,</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0"
+                                                                                     displaystyle="false"><mrow><mo>−</mo><mi>x</mi><mo
+                separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>x</mi><mo>&lt;</mo><mn>0.</mn></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation
+                encoding="application/x-tex">|x|=
+\begin{cases}
+x,&amp;x\ge0,\\
+-x,&amp;x&lt;0.
+\end{cases}</annotation></semantics></math></span></div>
+        <p>几何意义：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi></mrow><annotation
+                encoding="application/x-tex">|x|</annotation></semantics></math></span> 是数轴上点 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation
+                encoding="application/x-tex">x</annotation></semantics></math></span> 到原点的距离。更一般地，
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mo>−</mo><mi>a</mi><mi mathvariant="normal">∣</mi></mrow><annotation
+                encoding="application/x-tex">|x-a|</annotation></semantics></math></span></div>
+        <p>是点 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation
+                encoding="application/x-tex">x</annotation></semantics></math></span> 到点 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation
+                encoding="application/x-tex">a</annotation></semantics></math></span> 的距离。
+        </p>
+        <h3 id="13-绝对值的基本性质"><a class="heading-anchor" href="#13-绝对值的基本性质" aria-label="回到本小节">#</a>1.3
+            绝对值的基本性质</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>≥</mo><mn>0</mn><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">|x|\ge0,</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi>y</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>y</mi><mi
+                mathvariant="normal">∣</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">|xy|=|x||y|,</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo
+                fence="true">∣</mo><mfrac><mi>x</mi><mi>y</mi></mfrac><mo fence="true">∣</mo></mrow><mo>=</mo><mfrac><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi
+                mathvariant="normal">∣</mi><mi>y</mi><mi mathvariant="normal">∣</mi></mrow></mfrac><mspace width="1em"/><mo
+                stretchy="false">(</mo><mi>y</mi><mo mathvariant="normal">≠</mo><mn>0</mn><mo stretchy="false">)</mo><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\left|\frac xy\right|=\frac{|x|}{|y|}\quad(y\ne0),</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mo>+</mo><mi>y</mi><mi mathvariant="normal">∣</mi><mo>≤</mo><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>+</mo><mi
+                mathvariant="normal">∣</mi><mi>y</mi><mi mathvariant="normal">∣</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|x+y|\le|x|+|y|.</annotation></semantics></math></span>
+        </div>
+        <p>三角不等式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mo>+</mo><mi>y</mi><mi
+                mathvariant="normal">∣</mi><mo>≤</mo><mi mathvariant="normal">∣</mi><mi>x</mi><mi
+                mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mi>y</mi><mi
+                mathvariant="normal">∣</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{|x+y|\le|x|+|y|}.</annotation></semantics></math></span></div>
+        <p>它也常写成</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>−</mo><mi
+                mathvariant="normal">∣</mi><mi>y</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mo>≤</mo><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mo>−</mo><mi>y</mi><mi mathvariant="normal">∣</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">||x|-|y||\le|x-y|.</annotation></semantics></math></span></div>
+        <h3 id="14-绝对值方程与不等式"><a class="heading-anchor" href="#14-绝对值方程与不等式"
+                                          aria-label="回到本小节">#</a>1.4 绝对值方程与不等式</h3>
+        <p>设 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a&gt;0</annotation></semantics></math></span>。
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>a</mi><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>x</mi><mo>=</mo><mo>±</mo><mi>a</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">|x|=a\iff x=\pm a,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>a</mi><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mo>−</mo><mi>a</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>a</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">|x|&lt;a\iff -a&lt;x&lt;a,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&gt;</mo><mi>a</mi><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>x</mi><mo>&lt;</mo><mo>−</mo><mi>a</mi><mtext> 或 </mtext><mi>x</mi><mo>&gt;</mo><mi>a</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|x|&gt;a\iff x&lt;-a\ \text{或}\ x&gt;a.</annotation></semantics></math></span>
+        </div>
+        <p>更一般地：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mo>−</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>r</mi><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>a</mi><mo>−</mo><mi>r</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>a</mi><mo>+</mo><mi>r</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|x-a|&lt;r\iff a-r&lt;x&lt;a+r.</annotation></semantics></math></span>
+        </div>
+        <h3 id="15-含绝对值的分段讨论"><a class="heading-anchor" href="#15-含绝对值的分段讨论"
+                                          aria-label="回到本小节">#</a>1.5 含绝对值的分段讨论</h3>
+        <p>例如</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mo>−</mo><mn>1</mn><mi mathvariant="normal">∣</mi><mo>=</mo><mrow><mo
+                fence="true">{</mo><mtable rowspacing="0.36em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle
+                scriptlevel="0" displaystyle="false"><mrow><mi>x</mi><mo>−</mo><mn>1</mn><mo
+                separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>x</mi><mo>≥</mo><mn>1</mn><mo
+                separator="true">,</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0"
+                                                                                     displaystyle="false"><mrow><mn>1</mn><mo>−</mo><mi>x</mi><mo
+                separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>x</mi><mo>&lt;</mo><mn>1.</mn></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation
+                encoding="application/x-tex">|x-1|=
+\begin{cases}
+x-1,&amp;x\ge1,\\
+1-x,&amp;x&lt;1.
+\end{cases}</annotation></semantics></math></span></div>
+        <p>处理多个绝对值时，以零点为分界点分段。</p>
+        <hr class="section-rule">
+        <h2 id="二乘法公式"><a class="heading-anchor" href="#二乘法公式" aria-label="回到本小节">#</a>二、乘法公式</h2>
+        <h3 id="21-平方公式"><a class="heading-anchor" href="#21-平方公式" aria-label="回到本小节">#</a>2.1 平方公式
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>=</mo><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>a</mi><mi>b</mi><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></mstyle></mstyle></mstyle></menclose><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\boxed{(a+b)^2=a^2+2ab+b^2},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>=</mo><msup><mi>a</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>a</mi><mi>b</mi><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{(a-b)^2=a^2-2ab+b^2}.</annotation></semantics></math></span></div>
+        <p>平方差：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>−</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{a^2-b^2=(a-b)(a+b)}.</annotation></semantics></math></span></div>
+        <h3 id="22-完全立方公式"><a class="heading-anchor" href="#22-完全立方公式" aria-label="回到本小节">#</a>2.2
+            完全立方公式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><msup><mo
+                stretchy="false">)</mo><mn>3</mn></msup><mo>=</mo><msup><mi>a</mi><mn>3</mn></msup><mo>+</mo><mn>3</mn><msup><mi>a</mi><mn>2</mn></msup><mi>b</mi><mo>+</mo><mn>3</mn><mi>a</mi><msup><mi>b</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>3</mn></msup></mrow></mstyle></mstyle></mstyle></menclose><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{
+(a+b)^3=a^3+3a^2b+3ab^2+b^3
+},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><msup><mo
+                stretchy="false">)</mo><mn>3</mn></msup><mo>=</mo><msup><mi>a</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><msup><mi>a</mi><mn>2</mn></msup><mi>b</mi><mo>+</mo><mn>3</mn><mi>a</mi><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><msup><mi>b</mi><mn>3</mn></msup></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+(a-b)^3=a^3-3a^2b+3ab^2-b^3
+}.</annotation></semantics></math></span></div>
+        <h3 id="23-立方和与立方差"><a class="heading-anchor" href="#23-立方和与立方差" aria-label="回到本小节">#</a>2.3
+            立方和与立方差</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msup><mi>a</mi><mn>3</mn></msup><mo>+</mo><msup><mi>b</mi><mn>3</mn></msup><mo>=</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>a</mi><mn>2</mn></msup><mo>−</mo><mi>a</mi><mi>b</mi><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\boxed{
+a^3+b^3=(a+b)(a^2-ab+b^2)
+},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><msup><mi>a</mi><mn>3</mn></msup><mo>−</mo><msup><mi>b</mi><mn>3</mn></msup><mo>=</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><mi>b</mi><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+a^3-b^3=(a-b)(a^2+ab+b^2)
+}.</annotation></semantics></math></span></div>
+        <p>注意立方和、立方差第二个因式中的符号。</p>
+        <h3 id="24-三项平方"><a class="heading-anchor" href="#24-三项平方" aria-label="回到本小节">#</a>2.4 三项平方
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mi>c</mi><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>=</mo><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>+</mo><msup><mi>c</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>a</mi><mi>b</mi><mo>+</mo><mn>2</mn><mi>b</mi><mi>c</mi><mo>+</mo><mn>2</mn><mi>c</mi><mi>a</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+(a+b+c)^2
+=
+a^2+b^2+c^2+2ab+2bc+2ca
+}.</annotation></semantics></math></span></div>
+        <h3 id="25-恒等式"><a class="heading-anchor" href="#25-恒等式" aria-label="回到本小节">#</a>2.5 恒等式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>a</mi><mn>3</mn></msup><mo>+</mo><msup><mi>b</mi><mn>3</mn></msup><mo>+</mo><msup><mi>c</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><mi>a</mi><mi>b</mi><mi>c</mi><mo>=</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mi>c</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>+</mo><msup><mi>c</mi><mn>2</mn></msup><mo>−</mo><mi>a</mi><mi>b</mi><mo>−</mo><mi>b</mi><mi>c</mi><mo>−</mo><mi>c</mi><mi>a</mi><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">a^3+b^3+c^3-3abc
+=
+(a+b+c)(a^2+b^2+c^2-ab-bc-ca).</annotation></semantics></math></span></div>
+        <p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mi>c</mi><mo>=</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a+b+c=0</annotation></semantics></math></span> 时，
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>a</mi><mn>3</mn></msup><mo>+</mo><msup><mi>b</mi><mn>3</mn></msup><mo>+</mo><msup><mi>c</mi><mn>3</mn></msup><mo>=</mo><mn>3</mn><mi>a</mi><mi>b</mi><mi>c</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">a^3+b^3+c^3=3abc.</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="三因式分解"><a class="heading-anchor" href="#三因式分解" aria-label="回到本小节">#</a>三、因式分解</h2>
+        <h3 id="31-提公因式"><a class="heading-anchor" href="#31-提公因式" aria-label="回到本小节">#</a>3.1 提公因式
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>6</mn><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mn>9</mn><msup><mi>x</mi><mn>2</mn></msup><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">6x^3+9x^2=3x^2(2x+3).</annotation></semantics></math></span></div>
+        <p>先看有没有公因式，是所有因式分解的第一步。</p>
+        <h3 id="32-公式法"><a class="heading-anchor" href="#32-公式法" aria-label="回到本小节">#</a>3.2 公式法</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>9</mn><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo stretchy="false">)</mo><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">x^2-9=(x-3)(x+3),</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mn>8</mn><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>4</mn><mo
+                stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">x^3+8=(x+2)(x^2-2x+4),</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>8</mn><msup><mi>x</mi><mn>3</mn></msup><mo>−</mo><mn>27</mn><mo>=</mo><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mn>4</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi>x</mi><mo>+</mo><mn>9</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">8x^3-27=(2x-3)(4x^2+6x+9).</annotation></semantics></math></span>
+        </div>
+        <h3 id="33-十字相乘法"><a class="heading-anchor" href="#33-十字相乘法" aria-label="回到本小节">#</a>3.3 十字相乘法
+        </h3>
+        <p>对</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">ax^2+bx+c,</annotation></semantics></math></span></div>
+        <p>寻找两个数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo
+                separator="true">,</mo><mi>n</mi></mrow><annotation
+                encoding="application/x-tex">m,n</annotation></semantics></math></span>，使得
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>m</mi><mi>n</mi><mo>=</mo><mi>a</mi><mi>c</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>m</mi><mo>+</mo><mi>n</mi><mo>=</mo><mi>b</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">mn=ac,\qquad m+n=b.</annotation></semantics></math></span></div>
+        <p>于是</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>m</mi><mi>x</mi><mo>+</mo><mi>n</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">ax^2+bx+c
+=
+ax^2+mx+nx+c,</annotation></semantics></math></span></div>
+        <p>再分组分解。</p>
+        <p><strong>例</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>6</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>7</mn><mi>x</mi><mo>−</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">6x^2-7x-3.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mi>c</mi><mo>=</mo><mn>6</mn><mo>⋅</mo><mo
+                stretchy="false">(</mo><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mn>18</mn><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">ac=6\cdot(-3)=-18,</annotation></semantics></math></span></div>
+        <p>需要两数乘积 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>18</mn></mrow><annotation
+                encoding="application/x-tex">-18</annotation></semantics></math></span>、和 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>7</mn></mrow><annotation
+                encoding="application/x-tex">-7</annotation></semantics></math></span>，取 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>9</mn></mrow><annotation
+                encoding="application/x-tex">-9</annotation></semantics></math></span> 与 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation
+                encoding="application/x-tex">2</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>6</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>9</mn><mi>x</mi><mo>+</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo>=</mo><mn>3</mn><mi>x</mi><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo>+</mo><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mn>3</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">6x^2-9x+2x-3
+=
+3x(2x-3)+(2x-3)
+=
+(2x-3)(3x+1).</annotation></semantics></math></span></div>
+        <h3 id="34-分组分解"><a class="heading-anchor" href="#34-分组分解" aria-label="回到本小节">#</a>3.4 分组分解
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mi>x</mi><mo>+</mo><mi>a</mi><mi>y</mi><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>b</mi><mi>y</mi><mo>=</mo><mi>a</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mo>+</mo><mi>b</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">ax+ay+bx+by
+=
+a(x+y)+b(x+y)
+=
+(x+y)(a+b).</annotation></semantics></math></span></div>
+        <p>分组的关键是“分组后能出现公因式”。</p>
+        <h3 id="35-拆项添项"><a class="heading-anchor" href="#35-拆项添项" aria-label="回到本小节">#</a>3.5 拆项添项
+        </h3>
+        <p><strong>例</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><mi>x</mi><mo>+</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">x^3-3x+2.</annotation></semantics></math></span></div>
+        <p>把 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>3</mn><mi>x</mi></mrow><annotation
+                encoding="application/x-tex">-3x</annotation></semantics></math></span> 拆成 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>x</mi><mo>−</mo><mn>2</mn><mi>x</mi></mrow><annotation
+                encoding="application/x-tex">-x-2x</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>−</mo><mi>x</mi><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>2</mn><mo>=</mo><mi>x</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>−</mo><mn>2</mn><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo
+                stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">x^3-x-2x+2
+=
+x(x-1)(x+1)-2(x-1)
+=
+(x-1)(x^2+x-2)
+=
+(x-1)^2(x+2).</annotation></semantics></math></span></div>
+        <h3 id="36-双十字相乘"><a class="heading-anchor" href="#36-双十字相乘" aria-label="回到本小节">#</a>3.6 双十字相乘
+        </h3>
+        <p>对于</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mi>y</mi><mo>+</mo><mi>c</mi><msup><mi>y</mi><mn>2</mn></msup><mo>+</mo><mi>d</mi><mi>x</mi><mo>+</mo><mi>e</mi><mi>y</mi><mo>+</mo><mi>f</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">ax^2+bxy+cy^2+dx+ey+f,</annotation></semantics></math></span></div>
+        <p>可以同时对 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation
+                encoding="application/x-tex">x^2</annotation></semantics></math></span> 项和常数项进行十字分解，再检验交叉项。
+        </p>
+        <h3 id="37-因式分解的一般顺序"><a class="heading-anchor" href="#37-因式分解的一般顺序"
+                                          aria-label="回到本小节">#</a>3.7 因式分解的一般顺序</h3>
+        <ol>
+            <li>提公因式；</li>
+            <li>看能否用平方差、立方和/差；</li>
+            <li>二次三项式试十字相乘；</li>
+            <li>项数多时试分组；</li>
+            <li>都不行时试拆项、添项或换元；</li>
+            <li>分解到不能再分为止。</li>
+        </ol>
+        <hr class="section-rule">
+        <h2 id="四分式化简"><a class="heading-anchor" href="#四分式化简" aria-label="回到本小节">#</a>四、分式化简</h2>
+        <h3 id="41-分式有意义的条件"><a class="heading-anchor" href="#41-分式有意义的条件" aria-label="回到本小节">#</a>4.1
+            分式有意义的条件</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mi>P</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo
+                stretchy="false">)</mo></mrow></mfrac></mrow><annotation
+                encoding="application/x-tex">\frac{P(x)}{Q(x)}</annotation></semantics></math></span></div>
+        <p>要求</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>Q</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo mathvariant="normal">≠</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">Q(x)\ne0.</annotation></semantics></math></span></div>
+        <p>化简分式时，约去的因子不能恒为零。例如</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mi>x</mi><mo>+</mo><mn>1</mn><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>x</mi><mo mathvariant="normal">≠</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac{x^2-1}{x-1}=x+1\quad(x\ne1).</annotation></semantics></math></span>
+        </div>
+        <p>等号右边的表达式在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">x=1</annotation></semantics></math></span> 有定义，但原分式没有，所以必须注明
+            <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo
+                    mathvariant="normal">≠</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">x\ne1</annotation></semantics></math></span>。
+        </p>
+        <h3 id="42-约分"><a class="heading-anchor" href="#42-约分" aria-label="回到本小节">#</a>4.2 约分</h3>
+        <p>先因式分解，再约去公因式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>4</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>x</mi><mo>+</mo><mn>2</mn></mrow><mrow><mi>x</mi><mo>−</mo><mn>2</mn></mrow></mfrac><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>x</mi><mo mathvariant="normal">≠</mo><mn>2</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac{x^2-4}{x^2-4x+4}
+=
+\frac{(x-2)(x+2)}{(x-2)^2}
+=
+\frac{x+2}{x-2}\quad(x\ne2).</annotation></semantics></math></span></div>
+        <h3 id="43-通分"><a class="heading-anchor" href="#43-通分" aria-label="回到本小节">#</a>4.3 通分</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>2</mn><mi>x</mi></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac1{x-1}+\frac1{x+1}
+=
+\frac{(x+1)+(x-1)}{(x-1)(x+1)}
+=
+\frac{2x}{x^2-1}.</annotation></semantics></math></span></div>
+        <h3 id="44-繁分式"><a class="heading-anchor" href="#44-繁分式" aria-label="回到本小节">#</a>4.4 繁分式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mfrac><mn>1</mn><mi>x</mi></mfrac><mo>−</mo><mfrac><mn>1</mn><mi>y</mi></mfrac></mrow><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow></mfrac><mo>=</mo><mfrac><mfrac><mrow><mi>y</mi><mo>−</mo><mi>x</mi></mrow><mrow><mi>x</mi><mi>y</mi></mrow></mfrac><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow></mfrac><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mrow><mi>x</mi><mi>y</mi></mrow></mfrac><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>x</mi><mo mathvariant="normal">≠</mo><mi>y</mi><mo
+                separator="true">,</mo><mtext> </mtext><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo
+                mathvariant="normal">≠</mo><mn>0</mn><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\frac{\frac1x-\frac1y}{x-y}
+=
+\frac{\frac{y-x}{xy}}{x-y}
+=
+-\frac1{xy}\quad(x\ne y,\ x,y\ne0).</annotation></semantics></math></span></div>
+        <h3 id="45-分式化简的注意事项"><a class="heading-anchor" href="#45-分式化简的注意事项"
+                                          aria-label="回到本小节">#</a>4.5 分式化简的注意事项</h3>
+        <ul>
+            <li>先因式分解；</li>
+            <li>约分时注意定义域；</li>
+            <li>通分时找最小公分母；</li>
+            <li>分子分母整体加括号，避免符号错误；</li>
+            <li>最终结果要尽可能简化。</li>
+        </ul>
+        <hr class="section-rule">
+        <h2 id="五根式化简"><a class="heading-anchor" href="#五根式化简" aria-label="回到本小节">#</a>五、根式化简</h2>
+        <h3 id="51-二次根式的性质"><a class="heading-anchor" href="#51-二次根式的性质" aria-label="回到本小节">#</a>5.1
+            二次根式的性质</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><msup><mi>a</mi><mn>2</mn></msup></msqrt><mo>=</mo><mi
+                mathvariant="normal">∣</mi><mi>a</mi><mi mathvariant="normal">∣</mi><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\sqrt{a^2}=|a|,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mrow><mi>a</mi><mi>b</mi></mrow></msqrt><mo>=</mo><msqrt><mi>a</mi></msqrt><msqrt><mi>b</mi></msqrt><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo>≥</mo><mn>0</mn><mo
+                stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sqrt{ab}=\sqrt a\sqrt b\quad(a,b\ge0),</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mfrac><mi>a</mi><mi>b</mi></mfrac></msqrt><mo>=</mo><mfrac><msqrt><mi>a</mi></msqrt><msqrt><mi>b</mi></msqrt></mfrac><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>a</mi><mo>≥</mo><mn>0</mn><mo separator="true">,</mo><mi>b</mi><mo>&gt;</mo><mn>0</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt{\frac ab}=\frac{\sqrt a}{\sqrt b}\quad(a\ge0,b&gt;0).</annotation></semantics></math></span>
+        </div>
+        <p>注意：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><msup><mi>a</mi><mn>2</mn></msup></msqrt><mo>=</mo><mi
+                mathvariant="normal">∣</mi><mi>a</mi><mi mathvariant="normal">∣</mi><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\sqrt{a^2}=|a|,</annotation></semantics></math></span></div>
+        <p>不是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation
+                encoding="application/x-tex">a</annotation></semantics></math></span>。
+        </p>
+        <h3 id="52-化简根式"><a class="heading-anchor" href="#52-化简根式" aria-label="回到本小节">#</a>5.2 化简根式
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mn>12</mn></msqrt><mo>=</mo><msqrt><mrow><mn>4</mn><mo>⋅</mo><mn>3</mn></mrow></msqrt><mo>=</mo><mn>2</mn><msqrt><mn>3</mn></msqrt><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt{12}=\sqrt{4\cdot3}=2\sqrt3.</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mn>50</mn></msqrt><mo>=</mo><msqrt><mrow><mn>25</mn><mo>⋅</mo><mn>2</mn></mrow></msqrt><mo>=</mo><mn>5</mn><msqrt><mn>2</mn></msqrt><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt{50}=\sqrt{25\cdot2}=5\sqrt2.</annotation></semantics></math></span>
+        </div>
+        <h3 id="53-分母有理化"><a class="heading-anchor" href="#53-分母有理化" aria-label="回到本小节">#</a>5.3 分母有理化
+        </h3>
+        <p>单根式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><msqrt><mn>2</mn></msqrt></mfrac><mo>=</mo><mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac1{\sqrt2}
+=
+\frac{\sqrt2}{2}.</annotation></semantics></math></span></div>
+        <p>共轭因式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><msqrt><mn>5</mn></msqrt><mo>−</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><msqrt><mn>5</mn></msqrt><mo>+</mo><mn>2</mn></mrow><mrow><mo
+                stretchy="false">(</mo><msqrt><mn>5</mn></msqrt><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msqrt><mn>5</mn></msqrt><mo>+</mo><mn>2</mn><mo
+                stretchy="false">)</mo></mrow></mfrac><mo>=</mo><msqrt><mn>5</mn></msqrt><mo>+</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">\frac1{\sqrt5-2}
+=
+\frac{\sqrt5+2}{(\sqrt5-2)(\sqrt5+2)}
+=
+\sqrt5+2.</annotation></semantics></math></span></div>
+        <p>一般地，</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><msqrt><mi>a</mi></msqrt><mo>−</mo><msqrt><mi>b</mi></msqrt></mrow></mfrac><mo>=</mo><mfrac><mrow><msqrt><mi>a</mi></msqrt><mo>+</mo><msqrt><mi>b</mi></msqrt></mrow><mrow><mi>a</mi><mo>−</mo><mi>b</mi></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac1{\sqrt a-\sqrt b}
+=
+\frac{\sqrt a+\sqrt b}{a-b}.</annotation></semantics></math></span></div>
+        <h3 id="54-双重根式"><a class="heading-anchor" href="#54-双重根式" aria-label="回到本小节">#</a>5.4 双重根式
+        </h3>
+        <p>若</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mrow><mi>A</mi><mo>+</mo><mn>2</mn><msqrt><mi>B</mi></msqrt></mrow></msqrt><mo>=</mo><msqrt><mi>m</mi></msqrt><mo>+</mo><msqrt><mi>n</mi></msqrt><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sqrt{A+2\sqrt B}
+=
+\sqrt m+\sqrt n,</annotation></semantics></math></span></div>
+        <p>则</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi><mo>=</mo><mi>A</mi><mo
+                separator="true">,</mo><mspace width="2em"/><mi>m</mi><mi>n</mi><mo>=</mo><mi>B</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">m+n=A,\qquad mn=B.</annotation></semantics></math></span></div>
+        <p><strong>例</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mrow><mn>7</mn><mo>+</mo><mn>4</mn><msqrt><mn>3</mn></msqrt></mrow></msqrt><mo>=</mo><msqrt><mrow><mn>7</mn><mo>+</mo><mn>2</mn><msqrt><mn>12</mn></msqrt></mrow></msqrt><mo>=</mo><msqrt><mn>4</mn></msqrt><mo>+</mo><msqrt><mn>3</mn></msqrt><mo>=</mo><mn>2</mn><mo>+</mo><msqrt><mn>3</mn></msqrt><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt{7+4\sqrt3}
+=
+\sqrt{7+2\sqrt{12}}
+=
+\sqrt{4}+\sqrt3
+=
+2+\sqrt3.</annotation></semantics></math></span></div>
+        <h3 id="55-根式化简的注意事项"><a class="heading-anchor" href="#55-根式化简的注意事项"
+                                          aria-label="回到本小节">#</a>5.5 根式化简的注意事项</h3>
+        <ul>
+            <li>先分解出完全平方因子；</li>
+            <li>注意 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><msup><mi>a</mi><mn>2</mn></msup></msqrt><mo>=</mo><mi
+                    mathvariant="normal">∣</mi><mi>a</mi><mi mathvariant="normal">∣</mi></mrow><annotation
+                    encoding="application/x-tex">\sqrt{a^2}=|a|</annotation></semantics></math></span>；
+            </li>
+            <li>有理化时乘共轭因式；</li>
+            <li>分母不能为零；</li>
+            <li>根号内必须非负。</li>
+        </ul>
+        <hr class="section-rule">
+        <h2 id="六高数关联度"><a class="heading-anchor" href="#六高数关联度" aria-label="回到本小节">#</a>六、高数关联度
+        </h2>
+        <h3 id="61-求极限约分与有理化"><a class="heading-anchor" href="#61-求极限约分与有理化"
+                                          aria-label="回到本小节">#</a>6.1 求极限：约分与有理化</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>1</mn></mrow></munder><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>1</mn></mrow></munder><mfrac><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">\lim_{x\to1}\frac{x^2-1}{x-1}
+=
+\lim_{x\to1}\frac{(x-1)(x+1)}{x-1}
+=
+2.</annotation></semantics></math></span></div>
+        <p>如果不会因式分解，就看不出可以约分。</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><msqrt><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></msqrt><mo>−</mo><mn>1</mn></mrow><mi>x</mi></mfrac><mo>=</mo><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mn>1</mn><mrow><msqrt><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></msqrt><mo>+</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lim_{x\to0}\frac{\sqrt{1+x}-1}{x}
+=
+\lim_{x\to0}
+\frac{1}{\sqrt{1+x}+1}
+=
+\frac12.</annotation></semantics></math></span></div>
+        <p>这里用的是分母有理化。</p>
+        <h3 id="62-求导代数变形与合并"><a class="heading-anchor" href="#62-求导代数变形与合并"
+                                          aria-label="回到本小节">#</a>6.2 求导：代数变形与合并</h3>
+        <p>求导后经常需要展开、通分、因式分解，才能看出符号或进一步化简。</p>
+        <p>例如：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mrow><mo
+                fence="true">(</mo><mfrac><mi>x</mi><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo fence="true">)</mo></mrow><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mo>−</mo><mi>x</mi></mrow><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\left(\frac{x}{x+1}\right)&#x27;
+=
+\frac{(x+1)-x}{(x+1)^2}
+=
+\frac1{(x+1)^2}.</annotation></semantics></math></span></div>
+        <h3 id="63-积分部分分式"><a class="heading-anchor" href="#63-积分部分分式" aria-label="回到本小节">#</a>6.3
+            积分：部分分式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo
+                fence="true">(</mo><mfrac><mn>1</mn><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\frac1{x^2-1}
+=
+\frac12\left(\frac1{x-1}-\frac1{x+1}\right).</annotation></semantics></math></span></div>
+        <p>这依赖因式分解和分式拆分。</p>
+        <h3 id="64-绝对值与误差估计"><a class="heading-anchor" href="#64-绝对值与误差估计" aria-label="回到本小节">#</a>6.4
+            绝对值与误差估计</h3>
+        <p>极限的 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation
+                encoding="application/x-tex">\varepsilon</annotation></semantics></math></span>-<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi></mrow><annotation
+                encoding="application/x-tex">\delta</annotation></semantics></math></span> 定义、误差估计和不等式证明都大量使用绝对值。
+        </p>
+        <h3 id="65-根式与三角代换"><a class="heading-anchor" href="#65-根式与三角代换" aria-label="回到本小节">#</a>6.5
+            根式与三角代换</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msqrt><mo
+                separator="true">,</mo><mspace width="2em"/><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msqrt></mrow><annotation
+                encoding="application/x-tex">\sqrt{a^2-x^2},\qquad
+\sqrt{a^2+x^2}</annotation></semantics></math></span></div>
+        <p>等根式在积分中常通过三角代换化简，前提是能熟练处理根号和平方关系。</p>
+        <hr class="section-rule">
+        <h2 id="七典型例题"><a class="heading-anchor" href="#七典型例题" aria-label="回到本小节">#</a>七、典型例题</h2>
+        <h3 id="例-1绝对值不等式"><a class="heading-anchor" href="#例-1绝对值不等式" aria-label="回到本小节">#</a>例
+            1：绝对值不等式</h3>
+        <p>解</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>5.</mn></mrow><annotation
+                encoding="application/x-tex">|2x-3|&lt;5.</annotation></semantics></math></span></div>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mn>5</mn><mo>&lt;</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo>&lt;</mo><mn>5.</mn></mrow><annotation
+                encoding="application/x-tex">-5&lt;2x-3&lt;5.</annotation></semantics></math></span></div>
+        <p>各边加 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation
+                encoding="application/x-tex">3</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mn>2</mn><mo>&lt;</mo><mn>2</mn><mi>x</mi><mo>&lt;</mo><mn>8.</mn></mrow><annotation
+                encoding="application/x-tex">-2&lt;2x&lt;8.</annotation></semantics></math></span></div>
+        <p>除以 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation
+                encoding="application/x-tex">2</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mn>1</mn><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mn>4.</mn></mrow><annotation
+                encoding="application/x-tex">-1&lt;x&lt;4.</annotation></semantics></math></span></div>
+        <p>解集为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo
+                separator="true">,</mo><mn>4</mn><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{(-1,4)}.</annotation></semantics></math></span>
+        </div>
+        <h3 id="例-2完全立方公式"><a class="heading-anchor" href="#例-2完全立方公式" aria-label="回到本小节">#</a>例
+            2：完全立方公式</h3>
+        <p>展开</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><msup><mo stretchy="false">)</mo><mn>3</mn></msup><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">(2x-3)^3.</annotation></semantics></math></span></div>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><msup><mo stretchy="false">)</mo><mn>3</mn></msup><mo>=</mo><msup><mi>a</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><msup><mi>a</mi><mn>2</mn></msup><mi>b</mi><mo>+</mo><mn>3</mn><mi>a</mi><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><msup><mi>b</mi><mn>3</mn></msup><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">(a-b)^3=a^3-3a^2b+3ab^2-b^3.</annotation></semantics></math></span></div>
+        <p>取 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>2</mn><mi>x</mi><mo
+                separator="true">,</mo><mi>b</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">a=2x,b=3</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><msup><mo stretchy="false">)</mo><mn>3</mn></msup><mo>=</mo><mn>8</mn><msup><mi>x</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><mo>⋅</mo><mn>4</mn><msup><mi>x</mi><mn>2</mn></msup><mo>⋅</mo><mn>3</mn><mo>+</mo><mn>3</mn><mo>⋅</mo><mn>2</mn><mi>x</mi><mo>⋅</mo><mn>9</mn><mo>−</mo><mn>27.</mn></mrow><annotation
+                encoding="application/x-tex">(2x-3)^3
+=
+8x^3-3\cdot4x^2\cdot3
++3\cdot2x\cdot9-27.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mn>8</mn><msup><mi>x</mi><mn>3</mn></msup><mo>−</mo><mn>36</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>54</mn><mi>x</mi><mo>−</mo><mn>27</mn></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">=
+\boxed{8x^3-36x^2+54x-27}.</annotation></semantics></math></span></div>
+        <h3 id="例-3十字相乘"><a class="heading-anchor" href="#例-3十字相乘" aria-label="回到本小节">#</a>例 3：十字相乘
+        </h3>
+        <p>分解</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>6</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>7</mn><mi>x</mi><mo>−</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">6x^2-7x-3.</annotation></semantics></math></span></div>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mi>c</mi><mo>=</mo><mn>6</mn><mo>⋅</mo><mo
+                stretchy="false">(</mo><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mn>18.</mn></mrow><annotation
+                encoding="application/x-tex">ac=6\cdot(-3)=-18.</annotation></semantics></math></span></div>
+        <p>取两数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>9</mn><mo
+                separator="true">,</mo><mn>2</mn></mrow><annotation
+                encoding="application/x-tex">-9,2</annotation></semantics></math></span>，因为
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mn>9</mn><mo>+</mo><mn>2</mn><mo>=</mo><mo>−</mo><mn>7</mn><mo
+                separator="true">,</mo><mspace width="2em"/><mo stretchy="false">(</mo><mo>−</mo><mn>9</mn><mo
+                stretchy="false">)</mo><mo>⋅</mo><mn>2</mn><mo>=</mo><mo>−</mo><mn>18.</mn></mrow><annotation
+                encoding="application/x-tex">-9+2=-7,\qquad (-9)\cdot2=-18.</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>6</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>9</mn><mi>x</mi><mo>+</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo>=</mo><mn>3</mn><mi>x</mi><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo>+</mo><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo
+                stretchy="false">)</mo><mo stretchy="false">(</mo><mn>3</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">6x^2-9x+2x-3
+=
+3x(2x-3)+(2x-3)
+=
+\boxed{(2x-3)(3x+1)}.</annotation></semantics></math></span></div>
+        <h3 id="例-4拆项分解"><a class="heading-anchor" href="#例-4拆项分解" aria-label="回到本小节">#</a>例 4：拆项分解
+        </h3>
+        <p>分解</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><mi>x</mi><mo>+</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">x^3-3x+2.</annotation></semantics></math></span></div>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><mi>x</mi><mo>+</mo><mn>2</mn><mo>=</mo><msup><mi>x</mi><mn>3</mn></msup><mo>−</mo><mi>x</mi><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">x^3-3x+2
+=
+x^3-x-2x+2.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mi>x</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>−</mo><mn>2</mn><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">=
+x(x-1)(x+1)-2(x-1).</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo
+                stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">=
+(x-1)(x^2+x-2)
+=
+(x-1)(x-1)(x+2).</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{(x-1)^2(x+2)}.</annotation></semantics></math></span></div>
+        <h3 id="例-5分式化简"><a class="heading-anchor" href="#例-5分式化简" aria-label="回到本小节">#</a>例 5：分式化简
+        </h3>
+        <p>化简</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>4</mn></mrow></mfrac><mo>÷</mo><mfrac><mrow><mi>x</mi><mo>+</mo><mn>2</mn></mrow><mrow><mi>x</mi><mo>−</mo><mn>2</mn></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac{x^2-4}{x^2-4x+4}
+\div
+\frac{x+2}{x-2}.</annotation></semantics></math></span></div>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>4</mn></mrow></mfrac><mo>⋅</mo><mfrac><mrow><mi>x</mi><mo>−</mo><mn>2</mn></mrow><mrow><mi>x</mi><mo>+</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac><mo>⋅</mo><mfrac><mrow><mi>x</mi><mo>−</mo><mn>2</mn></mrow><mrow><mi>x</mi><mo>+</mo><mn>2</mn></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac{x^2-4}{x^2-4x+4}
+\cdot
+\frac{x-2}{x+2}
+=
+\frac{(x-2)(x+2)}{(x-2)^2}
+\cdot
+\frac{x-2}{x+2}.</annotation></semantics></math></span></div>
+        <p>约分得</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mstyle></mstyle></menclose><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>x</mi><mo mathvariant="normal">≠</mo><mn>2</mn><mo
+                separator="true">,</mo><mtext> </mtext><mi>x</mi><mo mathvariant="normal">≠</mo><mo>−</mo><mn>2</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{1}\quad(x\ne2,\ x\ne-2).</annotation></semantics></math></span>
+        </div>
+        <h3 id="例-6有理化"><a class="heading-anchor" href="#例-6有理化" aria-label="回到本小节">#</a>例 6：有理化</h3>
+        <p>化简</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msqrt><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></msqrt><mo>−</mo><mn>1</mn></mrow><mi>x</mi></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\frac{\sqrt{x+1}-1}{x}.</annotation></semantics></math></span></div>
+        <p><strong>解</strong></p>
+        <p>分子分母乘共轭因式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msqrt><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></msqrt><mo>−</mo><mn>1</mn></mrow><mi>x</mi></mfrac><mo>=</mo><mfrac><mrow><mo
+                stretchy="false">(</mo><msqrt><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></msqrt><mo>−</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mo stretchy="false">(</mo><msqrt><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></msqrt><mo>+</mo><mn>1</mn><mo
+                stretchy="false">)</mo></mrow><mrow><mi>x</mi><mo stretchy="false">(</mo><msqrt><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></msqrt><mo>+</mo><mn>1</mn><mo
+                stretchy="false">)</mo></mrow></mfrac><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\frac{\sqrt{x+1}-1}{x}
+=
+\frac{(\sqrt{x+1}-1)(\sqrt{x+1}+1)}
+{x(\sqrt{x+1}+1)}.</annotation></semantics></math></span></div>
+        <p>分子：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><msqrt><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></msqrt><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>1</mn><mo>=</mo><mi>x</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">(\sqrt{x+1})^2-1=x.</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mfrac><mi>x</mi><mrow><mi>x</mi><mo
+                stretchy="false">(</mo><msqrt><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></msqrt><mo>+</mo><mn>1</mn><mo
+                stretchy="false">)</mo></mrow></mfrac><mo>=</mo><menclose notation="box"><mstyle scriptlevel="0"
+                                                                                                 displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mfrac><mn>1</mn><mrow><msqrt><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></msqrt><mo>+</mo><mn>1</mn></mrow></mfrac></mstyle></mstyle></mstyle></menclose><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>x</mi><mo mathvariant="normal">≠</mo><mn>0</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">=
+\frac{x}{x(\sqrt{x+1}+1)}
+=
+\boxed{\frac1{\sqrt{x+1}+1}}
+\quad(x\ne0).</annotation></semantics></math></span></div>
+        <h3 id="例-7双重根式"><a class="heading-anchor" href="#例-7双重根式" aria-label="回到本小节">#</a>例 7：双重根式
+        </h3>
+        <p>化简</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mrow><mn>7</mn><mo>+</mo><mn>4</mn><msqrt><mn>3</mn></msqrt></mrow></msqrt><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\sqrt{7+4\sqrt3}.</annotation></semantics></math></span></div>
+        <p><strong>解</strong></p>
+        <p>注意到</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>7</mn><mo>+</mo><mn>4</mn><msqrt><mn>3</mn></msqrt><mo>=</mo><mn>7</mn><mo>+</mo><mn>2</mn><msqrt><mn>12</mn></msqrt><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">7+4\sqrt3=7+2\sqrt{12}.</annotation></semantics></math></span></div>
+        <p>寻找 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi><mo>=</mo><mn>7</mn></mrow><annotation
+                encoding="application/x-tex">m+n=7</annotation></semantics></math></span>、<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>n</mi><mo>=</mo><mn>12</mn></mrow><annotation
+                encoding="application/x-tex">mn=12</annotation></semantics></math></span>，取 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>4</mn><mo
+                separator="true">,</mo><mi>n</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">m=4,n=3</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mrow><mn>7</mn><mo>+</mo><mn>2</mn><msqrt><mn>12</mn></msqrt></mrow></msqrt><mo>=</mo><msqrt><mrow><mo
+                stretchy="false">(</mo><msqrt><mn>4</mn></msqrt><mo>+</mo><msqrt><mn>3</mn></msqrt><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt><mo>=</mo><msqrt><mn>4</mn></msqrt><mo>+</mo><msqrt><mn>3</mn></msqrt><mo>=</mo><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mn>2</mn><mo>+</mo><msqrt><mn>3</mn></msqrt></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt{7+2\sqrt{12}}
+=
+\sqrt{(\sqrt4+\sqrt3)^2}
+=
+\sqrt4+\sqrt3
+=
+\boxed{2+\sqrt3}.</annotation></semantics></math></span></div>
+        <h3 id="例-8因式分解求极限"><a class="heading-anchor" href="#例-8因式分解求极限" aria-label="回到本小节">#</a>例
+            8：因式分解求极限</h3>
+        <p>求</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>2</mn></mrow></munder><mfrac><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>−</mo><mn>8</mn></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lim_{x\to2}\frac{x^3-8}{x^2-4}.</annotation></semantics></math></span>
+        </div>
+        <p><strong>解</strong></p>
+        <p>因式分解：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>−</mo><mn>8</mn><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>4</mn><mo
+                stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">x^3-8=(x-2)(x^2+2x+4),</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">x^2-4=(x-2)(x+2).</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>2</mn></mrow></munder><mfrac><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>4</mn><mo
+                stretchy="false">)</mo></mrow><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo
+                stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo
+                stretchy="false">)</mo></mrow></mfrac><mo>=</mo><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>2</mn></mrow></munder><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>4</mn></mrow><mrow><mi>x</mi><mo>+</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mfrac><mn>12</mn><mn>4</mn></mfrac><mo>=</mo><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mn>3</mn></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lim_{x\to2}
+\frac{(x-2)(x^2+2x+4)}
+{(x-2)(x+2)}
+=
+\lim_{x\to2}
+\frac{x^2+2x+4}{x+2}
+=
+\frac{12}{4}
+=
+\boxed{3}.</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="八易错点提示"><a class="heading-anchor" href="#八易错点提示" aria-label="回到本小节">#</a>八、易错点提示
+        </h2>
+        <h3 id="1-忘记绝对值"><a class="heading-anchor" href="#1-忘记绝对值" aria-label="回到本小节">#</a>1. 忘记绝对值
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><msup><mi>x</mi><mn>2</mn></msup></msqrt><mo>=</mo><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\sqrt{x^2}=|x|,</annotation></semantics></math></span></div>
+        <p>不是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation
+                encoding="application/x-tex">x</annotation></semantics></math></span>。
+        </p>
+        <h3 id="2-解绝对值不等式时忘记取交集"><a class="heading-anchor" href="#2-解绝对值不等式时忘记取交集"
+                                                 aria-label="回到本小节">#</a>2. 解绝对值不等式时忘记取交集</h3>
+        <p>例如</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mo>−</mo><mn>1</mn><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>2</mn></mrow><annotation
+                encoding="application/x-tex">|x-1|&lt;2</annotation></semantics></math></span></div>
+        <p>应解为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mn>1</mn><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mn>3</mn><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">-1&lt;x&lt;3,</annotation></semantics></math></span></div>
+        <p>不能只写 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mn>3</mn></mrow><annotation
+                encoding="application/x-tex">x&lt;3</annotation></semantics></math></span>。
+        </p>
+        <h3 id="3-平方差符号写反"><a class="heading-anchor" href="#3-平方差符号写反" aria-label="回到本小节">#</a>3.
+            平方差符号写反</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>−</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">a^2-b^2=(a-b)(a+b).</annotation></semantics></math></span></div>
+        <h3 id="4-立方和立方差第二个因式写错"><a class="heading-anchor" href="#4-立方和立方差第二个因式写错"
+                                                 aria-label="回到本小节">#</a>4. 立方和、立方差第二个因式写错</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>a</mi><mn>3</mn></msup><mo>+</mo><msup><mi>b</mi><mn>3</mn></msup><mo>=</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>a</mi><mn>2</mn></msup><mo>−</mo><mi>a</mi><mi>b</mi><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo
+                stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">a^3+b^3=(a+b)(a^2-ab+b^2),</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>a</mi><mn>3</mn></msup><mo>−</mo><msup><mi>b</mi><mn>3</mn></msup><mo>=</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><mi>b</mi><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">a^3-b^3=(a-b)(a^2+ab+b^2).</annotation></semantics></math></span>
+        </div>
+        <h3 id="5-约分时忽略定义域"><a class="heading-anchor" href="#5-约分时忽略定义域" aria-label="回到本小节">#</a>5.
+            约分时忽略定义域</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mi>x</mi><mo>+</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">\frac{x^2-1}{x-1}=x+1</annotation></semantics></math></span></div>
+        <p>成立的前提是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo
+                mathvariant="normal">≠</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">x\ne1</annotation></semantics></math></span>。
+        </p>
+        <h3 id="6-通分时分子忘记加括号"><a class="heading-anchor" href="#6-通分时分子忘记加括号"
+                                           aria-label="回到本小节">#</a>6. 通分时分子忘记加括号</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>−</mo><mfrac><mn>1</mn><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>−</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mfrac><mn>2</mn><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac1{x-1}-\frac1{x+1}
+=
+\frac{(x+1)-(x-1)}{x^2-1}
+=
+\frac2{x^2-1}.</annotation></semantics></math></span></div>
+        <p>不能把分子写成 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>+</mo><mn>1</mn><mo>−</mo><mi>x</mi><mo>−</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">x+1-x-1</annotation></semantics></math></span>。
+        </p>
+        <h3 id="7-有理化时乘错共轭"><a class="heading-anchor" href="#7-有理化时乘错共轭" aria-label="回到本小节">#</a>7.
+            有理化时乘错共轭</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mi>a</mi></msqrt><mo>−</mo><msqrt><mi>b</mi></msqrt></mrow><annotation
+                encoding="application/x-tex">\sqrt a-\sqrt b</annotation></semantics></math></span></div>
+        <p>的共轭是</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mi>a</mi></msqrt><mo>+</mo><msqrt><mi>b</mi></msqrt><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt a+\sqrt b.</annotation></semantics></math></span>
+        </div>
+        <h3 id="8-根号内负号处理错误"><a class="heading-anchor" href="#8-根号内负号处理错误"
+                                         aria-label="回到本小节">#</a>8. 根号内负号处理错误</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mi>b</mi></mrow></msqrt><mo>=</mo><mi
+                mathvariant="normal">∣</mi><mi>a</mi><mi mathvariant="normal">∣</mi><msqrt><mi>b</mi></msqrt><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>b</mi><mo>≥</mo><mn>0</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt{a^2b}=|a|\sqrt b\quad(b\ge0).</annotation></semantics></math></span>
+        </div>
+        <h3 id="9-因式分解不彻底"><a class="heading-anchor" href="#9-因式分解不彻底" aria-label="回到本小节">#</a>9.
+            因式分解不彻底</h3>
+        <p>分解后要继续检查每个因式是否还能分解。</p>
+        <h3 id="10-分式方程去分母后不检验"><a class="heading-anchor" href="#10-分式方程去分母后不检验"
+                                              aria-label="回到本小节">#</a>10. 分式方程去分母后不检验</h3>
+        <p>去分母可能引入使原分母为零的增根，必须检验。</p>
+        <h3 id="11-绝对值等式直接平方"><a class="heading-anchor" href="#11-绝对值等式直接平方"
+                                          aria-label="回到本小节">#</a>11. 绝对值等式直接平方</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi
+                mathvariant="normal">∣</mi><mi>y</mi><mi mathvariant="normal">∣</mi><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>x</mi><mo>=</mo><mo>±</mo><mi>y</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">|x|=|y|\iff x=\pm y.</annotation></semantics></math></span></div>
+        <p>平方也可以，但要注意是否引入了额外条件。</p>
+        <h3 id="12-忽略根式定义域"><a class="heading-anchor" href="#12-忽略根式定义域" aria-label="回到本小节">#</a>12.
+            忽略根式定义域</h3>
+        <p>偶次根号内必须非负，分母不能为零。</p>
+        <hr class="section-rule">
+        <h2 id="九课后练习"><a class="heading-anchor" href="#九课后练习" aria-label="回到本小节">#</a>九、课后练习</h2>
+        <ol>
+            <li>解不等式 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                    mathvariant="normal">∣</mi><mn>3</mn><mi>x</mi><mo>+</mo><mn>1</mn><mi mathvariant="normal">∣</mi><mo>≥</mo><mn>4</mn></mrow><annotation
+                    encoding="application/x-tex">|3x+1|\ge4</annotation></semantics></math></span>。
+            </li>
+            <li>展开 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    stretchy="false">(</mo><mn>3</mn><mi>a</mi><mo>−</mo><mn>2</mn><mi>b</mi><msup><mo stretchy="false">)</mo><mn>3</mn></msup></mrow><annotation
+                    encoding="application/x-tex">(3a-2b)^3</annotation></semantics></math></span>。
+            </li>
+            <li>分解 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>5</mn><mi>x</mi><mo>+</mo><mn>6</mn></mrow><annotation
+                    encoding="application/x-tex">x^2-5x+6</annotation></semantics></math></span>。
+            </li>
+            <li>分解 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>5</mn><mi>x</mi><mo>−</mo><mn>3</mn></mrow><annotation
+                    encoding="application/x-tex">2x^2+5x-3</annotation></semantics></math></span>。
+            </li>
+            <li>分解 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mn>8</mn></mrow><annotation
+                    encoding="application/x-tex">x^3+8</annotation></semantics></math></span>。
+            </li>
+            <li>化简 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>9</mn></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi>x</mi><mo>+</mo><mn>9</mn></mrow></mfrac></mstyle><mo>⋅</mo><mstyle
+                    scriptlevel="0" displaystyle="true"><mfrac><mrow><mi>x</mi><mo>+</mo><mn>3</mn></mrow><mrow><mi>x</mi><mo>−</mo><mn>3</mn></mrow></mfrac></mstyle></mrow><annotation
+                    encoding="application/x-tex">\dfrac{x^2-9}{x^2+6x+9}\cdot\dfrac{x+3}{x-3}</annotation></semantics></math></span>。
+            </li>
+            <li>化简 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><mfrac><mn>1</mn><mrow><msqrt><mn>5</mn></msqrt><mo>−</mo><mn>2</mn></mrow></mfrac></mstyle></mrow><annotation
+                    encoding="application/x-tex">\dfrac1{\sqrt5-2}</annotation></semantics></math></span>。
+            </li>
+            <li>化简 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mn>12</mn></msqrt><mo>−</mo><msqrt><mn>27</mn></msqrt><mo>+</mo><msqrt><mn>48</mn></msqrt></mrow><annotation
+                    encoding="application/x-tex">\sqrt{12}-\sqrt{27}+\sqrt{48}</annotation></semantics></math></span>。
+            </li>
+            <li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>1</mn></mrow></munder><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\lim_{x\to1}\frac{x^2-1}{x-1}</annotation></semantics></math></span>。
+            </li>
+            <li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle
+                    scriptlevel="0" displaystyle="true"><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><msqrt><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></msqrt><mo>−</mo><mn>1</mn></mrow><mi>x</mi></mfrac></mstyle></mrow><annotation
+                    encoding="application/x-tex">\displaystyle\lim_{x\to0}\frac{\sqrt{1+x}-1}{x}</annotation></semantics></math></span>。
+            </li>
+        </ol>
+        <hr class="section-rule">
+        <h2 id="十练习答案与解析"><a class="heading-anchor" href="#十练习答案与解析" aria-label="回到本小节">#</a>十、练习答案与解析
+        </h2>
+        <h3 id="1-答案-或"><a class="heading-anchor" href="#1-答案-或" aria-label="回到本小节">#</a>1. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>≤</mo><mo>−</mo><mstyle
+                scriptlevel="0" displaystyle="true"><mfrac><mn>5</mn><mn>3</mn></mfrac></mstyle></mrow><annotation
+                encoding="application/x-tex">x\le-\dfrac53</annotation></semantics></math></span> 或 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>≥</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">x\ge1</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mn>3</mn><mi>x</mi><mo>+</mo><mn>1</mn><mi mathvariant="normal">∣</mi><mo>≥</mo><mn>4</mn><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mn>3</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>≤</mo><mo>−</mo><mn>4</mn><mtext> 或 </mtext><mn>3</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>≥</mo><mn>4.</mn></mrow><annotation
+                encoding="application/x-tex">|3x+1|\ge4
+\iff
+3x+1\le-4\ \text{或}\ 3x+1\ge4.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>3</mn><mi>x</mi><mo>≤</mo><mo>−</mo><mn>5</mn><mtext> 或 </mtext><mn>3</mn><mi>x</mi><mo>≥</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">3x\le-5\ \text{或}\ 3x\ge3.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>≤</mo><mo>−</mo><mfrac><mn>5</mn><mn>3</mn></mfrac><mtext> 或 </mtext><mi>x</mi><mo>≥</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">x\le-\frac53\ \text{或}\ x\ge1.</annotation></semantics></math></span>
+        </div>
+        <h3 id="2-答案"><a class="heading-anchor" href="#2-答案" aria-label="回到本小节">#</a>2. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>27</mn><msup><mi>a</mi><mn>3</mn></msup><mo>−</mo><mn>54</mn><msup><mi>a</mi><mn>2</mn></msup><mi>b</mi><mo>+</mo><mn>36</mn><mi>a</mi><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>8</mn><msup><mi>b</mi><mn>3</mn></msup></mrow><annotation
+                encoding="application/x-tex">27a^3-54a^2b+36ab^2-8b^3</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mn>3</mn><mi>a</mi><mo>−</mo><mn>2</mn><mi>b</mi><msup><mo
+                stretchy="false">)</mo><mn>3</mn></msup><mo>=</mo><mn>27</mn><msup><mi>a</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><mo>⋅</mo><mn>9</mn><msup><mi>a</mi><mn>2</mn></msup><mo>⋅</mo><mn>2</mn><mi>b</mi><mo>+</mo><mn>3</mn><mo>⋅</mo><mn>3</mn><mi>a</mi><mo>⋅</mo><mn>4</mn><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>8</mn><msup><mi>b</mi><mn>3</mn></msup><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">(3a-2b)^3
+=
+27a^3-3\cdot9a^2\cdot2b
++3\cdot3a\cdot4b^2-8b^3.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mn>27</mn><msup><mi>a</mi><mn>3</mn></msup><mo>−</mo><mn>54</mn><msup><mi>a</mi><mn>2</mn></msup><mi>b</mi><mo>+</mo><mn>36</mn><mi>a</mi><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>8</mn><msup><mi>b</mi><mn>3</mn></msup><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">=
+27a^3-54a^2b+36ab^2-8b^3.</annotation></semantics></math></span></div>
+        <h3 id="3-答案"><a class="heading-anchor" href="#3-答案" aria-label="回到本小节">#</a>3. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(x-2)(x-3)</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>5</mn><mi>x</mi><mo>+</mo><mn>6</mn><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">x^2-5x+6=(x-2)(x-3).</annotation></semantics></math></span></div>
+        <h3 id="4-答案"><a class="heading-anchor" href="#4-答案" aria-label="回到本小节">#</a>4. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(2x-1)(x+3)</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>5</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo>=</mo><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi>x</mi><mo>−</mo><mi>x</mi><mo>−</mo><mn>3</mn><mo>=</mo><mn>2</mn><mi>x</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo stretchy="false">)</mo><mo>−</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><mo
+                stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">2x^2+5x-3
+=
+2x^2+6x-x-3
+=
+2x(x+3)-(x+3)
+=
+(2x-1)(x+3).</annotation></semantics></math></span></div>
+        <h3 id="5-答案"><a class="heading-anchor" href="#5-答案" aria-label="回到本小节">#</a>5. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>4</mn><mo
+                stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(x+2)(x^2-2x+4)</annotation></semantics></math></span></h3>
+        <p>利用立方和公式。</p>
+        <h3 id="6-答案"><a class="heading-anchor" href="#6-答案" aria-label="回到本小节">#</a>6. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>x</mi><mo mathvariant="normal">≠</mo><mo>±</mo><mn>3</mn><mo
+                stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">1\quad(x\ne\pm3)</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>3</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac><mo>⋅</mo><mfrac><mrow><mi>x</mi><mo>+</mo><mn>3</mn></mrow><mrow><mi>x</mi><mo>−</mo><mn>3</mn></mrow></mfrac><mo>=</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">\frac{(x-3)(x+3)}{(x+3)^2}\cdot\frac{x+3}{x-3}=1.</annotation></semantics></math></span>
+        </div>
+        <h3 id="7-答案"><a class="heading-anchor" href="#7-答案" aria-label="回到本小节">#</a>7. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mn>5</mn></msqrt><mo>+</mo><mn>2</mn></mrow><annotation
+                encoding="application/x-tex">\sqrt5+2</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><msqrt><mn>5</mn></msqrt><mo>−</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><msqrt><mn>5</mn></msqrt><mo>+</mo><mn>2</mn></mrow><mrow><mn>5</mn><mo>−</mo><mn>4</mn></mrow></mfrac><mo>=</mo><msqrt><mn>5</mn></msqrt><mo>+</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">\frac1{\sqrt5-2}
+=
+\frac{\sqrt5+2}{5-4}
+=
+\sqrt5+2.</annotation></semantics></math></span></div>
+        <h3 id="8-答案"><a class="heading-anchor" href="#8-答案" aria-label="回到本小节">#</a>8. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><msqrt><mn>3</mn></msqrt></mrow><annotation
+                encoding="application/x-tex">3\sqrt3</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mn>12</mn></msqrt><mo>=</mo><mn>2</mn><msqrt><mn>3</mn></msqrt><mo
+                separator="true">,</mo><mspace width="2em"/><msqrt><mn>27</mn></msqrt><mo>=</mo><mn>3</mn><msqrt><mn>3</mn></msqrt><mo
+                separator="true">,</mo><mspace width="2em"/><msqrt><mn>48</mn></msqrt><mo>=</mo><mn>4</mn><msqrt><mn>3</mn></msqrt><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt{12}=2\sqrt3,
+\qquad
+\sqrt{27}=3\sqrt3,
+\qquad
+\sqrt{48}=4\sqrt3.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><msqrt><mn>3</mn></msqrt><mo>−</mo><mn>3</mn><msqrt><mn>3</mn></msqrt><mo>+</mo><mn>4</mn><msqrt><mn>3</mn></msqrt><mo>=</mo><mn>3</mn><msqrt><mn>3</mn></msqrt><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">2\sqrt3-3\sqrt3+4\sqrt3=3\sqrt3.</annotation></semantics></math></span>
+        </div>
+        <h3 id="9-答案"><a class="heading-anchor" href="#9-答案" aria-label="回到本小节">#</a>9. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation
+                encoding="application/x-tex">2</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>→</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">\frac{x^2-1}{x-1}
+=
+\frac{(x-1)(x+1)}{x-1}
+=
+x+1\to2.</annotation></semantics></math></span></div>
+        <h3 id="10-答案"><a class="heading-anchor" href="#10-答案" aria-label="回到本小节">#</a>10. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0"
+                                                                                                        displaystyle="true"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle></mrow><annotation
+                encoding="application/x-tex">\dfrac12</annotation></semantics></math></span></h3>
+        <p>有理化：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msqrt><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></msqrt><mo>−</mo><mn>1</mn></mrow><mi>x</mi></mfrac><mo>=</mo><mfrac><mn>1</mn><mrow><msqrt><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></msqrt><mo>+</mo><mn>1</mn></mrow></mfrac><mo>→</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac{\sqrt{1+x}-1}{x}
+=
+\frac{1}{\sqrt{1+x}+1}
+\to\frac12.</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="十一公式速查"><a class="heading-anchor" href="#十一公式速查" aria-label="回到本小节">#</a>十一、公式速查
+        </h2>
+        <h3 id="111-乘法公式"><a class="heading-anchor" href="#111-乘法公式" aria-label="回到本小节">#</a>11.1 乘法公式
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mi>a</mi><mo>±</mo><mi>b</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>=</mo><msup><mi>a</mi><mn>2</mn></msup><mo>±</mo><mn>2</mn><mi>a</mi><mi>b</mi><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">(a\pm b)^2=a^2\pm2ab+b^2,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mi>a</mi><mo>±</mo><mi>b</mi><msup><mo stretchy="false">)</mo><mn>3</mn></msup><mo>=</mo><msup><mi>a</mi><mn>3</mn></msup><mo>±</mo><mn>3</mn><msup><mi>a</mi><mn>2</mn></msup><mi>b</mi><mo>+</mo><mn>3</mn><mi>a</mi><msup><mi>b</mi><mn>2</mn></msup><mo>±</mo><msup><mi>b</mi><mn>3</mn></msup><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">(a\pm b)^3=a^3\pm3a^2b+3ab^2\pm b^3,</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>−</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">a^2-b^2=(a-b)(a+b),</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>a</mi><mn>3</mn></msup><mo>±</mo><msup><mi>b</mi><mn>3</mn></msup><mo>=</mo><mo
+                stretchy="false">(</mo><mi>a</mi><mo>±</mo><mi>b</mi><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><msup><mi>a</mi><mn>2</mn></msup><mo>∓</mo><mi>a</mi><mi>b</mi><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">a^3\pm b^3=(a\pm b)(a^2\mp ab+b^2).</annotation></semantics></math></span>
+        </div>
+        <h3 id="112-绝对值"><a class="heading-anchor" href="#112-绝对值" aria-label="回到本小节">#</a>11.2 绝对值</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>a</mi><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mo>−</mo><mi>a</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>a</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">|x|&lt;a\iff -a&lt;x&lt;a,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>&gt;</mo><mi>a</mi><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>x</mi><mo>&lt;</mo><mo>−</mo><mi>a</mi><mtext> 或 </mtext><mi>x</mi><mo>&gt;</mo><mi>a</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">|x|&gt;a\iff x&lt;-a\ \text{或}\ x&gt;a.</annotation></semantics></math></span>
+        </div>
+        <h3 id="113-根式"><a class="heading-anchor" href="#113-根式" aria-label="回到本小节">#</a>11.3 根式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><msup><mi>a</mi><mn>2</mn></msup></msqrt><mo>=</mo><mi
+                mathvariant="normal">∣</mi><mi>a</mi><mi mathvariant="normal">∣</mi><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\sqrt{a^2}=|a|,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><mrow><msqrt><mi>a</mi></msqrt><mo>−</mo><msqrt><mi>b</mi></msqrt></mrow></mfrac><mo>=</mo><mfrac><mrow><msqrt><mi>a</mi></msqrt><mo>+</mo><msqrt><mi>b</mi></msqrt></mrow><mrow><mi>a</mi><mo>−</mo><mi>b</mi></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac1{\sqrt a-\sqrt b}
+=
+\frac{\sqrt a+\sqrt b}{a-b}.</annotation></semantics></math></span></div>
+        <h3 id="114-高数常用"><a class="heading-anchor" href="#114-高数常用" aria-label="回到本小节">#</a>11.4 高数常用
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mi>a</mi></mrow></munder><mfrac><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>a</mi><mo stretchy="false">)</mo><mi>F</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><mi>x</mi><mo>−</mo><mi>a</mi></mrow></mfrac><mo>=</mo><mi>F</mi><mo
+                stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\lim_{x\to a}\frac{(x-a)F(x)}{x-a}=F(a),</annotation></semantics></math></span>
+        </div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msqrt><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></msqrt><mo>−</mo><mn>1</mn></mrow><mi>x</mi></mfrac><mo>=</mo><mfrac><mn>1</mn><mrow><msqrt><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></msqrt><mo>+</mo><mn>1</mn></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\frac{\sqrt{1+x}-1}{x}
+=
+\frac1{\sqrt{1+x}+1}.</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="结语"><a class="heading-anchor" href="#结语" aria-label="回到本小节">#</a>结语</h2>
+        <p>数与式的核心变形可以概括为：</p>
+        <ol>
+            <li><strong>先看结构</strong>：有没有公因式、公式、可约分因子；</li>
+            <li><strong>再选方法</strong>：提公因式、公式法、十字相乘、分组、拆项、有理化；</li>
+            <li><strong>最后查条件</strong>：定义域、分母、根号、绝对值。</li>
+        </ol>
+        <p>这些变形不是“初中旧知识”，而是高数计算的底层能力。把它们练熟，极限、导数、积分中的代数障碍会少很多。</p>
+        <p class="footer-note">说明：本页公式已由 KaTeX 预渲染为 MathML，HTML 为单文件、纯离线版本，不依赖外部字体、脚本或网络。若浏览器较旧，个别
+            MathML 符号可能显示不完整。</p>
+    </main>
+</div>
+<script>
+    (() => {
+        const root = document.documentElement, toggle = document.getElementById('theme-toggle');
+        const saved = (() => {
+            try {
+                return localStorage.getItem('module1-theme')
+            } catch (e) {
+                return null
+            }
+        })();
+        if (saved) root.dataset.theme = saved; else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme = 'dark';
+        const update = () => {
+            const dark = root.dataset.theme === 'dark';
+            toggle.textContent = dark ? '浅色模式' : '深色模式';
+            toggle.setAttribute('aria-pressed', String(dark));
+        };
+        update();
+        toggle.addEventListener('click', () => {
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            try {
+                localStorage.setItem('module1-theme', next)
+            } catch (e) {
+            }
+            update();
+        });
+        const bar = document.getElementById('progress-bar');
+        const progress = () => {
+            const doc = document.documentElement, total = doc.scrollHeight - doc.clientHeight;
+            bar.style.width = (total > 0 ? doc.scrollTop / total * 100 : 0).toFixed(2) + '%';
+        };
+        document.addEventListener('scroll', progress, {passive: true});
+        progress();
+    })();
+</script>
+<script src="../../一些必备脚本/AI生成响应式/script.js"></script>
+</body>
+</html>

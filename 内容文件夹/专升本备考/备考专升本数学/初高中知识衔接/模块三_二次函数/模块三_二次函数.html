@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="初高中衔接模块三：二次函数的三种表达式、图像与性质、最值、根的分布与高数关联。">
+    <title>初高中衔接模块三：二次函数</title>
+    <link rel="stylesheet" href="../../一些必备脚本/AI生成响应式/style.css">
+    <style>
+        :root {
+            --bg: #fbfcfe;
+            --text: #172033;
+            --muted: #5e6a7d;
+            --panel: #fff;
+            --panel-soft: #f3f7fc;
+            --line: #dce5ef;
+            --accent: #2563eb;
+            --accent-soft: #eff6ff;
+            --accent-2: #0d9488;
+            --warm: #fff7e8;
+            --warm-line: #f1cf8a;
+            --danger: #b42318;
+            --shadow: 0 18px 50px rgba(23, 32, 51, .08);
+            --radius: 16px
+        }
+
+        html[data-theme="dark"] {
+            --bg: #0b1220;
+            --text: #e6edf7;
+            --muted: #aab7c9;
+            --panel: #111a2b;
+            --panel-soft: #0d1728;
+            --line: #2b3a52;
+            --accent: #93c5fd;
+            --accent-soft: #172b49;
+            --accent-2: #5eead4;
+            --warm: #2a2415;
+            --warm-line: #6b5422;
+            --danger: #fca5a5;
+            --shadow: 0 18px 50px rgba(0, 0, 0, .28)
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="light"]) {
+                --bg: #0b1220;
+                --text: #e6edf7;
+                --muted: #aab7c9;
+                --panel: #111a2b;
+                --panel-soft: #0d1728;
+                --line: #2b3a52;
+                --accent: #93c5fd;
+                --accent-soft: #172b49;
+                --accent-2: #5eead4;
+                --warm: #2a2415;
+                --warm-line: #6b5422;
+                --danger: #fca5a5;
+                --shadow: 0 18px 50px rgba(0, 0, 0, .28)
+            }
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 30rem), radial-gradient(circle at 95% 12%, color-mix(in srgb, var(--accent-2) 7%, transparent), transparent 28rem), var(--bg);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+            font-size: 17px;
+            line-height: 1.85
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px
+        }
+
+        .reading-progress {
+            position: fixed;
+            inset: 0 0 auto 0;
+            height: 3px;
+            z-index: 100
+        }
+
+        .reading-progress span {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            transition: width .12s linear
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns:minmax(220px, 286px) minmax(0, 1fr);
+            gap: 38px;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 34px 28px 80px
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 22px;
+            align-self: start;
+            max-height: calc(100vh - 44px);
+            overflow: auto;
+            padding: 22px 18px;
+            background: color-mix(in srgb, var(--panel) 90%, transparent);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            scrollbar-width: thin
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .brand-mark {
+            display: grid;
+            place-items: center;
+            width: 43px;
+            height: 43px;
+            border-radius: 13px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 19px;
+            font-weight: 700
+        }
+
+        .brand strong {
+            display: block;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 15px;
+            line-height: 1.35
+        }
+
+        .brand small {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        .sidebar-title {
+            margin: 0 0 10px;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px;
+            letter-spacing: .12em
+        }
+
+        .toc {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            line-height: 1.45
+        }
+
+        .toc li {
+            margin: 2px 0
+        }
+
+        .toc a {
+            display: block;
+            padding: 5px 8px;
+            color: var(--muted);
+            border-radius: 8px;
+            text-decoration: none
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+            background: var(--accent-soft)
+        }
+
+        .toc-level-3 {
+            padding-left: 12px
+        }
+
+        .toc-level-3 a {
+            font-size: 12px;
+            opacity: .88
+        }
+
+        .content {
+            min-width: 0;
+            padding: 44px 54px 64px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            box-shadow: var(--shadow)
+        }
+
+        .hero {
+            position: relative;
+            margin: -8px 0 32px;
+            padding: 30px 32px;
+            overflow: hidden;
+            border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+            border-radius: 20px;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, var(--panel)), color-mix(in srgb, var(--accent-2) 7%, var(--panel)))
+        }
+
+        .hero::after {
+            content: "∪";
+            position: absolute;
+            right: 24px;
+            bottom: -30px;
+            color: color-mix(in srgb, var(--accent) 12%, transparent);
+            font-family: Georgia, serif;
+            font-size: 132px;
+            line-height: 1;
+            pointer-events: none
+        }
+
+        .hero-kicker {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 8px;
+            color: var(--accent);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .13em
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            border: 0;
+            padding: 0;
+            font-size: clamp(30px, 4vw, 45px);
+            line-height: 1.15;
+            letter-spacing: -.02em
+        }
+
+        .hero p {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 16px
+        }
+
+        .hero-stats {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 18px;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        .hero-stats span {
+            padding: 6px 11px;
+            color: var(--accent);
+            background: color-mix(in srgb, var(--panel) 72%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+            border-radius: 999px
+        }
+
+        h2, h3, h4 {
+            font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.35;
+            scroll-margin-top: 24px
+        }
+
+        h2 {
+            margin: 54px 0 18px;
+            padding-top: 8px;
+            font-size: 28px
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            margin-right: 10px;
+            border-radius: 3px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            vertical-align: .18em
+        }
+
+        h3 {
+            margin: 34px 0 12px;
+            color: color-mix(in srgb, var(--text) 82%, var(--accent));
+            font-size: 21px
+        }
+
+        h4 {
+            margin: 26px 0 8px;
+            font-size: 18px
+        }
+
+        .heading-anchor {
+            float: right;
+            margin-left: 12px;
+            color: color-mix(in srgb, var(--muted) 48%, transparent);
+            font-weight: 400;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity .15s ease
+        }
+
+        h2:hover .heading-anchor, h3:hover .heading-anchor, h4:hover .heading-anchor {
+            opacity: 1
+        }
+
+        p {
+            margin: .75em 0
+        }
+
+        strong {
+            color: color-mix(in srgb, var(--text) 84%, var(--accent))
+        }
+
+        .callout {
+            margin: 20px 0;
+            padding: 16px 20px;
+            color: var(--text);
+            background: var(--warm);
+            border: 1px solid var(--warm-line);
+            border-left: 5px solid #e8a317;
+            border-radius: 10px
+        }
+
+        .callout p {
+            margin: 0
+        }
+
+        ul, ol {
+            margin: .75em 0;
+            padding-left: 1.7em
+        }
+
+        li {
+            margin: .32em 0
+        }
+
+        li > p {
+            margin: .35em 0
+        }
+
+        .math-display {
+            margin: 20px 0;
+            padding: 14px 18px;
+            overflow-x: auto;
+            background: var(--panel-soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.05em
+        }
+
+        .math-display .katex-display, .math-display .katex {
+            margin: 0;
+            display: block
+        }
+
+        .math-display math {
+            font-size: 1.08em
+        }
+
+        .katex {
+            font-size: 1.06em
+        }
+
+        .katex math {
+            font-size: 1.06em
+        }
+
+        .math-error {
+            color: var(--danger);
+            font-family: monospace;
+            font-size: .9em;
+            white-space: pre-wrap
+        }
+
+        code {
+            padding: .12em .36em;
+            color: #9f1239;
+            background: #fff1f2;
+            border-radius: 5px;
+            font-family: "Cascadia Code", Consolas, monospace;
+            font-size: .9em
+        }
+
+        .table-wrap {
+            margin: 22px 0;
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 12px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px
+        }
+
+        th, td {
+            padding: 10px 13px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+            vertical-align: top
+        }
+
+        th {
+            color: var(--text);
+            background: var(--accent-soft);
+            font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            font-size: 14px;
+            white-space: nowrap
+        }
+
+        tbody tr:nth-child(even) {
+            background: color-mix(in srgb, var(--panel-soft) 72%, transparent)
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0
+        }
+
+        hr.section-rule {
+            margin: 36px 0;
+            border: 0;
+            border-top: 1px dashed color-mix(in srgb, var(--line) 82%, transparent)
+        }
+
+        .footer-note {
+            margin-top: 48px;
+            padding-top: 18px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px
+        }
+
+        .toolbar {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            display: flex;
+            gap: 8px;
+            z-index: 60
+        }
+
+        .toolbar button {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 10px 14px;
+            color: var(--text);
+            background: color-mix(in srgb, var(--panel) 92%, transparent);
+            box-shadow: 0 8px 24px rgba(23, 32, 51, .12);
+            cursor: pointer;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 13px;
+            backdrop-filter: blur(10px)
+        }
+
+        .toolbar button:hover {
+            color: var(--accent);
+            border-color: var(--accent)
+        }
+
+        .mobile-note {
+            display: none;
+            color: var(--muted);
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 12px
+        }
+
+        @media (max-width: 980px) {
+            .layout {
+                grid-template-columns:1fr;
+                gap: 18px;
+                padding: 18px
+            }
+
+            .sidebar {
+                position: static;
+                max-height: none
+            }
+
+            .content {
+                padding: 32px 24px 48px
+            }
+
+            .mobile-note {
+                display: block
+            }
+        }
+
+        @media (max-width: 620px) {
+            body {
+                font-size: 16px
+            }
+
+            .content {
+                padding: 24px 17px 38px;
+                border-radius: 16px
+            }
+
+            .hero {
+                padding: 24px 20px
+            }
+
+            .hero h1 {
+                font-size: 30px
+            }
+
+            h2 {
+                font-size: 24px
+            }
+
+            h3 {
+                font-size: 19px
+            }
+
+            .toolbar {
+                top: 10px;
+                right: 10px
+            }
+
+            .toolbar button {
+                padding: 8px 11px
+            }
+
+            .toc-level-3 {
+                display: none
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+                font-size: 11pt
+            }
+
+            .layout {
+                display: block;
+                max-width: none;
+                padding: 0
+            }
+
+            .sidebar, .toolbar, .reading-progress, .heading-anchor, .mobile-note {
+                display: none !important
+            }
+
+            .content {
+                padding: 0;
+                border: 0;
+                box-shadow: none;
+                background: #fff
+            }
+
+            .hero {
+                border: 1px solid #ccc;
+                background: #fff
+            }
+
+            .hero::after {
+                display: none
+            }
+
+            .math-display {
+                background: #fff;
+                break-inside: avoid
+            }
+
+            h2, h3 {
+                break-after: avoid
+            }
+
+            table, blockquote {
+                break-inside: avoid
+            }
+
+            a {
+                color: #000;
+                text-decoration: none
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="reading-progress" aria-hidden="true"><span id="progress-bar"></span></div>
+<div class="toolbar">
+    <button type="button" id="theme-toggle" aria-label="切换深色模式">深色模式</button>
+    <button type="button" onclick="window.print()">打印 / 保存为 PDF</button>
+</div>
+<div class="layout">
+    <aside class="sidebar" aria-label="模块目录">
+        <div class="brand">
+            <div class="brand-mark">∪</div>
+            <div><strong>初高中衔接<br>模块三</strong><small>二次函数</small></div>
+        </div>
+        <p class="sidebar-title">本页目录</p>
+        <ul class="toc">
+            <li class="toc-level-2"><a href="#一二次函数的三种表达式">一、二次函数的三种表达式</a></li>
+            <li class="toc-level-3"><a href="#11-一般式">1.1 一般式</a></li>
+            <li class="toc-level-3"><a href="#12-顶点式">1.2 顶点式</a></li>
+            <li class="toc-level-3"><a href="#13-交点式">1.3 交点式</a></li>
+            <li class="toc-level-3"><a href="#14-三种表达式的转换">1.4 三种表达式的转换</a></li>
+            <li class="toc-level-2"><a href="#二图像与性质">二、图像与性质</a></li>
+            <li class="toc-level-3"><a href="#21-开口方向">2.1 开口方向</a></li>
+            <li class="toc-level-3"><a href="#22-对称轴">2.2 对称轴</a></li>
+            <li class="toc-level-3"><a href="#23-顶点">2.3 顶点</a></li>
+            <li class="toc-level-3"><a href="#24-与坐标轴的交点">2.4 与坐标轴的交点</a></li>
+            <li class="toc-level-3"><a href="#25-单调性">2.5 单调性</a></li>
+            <li class="toc-level-3"><a href="#26-图像变换">2.6 图像变换</a></li>
+            <li class="toc-level-2"><a href="#三最值问题">三、最值问题</a></li>
+            <li class="toc-level-3"><a href="#31-无区间限制">3.1 无区间限制</a></li>
+            <li class="toc-level-3"><a href="#32-闭区间上的最值">3.2 闭区间上的最值</a></li>
+            <li class="toc-level-3"><a href="#33-含参数的最值">3.3 含参数的最值</a></li>
+            <li class="toc-level-3"><a href="#34-实际问题中的二次函数">3.4 实际问题中的二次函数</a></li>
+            <li class="toc-level-2"><a href="#四根的分布">四、根的分布</a></li>
+            <li class="toc-level-3"><a href="#41-判别式">4.1 判别式</a></li>
+            <li class="toc-level-3"><a href="#42-韦达定理">4.2 韦达定理</a></li>
+            <li class="toc-level-3"><a href="#43-两根同号异号">4.3 两根同号、异号</a></li>
+            <li class="toc-level-3"><a href="#44-根在某个区间内">4.4 根在某个区间内</a></li>
+            <li class="toc-level-3"><a href="#45-二次不等式与图像">4.5 二次不等式与图像</a></li>
+            <li class="toc-level-2"><a href="#五高数关联度">五、高数关联度</a></li>
+            <li class="toc-level-3"><a href="#51-抛物线">5.1 抛物线</a></li>
+            <li class="toc-level-3"><a href="#52-求极值">5.2 求极值</a></li>
+            <li class="toc-level-3"><a href="#53-泰勒展开的低阶近似">5.3 泰勒展开的低阶近似</a></li>
+            <li class="toc-level-3"><a href="#54-配方法与积分">5.4 配方法与积分</a></li>
+            <li class="toc-level-3"><a href="#55-判别式与二次方程">5.5 判别式与二次方程</a></li>
+            <li class="toc-level-2"><a href="#六典型例题">六、典型例题</a></li>
+            <li class="toc-level-3"><a href="#例-1一般式化顶点式">例 1：一般式化顶点式</a></li>
+            <li class="toc-level-3"><a href="#例-2交点式">例 2：交点式</a></li>
+            <li class="toc-level-3"><a href="#例-3由顶点求解析式">例 3：由顶点求解析式</a></li>
+            <li class="toc-level-3"><a href="#例-4闭区间最值">例 4：闭区间最值</a></li>
+            <li class="toc-level-3"><a href="#例-5根的分布">例 5：根的分布</a></li>
+            <li class="toc-level-3"><a href="#例-6二次不等式">例 6：二次不等式</a></li>
+            <li class="toc-level-3"><a href="#例-7用导数看顶点">例 7：用导数看顶点</a></li>
+            <li class="toc-level-3"><a href="#例-8二次近似">例 8：二次近似</a></li>
+            <li class="toc-level-2"><a href="#七易错点提示">七、易错点提示</a></li>
+            <li class="toc-level-3"><a href="#1-把对称轴写成">1. 把对称轴写成 …</a></li>
+            <li class="toc-level-3"><a href="#2-只看顶点不看区间">2. 只看顶点，不看区间</a></li>
+            <li class="toc-level-3"><a href="#3-忘记-的符号决定开口">3. 忘记 … 的符号决定开口</a></li>
+            <li class="toc-level-3"><a href="#4-顶点纵坐标只写">4. 顶点纵坐标只写 …</a></li>
+            <li class="toc-level-3"><a href="#5-交点式忘记前面的">5. 交点式忘记前面的 …</a></li>
+            <li class="toc-level-3"><a href="#6-判别式与根分布混淆">6. 判别式与根分布混淆</a></li>
+            <li class="toc-level-3"><a href="#7-两根同号异号条件用错">7. 两根同号、异号条件用错</a></li>
+            <li class="toc-level-3"><a href="#8-二次不等式方向写反">8. 二次不等式方向写反</a></li>
+            <li class="toc-level-3"><a href="#9-配方时忘记乘回">9. 配方时忘记乘回 …</a></li>
+            <li class="toc-level-3"><a href="#10-把有两个实根当成有两个不同实根">10.
+                把“有两个实根”当成“有两个不同实根”</a></li>
+            <li class="toc-level-3"><a href="#11-二次近似当成恒等式">11. 二次近似当成恒等式</a></li>
+            <li class="toc-level-3"><a href="#12-忽略定义域">12. 忽略定义域</a></li>
+            <li class="toc-level-2"><a href="#八课后练习">八、课后练习</a></li>
+            <li class="toc-level-2"><a href="#九练习答案与解析">九、练习答案与解析</a></li>
+            <li class="toc-level-3"><a href="#1-答案顶点-最小值">1. 答案：…，顶点 …，最小值 …</a></li>
+            <li class="toc-level-3"><a href="#2-答案最大值">2. 答案：…，最大值 …</a></li>
+            <li class="toc-level-3"><a href="#3-答案根-顶点-对称轴">3. 答案：根 …，顶点 …，对称轴 …</a></li>
+            <li class="toc-level-3"><a href="#4-答案">4. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#5-答案最小值-最大值">5. 答案：最小值 …，最大值 …</a></li>
+            <li class="toc-level-3"><a href="#6-答案-或">6. 答案：… 或 …</a></li>
+            <li class="toc-level-3"><a href="#7-答案">7. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#8-答案">8. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#9-答案">9. 答案：…</a></li>
+            <li class="toc-level-3"><a href="#10-答案约">10. 答案：约 …</a></li>
+            <li class="toc-level-2"><a href="#十公式速查">十、公式速查</a></li>
+            <li class="toc-level-3"><a href="#101-三种形式">10.1 三种形式</a></li>
+            <li class="toc-level-3"><a href="#102-顶点与对称轴">10.2 顶点与对称轴</a></li>
+            <li class="toc-level-3"><a href="#103-判别式">10.3 判别式</a></li>
+            <li class="toc-level-3"><a href="#104-韦达定理">10.4 韦达定理</a></li>
+            <li class="toc-level-3"><a href="#105-二次近似">10.5 二次近似</a></li>
+            <li class="toc-level-2"><a href="#结语">结语</a></li>
+        </ul>
+        <p class="mobile-note">小屏幕下目录可上下滚动。</p>
+    </aside>
+    <main class="content">
+        <section class="hero">
+            <p class="hero-kicker">PRECALCULUS · QUADRATIC FUNCTIONS</p>
+            <h1>初高中衔接模块三</h1>
+            <p>从一般式、顶点式、交点式到图像、最值和根的分布。二次函数是理解抛物线、极值和二阶近似的第一座桥。</p>
+            <div class="hero-stats"><span>高数关联</span><span>8 个典型例题</span><span>10 道课后练习</span><span>KaTeX · MathML 离线渲染</span>
+            </div>
+        </section>
+        <blockquote class="callout"><p><strong>模块定位</strong>：二次函数是“代数—图像—最值—近似”的交汇点。高数中的抛物线、极值、二阶泰勒近似、配方法、判别式，都能在这里找到原型。
+        </p></blockquote>
+        <blockquote class="callout"><p><strong>学习建议</strong>：看到二次函数，先想三件事：开口方向、对称轴、顶点。再根据题目选择一般式、顶点式或交点式。
+        </p></blockquote>
+        <hr class="section-rule">
+        <h2 id="一二次函数的三种表达式"><a class="heading-anchor" href="#一二次函数的三种表达式"
+                                           aria-label="回到本小节">#</a>一、二次函数的三种表达式</h2>
+        <h3 id="11-一般式"><a class="heading-anchor" href="#11-一般式" aria-label="回到本小节">#</a>1.1 一般式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mi>y</mi><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mspace
+                width="1em"/><mo stretchy="false">(</mo><mi>a</mi><mo mathvariant="normal">≠</mo><mn>0</mn><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{y=ax^2+bx+c\quad(a\ne0)}.</annotation></semantics></math></span>
+        </div>
+        <p>其中：</p>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation
+                    encoding="application/x-tex">a</annotation></semantics></math></span> 决定开口方向和开口大小；
+            </li>
+            <li><p>对称轴为</p>
+                <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"
+                                                                    display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                        separator="true">;</mo></mrow><annotation
+                        encoding="application/x-tex">x=-\frac{b}{2a};</annotation></semantics></math></span></div>
+            </li>
+            <li>顶点横坐标为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></mrow><annotation
+                    encoding="application/x-tex">-\frac{b}{2a}</annotation></semantics></math></span>，纵坐标代入函数求得。
+            </li>
+        </ul>
+        <h3 id="12-顶点式"><a class="heading-anchor" href="#12-顶点式" aria-label="回到本小节">#</a>1.2 顶点式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>h</mi><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mi>k</mi></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{y=a(x-h)^2+k}.</annotation></semantics></math></span></div>
+        <p>顶点为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mi>h</mi><mo separator="true">,</mo><mi>k</mi><mo stretchy="false">)</mo><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">(h,k),</annotation></semantics></math></span></div>
+        <p>对称轴为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mi>h</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">x=h.</annotation></semantics></math></span>
+        </div>
+        <p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a&gt;0</annotation></semantics></math></span> 时，顶点是最高点还是最低点？ 因为
+            <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>h</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>≥</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">(x-h)^2\ge0</annotation></semantics></math></span>，所以：
+        </p>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">a&gt;0</annotation></semantics></math></span>：顶点是最低点，函数有最小值
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation
+                        encoding="application/x-tex">k</annotation></semantics></math></span>；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">a&lt;0</annotation></semantics></math></span>：顶点是最高点，函数有最大值
+                <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation
+                        encoding="application/x-tex">k</annotation></semantics></math></span>。
+            </li>
+        </ul>
+        <h3 id="13-交点式"><a class="heading-anchor" href="#13-交点式" aria-label="回到本小节">#</a>1.3 交点式</h3>
+        <p>若二次函数与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation
+                encoding="application/x-tex">x</annotation></semantics></math></span> 轴有两个交点
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><mn>0</mn><mo
+                stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo
+                separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">(x_1,0),\qquad (x_2,0),</annotation></semantics></math></span></div>
+        <p>则可写成</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>1</mn></msub><mo
+                stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><mo
+                stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{y=a(x-x_1)(x-x_2)}.</annotation></semantics></math></span></div>
+        <p>交点式适合已知根或求根的问题。</p>
+        <h3 id="14-三种表达式的转换"><a class="heading-anchor" href="#14-三种表达式的转换" aria-label="回到本小节">#</a>1.4
+            三种表达式的转换</h3>
+        <p>一般式通过配方法化为顶点式：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo>=</mo><mi>a</mi><msup><mrow><mo
+                fence="true">(</mo><mi>x</mi><mo>+</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mfrac><mrow><mn>4</mn><mi>a</mi><mi>c</mi><mo>−</mo><msup><mi>b</mi><mn>2</mn></msup></mrow><mrow><mn>4</mn><mi>a</mi></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">ax^2+bx+c
+=
+a\left(x+\frac b{2a}\right)^2
++\frac{4ac-b^2}{4a}.</annotation></semantics></math></span></div>
+        <p>因此顶点为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo
+                fence="true">(</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                separator="true">,</mo><mfrac><mrow><mn>4</mn><mi>a</mi><mi>c</mi><mo>−</mo><msup><mi>b</mi><mn>2</mn></msup></mrow><mrow><mn>4</mn><mi>a</mi></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\left(
+-\frac b{2a},
+\frac{4ac-b^2}{4a}
+\right).</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="二图像与性质"><a class="heading-anchor" href="#二图像与性质" aria-label="回到本小节">#</a>二、图像与性质
+        </h2>
+        <h3 id="21-开口方向"><a class="heading-anchor" href="#21-开口方向" aria-label="回到本小节">#</a>2.1 开口方向
+        </h3>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">a&gt;0</annotation></semantics></math></span>：开口向上；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">a&lt;0</annotation></semantics></math></span>：开口向下。
+            </li>
+        </ul>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>a</mi><mi mathvariant="normal">∣</mi></mrow><annotation
+                encoding="application/x-tex">|a|</annotation></semantics></math></span> 越大，开口越窄；<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">∣</mi><mi>a</mi><mi mathvariant="normal">∣</mi></mrow><annotation
+                encoding="application/x-tex">|a|</annotation></semantics></math></span> 越小，开口越宽。
+        </p>
+        <h3 id="22-对称轴"><a class="heading-anchor" href="#22-对称轴" aria-label="回到本小节">#</a>2.2 对称轴</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{x=-\frac b{2a}}.</annotation></semantics></math></span></div>
+        <p>图像关于对称轴对称。</p>
+        <h3 id="23-顶点"><a class="heading-anchor" href="#23-顶点" aria-label="回到本小节">#</a>2.3 顶点</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo fence="true">(</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                separator="true">,</mo><mfrac><mrow><mn>4</mn><mi>a</mi><mi>c</mi><mo>−</mo><msup><mi>b</mi><mn>2</mn></msup></mrow><mrow><mn>4</mn><mi>a</mi></mrow></mfrac><mo
+                fence="true">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{
+\left(
+-\frac b{2a},
+\frac{4ac-b^2}{4a}
+\right)
+}.</annotation></semantics></math></span></div>
+        <p>顶点是二次函数最值所在的位置。</p>
+        <h3 id="24-与坐标轴的交点"><a class="heading-anchor" href="#24-与坐标轴的交点" aria-label="回到本小节">#</a>2.4
+            与坐标轴的交点</h3>
+        <p>与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation
+                encoding="application/x-tex">y</annotation></semantics></math></span> 轴交点：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>c</mi><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">(0,c).</annotation></semantics></math></span></div>
+        <p>与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation
+                encoding="application/x-tex">x</annotation></semantics></math></span> 轴交点由
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo>=</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">ax^2+bx+c=0</annotation></semantics></math></span></div>
+        <p>决定，判别式</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">Δ</mi><mo>=</mo><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>a</mi><mi>c</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\Delta=b^2-4ac.</annotation></semantics></math></span>
+        </div>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                    mathvariant="normal">Δ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Delta&gt;0</annotation></semantics></math></span>：两个交点；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                    mathvariant="normal">Δ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Delta=0</annotation></semantics></math></span>：一个切点；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                    mathvariant="normal">Δ</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Delta&lt;0</annotation></semantics></math></span>：没有实交点。
+            </li>
+        </ul>
+        <h3 id="25-单调性"><a class="heading-anchor" href="#25-单调性" aria-label="回到本小节">#</a>2.5 单调性</h3>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a&gt;0</annotation></semantics></math></span>：
+        </p>
+        <ul>
+            <li>在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    fence="true">(</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                    fence="true">)</mo></mrow><annotation
+                    encoding="application/x-tex">\left(-\infty,-\frac b{2a}\right)</annotation></semantics></math></span>
+                上递减；
+            </li>
+            <li>在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    fence="true">(</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                    separator="true">,</mo><mo>+</mo><mi mathvariant="normal">∞</mi><mo fence="true">)</mo></mrow><annotation
+                    encoding="application/x-tex">\left(-\frac b{2a},+\infty\right)</annotation></semantics></math></span>
+                上递增。
+            </li>
+        </ul>
+        <p>若 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a&lt;0</annotation></semantics></math></span>：
+        </p>
+        <ul>
+            <li>在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    fence="true">(</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                    fence="true">)</mo></mrow><annotation
+                    encoding="application/x-tex">\left(-\infty,-\frac b{2a}\right)</annotation></semantics></math></span>
+                上递增；
+            </li>
+            <li>在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    fence="true">(</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                    separator="true">,</mo><mo>+</mo><mi mathvariant="normal">∞</mi><mo fence="true">)</mo></mrow><annotation
+                    encoding="application/x-tex">\left(-\frac b{2a},+\infty\right)</annotation></semantics></math></span>
+                上递减。
+            </li>
+        </ul>
+        <h3 id="26-图像变换"><a class="heading-anchor" href="#26-图像变换" aria-label="回到本小节">#</a>2.6 图像变换
+        </h3>
+        <p>从 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation
+                encoding="application/x-tex">y=x^2</annotation></semantics></math></span> 出发：
+        </p>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation
+                    encoding="application/x-tex">y=ax^2</annotation></semantics></math></span>：纵向伸缩；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mo
+                    stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>h</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><annotation
+                    encoding="application/x-tex">y=(x-h)^2</annotation></semantics></math></span>：左右平移；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>k</mi></mrow><annotation
+                    encoding="application/x-tex">y=x^2+k</annotation></semantics></math></span>：上下平移；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo
+                    stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>h</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mi>k</mi></mrow><annotation
+                    encoding="application/x-tex">y=a(x-h)^2+k</annotation></semantics></math></span>：先伸缩，再平移。
+            </li>
+        </ul>
+        <hr class="section-rule">
+        <h2 id="三最值问题"><a class="heading-anchor" href="#三最值问题" aria-label="回到本小节">#</a>三、最值问题</h2>
+        <h3 id="31-无区间限制"><a class="heading-anchor" href="#31-无区间限制" aria-label="回到本小节">#</a>3.1 无区间限制
+        </h3>
+        <p>对</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>h</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mi>k</mi><mo>:</mo></mrow><annotation
+                encoding="application/x-tex">y=a(x-h)^2+k:</annotation></semantics></math></span></div>
+        <ul>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">a&gt;0</annotation></semantics></math></span>：最小值 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation
+                    encoding="application/x-tex">k</annotation></semantics></math></span>，无最大值；
+            </li>
+            <li><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">a&lt;0</annotation></semantics></math></span>：最大值 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation
+                    encoding="application/x-tex">k</annotation></semantics></math></span>，无最小值。
+            </li>
+        </ul>
+        <h3 id="32-闭区间上的最值"><a class="heading-anchor" href="#32-闭区间上的最值" aria-label="回到本小节">#</a>3.2
+            闭区间上的最值</h3>
+        <p>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">f(x)</annotation></semantics></math></span> 在 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>m</mi><mo
+                separator="true">,</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><annotation
+                encoding="application/x-tex">[m,n]</annotation></semantics></math></span> 上的最值：
+        </p>
+        <ol>
+            <li>求对称轴 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mi>b</mi><mi
+                    mathvariant="normal">/</mi><mo stretchy="false">(</mo><mn>2</mn><mi>a</mi><mo
+                    stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">x=-b/(2a)</annotation></semantics></math></span>；
+            </li>
+            <li>判断对称轴是否在区间内；</li>
+            <li>若在区间内，顶点是一个候选最值；</li>
+            <li>再计算两个端点的函数值；</li>
+            <li>比较所有候选值。</li>
+        </ol>
+        <p>不能只看顶点，端点也很重要。</p>
+        <h3 id="33-含参数的最值"><a class="heading-anchor" href="#33-含参数的最值" aria-label="回到本小节">#</a>3.3
+            含参数的最值</h3>
+        <p>若对称轴含参数，要讨论对称轴相对于区间的位置：</p>
+        <ul>
+            <li>对称轴在区间左侧；</li>
+            <li>对称轴在区间内；</li>
+            <li>对称轴在区间右侧。</li>
+        </ul>
+        <h3 id="34-实际问题中的二次函数"><a class="heading-anchor" href="#34-实际问题中的二次函数"
+                                            aria-label="回到本小节">#</a>3.4 实际问题中的二次函数</h3>
+        <p>面积、利润、距离平方等问题，常化为二次函数求最值。</p>
+        <hr class="section-rule">
+        <h2 id="四根的分布"><a class="heading-anchor" href="#四根的分布" aria-label="回到本小节">#</a>四、根的分布</h2>
+        <h3 id="41-判别式"><a class="heading-anchor" href="#41-判别式" aria-label="回到本小节">#</a>4.1 判别式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">Δ</mi><mo>=</mo><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>a</mi><mi>c</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\Delta=b^2-4ac.</annotation></semantics></math></span>
+        </div>
+        <p>判断实根个数。</p>
+        <h3 id="42-韦达定理"><a class="heading-anchor" href="#42-韦达定理" aria-label="回到本小节">#</a>4.2 韦达定理
+        </h3>
+        <p>若根为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo
+                separator="true">,</mo><msub><mi>x</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">x_1,x_2</annotation></semantics></math></span>，则
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mo>−</mo><mfrac><mi>b</mi><mi>a</mi></mfrac><mo
+                separator="true">,</mo><mspace width="2em"/><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mfrac><mi>c</mi><mi>a</mi></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">x_1+x_2=-\frac ba,
+\qquad
+x_1x_2=\frac ca.</annotation></semantics></math></span></div>
+        <h3 id="43-两根同号异号"><a class="heading-anchor" href="#43-两根同号异号" aria-label="回到本小节">#</a>4.3
+            两根同号、异号</h3>
+        <p>两根同号：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>&gt;</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">x_1x_2&gt;0.</annotation></semantics></math></span></div>
+        <p>两根异号：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>&lt;</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">x_1x_2&lt;0.</annotation></semantics></math></span></div>
+        <p>两根都为正：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">Δ</mi><mo>≥</mo><mn>0</mn><mo separator="true">,</mo><mspace width="2em"/><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo>&gt;</mo><mn>0</mn><mo
+                separator="true">,</mo><mspace width="2em"/><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>&gt;</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">\Delta\ge0,\qquad
+x_1+x_2&gt;0,\qquad
+x_1x_2&gt;0.</annotation></semantics></math></span></div>
+        <p>两根都为负：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">Δ</mi><mo>≥</mo><mn>0</mn><mo separator="true">,</mo><mspace width="2em"/><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo>&lt;</mo><mn>0</mn><mo
+                separator="true">,</mo><mspace width="2em"/><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>&gt;</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">\Delta\ge0,\qquad
+x_1+x_2&lt;0,\qquad
+x_1x_2&gt;0.</annotation></semantics></math></span></div>
+        <h3 id="44-根在某个区间内"><a class="heading-anchor" href="#44-根在某个区间内" aria-label="回到本小节">#</a>4.4
+            根在某个区间内</h3>
+        <p>除了判别式和韦达定理，还要结合：</p>
+        <ul>
+            <li>对称轴位置；</li>
+            <li>区间端点函数值；</li>
+            <li>开口方向。</li>
+        </ul>
+        <p>例如，若两根都大于 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">1</annotation></semantics></math></span>，可以令 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mi>x</mi><mo>−</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">t=x-1</annotation></semantics></math></span>，转化为 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation
+                encoding="application/x-tex">t</annotation></semantics></math></span> 的两个正根问题。
+        </p>
+        <h3 id="45-二次不等式与图像"><a class="heading-anchor" href="#45-二次不等式与图像" aria-label="回到本小节">#</a>4.5
+            二次不等式与图像</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">ax^2+bx+c&gt;0</annotation></semantics></math></span></div>
+        <p>的解集可以直接从抛物线在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation
+                encoding="application/x-tex">x</annotation></semantics></math></span> 轴上方的部分读出。
+        </p>
+        <hr class="section-rule">
+        <h2 id="五高数关联度"><a class="heading-anchor" href="#五高数关联度" aria-label="回到本小节">#</a>五、高数关联度
+        </h2>
+        <h3 id="51-抛物线"><a class="heading-anchor" href="#51-抛物线" aria-label="回到本小节">#</a>5.1 抛物线</h3>
+        <p>二次函数图像是抛物线。高数中的许多近似曲线、轨迹和优化问题都以抛物线为基本模型。</p>
+        <h3 id="52-求极值"><a class="heading-anchor" href="#52-求极值" aria-label="回到本小节">#</a>5.2 求极值</h3>
+        <p>对</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">f(x)=ax^2+bx+c,</annotation></semantics></math></span></div>
+        <p>有</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>f</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mn>2</mn><mi>a</mi><mi>x</mi><mo>+</mo><mi>b</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">f&#x27;(x)=2ax+b.</annotation></semantics></math></span></div>
+        <p>令 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>f</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">f&#x27;(x)=0</annotation></semantics></math></span>，得
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">x=-\frac b{2a},</annotation></semantics></math></span></div>
+        <p>这正是二次函数的对称轴。 二阶导数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>f</mi><mrow><mo
+                mathvariant="normal">′</mo><mo mathvariant="normal">′</mo></mrow></msup><mo stretchy="false">(</mo><mi>x</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mn>2</mn><mi>a</mi></mrow><annotation encoding="application/x-tex">f&#x27;&#x27;(x)=2a</annotation></semantics></math></span>
+            的符号决定极大或极小。
+        </p>
+        <h3 id="53-泰勒展开的低阶近似"><a class="heading-anchor" href="#53-泰勒展开的低阶近似"
+                                          aria-label="回到本小节">#</a>5.3 泰勒展开的低阶近似</h3>
+        <p>函数在一点附近常用二次多项式近似：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>≈</mo><mi>f</mi><mo
+                stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo stretchy="false">)</mo><mo>+</mo><msup><mi>f</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo
+                stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><mo
+                stretchy="false">)</mo><mo>+</mo><mfrac><mrow><msup><mi>f</mi><mrow><mo mathvariant="normal">′</mo><mo
+                mathvariant="normal">′</mo></mrow></msup><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo
+                stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">f(x)
+\approx
+f(x_0)+f&#x27;(x_0)(x-x_0)
++\frac{f&#x27;&#x27;(x_0)}2(x-x_0)^2.</annotation></semantics></math></span></div>
+        <p>例如：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>e</mi><mi>x</mi></msup><mo>≈</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>+</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mn>2</mn></mfrac><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">e^x\approx1+x+\frac{x^2}{2},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>≈</mo><mn>1</mn><mo>−</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mn>2</mn></mfrac><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\cos x\approx1-\frac{x^2}{2},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></msqrt><mo>≈</mo><mn>1</mn><mo>+</mo><mfrac><mi>x</mi><mn>2</mn></mfrac><mo>−</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mn>8</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt{1+x}\approx1+\frac x2-\frac{x^2}{8}.</annotation></semantics></math></span>
+        </div>
+        <p>这些近似本质上都是“用二次函数代替复杂函数”。</p>
+        <h3 id="54-配方法与积分"><a class="heading-anchor" href="#54-配方法与积分" aria-label="回到本小节">#</a>5.4
+            配方法与积分</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>5</mn><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mn>4.</mn></mrow><annotation
+                encoding="application/x-tex">x^2+2x+5=(x+1)^2+4.</annotation></semantics></math></span></div>
+        <p>配方后可化为反正切积分：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∫</mo><mfrac><mrow><mi>d</mi><mi>x</mi></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>5</mn></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>arctan</mi><mo>⁡</mo><mfrac><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo>+</mo><mi>C</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int\frac{dx}{x^2+2x+5}
+=
+\frac12\arctan\frac{x+1}{2}+C.</annotation></semantics></math></span></div>
+        <h3 id="55-判别式与二次方程"><a class="heading-anchor" href="#55-判别式与二次方程" aria-label="回到本小节">#</a>5.5
+            判别式与二次方程</h3>
+        <p>判别式在参数讨论、根的个数、二次曲面分类中反复出现。</p>
+        <hr class="section-rule">
+        <h2 id="六典型例题"><a class="heading-anchor" href="#六典型例题" aria-label="回到本小节">#</a>六、典型例题</h2>
+        <h3 id="例-1一般式化顶点式"><a class="heading-anchor" href="#例-1一般式化顶点式" aria-label="回到本小节">#</a>例
+            1：一般式化顶点式</h3>
+        <p>将</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>8</mn><mi>x</mi><mo>+</mo><mn>5</mn></mrow><annotation
+                encoding="application/x-tex">y=2x^2-8x+5</annotation></semantics></math></span></div>
+        <p>化为顶点式，并求顶点、对称轴和最值。</p>
+        <p><strong>解</strong></p>
+        <p>配方：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo
+                stretchy="false">)</mo><mo>+</mo><mn>5</mn><mo>=</mo><mn>2</mn><mo stretchy="false">[</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>4</mn><mo
+                stretchy="false">]</mo><mo>+</mo><mn>5.</mn></mrow><annotation encoding="application/x-tex">y=2(x^2-4x)+5
+=
+2[(x-2)^2-4]+5.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mn>2</mn><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>8</mn><mo>+</mo><mn>5</mn><mo>=</mo><mn>2</mn><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">=
+2(x-2)^2-8+5
+=
+2(x-2)^2-3.</annotation></semantics></math></span></div>
+        <p>所以顶点式为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>3</mn></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{y=2(x-2)^2-3}.</annotation></semantics></math></span></div>
+        <p>顶点</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mo>−</mo><mn>3</mn><mo
+                stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">(2,-3),</annotation></semantics></math></span>
+        </div>
+        <p>对称轴</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">x=2.</annotation></semantics></math></span></div>
+        <p>因为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>2</mn><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a=2&gt;0</annotation></semantics></math></span>，所以最小值为
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo>−</mo><mn>3</mn></mrow></mstyle></mstyle></mstyle></menclose><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">\boxed{-3},</annotation></semantics></math></span></div>
+        <p>无最大值。</p>
+        <h3 id="例-2交点式"><a class="heading-anchor" href="#例-2交点式" aria-label="回到本小节">#</a>例 2：交点式</h3>
+        <p>求</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>5</mn><mi>x</mi><mo>+</mo><mn>6</mn></mrow><annotation
+                encoding="application/x-tex">y=x^2-5x+6</annotation></semantics></math></span></div>
+        <p>的根、顶点和对称轴。</p>
+        <p><strong>解</strong></p>
+        <p>因式分解：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">y=(x-2)(x-3).</annotation></semantics></math></span></div>
+        <p>根为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mn>2</mn><mo
+                separator="true">,</mo><mspace width="2em"/><mi>x</mi><mo>=</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">x=2,\qquad x=3.</annotation></semantics></math></span></div>
+        <p>对称轴在两根中点：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mo>+</mo><mn>3</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mn>5</mn><mn>2</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">x=\frac{2+3}{2}=\frac52.</annotation></semantics></math></span></div>
+        <p>顶点纵坐标：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mrow><mo
+                fence="true">(</mo><mfrac><mn>5</mn><mn>2</mn></mfrac><mo fence="true">)</mo></mrow><mo>=</mo><mrow><mo
+                fence="true">(</mo><mfrac><mn>5</mn><mn>2</mn></mfrac><mo>−</mo><mn>2</mn><mo fence="true">)</mo></mrow><mrow><mo
+                fence="true">(</mo><mfrac><mn>5</mn><mn>2</mn></mfrac><mo>−</mo><mn>3</mn><mo fence="true">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⋅</mo><mrow><mo
+                fence="true">(</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo fence="true">)</mo></mrow><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">y\left(\frac52\right)
+=
+\left(\frac52-2\right)\left(\frac52-3\right)
+=
+\frac12\cdot\left(-\frac12\right)
+=
+-\frac14.</annotation></semantics></math></span></div>
+        <p>所以顶点为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo
+                fence="true">(</mo><mfrac><mn>5</mn><mn>2</mn></mfrac><mo separator="true">,</mo><mo>−</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo
+                fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\left(\frac52,-\frac14\right).</annotation></semantics></math></span></div>
+        <h3 id="例-3由顶点求解析式"><a class="heading-anchor" href="#例-3由顶点求解析式" aria-label="回到本小节">#</a>例
+            3：由顶点求解析式</h3>
+        <p>已知二次函数顶点为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">(</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(1,2)</annotation></semantics></math></span>，且经过点 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo
+                separator="true">,</mo><mn>6</mn><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(3,6)</annotation></semantics></math></span>，求解析式。
+        </p>
+        <p><strong>解</strong></p>
+        <p>设</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">y=a(x-1)^2+2.</annotation></semantics></math></span></div>
+        <p>代入 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">(</mo><mn>3</mn><mo separator="true">,</mo><mn>6</mn><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(3,6)</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>6</mn><mo>=</mo><mi>a</mi><mo
+                stretchy="false">(</mo><mn>3</mn><mo>−</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mn>2</mn><mo>=</mo><mn>4</mn><mi>a</mi><mo>+</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">6=a(3-1)^2+2=4a+2.</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>4</mn><mi>a</mi><mo>=</mo><mn>4</mn><mo>⟹</mo><mi>a</mi><mo>=</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">4a=4\Longrightarrow a=1.</annotation></semantics></math></span></div>
+        <p>因此</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mi>y</mi><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mn>2</mn></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{y=(x-1)^2+2}.</annotation></semantics></math></span></div>
+        <h3 id="例-4闭区间最值"><a class="heading-anchor" href="#例-4闭区间最值" aria-label="回到本小节">#</a>例 4：闭区间最值
+        </h3>
+        <p>求</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>3</mn></mrow><annotation
+                encoding="application/x-tex">f(x)=x^2-4x+3</annotation></semantics></math></span></div>
+        <p>在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">]</mo></mrow><annotation
+                encoding="application/x-tex">[0,3]</annotation></semantics></math></span> 上的最大值和最小值。
+        </p>
+        <p><strong>解</strong></p>
+        <p>配方：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">f(x)=(x-2)^2-1.</annotation></semantics></math></span></div>
+        <p>对称轴 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>2</mn><mo>∈</mo><mo
+                stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">]</mo></mrow><annotation
+                encoding="application/x-tex">x=2\in[0,3]</annotation></semantics></math></span>，顶点值
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">f(2)=-1.</annotation></semantics></math></span></div>
+        <p>端点：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mn>3</mn><mo
+                separator="true">,</mo><mspace width="2em"/><mi>f</mi><mo stretchy="false">(</mo><mn>3</mn><mo
+                stretchy="false">)</mo><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">f(0)=3,
+\qquad
+f(3)=0.</annotation></semantics></math></span></div>
+        <p>比较：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>min</mi><mo>⁡</mo><mo>=</mo><mo>−</mo><mn>1</mn><mo
+                separator="true">,</mo><mspace width="2em"/><mi>max</mi><mo>⁡</mo><mo>=</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">\min=-1,\qquad \max=3.</annotation></semantics></math></span></div>
+        <p>所以值域为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">[</mo><mo>−</mo><mn>1</mn><mo
+                separator="true">,</mo><mn>3</mn><mo
+                stretchy="false">]</mo></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{[-1,3]}.</annotation></semantics></math></span>
+        </div>
+        <h3 id="例-5根的分布"><a class="heading-anchor" href="#例-5根的分布" aria-label="回到本小节">#</a>例 5：根的分布
+        </h3>
+        <p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation
+                encoding="application/x-tex">m</annotation></semantics></math></span> 取何值时，方程
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>m</mi><mi>x</mi><mo>+</mo><mi>m</mi><mo>+</mo><mn>2</mn><mo>=</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">x^2-2mx+m+2=0</annotation></semantics></math></span></div>
+        <p>有两个正实根？</p>
+        <p><strong>解</strong></p>
+        <p>设两根为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo
+                separator="true">,</mo><msub><mi>x</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">x_1,x_2</annotation></semantics></math></span>。
+        </p>
+        <p>需要</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">Δ</mi><mo>≥</mo><mn>0</mn><mo separator="true">,</mo><mspace width="2em"/><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo>&gt;</mo><mn>0</mn><mo
+                separator="true">,</mo><mspace width="2em"/><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>&gt;</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">\Delta\ge0,
+\qquad
+x_1+x_2&gt;0,
+\qquad
+x_1x_2&gt;0.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">Δ</mi><mo>=</mo><mn>4</mn><msup><mi>m</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mo
+                stretchy="false">(</mo><mi>m</mi><mo>+</mo><mn>2</mn><mo stretchy="false">)</mo><mo>=</mo><mn>4</mn><mo
+                stretchy="false">(</mo><msup><mi>m</mi><mn>2</mn></msup><mo>−</mo><mi>m</mi><mo>−</mo><mn>2</mn><mo
+                stretchy="false">)</mo><mo>=</mo><mn>4</mn><mo stretchy="false">(</mo><mi>m</mi><mo>−</mo><mn>2</mn><mo
+                stretchy="false">)</mo><mo stretchy="false">(</mo><mi>m</mi><mo>+</mo><mn>1</mn><mo
+                stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\Delta=4m^2-4(m+2)
+=
+4(m^2-m-2)
+=
+4(m-2)(m+1).</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>m</mi><mo>≤</mo><mo>−</mo><mn>1</mn><mspace
+                width="1em"/><mtext>或</mtext><mspace width="1em"/><mi>m</mi><mo>≥</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">m\le-1\quad\text{或}\quad m\ge2.</annotation></semantics></math></span>
+        </div>
+        <p>又</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mn>2</mn><mi>m</mi><mo>&gt;</mo><mn>0</mn><mo>⟹</mo><mi>m</mi><mo>&gt;</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">x_1+x_2=2m&gt;0
+\Longrightarrow
+m&gt;0.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mi>m</mi><mo>+</mo><mn>2</mn><mo>&gt;</mo><mn>0</mn><mo>⟹</mo><mi>m</mi><mo>&gt;</mo><mo>−</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">x_1x_2=m+2&gt;0
+\Longrightarrow
+m&gt;-2.</annotation></semantics></math></span></div>
+        <p>三者取交集：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mi>m</mi><mo>≥</mo><mn>2</mn></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{m\ge2}.</annotation></semantics></math></span></div>
+        <p>若要求两个不同正根，则</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>m</mi><mo>&gt;</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">m&gt;2.</annotation></semantics></math></span></div>
+        <h3 id="例-6二次不等式"><a class="heading-anchor" href="#例-6二次不等式" aria-label="回到本小节">#</a>例 6：二次不等式
+        </h3>
+        <p>解</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi>x</mi><mo>−</mo><mn>8</mn><mo>≥</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">-x^2+6x-8\ge0.</annotation></semantics></math></span></div>
+        <p><strong>解</strong></p>
+        <p>两边乘 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">-1</annotation></semantics></math></span>，不等号反向：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>6</mn><mi>x</mi><mo>+</mo><mn>8</mn><mo>≤</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">x^2-6x+8\le0.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>4</mn><mo stretchy="false">)</mo><mo>≤</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">(x-2)(x-4)\le0.</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose
+                notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0"
+                                                                                    displaystyle="false"><mstyle
+                scriptlevel="0" displaystyle="true"><mrow><mn>2</mn><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>4</mn></mrow></mstyle></mstyle></mstyle></menclose><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\boxed{2\le x\le4}.</annotation></semantics></math></span></div>
+        <h3 id="例-7用导数看顶点"><a class="heading-anchor" href="#例-7用导数看顶点" aria-label="回到本小节">#</a>例
+            7：用导数看顶点</h3>
+        <p>求</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn></mrow><annotation
+                encoding="application/x-tex">f(x)=x^2-2x+3</annotation></semantics></math></span></div>
+        <p>的极值，并用二阶导数判断。</p>
+        <p><strong>解</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>f</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">f&#x27;(x)=2x-2.</annotation></semantics></math></span></div>
+        <p>令 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>f</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><mi>x</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">f&#x27;(x)=0</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">x=1.</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>f</mi><mrow><mo
+                mathvariant="normal">′</mo><mo mathvariant="normal">′</mo></mrow></msup><mo stretchy="false">(</mo><mi>x</mi><mo
+                stretchy="false">)</mo><mo>=</mo><mn>2</mn><mo>&gt;</mo><mn>0</mn><mo separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">f&#x27;&#x27;(x)=2&gt;0,</annotation></semantics></math></span></div>
+        <p>所以 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">x=1</annotation></semantics></math></span> 是极小值点，极小值为
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mn>2</mn><mo>+</mo><mn>3</mn><mo>=</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">f(1)=1-2+3=2.</annotation></semantics></math></span></div>
+        <p>这也与顶点式</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mn>2</mn></mrow><annotation
+                encoding="application/x-tex">f(x)=(x-1)^2+2</annotation></semantics></math></span></div>
+        <p>一致。</p>
+        <h3 id="例-8二次近似"><a class="heading-anchor" href="#例-8二次近似" aria-label="回到本小节">#</a>例 8：二次近似
+        </h3>
+        <p>用二次近似估计 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mn>0.1</mn></msup></mrow><annotation
+                encoding="application/x-tex">e^{0.1}</annotation></semantics></math></span>。
+        </p>
+        <p><strong>解</strong></p>
+        <p>在 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">x=0</annotation></semantics></math></span> 附近，
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>e</mi><mi>x</mi></msup><mo>≈</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>+</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mn>2</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">e^x\approx1+x+\frac{x^2}{2}.</annotation></semantics></math></span></div>
+        <p>代入 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>0.1</mn></mrow><annotation
+                encoding="application/x-tex">x=0.1</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>e</mi><mn>0.1</mn></msup><mo>≈</mo><mn>1</mn><mo>+</mo><mn>0.1</mn><mo>+</mo><mfrac><mn>0.01</mn><mn>2</mn></mfrac><mo>=</mo><mn>1.105.</mn></mrow><annotation
+                encoding="application/x-tex">e^{0.1}
+\approx
+1+0.1+\frac{0.01}{2}
+=
+1.105.</annotation></semantics></math></span></div>
+        <p>实际值约为</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1.10517</mn><mo
+                separator="true">,</mo></mrow><annotation encoding="application/x-tex">1.10517,</annotation></semantics></math></span>
+        </div>
+        <p>误差很小。</p>
+        <hr class="section-rule">
+        <h2 id="七易错点提示"><a class="heading-anchor" href="#七易错点提示" aria-label="回到本小节">#</a>七、易错点提示
+        </h2>
+        <h3 id="1-把对称轴写成"><a class="heading-anchor" href="#1-把对称轴写成" aria-label="回到本小节">#</a>1. 把对称轴写成
+            <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mi
+                    mathvariant="normal">/</mi><mo stretchy="false">(</mo><mn>2</mn><mi>a</mi><mo
+                    stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">b/(2a)</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">x=-\frac b{2a},</annotation></semantics></math></span></div>
+        <p>前面的负号不能丢。</p>
+        <h3 id="2-只看顶点不看区间"><a class="heading-anchor" href="#2-只看顶点不看区间" aria-label="回到本小节">#</a>2.
+            只看顶点，不看区间</h3>
+        <p>在闭区间上求最值，必须同时比较顶点和端点。</p>
+        <h3 id="3-忘记-的符号决定开口"><a class="heading-anchor" href="#3-忘记-的符号决定开口"
+                                          aria-label="回到本小节">#</a>3. 忘记 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation
+                encoding="application/x-tex">a</annotation></semantics></math></span> 的符号决定开口
+        </h3>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a&gt;0</annotation></semantics></math></span> 开口向上，顶点是最小值；<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a&lt;0</annotation></semantics></math></span> 开口向下，顶点是最大值。
+        </p>
+        <h3 id="4-顶点纵坐标只写"><a class="heading-anchor" href="#4-顶点纵坐标只写" aria-label="回到本小节">#</a>4.
+            顶点纵坐标只写 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>b</mi><mi
+                    mathvariant="normal">/</mi><mo stretchy="false">(</mo><mn>2</mn><mi>a</mi><mo
+                    stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">-b/(2a)</annotation></semantics></math></span></h3>
+        <p>顶点是一个点 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">(</mo><mi>h</mi><mo separator="true">,</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(h,k)</annotation></semantics></math></span>，纵坐标要把 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mi>h</mi></mrow><annotation
+                encoding="application/x-tex">x=h</annotation></semantics></math></span> 代回函数求。
+        </p>
+        <h3 id="5-交点式忘记前面的"><a class="heading-anchor" href="#5-交点式忘记前面的" aria-label="回到本小节">#</a>5.
+            交点式忘记前面的 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation
+                    encoding="application/x-tex">a</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">y=a(x-x_1)(x-x_2),</annotation></semantics></math></span></div>
+        <p>不能漏掉 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation
+                encoding="application/x-tex">a</annotation></semantics></math></span>。
+        </p>
+        <h3 id="6-判别式与根分布混淆"><a class="heading-anchor" href="#6-判别式与根分布混淆"
+                                         aria-label="回到本小节">#</a>6. 判别式与根分布混淆</h3>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi
+                mathvariant="normal">Δ</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Delta\ge0</annotation></semantics></math></span>
+            只保证有实根，不能保证根为正、为负或落在某区间。
+        </p>
+        <h3 id="7-两根同号异号条件用错"><a class="heading-anchor" href="#7-两根同号异号条件用错"
+                                           aria-label="回到本小节">#</a>7. 两根同号、异号条件用错</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">x_1x_2&gt;0</annotation></semantics></math></span></div>
+        <p>只说明同号，还要用 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub></mrow><annotation
+                encoding="application/x-tex">x_1+x_2</annotation></semantics></math></span> 判断正负。
+        </p>
+        <h3 id="8-二次不等式方向写反"><a class="heading-anchor" href="#8-二次不等式方向写反"
+                                         aria-label="回到本小节">#</a>8. 二次不等式方向写反</h3>
+        <p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">a&gt;0</annotation></semantics></math></span> 时，<span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">&gt;0</annotation></semantics></math></span> 取两根之外，<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&lt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">&lt;0</annotation></semantics></math></span> 取两根之间。
+        </p>
+        <h3 id="9-配方时忘记乘回"><a class="heading-anchor" href="#9-配方时忘记乘回" aria-label="回到本小节">#</a>9.
+            配方时忘记乘回 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation
+                    encoding="application/x-tex">a</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo>=</mo><mi>a</mi><msup><mrow><mo
+                fence="true">(</mo><mi>x</mi><mo>+</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mfrac><mrow><mn>4</mn><mi>a</mi><mi>c</mi><mo>−</mo><msup><mi>b</mi><mn>2</mn></msup></mrow><mrow><mn>4</mn><mi>a</mi></mrow></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">ax^2+bx+c
+=
+a\left(x+\frac b{2a}\right)^2
++\frac{4ac-b^2}{4a}.</annotation></semantics></math></span></div>
+        <p>不要只对括号内配方而忘记外面的 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation
+                encoding="application/x-tex">a</annotation></semantics></math></span>。
+        </p>
+        <h3 id="10-把有两个实根当成有两个不同实根"><a class="heading-anchor" href="#10-把有两个实根当成有两个不同实根"
+                                                      aria-label="回到本小节">#</a>10. 把“有两个实根”当成“有两个不同实根”
+        </h3>
+        <p>“有两个实根”可能包含二重根；“有两个不同实根”才要求 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">\Delta&gt;0</annotation></semantics></math></span>。
+        </p>
+        <h3 id="11-二次近似当成恒等式"><a class="heading-anchor" href="#11-二次近似当成恒等式"
+                                          aria-label="回到本小节">#</a>11. 二次近似当成恒等式</h3>
+        <p>泰勒二次近似只在展开点附近有效，不是对所有 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation
+                encoding="application/x-tex">x</annotation></semantics></math></span> 都成立。
+        </p>
+        <h3 id="12-忽略定义域"><a class="heading-anchor" href="#12-忽略定义域" aria-label="回到本小节">#</a>12. 忽略定义域
+        </h3>
+        <p>实际问题中的变量范围可能限制对称轴是否可取。</p>
+        <hr class="section-rule">
+        <h2 id="八课后练习"><a class="heading-anchor" href="#八课后练习" aria-label="回到本小节">#</a>八、课后练习</h2>
+        <ol>
+            <li>将 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi>x</mi><mo>−</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">y=3x^2+6x-1</annotation></semantics></math></span> 化为顶点式，并求顶点和最值。
+            </li>
+            <li>将 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>1</mn></mrow><annotation
+                    encoding="application/x-tex">y=-x^2+4x+1</annotation></semantics></math></span> 化为顶点式，并求最大值。
+            </li>
+            <li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>4</mn></mrow><annotation
+                    encoding="application/x-tex">y=x^2-3x-4</annotation></semantics></math></span> 的根、顶点和对称轴。
+            </li>
+            <li>已知二次函数顶点为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    stretchy="false">(</mo><mn>2</mn><mo separator="true">,</mo><mo>−</mo><mn>3</mn><mo
+                    stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">(2,-3)</annotation></semantics></math></span>，且经过 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo
+                    stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">(0,1)</annotation></semantics></math></span>，求解析式。
+            </li>
+            <li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                    stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>3</mn></mrow><annotation
+                    encoding="application/x-tex">f(x)=x^2-2x+3</annotation></semantics></math></span> 在 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    stretchy="false">[</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo
+                    stretchy="false">]</mo></mrow><annotation
+                    encoding="application/x-tex">[-1,2]</annotation></semantics></math></span> 上的最大值和最小值。
+            </li>
+            <li>解不等式 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo>&gt;</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">x^2-2x-3&gt;0</annotation></semantics></math></span>。
+            </li>
+            <li>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation
+                    encoding="application/x-tex">m</annotation></semantics></math></span> 取何值时，方程 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>m</mi><mi>x</mi><mo>+</mo><mi>m</mi><mo>+</mo><mn>2</mn><mo>=</mo><mn>0</mn></mrow><annotation
+                    encoding="application/x-tex">x^2+2mx+m+2=0</annotation></semantics></math></span> 的两根异号？
+            </li>
+            <li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>5</mn></mrow><annotation
+                    encoding="application/x-tex">y=x^2-4x+5</annotation></semantics></math></span> 在 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>3</mn><mo
+                    stretchy="false">]</mo></mrow><annotation
+                    encoding="application/x-tex">[0,3]</annotation></semantics></math></span> 上的值域。
+            </li>
+            <li>用配方法求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>7</mn></mrow><annotation
+                    encoding="application/x-tex">2x^2-4x+7</annotation></semantics></math></span> 的最小值。
+            </li>
+            <li>用二次近似估计 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mn>0.1</mn></msup></mrow><annotation
+                    encoding="application/x-tex">e^{0.1}</annotation></semantics></math></span>。
+            </li>
+        </ol>
+        <hr class="section-rule">
+        <h2 id="九练习答案与解析"><a class="heading-anchor" href="#九练习答案与解析" aria-label="回到本小节">#</a>九、练习答案与解析
+        </h2>
+        <h3 id="1-答案顶点-最小值"><a class="heading-anchor" href="#1-答案顶点-最小值" aria-label="回到本小节">#</a>1.
+            答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mn>3</mn><mo
+                    stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>4</mn></mrow><annotation
+                    encoding="application/x-tex">y=3(x+1)^2-4</annotation></semantics></math></span>，顶点 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                    stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mo>−</mo><mn>4</mn><mo
+                    stretchy="false">)</mo></mrow><annotation
+                    encoding="application/x-tex">(-1,-4)</annotation></semantics></math></span>，最小值 <span
+                    class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>4</mn></mrow><annotation
+                    encoding="application/x-tex">-4</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi>x</mi><mo>−</mo><mn>1</mn><mo>=</mo><mn>3</mn><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>x</mi><mo
+                stretchy="false">)</mo><mo>−</mo><mn>1</mn><mo>=</mo><mn>3</mn><mo stretchy="false">[</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>1</mn><mo
+                stretchy="false">]</mo><mo>−</mo><mn>1</mn><mo>=</mo><mn>3</mn><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>4.</mn></mrow><annotation
+                encoding="application/x-tex">3x^2+6x-1
+=
+3(x^2+2x)-1
+=
+3[(x+1)^2-1]-1
+=
+3(x+1)^2-4.</annotation></semantics></math></span></div>
+        <h3 id="2-答案最大值"><a class="heading-anchor" href="#2-答案最大值" aria-label="回到本小节">#</a>2. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mn>5</mn></mrow><annotation
+                encoding="application/x-tex">y=-(x-2)^2+5</annotation></semantics></math></span>，最大值 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn></mrow><annotation
+                encoding="application/x-tex">5</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>1</mn><mo>=</mo><mo>−</mo><mo
+                stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo
+                stretchy="false">)</mo><mo>+</mo><mn>1</mn><mo>=</mo><mo>−</mo><mo stretchy="false">[</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>4</mn><mo
+                stretchy="false">]</mo><mo>+</mo><mn>1</mn><mo>=</mo><mo>−</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mn>5.</mn></mrow><annotation
+                encoding="application/x-tex">-x^2+4x+1
+=
+-(x^2-4x)+1
+=
+-[(x-2)^2-4]+1
+=
+-(x-2)^2+5.</annotation></semantics></math></span></div>
+        <h3 id="3-答案根-顶点-对称轴"><a class="heading-anchor" href="#3-答案根-顶点-对称轴"
+                                         aria-label="回到本小节">#</a>3. 答案：根 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn><mo
+                separator="true">,</mo><mn>4</mn></mrow><annotation
+                encoding="application/x-tex">-1,4</annotation></semantics></math></span>，顶点 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo
+                separator="true">,</mo><mo>−</mo><mfrac><mn>25</mn><mn>4</mn></mfrac><mo fence="true">)</mo></mrow><annotation
+                encoding="application/x-tex">\left(\frac32,-\frac{25}{4}\right)</annotation></semantics></math></span>，对称轴
+            <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></mrow><annotation
+                    encoding="application/x-tex">x=\frac32</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn><mi>x</mi><mo>−</mo><mn>4</mn><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>4</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">x^2-3x-4=(x-4)(x+1).</annotation></semantics></math></span></div>
+        <p>对称轴：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">x=\frac{3}{2}.</annotation></semantics></math></span></div>
+        <p>顶点纵坐标：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mrow><mo
+                fence="true">(</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo fence="true">)</mo></mrow><mo>=</mo><mfrac><mn>9</mn><mn>4</mn></mfrac><mo>−</mo><mfrac><mn>9</mn><mn>2</mn></mfrac><mo>−</mo><mn>4</mn><mo>=</mo><mo>−</mo><mfrac><mn>25</mn><mn>4</mn></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">f\left(\frac32\right)
+=
+\frac94-\frac92-4
+=
+-\frac{25}{4}.</annotation></semantics></math></span></div>
+        <h3 id="4-答案"><a class="heading-anchor" href="#4-答案" aria-label="回到本小节">#</a>4. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>3</mn></mrow><annotation
+                encoding="application/x-tex">y=(x-2)^2-3</annotation></semantics></math></span></h3>
+        <p>设</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">y=a(x-2)^2-3.</annotation></semantics></math></span></div>
+        <p>代入 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation
+                encoding="application/x-tex">(0,1)</annotation></semantics></math></span>：
+        </p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mo>=</mo><mn>4</mn><mi>a</mi><mo>−</mo><mn>3</mn><mo>⟹</mo><mi>a</mi><mo>=</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">1=4a-3\Longrightarrow a=1.</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>−</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">y=(x-2)^2-3.</annotation></semantics></math></span></div>
+        <h3 id="5-答案最小值-最大值"><a class="heading-anchor" href="#5-答案最小值-最大值" aria-label="回到本小节">#</a>5.
+            答案：最小值 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation
+                    encoding="application/x-tex">2</annotation></semantics></math></span>，最大值 <span class="katex"><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn></mrow><annotation
+                    encoding="application/x-tex">6</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">f(x)=(x-1)^2+2.</annotation></semantics></math></span></div>
+        <p>对称轴 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>1</mn><mo>∈</mo><mo
+                stretchy="false">[</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo
+                stretchy="false">]</mo></mrow><annotation
+                encoding="application/x-tex">x=1\in[-1,2]</annotation></semantics></math></span>，最小值 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn></mrow><annotation
+                encoding="application/x-tex">f(1)=2</annotation></semantics></math></span>。
+        </p>
+        <p>端点：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>6</mn><mo
+                separator="true">,</mo><mspace width="2em"/><mi>f</mi><mo stretchy="false">(</mo><mn>2</mn><mo
+                stretchy="false">)</mo><mo>=</mo><mn>3.</mn></mrow><annotation encoding="application/x-tex">f(-1)=6,\qquad f(2)=3.</annotation></semantics></math></span>
+        </div>
+        <p>所以最大值为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn></mrow><annotation
+                encoding="application/x-tex">6</annotation></semantics></math></span>。
+        </p>
+        <h3 id="6-答案-或"><a class="heading-anchor" href="#6-答案-或" aria-label="回到本小节">#</a>6. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mo>−</mo><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">x&lt;-1</annotation></semantics></math></span> 或 <span class="katex"><math
+                xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>&gt;</mo><mn>3</mn></mrow><annotation
+                encoding="application/x-tex">x&gt;3</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>x</mi><mo>−</mo><mn>3</mn><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>3</mn><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>&gt;</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">x^2-2x-3=(x-3)(x+1)&gt;0.</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mo>−</mo><mn>1</mn><mtext> 或 </mtext><mi>x</mi><mo>&gt;</mo><mn>3.</mn></mrow><annotation
+                encoding="application/x-tex">x&lt;-1\ \text{或}\ x&gt;3.</annotation></semantics></math></span></div>
+        <h3 id="7-答案"><a class="heading-anchor" href="#7-答案" aria-label="回到本小节">#</a>7. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>&lt;</mo><mo>−</mo><mn>2</mn></mrow><annotation
+                encoding="application/x-tex">m&lt;-2</annotation></semantics></math></span></h3>
+        <p>两根异号等价于</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>&lt;</mo><mn>0.</mn></mrow><annotation
+                encoding="application/x-tex">x_1x_2&lt;0.</annotation></semantics></math></span></div>
+        <p>由韦达定理：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mi>m</mi><mo>+</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">x_1x_2=m+2.</annotation></semantics></math></span></div>
+        <p>所以</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>m</mi><mo>+</mo><mn>2</mn><mo>&lt;</mo><mn>0</mn><mo>⟹</mo><mi>m</mi><mo>&lt;</mo><mo>−</mo><mn>2.</mn></mrow><annotation
+                encoding="application/x-tex">m+2&lt;0\Longrightarrow m&lt;-2.</annotation></semantics></math></span>
+        </div>
+        <p>此时判别式自动大于 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation
+                encoding="application/x-tex">0</annotation></semantics></math></span>。
+        </p>
+        <h3 id="8-答案"><a class="heading-anchor" href="#8-答案" aria-label="回到本小节">#</a>8. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">[</mo><mn>1</mn><mo separator="true">,</mo><mn>5</mn><mo stretchy="false">]</mo></mrow><annotation
+                encoding="application/x-tex">[1,5]</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mn>1.</mn></mrow><annotation
+                encoding="application/x-tex">y=(x-2)^2+1.</annotation></semantics></math></span></div>
+        <p>对称轴 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>2</mn><mo>∈</mo><mo
+                stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">]</mo></mrow><annotation
+                encoding="application/x-tex">x=2\in[0,3]</annotation></semantics></math></span>，最小值 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation
+                encoding="application/x-tex">1</annotation></semantics></math></span>。
+        </p>
+        <p>端点：</p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo
+                stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mn>5</mn><mo
+                separator="true">,</mo><mspace width="2em"/><mi>y</mi><mo stretchy="false">(</mo><mn>3</mn><mo
+                stretchy="false">)</mo><mo>=</mo><mn>2.</mn></mrow><annotation encoding="application/x-tex">y(0)=5,\qquad y(3)=2.</annotation></semantics></math></span>
+        </div>
+        <p>所以值域为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo
+                stretchy="false">[</mo><mn>1</mn><mo separator="true">,</mo><mn>5</mn><mo stretchy="false">]</mo></mrow><annotation
+                encoding="application/x-tex">[1,5]</annotation></semantics></math></span>。
+        </p>
+        <h3 id="9-答案"><a class="heading-anchor" href="#9-答案" aria-label="回到本小节">#</a>9. 答案：<span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn></mrow><annotation
+                encoding="application/x-tex">5</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>7</mn><mo>=</mo><mn>2</mn><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mn>5.</mn></mrow><annotation
+                encoding="application/x-tex">2x^2-4x+7
+=
+2(x-1)^2+5.</annotation></semantics></math></span></div>
+        <p>所以最小值为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn></mrow><annotation
+                encoding="application/x-tex">5</annotation></semantics></math></span>。
+        </p>
+        <h3 id="10-答案约"><a class="heading-anchor" href="#10-答案约" aria-label="回到本小节">#</a>10. 答案：约 <span
+                class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.105</mn></mrow><annotation
+                encoding="application/x-tex">1.105</annotation></semantics></math></span></h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>e</mi><mn>0.1</mn></msup><mo>≈</mo><mn>1</mn><mo>+</mo><mn>0.1</mn><mo>+</mo><mfrac><msup><mn>0.1</mn><mn>2</mn></msup><mn>2</mn></mfrac><mo>=</mo><mn>1.105.</mn></mrow><annotation
+                encoding="application/x-tex">e^{0.1}\approx1+0.1+\frac{0.1^2}{2}=1.105.</annotation></semantics></math></span>
+        </div>
+        <hr class="section-rule">
+        <h2 id="十公式速查"><a class="heading-anchor" href="#十公式速查" aria-label="回到本小节">#</a>十、公式速查</h2>
+        <h3 id="101-三种形式"><a class="heading-anchor" href="#101-三种形式" aria-label="回到本小节">#</a>10.1 三种形式
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">y=ax^2+bx+c,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>h</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mi>k</mi><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">y=a(x-h)^2+k,</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo
+                stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mi
+                mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">y=a(x-x_1)(x-x_2).</annotation></semantics></math></span></div>
+        <h3 id="102-顶点与对称轴"><a class="heading-anchor" href="#102-顶点与对称轴" aria-label="回到本小节">#</a>10.2
+            顶点与对称轴</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                separator="true">,</mo></mrow><annotation
+                encoding="application/x-tex">x=-\frac b{2a},</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo
+                fence="true">(</mo><mo>−</mo><mfrac><mi>b</mi><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mo
+                separator="true">,</mo><mfrac><mrow><mn>4</mn><mi>a</mi><mi>c</mi><mo>−</mo><msup><mi>b</mi><mn>2</mn></msup></mrow><mrow><mn>4</mn><mi>a</mi></mrow></mfrac><mo
+                fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">\left(
+-\frac b{2a},
+\frac{4ac-b^2}{4a}
+\right).</annotation></semantics></math></span></div>
+        <h3 id="103-判别式"><a class="heading-anchor" href="#103-判别式" aria-label="回到本小节">#</a>10.3 判别式</h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi
+                mathvariant="normal">Δ</mi><mo>=</mo><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>a</mi><mi>c</mi><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\Delta=b^2-4ac.</annotation></semantics></math></span>
+        </div>
+        <h3 id="104-韦达定理"><a class="heading-anchor" href="#104-韦达定理" aria-label="回到本小节">#</a>10.4 韦达定理
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mo>−</mo><mfrac><mi>b</mi><mi>a</mi></mfrac><mo
+                separator="true">,</mo><mspace width="2em"/><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mfrac><mi>c</mi><mi>a</mi></mfrac><mi
+                mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">x_1+x_2=-\frac ba,
+\qquad
+x_1x_2=\frac ca.</annotation></semantics></math></span></div>
+        <h3 id="105-二次近似"><a class="heading-anchor" href="#105-二次近似" aria-label="回到本小节">#</a>10.5 二次近似
+        </h3>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo
+                stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>≈</mo><mi>f</mi><mo
+                stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo stretchy="false">)</mo><mo>+</mo><msup><mi>f</mi><mo
+                mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo
+                stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><mo
+                stretchy="false">)</mo><mo>+</mo><mfrac><mrow><msup><mi>f</mi><mrow><mo mathvariant="normal">′</mo><mo
+                mathvariant="normal">′</mo></mrow></msup><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo
+                stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><msup><mo
+                stretchy="false">)</mo><mn>2</mn></msup><mi mathvariant="normal">.</mi></mrow><annotation
+                encoding="application/x-tex">f(x)\approx f(x_0)+f&#x27;(x_0)(x-x_0)
++\frac{f&#x27;&#x27;(x_0)}2(x-x_0)^2.</annotation></semantics></math></span></div>
+        <hr class="section-rule">
+        <h2 id="结语"><a class="heading-anchor" href="#结语" aria-label="回到本小节">#</a>结语</h2>
+        <p>二次函数是初高中与高数之间的一座桥：</p>
+        <ol>
+            <li><strong>图像</strong>：抛物线、开口、对称轴、顶点；</li>
+            <li><strong>代数</strong>：三种表达式、判别式、韦达定理；</li>
+            <li><strong>最值</strong>：顶点与区间端点；</li>
+            <li><strong>高数</strong>：极值、二阶近似、配方法、积分。</li>
+        </ol>
+        <p>看到二次函数，先画图，再配方，最后结合定义域和区间判断。这样无论是初中题还是高数题，都能找到统一步骤。</p>
+        <p class="footer-note">说明：本页公式已由 KaTeX 预渲染为 MathML，HTML 为单文件、纯离线版本，不依赖外部字体、脚本或网络。若浏览器较旧，个别
+            MathML 符号可能显示不完整。</p>
+    </main>
+</div>
+<script>
+    (() => {
+        const root = document.documentElement, toggle = document.getElementById('theme-toggle');
+        const saved = (() => {
+            try {
+                return localStorage.getItem('module3-theme')
+            } catch (e) {
+                return null
+            }
+        })();
+        if (saved) root.dataset.theme = saved; else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme = 'dark';
+        const update = () => {
+            const dark = root.dataset.theme === 'dark';
+            toggle.textContent = dark ? '浅色模式' : '深色模式';
+            toggle.setAttribute('aria-pressed', String(dark));
+        };
+        update();
+        toggle.addEventListener('click', () => {
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            try {
+                localStorage.setItem('module3-theme', next)
+            } catch (e) {
+            }
+            update();
+        });
+        const bar = document.getElementById('progress-bar');
+        const progress = () => {
+            const doc = document.documentElement, total = doc.scrollHeight - doc.clientHeight;
+            bar.style.width = (total > 0 ? doc.scrollTop / total * 100 : 0).toFixed(2) + '%';
+        };
+        document.addEventListener('scroll', progress, {passive: true});
+        progress();
+    })();
+</script>
+<script src="../../一些必备脚本/AI生成响应式/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="初高中衔接模块五：任意角、弧度制、三角函数定义、恒等变换、图像性质及高数应用，含典型例题、易错点与练习答案。">
+  <meta name="color-scheme" content="light dark">
+  <title>初高中衔接模块五：三角函数</title>
+  <style>
+:root {
+  --bg: #fbfcfe;
+  --text: #172033;
+  --muted: #5e6a7d;
+  --panel: #ffffff;
+  --panel-soft: #f3f7fc;
+  --line: #dce5ef;
+  --accent: #0f766e;
+  --accent-soft: #ecfdf5;
+  --accent-2: #7c3aed;
+  --warm: #fff7e8;
+  --warm-line: #f1cf8a;
+  --danger: #b42318;
+  --shadow: 0 18px 50px rgba(23, 32, 51, 0.08);
+  --radius: 16px;
+}
+
+html[data-theme="dark"] {
+  --bg: #0b1220;
+  --text: #e6edf7;
+  --muted: #aab7c9;
+  --panel: #111a2b;
+  --panel-soft: #0d1728;
+  --line: #2b3a52;
+  --accent: #5eead4;
+  --accent-soft: #0f2e2b;
+  --accent-2: #c4b5fd;
+  --warm: #2a2415;
+  --warm-line: #6b5422;
+  --danger: #fca5a5;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --bg: #0b1220;
+    --text: #e6edf7;
+    --muted: #aab7c9;
+    --panel: #111a2b;
+    --panel-soft: #0d1728;
+    --line: #2b3a52;
+    --accent: #5eead4;
+    --accent-soft: #0f2e2b;
+    --accent-2: #c4b5fd;
+    --warm: #2a2415;
+    --warm-line: #6b5422;
+    --danger: #fca5a5;
+    --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 30rem),
+    radial-gradient(circle at 95% 12%, color-mix(in srgb, var(--accent-2) 7%, transparent), transparent 28rem),
+    var(--bg);
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.progress-container {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 100;
+  background: transparent;
+}
+
+.progress-bar {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.12s linear;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 286px) minmax(0, 1fr);
+  gap: 38px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 34px 28px 80px;
+}
+
+.sidebar {
+  position: sticky;
+  top: 22px;
+  align-self: start;
+  max-height: calc(100vh - 44px);
+  overflow: auto;
+  padding: 22px 18px;
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  scrollbar-width: thin;
+  z-index: 30;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.brand strong {
+  display: block;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.brand small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+}
+
+.sidebar-title {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+.toc {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.toc li {
+  margin: 2px 0;
+}
+
+.toc a {
+  display: block;
+  padding: 5px 8px;
+  color: var(--muted);
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.toc-level-3 {
+  padding-left: 12px;
+}
+
+.toc-level-3 a {
+  font-size: 12px;
+  opacity: 0.88;
+}
+
+.content {
+  min-width: 0;
+  padding: 44px 54px 64px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  position: relative;
+  margin: -8px 0 32px;
+  padding: 30px 32px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, var(--panel)), color-mix(in srgb, var(--accent-2) 7%, var(--panel)));
+}
+
+.hero::after {
+  content: "∠";
+  position: absolute;
+  right: 24px;
+  bottom: -30px;
+  color: color-mix(in srgb, var(--accent) 12%, transparent);
+  font-family: Georgia, serif;
+  font-size: 132px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.hero-kicker {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.hero h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-size: clamp(30px, 4vw, 45px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.hero-stats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+}
+
+.hero-stats span {
+  padding: 6px 11px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--panel) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  border-radius: 999px;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.35;
+  scroll-margin-top: 24px;
+}
+
+h2 {
+  margin: 54px 0 18px;
+  padding-top: 8px;
+  font-size: 28px;
+}
+
+h2::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 10px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  vertical-align: 0.18em;
+}
+
+h3 {
+  margin: 34px 0 12px;
+  color: color-mix(in srgb, var(--text) 82%, var(--accent));
+  font-size: 21px;
+}
+
+h4 {
+  margin: 26px 0 8px;
+  font-size: 18px;
+}
+
+.heading-anchor {
+  float: right;
+  margin-left: 12px;
+  color: color-mix(in srgb, var(--muted) 48%, transparent);
+  font-weight: 400;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+h2:hover .heading-anchor,
+h3:hover .heading-anchor,
+h4:hover .heading-anchor {
+  opacity: 1;
+}
+
+p {
+  margin: 0.75em 0;
+}
+
+strong {
+  color: color-mix(in srgb, var(--text) 84%, var(--accent));
+}
+
+.callout {
+  margin: 20px 0;
+  padding: 16px 20px;
+  color: var(--text);
+  background: var(--warm);
+  border: 1px solid var(--warm-line);
+  border-left: 5px solid #e8a317;
+  border-radius: 10px;
+}
+
+.callout p {
+  margin: 0;
+}
+
+ul, ol {
+  margin: 0.75em 0;
+  padding-left: 1.7em;
+}
+
+li {
+  margin: 0.32em 0;
+}
+
+li > p {
+  margin: 0.35em 0;
+}
+
+.math-display {
+  margin: 20px 0;
+  padding: 14px 18px;
+  overflow-x: auto;
+  max-width: 100%;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.05em;
+  scrollbar-width: thin;
+}
+
+.math-display .katex-display,
+.math-display .katex {
+  margin: 0;
+  display: block;
+}
+
+.math-display math {
+  font-size: 1.08em;
+}
+
+.katex {
+  font-size: 1.06em;
+}
+
+.katex math {
+  font-size: 1.06em;
+}
+
+.math-error {
+  color: var(--danger);
+  font-family: monospace;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+}
+
+code {
+  padding: 0.12em 0.36em;
+  color: #9f1239;
+  background: #fff1f2;
+  border-radius: 5px;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.table-wrap {
+  margin: 22px 0;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+th, td {
+  padding: 10px 13px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: var(--text);
+  background: var(--accent-soft);
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--panel-soft) 72%, transparent);
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+hr.section-rule {
+  margin: 36px 0;
+  border: 0;
+  border-top: 1px dashed color-mix(in srgb, var(--line) 82%, transparent);
+}
+
+.footer-note {
+  margin-top: 48px;
+  padding-top: 18px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+}
+
+.toolbar {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  gap: 8px;
+  z-index: 60;
+}
+
+.toolbar button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  box-shadow: 0 8px 24px rgba(23, 32, 51, 0.12);
+  cursor: pointer;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  backdrop-filter: blur(10px);
+}
+
+.toolbar button:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.mobile-note {
+  display: none;
+  color: var(--muted);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+}
+
+.overlay {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .layout {
+    display: block;
+    max-width: none;
+    padding: 18px;
+  }
+
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(82vw, 320px);
+    max-height: none;
+    border-radius: 0 18px 18px 0;
+    transform: translateX(-105%);
+    transition: transform 0.28s ease;
+    z-index: 80;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 10, 22, 0.48);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 70;
+  }
+
+  .overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  body.drawer-open {
+    overflow: hidden;
+  }
+
+  .content {
+    padding: 32px 24px 48px;
+  }
+
+  .mobile-note {
+    display: block;
+  }
+
+  .print-btn {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    left: 16px;
+    bottom: 18px;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--text);
+    background: color-mix(in srgb, var(--panel) 94%, transparent);
+    box-shadow: 0 10px 28px rgba(23, 32, 51, 0.2);
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 65;
+    backdrop-filter: blur(10px);
+  }
+
+  .toc-level-3 {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  body {
+    font-size: 16px;
+  }
+
+  .layout {
+    padding: 12px;
+  }
+
+  .content {
+    padding: 24px 17px 38px;
+    border-radius: 16px;
+  }
+
+  .hero {
+    padding: 24px 20px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 19px;
+  }
+
+  .toolbar {
+    top: 10px;
+    right: 10px;
+  }
+
+  .toolbar button {
+    padding: 8px 11px;
+  }
+}
+
+#back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+  box-shadow: 0 10px 28px rgba(23, 32, 51, 0.2);
+  cursor: pointer;
+  font-size: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+  z-index: 65;
+  backdrop-filter: blur(10px);
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+
+  .layout {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+
+  .sidebar,
+  .toolbar,
+  .progress-container,
+  .heading-anchor,
+  .mobile-note,
+  .overlay,
+  .menu-toggle,
+  #back-to-top {
+    display: none !important;
+  }
+
+  .content {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: #fff;
+  }
+
+  .hero {
+    border: 1px solid #ccc;
+    background: #fff;
+  }
+
+  .hero::after {
+    display: none;
+  }
+
+  .math-display {
+    background: #fff;
+    break-inside: avoid;
+  }
+
+  h2, h3 {
+    break-after: avoid;
+  }
+
+  table, blockquote {
+    break-inside: avoid;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+
+
+
+/* 模块五专用细节 */
+.sidebar { scrollbar-color: var(--line) transparent; }
+.toc a.active {
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 700;
+}
+.content > .callout:first-of-type {
+  margin-top: 24px;
+}
+.callout strong { color: var(--text); }
+.callout + .callout { margin-top: 12px; }
+.math-display {
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.math-display .katex { display: block; min-width: max-content; }
+.math-display math { display: block; min-width: max-content; }
+.table-wrap table { min-width: 520px; }
+@media (max-width: 980px) {
+  .sidebar {
+    visibility: hidden;
+    transition: transform .28s ease, visibility 0s linear .28s;
+  }
+  .sidebar.open {
+    visibility: visible;
+    transition: transform .28s ease, visibility 0s;
+  }
+}
+@media (max-width: 620px) {
+  .hero p { font-size: 15px; }
+  .toolbar #theme-toggle { padding-inline: 10px; }
+  .callout { padding: 14px 15px; }
+}
+@media print {
+  @page { size: A4; margin: 16mm; }
+  .content > .callout:first-of-type { margin-top: 12px; }
+  html, html[data-theme="dark"] {
+    --bg: #fff;
+    --text: #000;
+    --muted: #333;
+    --panel: #fff;
+    --panel-soft: #fff;
+    --line: #ccc;
+    --accent: #000;
+    --accent-soft: #fff;
+    --accent-2: #000;
+    --warm: #fff;
+    --warm-line: #bbb;
+    color-scheme: light;
+  }
+  body, h1, h2, h3, h4, p, li, td, th, strong, .hero p, .callout {
+    color: #000;
+  }
+  .hero-stats span, .callout {
+    background: #fff;
+    border-color: #bbb;
+  }
+  .callout { border-left-color: #000; }
+  .math-display { border-color: #ccc; overflow: visible; }
+  code { color: #000; background: #fff; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="progress-container" aria-hidden="true"><span class="progress-bar" id="progress-bar"></span></div>
+
+  <div class="toolbar">
+    <button type="button" id="theme-toggle" aria-label="切换深色模式">☾ 深色模式</button>
+    <button type="button" id="print-button" class="print-btn">打印 / 保存为 PDF</button>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="本页目录">
+      <div class="brand">
+        <div class="brand-mark">∠</div>
+        <div><strong>初高中衔接<br>模块五</strong><small>三角函数</small></div>
+      </div>
+      <p class="sidebar-title">本页目录</p>
+      <ul class="toc">
+<li class="toc-level-2"><a href="#一任意角与弧度制" data-target="一任意角与弧度制">一、任意角与弧度制</a></li>
+<li class="toc-level-3"><a href="#11-任意角" data-target="11-任意角">1.1 任意角</a></li>
+<li class="toc-level-3"><a href="#12-弧度制" data-target="12-弧度制">1.2 弧度制</a></li>
+<li class="toc-level-3"><a href="#13-弧长与扇形面积" data-target="13-弧长与扇形面积">1.3 弧长与扇形面积</a></li>
+<li class="toc-level-2"><a href="#二任意角三角函数的定义" data-target="二任意角三角函数的定义">二、任意角三角函数的定义</a></li>
+<li class="toc-level-3"><a href="#21-单位圆定义" data-target="21-单位圆定义">2.1 单位圆定义</a></li>
+<li class="toc-level-3"><a href="#22-一般坐标定义" data-target="22-一般坐标定义">2.2 一般坐标定义</a></li>
+<li class="toc-level-3"><a href="#23-三角函数在各象限的符号" data-target="23-三角函数在各象限的符号">2.3 三角函数在各象限的符号</a></li>
+<li class="toc-level-3"><a href="#24-特殊角" data-target="24-特殊角">2.4 特殊角</a></li>
+<li class="toc-level-2"><a href="#三同角三角函数关系" data-target="三同角三角函数关系">三、同角三角函数关系</a></li>
+<li class="toc-level-3"><a href="#31-平方关系" data-target="31-平方关系">3.1 平方关系</a></li>
+<li class="toc-level-3"><a href="#32-商数关系" data-target="32-商数关系">3.2 商数关系</a></li>
+<li class="toc-level-3"><a href="#33-倒数关系" data-target="33-倒数关系">3.3 倒数关系</a></li>
+<li class="toc-level-3"><a href="#34-使用提醒" data-target="34-使用提醒">3.4 使用提醒</a></li>
+<li class="toc-level-2"><a href="#四诱导公式" data-target="四诱导公式">四、诱导公式</a></li>
+<li class="toc-level-3"><a href="#41-基本公式" data-target="41-基本公式">4.1 基本公式</a></li>
+<li class="toc-level-3"><a href="#42-与-math-inline-165-相关的公式" data-target="42-与-math-inline-165-相关的公式">4.2 与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi2</annotation></semantics></math></span> 相关的公式</a></li>
+<li class="toc-level-3"><a href="#43-口诀" data-target="43-口诀">4.3 口诀</a></li>
+<li class="toc-level-2"><a href="#五两角和与差公式" data-target="五两角和与差公式">五、两角和与差公式</a></li>
+<li class="toc-level-3"><a href="#51-基本公式" data-target="51-基本公式">5.1 基本公式</a></li>
+<li class="toc-level-3"><a href="#52-积化和差" data-target="52-积化和差">5.2 积化和差</a></li>
+<li class="toc-level-3"><a href="#53-和差化积" data-target="53-和差化积">5.3 和差化积</a></li>
+<li class="toc-level-2"><a href="#六二倍角与半角公式" data-target="六二倍角与半角公式">六、二倍角与半角公式</a></li>
+<li class="toc-level-3"><a href="#61-二倍角公式" data-target="61-二倍角公式">6.1 二倍角公式</a></li>
+<li class="toc-level-3"><a href="#62-半角公式" data-target="62-半角公式">6.2 半角公式</a></li>
+<li class="toc-level-3"><a href="#63-降幂公式" data-target="63-降幂公式">6.3 降幂公式</a></li>
+<li class="toc-level-2"><a href="#七辅助角公式" data-target="七辅助角公式">七、辅助角公式</a></li>
+<li class="toc-level-3"><a href="#71-基本形式" data-target="71-基本形式">7.1 基本形式</a></li>
+<li class="toc-level-3"><a href="#72-最值" data-target="72-最值">7.2 最值</a></li>
+<li class="toc-level-3"><a href="#73-例" data-target="73-例">7.3 例</a></li>
+<li class="toc-level-2"><a href="#八三角函数图像与性质" data-target="八三角函数图像与性质">八、三角函数图像与性质</a></li>
+<li class="toc-level-3"><a href="#81-正弦函数-math-inline-171" data-target="81-正弦函数-math-inline-171">8.1 正弦函数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y=\sin x</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#82-余弦函数-math-inline-178" data-target="82-余弦函数-math-inline-178">8.2 余弦函数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y=\cos x</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#83-正切函数-math-inline-185" data-target="83-正切函数-math-inline-185">8.3 正切函数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>tan</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y=\tan x</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#84-变换形式" data-target="84-变换形式">8.4 变换形式</a></li>
+<li class="toc-level-2"><a href="#九高数关联度" data-target="九高数关联度">九、高数关联度</a></li>
+<li class="toc-level-3"><a href="#91-重要极限" data-target="91-重要极限">9.1 重要极限</a></li>
+<li class="toc-level-3"><a href="#92-三角函数求导" data-target="92-三角函数求导">9.2 三角函数求导</a></li>
+<li class="toc-level-3"><a href="#93-积化和差与积分" data-target="93-积化和差与积分">9.3 积化和差与积分</a></li>
+<li class="toc-level-3"><a href="#94-降幂与三角积分" data-target="94-降幂与三角积分">9.4 降幂与三角积分</a></li>
+<li class="toc-level-3"><a href="#95-三角代换" data-target="95-三角代换">9.5 三角代换</a></li>
+<li class="toc-level-3"><a href="#96-傅里叶级数" data-target="96-傅里叶级数">9.6 傅里叶级数</a></li>
+<li class="toc-level-3"><a href="#97-小角近似" data-target="97-小角近似">9.7 小角近似</a></li>
+<li class="toc-level-2"><a href="#十典型例题" data-target="十典型例题">十、典型例题</a></li>
+<li class="toc-level-3"><a href="#例-1-角度制与弧度制" data-target="例-1-角度制与弧度制">例 1：角度制与弧度制</a></li>
+<li class="toc-level-3"><a href="#例-2-同角关系" data-target="例-2-同角关系">例 2：同角关系</a></li>
+<li class="toc-level-3"><a href="#例-3-诱导公式" data-target="例-3-诱导公式">例 3：诱导公式</a></li>
+<li class="toc-level-3"><a href="#例-4-和角公式" data-target="例-4-和角公式">例 4：和角公式</a></li>
+<li class="toc-level-3"><a href="#例-5-二倍角" data-target="例-5-二倍角">例 5：二倍角</a></li>
+<li class="toc-level-3"><a href="#例-6-辅助角公式" data-target="例-6-辅助角公式">例 6：辅助角公式</a></li>
+<li class="toc-level-3"><a href="#例-7-图像性质" data-target="例-7-图像性质">例 7：图像性质</a></li>
+<li class="toc-level-3"><a href="#例-8-重要极限与积化和差" data-target="例-8-重要极限与积化和差">例 8：重要极限与积化和差</a></li>
+<li class="toc-level-2"><a href="#十一易错点提示" data-target="十一易错点提示">十一、易错点提示</a></li>
+<li class="toc-level-3"><a href="#1-角度制与弧度制混用" data-target="1-角度制与弧度制混用">1. 角度制与弧度制混用</a></li>
+<li class="toc-level-3"><a href="#2-忘记象限决定符号" data-target="2-忘记象限决定符号">2. 忘记象限决定符号</a></li>
+<li class="toc-level-3"><a href="#3-诱导公式符号判断错误" data-target="3-诱导公式符号判断错误">3. 诱导公式符号判断错误</a></li>
+<li class="toc-level-3"><a href="#4-正切公式忽略分母为零" data-target="4-正切公式忽略分母为零">4. 正切公式忽略分母为零</a></li>
+<li class="toc-level-3"><a href="#5-二倍角公式记混" data-target="5-二倍角公式记混">5. 二倍角公式记混</a></li>
+<li class="toc-level-3"><a href="#6-半角公式忘记符号" data-target="6-半角公式忘记符号">6. 半角公式忘记符号</a></li>
+<li class="toc-level-3"><a href="#7-辅助角公式相位写错" data-target="7-辅助角公式相位写错">7. 辅助角公式相位写错</a></li>
+<li class="toc-level-3"><a href="#8-周期公式用错" data-target="8-周期公式用错">8. 周期公式用错</a></li>
+<li class="toc-level-3"><a href="#9-正切函数单调区间写成整个定义域" data-target="9-正切函数单调区间写成整个定义域">9. 正切函数单调区间写成整个定义域</a></li>
+<li class="toc-level-3"><a href="#10-图像平移方向写反" data-target="10-图像平移方向写反">10. 图像平移方向写反</a></li>
+<li class="toc-level-3"><a href="#11-积化和差符号写错" data-target="11-积化和差符号写错">11. 积化和差符号写错</a></li>
+<li class="toc-level-3"><a href="#12-忽略定义域" data-target="12-忽略定义域">12. 忽略定义域</a></li>
+<li class="toc-level-2"><a href="#十二课后练习" data-target="十二课后练习">十二、课后练习</a></li>
+<li class="toc-level-2"><a href="#十三练习答案与解析" data-target="十三练习答案与解析">十三、练习答案与解析</a></li>
+<li class="toc-level-3"><a href="#1-答案-math-inline-246-参考角-math-inline-247" data-target="1-答案-math-inline-246-参考角-math-inline-247">1. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mn>7</mn><mi>π</mi></mrow><mn>6</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{7\pi}{6}</annotation></semantics></math></span>，参考角 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>6</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi6</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#2-答案-math-inline-249-math-inline-250" data-target="2-答案-math-inline-249-math-inline-250">2. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mo>=</mo><mn>2</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">l=2\pi</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mn>3</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">S=3\pi</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#3-答案-math-inline-251-math-inline-252" data-target="3-答案-math-inline-251-math-inline-252">3. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mo>−</mo><mfrac><mn>12</mn><mn>13</mn></mfrac></mrow><annotation encoding="application/x-tex">\sin\alpha=-\frac{12}{13}</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mn>12</mn><mn>5</mn></mfrac></mrow><annotation encoding="application/x-tex">\tan\alpha=\frac{12}{5}</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#4-答案-math-inline-253" data-target="4-答案-math-inline-253">4. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#5-答案-math-inline-254" data-target="5-答案-math-inline-254">5. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><msqrt><mn>6</mn></msqrt><mo>−</mo><msqrt><mn>2</mn></msqrt></mrow><mn>4</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{\sqrt6-\sqrt2}{4}</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#6-答案-math-inline-255" data-target="6-答案-math-inline-255">6. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>7</mn><mn>9</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac79</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#7-答案-math-inline-256" data-target="7-答案-math-inline-256">7. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mi>x</mi><mo>+</mo><mfrac><mi>π</mi><mn>3</mn></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">2\sin\left(x+\frac\pi3\right)</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#8-答案-振幅-math-inline-257-周期-math-inline-258-初相-math-inline-259-值域-math-inline-260" data-target="8-答案-振幅-math-inline-257-周期-math-inline-258-初相-math-inline-259-值域-math-inline-260">8. 答案：振幅 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span>，周期 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span>，初相 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>4</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi4</annotation></semantics></math></span>，值域 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mn>3</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-3,3]</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#9-答案-math-inline-264" data-target="9-答案-math-inline-264">9. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn></mrow><annotation encoding="application/x-tex">5</annotation></semantics></math></span></a></li>
+<li class="toc-level-3"><a href="#10-答案-math-inline-265" data-target="10-答案-math-inline-265">10. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mfrac><mn>1</mn><mn>12</mn></mfrac><mi>cos</mi><mo>⁡</mo><mn>6</mn><mi>x</mi><mo>−</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">-\frac1{12}\cos6x-\frac14\cos2x+C</annotation></semantics></math></span></a></li>
+<li class="toc-level-2"><a href="#十四公式速查" data-target="十四公式速查">十四、公式速查</a></li>
+<li class="toc-level-3"><a href="#141-基本关系" data-target="141-基本关系">14.1 基本关系</a></li>
+<li class="toc-level-3"><a href="#142-和差角" data-target="142-和差角">14.2 和差角</a></li>
+<li class="toc-level-3"><a href="#143-二倍角" data-target="143-二倍角">14.3 二倍角</a></li>
+<li class="toc-level-3"><a href="#144-辅助角" data-target="144-辅助角">14.4 辅助角</a></li>
+<li class="toc-level-3"><a href="#145-重要极限" data-target="145-重要极限">14.5 重要极限</a></li>
+<li class="toc-level-2"><a href="#结语" data-target="结语">结语</a></li>
+      </ul>
+      <p class="mobile-note">点击目录可快速跳转；阅读时也可用左下角按钮随时打开目录。</p>
+    </aside>
+
+    <main class="content">
+      <header class="hero">
+        <p class="hero-kicker">初高中衔接 · MODULE 05</p>
+        <h1>三角函数</h1>
+        <p>从任意角与弧度制出发，串起三角函数定义、恒等变换、图像性质，并连接到极限、求导、积分与傅里叶级数。先理解单位圆，再把公式连成一条推导链。</p>
+        <div class="hero-stats" aria-label="内容概览">
+          <span>任意角 · 弧度制</span>
+          <span>恒等变换</span>
+          <span>图像与性质</span>
+          <span>高数衔接</span>
+          <span>8 道例题 · 10 道练习</span>
+        </div>
+      </header>
+
+<div class="callout"><p><strong>模块定位</strong>：三角函数是连接几何、周期现象和高数的桥梁。极限中的 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi><mi mathvariant="normal">/</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\sin x/x</annotation></semantics></math></span>、求导中的三角函数公式、积分中的积化和差、傅里叶级数，都以本模块为基础。</p></div>
+<div class="callout"><p><strong>学习建议</strong>：先统一用弧度制思考，再用单位圆判断符号；公式不要死背，抓住“和角—倍角—辅助角”的推导链。</p></div>
+<hr class="section-rule">
+<h2 id="一任意角与弧度制"><a class="heading-anchor" href="#一任意角与弧度制" aria-label="回到本小节">#</a>一、任意角与弧度制</h2>
+<h3 id="11-任意角"><a class="heading-anchor" href="#11-任意角" aria-label="回到本小节">#</a>1.1 任意角</h3>
+<p>角可以看成一条射线绕端点旋转形成：</p>
+<ul><li>逆时针旋转为正角；</li><li>顺时针旋转为负角；</li><li>不旋转为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span> 角。</li></ul>
+<p>与角 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span> 终边相同的角可以写成</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>α</mi><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi><mspace width="1em"/><mo stretchy="false">(</mo><mi>k</mi><mo>∈</mo><mi mathvariant="double-struck">Z</mi><mo stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose></mrow><annotation encoding="application/x-tex">\boxed{\alpha+2k\pi\quad(k\in\mathbb Z)}</annotation></semantics></math></span></div>
+<p>（弧度制），或</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>α</mi><mo>+</mo><msup><mn>360</mn><mo>∘</mo></msup><mi>k</mi><mspace width="1em"/><mo stretchy="false">(</mo><mi>k</mi><mo>∈</mo><mi mathvariant="double-struck">Z</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\alpha+360^\circ k\quad(k\in\mathbb Z).</annotation></semantics></math></span></div>
+<h3 id="12-弧度制"><a class="heading-anchor" href="#12-弧度制" aria-label="回到本小节">#</a>1.2 弧度制</h3>
+<p>长度等于半径的弧所对的圆心角为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span> 弧度。</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>π</mi><mtext> rad</mtext><mo>=</mo><msup><mn>180</mn><mo>∘</mo></msup></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\pi\text{ rad}=180^\circ}.</annotation></semantics></math></span></div>
+<p>换算：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mn>1</mn><mo>∘</mo></msup><mo>=</mo><mfrac><mi>π</mi><mn>180</mn></mfrac><mtext> rad</mtext><mo separator="true">,</mo><mspace width="2em"/><mn>1</mn><mtext> rad</mtext><mo>=</mo><mfrac><msup><mn>180</mn><mo>∘</mo></msup><mi>π</mi></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">1^\circ=\frac{\pi}{180}\text{ rad},
+\qquad
+1\text{ rad}=\frac{180^\circ}{\pi}.</annotation></semantics></math></span></div>
+<p>常见角：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mn>30</mn><mo>∘</mo></msup><mo>=</mo><mfrac><mi>π</mi><mn>6</mn></mfrac><mo separator="true">,</mo><mspace width="1em"/><msup><mn>45</mn><mo>∘</mo></msup><mo>=</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><mo separator="true">,</mo><mspace width="1em"/><msup><mn>60</mn><mo>∘</mo></msup><mo>=</mo><mfrac><mi>π</mi><mn>3</mn></mfrac><mo separator="true">,</mo><mspace width="1em"/><msup><mn>90</mn><mo>∘</mo></msup><mo>=</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">30^\circ=\frac\pi6,\quad
+45^\circ=\frac\pi4,\quad
+60^\circ=\frac\pi3,\quad
+90^\circ=\frac\pi2,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mn>120</mn><mo>∘</mo></msup><mo>=</mo><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mn>3</mn></mfrac><mo separator="true">,</mo><mspace width="1em"/><msup><mn>135</mn><mo>∘</mo></msup><mo>=</mo><mfrac><mrow><mn>3</mn><mi>π</mi></mrow><mn>4</mn></mfrac><mo separator="true">,</mo><mspace width="1em"/><msup><mn>150</mn><mo>∘</mo></msup><mo>=</mo><mfrac><mrow><mn>5</mn><mi>π</mi></mrow><mn>6</mn></mfrac><mo separator="true">,</mo><mspace width="1em"/><msup><mn>180</mn><mo>∘</mo></msup><mo>=</mo><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">120^\circ=\frac{2\pi}{3},\quad
+135^\circ=\frac{3\pi}{4},\quad
+150^\circ=\frac{5\pi}{6},\quad
+180^\circ=\pi.</annotation></semantics></math></span></div>
+<h3 id="13-弧长与扇形面积"><a class="heading-anchor" href="#13-弧长与扇形面积" aria-label="回到本小节">#</a>1.3 弧长与扇形面积</h3>
+<p>设半径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span>，圆心角 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span>（弧度）：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>l</mi><mo>=</mo><mi>r</mi><mi mathvariant="normal">∣</mi><mi>θ</mi><mi mathvariant="normal">∣</mi></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{l=r|\theta|},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi>S</mi><mtext>扇形</mtext></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>r</mi><mn>2</mn></msup><mi mathvariant="normal">∣</mi><mi>θ</mi><mi mathvariant="normal">∣</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{S_{\text{扇形}}=\frac12r^2|\theta|}.</annotation></semantics></math></span></div>
+<p>这两个公式中的 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span> 必须是弧度。</p>
+<hr class="section-rule">
+<h2 id="二任意角三角函数的定义"><a class="heading-anchor" href="#二任意角三角函数的定义" aria-label="回到本小节">#</a>二、任意角三角函数的定义</h2>
+<h3 id="21-单位圆定义"><a class="heading-anchor" href="#21-单位圆定义" aria-label="回到本小节">#</a>2.1 单位圆定义</h3>
+<p>在单位圆上，角 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span> 的终边与单位圆交于点 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(x,y)</annotation></semantics></math></span>，则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mi>x</mi><mo separator="true">,</mo><mspace width="2em"/><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mi>y</mi></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{\cos\alpha=x,\qquad \sin\alpha=y},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mi>y</mi><mi>x</mi></mfrac><mspace width="1em"/><mo stretchy="false">(</mo><mi>x</mi><mo mathvariant="normal">≠</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\tan\alpha=\frac yx\quad(x\ne0)}.</annotation></semantics></math></span></div>
+<p>因此：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>+</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>1.</mn></mrow><annotation encoding="application/x-tex">\sin^2\alpha+\cos^2\alpha=1.</annotation></semantics></math></span></div>
+<h3 id="22-一般坐标定义"><a class="heading-anchor" href="#22-一般坐标定义" aria-label="回到本小节">#</a>2.2 一般坐标定义</h3>
+<p>若终边上一点为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(x,y)</annotation></semantics></math></span>，且</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>r</mi><mo>=</mo><msqrt><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></msqrt><mo>&gt;</mo><mn>0</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">r=\sqrt{x^2+y^2}&gt;0,</annotation></semantics></math></span></div>
+<p>则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mi>y</mi><mi>r</mi></mfrac><mo separator="true">,</mo><mspace width="2em"/><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mi>x</mi><mi>r</mi></mfrac><mo separator="true">,</mo><mspace width="2em"/><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mi>y</mi><mi>x</mi></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\sin\alpha=\frac yr,\qquad
+\cos\alpha=\frac xr,\qquad
+\tan\alpha=\frac yx
+}.</annotation></semantics></math></span></div>
+<h3 id="23-三角函数在各象限的符号"><a class="heading-anchor" href="#23-三角函数在各象限的符号" aria-label="回到本小节">#</a>2.3 三角函数在各象限的符号</h3>
+<div class="table-wrap"><table><thead><tr><th>象限</th><th><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">\sin\alpha</annotation></semantics></math></span></th><th><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">\cos\alpha</annotation></semantics></math></span></th><th><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">\tan\alpha</annotation></semantics></math></span></th></tr></thead><tbody><tr><td>第一象限</td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math></span></td></tr><tr><td>第二象限</td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo></mrow><annotation encoding="application/x-tex">-</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo></mrow><annotation encoding="application/x-tex">-</annotation></semantics></math></span></td></tr><tr><td>第三象限</td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo></mrow><annotation encoding="application/x-tex">-</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo></mrow><annotation encoding="application/x-tex">-</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math></span></td></tr><tr><td>第四象限</td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo></mrow><annotation encoding="application/x-tex">-</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math></span></td><td><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo></mrow><annotation encoding="application/x-tex">-</annotation></semantics></math></span></td></tr></tbody></table></div>
+<p>记忆：一全正，二正弦，三正切，四余弦。</p>
+<h3 id="24-特殊角"><a class="heading-anchor" href="#24-特殊角" aria-label="回到本小节">#</a>2.4 特殊角</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.16em" columnalign="center center center center center center" columnlines="solid none none none none" columnspacing="1em" rowlines="solid none none"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi>α</mi></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><mi>π</mi><mn>6</mn></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><mi>π</mi><mn>4</mn></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><mi>π</mi><mn>3</mn></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><mi>π</mi><mn>2</mn></mfrac></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mfrac><msqrt><mn>3</mn></msqrt><mn>3</mn></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msqrt><mn>3</mn></msqrt></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mtext>不存在</mtext></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{c|ccccc}
+\alpha&amp;0&amp;\frac\pi6&amp;\frac\pi4&amp;\frac\pi3&amp;\frac\pi2\\
+\hline
+\sin\alpha&amp;0&amp;\frac12&amp;\frac{\sqrt2}{2}&amp;\frac{\sqrt3}{2}&amp;1\\
+\cos\alpha&amp;1&amp;\frac{\sqrt3}{2}&amp;\frac{\sqrt2}{2}&amp;\frac12&amp;0\\
+\tan\alpha&amp;0&amp;\frac{\sqrt3}{3}&amp;1&amp;\sqrt3&amp;\text{不存在}
+\end{array}</annotation></semantics></math></span></div>
+<hr class="section-rule">
+<h2 id="三同角三角函数关系"><a class="heading-anchor" href="#三同角三角函数关系" aria-label="回到本小节">#</a>三、同角三角函数关系</h2>
+<h3 id="31-平方关系"><a class="heading-anchor" href="#31-平方关系" aria-label="回到本小节">#</a>3.1 平方关系</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>+</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>1</mn></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{\sin^2\alpha+\cos^2\alpha=1},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mn>1</mn><mo>+</mo><msup><mrow><mi>tan</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><msup><mrow><mi>sec</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{1+\tan^2\alpha=\sec^2\alpha},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mn>1</mn><mo>+</mo><msup><mrow><mi>cot</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><msup><mrow><mi>csc</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{1+\cot^2\alpha=\csc^2\alpha}.</annotation></semantics></math></span></div>
+<h3 id="32-商数关系"><a class="heading-anchor" href="#32-商数关系" aria-label="回到本小节">#</a>3.2 商数关系</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo><mspace width="2em"/><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>cot</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\tan\alpha=\frac{\sin\alpha}{\cos\alpha}},
+\qquad
+\boxed{\cot\alpha=\frac{\cos\alpha}{\sin\alpha}}.</annotation></semantics></math></span></div>
+<h3 id="33-倒数关系"><a class="heading-anchor" href="#33-倒数关系" aria-label="回到本小节">#</a>3.3 倒数关系</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sec</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac><mo separator="true">,</mo><mspace width="2em"/><mi>csc</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac><mo separator="true">,</mo><mspace width="2em"/><mi>cot</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sec\alpha=\frac1{\cos\alpha},
+\qquad
+\csc\alpha=\frac1{\sin\alpha},
+\qquad
+\cot\alpha=\frac1{\tan\alpha}.</annotation></semantics></math></span></div>
+<h3 id="34-使用提醒"><a class="heading-anchor" href="#34-使用提醒" aria-label="回到本小节">#</a>3.4 使用提醒</h3>
+<p>已知一个三角函数值求另外两个时，必须结合角所在象限确定符号。</p>
+<p>例如：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo separator="true">,</mo><mspace width="2em"/><mi>α</mi><mtext> 在第二象限</mtext><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin\alpha=\frac35,\qquad \alpha\text{ 在第二象限},</annotation></semantics></math></span></div>
+<p>则</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mo>−</mo><msqrt><mrow><mn>1</mn><mo>−</mo><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi></mrow></msqrt><mo>=</mo><mo>−</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\cos\alpha=-\sqrt{1-\sin^2\alpha}=-\frac45,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac><mo>=</mo><mo>−</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\tan\alpha=\frac{\sin\alpha}{\cos\alpha}=-\frac34.</annotation></semantics></math></span></div>
+<hr class="section-rule">
+<h2 id="四诱导公式"><a class="heading-anchor" href="#四诱导公式" aria-label="回到本小节">#</a>四、诱导公式</h2>
+<h3 id="41-基本公式"><a class="heading-anchor" href="#41-基本公式" aria-label="回到本小节">#</a>4.1 基本公式</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo><mspace width="2em"/><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin(-\alpha)=-\sin\alpha,
+\qquad
+\cos(-\alpha)=\cos\alpha,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>π</mi><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>=</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo><mspace width="2em"/><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>π</mi><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin(\pi-\alpha)=\sin\alpha,
+\qquad
+\cos(\pi-\alpha)=-\cos\alpha,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>π</mi><mo>+</mo><mi>α</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo><mspace width="2em"/><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>π</mi><mo>+</mo><mi>α</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin(\pi+\alpha)=-\sin\alpha,
+\qquad
+\cos(\pi+\alpha)=-\cos\alpha,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>2</mn><mi>π</mi><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo><mspace width="2em"/><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>2</mn><mi>π</mi><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin(2\pi-\alpha)=-\sin\alpha,
+\qquad
+\cos(2\pi-\alpha)=\cos\alpha.</annotation></semantics></math></span></div>
+<h3 id="42-与-math-inline-165-相关的公式"><a class="heading-anchor" href="#42-与-math-inline-165-相关的公式" aria-label="回到本小节">#</a>4.2 与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi2</annotation></semantics></math></span> 相关的公式</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>−</mo><mi>α</mi><mo fence="true">)</mo></mrow><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo><mspace width="2em"/><mi>cos</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>−</mo><mi>α</mi><mo fence="true">)</mo></mrow><mo>=</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin\left(\frac\pi2-\alpha\right)=\cos\alpha,
+\qquad
+\cos\left(\frac\pi2-\alpha\right)=\sin\alpha,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>α</mi><mo fence="true">)</mo></mrow><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo><mspace width="2em"/><mi>cos</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>α</mi><mo fence="true">)</mo></mrow><mo>=</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin\left(\frac\pi2+\alpha\right)=\cos\alpha,
+\qquad
+\cos\left(\frac\pi2+\alpha\right)=-\sin\alpha.</annotation></semantics></math></span></div>
+<h3 id="43-口诀"><a class="heading-anchor" href="#43-口诀" aria-label="回到本小节">#</a>4.3 口诀</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mtext>奇变偶不变，符号看象限</mtext></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\text{奇变偶不变，符号看象限}}.</annotation></semantics></math></span></div>
+<p>“奇变偶不变”指 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi2</annotation></semantics></math></span> 的奇数倍会改变函数名，偶数倍不改变函数名；“符号看象限”指把 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span> 看成锐角时，原角所在象限决定符号。</p>
+<hr class="section-rule">
+<h2 id="五两角和与差公式"><a class="heading-anchor" href="#五两角和与差公式" aria-label="回到本小节">#</a>五、两角和与差公式</h2>
+<h3 id="51-基本公式"><a class="heading-anchor" href="#51-基本公式" aria-label="回到本小节">#</a>5.1 基本公式</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>±</mo><mi>β</mi><mo stretchy="false">)</mo><mo>=</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi>cos</mi><mo>⁡</mo><mi>β</mi><mo>±</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mi>sin</mi><mo>⁡</mo><mi>β</mi></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{\sin(\alpha\pm\beta)
+=\sin\alpha\cos\beta\pm\cos\alpha\sin\beta},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>±</mo><mi>β</mi><mo stretchy="false">)</mo><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mi>cos</mi><mo>⁡</mo><mi>β</mi><mo>∓</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi>sin</mi><mo>⁡</mo><mi>β</mi></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{\cos(\alpha\pm\beta)
+=\cos\alpha\cos\beta\mp\sin\alpha\sin\beta},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>tan</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>±</mo><mi>β</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>±</mo><mi>tan</mi><mo>⁡</mo><mi>β</mi></mrow><mrow><mn>1</mn><mo>∓</mo><mi>tan</mi><mo>⁡</mo><mi>α</mi><mi>tan</mi><mo>⁡</mo><mi>β</mi></mrow></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\tan(\alpha\pm\beta)
+=\frac{\tan\alpha\pm\tan\beta}
+{1\mp\tan\alpha\tan\beta}}.</annotation></semantics></math></span></div>
+<p>正切公式要求分母不为零，并且各正切有意义。</p>
+<h3 id="52-积化和差"><a class="heading-anchor" href="#52-积化和差" aria-label="回到本小节">#</a>5.2 积化和差</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi>cos</mi><mo>⁡</mo><mi>β</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">[</mo><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>+</mo><mi>β</mi><mo stretchy="false">)</mo><mo>+</mo><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>−</mo><mi>β</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{
+\sin\alpha\cos\beta
+=\frac12[\sin(\alpha+\beta)+\sin(\alpha-\beta)]
+},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi><mi>sin</mi><mo>⁡</mo><mi>β</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">[</mo><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>+</mo><mi>β</mi><mo stretchy="false">)</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>−</mo><mi>β</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{
+\cos\alpha\sin\beta
+=\frac12[\sin(\alpha+\beta)-\sin(\alpha-\beta)]
+},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi><mi>cos</mi><mo>⁡</mo><mi>β</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">[</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>+</mo><mi>β</mi><mo stretchy="false">)</mo><mo>+</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>−</mo><mi>β</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{
+\cos\alpha\cos\beta
+=\frac12[\cos(\alpha+\beta)+\cos(\alpha-\beta)]
+},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi>sin</mi><mo>⁡</mo><mi>β</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">[</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>−</mo><mi>β</mi><mo stretchy="false">)</mo><mo>−</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>+</mo><mi>β</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\sin\alpha\sin\beta
+=\frac12[\cos(\alpha-\beta)-\cos(\alpha+\beta)]
+}.</annotation></semantics></math></span></div>
+<p>这些公式在积分中把乘积化为和差，非常常用。</p>
+<h3 id="53-和差化积"><a class="heading-anchor" href="#53-和差化积" aria-label="回到本小节">#</a>5.3 和差化积</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>A</mi><mo>+</mo><mi>sin</mi><mo>⁡</mo><mi>B</mi><mo>=</mo><mn>2</mn><mi>sin</mi><mo>⁡</mo><mfrac><mrow><mi>A</mi><mo>+</mo><mi>B</mi></mrow><mn>2</mn></mfrac><mi>cos</mi><mo>⁡</mo><mfrac><mrow><mi>A</mi><mo>−</mo><mi>B</mi></mrow><mn>2</mn></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin A+\sin B
+=2\sin\frac{A+B}{2}\cos\frac{A-B}{2},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>A</mi><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>B</mi><mo>=</mo><mn>2</mn><mi>cos</mi><mo>⁡</mo><mfrac><mrow><mi>A</mi><mo>+</mo><mi>B</mi></mrow><mn>2</mn></mfrac><mi>sin</mi><mo>⁡</mo><mfrac><mrow><mi>A</mi><mo>−</mo><mi>B</mi></mrow><mn>2</mn></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin A-\sin B
+=2\cos\frac{A+B}{2}\sin\frac{A-B}{2},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>A</mi><mo>+</mo><mi>cos</mi><mo>⁡</mo><mi>B</mi><mo>=</mo><mn>2</mn><mi>cos</mi><mo>⁡</mo><mfrac><mrow><mi>A</mi><mo>+</mo><mi>B</mi></mrow><mn>2</mn></mfrac><mi>cos</mi><mo>⁡</mo><mfrac><mrow><mi>A</mi><mo>−</mo><mi>B</mi></mrow><mn>2</mn></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\cos A+\cos B
+=2\cos\frac{A+B}{2}\cos\frac{A-B}{2},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>A</mi><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>B</mi><mo>=</mo><mo>−</mo><mn>2</mn><mi>sin</mi><mo>⁡</mo><mfrac><mrow><mi>A</mi><mo>+</mo><mi>B</mi></mrow><mn>2</mn></mfrac><mi>sin</mi><mo>⁡</mo><mfrac><mrow><mi>A</mi><mo>−</mo><mi>B</mi></mrow><mn>2</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos A-\cos B
+=-2\sin\frac{A+B}{2}\sin\frac{A-B}{2}.</annotation></semantics></math></span></div>
+<hr class="section-rule">
+<h2 id="六二倍角与半角公式"><a class="heading-anchor" href="#六二倍角与半角公式" aria-label="回到本小节">#</a>六、二倍角与半角公式</h2>
+<h3 id="61-二倍角公式"><a class="heading-anchor" href="#61-二倍角公式" aria-label="回到本小节">#</a>6.1 二倍角公式</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>sin</mi><mo>⁡</mo><mn>2</mn><mi>α</mi><mo>=</mo><mn>2</mn><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{\sin2\alpha=2\sin\alpha\cos\alpha},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>α</mi><mo>=</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>−</mo><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>2</mn><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>−</mo><mn>1</mn><mo>=</mo><mn>1</mn><mo>−</mo><mn>2</mn><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{
+\cos2\alpha
+=\cos^2\alpha-\sin^2\alpha
+=2\cos^2\alpha-1
+=1-2\sin^2\alpha
+},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>tan</mi><mo>⁡</mo><mn>2</mn><mi>α</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>tan</mi><mo>⁡</mo><mi>α</mi></mrow><mrow><mn>1</mn><mo>−</mo><msup><mrow><mi>tan</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi></mrow></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+\tan2\alpha=\frac{2\tan\alpha}{1-\tan^2\alpha}
+}.</annotation></semantics></math></span></div>
+<h3 id="62-半角公式"><a class="heading-anchor" href="#62-半角公式" aria-label="回到本小节">#</a>6.2 半角公式</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mfrac><mi>α</mi><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow><mn>2</mn></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin^2\frac\alpha2=\frac{1-\cos\alpha}{2},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mfrac><mi>α</mi><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn><mo>+</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow><mn>2</mn></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\cos^2\frac\alpha2=\frac{1+\cos\alpha}{2},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mfrac><mi>α</mi><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow><mrow><mn>1</mn><mo>+</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\tan\frac\alpha2
+=\frac{\sin\alpha}{1+\cos\alpha}
+=\frac{1-\cos\alpha}{\sin\alpha}.</annotation></semantics></math></span></div>
+<p>半角公式的符号要由角所在象限确定。</p>
+<h3 id="63-降幂公式"><a class="heading-anchor" href="#63-降幂公式" aria-label="回到本小节">#</a>6.3 降幂公式</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>α</mi></mrow><mn>2</mn></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{\sin^2\alpha=\frac{1-\cos2\alpha}{2}},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mfrac><mrow><mn>1</mn><mo>+</mo><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>α</mi></mrow><mn>2</mn></mfrac></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{\cos^2\alpha=\frac{1+\cos2\alpha}{2}}.</annotation></semantics></math></span></div>
+<p>高数中计算 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∫</mo><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\int\sin^2x\,dx</annotation></semantics></math></span>、<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∫</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\int\cos^2x\,dx</annotation></semantics></math></span> 时常用降幂。</p>
+<hr class="section-rule">
+<h2 id="七辅助角公式"><a class="heading-anchor" href="#七辅助角公式" aria-label="回到本小节">#</a>七、辅助角公式</h2>
+<h3 id="71-基本形式"><a class="heading-anchor" href="#71-基本形式" aria-label="回到本小节">#</a>7.1 基本形式</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>a</mi><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mi>b</mi><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>φ</mi><mo stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\boxed{
+a\sin x+b\cos x
+=
+\sqrt{a^2+b^2}\sin(x+\varphi)
+},</annotation></semantics></math></span></div>
+<p>其中</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>φ</mi><mo>=</mo><mfrac><mi>a</mi><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt></mfrac><mo separator="true">,</mo><mspace width="2em"/><mi>sin</mi><mo>⁡</mo><mi>φ</mi><mo>=</mo><mfrac><mi>b</mi><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos\varphi=\frac{a}{\sqrt{a^2+b^2}},
+\qquad
+\sin\varphi=\frac{b}{\sqrt{a^2+b^2}}.</annotation></semantics></math></span></div>
+<p>也可以写成余弦形式：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mi>b</mi><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>θ</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">a\sin x+b\cos x
+=
+\sqrt{a^2+b^2}\cos(x-\theta).</annotation></semantics></math></span></div>
+<h3 id="72-最值"><a class="heading-anchor" href="#72-最值" aria-label="回到本小节">#</a>7.2 最值</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>−</mo><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt><mo>≤</mo><mi>a</mi><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mi>b</mi><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>≤</mo><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt></mrow></mstyle></mstyle></mstyle></menclose><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\boxed{
+-\sqrt{a^2+b^2}
+\le a\sin x+b\cos x
+\le\sqrt{a^2+b^2}
+}.</annotation></semantics></math></span></div>
+<p>因此最大值和最小值分别为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex">\pm\sqrt{a^2+b^2}</annotation></semantics></math></span>。</p>
+<h3 id="73-例"><a class="heading-anchor" href="#73-例" aria-label="回到本小节">#</a>7.3 例</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mn>3</mn></msqrt><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mn>2</mn><mrow><mo fence="true">(</mo><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo fence="true">)</mo></mrow><mo>=</mo><mn>2</mn><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mi>x</mi><mo>+</mo><mfrac><mi>π</mi><mn>6</mn></mfrac><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt3\sin x+\cos x
+=
+2\left(\frac{\sqrt3}{2}\sin x+\frac12\cos x\right)
+=
+2\sin\left(x+\frac\pi6\right).</annotation></semantics></math></span></div>
+<hr class="section-rule">
+<h2 id="八三角函数图像与性质"><a class="heading-anchor" href="#八三角函数图像与性质" aria-label="回到本小节">#</a>八、三角函数图像与性质</h2>
+<h3 id="81-正弦函数-math-inline-171"><a class="heading-anchor" href="#81-正弦函数-math-inline-171" aria-label="回到本小节">#</a>8.1 正弦函数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y=\sin x</annotation></semantics></math></span></h3>
+<ul><li>定义域：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">R</mi></mrow><annotation encoding="application/x-tex">\mathbb R</annotation></semantics></math></span>；</li><li>值域：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-1,1]</annotation></semantics></math></span>；</li><li>周期：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">2\pi</annotation></semantics></math></span>；</li><li>奇偶性：奇函数；</li><li>零点：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mi>k</mi><mi>π</mi></mrow><annotation encoding="application/x-tex">x=k\pi</annotation></semantics></math></span>；</li><li>最大值点：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi></mrow><annotation encoding="application/x-tex">x=\frac\pi2+2k\pi</annotation></semantics></math></span>；</li><li>最小值点：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi></mrow><annotation encoding="application/x-tex">x=-\frac\pi2+2k\pi</annotation></semantics></math></span>。</li></ul>
+<p>单调性：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>在 </mtext><mrow><mo fence="true">[</mo><mo>−</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi><mo separator="true">,</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi><mo fence="true">]</mo></mrow><mtext> 上递增</mtext><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\text{在 }\left[-\frac\pi2+2k\pi,\frac\pi2+2k\pi\right]\text{ 上递增},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>在 </mtext><mrow><mo fence="true">[</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi><mo separator="true">,</mo><mfrac><mrow><mn>3</mn><mi>π</mi></mrow><mn>2</mn></mfrac><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi><mo fence="true">]</mo></mrow><mtext> 上递减</mtext><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\text{在 }\left[\frac\pi2+2k\pi,\frac{3\pi}{2}+2k\pi\right]\text{ 上递减}.</annotation></semantics></math></span></div>
+<h3 id="82-余弦函数-math-inline-178"><a class="heading-anchor" href="#82-余弦函数-math-inline-178" aria-label="回到本小节">#</a>8.2 余弦函数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y=\cos x</annotation></semantics></math></span></h3>
+<ul><li>定义域：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">R</mi></mrow><annotation encoding="application/x-tex">\mathbb R</annotation></semantics></math></span>；</li><li>值域：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-1,1]</annotation></semantics></math></span>；</li><li>周期：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">2\pi</annotation></semantics></math></span>；</li><li>奇偶性：偶函数；</li><li>零点：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>k</mi><mi>π</mi></mrow><annotation encoding="application/x-tex">x=\frac\pi2+k\pi</annotation></semantics></math></span>；</li><li>最大值点：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>2</mn><mi>k</mi><mi>π</mi></mrow><annotation encoding="application/x-tex">x=2k\pi</annotation></semantics></math></span>；</li><li>最小值点：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mi>π</mi><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi></mrow><annotation encoding="application/x-tex">x=\pi+2k\pi</annotation></semantics></math></span>。</li></ul>
+<h3 id="83-正切函数-math-inline-185"><a class="heading-anchor" href="#83-正切函数-math-inline-185" aria-label="回到本小节">#</a>8.3 正切函数 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>tan</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y=\tan x</annotation></semantics></math></span></h3>
+<ul><li>定义域：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo mathvariant="normal">≠</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>k</mi><mi>π</mi></mrow><annotation encoding="application/x-tex">x\ne\frac\pi2+k\pi</annotation></semantics></math></span>；</li><li>值域：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">R</mi></mrow><annotation encoding="application/x-tex">\mathbb R</annotation></semantics></math></span>；</li><li>周期：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span>；</li><li>奇偶性：奇函数；</li><li>零点：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mi>k</mi><mi>π</mi></mrow><annotation encoding="application/x-tex">x=k\pi</annotation></semantics></math></span>；</li><li>垂直渐近线：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>k</mi><mi>π</mi></mrow><annotation encoding="application/x-tex">x=\frac\pi2+k\pi</annotation></semantics></math></span>；</li><li>在每个区间</li></ul>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo fence="true">(</mo><mo>−</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>k</mi><mi>π</mi><mo separator="true">,</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>k</mi><mi>π</mi><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left(-\frac\pi2+k\pi,\frac\pi2+k\pi\right)</annotation></semantics></math></span></div>
+<p>上递增。</p>
+<h3 id="84-变换形式"><a class="heading-anchor" href="#84-变换形式" aria-label="回到本小节">#</a>8.4 变换形式</h3>
+<p>对</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mi>A</mi><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>ω</mi><mi>x</mi><mo>+</mo><mi>φ</mi><mo stretchy="false">)</mo><mo>+</mo><mi>k</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">y=A\sin(\omega x+\varphi)+k,</annotation></semantics></math></span></div>
+<ul><li>振幅：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">|A|</annotation></semantics></math></span>；</li><li>周期：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>ω</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{2\pi}{|\omega|}</annotation></semantics></math></span>；</li><li>相位：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi><mi>x</mi><mo>+</mo><mi>φ</mi></mrow><annotation encoding="application/x-tex">\omega x+\varphi</annotation></semantics></math></span>；</li><li>初相：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>φ</mi></mrow><annotation encoding="application/x-tex">\varphi</annotation></semantics></math></span>；</li><li>左右平移：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mfrac><mi>φ</mi><mi>ω</mi></mfrac></mrow><annotation encoding="application/x-tex">-\frac{\varphi}{\omega}</annotation></semantics></math></span>；</li><li>上下平移：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span>。</li></ul>
+<p>对 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>A</mi><mi>tan</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>ω</mi><mi>x</mi><mo>+</mo><mi>φ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">y=A\tan(\omega x+\varphi)</annotation></semantics></math></span>，周期为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mrow><mi mathvariant="normal">∣</mi><mi>ω</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\pi}{|\omega|}</annotation></semantics></math></span>。</p>
+<hr class="section-rule">
+<h2 id="九高数关联度"><a class="heading-anchor" href="#九高数关联度" aria-label="回到本小节">#</a>九、高数关联度</h2>
+<h3 id="91-重要极限"><a class="heading-anchor" href="#91-重要极限" aria-label="回到本小节">#</a>9.1 重要极限</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi></mrow><mi>x</mi></mfrac><mo>=</mo><mn>1</mn></mrow></mstyle></mstyle></mstyle></menclose></mrow><annotation encoding="application/x-tex">\boxed{\lim_{x\to0}\frac{\sin x}{x}=1}</annotation></semantics></math></span></div>
+<p>这个极限只在弧度制下成立。若用角度制，会多出因子 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>180</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{\pi}{180}</annotation></semantics></math></span>。</p>
+<p>由它可得：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>tan</mi><mo>⁡</mo><mi>x</mi></mrow><mi>x</mi></mfrac><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mspace width="2em"/><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi></mrow><msup><mi>x</mi><mn>2</mn></msup></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lim_{x\to0}\frac{\tan x}{x}=1,
+\qquad
+\lim_{x\to0}\frac{1-\cos x}{x^2}=\frac12.</annotation></semantics></math></span></div>
+<h3 id="92-三角函数求导"><a class="heading-anchor" href="#92-三角函数求导" aria-label="回到本小节">#</a>9.2 三角函数求导</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi><msup><mo stretchy="false">)</mo><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo separator="true">,</mo><mspace width="2em"/><mo stretchy="false">(</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi><msup><mo stretchy="false">)</mo><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">(\sin x)&#x27;=\cos x,
+\qquad
+(\cos x)&#x27;=-\sin x,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mi>tan</mi><mo>⁡</mo><mi>x</mi><msup><mo stretchy="false">)</mo><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><msup><mrow><mi>sec</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>x</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">(\tan x)&#x27;=\sec^2x.</annotation></semantics></math></span></div>
+<p>这些公式同样以弧度制为前提。</p>
+<h3 id="93-积化和差与积分"><a class="heading-anchor" href="#93-积化和差与积分" aria-label="回到本小节">#</a>9.3 积化和差与积分</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∫</mo><mi>sin</mi><mo>⁡</mo><mn>3</mn><mi>x</mi><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>∫</mo><mo stretchy="false">(</mo><mi>sin</mi><mo>⁡</mo><mn>5</mn><mi>x</mi><mo>+</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>x</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int\sin3x\cos2x\,dx
+=
+\frac12\int(\sin5x+\sin x)\,dx.</annotation></semantics></math></span></div>
+<p>积化和差把难处理的乘积变成容易积分的和差。</p>
+<h3 id="94-降幂与三角积分"><a class="heading-anchor" href="#94-降幂与三角积分" aria-label="回到本小节">#</a>9.4 降幂与三角积分</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∫</mo><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>=</mo><mo>∫</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi></mrow><mn>2</mn></mfrac><mtext> </mtext><mi>d</mi><mi>x</mi><mo>=</mo><mfrac><mi>x</mi><mn>2</mn></mfrac><mo>−</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mn>2</mn><mi>x</mi></mrow><mn>4</mn></mfrac><mo>+</mo><mi>C</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int\sin^2x\,dx
+=
+\int\frac{1-\cos2x}{2}\,dx
+=
+\frac x2-\frac{\sin2x}{4}+C.</annotation></semantics></math></span></div>
+<h3 id="95-三角代换"><a class="heading-anchor" href="#95-三角代换" aria-label="回到本小节">#</a>9.5 三角代换</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{a^2-x^2}</annotation></semantics></math></span></div>
+<p>常用 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mi>a</mi><mi>sin</mi><mo>⁡</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">x=a\sin t</annotation></semantics></math></span> 化简，前提是熟悉 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>t</mi><mo>+</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>t</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\sin^2t+\cos^2t=1</annotation></semantics></math></span> 和符号判断。</p>
+<h3 id="96-傅里叶级数"><a class="heading-anchor" href="#96-傅里叶级数" aria-label="回到本小节">#</a>9.6 傅里叶级数</h3>
+<p>正弦、余弦函数的正交性和积化和差公式是傅里叶级数系数计算的基础。</p>
+<h3 id="97-小角近似"><a class="heading-anchor" href="#97-小角近似" aria-label="回到本小节">#</a>9.7 小角近似</h3>
+<p>当 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x\to0</annotation></semantics></math></span> 时，</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>∼</mo><mi>x</mi><mo separator="true">,</mo><mspace width="2em"/><mi>tan</mi><mo>⁡</mo><mi>x</mi><mo>∼</mo><mi>x</mi><mo separator="true">,</mo><mspace width="2em"/><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>∼</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mn>2</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin x\sim x,\qquad
+\tan x\sim x,\qquad
+1-\cos x\sim\frac{x^2}{2}.</annotation></semantics></math></span></div>
+<p>这些近似来自泰勒展开：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mi>x</mi><mo>−</mo><mfrac><msup><mi>x</mi><mn>3</mn></msup><mn>6</mn></mfrac><mo>+</mo><mi>o</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin x=x-\frac{x^3}{6}+o(x^3),</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><mn>2</mn></mfrac><mo>+</mo><mi>o</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos x=1-\frac{x^2}{2}+o(x^2).</annotation></semantics></math></span></div>
+<hr class="section-rule">
+<h2 id="十典型例题"><a class="heading-anchor" href="#十典型例题" aria-label="回到本小节">#</a>十、典型例题</h2>
+<h3 id="例-1-角度制与弧度制"><a class="heading-anchor" href="#例-1-角度制与弧度制" aria-label="回到本小节">#</a>例 1：角度制与弧度制</h3>
+<p>把 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>150</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">150^\circ</annotation></semantics></math></span> 化为弧度，并求半径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span>、圆心角 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>150</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">150^\circ</annotation></semantics></math></span> 的弧长和扇形面积。</p>
+<p><strong>解</strong></p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mn>150</mn><mo>∘</mo></msup><mo>=</mo><mn>150</mn><mo>⋅</mo><mfrac><mi>π</mi><mn>180</mn></mfrac><mo>=</mo><mfrac><mrow><mn>5</mn><mi>π</mi></mrow><mn>6</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">150^\circ=150\cdot\frac\pi{180}=\frac{5\pi}{6}.</annotation></semantics></math></span></div>
+<p>弧长：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>l</mi><mo>=</mo><mi>r</mi><mi>θ</mi><mo>=</mo><mn>2</mn><mo>⋅</mo><mfrac><mrow><mn>5</mn><mi>π</mi></mrow><mn>6</mn></mfrac><mo>=</mo><mfrac><mrow><mn>5</mn><mi>π</mi></mrow><mn>3</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">l=r\theta=2\cdot\frac{5\pi}{6}=\frac{5\pi}{3}.</annotation></semantics></math></span></div>
+<p>扇形面积：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>r</mi><mn>2</mn></msup><mi>θ</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⋅</mo><mn>4</mn><mo>⋅</mo><mfrac><mrow><mn>5</mn><mi>π</mi></mrow><mn>6</mn></mfrac><mo>=</mo><mfrac><mrow><mn>5</mn><mi>π</mi></mrow><mn>3</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S=\frac12r^2\theta
+=
+\frac12\cdot4\cdot\frac{5\pi}{6}
+=
+\frac{5\pi}{3}.</annotation></semantics></math></span></div>
+<h3 id="例-2-同角关系"><a class="heading-anchor" href="#例-2-同角关系" aria-label="回到本小节">#</a>例 2：同角关系</h3>
+<p>已知 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mn>3</mn><mn>5</mn></mfrac></mrow><annotation encoding="application/x-tex">\sin\alpha=\frac35</annotation></semantics></math></span>，且 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span> 在第二象限，求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo><mi>tan</mi><mo>⁡</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">\cos\alpha,\tan\alpha</annotation></semantics></math></span>。</p>
+<p><strong>解</strong></p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>1</mn><mo>−</mo><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>9</mn><mn>25</mn></mfrac><mo>=</mo><mfrac><mn>16</mn><mn>25</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos^2\alpha=1-\sin^2\alpha
+=1-\frac9{25}=\frac{16}{25}.</annotation></semantics></math></span></div>
+<p>第二象限余弦为负，所以</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mo>−</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos\alpha=-\frac45.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>3</mn><mi mathvariant="normal">/</mi><mn>5</mn></mrow><mrow><mo>−</mo><mn>4</mn><mi mathvariant="normal">/</mi><mn>5</mn></mrow></mfrac><mo>=</mo><mo>−</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\tan\alpha=\frac{\sin\alpha}{\cos\alpha}
+=
+\frac{3/5}{-4/5}
+=
+-\frac34.</annotation></semantics></math></span></div>
+<h3 id="例-3-诱导公式"><a class="heading-anchor" href="#例-3-诱导公式" aria-label="回到本小节">#</a>例 3：诱导公式</h3>
+<p>化简</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>α</mi><mo fence="true">)</mo></mrow><mo>+</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>π</mi><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin\left(\frac\pi2+\alpha\right)+\cos(\pi-\alpha).</annotation></semantics></math></span></div>
+<p><strong>解</strong></p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>α</mi><mo fence="true">)</mo></mrow><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin\left(\frac\pi2+\alpha\right)=\cos\alpha,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>π</mi><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos(\pi-\alpha)=-\cos\alpha.</annotation></semantics></math></span></div>
+<p>所以原式</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">=\cos\alpha-\cos\alpha=0.</annotation></semantics></math></span></div>
+<h3 id="例-4-和角公式"><a class="heading-anchor" href="#例-4-和角公式" aria-label="回到本小节">#</a>例 4：和角公式</h3>
+<p>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><msup><mn>75</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\sin75^\circ</annotation></semantics></math></span>。</p>
+<p><strong>解</strong></p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><msup><mn>75</mn><mo>∘</mo></msup><mo>=</mo><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><msup><mn>45</mn><mo>∘</mo></msup><mo>+</mo><msup><mn>30</mn><mo>∘</mo></msup><mo stretchy="false">)</mo><mo>=</mo><mi>sin</mi><mo>⁡</mo><msup><mn>45</mn><mo>∘</mo></msup><mi>cos</mi><mo>⁡</mo><msup><mn>30</mn><mo>∘</mo></msup><mo>+</mo><mi>cos</mi><mo>⁡</mo><msup><mn>45</mn><mo>∘</mo></msup><mi>sin</mi><mo>⁡</mo><msup><mn>30</mn><mo>∘</mo></msup><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin75^\circ
+=
+\sin(45^\circ+30^\circ)
+=
+\sin45^\circ\cos30^\circ
++\cos45^\circ\sin30^\circ.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mo>⋅</mo><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac><mo>+</mo><mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mo>⋅</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><msqrt><mn>6</mn></msqrt><mo>+</mo><msqrt><mn>2</mn></msqrt></mrow><mn>4</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">=
+\frac{\sqrt2}{2}\cdot\frac{\sqrt3}{2}
++\frac{\sqrt2}{2}\cdot\frac12
+=
+\frac{\sqrt6+\sqrt2}{4}.</annotation></semantics></math></span></div>
+<h3 id="例-5-二倍角"><a class="heading-anchor" href="#例-5-二倍角" aria-label="回到本小节">#</a>例 5：二倍角</h3>
+<p>已知 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mn>3</mn><mn>5</mn></mfrac></mrow><annotation encoding="application/x-tex">\sin\alpha=\frac35</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span> 在第二象限，求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mn>2</mn><mi>α</mi><mo separator="true">,</mo><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>α</mi></mrow><annotation encoding="application/x-tex">\sin2\alpha,\cos2\alpha</annotation></semantics></math></span>。</p>
+<p><strong>解</strong></p>
+<p>由例 2：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mo>−</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos\alpha=-\frac45.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mn>2</mn><mi>α</mi><mo>=</mo><mn>2</mn><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mn>2</mn><mo>⋅</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo>⋅</mo><mrow><mo fence="true">(</mo><mo>−</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mo fence="true">)</mo></mrow><mo>=</mo><mo>−</mo><mfrac><mn>24</mn><mn>25</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin2\alpha=2\sin\alpha\cos\alpha
+=
+2\cdot\frac35\cdot\left(-\frac45\right)
+=
+-\frac{24}{25}.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>α</mi><mo>=</mo><mn>1</mn><mo>−</mo><mn>2</mn><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>1</mn><mo>−</mo><mn>2</mn><mo>⋅</mo><mfrac><mn>9</mn><mn>25</mn></mfrac><mo>=</mo><mfrac><mn>7</mn><mn>25</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos2\alpha=1-2\sin^2\alpha
+=
+1-2\cdot\frac9{25}
+=
+\frac7{25}.</annotation></semantics></math></span></div>
+<h3 id="例-6-辅助角公式"><a class="heading-anchor" href="#例-6-辅助角公式" aria-label="回到本小节">#</a>例 6：辅助角公式</h3>
+<p>求</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mn>3</mn></msqrt><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\sqrt3\sin x+\cos x</annotation></semantics></math></span></div>
+<p>的最大值和最小值，并写成 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>φ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A\sin(x+\varphi)</annotation></semantics></math></span> 的形式。</p>
+<p><strong>解</strong></p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msqrt><mn>3</mn></msqrt><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mn>2</mn><mrow><mo fence="true">(</mo><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sqrt3\sin x+\cos x
+=
+2\left(\frac{\sqrt3}{2}\sin x+\frac12\cos x\right).</annotation></semantics></math></span></div>
+<p>因为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mfrac><mi>π</mi><mn>6</mn></mfrac><mo>=</mo><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac><mo separator="true">,</mo><mspace width="2em"/><mi>sin</mi><mo>⁡</mo><mfrac><mi>π</mi><mn>6</mn></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\cos\frac\pi6=\frac{\sqrt3}{2},
+\qquad
+\sin\frac\pi6=\frac12,</annotation></semantics></math></span></div>
+<p>所以</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mn>2</mn><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mi>x</mi><mo>+</mo><mfrac><mi>π</mi><mn>6</mn></mfrac><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">=2\sin\left(x+\frac\pi6\right).</annotation></semantics></math></span></div>
+<p>因此最大值为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span>，最小值为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">-2</annotation></semantics></math></span>。</p>
+<h3 id="例-7-图像性质"><a class="heading-anchor" href="#例-7-图像性质" aria-label="回到本小节">#</a>例 7：图像性质</h3>
+<p>求</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mfrac><mi>π</mi><mn>3</mn></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">y=2\sin\left(2x-\frac\pi3\right)</annotation></semantics></math></span></div>
+<p>的振幅、周期、相位、初相和值域。</p>
+<p><strong>解</strong></p>
+<p>与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>A</mi><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>ω</mi><mi>x</mi><mo>+</mo><mi>φ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">y=A\sin(\omega x+\varphi)</annotation></semantics></math></span> 比较：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mo>=</mo><mn>2</mn><mo separator="true">,</mo><mspace width="2em"/><mi>ω</mi><mo>=</mo><mn>2</mn><mo separator="true">,</mo><mspace width="2em"/><mi>φ</mi><mo>=</mo><mo>−</mo><mfrac><mi>π</mi><mn>3</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">A=2,\qquad \omega=2,\qquad \varphi=-\frac\pi3.</annotation></semantics></math></span></div>
+<p>振幅：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mn>2.</mn></mrow><annotation encoding="application/x-tex">|A|=2.</annotation></semantics></math></span></div>
+<p>周期：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>T</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>ω</mi><mi mathvariant="normal">∣</mi></mrow></mfrac><mo>=</mo><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">T=\frac{2\pi}{|\omega|}=\pi.</annotation></semantics></math></span></div>
+<p>相位：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>2</mn><mi>x</mi><mo>−</mo><mfrac><mi>π</mi><mn>3</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">2x-\frac\pi3.</annotation></semantics></math></span></div>
+<p>初相：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mfrac><mi>π</mi><mn>3</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">-\frac\pi3.</annotation></semantics></math></span></div>
+<p>值域：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mn>2</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">[-2,2].</annotation></semantics></math></span></div>
+<h3 id="例-8-重要极限与积化和差"><a class="heading-anchor" href="#例-8-重要极限与积化和差" aria-label="回到本小节">#</a>例 8：重要极限与积化和差</h3>
+<p>求</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mn>3</mn><mi>x</mi></mrow><mrow><mn>2</mn><mi>x</mi></mrow></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\lim_{x\to0}\frac{\sin3x}{2x},</annotation></semantics></math></span></div>
+<p>并计算</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∫</mo><mi>sin</mi><mo>⁡</mo><mn>3</mn><mi>x</mi><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int\sin3x\cos2x\,dx.</annotation></semantics></math></span></div>
+<p><strong>解</strong></p>
+<p>极限：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mn>3</mn><mi>x</mi></mrow><mrow><mn>2</mn><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mn>3</mn><mi>x</mi></mrow><mrow><mn>3</mn><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lim_{x\to0}\frac{\sin3x}{2x}
+=
+\frac32\lim_{x\to0}\frac{\sin3x}{3x}
+=
+\frac32.</annotation></semantics></math></span></div>
+<p>积分：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mn>3</mn><mi>x</mi><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">[</mo><mi>sin</mi><mo>⁡</mo><mn>5</mn><mi>x</mi><mo>+</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin3x\cos2x
+=
+\frac12[\sin5x+\sin x].</annotation></semantics></math></span></div>
+<p>所以</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∫</mo><mi>sin</mi><mo>⁡</mo><mn>3</mn><mi>x</mi><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo fence="true">(</mo><mo>−</mo><mfrac><mn>1</mn><mn>5</mn></mfrac><mi>cos</mi><mo>⁡</mo><mn>5</mn><mi>x</mi><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo fence="true">)</mo></mrow><mo>+</mo><mi>C</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int\sin3x\cos2x\,dx
+=
+\frac12\left(
+-\frac15\cos5x-\cos x
+\right)+C.</annotation></semantics></math></span></div>
+<p>即</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mfrac><mn>1</mn><mn>10</mn></mfrac><mi>cos</mi><mo>⁡</mo><mn>5</mn><mi>x</mi><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mi>C</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">-\frac1{10}\cos5x-\frac12\cos x+C.</annotation></semantics></math></span></div>
+<hr class="section-rule">
+<h2 id="十一易错点提示"><a class="heading-anchor" href="#十一易错点提示" aria-label="回到本小节">#</a>十一、易错点提示</h2>
+<h3 id="1-角度制与弧度制混用"><a class="heading-anchor" href="#1-角度制与弧度制混用" aria-label="回到本小节">#</a>1. 角度制与弧度制混用</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi></mrow><mi>x</mi></mfrac><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\lim_{x\to0}\frac{\sin x}{x}=1</annotation></semantics></math></span></div>
+<p>要求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span> 是弧度。用角度制时必须换算。</p>
+<h3 id="2-忘记象限决定符号"><a class="heading-anchor" href="#2-忘记象限决定符号" aria-label="回到本小节">#</a>2. 忘记象限决定符号</h3>
+<p>由 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">\sin\alpha</annotation></semantics></math></span> 求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">\cos\alpha</annotation></semantics></math></span> 时，开方后有两个符号，必须根据象限选择。</p>
+<h3 id="3-诱导公式符号判断错误"><a class="heading-anchor" href="#3-诱导公式符号判断错误" aria-label="回到本小节">#</a>3. 诱导公式符号判断错误</h3>
+<p>“符号看象限”是把 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span> 看成锐角，判断原角所在象限，不是看 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span> 本身。</p>
+<h3 id="4-正切公式忽略分母为零"><a class="heading-anchor" href="#4-正切公式忽略分母为零" aria-label="回到本小节">#</a>4. 正切公式忽略分母为零</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>+</mo><mi>β</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>+</mo><mi>tan</mi><mo>⁡</mo><mi>β</mi></mrow><mrow><mn>1</mn><mo>−</mo><mi>tan</mi><mo>⁡</mo><mi>α</mi><mi>tan</mi><mo>⁡</mo><mi>β</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\tan(\alpha+\beta)
+=
+\frac{\tan\alpha+\tan\beta}
+{1-\tan\alpha\tan\beta}</annotation></semantics></math></span></div>
+<p>要求分母不为零，且各正切有意义。</p>
+<h3 id="5-二倍角公式记混"><a class="heading-anchor" href="#5-二倍角公式记混" aria-label="回到本小节">#</a>5. 二倍角公式记混</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>α</mi><mo>=</mo><mn>1</mn><mo>−</mo><mn>2</mn><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>2</mn><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>−</mo><mn>1.</mn></mrow><annotation encoding="application/x-tex">\cos2\alpha=1-2\sin^2\alpha=2\cos^2\alpha-1.</annotation></semantics></math></span></div>
+<p>三个形式要会互换。</p>
+<h3 id="6-半角公式忘记符号"><a class="heading-anchor" href="#6-半角公式忘记符号" aria-label="回到本小节">#</a>6. 半角公式忘记符号</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mfrac><mi>α</mi><mn>2</mn></mfrac><mo>=</mo><mo>±</mo><msqrt><mfrac><mrow><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow><mn>2</mn></mfrac></msqrt><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin\frac\alpha2
+=
+\pm\sqrt{\frac{1-\cos\alpha}{2}}.</annotation></semantics></math></span></div>
+<p>符号由 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>α</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\alpha2</annotation></semantics></math></span> 所在象限决定。</p>
+<h3 id="7-辅助角公式相位写错"><a class="heading-anchor" href="#7-辅助角公式相位写错" aria-label="回到本小节">#</a>7. 辅助角公式相位写错</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mi>b</mi><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>φ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">a\sin x+b\cos x
+=
+\sqrt{a^2+b^2}\sin(x+\varphi)</annotation></semantics></math></span></div>
+<p>其中</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>φ</mi><mo>=</mo><mfrac><mi>b</mi><mi>a</mi></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\tan\varphi=\frac ba.</annotation></semantics></math></span></div>
+<p>不要写成 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>φ</mi><mo>=</mo><mi>a</mi><mi mathvariant="normal">/</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">\tan\varphi=a/b</annotation></semantics></math></span>。</p>
+<h3 id="8-周期公式用错"><a class="heading-anchor" href="#8-周期公式用错" aria-label="回到本小节">#</a>8. 周期公式用错</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mi>A</mi><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>ω</mi><mi>x</mi><mo>+</mo><mi>φ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">y=A\sin(\omega x+\varphi)</annotation></semantics></math></span></div>
+<p>的周期是</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>ω</mi><mi mathvariant="normal">∣</mi></mrow></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\frac{2\pi}{|\omega|},</annotation></semantics></math></span></div>
+<p>不是 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi><mi mathvariant="normal">/</mi><mi>ω</mi></mrow><annotation encoding="application/x-tex">2\pi/\omega</annotation></semantics></math></span> 忽略绝对值。</p>
+<h3 id="9-正切函数单调区间写成整个定义域"><a class="heading-anchor" href="#9-正切函数单调区间写成整个定义域" aria-label="回到本小节">#</a>9. 正切函数单调区间写成整个定义域</h3>
+<p>正切在每个连续区间上递增，但整个定义域上不是单调递增。</p>
+<h3 id="10-图像平移方向写反"><a class="heading-anchor" href="#10-图像平移方向写反" aria-label="回到本小节">#</a>10. 图像平移方向写反</h3>
+<p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>2</mn><mi>x</mi><mo>−</mo><mi>π</mi><mi mathvariant="normal">/</mi><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">y=\sin(2x-\pi/3)</annotation></semantics></math></span> 是向右平移 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><mi mathvariant="normal">/</mi><mn>6</mn></mrow><annotation encoding="application/x-tex">\pi/6</annotation></semantics></math></span>，不是向左。</p>
+<h3 id="11-积化和差符号写错"><a class="heading-anchor" href="#11-积化和差符号写错" aria-label="回到本小节">#</a>11. 积化和差符号写错</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>A</mi><mi>sin</mi><mo>⁡</mo><mi>B</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">[</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>A</mi><mo>−</mo><mi>B</mi><mo stretchy="false">)</mo><mo>−</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>A</mi><mo>+</mo><mi>B</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin A\sin B
+=
+\frac12[\cos(A-B)-\cos(A+B)].</annotation></semantics></math></span></div>
+<p>注意两个余弦的顺序。</p>
+<h3 id="12-忽略定义域"><a class="heading-anchor" href="#12-忽略定义域" aria-label="回到本小节">#</a>12. 忽略定义域</h3>
+<p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\tan x</annotation></semantics></math></span>、<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sec</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\sec x</annotation></semantics></math></span>、<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>csc</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\csc x</annotation></semantics></math></span>、<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cot</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\cot x</annotation></semantics></math></span> 都有不存在的点。</p>
+<hr class="section-rule">
+<h2 id="十二课后练习"><a class="heading-anchor" href="#十二课后练习" aria-label="回到本小节">#</a>十二、课后练习</h2>
+<ol><li>把 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>210</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">210^\circ</annotation></semantics></math></span> 化为弧度，并写出它的参考角。</li><li>半径 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span>、圆心角 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{2\pi}{3}</annotation></semantics></math></span> 的弧长和扇形面积各是多少？</li><li>已知 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mo>−</mo><mfrac><mn>5</mn><mn>13</mn></mfrac></mrow><annotation encoding="application/x-tex">\cos\alpha=-\frac5{13}</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span> 在第三象限，求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo><mi>tan</mi><mo>⁡</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">\sin\alpha,\tan\alpha</annotation></semantics></math></span>。</li><li>化简 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>π</mi><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>+</mo><mi>cos</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>α</mi><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\sin(\pi-\alpha)+\cos\left(\frac\pi2+\alpha\right)</annotation></semantics></math></span>。</li><li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><msup><mn>15</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\sin15^\circ</annotation></semantics></math></span>。</li><li>已知 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">\sin\alpha=\frac13</annotation></semantics></math></span>，求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>α</mi></mrow><annotation encoding="application/x-tex">\cos2\alpha</annotation></semantics></math></span>。</li><li>将 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><msqrt><mn>3</mn></msqrt><mi>cos</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\sin x+\sqrt3\cos x</annotation></semantics></math></span> 化为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>φ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A\sin(x+\varphi)</annotation></semantics></math></span> 的形式。</li><li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mn>3</mn><mi>cos</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">y=3\cos\left(2x+\frac\pi4\right)</annotation></semantics></math></span> 的振幅、周期、初相和值域。</li><li>求 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mn>5</mn><mi>x</mi></mrow><mi>x</mi></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle\lim_{x\to0}\frac{\sin5x}{x}</annotation></semantics></math></span>。</li><li>计算 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mo>∫</mo><mi>sin</mi><mo>⁡</mo><mn>4</mn><mi>x</mi><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle\int\sin4x\cos2x\,dx</annotation></semantics></math></span>。</li></ol>
+<hr class="section-rule">
+<h2 id="十三练习答案与解析"><a class="heading-anchor" href="#十三练习答案与解析" aria-label="回到本小节">#</a>十三、练习答案与解析</h2>
+<h3 id="1-答案-math-inline-246-参考角-math-inline-247"><a class="heading-anchor" href="#1-答案-math-inline-246-参考角-math-inline-247" aria-label="回到本小节">#</a>1. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mn>7</mn><mi>π</mi></mrow><mn>6</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{7\pi}{6}</annotation></semantics></math></span>，参考角 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>6</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi6</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mn>210</mn><mo>∘</mo></msup><mo>=</mo><mn>210</mn><mo>⋅</mo><mfrac><mi>π</mi><mn>180</mn></mfrac><mo>=</mo><mfrac><mrow><mn>7</mn><mi>π</mi></mrow><mn>6</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">210^\circ=210\cdot\frac\pi{180}=\frac{7\pi}{6}.</annotation></semantics></math></span></div>
+<p><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>210</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">210^\circ</annotation></semantics></math></span> 在第三象限，参考角为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mn>210</mn><mo>∘</mo></msup><mo>−</mo><msup><mn>180</mn><mo>∘</mo></msup><mo>=</mo><msup><mn>30</mn><mo>∘</mo></msup><mo>=</mo><mfrac><mi>π</mi><mn>6</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">210^\circ-180^\circ=30^\circ=\frac\pi6.</annotation></semantics></math></span></div>
+<h3 id="2-答案-math-inline-249-math-inline-250"><a class="heading-anchor" href="#2-答案-math-inline-249-math-inline-250" aria-label="回到本小节">#</a>2. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mo>=</mo><mn>2</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">l=2\pi</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mn>3</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">S=3\pi</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>l</mi><mo>=</mo><mi>r</mi><mi>θ</mi><mo>=</mo><mn>3</mn><mo>⋅</mo><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mn>3</mn></mfrac><mo>=</mo><mn>2</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">l=r\theta=3\cdot\frac{2\pi}{3}=2\pi.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>r</mi><mn>2</mn></msup><mi>θ</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⋅</mo><mn>9</mn><mo>⋅</mo><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mn>3</mn></mfrac><mo>=</mo><mn>3</mn><mi>π</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">S=\frac12r^2\theta
+=
+\frac12\cdot9\cdot\frac{2\pi}{3}
+=
+3\pi.</annotation></semantics></math></span></div>
+<h3 id="3-答案-math-inline-251-math-inline-252"><a class="heading-anchor" href="#3-答案-math-inline-251-math-inline-252" aria-label="回到本小节">#</a>3. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mo>−</mo><mfrac><mn>12</mn><mn>13</mn></mfrac></mrow><annotation encoding="application/x-tex">\sin\alpha=-\frac{12}{13}</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mn>12</mn><mn>5</mn></mfrac></mrow><annotation encoding="application/x-tex">\tan\alpha=\frac{12}{5}</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>25</mn><mn>169</mn></mfrac><mo>=</mo><mfrac><mn>144</mn><mn>169</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin^2\alpha=1-\frac{25}{169}=\frac{144}{169}.</annotation></semantics></math></span></div>
+<p>第三象限正弦为负：</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mo>−</mo><mfrac><mn>12</mn><mn>13</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin\alpha=-\frac{12}{13}.</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mo>−</mo><mn>12</mn><mi mathvariant="normal">/</mi><mn>13</mn></mrow><mrow><mo>−</mo><mn>5</mn><mi mathvariant="normal">/</mi><mn>13</mn></mrow></mfrac><mo>=</mo><mfrac><mn>12</mn><mn>5</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\tan\alpha=\frac{\sin\alpha}{\cos\alpha}
+=
+\frac{-12/13}{-5/13}
+=
+\frac{12}{5}.</annotation></semantics></math></span></div>
+<h3 id="4-答案-math-inline-253"><a class="heading-anchor" href="#4-答案-math-inline-253" aria-label="回到本小节">#</a>4. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>π</mi><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>=</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin(\pi-\alpha)=\sin\alpha,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mo>+</mo><mi>α</mi><mo fence="true">)</mo></mrow><mo>=</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos\left(\frac\pi2+\alpha\right)=-\sin\alpha.</annotation></semantics></math></span></div>
+<p>所以</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mn>0.</mn></mrow><annotation encoding="application/x-tex">\sin\alpha-\sin\alpha=0.</annotation></semantics></math></span></div>
+<h3 id="5-答案-math-inline-254"><a class="heading-anchor" href="#5-答案-math-inline-254" aria-label="回到本小节">#</a>5. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><msqrt><mn>6</mn></msqrt><mo>−</mo><msqrt><mn>2</mn></msqrt></mrow><mn>4</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{\sqrt6-\sqrt2}{4}</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><msup><mn>15</mn><mo>∘</mo></msup><mo>=</mo><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><msup><mn>45</mn><mo>∘</mo></msup><mo>−</mo><msup><mn>30</mn><mo>∘</mo></msup><mo stretchy="false">)</mo><mo>=</mo><mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mo>⋅</mo><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac><mo>−</mo><mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mo>⋅</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><msqrt><mn>6</mn></msqrt><mo>−</mo><msqrt><mn>2</mn></msqrt></mrow><mn>4</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin15^\circ
+=
+\sin(45^\circ-30^\circ)
+=
+\frac{\sqrt2}{2}\cdot\frac{\sqrt3}{2}
+-\frac{\sqrt2}{2}\cdot\frac12
+=
+\frac{\sqrt6-\sqrt2}{4}.</annotation></semantics></math></span></div>
+<h3 id="6-答案-math-inline-255"><a class="heading-anchor" href="#6-答案-math-inline-255" aria-label="回到本小节">#</a>6. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>7</mn><mn>9</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac79</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>α</mi><mo>=</mo><mn>1</mn><mo>−</mo><mn>2</mn><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>1</mn><mo>−</mo><mn>2</mn><mo>⋅</mo><mfrac><mn>1</mn><mn>9</mn></mfrac><mo>=</mo><mfrac><mn>7</mn><mn>9</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos2\alpha=1-2\sin^2\alpha
+=
+1-2\cdot\frac19
+=
+\frac79.</annotation></semantics></math></span></div>
+<h3 id="7-答案-math-inline-256"><a class="heading-anchor" href="#7-答案-math-inline-256" aria-label="回到本小节">#</a>7. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mi>x</mi><mo>+</mo><mfrac><mi>π</mi><mn>3</mn></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">2\sin\left(x+\frac\pi3\right)</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><msqrt><mn>3</mn></msqrt><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mn>2</mn><mrow><mo fence="true">(</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin x+\sqrt3\cos x
+=
+2\left(\frac12\sin x+\frac{\sqrt3}{2}\cos x\right).</annotation></semantics></math></span></div>
+<p>因为</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mfrac><mi>π</mi><mn>3</mn></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo separator="true">,</mo><mspace width="2em"/><mi>sin</mi><mo>⁡</mo><mfrac><mi>π</mi><mn>3</mn></mfrac><mo>=</mo><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\cos\frac\pi3=\frac12,
+\qquad
+\sin\frac\pi3=\frac{\sqrt3}{2},</annotation></semantics></math></span></div>
+<p>所以</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mn>2</mn><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mi>x</mi><mo>+</mo><mfrac><mi>π</mi><mn>3</mn></mfrac><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">=2\sin\left(x+\frac\pi3\right).</annotation></semantics></math></span></div>
+<h3 id="8-答案-振幅-math-inline-257-周期-math-inline-258-初相-math-inline-259-值域-math-inline-260"><a class="heading-anchor" href="#8-答案-振幅-math-inline-257-周期-math-inline-258-初相-math-inline-259-值域-math-inline-260" aria-label="回到本小节">#</a>8. 答案：振幅 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span>，周期 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span>，初相 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>4</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi4</annotation></semantics></math></span>，值域 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mn>3</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-3,3]</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mn>3</mn><mi>cos</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">y=3\cos\left(2x+\frac\pi4\right).</annotation></semantics></math></span></div>
+<p>振幅 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">|A|=3</annotation></semantics></math></span>，周期</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mn>2</mn><mi>π</mi></mrow><mn>2</mn></mfrac><mo>=</mo><mi>π</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\frac{2\pi}{2}=\pi,</annotation></semantics></math></span></div>
+<p>初相 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>4</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi4</annotation></semantics></math></span>，值域 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mn>3</mn><mo separator="true">,</mo><mn>3</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-3,3]</annotation></semantics></math></span>。</p>
+<h3 id="9-答案-math-inline-264"><a class="heading-anchor" href="#9-答案-math-inline-264" aria-label="回到本小节">#</a>9. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn></mrow><annotation encoding="application/x-tex">5</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mn>5</mn><mi>x</mi></mrow><mi>x</mi></mfrac><mo>=</mo><mn>5</mn><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mn>5</mn><mi>x</mi></mrow><mrow><mn>5</mn><mi>x</mi></mrow></mfrac><mo>=</mo><mn>5.</mn></mrow><annotation encoding="application/x-tex">\lim_{x\to0}\frac{\sin5x}{x}
+=
+5\lim_{x\to0}\frac{\sin5x}{5x}
+=
+5.</annotation></semantics></math></span></div>
+<h3 id="10-答案-math-inline-265"><a class="heading-anchor" href="#10-答案-math-inline-265" aria-label="回到本小节">#</a>10. 答案：<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mfrac><mn>1</mn><mn>12</mn></mfrac><mi>cos</mi><mo>⁡</mo><mn>6</mn><mi>x</mi><mo>−</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">-\frac1{12}\cos6x-\frac14\cos2x+C</annotation></semantics></math></span></h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mn>4</mn><mi>x</mi><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">[</mo><mi>sin</mi><mo>⁡</mo><mn>6</mn><mi>x</mi><mo>+</mo><mi>sin</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sin4x\cos2x
+=
+\frac12[\sin6x+\sin2x].</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∫</mo><mi>sin</mi><mo>⁡</mo><mn>4</mn><mi>x</mi><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mtext> </mtext><mi>d</mi><mi>x</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo fence="true">(</mo><mo>−</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><mi>cos</mi><mo>⁡</mo><mn>6</mn><mi>x</mi><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mo fence="true">)</mo></mrow><mo>+</mo><mi>C</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\int\sin4x\cos2x\,dx
+=
+\frac12\left(
+-\frac16\cos6x-\frac12\cos2x
+\right)+C.</annotation></semantics></math></span></div>
+<p>即</p>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mfrac><mn>1</mn><mn>12</mn></mfrac><mi>cos</mi><mo>⁡</mo><mn>6</mn><mi>x</mi><mo>−</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>C</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">-\frac1{12}\cos6x-\frac14\cos2x+C.</annotation></semantics></math></span></div>
+<hr class="section-rule">
+<h2 id="十四公式速查"><a class="heading-anchor" href="#十四公式速查" aria-label="回到本小节">#</a>十四、公式速查</h2>
+<h3 id="141-基本关系"><a class="heading-anchor" href="#141-基本关系" aria-label="回到本小节">#</a>14.1 基本关系</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>+</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin^2\alpha+\cos^2\alpha=1,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>α</mi><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mi>α</mi></mrow><mrow><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow></mfrac><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\tan\alpha=\frac{\sin\alpha}{\cos\alpha},</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mo>+</mo><msup><mrow><mi>tan</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><msup><mrow><mi>sec</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">1+\tan^2\alpha=\sec^2\alpha.</annotation></semantics></math></span></div>
+<h3 id="142-和差角"><a class="heading-anchor" href="#142-和差角" aria-label="回到本小节">#</a>14.2 和差角</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>±</mo><mi>β</mi><mo stretchy="false">)</mo><mo>=</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi>cos</mi><mo>⁡</mo><mi>β</mi><mo>±</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mi>sin</mi><mo>⁡</mo><mi>β</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin(\alpha\pm\beta)
+=
+\sin\alpha\cos\beta\pm\cos\alpha\sin\beta,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>α</mi><mo>±</mo><mi>β</mi><mo stretchy="false">)</mo><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi><mi>cos</mi><mo>⁡</mo><mi>β</mi><mo>∓</mo><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi>sin</mi><mo>⁡</mo><mi>β</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\cos(\alpha\pm\beta)
+=
+\cos\alpha\cos\beta\mp\sin\alpha\sin\beta.</annotation></semantics></math></span></div>
+<h3 id="143-二倍角"><a class="heading-anchor" href="#143-二倍角" aria-label="回到本小节">#</a>14.3 二倍角</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mn>2</mn><mi>α</mi><mo>=</mo><mn>2</mn><mi>sin</mi><mo>⁡</mo><mi>α</mi><mi>cos</mi><mo>⁡</mo><mi>α</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\sin2\alpha=2\sin\alpha\cos\alpha,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>α</mi><mo>=</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>−</mo><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>1</mn><mo>−</mo><mn>2</mn><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>=</mo><mn>2</mn><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi><mo>−</mo><mn>1.</mn></mrow><annotation encoding="application/x-tex">\cos2\alpha=\cos^2\alpha-\sin^2\alpha
+=1-2\sin^2\alpha
+=2\cos^2\alpha-1.</annotation></semantics></math></span></div>
+<h3 id="144-辅助角"><a class="heading-anchor" href="#144-辅助角" aria-label="回到本小节">#</a>14.4 辅助角</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mi>b</mi><mi>cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt><mi>sin</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>φ</mi><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">a\sin x+b\cos x
+=
+\sqrt{a^2+b^2}\sin(x+\varphi),</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>φ</mi><mo>=</mo><mfrac><mi>b</mi><mi>a</mi></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\tan\varphi=\frac ba.</annotation></semantics></math></span></div>
+<h3 id="145-重要极限"><a class="heading-anchor" href="#145-重要极限" aria-label="回到本小节">#</a>14.5 重要极限</h3>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi></mrow><mi>x</mi></mfrac><mo>=</mo><mn>1</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\lim_{x\to0}\frac{\sin x}{x}=1,</annotation></semantics></math></span></div>
+<div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi></mrow><msup><mi>x</mi><mn>2</mn></msup></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lim_{x\to0}\frac{1-\cos x}{x^2}=\frac12.</annotation></semantics></math></span></div>
+<hr class="section-rule">
+<h2 id="结语"><a class="heading-anchor" href="#结语" aria-label="回到本小节">#</a>结语</h2>
+<p>三角函数模块可以概括为：</p>
+<ol><li><strong>统一弧度制</strong>：极限、求导、积分中的三角公式都以弧度为前提；</li><li><strong>用单位圆判断符号</strong>：同角关系、诱导公式都离不开象限；</li><li><strong>公式成链</strong>：和角公式推出倍角、半角、积化和差；</li><li><strong>辅助角公式</strong>：把 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>+</mo><mi>b</mi><mi>cos</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">a\sin x+b\cos x</annotation></semantics></math></span> 化为单一正弦，直接读最值；</li><li><strong>图像与性质</strong>：振幅、周期、相位、单调区间、渐近线。</li></ol>
+<p>把“角—函数值—图像—公式”四件事连起来，高数中的三角极限、三角积分和傅里叶级数都会变得自然。</p>
+
+      <p class="footer-note">说明：本页公式由 KaTeX 预渲染为 MathML，CSS 与 JavaScript 已全部内嵌，不依赖任何外部字体、脚本或网络连接。</p>
+    </main>
+  </div>
+
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-label="打开目录" aria-controls="sidebar">☰</button>
+
+  <script>
+(() => {
+  const root = document.documentElement;
+  const themeToggle = document.getElementById("theme-toggle");
+  const progressBar = document.getElementById("progress-bar");
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const menuToggle = document.getElementById("menu-toggle");
+  const printButton = document.getElementById("print-button");
+  const tocLinks = Array.from(document.querySelectorAll(".toc a[data-target]"));
+
+  const storageGet = (key) => {
+    try { return localStorage.getItem(key); } catch (error) { return null; }
+  };
+  const storageSet = (key, value) => {
+    try { localStorage.setItem(key, value); } catch (error) { /* file:// 环境可能禁用存储 */ }
+  };
+
+  const savedTheme = storageGet("trig-theme");
+  if (savedTheme === "light" || savedTheme === "dark") {
+    root.dataset.theme = savedTheme;
+  } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    root.dataset.theme = "dark";
+  }
+
+  const updateThemeButton = () => {
+    const dark = root.dataset.theme === "dark";
+    themeToggle.textContent = dark ? "☀ 浅色模式" : "☾ 深色模式";
+    themeToggle.setAttribute("aria-pressed", String(dark));
+    themeToggle.setAttribute("aria-label", dark ? "切换到浅色模式" : "切换到深色模式");
+  };
+  updateThemeButton();
+
+  themeToggle.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    storageSet("trig-theme", next);
+    updateThemeButton();
+  });
+
+  const updateProgress = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = height > 0 ? scrollTop / height : 0;
+    progressBar.style.width = Math.min(100, Math.max(0, ratio * 100)) + "%";
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress);
+  updateProgress();
+
+  const backToTop = document.createElement("button");
+  backToTop.id = "back-to-top";
+  backToTop.type = "button";
+  backToTop.setAttribute("aria-label", "返回顶部");
+  backToTop.textContent = "↑";
+  document.body.appendChild(backToTop);
+
+  const updateBackToTop = () => {
+    backToTop.classList.toggle("show", window.scrollY > 300);
+  };
+  window.addEventListener("scroll", updateBackToTop, { passive: true });
+  updateBackToTop();
+  backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  const openDrawer = () => {
+    sidebar.classList.add("open");
+    overlay.classList.add("open");
+    document.body.classList.add("drawer-open");
+    menuToggle.setAttribute("aria-expanded", "true");
+  };
+  const closeDrawer = () => {
+    sidebar.classList.remove("open");
+    overlay.classList.remove("open");
+    document.body.classList.remove("drawer-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  };
+
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.addEventListener("click", () => {
+    sidebar.classList.contains("open") ? closeDrawer() : openDrawer();
+  });
+  overlay.addEventListener("click", closeDrawer);
+  tocLinks.forEach((link) => link.addEventListener("click", closeDrawer));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeDrawer();
+  });
+
+  if (printButton) {
+    printButton.addEventListener("click", () => window.print());
+  }
+
+  if ("IntersectionObserver" in window) {
+    const headings = Array.from(document.querySelectorAll(".content h2[id], .content h3[id]"));
+    const linkMap = new Map(tocLinks.map((link) => [link.dataset.target, link]));
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (!visible.length) return;
+      tocLinks.forEach((link) => link.classList.remove("active"));
+      const active = linkMap.get(visible[0].target.id);
+      if (active) active.classList.add("active");
+    }, { rootMargin: "-12% 0px -78% 0px", threshold: [0, 1] });
+    headings.forEach((heading) => observer.observe(heading));
+  }
+})();
+  </script>
+</body>
+</html>
