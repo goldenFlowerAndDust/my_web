@@ -1,0 +1,11 @@
+﻿chrome.exe : [1019/104708.026:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:430] OpenProcess: 拒绝访问。
+ (0x5)
+所在位置 行:4 字符: 1
++ & $chrome --headless=new --no-sandbox --disable-gpu --disable-breakpa ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([1019/104708.02...ss: 拒绝访问。 (0x5):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[2856:2200:1019/104708.124:FATAL:mojo\public\cpp\platform\platform_channel.cc:112] Check failed: . : 拒绝访问。 (0x5)
+[1019/104708.125:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:144] crash server failed to launch, 
+self-terminating

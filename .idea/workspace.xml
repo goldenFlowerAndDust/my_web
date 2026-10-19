@@ -5,17 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f5561d0-0649-48dc-90c3-e89ff28ac45b" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/一些必备脚本/AI生成响应式/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/一些必备脚本/AI生成响应式/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块四_平面解析几何/模块四_平面解析几何.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块四_平面解析几何/模块四_平面解析几何.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第一章_极限章节完整总结/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第一章_极限章节完整总结/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/专升本/信息技术/专升本信息技术.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/专升本/信息技术/专升本信息技术.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/专升本/政治/专升本政治.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/专升本/政治/专升本政治.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块一_数与式的核心变形/模块一_数与式的核心变形.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块一_数与式的核心变形/模块一_数与式的核心变形.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块七_数列初步/模块七_数列初步.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块七_数列初步/模块七_数列初步.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块三_二次函数/模块三_二次函数.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块三_二次函数/模块三_二次函数.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块二_方程与不等式/模块二_方程与不等式.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块二_方程与不等式/模块二_方程与不等式.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块五_三角函数/模块五_三角函数.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块五_三角函数/模块五_三角函数.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块八_平面向量与立体几何初步/模块八_平面向量与立体几何初步.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块八_平面向量与立体几何初步/模块八_平面向量与立体几何初步.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块六_指数与对数函数/模块六_指数与对数函数.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块六_指数与对数函数/模块六_指数与对数函数.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块四_平面解析几何/模块四_平面解析几何.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块四_平面解析几何/模块四_平面解析几何.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第一章_极限章节完整总结/第一章_极限章节完整总结.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第一章_极限章节完整总结/第一章_极限章节完整总结.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第七章_微分方程/第七章_微分方程.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第七章_微分方程/第七章_微分方程.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第三章_微分中值定理与导数的应用/第三章_微分中值定理与导数的应用.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第三章_微分中值定理与导数的应用/第三章_微分中值定理与导数的应用.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第九章_多元函数微分法及其应用/第九章_多元函数微分法及其应用.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第九章_多元函数微分法及其应用/第九章_多元函数微分法及其应用.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第二章_导数与微分/第二章_导数与微分.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第二章_导数与微分/第二章_导数与微分.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第五章_定积分/第五章_定积分.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第五章_定积分/第五章_定积分.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第八章_向量代数与空间解析几何/第八章_向量代数与空间解析几何.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第八章_向量代数与空间解析几何/第八章_向量代数与空间解析几何.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第六章_定积分的应用/第六章_定积分的应用.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第六章_定积分的应用/第六章_定积分的应用.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第十一章_曲线积分与曲面积分/第十一章_曲线积分与曲面积分.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第十一章_曲线积分与曲面积分/第十一章_曲线积分与曲面积分.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第十二章_无穷级数/第十二章_无穷级数.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第十二章_无穷级数/第十二章_无穷级数.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第十章_重积分/第十章_重积分.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第十章_重积分/第十章_重积分.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第四章_不定积分/第四章_不定积分.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/高等数学复习资料——均由AI生成/第四章_不定积分/第四章_不定积分.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/专升本/数学/专升本数学.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/专升本/数学/专升本数学.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/专升本/英语/专升本英语.html" beforeDir="false" afterPath="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/专升本/英语/专升本英语.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,57 +72,57 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JavaScript 调试.基础01——数.html.executor": "Run",
-    "JavaScript 调试.模块与包.html.executor": "Run",
-    "JavaScript 调试.笔记通用模板.html.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Node.js.dom1.js.executor": "Run",
-    "Node.js.dom2.js.executor": "Run",
-    "Python.#1.executor": "Run",
-    "Python.PY202.executor": "Run",
-    "Python.deepSeek-API.executor": "Run",
-    "Python.xmind2.executor": "Run",
-    "Python.xmind2md.executor": "Run",
-    "Python.主程序——获取图形参数.executor": "Run",
-    "Python.二次函数图像.executor": "Run",
-    "Python.异常处理.executor": "Run",
-    "Python.读写、写入、追加操作-open-read-write-close解析.executor": "Run",
-    "Python.读文件及注意事项.executor": "Run",
-    "Python.选择题.executor": "Run",
-    "Python.面向对象——创建类-实例对象-实例方法概念.executor": "Run",
-    "Python.面向对象——实例属性与类属性.executor": "Run",
-    "Python.面向对象——类与对象.executor": "Run",
-    "Python.面向对象——魔法方法.executor": "Run",
-    "Python.面向对象基础案例.executor": "Run",
-    "Python.面向对象案例——课后作业.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "javascript.nodejs.core.library.configured.version": "24.20.0",
-    "javascript.nodejs.core.library.typings.version": "24.19.1",
-    "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块四_平面解析几何",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "E:\\编程学习\\JavaScript\\webstorm安装\\AZCX\\WebStorm 2026.1.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript 调试.基础01——数.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript 调试.模块与包.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript 调试.笔记通用模板.html.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.dom1.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.dom2.js.executor&quot;: &quot;Run&quot;,
+    &quot;Python.#1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.PY202.executor&quot;: &quot;Run&quot;,
+    &quot;Python.deepSeek-API.executor&quot;: &quot;Run&quot;,
+    &quot;Python.xmind2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.xmind2md.executor&quot;: &quot;Run&quot;,
+    &quot;Python.主程序——获取图形参数.executor&quot;: &quot;Run&quot;,
+    &quot;Python.二次函数图像.executor&quot;: &quot;Run&quot;,
+    &quot;Python.异常处理.executor&quot;: &quot;Run&quot;,
+    &quot;Python.读写、写入、追加操作-open-read-write-close解析.executor&quot;: &quot;Run&quot;,
+    &quot;Python.读文件及注意事项.executor&quot;: &quot;Run&quot;,
+    &quot;Python.选择题.executor&quot;: &quot;Run&quot;,
+    &quot;Python.面向对象——创建类-实例对象-实例方法概念.executor&quot;: &quot;Run&quot;,
+    &quot;Python.面向对象——实例属性与类属性.executor&quot;: &quot;Run&quot;,
+    &quot;Python.面向对象——类与对象.executor&quot;: &quot;Run&quot;,
+    &quot;Python.面向对象——魔法方法.executor&quot;: &quot;Run&quot;,
+    &quot;Python.面向对象基础案例.executor&quot;: &quot;Run&quot;,
+    &quot;Python.面向对象案例——课后作业.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;24.20.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;24.19.1&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GitHub/my_web/内容文件夹/专升本备考/备考专升本数学/初高中知识衔接/模块四_平面解析几何&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;E:\\编程学习\\JavaScript\\webstorm安装\\AZCX\\WebStorm 2026.1.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\GitHub\my_web\内容文件夹\专升本备考\备考专升本数学\初高中知识衔接\模块四_平面解析几何" />
@@ -120,11 +132,11 @@
       <recent name="D:\GitHub\my_web\内容文件夹\frontend——前端\JS游戏开发\第二堂课" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GitHub\my_web\AI-总结文件\AI -修复在华为设备公式渲染问题" />
       <recent name="D:\GitHub\my_web\AI-总结文件\AI-总结文件" />
       <recent name="D:\GitHub\my_web\AI-总结文件" />
       <recent name="D:\GitHub\my_web\内容文件夹\专升本备考\备考专升本数学\基础知识\整式" />
       <recent name="D:\GitHub\my_web\内容文件夹\专升本备考\备考专升本数学\一些必备脚本\数学公式js" />
-      <recent name="D:\GitHub\my_web\内容文件夹\专升本备考\备考专升本数学\一些必备脚本\数学公式js\其他" />
     </key>
   </component>
   <component name="RunManager" selected="Python.deepSeek-API">
@@ -150,198 +162,6 @@
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/专升本备考/备考专升本数学/基础知识/函数/二次函数图像.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="面向对象基础案例" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例/面向对象基础案例.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="面向对象基础案例" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例/面向对象基础案例.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="面向对象——魔法方法" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码/面向对象——魔法方法.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="my_web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -582,6 +402,198 @@
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/python基础——文件读写与操作/读文件及注意事项/代码/读文件及注意事项.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="面向对象基础案例" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例/面向对象基础案例.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="面向对象基础案例" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例/面向对象基础案例.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="面向对象——魔法方法" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/面向对象——魔法方法/代码/面向对象——魔法方法.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="选择题" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="my_web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/内容文件夹/自建本地网站/导航栏内容/计算机二级——python/代码实操/选择题.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />

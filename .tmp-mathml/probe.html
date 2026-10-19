@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: "Microsoft YaHei", serif; font-size: 16px; }
+  #box { position: absolute; left: -9999px; top: 0; }
+</style>
+</head>
+<body>
+<div id="box">
+  <math id="m1"><mfrac><mn>1</mn><mn>2</mn></mfrac></math>
+  <math id="m2"><mi>x</mi><mo>+</mo><mn>1</mn></math>
+  <span id="t1">1<br>2</span>
+</div>
+<pre id="out"></pre>
+<script>
+function r(el){ var b=el.getBoundingClientRect(); return {w:+b.width.toFixed(2),h:+b.height.toFixed(2)}; }
+var lines=[];
+lines.push('hasMathMLElement=' + (typeof MathMLElement));
+var m1=document.getElementById('m1');
+lines.push('math#m1 display=' + getComputedStyle(m1).display + ' rect=' + JSON.stringify(r(m1)));
+var frac=m1.querySelector('mfrac');
+lines.push('mfrac display=' + getComputedStyle(frac).display + ' rect=' + JSON.stringify(r(frac)) + ' fontFamily=' + getComputedStyle(frac).fontFamily + ' fontSize=' + getComputedStyle(frac).fontSize);
+var mi=m1.querySelector('mfrac');
+var m2=document.getElementById('m2');
+var mi2=m2.querySelector('mi');
+lines.push('mi display=' + getComputedStyle(mi2).display + ' rect=' + JSON.stringify(r(mi2)) + ' font=' + getComputedStyle(mi2).font);
+var tn=mi2.firstChild, range=document.createRange(); range.selectNodeContents(mi2);
+var rects=range.getClientRects();
+lines.push('mi range rects=' + rects.length + ' first=' + (rects[0]?JSON.stringify({w:+rects[0].width.toFixed(2),h:+rects[0].height.toFixed(2)}):'none'));
+lines.push('span 1br2 h=' + r(document.getElementById('t1')).h);
+lines.push('lineHeight m2=' + getComputedStyle(m2).lineHeight);
+// ink test
+function ink(font,ch){
+  var c=document.createElement('canvas'); c.width=48; c.height=48;
+  var ctx=c.getContext('2d'); ctx.font=font; ctx.textBaseline='top'; ctx.fillStyle='#000';
+  ctx.clearRect(0,0,48,48); ctx.fillText(ch,4,4);
+  var d=ctx.getImageData(0,0,48,48).data, n=0;
+  for(var i=3;i<d.length;i+=4){ if(d[i]>8) n++; }
+  return n;
+}
+var fam=getComputedStyle(mi2).fontFamily;
+var fs=getComputedStyle(mi2).fontSize;
+var fontStr='italic '+fs+' '+fam;
+lines.push('ink(x,'+fontStr+')=' + ink(fontStr,'x') + ' ink(a)=' + ink(fontStr,'a'));
+lines.push('ink serif x=' + ink('italic 16px serif','x'));
+lines.push('canvas fontFamily used=' + fam);
+document.getElementById('out').textContent = lines.join('\n');
+</script>
+</body>
+</html>

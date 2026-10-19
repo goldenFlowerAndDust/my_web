@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>公式渲染自检 · 这台设备到底缺什么</title>
+<style>
+    :root { --bg:#fbfcfe; --text:#172033; --muted:#5e6a7d; --line:#dce5ef; --panel:#fff; --ok:#0f766e; --bad:#b42318; --warm:#fff7e8; }
+    * { box-sizing:border-box }
+    body { margin:0; padding:22px 18px 60px; color:var(--text); background:var(--bg);
+           font-family:"Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif; font-size:16px; line-height:1.8 }
+    .wrap { max-width:820px; margin:0 auto }
+    h1 { font-size:24px; margin:0 0 6px }
+    p.sub { color:var(--muted); margin:0 0 22px; font-size:14px }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:16px 0 }
+    table { width:100%; border-collapse:collapse; font-size:14px }
+    th,td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top }
+    th { width:38%; color:var(--muted); font-weight:600 }
+    tr:last-child td, tr:last-child th { border-bottom:0 }
+    code { background:#f1f5f9; padding:.1em .35em; border-radius:4px; font-family:Consolas,monospace; font-size:.92em }
+    .verdict { font-size:18px; font-weight:700; padding:14px 16px; border-radius:12px; border:1px solid var(--warm); background:var(--warm) }
+    .verdict.ok { color:var(--ok); border-color:#bfe6df; background:#ecfdf5 }
+    .verdict.bad { color:var(--bad); border-color:#f3c6c0; background:#fef3f2 }
+    .math-display { margin:14px 0; padding:14px 16px; background:#f3f7fc; border:1px solid var(--line);
+                    border-radius:12px; text-align:center; overflow-x:auto; font-size:17px }
+    .math-display .katex { display:block }
+    .hint { color:var(--muted); font-size:13px }
+    ol { padding-left:1.4em }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <h1>公式渲染自检</h1>
+    <p class="sub">在出问题的那台设备（比如华为平板）上打开本页，它会告诉你：公式坏在哪一步。</p>
+
+    <div id="verdict" class="verdict">检测中…</div>
+
+    <div class="card">
+        <table id="probe"></table>
+    </div>
+
+    <div class="card">
+        <p style="margin:0 0 6px"><strong>同一组公式的实际渲染</strong></p>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow><mn>2</mn></mfrac><mo>=</mo><msqrt><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn></mrow></msqrt></mrow><annotation encoding="application/x-tex">\frac{a+b}{2}=\sqrt{x^2+1}</annotation></semantics></math></span></div>
+        <div class="math-display"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo fence="true">{</mo><mtable rowspacing="0.36em" columnalign="left left"><mtr><mtd><mi>x</mi></mtd><mtd><mi>x</mi><mo>≥</mo><mn>0</mn></mtd></mtr><mtr><mtd><mo>−</mo><mi>x</mi></mtd><mtd><mi>x</mi><mo>&lt;</mo><mn>0</mn></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">|x|=\begin{cases}x,&amp;x\ge 0\\-x,&amp;x&lt;0\end{cases}</annotation></semantics></math></span></div>
+        <p class="hint">如果这里的分式是上下两层、字母是斜体，说明公式排版正常；如果挤成一行、字母缺失或出现方块，就是内核/字体的问题。</p>
+    </div>
+
+    <div class="card">
+        <p style="margin:0 0 6px"><strong>怎么用</strong></p>
+        <ol class="hint" style="margin:0">
+            <li>先看上面的判定结果；</li>
+            <li>再打开任意一讲，把地址栏末尾加上 <code>?mathml=fallback</code>，对比公式是否恢复；</li>
+            <li>想强制看原生渲染，加 <code>?mathml=native</code>。</li>
+        </ol>
+    </div>
+</div>
+
+<!-- 公式兜底脚本：本页也接上，看看它在当前设备上会不会自动接管 -->
+<script src="mathml-fallback.js"></script>
+<script>
+(function () {
+    'use strict';
+    // 等 load 之后再测：此时兜底脚本已经在 DOMContentLoaded 里跑完了
+    function run() {
+        setTimeout(probe, 0);
+    }
+    function probe() {
+    var rows = [];
+    function row(k, v) { rows.push('<tr><th>' + k + '</th><td>' + v + '</td></tr>'); }
+
+    var hasApi = (typeof window.MathMLElement !== 'undefined');
+    row('浏览器内核', (function () {
+        var ua = navigator.userAgent || '';
+        var m = /Chrome\/([\d.]+)/.exec(ua);
+        var edge = /Edg\/([\d.]+)/.exec(ua);
+        var out = m ? 'Chromium ' + m[1] : '非 Chromium（Safari / Firefox / 其它）';
+        if (edge) out += '（Edge ' + edge[1] + '）';
+        return out;
+    })());
+    row('MathML 接口 <code>MathMLElement</code>', hasApi ? '有（内核 ≥ Chromium 109）' : '没有（内核 < Chromium 109，不认识 MathML）');
+
+    // 分式实测：能排版的分式是上下两层，高度约 2em 以上
+    var fracH = 0;
+    try {
+        var box = document.createElement('div');
+        box.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden;font-size:16px;';
+        box.innerHTML = '<math><mfrac><mn>1</mn><mn>2</mn></mfrac></math>';
+        document.body.appendChild(box);
+        var frac = box.getElementsByTagName('mfrac')[0];
+        fracH = frac ? frac.getBoundingClientRect().height : 0;
+        document.body.removeChild(box);
+    } catch (e) { fracH = 0; }
+    row('分式 &lt;mfrac&gt; 实测高度', fracH.toFixed(1) + ' px' + (fracH > 24 ? '（正常，两行叠排）' : '（异常，被当成一行文字）'));
+
+    // 字形墨水检测：按 mi 的实际字体画个 x，数非透明像素
+    var ink = -1;
+    try {
+        var mi = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'mi');
+        mi.textContent = 'x';
+        var holder = document.createElement('div');
+        holder.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden;font-size:16px;';
+        holder.appendChild(mi);
+        document.body.appendChild(holder);
+        var cs = getComputedStyle(mi);
+        var font = (cs.fontStyle || 'normal') + ' ' + (cs.fontSize || '16px') + ' ' + (cs.fontFamily || 'serif');
+        var size = parseFloat(cs.fontSize) || 16;
+        document.body.removeChild(holder);
+        var canvas = document.createElement('canvas');
+        canvas.width = canvas.height = Math.max(24, Math.ceil(size * 2));
+        var ctx = canvas.getContext('2d');
+        ctx.font = font;
+        ctx.textBaseline = 'top';
+        ctx.fillStyle = '#000';
+        ctx.fillText('x', 2, 2);
+        var data = ctx.getImageData(0, 0, canvas.width, canvas.height).data, n = 0;
+        for (var i = 3; i < data.length; i += 4) { if (data[i] > 8) n++; }
+        ink = n;
+    } catch (e) { ink = -1; }
+    row('数学字体墨水检测', ink < 0 ? '无法检测（Canvas 不可用）' :
+        (ink + ' 个像素' + (ink > 0 ? '（字体能画出字母）' : '（字体画不出字母，字母会消失）')));
+
+    var mode = window.MathMLFallback ? window.MathMLFallback.mode : '(脚本未加载)';
+    var reason = window.MathMLFallback ? window.MathMLFallback.reason : '-';
+    var stats = window.MathMLFallback ? window.MathMLFallback.stats : null;
+    row('兜底脚本状态', 'mode=<code>' + mode + '</code>　reason=<code>' + reason + '</code>' +
+        (stats ? '　转换 ' + stats.converted + ' 个 / 失败 ' + stats.failed + ' 个 / ' + stats.ms + 'ms' : ''));
+
+    var nativeOk = hasApi && fracH > 24 && (ink === -1 || ink > 0);
+    var verdict = document.getElementById('verdict');
+    if (nativeOk) {
+        verdict.className = 'verdict ok';
+        verdict.innerHTML = '结论：这台设备原生 MathML 可用，公式能正常排版和绘制。' +
+            '<div class="hint" style="font-weight:400;margin-top:6px">如果这一页正常但某讲不正常，问题在那一讲的页面，不在设备。</div>';
+    } else if (!hasApi || fracH <= 24) {
+        verdict.className = 'verdict bad';
+        verdict.innerHTML = '结论：这台设备的内核不认识 MathML（Chromium &lt; 109 或旧 WebView）。' +
+            '<div class="hint" style="font-weight:400;margin-top:6px">公式会退化成一串字符：分式不叠排、上下标掉下来、\\boxed 没有框、字母可能错位或缺失。加入 mathml-fallback.js 后会自动改用 HTML 排版。</div>';
+    } else {
+        verdict.className = 'verdict bad';
+        verdict.innerHTML = '结论：内核支持 MathML，但系统缺少可用的数学字体，字母画不出来。' +
+            '<div class="hint" style="font-weight:400;margin-top:6px">这就是「符号在、字母不见」的典型症状。加入 mathml-fallback.js 后会改用正文字体排版。</div>';
+    }
+
+    document.getElementById('probe').innerHTML = rows.join('');
+    verdict.innerHTML += '<div class="hint" style="font-weight:400;margin-top:8px">UA：' +
+        (navigator.userAgent || '').replace(/</g, '&lt;') + '</div>';
+    }
+
+    if (document.readyState === 'complete') run();
+    else window.addEventListener('load', run);
+})();
+</script>
+</body>
+</html>

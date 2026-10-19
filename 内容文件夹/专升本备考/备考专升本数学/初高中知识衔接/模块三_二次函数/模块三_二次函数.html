@@ -1818,8 +1818,9 @@ x_1x_2=\frac ca.</annotation></semantics></math></span></div>
             <li><strong>高数</strong>：极值、二阶近似、配方法、积分。</li>
         </ol>
         <p>看到二次函数，先画图，再配方，最后结合定义域和区间判断。这样无论是初中题还是高数题，都能找到统一步骤。</p>
-        <p class="footer-note">说明：本页公式已由 KaTeX 预渲染为 MathML，HTML 为单文件、纯离线版本，不依赖外部字体、脚本或网络。若浏览器较旧，个别
-            MathML 符号可能显示不完整。</p>
+        <p class="footer-note">说明：本页公式由 KaTeX 预渲染为 MathML，并加载 <code>mathml-fallback.js</code>
+            做降级渲染——浏览器内核较旧或系统缺少数学字体时（例如部分华为平板），会自动改成 HTML 排版，保证公式里的字母可见；内核支持原生
+            MathML 时不做任何改动。</p>
     </main>
 </div>
 <script>
@@ -1858,5 +1859,7 @@ x_1x_2=\frac ca.</annotation></semantics></math></span></div>
     })();
 </script>
 <script src="../../一些必备脚本/AI生成响应式/script.js"></script>
+<!-- 公式兜底渲染：内核不支持 MathML 或缺少数学字体时，把 MathML 换成 HTML 排版 -->
+<script src="../../一些必备脚本/mathml-fallback.js"></script>
 </body>
 </html>

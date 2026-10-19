@@ -1854,8 +1854,9 @@ x+1\to2.</annotation></semantics></math></span></div>
             <li><strong>最后查条件</strong>：定义域、分母、根号、绝对值。</li>
         </ol>
         <p>这些变形不是“初中旧知识”，而是高数计算的底层能力。把它们练熟，极限、导数、积分中的代数障碍会少很多。</p>
-        <p class="footer-note">说明：本页公式已由 KaTeX 预渲染为 MathML，HTML 为单文件、纯离线版本，不依赖外部字体、脚本或网络。若浏览器较旧，个别
-            MathML 符号可能显示不完整。</p>
+        <p class="footer-note">说明：本页公式由 KaTeX 预渲染为 MathML，并加载 <code>mathml-fallback.js</code>
+            做降级渲染——浏览器内核较旧或系统缺少数学字体时（例如部分华为平板），会自动改成 HTML 排版，保证公式里的字母可见；内核支持原生
+            MathML 时不做任何改动。</p>
     </main>
 </div>
 <script>
@@ -1893,6 +1894,7 @@ x+1\to2.</annotation></semantics></math></span></div>
         progress();
     })();
 </script>
+<script src="../../一些必备脚本/mathml-fallback.js"></script>
 <script src="../../一些必备脚本/AI生成响应式/script.js"></script>
 </body>
 </html>
