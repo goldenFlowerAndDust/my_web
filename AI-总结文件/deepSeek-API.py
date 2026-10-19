@@ -5,7 +5,7 @@ import requests
 # ⚙️ 1. 手动配置区（每次复用只需改这里）
 # ==========================================
 # 你的 DeepSeek API Key
-API_KEY = "sk-215500aab5c64465a887ac3cafe82c76"
+API_KEY = "sk-18eeca5cb07f49a381cc04b3b81d9d1b"
 
 # 要读取的文本文件路径
 INPUT_FILE = r"D:\GitHub\my_web\AI-总结文件\python_study_all_text.md"

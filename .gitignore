@@ -3,15 +3,18 @@ venv/
 .idea/
 内容文件夹/frontend——前端/JS游戏开发/
 内容文件夹/python_study/哔哩哔哩UP主——黑马程序员/第二部分——python核心语法/面向对象/基础/面向对象基础案例/面向对象案例——课后作业/image/
-AI-总结文件/
 
 # 忽略特定文件
 内容文件夹/自建本地网站/导航栏内容/计算机一级考试/image/excel/有点压力/第八章卷子视频.mp4
 内容文件夹/自建本地网站/导航栏内容/计算机一级考试/image/excel/有点压力/第十一张/第十一张.mp4
+README_完善版_2026-10-19.md
 
 # 忽略特定后缀
 .preferences
 *.wmv
-/AI-总结文件
+
+
+/AI-总结文件/
 AI-总结文件/deepSeek-API.py
 AI-总结文件/py-API接口.txt
+
