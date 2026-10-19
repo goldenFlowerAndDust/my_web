@@ -12,3 +12,6 @@ AI-总结文件/
 # 忽略特定后缀
 .preferences
 *.wmv
+/AI-总结文件
+AI-总结文件/deepSeek-API.py
+AI-总结文件/py-API接口.txt
