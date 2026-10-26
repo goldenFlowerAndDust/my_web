@@ -1,0 +1,19 @@
+{
+  "name": "dsh-profile-desktop",
+  "private": true,
+  "dependencies": {
+    "dsh-context": "0.74.0",
+    "dshmarket": "^1.66.44"
+  },
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "@deepseek-ai/dsh-experimental-plugin-market-bundle",
+        "dshmarket",
+        "dsh-context"
+      ]
+    }
+  }
+}
