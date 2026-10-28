@@ -1,0 +1,3415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>极限题库-详细解析版（第1-120题）</title>
+<meta name="description" content="专升本高等数学第一章极限专项题库，江西专升本风格，第1-120题详细解析版。">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" onerror="var s=document.createElement('script');s.src='https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js';document.head.appendChild(s);"></script>
+<style>
+:root{--ink:#1f2937;--muted:#6b7280;--line:#e5eaf2;--card:#fff;--bg:#f4f6fb}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:
+  radial-gradient(1100px 560px at 8% -12%,#dbeafe 0%,rgba(219,234,254,0) 62%),
+  radial-gradient(900px 520px at 102% -4%,#fef3c7 0%,rgba(254,243,199,0) 58%),var(--bg);
+  font-family:"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  line-height:1.8;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:30px 22px 96px}
+.print-btn{position:fixed;top:18px;right:20px;z-index:999;border:0;cursor:pointer;padding:12px 20px;border-radius:999px;background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;font-size:14px;font-weight:700;letter-spacing:.4px;box-shadow:0 10px 24px rgba(29,78,216,.35);transition:transform .18s ease,box-shadow .18s ease}
+.print-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(29,78,216,.42)}
+.hero{position:relative;overflow:hidden;color:#fff;border-radius:24px;padding:40px 42px 34px;background:linear-gradient(135deg,#0b1220 0%,#172554 52%,#1d4ed8 100%);box-shadow:0 20px 46px rgba(15,23,42,.24)}
+.hero:after{content:"";position:absolute;right:-70px;top:-90px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.08)}
+.hero:before{content:"";position:absolute;right:110px;bottom:-120px;width:220px;height:220px;border-radius:50%;border:1px solid rgba(255,255,255,.16)}
+.hero>*{position:relative;z-index:1}
+.eyebrow{font-size:13px;letter-spacing:2.4px;color:#bfdbfe;font-weight:700}
+.hero h1{margin:12px 0 6px;font-size:36px;line-height:1.25;letter-spacing:1px;font-weight:800}
+.hero .sub{margin:0;font-size:17px;color:#dbeafe;font-weight:600}
+.hero .desc{margin:14px 0 0;max-width:700px;color:#cbd5e1;font-size:14.5px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 13px;border-radius:999px;font-size:12.5px;font-weight:600;color:#e2e8f0;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(4px)}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin:20px 0 2px;padding:12px 18px;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:13px;color:#475569}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.dot.b{background:#2563eb}.dot.r{background:#dc2626}.dot.g{background:#9ca3af}
+.sec-title{display:flex;align-items:center;gap:12px;margin:38px 0 4px;font-size:21px;font-weight:800;letter-spacing:.5px}
+.sec-title:before{content:"";width:6px;height:23px;border-radius:3px;background:linear-gradient(180deg,#2563eb,#60a5fa)}
+.sec-sub{margin:0 0 10px 18px;color:var(--muted);font-size:13.5px}
+.sol-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:18px 0;box-shadow:0 5px 18px rgba(15,23,42,.05)}
+.sol-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.q-num{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:30px;padding:0 10px;border-radius:9px;background:#0f172a;color:#fff;font-size:13px;font-weight:800;letter-spacing:.8px}
+.q-level{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px}
+.basic{background:#e7f7ee;color:#0f7a4d}.adv{background:#e8efff;color:#1d4ed8}.trap{background:#fff0e6;color:#c2410c}.comp{background:#f3e8ff;color:#7e22ce}
+.sol-point{font-size:12px;color:#64748b;background:#f1f5f9;border:1px solid #e2e8f0;padding:3px 10px;border-radius:999px}
+.sol-stem{background:#f8fafc;border-left:4px solid #94a3b8;padding:10px 16px;border-radius:0 10px 10px 0;margin:10px 0 14px;font-size:15.5px;color:#334155}
+.sol-stem p{margin:4px 0}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 16px;margin:6px 0 0}
+.opt{padding:2px 0;color:#374151}
+.opt b{color:#1d4ed8;margin-right:4px}
+.module{border-radius:12px;padding:11px 16px;margin:9px 0;border:1px solid #e8edf5}
+.module h4{margin:0 0 4px;font-size:14px;letter-spacing:.6px;font-weight:800}
+.module p{margin:4px 0}
+.module.step{background:#f8fbff;border-color:#dbeafe;border-left:4px solid #3b82f6}
+.module.step h4{color:#1d4ed8}
+.module.key{background:#f5f9ff;border-color:#dbeafe;border-left:4px solid #2563eb}
+.module.key h4{color:#1e40af}
+.module.trap{background:#fff7f7;border-color:#fee2e2;border-left:4px solid #dc2626}
+.module.trap h4{color:#b91c1c}
+.module.origin{background:#fafafa;border-color:#e5e7eb;border-left:4px solid #9ca3af}
+.module.origin h4{color:#4b5563}
+mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+mjx-container[display]{margin:11px 0 !important}
+.answer-key{margin-top:38px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 24px;box-shadow:0 5px 18px rgba(15,23,42,.05)}
+.answer-key h2{margin:0 0 4px;font-size:19px}
+.answer-key .hint{margin:0 0 14px;color:var(--muted);font-size:13px}
+.key-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.key-item{display:flex;gap:7px;align-items:baseline;padding:7px 9px;border-radius:9px;background:#f8fafc;border:1px solid #eef2f7;font-size:14px}
+.key-item b{color:#94a3b8;font-size:11px;font-weight:700}
+.foot{margin-top:30px;text-align:center;color:#94a3b8;font-size:12.5px;letter-spacing:.5px}
+
+@page{size:A4;margin:14mm 13mm 15mm}
+@media print{
+  body{background:#fff !important;font-size:9.3pt;line-height:1.48}
+  .wrap{max-width:none;padding:0}
+  .print-btn,.no-print{display:none !important}
+  .hero{background:#fff !important;color:#111 !important;border:0;border-bottom:2.5px solid #1d4ed8;border-radius:0;padding:0 0 8px;margin:0 0 6px;box-shadow:none}
+  .hero:after,.hero:before{display:none !important}
+  .hero h1{font-size:19pt;color:#111;margin:5px 0 2px;letter-spacing:0}
+  .hero .sub{color:#374151;font-size:11pt}
+  .hero .desc,.chips{display:none !important}
+  .eyebrow{color:#1d4ed8;font-size:8.2pt;letter-spacing:1.4px}
+  .legend{display:none !important}
+  .sec-title{font-size:12.5pt;margin:10px 0 3px;break-after:avoid;page-break-after:avoid}
+  .sec-title:before{height:15px;width:4px}
+  .sec-sub{display:none}
+  .sol-card{box-shadow:none;border:1px solid #d5dbe6;border-radius:7px;padding:5px 8px;margin:4px 0;break-inside:avoid;page-break-inside:avoid}
+  .sol-head{margin-bottom:2px}
+  .q-num{min-width:34px;height:20px;font-size:8.8pt;border-radius:6px;background:#111 !important;color:#fff !important}
+  .q-level{font-size:8pt;padding:1px 7px;border:1px solid #d1d5db;background:#fff !important}
+  .sol-point{font-size:8pt;padding:1px 8px}
+  .sol-stem{background:#fff !important;padding:3px 8px;margin:3px 0 4px;font-size:9.2pt}
+  .options{gap:0 14px;margin:2px 0 0}
+  .module{padding:2px 8px;margin:2px 0;background:#fff !important;break-inside:avoid;page-break-inside:avoid}
+  .module h4{font-size:8.8pt;margin-bottom:0}
+  .module p{margin:2px 0}
+  mjx-container[display]{margin:2px 0 !important}
+  .answer-key{display:none !important}
+  .foot{display:none}
+}
+@media (max-width:640px){
+  .wrap{padding:18px 14px 80px}
+  .hero{padding:28px 22px 24px;border-radius:18px}
+  .hero h1{font-size:26px}
+  .print-btn{top:auto;bottom:18px;right:18px;padding:11px 16px}
+  .sol-card{padding:16px 16px 12px}
+  .key-grid{grid-template-columns:repeat(3,1fr)}
+  .options{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">📥 导出为 PDF</button>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">专升本高等数学 · 第一章 极限 · 江西专升本专项</div>
+    <h1>极限专项通关题库</h1>
+    <p class="sub">第 1—120 题 · 详细解析版</p>
+    <p class="desc">每题按「清晰步骤 → 重点标识 → 坑点预警 → 知识溯源」四步拆解；知识溯源补全定义、公式与适用条件，不只列名称。</p>
+    <div class="chips">
+      <span class="chip">120 道详解</span>
+      <span class="chip">基础 39 · 进阶 61 · 易错 7 · 综合 13</span>
+      <span class="chip">与题目版题号一一对应</span>
+    </div>
+  </header>
+
+  <div class="legend no-print">
+    <span><i class="dot b"></i><b>蓝字</b>：破局点</span>
+    <span><i class="dot r"></i><b>红字</b>：坑点预警</span>
+    <span><i class="dot g"></i><b>灰字</b>：知识溯源</span>
+  </div>
+
+  <h2 class="sec-title" id="ssec1">一、基础巩固</h2>
+<p class="sec-sub">直接代入 · 因式分解 · 根式有理化 · 抓大头</p>
+
+<article class="sol-card" id="s1">
+  <div class="sol-head">
+    <span class="q-num">001</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：直接代入（分母非零）</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 2}\frac{x^{2}-3x+5}{x+1} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：先算分母的极限。</p>\[ \lim_{x\to2}(x+1)=3\neq0 \]<p>第二步：分母极限非零，直接用商的极限法则代入。</p>\[ \frac{2^{2}-3\cdot2+5}{2+1}=\frac{4-6+5}{3}=\frac{3}{3}=1 \]<p>所以原式 \(=1\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先验证分母极限不为 0，再直接代入。</span>这是做极限题的第一反应：能直接算，就绝不绕路。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">别把 \(x\to2\) 看成 \(x=0\)；也别在分母非零时强行因式分解。</span>本题分子算得 \(3\)，分母算得 \(3\)，结果是 \(1\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">极限四则运算法则：若 \(\lim f=A\)、\(\lim g=B\)（\(A,B\) 为有限数），且 \(B\neq0\)，则 \(\lim\frac fg=\frac AB\)。本题分母极限为 3，满足“分母非零”，所以可直接代入。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s2">
+  <div class="sol-head">
+    <span class="q-num">002</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：0/0 型 · 因式分解约分</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 1}\frac{x^{2}-1}{x^{2}-3x+2} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：代入 \(x=1\)，分子、分母都是 \(0\)，属于 \(\frac00\) 型。</p><p>第二步：分解因式，找零因子。</p>\[ x^{2}-1=(x-1)(x+1),\qquad x^{2}-3x+2=(x-1)(x-2) \]<p>第三步：因为 \(x\to1\) 但 \(x\neq1\)，约去 \(x-1\)。</p>\[ \frac{x^{2}-1}{x^{2}-3x+2}=\frac{x+1}{x-2}\quad(x\neq1) \]<p>第四步：再代入 \(x=1\)。</p>\[ \frac{1+1}{1-2}=-2 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(x\to1\) 意味着 \(x\neq1\)，可以放心约去零因子 \(x-1\)。</span>约分是把 0/0 变成可代入的关键一步。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">约分前必须注明 \(x\neq1\)；分母是 \((x-1)(x-2)\)，代入后是 \(2/(-1)=-2\)，符号别丢。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">0/0 型约分原理：极限只与去心邻域有关。\(x\to1\) 时 \(x\neq1\)，所以零因子 \(x-1\) 可以约去；约分后分母极限非零，再用四则法则代入。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s3">
+  <div class="sol-head">
+    <span class="q-num">003</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：0/0 型 · 立方差公式</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 1}\frac{x^{3}-1}{x^{2}-1} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：代入 \(x=1\)，得 \(\frac00\) 型。</p><p>第二步：用立方差、平方差分解。</p>\[ x^{3}-1=(x-1)(x^{2}+x+1),\qquad x^{2}-1=(x-1)(x+1) \]<p>第三步：约去 \(x-1\)，再代入。</p>\[ \frac{x^{2}+x+1}{x+1}\Big|_{x=1}=\frac{1+1+1}{1+1}=\frac32 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">立方差公式 \(a^{3}-b^{3}=(a-b)(a^{2}+ab+b^{2})\) 是破局点。</span>约掉 \(x-1\) 后，剩下的式子可以直接代入。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(x^{3}-1\neq(x-1)^{3}\)！</span>立方差分解出的是二次三项式 \(x^{2}+x+1\)，不是 \((x-1)^{2}\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">立方差公式 \(a^{3}-b^{3}=(a-b)(a^{2}+ab+b^{2})\)。约去零因子后，剩余因式在 \(x=1\) 连续，可直接代入；这是“先约分、再代入”的标准流程。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s4">
+  <div class="sol-head">
+    <span class="q-num">004</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：0/0 型 · 分子有理化</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{\sqrt{1+x}-1}{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：代入得 \(\frac00\) 型，分子含根式，考虑分子有理化。</p><p>第二步：分子分母同乘共轭式 \(\sqrt{1+x}+1\)。</p>\[ \frac{\sqrt{1+x}-1}{x}=\frac{(\sqrt{1+x}-1)(\sqrt{1+x}+1)}{x(\sqrt{1+x}+1)}=\frac{x}{x(\sqrt{1+x}+1)} \]<p>第三步：约去 \(x\)，再代入 \(x=0\)。</p>\[ \frac{1}{\sqrt{1+x}+1}\to\frac{1}{1+1}=\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">看到 \(\sqrt{1+x}-1\)，就乘共轭式 \(\sqrt{1+x}+1\)，把根式差变成有理式。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">共轭式中间是“加号”；乘的时候分子分母都要乘，别只乘分子。</span>结果是 \(\frac12\)，不是 \(0\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">有理化利用平方差 \((\sqrt A-\sqrt B)(\sqrt A+\sqrt B)=A-B\)，把“根式差”转成“整式差”，从而暴露与分母相同的零因子 \(x\)，约分后再代入。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s5">
+  <div class="sol-head">
+    <span class="q-num">005</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：∞/∞ 型 · 抓大头</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to \infty}\frac{3x^{3}-2x+1}{2x^{3}+x^{2}-5} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：这是 \(\frac{\infty}{\infty}\) 型，分子分母同除以最高次幂 \(x^{3}\)。</p>\[ \frac{3x^{3}-2x+1}{2x^{3}+x^{2}-5}=\frac{3-\frac{2}{x^{2}}+\frac{1}{x^{3}}}{2+\frac{1}{x}-\frac{5}{x^{3}}} \]<p>第二步：令 \(x\to\infty\)，所有含 \(\frac1x\) 的项都趋于 \(0\)。</p>\[ \to\frac{3-0+0}{2+0-0}=\frac32 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分子分母同除以最高次幂 \(x^{3}\)，低次项自动归零。</span>这就是“抓大头”的标准写法。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">只除分子或只除分母都会错；\(\frac{\infty}{\infty}\) 不是 \(1\)。</span>结果看最高次项系数之比：\(\frac32\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">抓大头：\(\frac{\infty}{\infty}\) 型同除最高次幂 \(x^{3}\)，低次项相对最高次项趋于 0；极限只由最高次项系数之比决定，本题为 \(\frac32\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s6">
+  <div class="sol-head">
+    <span class="q-num">006</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：∞/∞ 型 · 根式抓大头</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to +\infty}\frac{\sqrt{4x^{2}+x+1}}{x+2} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：这是 \(\frac{\infty}{\infty}\) 型。因为 \(x\to+\infty\)，所以 \(x>0\)，有 \(x=\sqrt{x^{2}}\)。</p><p>第二步：分子分母同除以 \(x\)。</p>\[ \frac{\sqrt{4x^{2}+x+1}}{x+2}=\frac{\sqrt{4+\frac1x+\frac1{x^{2}}}}{1+\frac2x} \]<p>第三步：令 \(x\to+\infty\)。</p>\[ \to\frac{\sqrt{4+0+0}}{1+0}=2 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">根号内除以 \(x^{2}\)，根号外除以 \(x\)，因为 \(x>0\) 时 \(x=\sqrt{x^{2}}\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">若改为 \(x\to-\infty\)，则 \(\sqrt{x^{2}}=-x\)，答案会变成 \(-2\)。</span>本题是 \(+\infty\)，不要多写负号。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">根式抓大头：\(x\to+\infty\) 时 \(x>0\)，有 \(x=\sqrt{x^{2}}\)，所以根号内除 \(x^{2}\)、根号外除 \(x\)。若改为 \(x\to-\infty\)，则 \(\sqrt{x^{2}}=-x\)，结果会变号。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s7">
+  <div class="sol-head">
+    <span class="q-num">007</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：等价无穷小 (1-cos xsimrac{x^{2}}2)</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{1-\cos x}{x^{2}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：用半角公式把 \(1-\cos x\) 化成平方。</p>\[ 1-\cos x=2\sin^{2}\frac{x}{2} \]<p>第二步：当 \(x\to0\) 时，\(\sin\frac{x}{2}\sim\frac{x}{2}\)。</p>\[ 1-\cos x\sim2\left(\frac{x}{2}\right)^{2}=\frac{x^{2}}{2} \]<p>第三步：代回原式。</p>\[ \frac{1-\cos x}{x^{2}}\to\frac{\frac{x^{2}}{2}}{x^{2}}=\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">记住 \(1-\cos x\sim\frac{x^{2}}2\)，一步出结果。</span>它是 \(x\) 的二阶无穷小，不是一阶。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">系数 \(\frac12\) 最容易漏；\(1-\cos x\) 不能替换成 \(x^{2}\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(1-\cos x=2\sin^{2}\frac x2\sim2\left(\frac x2\right)^{2}=\frac{x^{2}}2\)。等价无穷小替换要求整体因子，本题分子正是整体。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s8">
+  <div class="sol-head">
+    <span class="q-num">008</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：等价无穷小 (e^{u}-1sim u)</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{e^{2x}-1}{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：令 \(t=2x\)，则 \(x\to0\) 时 \(t\to0\)。</p><p>第二步：凑标准形式 \(e^{t}-1\sim t\)。</p>\[ \frac{e^{2x}-1}{x}=2\cdot\frac{e^{2x}-1}{2x}=2\cdot\frac{e^{t}-1}{t} \]<p>第三步：由 \(\frac{e^{t}-1}{t}\to1\)，得原式 \(=2\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">把 \(e^{2x}-1\) 配成 \(e^{t}-1\)，前面补系数 \(2\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(e^{2x}-1\sim2x\)，不是 \(x\)；前面的系数 \(2\) 必须保留。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(e^{u}-1\sim u\)（\(u\to0\)），由重要极限 \(\lim_{u\to0}\frac{e^{u}-1}{u}=1\) 得到。本题 \(u=2x\)，所以 \(e^{2x}-1\sim2x\)。</span></p>
+  </div>
+</article>
+<h2 class="sec-title" id="ssec2">二、进阶计算</h2>
+<p class="sec-sub">等价无穷小 · 两个重要极限 · ∞−∞ 型</p>
+
+<article class="sol-card" id="s9">
+  <div class="sol-head">
+    <span class="q-num">009</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：对数与正弦的等价替换</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{\ln(1+3x)}{\sin 2x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分别找分子、分母的等价无穷小。</p>\[ \ln(1+3x)\sim3x,\qquad \sin2x\sim2x \]<p>第二步：原式是“分子除以分母”的纯乘除结构，可以整体替换。</p>\[ \frac{\ln(1+3x)}{\sin2x}\sim\frac{3x}{2x}=\frac32 \]<p>所以原极限 \(=\frac32\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分子分母都是“整体乘除”，可以分别等价替换。</span>替换后 \(x\) 直接约掉。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">若分子出现 \(\ln(1+3x)-3x\) 这类“加减”，就不能各自替换后相减。</span>本题是纯乘除，才可以放心换。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(\ln(1+u)\sim u\)、\(\sin u\sim u\)（\(u\to0\)）。分子、分母都是整体乘除因子，可分别替换；替换后 \(x\) 约掉。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s10">
+  <div class="sol-head">
+    <span class="q-num">010</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：整体代换 + 二倍角</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{1-\cos 2x}{x\sin x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：把 \(2x\) 看成整体，用 \(1-\cos t\sim\frac{t^{2}}{2}\)。</p>\[ 1-\cos2x\sim\frac{(2x)^{2}}{2}=2x^{2} \]<p>第二步：分母用 \(\sin x\sim x\)。</p>\[ x\sin x\sim x\cdot x=x^{2} \]<p>第三步：相除。</p>\[ \frac{1-\cos2x}{x\sin x}\to\frac{2x^{2}}{x^{2}}=2 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">把 \(2x\) 看作整体：\(1-\cos2x\sim\frac{(2x)^2}{2}=2x^{2}\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">漏掉平方里的 \(2\)，写成 \(\frac{x^{2}}2\)，就会得到错误答案 \(\frac12\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(1-\cos t\sim\frac{t^{2}}2\)，令 \(t=2x\) 得 \(1-\cos2x\sim2x^{2}\)；分母 \(x\sin x\sim x^{2}\)。整体替换只适用于乘除因子。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s11">
+  <div class="sol-head">
+    <span class="q-num">011</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：加减法陷阱 · 提取公因式</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{\tan x-\sin x}{x^{3}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：先提取公因式，把“差”化成“乘积”。</p>\[ \tan x-\sin x=\frac{\sin x}{\cos x}-\sin x=\sin x\left(\frac{1-\cos x}{\cos x}\right) \]<p>第二步：分别替换 \(\sin x\sim x\)，\(1-\cos x\sim\frac{x^{2}}{2}\)，\(\cos x\to1\)。</p>\[ \tan x-\sin x\sim x\cdot\frac{\frac{x^{2}}{2}}{1}=\frac{x^{3}}{2} \]<p>第三步：代回。</p>\[ \frac{\tan x-\sin x}{x^{3}}\to\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先把“差”化成“乘积”：\(\tan x-\sin x=\sin x\cdot\frac{1-\cos x}{\cos x}\)，再替换。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">直接写 \(\tan x\sim x\)、\(\sin x\sim x\)，相减得 \(0\)，是经典错误！加减法不能各自等价替换。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">加减法不能各自等价替换：\(\tan x-\sin x\) 的首项相消，直接换成 \(x-x\) 会得到 0。必须先提公因式化为乘积 \(\sin x\cdot\frac{1-\cos x}{\cos x}\)，再替换。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s12">
+  <div class="sol-head">
+    <span class="q-num">012</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：首项抵消 · 泰勒/洛必达</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{x-\sin x}{x^{3}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：直接替换会得到 \(x-x=0\)，说明首项抵消，必须看更高阶。用泰勒展开：</p>\[ \sin x=x-\frac{x^{3}}{6}+o(x^{3}) \]<p>第二步：相减。</p>\[ x-\sin x=\frac{x^{3}}{6}+o(x^{3}) \]<p>第三步：代回。</p>\[ \frac{x-\sin x}{x^{3}}\to\frac16 \]<p>也可用洛必达两次：\(\frac{1-\cos x}{3x^{2}}\to\frac{x^{2}/2}{3x^{2}}=\frac16\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(x-\sin x\) 的首项 \(x\) 被抵消，必须看下一阶：\(\sin x=x-\frac{x^{3}}{6}+o(x^{3})\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(x-\sin x\sim x-x=0\) 是错的；它实际是 \(\frac{x^{3}}{6}\) 级别的无穷小。</span>遇到“减完为 0”，立刻换泰勒或洛必达。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">泰勒展开 \(\sin x=x-\frac{x^{3}}6+o(x^{3})\)。首项 \(x\) 抵消后，\(x-\sin x\sim\frac{x^{3}}6\)，所以极限为 \(\frac16\)；也可用洛必达两次。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s13">
+  <div class="sol-head">
+    <span class="q-num">013</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 第二个重要极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to \infty}\left(1+\frac{2}{x}\right)^{3x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：令 \(t=\frac2x\)，则 \(x=\frac2t\)，且 \(x\to\infty\) 时 \(t\to0\)。</p><p>第二步：把指数 \(3x\) 用 \(t\) 表示：\(3x=\frac{6}{t}\)。</p>\[ \left(1+\frac2x\right)^{3x}=(1+t)^{6/t}=\left[(1+t)^{1/t}\right]^{6} \]<p>第三步：由 \(\lim_{t\to0}(1+t)^{1/t}=e\)，得原式 \(=e^{6}\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">凑出 \(\left(1+\frac2x\right)^{x/2}\to e\)，再把指数配成 \(6\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">指数是 \(3x\)，不是 \(x\)，所以是 \(e^{6}\) 不是 \(e^{2}\)；\(1^{\infty}\) 绝不能直接写 \(1\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限 \(\lim_{t\to0}(1+t)^{1/t}=e\)。\(1^{\infty}\) 型通过凑 \((1+\alpha)^{1/\alpha}\) 处理，指数必须整体配平；本题配出 \(e^{6}\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s14">
+  <div class="sol-head">
+    <span class="q-num">014</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 负号处理</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}(1-3x)^{\frac{1}{x}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：令 \(t=-3x\)，则 \(x=-\frac{t}{3}\)，\(\frac1x=-\frac3t\)。</p><p>第二步：凑第二个重要极限。</p>\[ (1-3x)^{1/x}=(1+t)^{-3/t}=\left[(1+t)^{1/t}\right]^{-3} \]<p>第三步：取极限。</p>\[ \to e^{-3} \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">令 \(t=-3x\)，指数自然凑成 \(-3\)。</span>负号要跟着指数一起走。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">结果是 \(e^{-3}\)，不是 \(e^{3}\)；底数 \(1-3x\) 中的负号不能丢。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">令 \(t=-3x\)，则 \((1-3x)^{1/x}=(1+t)^{-3/t}\to e^{-3}\)。负号属于无穷小 \(t\)，指数配成 \(-3\)，不要漏号。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s15">
+  <div class="sol-head">
+    <span class="q-num">015</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 先化底数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to \infty}\left(\frac{x+1}{x-1}\right)^{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：先把底数化成“\(1+\) 无穷小”的形式。</p>\[ \frac{x+1}{x-1}=1+\frac{2}{x-1} \]<p>第二步：令 \(u=x-1\)，则 \(u\to\infty\)，且 \(x=u+1\)。</p>\[ \left(1+\frac2u\right)^{x}=\left(1+\frac2u\right)^{u+1}=\left[\left(1+\frac2u\right)^{u/2}\right]^{2}\left(1+\frac2u\right) \]<p>第三步：中括号部分趋于 \(e\)，最后因子趋于 \(1\)。</p>\[ \to e^{2}\cdot1=e^{2} \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先写成 \(1+\frac{2}{x-1}\)，再令 \(u=x-1\) 凑重要极限。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">指数 \(x=u+1\) 多出的 \(1\) 次方极限为 \(1\)，不能丢；答案是 \(e^{2}\)，不是 \(e\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(1^{\infty}\) 型先化底数为 \(1+\alpha\)：\(\frac{x+1}{x-1}=1+\frac{2}{x-1}\)。令 \(u=x-1\)，指数 \(x=u+1\)，多出的 1 次方极限为 1，所以结果为 \(e^{2}\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s16">
+  <div class="sol-head">
+    <span class="q-num">016</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：∞−∞ 型 · 分子有理化</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to +\infty}\left(\sqrt{x^{2}+x}-\sqrt{x^{2}-x}\right) \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\infty-\infty\) 型，先分子有理化。</p>\[ \sqrt{x^{2}+x}-\sqrt{x^{2}-x}=\frac{(x^{2}+x)-(x^{2}-x)}{\sqrt{x^{2}+x}+\sqrt{x^{2}-x}}=\frac{2x}{\sqrt{x^{2}+x}+\sqrt{x^{2}-x}} \]<p>第二步：分子分母同除以 \(x\)（\(x>0\)）。</p>\[ =\frac{2}{\sqrt{1+\frac1x}+\sqrt{1-\frac1x}} \]<p>第三步：令 \(x\to+\infty\)。</p>\[ \to\frac{2}{1+1}=1 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">乘共轭式，把“差”变成 \(\frac{2x}{\sqrt{}+\sqrt{}}\)，再同除 \(x\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\infty-\infty\) 不能直接写 \(0\)；有理化后分子是 \(2x\)，分母两个根式都等价于 \(x\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(\infty-\infty\) 有理化：乘共轭式把“差”化为“商”，再同除 \(x\)。本题 \(x\to+\infty\)，所以 \(x=\sqrt{x^{2}}\)，不变号；结果为 1。</span></p>
+  </div>
+</article>
+<h2 class="sec-title" id="ssec3">三、易错与综合</h2>
+<p class="sec-sub">通分 · 0·∞ · 无穷小乘有界量 · 分段点连续</p>
+
+<article class="sol-card" id="s17">
+  <div class="sol-head">
+    <span class="q-num">017</span>
+    <span class="q-level trap">易错</span>
+    <span class="sol-point">考点：∞−∞ 型 · 通分</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 1}\left(\frac{1}{x-1}-\frac{2}{x^{2}-1}\right) \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\infty-\infty\) 型，先通分。公分母为 \((x-1)(x+1)=x^{2}-1\)。</p>\[ \frac{1}{x-1}-\frac{2}{x^{2}-1}=\frac{x+1-2}{(x-1)(x+1)}=\frac{x-1}{(x-1)(x+1)} \]<p>第二步：约去 \(x-1\)（\(x\neq1\)）。</p>\[ =\frac{1}{x+1} \]<p>第三步：代入 \(x=1\)。</p>\[ \to\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">通分是破局点：公分母 \((x-1)(x+1)\)，通分后出现可约的 \(x-1\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">第二项 \(\frac{2}{x^{2}-1}\) 通分后分子是 \(2\)，不是 \(2(x+1)\)；约分后别忘了 \(x\to1\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(\infty-\infty\) 通分：公分母为 \((x-1)(x+1)=x^{2}-1\)，通分后分子出现 \(x-1\)，约去后化为 \(\frac1{x+1}\)，再代入 \(x=1\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s18">
+  <div class="sol-head">
+    <span class="q-num">018</span>
+    <span class="q-level trap">易错</span>
+    <span class="sol-point">考点：0·∞ 型 · 化为标准极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0} x\cot x \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：把 \(\cot x\) 写成 \(\frac{\cos x}{\sin x}\)，化为 \(\frac00\) 型。</p>\[ x\cot x=x\cdot\frac{\cos x}{\sin x}=\frac{x}{\sin x}\cdot\cos x \]<p>第二步：用第一个重要极限 \(\frac{x}{\sin x}\to1\)，且 \(\cos x\to1\)。</p>\[ \to1\cdot1=1 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">把 \(\cot x\) 写成 \(\frac{\cos x}{\sin x}\)，凑出 \(\frac{x}{\sin x}\to1\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\cot0\) 不存在，不能直接代入；\(\frac{x}{\sin x}\to1\)，不是 \(0\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(0\cdot\infty\) 型转化为标准极限：\(\cot x=\frac{\cos x}{\sin x}\)，于是 \(x\cot x=\frac{x}{\sin x}\cos x\to1\)。不能直接写“0 乘无穷等于 0”。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s19">
+  <div class="sol-head">
+    <span class="q-num">019</span>
+    <span class="q-level trap">易错</span>
+    <span class="sol-point">考点：无穷小 × 有界量</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0} x^{2}\sin\frac{1}{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\sin\frac1x\) 在 \(x\to0\) 时振荡，但始终有界：\(\left|\sin\frac1x\right|\le1\)。</p><p>第二步：放大绝对值。</p>\[ 0\le\left|x^{2}\sin\frac1x\right|\le x^{2} \]<p>第三步：两边都趋于 \(0\)，由夹逼定理得</p>\[ \lim_{x\to0}x^{2}\sin\frac1x=0 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\sin\frac1x\) 有界，\(x^{2}\to0\)，所以“无穷小 × 有界量”仍是无穷小。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\lim_{x\to0}\sin\frac1x\) 不存在，不能把极限拆成两个极限相乘；“不存在”不能直接参加四则运算，要用夹逼。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">无穷小乘有界量：\(\left|\sin\frac1x\right|\le1\)，所以 \(0\le\left|x^{2}\sin\frac1x\right|\le x^{2}\to0\)，由夹逼定理得极限为 0。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s20">
+  <div class="sol-head">
+    <span class="q-num">020</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：分段点连续 · 左右极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{1-\cos x}{x^{2}}, & x<0,\\[6pt] a+x, & x\geq 0.\end{cases} \]
+<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求常数 \(a\) 的值。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：求左极限（\(x<0\)）。</p>\[ \lim_{x\to0^{-}}f(x)=\lim_{x\to0^{-}}\frac{1-\cos x}{x^{2}}=\frac12 \]<p>第二步：求右极限与函数值（\(x\ge0\)）。</p>\[ \lim_{x\to0^{+}}f(x)=\lim_{x\to0^{+}}(a+x)=a,\qquad f(0)=a \]<p>第三步：连续要求左极限 \(=\) 右极限 \(=\) 函数值。</p>\[ \frac12=a=a\quad\Rightarrow\quad a=\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分段点连续的充要条件：\(\lim_{x\to0^-}f(x)=\lim_{x\to0^+}f(x)=f(0)\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">只算右极限会漏掉左极限；\(f(0)=a\) 也要算进去；左极限是 \(\frac12\)，不是 \(0\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">连续定义：\(f\) 在 \(x_0\) 连续 \(\Leftrightarrow\lim_{x\to x_0^-}f=\lim_{x\to x_0^+}f=f(x_0)\)。分段点必须分别求左右极限，再与函数值比较。</span></p>
+  </div>
+</article>
+<h2 class="sec-title" id="ssec4">四、常规未定式与有理化</h2>
+<p class="sec-sub">0/0 · ∞/∞ · 根式有理化 · 立方差 · 基础参数</p>
+
+<article class="sol-card" id="s21">
+  <div class="sol-head">
+    <span class="q-num">021</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：0/0 型 · 因式分解</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">填空：</p>\[ \lim_{x\to1}\frac{x^{2}+2x-3}{x^{2}-1}=\underline{\qquad} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：代入 \(x=1\)，分子、分母都为 \(0\)，是 \(\frac00\) 型。</p><p>第二步：分解因式。</p>\[ x^{2}+2x-3=(x+3)(x-1),\qquad x^{2}-1=(x-1)(x+1) \]<p>第三步：约去零因子 \(x-1\)，再代入。</p>\[ \frac{(x+3)(x-1)}{(x-1)(x+1)}=\frac{x+3}{x+1}\to\frac{4}{2}=2 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(x\to1\) 但 \(x\neq1\)，所以可以约去 \(x-1\)。</span>约分后分母极限为 \(2\neq0\)，可直接代入。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">分子分解为 \((x+3)(x-1)\)，不是 \((x-3)(x+1)\)。</span>最后是 \(\frac{4}{2}=2\)，别把符号带错。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">0/0 型极限的处理依据是“极限只与去心邻域有关”：\(x\to1\) 时 \(x\neq1\)，零因子可以约去。约分后若分母极限非零，再用四则运算法则代入。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s22">
+  <div class="sol-head">
+    <span class="q-num">022</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：立方差 + 平方差</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to2}\frac{x^{3}-8}{x^{2}-4} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：代入 \(x=2\)，得 \(\frac00\) 型。</p><p>第二步：分别分解。</p>\[ x^{3}-8=(x-2)(x^{2}+2x+4),\qquad x^{2}-4=(x-2)(x+2) \]<p>第三步：约去 \(x-2\)，代入。</p>\[ \frac{x^{2}+2x+4}{x+2}\to\frac{4+4+4}{4}=3 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">立方差公式 \(a^{3}-b^{3}=(a-b)(a^{2}+ab+b^{2})\) 是破局点。</span>本题 \(a=x,b=2\)，分解出 \((x-2)(x^{2}+2x+4)\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(x^{3}-8\neq(x-2)^{3}\)！</span>立方差剩下的是二次三项式 \(x^{2}+2x+4\)，不是完全立方。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">立方差公式属于高中代数；高数中它与“约去零因子”配合，专门处理 0/0 型。约分后剩余因式在 \(x=2\) 连续，可直接代入。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s23">
+  <div class="sol-head">
+    <span class="q-num">023</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：0/0 型 · 分子有理化</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sqrt{4+x}-2}{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：代入得 \(\frac00\) 型，分子含根式差，考虑有理化。</p><p>第二步：分子分母同乘 \(\sqrt{4+x}+2\)。</p>\[ \frac{\sqrt{4+x}-2}{x}=\frac{(4+x)-4}{x(\sqrt{4+x}+2)}=\frac{x}{x(\sqrt{4+x}+2)} \]<p>第三步：约去 \(x\)，代入 \(x=0\)。</p>\[ \frac{1}{\sqrt{4+x}+2}\to\frac{1}{2+2}=\frac14 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">看到 \(\sqrt{4+x}-2\)，就乘共轭式 \(\sqrt{4+x}+2\)，把根式差化为有理式。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">分子有理化后分子是 \((4+x)-4=x\)，不是 \(4+x-2\)。</span>分母也要乘共轭式，约去 \(x\) 后才能代入。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">有理化依据平方差公式 \((\sqrt A-\sqrt B)(\sqrt A+\sqrt B)=A-B\)。它把“根式差”转成“整式差”，从而暴露与分母相同的零因子。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s24">
+  <div class="sol-head">
+    <span class="q-num">024</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：0/0 型 · 分子有理化</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sqrt{1+x}-\sqrt{1-x}}{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：代入得 \(\frac00\) 型。</p><p>第二步：分子分母同乘 \(\sqrt{1+x}+\sqrt{1-x}\)。</p>\[ \frac{(1+x)-(1-x)}{x(\sqrt{1+x}+\sqrt{1-x})}=\frac{2x}{x(\sqrt{1+x}+\sqrt{1-x})} \]<p>第三步：约去 \(x\)，代入。</p>\[ \frac{2}{\sqrt{1+x}+\sqrt{1-x}}\to\frac{2}{1+1}=1 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">两个根式相减，乘它们的共轭式 \(\sqrt{1+x}+\sqrt{1-x}\)，分子立即变成 \(2x\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">分子是 \((1+x)-(1-x)=2x\)，不要漏掉负负得正。</span>约去 \(x\) 后分母趋于 2，结果是 1。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">有理化的核心是平方差公式。本题两个根式都趋于 1，直接代入会得到 \(\frac00\)，必须先把“差”变成“商”。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s25">
+  <div class="sol-head">
+    <span class="q-num">025</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：∞/∞ 型 · 抓大头</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\frac{2x^{2}+3x-1}{4x^{2}-x+5} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分子分母同除以最高次幂 \(x^{2}\)。</p>\[ \frac{2+\frac3x-\frac1{x^{2}}}{4-\frac1x+\frac5{x^{2}}} \]<p>第二步：令 \(x\to\infty\)，含 \(\frac1x\) 的项都趋于 0。</p>\[ \to\frac{2}{4}=\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">最高次项系数之比就是答案：\(\frac{2}{4}=\frac12\)。</span>严格写法是分子分母同除 \(x^{2}\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\frac{\infty}{\infty}\) 不是 1，也不是 0；要看最高次项。</span>本题分子分母同为二次，极限为非零常数。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">抓大头的原理：\(x\to\infty\) 时，低次项相对最高次项趋于 0。同除最高次幂后，只剩最高次项系数参与极限。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s26">
+  <div class="sol-head">
+    <span class="q-num">026</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：∞/∞ 型 · 分母次数更高</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\frac{2x^{2}+1}{x^{3}-3x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分子分母同除以 \(x^{3}\)。</p>\[ \frac{\frac2x+\frac1{x^{3}}}{1-\frac3{x^{2}}} \]<p>第二步：令 \(x\to\infty\)。</p>\[ \to\frac{0}{1}=0 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分母次数高于分子，\(\frac{\infty}{\infty}\) 的极限为 0。</span>因为分母增长更快，整体被“压到” 0。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要因为分子、分母都趋于无穷就写“不存在”。</span>次数不同时，极限可能是 0 或无穷；本题分母次数高，结果为 0。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">无穷大比较：多项式在无穷远处由最高次项主导。分母次数高，则分式趋于 0；分子次数高，则分式趋于无穷。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s27">
+  <div class="sol-head">
+    <span class="q-num">027</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：∞−∞ 型 · 分子有理化</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to+\infty}\left(\sqrt{x^{2}+2x}-x\right) \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\infty-\infty\) 型，先乘共轭式。</p>\[ \sqrt{x^{2}+2x}-x=\frac{(x^{2}+2x)-x^{2}}{\sqrt{x^{2}+2x}+x}=\frac{2x}{\sqrt{x^{2}+2x}+x} \]<p>第二步：分子分母同除以 \(x\)（\(x>0\)）。</p>\[ =\frac{2}{\sqrt{1+\frac2x}+1} \]<p>第三步：令 \(x\to+\infty\)。</p>\[ \to\frac{2}{1+1}=1 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">乘共轭式，把“根式差”变成“分式”，再同除 \(x\)。</span>这类题不要直接说“无穷减无穷等于 0”。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\infty-\infty\) 不能直接写 0；有理化后分子是 \(2x\)，分母两根式都等价于 \(x\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">∞−∞ 型的常规转化是“有理化”或“通分”，把它变成 \(\frac{\infty}{\infty}\) 或 \(\frac00\)。本题 \(x\to+\infty\)，所以 \(x=\sqrt{x^{2}}\)，同除 \(x\) 不变号。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s28">
+  <div class="sol-head">
+    <span class="q-num">028</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：∞−∞ 型 · 通分</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to1}\left(\frac{1}{x-1}-\frac{3}{x^{3}-1}\right) \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：公分母为 \(x^{3}-1=(x-1)(x^{2}+x+1)\)。</p>\[ \frac{1}{x-1}-\frac{3}{x^{3}-1}=\frac{x^{2}+x+1-3}{(x-1)(x^{2}+x+1)} \]<p>第二步：化简分子。</p>\[ x^{2}+x-2=(x+2)(x-1) \]<p>第三步：约去 \(x-1\)，代入。</p>\[ \frac{x+2}{x^{2}+x+1}\to\frac{3}{3}=1 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\infty-\infty\) 先通分，化成分式后会出现零因子 \(x-1\)。</span>公分母是 \(x^{3}-1\)，不是 \(x-1\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">第二项通分后分子是 \(3\)，不是 \(3(x^{2}+x+1)\)。</span>通分时要乘的是 \(1\)，因为 \(x^{3}-1\) 已经包含 \(x-1\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">通分把“无穷减无穷”转化为 \(\frac00\)：两个分式在 \(x=1\) 附近都发散，但差可能有限。通分后约去零因子，是处理分式差的通用方法。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s29">
+  <div class="sol-head">
+    <span class="q-num">029</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：等价无穷小 · 整体代换</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{1-\cos3x}{x^{2}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：把 \(3x\) 看成整体，用 \(1-\cos t\sim\frac{t^{2}}2\)。</p>\[ 1-\cos3x\sim\frac{(3x)^{2}}2=\frac{9x^{2}}2 \]<p>第二步：代回。</p>\[ \frac{1-\cos3x}{x^{2}}\to\frac{9x^{2}/2}{x^{2}}=\frac92 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(1-\cos t\sim\frac{t^{2}}2\)，令 \(t=3x\)，系数要平方得 9。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">最容易错成 \(\frac{3x^{2}}2\) 或 \(\frac{x^{2}}2\)。</span>\((3x)^{2}=9x^{2}\)，不是 \(3x^{2}\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">等价无穷小 \(1-\cos t\sim\frac{t^{2}}2\) 由 \(1-\cos t=2\sin^{2}(t/2)\) 与 \(\sin u\sim u\) 推出。替换时要把整个 \(3x\) 当作 \(t\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s30">
+  <div class="sol-head">
+    <span class="q-num">030</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：等价无穷小 · 乘除替换</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{e^{3x}-1}{\sin2x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分别替换分子、分母。</p>\[ e^{3x}-1\sim3x,\qquad \sin2x\sim2x \]<p>第二步：原式是纯乘除结构，可以整体替换。</p>\[ \frac{e^{3x}-1}{\sin2x}\sim\frac{3x}{2x}=\frac32 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(e^{u}-1\sim u\)，\(\sin u\sim u\)；本题 \(u\) 分别是 \(3x\) 和 \(2x\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">别把 \(e^{3x}-1\) 写成 \(3x-1\)，也别把 \(\sin2x\) 写成 \(2x-1\)。</span>等价替换的是整个无穷小，不是把函数“拆开”。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">常用等价无穷小 \(e^{u}-1\sim u\)、\(\sin u\sim u\)（\(u\to0\)）。替换只适用于乘除中的整体因子，本题分子分母都是整体，所以可以直接换。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s31">
+  <div class="sol-head">
+    <span class="q-num">031</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：等价无穷小 · \(\ln(1+u)\sim u\)</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\ln(1-2x)}{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：把 \(-2x\) 看成整体 \(u\)。</p>\[ \ln(1-2x)\sim-2x \]<p>第二步：代回。</p>\[ \frac{\ln(1-2x)}{x}\to\frac{-2x}{x}=-2 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\ln(1+u)\sim u\)（\(u\to0\)），本题 \(u=-2x\)。</span>负号要保留。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\ln(1-2x)\sim-2x\)，不是 \(2x\)，也不是 \(-2\)。</span>最后除以 \(x\) 后才得到 \(-2\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(\ln(1+u)\sim u\) 来自重要极限 \(\lim_{u\to0}\frac{\ln(1+u)}u=1\)。它是等价无穷小，只可在乘除中整体替换。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s32">
+  <div class="sol-head">
+    <span class="q-num">032</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：指数函数的等价无穷小</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">填空（\(a>0\)）：</p>\[ \lim_{x\to0}\frac{a^{x}-1}{x}=\underline{\qquad} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：令 \(t=a^{x}-1\)，则 \(t\to0\)，且 \(a^{x}=1+t\)。</p><p>第二步：两边取对数，\(x\ln a=\ln(1+t)\)，所以 \(x=\frac{\ln(1+t)}{\ln a}\)。</p><p>第三步：代入并利用 \(\ln(1+t)\sim t\)。</p>\[ \frac{a^{x}-1}{x}=\frac{t}{x}=\frac{t\ln a}{\ln(1+t)}\to\ln a \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(a^{x}-1\sim x\ln a\)，这是指数函数在 0 点的标准等价无穷小。</span>令 \(a^{x}=e^{x\ln a}\) 也可直接得到。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">答案含 \(\ln a\)，不是 \(a\)；当 \(0<a<1\) 时 \(\ln a<0\)，符号要保留。</span>换元时不要漏掉分母 \(\ln a\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">由 \(a^{x}=e^{x\ln a}\) 与 \(e^{u}-1\sim u\) 得 \(a^{x}-1\sim x\ln a\)。这是 \(e^{u}-1\sim u\) 的推广，常用于含指数函数的 0/0 型。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s33">
+  <div class="sol-head">
+    <span class="q-num">033</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：等价无穷小 · \(\tan u\sim u\)</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\tan2x}{3x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\tan2x\sim2x\)。</p><p>第二步：代回。</p>\[ \frac{\tan2x}{3x}\sim\frac{2x}{3x}=\frac23 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\tan u\sim u\)，令 \(u=2x\)，分子等价于 \(2x\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要把 \(\tan2x\) 换成 \(2x\) 后再把分母的 3 漏掉。</span>结果是 \(\frac23\)，不是 \(\frac32\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(\tan u\sim u\) 由 \(\tan u=\frac{\sin u}{\cos u}\)、\(\sin u\sim u\)、\(\cos u\to1\) 推出。它与 \(\sin u\sim u\) 一样，是乘除替换的常用工具。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s34">
+  <div class="sol-head">
+    <span class="q-num">034</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：等价无穷小 · 分母整体替换</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{1-\cos x}{x\tan x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分子 \(1-\cos x\sim\frac{x^{2}}2\)。</p><p>第二步：分母 \(x\tan x\sim x\cdot x=x^{2}\)。</p><p>第三步：相除。</p>\[ \frac{1-\cos x}{x\tan x}\sim\frac{x^{2}/2}{x^{2}}=\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分子是二阶无穷小，分母 \(x\tan x\) 也是二阶，系数决定结果。</span>\(\tan x\sim x\) 只替换分母中的因子。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">分母是 \(x\tan x\)，不要把它替换成 \(x\cdot1\)。</span>\(\tan x\sim x\)，所以分母等价于 \(x^{2}\)，不是 \(x\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">等价无穷小替换要求“整体因子”：\(x\tan x\) 是乘积，可以把 \(\tan x\) 换成 \(x\)。分子 \(1-\cos x\sim\frac{x^{2}}2\) 也是整体。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s35">
+  <div class="sol-head">
+    <span class="q-num">035</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：首项抵消 · 泰勒/洛必达</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sin x-x}{x^{3}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：直接用 \(\sin x\sim x\) 会得到 \(x-x=0\)，说明首项抵消，必须看更高阶。</p><p>第二步：用泰勒展开。</p>\[ \sin x=x-\frac{x^{3}}6+o(x^{3}) \]<p>第三步：相减并代回。</p>\[ \sin x-x=-\frac{x^{3}}6+o(x^{3})\quad\Rightarrow\quad \frac{\sin x-x}{x^{3}}\to-\frac16 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">首项抵消时，要展开到第一个非零项：\(\sin x-x\sim-\frac{x^{3}}6\)。</span>也可用洛必达两次。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\sin x-x\sim x-x=0\) 是错误写法；结果是 \(-\frac16\)，负号最容易丢。</span>注意与 \(\frac{x-\sin x}{x^{3}}\to\frac16\) 区分。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">泰勒展开 \(\sin x=x-\frac{x^{3}}6+o(x^{3})\) 揭示了首项抵消后的主部。等价无穷小只能替换“首项不为零”的因子；相减抵消时必须看更高阶。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s36">
+  <div class="sol-head">
+    <span class="q-num">036</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：首项抵消 · 洛必达</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\tan x-x}{x^{3}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\tan x\sim x\) 会得到 \(x-x=0\)，首项抵消，改用洛必达。</p>\[ \lim_{x\to0}\frac{\tan x-x}{x^{3}}=\lim_{x\to0}\frac{\sec^{2}x-1}{3x^{2}} \]<p>第二步：用 \(\sec^{2}x-1=\tan^{2}x\)。</p>\[ =\lim_{x\to0}\frac{\tan^{2}x}{3x^{2}} \]<p>第三步：\(\tan x\sim x\)。</p>\[ =\frac13 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\sec^{2}x-1=\tan^{2}x\)，再用 \(\tan x\sim x\)，一步得到 \(\frac13\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">洛必达后分子是 \(\sec^{2}x-1\)，不是 \(\sec^{2}x\)；忘记减 1 会算成无穷。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">洛必达法则适用于 \(\frac00\) 或 \(\frac{\infty}{\infty}\)，且要求导数比的极限存在。本题求导后仍是 \(\frac00\)，用恒等式化简最快。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s37">
+  <div class="sol-head">
+    <span class="q-num">037</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 分子分母分别替换</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sqrt{1+x}-1}{\sin x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\sqrt{1+x}-1\sim\frac{x}2\)。</p><p>第二步：\(\sin x\sim x\)。</p><p>第三步：相除。</p>\[ \frac{\sqrt{1+x}-1}{\sin x}\sim\frac{x/2}{x}=\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\sqrt{1+x}-1\sim\frac{x}2\)，可由有理化或 \((1+x)^{1/2}-1\sim\frac12x\) 得到。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\sqrt{1+x}-1\sim x\) 是错的，系数是 \(\frac12\)。</span>分母 \(\sin x\sim x\)，所以答案是 \(\frac12\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">二项式等价 \((1+x)^{\alpha}-1\sim\alpha x\)（\(\alpha\neq0\)）。本题 \(\alpha=\frac12\)；也可分子有理化得到同样结果。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s38">
+  <div class="sol-head">
+    <span class="q-num">038</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 第二重要极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\left(\frac{2x+1}{2x-1}\right)^{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：先把底数化成 \(1+\) 无穷小。</p>\[ \frac{2x+1}{2x-1}=1+\frac{2}{2x-1} \]<p>第二步：令 \(u=2x-1\)，则 \(u\to\infty\)，\(x=\frac{u+1}{2}\)。</p>\[ \left(1+\frac2u\right)^{x}=\left[\left(1+\frac2u\right)^{u/2}\right]\cdot\left(1+\frac2u\right)^{1/2} \]<p>第三步：中括号趋于 \(e\)，最后因子趋于 1。</p>\[ \to e\cdot1=e \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">把底数写成 \(1+\frac{2}{2x-1}\)，再令 \(u=2x-1\) 凑 \((1+\frac2u)^{u/2}\to e\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">底数不是 \(1+\frac1x\)，而是 \(1+\frac{2}{2x-1}\)；指数配平后是 \(e^{1}\)，不是 \(e^{2}\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限 \(\lim_{u\to\infty}(1+\frac{a}{u})^{u}=e^{a}\)。本题 \(\frac{2}{2x-1}=\frac{1}{x-1/2}\)，所以 \(a=1\)，极限为 \(e\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s39">
+  <div class="sol-head">
+    <span class="q-num">039</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 取对数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}(1+\sin x)^{\frac1x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：这是 \(1^{\infty}\) 型，设 \(y=(1+\sin x)^{1/x}\)，取对数。</p>\[ \ln y=\frac{\ln(1+\sin x)}{x} \]<p>第二步：\(\ln(1+\sin x)\sim\sin x\sim x\)。</p>\[ \ln y\to\frac{x}{x}=1 \]<p>第三步：由 \(\ln y\to1\)，得 \(y\to e\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">1^∞ 型先取对数，把指数型极限化成 \(\frac00\) 型。</span>\(\ln(1+\sin x)\sim\sin x\) 是关键。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不能因为底数趋于 1、指数趋于无穷就直接写 1；\(1^{\infty}\) 是未定式。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">处理 \(1^{\infty}\) 的通用方法：取对数，利用 \(\ln(1+u)\sim u\)，把极限转化为 \(\lim \frac{u}{v}\)。也可直接凑第二重要极限。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s40">
+  <div class="sol-head">
+    <span class="q-num">040</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 取对数 + 等价无穷小</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}(\cos x)^{\frac1{x^{2}}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：设 \(y=(\cos x)^{1/x^{2}}\)，取对数。</p>\[ \ln y=\frac{\ln(\cos x)}{x^{2}} \]<p>第二步：\(\cos x=1-(1-\cos x)\)，用 \(\ln(1-u)\sim-u\)。</p>\[ \ln(\cos x)\sim-(1-\cos x)\sim-\frac{x^{2}}2 \]<p>第三步：代回。</p>\[ \ln y\to\frac{-x^{2}/2}{x^{2}}=-\frac12\quad\Rightarrow\quad y\to e^{-1/2} \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\ln\cos x\sim-\frac{x^{2}}2\)，因为 \(\ln(1-u)\sim-u\) 且 \(1-\cos x\sim\frac{x^{2}}2\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不能把 \(\cos x\) 直接替换成 \(1\) 后写 \(1^{\infty}=1\)；要先取对数看指数。</span>结果是 \(e^{-1/2}\)，不是 \(e^{-1}\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">1^∞ 型取对数后，\(\ln\cos x=\ln(1-(1-\cos x))\sim-(1-\cos x)\)。这体现了“先化 1+无穷小，再用 \(\ln(1+u)\sim u\)”的固定套路。</span></p>
+  </div>
+</article>
+<h2 class="sec-title" id="ssec5">五、等价无穷小与两个重要极限</h2>
+<p class="sec-sub">阶的比较 · 1^∞ · 0^0 · ∞^0 · 整体代换</p>
+
+<article class="sol-card" id="s41">
+  <div class="sol-head">
+    <span class="q-num">041</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：等价无穷小 · 整体代换</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">填空：</p><p>当 \(x\to0\) 时，\(1-\cos2x\) 与 \(ax^{2}\) 是等价无穷小，则 \(a=\) ______。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：把 \(2x\) 看成整体，使用 \(1-\cos t\sim\frac{t^{2}}2\)。</p>\[ 1-\cos2x\sim\frac{(2x)^{2}}2=2x^{2} \]<p>第二步：与 \(ax^{2}\) 比较系数。</p>\[ a=2 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(1-\cos2x\sim2x^{2}\)，所以 \(a=2\)。</span>系数来自 \((2x)^{2}\)，平方后是 4，再除以 2。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要写成 \(a=\frac12\) 或 \(a=4\)。</span>常见错误是漏掉平方：\((2x)^2=4x^2\)，再乘 \(\frac12\) 得 \(2x^2\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">等价无穷小的定义：\(\frac{1-\cos2x}{ax^{2}}\to1\)。由 \(1-\cos t\sim\frac{t^{2}}2\) 得分子等价于 \(2x^{2}\)，故 \(a=2\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s42">
+  <div class="sol-head">
+    <span class="q-num">042</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：无穷小的阶</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">填空：</p><p>当 \(x\to0\) 时，\(\ln(1+3x)\) 是 \(x\) 的 ______ 阶无穷小。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：写出等价无穷小。</p>\[ \ln(1+3x)\sim3x \]<p>第二步：与 \(x\) 比较。</p>\[ \frac{\ln(1+3x)}{x}\to3\neq0 \]<p>所以它是 \(x\) 的 1 阶无穷小。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">阶看的是“与 \(x^{k}\) 的比值是否趋于非零常数”，不是看系数 3。</span>\(\ln(1+3x)\sim3x\)，与 \(x\) 同阶。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要因为出现“3x”就答 3 阶。</span>3 只是系数；与 \(x\) 的比值趋于 3，所以是 1 阶。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">无穷小阶的定义：若 \(\frac{\alpha(x)}{x^{k}}\to c\neq0\)，则称 \(\alpha\) 是 \(x\) 的 \(k\) 阶无穷小。本题比值为 3，故 \(k=1\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s43">
+  <div class="sol-head">
+    <span class="q-num">043</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：等价无穷小的辨析</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：下列无穷小中，与 \(x\) 等价的是（ ）</p><div class="options"><div class="opt"><b>A.</b> \(\sin x\)</div><div class="opt"><b>B.</b> \(1-\cos x\)</div><div class="opt"><b>C.</b> \(\tan x-\sin x\)</div><div class="opt"><b>D.</b> \(\ln(1+x^{2})\)</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>逐项与 \(x\) 比较：</p>\[ \frac{\sin x}{x}\to1;\qquad \frac{1-\cos x}{x}\to0 \]\[ \frac{\tan x-\sin x}{x}\to0;\qquad \frac{\ln(1+x^{2})}{x}\to0 \]<p>只有 A 的比值为 1，所以选 A。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">等价要求比值趋于 1，不只是“都趋于 0”。</span>\(\sin x\sim x\)，比值为 1。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">B、C、D 都是比 \(x\) 高阶的无穷小，比值趋于 0，不是等价。</span>\(1-\cos x\) 是二阶，\(\tan x-\sin x\) 是三阶，\(\ln(1+x^{2})\) 是二阶。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">等价无穷小的定义：\(\lim\frac{\alpha}{\beta}=1\)。同阶只要求比值是非零常数；等价要求该常数为 1。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s44">
+  <div class="sol-head">
+    <span class="q-num">044</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：无穷小阶 · 首项抵消</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：当 \(x\to0\) 时，\(x-\sin x\) 是 \(x\) 的（ ）阶无穷小。</p><div class="options"><div class="opt"><b>A.</b> 1</div><div class="opt"><b>B.</b> 2</div><div class="opt"><b>C.</b> 3</div><div class="opt"><b>D.</b> 4</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\sin x=x-\frac{x^{3}}6+o(x^{3})\)，所以</p>\[ x-\sin x=\frac{x^{3}}6+o(x^{3}) \]<p>第二步：与 \(x^{3}\) 比较。</p>\[ \frac{x-\sin x}{x^{3}}\to\frac16\neq0 \]<p>所以是 3 阶，选 C。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">首项 \(x\) 抵消后，主部是 \(\frac{x^{3}}6\)，所以阶数为 3。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不能因为 \(\sin x\sim x\) 就说 \(x-\sin x\) 是 1 阶；相减后首项为 0，必须看下一项。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">无穷小阶由“第一个非零展开项”决定。\(\sin x\) 展开到 \(x^{3}\) 项，\(x\) 被抵消，剩下 \(x^{3}/6\)，故为 3 阶。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s45">
+  <div class="sol-head">
+    <span class="q-num">045</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：无穷小阶的比较</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：当 \(x\to0\) 时，下列无穷小中阶数最高的是（ ）</p><div class="options"><div class="opt"><b>A.</b> \(x^{2}\)</div><div class="opt"><b>B.</b> \(1-\cos x\)</div><div class="opt"><b>C.</b> \(x-\sin x\)</div><div class="opt"><b>D.</b> \(\sin x\)</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>分别判断阶数：</p>\[ x^{2}\text{ 为 2 阶};\quad 1-\cos x\sim\frac{x^{2}}2\text{ 为 2 阶} \]\[ x-\sin x\sim\frac{x^{3}}6\text{ 为 3 阶};\quad \sin x\sim x\text{ 为 1 阶} \]<p>阶数最高的是 C。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">比较阶数就是比较“趋于 0 的速度”：指数越大，趋于 0 越快。</span>\(x^{3}\) 比 \(x^{2}\) 快，\(x^{2}\) 比 \(x\) 快。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">“阶数最高”不是“数值最大”。</span>在 \(x\to0\) 的很小范围内，\(x^{3}\) 最小，但它趋于 0 最快，阶数最高。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">若 \(\alpha\sim c x^{k}\)，则阶数为 \(k\)。比较阶数即比较 \(k\)：\(k\) 越大，无穷小越高阶。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s46">
+  <div class="sol-head">
+    <span class="q-num">046</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 乘除替换</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{1-\cos x}{x\sin2x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分子 \(1-\cos x\sim\frac{x^{2}}2\)。</p><p>第二步：分母 \(x\sin2x\sim x\cdot2x=2x^{2}\)。</p><p>第三步：相除。</p>\[ \frac{1-\cos x}{x\sin2x}\sim\frac{x^{2}/2}{2x^{2}}=\frac14 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分母是 \(x\sin2x\)，\(\sin2x\sim2x\)，所以分母等价于 \(2x^{2}\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">把 \(\sin2x\) 写成 \(2x\) 后，别忘了再乘外面的 \(x\)，分母是 \(2x^{2}\) 而不是 \(2x\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">等价替换只适用于乘除中的整体因子。分母 \(x\sin2x\) 是乘积，可以分别替换；分子 \(1-\cos x\) 也是整体。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s47">
+  <div class="sol-head">
+    <span class="q-num">047</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 分子分母</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{e^{x^{2}}-1}{1-\cos x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(e^{x^{2}}-1\sim x^{2}\)。</p><p>第二步：\(1-\cos x\sim\frac{x^{2}}2\)。</p><p>第三步：相除。</p>\[ \frac{e^{x^{2}}-1}{1-\cos x}\sim\frac{x^{2}}{x^{2}/2}=2 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(e^{u}-1\sim u\)，令 \(u=x^{2}\)，分子等价于 \(x^{2}\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(e^{x^{2}}-1\sim x^{2}\)，不是 \(x^{2}-1\)。</span>指数函数减 1 后才是无穷小。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(e^{u}-1\sim u\) 是 \(e^{u}\) 在 0 点的一阶展开。本题 \(u=x^{2}\) 仍是无穷小，所以可以替换。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s48">
+  <div class="sol-head">
+    <span class="q-num">048</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 对数与三角</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\ln(1+x^{2})}{1-\cos x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\ln(1+x^{2})\sim x^{2}\)。</p><p>第二步：\(1-\cos x\sim\frac{x^{2}}2\)。</p><p>第三步：相除。</p>\[ \frac{\ln(1+x^{2})}{1-\cos x}\sim\frac{x^{2}}{x^{2}/2}=2 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\ln(1+u)\sim u\)，令 \(u=x^{2}\)，分子等价于 \(x^{2}\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\ln(1+x^{2})\sim x^{2}\)，不是 \(x^{2}+1\)。</span>对数里面是 \(1+\) 无穷小，才能用等价。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(\ln(1+u)\sim u\) 要求 \(u\to0\)。本题 \(u=x^{2}\to0\)，所以 \(\ln(1+x^{2})\sim x^{2}\)；分母是标准的二阶无穷小。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s49">
+  <div class="sol-head">
+    <span class="q-num">049</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：加减法陷阱 · 符号</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sin x-\tan x}{x^{3}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：提取公因式，把差化成乘积。</p>\[ \sin x-\tan x=\sin x\left(1-\frac1{\cos x}\right)=\sin x\cdot\frac{\cos x-1}{\cos x} \]<p>第二步：\(\sin x\sim x\)，\(\cos x-1\sim-\frac{x^{2}}2\)，\(\cos x\to1\)。</p>\[ \sin x-\tan x\sim x\cdot\left(-\frac{x^{2}}2\right)=-\frac{x^{3}}2 \]<p>第三步：代回。</p>\[ \frac{\sin x-\tan x}{x^{3}}\to-\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先提公因式，把“差”变成“乘积”，再替换；\(\cos x-1\sim-\frac{x^{2}}2\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">直接写 \(\sin x\sim x\)、\(\tan x\sim x\) 相减得 0，是经典错误。</span>本题结果是 \(-\frac12\)，负号来自 \(\cos x-1<0\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(\sin x-\tan x=\sin x(1-\sec x)\)，首项抵消，实际是三阶无穷小。加减法不能各自替换，必须先化成乘积或通分。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s50">
+  <div class="sol-head">
+    <span class="q-num">050</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：第一个重要极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sin3x}{5x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\sin3x\sim3x\)。</p><p>第二步：代回。</p>\[ \frac{\sin3x}{5x}\sim\frac{3x}{5x}=\frac35 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\sin3x\sim3x\)，系数 3 要保留；分母系数 5 也要保留。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\sin3x\sim3x\)，不是 \(3x-1\)，也不是 \(x\)。</span>答案是 \(\frac35\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第一个重要极限 \(\lim_{u\to0}\frac{\sin u}{u}=1\)，等价形式 \(\sin u\sim u\)。本题 \(u=3x\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s51">
+  <div class="sol-head">
+    <span class="q-num">051</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 分母因式</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{1-\cos x}{x^{2}(1+\cos x)} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分子 \(1-\cos x\sim\frac{x^{2}}2\)。</p><p>第二步：分母中的 \(1+\cos x\to2\)，可以先算它的极限。</p>\[ \frac{1-\cos x}{x^{2}(1+\cos x)}\sim\frac{x^{2}/2}{x^{2}\cdot2}=\frac14 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分母是乘积，\(1+\cos x\to2\) 可直接提出；剩下 \(\frac{1-\cos x}{x^{2}}\to\frac12\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要把 \(1+\cos x\) 也等价成 1 后再把分母当成 \(x^{2}\)。</span>它在 \(x=0\) 处等于 2，是有限非零因子。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">极限四则运算：乘积中若一个因子趋于非零常数，可以先求出它。\(1+\cos x\to2\neq0\)，所以可分离出来。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s52">
+  <div class="sol-head">
+    <span class="q-num">052</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 根式与三角</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sqrt{1+x^{2}}-1}{1-\cos x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\sqrt{1+x^{2}}-1\sim\frac{x^{2}}2\)。</p><p>第二步：\(1-\cos x\sim\frac{x^{2}}2\)。</p><p>第三步：相除。</p>\[ \frac{\sqrt{1+x^{2}}-1}{1-\cos x}\sim\frac{x^{2}/2}{x^{2}/2}=1 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\((1+u)^{1/2}-1\sim\frac{u}2\)，令 \(u=x^{2}\)，分子等价于 \(\frac{x^{2}}2\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\sqrt{1+x^{2}}-1\sim x^{2}\) 是错的，系数是 \(\frac12\)。</span>分母也是 \(\frac{x^{2}}2\)，所以比值为 1。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">二项式等价 \((1+u)^{\alpha}-1\sim\alpha u\)。本题 \(\alpha=\frac12\)，\(u=x^{2}\)；也可分子有理化验证。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s53">
+  <div class="sol-head">
+    <span class="q-num">053</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：指数函数等价无穷小</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{2^{x}-1}{3^{x}-1} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(2^{x}-1\sim x\ln2\)。</p><p>第二步：\(3^{x}-1\sim x\ln3\)。</p><p>第三步：相除。</p>\[ \frac{2^{x}-1}{3^{x}-1}\sim\frac{x\ln2}{x\ln3}=\frac{\ln2}{\ln3} \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(a^{x}-1\sim x\ln a\)，分子取 \(a=2\)，分母取 \(a=3\)。</span>结果可以写成 \(\log_{3}2\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要写成 \(\frac23\)；指数函数的等价无穷小带的是 \(\ln a\)，不是 \(a\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">由 \(a^{x}=e^{x\ln a}\)、\(e^{u}-1\sim u\) 得 \(a^{x}-1\sim x\ln a\)。本题分子分母都是一阶无穷小，系数之比为 \(\frac{\ln2}{\ln3}\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s54">
+  <div class="sol-head">
+    <span class="q-num">054</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 对数与指数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\ln(1+2x)}{e^{3x}-1} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\ln(1+2x)\sim2x\)。</p><p>第二步：\(e^{3x}-1\sim3x\)。</p><p>第三步：相除。</p>\[ \frac{\ln(1+2x)}{e^{3x}-1}\sim\frac{2x}{3x}=\frac23 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\ln(1+u)\sim u\)，\(e^{u}-1\sim u\)；系数分别是 2 和 3。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">分子是 \(\ln(1+2x)\sim2x\)，不是 \(2x+1\)；分母是 \(3x\)，不是 \(3x-1\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">两个标准等价无穷小：\(\ln(1+u)\sim u\)、\(e^{u}-1\sim u\)。它们都来自重要极限，替换后 \(x\) 约掉即可。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s55">
+  <div class="sol-head">
+    <span class="q-num">055</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 第二重要极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}(1+2x)^{\frac1{3x}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：凑标准形式 \((1+u)^{1/u}\to e\)。</p>\[ (1+2x)^{\frac1{3x}}=\left[(1+2x)^{\frac1{2x}}\right]^{\frac23} \]<p>第二步：中括号趋于 \(e\)。</p>\[ \to e^{2/3} \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先配出 \((1+2x)^{1/(2x)}\to e\)，再把多出的指数 \(\frac23\) 放上去。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">指数是 \(\frac1{3x}\)，配成 \(\frac1{2x}\) 后要乘 \(\frac23\)，不能直接写 \(e\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限 \(\lim_{u\to0}(1+u)^{1/u}=e\)。本题 \(u=2x\)，原指数 \(\frac1{3x}=\frac23\cdot\frac1{2x}\)，所以极限为 \(e^{2/3}\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s56">
+  <div class="sol-head">
+    <span class="q-num">056</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 负指数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\left(1-\frac1x\right)^{2x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：先算 \((1-\frac1x)^{x}\)。</p>\[ \left(1-\frac1x\right)^{x}=\left(1+\frac{-1}{x}\right)^{x}\to e^{-1} \]<p>第二步：原式是它的平方。</p>\[ \left(1-\frac1x\right)^{2x}=\left[\left(1-\frac1x\right)^{x}\right]^{2}\to e^{-2} \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">把 \(2x\) 拆成 \(x\cdot2\)，先利用 \((1-\frac1x)^x\to e^{-1}\)，再平方。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">结果是 \(e^{-2}\)，不是 \(e^{2}\)；底数 \(1-\frac1x<1\)，极限应小于 1。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限的推广：\((1+\frac{a}{x})^{x}\to e^{a}\)。本题 \(a=-1\)，指数再乘 2，故为 \(e^{-2}\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s57">
+  <div class="sol-head">
+    <span class="q-num">057</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 取对数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}(1+\tan x)^{\cot x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：设 \(y=(1+\tan x)^{\cot x}\)，取对数。</p>\[ \ln y=\cot x\ln(1+\tan x)=\frac{\cos x}{\sin x}\ln(1+\tan x) \]<p>第二步：\(\ln(1+\tan x)\sim\tan x\)，且 \(\tan x=\frac{\sin x}{\cos x}\)。</p>\[ \ln y\sim\frac{\cos x}{\sin x}\cdot\frac{\sin x}{\cos x}=1 \]<p>第三步：\(y\to e\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\cot x=\frac{\cos x}{\sin x}\)，与 \(\tan x=\frac{\sin x}{\cos x}\) 相乘得 1。</span>对数是把 \(1^{\infty}\) 化为乘积的关键。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\cot x\) 在 \(x=0\) 无定义，不能直接代入；这是 \(1^{\infty}\) 型，必须取对数或凑重要极限。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">1^∞ 型取对数后，\(\cot x\ln(1+\tan x)\) 是 \(0\cdot\infty\) 型；用 \(\ln(1+\tan x)\sim\tan x\) 化成 \(\cot x\tan x=1\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s58">
+  <div class="sol-head">
+    <span class="q-num">058</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 对数差</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\left(\frac{1+x}{1-x}\right)^{\frac1x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：取对数。</p>\[ \ln y=\frac1x\ln\frac{1+x}{1-x}=\frac{\ln(1+x)-\ln(1-x)}x \]<p>第二步：用 \(\ln(1+x)\sim x\)，\(\ln(1-x)\sim-x\)。</p>\[ \ln y\sim\frac{x-(-x)}x=2 \]<p>第三步：\(y\to e^{2}\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">把商的对数拆成对数差，再用 \(\ln(1+x)\sim x\)、\(\ln(1-x)\sim-x\)。</span>分子等价于 \(2x\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\ln(1-x)\sim-x\)，不是 \(x\)；两者相减是 \(2x\)，不是 0。</span>结果为 \(e^{2}\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">1^∞ 型取对数后化为 \(\frac00\)。\(\ln(1+x)\sim x\)、\(\ln(1-x)\sim-x\) 是两个常用的对数等价无穷小。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s59">
+  <div class="sol-head">
+    <span class="q-num">059</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：0^0 型 · 取对数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0^{+}}x^{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：这是 \(0^{0}\) 型，设 \(y=x^{x}\)，取对数。</p>\[ \ln y=x\ln x \]<p>第二步：求 \(x\ln x\) 的极限。令 \(t=\frac1x\to+\infty\)，或直接用洛必达：</p>\[ \lim_{x\to0^{+}}\frac{\ln x}{1/x}=\lim_{x\to0^{+}}\frac{1/x}{-1/x^{2}}=\lim_{x\to0^{+}}(-x)=0 \]<p>第三步：\(\ln y\to0\)，所以 \(y\to e^{0}=1\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(0^{0}\) 是未定式，先取对数；关键极限是 \(x\ln x\to0\)。</span>不要直接写 \(0^{0}=1\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(x\ln x\) 是 \(0\cdot(-\infty)\) 型，不能直接得 0；要用洛必达或换元证明。</span>最后是指数 \(e^{0}=1\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">幂指函数 \(u^{v}\) 的通用处理：取对数化为 \(v\ln u\)。本题 \(v=x\to0\)、\(\ln u=\ln x\to-\infty\)，是 \(0\cdot\infty\) 型；用洛必达得 \(x\ln x\to0\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s60">
+  <div class="sol-head">
+    <span class="q-num">060</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：∞^0 型 · 取对数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}x^{\frac1x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：这是 \(\infty^{0}\) 型，设 \(y=x^{1/x}\)，取对数。</p>\[ \ln y=\frac{\ln x}{x} \]<p>第二步：用洛必达。</p>\[ \lim_{x\to\infty}\frac{\ln x}{x}=\lim_{x\to\infty}\frac{1/x}{1}=0 \]<p>第三步：\(\ln y\to0\)，所以 \(y\to e^{0}=1\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\infty^{0}\) 型先取对数，化为 \(\frac{\ln x}{x}\)，再用洛必达得 0。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不能因为底数趋于无穷、指数趋于 0 就写“无穷的 0 次方等于 1”。</span>这是未定式，必须通过取对数证明。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">幂指函数取对数后，\(\frac{\ln x}{x}\to0\)（多项式增长快于对数）。因此 \(x^{1/x}=e^{\ln x/x}\to e^{0}=1\)。</span></p>
+  </div>
+</article>
+<h2 class="sec-title" id="ssec6">六、无穷小、无穷大与概念辨析</h2>
+<p class="sec-sub">未定式辨析 · 无穷小乘有界 · 数列极限 · 概念选择</p>
+
+<article class="sol-card" id="s61">
+  <div class="sol-head">
+    <span class="q-num">061</span>
+    <span class="q-level trap">易错</span>
+    <span class="sol-point">考点：0·∞ 型未定式</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：若 \(\lim f(x)=0\)，\(\lim g(x)=\infty\)，则 \(\lim f(x)g(x)\)（ ）</p><div class="options"><div class="opt"><b>A.</b> 一定为 0</div><div class="opt"><b>B.</b> 一定为 \(\infty\)</div><div class="opt"><b>C.</b> 一定不存在</div><div class="opt"><b>D.</b> 不确定</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>用三个例子说明结果不唯一：</p>\[ x\cdot\frac1x\to1;\qquad x^{2}\cdot\frac1x\to0;\qquad x\cdot\frac1{x^{2}}\to\infty \]<p>它们都满足 \(f\to0\)、\(g\to\infty\)，但乘积分别趋于 \(1,0,\infty\)。所以选 D。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(0\cdot\infty\) 是未定式，结果取决于 \(f\) 与 \(g\) 谁“更快”。</span>必须化成 \(\frac00\) 或 \(\frac{\infty}{\infty}\) 后再算。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不能套用“0 乘任何数等于 0”：\(\infty\) 不是数，极限乘积法则要求两个极限都是有限数。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">极限乘积法则：若 \(\lim f=A\)、\(\lim g=B\)（\(A,B\) 为有限数），则 \(\lim fg=AB\)。\(0\cdot\infty\) 不满足“有限数”条件，所以是未定式，必须具体分析。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s62">
+  <div class="sol-head">
+    <span class="q-num">062</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：无穷大与无穷小的关系</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：若 \(\lim_{x\to x_0}f(x)=\infty\)，且在 \(x_0\) 的某去心邻域内 \(f(x)\neq0\)，则 \(\lim_{x\to x_0}\frac1{f(x)}\)（ ）</p><div class="options"><div class="opt"><b>A.</b> \(0\)</div><div class="opt"><b>B.</b> \(\infty\)</div><div class="opt"><b>C.</b> \(1\)</div><div class="opt"><b>D.</b> 不确定</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\lim f=\infty\) 表示 \(|f(x)|\) 可以任意大。</p><p>第二步：于是 \(\left|\frac1{f(x)}\right|=\frac1{|f(x)|}\) 可以任意小。</p><p>第三步：所以 \(\frac1{f(x)}\to0\)，选 A。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">无穷大的倒数是无穷小；无穷小的倒数是无穷大（要求倒数有意义）。</span>这是同一趋势的两种描述。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">必须保证 \(f(x)\neq0\)，否则 \(\frac1f\) 无定义；题目已给出该条件。</span>\(\infty\) 不是数，不能写 \(\frac1{\infty}=0\)，要按定义理解。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">无穷大的定义：对任意 \(M>0\)，存在去心邻域使 \(|f(x)|>M\)。于是 \(\left|\frac1{f(x)}\right|<\frac1M\)，这正是 \(\frac1f\to0\) 的定义。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s63">
+  <div class="sol-head">
+    <span class="q-num">063</span>
+    <span class="q-level trap">易错</span>
+    <span class="sol-point">考点：无穷大与无界的区别</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：下列说法正确的是（ ）</p><div class="options"><div class="opt"><b>A.</b> 无穷大一定是无界函数</div><div class="opt"><b>B.</b> 无界函数一定是无穷大</div><div class="opt"><b>C.</b> 无穷小一定是 0</div><div class="opt"><b>D.</b> 无穷大一定取到任意大的函数值</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>A 正确：无穷大要求 \(|f|\) 最终超过任意 \(M\)，当然无界。</p><p>B 错误：\(f(x)=x\sin x\) 在 \(x\to\infty\) 时无界，但不趋于无穷（有无限多个零点）。</p><p>C 错误：无穷小是趋于 0 的变量，不一定是 0。</p><p>D 错误：无穷大是“趋势”，不要求函数取遍所有大值。选 A。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">无穷大是“整体趋势”，无界是“存在任意大的值”；无穷大强于无界。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">“无界”不能推出“趋于无穷”。</span>无界只要求对任意 \(M\) 存在某个 \(x\) 使 \(|f(x)|>M\)，不要求 \(x\) 靠近某点后一直很大。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">定义对比：\(\lim f=\infty\) 要求“从某个时刻起，所有 \(x\) 都满足 \(|f(x)|>M\)”；无界只要求“存在 \(x\) 使 \(|f(x)|>M\)”。量词顺序不同，结论强弱不同。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s64">
+  <div class="sol-head">
+    <span class="q-num">064</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：同阶与等价的区别</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：当 \(x\to0\) 时，下列无穷小与 \(x^{2}\) 同阶但不等价的是（ ）</p><div class="options"><div class="opt"><b>A.</b> \(1-\cos x\)</div><div class="opt"><b>B.</b> \(x^{2}\)</div><div class="opt"><b>C.</b> \(\sin^{2}x\)</div><div class="opt"><b>D.</b> \(x^{2}+x^{3}\)</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>分别求与 \(x^{2}\) 的比值：</p>\[ \frac{1-\cos x}{x^{2}}\to\frac12;\quad \frac{x^{2}}{x^{2}}=1 \]\[ \frac{\sin^{2}x}{x^{2}}\to1;\quad \frac{x^{2}+x^{3}}{x^{2}}\to1 \]<p>只有 A 的比值是 \(\frac12\neq1\)，所以选 A。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">同阶：比值趋于非零常数；等价：比值趋于 1。</span>A 的比值是 \(\frac12\)，同阶但不等价。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">B、C、D 都与 \(x^{2}\) 等价，比值都是 1。</span>\(x^{2}+x^{3}\sim x^{2}\)，低阶项 \(x^{3}\) 可忽略。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">同阶无穷小的定义是比值趋于非零常数；等价无穷小要求该常数恰为 1。判断时要算 \(\lim\frac{\alpha}{\beta}\)，不能只看“都是二阶”。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s65">
+  <div class="sol-head">
+    <span class="q-num">065</span>
+    <span class="q-level trap">易错</span>
+    <span class="sol-point">考点：无穷小 × 有界量</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：当 \(x\to0\) 时，\(f(x)=x\sin\frac1x\) 是（ ）</p><div class="options"><div class="opt"><b>A.</b> 无穷小</div><div class="opt"><b>B.</b> 无穷大</div><div class="opt"><b>C.</b> 振荡无极限</div><div class="opt"><b>D.</b> 有界但非无穷小</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\left|\sin\frac1x\right|\le1\)，所以</p>\[ 0\le\left|x\sin\frac1x\right|\le|x| \]<p>第二步：\(|x|\to0\)，由夹逼定理得 \(x\sin\frac1x\to0\)。</p><p>所以它是无穷小，选 A。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\sin\frac1x\) 虽然振荡，但有界；无穷小乘有界量仍是无穷小。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要因为 \(\sin\frac1x\) 没有极限，就判断整个乘积没有极限。</span>\(x\to0\) 的因子把振荡“压扁”了。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">定理：若 \(\alpha\to0\)，且 \(|\beta|\le M\)，则 \(\alpha\beta\to0\)。证明用夹逼：\(0\le|\alpha\beta|\le M|\alpha|\to0\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s66">
+  <div class="sol-head">
+    <span class="q-num">066</span>
+    <span class="q-level trap">易错</span>
+    <span class="sol-point">考点：振荡间断与极限不存在</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：当 \(x\to0\) 时，\(f(x)=\sin\frac1x\)（ ）</p><div class="options"><div class="opt"><b>A.</b> 是无穷小</div><div class="opt"><b>B.</b> 是无穷大</div><div class="opt"><b>C.</b> 振荡，极限不存在</div><div class="opt"><b>D.</b> 极限为 0</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>取两个趋于 0 的数列：</p>\[ x_n=\frac1{n\pi}\to0,\quad \sin\frac1{x_n}=0 \]\[ y_n=\frac1{\frac\pi2+2n\pi}\to0,\quad \sin\frac1{y_n}=1 \]<p>两个子列极限不同，所以原极限不存在，选 C。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">证明极限不存在，常用“两个子列极限不同”。</span>这里一个子列趋于 0，一个恒为 1。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\sin\frac1x\) 有界，但“有界”不等于“有极限”。</span>它在 \(-1\) 与 \(1\) 之间无限振荡。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">函数极限存在的充分必要条件：对任意趋于 \(x_0\) 的数列 \(\{x_n\}\)，\(f(x_n)\) 都趋于同一值。找到两个子列极限不同，即可判定极限不存在。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s67">
+  <div class="sol-head">
+    <span class="q-num">067</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：同阶与等价的判定</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">填空：</p><p>当 \(x\to0\) 时，\(x^{2}\) 与 \(1-\cos x\) 是 ______ 无穷小（填“等价”“同阶但不等价”或“不同阶”）。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：求比值。</p>\[ \frac{x^{2}}{1-\cos x}\to\frac{x^{2}}{x^{2}/2}=2 \]<p>第二步：比值是 2，非零且不等于 1。</p><p>所以是“同阶但不等价”。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">比值趋于 2：同阶；比值不是 1：不等价。</span>两个结论要同时说。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要因为 \(1-\cos x\sim\frac{x^{2}}2\) 就说它与 \(x^{2}\) 等价。</span>等价要求比值趋于 1，这里比值是 2。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">同阶无穷小：比值趋于非零常数；等价无穷小：比值趋于 1。\(1-\cos x\sim\frac{x^{2}}2\)，所以 \(x^{2}\) 与它是同阶但不等价。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s68">
+  <div class="sol-head">
+    <span class="q-num">068</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：无穷小阶 · 泰勒</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">填空：</p><p>当 \(x\to0\) 时，\(x-\sin x\) 是 \(x\) 的 ______ 阶无穷小。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：展开 \(\sin x\)。</p>\[ \sin x=x-\frac{x^{3}}6+o(x^{3}) \]<p>第二步：相减。</p>\[ x-\sin x=\frac{x^{3}}6+o(x^{3}) \]<p>第三步：与 \(x^{3}\) 的比值趋于 \(\frac16\neq0\)，所以是 3 阶。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">首项抵消后看第一个非零项：\(x-\sin x\sim\frac{x^{3}}6\)，所以是 3 阶。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不能因为 \(\sin x\sim x\) 就答 1 阶；相减后首项为 0。</span>阶数由剩余的最低次项决定。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">无穷小阶的定义：若 \(\frac{\alpha}{x^{k}}\to c\neq0\)，则阶数为 \(k\)。本题比值为 \(\frac16\)，故 \(k=3\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s69">
+  <div class="sol-head">
+    <span class="q-num">069</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：根式的等价无穷小</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">填空：</p><p>当 \(x\to0\) 时，\(\sqrt{1+x}-1\) 是 \(x\) 的 ______ 阶无穷小。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：有理化或二项式展开。</p>\[ \sqrt{1+x}-1\sim\frac{x}2 \]<p>第二步：与 \(x\) 的比值趋于 \(\frac12\neq0\)，所以是 1 阶。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">阶数看幂次，不看系数：它与 \(x\) 的比值是 \(\frac12\)，所以是 1 阶。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\sqrt{1+x}-1\sim\frac{x}2\)，与 \(x\) 同阶但不等价，阶数是 1。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\((1+x)^{\alpha}-1\sim\alpha x\)。本题 \(\alpha=\frac12\)，所以 \(\sqrt{1+x}-1\sim\frac{x}2\)，与 \(x\) 同阶。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s70">
+  <div class="sol-head">
+    <span class="q-num">070</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：第一个重要极限 · 换元</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}x\sin\frac1x \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：令 \(t=\frac1x\)，则 \(x\to\infty\) 时 \(t\to0\)。</p>\[ x\sin\frac1x=\frac{\sin t}{t} \]<p>第二步：由第一个重要极限，\(\frac{\sin t}{t}\to1\)。</p><p>所以原式 \(=1\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">换元 \(t=1/x\)，把 \(x\sin(1/x)\) 化为标准形式 \(\frac{\sin t}{t}\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\sin\frac1x\sim\frac1x\)，所以乘积趋于 1，不是 0。</span>不要看到“无穷大乘有界”就套结论；这里 \(\sin(1/x)\) 不是有界振荡，而是等价于 \(1/x\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第一个重要极限 \(\lim_{t\to0}\frac{\sin t}{t}=1\)。通过换元 \(t=1/x\)，可把 \(x\to\infty\) 的问题转化为 \(t\to0\) 的标准形式。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s71">
+  <div class="sol-head">
+    <span class="q-num">071</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：无穷小 × 有界量</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\frac{\sin x}{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\sin x\) 有界，\(|\sin x|\le1\)。</p><p>第二步：放大。</p>\[ 0\le\left|\frac{\sin x}{x}\right|\le\frac1{|x|} \]<p>第三步：\(x\to\infty\) 时 \(\frac1{|x|}\to0\)，由夹逼定理得极限为 0。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分母 \(x\to\infty\)，分子有界，所以整体是“无穷小 × 有界量”。</span>不要被 \(\sin x\) 的振荡干扰。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\lim_{x\to\infty}\sin x\) 不存在，不能把原式拆成 \(\lim\sin x\cdot\lim\frac1x\)。</span>必须用夹逼。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">定理：无穷小乘有界量仍为无穷小。这里 \(\frac1x\to0\) 是无穷小，\(\sin x\) 有界；也可直接用夹逼 \(0\le|\frac{\sin x}{x}|\le\frac1{|x|}\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s72">
+  <div class="sol-head">
+    <span class="q-num">072</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：无穷小 × 有界量</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}x\cos\frac1x \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\left|\cos\frac1x\right|\le1\)。</p><p>第二步：放大。</p>\[ 0\le\left|x\cos\frac1x\right|\le|x| \]<p>第三步：\(|x|\to0\)，由夹逼定理得极限为 0。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\cos(1/x)\) 有界，\(x\to0\)，乘积为无穷小。</span>这是“无穷小 × 有界量”的标准模型。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\cos(1/x)\) 在 \(x\to0\) 时没有极限，不能拆成两个极限相乘。</span>结论 0 来自夹逼，不是来自“0 乘不存在”。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">若 \(\alpha\to0\) 且 \(|\beta|\le M\)，则 \(\alpha\beta\to0\)。本题 \(\alpha=x\)，\(\beta=\cos(1/x)\)，\(M=1\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s73">
+  <div class="sol-head">
+    <span class="q-num">073</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：重要极限 · 对数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\ln(1+x)}{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>方法一：直接使用标准极限。</p>\[ \lim_{x\to0}\frac{\ln(1+x)}x=1 \]<p>方法二：等价无穷小 \(\ln(1+x)\sim x\)，所以比值为 1。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">这是对数函数的“母极限”，也是 \(\ln(1+x)\sim x\) 的来源。</span>必须记牢。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\ln(1+x)\sim x\)，不是 \(\ln(1+x)\sim x-1\)。</span>分母是 \(x\)，所以极限为 1。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">由重要极限 \(\lim_{x\to0}(1+x)^{1/x}=e\) 两边取对数，得到 \(\lim_{x\to0}\frac{\ln(1+x)}x=1\)；它等价于 \(\ln(1+x)\sim x\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s74">
+  <div class="sol-head">
+    <span class="q-num">074</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：抓大头 · 有界量</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\frac{x+\sin x}{x} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：拆成两项。</p>\[ \frac{x+\sin x}{x}=1+\frac{\sin x}{x} \]<p>第二步：由 \(\frac{\sin x}{x}\to0\)。</p>\[ \to1+0=1 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分子中的 \(x\) 是主部，\(\sin x\) 有界，相对 \(x\) 可忽略。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不能把 \(\sin x\) 直接丢掉后说“显然为 1”，要说明 \(\frac{\sin x}{x}\to0\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">抓大头思想：\(x\to\infty\) 时，\(x\) 是主部，\(\sin x\) 有界，\(\frac{\sin x}{x}\to0\)（无穷小乘有界量）。所以极限由主部决定。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s75">
+  <div class="sol-head">
+    <span class="q-num">075</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：数列极限 · 求和公式</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\frac{1+2+\cdots+n}{n^{2}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：用等差数列求和。</p>\[ 1+2+\cdots+n=\frac{n(n+1)}2 \]<p>第二步：代回。</p>\[ \frac{n(n+1)}{2n^{2}}=\frac12\left(1+\frac1n\right)\to\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先求和再取极限：\(1+2+\cdots+n=\frac{n(n+1)}2\)。</span>这是数列极限的常用预处理。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要把分子当成 \(n\) 或 \(n^{2}\)。</span>和是二次的，与分母 \(n^{2}\) 同阶，所以极限是非零常数。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">等差数列求和公式 \(S_n=\frac{n(a_1+a_n)}2\)。求和后分子是 \(n^{2}\) 量级，分母也是 \(n^{2}\)，用抓大头得 \(\frac12\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s76">
+  <div class="sol-head">
+    <span class="q-num">076</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等比数列求和</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\left(1+\frac12+\frac1{2^{2}}+\cdots+\frac1{2^{n}}\right) \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：这是首项 1、公比 \(\frac12\) 的等比数列前 \(n+1\) 项和。</p>\[ S_n=\frac{1-\left(\frac12\right)^{n+1}}{1-\frac12}=2\left(1-\frac1{2^{n+1}}\right) \]<p>第二步：令 \(n\to\infty\)，\(\frac1{2^{n+1}}\to0\)。</p>\[ S_n\to2 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">等比求和公式 \(S=\frac{a_1(1-q^{n})}{1-q}\)，这里 \(q=\frac12\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">项数容易数错：从 \(2^{0}\) 到 \(2^{n}\) 共 \(n+1\) 项。</span>但 \(n\to\infty\) 时项数不影响极限，结果仍是 2。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">等比数列前 \(n\) 项和：\(S_n=\frac{a_1(1-q^{n})}{1-q}\)（\(q\neq1\)）。因为 \(|q|<1\)，\(q^{n}\to0\)，所以无穷级数和为 \(\frac{a_1}{1-q}=2\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s77">
+  <div class="sol-head">
+    <span class="q-num">077</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：对数等价 · 数列极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}n\ln\left(1+\frac1n\right) \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：令 \(x=\frac1n\)，则 \(x\to0^{+}\)。</p>\[ n\ln\left(1+\frac1n\right)=\frac{\ln(1+x)}x \]<p>第二步：\(\ln(1+x)\sim x\)。</p>\[ \to1 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">换元 \(x=1/n\)，把数列极限化为函数极限 \(\frac{\ln(1+x)}x\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要把 \(n\ln(1+1/n)\) 写成 \(\ln(1+1/n)^{n}\) 后直接说等于 \(\ln e\) 而不解释。</span>两种写法都对，但要看清楚指数。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(n\ln(1+\frac1n)=\ln(1+\frac1n)^{n}\to\ln e=1\)；也可用 \(\ln(1+x)\sim x\)。这体现了数列极限与函数极限的转化。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s78">
+  <div class="sol-head">
+    <span class="q-num">078</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：第二个重要极限 · 数列形式</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\left(1+\frac1n\right)^{n} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>这是第二重要极限的数列形式：</p>\[ \lim_{n\to\infty}\left(1+\frac1n\right)^{n}=e \]<p>可看作函数极限 \(\lim_{x\to\infty}(1+\frac1x)^{x}=e\) 的特例。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">这是 \(e\) 的定义式之一。</span>底数 \(1+\frac1n\to1\)，指数 \(n\to\infty\)，是 \(1^{\infty}\) 型，结果是 \(e\) 而不是 1。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(1^{\infty}\) 是未定式，不能写 1。</span>若把指数换成 \(2n\)，结果就是 \(e^{2}\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限：\(\lim_{x\to\infty}(1+\frac1x)^{x}=e\)，数列形式同样成立。它是复利、连续增长等应用的基础。</span></p>
+  </div>
+</article>
+<h2 class="sec-title" id="ssec7">七、分段函数、连续与间断</h2>
+<p class="sec-sub">可去 · 跳跃 · 无穷 · 振荡 · 左右极限</p>
+
+<article class="sol-card" id="s79">
+  <div class="sol-head">
+    <span class="q-num">079</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：可去间断点 · 补充定义</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">填空：</p><p>函数 \(f(x)=\frac{x^{2}-1}{x-1}\) 在 \(x=1\) 处无定义。若补充定义 \(f(1)=\) ______，则 \(f(x)\) 在 \(x=1\) 处连续。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：求 \(x\to1\) 时的极限。</p>\[ \lim_{x\to1}\frac{x^{2}-1}{x-1}=\lim_{x\to1}(x+1)=2 \]<p>第二步：连续要求 \(f(1)=\lim_{x\to1}f(x)\)。</p><p>所以补充定义 \(f(1)=2\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">可去间断点的修补方法：把函数值定义为该点的极限值。</span>这里极限是 2。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要填 0 或 1。</span>\(f(1)\) 应等于极限 2，而不是分子、分母分别代入得到的 \(0/0\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">连续的定义：\(\lim_{x\to x_0}f(x)=f(x_0)\)。若极限存在但函数值缺失或不等于极限，就是可去间断点；补充定义使二者相等即可。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s80">
+  <div class="sol-head">
+    <span class="q-num">080</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：间断点分类 · 无穷间断</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：\(f(x)=\frac1{x-1}\) 在 \(x=1\) 处是（ ）</p><div class="options"><div class="opt"><b>A.</b> 可去间断点</div><div class="opt"><b>B.</b> 跳跃间断点</div><div class="opt"><b>C.</b> 无穷间断点</div><div class="opt"><b>D.</b> 振荡间断点</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：看 \(x\to1\) 时的趋势。</p>\[ \lim_{x\to1^{+}}\frac1{x-1}=+\infty,\qquad \lim_{x\to1^{-}}\frac1{x-1}=-\infty \]<p>第二步：两侧都趋于无穷，属于第二类间断点中的无穷间断点。选 C。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分母趋于 0、分子不为 0，函数值趋于无穷，是无穷间断点。</span>它属于第二类间断点。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要因为左右极限“一个正无穷、一个负无穷”就判成跳跃。</span>跳跃要求左右极限都是有限数。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">间断点分类：第一类要求左右极限都存在（可去：相等；跳跃：不等）；第二类只要有一个单侧极限不存在。\(\frac1{x-1}\) 在 1 处单侧极限为无穷，故为第二类无穷间断。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s81">
+  <div class="sol-head">
+    <span class="q-num">081</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：左右极限 · 跳跃间断</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：\(f(x)=\frac{|x|}{x}\) 在 \(x=0\) 处是（ ）</p><div class="options"><div class="opt"><b>A.</b> 可去间断点</div><div class="opt"><b>B.</b> 跳跃间断点</div><div class="opt"><b>C.</b> 无穷间断点</div><div class="opt"><b>D.</b> 振荡间断点</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分左右计算。</p>\[ \lim_{x\to0^{+}}\frac{|x|}x=\lim_{x\to0^{+}}\frac xx=1 \]<p>\[ \lim_{x\to0^{-}}\frac{|x|}x=\lim_{x\to0^{-}}\frac{-x}x=-1 \]<p>第二步：左右极限都存在但不相等，所以是跳跃间断点。选 B。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">左右极限分别为 \(1\) 和 \(-1\)，都存在但不相等，这就是跳跃间断。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要把它当成可去间断点。</span>可去要求左右极限相等；这里差了一个符号。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">跳跃间断点的定义：左右极限都存在但不等。\(\frac{|x|}x\) 在 0 左侧恒为 \(-1\)，右侧恒为 \(1\)，是典型的跳跃间断。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s82">
+  <div class="sol-head">
+    <span class="q-num">082</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：振荡间断 · 第二类</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：\(f(x)=\sin\frac1x\) 在 \(x=0\) 处是（ ）</p><div class="options"><div class="opt"><b>A.</b> 可去间断点</div><div class="opt"><b>B.</b> 跳跃间断点</div><div class="opt"><b>C.</b> 无穷间断点</div><div class="opt"><b>D.</b> 振荡间断点</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：取子列 \(x_n=\frac1{n\pi}\to0\)，\(f(x_n)=0\)。</p><p>第二步：取子列 \(y_n=\frac1{\pi/2+2n\pi}\to0\)，\(f(y_n)=1\)。</p><p>第三步：两个子列极限不同，所以 \(x\to0\) 时 \(f(x)\) 没有极限，且函数值在 \(-1,1\) 间振荡。选 D。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">极限不存在且不是趋于无穷，而是无限振荡，称为振荡间断点。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\sin(1/x)\) 有界，所以不是无穷间断；但它也没有极限，所以不是可去或跳跃。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二类间断点包括无穷间断和振荡间断。判断振荡间断常用两个子列：若它们趋于不同的值，则极限不存在；若函数又有界，则为振荡型。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s83">
+  <div class="sol-head">
+    <span class="q-num">083</span>
+    <span class="q-level basic">基础</span>
+    <span class="sol-point">考点：可去间断 · 函数值不匹配</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">选择：设 \(f(x)=\frac{x^{2}-1}{x-1}\ (x\neq1)\)，\(f(1)=0\)，则 \(x=1\) 是 \(f\) 的（ ）</p><div class="options"><div class="opt"><b>A.</b> 连续点</div><div class="opt"><b>B.</b> 可去间断点</div><div class="opt"><b>C.</b> 跳跃间断点</div><div class="opt"><b>D.</b> 无穷间断点</div></div>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：极限</p>\[ \lim_{x\to1}\frac{x^{2}-1}{x-1}=\lim_{x\to1}(x+1)=2 \]<p>第二步：函数值 \(f(1)=0\)。</p><p>极限存在但不等于函数值，所以是可去间断点。选 B。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">极限存在，但 \(f(1)\neq\) 极限，仍是可去间断；只要改定义 \(f(1)=2\) 就连续。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要把“有定义”误认为“连续”。</span>连续要求极限等于函数值，而这里 \(2\neq0\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">可去间断点的判定：\(\lim_{x\to x_0}f(x)\) 存在，但 \(f(x_0)\) 不存在或不等于该极限。本题极限为 2、函数值为 0，所以可去。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s84">
+  <div class="sol-head">
+    <span class="q-num">084</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：分段函数 · 左右极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}x+1, & x<0,\\ a, & x=0,\\ e^{x}, & x>0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：左极限。</p>\[ \lim_{x\to0^{-}}f(x)=\lim_{x\to0^{-}}(x+1)=1 \]<p>第二步：右极限与函数值。</p>\[ \lim_{x\to0^{+}}f(x)=\lim_{x\to0^{+}}e^{x}=1,\qquad f(0)=a \]<p>第三步：连续要求三者相等，所以 \(a=1\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分段点连续：左极限 \(=\) 右极限 \(=\) 函数值。</span>本题两侧极限都是 1，所以 \(a=1\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">只算右极限 \(e^{0}=1\) 就写答案，容易漏掉左极限的验证。</span>虽然结果相同，但必须两边都算。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">连续定义：\(f\) 在 \(x_0\) 连续 \(\Leftrightarrow \lim_{x\to x_0^-}f=\lim_{x\to x_0^+}f=f(x_0)\)。分段函数在分界点必须分别求左右极限。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s85">
+  <div class="sol-head">
+    <span class="q-num">085</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：第一个重要极限 · 连续</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{\sin x}{x}, & x\neq0,\\ a, & x=0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：求极限。</p>\[ \lim_{x\to0}\frac{\sin x}{x}=1 \]<p>第二步：连续要求 \(f(0)=\lim_{x\to0}f(x)\)，所以 \(a=1\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\lim_{x\to0}\frac{\sin x}{x}=1\)，所以补充定义 \(f(0)=1\) 才连续。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要因为 \(\sin0=0\) 就把 \(a\) 写成 0。</span>函数在 0 点的极限是 1，不是函数值 \(\sin0/0\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第一个重要极限 \(\lim_{x\to0}\frac{\sin x}{x}=1\)。分段函数在 \(x=0\) 连续，必须让定义值等于这个极限。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s86">
+  <div class="sol-head">
+    <span class="q-num">086</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：无穷小 × 有界量 · 连续</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}x\sin\dfrac1x, & x\neq0,\\ a, & x=0.\end{cases} \]<p><p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：求 \(x\to0\) 时的极限。</p>\[ 0\le\left|x\sin\frac1x\right|\le|x|\to0 \]<p>所以 \(\lim_{x\to0}f(x)=0\)。</p><p>第二步：连续要求 \(f(0)=0\)，所以 \(a=0\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(x\sin(1/x)\to0\)，虽然 \(\sin(1/x)\) 振荡，但被 \(x\) 压成无穷小。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要因为 \(\sin(1/x)\) 没有极限就认为 \(f\) 在 0 不连续。</span>乘积的极限存在且为 0。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">无穷小乘有界量是无穷小：\(|x\sin(1/x)|\le|x|\to0\)。因此补充定义 \(f(0)=0\) 后，函数在 0 点连续。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s87">
+  <div class="sol-head">
+    <span class="q-num">087</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 连续</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{e^{x}-1}{x}, & x\neq0,\\ a, & x=0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：求极限。</p>\[ \lim_{x\to0}\frac{e^{x}-1}{x}=1 \]<p>第二步：连续要求 \(f(0)=1\)，所以 \(a=1\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(e^{x}-1\sim x\)，所以极限为 1；定义 \(f(0)=1\) 即连续。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要因为 \(e^{0}=1\) 就把 \(a\) 写成 1 后不解释；这里 1 是极限值，不是直接代入。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(e^{x}-1\sim x\) 来自重要极限 \(\lim_{x\to0}\frac{e^{x}-1}{x}=1\)。分段函数在 0 点连续，必须让定义值等于该极限。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s88">
+  <div class="sol-head">
+    <span class="q-num">088</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：第二重要极限 · 连续</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}(1+x)^{\frac1x}, & x\neq0,\\ a, & x=0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：求极限。</p>\[ \lim_{x\to0}(1+x)^{\frac1x}=e \]<p>第二步：连续要求 \(f(0)=e\)，所以 \(a=e\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">这是 \(1^{\infty}\) 型，结果是 \(e\)，不是 1。</span>连续性要求定义值等于极限 \(e\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">把 \(a\) 写成 1 是典型错误：底数趋于 1，但指数同时趋于无穷，不能直接代入。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限 \(\lim_{x\to0}(1+x)^{1/x}=e\)。它是 \(1^{\infty}\) 型的标准形式，也是连续复利的数学基础。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s89">
+  <div class="sol-head">
+    <span class="q-num">089</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：根式等价 · 连续</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{\sqrt{1+x}-1}{x}, & x\neq0,\\ a, & x=0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分子有理化或等价替换。</p>\[ \sqrt{1+x}-1\sim\frac{x}2\quad\Rightarrow\quad \lim_{x\to0}\frac{\sqrt{1+x}-1}{x}=\frac12 \]<p>第二步：连续要求 \(a=\frac12\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\sqrt{1+x}-1\sim\frac{x}2\)，所以极限是 \(\frac12\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要写成 1 或 0；根式等价替换的系数是 \(\frac12\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\((1+x)^{1/2}-1\sim\frac12x\)，可由二项式展开或分子有理化得到。分段点连续要求定义值等于该极限。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s90">
+  <div class="sol-head">
+    <span class="q-num">090</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：分段点连续 · 左右极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}x^{2}+1, & x\le1,\\ b+\ln x, & x>1.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=1\) 处连续，求 \(b\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：左极限与函数值。</p>\[ \lim_{x\to1^{-}}f(x)=1^{2}+1=2,\qquad f(1)=2 \]<p>第二步：右极限。</p>\[ \lim_{x\to1^{+}}f(x)=b+\ln1=b \]<p>第三步：连续要求 \(2=b\)，所以 \(b=2\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先算左极限 \(2\)，再算右极限 \(b\)，令二者相等。</span>分段函数在分界点必须两边都算。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">右极限是 \(b+\ln1=b\)，不要把 \(\ln1\) 写成 1。</span>\(\ln1=0\)，所以右极限就是 \(b\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">连续定义：左极限 \(=\) 右极限 \(=\) 函数值。分段点 \(x=1\) 处，左侧表达式含等号，所以 \(f(1)=2\)；右侧极限为 \(b\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s91">
+  <div class="sol-head">
+    <span class="q-num">091</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：因式分解 · 间断点分类</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求函数</p>\[ f(x)=\frac{x^{2}-1}{x^{2}-3x+2} \]<p class="prompt">的间断点，并指出其类型。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分解分母。</p>\[ x^{2}-3x+2=(x-1)(x-2) \]<p>所以间断点为 \(x=1\)、\(x=2\)。</p><p>第二步：看 \(x=1\)。</p>\[ f(x)=\frac{(x-1)(x+1)}{(x-1)(x-2)}=\frac{x+1}{x-2}\to\frac{2}{-1}=-2 \]<p>极限存在，但 \(f(1)\) 无定义，所以 \(x=1\) 是可去间断点。</p><p>第三步：看 \(x=2\)。分子 \(x^{2}-1\to3\neq0\)，分母 \(\to0\)，所以 \(f\to\infty\)。\(x=2\) 是无穷间断点。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先因式分解找零因子：\(x=1\) 是可去，\(x=2\) 是无穷。</span>分类看左右极限是否存在。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(x=1\) 处的极限是 \(-2\)，不是 \(2\)。</span>约分后是 \(\frac{x+1}{x-2}\)，代入 1 得 \(2/(-1)=-2\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">间断点分类：先找分母为 0 的点；若约分后极限存在，为可去间断；若分母仍为 0 且分子非 0，为无穷间断。本题 \(x=1\) 可去，\(x=2\) 无穷。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s92">
+  <div class="sol-head">
+    <span class="q-num">092</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：左右极限 · 跳跃间断</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">讨论函数</p>\[ f(x)=\frac1{1-e^{1/x}} \]<p class="prompt">在 \(x=0\) 处的间断类型。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：右极限（\(x\to0^{+}\)）。此时 \(\frac1x\to+\infty\)，\(e^{1/x}\to+\infty\)，分母 \(1-e^{1/x}\to-\infty\)。</p>\[ \lim_{x\to0^{+}}f(x)=0 \]<p>第二步：左极限（\(x\to0^{-}\)）。此时 \(\frac1x\to-\infty\)，\(e^{1/x}\to0\)，分母 \(\to1\)。</p>\[ \lim_{x\to0^{-}}f(x)=1 \]<p>左右极限都存在但不相等，所以是跳跃间断点。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">关键是分清 \(e^{1/x}\) 在 0 左右两侧的两种命运：右侧趋于 \(+\infty\)，左侧趋于 0。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要只看 \(x=0\) 分母为 0 就判无穷间断。</span>右侧极限是 0（有限），左侧是 1，所以是跳跃而非无穷。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(x\to0^{+}\) 时 \(1/x\to+\infty\)，\(e^{1/x}\to+\infty\)；\(x\to0^{-}\) 时 \(1/x\to-\infty\)，\(e^{1/x}\to0\)。左右极限分别为 0、1，属于第一类跳跃间断。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s93">
+  <div class="sol-head">
+    <span class="q-num">093</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：反三角函数 · 左右极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">讨论函数</p>\[ f(x)=\arctan\frac1x \]<p class="prompt">在 \(x=0\) 处的间断类型。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：右极限。\(x\to0^{+}\) 时 \(\frac1x\to+\infty\)，\(\arctan(+\infty)=\frac\pi2\)。</p><p>第二步：左极限。\(x\to0^{-}\) 时 \(\frac1x\to-\infty\)，\(\arctan(-\infty)=-\frac\pi2\)。</p><p>左右极限都存在但不相等，所以是跳跃间断点。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\arctan\) 的值域是 \((-\frac\pi2,\frac\pi2)\)，在正、负无穷处分别趋于 \(\pm\frac\pi2\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要写成 \(\arctan0=0\) 后说极限为 0。</span>\(x\to0\) 时 \(\frac1x\) 趋于无穷，不是 0。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">反三角函数极限：\(\lim_{t\to+\infty}\arctan t=\frac\pi2\)，\(\lim_{t\to-\infty}\arctan t=-\frac\pi2\)。左右极限不等，故为跳跃间断。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s94">
+  <div class="sol-head">
+    <span class="q-num">094</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：0/0 型 · 可去间断</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">讨论函数</p>\[ f(x)=\frac{x}{1-e^{x}} \]<p class="prompt">在 \(x=0\) 处的间断类型；若是可去间断，写出补充定义。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：代入 \(x=0\) 得 \(\frac00\) 型。</p><p>第二步：用等价无穷小 \(e^{x}-1\sim x\)，所以 \(1-e^{x}\sim-x\)。</p>\[ \lim_{x\to0}\frac{x}{1-e^{x}}=\lim_{x\to0}\frac{x}{-x}=-1 \]<p>极限存在，但 \(f(0)\) 无定义，所以是可去间断点；补充定义 \(f(0)=-1\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(1-e^{x}\sim-x\)，所以极限是 \(-1\)。</span>可去间断点通过补充定义极限值来修补。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">符号最容易错：\(1-e^{x}\sim-x\)，不是 \(x\)。</span>所以极限是 \(-1\)，不是 1。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">可去间断：极限存在但函数值缺失或不等于极限。本题 \(x=0\) 处无定义，极限为 \(-1\)，故补充定义 \(f(0)=-1\) 即可连续。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s95">
+  <div class="sol-head">
+    <span class="q-num">095</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：分段函数 · 左右极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{\sin ax}{x}, & x<0,\\ 2, & x=0,\\ x+b, & x>0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a,b\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：左极限。</p>\[ \lim_{x\to0^{-}}\frac{\sin ax}{x}=a \]<p>第二步：右极限与函数值。</p>\[ \lim_{x\to0^{+}}(x+b)=b,\qquad f(0)=2 \]<p>第三步：连续要求 \(a=b=2\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">左极限用第一个重要极限得 \(a\)，右极限是 \(b\)，再令二者都等于 2。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\frac{\sin ax}{x}\to a\)，不是 1；系数 \(a\) 要保留。</span>右极限 \(x+b\to b\)，不是 \(b+1\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第一个重要极限的推广：\(\lim_{x\to0}\frac{\sin ax}{x}=a\)。分段点连续要求左极限 \(=\) 右极限 \(=\) 函数值。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s96">
+  <div class="sol-head">
+    <span class="q-num">096</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 连续</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{1-\cos x}{x^{2}}, & x\neq0,\\ a, & x=0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(1-\cos x\sim\frac{x^{2}}2\)。</p>\[ \lim_{x\to0}\frac{1-\cos x}{x^{2}}=\frac12 \]<p>第二步：连续要求 \(a=\frac12\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(1-\cos x\sim\frac{x^{2}}2\)，所以极限为 \(\frac12\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要写成 1 或 0；\(1-\cos x\) 是二阶无穷小，系数是 \(\frac12\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(1-\cos x\sim\frac{x^{2}}2\) 由半角公式与 \(\sin u\sim u\) 推出。分段点连续要求定义值等于该极限。</span></p>
+  </div>
+</article>
+<h2 class="sec-title" id="ssec8">八、已知极限求参数</h2>
+<p class="sec-sub">分子为零 · 等价系数 · 指数配平 · 泰勒定系数</p>
+
+<article class="sol-card" id="s97">
+  <div class="sol-head">
+    <span class="q-num">097</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：已知极限求参数 · 重要极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{\sin3x+ax}{x}=5 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：拆项。</p>\[ \frac{\sin3x+ax}{x}=\frac{\sin3x}{x}+a \]<p>第二步：\(\frac{\sin3x}{x}\to3\)。</p>\[ 3+a=5\quad\Rightarrow\quad a=2 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先把分式拆成“标准极限 + 常数”，再对比已知值。</span>\(\frac{\sin3x}{x}\to3\)，不是 1。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(\frac{\sin3x}{x}\to3\)，因为分子是 \(3x\) 的等价无穷小。</span>若写成 1，会得到 \(a=4\) 的错误答案。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第一个重要极限 \(\lim_{u\to0}\frac{\sin u}{u}=1\) 的推广：\(\frac{\sin ax}{x}\to a\)。参数题就是把未知常数分离出来，再与已知极限比较。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s98">
+  <div class="sol-head">
+    <span class="q-num">098</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：根式等价 · 求参数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{\sqrt{1+ax}-1}{x}=2 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\sqrt{1+ax}-1\sim\frac{ax}2\)。</p>\[ \frac{\sqrt{1+ax}-1}{x}\to\frac a2 \]<p>第二步：令 \(\frac a2=2\)，得 \(a=4\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\((1+u)^{1/2}-1\sim\frac u2\)，这里 \(u=ax\)，所以分子等价于 \(\frac{ax}2\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要漏掉系数 \(\frac12\)：极限是 \(\frac a2\)，不是 \(a\)。</span>所以 \(a=4\)，不是 2。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">二项式等价 \((1+u)^{\alpha}-1\sim\alpha u\)。本题 \(\alpha=\frac12\)，\(u=ax\)。参数题先化简出极限关于 \(a\) 的表达式，再解方程。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s99">
+  <div class="sol-head">
+    <span class="q-num">099</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 求参数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to\infty}\left(1+\frac ax\right)^{2x}=e^{4} \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：先算 \((1+\frac ax)^{x}\to e^{a}\)。</p><p>第二步：原式是它的平方。</p>\[ \left(1+\frac ax\right)^{2x}=\left[\left(1+\frac ax\right)^{x}\right]^{2}\to e^{2a} \]<p>第三步：令 \(e^{2a}=e^{4}\)，得 \(2a=4\)，所以 \(a=2\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\((1+\frac ax)^{x}\to e^{a}\)，指数再乘 2，所以整体是 \(e^{2a}\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要把 \(2x\) 直接当成 \(x\)，否则会误得 \(a=4\)。</span>指数上的 2 要乘进指数。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限的推广：\(\lim_{x\to\infty}(1+\frac ax)^{x}=e^{a}\)。若指数是 \(2x\)，极限为 \(e^{2a}\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s100">
+  <div class="sol-head">
+    <span class="q-num">100</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 求参数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{1-\cos x}{ax^{2}}=1 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(1-\cos x\sim\frac{x^{2}}2\)。</p>\[ \frac{1-\cos x}{ax^{2}}\to\frac{1}{2a} \]<p>第二步：令 \(\frac1{2a}=1\)，得 \(a=\frac12\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分子等价于 \(\frac{x^{2}}2\)，所以整个分式的极限是 \(\frac1{2a}\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要漏掉分子里的 \(\frac12\)，否则会误得 \(a=1\)。</span>正确结果是 \(a=\frac12\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(1-\cos x\sim\frac{x^{2}}2\) 是二阶等价无穷小。参数题先把极限写成关于 \(a\) 的表达式，再令它等于已知值。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s101">
+  <div class="sol-head">
+    <span class="q-num">101</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：极限存在 · 因式分解求参数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to1}\frac{x^{2}+ax+b}{x-1}=3 \]<p class="prompt">求常数 \(a,b\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分母 \(x-1\to0\)，而极限存在且为有限数，所以分子在 \(x=1\) 时必须为 0。</p>\[ 1+a+b=0\quad\Rightarrow\quad b=-a-1 \]<p>第二步：分子因式分解。</p>\[ x^{2}+ax+b=(x-1)(x+a+1) \]<p>第三步：约分后取极限。</p>\[ \lim_{x\to1}(x+a+1)=a+2=3\quad\Rightarrow\quad a=1 \]<p>所以 \(b=-2\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">“分母趋于 0、极限存在” ⇒ 分子也必须趋于 0。</span>这是求参数的第一条方程；再用约分后的极限求第二条。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">只令分子在 1 处为 0 只能得到一个方程，不能确定两个参数。</span>还必须用约分后的极限值 \(a+2=3\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">若 \(\frac{P(x)}{x-x_0}\to L\)（有限），则 \(P(x_0)=0\)，从而 \(P(x)\) 含因子 \(x-x_0\)。约去该因子后，剩下的多项式在 \(x_0\) 连续，可直接代入求 \(L\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s102">
+  <div class="sol-head">
+    <span class="q-num">102</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：指数等价 · 求参数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{e^{ax}-1}{x}=3 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(e^{ax}-1\sim ax\)。</p>\[ \frac{e^{ax}-1}{x}\to a \]<p>第二步：令 \(a=3\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(e^{u}-1\sim u\)，令 \(u=ax\)，分子等价于 \(ax\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">\(e^{ax}-1\sim ax\)，不是 \(a\)；除以 \(x\) 后才得到 \(a\)。</span>答案是 3。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">由 \(e^{u}-1\sim u\) 得 \(e^{ax}-1\sim ax\)。参数题中，极限值就是等价无穷小的系数。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s103">
+  <div class="sol-head">
+    <span class="q-num">103</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：对数等价 · 求参数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{\ln(1+ax)}{x}=2 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\ln(1+ax)\sim ax\)。</p>\[ \frac{\ln(1+ax)}{x}\to a \]<p>第二步：令 \(a=2\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\(\ln(1+u)\sim u\)，令 \(u=ax\)，分子等价于 \(ax\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">结果为 \(a\)，不是 \(\ln a\)；这里是 \(\ln(1+ax)\)，不是 \(a^{x}-1\)。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(\ln(1+u)\sim u\) 来自重要极限 \(\lim_{u\to0}\frac{\ln(1+u)}u=1\)。本题 \(u=ax\)，所以极限为 \(a\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s104">
+  <div class="sol-head">
+    <span class="q-num">104</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：1^∞ 型 · 求参数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to\infty}\left(\frac{x+a}{x-a}\right)^{x}=e^{4} \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：化底数。</p>\[ \frac{x+a}{x-a}=1+\frac{2a}{x-a} \]<p>第二步：由第二重要极限，\(\left(1+\frac{2a}{x-a}\right)^{x}\to e^{2a}\)。</p><p>第三步：令 \(e^{2a}=e^{4}\)，得 \(2a=4\)，所以 \(a=2\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先化成 \(1+\frac{2a}{x-a}\)，极限为 \(e^{2a}\)；再与 \(e^{4}\) 比较。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">分子差是 \(2a\)，所以指数系数是 \(2a\)，不是 \(a\)。</span>若漏掉 2，会误得 \(a=4\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限推广：\(\lim_{x\to\infty}(1+\frac{k}{x})^{x}=e^{k}\)。本题 \(k=2a\)，所以极限为 \(e^{2a}\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s105">
+  <div class="sol-head">
+    <span class="q-num">105</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 求参数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{\tan2x+a\sin x}{x}=5 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\tan2x\sim2x\)，\(\sin x\sim x\)。</p>\[ \frac{\tan2x+a\sin x}{x}\to2+a \]<p>第二步：令 \(2+a=5\)，得 \(a=3\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">两项分别等价：\(\tan2x\sim2x\)、\(a\sin x\sim ax\)，相加系数为 \(2+a\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">这里分子是“和”，但每一项都是单独的整体因子，且分母只有一个 \(x\)，可以拆成两个极限相加。</span>拆开后分别算，不要直接把 \(\tan2x\) 和 \(\sin x\) 都换成 \(x\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">极限四则运算允许在各自极限存在时拆项。\(\frac{\tan2x}{x}\to2\)，\(\frac{a\sin x}{x}\to a\)，所以总和为 \(2+a\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s106">
+  <div class="sol-head">
+    <span class="q-num">106</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：极限存在 · 因式分解求参数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to2}\frac{x^{2}+ax+b}{x-2}=5 \]<p class="prompt">求常数 \(a,b\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：分母 \(x-2\to0\)，极限存在，所以分子在 \(x=2\) 处为 0。</p>\[ 4+2a+b=0\quad\Rightarrow\quad b=-2a-4 \]<p>第二步：因式分解。</p>\[ x^{2}+ax+b=(x-2)(x+a+2) \]<p>第三步：约分后取极限。</p>\[ \lim_{x\to2}(x+a+2)=a+4=5\quad\Rightarrow\quad a=1 \]<p>所以 \(b=-6\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">分母趋于 0 而极限有限，分子必须含因子 \(x-2\)。</span>先由 \(P(2)=0\) 得一个方程，再由约分后的极限得另一个。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">只代 \(x=2\) 令分子为 0 不够；还要用极限值 \(a+4=5\)。</span>否则无法确定 \(a,b\) 两个参数。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">若 \(\frac{P(x)}{x-2}\to L\)，则 \(P(2)=0\)，\(P(x)=(x-2)Q(x)\)，且 \(Q(2)=L\)。这是“已知极限求参数”的标准方法。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s107">
+  <div class="sol-head">
+    <span class="q-num">107</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：等价无穷小 · 平方关系</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{1-\cos ax}{x^{2}}=2 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(1-\cos ax\sim\frac{(ax)^{2}}2=\frac{a^{2}x^{2}}2\)。</p>\[ \frac{1-\cos ax}{x^{2}}\to\frac{a^{2}}2 \]<p>第二步：令 \(\frac{a^{2}}2=2\)，得 \(a^{2}=4\)，所以 \(a=\pm2\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">系数是 \(a^{2}\)，不是 \(a\)；开方后有两个解。</span>\(a=2\) 或 \(a=-2\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">只写 \(a=2\) 会漏解。</span>因为 \(a\) 出现在 \(\cos ax\) 中，\(a\) 与 \(-a\) 给出同一个函数。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">\(1-\cos ax\sim\frac{a^{2}x^{2}}2\)。参数以平方形式出现，所以解方程 \(a^{2}=4\) 时必须考虑正负两个值。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s108">
+  <div class="sol-head">
+    <span class="q-num">108</span>
+    <span class="q-level adv">进阶</span>
+    <span class="sol-point">考点：泰勒展开 · 求参数</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{\sqrt{1+x}+ax+b}{x}=0 \]<p class="prompt">求常数 \(a,b\)。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：展开 \(\sqrt{1+x}=1+\frac{x}2+o(x)\)。</p>\[ \sqrt{1+x}+ax+b=(1+b)+\left(a+\frac12\right)x+o(x) \]<p>第二步：除以 \(x\)。</p>\[ \frac{1+b}{x}+\left(a+\frac12\right)+o(1)\to0 \]<p>第三步：要让极限为 0，常数项和 \(1/x\) 项都必须消失。</p>\[ 1+b=0,\qquad a+\frac12=0 \]<p>所以 \(b=-1\)，\(a=-\frac12\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">展开到一次项，令常数项和一次项系数同时为 0。</span>这是“极限为 0”与“极限存在”的区别：要求更高阶的消失。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">只令常数项 \(1+b=0\) 不够；若 \(a+\frac12\neq0\)，除以 \(x\) 后仍会留下有限项，极限不是 0。</span></p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">泰勒/二项式展开：\(\sqrt{1+x}=1+\frac{x}2+o(x)\)。分式极限为 0 要求分子是比 \(x\) 高阶的无穷小，因此常数项与一次项系数都必须为 0。</span></p>
+  </div>
+</article>
+<h2 class="sec-title" id="ssec9">九、应用、证明与真题风格</h2>
+<p class="sec-sub">连续复利 · 变化率 · 零点定理 · 夹逼 · 综合计算</p>
+
+<article class="sol-card" id="s109">
+  <div class="sol-head">
+    <span class="q-num">109</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：连续复利 · 第二重要极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">应用题：</p><p>本金 \(P\) 元，年利率 \(r\)，若一年分 \(n\) 次计息，则年末本利和为</p>\[ A_n=P\left(1+\frac rn\right)^{n} \]<p class="prompt">求 \(n\to\infty\)（连续复利）时的年末本利和。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：把指数配成 \(n/r\) 的形式。</p>\[ \left(1+\frac rn\right)^{n}=\left[\left(1+\frac rn\right)^{\frac nr}\right]^{r} \]<p>第二步：由第二重要极限，中括号趋于 \(e\)。</p>\[ \to e^{r} \]<p>第三步：乘本金。</p>\[ A_n\to Pe^{r} \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">连续复利公式 \(A=Pe^{rt}\)。本题 \(t=1\)，所以是 \(Pe^{r}\)。</span>关键是把 \((1+\frac rn)^n\) 凑成 \([(1+\frac rn)^{n/r}]^r\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要把指数配成 \(n\) 后忘记外面的 \(r\) 次方。</span>结果是指数 \(e^{r}\)，不是 \(e\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限 \(\lim_{x\to\infty}(1+\frac1x)^x=e\) 的推广：\(\lim_{n\to\infty}(1+\frac rn)^n=e^{r}\)。连续复利就是“计息次数趋于无穷”的极限模型。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s110">
+  <div class="sol-head">
+    <span class="q-num">110</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：1^∞ 型 · 细菌增长模型</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">应用题：</p><p>某细菌培养数量按模型</p>\[ N(t)=N_0(1+t)^{\frac1t}\quad(t>0) \]<p class="prompt">增长，其中 \(N_0\) 为初始数量。求 \(t\to0^{+}\) 时数量的极限。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：这是 \(1^{\infty}\) 型，但可直接识别为第二重要极限。</p>\[ \lim_{t\to0^{+}}(1+t)^{\frac1t}=e \]<p>第二步：乘初始数量。</p>\[ N(t)\to N_0e \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">\((1+t)^{1/t}\to e\)，所以极限数量是 \(N_0e\)。</span>这是连续增长模型的典型极限。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要把 \((1+t)^{1/t}\) 当成 \(1^{\infty}=1\)。</span>底数趋于 1、指数趋于无穷，结果是 \(e\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限 \(\lim_{t\to0}(1+t)^{1/t}=e\)。它描述了“每个瞬间都在增长”的连续增长过程，与复利模型同源。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s111">
+  <div class="sol-head">
+    <span class="q-num">111</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：瞬时速度 · 极限定义</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">应用题：</p><p>物体做直线运动，位移 \(s(t)=t^{2}+2t\)（米，秒）。求 \(t=1\) 时的瞬时速度。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：写出 \(t=1\) 到 \(t=1+h\) 的平均速度。</p>\[ \bar v=\frac{s(1+h)-s(1)}h \]<p>第二步：计算位移差。</p>\[ s(1+h)=(1+h)^{2}+2(1+h)=3+4h+h^{2} \]<p>所以 \(s(1+h)-s(1)=4h+h^{2}\)。</p><p>第三步：求极限。</p>\[ v(1)=\lim_{h\to0}\frac{4h+h^{2}}h=\lim_{h\to0}(4+h)=4 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">瞬时速度是平均速度的极限：\(v(t_0)=\lim_{h\to0}\frac{s(t_0+h)-s(t_0)}h\)。</span>本题结果为 4 米/秒。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要直接把 \(t=1\) 代入 \(s(t)\) 求速度；那是位移，不是速度。</span>必须先算差商，再取极限。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">导数的定义：\(v(t_0)=s'(t_0)=\lim_{h\to0}\frac{s(t_0+h)-s(t_0)}h\)。在极限章中，这就是“平均变化率的极限”。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s112">
+  <div class="sol-head">
+    <span class="q-num">112</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：平均变化率 · 极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">应用题：</p><p>圆面积 \(A(r)=\pi r^{2}\)。当半径由 \(r\) 增加到 \(r+h\) 时，求面积的平均变化率 \(\frac{A(r+h)-A(r)}h\) 当 \(h\to0\) 时的极限。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：算面积差。</p>\[ A(r+h)-A(r)=\pi(r+h)^{2}-\pi r^{2}=2\pi rh+\pi h^{2} \]<p>第二步：除以 \(h\)。</p>\[ \frac{2\pi rh+\pi h^{2}}h=2\pi r+\pi h \]<p>第三步：令 \(h\to0\)。</p>\[ \to2\pi r \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">极限 \(2\pi r\) 就是圆周长，也是面积对半径的瞬时变化率。</span>这就是“导数”的几何意义。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要漏掉 \(\pi\)，也不要把 \(2\pi rh\) 约成 \(2\pi r\) 后忘记 \(h\) 项。</span>\(h\to0\) 时 \(\pi h\to0\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">平均变化率 \(\frac{\Delta A}{\Delta r}\) 的极限是瞬时变化率。\(A'(r)=2\pi r\)，在几何上对应周长；这是极限与导数联系的典型例子。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s113">
+  <div class="sol-head">
+    <span class="q-num">113</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：平均变化率 · 极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">应用题：</p><p>正方形边长由 \(a\) 增加到 \(a+h\)，面积 \(S=a^{2}\)。求面积的平均变化率当 \(h\to0\) 时的极限。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：面积增量。</p>\[ \Delta S=(a+h)^{2}-a^{2}=2ah+h^{2} \]<p>第二步：平均变化率。</p>\[ \frac{\Delta S}{h}=2a+h \]<p>第三步：令 \(h\to0\)。</p>\[ \to2a \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">极限 \(2a\) 是正方形面积对边长的瞬时变化率，量纲上对应“两条边”的总长。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要把 \(h^{2}\) 当成主要项；它比 \(h\) 高阶，取极限后消失。</span>结果是 \(2a\)，不是 \(2a+h\)。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">平均变化率 \(\frac{\Delta S}{\Delta a}\) 的极限是瞬时变化率。\(S'(a)=2a\)，体现“边长增加一点点时，面积增加约两条边长的贡献”。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s114">
+  <div class="sol-head">
+    <span class="q-num">114</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：零点定理 · 方程有根</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">证明题：</p><p>证明方程 \(x^{3}-4x+1=0\) 在区间 \((0,1)\) 内至少有一个实根。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：令 \(f(x)=x^{3}-4x+1\)。它是多项式，在 \([0,1]\) 上连续。</p><p>第二步：计算端点值。</p>\[ f(0)=1>0,\qquad f(1)=1-4+1=-2<0 \]<p>第三步：由零点定理，存在 \(c\in(0,1)\)，使 \(f(c)=0\)。</p><p>所以方程在 \((0,1)\) 内至少有一个实根。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">破局点：端点函数值异号 \(+\) 闭区间上连续 ⇒ 中间必有零点。</span>这是零点定理的标准用法。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">必须写“在闭区间 \([0,1]\) 上连续”，且说明 \(f(0)\) 与 \(f(1)\) 异号。</span>只算两个值不说明连续性，证明不完整。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">零点定理：若 \(f\) 在 \([a,b]\) 上连续，且 \(f(a)f(b)<0\)，则存在 \(c\in(a,b)\) 使 \(f(c)=0\)。它只保证“至少一个根”，不保证唯一。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s115">
+  <div class="sol-head">
+    <span class="q-num">115</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：零点定理 · 方程有根</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">证明题：</p><p>证明方程 \(x=\cos x\) 在区间 \((0,\frac\pi2)\) 内至少有一个实根。</p>
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：令 \(f(x)=x-\cos x\)。它在 \([0,\frac\pi2]\) 上连续。</p><p>第二步：端点值。</p>\[ f(0)=-\cos0=-1<0,\qquad f\left(\frac\pi2\right)=\frac\pi2-\cos\frac\pi2=\frac\pi2>0 \]<p>第三步：由零点定理，存在 \(c\in(0,\frac\pi2)\)，使 \(f(c)=0\)，即 \(c=\cos c\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">把方程改写成 \(f(x)=x-\cos x=0\)，再验证端点异号。</span>这是零点定理的标准套路。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">注意 \(\cos\frac\pi2=0\)，所以 \(f(\frac\pi2)=\frac\pi2>0\)。</span>不要把 \(\cos0=1\) 的符号弄反。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">零点定理：连续函数在区间两端异号，则中间至少有一个零点。本题 \(f(0)=-1<0\)、\(f(\frac\pi2)=\frac\pi2>0\)，故有根。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s116">
+  <div class="sol-head">
+    <span class="q-num">116</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：n 项和 · 夹逼定理</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\left(\frac1{\sqrt{n^{2}+1}}+\frac1{\sqrt{n^{2}+2}}+\cdots+\frac1{\sqrt{n^{2}+n}}\right) \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：共有 \(n\) 项，每一项都介于 \(\frac1{\sqrt{n^{2}+n}}\) 与 \(\frac1{\sqrt{n^{2}+1}}\) 之间。</p>\[ \frac{n}{\sqrt{n^{2}+n}}\le S_n\le\frac{n}{\sqrt{n^{2}+1}} \]<p>第二步：两端极限。</p>\[ \frac{n}{\sqrt{n^{2}+n}}=\frac1{\sqrt{1+\frac1n}}\to1;\qquad \frac{n}{\sqrt{n^{2}+1}}=\frac1{\sqrt{1+\frac1{n^{2}}}}\to1 \]<p>第三步：由夹逼定理，\(S_n\to1\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">n 项和不能逐项求极限，要用夹逼：把每一项放大/缩小成同一个数。</span>分母最大时最小，分母最小时最大。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要因为每项都趋于 0 就说和趋于 0。</span>有 \(n\) 项，\(n\cdot\frac1n=1\)，结果是 1。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">夹逼定理：若 \(a_n\le b_n\le c_n\) 且 \(a_n,c_n\to L\)，则 \(b_n\to L\)。本题把 \(n\) 项和夹在 \(n/\sqrt{n^{2}+n}\) 与 \(n/\sqrt{n^{2}+1}\) 之间。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s117">
+  <div class="sol-head">
+    <span class="q-num">117</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：n 项和 · 夹逼定理</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\left(\frac1{n^{2}+1}+\frac2{n^{2}+2}+\cdots+\frac n{n^{2}+n}\right) \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：第 \(k\) 项介于 \(\frac{k}{n^{2}+n}\) 与 \(\frac{k}{n^{2}+1}\) 之间。</p>\[ \frac{1+2+\cdots+n}{n^{2}+n}\le S_n\le\frac{1+2+\cdots+n}{n^{2}+1} \]<p>第二步：用 \(1+2+\cdots+n=\frac{n(n+1)}2\)。</p>\[ \frac{n(n+1)}{2(n^{2}+n)}=\frac12;\qquad \frac{n(n+1)}{2(n^{2}+1)}\to\frac12 \]<p>第三步：由夹逼定理，\(S_n\to\frac12\)。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">先对分子求和，再把分母统一放大/缩小，最后夹逼。</span>左边恰好等于 \(\frac12\)，右边也趋于 \(\frac12\)。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">分母是 \(n^{2}+k\)，不是 \(n^{2}\)；不能直接把每项当成 \(\frac{k}{n^{2}}\) 后求和。</span>夹逼的上下界要选得都能算出极限。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">夹逼定理处理“n 项和”的固定套路：把每项的分母换成最大/最小，得到统一的分母，再用求和公式。本题上下界都趋于 \(\frac12\)。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s118">
+  <div class="sol-head">
+    <span class="q-num">118</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：夹逼 · 指数增长</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\left(2^{n}+3^{n}\right)^{\frac1n} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：提出最大底数 \(3^{n}\)。</p>\[ (2^{n}+3^{n})^{1/n}=3\left[\left(\frac23\right)^{n}+1\right]^{1/n} \]<p>第二步：用夹逼。因为 \(3^{n}<2^{n}+3^{n}\le2\cdot3^{n}\)，所以</p>\[ 3<(2^{n}+3^{n})^{1/n}\le3\cdot2^{1/n} \]<p>第三步：\(2^{1/n}\to1\)，由夹逼定理得极限为 3。</p>
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">最大底数决定极限：\((a^{n}+b^{n})^{1/n}\to\max(a,b)\)。</span>本题最大底数是 3。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">不要写成 \(2+3=5\) 或 \(3+2=5\)。</span>指数 \(1/n\) 会把“加法”变成“取最大者”。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">夹逼：\(3^{n}\le2^{n}+3^{n}\le2\cdot3^{n}\)，开 \(n\) 次方得 \(3\le(\cdots)^{1/n}\le3\cdot2^{1/n}\)。因为 \(2^{1/n}\to1\)，所以极限为 3。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s119">
+  <div class="sol-head">
+    <span class="q-num">119</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：首项抵消 · 泰勒/洛必达</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\ln(1+x)-x}{x^{2}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：\(\ln(1+x)\sim x\) 会得到 \(x-x=0\)，说明首项抵消，必须看更高阶。</p><p>第二步：泰勒展开。</p>\[ \ln(1+x)=x-\frac{x^{2}}2+o(x^{2}) \]<p>第三步：相减并代回。</p>\[ \ln(1+x)-x=-\frac{x^{2}}2+o(x^{2})\quad\Rightarrow\quad \frac{\ln(1+x)-x}{x^{2}}\to-\frac12 \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">首项 \(x\) 抵消后，主部是 \(-\frac{x^{2}}2\)，所以极限是 \(-\frac12\)。</span>也可用洛必达两次。</p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">用 \(\ln(1+x)\sim x\) 直接替换会得到 0，这是错误的。</span>加减法中首项抵消，必须保留二阶项。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">泰勒展开 \(\ln(1+x)=x-\frac{x^{2}}2+o(x^{2})\)。当分子出现“函数减一次项”时，等价无穷小不够用，需要展开到抵消后的第一个非零项。</span></p>
+  </div>
+</article>
+<article class="sol-card" id="s120">
+  <div class="sol-head">
+    <span class="q-num">120</span>
+    <span class="q-level comp">综合</span>
+    <span class="sol-point">考点：1^∞ 型 · 第二重要极限</span>
+  </div>
+  <div class="sol-stem">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\left(\frac{x^{2}+1}{x^{2}-1}\right)^{x^{2}} \]
+  </div>
+  <div class="module step">
+    <h4>【清晰步骤】</h4>
+    <p>第一步：化底数。</p>\[ \frac{x^{2}+1}{x^{2}-1}=1+\frac{2}{x^{2}-1} \]<p>第二步：令 \(u=x^{2}-1\)，则 \(u\to\infty\)，且 \(x^{2}=u+1\)。</p>\[ \left(1+\frac2u\right)^{x^{2}}=\left(1+\frac2u\right)^{u+1}=\left[\left(1+\frac2u\right)^{u/2}\right]^{2}\left(1+\frac2u\right) \]<p>第三步：中括号趋于 \(e\)，最后因子趋于 1。</p>\[ \to e^{2} \]
+  </div>
+  <div class="module key">
+    <h4>【重点标识】</h4>
+    <p><span style="color:blue; font-weight:bold;">底数化成 \(1+\frac{2}{x^{2}-1}\)，指数 \(x^{2}=u+1\)，配平后得到 \(e^{2}\)。</span></p>
+  </div>
+  <div class="module trap">
+    <h4>【坑点预警】</h4>
+    <p><span style="color:red; font-weight:bold;">指数是 \(x^{2}\)，不是 \(x\)；答案是 \(e^{2}\)，不是 \(e\)。</span>多出的 \(+1\) 次方极限为 1，不能把 2 丢掉。</p>
+  </div>
+  <div class="module origin">
+    <h4>【知识溯源】</h4>
+    <p><span style="color:gray;">第二重要极限推广：\(\lim_{u\to\infty}(1+\frac{a}{u})^{u}=e^{a}\)。本题 \(a=2\)，指数多出的 \(1\) 次方趋于 1，所以极限为 \(e^{2}\)。</span></p>
+  </div>
+</article>
+
+  <section class="answer-key no-print" id="answer">
+    <h2>答案速查</h2>
+    <p class="hint">建议做完一整组再对照；错题回到对应解析，重点看“坑点预警”。</p>
+    <div class="key-grid">
+      <div class="key-item"><b>001</b><span>\(1\)</span></div>
+      <div class="key-item"><b>002</b><span>\(-2\)</span></div>
+      <div class="key-item"><b>003</b><span>\(\frac32\)</span></div>
+      <div class="key-item"><b>004</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>005</b><span>\(\frac32\)</span></div>
+      <div class="key-item"><b>006</b><span>\(2\)</span></div>
+      <div class="key-item"><b>007</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>008</b><span>\(2\)</span></div>
+      <div class="key-item"><b>009</b><span>\(\frac32\)</span></div>
+      <div class="key-item"><b>010</b><span>\(2\)</span></div>
+      <div class="key-item"><b>011</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>012</b><span>\(\frac16\)</span></div>
+      <div class="key-item"><b>013</b><span>\(e^{6}\)</span></div>
+      <div class="key-item"><b>014</b><span>\(e^{-3}\)</span></div>
+      <div class="key-item"><b>015</b><span>\(e^{2}\)</span></div>
+      <div class="key-item"><b>016</b><span>\(1\)</span></div>
+      <div class="key-item"><b>017</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>018</b><span>\(1\)</span></div>
+      <div class="key-item"><b>019</b><span>\(0\)</span></div>
+      <div class="key-item"><b>020</b><span>\(a=\frac12\)</span></div>
+      <div class="key-item"><b>021</b><span>\(2\)</span></div>
+      <div class="key-item"><b>022</b><span>\(3\)</span></div>
+      <div class="key-item"><b>023</b><span>\(\frac14\)</span></div>
+      <div class="key-item"><b>024</b><span>\(1\)</span></div>
+      <div class="key-item"><b>025</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>026</b><span>\(0\)</span></div>
+      <div class="key-item"><b>027</b><span>\(1\)</span></div>
+      <div class="key-item"><b>028</b><span>\(1\)</span></div>
+      <div class="key-item"><b>029</b><span>\(\frac92\)</span></div>
+      <div class="key-item"><b>030</b><span>\(\frac32\)</span></div>
+      <div class="key-item"><b>031</b><span>\(-2\)</span></div>
+      <div class="key-item"><b>032</b><span>\(\ln a\)</span></div>
+      <div class="key-item"><b>033</b><span>\(\frac23\)</span></div>
+      <div class="key-item"><b>034</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>035</b><span>\(-\frac16\)</span></div>
+      <div class="key-item"><b>036</b><span>\(\frac13\)</span></div>
+      <div class="key-item"><b>037</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>038</b><span>\(e\)</span></div>
+      <div class="key-item"><b>039</b><span>\(e\)</span></div>
+      <div class="key-item"><b>040</b><span>\(e^{-\frac12}\)</span></div>
+      <div class="key-item"><b>041</b><span>\(2\)</span></div>
+      <div class="key-item"><b>042</b><span>1阶</span></div>
+      <div class="key-item"><b>043</b><span>\(A\)</span></div>
+      <div class="key-item"><b>044</b><span>\(C\)</span></div>
+      <div class="key-item"><b>045</b><span>\(C\)</span></div>
+      <div class="key-item"><b>046</b><span>\(\frac14\)</span></div>
+      <div class="key-item"><b>047</b><span>\(2\)</span></div>
+      <div class="key-item"><b>048</b><span>\(2\)</span></div>
+      <div class="key-item"><b>049</b><span>\(-\frac12\)</span></div>
+      <div class="key-item"><b>050</b><span>\(\frac35\)</span></div>
+      <div class="key-item"><b>051</b><span>\(\frac14\)</span></div>
+      <div class="key-item"><b>052</b><span>\(1\)</span></div>
+      <div class="key-item"><b>053</b><span>\(\frac{\ln2}{\ln3}\)</span></div>
+      <div class="key-item"><b>054</b><span>\(\frac23\)</span></div>
+      <div class="key-item"><b>055</b><span>\(e^{\frac23}\)</span></div>
+      <div class="key-item"><b>056</b><span>\(e^{-2}\)</span></div>
+      <div class="key-item"><b>057</b><span>\(e\)</span></div>
+      <div class="key-item"><b>058</b><span>\(e^{2}\)</span></div>
+      <div class="key-item"><b>059</b><span>\(1\)</span></div>
+      <div class="key-item"><b>060</b><span>\(1\)</span></div>
+      <div class="key-item"><b>061</b><span>\(D\)</span></div>
+      <div class="key-item"><b>062</b><span>\(A\)</span></div>
+      <div class="key-item"><b>063</b><span>\(A\)</span></div>
+      <div class="key-item"><b>064</b><span>\(A\)</span></div>
+      <div class="key-item"><b>065</b><span>\(A\)</span></div>
+      <div class="key-item"><b>066</b><span>\(C\)</span></div>
+      <div class="key-item"><b>067</b><span>同阶但不等价</span></div>
+      <div class="key-item"><b>068</b><span>\(3\)</span></div>
+      <div class="key-item"><b>069</b><span>\(1\)</span></div>
+      <div class="key-item"><b>070</b><span>\(1\)</span></div>
+      <div class="key-item"><b>071</b><span>\(0\)</span></div>
+      <div class="key-item"><b>072</b><span>\(0\)</span></div>
+      <div class="key-item"><b>073</b><span>\(1\)</span></div>
+      <div class="key-item"><b>074</b><span>\(1\)</span></div>
+      <div class="key-item"><b>075</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>076</b><span>\(2\)</span></div>
+      <div class="key-item"><b>077</b><span>\(1\)</span></div>
+      <div class="key-item"><b>078</b><span>\(e\)</span></div>
+      <div class="key-item"><b>079</b><span>\(2\)</span></div>
+      <div class="key-item"><b>080</b><span>\(C\)</span></div>
+      <div class="key-item"><b>081</b><span>\(B\)</span></div>
+      <div class="key-item"><b>082</b><span>\(D\)</span></div>
+      <div class="key-item"><b>083</b><span>\(B\)</span></div>
+      <div class="key-item"><b>084</b><span>\(1\)</span></div>
+      <div class="key-item"><b>085</b><span>\(1\)</span></div>
+      <div class="key-item"><b>086</b><span>\(0\)</span></div>
+      <div class="key-item"><b>087</b><span>\(1\)</span></div>
+      <div class="key-item"><b>088</b><span>\(e\)</span></div>
+      <div class="key-item"><b>089</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>090</b><span>\(2\)</span></div>
+      <div class="key-item"><b>091</b><span>x=1 可去；x=2 无穷</span></div>
+      <div class="key-item"><b>092</b><span>跳跃间断</span></div>
+      <div class="key-item"><b>093</b><span>跳跃间断</span></div>
+      <div class="key-item"><b>094</b><span>可去，定义 f(0)=-1</span></div>
+      <div class="key-item"><b>095</b><span>\(a=2,b=2\)</span></div>
+      <div class="key-item"><b>096</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>097</b><span>\(2\)</span></div>
+      <div class="key-item"><b>098</b><span>\(4\)</span></div>
+      <div class="key-item"><b>099</b><span>\(2\)</span></div>
+      <div class="key-item"><b>100</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>101</b><span>\(a=1, b=-2\)</span></div>
+      <div class="key-item"><b>102</b><span>\(3\)</span></div>
+      <div class="key-item"><b>103</b><span>\(2\)</span></div>
+      <div class="key-item"><b>104</b><span>\(2\)</span></div>
+      <div class="key-item"><b>105</b><span>\(3\)</span></div>
+      <div class="key-item"><b>106</b><span>\(a=1, b=-6\)</span></div>
+      <div class="key-item"><b>107</b><span>\(a=\pm2\)</span></div>
+      <div class="key-item"><b>108</b><span>\(a=-\frac12, b=-1\)</span></div>
+      <div class="key-item"><b>109</b><span>\(Pe^{r}\)</span></div>
+      <div class="key-item"><b>110</b><span>\(N_0e\)</span></div>
+      <div class="key-item"><b>111</b><span>\(4\)</span></div>
+      <div class="key-item"><b>112</b><span>\(2\pi r\)</span></div>
+      <div class="key-item"><b>113</b><span>\(2a\)</span></div>
+      <div class="key-item"><b>114</b><span>证明见解析</span></div>
+      <div class="key-item"><b>115</b><span>证明见解析</span></div>
+      <div class="key-item"><b>116</b><span>\(1\)</span></div>
+      <div class="key-item"><b>117</b><span>\(\frac12\)</span></div>
+      <div class="key-item"><b>118</b><span>\(3\)</span></div>
+      <div class="key-item"><b>119</b><span>\(-\frac12\)</span></div>
+      <div class="key-item"><b>120</b><span>\(e^{2}\)</span></div>
+    </div>
+  </section>
+
+  <footer class="foot">极限专项通关题库 · 第 1—120 题（共 120 题）· 详细解析版</footer>
+</div>
+</body>
+</html>

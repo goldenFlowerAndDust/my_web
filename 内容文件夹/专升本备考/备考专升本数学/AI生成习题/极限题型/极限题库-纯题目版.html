@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>极限题库-纯题目版（第1-120题）</title>
+<meta name="description" content="专升本高等数学第一章极限专项题库，江西专升本风格，第1-120题纯题目版，PDF每题一页。">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" onerror="var s=document.createElement('script');s.src='https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js';document.head.appendChild(s);"></script>
+<style>
+:root{
+  --ink:#1f2937; --muted:#6b7280; --line:#e5eaf2;
+  --brand:#1d4ed8; --card:#ffffff; --bg:#f4f6fb;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink); background:
+    radial-gradient(1100px 560px at 8% -12%, #dbeafe 0%, rgba(219,234,254,0) 62%),
+    radial-gradient(900px 520px at 102% -4%, #fef3c7 0%, rgba(254,243,199,0) 58%),
+    var(--bg);
+  font-family:"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  line-height:1.8; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:960px; margin:0 auto; padding:30px 22px 96px}
+.print-btn{
+  position:fixed; top:18px; right:20px; z-index:999;
+  border:0; cursor:pointer; padding:12px 20px; border-radius:999px;
+  background:linear-gradient(135deg,#1d4ed8,#2563eb); color:#fff;
+  font-size:14px; font-weight:700; letter-spacing:.4px;
+  box-shadow:0 10px 24px rgba(29,78,216,.35);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.print-btn:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(29,78,216,.42)}
+.hero{
+  position:relative; overflow:hidden; color:#fff; border-radius:24px;
+  padding:40px 42px 34px;
+  background:linear-gradient(135deg,#0b1220 0%,#172554 52%,#1d4ed8 100%);
+  box-shadow:0 20px 46px rgba(15,23,42,.24);
+}
+.hero:after{content:""; position:absolute; right:-70px; top:-90px; width:280px; height:280px; border-radius:50%; background:rgba(255,255,255,.08)}
+.hero:before{content:""; position:absolute; right:110px; bottom:-120px; width:220px; height:220px; border-radius:50%; border:1px solid rgba(255,255,255,.16)}
+.hero>*{position:relative; z-index:1}
+.eyebrow{font-size:13px; letter-spacing:2.4px; color:#bfdbfe; font-weight:700}
+.hero h1{margin:12px 0 6px; font-size:36px; line-height:1.25; letter-spacing:1px; font-weight:800}
+.hero .sub{margin:0; font-size:17px; color:#dbeafe; font-weight:600}
+.hero .desc{margin:14px 0 0; max-width:700px; color:#cbd5e1; font-size:14.5px}
+.chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+.chip{display:inline-flex; align-items:center; gap:6px; padding:6px 13px; border-radius:999px; font-size:12.5px; font-weight:600; color:#e2e8f0; background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.18); backdrop-filter:blur(4px)}
+.note{margin:20px 0 4px; padding:14px 18px; border-radius:14px; background:#fffbeb; border:1px solid #fde68a; color:#78350f; font-size:13.6px}
+.note strong{color:#92400e}
+.toc{display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 2px; padding:14px 16px; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:0 4px 14px rgba(15,23,42,.04)}
+.toc a{font-size:12.5px; color:#334155; text-decoration:none; padding:4px 9px; border-radius:8px; background:#f1f5f9; border:1px solid #e2e8f0}
+.toc a:hover{background:#e8efff; color:#1d4ed8; border-color:#c7d7f5}
+.sec-title{display:flex; align-items:center; gap:12px; margin:38px 0 4px; font-size:21px; font-weight:800; letter-spacing:.5px; scroll-margin-top:16px}
+.sec-title:before{content:""; width:6px; height:23px; border-radius:3px; background:linear-gradient(180deg,#2563eb,#60a5fa)}
+.sec-sub{margin:0 0 10px 18px; color:var(--muted); font-size:13.5px}
+.q-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px 24px 16px; margin:15px 0; box-shadow:0 5px 18px rgba(15,23,42,.05); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
+.q-card:hover{transform:translateY(-2px); border-color:#c7d7f5; box-shadow:0 10px 26px rgba(15,23,42,.09)}
+.q-head{display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap}
+.q-num{display:inline-flex; align-items:center; justify-content:center; min-width:44px; height:30px; padding:0 10px; border-radius:9px; background:#0f172a; color:#fff; font-size:13px; font-weight:800; letter-spacing:.8px}
+.q-level{font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px}
+.basic{background:#e7f7ee; color:#0f7a4d}
+.adv{background:#e8efff; color:#1d4ed8}
+.trap{background:#fff0e6; color:#c2410c}
+.comp{background:#f3e8ff; color:#7e22ce}
+.q-type{margin-left:auto; font-size:12px; color:#94a3b8; letter-spacing:.6px}
+.q-body{font-size:16.5px}
+.q-body p{margin:4px 0}
+.q-body .prompt{color:#374151}
+.options{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 18px; margin:10px 0 2px}
+.opt{padding:2px 0; color:#374151}
+.opt b{color:#1d4ed8; margin-right:4px}
+mjx-container{max-width:100%; overflow-x:auto; overflow-y:hidden}
+mjx-container[display]{margin:12px 0 !important}
+.foot{margin-top:40px; text-align:center; color:#94a3b8; font-size:12.5px; letter-spacing:.5px}
+
+@page{size:A4; margin:16mm 14mm 16mm}
+@media print{
+  body{background:#fff !important; font-size:11.2pt; line-height:1.65}
+  .wrap{max-width:none; padding:0}
+  .print-btn,.no-print{display:none !important}
+  .hero{background:#fff !important; color:#111 !important; border:0; border-bottom:2.5px solid #1d4ed8; border-radius:0; padding:0 0 10px; margin:0 0 6px; box-shadow:none}
+  .hero:after,.hero:before{display:none !important}
+  .hero h1{font-size:20pt; color:#111; margin:6px 0 2px; letter-spacing:0}
+  .hero .sub{color:#374151; font-size:11.5pt}
+  .hero .desc{display:none !important}
+  .chips{display:none !important}
+  .eyebrow{color:#1d4ed8; font-size:8.5pt; letter-spacing:1.5px}
+  .note,.toc{display:none !important}
+  .sec-title{font-size:13pt; margin:5px 0 6px; break-after:avoid; page-break-after:avoid}
+  .sec-title:before{height:16px; width:4px}
+  .sec-sub{display:none}
+  .q-card{
+    box-shadow:none; border:1px solid #d5dbe6; border-radius:8px;
+    padding:14px 16px 12px; margin:0;
+    break-after:page; page-break-after:always;
+    break-inside:avoid; page-break-inside:avoid;
+  }
+  .q-card:last-of-type{break-after:auto; page-break-after:auto}
+  .q-head{margin-bottom:4px; gap:8px}
+  .q-num{min-width:36px; height:24px; font-size:9.5pt; border-radius:6px; background:#111 !important; color:#fff !important}
+  .q-level{font-size:8.5pt; padding:1px 8px; border:1px solid #d1d5db; background:#fff !important}
+  .q-type{display:none}
+  .q-body{font-size:11.2pt}
+  .q-body .prompt{margin:2px 0}
+  .options{grid-template-columns:repeat(2,1fr); gap:2px 16px; margin:6px 0 0}
+  mjx-container[display]{margin:6px 0 !important}
+  .foot{display:none}
+}
+@media (max-width:640px){
+  .wrap{padding:18px 14px 80px}
+  .hero{padding:28px 22px 24px; border-radius:18px}
+  .hero h1{font-size:26px}
+  .print-btn{top:auto; bottom:18px; right:18px; padding:11px 16px}
+  .q-card{padding:16px 16px 12px}
+  .options{grid-template-columns:1fr}
+  .q-type{display:none}
+}
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">📥 导出为 PDF</button>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">专升本高等数学 · 第一章 极限 · 江西专升本专项</div>
+    <h1>极限专项通关题库</h1>
+    <p class="sub">第 1—120 题 · 纯题目版</p>
+    <p class="desc">按江西专升本常见题型编排：基础计算、未定式、等价无穷小、两个重要极限、无穷小比较、分段函数连续、参数反求、应用与证明。导出 PDF 时每题自动独占一页，预留作答空间。</p>
+    <div class="chips">
+      <span class="chip">120 道题</span>
+      <span class="chip">基础 39 · 进阶 61 · 易错 7 · 综合 13</span>
+      <span class="chip">建议 240 分钟</span>
+      <span class="chip">PDF 每题一页</span>
+    </div>
+  </header>
+
+  <div class="note no-print"><strong>平板做题提示：</strong>点击右上角“导出为 PDF”，打印设置中选择“另存为 PDF”、关闭“页眉和页脚”。每题会自动占据一页，题目下方留白可用于演算。</div>
+
+  <nav class="toc no-print"><a href="#sec1">一、基础巩固</a><a href="#sec2">二、进阶计算</a><a href="#sec3">三、易错与综合</a><a href="#sec4">四、常规未定式与有理化</a><a href="#sec5">五、等价无穷小与两个重要极限</a><a href="#sec6">六、无穷小、无穷大与概念辨析</a><a href="#sec7">七、分段函数、连续与间断</a><a href="#sec8">八、已知极限求参数</a><a href="#sec9">九、应用、证明与真题风格</a></nav>
+
+  <h2 class="sec-title" id="sec1">一、基础巩固</h2>
+<p class="sec-sub">直接代入 · 因式分解 · 根式有理化 · 抓大头</p>
+
+<article class="q-card" id="q1">
+  <div class="q-head">
+    <span class="q-num">001</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 2}\frac{x^{2}-3x+5}{x+1} \]
+  </div>
+</article>
+<article class="q-card" id="q2">
+  <div class="q-head">
+    <span class="q-num">002</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 1}\frac{x^{2}-1}{x^{2}-3x+2} \]
+  </div>
+</article>
+<article class="q-card" id="q3">
+  <div class="q-head">
+    <span class="q-num">003</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 1}\frac{x^{3}-1}{x^{2}-1} \]
+  </div>
+</article>
+<article class="q-card" id="q4">
+  <div class="q-head">
+    <span class="q-num">004</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{\sqrt{1+x}-1}{x} \]
+  </div>
+</article>
+<article class="q-card" id="q5">
+  <div class="q-head">
+    <span class="q-num">005</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to \infty}\frac{3x^{3}-2x+1}{2x^{3}+x^{2}-5} \]
+  </div>
+</article>
+<article class="q-card" id="q6">
+  <div class="q-head">
+    <span class="q-num">006</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to +\infty}\frac{\sqrt{4x^{2}+x+1}}{x+2} \]
+  </div>
+</article>
+<article class="q-card" id="q7">
+  <div class="q-head">
+    <span class="q-num">007</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{1-\cos x}{x^{2}} \]
+  </div>
+</article>
+<article class="q-card" id="q8">
+  <div class="q-head">
+    <span class="q-num">008</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{e^{2x}-1}{x} \]
+  </div>
+</article>
+<h2 class="sec-title" id="sec2">二、进阶计算</h2>
+<p class="sec-sub">等价无穷小 · 两个重要极限 · ∞−∞ 型</p>
+
+<article class="q-card" id="q9">
+  <div class="q-head">
+    <span class="q-num">009</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{\ln(1+3x)}{\sin 2x} \]
+  </div>
+</article>
+<article class="q-card" id="q10">
+  <div class="q-head">
+    <span class="q-num">010</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{1-\cos 2x}{x\sin x} \]
+  </div>
+</article>
+<article class="q-card" id="q11">
+  <div class="q-head">
+    <span class="q-num">011</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{\tan x-\sin x}{x^{3}} \]
+  </div>
+</article>
+<article class="q-card" id="q12">
+  <div class="q-head">
+    <span class="q-num">012</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}\frac{x-\sin x}{x^{3}} \]
+  </div>
+</article>
+<article class="q-card" id="q13">
+  <div class="q-head">
+    <span class="q-num">013</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to \infty}\left(1+\frac{2}{x}\right)^{3x} \]
+  </div>
+</article>
+<article class="q-card" id="q14">
+  <div class="q-head">
+    <span class="q-num">014</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0}(1-3x)^{\frac{1}{x}} \]
+  </div>
+</article>
+<article class="q-card" id="q15">
+  <div class="q-head">
+    <span class="q-num">015</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to \infty}\left(\frac{x+1}{x-1}\right)^{x} \]
+  </div>
+</article>
+<article class="q-card" id="q16">
+  <div class="q-head">
+    <span class="q-num">016</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to +\infty}\left(\sqrt{x^{2}+x}-\sqrt{x^{2}-x}\right) \]
+  </div>
+</article>
+<h2 class="sec-title" id="sec3">三、易错与综合</h2>
+<p class="sec-sub">通分 · 0·∞ · 无穷小乘有界量 · 分段点连续</p>
+
+<article class="q-card" id="q17">
+  <div class="q-head">
+    <span class="q-num">017</span>
+    <span class="q-level trap">易错</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 1}\left(\frac{1}{x-1}-\frac{2}{x^{2}-1}\right) \]
+  </div>
+</article>
+<article class="q-card" id="q18">
+  <div class="q-head">
+    <span class="q-num">018</span>
+    <span class="q-level trap">易错</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0} x\cot x \]
+  </div>
+</article>
+<article class="q-card" id="q19">
+  <div class="q-head">
+    <span class="q-num">019</span>
+    <span class="q-level trap">易错</span>
+    <span class="q-type">求极限</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to 0} x^{2}\sin\frac{1}{x} \]
+  </div>
+</article>
+<article class="q-card" id="q20">
+  <div class="q-head">
+    <span class="q-num">020</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">分段函数</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{1-\cos x}{x^{2}}, & x<0,\\[6pt] a+x, & x\geq 0.\end{cases} \]
+<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求常数 \(a\) 的值。</p>
+  </div>
+</article>
+<h2 class="sec-title" id="sec4">四、常规未定式与有理化</h2>
+<p class="sec-sub">0/0 · ∞/∞ · 根式有理化 · 立方差 · 基础参数</p>
+
+<article class="q-card" id="q21">
+  <div class="q-head">
+    <span class="q-num">021</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">填空</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">填空：</p>\[ \lim_{x\to1}\frac{x^{2}+2x-3}{x^{2}-1}=\underline{\qquad} \]
+  </div>
+</article>
+<article class="q-card" id="q22">
+  <div class="q-head">
+    <span class="q-num">022</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to2}\frac{x^{3}-8}{x^{2}-4} \]
+  </div>
+</article>
+<article class="q-card" id="q23">
+  <div class="q-head">
+    <span class="q-num">023</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sqrt{4+x}-2}{x} \]
+  </div>
+</article>
+<article class="q-card" id="q24">
+  <div class="q-head">
+    <span class="q-num">024</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sqrt{1+x}-\sqrt{1-x}}{x} \]
+  </div>
+</article>
+<article class="q-card" id="q25">
+  <div class="q-head">
+    <span class="q-num">025</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\frac{2x^{2}+3x-1}{4x^{2}-x+5} \]
+  </div>
+</article>
+<article class="q-card" id="q26">
+  <div class="q-head">
+    <span class="q-num">026</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\frac{2x^{2}+1}{x^{3}-3x} \]
+  </div>
+</article>
+<article class="q-card" id="q27">
+  <div class="q-head">
+    <span class="q-num">027</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to+\infty}\left(\sqrt{x^{2}+2x}-x\right) \]
+  </div>
+</article>
+<article class="q-card" id="q28">
+  <div class="q-head">
+    <span class="q-num">028</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to1}\left(\frac{1}{x-1}-\frac{3}{x^{3}-1}\right) \]
+  </div>
+</article>
+<article class="q-card" id="q29">
+  <div class="q-head">
+    <span class="q-num">029</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{1-\cos3x}{x^{2}} \]
+  </div>
+</article>
+<article class="q-card" id="q30">
+  <div class="q-head">
+    <span class="q-num">030</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{e^{3x}-1}{\sin2x} \]
+  </div>
+</article>
+<article class="q-card" id="q31">
+  <div class="q-head">
+    <span class="q-num">031</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\ln(1-2x)}{x} \]
+  </div>
+</article>
+<article class="q-card" id="q32">
+  <div class="q-head">
+    <span class="q-num">032</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">填空</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">填空（\(a>0\)）：</p>\[ \lim_{x\to0}\frac{a^{x}-1}{x}=\underline{\qquad} \]
+  </div>
+</article>
+<article class="q-card" id="q33">
+  <div class="q-head">
+    <span class="q-num">033</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\tan2x}{3x} \]
+  </div>
+</article>
+<article class="q-card" id="q34">
+  <div class="q-head">
+    <span class="q-num">034</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{1-\cos x}{x\tan x} \]
+  </div>
+</article>
+<article class="q-card" id="q35">
+  <div class="q-head">
+    <span class="q-num">035</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sin x-x}{x^{3}} \]
+  </div>
+</article>
+<article class="q-card" id="q36">
+  <div class="q-head">
+    <span class="q-num">036</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\tan x-x}{x^{3}} \]
+  </div>
+</article>
+<article class="q-card" id="q37">
+  <div class="q-head">
+    <span class="q-num">037</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sqrt{1+x}-1}{\sin x} \]
+  </div>
+</article>
+<article class="q-card" id="q38">
+  <div class="q-head">
+    <span class="q-num">038</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\left(\frac{2x+1}{2x-1}\right)^{x} \]
+  </div>
+</article>
+<article class="q-card" id="q39">
+  <div class="q-head">
+    <span class="q-num">039</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}(1+\sin x)^{\frac1x} \]
+  </div>
+</article>
+<article class="q-card" id="q40">
+  <div class="q-head">
+    <span class="q-num">040</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}(\cos x)^{\frac1{x^{2}}} \]
+  </div>
+</article>
+<h2 class="sec-title" id="sec5">五、等价无穷小与两个重要极限</h2>
+<p class="sec-sub">阶的比较 · 1^∞ · 0^0 · ∞^0 · 整体代换</p>
+
+<article class="q-card" id="q41">
+  <div class="q-head">
+    <span class="q-num">041</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">填空</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">填空：</p><p>当 \(x\to0\) 时，\(1-\cos2x\) 与 \(ax^{2}\) 是等价无穷小，则 \(a=\) ______。</p>
+  </div>
+</article>
+<article class="q-card" id="q42">
+  <div class="q-head">
+    <span class="q-num">042</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">填空</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">填空：</p><p>当 \(x\to0\) 时，\(\ln(1+3x)\) 是 \(x\) 的 ______ 阶无穷小。</p>
+  </div>
+</article>
+<article class="q-card" id="q43">
+  <div class="q-head">
+    <span class="q-num">043</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：下列无穷小中，与 \(x\) 等价的是（ ）</p><div class="options"><div class="opt"><b>A.</b> \(\sin x\)</div><div class="opt"><b>B.</b> \(1-\cos x\)</div><div class="opt"><b>C.</b> \(\tan x-\sin x\)</div><div class="opt"><b>D.</b> \(\ln(1+x^{2})\)</div></div>
+  </div>
+</article>
+<article class="q-card" id="q44">
+  <div class="q-head">
+    <span class="q-num">044</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：当 \(x\to0\) 时，\(x-\sin x\) 是 \(x\) 的（ ）阶无穷小。</p><div class="options"><div class="opt"><b>A.</b> 1</div><div class="opt"><b>B.</b> 2</div><div class="opt"><b>C.</b> 3</div><div class="opt"><b>D.</b> 4</div></div>
+  </div>
+</article>
+<article class="q-card" id="q45">
+  <div class="q-head">
+    <span class="q-num">045</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：当 \(x\to0\) 时，下列无穷小中阶数最高的是（ ）</p><div class="options"><div class="opt"><b>A.</b> \(x^{2}\)</div><div class="opt"><b>B.</b> \(1-\cos x\)</div><div class="opt"><b>C.</b> \(x-\sin x\)</div><div class="opt"><b>D.</b> \(\sin x\)</div></div>
+  </div>
+</article>
+<article class="q-card" id="q46">
+  <div class="q-head">
+    <span class="q-num">046</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{1-\cos x}{x\sin2x} \]
+  </div>
+</article>
+<article class="q-card" id="q47">
+  <div class="q-head">
+    <span class="q-num">047</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{e^{x^{2}}-1}{1-\cos x} \]
+  </div>
+</article>
+<article class="q-card" id="q48">
+  <div class="q-head">
+    <span class="q-num">048</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\ln(1+x^{2})}{1-\cos x} \]
+  </div>
+</article>
+<article class="q-card" id="q49">
+  <div class="q-head">
+    <span class="q-num">049</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sin x-\tan x}{x^{3}} \]
+  </div>
+</article>
+<article class="q-card" id="q50">
+  <div class="q-head">
+    <span class="q-num">050</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sin3x}{5x} \]
+  </div>
+</article>
+<article class="q-card" id="q51">
+  <div class="q-head">
+    <span class="q-num">051</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{1-\cos x}{x^{2}(1+\cos x)} \]
+  </div>
+</article>
+<article class="q-card" id="q52">
+  <div class="q-head">
+    <span class="q-num">052</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\sqrt{1+x^{2}}-1}{1-\cos x} \]
+  </div>
+</article>
+<article class="q-card" id="q53">
+  <div class="q-head">
+    <span class="q-num">053</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{2^{x}-1}{3^{x}-1} \]
+  </div>
+</article>
+<article class="q-card" id="q54">
+  <div class="q-head">
+    <span class="q-num">054</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\ln(1+2x)}{e^{3x}-1} \]
+  </div>
+</article>
+<article class="q-card" id="q55">
+  <div class="q-head">
+    <span class="q-num">055</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}(1+2x)^{\frac1{3x}} \]
+  </div>
+</article>
+<article class="q-card" id="q56">
+  <div class="q-head">
+    <span class="q-num">056</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\left(1-\frac1x\right)^{2x} \]
+  </div>
+</article>
+<article class="q-card" id="q57">
+  <div class="q-head">
+    <span class="q-num">057</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}(1+\tan x)^{\cot x} \]
+  </div>
+</article>
+<article class="q-card" id="q58">
+  <div class="q-head">
+    <span class="q-num">058</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\left(\frac{1+x}{1-x}\right)^{\frac1x} \]
+  </div>
+</article>
+<article class="q-card" id="q59">
+  <div class="q-head">
+    <span class="q-num">059</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0^{+}}x^{x} \]
+  </div>
+</article>
+<article class="q-card" id="q60">
+  <div class="q-head">
+    <span class="q-num">060</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}x^{\frac1x} \]
+  </div>
+</article>
+<h2 class="sec-title" id="sec6">六、无穷小、无穷大与概念辨析</h2>
+<p class="sec-sub">未定式辨析 · 无穷小乘有界 · 数列极限 · 概念选择</p>
+
+<article class="q-card" id="q61">
+  <div class="q-head">
+    <span class="q-num">061</span>
+    <span class="q-level trap">易错</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：若 \(\lim f(x)=0\)，\(\lim g(x)=\infty\)，则 \(\lim f(x)g(x)\)（ ）</p><div class="options"><div class="opt"><b>A.</b> 一定为 0</div><div class="opt"><b>B.</b> 一定为 \(\infty\)</div><div class="opt"><b>C.</b> 一定不存在</div><div class="opt"><b>D.</b> 不确定</div></div>
+  </div>
+</article>
+<article class="q-card" id="q62">
+  <div class="q-head">
+    <span class="q-num">062</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：若 \(\lim_{x\to x_0}f(x)=\infty\)，且在 \(x_0\) 的某去心邻域内 \(f(x)\neq0\)，则 \(\lim_{x\to x_0}\frac1{f(x)}\)（ ）</p><div class="options"><div class="opt"><b>A.</b> \(0\)</div><div class="opt"><b>B.</b> \(\infty\)</div><div class="opt"><b>C.</b> \(1\)</div><div class="opt"><b>D.</b> 不确定</div></div>
+  </div>
+</article>
+<article class="q-card" id="q63">
+  <div class="q-head">
+    <span class="q-num">063</span>
+    <span class="q-level trap">易错</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：下列说法正确的是（ ）</p><div class="options"><div class="opt"><b>A.</b> 无穷大一定是无界函数</div><div class="opt"><b>B.</b> 无界函数一定是无穷大</div><div class="opt"><b>C.</b> 无穷小一定是 0</div><div class="opt"><b>D.</b> 无穷大一定取到任意大的函数值</div></div>
+  </div>
+</article>
+<article class="q-card" id="q64">
+  <div class="q-head">
+    <span class="q-num">064</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：当 \(x\to0\) 时，下列无穷小与 \(x^{2}\) 同阶但不等价的是（ ）</p><div class="options"><div class="opt"><b>A.</b> \(1-\cos x\)</div><div class="opt"><b>B.</b> \(x^{2}\)</div><div class="opt"><b>C.</b> \(\sin^{2}x\)</div><div class="opt"><b>D.</b> \(x^{2}+x^{3}\)</div></div>
+  </div>
+</article>
+<article class="q-card" id="q65">
+  <div class="q-head">
+    <span class="q-num">065</span>
+    <span class="q-level trap">易错</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：当 \(x\to0\) 时，\(f(x)=x\sin\frac1x\) 是（ ）</p><div class="options"><div class="opt"><b>A.</b> 无穷小</div><div class="opt"><b>B.</b> 无穷大</div><div class="opt"><b>C.</b> 振荡无极限</div><div class="opt"><b>D.</b> 有界但非无穷小</div></div>
+  </div>
+</article>
+<article class="q-card" id="q66">
+  <div class="q-head">
+    <span class="q-num">066</span>
+    <span class="q-level trap">易错</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：当 \(x\to0\) 时，\(f(x)=\sin\frac1x\)（ ）</p><div class="options"><div class="opt"><b>A.</b> 是无穷小</div><div class="opt"><b>B.</b> 是无穷大</div><div class="opt"><b>C.</b> 振荡，极限不存在</div><div class="opt"><b>D.</b> 极限为 0</div></div>
+  </div>
+</article>
+<article class="q-card" id="q67">
+  <div class="q-head">
+    <span class="q-num">067</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">填空</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">填空：</p><p>当 \(x\to0\) 时，\(x^{2}\) 与 \(1-\cos x\) 是 ______ 无穷小（填“等价”“同阶但不等价”或“不同阶”）。</p>
+  </div>
+</article>
+<article class="q-card" id="q68">
+  <div class="q-head">
+    <span class="q-num">068</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">填空</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">填空：</p><p>当 \(x\to0\) 时，\(x-\sin x\) 是 \(x\) 的 ______ 阶无穷小。</p>
+  </div>
+</article>
+<article class="q-card" id="q69">
+  <div class="q-head">
+    <span class="q-num">069</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">填空</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">填空：</p><p>当 \(x\to0\) 时，\(\sqrt{1+x}-1\) 是 \(x\) 的 ______ 阶无穷小。</p>
+  </div>
+</article>
+<article class="q-card" id="q70">
+  <div class="q-head">
+    <span class="q-num">070</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}x\sin\frac1x \]
+  </div>
+</article>
+<article class="q-card" id="q71">
+  <div class="q-head">
+    <span class="q-num">071</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\frac{\sin x}{x} \]
+  </div>
+</article>
+<article class="q-card" id="q72">
+  <div class="q-head">
+    <span class="q-num">072</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}x\cos\frac1x \]
+  </div>
+</article>
+<article class="q-card" id="q73">
+  <div class="q-head">
+    <span class="q-num">073</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\ln(1+x)}{x} \]
+  </div>
+</article>
+<article class="q-card" id="q74">
+  <div class="q-head">
+    <span class="q-num">074</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\frac{x+\sin x}{x} \]
+  </div>
+</article>
+<article class="q-card" id="q75">
+  <div class="q-head">
+    <span class="q-num">075</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\frac{1+2+\cdots+n}{n^{2}} \]
+  </div>
+</article>
+<article class="q-card" id="q76">
+  <div class="q-head">
+    <span class="q-num">076</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\left(1+\frac12+\frac1{2^{2}}+\cdots+\frac1{2^{n}}\right) \]
+  </div>
+</article>
+<article class="q-card" id="q77">
+  <div class="q-head">
+    <span class="q-num">077</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}n\ln\left(1+\frac1n\right) \]
+  </div>
+</article>
+<article class="q-card" id="q78">
+  <div class="q-head">
+    <span class="q-num">078</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\left(1+\frac1n\right)^{n} \]
+  </div>
+</article>
+<h2 class="sec-title" id="sec7">七、分段函数、连续与间断</h2>
+<p class="sec-sub">可去 · 跳跃 · 无穷 · 振荡 · 左右极限</p>
+
+<article class="q-card" id="q79">
+  <div class="q-head">
+    <span class="q-num">079</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">填空</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">填空：</p><p>函数 \(f(x)=\frac{x^{2}-1}{x-1}\) 在 \(x=1\) 处无定义。若补充定义 \(f(1)=\) ______，则 \(f(x)\) 在 \(x=1\) 处连续。</p>
+  </div>
+</article>
+<article class="q-card" id="q80">
+  <div class="q-head">
+    <span class="q-num">080</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：\(f(x)=\frac1{x-1}\) 在 \(x=1\) 处是（ ）</p><div class="options"><div class="opt"><b>A.</b> 可去间断点</div><div class="opt"><b>B.</b> 跳跃间断点</div><div class="opt"><b>C.</b> 无穷间断点</div><div class="opt"><b>D.</b> 振荡间断点</div></div>
+  </div>
+</article>
+<article class="q-card" id="q81">
+  <div class="q-head">
+    <span class="q-num">081</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：\(f(x)=\frac{|x|}{x}\) 在 \(x=0\) 处是（ ）</p><div class="options"><div class="opt"><b>A.</b> 可去间断点</div><div class="opt"><b>B.</b> 跳跃间断点</div><div class="opt"><b>C.</b> 无穷间断点</div><div class="opt"><b>D.</b> 振荡间断点</div></div>
+  </div>
+</article>
+<article class="q-card" id="q82">
+  <div class="q-head">
+    <span class="q-num">082</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：\(f(x)=\sin\frac1x\) 在 \(x=0\) 处是（ ）</p><div class="options"><div class="opt"><b>A.</b> 可去间断点</div><div class="opt"><b>B.</b> 跳跃间断点</div><div class="opt"><b>C.</b> 无穷间断点</div><div class="opt"><b>D.</b> 振荡间断点</div></div>
+  </div>
+</article>
+<article class="q-card" id="q83">
+  <div class="q-head">
+    <span class="q-num">083</span>
+    <span class="q-level basic">基础</span>
+    <span class="q-type">选择</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">选择：设 \(f(x)=\frac{x^{2}-1}{x-1}\ (x\neq1)\)，\(f(1)=0\)，则 \(x=1\) 是 \(f\) 的（ ）</p><div class="options"><div class="opt"><b>A.</b> 连续点</div><div class="opt"><b>B.</b> 可去间断点</div><div class="opt"><b>C.</b> 跳跃间断点</div><div class="opt"><b>D.</b> 无穷间断点</div></div>
+  </div>
+</article>
+<article class="q-card" id="q84">
+  <div class="q-head">
+    <span class="q-num">084</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}x+1, & x<0,\\ a, & x=0,\\ e^{x}, & x>0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q85">
+  <div class="q-head">
+    <span class="q-num">085</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{\sin x}{x}, & x\neq0,\\ a, & x=0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q86">
+  <div class="q-head">
+    <span class="q-num">086</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}x\sin\dfrac1x, & x\neq0,\\ a, & x=0.\end{cases} \]<p><p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q87">
+  <div class="q-head">
+    <span class="q-num">087</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{e^{x}-1}{x}, & x\neq0,\\ a, & x=0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q88">
+  <div class="q-head">
+    <span class="q-num">088</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}(1+x)^{\frac1x}, & x\neq0,\\ a, & x=0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q89">
+  <div class="q-head">
+    <span class="q-num">089</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{\sqrt{1+x}-1}{x}, & x\neq0,\\ a, & x=0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q90">
+  <div class="q-head">
+    <span class="q-num">090</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}x^{2}+1, & x\le1,\\ b+\ln x, & x>1.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=1\) 处连续，求 \(b\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q91">
+  <div class="q-head">
+    <span class="q-num">091</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求函数</p>\[ f(x)=\frac{x^{2}-1}{x^{2}-3x+2} \]<p class="prompt">的间断点，并指出其类型。</p>
+  </div>
+</article>
+<article class="q-card" id="q92">
+  <div class="q-head">
+    <span class="q-num">092</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">讨论函数</p>\[ f(x)=\frac1{1-e^{1/x}} \]<p class="prompt">在 \(x=0\) 处的间断类型。</p>
+  </div>
+</article>
+<article class="q-card" id="q93">
+  <div class="q-head">
+    <span class="q-num">093</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">讨论函数</p>\[ f(x)=\arctan\frac1x \]<p class="prompt">在 \(x=0\) 处的间断类型。</p>
+  </div>
+</article>
+<article class="q-card" id="q94">
+  <div class="q-head">
+    <span class="q-num">094</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">讨论函数</p>\[ f(x)=\frac{x}{1-e^{x}} \]<p class="prompt">在 \(x=0\) 处的间断类型；若是可去间断，写出补充定义。</p>
+  </div>
+</article>
+<article class="q-card" id="q95">
+  <div class="q-head">
+    <span class="q-num">095</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{\sin ax}{x}, & x<0,\\ 2, & x=0,\\ x+b, & x>0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a,b\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q96">
+  <div class="q-head">
+    <span class="q-num">096</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">设</p>\[ f(x)=\begin{cases}\dfrac{1-\cos x}{x^{2}}, & x\neq0,\\ a, & x=0.\end{cases} \]<p class="prompt">若 \(f(x)\) 在 \(x=0\) 处连续，求 \(a\)。</p>
+  </div>
+</article>
+<h2 class="sec-title" id="sec8">八、已知极限求参数</h2>
+<p class="sec-sub">分子为零 · 等价系数 · 指数配平 · 泰勒定系数</p>
+
+<article class="q-card" id="q97">
+  <div class="q-head">
+    <span class="q-num">097</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{\sin3x+ax}{x}=5 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q98">
+  <div class="q-head">
+    <span class="q-num">098</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{\sqrt{1+ax}-1}{x}=2 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q99">
+  <div class="q-head">
+    <span class="q-num">099</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to\infty}\left(1+\frac ax\right)^{2x}=e^{4} \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q100">
+  <div class="q-head">
+    <span class="q-num">100</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{1-\cos x}{ax^{2}}=1 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q101">
+  <div class="q-head">
+    <span class="q-num">101</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to1}\frac{x^{2}+ax+b}{x-1}=3 \]<p class="prompt">求常数 \(a,b\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q102">
+  <div class="q-head">
+    <span class="q-num">102</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{e^{ax}-1}{x}=3 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q103">
+  <div class="q-head">
+    <span class="q-num">103</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{\ln(1+ax)}{x}=2 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q104">
+  <div class="q-head">
+    <span class="q-num">104</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to\infty}\left(\frac{x+a}{x-a}\right)^{x}=e^{4} \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q105">
+  <div class="q-head">
+    <span class="q-num">105</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{\tan2x+a\sin x}{x}=5 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q106">
+  <div class="q-head">
+    <span class="q-num">106</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to2}\frac{x^{2}+ax+b}{x-2}=5 \]<p class="prompt">求常数 \(a,b\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q107">
+  <div class="q-head">
+    <span class="q-num">107</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{1-\cos ax}{x^{2}}=2 \]<p class="prompt">求常数 \(a\)。</p>
+  </div>
+</article>
+<article class="q-card" id="q108">
+  <div class="q-head">
+    <span class="q-num">108</span>
+    <span class="q-level adv">进阶</span>
+    <span class="q-type">解答</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">已知</p>\[ \lim_{x\to0}\frac{\sqrt{1+x}+ax+b}{x}=0 \]<p class="prompt">求常数 \(a,b\)。</p>
+  </div>
+</article>
+<h2 class="sec-title" id="sec9">九、应用、证明与真题风格</h2>
+<p class="sec-sub">连续复利 · 变化率 · 零点定理 · 夹逼 · 综合计算</p>
+
+<article class="q-card" id="q109">
+  <div class="q-head">
+    <span class="q-num">109</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">应用</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">应用题：</p><p>本金 \(P\) 元，年利率 \(r\)，若一年分 \(n\) 次计息，则年末本利和为</p>\[ A_n=P\left(1+\frac rn\right)^{n} \]<p class="prompt">求 \(n\to\infty\)（连续复利）时的年末本利和。</p>
+  </div>
+</article>
+<article class="q-card" id="q110">
+  <div class="q-head">
+    <span class="q-num">110</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">应用</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">应用题：</p><p>某细菌培养数量按模型</p>\[ N(t)=N_0(1+t)^{\frac1t}\quad(t>0) \]<p class="prompt">增长，其中 \(N_0\) 为初始数量。求 \(t\to0^{+}\) 时数量的极限。</p>
+  </div>
+</article>
+<article class="q-card" id="q111">
+  <div class="q-head">
+    <span class="q-num">111</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">应用</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">应用题：</p><p>物体做直线运动，位移 \(s(t)=t^{2}+2t\)（米，秒）。求 \(t=1\) 时的瞬时速度。</p>
+  </div>
+</article>
+<article class="q-card" id="q112">
+  <div class="q-head">
+    <span class="q-num">112</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">应用</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">应用题：</p><p>圆面积 \(A(r)=\pi r^{2}\)。当半径由 \(r\) 增加到 \(r+h\) 时，求面积的平均变化率 \(\frac{A(r+h)-A(r)}h\) 当 \(h\to0\) 时的极限。</p>
+  </div>
+</article>
+<article class="q-card" id="q113">
+  <div class="q-head">
+    <span class="q-num">113</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">应用</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">应用题：</p><p>正方形边长由 \(a\) 增加到 \(a+h\)，面积 \(S=a^{2}\)。求面积的平均变化率当 \(h\to0\) 时的极限。</p>
+  </div>
+</article>
+<article class="q-card" id="q114">
+  <div class="q-head">
+    <span class="q-num">114</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">证明</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">证明题：</p><p>证明方程 \(x^{3}-4x+1=0\) 在区间 \((0,1)\) 内至少有一个实根。</p>
+  </div>
+</article>
+<article class="q-card" id="q115">
+  <div class="q-head">
+    <span class="q-num">115</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">证明</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">证明题：</p><p>证明方程 \(x=\cos x\) 在区间 \((0,\frac\pi2)\) 内至少有一个实根。</p>
+  </div>
+</article>
+<article class="q-card" id="q116">
+  <div class="q-head">
+    <span class="q-num">116</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\left(\frac1{\sqrt{n^{2}+1}}+\frac1{\sqrt{n^{2}+2}}+\cdots+\frac1{\sqrt{n^{2}+n}}\right) \]
+  </div>
+</article>
+<article class="q-card" id="q117">
+  <div class="q-head">
+    <span class="q-num">117</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\left(\frac1{n^{2}+1}+\frac2{n^{2}+2}+\cdots+\frac n{n^{2}+n}\right) \]
+  </div>
+</article>
+<article class="q-card" id="q118">
+  <div class="q-head">
+    <span class="q-num">118</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{n\to\infty}\left(2^{n}+3^{n}\right)^{\frac1n} \]
+  </div>
+</article>
+<article class="q-card" id="q119">
+  <div class="q-head">
+    <span class="q-num">119</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to0}\frac{\ln(1+x)-x}{x^{2}} \]
+  </div>
+</article>
+<article class="q-card" id="q120">
+  <div class="q-head">
+    <span class="q-num">120</span>
+    <span class="q-level comp">综合</span>
+    <span class="q-type">计算</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">求极限：</p>\[ \lim_{x\to\infty}\left(\frac{x^{2}+1}{x^{2}-1}\right)^{x^{2}} \]
+  </div>
+</article>
+
+  <footer class="foot">极限专项通关题库 · 第 1—120 题（共 120 题）· 纯题目版</footer>
+</div>
+</body>
+</html>

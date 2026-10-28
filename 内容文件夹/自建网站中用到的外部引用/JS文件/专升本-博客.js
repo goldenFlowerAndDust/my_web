@@ -19,7 +19,19 @@
   const headingNodes = Array.from(
     sourceItem.querySelectorAll(":scope > h2"),
   );
-  const moduleCount = sourceItem.querySelectorAll("h3").length;
+  const typeItems = Array.from(
+    sourceItem.querySelectorAll(".question-type-item"),
+  );
+  const typeCount = typeItems.length;
+  const typeGroupCount = sourceItem.querySelectorAll(
+    ".question-type-group",
+  ).length;
+  const moduleCount = Math.max(
+    0,
+    sourceItem.querySelectorAll("h3").length -
+      typeCount -
+      typeGroupCount,
+  );
 
   const ambient = document.createElement("div");
   ambient.className = "ambient-bg";
@@ -63,7 +75,7 @@
 
   const description = document.createElement("p");
   description.textContent =
-    "从基础知识到高等数学，把章节、笔记与复习资料整理成一张清晰的学习地图。";
+    "从基础知识到高等数学，把章节、题型、笔记与复习资料整理成一张清晰的学习地图。";
 
   heroCopy.append(eyebrow, title, description);
 
@@ -85,11 +97,21 @@
     return item;
   };
 
-  heroStats.append(
-    makeStat(headingNodes.length, "学习分区"),
+  const stats = [
+    makeStat(headingNodes.length, "内容分区"),
     makeStat(moduleCount, "知识模块"),
-    makeStat(resourceLinks.length, "资料入口"),
+  ];
+  if (typeCount) {
+    stats.push(makeStat(typeCount, "题型数量"));
+  }
+  stats.push(
+    makeStat(
+      resourceLinks.length +
+        (typeCount ? typeCount * 3 + typeGroupCount * 3 : 0),
+      "资料入口",
+    ),
   );
+  heroStats.append(...stats);
 
   const signature = document.createElement("span");
   signature.className = "hero-signature";
@@ -118,7 +140,7 @@
   searchInput.id = "resource-search";
   searchInput.type = "search";
   searchInput.autocomplete = "off";
-  searchInput.placeholder = "搜索章节、资料或关键词…";
+  searchInput.placeholder = "搜索章节、题型、资料或关键词…";
   searchInput.setAttribute("aria-label", "搜索章节和资料");
 
   const shortcut = document.createElement("kbd");
@@ -162,6 +184,9 @@
   shell.appendChild(emptyState);
 
   const configFor = (text) => {
+    if (/题型/.test(text)) {
+      return { icon: "◎", accent: "rose", wide: true };
+    }
     if (/初高中/.test(text)) {
       return { icon: "∿", accent: "violet", wide: true };
     }
@@ -175,6 +200,144 @@
       return { icon: "∫", accent: "blue", wide: false };
     }
     return { icon: "◇", accent: "rose", wide: false };
+  };
+
+  const makeTypeLink = (label, href, kind) => {
+    const link = document.createElement("a");
+    link.className = "type-link";
+    link.dataset.kind = kind;
+    link.href = href;
+    if (kind === "pdf") {
+      link.target = "_blank";
+      link.rel = "noopener";
+    }
+    const text = document.createElement("span");
+    text.textContent = label;
+    const arrow = document.createElement("span");
+    arrow.className = "type-arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "→";
+    link.append(text, arrow);
+    return link;
+  };
+
+  // 题型模板：一个 [data-question-types] 标题下可以放多个
+  // .question-type-group（极限、连续、导数……），每组一个 data-bank + ul。
+  // 组内 li 使用 data-range|data-count|data-level|data-q|data-a，
+  // 这里会统一生成题型卡片、深链、组统计和底部完整入口。
+  const enhanceQuestionGroup = (group) => {
+    const bank = (group.dataset.bank || "").replace(/\/+$/, "");
+    const list = group.querySelector(".question-type-list");
+    if (!list) {
+      return 0;
+    }
+    const items = Array.from(
+      list.querySelectorAll(":scope > li"),
+    ).filter((item) => item.querySelector("h3"));
+    const groupTitle = (
+      group.querySelector(".type-group-title")?.textContent || ""
+    ).trim();
+
+    list.classList.add("module-list");
+    items.forEach((item, index) => {
+      item.classList.add("module-item", "question-type-item");
+      item.dataset.index = String(index + 1).padStart(2, "0");
+
+      const title = item.querySelector("h3");
+      const desc = item.querySelector("p");
+      const range = item.dataset.range || "";
+      const count = item.dataset.count || "";
+      const level = item.dataset.level || "";
+      const qAnchor = item.dataset.q || "";
+      const aAnchor = item.dataset.a || "";
+
+      const meta = document.createElement("div");
+      meta.className = "type-meta";
+
+      const number = document.createElement("span");
+      number.className = "type-index";
+      number.textContent = String(index + 1).padStart(2, "0");
+
+      const rangeEl = document.createElement("span");
+      rangeEl.className = "type-range";
+      rangeEl.textContent = range;
+
+      const levelEl = document.createElement("span");
+      levelEl.className = "type-level";
+      levelEl.dataset.level = level;
+      levelEl.textContent = level;
+
+      const countEl = document.createElement("span");
+      countEl.className = "type-count";
+      countEl.textContent = count ? count + " 题" : "";
+
+      meta.append(number, rangeEl, levelEl, countEl);
+      item.insertBefore(meta, title);
+
+      if (desc) {
+        desc.classList.add("type-desc");
+      }
+
+      item.dataset.search = [
+        "题型",
+        "题库",
+        groupTitle,
+        title.textContent,
+        desc ? desc.textContent : "",
+        range,
+        level,
+        count,
+      ]
+        .join(" ")
+        .toLocaleLowerCase("zh-CN");
+
+      const links = document.createElement("div");
+      links.className = "type-links";
+      const questionHref =
+        bank + "/极限题库-纯题目版.html" + (qAnchor ? "#" + qAnchor : "");
+      const solutionHref =
+        bank + "/极限题库-详细解析版.html" + (aAnchor ? "#" + aAnchor : "");
+      const pdfHref = bank + "/极限题库-纯题目版-每题一页.pdf";
+
+      links.append(
+        makeTypeLink("题目版", questionHref, "question"),
+        makeTypeLink("解析版", solutionHref, "solution"),
+        makeTypeLink("PDF", pdfHref, "pdf"),
+      );
+      item.appendChild(links);
+    });
+
+    const total = items.reduce(
+      (sum, item) => sum + Number(item.dataset.count || 0),
+      0,
+    );
+    const metaEl = group.querySelector(".type-group-meta");
+    if (metaEl) {
+      metaEl.textContent = items.length + " 类 · " + total + " 题";
+    }
+
+    const footer = document.createElement("div");
+    footer.className = "type-board-footer";
+
+    const summary = document.createElement("span");
+    summary.className = "type-summary";
+    summary.textContent = "完整题库入口";
+
+    const actions = document.createElement("div");
+    actions.className = "type-actions";
+    actions.append(
+      makeTypeLink("全部题目", bank + "/极限题库-纯题目版.html", "ghost"),
+      makeTypeLink("全部解析", bank + "/极限题库-详细解析版.html", "ghost"),
+      makeTypeLink(
+        "打印版 PDF",
+        bank + "/极限题库-纯题目版-每题一页.pdf",
+        "pdf",
+      ),
+    );
+    footer.append(summary, actions);
+    group.appendChild(footer);
+
+    return items.length;
   };
 
   const sectionLinks = [];
@@ -192,43 +355,73 @@
     sectionIndex += 1;
     const headingText = activeHeading.textContent.trim();
     const config = configFor(headingText);
+    const isQuestionTypes =
+      activeHeading.hasAttribute("data-question-types");
     const section = document.createElement("section");
     const sectionId = `math-section-${sectionIndex}`;
     section.id = sectionId;
-    section.className = `category-card${config.wide ? " is-wide" : ""}`;
+    section.className = `category-card${config.wide ? " is-wide" : ""}${
+      isQuestionTypes ? " is-question-types" : ""
+    }`;
     section.dataset.accent = config.accent;
     section.dataset.search = "";
 
     activeHeading.dataset.icon = config.icon;
 
-    const nestedList = activeNodes.find(
-      (node) => node.tagName === "UL",
-    );
+    let typeGroups = [];
 
-    if (nestedList) {
-      const moduleItems = Array.from(
-        nestedList.querySelectorAll(":scope > li"),
-      ).filter((item) => item.querySelector("h3"));
-
-      if (moduleItems.length) {
-        nestedList.classList.add("module-list");
-        moduleItems.forEach((item, index) => {
-          item.classList.add("module-item");
-          item.dataset.index = String(index + 1).padStart(2, "0");
-        });
-        activeHeading.dataset.count = String(moduleItems.length);
-      } else {
-        nestedList.classList.add("link-list");
-        activeHeading.dataset.count = String(
-          nestedList.querySelectorAll("a").length,
-        );
-      }
+    if (isQuestionTypes) {
+      const groupWrap = activeNodes.find(
+        (node) =>
+          node.classList &&
+          node.classList.contains("question-type-groups"),
+      );
+      typeGroups = groupWrap
+        ? Array.from(
+            groupWrap.querySelectorAll(
+              ":scope > .question-type-group",
+            ),
+          )
+        : [];
     } else {
-      activeHeading.dataset.count = "0";
+      const nestedList = activeNodes.find(
+        (node) => node.tagName === "UL",
+      );
+
+      if (nestedList) {
+        const moduleItems = Array.from(
+          nestedList.querySelectorAll(":scope > li"),
+        ).filter((item) => item.querySelector("h3"));
+
+        if (moduleItems.length) {
+          nestedList.classList.add("module-list");
+          moduleItems.forEach((item, index) => {
+            item.classList.add("module-item");
+            item.dataset.index = String(index + 1).padStart(2, "0");
+          });
+          activeHeading.dataset.count = String(moduleItems.length);
+        } else {
+          nestedList.classList.add("link-list");
+          activeHeading.dataset.count = String(
+            nestedList.querySelectorAll("a").length,
+          );
+        }
+      } else {
+        activeHeading.dataset.count = "0";
+      }
     }
 
     section.append(activeHeading);
     activeNodes.forEach((node) => section.appendChild(node));
+
+    if (isQuestionTypes) {
+      typeGroups.forEach((group, index) => {
+        group.dataset.index = String(index + 1).padStart(2, "0");
+        enhanceQuestionGroup(group);
+      });
+      activeHeading.dataset.count = String(typeGroups.length);
+    }
+
     section.dataset.search = section.textContent.toLocaleLowerCase("zh-CN");
 
     categories.appendChild(section);
@@ -343,13 +536,23 @@
       filterable.forEach((item) => {
         const match =
           !query ||
-          item.textContent
+          (item.dataset.search || item.textContent)
             .toLocaleLowerCase("zh-CN")
             .includes(query);
         item.classList.toggle("is-hidden", !match);
         if (match) {
           visible += 1;
         }
+      });
+
+      section.querySelectorAll(".question-type-group").forEach((group) => {
+        const items = Array.from(
+          group.querySelectorAll(".question-type-item"),
+        );
+        const groupVisible = items.some(
+          (item) => !item.classList.contains("is-hidden"),
+        );
+        group.classList.toggle("is-hidden", !groupVisible);
       });
 
       const show = !query || visible > 0;
