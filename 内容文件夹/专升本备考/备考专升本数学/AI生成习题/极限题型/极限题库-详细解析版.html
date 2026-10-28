@@ -5,13 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>极限题库-详细解析版（第1-120题）</title>
 <meta name="description" content="专升本高等数学第一章极限专项题库，江西专升本风格，第1-120题详细解析版。">
+<link rel="stylesheet" href="../../一些必备脚本/数学公式js/libs/katex.min.css">
+<script defer src="../../一些必备脚本/数学公式js/libs/katex.min.js"></script>
+<script defer src="../../一些必备脚本/数学公式js/libs/auto-render.min.js"></script>
 <script>
-window.MathJax = {
-  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
-  svg: { fontCache: 'global' }
-};
+document.addEventListener("DOMContentLoaded", function () {
+  if (typeof renderMathInElement !== "function") {
+    return;
+  }
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "\\[", right: "\\]", display: true },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false,
+    strict: false
+  });
+});
 </script>
-<script id="MathJax-script" async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" onerror="var s=document.createElement('script');s.src='https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js';document.head.appendChild(s);"></script>
 <style>
 :root{--ink:#1f2937;--muted:#6b7280;--line:#e5eaf2;--card:#fff;--bg:#f4f6fb}
 *{box-sizing:border-box}
@@ -1304,7 +1315,7 @@ mjx-container[display]{margin:11px 0 !important}
   </div>
   <div class="module step">
     <h4>【清晰步骤】</h4>
-    <p>分别判断阶数：</p>\[ x^{2}\text{ 为 2 阶};\quad 1-\cos x\sim\frac{x^{2}}2\text{ 为 2 阶} \]\[ x-\sin x\sim\frac{x^{3}}6\text{ 为 3 阶};\quad \sin x\sim x\text{ 为 1 阶} \]<p>阶数最高的是 C。</p>
+    <p>分别判断阶数：\(x^{2}\) 为 2 阶；\(1-\cos x\sim\frac{x^{2}}2\) 为 2 阶；\(x-\sin x\sim\frac{x^{3}}6\) 为 3 阶；\(\sin x\sim x\) 为 1 阶。</p><p>阶数最高的是 C。</p>
   </div>
   <div class="module key">
     <h4>【重点标识】</h4>
