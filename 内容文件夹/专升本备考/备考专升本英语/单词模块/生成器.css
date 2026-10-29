@@ -765,3 +765,18 @@
         font-size: 1.4rem;
     }
 }
+
+.generator_local_note {
+    margin: 1rem 0 0;
+    padding: 0.85rem 1rem;
+    color: #6c4b00;
+    background: #fffaf0;
+    border-left: 4px solid #b8860b;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    line-height: 1.8;
+}
+
+.generator_local_note strong {
+    color: #4d3500;
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>单词自动归档 · AI 构词分类</title>
-    <meta name="description" content="输入英文单词，调用 DeepSeek 分析后缀、前缀、词根族、复合词或原子词，自动写入核心词汇页或词素模块，并加入每日 20 词复习日程。">
+    <meta name="description" content="输入英文单词，调用 DeepSeek 分析后缀、前缀、词根族、复合词或原子词，自动写入核心词汇页或词素模块，并排到明天的额外新增（不占 20 词）。">
     <link rel="stylesheet" href="../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
     <link rel="stylesheet" href="../单词独有样式表.css">
     <link rel="stylesheet" href="词汇组件.css">
@@ -23,7 +23,7 @@
         <p class="header_desc">
             输入一个英文单词，DeepSeek 判断它属于后缀、前缀、词根族、复合词还是原子词；
             命中原有词族就直接追加，没有对应后缀就自动建新词族，非后缀词则写入
-            <code>词素/</code> 对应模块，并同步加入每天 20 词的复习日程。
+            <code>词素/</code> 对应模块，并排到明天的“额外新增”，不占每天 20 个新词。
         </p>
         <div class="header_meta">
             <span>DeepSeek 构词分析</span>
@@ -56,9 +56,14 @@
             </li>
             <li>
                 <span class="guide_no">04</span>
-                <p>新词按每天 20 个的节奏排入复习清单，旧词按 1 / 3 / 7 / 15 / 30 / 60 / 90 天复习。</p>
+                <p>新词排到明天的“额外新增”，不占每天 20 个新词；旧词按 1 / 3 / 7 / 15 / 30 / 60 / 90 天复习。</p>
             </li>
         </ol>
+        <p class="generator_local_note">
+            <strong>本地专用：</strong>这个工具会直接写本地 HTML 和 <code>data.json</code>，所以没有云端连接设置。
+            GitHub Pages 上请用 <a href="../英语答疑/英语答疑.html">英语答疑</a> 的“单词解释”；
+            云端单词会先进入待归档队列，再回本地导入分类。
+        </p>
     </section>
 
     <section class="service_bar" id="serviceBar" aria-live="polite">

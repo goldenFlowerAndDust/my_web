@@ -6969,6 +6969,31 @@
       "extra": true,
       "extraDate": "2026-10-31",
       "source": "generator"
+    },
+    {
+      "name": "heaven",
+      "path": "../词素/原子词/原子词：heaven.html#word-heaven",
+      "category": "词素/原子词",
+      "level": 0,
+      "nextDate": "2026-10-31",
+      "lastReviewed": null,
+      "created": "2026-10-30",
+      "modified": "2026-10-30",
+      "kind": "word",
+      "word": "heaven",
+      "zh": "天堂；天空；极乐之地",
+      "root": "heaven",
+      "rootZh": "天堂；天空",
+      "suffix": "",
+      "suffixLabel": "",
+      "pos": "n.",
+      "levelTag": "高中",
+      "sense": "天堂；天国",
+      "anchor": "word-heaven",
+      "batch": "自动补充",
+      "extra": true,
+      "extraDate": "2026-10-31",
+      "source": "generator"
     }
   ]
 }
