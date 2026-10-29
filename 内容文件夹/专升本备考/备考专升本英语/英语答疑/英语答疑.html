@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语答疑 · 资深英语教师</title>
+    <meta name="description" content="专升本英语答疑：单词解释、作文反例与修改、句子分析、语法问答。由资深英语教师人设的 AI 回答，本地服务按分类记录问题和答案。">
+    <link rel="stylesheet" href="英语答疑.css">
+</head>
+<body>
+<div class="page-glow" aria-hidden="true"></div>
+
+<div class="shell">
+    <header class="hero">
+        <nav class="hero-nav" aria-label="页面导航">
+            <a class="brand" href="../../../自建本地网站/导航栏内容/专升本/英语/专升本英语.html">
+                <span class="brand-mark">E</span>
+                <span>专升本英语</span>
+            </a>
+            <div class="hero-links">
+                <a href="../使用指南.html">使用指南</a>
+                <a href="../复习清单/核心词汇复习清单.html">复习清单</a>
+                <a href="../单词模块/词汇代码生成器.html">AI 收词</a>
+            </div>
+        </nav>
+
+        <div class="hero-main">
+            <p class="hero-kicker">ENGLISH TUTOR · 资深英语教师</p>
+            <h1>英语答疑<span> · 把不懂的问清楚</span></h1>
+            <p class="hero-lead">
+                不只是录入单词。单词解释、作文反例与修改、句子分析、语法问答，
+                都可以在这里问。老师用中文讲，英文给例子；每次回答按分类记入日志。
+            </p>
+            <div class="hero-meta">
+                <span class="service-badge" id="service-badge">检查连接…</span>
+                <span class="meta-pill">4 类答疑</span>
+                <span class="meta-pill">按分类日志</span>
+                <span class="meta-pill">DeepSeek</span>
+                <button type="button" class="connection-btn" id="connection-btn">连接设置</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="notice" id="offline-notice" hidden>
+        <strong id="offline-title">本地服务没有连接。</strong>
+        <span id="offline-text">先双击项目根目录的 <code>启动词素服务.bat</code>，再刷新本页。GitHub Pages 是静态托管，不能调用本地服务。</span>
+    </div>
+
+    <main>
+        <section class="workspace" aria-label="答疑工作区">
+            <div class="ask-panel panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="panel-kicker">ASK</p>
+                        <h2>选择问题类型</h2>
+                    </div>
+                    <span class="panel-hint">Ctrl + Enter 发送</span>
+                </div>
+
+                <div class="mode-tabs" role="tablist" aria-label="答疑分类">
+                    <button type="button" class="mode-tab is-active" data-mode="单词解释" role="tab" aria-selected="true">单词解释</button>
+                    <button type="button" class="mode-tab" data-mode="作文" role="tab" aria-selected="false">作文 · 反例</button>
+                    <button type="button" class="mode-tab" data-mode="句子分析" role="tab" aria-selected="false">句子分析</button>
+                    <button type="button" class="mode-tab" data-mode="其他" role="tab" aria-selected="false">语法 / 其他</button>
+                </div>
+
+                <label class="field-label" for="question">你的问题</label>
+                <textarea id="question" maxlength="2000" rows="7" placeholder="输入要请教的单词、作文题目或英文句子…"></textarea>
+                <div class="input-meta">
+                    <span id="input-hint">例如：解释 account 的词义、搭配和易混词。</span>
+                    <span id="char-count">0 / 2000</span>
+                </div>
+
+                <div class="examples" id="examples" aria-label="示例问题"></div>
+
+                <div class="ask-actions">
+                    <p class="ask-note">
+                        这里只做知识解答，<strong>不会自动收词</strong>。要收词请用
+                        <a href="../单词模块/词汇代码生成器.html">AI 自动归档</a>。
+                    </p>
+                    <button type="button" class="primary-btn" id="ask-btn">
+                        <span class="btn-label">请教老师</span>
+                        <span class="btn-arrow" aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="answer-panel panel" aria-live="polite">
+                <div class="answer-head">
+                    <div>
+                        <p class="panel-kicker">ANSWER</p>
+                        <h2>老师回答</h2>
+                    </div>
+                    <div class="answer-tools">
+                        <span class="answer-mode" id="answer-mode">等待提问</span>
+                        <button type="button" class="copy-btn" id="copy-btn" disabled>复制</button>
+                    </div>
+                </div>
+
+                <div class="answer-body" id="answer-body">
+                    <div class="answer-empty" id="answer-empty">
+                        <span class="empty-mark" aria-hidden="true">Aa</span>
+                        <strong>把一个具体问题交给老师</strong>
+                        <p>可以是一个单词、一个作文题目，或一个拆不开的长句。回答会显示在这里，并按分类记入历史记录。</p>
+                    </div>
+
+                    <div class="answer-loading" id="answer-loading" hidden>
+                        <span class="spinner" aria-hidden="true"></span>
+                        <div>
+                            <strong>资深英语教师正在组织回答…</strong>
+                            <p>作文和长难句可能需要几十秒，请不要关闭页面。</p>
+                        </div>
+                    </div>
+
+                    <div class="answer-error" id="answer-error" hidden></div>
+                    <article class="answer-content" id="answer-content" hidden></article>
+                </div>
+
+                <div class="answer-foot">
+                    <span id="answer-time">—</span>
+                    <span id="answer-meta">回答只用于学习参考，重要考试信息请以考纲和老师为准。</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="history-section" aria-labelledby="history-title">
+            <div class="history-head">
+                <div>
+                    <p class="panel-kicker">HISTORY</p>
+                    <h2 id="history-title">历史记录</h2>
+                    <p class="history-desc">每次成功回答都会写入对应分类的日志，包含日期时间、原问题和完整回答。</p>
+                </div>
+                <button type="button" class="ghost-btn" id="history-refresh">刷新</button>
+            </div>
+
+            <div class="history-tabs" id="history-tabs" role="tablist" aria-label="日志分类">
+                <button type="button" class="history-tab is-active" data-category="all">全部</button>
+                <button type="button" class="history-tab" data-category="单词解释">单词解释</button>
+                <button type="button" class="history-tab" data-category="作文">作文</button>
+                <button type="button" class="history-tab" data-category="句子分析">句子分析</button>
+                <button type="button" class="history-tab" data-category="其他">其他</button>
+                <span class="history-count" id="history-count">—</span>
+            </div>
+
+            <div class="history-list" id="history-list"></div>
+            <div class="history-empty" id="history-empty">
+                还没有记录。问第一个问题后，这里会自动出现。
+            </div>
+
+            <p class="history-note" id="history-note">
+                日志位置：<code>词素工具/英语问答日志/单词解释.jsonl</code>、
+                <code>作文.jsonl</code>、<code>句子分析.jsonl</code>、<code>其他.jsonl</code>。
+                已加入 <code>.gitignore</code>，不会上传 GitHub。
+            </p>
+        </section>
+    </main>
+
+    <footer class="page-footer">
+        <span>专升本英语 · ENGLISH TUTOR</span>
+        <span>单词 · 作文 · 句子 · 语法</span>
+    </footer>
+</div>
+
+<dialog class="connection-dialog" id="connection-dialog" aria-labelledby="connection-title">
+    <form id="connection-form" method="dialog">
+        <div class="dialog-head">
+            <div>
+                <p class="panel-kicker">CONNECTION</p>
+                <h2 id="connection-title">连接设置</h2>
+            </div>
+            <button type="button" class="dialog-close" id="connection-close" aria-label="关闭">×</button>
+        </div>
+
+        <label class="field" for="connection-mode">连接方式</label>
+        <select id="connection-mode">
+            <option value="local">本地 8767（电脑上使用，推荐）</option>
+            <option value="cloud">云端 Worker（GitHub Pages / 手机）</option>
+        </select>
+
+        <div class="cloud-fields" id="cloud-fields" hidden>
+            <label class="field" for="cloud-url">Worker 地址</label>
+            <input id="cloud-url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://english-tutor.xxx.workers.dev">
+
+            <label class="field" for="cloud-token">访问口令</label>
+            <input id="cloud-token" type="password" autocomplete="off" spellcheck="false" placeholder="Worker 的 TUTOR_ACCESS_TOKEN">
+
+            <p class="field-note">地址和口令只保存在当前浏览器的 localStorage，不写进网页源码，也不会上传 GitHub。</p>
+        </div>
+
+        <p class="connection-note" id="connection-note">
+            本地模式需要先启动 8767 服务。云端模式需要先部署 Cloudflare Worker。
+        </p>
+
+        <div class="dialog-actions">
+            <button type="button" class="ghost-btn" id="connection-test">测试连接</button>
+            <button type="submit" class="primary-btn" id="connection-save">保存并使用</button>
+        </div>
+    </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="英语答疑.js" defer></script>
+<script src="../返回顶部.js"></script>
+</body>
+</html>

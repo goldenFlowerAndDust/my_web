@@ -50,8 +50,12 @@ function escapeStr(s) {
 }
 
 function makeHref(relPath) {
-    const encoded = String(relPath).split('/').map(encodeURIComponent).join('/');
-    return (dataBaseUrl || './') + encoded;
+    const raw = String(relPath);
+    const hashIndex = raw.indexOf('#');
+    const pathPart = hashIndex >= 0 ? raw.slice(0, hashIndex) : raw;
+    const hash = hashIndex >= 0 ? raw.slice(hashIndex) : '';
+    const encoded = pathPart.split('/').map(encodeURIComponent).join('/');
+    return (dataBaseUrl || './') + encoded + hash;
 }
 
 function getSavedPending() {
@@ -177,7 +181,7 @@ async function loadData() {
     undoStack = [];
     updateDirtyUI();
     render();
-    showStatus('已加载 ' + flattenData().length + ' 个词根' +
+    showStatus('已加载 ' + flattenData().length + ' 个词条' +
         (applied > 0 ? '（含 ' + applied + ' 条本地修改）' : ''));
 }
 

@@ -29,6 +29,24 @@ header h1 {
     font-size: 2rem;
 }
 
+.switch-link {
+    margin: -0.4rem 0 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.switch-link a {
+    color: #0d9488;
+    text-decoration: none;
+    border-bottom: 1px dashed #0d9488;
+    padding-bottom: 1px;
+}
+
+.switch-link a:hover {
+    color: #8E44AD;
+    border-bottom-color: #8E44AD;
+}
+
 #status {
     padding: 10px 16px;
     margin-bottom: 1rem;

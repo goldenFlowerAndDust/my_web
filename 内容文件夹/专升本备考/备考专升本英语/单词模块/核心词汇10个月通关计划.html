@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专升本核心词汇 10 个月通关计划 · 备考专升本英语</title>
+    <meta name="description" content="以 -ful / -less 打样的专升本核心词汇 10 个月通关计划，含艾宾浩斯 3/5/7/15/30 天复习打卡、后缀搜索和默认隐藏答案。">
+    <link rel="stylesheet" href="../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+    <link rel="stylesheet" href="../单词独有样式表.css">
+    <link rel="stylesheet" href="词汇组件.css">
+    <link rel="stylesheet" href="通关计划.css">
+</head>
+<body>
+<main class="page_main" id="top">
+
+    <!-- ================= 页头 ================= -->
+    <header class="page_header">
+        <div class="header_top">
+            <a class="crumb" href="../00-总目录/构词法总览.html">← 构词法总览</a>
+            <span class="header_tag">单词模块 · 第 1 批</span>
+        </div>
+        <p class="header_kicker">专升本英语 · 核心词汇</p>
+        <h1>10 个月通关计划<span class="h1_accent"> · 单词</span></h1>
+        <p class="header_desc">以词根和后缀为线索，把小学、初中、专升本词汇串成家族。先学“构词公式”，再用默认隐藏的中文和例句自测。</p>
+        <div class="header_actions">
+            <a class="btn btn_primary" href="词汇代码生成器.html">⚡ 词汇代码生成器</a>
+            <a class="btn btn_ghost" href="#today_review">今日打卡 ↓</a>
+            <a class="btn btn_ghost" href="#word_content">开始背词</a>
+        </div>
+        <div class="header_meta">
+            <span>首批 <strong>62</strong> 词</span>
+            <span>2 个词族</span>
+            <span>10 个月路线</span>
+            <span>原生 HTML / CSS / JS</span>
+        </div>
+    </header>
+
+    <!-- ================= 今日单词复习清单 ================= -->
+    <section id="today_review" class="panel review_panel" aria-labelledby="reviewTitle">
+        <div class="review_head">
+            <div>
+                <p class="eyebrow">Ebbinghaus · 3 / 5 / 7 / 15 / 30 天</p>
+                <h2 id="reviewTitle">今日单词复习清单</h2>
+                <p class="panel_sub">新词学完先打卡；到期后自动进入复习清单。逾期会自动合并补卡，完成 5 轮即通关。</p>
+            </div>
+            <div class="today_badge" aria-label="今天">
+                <span class="today_week" id="reviewWeekday">周四</span>
+                <strong id="reviewDate">10月29日</strong>
+            </div>
+        </div>
+
+        <div class="stat_grid">
+            <div class="stat_card stat_due">
+                <span class="stat_label">今日待复习</span>
+                <strong id="statDue">0</strong>
+                <span class="stat_unit">个词</span>
+            </div>
+            <div class="stat_card">
+                <span class="stat_label">已加入计划</span>
+                <strong id="statJoined">0</strong>
+                <span class="stat_unit">/ <b id="statTotal">62</b></span>
+            </div>
+            <div class="stat_card">
+                <span class="stat_label">今日已复习</span>
+                <strong id="statReviewed">0</strong>
+                <span class="stat_unit">个词</span>
+            </div>
+            <div class="stat_card stat_done">
+                <span class="stat_label">已通关</span>
+                <strong id="statDone">0</strong>
+                <span class="stat_unit">个词</span>
+            </div>
+        </div>
+
+        <div class="review_grid">
+            <div class="review_col">
+                <div class="col_head">
+                    <h3>今天要复习</h3>
+                    <span class="count_pill" id="dueCount">0</span>
+                </div>
+                <ul id="dueList" class="due_list" aria-live="polite"></ul>
+            </div>
+            <div class="review_col">
+                <div class="col_head">
+                    <h3>今日新学打卡</h3>
+                    <span class="count_pill" id="newCount">62</span>
+                </div>
+                <div id="newBatchList" class="batch_list"></div>
+            </div>
+        </div>
+
+        <div class="review_footer">
+            <div class="curve_strip" aria-label="艾宾浩斯复习节奏">
+                <span class="curve_label">记忆节奏</span>
+                <span class="curve_step curve_start">学习</span>
+                <i aria-hidden="true">→</i>
+                <span class="curve_step">+3 天</span>
+                <i aria-hidden="true">→</i>
+                <span class="curve_step">+5 天</span>
+                <i aria-hidden="true">→</i>
+                <span class="curve_step">+7 天</span>
+                <i aria-hidden="true">→</i>
+                <span class="curve_step">+15 天</span>
+                <i aria-hidden="true">→</i>
+                <span class="curve_step">+30 天</span>
+                <span class="curve_finish">通关</span>
+            </div>
+            <div class="upcoming">
+                <span class="upcoming_label">接下来</span>
+                <ul id="upcomingList" class="upcoming_list"></ul>
+                <button type="button" class="btn btn_link" id="btnResetReview">清除打卡记录</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 10 个月路线图 ================= -->
+    <section id="plan" class="panel plan_panel" aria-labelledby="planTitle">
+        <div class="panel_head">
+            <div>
+                <p class="eyebrow">Roadmap · 10 months</p>
+                <h2 id="planTitle">10 个月通关路线图</h2>
+                <p class="panel_sub">每月 1 个构词主题，每周 1 个词族，约 150–200 词。第 1 个月已打样，后续按月补充。</p>
+            </div>
+            <div class="progress_ring" aria-label="进度：10 个月中的第 1 个月">
+                <strong>1</strong><span>/ 10 月</span>
+            </div>
+        </div>
+        <div class="plan_progress"><span style="width:10%"></span></div>
+
+        <ol class="month_grid">
+            <li class="month_card is_active">
+                <div class="month_no">01</div>
+                <div class="month_body">
+                    <p class="month_tag">第 1 个月 · 已打样</p>
+                    <h3>形容词的两面：充满 / 缺失</h3>
+                    <p class="month_suffix"><code>-ful</code><code>-less</code></p>
+                    <p class="month_desc">62 个核心词，含搭配、例句与易混提醒。</p>
+                    <div class="month_actions">
+                        <a href="#group_ful">查看 -ful</a>
+                        <a href="#group_less">查看 -less</a>
+                    </div>
+                </div>
+            </li>
+            <li class="month_card">
+                <div class="month_no">02</div>
+                <div class="month_body">
+                    <p class="month_tag">第 2 个月</p>
+                    <h3>能与不能</h3>
+                    <p class="month_suffix"><code>-able</code><code>-ible</code></p>
+                    <p class="month_desc">动词 → 形容词：能被……的、可以……的。</p>
+                    <p class="month_status">待生成 · 用工具补词</p>
+                </div>
+            </li>
+            <li class="month_card">
+                <div class="month_no">03</div>
+                <div class="month_body">
+                    <p class="month_tag">第 3 个月</p>
+                    <h3>行为与结果</h3>
+                    <p class="month_suffix"><code>-tion</code><code>-sion</code><code>-ment</code></p>
+                    <p class="month_desc">动词 → 名词：动作、过程、结果。</p>
+                    <p class="month_status">待生成 · 用工具补词</p>
+                </div>
+            </li>
+            <li class="month_card">
+                <div class="month_no">04</div>
+                <div class="month_body">
+                    <p class="month_tag">第 4 个月</p>
+                    <h3>性质与状态</h3>
+                    <p class="month_suffix"><code>-ness</code><code>-ity</code><code>-ty</code></p>
+                    <p class="month_desc">形容词 → 抽象名词：性质、程度、状态。</p>
+                    <p class="month_status">待生成 · 用工具补词</p>
+                </div>
+            </li>
+            <li class="month_card">
+                <div class="month_no">05</div>
+                <div class="month_body">
+                    <p class="month_tag">第 5 个月</p>
+                    <h3>人与身份</h3>
+                    <p class="month_suffix"><code>-er</code><code>-or</code><code>-ist</code><code>-ant</code></p>
+                    <p class="month_desc">动词 / 名词 → 人：职业、身份、动作执行者。</p>
+                    <p class="month_status">待生成 · 用工具补词</p>
+                </div>
+            </li>
+            <li class="month_card">
+                <div class="month_no">06</div>
+                <div class="month_body">
+                    <p class="month_tag">第 6 个月</p>
+                    <h3>特征与倾向</h3>
+                    <p class="month_suffix"><code>-ive</code><code>-ous</code><code>-al</code><code>-ic</code></p>
+                    <p class="month_desc">描述性格、属性与倾向的高频形容词。</p>
+                    <p class="month_status">待生成 · 用工具补词</p>
+                </div>
+            </li>
+            <li class="month_card">
+                <div class="month_no">07</div>
+                <div class="month_body">
+                    <p class="month_tag">第 7 个月</p>
+                    <h3>否定与反向</h3>
+                    <p class="month_suffix"><code>un-</code><code>in-</code><code>im-</code><code>dis-</code></p>
+                    <p class="month_desc">否定前缀：不、非、相反；专治形近词。</p>
+                    <p class="month_status">待生成 · 用工具补词</p>
+                </div>
+            </li>
+            <li class="month_card">
+                <div class="month_no">08</div>
+                <div class="month_body">
+                    <p class="month_tag">第 8 个月</p>
+                    <h3>方向与程度</h3>
+                    <p class="month_suffix"><code>re-</code><code>pre-</code><code>pro-</code><code>over-</code></p>
+                    <p class="month_desc">方向前缀：再、前、向外、过度。</p>
+                    <p class="month_status">待生成 · 用工具补词</p>
+                </div>
+            </li>
+            <li class="month_card">
+                <div class="month_no">09</div>
+                <div class="month_body">
+                    <p class="month_tag">第 9 个月</p>
+                    <h3>高频词根 I</h3>
+                    <p class="month_suffix"><code>spect</code><code>port</code><code>dict</code><code>form</code></p>
+                    <p class="month_desc">看、带、说、形：用词根串起阅读高频词。</p>
+                    <p class="month_status">待生成 · 用工具补词</p>
+                </div>
+            </li>
+            <li class="month_card">
+                <div class="month_no">10</div>
+                <div class="month_body">
+                    <p class="month_tag">第 10 个月</p>
+                    <h3>高频词根 II + 总复盘</h3>
+                    <p class="month_suffix"><code>struct</code><code>duc</code><code>tract</code><code>press</code></p>
+                    <p class="month_desc">建、引、拉、压：收束 10 个月，回到真题。</p>
+                    <p class="month_status">待生成 · 用工具补词</p>
+                </div>
+            </li>
+        </ol>
+        <p class="plan_note">后续月份按“词族 → 生成器出代码 → 打卡”的流程补充，词表不需要一次写完。当前先把体系跑通，再逐月加量。</p>
+    </section>
+
+    <!-- ================= 单词区 ================= -->
+    <section id="word_content" class="word_content" aria-labelledby="wordsTitle">
+        <div class="content_intro">
+            <p class="eyebrow">Batch 01 · 首批打样</p>
+            <h2 id="wordsTitle">首批词族：<code>-ful</code> / <code>-less</code></h2>
+            <p class="intro_desc">先读构词公式，再看词条。默认只显示英文；点击任意词条可单独核对答案，也可以用下方按钮一次展开。</p>
+            <div class="intro_stats">
+                <span><b id="wordTotal">62</b> 个单词</span>
+                <span><b id="groupTotal">2</b> 个词族</span>
+                <span id="levelStats" class="level_stats"></span>
+            </div>
+        </div>
+
+        <!-- 后缀搜索 -->
+        <section class="panel search_panel" aria-labelledby="searchTitle">
+            <div class="search_head">
+                <div>
+                    <h2 id="searchTitle">按后缀 / 词根筛选</h2>
+                    <p class="panel_sub">输入后缀（如 ful、less、tion）或词根（如 help、care），只保留匹配的词族和词条。</p>
+                </div>
+                <span class="search_kbd">Enter 搜索</span>
+            </div>
+            <form class="search_form" id="searchForm" role="search">
+                <label class="sr_only" for="suffixInput">输入后缀或词根</label>
+                <input id="suffixInput" name="suffix" type="text" placeholder="例如：ful、less、tion" autocomplete="off" spellcheck="false">
+                <button type="submit" class="btn btn_primary">搜索</button>
+                <button type="button" class="btn btn_soft" id="btnClearSearch">重置</button>
+            </form>
+            <div class="quick_filters" id="quickFilters">
+                <button type="button" class="chip is_active" data-query="">全部词族</button>
+                <button type="button" class="chip" data-query="ful">-ful</button>
+                <button type="button" class="chip" data-query="less">-less</button>
+                <button type="button" class="chip chip_planned" data-query="tion">-tion（第 3 月）</button>
+                <button type="button" class="chip chip_planned" data-query="able">-able（第 2 月）</button>
+            </div>
+            <p id="searchResult" class="search_result" role="status" aria-live="polite">当前展示 2 个词族 · 62 个单词。</p>
+        </section>
+
+        <!-- 全局显示 / 隐藏 -->
+        <div class="word_toolbar" id="wordToolbar">
+            <div class="word_toolbar_inner">
+                <button type="button" class="btn btn_primary" id="btnToggleAll" aria-pressed="false">显示全部答案</button>
+                <span class="toolbar_tip">点击词条可单独核对 · 每个词族右侧可只展开本组</span>
+                <span class="toolbar_count" id="visibleCount">62 个单词</span>
+            </div>
+        </div>
+
+        <!-- ========== -ful 词族 ========== -->
+        <article class="word_group" data-suffix="ful" data-month="第 1 个月" id="group_ful">
+            <div class="group_head">
+                <div class="group_title">
+                    <span class="suffix_badge suffix_ful">-ful</span>
+                    <div>
+                        <h2>名词 / 动词 + <code>ful</code> = 充满……的（形容词）</h2>
+                        <p class="group_sub">例：help（帮助）——&gt; helpful（有帮助的）</p>
+                    </div>
+                </div>
+                <div class="group_actions">
+                    <span class="group_count">28 个词</span>
+                    <button type="button" class="toggle-btn-local" data-target="group_ful_list" aria-pressed="false">显示中文</button>
+                </div>
+            </div>
+            <div class="group_rule">
+                <code class="rule_en">help</code><span class="rule_op">+</span><code class="rule_en">ful</code><span class="rule_op">=</span><code class="rule_en">helpful</code>
+                <span class="rule_gloss">充满……的；具有……性质的</span>
+            </div>
+            <div class="group_tips">
+                <p><strong>拼写提示</strong>一般直接加 <code>-ful</code>；以“辅音字母 + y”结尾变 y 为 i（beauty → beautiful，mercy → merciful）；词根末尾的辅音通常不双写（forget → forgetful，regret → regretful），不要写成 forgettful / regrettful。</p>
+                <p><strong>词义提醒</strong><code>-ful</code> 是“充满”的意思，不是 <code>full</code>（满的）的缩写；<code>helpful</code> 是“有帮助的”，不是“充满帮助”。</p>
+            </div>
+            <ol class="word_div hide-zh" id="group_ful_list">
+                <li class="word_item" data-word="helpful" data-root="help" data-suffix="ful" data-level="小学" data-meaning="有帮助的；有益的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">help(<span class="zh">帮助；有助于</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">helpful(<span class="zh">有帮助的；有益的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">小学</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">有帮助的；有用的</span> <span class="colloc"><code class="en">helpful advice</code><span class="zh">有用的建议</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">乐于助人的</span> <span class="colloc"><code class="en">a helpful teacher</code><span class="zh">乐于助人的老师</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Your advice was very helpful.</code>
+                            <span class="zh">你的建议非常有用。</span>
+                        </p>
+                        <p class="note">搭配：be helpful to sb. 对某人有帮助。反义：helpless 无助的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="careful" data-root="care" data-suffix="ful" data-level="小学" data-meaning="小心的；仔细的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">care(<span class="zh">关心；照料；小心</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">careful(<span class="zh">小心的；仔细的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">小学</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">小心的；谨慎的</span> <span class="colloc"><code class="en">be careful with...</code><span class="zh">小心……</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">仔细的；细致的</span> <span class="colloc"><code class="en">a careful plan</code><span class="zh">周密的计划</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Be careful with the glass.</code>
+                            <span class="zh">小心拿玻璃杯。</span>
+                        </p>
+                        <p class="note">反义：careless 粗心的。careful 是“用心”，careless 是“不上心”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="useful" data-root="use" data-suffix="ful" data-level="小学" data-meaning="有用的；有益的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">use(<span class="zh">使用；用途</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">useful(<span class="zh">有用的；有益的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">小学</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">有用的；实用的</span> <span class="colloc"><code class="en">useful information</code><span class="zh">有用的信息</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">有益的</span> <span class="colloc"><code class="en">useful experience</code><span class="zh">有益的经历</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">This dictionary is useful for beginners.</code>
+                            <span class="zh">这本词典对初学者很有用。</span>
+                        </p>
+                        <p class="note">搭配：be useful for / to... 对……有用。反义：useless 无用的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="beautiful" data-root="beauty" data-suffix="ful" data-level="小学" data-meaning="美丽的；出色的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">beauty(<span class="zh">美；美人</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">beautiful(<span class="zh">美丽的；出色的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">小学</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">美丽的；漂亮的</span> <span class="colloc"><code class="en">a beautiful garden</code><span class="zh">美丽的花园</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">出色的；精彩的</span> <span class="colloc"><code class="en">a beautiful performance</code><span class="zh">精彩的表演</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The garden looks beautiful in spring.</code>
+                            <span class="zh">春天，这座花园很美。</span>
+                        </p>
+                        <p class="note">拼写：beauty → beautiful，把 y 变 i 再加 -ful。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="successful" data-root="success" data-suffix="ful" data-level="初中" data-meaning="成功的；有成就的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">success(<span class="zh">成功；成功的人或事</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">successful(<span class="zh">成功的；有成就的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">成功的</span> <span class="colloc"><code class="en">a successful experiment</code><span class="zh">成功的实验</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">有成就的</span> <span class="colloc"><code class="en">a successful writer</code><span class="zh">有成就的作家</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">She had a successful career in teaching.</code>
+                            <span class="zh">她在教学方面事业有成。</span>
+                        </p>
+                        <p class="note">词族：succeed v. 成功 → success n. 成功 → successful adj. 成功的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="meaningful" data-root="meaning" data-suffix="ful" data-level="初中" data-meaning="有意义的；意味深长的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">meaning(<span class="zh">意思；意义</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">meaningful(<span class="zh">有意义的；意味深长的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">有意义的</span> <span class="colloc"><code class="en">a meaningful life</code><span class="zh">有意义的人生</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">意味深长的</span> <span class="colloc"><code class="en">a meaningful look</code><span class="zh">意味深长的眼神</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">They had a meaningful conversation.</code>
+                            <span class="zh">他们进行了一次有意义的谈话。</span>
+                        </p>
+                        <p class="note">反义：meaningless 无意义的。meaning 是名词，meaningful 是形容词。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="colorful" data-root="color" data-suffix="ful" data-level="小学" data-meaning="多彩的；生动的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">color(<span class="zh">颜色；给……上色</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">colorful(<span class="zh">多彩的；生动的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">小学</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">色彩丰富的；多彩的</span> <span class="colloc"><code class="en">colorful flowers</code><span class="zh">五颜六色的花</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">生动的；丰富多彩的</span> <span class="colloc"><code class="en">a colorful life</code><span class="zh">丰富多彩的生活</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The market is full of colorful flowers.</code>
+                            <span class="zh">市场上满是五颜六色的花。</span>
+                        </p>
+                        <p class="note">英式拼写：colourful。反义：colorless 无色的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="powerful" data-root="power" data-suffix="ful" data-level="初中" data-meaning="强大的；有影响力的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">power(<span class="zh">力量；权力</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">powerful(<span class="zh">强大的；有影响力的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">强大的；有力的</span> <span class="colloc"><code class="en">a powerful nation</code><span class="zh">强国</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">有影响力的</span> <span class="colloc"><code class="en">a powerful speech</code><span class="zh">有感染力的演讲</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The Internet is a powerful tool for learning.</code>
+                            <span class="zh">互联网是有力的学习工具。</span>
+                        </p>
+                        <p class="note">power n. 力量；powerful adj.。反义：powerless 无力的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="wonderful" data-root="wonder" data-suffix="ful" data-level="小学" data-meaning="精彩的；极好的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">wonder(<span class="zh">奇迹；想知道</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">wonderful(<span class="zh">精彩的；极好的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">小学</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">极好的；精彩的</span> <span class="colloc"><code class="en">a wonderful time</code><span class="zh">一段美好的时光</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">令人惊叹的</span> <span class="colloc"><code class="en">the wonderful world</code><span class="zh">奇妙的世界</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">We had a wonderful time at the party.</code>
+                            <span class="zh">我们在聚会上玩得很开心。</span>
+                        </p>
+                        <p class="note">wonder 也可作动词“想知道”：I wonder why he left. 我想知道他为什么离开。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="thankful" data-root="thank" data-suffix="ful" data-level="小学" data-meaning="感激的；欣慰的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">thank(<span class="zh">感谢</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">thankful(<span class="zh">感激的；欣慰的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">小学</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">感激的</span> <span class="colloc"><code class="en">be thankful for sth.</code><span class="zh">因某事感激</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">欣慰的；庆幸的</span> <span class="colloc"><code class="en">I'm thankful that...</code><span class="zh">我很庆幸……</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">I am thankful for your help.</code>
+                            <span class="zh">我很感激你的帮助。</span>
+                        </p>
+                        <p class="note">thankful 强调“心存感激”；grateful 更正式。搭配：be thankful for / that...</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="painful" data-root="pain" data-suffix="ful" data-level="初中" data-meaning="痛苦的；令人疼痛的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">pain(<span class="zh">疼痛；痛苦</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">painful(<span class="zh">痛苦的；令人疼痛的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">疼痛的；引起疼痛的</span> <span class="colloc"><code class="en">a painful leg</code><span class="zh">疼痛的腿</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">痛苦的；令人不快的</span> <span class="colloc"><code class="en">a painful memory</code><span class="zh">痛苦的回忆</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">It was a painful experience for him.</code>
+                            <span class="zh">那对他是一次痛苦的经历。</span>
+                        </p>
+                        <p class="note">pain n. 疼痛；painful adj.。反义：painless 无痛的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="peaceful" data-root="peace" data-suffix="ful" data-level="初中" data-meaning="和平的；平静的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">peace(<span class="zh">和平；平静</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">peaceful(<span class="zh">和平的；平静的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">和平的</span> <span class="colloc"><code class="en">a peaceful solution</code><span class="zh">和平的解决办法</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">平静的；宁静的</span> <span class="colloc"><code class="en">a peaceful village</code><span class="zh">宁静的村庄</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">We hope for a peaceful world.</code>
+                            <span class="zh">我们希望有一个和平的世界。</span>
+                        </p>
+                        <p class="note">peace n. 和平；peaceful adj.。注意：peaceful 是“平静的”，不是“太平的”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="hopeful" data-root="hope" data-suffix="ful" data-level="初中" data-meaning="有希望的；抱有希望的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">hope(<span class="zh">希望；期望</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">hopeful(<span class="zh">有希望的；抱有希望的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">抱有希望的</span> <span class="colloc"><code class="en">be hopeful about...</code><span class="zh">对……抱有希望</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">有希望的；可能成功的</span> <span class="colloc"><code class="en">a hopeful sign</code><span class="zh">好兆头</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">We are hopeful about the future.</code>
+                            <span class="zh">我们对未来充满希望。</span>
+                        </p>
+                        <p class="note">反义：hopeless 绝望的。搭配：be hopeful of doing sth. 有望做某事。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="skillful" data-root="skill" data-suffix="ful" data-level="专升本" data-meaning="熟练的；灵巧的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">skill(<span class="zh">技能；技巧</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">skillful(<span class="zh">熟练的；灵巧的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">熟练的；技术好的</span> <span class="colloc"><code class="en">a skillful worker</code><span class="zh">熟练工人</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">灵巧的</span> <span class="colloc"><code class="en">skillful hands</code><span class="zh">灵巧的手</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">She is a skillful driver.</code>
+                            <span class="zh">她是一位技术娴熟的司机。</span>
+                        </p>
+                        <p class="note">英式拼写：skilful（只写一个 l）。skill n. 技能；skillful adj.。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="truthful" data-root="truth" data-suffix="ful" data-level="专升本" data-meaning="诚实的；真实的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">truth(<span class="zh">真相；事实</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">truthful(<span class="zh">诚实的；真实的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">诚实的；说真话的</span> <span class="colloc"><code class="en">a truthful witness</code><span class="zh">诚实的证人</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">真实的；如实的</span> <span class="colloc"><code class="en">a truthful account</code><span class="zh">如实的叙述</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Please give me a truthful answer.</code>
+                            <span class="zh">请给我一个诚实的回答。</span>
+                        </p>
+                        <p class="note">truth n. 真相；truthful adj.。反义：untruthful 不诚实的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="harmful" data-root="harm" data-suffix="ful" data-level="初中" data-meaning="有害的；造成损害的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">harm(<span class="zh">伤害；损害</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">harmful(<span class="zh">有害的；造成损害的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">有害的</span> <span class="colloc"><code class="en">be harmful to...</code><span class="zh">对……有害</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">造成损害的</span> <span class="colloc"><code class="en">harmful effects</code><span class="zh">不良影响</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Smoking is harmful to your health.</code>
+                            <span class="zh">吸烟有害健康。</span>
+                        </p>
+                        <p class="note">harm n./v. 伤害；反义：harmless 无害的。固定搭配 be harmful to。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="faithful" data-root="faith" data-suffix="ful" data-level="专升本" data-meaning="忠诚的；如实的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">faith(<span class="zh">信任；信仰</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">faithful(<span class="zh">忠诚的；如实的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">忠诚的；忠实的</span> <span class="colloc"><code class="en">a faithful friend</code><span class="zh">忠实的朋友</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">如实的；准确的</span> <span class="colloc"><code class="en">a faithful translation</code><span class="zh">忠于原文的翻译</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">A dog is a faithful friend.</code>
+                            <span class="zh">狗是忠诚的朋友。</span>
+                        </p>
+                        <p class="note">搭配：be faithful to sb./sth. 忠于……。faith n. 信任；信仰。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="cheerful" data-root="cheer" data-suffix="ful" data-level="初中" data-meaning="愉快的；欢快的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">cheer(<span class="zh">欢呼；使振奋</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">cheerful(<span class="zh">愉快的；欢快的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">愉快的；高兴的</span> <span class="colloc"><code class="en">a cheerful smile</code><span class="zh">愉快的微笑</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">欢快的；明亮的</span> <span class="colloc"><code class="en">a cheerful room</code><span class="zh">明亮的房间</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">She greeted us with a cheerful smile.</code>
+                            <span class="zh">她用愉快的微笑迎接我们。</span>
+                        </p>
+                        <p class="note">cheer v. 欢呼；cheerful adj.。反义：cheerless 阴郁的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="dreadful" data-root="dread" data-suffix="ful" data-level="专升本" data-meaning="可怕的；糟糕的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">dread(<span class="zh">恐惧；害怕</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">dreadful(<span class="zh">可怕的；糟糕的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">可怕的</span> <span class="colloc"><code class="en">a dreadful accident</code><span class="zh">可怕的事故</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">糟糕的；令人不快的</span> <span class="colloc"><code class="en">a dreadful movie</code><span class="zh">一部烂片</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The weather was dreadful yesterday.</code>
+                            <span class="zh">昨天天气糟透了。</span>
+                        </p>
+                        <p class="note">口语中 dreadful 常表示“糟透了”。dread v./n. 恐惧；dreadful adj.。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="forgetful" data-root="forget" data-suffix="ful" data-level="专升本" data-meaning="健忘的；易忘的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">forget(<span class="zh">忘记；遗忘</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">forgetful(<span class="zh">健忘的；易忘的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">健忘的；记性差的</span> <span class="colloc"><code class="en">become forgetful</code><span class="zh">变得健忘</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">疏忽的；不注意的</span> <span class="colloc"><code class="en">forgetful of danger</code><span class="zh">忘记危险</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Grandpa is becoming forgetful.</code>
+                            <span class="zh">爷爷越来越健忘了。</span>
+                        </p>
+                        <p class="note">forgetful 指“人健忘”；forgettable 指“容易被忘记的”，别混用。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="merciful" data-root="mercy" data-suffix="ful" data-level="专升本" data-meaning="仁慈的；宽大的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">mercy(<span class="zh">仁慈；宽恕</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">merciful(<span class="zh">仁慈的；宽大的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">仁慈的；宽大的</span> <span class="colloc"><code class="en">be merciful to sb.</code><span class="zh">对某人仁慈</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">宽恕的；手下留情的</span> <span class="colloc"><code class="en">a merciful judge</code><span class="zh">仁慈的法官</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The judge was merciful to the young man.</code>
+                            <span class="zh">法官对这个年轻人很仁慈。</span>
+                        </p>
+                        <p class="note">mercy n. 仁慈；反义：merciless 残忍的。搭配 be merciful to sb.。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="shameful" data-root="shame" data-suffix="ful" data-level="专升本" data-meaning="可耻的；丢脸的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">shame(<span class="zh">羞愧；令人惋惜的事</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">shameful(<span class="zh">可耻的；丢脸的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">可耻的；丢脸的</span> <span class="colloc"><code class="en">shameful behavior</code><span class="zh">可耻的行为</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">令人羞愧的</span> <span class="colloc"><code class="en">a shameful secret</code><span class="zh">令人羞愧的秘密</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">It is shameful to cheat in exams.</code>
+                            <span class="zh">考试作弊是可耻的。</span>
+                        </p>
+                        <p class="note">shameful 形容“行为可耻”；ashamed 形容“人感到羞愧”；shameless 是“不知羞耻”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="thoughtful" data-root="thought" data-suffix="ful" data-level="专升本" data-meaning="体贴的；深思的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">thought(<span class="zh">思考；想法</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">thoughtful(<span class="zh">体贴的；深思的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">体贴的；考虑周到的</span> <span class="colloc"><code class="en">It is thoughtful of sb. to do sth.</code><span class="zh">某人做某事真体贴</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">深思的；有思想的</span> <span class="colloc"><code class="en">a thoughtful article</code><span class="zh">有思想深度的文章</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">It was thoughtful of you to call me.</code>
+                            <span class="zh">你打电话给我真体贴。</span>
+                        </p>
+                        <p class="note">反义：thoughtless 欠考虑的。句型 It is thoughtful of sb. to do sth.。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="fruitful" data-root="fruit" data-suffix="ful" data-level="专升本" data-meaning="富有成效的；多产的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">fruit(<span class="zh">水果；成果</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">fruitful(<span class="zh">富有成效的；多产的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">富有成效的</span> <span class="colloc"><code class="en">a fruitful discussion</code><span class="zh">富有成效的讨论</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">多产的；果实累累的</span> <span class="colloc"><code class="en">fruitful trees</code><span class="zh">结果多的树</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">They had a fruitful discussion.</code>
+                            <span class="zh">他们进行了富有成效的讨论。</span>
+                        </p>
+                        <p class="note">fruit 作“成果”讲时常用复数 fruits；fruitful 强调“有收获的”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="stressful" data-root="stress" data-suffix="ful" data-level="专升本" data-meaning="有压力的；紧张的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">stress(<span class="zh">压力；强调</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">stressful(<span class="zh">有压力的；紧张的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">有压力的；令人紧张的</span> <span class="colloc"><code class="en">a stressful job</code><span class="zh">压力大的工作</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">充满压力的</span> <span class="colloc"><code class="en">a stressful period</code><span class="zh">压力重重的时期</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The final year can be very stressful.</code>
+                            <span class="zh">最后一年压力可能很大。</span>
+                        </p>
+                        <p class="note">stressful 形容事情“让人有压力”；stressed 形容人“感到有压力”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="doubtful" data-root="doubt" data-suffix="ful" data-level="专升本" data-meaning="怀疑的；不太可能的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">doubt(<span class="zh">怀疑；疑问</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">doubtful(<span class="zh">怀疑的；不太可能的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">怀疑的；不确定的</span> <span class="colloc"><code class="en">be doubtful about...</code><span class="zh">对……持怀疑态度</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">不太可能的</span> <span class="colloc"><code class="en">It is doubtful whether...</code><span class="zh">是否……尚不确定</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">I am doubtful about his plan.</code>
+                            <span class="zh">我对他的计划持怀疑态度。</span>
+                        </p>
+                        <p class="note">反义：doubtless 无疑的。doubt n./v.；句型 It is doubtful whether...</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="respectful" data-root="respect" data-suffix="ful" data-level="专升本" data-meaning="恭敬的；尊重的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">respect(<span class="zh">尊重；方面</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">respectful(<span class="zh">恭敬的；尊重的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">恭敬的；尊重的</span> <span class="colloc"><code class="en">be respectful to sb.</code><span class="zh">尊敬某人</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">表示敬意的</span> <span class="colloc"><code class="en">a respectful silence</code><span class="zh">表示敬意的静默</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Students should be respectful to their teachers.</code>
+                            <span class="zh">学生应该尊敬老师。</span>
+                        </p>
+                        <p class="note">易混：respectful 尊敬他人的；respectable 值得尊敬的；respective 各自的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="regretful" data-root="regret" data-suffix="ful" data-level="专升本" data-meaning="后悔的；遗憾的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">regret(<span class="zh">后悔；遗憾</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">regretful(<span class="zh">后悔的；遗憾的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">后悔的；懊悔的</span> <span class="colloc"><code class="en">be regretful about sth.</code><span class="zh">对某事感到后悔</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">遗憾的</span> <span class="colloc"><code class="en">a regretful smile</code><span class="zh">遗憾的微笑</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">She was regretful about her decision.</code>
+                            <span class="zh">她对自己的决定感到后悔。</span>
+                        </p>
+                        <p class="note">regretful 修饰人；regrettable 修饰事，表示“令人遗憾的”。</p>
+                    </div>
+                </li>
+            </ol>
+        </article>
+
+        <!-- ========== -less 词族 ========== -->
+        <article class="word_group" data-suffix="less" data-month="第 1 个月" id="group_less">
+            <div class="group_head">
+                <div class="group_title">
+                    <span class="suffix_badge suffix_less">-less</span>
+                    <div>
+                        <h2>名词 / 动词 + <code>less</code> = 没有……的（形容词）</h2>
+                        <p class="group_sub">例：care（关心）——&gt; careless（粗心的）</p>
+                    </div>
+                </div>
+                <div class="group_actions">
+                    <span class="group_count">34 个词</span>
+                    <button type="button" class="toggle-btn-local" data-target="group_less_list" aria-pressed="false">显示中文</button>
+                </div>
+            </div>
+            <div class="group_rule">
+                <code class="rule_en">care</code><span class="rule_op">+</span><code class="rule_en">less</code><span class="rule_op">=</span><code class="rule_en">careless</code>
+                <span class="rule_gloss">没有……的；缺少……的</span>
+            </div>
+            <div class="group_tips">
+                <p><strong>拼写提示</strong>一般直接加 <code>-less</code>，以 e 结尾通常保留 e（careless、homeless、hopeless）；不要漏写一个 s，也不要写成 <code>care-less</code>（连字符只在特殊强调时用）。</p>
+                <p><strong>词义陷阱</strong><code>priceless</code> 是“无价的、极珍贵的”，不是“没价格”；<code>worthless</code> 才是“一文不值的”。<code>doubtless</code> 常作副词“无疑地”。</p>
+            </div>
+            <ol class="word_div hide-zh" id="group_less_list">
+                <li class="word_item" data-word="careless" data-root="care" data-suffix="less" data-level="初中" data-meaning="粗心的；漫不经心的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">care(<span class="zh">关心；小心</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">careless(<span class="zh">粗心的；漫不经心的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">粗心的；疏忽的</span> <span class="colloc"><code class="en">It is careless of sb. to do sth.</code><span class="zh">某人做某事真粗心</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">漫不经心的；随意的</span> <span class="colloc"><code class="en">a careless remark</code><span class="zh">随口说出的话</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">It was careless of you to leave the door open.</code>
+                            <span class="zh">你让门开着，真是粗心。</span>
+                        </p>
+                        <p class="note">反义：careful 仔细的。careless 是“不上心”，不是“不关心”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="useless" data-root="use" data-suffix="less" data-level="初中" data-meaning="无用的；没用的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">use(<span class="zh">使用</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">useless(<span class="zh">无用的；没用的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无用的；不能用的</span> <span class="colloc"><code class="en">useless advice</code><span class="zh">无用的建议</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">无能的；不擅长的</span> <span class="colloc"><code class="en">be useless at sth.</code><span class="zh">不擅长某事</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">This broken radio is useless.</code>
+                            <span class="zh">这台坏收音机没用了。</span>
+                        </p>
+                        <p class="note">反义：useful 有用的。句型 It is useless doing / to do sth. 做……没用。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="hopeless" data-root="hope" data-suffix="less" data-level="初中" data-meaning="绝望的；无望的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">hope(<span class="zh">希望</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">hopeless(<span class="zh">绝望的；无望的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">绝望的；无望的</span> <span class="colloc"><code class="en">a hopeless situation</code><span class="zh">绝望的处境</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">极差的；不擅长的</span> <span class="colloc"><code class="en">be hopeless at maths</code><span class="zh">数学很差</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The situation seemed hopeless.</code>
+                            <span class="zh">形势看起来毫无希望。</span>
+                        </p>
+                        <p class="note">反义：hopeful 有希望的。be hopeless at 表示“极不擅长”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="homeless" data-root="home" data-suffix="less" data-level="初中" data-meaning="无家可归的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">home(<span class="zh">家</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">homeless(<span class="zh">无家可归的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无家可归的</span> <span class="colloc"><code class="en">homeless people</code><span class="zh">无家可归的人</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">失去家园的</span> <span class="colloc"><code class="en">a homeless family</code><span class="zh">失去家园的家庭</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The charity helps homeless people.</code>
+                            <span class="zh">这家慈善机构帮助无家可归的人。</span>
+                        </p>
+                        <p class="note">the homeless 表示“无家可归的人”，作主语时谓语用复数。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="helpless" data-root="help" data-suffix="less" data-level="初中" data-meaning="无助的；无能为力的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">help(<span class="zh">帮助</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">helpless(<span class="zh">无助的；无能为力的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无助的；需要帮助的</span> <span class="colloc"><code class="en">a helpless child</code><span class="zh">无助的孩子</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">无能为力的</span> <span class="colloc"><code class="en">be helpless to do sth.</code><span class="zh">无力做某事</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The baby was helpless without its mother.</code>
+                            <span class="zh">婴儿离开妈妈就无助了。</span>
+                        </p>
+                        <p class="note">反义：helpful 有帮助的。helpless 是“帮不上/需要帮助”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="endless" data-root="end" data-suffix="less" data-level="初中" data-meaning="无尽的；没完没了的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">end(<span class="zh">结束；末端</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">endless(<span class="zh">无尽的；没完没了的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无尽的；无穷的</span> <span class="colloc"><code class="en">endless possibilities</code><span class="zh">无限可能</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">没完没了的</span> <span class="colloc"><code class="en">endless complaints</code><span class="zh">没完没了的抱怨</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">We had endless meetings last week.</code>
+                            <span class="zh">上周我们开了没完没了的会。</span>
+                        </p>
+                        <p class="note">end n./v.；endless 强调“看不到尽头”。近义：ceaseless, limitless。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="fearless" data-root="fear" data-suffix="less" data-level="专升本" data-meaning="无畏的；不怕的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">fear(<span class="zh">恐惧；害怕</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">fearless(<span class="zh">无畏的；不怕的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无畏的；勇敢的</span> <span class="colloc"><code class="en">a fearless fighter</code><span class="zh">无畏的战士</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">不怕……的</span> <span class="colloc"><code class="en">fearless of death</code><span class="zh">不怕死</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">She is fearless in the face of danger.</code>
+                            <span class="zh">她面对危险毫不畏惧。</span>
+                        </p>
+                        <p class="note">fear n./v.；反义：fearful 害怕的。fearless 是褒义词。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="colorless" data-root="color" data-suffix="less" data-level="专升本" data-meaning="无色的；苍白的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">color(<span class="zh">颜色</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">colorless(<span class="zh">无色的；苍白的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无色的</span> <span class="colloc"><code class="en">a colorless gas</code><span class="zh">无色气体</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">苍白的；平淡无奇的</span> <span class="colloc"><code class="en">a colorless personality</code><span class="zh">平淡的个性</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Water is a colorless liquid.</code>
+                            <span class="zh">水是无色液体。</span>
+                        </p>
+                        <p class="note">英式拼写：colourless。反义：colorful 多彩的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="powerless" data-root="power" data-suffix="less" data-level="专升本" data-meaning="无力的；无能为力的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">power(<span class="zh">力量；权力</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">powerless(<span class="zh">无力的；无能为力的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无力的；没有力量的</span> <span class="colloc"><code class="en">feel powerless</code><span class="zh">感到无力</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">无权的；无能为力的</span> <span class="colloc"><code class="en">be powerless to do sth.</code><span class="zh">无力做某事</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">We felt powerless to change the situation.</code>
+                            <span class="zh">我们感到无力改变现状。</span>
+                        </p>
+                        <p class="note">反义：powerful 强大的。power n. 力量；权力。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="meaningless" data-root="meaning" data-suffix="less" data-level="初中" data-meaning="无意义的；毫无意义的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">meaning(<span class="zh">意义</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">meaningless(<span class="zh">无意义的；毫无意义的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无意义的；无目的的</span> <span class="colloc"><code class="en">a meaningless life</code><span class="zh">毫无意义的人生</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">毫无意义的；徒劳的</span> <span class="colloc"><code class="en">meaningless words</code><span class="zh">空话</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Life without goals is meaningless.</code>
+                            <span class="zh">没有目标的生活毫无意义。</span>
+                        </p>
+                        <p class="note">反义：meaningful 有意义的。meaning n. 意义。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="thoughtless" data-root="thought" data-suffix="less" data-level="专升本" data-meaning="欠考虑的；不顾他人的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">thought(<span class="zh">思考；关心</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">thoughtless(<span class="zh">欠考虑的；不顾他人的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">欠考虑的；轻率的</span> <span class="colloc"><code class="en">a thoughtless decision</code><span class="zh">轻率的决定</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">不顾他人的；不体贴的</span> <span class="colloc"><code class="en">It is thoughtless of sb. to do sth.</code><span class="zh">某人做某事真不体贴</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">It was thoughtless of him to criticize her in public.</code>
+                            <span class="zh">他当众批评她，太欠考虑了。</span>
+                        </p>
+                        <p class="note">反义：thoughtful 体贴的。字面是“没有想法”，实际常指“不为别人着想”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="harmless" data-root="harm" data-suffix="less" data-level="初中" data-meaning="无害的；无恶意的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">harm(<span class="zh">伤害</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">harmless(<span class="zh">无害的；无恶意的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无害的</span> <span class="colloc"><code class="en">be harmless to...</code><span class="zh">对……无害</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">无恶意的</span> <span class="colloc"><code class="en">a harmless joke</code><span class="zh">无恶意的玩笑</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The snake looks frightening but is harmless.</code>
+                            <span class="zh">这条蛇看着吓人，其实无害。</span>
+                        </p>
+                        <p class="note">反义：harmful 有害的。harm n./v. 伤害。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="doubtless" data-root="doubt" data-suffix="less" data-level="专升本" data-meaning="无疑的；无疑地">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">doubt(<span class="zh">怀疑</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">doubtless(<span class="zh">无疑的；无疑地</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj./adv.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无疑的；确定的（adj.，较正式）</span></li>
+                            <li><span class="sense_no">②</span><span class="zh">无疑地；很可能（adv.）</span> <span class="colloc"><code class="en">Doubtless, she will agree.</code><span class="zh">她很可能会同意。</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Doubtless, he will come.</code>
+                            <span class="zh">无疑他会来。</span>
+                        </p>
+                        <p class="note">doubtless 常作副词，相当于 undoubtedly；反义：doubtful 怀疑的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="shameless" data-root="shame" data-suffix="less" data-level="专升本" data-meaning="无耻的；不知羞耻的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">shame(<span class="zh">羞愧</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">shameless(<span class="zh">无耻的；不知羞耻的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无耻的；不知羞耻的</span> <span class="colloc"><code class="en">a shameless liar</code><span class="zh">无耻的骗子</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">厚颜无耻的</span> <span class="colloc"><code class="en">shameless self-promotion</code><span class="zh">厚颜无耻的自我宣传</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">He told a shameless lie.</code>
+                            <span class="zh">他撒了一个无耻的谎。</span>
+                        </p>
+                        <p class="note">辨析：shameful 行为可耻；shameless 不知羞耻；ashamed 感到羞愧。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="speechless" data-root="speech" data-suffix="less" data-level="专升本" data-meaning="说不出话的；哑口无言的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">speech(<span class="zh">说话；演讲</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">speechless(<span class="zh">说不出话的；哑口无言的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">说不出话的；哑口无言的</span> <span class="colloc"><code class="en">be speechless with anger</code><span class="zh">气得说不出话</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">难以言表的</span> <span class="colloc"><code class="en">speechless joy</code><span class="zh">难以言表的喜悦</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">I was speechless with anger.</code>
+                            <span class="zh">我气得说不出话来。</span>
+                        </p>
+                        <p class="note">speech n. 演讲；speechless 多指“一时语塞”，不是生理上的“不会说话”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="sleepless" data-root="sleep" data-suffix="less" data-level="专升本" data-meaning="失眠的；不眠的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">sleep(<span class="zh">睡眠；睡觉</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">sleepless(<span class="zh">失眠的；不眠的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">失眠的；睡不着的</span> <span class="colloc"><code class="en">a sleepless night</code><span class="zh">不眠之夜</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">不眠的；连续不断的</span> <span class="colloc"><code class="en">sleepless nights</code><span class="zh">一个个不眠之夜</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">She spent a sleepless night.</code>
+                            <span class="zh">她度过了一个不眠之夜。</span>
+                        </p>
+                        <p class="note">sleep n./v.；sleepy 困倦的；asleep 睡着的；sleepless 睡不着的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="priceless" data-root="price" data-suffix="less" data-level="专升本" data-meaning="无价的；极其珍贵的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">price(<span class="zh">价格；代价</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">priceless(<span class="zh">无价的；极其珍贵的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无价的；极珍贵的</span> <span class="colloc"><code class="en">priceless advice</code><span class="zh">极其宝贵的建议</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">无法定价的；非卖品的</span> <span class="colloc"><code class="en">a priceless painting</code><span class="zh">无价之宝</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Good health is priceless.</code>
+                            <span class="zh">健康无价。</span>
+                        </p>
+                        <p class="note">priceless 不是“没有价格”，而是“珍贵到无法定价”；反义：worthless 一文不值的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="regardless" data-root="regard" data-suffix="less" data-level="专升本" data-meaning="不顾的；无论如何">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">regard(<span class="zh">关注；尊重</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">regardless(<span class="zh">不顾的；无论如何</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj./adv.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">不顾的；不关心的</span> <span class="colloc"><code class="en">regardless of...</code><span class="zh">不顾……</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">无论如何；不管怎样（adv.）</span> <span class="colloc"><code class="en">Regardless, we must finish it.</code><span class="zh">无论如何，我们必须完成它。</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">He went out regardless of the rain.</code>
+                            <span class="zh">他不顾下雨仍出门了。</span>
+                        </p>
+                        <p class="note">regardless of + 名词；后接从句用 regardless of the fact that...。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="restless" data-root="rest" data-suffix="less" data-level="专升本" data-meaning="焦躁不安的；不得休息的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">rest(<span class="zh">休息；剩余部分</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">restless(<span class="zh">焦躁不安的；不得休息的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">焦躁不安的；坐立不安的</span> <span class="colloc"><code class="en">The children were restless.</code><span class="zh">孩子们坐立不安。</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">得不到休息的；不宁的</span> <span class="colloc"><code class="en">a restless night</code><span class="zh">不宁之夜</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The children were restless during the long film.</code>
+                            <span class="zh">看长电影时孩子们坐立不安。</span>
+                        </p>
+                        <p class="note">rest n./v. 休息；restless 是“无法安静下来”，不是“不休息”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="countless" data-root="count" data-suffix="less" data-level="初中" data-meaning="无数的；数不清的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">count(<span class="zh">计数；重要</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">countless(<span class="zh">无数的；数不清的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无数的；数不清的</span> <span class="colloc"><code class="en">countless times</code><span class="zh">无数次</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">不可胜数的</span> <span class="colloc"><code class="en">countless possibilities</code><span class="zh">无限可能</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Countless stars filled the sky.</code>
+                            <span class="zh">无数星星布满天空。</span>
+                        </p>
+                        <p class="note">count v. 计数；countless = too many to count，后接可数名词复数。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="effortless" data-root="effort" data-suffix="less" data-level="专升本" data-meaning="不费力的；轻松的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">effort(<span class="zh">努力</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">effortless(<span class="zh">不费力的；轻松的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">不费力的；轻松的</span> <span class="colloc"><code class="en">an effortless performance</code><span class="zh">轻松的表演</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">自然流畅的</span> <span class="colloc"><code class="en">effortless style</code><span class="zh">自然的风格</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">She speaks English with effortless fluency.</code>
+                            <span class="zh">她说英语流利自如。</span>
+                        </p>
+                        <p class="note">effort n. 努力；effortless 是“看起来毫不费力”，不是“没有努力”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="faultless" data-root="fault" data-suffix="less" data-level="专升本" data-meaning="无过错的；完美无缺的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">fault(<span class="zh">过错；缺点</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">faultless(<span class="zh">无过错的；完美无缺的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无过错的；无可指责的</span> <span class="colloc"><code class="en">a faultless performance</code><span class="zh">无可指责的表演</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">完美无缺的</span> <span class="colloc"><code class="en">faultless English</code><span class="zh">无可挑剔的英语</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Her performance was faultless.</code>
+                            <span class="zh">她的表演完美无缺。</span>
+                        </p>
+                        <p class="note">fault n. 过错；find fault with 挑毛病；反义：faulty 有故障的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="merciless" data-root="mercy" data-suffix="less" data-level="专升本" data-meaning="残忍的；无情的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">mercy(<span class="zh">仁慈</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">merciless(<span class="zh">残忍的；无情的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">残忍的；无情的</span> <span class="colloc"><code class="en">a merciless attack</code><span class="zh">无情的攻击</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">毫不留情的</span> <span class="colloc"><code class="en">merciless criticism</code><span class="zh">毫不留情的批评</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The judge was merciless.</code>
+                            <span class="zh">这位法官毫不留情。</span>
+                        </p>
+                        <p class="note">反义：merciful 仁慈的；mercy n. 仁慈。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="pointless" data-root="point" data-suffix="less" data-level="专升本" data-meaning="无意义的；无目标的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">point(<span class="zh">点；意义</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">pointless(<span class="zh">无意义的；无目标的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无意义的；无目的的</span> <span class="colloc"><code class="en">a pointless argument</code><span class="zh">无意义的争论</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">徒劳的；不值得的</span> <span class="colloc"><code class="en">It is pointless to argue.</code><span class="zh">争论毫无意义。</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">It is pointless to argue with him.</code>
+                            <span class="zh">和他争论毫无意义。</span>
+                        </p>
+                        <p class="note">point 作名词还有“意义、要点”；There is no point in doing sth. 做某事没意义。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="limitless" data-root="limit" data-suffix="less" data-level="专升本" data-meaning="无限的；无界限的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">limit(<span class="zh">限制；界限</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">limitless(<span class="zh">无限的；无界限的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无限的；无穷的</span> <span class="colloc"><code class="en">limitless energy</code><span class="zh">无穷的精力</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">无限制的；无界限的</span> <span class="colloc"><code class="en">limitless freedom</code><span class="zh">无限的自由</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The child has limitless energy.</code>
+                            <span class="zh">这孩子精力无穷。</span>
+                        </p>
+                        <p class="note">limit n./v. 限制；反义：limited 有限的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="tasteless" data-root="taste" data-suffix="less" data-level="专升本" data-meaning="无味的；缺乏品味的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">taste(<span class="zh">味道；品味</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">tasteless(<span class="zh">无味的；缺乏品味的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无味的；没有味道的</span> <span class="colloc"><code class="en">tasteless food</code><span class="zh">淡而无味的食物</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">缺乏品味的；俗气的</span> <span class="colloc"><code class="en">a tasteless joke</code><span class="zh">粗俗的玩笑</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The soup was tasteless.</code>
+                            <span class="zh">这汤淡而无味。</span>
+                        </p>
+                        <p class="note">taste n./v.；tasty 美味的；tasteless 既指“没味道”，也指“没品味”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="worthless" data-root="worth" data-suffix="less" data-level="初中" data-meaning="无价值的；一文不值的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">worth(<span class="zh">价值</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">worthless(<span class="zh">无价值的；一文不值的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">初中</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无价值的；不值钱的</span> <span class="colloc"><code class="en">a worthless coin</code><span class="zh">一文不值的硬币</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">无用的；不值得的</span> <span class="colloc"><code class="en">worthless advice</code><span class="zh">没用的建议</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The old coin is worthless.</code>
+                            <span class="zh">这枚旧硬币一文不值。</span>
+                        </p>
+                        <p class="note">be worth doing sth. 值得做某事；worthless 是形容词；反义：priceless。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="blameless" data-root="blame" data-suffix="less" data-level="专升本" data-meaning="无可指责的；清白的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">blame(<span class="zh">责备；归咎</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">blameless(<span class="zh">无可指责的；清白的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无可指责的；无过错的</span> <span class="colloc"><code class="en">a blameless life</code><span class="zh">清白的一生</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">清白的</span> <span class="colloc"><code class="en">blameless in the accident</code><span class="zh">在事故中无过错</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">She lived a blameless life.</code>
+                            <span class="zh">她一生清白。</span>
+                        </p>
+                        <p class="note">blame v./n. 责备；blame sb. for sth. / blame sth. on sb.。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="penniless" data-root="penny" data-suffix="less" data-level="专升本" data-meaning="身无分文的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">penny(<span class="zh">便士；零钱</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">penniless(<span class="zh">身无分文的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">身无分文的；一贫如洗的</span> <span class="colloc"><code class="en">be penniless</code><span class="zh">身无分文</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">没有钱的</span> <span class="colloc"><code class="en">a penniless student</code><span class="zh">身无分文的学生</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">He was penniless after the trip.</code>
+                            <span class="zh">旅行之后他身无分文。</span>
+                        </p>
+                        <p class="note">penny 的复数：pennies（一枚枚硬币）或 pence（金额）。penniless 强调“一分钱也没有”。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="timeless" data-root="time" data-suffix="less" data-level="专升本" data-meaning="永恒的；不受时间影响的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">time(<span class="zh">时间</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">timeless(<span class="zh">永恒的；不受时间影响的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">永恒的；不朽的</span> <span class="colloc"><code class="en">a timeless classic</code><span class="zh">永恒的经典</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">不受时间影响的；永不过时的</span> <span class="colloc"><code class="en">a timeless design</code><span class="zh">永不过时的设计</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Her music has a timeless quality.</code>
+                            <span class="zh">她的音乐有一种永恒的魅力。</span>
+                        </p>
+                        <p class="note">timeless 不是“没有时间”，而是“超越时间”。辨析：timely 及时的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="lifeless" data-root="life" data-suffix="less" data-level="专升本" data-meaning="无生命的；死气沉沉的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">life(<span class="zh">生命；生活</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">lifeless(<span class="zh">无生命的；死气沉沉的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无生命的</span> <span class="colloc"><code class="en">lifeless matter</code><span class="zh">无生命物质</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">死气沉沉的；没有生气的</span> <span class="colloc"><code class="en">a lifeless city</code><span class="zh">死气沉沉的城市</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The desert looks lifeless.</code>
+                            <span class="zh">沙漠看起来毫无生机。</span>
+                        </p>
+                        <p class="note">life n. 生命；lively 活泼的；living 活着的；lifeless 无生气的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="heartless" data-root="heart" data-suffix="less" data-level="专升本" data-meaning="无情的；冷酷的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">heart(<span class="zh">心；内心</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">heartless(<span class="zh">无情的；冷酷的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无情的；冷酷的</span> <span class="colloc"><code class="en">a heartless person</code><span class="zh">冷酷的人</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">残忍的</span> <span class="colloc"><code class="en">a heartless decision</code><span class="zh">冷酷的决定</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">It was a heartless decision.</code>
+                            <span class="zh">那是一个冷酷的决定。</span>
+                        </p>
+                        <p class="note">反义：warm-hearted 热心的；kind-hearted 善良的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="selfless" data-root="self" data-suffix="less" data-level="专升本" data-meaning="无私的；忘我的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">self(<span class="zh">自我</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">selfless(<span class="zh">无私的；忘我的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无私的；忘我的</span> <span class="colloc"><code class="en">selfless devotion</code><span class="zh">无私的奉献</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">不考虑自己的</span> <span class="colloc"><code class="en">a selfless act</code><span class="zh">无私的行为</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">Her selfless help moved everyone.</code>
+                            <span class="zh">她无私的帮助感动了所有人。</span>
+                        </p>
+                        <p class="note">self n. 自我；selfish 自私的；selfless 无私的。</p>
+                    </div>
+                </li>
+                <li class="word_item" data-word="groundless" data-root="ground" data-suffix="less" data-level="专升本" data-meaning="无根据的">
+                    <div class="word_top">
+                        <div class="word_derive">
+                            <code class="en">ground(<span class="zh">地面；理由</span>)</code>
+                            <span class="arrow" aria-hidden="true">——&gt;</span>
+                            <code class="en">groundless(<span class="zh">无根据的</span>)</code>
+                        </div>
+                        <div class="word_meta">
+                            <span class="word_pos">adj.</span>
+                            <span class="word_level">专升本</span>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <ul class="sense_list">
+                            <li><span class="sense_no">①</span><span class="zh">无根据的；没有理由的</span> <span class="colloc"><code class="en">a groundless fear</code><span class="zh">无端的恐惧</span></span></li>
+                            <li><span class="sense_no">②</span><span class="zh">无基础的</span> <span class="colloc"><code class="en">groundless suspicions</code><span class="zh">毫无根据的怀疑</span></span></li>
+                        </ul>
+                        <p class="example">
+                            <span class="example_label">例</span>
+                            <code class="en">The rumor is completely groundless.</code>
+                            <span class="zh">这个谣言完全无根据。</span>
+                        </p>
+                        <p class="note">ground 作名词还有“理由、根据”；on the grounds of 以……为理由。</p>
+                    </div>
+                </li>
+            </ol>
+        </article>
+
+        <div id="searchEmpty" class="panel empty_state" hidden>
+            <p class="empty_icon" aria-hidden="true">🔍</p>
+            <h3>没有找到这个词族</h3>
+            <p id="searchEmptyText">试试输入 ful、less，或点击“重置”查看全部词族。</p>
+            <p><a class="btn btn_primary" href="词汇代码生成器.html">去生成一个新词族 →</a></p>
+        </div>
+    </section>
+
+    <!-- ================= 页脚 ================= -->
+    <footer class="page_footer">
+        <div class="footer_grid">
+            <div>
+                <h3>这个页面怎么用</h3>
+                <ol class="footer_steps">
+                    <li>在“今日新学打卡”里把一组词加入计划。</li>
+                    <li>3 / 5 / 7 / 15 / 30 天后，到期的词自动出现在“今天要复习”。</li>
+                    <li>点击词条可单独显示答案；顶部按钮可批量显示全部答案。</li>
+                    <li>以后用生成器产出新词族，粘贴进本文件即可自动纳入打卡。</li>
+                </ol>
+            </div>
+            <div>
+                <h3>标注约定</h3>
+                <p class="footer_legend">
+                    <code class="en">en</code> 英文
+                    <span class="legend_sep">·</span>
+                    <span class="zh">zh</span> 中文
+                    <span class="legend_sep">·</span>
+                    <span class="note">note</span> 提醒
+                    <span class="legend_sep">·</span>
+                    <code>word_div</code> 词条列表
+                </p>
+                <p class="footer_small">沿用现有页面的类名与配色，可复制到其他构词法页面。答案默认隐藏，打卡记录保存在本机浏览器（localStorage）。</p>
+            </div>
+            <div>
+                <h3>相关入口</h3>
+                <p><a href="词汇代码生成器.html">词汇代码生成器</a></p>
+                <p><a href="../构词法案例/以-ful与-less结尾.html">旧版 -ful / -less 卡片</a></p>
+                <p><a href="../复习清单/复习清单.html">复习清单（词根版）</a></p>
+                <p><a href="../00-总目录/构词法总览.html">返回构词法总览</a></p>
+            </div>
+        </div>
+        <p class="footer_bottom">备考专升本英语 · 单词模块 · 第一批打样（-ful / -less）</p>
+    </footer>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="通关计划.js"></script>
+</body>
+</html>

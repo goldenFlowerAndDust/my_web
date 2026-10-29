@@ -1,0 +1,615 @@
+/* ==========================================================================
+   核心词汇复习清单（配合 复习打卡.css 使用）
+   ========================================================================== */
+
+.review-header {
+    padding-bottom: 1.2rem;
+}
+
+.header-sub {
+    margin-top: 0.35rem;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.header-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem 1rem;
+    margin-top: 0.7rem;
+    font-size: 0.82rem;
+}
+
+.header-links a {
+    color: #A3E4D7;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(163, 228, 215, 0.5);
+    padding-bottom: 1px;
+}
+
+.header-links a:hover {
+    color: #F1C40F;
+    border-bottom-color: #F1C40F;
+}
+
+.daily-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.9rem;
+    color: #7F8C8D;
+    font-size: 0.82rem;
+}
+
+.toolbar_note {
+    margin: -0.9rem 0 1rem;
+    padding: 0.4rem 0.6rem;
+    border-left: 3px solid #B7950B;
+    background: #FFFDF5;
+    color: #7A5B00;
+    font-size: 0.72rem;
+    line-height: 1.55;
+}
+
+.toolbar_note code {
+    padding: 0 0.18rem;
+    border-radius: 3px;
+    background: #F4F0F7;
+    color: #6C3483;
+}
+
+.daily-summary #today-date {
+    color: #5D6D7E;
+    font-weight: bold;
+}
+
+.summary-sep {
+    color: #BDC3C7;
+}
+
+.sync-badge {
+    margin-left: auto;
+    padding: 0.12rem 0.45rem;
+    border-radius: 999px;
+    background: #FEF5E7;
+    color: #9A6A00;
+    font-size: 0.68rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.sync-badge.is-on {
+    background: #EAF7EF;
+    color: #1E8449;
+}
+
+.sync-badge.is-off {
+    background: #FADBD8;
+    color: #922B21;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.55rem;
+    margin-bottom: 1.2rem;
+}
+
+.stat-card {
+    padding: 0.65rem 0.6rem;
+    border: 1px solid #E5E5E2;
+    border-radius: 8px;
+    background: #FFFFFF;
+    text-align: center;
+}
+
+.stat-card strong {
+    display: block;
+    color: #5D6D7E;
+    font-size: 1.45rem;
+    line-height: 1.2;
+}
+
+.stat-card span {
+    color: #7F8C8D;
+    font-size: 0.72rem;
+    white-space: nowrap;
+}
+
+.stat-card.stat-new {
+    border-color: #AED6F1;
+    background: #F4F9FF;
+}
+
+.stat-card.stat-new strong {
+    color: #1A5276;
+}
+
+.stat-card.stat-due {
+    border-color: #F5CBA7;
+    background: #FFF9F2;
+}
+
+.stat-card.stat-due strong {
+    color: #B9770E;
+}
+
+.stat-card.stat-today {
+    border-color: #A9DFBF;
+    background: #F3FBF6;
+}
+
+.stat-card.stat-today strong {
+    color: #1E8449;
+}
+
+.daily-section,
+.all-section {
+    margin-bottom: 1.3rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid #E5E5E2;
+    border-radius: 8px;
+    background: #FFFFFF;
+}
+
+.new-section {
+    border-top: 4px solid #3498DB;
+}
+
+.due-section {
+    border-top: 4px solid #E67E22;
+}
+
+.all-section {
+    border-top: 4px solid #5D6D7E;
+}
+
+.section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.65rem;
+}
+
+.section-head h2 {
+    margin: 0;
+    color: #B7950B;
+    font-size: 1.35rem;
+}
+
+.count-badge {
+    display: inline-block;
+    min-width: 1.4rem;
+    padding: 0.08rem 0.42rem;
+    border-radius: 999px;
+    background: #EEF1F4;
+    color: #5D6D7E;
+    font-size: 0.78rem;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.section-hint {
+    color: #95A5A6;
+    font-size: 0.74rem;
+    line-height: 1.5;
+}
+
+.backlog {
+    margin-bottom: 0.55rem;
+    padding: 0.45rem 0.65rem;
+    border-radius: 5px;
+    background: #FEF5E7;
+    color: #9A6A00;
+    font-size: 0.78rem;
+    line-height: 1.55;
+}
+
+.word-list {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.review-item.word-card {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.7rem;
+    padding: 0.62rem 0.8rem;
+    border: 1px solid #E5E5E2;
+    border-left: 4px solid #3498DB;
+    border-radius: 6px;
+    background: #F8FBFF;
+    margin-bottom: 0;
+}
+
+.due-section .review-item.word-card {
+    border-left-color: #E67E22;
+    background: #FFFBF5;
+}
+
+.word-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.word-line {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.45rem;
+}
+
+.word-name {
+    padding: 0;
+    border: none;
+    border-bottom: 1.5px dashed #C9A7D8;
+    background: none;
+    color: #6C3483;
+    font-family: inherit;
+    font-size: 1.02rem;
+    font-weight: bold;
+    line-height: 1.35;
+    text-align: left;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+
+.word-name:hover {
+    color: #E67E22;
+    border-bottom-color: #E67E22;
+}
+
+.word-zh {
+    display: none;
+    color: #C0392B;
+    font-size: 0.84rem;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.word-card.is-open .word-zh,
+.all-item.is-open .word-zh {
+    display: inline;
+}
+
+.word-sub {
+    margin-top: 0.1rem;
+    color: #7F8C8D;
+    font-size: 0.72rem;
+    line-height: 1.5;
+}
+
+.word-sub .root {
+    color: #5D6D7E;
+    font-family: "Consolas", monospace;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: #ECF0F1;
+    color: #7F8C8D;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.badge-suffix {
+    background: #F4ECF7;
+    color: #6C3483;
+    font-family: "Consolas", monospace;
+    font-weight: bold;
+}
+
+.badge-level {
+    background: #FEF5E7;
+    color: #B9770E;
+}
+
+.badge-mastered {
+    background: #EAF7EF;
+    color: #1E8449;
+}
+
+.badge-overdue {
+    background: #FADBD8;
+    color: #922B21;
+}
+
+.badge-category {
+    background: #E8F6F3;
+    color: #0E6655;
+}
+
+.badge-page {
+    background: #ECF0F1;
+    color: #566573;
+}
+
+.badge-priority {
+    background: #FDEBD0;
+    color: #A04000;
+    border: 1px solid #F5CBA7;
+}
+
+.word-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 0 0 auto;
+}
+
+.btn-open {
+    padding: 0.28rem 0.5rem;
+    border: 1px solid #D5DBDB;
+    border-radius: 4px;
+    background: #FFFFFF;
+    color: #0d9488;
+    font-size: 0.7rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-open:hover {
+    border-color: #0d9488;
+    color: #8E44AD;
+}
+
+.word-actions .btn-done {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.74rem;
+}
+
+.empty {
+    padding: 1.2rem;
+    border: 1px dashed #D5DBDB;
+    border-radius: 6px;
+    color: #7F8C8D;
+    font-size: 0.82rem;
+    font-style: normal;
+    text-align: center;
+    list-style: none;
+}
+
+/* ---------- 全部词汇 ---------- */
+
+.btn-expand {
+    padding: 0.28rem 0.6rem;
+    border: 1px solid #D5DBDB;
+    border-radius: 4px;
+    background: #FFFFFF;
+    color: #5D6D7E;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.btn-expand:hover {
+    border-color: #0d9488;
+    color: #0d9488;
+}
+
+.all-groups {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.suffix-group {
+    border: 1px solid #E5E5E2;
+    border-radius: 6px;
+    background: #FAFAF8;
+    overflow: hidden;
+}
+
+.suffix-group summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding: 0.55rem 0.7rem;
+    color: #2C3E50;
+    font-size: 0.86rem;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+}
+
+.suffix-group summary::-webkit-details-marker {
+    display: none;
+}
+
+.suffix-group summary::before {
+    content: "▸";
+    color: #95A5A6;
+    font-size: 0.8rem;
+    transition: transform 0.15s;
+}
+
+.suffix-group[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.suffix-label {
+    padding: 0.08rem 0.4rem;
+    border-radius: 4px;
+    background: #F4ECF7;
+    color: #6C3483;
+    font-family: "Consolas", monospace;
+    font-size: 0.78rem;
+}
+
+.group-progress {
+    margin-left: auto;
+    color: #7F8C8D;
+    font-size: 0.72rem;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.group-category {
+    color: #A6ADB3;
+    font-size: 0.68rem;
+    font-weight: normal;
+}
+
+.all-item .word-name.static {
+    border-bottom: none;
+    color: #2C3E50;
+    cursor: default;
+}
+
+.all-item .word-name.static:hover {
+    color: #2C3E50;
+    text-decoration: none;
+}
+
+.all-open {
+    color: #95A5A6;
+    font-size: 0.72rem;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.all-open:hover {
+    color: #0d9488;
+}
+
+.all-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.2rem 0.65rem;
+    margin: 0;
+    padding: 0.35rem 0.7rem 0.6rem;
+    border-top: 1px solid #EDEDE8;
+    list-style: none;
+}
+
+.all-item {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.35rem;
+    padding: 0.28rem 0.1rem;
+    border-bottom: 1px dotted #ECF0F1;
+    font-size: 0.8rem;
+}
+
+.all-item:last-child {
+    border-bottom: none;
+}
+
+.all-item .word-name {
+    font-size: 0.86rem;
+    border-bottom: none;
+}
+
+.all-item .word-name:hover {
+    text-decoration: underline;
+}
+
+.all-item .word-zh {
+    font-size: 0.75rem;
+}
+
+.all-item .badge {
+    font-size: 0.62rem;
+    padding: 1px 5px;
+}
+
+.all-date {
+    margin-left: auto;
+    color: #A6ADB3;
+    font-family: "Consolas", monospace;
+    font-size: 0.62rem;
+    white-space: nowrap;
+}
+
+.footer-note {
+    margin-top: 0.5rem;
+    color: #95A5A6;
+    font-size: 0.72rem;
+    line-height: 1.6;
+}
+
+.footer-note code {
+    padding: 0 0.18rem;
+    border-radius: 3px;
+    background: #ECF0F1;
+    color: #6C3483;
+    font-size: 0.9em;
+}
+
+/* 保存按钮的未同步状态沿用原样式，但加强可见性 */
+#btn-save.dirty {
+    background: #E67E22;
+    animation: pulse 1.5s infinite;
+}
+
+@media (max-width: 900px) {
+    .stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    header.review-header {
+        padding: 1.1rem 0.8rem;
+    }
+
+    .review-header h1 {
+        font-size: 1.55rem;
+    }
+
+    .header-sub {
+        font-size: 0.8rem;
+    }
+
+    .header-links {
+        font-size: 0.75rem;
+        gap: 0.3rem 0.7rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .daily-section,
+    .all-section {
+        padding: 0.8rem;
+    }
+
+    .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .review-item.word-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .word-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .all-list {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar button {
+        padding: 8px 12px;
+        font-size: 0.86rem;
+    }
+}

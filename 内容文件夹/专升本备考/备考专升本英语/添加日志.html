@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加日志 · 最近添加的单词</title>
+    <meta name="description" content="查看最近通过 AI 自动添加的单词、分类、目标文件和复习日程，带精确时间。">
+    <style>
+        :root {
+            --ink: #2C3E50;
+            --muted: #7F8C8D;
+            --slate: #5D6D7E;
+            --deep: #3E4C59;
+            --cream: #F0F0EC;
+            --paper: #FFFFFF;
+            --gold: #B7950B;
+            --gold-light: #F1C40F;
+            --teal: #0D9488;
+            --purple: #6C3483;
+            --red: #C0392B;
+            --green: #1E8449;
+            --line: #E5E5E2;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: linear-gradient(180deg, #F5F5F0 0%, #EEEFE9 100%);
+            color: var(--ink);
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Segoe UI", sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        code {
+            padding: 0.08em 0.28em;
+            border-radius: 4px;
+            background: #F1EEF5;
+            color: var(--purple);
+            font-family: "Cascadia Code", Consolas, monospace;
+            font-size: 0.9em;
+            overflow-wrap: anywhere;
+        }
+
+        .wrap {
+            width: min(1120px, 94vw);
+            margin: 0 auto;
+            padding: 1rem 0 3rem;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 1.8rem 1.8rem 1.5rem;
+            border-radius: 18px;
+            background:
+                radial-gradient(circle at 92% -20%, rgba(241, 196, 15, 0.32), transparent 40%),
+                radial-gradient(circle at 5% 120%, rgba(13, 148, 136, 0.22), transparent 38%),
+                linear-gradient(135deg, #5D6D7E 0%, #3E4C59 100%);
+            color: #FFFFFF;
+            box-shadow: 0 16px 40px rgba(44, 62, 80, 0.2);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            right: -70px;
+            bottom: -120px;
+            width: 280px;
+            height: 280px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .kicker {
+            margin: 0 0 0.35rem;
+            color: var(--gold-light);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            line-height: 1.2;
+        }
+
+        .hero h1 span { color: var(--gold-light); }
+
+        .lead {
+            max-width: 720px;
+            margin: 0.55rem 0 0;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 0.88rem;
+            line-height: 1.75;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.35rem;
+            padding: 0.48rem 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 7px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.15s;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            color: #FFFFFF;
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        .btn.primary {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+            color: #3E2C00;
+        }
+
+        .btn.primary:hover { color: #3E2C00; background: #F7DC6F; }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.6rem;
+            margin: 0.9rem 0;
+        }
+
+        .stat {
+            padding: 0.65rem 0.8rem;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            background: var(--paper);
+            box-shadow: 0 4px 14px rgba(44, 62, 80, 0.04);
+        }
+
+        .stat strong {
+            display: block;
+            color: var(--slate);
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 0.72rem;
+        }
+
+        .panel {
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--paper);
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.045);
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .toolbar input,
+        .toolbar select {
+            min-height: 2.2rem;
+            padding: 0.35rem 0.55rem;
+            border: 1px solid #D5DBDB;
+            border-radius: 6px;
+            background: #FFFFFF;
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 0.8rem;
+            outline: none;
+        }
+
+        .toolbar input:focus,
+        .toolbar select:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .toolbar input { flex: 1 1 180px; }
+
+        .toolbar button {
+            min-height: 2.2rem;
+            padding: 0.35rem 0.7rem;
+            border: 1px solid #D5DBDB;
+            border-radius: 6px;
+            background: #FFFFFF;
+            color: var(--slate);
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .toolbar button:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+        }
+
+        .sync-badge {
+            margin-left: auto;
+            padding: 0.12rem 0.5rem;
+            border-radius: 999px;
+            background: #FEF5E7;
+            color: #9A6A00;
+            font-size: 0.68rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .sync-badge.is-on { background: #EAF7EF; color: var(--green); }
+        .sync-badge.is-off { background: #FADBD8; color: #922B21; }
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        th, td {
+            padding: 0.55rem 0.6rem;
+            border-bottom: 1px solid #EEF0F1;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background: #F7F7F3;
+            color: var(--slate);
+            font-size: 0.72rem;
+            white-space: nowrap;
+            z-index: 1;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: #FBFCFC; }
+
+        .time {
+            color: var(--muted);
+            font-family: "Cascadia Code", Consolas, monospace;
+            font-size: 0.72rem;
+            white-space: nowrap;
+        }
+
+        .word {
+            color: var(--purple);
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.08rem 0.38rem;
+            border-radius: 4px;
+            font-size: 0.66rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .badge.new { background: #EAF7EF; color: var(--green); }
+        .badge.priority { background: #FDEBD0; color: #A04000; }
+        .badge.review { background: #ECF0F1; color: #566573; }
+
+        .type-detail {
+            display: block;
+            margin-top: 0.1rem;
+            color: #A6ADB3;
+            font-size: 0.65rem;
+        }
+
+        .target {
+            color: #5D6D7E;
+            font-size: 0.74rem;
+        }
+
+        .file-link {
+            color: var(--teal);
+            font-size: 0.72rem;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .file-link:hover { text-decoration: underline; }
+
+        .schedule {
+            color: var(--muted);
+            font-family: "Cascadia Code", Consolas, monospace;
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+
+        .empty,
+        .error {
+            padding: 1.3rem;
+            border: 1px dashed #D5DBDB;
+            border-radius: 8px;
+            color: var(--muted);
+            font-size: 0.82rem;
+            text-align: center;
+        }
+
+        .error {
+            border-color: #F0C8C3;
+            background: #FDF3F2;
+            color: #7B241C;
+            text-align: left;
+        }
+
+        .error code { background: #FADBD8; color: #922B21; }
+
+        .note {
+            margin: 0.7rem 0 0;
+            color: #95A5A6;
+            font-size: 0.7rem;
+            line-height: 1.6;
+        }
+
+        .footer-note {
+            margin-top: 1rem;
+            color: #95A5A6;
+            font-size: 0.7rem;
+            text-align: center;
+        }
+
+        @media (max-width: 680px) {
+            .stats { grid-template-columns: 1fr; }
+            .hero { padding: 1.3rem 1rem; }
+            .actions .btn { flex: 1 1 100%; }
+            .toolbar .sync-badge { margin-left: 0; }
+            .table-wrap { font-size: 0.75rem; }
+            th, td { padding: 0.45rem; }
+        }
+
+        @media print {
+            .hero, .toolbar, .actions { display: none; }
+            .panel, .stat { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <header class="hero">
+        <p class="kicker">VOCABULARY ARCHIVE LOG</p>
+        <h1>添加日志<span> · 最近添加</span></h1>
+        <p class="lead">
+            这里记录通过 AI 自动归档写入的单词：什么时候加的、分到哪一类、写进哪个文件、
+            排到哪一天复习。默认显示“新增 + 插队”，也可以查看复习同步记录。
+        </p>
+        <div class="actions">
+            <a class="btn primary" href="单词模块/词汇代码生成器.html">添加新单词</a>
+            <a class="btn" href="复习清单/核心词汇复习清单.html">今日复习</a>
+            <a class="btn" href="使用指南.html">使用指南</a>
+        </div>
+    </header>
+
+    <div class="stats">
+        <div class="stat"><strong id="stat-total">—</strong><span>自动添加记录</span></div>
+        <div class="stat"><strong id="stat-today">—</strong><span>今日新增 / 插队</span></div>
+        <div class="stat"><strong id="stat-last">—</strong><span>最近一次添加时间</span></div>
+    </div>
+
+    <section class="panel">
+        <div class="toolbar">
+            <input id="search" type="search" placeholder="搜索单词、分类或文件…" autocomplete="off">
+            <select id="filter">
+                <option value="auto">新增 + 插队</option>
+                <option value="new">只看新增</option>
+                <option value="priority">只看插队</option>
+                <option value="review">只看复习同步</option>
+                <option value="all">全部记录</option>
+            </select>
+            <button type="button" id="refresh">刷新</button>
+            <span class="sync-badge" id="sync-badge">检查服务…</span>
+        </div>
+        <div id="content">
+            <div class="empty">加载中…</div>
+        </div>
+        <p class="note">
+            日志来源：<code>词素工具/归档日志.jsonl</code>（已 gitignore）。最多显示最近 500 条；
+            新记录会出现在最上面。时间按本机时间记录。
+        </p>
+    </section>
+
+    <p class="footer-note">备考专升本英语 · 自动收词日志</p>
+</div>
+
+<script>
+(function () {
+    'use strict';
+
+    var API_BASE = (window.location.protocol === 'http:' && window.location.port === '8767')
+        ? ''
+        : 'http://127.0.0.1:8767';
+
+    var searchEl = document.getElementById('search');
+    var filterEl = document.getElementById('filter');
+    var refreshEl = document.getElementById('refresh');
+    var contentEl = document.getElementById('content');
+    var badgeEl = document.getElementById('sync-badge');
+    var statTotal = document.getElementById('stat-total');
+    var statToday = document.getElementById('stat-today');
+    var statLast = document.getElementById('stat-last');
+
+    var entries = [];
+    var loading = false;
+
+    function esc(value) {
+        return String(value == null ? '' : value).replace(/[&<>"']/g, function (ch) {
+            return {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[ch];
+        });
+    }
+
+    function todayString() {
+        var d = new Date();
+        return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+    function isNewType(type) {
+        return ['suffix', 'prefix', 'root_family', 'compound', 'atom'].indexOf(type) >= 0;
+    }
+
+    function isPriorityType(type) {
+        return type === 'existing-priority';
+    }
+
+    function isReviewType(type) {
+        return type === 'review-sync';
+    }
+
+    function typeLabel(type) {
+        if (isNewType(type)) return '新增';
+        if (isPriorityType(type)) return '插队';
+        if (isReviewType(type)) return '复习同步';
+        return type || '记录';
+    }
+
+    function typeDetail(type) {
+        return {
+            suffix: '后缀派生',
+            prefix: '前缀派生',
+            root_family: '词根 / 本体',
+            compound: '复合词',
+            atom: '原子词',
+            'existing-priority': '已录入，插队复习',
+            'review-sync': '复习打卡写回'
+        }[type] || '';
+    }
+
+    function badgeClass(type) {
+        if (isNewType(type)) return 'new';
+        if (isPriorityType(type)) return 'priority';
+        return 'review';
+    }
+
+    function fileHref(file) {
+        if (!file) return '';
+        return String(file).replace(/\\/g, '/');
+    }
+
+    function passFilter(item) {
+        var filter = filterEl.value;
+        if (filter === 'auto' && isReviewType(item.type)) return false;
+        if (filter === 'new' && !isNewType(item.type)) return false;
+        if (filter === 'priority' && !isPriorityType(item.type)) return false;
+        if (filter === 'review' && !isReviewType(item.type)) return false;
+        var q = (searchEl.value || '').trim().toLowerCase();
+        if (!q) return true;
+        return [item.word, item.target, item.file, item.type, item.schedule]
+            .some(function (value) { return String(value || '').toLowerCase().indexOf(q) >= 0; });
+    }
+
+    function render() {
+        var list = entries.filter(passFilter);
+        if (list.length === 0) {
+            contentEl.innerHTML = '<div class="empty">' +
+                (entries.length ? '没有匹配的记录。' : '还没有自动添加记录。去“添加新单词”试试。') +
+                '</div>';
+            return;
+        }
+
+        var rows = list.map(function (item) {
+            var isReview = isReviewType(item.type);
+            var wordText = isReview ? (item.word || '').split(',').slice(0, 4).join('、') : (item.word || '');
+            var more = isReview && (item.word || '').split(',').length > 4 ? ' …' : '';
+            return '<tr>' +
+                '<td class="time">' + esc(item.time || '') + '</td>' +
+                '<td><span class="word">' + esc(wordText) + more + '</span></td>' +
+                '<td><span class="badge ' + badgeClass(item.type) + '">' + esc(typeLabel(item.type)) + '</span>' +
+                '<span class="type-detail">' + esc(typeDetail(item.type)) + '</span></td>' +
+                '<td class="target">' + esc(item.target || item.file || '') + '</td>' +
+                '<td>' + (item.file ? '<a class="file-link" href="' + esc(fileHref(item.file)) + '" target="_blank" rel="noopener">' + esc(item.file) + '</a>' : '—') + '</td>' +
+                '<td class="schedule">' + esc(item.schedule || '—') + '</td>' +
+                '</tr>';
+        }).join('');
+
+        contentEl.innerHTML = '<div class="table-wrap"><table>' +
+            '<thead><tr><th>时间</th><th>单词</th><th>类型</th><th>分类 / 目标</th><th>文件</th><th>复习日程</th></tr></thead>' +
+            '<tbody>' + rows + '</tbody></table></div>';
+    }
+
+    function renderStats() {
+        var today = todayString();
+        var autoEntries = entries.filter(function (item) {
+            return isNewType(item.type) || isPriorityType(item.type);
+        });
+        var todayAuto = autoEntries.filter(function (item) {
+            return String(item.time || '').slice(0, 10) === today;
+        });
+        statTotal.textContent = autoEntries.length;
+        statToday.textContent = todayAuto.length;
+        statLast.textContent = autoEntries.length ? (autoEntries[0].time || '—') : '—';
+    }
+
+    function setBadge(on, text) {
+        badgeEl.textContent = text;
+        badgeEl.className = 'sync-badge ' + (on ? 'is-on' : 'is-off');
+    }
+
+    function fetchWithTimeout(url, options, timeoutMs) {
+        var controller = new AbortController();
+        var timer = setTimeout(function () { controller.abort(); }, timeoutMs);
+        options = options || {};
+        options.signal = controller.signal;
+        return fetch(url, options).finally(function () { clearTimeout(timer); });
+    }
+
+    async function load() {
+        if (loading) return;
+        loading = true;
+        refreshEl.disabled = true;
+        try {
+            var resp = await fetchWithTimeout(API_BASE + '/api/log?limit=500', { cache: 'no-store' }, 8000);
+            var data = await resp.json();
+            if (!resp.ok || !data.ok) throw new Error((data && data.error) || ('HTTP ' + resp.status));
+            entries = Array.isArray(data.entries) ? data.entries : [];
+            setBadge(true, '日志已连接 · ' + data.total + ' 条');
+            renderStats();
+            render();
+        } catch (err) {
+            setBadge(false, '本地服务未连接');
+            contentEl.innerHTML = '<div class="error">' +
+                '<strong>无法读取日志。</strong><br>' +
+                '先启动 <code>python 词素工具/server.py</code>，再打开本页。' +
+                '<br>错误：' + esc(err.message) +
+                '</div>';
+            statTotal.textContent = '—';
+            statToday.textContent = '—';
+            statLast.textContent = '—';
+        } finally {
+            loading = false;
+            refreshEl.disabled = false;
+        }
+    }
+
+    searchEl.addEventListener('input', render);
+    filterEl.addEventListener('change', render);
+    refreshEl.addEventListener('click', load);
+
+    load();
+    setInterval(load, 15000);
+})();
+</script>
+<script src="返回顶部.js"></script>
+</body>
+</html>

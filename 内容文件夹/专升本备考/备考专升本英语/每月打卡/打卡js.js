@@ -22,8 +22,12 @@
     function pad2(n) { return String(n).padStart(2, '0'); }
 
     function makeHref(path) {
-        const encoded = String(path).split('/').map(encodeURIComponent).join('/');
-        return (dataBaseUrl || './') + encoded;
+        const raw = String(path);
+        const hashIndex = raw.indexOf('#');
+        const pathPart = hashIndex >= 0 ? raw.slice(0, hashIndex) : raw;
+        const hash = hashIndex >= 0 ? raw.slice(hashIndex) : '';
+        const encoded = pathPart.split('/').map(encodeURIComponent).join('/');
+        return (dataBaseUrl || './') + encoded + hash;
     }
 
     function getPending() {

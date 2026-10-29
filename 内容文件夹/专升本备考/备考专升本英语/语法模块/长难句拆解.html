@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>长难句拆解 · 主干与修饰 · 备考专升本英语</title>
+    <meta name="description" content="专升本英语语法模块：12 个真题式长难句，点击高亮主干、修饰与连接词，查看翻译和结构解析。">
+    <link rel="stylesheet" href="../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+    <link rel="stylesheet" href="../单词模块/词汇组件.css">
+    <link rel="stylesheet" href="语法模块.css">
+</head>
+<body>
+<main class="page_main" id="top">
+
+    <!-- ================= 页头 ================= -->
+    <header class="page_header">
+        <div class="header_top">
+            <a class="crumb" href="../00-总目录/语法体系.html">← 语法体系</a>
+            <span class="header_tag">语法模块 · 长难句</span>
+        </div>
+        <p class="header_kicker">Grammar · Sentence Decoding</p>
+        <h1>长难句拆解<span class="h1_accent"> · 主干与修饰</span></h1>
+        <p class="header_desc">先数谓语，再抓主干，最后剥开从句、非谓语和插入语。每句话都可以单独高亮主干与修饰，翻译和解析默认隐藏。</p>
+        <div class="header_actions">
+            <a class="btn btn_primary" href="#sentence_library">开始拆句 ↓</a>
+            <a class="btn btn_ghost" href="#method">三步拆句法</a>
+        </div>
+        <div class="header_meta">
+            <span>12 个真题式长句</span>
+            <span>6 类常考结构</span>
+            <span>主干 / 修饰高亮</span>
+            <span>纯原生 HTML / CSS / JS</span>
+        </div>
+    </header>
+
+    <!-- ================= 方法 ================= -->
+    <section id="method" class="panel method_panel" aria-labelledby="methodTitle">
+        <div class="panel_head">
+            <div>
+                <p class="eyebrow">Method · 3 steps</p>
+                <h2 id="methodTitle">三步拆句法</h2>
+                <p class="panel_sub">长难句不是“词都认识却读不懂”，而是句子被切成了太多层。按顺序拆，先保主干，再补细节。</p>
+            </div>
+            <span class="method_badge">先结构，后意思</span>
+        </div>
+        <ol class="method_steps">
+            <li>
+                <span class="method_no">01</span>
+                <div>
+                    <h3>数谓语，定分句</h3>
+                    <p>一个谓语动词通常对应一个分句。先圈出所有谓语，再判断哪一个是主句谓语。</p>
+                </div>
+            </li>
+            <li>
+                <span class="method_no">02</span>
+                <div>
+                    <h3>找主句，抓主干</h3>
+                    <p>找主句的主语、谓语、宾语或表语；把从句、非谓语和插入语先括起来，主干就浮出来了。</p>
+                </div>
+            </li>
+            <li>
+                <span class="method_no">03</span>
+                <div>
+                    <h3>剥修饰，补逻辑</h3>
+                    <p>判断从句类型、修饰对象和连接词；最后通读译文，检查逻辑是否通顺。</p>
+                </div>
+            </li>
+        </ol>
+        <div class="legend_row">
+            <div class="grammar_legend" aria-label="颜色图例">
+                <span><i class="legend_swatch swatch_main"></i>主干</span>
+                <span><i class="legend_swatch swatch_mod"></i>修饰 / 从句</span>
+                <span><i class="legend_swatch swatch_conn"></i>连接词 / 引导词</span>
+            </div>
+            <p class="legend_note">橙色不只标“可有可无”的修饰语，也标从句、非谓语、插入语等展开成分；具体句法功能看每句的“解析”。</p>
+        </div>
+    </section>
+
+    <!-- ================= 进度与全局操作 ================= -->
+    <section class="panel grammar_toolbar_panel" aria-label="拆句进度与全局操作">
+        <div class="mastery_box">
+            <div class="mastery_text">
+                <span>拆句进度</span>
+                <strong id="masteredCount">0</strong>
+                <span>/ <b id="masteredTotal">12</b> 句</span>
+            </div>
+            <div class="mastery_bar" role="progressbar" aria-label="已掌握句子进度" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0">
+                <span id="masteredBar"></span>
+            </div>
+        </div>
+        <div class="grammar_actions">
+            <button type="button" class="btn btn_soft btn_small" id="btnAllMain" aria-pressed="false">显示全部主干</button>
+            <button type="button" class="btn btn_soft btn_small" id="btnAllMod" aria-pressed="false">显示全部修饰</button>
+            <button type="button" class="btn btn_soft btn_small" id="btnCollapseAll">收起全部</button>
+            <button type="button" class="btn btn_link" id="btnResetMastered">重置掌握进度</button>
+        </div>
+    </section>
+
+    <!-- ================= 搜索与筛选 ================= -->
+    <section class="panel grammar_filter_panel" aria-labelledby="filterTitle">
+        <div class="filter_head">
+            <div>
+                <h2 id="filterTitle">按结构筛选</h2>
+                <p class="panel_sub">也可以直接搜索句子、连接词或语法点，例如 <code>although</code>、<code>定语从句</code>、<code>倒装</code>。</p>
+            </div>
+            <span class="search_kbd">Enter 搜索</span>
+        </div>
+        <form class="grammar_search_form" id="grammarSearchForm" role="search">
+            <label class="sr_only" for="grammarSearch">搜索长难句</label>
+            <input id="grammarSearch" type="search" placeholder="例如：定语从句、although、非谓语" autocomplete="off" spellcheck="false">
+            <button type="submit" class="btn btn_primary">搜索</button>
+            <button type="button" class="btn btn_soft" id="btnGrammarReset">重置</button>
+        </form>
+        <div class="type_chips" id="typeChips">
+            <button type="button" class="chip is_active" data-type="">全部 <span>12</span></button>
+            <button type="button" class="chip" data-type="定语从句">定语从句 <span>2</span></button>
+            <button type="button" class="chip" data-type="状语从句">状语从句 <span>2</span></button>
+            <button type="button" class="chip" data-type="名词性从句">名词性从句 <span>2</span></button>
+            <button type="button" class="chip" data-type="非谓语">非谓语 <span>2</span></button>
+            <button type="button" class="chip" data-type="并列/插入">并列 / 插入 <span>2</span></button>
+            <button type="button" class="chip" data-type="倒装/强调">倒装 / 强调 <span>2</span></button>
+        </div>
+        <p id="grammarResult" class="search_result" role="status" aria-live="polite">当前展示 12 个长难句。</p>
+    </section>
+
+    <!-- ================= 句库 ================= -->
+    <section id="sentence_library" class="sentence_library" aria-label="长难句库">
+
+        <!-- 01 -->
+        <article class="sentence_card" data-id="s01" data-type="定语从句">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">01</span>
+                    <span class="type_badge type_attr">定语从句</span>
+                    <span class="difficulty" title="难度：中等">★★☆</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-main">The book</span>
+                <span class="g-mod" data-clause="定语从句"><span class="g-conn">that</span> you recommended</span>
+                <span class="g-main">is</span>
+                <span class="g-mod" data-clause="表语从句">exactly <span class="g-conn">what</span> I need for the exam</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>The book is exactly what I need.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>定语从句：</b>that you recommended 修饰 The book；that 在从句中作 recommended 的宾语，可省略。</li>
+                        <li><b>表语从句：</b>what I need for the exam 作 is 的表语；what 在从句中作 need 的宾语，不能换成 that。</li>
+                        <li><b>主干：</b>The book is ...；系动词 is 后接表语，句子并不缺宾语。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>你推荐的那本书正是我备考所需要的。</p>
+            </div>
+        </article>
+
+        <!-- 02 -->
+        <article class="sentence_card" data-id="s02" data-type="定语从句">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">02</span>
+                    <span class="type_badge type_attr">定语从句</span>
+                    <span class="difficulty" title="难度：中等">★★☆</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-main">Students</span>
+                <span class="g-mod" data-clause="定语从句"><span class="g-conn">who</span> take part in campus activities</span>
+                <span class="g-main">often develop skills</span>
+                <span class="g-mod" data-clause="定语从句"><span class="g-conn">that</span> cannot be learned from textbooks</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>Students develop skills.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>第一个定语从句：</b>who 引导，修饰 Students，在从句中作主语；谓语 take 与先行词复数一致。</li>
+                        <li><b>第二个定语从句：</b>that 引导，修饰 skills，在从句中作主语；谓语用被动语态 cannot be learned。</li>
+                        <li><b>主干：</b>Students develop skills；两个定语从句一前一后，把主谓宾隔开了。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>参加校园活动的学生常常会培养出课本上学不到的技能。</p>
+            </div>
+        </article>
+
+        <!-- 03 -->
+        <article class="sentence_card" data-id="s03" data-type="状语从句">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">03</span>
+                    <span class="type_badge type_adv">状语从句</span>
+                    <span class="difficulty" title="难度：较难">★★★</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-mod" data-clause="让步状语从句"><span class="g-conn">Although</span> online courses offer great convenience</span>,
+                <span class="g-main">they cannot replace the discussion and interaction</span>
+                <span class="g-mod" data-clause="定语从句"><span class="g-conn">that</span> take place in a real classroom</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>They cannot replace the discussion and interaction.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>让步状语从句：</b>Although 引导，表示“尽管”；主句前不能再用 but。</li>
+                        <li><b>定语从句：</b>that take place... 修饰 the discussion and interaction；先行词是复数，谓语用 take。</li>
+                        <li><b>主干：</b>they cannot replace the discussion and interaction；后面整段都在说明 interaction。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>尽管在线课程提供了极大的便利，但它们无法取代真实课堂中发生的讨论与互动。</p>
+            </div>
+        </article>
+
+        <!-- 04 -->
+        <article class="sentence_card" data-id="s04" data-type="状语从句">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">04</span>
+                    <span class="type_badge type_adv">状语从句</span>
+                    <span class="difficulty" title="难度：较难">★★★</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-mod" data-clause="条件状语从句"><span class="g-conn">If</span> we keep ignoring the signs of climate change</span>,
+                <span class="g-main">the problems</span>
+                <span class="g-mod" data-clause="定语从句"><span class="g-conn">that</span> we face today</span>
+                <span class="g-main">will become far more serious</span>
+                <span class="g-mod" data-clause="比较状语从句"><span class="g-conn">than</span> we can imagine</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>The problems will become far more serious.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>条件状语从句：</b>If 引导；keep doing 表示“持续做某事”。</li>
+                        <li><b>定语从句：</b>that we face today 修饰 problems；that 在从句中作 face 的宾语。</li>
+                        <li><b>比较状语从句：</b>than we can imagine；far 修饰比较级 more serious，表示程度更深。</li>
+                        <li><b>主干：</b>The problems will become far more serious.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>如果我们继续忽视气候变化的迹象，我们今天面临的问题将变得远比我们想象的严重。</p>
+            </div>
+        </article>
+
+        <!-- 05 -->
+        <article class="sentence_card" data-id="s05" data-type="名词性从句">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">05</span>
+                    <span class="type_badge type_noun">名词性从句</span>
+                    <span class="difficulty" title="难度：较难">★★★</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-mod" data-clause="主语从句"><span class="g-conn">What</span> surprised the researchers</span>
+                <span class="g-main">was</span>
+                <span class="g-mod" data-clause="表语从句"><span class="g-conn">that</span> the ancient tree had survived for thousands of years</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>What surprised the researchers was that the ancient tree had survived.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>主语从句：</b>What surprised the researchers 作整个句子的主语；what 在从句中作主语，谓语用单数 was。</li>
+                        <li><b>表语从句：</b>that... 作 was 的表语；that 只起连接作用，不作成分，通常不省略。</li>
+                        <li><b>主干：</b>What... was that...；两个从句都是句子主干的一部分，不能当修饰语删掉。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>令研究人员惊讶的是，这棵古树已经存活了数千年。</p>
+            </div>
+        </article>
+
+        <!-- 06 -->
+        <article class="sentence_card" data-id="s06" data-type="名词性从句">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">06</span>
+                    <span class="type_badge type_noun">名词性从句</span>
+                    <span class="difficulty" title="难度：较难">★★★</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-main">The report suggests</span>
+                <span class="g-mod" data-clause="宾语从句"><span class="g-conn">that</span> companies should pay more attention to the mental health of their employees</span>,
+                <span class="g-mod" data-clause="让步状语从句"><span class="g-conn">whether</span> they work in offices <span class="g-conn">or</span> at home</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>The report suggests that companies should pay more attention to mental health.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>宾语从句：</b>that... 作 suggests 的宾语；that 在从句中不作成分，可以省略。</li>
+                        <li><b>让步状语从句：</b>whether... or... 表示“无论……还是……”，说明关注心理健康适用于两种办公场景。</li>
+                        <li><b>宾语从句主干：</b>companies should pay more attention to mental health；of their employees 是后置定语。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>报告建议，无论员工在办公室还是在家办公，公司都应更加关注他们的心理健康。</p>
+            </div>
+        </article>
+
+        <!-- 07 -->
+        <article class="sentence_card" data-id="s07" data-type="非谓语">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">07</span>
+                    <span class="type_badge type_nonfinite">非谓语</span>
+                    <span class="difficulty" title="难度：中等">★★☆</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-mod" data-clause="过去分词短语">Faced with increasing competition</span>,
+                <span class="g-main">many young people choose to improve their skills</span>
+                <span class="g-mod" data-clause="方式状语">through online learning</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>Many young people choose to improve their skills.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>过去分词短语：</b>Faced with... 作状语，逻辑主语是 many young people，表示“面对……”。</li>
+                        <li><b>不定式：</b>choose to do sth. 中 to improve... 作 choose 的宾语，是主谓宾的一部分，不是可有可无的修饰。</li>
+                        <li><b>方式状语：</b>through online learning；主干是 Many young people choose to improve their skills.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>面对日益激烈的竞争，许多年轻人选择通过在线学习提升技能。</p>
+            </div>
+        </article>
+
+        <!-- 08 -->
+        <article class="sentence_card" data-id="s08" data-type="非谓语">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">08</span>
+                    <span class="type_badge type_nonfinite">非谓语</span>
+                    <span class="difficulty" title="难度：较难">★★★</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-mod" data-clause="现在分词完成式">Having worked in the company for ten years</span>,
+                <span class="g-main">she knows exactly how to deal with such problems</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>She knows exactly how to deal with such problems.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>现在分词完成式：</b>Having worked... 作状语，表示“已经工作了……”，动作发生在 knows 之前。</li>
+                        <li><b>疑问词 + 不定式：</b>how to deal with... 作 knows 的宾语，是主干的一部分。</li>
+                        <li><b>主干：</b>She knows how to deal with such problems；exactly 是副词，修饰 knows。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>在这家公司工作了十年之后，她非常清楚如何处理这类问题。</p>
+            </div>
+        </article>
+
+        <!-- 09 -->
+        <article class="sentence_card" data-id="s09" data-type="并列/插入">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">09</span>
+                    <span class="type_badge type_coord">并列句</span>
+                    <span class="difficulty" title="难度：较难">★★★</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-main">The new policy</span>,
+                <span class="g-mod" data-clause="非限制性定语从句"><span class="g-conn">which</span> was announced last week</span>,
+                <span class="g-main">is expected to reduce traffic</span>,
+                <span class="g-conn">but</span>
+                <span class="g-main">many drivers remain doubtful</span>
+                <span class="g-mod" data-clause="宾语从句">about <span class="g-conn">whether</span> it will work</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>The new policy is expected to reduce traffic, but many drivers remain doubtful.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>非限制性定语从句：</b>which was announced last week 修饰 The new policy；用逗号隔开，不能用 that。</li>
+                        <li><b>被动结构：</b>is expected to do 表示“预计做……”。</li>
+                        <li><b>并列分句：</b>but 连接两个主句；whether it will work 是介词 about 的宾语从句。</li>
+                        <li><b>主干：</b>两个并列分句，翻译时先按 but 切开。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>这项上周宣布的新政策预计会减少交通流量，但许多司机仍怀疑它是否有效。</p>
+            </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="sentence_card" data-id="s10" data-type="并列/插入">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">10</span>
+                    <span class="type_badge type_coord">插入语</span>
+                    <span class="difficulty" title="难度：难">★★★★</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-mod" data-clause="插入语">To be honest</span>,
+                <span class="g-main">I don't think</span>
+                <span class="g-mod" data-clause="宾语从句"><span class="g-conn">that</span> the plan will succeed</span>,
+                <span class="g-conn">nor</span>
+                <span class="g-main">do I believe</span>
+                <span class="g-mod" data-clause="宾语从句"><span class="g-conn">that</span> it is worth the money</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>I don't think that the plan will succeed, nor do I believe that it is worth the money.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>插入语：</b>To be honest 独立于句子结构，删掉不影响主干。</li>
+                        <li><b>否定前移：</b>I don't think... 否定的是 think；从句仍用肯定形式 the plan will succeed。</li>
+                        <li><b>部分倒装：</b>nor 置于句首，助动词 do 提前：nor do I believe...。</li>
+                        <li><b>宾语从句：</b>that it is worth the money 作 believe 的宾语；be worth sth. 表示“值得……”。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>说实话，我认为这个计划不会成功，也不相信它值得花这笔钱。</p>
+            </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="sentence_card" data-id="s11" data-type="倒装/强调">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">11</span>
+                    <span class="type_badge type_invert">倒装</span>
+                    <span class="difficulty" title="难度：难">★★★★</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-mod" data-clause="时间状语从句"><span class="g-conn">Only when</span> we understand the causes of the problem</span>
+                <span class="g-main">can we hope to solve it effectively</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>We can hope to solve it effectively.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>部分倒装：</b>Only + 状语从句置于句首，主句把情态动词 can 提前：can we hope。</li>
+                        <li><b>时间状语从句：</b>when we understand...；of the problem 是后置定语。</li>
+                        <li><b>宾语：</b>to solve it effectively 作 hope 的宾语，是主干谓语的一部分。</li>
+                        <li><b>还原语序：</b>We can hope to solve it effectively only when we understand the causes of the problem.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>只有当我们理解了问题的成因，才能有望有效地解决它。</p>
+            </div>
+        </article>
+
+        <!-- 12 -->
+        <article class="sentence_card" data-id="s12" data-type="倒装/强调">
+            <div class="sentence_head">
+                <div class="sentence_meta">
+                    <span class="sentence_no">12</span>
+                    <span class="type_badge type_invert">强调</span>
+                    <span class="difficulty" title="难度：难">★★★★</span>
+                </div>
+                <div class="sentence_actions">
+                    <button type="button" class="seg_btn" data-act="main" aria-pressed="false">主干</button>
+                    <button type="button" class="seg_btn" data-act="mod" aria-pressed="false">修饰</button>
+                    <button type="button" class="seg_btn" data-act="trans" aria-pressed="false">翻译</button>
+                    <button type="button" class="seg_btn" data-act="analysis" aria-pressed="false">解析</button>
+                    <button type="button" class="seg_btn seg_btn_master" data-act="mastered" aria-pressed="false">标记掌握</button>
+                </div>
+            </div>
+            <p class="sentence_en">
+                <span class="g-main">It is</span>
+                <span class="g-mod" data-clause="强调成分"><span class="g-conn">not</span> the amount of time we spend <span class="g-conn">but</span> the way we use it</span>
+                <span class="g-main">that determines</span>
+                <span class="g-mod" data-clause="宾语从句">how much we can achieve</span>.
+            </p>
+            <div class="analysis_body">
+                <div class="skeleton_block">
+                    <h4>主干提炼</h4>
+                    <p>The way we use time determines how much we can achieve.</p>
+                </div>
+                <div class="points_block">
+                    <h4>拆解要点</h4>
+                    <ul>
+                        <li><b>强调句：</b>It is ... that ... 强调主语；去掉 It is 和 that 后，句子仍然完整。</li>
+                        <li><b>not...but...：</b>连接两个被强调的并列成分，强调“不是时间多少，而是使用时间的方式”。</li>
+                        <li><b>省略关系词：</b>we spend / we use it 是省略了 that/which 的定语从句，分别修饰 time / way。</li>
+                        <li><b>宾语从句：</b>how much we can achieve 作 determines 的宾语；主干是 The way we use time determines how much we can achieve.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="translation_block">
+                <h4>参考译文</h4>
+                <p>决定我们能取得多少成就的，不是我们花的时间多少，而是我们利用时间的方式。</p>
+            </div>
+        </article>
+
+        <div id="grammarEmpty" class="grammar_empty" hidden>
+            <p class="empty_icon" aria-hidden="true">🔍</p>
+            <h3>没有匹配的长难句</h3>
+            <p>试试“定语从句”“非谓语”或重置筛选；也可以先回到上面的三步拆句法。</p>
+        </div>
+    </section>
+
+    <!-- ================= 页脚 ================= -->
+    <footer class="page_footer">
+        <div class="footer_grid">
+            <div>
+                <h3>怎么用这一页</h3>
+                <ol class="footer_steps">
+                    <li>先读“三步拆句法”，不要一上来就逐词翻译。</li>
+                    <li>点“主干”看绿色部分，先说出句子最核心的主谓宾。</li>
+                    <li>点“修饰”看橙色从句、非谓语和插入语，再点“解析”核对。</li>
+                    <li>最后点“翻译”，把结构和意思合起来；点“标记掌握”记录进度。</li>
+                </ol>
+            </div>
+            <div>
+                <h3>高亮约定</h3>
+                <p class="footer_legend">
+                    <span class="legend_swatch swatch_main"></span>主干
+                    <span class="legend_sep">·</span>
+                    <span class="legend_swatch swatch_mod"></span>修饰 / 从句
+                    <span class="legend_sep">·</span>
+                    <span class="legend_swatch swatch_conn"></span>连接词
+                </p>
+                <p class="footer_small">橙色是“展开成分”的统一颜色，不代表它们都不重要；名词性从句本身就是句子的主语、宾语或表语，具体看解析。</p>
+            </div>
+            <div>
+                <h3>相关模块</h3>
+                <p><a href="../专升本英语核心词汇通关.html">单词：核心词汇通关</a></p>
+                <p><a href="../使用指南.html">使用指南</a></p>
+                <p><a href="../00-总目录/语法体系.html">返回语法体系</a></p>
+            </div>
+        </div>
+        <p class="footer_bottom">备考专升本英语 · 语法模块 · 长难句拆解</p>
+    </footer>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="长难句.js"></script>
+</body>
+</html>
