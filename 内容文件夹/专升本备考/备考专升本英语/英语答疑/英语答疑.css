@@ -1277,3 +1277,9 @@ code {
         width: 100%;
     }
 }
+
+.history-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}

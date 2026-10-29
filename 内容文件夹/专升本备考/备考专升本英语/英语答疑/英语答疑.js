@@ -67,6 +67,7 @@
     var historyEmpty = document.getElementById("history-empty");
     var historyCount = document.getElementById("history-count");
     var historyRefresh = document.getElementById("history-refresh");
+    var historyExport = document.getElementById("history-export");
     var historyNote = document.getElementById("history-note");
     var toastEl = document.getElementById("toast");
     var connectionBtn = document.getElementById("connection-btn");
@@ -615,6 +616,85 @@
         showToast("已载入历史记录。");
     }
 
+    async function exportHistory() {
+        if (!connectionReady()) {
+            showToast("先配置云端 Worker 地址和访问口令。", true);
+            openConnectionDialog();
+            return;
+        }
+
+        var categories = ["单词解释", "作文", "句子分析", "其他"];
+        historyExport.disabled = true;
+        showToast("正在导出记录…");
+        try {
+            var all = [];
+            for (var i = 0; i < categories.length; i += 1) {
+                var category = categories[i];
+                var url = apiUrl("/api/tutor-log?category=" +
+                    encodeURIComponent(category) + "&limit=50");
+                var resp = await fetchWithTimeout(url, {
+                    cache: "no-store",
+                    headers: requestHeaders(false)
+                }, 15000);
+                var data = await resp.json().catch(function () { return null; });
+                if (!resp.ok || !data || !data.ok) {
+                    throw new Error((data && data.error) || ("HTTP " + resp.status));
+                }
+                if (Array.isArray(data.entries)) {
+                    all = all.concat(data.entries);
+                }
+            }
+
+            var seen = {};
+            var entries = all.filter(function (entry) {
+                var key = String(entry.time || "") + "|" +
+                    String(entry.mode || "") + "|" +
+                    String(entry.question || "");
+                if (seen[key]) return false;
+                seen[key] = true;
+                return !!entry.answer;
+            }).sort(function (a, b) {
+                return String(b.time || "").localeCompare(String(a.time || ""));
+            });
+
+            if (!entries.length) {
+                showToast("当前没有可导出的记录。", true);
+                return;
+            }
+
+            var now = new Date();
+            var stamp = now.getFullYear() + "-" +
+                String(now.getMonth() + 1).padStart(2, "0") + "-" +
+                String(now.getDate()).padStart(2, "0") + "-" +
+                String(now.getHours()).padStart(2, "0") +
+                String(now.getMinutes()).padStart(2, "0");
+            var payload = {
+                exported_at: now.toISOString(),
+                source: connection.mode === "cloud" ? "cloudflare-kv" : "local-jsonl",
+                count: entries.length,
+                entries: entries
+            };
+            var blob = new Blob([JSON.stringify(payload, null, 2)], {
+                type: "application/json;charset=utf-8"
+            });
+            var objectUrl = URL.createObjectURL(blob);
+            var link = document.createElement("a");
+            link.href = objectUrl;
+            link.download = "英语答疑记录-" + stamp + ".json";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(function () {
+                URL.revokeObjectURL(objectUrl);
+            }, 1000);
+            showToast("已导出 " + entries.length + " 条记录。");
+        } catch (error) {
+            showToast("导出失败：" + (error.message || "未知错误"), true);
+        } finally {
+            historyExport.disabled = false;
+        }
+    }
+
     async function loadHistory(category) {
         historyCategory = category || "all";
         historyTabs.forEach(function (tab) {
@@ -773,6 +853,7 @@
     historyRefresh.addEventListener("click", function () {
         loadHistory(historyCategory);
     });
+    historyExport.addEventListener("click", exportHistory);
     historyTabs.forEach(function (tab) {
         tab.addEventListener("click", function () {
             loadHistory(tab.dataset.category || "all");

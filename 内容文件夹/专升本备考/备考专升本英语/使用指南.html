@@ -693,6 +693,13 @@
             </a>
         </div>
 
+        <div class="callout blue">
+            <strong>云端答疑记录怎么回到本地：</strong>
+            在答疑页历史记录右上角点 <code>导出记录</code>，下载 JSON；把 JSON 拖到项目根目录的
+            <code>导入答疑记录.bat</code> 上即可合并到本地日志。重复记录会自动跳过，
+            原日志会备份到 <code>词素工具/英语问答日志备份/</code>。
+        </div>
+
         <div class="table-wrap">
             <table>
                 <thead>
@@ -703,7 +710,7 @@
                 <tr><td>单词自动归档</td><td>把阅读/真题里的新词收进系统</td><td>遇到新词时</td></tr>
                 <tr><td>核心词汇通关</td><td>按词族系统看词、查例句</td><td>想补构词法/查词时</td></tr>
                 <tr><td>打卡日历</td><td>看坚持情况和每天任务量</td><td>每周复盘时</td></tr>
-                <tr><td>原复习清单</td><td>管理旧页面条目、导出总数据</td><td>需要处理旧条目时</td></tr>
+                <tr><td>英语答疑</td><td>单词解释、作文反例、句子分析、语法问答</td><td>有具体英语问题时</td></tr>
                 </tbody>
             </table>
         </div>
@@ -1000,6 +1007,8 @@
             <div class="file-item"><code>复习清单/核心词汇复习清单.html</code><span>每天 20 新 + 20 复习</span></div>
             <div class="file-item"><code>单词模块/词汇代码生成器.html</code><span>AI 自动归档界面</span></div>
             <div class="file-item"><code>英语答疑/英语答疑.html</code><span>资深英语教师答疑界面</span></div>
+            <div class="file-item"><code>导入答疑记录.bat</code><span>把云端导出的 JSON 合并到本地日志</span></div>
+            <div class="file-item"><code>词素工具/import_tutor_logs.py</code><span>本地日志导入脚本（可预览/去重/备份）</span></div>
             <div class="file-item"><code>词素工具/english_tutor.py</code><span>英语答疑 API 与分类日志</span></div>
             <div class="file-item"><code>词素工具/英语问答日志/</code><span>按分类保存问题与回答（已 gitignore）</span></div>
             <div class="file-item"><code>复习清单/data.json</code><span>全部词条与复习日程</span></div>
