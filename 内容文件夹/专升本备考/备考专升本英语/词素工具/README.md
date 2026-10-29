@@ -11,9 +11,11 @@
 | `word_server.py` | 启动器的 ASCII 路径入口 |
 | `词素工具/server.py` | 本地 HTTP 服务，给网页工具提供 API，并防止 Key 被静态访问 |
 | `词素工具/auto_archive.py` | 命令行入口，也是 skill 的底层工具 |
-| `%USERPROFILE%\.word_archiver_api_key` | 本地 API Key（项目外；不要提交、不要发给别人） |
+| `词素工具/API.txt` | 本地 API Key（和 py 同目录；已 gitignore；不要提交、不要发给别人） |
 | `单词模块/词汇代码生成器.html` | 网页界面：输入、分析、写入 |
 | `英语答疑/英语答疑.html` | 资深英语教师答疑：单词解释、作文反例、句子分析、语法问答 |
+| `导入待归档单词.bat` | 把云端待归档单词 JSON 拖入后分类写入 |
+| `词素工具/import_pending_words.py` | 待归档单词导入脚本 |
 | `词素工具/english_tutor.py` | 答疑 API、教师人设、按分类日志 |
 | `skills/english-tutor/SKILL.md` | 资深英语教师答疑 skill |
 | `cloudflare-worker/worker.js` | 可选：GitHub Pages 用的云端答疑代理 |
@@ -75,7 +77,28 @@ http://127.0.0.1:8767/英语答疑/英语答疑.html
 - 页面历史记录调用 `GET /api/tutor-log?category=作文&limit=20`；
   `category=all` 合并全部分类。
 - 日志目录已加入 `my_web/.gitignore`，不会静态暴露，也不要上传 GitHub。
-- 答疑只做知识解答，不会自动收词；收词仍用“单词自动归档”。
+- **单词解释模式会自动收录目标单词**：本地直接归档；云端先进入“待归档单词”队列。
+- 作文、句子分析、其他模式只答疑，不自动收词。
+
+### 云端待归档单词
+
+云端 Worker 不能直接改本地 HTML / `data.json`，所以：
+
+1. 云端答疑识别到单词后，写入 KV 的 `pending:` 队列；
+2. 答疑页历史记录右上角点 **导出待归档单词**，下载 `英语答疑待归档单词-*.json`；
+3. 把 JSON 拖到项目根目录的 `导入待归档单词.bat`；
+4. 本地 `word_archiver.py` 统一分类、写入 HTML 和 `data.json`，
+   标记为“明天额外新增”（不占 20 词）；
+5. 已存在的词会跳过，不会重复。
+
+也可以手动运行：
+
+```powershell
+python 词素工具/import_pending_words.py "英语答疑待归档单词-2026-10-30-0420.json" --write
+```
+
+> 需要重新部署包含 `/api/pending-word`、`/api/pending-words` 的 Worker；
+> 旧 Worker 没有这两个接口。
 
 ### 云端记录导回本地
 
@@ -126,7 +149,7 @@ Key 存 Cloudflare Secret，日志存 KV；访问口令只存在浏览器 localS
 > `git add / commit / push`（或 GitHub Desktop 上传）。不要把 GitHub Token
 > 放进网页。
 
-## 已录入检查 / 插队复习
+## 已录入检查（不插队）
 
 网页上的“检查是否已录入”只读，不调用 DeepSeek；CLI 也可以：
 
@@ -138,9 +161,26 @@ python 词素工具/auto_archive.py "friendship" --check
 
 - 不新建词卡；
 - 返回“已录入”；
-- 把该词的 `nextDate` 改成今天，并写入 `priority` 标记；
-- 复习清单会把它排到新词/复习列表最前面，并显示“插队”；
-- 完成这次复习后，`lastReviewed` 会覆盖 priority，不再重复插队。
+- 不修改 `nextDate`，不写 `priority`，也不再提供“插队”。
+
+## 新词：额外新增
+
+从词汇代码生成器或答疑自动归档的新词：
+
+- 写入对应 HTML 和 `data.json`；
+- 打上 `extra: true`、`extraDate: 第二天`；
+- **不占每天 20 个新词配额**；
+- 第二天出现在复习清单的“额外新增”；
+- 没复习完会继续保留；
+- 完成后按正常 1/3/7/15/30/60/90 天间隔复习。
+
+当天总量因此可以是：
+
+```text
+20 新词 + 20 复习 + 额外新增 = 40+
+```
+
+已有词不会重复创建，也不会插队。
 
 ## 命令行用法
 
@@ -174,11 +214,12 @@ python 词素工具/auto_archive.py "sunflower" --write --json
 
 ## 安全与验证
 
-- API Key 只在 Python 服务端读取；浏览器只请求 `/api/analyze`、`/api/check`、`/api/archive`、`/api/review`、`/api/log`、`/api/tutor` 和 `/api/tutor-log`。
+- API Key 只在 Python 服务端读取；浏览器只请求 `/api/analyze`、`/api/check`、`/api/archive`、`/api/review`、`/api/log`、`/api/tutor`、`/api/tutor-log`、`/api/pending-word` 和 `/api/pending-words`。
 - 静态服务禁止访问 `/词素工具/`，避免工具目录、日志、备份被浏览器读到。
 - 写入前会在 `词素工具/backups/时间戳/` 备份被修改的文件。
-- 已录入的词（核心词页、词素页、data.json）不会重复创建；工具会返回“已录入”，
-  更新 `nextDate` 和 `priority`，让它插队到下一次复习清单。
+- 已录入的词（核心词页、词素页、data.json）不会重复创建；工具返回“已录入”，
+  不修改日程，也不插队。
+- 新词写入后进入第二天的“额外新增”，不占每日 20 词。 
 - API 失败、JSON 不合法、词缀与单词不匹配时不会写入。
 - 每次写入后应检查：
   - `data.json` 中该词的 `category`、`kind`、`created`、`nextDate`；
@@ -191,23 +232,26 @@ python 词素工具/auto_archive.py "sunflower" --write --json
 
 ## 删除 API Key
 
-使用完本阶段后，直接删除用户目录下的：
+使用完本阶段后，直接删除：
 
 ```text
-%USERPROFILE%\.word_archiver_api_key
+词素工具/API.txt
 ```
 
-这个文件在项目之外，上传整个项目到 GitHub 也不会带 Key。
-如果曾使用旧位置，也检查一下 `词素工具/API.txt` 和 `词素工具/api_key.txt` 并删除。
+如果曾使用旧位置，也检查一下 `词素工具/api_key.txt` 和用户目录
+`.word_archiver_api_key` 并删除。
+
+> `API.txt` 位于网站目录内，所以请使用本项目自带的 8767 服务（它屏蔽了
+> `/词素工具/`），或确认你自己的静态服务器不会把整个项目目录暴露出去。
 
 ## 上传 GitHub 前检查
 
-- 项目内不应有 `词素工具/API.txt`；Key 只在用户目录。
-- `.gitignore` 只对 git 提交有效；如果用 GitHub 网页“Upload files”拖拽，
-  要手动排除 `词素工具/`、`backups/`、`review_backups/`、`归档日志.jsonl`、
-  `data.json.bak`。
-- 静态网站只需要 HTML/CSS/JS、`复习清单/data.json`、`词素/`、`每月打卡/` 等；
-  `词素工具/` 是本地服务，不需要上传。
+- **`词素工具/API.txt` 是本地 Key，绝不能上传。** `.gitignore` 已包含它，但 GitHub
+  网页“Upload files”不会自动忽略文件，必须手动排除。
+- 如果用 GitHub 网页上传，直接**不要上传 `词素工具/` 整个目录**；静态网站不需要它。
+- 要排除 `词素工具/`、`backups/`、`review_backups/`、`归档日志.jsonl`、
+  `data.json.bak`、`英语问答日志/`、`英语问答日志备份/`。
+- 静态网站只需要 HTML/CSS/JS、`复习清单/data.json`、`词素/`、`每月打卡/` 等。
 - 页面里引用了 `../../../../frontend——前端/...`。如果只上传 `备考专升本英语`
   一个文件夹，复习/日历/词素页会丢样式；建议上传整个 `my_web` 仓库，
   或至少保留 `内容文件夹/frontend——前端` 的相对位置。

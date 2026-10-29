@@ -167,6 +167,12 @@ localStorage，不写进 HTML/JS 文件。
 
 ```text
 GET  /api/health
-POST /api/tutor           Header: X-Tutor-Token
-GET  /api/tutor-log       Header: X-Tutor-Token
+POST /api/tutor             Header: X-Tutor-Token
+GET  /api/tutor-log         Header: X-Tutor-Token
+POST /api/pending-word      Header: X-Tutor-Token
+GET  /api/pending-words     Header: X-Tutor-Token
 ```
+
+> 如果之前部署的是旧版 Worker，需要重新粘贴新版 `worker.js` 并部署，
+> 否则答疑页的“待归档单词”会提示 404。云端只存待归档单词，分类和写入 HTML
+> 仍由本地 `word_archiver.py` 完成。

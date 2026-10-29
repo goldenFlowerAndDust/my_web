@@ -75,8 +75,8 @@
 
                 <div class="ask-actions">
                     <p class="ask-note">
-                        这里只做知识解答，<strong>不会自动收词</strong>。要收词请用
-                        <a href="../单词模块/词汇代码生成器.html">AI 自动归档</a>。
+                        <strong>单词解释模式会自动收录目标单词：</strong>本地直接写入词库，云端先进入“待归档单词”，
+                        回本地导出后再分类写入。作文、句子和其他模式只答疑。
                     </p>
                     <button type="button" class="primary-btn" id="ask-btn">
                         <span class="btn-label">请教老师</span>
@@ -131,7 +131,8 @@
                     <p class="history-desc">每次成功回答都会写入对应分类的日志，包含日期时间、原问题和完整回答。</p>
                 </div>
                 <div class="history-actions">
-                    <button type="button" class="ghost-btn" id="history-export">导出记录</button>
+                    <button type="button" class="ghost-btn" id="pending-export">导出待归档单词</button>
+                    <button type="button" class="ghost-btn" id="history-export">导出答疑记录</button>
                     <button type="button" class="ghost-btn" id="history-refresh">刷新</button>
                 </div>
             </div>

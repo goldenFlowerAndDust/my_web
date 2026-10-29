@@ -337,12 +337,6 @@
     color: #566573;
 }
 
-.badge-priority {
-    background: #FDEBD0;
-    color: #A04000;
-    border: 1px solid #F5CBA7;
-}
-
 .word-actions {
     display: flex;
     align-items: center;
@@ -612,4 +606,23 @@
         padding: 8px 12px;
         font-size: 0.86rem;
     }
+}
+
+/* 额外新增：不占每日 20 新词配额 */
+.stat-card.stat-extra {
+    border-color: #D7BDE2;
+    background: #FBF7FD;
+}
+
+.stat-card.stat-extra strong {
+    color: #6C3483;
+}
+
+.extra-section {
+    border-top: 4px solid #8E44AD;
+}
+
+.badge-extra {
+    background: #F4ECF7;
+    color: #6C3483;
 }

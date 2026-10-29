@@ -56,17 +56,11 @@ def main() -> int:
     if result.get("exists") or "analysis" not in result:
         print("单词：%s" % result.get("word", ""))
         print(("已录入" if result.get("exists") else "未录入") + "：" + result.get("message", ""))
-        if result.get("data_category"):
-            print("分类：%s" % result["data_category"])
+        item = ((result.get("data") or {}).get("item") or {})
+        if item.get("category"):
+            print("分类：%s" % item["category"])
         if result.get("page_file"):
             print("页面：%s" % result["page_file"])
-        if result.get("review"):
-            print("复习日程：%s（%s）" % (
-                result["review"].get("schedule", ""),
-                "新词" if result["review"].get("mode") == "new" else "复习",
-            ))
-        if result.get("backup"):
-            print("备份：%s" % result["backup"])
         return 0
 
     analysis = result["analysis"]
@@ -82,7 +76,8 @@ def main() -> int:
         print("写入：%s" % loc.get("file", ""))
         print("目标：%s" % loc.get("target", ""))
     if result.get("data"):
-        print("复习日程：%s" % result["data"].get("schedule", ""))
+        item = (result.get("data") or {}).get("item") or {}
+        print("额外新增：%s（不占每日 20 词）" % item.get("extraDate", result["data"].get("schedule", "")))
     if result.get("backup"):
         print("备份：%s" % result["backup"])
     return 0

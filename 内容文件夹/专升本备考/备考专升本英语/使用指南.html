@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>使用指南 · 专升本英语词汇系统</title>
-    <meta name="description" content="专升本英语词汇系统使用指南：每天 20 个新词 + 20 个复习，AI 自动收词、词族/词素分类、打卡日历与常见问题。">
+    <meta name="description" content="专升本英语词汇系统使用指南：每天 20 个新词 + 20 个复习 + 额外新增，AI 自动收词、词族/词素分类、打卡日历与常见问题。">
     <style>
         :root {
             --ink: #2C3E50;
@@ -587,9 +587,9 @@
         </div>
         <div class="hero-meta">
             <span>当前快照：<b>307</b> 个核心词 / <b>18</b> 个词族</span>
-            <span>复习词 <b>309</b> 个</span>
-            <span>全部词条 <b>322</b> 条</span>
-            <span>每天 <b>20 新 + 20 复习</b></span>
+            <span>复习词 <b>310</b> 个</span>
+            <span>全部词条 <b>323</b> 条</span>
+            <span>每天 <b>20 新 + 20 复习 + 额外新增</b></span>
         </div>
     </header>
 
@@ -664,7 +664,7 @@
             <a class="card" href="复习清单/核心词汇复习清单.html">
                 <span class="card-tag">每日必用</span>
                 <strong>词汇复习清单</strong>
-                <p>每天 20 个新词 + 20 个到期旧词；所有分类统一管理；完成、撤销、保存、导出。</p>
+                <p>每天 20 个新词 + 20 个到期旧词，另有不占额的“额外新增”；所有分类统一管理；完成、撤销、保存、导出。</p>
             </a>
             <a class="card" href="单词模块/词汇代码生成器.html">
                 <span class="card-tag">收词工具</span>
@@ -700,13 +700,20 @@
             原日志会备份到 <code>词素工具/英语问答日志备份/</code>。
         </div>
 
+        <div class="callout green">
+            <strong>答疑收词：</strong>
+            单词解释模式会自动收录目标单词。本地模式直接写入词库；云端模式先进入
+            “待归档单词”，在答疑页点 <code>导出待归档单词</code>，再把 JSON 拖到
+            <code>导入待归档单词.bat</code>。本地统一分类，新词进入明天的“额外新增”，不占 20 词。
+        </div>
+
         <div class="table-wrap">
             <table>
                 <thead>
                 <tr><th>页面</th><th>最适合用来做什么</th><th>什么时候打开</th></tr>
                 </thead>
                 <tbody>
-                <tr><td>词汇复习清单</td><td>完成每天 20 新 + 20 复习</td><td>每天固定学习时</td></tr>
+                <tr><td>词汇复习清单</td><td>完成每天 20 新 + 20 复习 + 额外新增</td><td>每天固定学习时</td></tr>
                 <tr><td>单词自动归档</td><td>把阅读/真题里的新词收进系统</td><td>遇到新词时</td></tr>
                 <tr><td>核心词汇通关</td><td>按词族系统看词、查例句</td><td>想补构词法/查词时</td></tr>
                 <tr><td>打卡日历</td><td>看坚持情况和每天任务量</td><td>每周复盘时</td></tr>
@@ -776,26 +783,26 @@
             <b>已经实际跑通的两个例子：</b><br>
             <code>friendship</code> → 核心词汇页新建 <code>-ship</code> 词族；<br>
             <code>sunflower</code> → <code>词素/复合词/复合词：sunflower.html</code>；<br>
-            两个词都排入 <b>2026-11-13</b>。新词不一定当天出现，系统会排到最近一个不足 20 词的日期。
+            旧规则曾把它们排到 2026-11-13。现在新词改为排到<strong>明天的额外新增</strong>，
+            不占每天 20 个新词配额。
         </div>
 
         <div class="callout">
             <strong>不想调用 API？</strong>
             先点“检查是否已录入”。这个按钮只查词库、词素页和 data.json，不调用 DeepSeek；
-            如果已录入，会直接提示，并可以一键插队到下一次复习。
+            如果已录入，会直接提示，不再提供“插队”操作。
         </div>
 
         <div class="callout">
             <strong>写入后在哪里看？</strong>
-            结果区可以直接“打开写入页面”；也可以在复习清单的“全部词条”里找到它。
-            当天新词列表只显示今天到期的词，未到日期的在“全部词条”里。
+            结果区可以直接“打开写入页面”；新词会排到明天的“额外新增”，
+            不占每天 20 个新词配额；当天没复习完会继续保留。
         </div>
 
         <div class="callout red">
             <strong>已录入的词不会重复创建。</strong>
             工具会先检查词库、词素页和 data.json；如果已经存在，会提示“已录入”，
-            然后把该词插队到下一次复习清单，并显示“插队”标记。
-            它不会新建第二张词卡。
+            不会新建第二张词卡，也不会插队。需要复习时到复习清单的“全部词条”里查看。
         </div>
     </section>
 
@@ -835,7 +842,7 @@
     <!-- 6 -->
     <section class="section" id="review">
         <h2><span class="num">06</span>复习清单的规则</h2>
-        <p class="lead-small">你只需要记住：每天最多 20 个新词，最多 20 个旧词复习。</p>
+        <p class="lead-small">你只需要记住：每天最多 20 个新词、最多 20 个旧词复习，外加不占额的“额外新增”。</p>
 
         <div class="table-wrap">
             <table>
@@ -855,8 +862,15 @@
 
         <div class="callout green">
             <strong>当前快照：</strong>
-            核心词 307 个；加上词素里的 sunflower、deep 等词级条目，复习词 309 个；
-            再加 13 个旧页面条目，全部词条 322 条。数字会随收词自动变化，以页面为准。
+            核心词 307 个；加上词素里的 sunflower、deep、hello 等词级条目，复习词 310 个；
+            再加 13 个旧页面条目，全部词条 323 条。数字会随收词自动变化，以页面为准。
+
+            <div class="callout blue">
+                <strong>为什么新增了词，核心词汇还是 307？</strong>
+                核心词汇页只收“后缀/前缀派生词”；词根族、复合词、原子词会进入
+                <code>词素/</code> 下的对应页面，不会增加核心页的 307。
+                它们仍然会进 <code>data.json</code>、复习清单和词素分类；看总词数请用复习清单。
+            </div>
         </div>
 
         <div class="callout">
@@ -887,7 +901,7 @@
             <a class="card" href="每月打卡/2026年11月打卡.html">
                 <span class="card-tag">11 月</span>
                 <strong>2026 年 11 月打卡</strong>
-                <p>查看 11 月 1–13 日的新词日程；11 月 13 日目前是 8 个新词。</p>
+                <p>查看 11 月的新词日程；11 月 13 日还有新词计划。具体数量以页面当前数据为准。</p>
             </a>
         </div>
 
@@ -903,10 +917,10 @@
         <h2><span class="num">08</span>API Key 与备份</h2>
 
         <div class="callout red">
-            <strong>Key 已移到用户目录：<code>%USERPROFILE%\.word_archiver_api_key</code>。</strong>
-            项目文件夹里不再有 Key，所以上传整个项目到 GitHub 也不会带 Key。
-            网页不会读取这个文件；本机 Python 服务会自动读取它。
-            你之后直接删除这个用户目录文件即可停用。
+            <strong>本地 Key 放在 <code>词素工具/API.txt</code>（和 py 同目录）。</strong>
+            本机 Python 服务会自动读取它，网页不会读取这个文件。
+            这个文件已写入 <code>.gitignore</code>，但 GitHub 网页“上传文件”不会自动忽略它，
+            上传时不要勾选 <code>词素工具/</code> 文件夹。删除 API.txt 即可停用本地 AI。
         </div>
 
         <p>
@@ -962,8 +976,15 @@
 
         <details>
             <summary>显示“缺少 API Key”</summary>
-            <p>把 Key 写入用户目录 <code>%USERPROFILE%\.word_archiver_api_key</code>，或设置环境变量
+            <p>把 Key 写入 <code>词素工具/API.txt</code>（和 py 同目录），或设置环境变量
                 <code>DEEPSEEK_API_KEY</code>。保存后点“重新检测”，不需要重启服务。</p>
+        </details>
+
+        <details>
+            <summary>显示 401 / Authentication Fails</summary>
+            <p>说明 Key 已失效或填错。<code>api_key: true</code> 只代表文件里非空，不代表 Key 有效；
+                请把 <code>词素工具/API.txt</code> 换成有效的 DeepSeek Key。云端 Worker 的 Key
+                是另一份，不受本地文件影响。</p>
         </details>
 
         <details>
@@ -975,13 +996,13 @@
         <details>
             <summary>写入成功了，但今天的新词列表里没有它</summary>
             <p>新词会排到最近一个不足 20 词的日期，不一定在今天。工具结果区会显示“复习日程”；
-                也可以到复习清单的“全部词条”里找到它。当前日程已排到 11 月 13 日。</p>
+                也可以到复习清单的“全部词条”里找到它；新词会出现在第二天的“额外新增”。</p>
         </details>
 
         <details>
             <summary>提示“已经存在”，但我没看到</summary>
-            <p>它可能已经在词素页、核心词页或 data.json 里。工具不会重复创建，而是把已有词
-                插队到下一次复习清单。用“检查是否已录入”按钮或复习清单的“全部词条”可以确认。</p>
+            <p>它可能已经在词素页、核心词页或 data.json 里。工具不会重复创建，也不会插队。
+                用“检查是否已录入”按钮或复习清单的“全部词条”可以确认。</p>
         </details>
 
         <details>
@@ -1004,10 +1025,12 @@
 
         <div class="file-map">
             <div class="file-item"><code>专升本英语核心词汇通关.html</code><span>核心词库，按词族浏览</span></div>
-            <div class="file-item"><code>复习清单/核心词汇复习清单.html</code><span>每天 20 新 + 20 复习</span></div>
+            <div class="file-item"><code>复习清单/核心词汇复习清单.html</code><span>每天 20 新 + 20 复习 + 额外新增</span></div>
             <div class="file-item"><code>单词模块/词汇代码生成器.html</code><span>AI 自动归档界面</span></div>
             <div class="file-item"><code>英语答疑/英语答疑.html</code><span>资深英语教师答疑界面</span></div>
             <div class="file-item"><code>导入答疑记录.bat</code><span>把云端导出的 JSON 合并到本地日志</span></div>
+            <div class="file-item"><code>导入待归档单词.bat</code><span>把云端待归档单词分类写入词库</span></div>
+            <div class="file-item"><code>词素工具/import_pending_words.py</code><span>待归档单词导入脚本</span></div>
             <div class="file-item"><code>词素工具/import_tutor_logs.py</code><span>本地日志导入脚本（可预览/去重/备份）</span></div>
             <div class="file-item"><code>词素工具/english_tutor.py</code><span>英语答疑 API 与分类日志</span></div>
             <div class="file-item"><code>词素工具/英语问答日志/</code><span>按分类保存问题与回答（已 gitignore）</span></div>
@@ -1018,7 +1041,7 @@
             <div class="file-item"><code>词素工具/word_archiver.py</code><span>DeepSeek 分析与写入逻辑</span></div>
             <div class="file-item"><code>添加日志.html</code><span>最近自动添加的单词、分类和时间</span></div>
             <div class="file-item"><code>返回顶部.js</code><span>主页面浮动“返回顶部”按钮</span></div>
-            <div class="file-item"><code>%USERPROFILE%\.word_archiver_api_key</code><span>本地 Key，在项目外，不会上传</span></div>
+            <div class="file-item"><code>词素工具/API.txt</code><span>本地 Key，和 py 同目录，已 gitignore</span></div>
             <div class="file-item"><code>词素工具/backups/</code><span>每次写入前的备份</span></div>
             <div class="file-item"><code>词素/</code><span>词根、复合词、原子词页面</span></div>
             <div class="file-item"><code>每月打卡/</code><span>10 月、11 月打卡日历</span></div>
@@ -1031,11 +1054,11 @@
     <section class="ending">
         <h2>最后，只记住这 5 句话</h2>
         <ol>
-            <li>每天打开复习清单：<strong>先复习 20，再学 20</strong>。</li>
+            <li>每天打开复习清单：<strong>先复习 20，再学 20，额外新增顺手完成</strong>。</li>
             <li>遇到新词，打开自动归档：<strong>先分析，再写入</strong>。</li>
-            <li>新词不会丢，只是会<strong>按每天 20 个顺延</strong>。</li>
+            <li>新词不会丢，会排到<strong>明天的额外新增</strong>，不占每天 20 个新词配额。</li>
             <li>复习页和 AI 工具要用本地 HTTP，<strong>先启动 8767 服务</strong>。</li>
-            <li>Key 放在用户目录 <code>.word_archiver_api_key</code>，<strong>不在项目里，不写进网页，用完删除</strong>。</li>
+            <li>Key 放在 <code>词素工具/API.txt</code>，<strong>和 py 同目录，不写进网页，不上传 GitHub</strong>。</li>
         </ol>
     </section>
 

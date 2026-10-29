@@ -6923,10 +6923,10 @@
       "path": "../词素/词根-本体-变体【派生词】/本体-deep、以及它的变体.html#word-deep",
       "category": "词素/词根-本体-变体【派生词】",
       "level": 0,
-      "nextDate": "2026-11-13",
+      "nextDate": "2026-10-31",
       "lastReviewed": null,
       "created": "2026-11-13",
-      "modified": "2026-11-13",
+      "modified": "2026-10-30",
       "kind": "word",
       "word": "deep",
       "zh": "深的；深刻的；深切的",
@@ -6938,7 +6938,37 @@
       "levelTag": "初中",
       "sense": "深的；深处的",
       "anchor": "word-deep",
-      "batch": "自动补充"
+      "batch": "自动补充",
+      "extra": true,
+      "extraDate": "2026-10-31",
+      "source": "generator"
+    }
+  ],
+  "词素/原子词": [
+    {
+      "name": "hello",
+      "path": "../词素/原子词/原子词：hello.html#word-hello",
+      "category": "词素/原子词",
+      "level": 0,
+      "nextDate": "2026-10-31",
+      "lastReviewed": null,
+      "created": "2026-10-30",
+      "modified": "2026-10-30",
+      "kind": "word",
+      "word": "hello",
+      "zh": "你好；喂",
+      "root": "hello",
+      "rootZh": "你好",
+      "suffix": "",
+      "suffixLabel": "",
+      "pos": "int.",
+      "levelTag": "小学",
+      "sense": "你好；喂",
+      "anchor": "word-hello",
+      "batch": "自动补充",
+      "extra": true,
+      "extraDate": "2026-10-31",
+      "source": "generator"
     }
   ]
 }

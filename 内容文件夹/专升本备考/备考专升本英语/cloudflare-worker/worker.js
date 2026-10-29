@@ -16,9 +16,12 @@
  *   GET  /api/health
  *   POST /api/tutor           Header: X-Tutor-Token
  *   GET  /api/tutor-log       Header: X-Tutor-Token
+ *   POST /api/pending-word     Header: X-Tutor-Token
+ *   GET  /api/pending-words    Header: X-Tutor-Token
  */
 
 const CATEGORIES = ["单词解释", "作文", "句子分析", "其他"];
+const PENDING_PREFIX = "pending:";
 const ALIASES = {
   word: "单词解释",
   words: "单词解释",
@@ -314,6 +317,98 @@ async function handleTutor(request, env) {
   }, 200, request, env);
 }
 
+function normalizePendingWord(raw) {
+  const word = String(raw || "").trim();
+  if (!/^[A-Za-z][A-Za-z'-]{1,40}$/.test(word)) return "";
+  return word.toLowerCase();
+}
+
+async function handlePendingWord(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: error.message || "请求体不合法。" }, 400, request, env);
+  }
+
+  const word = normalizePendingWord(payload.word);
+  const question = String(payload.question || "").trim().slice(0, 2000);
+  if (!word) {
+    return json({ ok: false, error: "待归档的必须是一个英文单词。" }, 400, request, env);
+  }
+
+  const now = new Date();
+  const createdAt = now.toISOString();
+  const time = formatShanghai(now);
+  const ttl = Math.max(1, Number(env.LOG_TTL_DAYS || 180) || 180) * 86400;
+
+  try {
+    const listed = await env.TUTOR_KV.list({ prefix: PENDING_PREFIX, limit: 1000 });
+    const values = await Promise.all(listed.keys.map((key) => env.TUTOR_KV.get(key.name, "json")));
+    const duplicate = values.find((item) => item && String(item.word || "").toLowerCase() === word);
+    if (duplicate) {
+      return json({
+        ok: true,
+        queued: false,
+        already_pending: true,
+        word,
+        message: "这个词已经在云端待归档队列中。",
+      }, 200, request, env);
+    }
+  } catch (error) {
+    // 列表失败时仍然尝试写入，避免用户问完却丢失待归档词。
+  }
+
+  const key = `${PENDING_PREFIX}${createdAt}:${crypto.randomUUID()}`;
+  const record = {
+    created_at: createdAt,
+    time,
+    word,
+    question,
+    source: "tutor",
+  };
+  try {
+    await env.TUTOR_KV.put(key, JSON.stringify(record), { expirationTtl: ttl });
+  } catch (error) {
+    return json({ ok: false, error: "云端待归档队列写入失败。" }, 500, request, env);
+  }
+
+  return json({
+    ok: true,
+    queued: true,
+    word,
+    time,
+    message: "已加入云端待归档单词；回本地导出后归档。",
+  }, 200, request, env);
+}
+
+async function handlePendingWords(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+
+  try {
+    const listed = await env.TUTOR_KV.list({ prefix: PENDING_PREFIX, limit: 1000 });
+    const values = await Promise.all(listed.keys.map((key) => env.TUTOR_KV.get(key.name, "json")));
+    const entries = values
+      .filter((item) => item && item.word)
+      .sort((a, b) => String(b.created_at || b.time || "").localeCompare(String(a.created_at || a.time || "")));
+    return json({ ok: true, total: entries.length, entries }, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: "读取云端待归档单词失败。" }, 500, request, env);
+  }
+}
+
 async function handleLog(request, env) {
   if (!authorized(request, env)) {
     return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
@@ -380,6 +475,14 @@ async function handleRequest(request, env) {
 
   if (path === "/api/tutor" && request.method === "POST") {
     return handleTutor(request, env);
+  }
+
+  if (path === "/api/pending-word" && request.method === "POST") {
+    return handlePendingWord(request, env);
+  }
+
+  if (path === "/api/pending-words" && request.method === "GET") {
+    return handlePendingWords(request, env);
   }
 
   if (path === "/api/tutor-log" && request.method === "GET") {

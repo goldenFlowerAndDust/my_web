@@ -6,12 +6,12 @@
 1. 调用 DeepSeek API 分析一个英文单词的构词方式；
 2. 后缀/前缀词写入 专升本英语核心词汇通关.html 的对应词族；
 3. 词根/复合词/原子词写入 词素/ 下对应页面；
-4. 同步写入 复习清单/data.json，自动排入每天 20 个新词的日程。
+4. 同步写入 复习清单/data.json，新词标记为第二天的“额外新增”（不占每日 20 个新词）。
 
 API Key 读取顺序：
 - 环境变量 DEEPSEEK_API_KEY
-- 用户目录 .word_archiver_api_key（推荐，项目外）
-- 词素工具/API.txt（旧位置；项目内不推荐）
+- 词素工具/API.txt（推荐；和 py 同目录，已 gitignore）
+- 用户目录 .word_archiver_api_key（备用）
 - 兼容旧位置：词素工具/api_key.txt
 """
 
@@ -121,13 +121,13 @@ def read_api_key() -> str:
     key = (os.environ.get("DEEPSEEK_API_KEY") or "").strip()
     if key:
         return key
-    for path in (HOME_KEY_FILE, API_TXT, API_KEY_FILE):
+    for path in (API_TXT, HOME_KEY_FILE, API_KEY_FILE):
         if path.exists():
             key = path.read_text(encoding="utf-8").strip()
             if key:
                 return key
     raise ArchiveError(
-        "未配置 API Key：请设置 DEEPSEEK_API_KEY，或写入用户目录的 .word_archiver_api_key"
+        "未配置 API Key：请写入 词素工具/API.txt（和 py 同目录），或设置 DEEPSEEK_API_KEY"
     )
 
 
@@ -791,6 +791,8 @@ def next_schedule_date(data: dict[str, Any]) -> str:
                 continue
             if item.get("kind") != "word":
                 continue
+            if item.get("extra"):
+                continue
             d = item.get("created")
             if isinstance(d, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", d):
                 counts[d] = counts.get(d, 0) + 1
@@ -803,15 +805,23 @@ def next_schedule_date(data: dict[str, Any]) -> str:
     raise ArchiveError("无法找到可用的新词日程。")
 
 
-def build_data_item(analysis: dict[str, Any], target: dict[str, Any], created: str) -> dict[str, Any]:
+def build_data_item(
+    analysis: dict[str, Any],
+    target: dict[str, Any],
+    created: str,
+    *,
+    extra: bool = False,
+    extra_date: str = "",
+    source: str = "",
+) -> dict[str, Any]:
     w = analysis
     morph = w["morphology"]
-    return {
+    item = {
         "name": w["word"],
         "path": "../" + target["file"].replace("\\", "/") + "#word-" + w["word"],
         "category": w["target"]["category"],
         "level": 0,
-        "nextDate": created,
+        "nextDate": extra_date or created,
         "lastReviewed": None,
         "created": created,
         "modified": created,
@@ -828,21 +838,40 @@ def build_data_item(analysis: dict[str, Any], target: dict[str, Any], created: s
         "anchor": "word-" + w["word"],
         "batch": "自动补充",
     }
+    if extra:
+        item["extra"] = True
+        item["extraDate"] = extra_date or created
+        item["source"] = source or "generator"
+    return item
 
 
-def append_data_item(analysis: dict[str, Any], target: dict[str, Any]) -> dict[str, Any]:
+def append_data_item(
+    analysis: dict[str, Any],
+    target: dict[str, Any],
+    *,
+    extra: bool = True,
+    source: str = "generator",
+) -> dict[str, Any]:
     data = load_data()
     if analysis["word"] in all_names(data):
         raise ArchiveError("data.json 中已经有 %s，未重复写入。" % analysis["word"])
-    created = next_schedule_date(data)
-    item = build_data_item(analysis, target, created)
+    today = date.today().isoformat()
+    extra_date = (date.today() + timedelta(days=1)).isoformat() if extra else ""
+    item = build_data_item(
+        analysis,
+        target,
+        today,
+        extra=extra,
+        extra_date=extra_date,
+        source=source,
+    )
     category = analysis["target"]["category"]
     data.setdefault(category, [])
     if not isinstance(data[category], list):
         raise ArchiveError("data.json 的分类 %s 不是列表。" % category)
     data[category].append(item)
     write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
-    return {"item": item, "category": category, "schedule": created}
+    return {"item": item, "category": category, "schedule": item["nextDate"]}
 
 
 # ---------------------------------------------------------------------------
@@ -1017,8 +1046,8 @@ def check_word(word: str) -> dict[str, Any]:
         "data_item": item,
         "page_file": page_file,
         "message": (
-            "已录入：不会新建；再次点“分析并写入”会插队到下一次复习清单。"
-            if exists else "尚未录入，可以分析并写入。"
+            "已录入：不会新建，也不插队；需要复习时请在复习清单查看。"
+            if exists else "尚未录入，可以分析并写入；写入后会排到明天的额外新增。"
         ),
     }
 
@@ -1145,7 +1174,18 @@ def archive_word(word: str, hint: str = "") -> dict[str, Any]:
         category, item = find_data_item(data_before, word)
 
         if page_file or item:
-            return prioritize_existing(word, page_file)
+            return {
+                "ok": True,
+                "exists": True,
+                "word": word,
+                "message": "已录入：不会重复创建，也不会插队；需要复习时请在复习清单或全部词条中查看。",
+                "data": {
+                    "category": category,
+                    "item": item,
+                    "schedule": (item or {}).get("nextDate", ""),
+                },
+                "page_file": page_file,
+            }
 
         analysis = analyze_word(word, hint)
         target = analysis["target"]
@@ -1161,10 +1201,10 @@ def archive_word(word: str, hint: str = "") -> dict[str, Any]:
             data_result = append_data_item(analysis, {
                 "file": "专升本英语核心词汇通关.html",
                 "anchor": location["anchor"],
-            })
+            }, extra=True, source="generator")
         else:
             location = insert_into_ci(analysis)
-            data_result = append_data_item(analysis, location)
+            data_result = append_data_item(analysis, location, extra=True, source="generator")
 
         result = {
             "ok": True,
@@ -1174,7 +1214,7 @@ def archive_word(word: str, hint: str = "") -> dict[str, Any]:
             "location": location,
             "data": data_result,
             "backup": backup,
-            "summary": "%s → %s；排入 %s" % (word, location["target"], data_result["schedule"]),
+            "summary": "%s → %s；额外新增 %s" % (word, location["target"], data_result["schedule"]),
         }
         append_log({
             "word": word,

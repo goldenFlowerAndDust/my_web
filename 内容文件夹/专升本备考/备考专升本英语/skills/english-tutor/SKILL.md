@@ -47,6 +47,17 @@ http://127.0.0.1:8767/英语答疑/英语答疑.html
 `导入答疑记录.bat` 上合并到本地 `词素工具/英语问答日志/*.jsonl`；
 重复记录会跳过，原日志会备份。
 
+### 单词解释自动收词
+
+- 本地模式：答完“单词解释”后，页面直接调用本地 `/api/archive`；
+  新词写入对应 HTML / `data.json`，标记为**明天的额外新增**，不占 20 个新词配额。
+- 云端模式：页面调用 `/api/pending-word`，只把单词存入 Cloudflare KV 的待归档队列；
+  在答疑页点“导出待归档单词”，再拖到 `导入待归档单词.bat`，
+  由本地 `word_archiver.py` 统一分类后写入。
+- 云端不能直接修改 GitHub HTML / `data.json`；不要给页面 GitHub 写权限。
+- 已录入的词不会重复创建，也不会插队。
+- 云端 Worker 必须包含 `/api/pending-word`、`/api/pending-words` 并重新部署。
+
 也可以直接调用 API：
 
 ```http
@@ -162,7 +173,7 @@ GET http://127.0.0.1:8767/api/tutor-log?category=作文&limit=20
 ## 故障处理
 
 - `服务未连接`：启动 `server.py` / `启动词素服务.bat`，不要用 GitHub Pages。
-- `缺少 API Key`：Key 在用户目录 `.word_archiver_api_key`，或环境变量
+- `缺少 API Key`：Key 在 `词素工具/API.txt`（和 py 同目录），或环境变量
   `DEEPSEEK_API_KEY`；不要把 Key 写进页面或日志。
 - `未知的答疑分类`：只能使用四个规定分类。
 - API 超时/HTTP 错误：不写日志、不伪造答案；提示稍后重试。

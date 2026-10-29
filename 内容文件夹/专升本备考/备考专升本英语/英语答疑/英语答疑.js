@@ -68,6 +68,7 @@
     var historyCount = document.getElementById("history-count");
     var historyRefresh = document.getElementById("history-refresh");
     var historyExport = document.getElementById("history-export");
+    var pendingExport = document.getElementById("pending-export");
     var historyNote = document.getElementById("history-note");
     var toastEl = document.getElementById("toast");
     var connectionBtn = document.getElementById("connection-btn");
@@ -385,6 +386,7 @@
         } else {
             historyNote.innerHTML = "日志位置：<code>词素工具/英语问答日志/单词解释.jsonl</code>、<code>作文.jsonl</code>、<code>句子分析.jsonl</code>、<code>其他.jsonl</code>。已加入 <code>.gitignore</code>，不会上传 GitHub。";
         }
+        if (pendingExport) pendingExport.hidden = connection.mode !== "cloud";
     }
 
     function fetchWithTimeout(url, options, timeoutMs) {
@@ -464,6 +466,126 @@
         return "<strong>没有拿到回答</strong>" + escapeHtml(text) + hint;
     }
 
+    function extractTargetWord(question) {
+        var text = String(question || "").trim();
+        var match = text.match(/^([A-Za-z][A-Za-z'-]{1,40})$/);
+        if (match) return match[1].toLowerCase();
+        match = text.match(/(?:解释|单词|词汇|查|分析|说说|讲讲|meaning\s+of|definition\s+of)\s*[“"'']?([A-Za-z][A-Za-z'-]{1,40})/i);
+        if (match) return match[1].toLowerCase();
+        match = text.match(/^([A-Za-z][A-Za-z'-]{1,40})\b/);
+        if (match) {
+            var stop = {
+                what: 1, how: 1, why: 1, when: 1, where: 1, which: 1, who: 1,
+                is: 1, are: 1, am: 1, do: 1, does: 1, did: 1, can: 1, could: 1,
+                the: 1, a: 1, an: 1, please: 1, explain: 1, meaning: 1,
+                definition: 1, translate: 1, difference: 1, between: 1
+            };
+            if (!stop[match[1].toLowerCase()]) return match[1].toLowerCase();
+        }
+        return "";
+    }
+
+    async function queueWordAfterAnswer(question, mode) {
+        if (mode !== "单词解释") return "";
+        var word = extractTargetWord(question);
+        if (!word) return "";
+
+        if (connection.mode === "local") {
+            try {
+                var resp = await fetchWithTimeout(apiUrl("/api/archive"), {
+                    method: "POST",
+                    headers: requestHeaders(true),
+                    body: JSON.stringify({ word: word, hint: "来自英语答疑" })
+                }, 90000);
+                var data = await resp.json().catch(function () { return null; });
+                if (!resp.ok || !data || !data.ok) {
+                    throw new Error((data && data.error) || ("HTTP " + resp.status));
+                }
+                return data.exists
+                    ? word + " 已在本地词库"
+                    : word + " 已加入本地词库，明天额外新增";
+            } catch (error) {
+                return word + " 自动收录失败：" + (error.message || "未知错误");
+            }
+        }
+
+        try {
+            var cloudResp = await fetchWithTimeout(apiUrl("/api/pending-word"), {
+                method: "POST",
+                headers: requestHeaders(true),
+                body: JSON.stringify({ word: word, question: question })
+            }, 15000);
+            var cloudData = await cloudResp.json().catch(function () { return null; });
+            if (!cloudResp.ok || !cloudData || !cloudData.ok) {
+                throw new Error((cloudData && cloudData.error) || ("HTTP " + cloudResp.status));
+            }
+            return cloudData.already_pending
+                ? word + " 已在云端待归档"
+                : word + " 已加入云端待归档";
+        } catch (error) {
+            return word + " 加入云端待归档失败：" + (error.message || "未知错误");
+        }
+    }
+
+    async function exportPendingWords() {
+        if (connection.mode !== "cloud") {
+            showToast("待归档单词只存在于云端模式。本地答疑会直接写入词库。", true);
+            return;
+        }
+        if (!cloudConfigured()) {
+            showToast("先配置云端 Worker 地址和访问口令。", true);
+            openConnectionDialog();
+            return;
+        }
+
+        pendingExport.disabled = true;
+        showToast("正在读取云端待归档单词…");
+        try {
+            var resp = await fetchWithTimeout(apiUrl("/api/pending-words"), {
+                cache: "no-store",
+                headers: requestHeaders(false)
+            }, 15000);
+            var data = await resp.json().catch(function () { return null; });
+            if (!resp.ok || !data || !data.ok) {
+                throw new Error((data && data.error) || ("HTTP " + resp.status));
+            }
+            var entries = Array.isArray(data.entries) ? data.entries : [];
+            if (!entries.length) {
+                showToast("云端没有待归档单词。", true);
+                return;
+            }
+
+            var now = new Date();
+            var stamp = now.getFullYear() + "-" +
+                String(now.getMonth() + 1).padStart(2, "0") + "-" +
+                String(now.getDate()).padStart(2, "0") + "-" +
+                String(now.getHours()).padStart(2, "0") +
+                String(now.getMinutes()).padStart(2, "0");
+            var payload = {
+                exported_at: now.toISOString(),
+                source: "cloudflare-kv",
+                count: entries.length,
+                entries: entries
+            };
+            var blob = new Blob([JSON.stringify(payload, null, 2)], {
+                type: "application/json;charset=utf-8"
+            });
+            var objectUrl = URL.createObjectURL(blob);
+            var link = document.createElement("a");
+            link.href = objectUrl;
+            link.download = "英语答疑待归档单词-" + stamp + ".json";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(function () { URL.revokeObjectURL(objectUrl); }, 1000);
+            showToast("已导出 " + entries.length + " 个待归档单词。");
+        } catch (error) {
+            showToast("导出待归档单词失败：" + (error.message || "未知错误"), true);
+        } finally {
+            pendingExport.disabled = false;
+        }
+    }
+
     async function submitQuestion() {
         if (busy) return;
         if (!connectionReady()) {
@@ -482,6 +604,7 @@
             showToast("问题太长了，请控制在 2000 字以内。", true);
             return;
         }
+        var submittedMode = currentMode;
 
         setBusy(true);
         currentAnswer = "";
@@ -499,7 +622,7 @@
                 {
                     method: "POST",
                     headers: requestHeaders(true),
-                    body: JSON.stringify({ mode: currentMode, question: question })
+                    body: JSON.stringify({ mode: submittedMode, question: question })
                 },
                 125000
             );
@@ -514,12 +637,16 @@
             answerEmpty.hidden = true;
             answerLoading.hidden = true;
             answerError.hidden = true;
-            answerMode.textContent = data.mode || currentMode;
+            answerMode.textContent = data.mode || submittedMode;
             answerTime.textContent = data.time || "";
             var logWhere = connection.mode === "cloud" ? "已写入云端 KV" : "已写入对应分类日志";
             answerMeta.textContent = data.logged
                 ? logWhere + " · " + (data.model || "deepseek-chat")
                 : "回答已生成，但日志写入失败：" + (data.warning || "请检查配置");
+            var queueMessage = await queueWordAfterAnswer(question, submittedMode);
+            if (queueMessage) {
+                answerMeta.textContent += " · " + queueMessage;
+            }
             copyBtn.disabled = !currentAnswer;
             showToast(data.logged ? "回答完成，已写入日志。" : "回答完成，但日志未写入。", !data.logged);
             if (window.innerWidth < 940) {
@@ -854,6 +981,7 @@
         loadHistory(historyCategory);
     });
     historyExport.addEventListener("click", exportHistory);
+    pendingExport.addEventListener("click", exportPendingWords);
     historyTabs.forEach(function (tab) {
         tab.addEventListener("click", function () {
             loadHistory(tab.dataset.category || "all");

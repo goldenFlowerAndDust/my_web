@@ -101,7 +101,7 @@
             var data = await resp.json();
             if (!resp.ok || !data.ok) throw new Error('服务返回异常');
             if (!data.api_key) {
-                setService('warn', '服务已连接，但缺少 API Key', '请把 Key 写入用户目录 .word_archiver_api_key，或设置 DEEPSEEK_API_KEY。');
+                setService('warn', '服务已连接，但缺少 API Key', '请把 Key 写入 词素工具/API.txt（和 py 同目录），或设置 DEEPSEEK_API_KEY。');
             } else {
                 setService('ok', '本地服务已连接 · ' + data.model,
                     'API Key 只在服务端；工具页：' + (window.location.port === '8767' ? '当前地址' : 'http://127.0.0.1:8767/单词模块/词汇代码生成器.html'));
@@ -200,7 +200,7 @@
         ];
         if (written) {
             targetRows.push(['写入文件', location && location.file ? location.file : '']);
-            targetRows.push(['复习日程', schedule ? schedule + ' · 每天 20 词' : '']);
+            targetRows.push(['额外新增', schedule ? schedule + ' · 不占每日 20 词' : '']);
         } else {
             targetRows.push(['状态', '仅预览，尚未写入任何文件']);
         }
@@ -270,12 +270,12 @@
 
     function renderCheckResult(data) {
         var exists = !!data.exists;
-        var item = data.data_item || null;
+        var item = data.data_item || (data.data && data.data.item) || null;
         resultBadge.textContent = exists ? '已录入' : '未录入';
         inputBadge.textContent = exists ? '已录入' : '可录入';
 
         var rows = [];
-        if (data.data_category) rows.push(['分类', data.data_category]);
+        if (data.data_category || (item && item.category)) rows.push(['分类', data.data_category || item.category]);
         if (data.page_file) rows.push(['页面', data.page_file]);
         if (item) {
             rows.push(['当前等级', '第 ' + (item.level || 0) + ' 次']);
@@ -290,22 +290,19 @@
         var body = exists
             ? '<div class="result_exists">' +
               '<strong>已录入，不会新建页面。</strong>' +
-              '<p>再次点“分析并写入”或下面的“插队到下一次复习”，只会更新复习日程，不会重复创建词卡。</p>' +
+              '<p>已录入的词不会重复创建，也不再提供“插队”操作。需要复习时直接在复习清单或全部词条中查看。</p>' +
               '</div>'
             : '<div class="result_not_exists">' +
               '<strong>尚未录入。</strong>' +
-              '<p>可以点“分析并写入”，AI 会判断分类并创建对应内容。</p>' +
+              '<p>可以点“分析并写入”，AI 会判断分类并创建对应内容；新词会排到明天的“额外新增”。</p>' +
               '</div>';
 
-        var actions = exists
-            ? '<div class="result_actions">' +
-              '<button type="button" class="btn btn_primary btn_small" id="btnPriorityExisting">插队到下一次复习</button>' +
-              '<a class="btn btn_soft btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>' +
-              '</div>'
-            : '<div class="result_actions">' +
-              '<button type="button" class="btn btn_primary btn_small" id="btnWriteFromCheck">分析并写入</button>' +
-              '<a class="btn btn_soft btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>' +
-              '</div>';
+        var actions = '<div class="result_actions">' +
+            (exists
+                ? '<a class="btn btn_primary btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>'
+                : '<button type="button" class="btn btn_primary btn_small" id="btnWriteFromCheck">分析并写入</button>' +
+                  '<a class="btn btn_soft btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>') +
+            '</div>';
 
         resultArea.innerHTML =
             '<div class="result_head">' +
@@ -316,59 +313,8 @@
             body +
             actions;
 
-        var priorityBtn = document.getElementById('btnPriorityExisting');
-        if (priorityBtn) priorityBtn.addEventListener('click', doArchive);
         var writeBtn = document.getElementById('btnWriteFromCheck');
         if (writeBtn) writeBtn.addEventListener('click', doArchive);
-    }
-
-    function renderExistingResult(data) {
-        var existing = data.existing || {};
-        var item = existing.data_item || {};
-        var review = data.review || {};
-        var modeText = review.mode === 'new' ? '新词优先' : '复习优先';
-        var rows = [
-            ['状态', '已录入，未新建页面'],
-            ['分类', existing.data_category || item.category || ''],
-            ['页面', existing.page_file || item.path || ''],
-            ['复习日程', (review.schedule || '') + (review.schedule ? ' · ' + modeText : '')]
-        ];
-        if (data.backup) rows.push(['备份', data.backup]);
-
-        var rowsHtml = rows.map(function (row) {
-            return '<div class="result_row"><span>' + esc(row[0]) + '</span><strong>' + esc(row[1]) + '</strong></div>';
-        }).join('');
-
-        resultBadge.textContent = '已插队';
-        inputBadge.textContent = '已录入';
-        resultArea.innerHTML =
-            '<div class="result_head">' +
-            '<div><span class="result_word">' + esc(data.word) + '</span></div>' +
-            '<div class="result_tags"><span class="result_tag">已录入</span><span class="result_tag">插队</span></div>' +
-            '</div>' +
-            '<div class="result_exists">' +
-            '<strong>' + esc(data.message || '已录入，已插队到下一次复习清单。') + '</strong>' +
-            '<p>没有创建新词卡；它会在下一次打开复习清单时优先出现，并带有“插队”标记。</p>' +
-            '</div>' +
-            '<div class="result_rows">' + rowsHtml + '</div>' +
-            '<div class="result_actions">' +
-            '<a class="btn btn_primary btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>' +
-            '<button type="button" class="btn btn_soft btn_small" id="btnAgain">再查一个</button>' +
-            '</div>';
-
-        var again = document.getElementById('btnAgain');
-        if (again) {
-            again.addEventListener('click', function () {
-                wordInput.value = '';
-                hintInput.value = '';
-                wordInput.focus();
-                resultArea.innerHTML = '<div class="result_empty"><span class="result_empty_icon">A</span>' +
-                    '<p>输入下一个单词。</p></div>';
-                resultBadge.textContent = '等待输入';
-                inputBadge.textContent = '等待输入';
-                setStatus('', '');
-            });
-        }
     }
 
     async function doAnalyze() {
@@ -406,13 +352,13 @@
         try {
             var data = await post('/api/archive', { word: word, hint: hintInput.value.trim() });
             if (data.exists) {
-                renderExistingResult(data);
-                setStatus(data.message || '已录入，已插队到下一次复习清单。', 'ok');
-                toast('已录入，已插队到复习清单');
+                renderCheckResult(data);
+                setStatus(data.message || '已录入，不会重复创建。', 'ok');
+                toast('已录入');
             } else {
                 renderResult(data, true);
-                setStatus('已写入：' + data.location.target + '；复习日程 ' + data.data.schedule + '。', 'ok');
-                toast('已写入并排入复习日程');
+                setStatus('已写入：' + data.location.target + '；额外新增 ' + data.data.schedule + '。', 'ok');
+                toast('已写入，排到明天的额外新增');
             }
         } catch (err) {
             renderError(err.message);

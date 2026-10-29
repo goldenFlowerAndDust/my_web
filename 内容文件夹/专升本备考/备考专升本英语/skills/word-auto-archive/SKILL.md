@@ -12,12 +12,12 @@ description: 把一个或多个英文单词通过 DeepSeek 构词分析，自动
 - 把某个英文单词加入专升本词汇库；
 - 自动判断单词是后缀、前缀、词根、复合词还是原子词；
 - 扩充 `专升本英语核心词汇通关.html` 或 `词素/` 下的分类；
-- 把新词加入每天 20 个新词 + 20 个复习的清单。
+- 把新词加入第二天的“额外新增”，不占每天 20 个新词配额。
 
 ## 前置条件
 
 - 工作目录是 `备考专升本英语`（或能解析到它的绝对路径）。
-- Python 可用；API Key 位于用户目录 `.word_archiver_api_key`，或环境变量 `DEEPSEEK_API_KEY`。
+- Python 可用；API Key 位于 `词素工具/API.txt`（和 py 同目录），或环境变量 `DEEPSEEK_API_KEY`。
 - 如果要用网页界面，启动 `python 词素工具/server.py`，打开
   `http://127.0.0.1:8767/单词模块/词汇代码生成器.html`。
 
@@ -31,7 +31,7 @@ description: 把一个或多个英文单词通过 DeepSeek 构词分析，自动
      ```powershell
      python 词素工具/auto_archive.py "<word>" --check --json
      ```
-   - 如果已录入：**不要新建词卡**，执行 `--write` 让它插队复习。
+   - 如果已录入：**不要新建词卡**，也不要插队；只返回“已录入”。
 
 2. **执行写入**
 
@@ -40,7 +40,8 @@ description: 把一个或多个英文单词通过 DeepSeek 构词分析，自动
    ```
 
    - 只预览时用 `--analyze`（不写文件）。
-   - 已录入时 `--write` 不会创建内容，只会写入 `priority` 和今天的 `nextDate`。
+   - 已录入时 `--write` 不创建内容，也不修改 `nextDate` / `priority`。
+   - 新词会打上 `extra: true`，排在第二天的“额外新增”，不占每天 20 个新词。
    - 不要使用浏览器直接调用 DeepSeek；Key 只在 Python 服务端。
    - API 失败时工具不会写入；可以重试一次，仍失败则报告错误。
 
@@ -52,33 +53,28 @@ description: 把一个或多个英文单词通过 DeepSeek 构词分析，自动
    - `analysis.target.label`：目标分类
    - `location.file`：写入的文件
    - `location.group_created`：是否新建了词族
-   - `data.schedule`：排入的日期
+   - `data.schedule`：额外新增日期（通常是第二天）
    - `backup`：备份目录
 
    已录入返回：
 
    - `exists: true`
-   - `existing.data_category`：已有分类
-   - `existing.data_item`：已有 data.json 条目
-   - `review.schedule`：插队日期（今天）
-   - `review.mode`：`new`（新词优先）或 `review`（复习优先）
-   - `backup`：data.json 的备份
-
-   复习清单会把带 `priority` 的词排在最前面，并显示“插队”标记。
+   - `data.item`：已有 data.json 条目
+   - `message`：已录入，不新建、不插队
+   - `page_file`：已有页面（如有）
 
    新词写入后验证：
 
    - 目标页面含 `id="word-<word>"` 和正确的中文/例句；
    - 核心词页的总词数、词族数、导航计数能通过页面脚本自动更新；
-   - `data.json` 有且只有一条该词，`kind` 为 `word`；
-   - 复习清单 `核心词汇复习清单.html` 的“全部词条”出现该词，分类正确；
+   - `data.json` 有且只有一条该词，`kind` 为 `word`，`extra: true`；
+   - 复习清单的“额外新增”出现该词，且不占 20 个新词配额；
    - 不修改旧页面条目和其他分类的已有数据。
 
    已录入验证：
 
    - `data.json` 中没有新增第二条同名记录；
-   - 该词有 `priority` 和今天的 `nextDate`；
-   - 复习清单的“今日新词/今日复习”把它排在最前面，带“插队”标记。
+   - 没有新增 `priority`，也没有被改到今天。
 
 4. **报告给用户**
 
@@ -86,8 +82,8 @@ description: 把一个或多个英文单词通过 DeepSeek 构词分析，自动
 
    - 单词、释义、词性、级别；
    - 新词：分类（如“核心词汇 · -ship 后缀”或“词素 / 复合词”）、写入文件、是否新建词族；
-   - 已录入：提示“已录入，未新建”，说明已插队到今天复习；
-   - 复习日程日期；
+   - 已录入：提示“已录入，未新建”，说明不插队；需要时去“全部词条”查看；
+   - 新词：目标分类、写入文件、额外新增日期；
    - 备份路径；
    - API 错误（如有）。
 

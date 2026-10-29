@@ -22,8 +22,10 @@
     var todayDateEl = document.getElementById('today-date');
     var newList = document.getElementById('new-list');
     var dueList = document.getElementById('due-list');
+    var extraList = document.getElementById('extra-list');
     var newCountEl = document.getElementById('new-count');
     var dueCountEl = document.getElementById('due-count');
+    var extraCountEl = document.getElementById('extra-count');
     var allCountEl = document.getElementById('all-count');
     var newBacklog = document.getElementById('new-backlog');
     var dueBacklog = document.getElementById('due-backlog');
@@ -34,6 +36,7 @@
     var statLearned = document.getElementById('stat-learned');
     var statNew = document.getElementById('stat-new');
     var statDue = document.getElementById('stat-due');
+    var statExtra = document.getElementById('stat-extra');
     var statToday = document.getElementById('stat-today');
     var statRemaining = document.getElementById('stat-remaining');
 
@@ -148,6 +151,9 @@
         var suffix = String(item.suffix || '');
         var suffixLabel = item.suffixLabel ||
             (suffix === 'un' || suffix === 're' ? suffix + '-' : (suffix ? '-' + suffix : ''));
+        var extraDate = /^\d{4}-\d{2}-\d{2}$/.test(item.extraDate || '')
+            ? item.extraDate
+            : '';
 
         return Object.assign({}, item, {
             name: name,
@@ -162,7 +168,8 @@
             suffixLabel: suffixLabel,
             category: item.category || category || '',
             kind: item.kind || '',
-            priority: item.priority || ''
+            extra: item.extra === true,
+            extraDate: extraDate
         });
     }
 
@@ -174,15 +181,12 @@
         return wordData.filter(isWordItem);
     }
 
-    function priorityActive(item, today) {
-        if (!item.priority || item.priority > today) return false;
-        // 已插队的词完成后，lastReviewed 会 >= priority，就不再显示“插队”
-        if (item.lastReviewed && item.lastReviewed >= item.priority) return false;
+    function extraActive(item, today) {
+        if (!item.extra || item.level !== 0 || !item.extraDate) return false;
+        if (item.extraDate > today) return false;
+        // 额外新增完成一次后不再重复出现；未完成则持续保留。
+        if (item.lastReviewed && item.lastReviewed >= item.extraDate) return false;
         return true;
-    }
-
-    function priorityRank(item, today) {
-        return priorityActive(item, today) ? 0 : 1;
     }
 
     function getPending() {
@@ -489,8 +493,8 @@
         var categoryBadge = item.category && item.category !== CORE_CATEGORY
             ? '<span class="badge badge-category">' + esc(item.category.replace(/^词素\//, '')) + '</span>'
             : '';
-        var priorityBadge = priorityActive(item, today)
-            ? '<span class="badge badge-priority">插队</span>'
+        var extraBadge = item.extra
+            ? '<span class="badge badge-extra">额外新增</span>'
             : '';
 
         return '<li class="review-item word-card ' + mode + '" data-name="' + esc(item.name) + '">' +
@@ -500,7 +504,7 @@
             '<span class="word-zh">' + esc(item.zh) + '</span>' +
             suffixBadge +
             categoryBadge +
-            priorityBadge +
+            extraBadge +
             '<span class="badge' + levelClass + '">' + esc(levelLabel(item)) + '</span>' +
             '<span class="badge' + overdueClass + '">' + esc(dateLabel) + '</span>' +
             '</div>' +
@@ -509,13 +513,13 @@
             '<div class="word-actions">' +
             '<a class="btn-open" href="' + esc(makeHref(item.path)) + '" target="_blank" rel="noopener">打开</a>' +
             '<button type="button" class="btn-done" data-complete="' + esc(item.name) + '">' +
-            (mode === 'new' ? '学完' : '复习完成') +
+            (mode === 'new' ? '学完' : (mode === 'extra' ? '额外完成' : '复习完成')) +
             '</button>' +
             '</div>' +
             '</li>';
     }
 
-    function renderStats(today, words, newItems, dueItems) {
+    function renderStats(today, words, newItems, dueItems, extraItems) {
         var learned = words.filter(function (item) {
             return item.level > 0 || !!item.lastReviewed;
         }).length;
@@ -527,11 +531,13 @@
         statLearned.textContent = learned;
         statNew.textContent = newItems.length;
         statDue.textContent = dueItems.length;
+        if (statExtra) statExtra.textContent = extraItems.length;
         statToday.textContent = doneToday;
         statRemaining.textContent = Math.max(0, words.length - learned);
 
         newCountEl.textContent = newItems.length;
         dueCountEl.textContent = dueItems.length;
+        if (extraCountEl) extraCountEl.textContent = extraItems.length;
         allCountEl.textContent = wordData.length;
     }
 
@@ -592,14 +598,14 @@
                       '<span class="word-zh">' + esc(item.zh) + '</span>'
                     : '<span class="word-name static">' + esc(display) + '</span>';
                 var pageBadge = isWord ? '' : '<span class="badge badge-page">页面</span>';
-                var priorityBadge = isWord && priorityActive(item, today)
-                    ? '<span class="badge badge-priority">插队</span>'
+                var extraBadge = isWord && item.extra
+                    ? '<span class="badge badge-extra">额外新增</span>'
                     : '';
                 var href = item.path ? makeHref(item.path) : '';
                 return '<li class="all-item ' + (isWord ? 'is-word' : 'is-page') + '" data-name="' + esc(item.name) + '">' +
                     nameHtml +
                     pageBadge +
-                    priorityBadge +
+                    extraBadge +
                     '<span class="badge badge-level">' + esc(levelLabel(item)) + '</span>' +
                     '<span class="all-date">' + esc(item.nextDate ? formatShort(item.nextDate) : '') + '</span>' +
                     (href ? '<a class="all-open" href="' + esc(href) + '" target="_blank" rel="noopener" title="打开">↗</a>' : '') +
@@ -640,30 +646,36 @@
 
         var words = getWordItems();
 
-        var newCandidates = words.filter(function (item) {
-            return item.level === 0 && (
-                (item.nextDate && item.nextDate <= today) || priorityActive(item, today)
-            );
+        var extraItems = words.filter(function (item) {
+            return extraActive(item, today);
         }).sort(function (a, b) {
-            return priorityRank(a, today) - priorityRank(b, today);
+            if (a.extraDate !== b.extraDate) return a.extraDate.localeCompare(b.extraDate);
+            return a.name.localeCompare(b.name);
+        });
+
+        var newCandidates = words.filter(function (item) {
+            return item.level === 0 &&
+                !extraActive(item, today) &&
+                item.nextDate && item.nextDate <= today;
+        }).sort(function (a, b) {
+            if (a.nextDate !== b.nextDate) return a.nextDate.localeCompare(b.nextDate);
+            return a.name.localeCompare(b.name);
         });
         var newItems = newCandidates.slice(0, DAILY_NEW);
         var newBacklogCount = Math.max(0, newCandidates.length - newItems.length);
 
         var dueCandidates = words.filter(function (item) {
-            return item.level > 0 && (
-                (item.nextDate && item.nextDate <= today) || priorityActive(item, today)
-            );
+            return item.level > 0 &&
+                !extraActive(item, today) &&
+                item.nextDate && item.nextDate <= today;
         }).sort(function (a, b) {
-            var pr = priorityRank(a, today) - priorityRank(b, today);
-            if (pr !== 0) return pr;
             if (a.nextDate !== b.nextDate) return a.nextDate.localeCompare(b.nextDate);
             return a.name.localeCompare(b.name);
         });
         var dueItems = dueCandidates.slice(0, DAILY_REVIEW);
         var dueBacklogCount = Math.max(0, dueCandidates.length - dueItems.length);
 
-        renderStats(today, words, newItems, dueItems);
+        renderStats(today, words, newItems, dueItems, extraItems);
 
         if (newBacklog) {
             if (newBacklogCount > 0) {
@@ -692,6 +704,12 @@
         dueList.innerHTML = dueItems.length > 0
             ? dueItems.map(function (item) { return wordCard(item, 'due', today); }).join('')
             : '<li class="empty">今天没有到期复习。学完新词后，明天会开始第一次复习。</li>';
+
+        if (extraList) {
+            extraList.innerHTML = extraItems.length > 0
+                ? extraItems.map(function (item) { return wordCard(item, 'extra', today); }).join('')
+                : '<li class="empty">今天没有额外新增。前一天通过生成器/答疑新增的词会出现在这里，不占 20 新词配额。</li>';
+        }
 
         renderAllGroups(today);
     }
