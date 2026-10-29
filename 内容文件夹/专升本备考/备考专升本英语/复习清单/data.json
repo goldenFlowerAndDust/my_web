@@ -6994,6 +6994,31 @@
       "extra": true,
       "extraDate": "2026-10-31",
       "source": "generator"
+    },
+    {
+      "name": "nasty",
+      "path": "../词素/原子词/原子词：nasty.html#word-nasty",
+      "category": "词素/原子词",
+      "level": 0,
+      "nextDate": "2026-10-31",
+      "lastReviewed": null,
+      "created": "2026-10-30",
+      "modified": "2026-10-30",
+      "kind": "word",
+      "word": "nasty",
+      "zh": "令人不快的；恶劣的；肮脏的",
+      "root": "nasty",
+      "rootZh": "令人不快的；肮脏的",
+      "suffix": "",
+      "suffixLabel": "",
+      "pos": "adj.",
+      "levelTag": "专升本",
+      "sense": "令人不快的；讨厌的",
+      "anchor": "word-nasty",
+      "batch": "自动补充",
+      "extra": true,
+      "extraDate": "2026-10-31",
+      "source": "generator"
     }
   ]
 }
