@@ -707,6 +707,16 @@
             <code>导入待归档单词.bat</code>。本地统一分类，新词进入明天的“额外新增”，不占 20 词。
         </div>
 
+        <div class="callout">
+            <strong>两类导出不要混：</strong>
+            <code>导出答疑记录</code>是完整问答日志；
+            <code>导出待归档单词</code>才含结构化的 <code>word</code> 字段，能拖到
+            <code>导入待归档单词.bat</code>。
+            浏览器不能自动把下载文件放进子文件夹；下载后双击
+            <code>整理云端下载.bat</code>，会分到
+            <code>云端下载/答疑归档</code>和<code>云端下载/待归档单词</code>。
+        </div>
+
         <div class="table-wrap">
             <table>
                 <thead>
@@ -1030,6 +1040,8 @@
             <div class="file-item"><code>英语答疑/英语答疑.html</code><span>资深英语教师答疑界面</span></div>
             <div class="file-item"><code>导入答疑记录.bat</code><span>把云端导出的 JSON 合并到本地日志</span></div>
             <div class="file-item"><code>导入待归档单词.bat</code><span>把云端待归档单词分类写入词库</span></div>
+            <div class="file-item"><code>整理云端下载.bat</code><span>把两类下载 JSON 分到云端下载子文件夹</span></div>
+            <div class="file-item"><code>云端下载/</code><span>答疑归档 / 待归档单词（已 gitignore）</span></div>
             <div class="file-item"><code>词素工具/import_pending_words.py</code><span>待归档单词导入脚本</span></div>
             <div class="file-item"><code>词素工具/import_tutor_logs.py</code><span>本地日志导入脚本（可预览/去重/备份）</span></div>
             <div class="file-item"><code>词素工具/english_tutor.py</code><span>英语答疑 API 与分类日志</span></div>
