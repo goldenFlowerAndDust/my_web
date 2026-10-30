@@ -11,7 +11,8 @@
 | `word_server.py` | 启动器的 ASCII 路径入口 |
 | `词素工具/server.py` | 本地 HTTP 服务，给网页工具提供 API，并防止 Key 被静态访问 |
 | `词素工具/auto_archive.py` | 命令行入口，也是 skill 的底层工具 |
-| `词素工具/API.txt` | 本地 API Key（和 py 同目录；已 gitignore；不要提交、不要发给别人） |
+| `专升本备考/共享配置/API.txt` | 英语/数学共用 API Key（推荐；已 gitignore；不要提交、不要发给别人） |
+| `词素工具/API.txt` | 旧位置 Key（兼容；可迁移到共享配置） |
 | `单词模块/词汇代码生成器.html` | 网页界面：输入、分析、写入 |
 | `英语答疑/英语答疑.html` | 资深英语教师答疑：单词解释、作文反例、句子分析、语法问答 |
 | `导入待归档单词.bat` | 把云端待归档单词 JSON 拖入后分类写入 |
@@ -272,20 +273,20 @@ python 词素工具/auto_archive.py "sunflower" --write --json
 使用完本阶段后，直接删除：
 
 ```text
-词素工具/API.txt
+专升本备考/共享配置/API.txt
 ```
 
-如果曾使用旧位置，也检查一下 `词素工具/api_key.txt` 和用户目录
+如果曾使用旧位置，也检查一下 `词素工具/API.txt`、`词素工具/api_key.txt` 和用户目录
 `.word_archiver_api_key` 并删除。
 
-> `API.txt` 位于网站目录内，所以请使用本项目自带的 8767 服务（它屏蔽了
+> `共享配置/` 位于网站目录内，所以请使用本项目自带的 8767 服务（它屏蔽了
 > `/词素工具/`），或确认你自己的静态服务器不会把整个项目目录暴露出去。
 
 ## 上传 GitHub 前检查
 
-- **`词素工具/API.txt` 是本地 Key，绝不能上传。** `.gitignore` 已包含它，但 GitHub
-  网页“Upload files”不会自动忽略文件，必须手动排除。
-- 如果用 GitHub 网页上传，直接**不要上传 `词素工具/` 整个目录**；静态网站不需要它。
+- **`专升本备考/共享配置/API.txt` 是本地 Key，绝不能上传。** `.gitignore` 已包含
+  `**/API.txt`，但 GitHub 网页“Upload files”不会自动忽略文件，必须手动排除。
+- 如果用 GitHub 网页上传，直接**不要上传 `共享配置/`**；静态网站不需要它。
 - 要排除 `词素工具/`、`backups/`、`review_backups/`、`归档日志.jsonl`、
   `data.json.bak`、`英语问答日志/`、`英语问答日志备份/`。
 - 静态网站只需要 HTML/CSS/JS、`复习清单/data.json`、`词素/`、`每月打卡/` 等。

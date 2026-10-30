@@ -9,6 +9,107 @@
     ? rootList.querySelector(":scope > li")
     : null;
 
+  function initAiTutor() {
+    const slot = document.querySelector("[data-ai-tutor]");
+    if (!slot || document.querySelector(".ai-tutor-launch")) {
+      return;
+    }
+
+    const source = slot.getAttribute("data-ai-src");
+    if (!source) {
+      return;
+    }
+
+    const title = slot.getAttribute("data-ai-title") || "AI 答疑";
+    const kicker = slot.getAttribute("data-ai-kicker") || "AI TUTOR";
+    const icon = slot.getAttribute("data-ai-icon") || "∑";
+    const newTabLabel = slot.getAttribute("data-ai-newtab") || "新窗口打开";
+
+    slot.hidden = true;
+
+    const launch = document.createElement("button");
+    launch.type = "button";
+    launch.className = "ai-tutor-launch";
+    launch.setAttribute("aria-haspopup", "dialog");
+    launch.setAttribute("aria-controls", "ai-tutor-window");
+
+    const launchIcon = document.createElement("span");
+    launchIcon.className = "ai-tutor-launch-icon";
+    launchIcon.setAttribute("aria-hidden", "true");
+    launchIcon.textContent = icon;
+
+    const launchLabel = document.createElement("strong");
+    launchLabel.textContent = title;
+    launch.append(launchIcon, launchLabel);
+
+    const windowEl = document.createElement("div");
+    windowEl.className = "ai-tutor-window";
+    windowEl.id = "ai-tutor-window";
+    windowEl.hidden = true;
+    windowEl.innerHTML = `
+      <div class="ai-tutor-backdrop" data-ai-tutor-close></div>
+      <section class="ai-tutor-panel" role="dialog" aria-modal="true" aria-labelledby="ai-tutor-title">
+        <div class="ai-tutor-head">
+          <div class="ai-tutor-head-copy">
+            <span class="ai-tutor-kicker"></span>
+            <h2 id="ai-tutor-title"></h2>
+          </div>
+          <div class="ai-tutor-head-actions">
+            <a class="ai-tutor-newtab" target="_blank" rel="noopener"></a>
+            <button type="button" class="ai-tutor-close" aria-label="关闭 AI 答疑">×</button>
+          </div>
+        </div>
+        <iframe class="ai-tutor-frame" title="" loading="lazy"></iframe>
+      </section>
+    `;
+
+    windowEl.querySelector(".ai-tutor-kicker").textContent = kicker;
+    windowEl.querySelector("#ai-tutor-title").textContent = title;
+    const newTab = windowEl.querySelector(".ai-tutor-newtab");
+    newTab.href = source;
+    newTab.textContent = newTabLabel;
+    const closeBtn = windowEl.querySelector(".ai-tutor-close");
+    const frame = windowEl.querySelector(".ai-tutor-frame");
+    frame.title = title;
+
+    document.body.append(launch, windowEl);
+
+    let loaded = false;
+    let lastFocus = null;
+
+    const openWindow = () => {
+      if (!loaded) {
+        frame.src = source;
+        loaded = true;
+      }
+      lastFocus = document.activeElement;
+      windowEl.hidden = false;
+      document.body.classList.add("ai-tutor-open");
+      closeBtn.focus();
+    };
+
+    const closeWindow = () => {
+      windowEl.hidden = true;
+      document.body.classList.remove("ai-tutor-open");
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        lastFocus.focus();
+      }
+    };
+
+    launch.addEventListener("click", openWindow);
+    closeBtn.addEventListener("click", closeWindow);
+    windowEl.querySelectorAll("[data-ai-tutor-close]").forEach((node) => {
+      node.addEventListener("click", closeWindow);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !windowEl.hidden) {
+        closeWindow();
+      }
+    });
+  }
+
+  initAiTutor();
+
   if (!header || !rootList || !sourceItem) {
     return;
   }

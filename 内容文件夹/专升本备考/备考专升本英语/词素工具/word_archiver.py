@@ -10,7 +10,8 @@
 
 API Key 读取顺序：
 - 环境变量 DEEPSEEK_API_KEY
-- 词素工具/API.txt（推荐；和 py 同目录，已 gitignore）
+- 专升本备考/共享配置/API.txt（推荐，英语/数学共用）
+- 词素工具/API.txt（旧位置，兼容）
 - 用户目录 .word_archiver_api_key（备用）
 - 兼容旧位置：词素工具/api_key.txt
 """
@@ -38,6 +39,7 @@ LOG_FILE = TOOL_DIR / "归档日志.jsonl"
 BACKUP_DIR = TOOL_DIR / "backups"
 REVIEW_BACKUP_DIR = TOOL_DIR / "review_backups"
 API_TXT = TOOL_DIR / "API.txt"
+SHARED_KEY_FILE = BASE.parent / "共享配置" / "API.txt"
 HOME_KEY_FILE = Path.home() / ".word_archiver_api_key"
 API_KEY_FILE = TOOL_DIR / "api_key.txt"  # 兼容旧位置
 
@@ -121,13 +123,14 @@ def read_api_key() -> str:
     key = (os.environ.get("DEEPSEEK_API_KEY") or "").strip()
     if key:
         return key
-    for path in (API_TXT, HOME_KEY_FILE, API_KEY_FILE):
+    for path in (SHARED_KEY_FILE, API_TXT, HOME_KEY_FILE, API_KEY_FILE):
         if path.exists():
             key = path.read_text(encoding="utf-8").strip()
             if key:
                 return key
     raise ArchiveError(
-        "未配置 API Key：请写入 词素工具/API.txt（和 py 同目录），或设置 DEEPSEEK_API_KEY"
+        "未配置 API Key：请写入 专升本备考/共享配置/API.txt，"
+        "或设置 DEEPSEEK_API_KEY。"
     )
 
 
@@ -1240,7 +1243,7 @@ def health() -> dict[str, Any]:
     configured = bool((os.environ.get("DEEPSEEK_API_KEY") or "").strip())
     if not configured:
         configured = any(p.exists() and p.read_text(encoding="utf-8").strip()
-                         for p in (API_TXT, HOME_KEY_FILE, API_KEY_FILE))
+                         for p in (SHARED_KEY_FILE, API_TXT, HOME_KEY_FILE, API_KEY_FILE))
     return {
         "ok": True,
         "word_page": WORD_PAGE.exists(),

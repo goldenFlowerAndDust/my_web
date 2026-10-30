@@ -936,10 +936,10 @@
         <h2><span class="num">08</span>API Key 与备份</h2>
 
         <div class="callout red">
-            <strong>本地 Key 放在 <code>词素工具/API.txt</code>（和 py 同目录）。</strong>
+            <strong>本地 Key 放在 <code>专升本备考/共享配置/API.txt</code>（英语/数学共用）。</strong>
             本机 Python 服务会自动读取它，网页不会读取这个文件。
             这个文件已写入 <code>.gitignore</code>，但 GitHub 网页“上传文件”不会自动忽略它，
-            上传时不要勾选 <code>词素工具/</code> 文件夹。删除 API.txt 即可停用本地 AI。
+            上传时不要勾选 <code>共享配置/</code> 文件夹。删除 API.txt 即可停用本地 AI。
         </div>
 
         <p>
@@ -995,14 +995,14 @@
 
         <details>
             <summary>显示“缺少 API Key”</summary>
-            <p>把 Key 写入 <code>词素工具/API.txt</code>（和 py 同目录），或设置环境变量
+            <p>把 Key 写入 <code>专升本备考/共享配置/API.txt</code>，或设置环境变量
                 <code>DEEPSEEK_API_KEY</code>。保存后点“重新检测”，不需要重启服务。</p>
         </details>
 
         <details>
             <summary>显示 401 / Authentication Fails</summary>
             <p>说明 Key 已失效或填错。<code>api_key: true</code> 只代表文件里非空，不代表 Key 有效；
-                请把 <code>词素工具/API.txt</code> 换成有效的 DeepSeek Key。云端 Worker 的 Key
+                请把 <code>专升本备考/共享配置/API.txt</code> 换成有效的 DeepSeek Key。云端 Worker 的 Key
                 是另一份，不受本地文件影响。</p>
         </details>
 
@@ -1063,7 +1063,7 @@
             <div class="file-item"><code>词素工具/word_archiver.py</code><span>DeepSeek 分析与写入逻辑</span></div>
             <div class="file-item"><code>添加日志.html</code><span>最近自动添加的单词、分类和时间</span></div>
             <div class="file-item"><code>返回顶部.js</code><span>主页面浮动“返回顶部”按钮</span></div>
-            <div class="file-item"><code>词素工具/API.txt</code><span>本地 Key，和 py 同目录，已 gitignore</span></div>
+            <div class="file-item"><code>专升本备考/共享配置/API.txt</code><span>英语/数学共用 Key，已 gitignore</span></div>
             <div class="file-item"><code>词素工具/backups/</code><span>每次写入前的备份</span></div>
             <div class="file-item"><code>词素/</code><span>词根、复合词、原子词页面</span></div>
             <div class="file-item"><code>每月打卡/</code><span>10 月、11 月打卡日历</span></div>
@@ -1080,7 +1080,7 @@
             <li>遇到新词，打开自动归档：<strong>先分析，再写入</strong>。</li>
             <li>新词不会丢，会排到<strong>明天的额外新增</strong>，不占每天 20 个新词配额。</li>
             <li>复习页和 AI 工具要用本地 HTTP，<strong>先启动 8767 服务</strong>。</li>
-            <li>Key 放在 <code>词素工具/API.txt</code>，<strong>和 py 同目录，不写进网页，不上传 GitHub</strong>。</li>
+            <li>Key 放在 <code>专升本备考/共享配置/API.txt</code>，<strong>英语/数学共用，不写进网页，不上传 GitHub</strong>。</li>
         </ol>
     </section>
 

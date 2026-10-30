@@ -1,5 +1,5 @@
 /**
- * Cloudflare Worker：专升本英语答疑代理
+ * Cloudflare Worker：专升本英语 / 数学答疑代理
  *
  * 绑定：
  *   TUTOR_KV                 KV namespace（日志）
@@ -18,6 +18,10 @@
  *   GET  /api/tutor-log       Header: X-Tutor-Token
  *   POST /api/pending-word     Header: X-Tutor-Token
  *   GET  /api/pending-words    Header: X-Tutor-Token
+ *
+ * /api/tutor 的 subject：
+ *   缺省 / english → 英语教师
+ *   math           → 数学家
  */
 
 const CATEGORIES = ["单词解释", "作文", "句子分析", "其他"];
@@ -84,6 +88,65 @@ const SYSTEM_PROMPT = `你是一位资深英语教师，长期从事专升本英
 
 最后检查：答案是否直接解决了用户的问题？作文是否同时有“反例”和“修改/范文”？句子分析是否真的拆了主干？单词解释是否有例句？`;
 
+const MATH_CATEGORIES = ["题目讲解", "错题诊断", "概念公式", "其他"];
+const MATH_ALIASES = {
+  problem: "题目讲解",
+  question: "题目讲解",
+  solution: "题目讲解",
+  题目: "题目讲解",
+  讲解: "题目讲解",
+  错题: "错题诊断",
+  diagnosis: "错题诊断",
+  mistake: "错题诊断",
+  error: "错题诊断",
+  concept: "概念公式",
+  formula: "概念公式",
+  概念: "概念公式",
+  公式: "概念公式",
+  other: "其他",
+  qa: "其他",
+  问答: "其他",
+};
+
+const MATH_SYSTEM_PROMPT = `你是一位严谨、耐心的专升本数学老师，具有数学家的严谨和教学经验。你熟悉专升本高等数学、初等数学衔接、常见题型、计算易错点和学生的思维卡点。你的回答对象是准备专升本考试的中文母语大学生。
+
+总要求：
+1. 用中文讲解；数学公式用 LaTeX，行内用 $...$，独立公式用 $$...$$。
+2. 只输出 Markdown 正文，不要输出 HTML、JSON、代码围栏外的系统说明，也不要提到“日志”“API”“系统提示”。
+3. 先判断题目类型和知识点，再给结论/步骤；不要跳步，关键变形说明依据。
+4. 计算题要展示过程并检验；证明题要写清已知、求证、关键推理；应用题要写清变量和条件。
+5. 不确定或题目信息不足时，先明确假设，再按最合理的考试语境作答；不要编造条件。
+6. 不要使用 Markdown 表格；用二级/三级标题、短段落、编号列表组织。
+7. 语言具体、克制，不堆砌套话；最后指出最容易错的一步。
+
+根据用户给出的 mode 执行：
+
+【题目讲解】
+- 先抄出/概括题目，确认要求求什么。
+- 指出知识点、所属章节和可能的方法。
+- 给出完整解题步骤，每一步写清依据（公式、定理、等价变形）。
+- 单独标出最终答案，并做代回/量纲/范围检验。
+- 最后给 1—2 个同类题提醒或易错点。
+
+【错题诊断】
+- 先复述学生的解法或错误答案（如果没有，明确说明按常见错误分析）。
+- 找到第一处真正的错误，说明错因（概念、公式条件、计算、逻辑、审题）。
+- 给出正确解法，并对比错误解法的关键差异。
+- 给一个同类型变式，帮助学生迁移。
+
+【概念公式】
+- 给定义、使用条件、几何/代数意义。
+- 写清公式的常见变形和适用边界。
+- 给一个典型例子和一个反例/易错点。
+- 如果多个概念易混，用并列要点对比，不用表格。
+
+【其他】
+- 回答学习方法、考试策略、概念疑问、计算技巧等问题。
+- 先给结论，再给依据和例子。
+- 需要时给出可执行的练习建议。
+
+最后检查：题目条件是否用全？每一步是否可复核？最终答案是否单独标出？公式是否符合 LaTeX？`;
+
 function corsHeaders(request, env) {
   const configured = String(env.ALLOWED_ORIGIN || "*").trim();
   const requestOrigin = request.headers.get("Origin") || "";
@@ -117,10 +180,35 @@ function json(data, status, request, env) {
   });
 }
 
-function normalizeMode(raw) {
+function normalizeMode(raw, categories = CATEGORIES, aliases = ALIASES) {
   const value = String(raw || "").trim();
-  if (CATEGORIES.includes(value)) return value;
-  return ALIASES[value.toLowerCase()] || "";
+  if (categories.includes(value)) return value;
+  return aliases[value.toLowerCase()] || "";
+}
+
+function subjectConfig(subject) {
+  if (subject === "math") {
+    return {
+      subject: "math",
+      categories: MATH_CATEGORIES,
+      aliases: MATH_ALIASES,
+      prompt: MATH_SYSTEM_PROMPT,
+      temperature: 0.2,
+      maxTokens: 4000,
+      maxQuestion: 4000,
+      label: "数学",
+    };
+  }
+  return {
+    subject: "english",
+    categories: CATEGORIES,
+    aliases: ALIASES,
+    prompt: SYSTEM_PROMPT,
+    temperature: 0.35,
+    maxTokens: 3200,
+    maxQuestion: 2000,
+    label: "英语",
+  };
 }
 
 function formatShanghai(date) {
@@ -191,16 +279,23 @@ async function handleTutor(request, env) {
     return json({ ok: false, error: error.message || "请求体不合法。" }, 400, request, env);
   }
 
-  const mode = normalizeMode(payload.mode);
+  const subject = String(payload.subject || "english").trim().toLowerCase() === "math"
+    ? "math"
+    : "english";
+  const config = subjectConfig(subject);
+  const mode = normalizeMode(payload.mode, config.categories, config.aliases);
   const question = String(payload.question || "").trim();
   if (!mode) {
-    return json({ ok: false, error: "未知的答疑分类，请使用：单词解释 / 作文 / 句子分析 / 其他。" }, 400, request, env);
+    return json({
+      ok: false,
+      error: "未知的答疑分类，请使用：" + config.categories.join(" / ") + "。",
+    }, 400, request, env);
   }
   if (!question) {
     return json({ ok: false, error: "请输入要问的问题。" }, 400, request, env);
   }
-  if (question.length > 2000) {
-    return json({ ok: false, error: "问题太长了，请控制在 2000 字以内。" }, 400, request, env);
+  if (question.length > config.maxQuestion) {
+    return json({ ok: false, error: "问题太长了，请控制在 " + config.maxQuestion + " 字以内。" }, 400, request, env);
   }
 
   const limit = Math.max(1, Math.min(Number(env.RATE_LIMIT_PER_MINUTE || 10) || 10, 100));
@@ -232,14 +327,14 @@ async function handleTutor(request, env) {
       body: JSON.stringify({
         model,
         messages: [
-          { role: "system", content: SYSTEM_PROMPT },
+          { role: "system", content: config.prompt },
           {
             role: "user",
-            content: JSON.stringify({ mode, question }, null, 0),
+            content: JSON.stringify({ subject, mode, question }, null, 0),
           },
         ],
-        temperature: 0.35,
-        max_tokens: 3200,
+        temperature: config.temperature,
+        max_tokens: config.maxTokens,
       }),
       signal: controller.signal,
     });
@@ -280,6 +375,7 @@ async function handleTutor(request, env) {
   const record = {
     created_at: createdAt,
     time,
+    subject,
     mode,
     question,
     answer,
@@ -287,7 +383,7 @@ async function handleTutor(request, env) {
     duration_ms: Date.now() - started,
     status: "ok",
   };
-  const key = `log:${mode}:${createdAt}:${crypto.randomUUID()}`;
+  const key = `log:${subject}:${mode}:${createdAt}:${crypto.randomUUID()}`;
   const ttl = Math.max(1, Number(env.LOG_TTL_DAYS || 180) || 180) * 86400;
 
   let logged = true;
@@ -295,8 +391,8 @@ async function handleTutor(request, env) {
   try {
     await env.TUTOR_KV.put(key, JSON.stringify(record), { expirationTtl: ttl });
 
-    // 单独的 log key 用于存档；index 用于快速读取历史，避免一次列出/读取大量 KV key。
-    const indexKey = `index:${mode}`;
+    // 英语沿用旧 index:<mode>，数学使用独立的 index:math:<mode>。
+    const indexKey = subject === "math" ? `index:math:${mode}` : `index:${mode}`;
     const existing = await env.TUTOR_KV.get(indexKey, "json");
     const index = Array.isArray(existing) ? existing : [];
     index.unshift(record);
@@ -308,6 +404,7 @@ async function handleTutor(request, env) {
 
   return json({
     ok: true,
+    subject,
     mode,
     time,
     answer,
@@ -418,8 +515,14 @@ async function handleLog(request, env) {
   }
 
   const url = new URL(request.url);
+  const subject = (url.searchParams.get("subject") || "english").toLowerCase() === "math"
+    ? "math"
+    : "english";
+  const config = subjectConfig(subject);
   const rawCategory = url.searchParams.get("category") || "all";
-  const category = rawCategory === "all" ? "all" : normalizeMode(rawCategory);
+  const category = rawCategory === "all"
+    ? "all"
+    : normalizeMode(rawCategory, config.categories, config.aliases);
   if (!category) {
     return json({ ok: false, error: "未知的答疑分类。" }, 400, request, env);
   }
@@ -427,12 +530,15 @@ async function handleLog(request, env) {
   if (!Number.isFinite(limit)) limit = 20;
   limit = Math.max(1, Math.min(Math.floor(limit), 50));
 
-  const categories = category === "all" ? CATEGORIES : [category];
+  const categories = category === "all" ? config.categories : [category];
   let entries = [];
   let total = 0;
   try {
     const indexes = await Promise.all(
-      categories.map((name) => env.TUTOR_KV.get(`index:${name}`, "json")),
+      categories.map((name) => env.TUTOR_KV.get(
+        subject === "math" ? `index:math:${name}` : `index:${name}`,
+        "json",
+      )),
     );
     for (const index of indexes) {
       if (Array.isArray(index)) entries.push(...index);
@@ -446,7 +552,7 @@ async function handleLog(request, env) {
     return json({ ok: false, error: "读取云端日志失败，请稍后重试。" }, 500, request, env);
   }
 
-  return json({ ok: true, category, total, entries }, 200, request, env);
+  return json({ ok: true, subject, category, total, entries }, 200, request, env);
 }
 
 async function handleRequest(request, env) {

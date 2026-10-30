@@ -176,3 +176,46 @@ GET  /api/pending-words     Header: X-Tutor-Token
 > 如果之前部署的是旧版 Worker，需要重新粘贴新版 `worker.js` 并部署，
 > 否则答疑页的“待归档单词”会提示 404。云端只存待归档单词，分类和写入 HTML
 > 仍由本地 `word_archiver.py` 完成。
+
+## 八、数学答疑（subject: math）
+
+同一个 Worker 同时支持英语和数学，不需要第二个 Worker。
+
+数学请求：
+
+```json
+{
+  "subject": "math",
+  "mode": "题目讲解",
+  "question": "..."
+}
+```
+
+数学分类：
+
+```text
+题目讲解 / 错题诊断 / 概念公式 / 其他
+```
+
+数学日志索引独立保存：
+
+```text
+index:math:<分类>
+```
+
+英语仍然使用：
+
+```text
+index:<分类>
+```
+
+互不影响。
+
+数学历史：
+
+```text
+GET /api/tutor-log?subject=math&category=all&limit=20
+```
+
+> 数学答疑页也要用新版 `worker.js`；旧 Worker 没有 `subject` 分支，
+> 会把数学题按英语分类处理。更新 Worker 后不需要改 SCF 函数。
