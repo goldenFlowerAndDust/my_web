@@ -23,11 +23,23 @@ sys.path.insert(0, str(TOOL_DIR))
 from math_tutor import (  # noqa: E402
     TutorError,
     ask_tutor,
+    delete_tutor_log,
     health,
     read_tutor_logs,
 )
 
 DEFAULT_PORT = 8768
+SHARED_DIR = BASE.parent / "共享工具"
+if str(SHARED_DIR) not in sys.path:
+    sys.path.insert(0, str(SHARED_DIR))
+
+
+def refresh_archive() -> None:
+    try:
+        from 归档答疑历史 import refresh
+        refresh("math")
+    except Exception as exc:  # noqa: BLE001
+        print("答疑归档更新失败（不影响服务）：%s" % exc)
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -71,12 +83,13 @@ class Handler(SimpleHTTPRequestHandler):
 
             query = parse_qs(urlparse(self.path).query)
             category = (query.get("category") or ["all"])[0]
+            topic = (query.get("topic") or ["all"])[0]
             try:
                 limit = int((query.get("limit") or ["20"])[0])
             except ValueError:
                 limit = 20
             try:
-                self._send_json(200, read_tutor_logs(category, limit))
+                self._send_json(200, read_tutor_logs(category, limit, topic))
             except TutorError as exc:
                 self._send_json(400, {"ok": False, "error": str(exc)})
             return
@@ -85,7 +98,8 @@ class Handler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self):  # noqa: N802
-        if urlparse(self.path).path != "/api/tutor":
+        path = urlparse(self.path).path
+        if path not in {"/api/tutor", "/api/tutor-log-delete"}:
             self._send_json(404, {"ok": False, "error": "未知接口。"})
             return
         try:
@@ -95,7 +109,19 @@ class Handler(SimpleHTTPRequestHandler):
             payload = json.loads(self.rfile.read(length).decode("utf-8") or "{}")
             if not isinstance(payload, dict):
                 raise ValueError("请求体必须是 JSON 对象。")
-            result = ask_tutor(payload.get("mode"), payload.get("question"))
+            if path == "/api/tutor":
+                result = ask_tutor(
+                    payload.get("mode"),
+                    payload.get("question"),
+                    payload.get("topic"),
+                )
+            else:
+                result = delete_tutor_log(
+                    payload.get("mode"),
+                    payload.get("created_at"),
+                    payload.get("time"),
+                )
+            refresh_archive()
             self._send_json(200, result)
         except ValueError as exc:
             self._send_json(400, {"ok": False, "error": str(exc)})
@@ -119,6 +145,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     args = parser.parse_args()
+    refresh_archive()
     server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
     print("数学答疑服务已启动：http://127.0.0.1:%d/数学答疑/数学答疑.html" % args.port)
     print("健康检查：http://127.0.0.1:%d/api/health" % args.port)

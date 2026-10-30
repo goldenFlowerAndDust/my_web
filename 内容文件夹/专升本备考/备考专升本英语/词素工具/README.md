@@ -106,7 +106,6 @@ python 词素工具/import_pending_words.py "英语答疑待归档单词-2026-10
 > 旧 Worker 没有这两个接口。
 
 ### 浏览器下载整理
-
 浏览器不允许网页自动把文件写进指定子文件夹。下载后双击：
 
 ```text
@@ -161,6 +160,27 @@ Key 存 Cloudflare Secret，日志存 KV；访问口令只存在浏览器 localS
 页面“连接设置”里线路选 `国内 SCF`，填 SCF 地址和 `PROXY_TOKEN`。
 Cloudflare 线路的地址和口令会单独保存，不会被覆盖。  
 部署步骤见 `tencent-scf/README.md`。
+
+## 答疑历史自动归档
+
+启动 8767 服务、每次成功答疑或删除记录后，会自动调用：
+
+```text
+共享工具/归档答疑历史.py
+```
+
+生成：
+
+```text
+英语答疑/归档/<分类>/<日期>.html
+```
+
+并更新英语主页的 **AI 答疑历史** 板块。  
+手动执行：
+
+```powershell
+python 共享工具/归档答疑历史.py english
+```
 
 ## 复习打卡自动写回 data.json
 

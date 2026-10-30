@@ -31,6 +31,17 @@ from word_archiver import ArchiveError, analyze_only, apply_review_updates, arch
 from english_tutor import TutorError, ask_tutor, read_tutor_logs  # noqa: E402
 
 DEFAULT_PORT = 8767
+SHARED_DIR = BASE.parent / "共享工具"
+if str(SHARED_DIR) not in sys.path:
+    sys.path.insert(0, str(SHARED_DIR))
+
+
+def refresh_archive() -> None:
+    try:
+        from 归档答疑历史 import refresh
+        refresh("english")
+    except Exception as exc:  # noqa: BLE001
+        print("答疑归档更新失败（不影响服务）：%s" % exc)
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -145,6 +156,7 @@ class Handler(SimpleHTTPRequestHandler):
 
             if path == "/api/tutor":
                 result = ask_tutor(payload.get("mode"), payload.get("question"))
+                refresh_archive()
                 self._send_json(200, result)
                 return
 
@@ -188,6 +200,7 @@ def main() -> None:
         except ValueError:
             print("端口必须是数字。")
             return
+    refresh_archive()
     server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
     print("词素自动归档服务已启动：")
     print("  工具页: http://127.0.0.1:%d/单词模块/词汇代码生成器.html" % port)

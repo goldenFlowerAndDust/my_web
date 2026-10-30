@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学 · 极限 · 2026-10-30</title>
+    <link rel="stylesheet" href="../../../一些必备脚本/数学公式js/libs/katex.min.css">
+    <script defer src="../../../一些必备脚本/数学公式js/libs/katex.min.js"></script>
+    <script defer src="../../../一些必备脚本/数学公式js/libs/auto-render.min.js"></script>
+    <style>
+        :root { --ink:#172033; --muted:#65718a; --line:#e3e7ef; --paper:#fffdf8; --accent:#425fe8; }
+        * { box-sizing:border-box; }
+        body { margin:0; padding:28px 16px 56px; background:#f3f6fc; color:var(--ink); font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; line-height:1.8; }
+        .shell { width:min(960px,100%); margin:0 auto; }
+        .top { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px; }
+        .back { color:var(--accent); text-decoration:none; font-weight:700; font-size:14px; }
+        .tag { color:var(--muted); font-size:12px; }
+        h1 { margin:0 0 4px; font-family:"Noto Serif SC",serif; font-size:clamp(24px,4vw,38px); }
+        .sub { margin:0 0 22px; color:var(--muted); font-size:13px; }
+        .record { margin:0 0 16px; padding:18px 20px; background:var(--paper); border:1px solid var(--line); border-radius:12px; box-shadow:0 8px 24px rgba(33,48,88,.05); }
+        .record-meta { display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:11px; }
+        .record h2 { margin:8px 0; font-size:16px; line-height:1.7; overflow-wrap:anywhere; }
+        .answer { white-space:pre-wrap; overflow-wrap:anywhere; font-size:14px; }
+        .answer.math { line-height:2; }
+        .katex-display { overflow-x:auto; overflow-y:hidden; padding:.2rem 0; }
+        @media (max-width:600px) { body { padding:18px 10px 40px; } .record { padding:14px; } }
+    </style>
+</head>
+<body>
+<div class="shell">
+    <div class="top">
+        <a class="back" href="../../../../../../自建本地网站/导航栏内容/专升本/数学/专升本数学.html">← 返回数学主页</a>
+        <span class="tag">AI 答疑归档 · 按日保存</span>
+    </div>
+    <h1>极限 · 2026-10-30</h1>
+    <p class="sub">数学答疑记录，共 1 条。</p>
+    <article class="record"><div class="record-meta"><span>题目讲解</span><time>2026-10-30 22:07:00</time></div><h2>$\lim_{x \to -\infty}x(\sqrt{1+x^2}+x)$求极限</h2><div class="answer math">## 题目与知识点
+
+求极限
+\[
+\lim_{x\to -\infty}x\left(\sqrt{1+x^2}+x\right).
+\]
+
+知识点：无穷远处函数极限、\(\infty-\infty\) 型处理、分子有理化、无穷小量阶的比较。所属章节：高等数学“极限与连续”。
+
+关键观察：当 \(x\to -\infty\) 时，\(\sqrt{1+x^2}\to +\infty\)，而 \(x\to -\infty\)，括号内是 \(\infty-\infty\) 型，不能直接代入，需要变形。
+
+## 解题步骤
+
+**第一步：有理化括号内的差式。**
+
+利用恒等式
+\[
+\sqrt{1+x^2}+x=\frac{\left(\sqrt{1+x^2}+x\right)\left(\sqrt{1+x^2}-x\right)}{\sqrt{1+x^2}-x}
+=\frac{(1+x^2)-x^2}{\sqrt{1+x^2}-x}
+=\frac{1}{\sqrt{1+x^2}-x}.
+\]
+这里用到平方差公式，且分母 \(\sqrt{1+x^2}-x\neq 0\)（事实上当 \(x\to-\infty\) 时它趋于 \(+\infty\)）。
+
+**第二步：代回原式。**
+
+\[
+x\left(\sqrt{1+x^2}+x\right)=\frac{x}{\sqrt{1+x^2}-x}.
+\]
+
+**第三步：分子分母同除以 \(|x|=-x\)（因为 \(x&lt;0\)）。**
+
+注意 \(x\to -\infty\) 时 \(x&lt;0\)，所以 \(|x|=-x\)，且
+\[
+\sqrt{1+x^2}=|x|\sqrt{\frac{1}{x^2}+1}=-x\sqrt{1+\frac{1}{x^2}}.
+\]
+于是
+\[
+\frac{x}{\sqrt{1+x^2}-x}
+=\frac{x}{-x\sqrt{1+\frac1{x^2}}-x}
+=\frac{x}{-x\left(\sqrt{1+\frac1{x^2}}+1\right)}
+=\frac{1}{-\left(\sqrt{1+\frac1{x^2}}+1\right)}.
+\]
+
+**第四步：取极限。**
+
+当 \(x\to-\infty\) 时，\(\dfrac{1}{x^2}\to 0\)，故
+\[
+\sqrt{1+\frac1{x^2}}\to 1.
+\]
+因此
+\[
+\lim_{x\to-\infty}\frac{1}{-\left(\sqrt{1+\frac1{x^2}}+1\right)}
+=\frac{1}{-(1+1)}=-\frac12.
+\]
+
+## 最终答案
+
+\[
+\boxed{\lim_{x\to -\infty}x\left(\sqrt{1+x^2}+x\right)=-\frac12}
+\]
+
+## 检验
+
+从量级看：当 \(x\to-\infty\) 时，\(\sqrt{1+x^2}=|x|+o(1)=-x+o(1)\)，所以
+\[
+\sqrt{1+x^2}+x=o(1),
+\]
+即括号内是无穷小。更精确地，
+\[
+\sqrt{1+x^2}+x=\frac{1}{\sqrt{1+x^2}-x}\sim \frac{1}{-2x},
+\]
+乘以 \(x\) 得 \(\sim -\dfrac12\)，与计算结果一致。结果是一个有限常数，符合“无穷大乘无穷小”可能得到非零常数的预期。
+
+## 易错点提醒
+
+最容易错的一步是**开方时忽略 \(x&lt;0\)**：把 \(\sqrt{1+x^2}\) 直接写成 \(x\sqrt{1+\frac1{x^2}}\) 会多出一个负号，导致答案变成 \(\frac12\)。正确写法是 \(\sqrt{1+x^2}=|x|\sqrt{1+\frac1{x^2}}=-x\sqrt{1+\frac1{x^2}}\)。
+
+同类题提醒：处理 \(x\to -\infty\) 的有理化、同除最高次幂时，凡涉及 \(\sqrt{x^2}=|x|\) 的地方都要先判断 \(x\) 的符号；若改为 \(x\to +\infty\)，同样题目的极限会是 \(\frac12\)，可作对比练习。</div></article>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof renderMathInElement !== "function") return;
+    document.querySelectorAll(".answer, h2").forEach(function (node) {
+        try {
+            renderMathInElement(node, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                strict: false
+            });
+        } catch (e) {}
+    });
+});
+</script>
+
+</body>
+</html>

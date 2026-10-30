@@ -1189,3 +1189,56 @@ button {
     justify-content: center;
   }
 }
+
+/* AI 答疑历史归档（英语主页生成板块） */
+.ai-archive-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.ai-archive-group {
+    min-width: 0;
+    padding: 14px 16px;
+    background: var(--paper-solid);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.ai-archive-group h3 {
+    margin: 0 0 8px;
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 15px;
+}
+
+.ai-archive-group ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ai-archive-group a {
+    display: inline-block;
+    padding: 3px 7px;
+    color: var(--teal);
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-decoration: none;
+}
+
+.ai-archive-group a:hover {
+    border-color: var(--teal);
+}
+
+.ai-archive-empty {
+    margin: 0;
+    color: var(--faint);
+    font-size: 12px;
+}

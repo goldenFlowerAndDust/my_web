@@ -65,6 +65,23 @@
                     <button type="button" class="mode-tab" data-mode="其他" role="tab" aria-selected="false">方法 / 其他</button>
                 </div>
 
+                <div class="topic-row">
+                    <label class="field-label" for="topic-select">知识分类</label>
+                    <select id="topic-select" class="topic-select">
+                        <option value="极限">极限</option>
+                        <option value="导数与微分">导数与微分</option>
+                        <option value="积分">积分</option>
+                        <option value="三角函数">三角函数</option>
+                        <option value="矩阵">矩阵</option>
+                        <option value="向量与空间几何">向量与空间几何</option>
+                        <option value="微分方程">微分方程</option>
+                        <option value="无穷级数">无穷级数</option>
+                        <option value="多元函数">多元函数</option>
+                        <option value="概率统计">概率统计</option>
+                        <option value="其他" selected>其他</option>
+                    </select>
+                </div>
+
                 <label class="field-label" for="question">你的题目或问题</label>
                 <textarea id="question" maxlength="4000" rows="8" placeholder="粘贴题目、写出你的解法，或问一个概念/公式…"></textarea>
                 <div class="input-meta">
@@ -144,6 +161,24 @@
                 <button type="button" class="history-tab" data-category="概念公式">概念公式</button>
                 <button type="button" class="history-tab" data-category="其他">其他</button>
                 <span class="history-count" id="history-count">—</span>
+            </div>
+
+            <div class="history-topic-row">
+                <label for="history-topic">知识分类</label>
+                <select id="history-topic">
+                    <option value="all" selected>全部</option>
+                    <option value="极限">极限</option>
+                    <option value="导数与微分">导数与微分</option>
+                    <option value="积分">积分</option>
+                    <option value="三角函数">三角函数</option>
+                    <option value="矩阵">矩阵</option>
+                    <option value="向量与空间几何">向量与空间几何</option>
+                    <option value="微分方程">微分方程</option>
+                    <option value="无穷级数">无穷级数</option>
+                    <option value="多元函数">多元函数</option>
+                    <option value="概率统计">概率统计</option>
+                    <option value="其他">其他</option>
+                </select>
             </div>
 
             <div class="history-list" id="history-list"></div>

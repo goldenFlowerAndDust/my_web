@@ -39,7 +39,9 @@ http://127.0.0.1:8768/数学答疑/数学答疑.html
 
 | 文件 | 作用 |
 |---|---|
-| `数学工具/server.py` | 本地静态服务 + `/api/health`、`/api/tutor`、`/api/tutor-log` |
+| `数学工具/server.py` | 本地静态服务 + `/api/health`、`/api/tutor`、`/api/tutor-log`、`/api/tutor-log-delete` |
+| `数学工具/import_math_tutor_logs.py` | 把云端导出的数学 JSON 合并到本地日志 |
+| `导入数学答疑记录.bat` | 拖入数学 JSON 自动导入 |
 | `数学工具/math_tutor.py` | 数学家人设、DeepSeek 调用、分类日志 |
 | `数学答疑/数学答疑.html` | 数学答疑页面 |
 | `数学答疑/数学答疑.css` | 页面样式 |
@@ -62,21 +64,76 @@ Cloudflare
 {
   "subject": "math",
   "mode": "题目讲解",
+  "topic": "极限",
   "question": "..."
 }
 ```
 
+知识分类：
+
+```text
+极限 / 导数与微分 / 积分 / 三角函数 / 矩阵 /
+向量与空间几何 / 微分方程 / 无穷级数 / 多元函数 / 概率统计 / 其他
+```
+
+它和 `mode`（题目讲解/错题诊断/概念公式/其他）是两个维度，历史记录可以按知识分类筛选。
+
 Cloudflare Worker 用 `subject: "math"` 选择数学家人设和数学分类，日志索引用：
 
 ```text
-index:math:<分类>
+index:math:<mode>
 ```
 
-英语仍用原来的 `index:<分类>`，互不影响。
+英语仍用原来的 `index:<mode>`，互不影响。
+
+数学历史可以带知识分类筛选：
+
+```text
+GET /api/tutor-log?subject=math&category=all&topic=极限&limit=20
+```
+
+## 云端记录导回本地
+
+1. 数学答疑页历史记录点 **导出答疑记录**；
+2. 把 `数学答疑记录-*.json` 拖到项目根目录的 `导入数学答疑记录.bat`；
+3. 脚本按分类追加到 `数学工具/数学问答日志/*.jsonl`，保留 `topic`，重复记录跳过；
+4. 写入前原日志备份到 `数学工具/数学问答日志备份/`。
+
+也可以手动预览（不加 `--write` 不写入）：
+
+```powershell
+python 数学工具/import_math_tutor_logs.py "数学答疑记录-2026-10-30-2112.json"
+python 数学工具/import_math_tutor_logs.py "数学答疑记录-2026-10-30-2112.json" --write
+```
+
+> 只启动 8768 服务不会自动读取导出的 JSON；必须拖入 bat 或运行脚本。
+> 刷新页面后，本地线路才能看到导入的记录。
+
+## 自动归档与主页历史
+
+启动数学服务、每次答疑成功或删除记录后，会自动调用：
+
+```text
+共享工具/归档答疑历史.py
+```
+
+生成：
+
+```text
+数学答疑/归档/<知识分类>/<日期>.html
+```
+
+并更新数学主页的 **AI 答疑历史** 板块。  
+手动执行：
+
+```powershell
+python 共享工具/归档答疑历史.py math
+```
 
 ## 注意
 
 - 数学答疑**不会**自动收词、不写词库、不进入英语复习额外新增。
-- 公式用 LaTeX；页面加载本地 KaTeX。
+- 公式用 LaTeX；页面加载本地 `一些必备脚本/数学公式js/libs` 里的 KaTeX，支持 `$...$`、`$$...$$`、`\(...\)`、`\[...\]`；历史记录原题也会渲染。
+- 历史记录每条有“删除”按钮，调用 `/api/tutor-log-delete`；云端对应 Worker 也需要新版。
 - 本地 AI 需要有效 DeepSeek Key；没有 Key 时只能看页面和云端线路。
 - 腾讯云 SCF 只是国内入口，转发到 Cloudflare Worker，不需要改 SCF 代码。

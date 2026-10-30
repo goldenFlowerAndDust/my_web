@@ -16,6 +16,7 @@
  *   GET  /api/health
  *   POST /api/tutor           Header: X-Tutor-Token
  *   GET  /api/tutor-log       Header: X-Tutor-Token
+ *   POST /api/tutor-log-delete Header: X-Tutor-Token
  *   POST /api/pending-word     Header: X-Tutor-Token
  *   GET  /api/pending-words    Header: X-Tutor-Token
  *
@@ -89,6 +90,55 @@ const SYSTEM_PROMPT = `你是一位资深英语教师，长期从事专升本英
 最后检查：答案是否直接解决了用户的问题？作文是否同时有“反例”和“修改/范文”？句子分析是否真的拆了主干？单词解释是否有例句？`;
 
 const MATH_CATEGORIES = ["题目讲解", "错题诊断", "概念公式", "其他"];
+const MATH_TOPICS = [
+  "极限",
+  "导数与微分",
+  "积分",
+  "三角函数",
+  "矩阵",
+  "向量与空间几何",
+  "微分方程",
+  "无穷级数",
+  "多元函数",
+  "概率统计",
+  "其他",
+];
+const MATH_TOPIC_ALIASES = {
+  limit: "极限",
+  limits: "极限",
+  极限: "极限",
+  derivative: "导数与微分",
+  differential: "导数与微分",
+  differentiation: "导数与微分",
+  导数: "导数与微分",
+  微分: "导数与微分",
+  导数与微分: "导数与微分",
+  integral: "积分",
+  integration: "积分",
+  积分: "积分",
+  trigonometry: "三角函数",
+  trigonometric: "三角函数",
+  三角函数: "三角函数",
+  matrix: "矩阵",
+  matrices: "矩阵",
+  矩阵: "矩阵",
+  vector: "向量与空间几何",
+  vectors: "向量与空间几何",
+  向量: "向量与空间几何",
+  空间几何: "向量与空间几何",
+  "differential equation": "微分方程",
+  微分方程: "微分方程",
+  series: "无穷级数",
+  无穷级数: "无穷级数",
+  multivariable: "多元函数",
+  多元函数: "多元函数",
+  probability: "概率统计",
+  statistics: "概率统计",
+  概率: "概率统计",
+  统计: "概率统计",
+  other: "其他",
+  其他: "其他",
+};
 const MATH_ALIASES = {
   problem: "题目讲解",
   question: "题目讲解",
@@ -186,12 +236,19 @@ function normalizeMode(raw, categories = CATEGORIES, aliases = ALIASES) {
   return aliases[value.toLowerCase()] || "";
 }
 
+function normalizeTopic(raw) {
+  const value = String(raw || "").trim();
+  if (MATH_TOPICS.includes(value)) return value;
+  return MATH_TOPIC_ALIASES[value.toLowerCase()] || "其他";
+}
+
 function subjectConfig(subject) {
   if (subject === "math") {
     return {
       subject: "math",
       categories: MATH_CATEGORIES,
       aliases: MATH_ALIASES,
+      topics: MATH_TOPICS,
       prompt: MATH_SYSTEM_PROMPT,
       temperature: 0.2,
       maxTokens: 4000,
@@ -203,6 +260,7 @@ function subjectConfig(subject) {
     subject: "english",
     categories: CATEGORIES,
     aliases: ALIASES,
+    topics: [],
     prompt: SYSTEM_PROMPT,
     temperature: 0.35,
     maxTokens: 3200,
@@ -284,6 +342,7 @@ async function handleTutor(request, env) {
     : "english";
   const config = subjectConfig(subject);
   const mode = normalizeMode(payload.mode, config.categories, config.aliases);
+  const topic = subject === "math" ? normalizeTopic(payload.topic) : "";
   const question = String(payload.question || "").trim();
   if (!mode) {
     return json({
@@ -330,7 +389,7 @@ async function handleTutor(request, env) {
           { role: "system", content: config.prompt },
           {
             role: "user",
-            content: JSON.stringify({ subject, mode, question }, null, 0),
+            content: JSON.stringify({ subject, mode, topic, question }, null, 0),
           },
         ],
         temperature: config.temperature,
@@ -377,6 +436,7 @@ async function handleTutor(request, env) {
     time,
     subject,
     mode,
+    topic,
     question,
     answer,
     model,
@@ -406,6 +466,7 @@ async function handleTutor(request, env) {
     ok: true,
     subject,
     mode,
+    topic,
     time,
     answer,
     model,
@@ -526,6 +587,10 @@ async function handleLog(request, env) {
   if (!category) {
     return json({ ok: false, error: "未知的答疑分类。" }, 400, request, env);
   }
+  const rawTopic = url.searchParams.get("topic") || "all";
+  const topic = subject === "math" && rawTopic !== "all"
+    ? normalizeTopic(rawTopic)
+    : "all";
   let limit = Number(url.searchParams.get("limit") || 20);
   if (!Number.isFinite(limit)) limit = 20;
   limit = Math.max(1, Math.min(Math.floor(limit), 50));
@@ -545,6 +610,7 @@ async function handleLog(request, env) {
     }
     entries = entries
       .filter((item) => item && typeof item === "object" && item.answer)
+      .filter((item) => topic === "all" || normalizeTopic(item.topic) === topic)
       .sort((a, b) => String(b.created_at || b.time || "").localeCompare(String(a.created_at || a.time || "")));
     total = entries.length;
     entries = entries.slice(0, limit);
@@ -552,7 +618,59 @@ async function handleLog(request, env) {
     return json({ ok: false, error: "读取云端日志失败，请稍后重试。" }, 500, request, env);
   }
 
-  return json({ ok: true, subject, category, total, entries }, 200, request, env);
+  return json({ ok: true, subject, category, topic, total, entries }, 200, request, env);
+}
+
+async function handleLogDelete(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: error.message || "请求体不合法。" }, 400, request, env);
+  }
+
+  const subject = String(payload.subject || "english").trim().toLowerCase() === "math"
+    ? "math"
+    : "english";
+  const config = subjectConfig(subject);
+  const mode = normalizeMode(payload.mode, config.categories, config.aliases);
+  const createdAt = String(payload.created_at || "").trim();
+  const time = String(payload.time || "").trim();
+  if (!mode) {
+    return json({ ok: false, error: "未知的答疑分类。" }, 400, request, env);
+  }
+  if (!createdAt && !time) {
+    return json({ ok: false, error: "缺少要删除的记录时间。" }, 400, request, env);
+  }
+
+  const indexKey = subject === "math" ? `index:math:${mode}` : `index:${mode}`;
+  try {
+    const existing = await env.TUTOR_KV.get(indexKey, "json");
+    if (!Array.isArray(existing) || !existing.length) {
+      return json({ ok: true, deleted: 0 }, 200, request, env);
+    }
+    const kept = existing.filter((item) => {
+      if (!item || typeof item !== "object") return true;
+      if (createdAt && String(item.created_at || "") === createdAt) return false;
+      if (time && String(item.time || "") === time) return false;
+      return true;
+    });
+    const deleted = existing.length - kept.length;
+    if (deleted > 0) {
+      const ttl = Math.max(1, Number(env.LOG_TTL_DAYS || 180) || 180) * 86400;
+      await env.TUTOR_KV.put(indexKey, JSON.stringify(kept), { expirationTtl: ttl });
+    }
+    return json({ ok: true, deleted }, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: "删除云端答疑记录失败。" }, 500, request, env);
+  }
 }
 
 async function handleRequest(request, env) {
@@ -593,6 +711,10 @@ async function handleRequest(request, env) {
 
   if (path === "/api/tutor-log" && request.method === "GET") {
     return handleLog(request, env);
+  }
+
+  if (path === "/api/tutor-log-delete" && request.method === "POST") {
+    return handleLogDelete(request, env);
   }
 
   return json({ ok: false, error: "未知接口。" }, 404, request, env);

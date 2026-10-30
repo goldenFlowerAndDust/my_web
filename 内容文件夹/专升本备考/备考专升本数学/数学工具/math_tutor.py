@@ -47,6 +47,57 @@ _ALIASES = {
     "问答": "其他",
 }
 
+# 知识分类：和 mode（讲法）分开，便于历史按知识分类筛选。
+TOPICS = (
+    "极限",
+    "导数与微分",
+    "积分",
+    "三角函数",
+    "矩阵",
+    "向量与空间几何",
+    "微分方程",
+    "无穷级数",
+    "多元函数",
+    "概率统计",
+    "其他",
+)
+_TOPIC_ALIASES = {
+    "limit": "极限",
+    "limits": "极限",
+    "极限": "极限",
+    "derivative": "导数与微分",
+    "differential": "导数与微分",
+    "differentiation": "导数与微分",
+    "导数": "导数与微分",
+    "微分": "导数与微分",
+    "导数与微分": "导数与微分",
+    "integral": "积分",
+    "integration": "积分",
+    "积分": "积分",
+    "trigonometry": "三角函数",
+    "trigonometric": "三角函数",
+    "三角函数": "三角函数",
+    "matrix": "矩阵",
+    "matrices": "矩阵",
+    "矩阵": "矩阵",
+    "vector": "向量与空间几何",
+    "vectors": "向量与空间几何",
+    "向量": "向量与空间几何",
+    "空间几何": "向量与空间几何",
+    "differential equation": "微分方程",
+    "微分方程": "微分方程",
+    "series": "无穷级数",
+    "无穷级数": "无穷级数",
+    "multivariable": "多元函数",
+    "多元函数": "多元函数",
+    "probability": "概率统计",
+    "statistics": "概率统计",
+    "概率": "概率统计",
+    "统计": "概率统计",
+    "other": "其他",
+    "其他": "其他",
+}
+
 SYSTEM_PROMPT = """你是一位严谨、耐心的专升本数学老师，具有数学家的严谨和教学经验。你熟悉专升本高等数学、初等数学衔接、常见题型、计算易错点和学生的思维卡点。你的回答对象是准备专升本考试的中文母语大学生。
 
 总要求：
@@ -127,6 +178,14 @@ def normalize_mode(raw: str) -> str:
     )
 
 
+def normalize_topic(raw: str) -> str:
+    value = str(raw or "").strip()
+    if value in TOPICS:
+        return value
+    alias = _TOPIC_ALIASES.get(value.lower())
+    return alias or "其他"
+
+
 def _log_path(category: str) -> Path:
     return LOG_DIR / CATEGORY_FILES[category]
 
@@ -138,8 +197,9 @@ def _append_log(record: dict[str, Any], category: str) -> None:
         fh.write(line + "\n")
 
 
-def ask_tutor(mode: str, question: str) -> dict[str, Any]:
+def ask_tutor(mode: str, question: str, topic: str = "其他") -> dict[str, Any]:
     category = normalize_mode(mode)
+    topic = normalize_topic(topic)
     question = str(question or "").strip()
     if not question:
         raise TutorError("请输入要问的题目或问题。")
@@ -154,7 +214,7 @@ def ask_tutor(mode: str, question: str) -> dict[str, Any]:
             {
                 "role": "user",
                 "content": json.dumps(
-                    {"mode": category, "question": question}, ensure_ascii=False
+                    {"mode": category, "topic": topic, "question": question}, ensure_ascii=False
                 ),
             },
         ],
@@ -196,6 +256,7 @@ def ask_tutor(mode: str, question: str) -> dict[str, Any]:
     record = {
         "time": now,
         "mode": category,
+        "topic": topic,
         "question": question,
         "answer": answer,
         "model": MODEL,
@@ -214,6 +275,7 @@ def ask_tutor(mode: str, question: str) -> dict[str, Any]:
     result: dict[str, Any] = {
         "ok": True,
         "mode": category,
+        "topic": topic,
         "time": now,
         "answer": answer,
         "model": MODEL,
@@ -224,12 +286,60 @@ def ask_tutor(mode: str, question: str) -> dict[str, Any]:
     return result
 
 
-def read_tutor_logs(category: str = "all", limit: int = 20) -> dict[str, Any]:
+def delete_tutor_log(mode: str, created_at: str = "", time_text: str = "") -> dict[str, Any]:
+    category = normalize_mode(mode)
+    created_at = str(created_at or "").strip()
+    time_text = str(time_text or "").strip()
+    if not created_at and not time_text:
+        raise TutorError("缺少要删除的记录时间。")
+
+    path = _log_path(category)
+    if not path.exists():
+        return {"ok": True, "deleted": 0}
+
+    kept: list[str] = []
+    deleted = 0
+    for line in path.read_text(encoding="utf-8-sig").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            item = json.loads(line)
+        except json.JSONDecodeError:
+            kept.append(line)
+            continue
+        if not isinstance(item, dict):
+            kept.append(line)
+            continue
+        matched = False
+        if created_at and str(item.get("created_at", "")) == created_at:
+            matched = True
+        elif time_text and str(item.get("time", "")) == time_text:
+            matched = True
+        if matched:
+            deleted += 1
+        else:
+            kept.append(json.dumps(item, ensure_ascii=False))
+
+    if deleted:
+        temp = path.with_suffix(".tmp")
+        temp.write_text("\n".join(kept) + ("\n" if kept else ""), encoding="utf-8", newline="\n")
+        temp.replace(path)
+    return {"ok": True, "deleted": deleted}
+
+
+def read_tutor_logs(category: str = "all", limit: int = 20, topic: str = "all") -> dict[str, Any]:
     category = str(category or "all").strip()
     if category and category.lower() != "all":
         category = normalize_mode(category)
     else:
         category = "all"
+
+    topic_filter = str(topic or "all").strip()
+    if topic_filter.lower() != "all":
+        topic_filter = normalize_topic(topic_filter)
+    else:
+        topic_filter = "all"
 
     try:
         limit = int(limit)
@@ -258,13 +368,17 @@ def read_tutor_logs(category: str = "all", limit: int = 20) -> dict[str, Any]:
                 item = json.loads(line)
             except json.JSONDecodeError:
                 continue
-            if isinstance(item, dict):
-                entries.append(item)
+            if not isinstance(item, dict):
+                continue
+            if topic_filter != "all" and normalize_topic(item.get("topic")) != topic_filter:
+                continue
+            entries.append(item)
 
     entries.sort(key=lambda item: str(item.get("time", "")), reverse=True)
     return {
         "ok": True,
         "category": category,
+        "topic": topic_filter,
         "total": len(entries),
         "entries": entries[:limit],
     }

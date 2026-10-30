@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专升本英语 · 学习主页</title>
+    <meta name="description" content="专升本英语学习主页：核心词汇、构词法、词素、语法长难句、每日复习、打卡日历、AI 自动收词与使用指南。">
+    <link rel="stylesheet" href="专升本英语.css">
+</head>
+<body>
+<div class="ambient" aria-hidden="true">
+    <span class="ambient-orb one"></span>
+    <span class="ambient-orb two"></span>
+    <span class="ambient-orb three"></span>
+    <span class="float-letter" style="top:10%;left:4%">A</span>
+    <span class="float-letter" style="top:22%;right:7%;animation-delay:-5s">a</span>
+    <span class="float-letter" style="top:58%;left:2%;animation-delay:-9s">W</span>
+    <span class="float-letter" style="top:78%;right:5%;animation-delay:-13s">E</span>
+</div>
+
+<div class="page-shell">
+    <header class="site-hero">
+        <div class="hero-content">
+            <div class="hero-copy">
+                <span class="hero-eyebrow">ENGLISH · STUDY HUB</span>
+                <h1>专升本英语</h1>
+                <p>从 307 个核心词、构词法与词素，到长难句和每日 20 + 20 复习。先看“今日学习”，再按分类进入专题；旧版内容单独归档。</p>
+                <div class="hero-actions">
+                    <a class="hero-action primary" href="../../../../专升本备考/备考专升本英语/英语答疑/英语答疑.html">英语答疑 · 问老师</a>
+                    <a class="hero-action" href="../../../../专升本备考/备考专升本英语/复习清单/核心词汇复习清单.html">今日复习</a>
+                    <a class="hero-action" href="../../../../专升本备考/备考专升本英语/添加日志.html">添加日志</a>
+                </div>
+            </div>
+            <div class="hero-footer">
+                <div class="hero-stats" aria-label="内容统计">
+                    <div class="hero-stat"><strong id="stat-resources">—</strong><span>学习入口</span></div>
+                    <div class="hero-stat"><strong id="stat-sections">—</strong><span>内容分类</span></div>
+                    <div class="hero-stat"><strong>307</strong><span>核心词汇</span></div>
+                    <div class="hero-stat"><strong>20 + 20</strong><span>每日节奏</span></div>
+                </div>
+                <span class="hero-signature">VOCABULARY · GRAMMAR · REVIEW</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="quick-panel" aria-label="本地使用提示">
+        <div>
+            <span class="quick-kicker">LOCAL FIRST</span>
+            <strong>本地使用：先启动 8767 服务，再打开复习清单</strong>
+            <p>双击项目根目录的 <code>启动词素服务.bat</code>。添加单词、复习自动写回 <code>data.json</code> 都需要它；GitHub Pages 是静态托管，线上只能读，不能写回仓库。</p>
+        </div>
+        <a class="quick-link" href="../../../../专升本备考/备考专升本英语/使用指南.html#start">查看启动说明 →</a>
+    </section>
+
+    <section class="sticky-tools" aria-label="搜索学习资料">
+        <label class="search-box" for="english-search">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="english-search" type="search" autocomplete="off" placeholder="搜索复习、单词、构词、语法、工具…" aria-label="搜索英语学习资料">
+            <kbd>/</kbd>
+        </label>
+        <button class="theme-toggle" type="button" aria-label="切换深色模式">
+            <span class="theme-icon" aria-hidden="true"></span>
+            <span class="theme-label"></span>
+        </button>
+    </section>
+
+    <main class="hub-main">
+        <!-- 01 今日学习 -->
+        <section class="hub-section" data-section="daily">
+            <div class="section-head">
+                <div>
+                    <p class="section-kicker">01 · DAILY FLOW</p>
+                    <h2>今日学习</h2>
+                    <p class="section-desc">每天先复习 20 个旧词，再学 20 个新词。遇到新词就用 AI 归档，收词记录自动留时间。</p>
+                </div>
+                <span class="section-count">4 个入口</span>
+            </div>
+            <div class="resource-grid">
+                <article class="resource-card" data-index="01">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/复习清单/核心词汇复习清单.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">✓</span><span class="resource-badge">每日</span></span>
+                        <span class="resource-title">核心词汇复习清单</span>
+                        <span class="resource-desc">每天 20 个新词 + 20 个到期旧词；本地服务开启时，完成/撤销会自动写回 data.json。</span>
+                        <span class="resource-meta">20 新 + 20 复习</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="02">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/添加日志.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">◷</span><span class="resource-badge">记录</span></span>
+                        <span class="resource-title">添加日志</span>
+                        <span class="resource-desc">查看最近自动收录的单词：添加时间、分类、目标文件、复习日程；支持搜索和筛选。</span>
+                        <span class="resource-meta">最近添加 · 时间戳</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="03">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/单词模块/词汇代码生成器.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">Aa</span><span class="resource-badge">AI</span></span>
+                        <span class="resource-title">单词自动归档</span>
+                        <span class="resource-desc">输入单词，AI 判断后缀/词根/复合词/原子词；没有对应词族就自动新建，已录入则插队复习。</span>
+                        <span class="resource-meta">DeepSeek · 自动写入</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="04">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/英语答疑/英语答疑.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">?</span><span class="resource-badge">答疑</span></span>
+                        <span class="resource-title">英语答疑 · 资深英语教师</span>
+                        <span class="resource-desc">单词解释自动收词并排入“额外新增”；作文反例、句子分析、语法问答按分类写入日志。</span>
+                        <span class="resource-meta">4 类答疑 · 分类日志</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 02 词汇与构词 -->
+        <section class="hub-section" data-section="vocabulary">
+            <div class="section-head">
+                <div>
+                    <p class="section-kicker">02 · VOCABULARY</p>
+                    <h2>词汇与构词</h2>
+                    <p class="section-desc">从核心词族到词根、词素和复合词。先看公式，再记词；每个词卡默认隐藏中文。</p>
+                </div>
+                <span class="section-count">4 个入口</span>
+            </div>
+            <div class="resource-grid">
+                <article class="resource-card" data-index="05">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/专升本英语核心词汇通关.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">Aa</span><span class="resource-badge">307 词</span></span>
+                        <span class="resource-title">核心词汇通关</span>
+                        <span class="resource-desc">按 18 个词族学习 307 个核心词；中文、搭配和例句默认隐藏，点击词条展开核对。</span>
+                        <span class="resource-meta">307 词 / 18 族</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="06">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/00-总目录/构词法总览.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">✦</span><span class="resource-badge">词缀</span></span>
+                        <span class="resource-title">构词法总览</span>
+                        <span class="resource-desc">按后缀、前缀进入词族，配合词根理解构词规律；也可以直接进复习清单和 AI 工具。</span>
+                        <span class="resource-meta">词缀索引</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="07">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/00-总目录/单词家族.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">⌘</span><span class="resource-badge">词族</span></span>
+                        <span class="resource-title">单词家族</span>
+                        <span class="resource-desc">从一个基础词扩展到同族词，把词形、词性和词义放在同一张网络里记。</span>
+                        <span class="resource-meta">家族索引</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="08">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/00-总目录/词素分类.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">§</span><span class="resource-badge">词素</span></span>
+                        <span class="resource-title">词素分类</span>
+                        <span class="resource-desc">本体词、派生词、原子词、词根族、复合词；查看自动生成的词素页面入口。</span>
+                        <span class="resource-meta">五类词素</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 03 语法与长难句 -->
+        <section class="hub-section" data-section="grammar">
+            <div class="section-head">
+                <div>
+                    <p class="section-kicker">03 · GRAMMAR</p>
+                    <h2>语法与长难句</h2>
+                    <p class="section-desc">先数谓语，再抓主干，最后剥修饰。长难句的翻译和解析默认隐藏，适合先自己拆再核对。</p>
+                </div>
+                <span class="section-count">2 个入口</span>
+            </div>
+            <div class="resource-grid">
+                <article class="resource-card" data-index="09">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/00-总目录/语法体系.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">§</span><span class="resource-badge">语法</span></span>
+                        <span class="resource-title">语法体系</span>
+                        <span class="resource-desc">语法专题总入口：长难句拆解、词素分类说明和分类索引。</span>
+                        <span class="resource-meta">专题索引</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="10">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/语法模块/长难句拆解.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">⌁</span><span class="resource-badge">长难句</span></span>
+                        <span class="resource-title">长难句拆解</span>
+                        <span class="resource-desc">12 个真题式长句，主干/修饰/连接词高亮；三步拆句法配合翻译核对。</span>
+                        <span class="resource-meta">12 句 · 三步拆句</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 04 复习与打卡 -->
+        <section class="hub-section" data-section="review">
+            <div class="section-head">
+                <div>
+                    <p class="section-kicker">04 · REVIEW</p>
+                    <h2>复习与打卡</h2>
+                    <p class="section-desc">复习清单负责每天做什么，日历负责看坚持情况。日历和清单共用同一份 data.json。</p>
+                </div>
+                <span class="section-count">3 个入口</span>
+            </div>
+            <div class="resource-grid">
+                <article class="resource-card" data-index="11">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/每月打卡/2026年10月打卡.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">◷</span><span class="resource-badge">10 月</span></span>
+                        <span class="resource-title">2026 年 10 月打卡</span>
+                        <span class="resource-desc">查看 10 月每天的新增与复习记录；点日期可以看当天词条并跳转。</span>
+                        <span class="resource-meta">10 月日历</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="12">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/每月打卡/2026年11月打卡.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">◷</span><span class="resource-badge">11 月</span></span>
+                        <span class="resource-title">2026 年 11 月打卡</span>
+                        <span class="resource-desc">查看 11 月的新词与复习记录；当前日程排到 11 月 13 日。</span>
+                        <span class="resource-meta">11 月日历</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="13">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/00-总目录/每月汇总.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">☷</span><span class="resource-badge">总览</span></span>
+                        <span class="resource-title">每月汇总</span>
+                        <span class="resource-desc">按月进入所有打卡日历，适合每周或每月复盘。</span>
+                        <span class="resource-meta">日历总目录</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 05 工具与说明 -->
+        <section class="hub-section" data-section="tools">
+            <div class="section-head">
+                <div>
+                    <p class="section-kicker">05 · TOOLKIT</p>
+                    <h2>工具与说明</h2>
+                    <p class="section-desc">第一次使用先看指南；本地服务、JSON 同步和 GitHub 静态托管的限制都在里面。</p>
+                </div>
+                <span class="section-count">3 个入口</span>
+            </div>
+            <div class="resource-grid">
+                <article class="resource-card" data-index="14">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/使用指南.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">?</span><span class="resource-badge">先看</span></span>
+                        <span class="resource-title">使用指南</span>
+                        <span class="resource-desc">启动服务、每天 15 分钟流程、AI 收词、JSON 同步、备份与 GitHub 上传安全。</span>
+                        <span class="resource-meta">完整说明</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="15">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/使用指南.html#start">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">▶</span><span class="resource-badge">本地</span></span>
+                        <span class="resource-title">本地服务启动</span>
+                        <span class="resource-desc">双击 启动词素服务.bat；添加单词、复习写回 data.json 都需要 8767 服务。</span>
+                        <span class="resource-meta">8767 · Python</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="16">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/复习清单/data.json">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">{}</span><span class="resource-badge">数据</span></span>
+                        <span class="resource-title">data.json</span>
+                        <span class="resource-desc">复习清单的根数据；浏览器里查看原始 JSON（只读），线上静态托管不能写回。</span>
+                        <span class="resource-meta">JSON 根</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 06 旧版归档 -->
+        <section class="hub-section" data-section="legacy">
+            <div class="section-head">
+                <div>
+                    <p class="section-kicker">06 · ARCHIVE</p>
+                    <h2>旧版归档</h2>
+                    <p class="section-desc">旧版内容独立保留，只作对照，不再进入日常主流程。日常请使用上面的新版复习清单和核心词汇通关。</p>
+                </div>
+                <span class="section-count">2 个入口</span>
+            </div>
+            <div class="resource-grid">
+                <article class="resource-card" data-index="17">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/单词模块/核心词汇10个月通关计划.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">⌛</span><span class="resource-badge">旧版</span></span>
+                        <span class="resource-title">核心词汇 10 个月通关计划</span>
+                        <span class="resource-desc">早期 62 词 -ful / -less 页面；保留作对照，不再作为主流程。</span>
+                        <span class="resource-meta">归档</span>
+                    </a>
+                </article>
+                <article class="resource-card" data-index="18">
+                    <a class="resource-link" href="../../../../专升本备考/备考专升本英语/复习清单/复习清单.html">
+                        <span class="resource-top"><span class="resource-icon" aria-hidden="true">⌛</span><span class="resource-badge">旧版</span></span>
+                        <span class="resource-title">原复习清单</span>
+                        <span class="resource-desc">早期页面级复习清单；仍可打开，但日常请用新版 20 + 20 清单。</span>
+                        <span class="resource-meta">归档</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <div class="empty-state">
+            <strong>没有找到匹配内容</strong>
+            <span>试试更短的关键词，或按 Esc 清空搜索。</span>
+        </div>
+
+        <!-- AI_ARCHIVE_START -->
+<section class="hub-section" data-section="ai-history">
+    <div class="section-head">
+        <div>
+            <p class="section-kicker">AI HISTORY</p>
+            <h2>AI 答疑历史</h2>
+            <p class="section-desc">按分类和日期归档，点击日期查看当时的完整回答。</p>
+        </div>
+    </div>
+    <div class="ai-archive-groups"><article class="ai-archive-group"><h3>作文</h3><ul><li><a href="../../../../专升本备考/备考专升本英语/英语答疑/归档/%E4%BD%9C%E6%96%87/2026-10-30.html">2026-10-30</a></li></ul></article></div>
+</section>
+<!-- AI_ARCHIVE_END -->
+    </main>
+
+    <footer class="page-footer">
+        <span>专升本 · 英语 / STUDY HUB</span>
+        <span>VOCABULARY · GRAMMAR · REVIEW</span>
+    </footer>
+</div>
+
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<button class="back-to-top" type="button" aria-label="返回顶部">↑</button>
+<script src="专升本英语.js" defer></script>
+</body>
+</html>

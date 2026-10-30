@@ -169,6 +169,7 @@ localStorage，不写进 HTML/JS 文件。
 GET  /api/health
 POST /api/tutor             Header: X-Tutor-Token
 GET  /api/tutor-log         Header: X-Tutor-Token
+POST /api/tutor-log-delete  Header: X-Tutor-Token
 POST /api/pending-word      Header: X-Tutor-Token
 GET  /api/pending-words     Header: X-Tutor-Token
 ```
@@ -187,6 +188,7 @@ GET  /api/pending-words     Header: X-Tutor-Token
 {
   "subject": "math",
   "mode": "题目讲解",
+  "topic": "极限",
   "question": "..."
 }
 ```
@@ -196,6 +198,15 @@ GET  /api/pending-words     Header: X-Tutor-Token
 ```text
 题目讲解 / 错题诊断 / 概念公式 / 其他
 ```
+
+知识分类：
+
+```text
+极限 / 导数与微分 / 积分 / 三角函数 / 矩阵 /
+向量与空间几何 / 微分方程 / 无穷级数 / 多元函数 / 概率统计 / 其他
+```
+
+`mode` 和 `topic` 是两个维度；历史接口可以按 `topic` 筛选。
 
 数学日志索引独立保存：
 
@@ -214,7 +225,19 @@ index:<分类>
 数学历史：
 
 ```text
-GET /api/tutor-log?subject=math&category=all&limit=20
+GET /api/tutor-log?subject=math&category=all&topic=极限&limit=20
+POST /api/tutor-log-delete
+```
+
+删除请求：
+
+```json
+{
+  "subject": "math",
+  "mode": "题目讲解",
+  "created_at": "2026-10-30T13:10:36.522Z",
+  "time": "2026-10-30 21:10:36"
+}
 ```
 
 > 数学答疑页也要用新版 `worker.js`；旧 Worker 没有 `subject` 分支，

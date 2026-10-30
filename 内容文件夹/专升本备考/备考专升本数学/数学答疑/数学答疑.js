@@ -25,6 +25,7 @@
     var offlineText = document.getElementById("offline-text");
 
     var modeTabs = Array.prototype.slice.call(document.querySelectorAll(".mode-tab"));
+    var topicSelect = document.getElementById("topic-select");
     var questionEl = document.getElementById("question");
     var charCount = document.getElementById("char-count");
     var inputHint = document.getElementById("input-hint");
@@ -41,6 +42,7 @@
     var copyBtn = document.getElementById("copy-btn");
 
     var historyTabs = Array.prototype.slice.call(document.querySelectorAll(".history-tab"));
+    var historyTopicSelect = document.getElementById("history-topic");
     var historyList = document.getElementById("history-list");
     var historyEmpty = document.getElementById("history-empty");
     var historyCount = document.getElementById("history-count");
@@ -50,13 +52,28 @@
     var toastEl = document.getElementById("toast");
 
     var currentMode = "题目讲解";
+    var currentTopic = "其他";
     var currentAnswer = "";
     var historyCategory = "all";
+    var historyTopic = "all";
     var historyEntries = [];
     var busy = false;
     var toastTimer = null;
     var dialogProfiles = emptyProfiles();
     var dialogProvider = "cloudflare";
+
+    var TOPICS = [
+        "极限", "导数与微分", "积分", "三角函数", "矩阵",
+        "向量与空间几何", "微分方程", "无穷级数", "多元函数", "概率统计", "其他"
+    ];
+    try {
+        var savedTopic = localStorage.getItem("math-tutor-topic");
+        if (savedTopic === "微分") savedTopic = "导数与微分";
+        if (TOPICS.indexOf(savedTopic) >= 0) currentTopic = savedTopic;
+    } catch (error) {
+        // localStorage 可能被禁用。
+    }
+    if (topicSelect) topicSelect.value = currentTopic;
 
     var MODE_HINTS = {
         "题目讲解": "例如：求极限 $\\lim_{x\\to 0}\\frac{\\sin x}{x}$，并说明每一步依据。",
@@ -228,10 +245,29 @@
             .replace(/\*([^*\n]+)\*/g, "<em>$1</em>");
     }
 
+    function questionHtml(value) {
+        var text = String(value || "");
+        var escaped = escapeHtml(text);
+        if (/\$|\\\(|\\\[/.test(text)) {
+            return escaped;
+        }
+        // 兼容用户直接把 \lim、\sqrt 等裸 LaTeX 写进题目：
+        // 把从反斜杠命令开始、到下一个中文之前的片段包进 $...$。
+        return escaped.replace(/(\\[a-zA-Z]+[\s\S]*?)(?=[\u4e00-\u9fff]|$)/g, function (match) {
+            var body = match.trim();
+            return body ? "$" + body + "$" : match;
+        });
+    }
+
     function renderMarkdown(markdown) {
         var source = String(markdown).replace(/\r\n/g, "\n");
         var mathBlocks = [];
         source = source.replace(/\$\$([\s\S]*?)\$\$/g, function (_, body) {
+            mathBlocks.push(body);
+            return "\n@@MATH" + (mathBlocks.length - 1) + "@@\n";
+        });
+        // API 经常用 \[...\] 写独立公式；先提取，避免被 Markdown 拆成多个段落。
+        source = source.replace(/\\\[([\s\S]*?)\\\]/g, function (_, body) {
             mathBlocks.push(body);
             return "\n@@MATH" + (mathBlocks.length - 1) + "@@\n";
         });
@@ -556,6 +592,7 @@
                 body: JSON.stringify({
                     subject: SUBJECT,
                     mode: currentMode,
+                    topic: currentTopic,
                     question: question
                 })
             }, 120000);
@@ -567,9 +604,13 @@
             answerMode.textContent = data.mode || currentMode;
             answerTime.textContent = data.time || "";
             var where = connection.mode === "cloud" ? "已写入云端数学日志" : "已写入本地数学日志";
-            answerMeta.textContent = where + (data.logged === false ? "（日志写入失败）" : "") +
+            answerMeta.textContent = where + " · " + (data.topic || currentTopic) +
+                (data.logged === false ? "（日志写入失败）" : "") +
                 " · " + (data.model || "deepseek-chat");
             showToast("回答完成。");
+            // 新记录可能不属于当前筛选；回到“全部”，避免看起来没保存。
+            historyTopic = "all";
+            if (historyTopicSelect) historyTopicSelect.value = "all";
             loadHistory(historyCategory);
         } catch (error) {
             var message = error && error.message ? error.message : "未知错误";
@@ -598,19 +639,23 @@
         historyEmpty.hidden = true;
         historyCount.textContent = historyEntries.length + " 条";
         historyEntries.forEach(function (item, index) {
+            var row = document.createElement("div");
+            row.className = "history-row";
+
             var btn = document.createElement("button");
             btn.type = "button";
             btn.className = "history-item";
             btn.dataset.index = String(index);
             var question = String(item.question || "（无原题）");
             var answer = String(item.answer || "");
-            var preview = answer.replace(/\s+/g, " ").slice(0, 160);
+            var preview = answer.replace(/\s+/g, " ").slice(0, 120);
             btn.innerHTML =
                 '<span class="history-item-top">' +
+                '<span class="history-topic-badge">' + escapeHtml(item.topic || "其他") + "</span>" +
                 '<span class="history-mode">' + escapeHtml(item.mode || "其他") + "</span>" +
                 '<span class="history-time">' + escapeHtml(item.time || "") + "</span>" +
                 "</span>" +
-                '<span class="history-question">' + escapeHtml(question) + "</span>" +
+                '<span class="history-question">' + questionHtml(question) + "</span>" +
                 '<span class="history-preview">' + escapeHtml(preview) + "</span>";
             btn.addEventListener("click", function () {
                 renderAnswer(answer);
@@ -619,12 +664,53 @@
                 answerMeta.textContent = "历史记录 · " + (item.model || "deepseek-chat");
                 document.querySelector(".answer-panel").scrollIntoView({ behavior: "smooth", block: "start" });
             });
-            historyList.appendChild(btn);
+
+            var del = document.createElement("button");
+            del.type = "button";
+            del.className = "history-delete";
+            del.textContent = "删除";
+            del.title = "删除这条答疑记录";
+            del.addEventListener("click", function (event) {
+                event.stopPropagation();
+                deleteHistoryItem(item);
+            });
+
+            row.append(btn, del);
+            historyList.appendChild(row);
+            // 原题里的 LaTeX 也要像正文一样渲染。
+            renderMath(btn.querySelector(".history-question"));
         });
     }
 
-    async function loadHistory(category) {
+    async function deleteHistoryItem(item) {
+        if (!window.confirm("删除这条答疑记录？删除后不可恢复。")) return;
+        var payload = {
+            subject: SUBJECT,
+            mode: item.mode || "",
+            created_at: item.created_at || "",
+            time: item.time || ""
+        };
+        try {
+            var resp = await fetchWithTimeout(apiUrl("/api/tutor-log-delete"), {
+                method: "POST",
+                headers: requestHeaders(true),
+                body: JSON.stringify(payload)
+            }, 15000);
+            var data = await resp.json().catch(function () { return null; });
+            if (!resp.ok || !data || !data.ok) {
+                throw new Error((data && data.error) || "删除失败");
+            }
+            showToast("已删除这条答疑记录。");
+            await loadHistory(historyCategory);
+        } catch (error) {
+            showToast("删除失败：" + (error.message || "未知错误"), true);
+        }
+    }
+
+    async function loadHistory(category, topic) {
         historyCategory = category || "all";
+        if (topic !== undefined) historyTopic = topic || "all";
+        if (historyTopicSelect) historyTopicSelect.value = historyTopic;
         historyTabs.forEach(function (tab) {
             var active = tab.dataset.category === historyCategory;
             tab.classList.toggle("is-active", active);
@@ -636,7 +722,8 @@
             return;
         }
         try {
-            var url = apiUrl("/api/tutor-log?category=" + encodeURIComponent(historyCategory) + "&limit=20&subject=" + SUBJECT);
+            var url = apiUrl("/api/tutor-log?category=" + encodeURIComponent(historyCategory) +
+                "&limit=20&subject=" + SUBJECT + "&topic=" + encodeURIComponent(historyTopic));
             var resp = await fetchWithTimeout(url, {
                 cache: "no-store",
                 headers: requestHeaders(false)
@@ -832,6 +919,18 @@
     historyTabs.forEach(function (tab) {
         tab.addEventListener("click", function () { loadHistory(tab.dataset.category); });
     });
+    if (topicSelect) {
+        topicSelect.addEventListener("change", function () {
+            if (TOPICS.indexOf(topicSelect.value) < 0) return;
+            currentTopic = topicSelect.value;
+            try { localStorage.setItem("math-tutor-topic", currentTopic); } catch (error) {}
+        });
+    }
+    if (historyTopicSelect) {
+        historyTopicSelect.addEventListener("change", function () {
+            loadHistory(historyCategory, historyTopicSelect.value);
+        });
+    }
     questionEl.addEventListener("input", updateCharCount);
     questionEl.addEventListener("keydown", function (event) {
         if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
