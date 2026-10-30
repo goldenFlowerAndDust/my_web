@@ -587,8 +587,8 @@
         </div>
         <div class="hero-meta">
             <span>当前快照：<b>307</b> 个核心词 / <b>18</b> 个词族</span>
-            <span>复习词 <b>310</b> 个</span>
-            <span>全部词条 <b>323</b> 条</span>
+            <span>复习词 <b>312</b> 个</span>
+            <span>全部词条 <b>325</b> 条</span>
             <span>每天 <b>20 新 + 20 复习 + 额外新增</b></span>
         </div>
     </header>
@@ -715,6 +715,15 @@
             浏览器不能自动把下载文件放进子文件夹；下载后双击
             <code>整理云端下载.bat</code>，会分到
             <code>云端下载/答疑归档</code>和<code>云端下载/待归档单词</code>。
+        </div>
+
+        <div class="callout">
+            <strong>国内访问：</strong>
+            Cloudflare 的 <code>workers.dev</code> 在国内可能打不开。可以在腾讯云 SCF
+            部署一个国内反向代理，函数 URL 自带 HTTPS 默认域名，不需要备案，也不需要买服务器；
+            Cloudflare Worker 和 KV 原样保留。部署步骤见
+            <code>tencent-scf/README.md</code>；页面连接设置里可切换
+            <code>Cloudflare</code> / <code>国内 SCF</code>，两套地址和口令分别保存。
         </div>
 
         <div class="table-wrap">
@@ -872,8 +881,8 @@
 
         <div class="callout green">
             <strong>当前快照：</strong>
-            核心词 307 个；加上词素里的 sunflower、deep、hello 等词级条目，复习词 310 个；
-            再加 13 个旧页面条目，全部词条 323 条。数字会随收词自动变化，以页面为准。
+            核心词 307 个；加上词素里的 sunflower、deep、hello、heaven、nasty 等词级条目，复习词 312 个；
+            再加 13 个旧页面条目，全部词条 325 条。数字会随收词自动变化，以页面为准。
 
             <div class="callout blue">
                 <strong>为什么新增了词，核心词汇还是 307？</strong>
@@ -1042,6 +1051,7 @@
             <div class="file-item"><code>导入待归档单词.bat</code><span>把云端待归档单词分类写入词库</span></div>
             <div class="file-item"><code>整理云端下载.bat</code><span>把两类下载 JSON 分到云端下载子文件夹</span></div>
             <div class="file-item"><code>云端下载/</code><span>答疑归档 / 待归档单词（已 gitignore）</span></div>
+            <div class="file-item"><code>tencent-scf/</code><span>腾讯云 SCF 国内反向代理与部署说明</span></div>
             <div class="file-item"><code>词素工具/import_pending_words.py</code><span>待归档单词导入脚本</span></div>
             <div class="file-item"><code>词素工具/import_tutor_logs.py</code><span>本地日志导入脚本（可预览/去重/备份）</span></div>
             <div class="file-item"><code>词素工具/english_tutor.py</code><span>英语答疑 API 与分类日志</span></div>

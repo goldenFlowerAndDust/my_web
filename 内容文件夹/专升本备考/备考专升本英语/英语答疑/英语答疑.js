@@ -77,6 +77,7 @@
     var connectionClose = document.getElementById("connection-close");
     var connectionMode = document.getElementById("connection-mode");
     var cloudFields = document.getElementById("cloud-fields");
+    var cloudProvider = document.getElementById("cloud-provider");
     var cloudUrl = document.getElementById("cloud-url");
     var cloudToken = document.getElementById("cloud-token");
     var connectionNote = document.getElementById("connection-note");
@@ -94,20 +95,42 @@
         return String(value || "").trim().replace(/\/+$/, "");
     }
 
-    function normalizeConnection(value) {
-        var mode = value && value.mode === "cloud" ? "cloud" : "local";
+    function emptyProfiles() {
         return {
-            mode: mode,
-            cloudUrl: normalizeBase(value && value.cloudUrl),
+            cloudflare: { url: "", token: "" },
+            domestic: { url: "", token: "" }
+        };
+    }
+
+    function normalizeProfile(value) {
+        return {
+            url: normalizeBase(value && value.url),
             token: String((value && value.token) || "").trim()
         };
+    }
+
+    function normalizeConnection(value) {
+        var mode = value && value.mode === "cloud" ? "cloud" : "local";
+        var provider = value && value.provider === "domestic" ? "domestic" : "cloudflare";
+        var profiles = emptyProfiles();
+        if (value && value.profiles && typeof value.profiles === "object") {
+            profiles.cloudflare = normalizeProfile(value.profiles.cloudflare);
+            profiles.domestic = normalizeProfile(value.profiles.domestic);
+        } else if (value && (value.cloudUrl || value.token)) {
+            // 兼容旧版单线路配置。
+            profiles.cloudflare = normalizeProfile({
+                url: value.cloudUrl,
+                token: value.token
+            });
+        }
+        return { mode: mode, provider: provider, profiles: profiles };
     }
 
     function defaultConnection() {
         return {
             mode: isGitHubPages ? "cloud" : "local",
-            cloudUrl: "",
-            token: ""
+            provider: "cloudflare",
+            profiles: emptyProfiles()
         };
     }
 
@@ -138,6 +161,16 @@
     if (window.__TUTOR_CONNECTION__) {
         connection = normalizeConnection(window.__TUTOR_CONNECTION__);
     }
+    var dialogProfiles = emptyProfiles();
+    var dialogProvider = connection.provider;
+
+    function activeProfile() {
+        return connection.profiles[connection.provider] || { url: "", token: "" };
+    }
+
+    function providerLabel() {
+        return connection.provider === "domestic" ? "国内 SCF" : "Cloudflare";
+    }
 
     function localBase() {
         if (TEST_BASE) return normalizeBase(TEST_BASE);
@@ -147,7 +180,7 @@
 
     function currentBase() {
         return connection.mode === "cloud"
-            ? normalizeBase(connection.cloudUrl)
+            ? normalizeBase(activeProfile().url)
             : localBase();
     }
 
@@ -162,9 +195,10 @@
     }
 
     function cloudConfigured() {
+        var profile = activeProfile();
         return connection.mode === "cloud" &&
-            isSecureCloudUrl(connection.cloudUrl) &&
-            connection.token.length > 0;
+            isSecureCloudUrl(profile.url) &&
+            profile.token.length > 0;
     }
 
     function connectionReady() {
@@ -174,8 +208,8 @@
     function requestHeaders(withJson) {
         var headers = {};
         if (withJson) headers["Content-Type"] = "application/json";
-        if (connection.mode === "cloud" && connection.token) {
-            headers["X-Tutor-Token"] = connection.token;
+        if (connection.mode === "cloud" && activeProfile().token) {
+            headers["X-Tutor-Token"] = activeProfile().token;
         }
         return headers;
     }
@@ -402,7 +436,7 @@
     async function checkService() {
         if (connection.mode === "cloud" && !cloudConfigured()) {
             showOffline("cloud-config");
-            setService(false, "云端未配置", "is-warn");
+            setService(false, providerLabel() + " 未配置", "is-warn");
             return;
         }
 
@@ -413,14 +447,14 @@
 
             if (connection.mode === "cloud") {
                 if (data.has_key === false) {
-                    setService(true, "云端已连接 · 缺少 Key", "is-warn");
+                    setService(true, providerLabel() + " 已连接 · 缺少 Key", "is-warn");
                     return;
                 }
                 if (data.kv_bound === false) {
-                    setService(true, "云端已连接 · KV 未绑定", "is-warn");
+                    setService(true, providerLabel() + " 已连接 · KV 未绑定", "is-warn");
                     return;
                 }
-                setService(true, "云端已连接 · " + (data.model || "deepseek-chat"), "is-on");
+                setService(true, providerLabel() + " 已连接 · " + (data.model || "deepseek-chat"), "is-on");
                 return;
             }
 
@@ -432,7 +466,7 @@
         } catch (error) {
             if (connection.mode === "cloud") {
                 showOffline("cloud-error");
-                setService(false, "云端未连接", "is-off");
+                setService(false, providerLabel() + " 未连接", "is-off");
             } else {
                 showOffline("local");
                 setService(false, "本地服务未连接", "is-off");
@@ -872,33 +906,54 @@
         cloudFields.hidden = connectionMode.value !== "cloud";
     }
 
+    function fillProviderFields() {
+        var profile = dialogProfiles[dialogProvider] || { url: "", token: "" };
+        cloudProvider.value = dialogProvider;
+        cloudUrl.value = profile.url;
+        cloudToken.value = profile.token;
+    }
+
+    function syncProviderFields() {
+        dialogProfiles[dialogProvider] = {
+            url: normalizeBase(cloudUrl.value),
+            token: String(cloudToken.value || "").trim()
+        };
+    }
+
     function openConnectionDialog() {
         connectionMode.value = connection.mode;
-        cloudUrl.value = connection.cloudUrl;
-        cloudToken.value = connection.token;
+        dialogProfiles = {
+            cloudflare: normalizeProfile(connection.profiles.cloudflare),
+            domestic: normalizeProfile(connection.profiles.domestic)
+        };
+        dialogProvider = connection.provider;
+        fillProviderFields();
         toggleCloudFields();
         connectionNote.textContent = connection.mode === "cloud"
-            ? "云端模式：需要 Worker 地址和访问口令。口令只保存在本浏览器。"
+            ? "云端模式：当前线路 " + (dialogProvider === "domestic" ? "国内 SCF" : "Cloudflare") +
+              "。地址和口令只保存在本浏览器。"
             : "本地模式：需要先启动 8767 服务。只想在电脑上用，选这个最省事。";
         connectionNote.className = "connection-note";
         if (!connectionDialog.open) connectionDialog.showModal();
     }
 
     function readConnectionForm() {
+        syncProviderFields();
         return normalizeConnection({
             mode: connectionMode.value,
-            cloudUrl: cloudUrl.value,
-            token: cloudToken.value
+            provider: dialogProvider,
+            profiles: dialogProfiles
         });
     }
 
     function validateConnectionForm(value) {
         if (value.mode !== "cloud") return "";
-        if (!value.cloudUrl) return "请填 Worker 地址。";
-        if (!isSecureCloudUrl(value.cloudUrl)) {
-            return "Worker 地址必须是 https://…；本地测试可用 http://127.0.0.1:端口。";
+        var profile = value.profiles[value.provider] || { url: "", token: "" };
+        if (!profile.url) return "请填云端地址。";
+        if (!isSecureCloudUrl(profile.url)) {
+            return "地址必须是 https://…；本地测试可用 http://127.0.0.1:端口。";
         }
-        if (value.token.length < 8) {
+        if (profile.token.length < 8) {
             return "访问口令至少 8 位；建议使用 24 位以上随机字符串。";
         }
         return "";
@@ -912,7 +967,8 @@
             connectionNote.className = "connection-note is-error";
             return;
         }
-        var base = value.mode === "cloud" ? value.cloudUrl : localBase();
+        var profile = value.profiles[value.provider] || { url: "", token: "" };
+        var base = value.mode === "cloud" ? profile.url : localBase();
         var url = (base ? base : "") + "/api/health";
         connectionNote.textContent = "正在测试连接…";
         connectionNote.className = "connection-note";
@@ -925,7 +981,7 @@
                 var logUrl = (base ? base : "") + "/api/tutor-log?category=all&limit=1";
                 var logResp = await fetchWithTimeout(logUrl, {
                     cache: "no-store",
-                    headers: { "X-Tutor-Token": value.token }
+                    headers: { "X-Tutor-Token": profile.token }
                 }, 8000);
                 var logData = await logResp.json().catch(function () { return null; });
                 if (!logResp.ok || !logData || !logData.ok) {
@@ -956,7 +1012,9 @@
         saveConnection(value);
         connectionDialog.close();
         updateHistoryNote();
-        showToast(value.mode === "cloud" ? "已切换到云端 Worker。" : "已切换到本地服务。");
+        showToast(value.mode === "cloud"
+            ? "已切换到" + (value.provider === "domestic" ? "国内 SCF" : "Cloudflare") + "。"
+            : "已切换到本地服务。");
         checkService();
         loadHistory(historyCategory);
     }
@@ -993,6 +1051,15 @@
         connectionDialog.close();
     });
     connectionMode.addEventListener("change", toggleCloudFields);
+    cloudProvider.addEventListener("change", function () {
+        syncProviderFields();
+        dialogProvider = cloudProvider.value;
+        fillProviderFields();
+        connectionNote.textContent = dialogProvider === "domestic"
+            ? "国内 SCF：地址填腾讯云 API 网关默认域名，口令填 SCF 的 PROXY_TOKEN。"
+            : "Cloudflare：地址填 workers.dev，口令填 Worker 的 TUTOR_ACCESS_TOKEN。";
+        connectionNote.className = "connection-note";
+    });
     connectionTest.addEventListener("click", testConnectionFromDialog);
     connectionForm.addEventListener("submit", saveConnectionFromDialog);
     connectionDialog.addEventListener("close", function () {

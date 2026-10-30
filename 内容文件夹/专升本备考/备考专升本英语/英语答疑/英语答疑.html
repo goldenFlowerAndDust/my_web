@@ -185,15 +185,21 @@
         <label class="field" for="connection-mode">连接方式</label>
         <select id="connection-mode">
             <option value="local">本地 8767（电脑上使用，推荐）</option>
-            <option value="cloud">云端 Worker（GitHub Pages / 手机）</option>
+            <option value="cloud">云端 Worker / SCF（GitHub Pages / 手机）</option>
         </select>
 
         <div class="cloud-fields" id="cloud-fields" hidden>
-            <label class="field" for="cloud-url">Worker 地址</label>
-            <input id="cloud-url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://english-tutor.xxx.workers.dev">
+            <label class="field" for="cloud-provider">云端线路</label>
+            <select id="cloud-provider">
+                <option value="cloudflare">Cloudflare（现有）</option>
+                <option value="domestic">国内 SCF（新）</option>
+            </select>
+
+            <label class="field" for="cloud-url">云端地址</label>
+            <input id="cloud-url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="Cloudflare Worker 或腾讯云 SCF 默认域名">
 
             <label class="field" for="cloud-token">访问口令</label>
-            <input id="cloud-token" type="password" autocomplete="off" spellcheck="false" placeholder="Worker 的 TUTOR_ACCESS_TOKEN">
+            <input id="cloud-token" type="password" autocomplete="off" spellcheck="false" placeholder="Cloudflare 填 TUTOR_ACCESS_TOKEN；SCF 填 PROXY_TOKEN">
 
             <p class="field-note">地址和口令只保存在当前浏览器的 localStorage，不写进网页源码，也不会上传 GitHub。</p>
         </div>
