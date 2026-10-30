@@ -22,6 +22,8 @@
 | `skills/english-tutor/SKILL.md` | 资深英语教师答疑 skill |
 | `cloudflare-worker/worker.js` | 可选：GitHub Pages 用的云端答疑代理 |
 | `cloudflare-worker/README.md` | Cloudflare Worker 部署步骤 |
+| `tencent-scf/index.js` | 可选：腾讯云 SCF 函数 URL 国内反向代理 |
+| `tencent-scf/README.md` | 腾讯云 SCF / 函数 URL 部署步骤 |
 | `添加日志.html` | 查看最近自动添加的单词、分类、文件和时间 |
 | `skills/word-auto-archive/SKILL.md` | 给 agent 使用的项目 skill 说明 |
 | `词素工具/backups/` | 每次写入前的自动备份 |
@@ -144,9 +146,20 @@ python 词素工具/import_tutor_logs.py "英语答疑记录-2026-10-30-0315.jso
 ### 云端模式（可选）
 
 如果要把网页放到 GitHub Pages，可部署 `cloudflare-worker/` 的 Worker：
-页面“连接设置”选“云端 Worker”，填 Worker 地址和访问口令。
+页面“连接设置”选“云端”，线路选 `Cloudflare`，填 Worker 地址和访问口令。
 Key 存 Cloudflare Secret，日志存 KV；访问口令只存在浏览器 localStorage。
 具体步骤见 `cloudflare-worker/README.md`。
+
+如果国内访问 `workers.dev` 不稳定，可以再加腾讯云 SCF 反向代理：
+
+```text
+国内浏览器 → 腾讯云 SCF 函数 URL → 现有 Cloudflare Worker → KV
+```
+
+不买服务器、不买域名；函数 URL 自带 HTTPS 默认域名，不需要备案。  
+页面“连接设置”里线路选 `国内 SCF`，填 SCF 地址和 `PROXY_TOKEN`。
+Cloudflare 线路的地址和口令会单独保存，不会被覆盖。  
+部署步骤见 `tencent-scf/README.md`。
 
 ## 复习打卡自动写回 data.json
 
