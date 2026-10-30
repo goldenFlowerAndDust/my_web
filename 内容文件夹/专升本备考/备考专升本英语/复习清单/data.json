@@ -6942,6 +6942,31 @@
       "extra": true,
       "extraDate": "2026-10-31",
       "source": "generator"
+    },
+    {
+      "name": "contrast",
+      "path": "../词素/词根-本体-变体【派生词】/本体-contrast、以及它的变体.html#word-contrast",
+      "category": "词素/词根-本体-变体【派生词】",
+      "level": 0,
+      "nextDate": "2026-10-31",
+      "lastReviewed": null,
+      "created": "2026-10-30",
+      "modified": "2026-10-30",
+      "kind": "word",
+      "word": "contrast",
+      "zh": "对比；对照；差异",
+      "root": "contrast",
+      "rootZh": "对比；对照（来自拉丁语 contra- 相反 + stare 站）",
+      "suffix": "",
+      "suffixLabel": "",
+      "pos": "n./v.",
+      "levelTag": "专升本",
+      "sense": "对比；对照",
+      "anchor": "word-contrast",
+      "batch": "自动补充",
+      "extra": true,
+      "extraDate": "2026-10-31",
+      "source": "generator"
     }
   ],
   "词素/原子词": [
