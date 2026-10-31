@@ -7294,6 +7294,31 @@
       "extra": true,
       "extraDate": "2026-11-01",
       "source": "generator"
+    },
+    {
+      "name": "word",
+      "path": "../词素/原子词/原子词：word.html#word-word",
+      "category": "词素/原子词",
+      "level": 0,
+      "nextDate": "2026-11-01",
+      "lastReviewed": null,
+      "created": "2026-10-31",
+      "modified": "2026-10-31",
+      "kind": "word",
+      "word": "word",
+      "zh": "词；单词；话语；诺言；消息；用词语表达",
+      "root": "word",
+      "rootZh": "词；话语",
+      "suffix": "",
+      "suffixLabel": "",
+      "pos": "n. / v.",
+      "levelTag": "小学",
+      "sense": "词；单词",
+      "anchor": "word-word",
+      "batch": "自动补充",
+      "extra": true,
+      "extraDate": "2026-11-01",
+      "source": "generator"
     }
   ],
   "词素/词根族": [
