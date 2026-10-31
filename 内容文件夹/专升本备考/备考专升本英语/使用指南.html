@@ -706,7 +706,7 @@
             现在页面会同时合并 GitHub 的 <code>英语答疑/答疑历史.json</code>：
             云端保留移动端新问题，静态归档保留旧历史，不受 24 小时限制。
             同步器会从本地 JSONL 生成归档；提交 <code>答疑历史.json</code> 后 GitHub 就会显示本地旧记录。
-            原始 JSONL 仍不上传，公开的是归档 JSON。生词器会自动复用同一 GitHub Pages 来源下 AI 答疑的连接设置；
+            原始 JSONL 现在也可选择上传（会公开问答原文）；公开的归档 JSON 同样包含问答内容。生词器会自动复用同一 GitHub Pages 来源下 AI 答疑的连接设置；
             如果仍提示 <code>Failed to fetch</code>，检查地址是否为 https、Worker/SCF 的
             <code>ALLOWED_ORIGIN</code> 是否允许 <code>https://你的用户名.github.io</code>。
         </div>
