@@ -172,3 +172,55 @@ document.addEventListener('click', function (event) {
 })();
 
 console.log('[显示或隐藏] 脚本已加载');
+// ================= 4. 旧词卡：把词性从末尾移到释义前 =================
+(function enhanceLegacyPosDisplay() {
+    var POS_RE = /^(?:n|v|adj|adv|prep|pron|conj|num|art|int|aux|phr)\.(?:\s*\/\s*(?:n|v|adj|adv|prep|pron|conj|num|art|int|aux|phr)\.)*$/i;
+
+    document.querySelectorAll('.word_line').forEach(function (line) {
+        var pos = line.querySelector('.word_pos');
+        var codes = line.querySelectorAll('code.en');
+        if (pos && codes.length > 1) {
+            line.insertBefore(pos, codes[codes.length - 1]);
+        }
+    });
+
+    document.querySelectorAll('.word_div > li').forEach(function (li) {
+        if (li.querySelector('.word_line') || li.querySelector('.ci_word_head')) return;
+
+        var note = li.querySelector('.note');
+        if (!note) return;
+
+        var parts = String(note.textContent || '').split('·').map(function (x) { return x.trim(); }).filter(Boolean);
+        var pos = '';
+        var kept = [];
+        parts.forEach(function (part) {
+            if (!pos && POS_RE.test(part)) {
+                pos = part;
+            } else {
+                kept.push(part);
+            }
+        });
+        if (!pos) return;
+
+        note.textContent = kept.join(' · ');
+        var zh = li.querySelector('.zh');
+        if (!zh || zh.parentNode.querySelector('.pos_tag')) return;
+
+        var badge = document.createElement('span');
+        badge.className = 'pos_tag';
+        badge.textContent = pos;
+        zh.parentNode.insertBefore(badge, zh);
+
+        var text = String(zh.textContent || '').trim();
+        var meanings = text.split(/[；;]/).map(function (x) { return x.trim(); }).filter(Boolean);
+        if (meanings.length > 1) {
+            zh.textContent = '';
+            meanings.forEach(function (meaning, idx) {
+                var item = document.createElement('span');
+                item.className = 'meaning_item';
+                item.textContent = (idx + 1) + '. ' + meaning;
+                zh.appendChild(item);
+            });
+        }
+    });
+})();

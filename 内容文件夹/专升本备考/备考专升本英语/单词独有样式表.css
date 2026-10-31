@@ -122,3 +122,85 @@ footer:not(:has(*)) {
     background: transparent;
     padding: 0;
 }
+/* ================= 6. 词性分组：先看词性，再看释义 ================= */
+.pos_tag {
+    display: inline-block;
+    margin: 0 6px 0 2px;
+    padding: 1px 6px;
+    color: #FFFFFF;
+    background: #8E44AD;
+    border-radius: 4px;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.7;
+    vertical-align: middle;
+}
+
+.ci_word_head {
+    margin-bottom: 4px;
+}
+
+.ci_word_head .en {
+    display: inline;
+}
+
+.sense_list > .pos_group {
+    display: block;
+    margin: 3px 0;
+    padding: 0;
+}
+
+.pos_group > .pos_tag {
+    margin-left: 0;
+}
+
+.pos_meanings {
+    margin: 2px 0 4px;
+    padding: 0;
+    list-style: none;
+}
+
+.pos_meanings > li {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 2px 0;
+}
+
+.pos_meanings .sense_no {
+    flex: 0 0 auto;
+}
+
+.meaning_item {
+    display: block;
+    margin: 2px 0;
+}
+
+/* 新版词卡：释义列表 */
+.sense_list {
+    margin: 4px 0 6px;
+    padding: 0;
+    list-style: none;
+}
+
+.sense_list .sense_no {
+    margin-right: 3px;
+    color: #B7950B;
+    font-weight: 800;
+}
+
+.sense_list .colloc {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-left: 4px;
+    padding: 1px 6px;
+    background: #F4F6F8;
+    border-radius: 4px;
+    font-size: 0.78rem;
+}
+
+.sense_list .colloc .zh {
+    color: #7F8C8D;
+}

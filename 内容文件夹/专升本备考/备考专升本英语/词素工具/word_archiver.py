@@ -78,9 +78,10 @@ SYSTEM_PROMPT = r"""你是一位严谨的英语构词法老师，服务对象是
 
 其他要求：
 - word 必须与输入完全一致（小写）。
-- meaning_zh 用简洁中文；senses 1–3 条；每条包含 zh，可选 collocation / collocation_zh。
+- meaning_zh 用简洁中文概括全部释义；senses 1–5 条，**每条必须包含 pos 和 zh**，可选 collocation / collocation_zh。
+- pos 用标准缩写：n. / v. / adj. / adv. / prep. / pron. / conj. / num. / art. / int. / aux. / phr.；同一个词的多个词性要拆成多条 sense，不要把词性只写在 note 末尾。
 - example 必须是自然、适合该词的英文例句；example_zh 是准确中文翻译。
-- note 用中文说明构词/拼写/易混点，适合直接放进学习卡片。
+- note 只写构词/拼写/易混点，不要重复词性。
 - level 只能是：小学、初中、高中、专升本、超纲。
 - related 只放真实存在的同族词，0–6 条，每条包含 word、meaning_zh、pos、note。
 - 对没有把握的拆分要选择 atom 或 root_family，不要编造词根。
@@ -100,7 +101,8 @@ SYSTEM_PROMPT = r"""你是一位严谨的英语构词法老师，服务对象是
     "components": []
   },
   "senses": [
-    {"zh": "有帮助的；有益的", "collocation": "helpful advice", "collocation_zh": "有用的建议"}
+    {"pos": "adj.", "zh": "有帮助的；有益的", "collocation": "helpful advice", "collocation_zh": "有用的建议"},
+    {"pos": "adj.", "zh": "乐于助人的", "collocation": "a helpful teacher", "collocation_zh": "乐于助人的老师"}
   ],
   "example": "She gave me some helpful advice.",
   "example_zh": "她给了我一些有用的建议。",
@@ -370,22 +372,23 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
     senses_raw = raw.get("senses") or []
     senses: list[dict[str, str]] = []
     if isinstance(senses_raw, list):
-        for item in senses_raw[:3]:
+        for item in senses_raw[:5]:
             if isinstance(item, str):
                 zh = item.strip()
                 if zh:
-                    senses.append({"zh": zh, "collocation": "", "collocation_zh": ""})
+                    senses.append({"pos": pos, "zh": zh, "collocation": "", "collocation_zh": ""})
             elif isinstance(item, dict):
                 zh = str(item.get("zh") or "").strip()
                 if not zh:
                     continue
                 senses.append({
+                    "pos": str(item.get("pos") or pos).strip(),
                     "zh": zh,
                     "collocation": str(item.get("collocation") or "").strip(),
                     "collocation_zh": str(item.get("collocation_zh") or "").strip(),
                 })
     if not senses:
-        senses = [{"zh": meaning, "collocation": "", "collocation_zh": ""}]
+        senses = [{"pos": pos, "zh": meaning, "collocation": "", "collocation_zh": ""}]
 
     example = str(raw.get("example") or "").strip()
     example_zh = str(raw.get("example_zh") or "").strip()
@@ -483,20 +486,52 @@ def analyze_word(word: str, hint: str = "") -> dict[str, Any]:
 # 单词页面写入
 # ---------------------------------------------------------------------------
 
+def _group_senses_by_pos(analysis: dict[str, Any]) -> list[tuple[str, list[dict[str, str]]]]:
+    """按词性分组，保持 AI 输出顺序；同词性合并到一组。"""
+    fallback = str(analysis.get("pos") or "").strip()
+    groups: list[tuple[str, list[dict[str, str]]]] = []
+    by_pos: dict[str, list[dict[str, str]]] = {}
+    for sense in analysis.get("senses", []):
+        pos = str(sense.get("pos") or fallback or "其他").strip()
+        if pos not in by_pos:
+            by_pos[pos] = []
+            groups.append((pos, by_pos[pos]))
+        by_pos[pos].append(sense)
+    if not groups:
+        groups.append((fallback or "其他", [{"zh": analysis.get("meaning_zh", ""), "collocation": "", "collocation_zh": ""}]))
+    return groups
+
+
 def _sense_items_html(analysis: dict[str, Any]) -> str:
     controls = "①②③④⑤"
-    rows = []
-    for idx, sense in enumerate(analysis["senses"][:3]):
-        colloc = ""
-        if sense.get("collocation"):
-            colloc = ' <span class="colloc"><code class="en">%s</code><span class="zh">%s</span></span>' % (
-                esc(sense["collocation"]), esc(sense.get("collocation_zh", ""))
+    groups = _group_senses_by_pos(analysis)
+    group_rows = []
+    number = 0
+    for pos, senses in groups:
+        sense_rows = []
+        for sense in senses:
+            if number >= len(controls):
+                break
+            colloc = ""
+            if sense.get("collocation"):
+                colloc = ' <span class="colloc"><code class="en">%s</code><span class="zh">%s</span></span>' % (
+                    esc(sense["collocation"]), esc(sense.get("collocation_zh", ""))
+                )
+            sense_rows.append(
+                '                        <li><span class="sense_no">%s</span><span class="zh">%s</span>%s</li>'
+                % (controls[number], esc(sense["zh"]), colloc)
             )
-        rows.append(
-            '                    <li><span class="sense_no">%s</span><span class="zh">%s</span>%s</li>'
-            % (controls[idx], esc(sense["zh"]), colloc)
-        )
-    return "\n".join(rows)
+            number += 1
+        if sense_rows:
+            group_rows.append(
+                '                <li class="pos_group">\n'
+                '                    <span class="pos_tag">%s</span>\n'
+                '                    <ul class="pos_meanings">\n%s\n'
+                '                    </ul>\n'
+                '                </li>'
+                % (esc(pos), "\n".join(sense_rows))
+            )
+    return "\n".join(group_rows)
 
 
 def word_card_html(analysis: dict[str, Any]) -> str:
@@ -508,8 +543,8 @@ def word_card_html(analysis: dict[str, Any]) -> str:
                 <div class="word_line">
                     <code class="en">{esc(morph["root"])}(<span class="zh">{esc(morph["root_meaning_zh"])}</span>)</code>
                     <span class="arrow" aria-hidden="true">——&gt;</span>
-                    <code class="en">{esc(word)}(<span class="zh">{esc(w["meaning_zh"])}</span>)</code>
                     <span class="word_pos">{esc(w["pos"])}</span>
+                    <code class="en">{esc(word)}(<span class="zh">{esc(w["meaning_zh"])}</span>)</code>
                     <span class="word_level">{esc(w["level"])}</span>
                     <button type="button" class="card_toggle">显示</button>
                 </div>
@@ -657,22 +692,34 @@ def _ci_card_html(analysis: dict[str, Any], is_main: bool) -> str:
     morph = w["morphology"]
     word = w["word"]
     anchor = (' id="word-%s" data-word="%s"' % (esc_attr(word), esc_attr(word))) if is_main else ""
-    note_parts = [morph.get("explanation", ""), w.get("pos", ""), w.get("level", "")]
-    note = " · ".join([p for p in note_parts if p])
+    note = " · ".join([p for p in [morph.get("explanation", ""), w.get("level", "")] if p])
+    pos = str(w.get("pos") or "").strip()
+    pos_html = '<span class="pos_tag">%s</span>' % esc(pos) if pos else ""
     return f'''            <li{anchor}>
-                <span><code class="en">{esc(word)}</code>(<span class="zh">{esc(w["meaning_zh"])}</span>)
-                <span class="note">{esc(note)}</span></span>
+                <div class="ci_word_head">
+                    <code class="en">{esc(word)}</code>{pos_html}
+                    <span class="zh">{esc(w["meaning_zh"])}</span>
+                </div>
+                <ul class="sense_list pos_sense_list">
+{_sense_items_html(w)}
+                </ul>
                 <p class="example"><span class="example_label">例</span><code class="en">{esc(w["example"])}</code><span class="zh">{esc(w["example_zh"])}</span></p>
+                <p class="note">{esc(note)}</p>
             </li>'''
 
 
 def _related_cards_html(analysis: dict[str, Any]) -> str:
     rows = []
     for item in analysis.get("related", []):
-        note = " · ".join([x for x in [item.get("pos", ""), item.get("note", "")] if x])
+        pos = str(item.get("pos") or "").strip()
+        pos_html = '<span class="pos_tag">%s</span>' % esc(pos) if pos else ""
+        note = str(item.get("note") or "").strip()
         rows.append(f'''            <li>
-                <span><code class="en">{esc(item["word"])}</code>(<span class="zh">{esc(item.get("meaning_zh", ""))}</span>)
-                <span class="note">{esc(note)}</span></span>
+                <div class="ci_word_head">
+                    <code class="en">{esc(item["word"])}</code>{pos_html}
+                    <span class="zh">{esc(item.get("meaning_zh", ""))}</span>
+                </div>
+                <span class="note">{esc(note)}</span>
             </li>''')
     return "\n".join(rows)
 

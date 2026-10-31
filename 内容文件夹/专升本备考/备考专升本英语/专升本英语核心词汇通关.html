@@ -1502,6 +1502,42 @@
                 scroll-behavior: auto !important;
             }
         }
+
+        /* 词性分组：先看词性，再看释义 */
+        .pos_tag {
+            display: inline-block;
+            margin: 0 0.3rem 0 0.1rem;
+            padding: 0.02rem 0.35rem;
+            color: #fff;
+            background: var(--purple);
+            border-radius: 4px;
+            font-family: var(--font-code);
+            font-size: 0.62rem;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+
+        .sense_list > .pos_group {
+            display: block;
+            margin: 0.12rem 0;
+        }
+
+        .pos_group > .pos_tag {
+            margin-left: 0;
+        }
+
+        .pos_meanings {
+            margin: 0.1rem 0 0.2rem;
+            padding: 0;
+            list-style: none;
+        }
+
+        .pos_meanings > li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.3rem;
+            padding: 0.1rem 0;
+        }
     </style>
 </head>
 <body>
