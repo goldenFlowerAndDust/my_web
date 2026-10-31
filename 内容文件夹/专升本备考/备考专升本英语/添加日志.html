@@ -200,6 +200,7 @@
         }
 
         .toolbar input { flex: 1 1 180px; }
+        .toolbar input[type="date"] { flex: 0 0 145px; }
 
         .toolbar button {
             min-height: 2.2rem;
@@ -382,6 +383,7 @@
         <div class="actions">
             <a class="btn primary" href="单词模块/词汇代码生成器.html">添加新单词</a>
             <a class="btn" href="复习清单/核心词汇复习清单.html">今日复习</a>
+            <a class="btn" href="添加日志/index.html">按天归档</a>
             <a class="btn" href="使用指南.html">使用指南</a>
         </div>
     </header>
@@ -394,7 +396,8 @@
 
     <section class="panel">
         <div class="toolbar">
-            <input id="search" type="search" placeholder="搜索单词、分类或文件…" autocomplete="off">
+            <input id="search" type="search" placeholder="搜索单词、时间、分类或文件…" autocomplete="off">
+            <input id="date-filter" type="date" title="按添加日期筛选">
             <select id="filter">
                 <option value="auto">新增 + 插队</option>
                 <option value="new">只看新增</option>
@@ -403,14 +406,17 @@
                 <option value="all">全部记录</option>
             </select>
             <button type="button" id="refresh">刷新</button>
+            <button type="button" id="clear-filters">清空筛选</button>
             <span class="sync-badge" id="sync-badge">检查服务…</span>
         </div>
         <div id="content">
             <div class="empty">加载中…</div>
         </div>
         <p class="note">
-            日志来源：<code>词素工具/归档日志.jsonl</code>（已 gitignore）。最多显示最近 500 条；
-            新记录会出现在最上面。时间按本机时间记录。
+            日志来源：<code>词素工具/归档日志.jsonl</code>（已 gitignore）。实时页最多显示最近 500 条；
+            完整历史按天保存到 <a href="添加日志/index.html"><code>添加日志/</code></a>。
+            日期筛选和日期搜索都按“添加时间”，不是复习日程。时间按本机时间记录。
+            启动服务时会从 <code>data.json</code> 补回漏记的额外新增日志（标记 <code>recovered</code>）。
         </p>
     </section>
 
@@ -426,8 +432,10 @@
         : 'http://127.0.0.1:8767';
 
     var searchEl = document.getElementById('search');
+    var dateEl = document.getElementById('date-filter');
     var filterEl = document.getElementById('filter');
     var refreshEl = document.getElementById('refresh');
+    var clearEl = document.getElementById('clear-filters');
     var contentEl = document.getElementById('content');
     var badgeEl = document.getElementById('sync-badge');
     var statTotal = document.getElementById('stat-total');
@@ -496,15 +504,29 @@
         return String(file).replace(/\\/g, '/');
     }
 
+    function dateOf(item) {
+        return String(item && item.time || '').slice(0, 10);
+    }
+
     function passFilter(item) {
         var filter = filterEl.value;
         if (filter === 'auto' && isReviewType(item.type)) return false;
         if (filter === 'new' && !isNewType(item.type)) return false;
         if (filter === 'priority' && !isPriorityType(item.type)) return false;
         if (filter === 'review' && !isReviewType(item.type)) return false;
+
+        var selectedDate = String(dateEl.value || '').trim();
+        if (selectedDate && dateOf(item) !== selectedDate) return false;
+
         var q = (searchEl.value || '').trim().toLowerCase();
         if (!q) return true;
-        return [item.word, item.target, item.file, item.type, item.schedule]
+
+        // 输入完整日期时，只按“添加时间”匹配，绝不拿复习日程冒充添加日期。
+        if (/^\d{4}-\d{2}-\d{2}$/.test(q)) {
+            return dateOf(item) === q;
+        }
+
+        return [item.time, item.word, item.target, item.file, item.type, item.schedule]
             .some(function (value) { return String(value || '').toLowerCase().indexOf(q) >= 0; });
     }
 
@@ -592,8 +614,16 @@
     }
 
     searchEl.addEventListener('input', render);
+    dateEl.addEventListener('input', render);
+    dateEl.addEventListener('change', render);
     filterEl.addEventListener('change', render);
     refreshEl.addEventListener('click', load);
+    clearEl.addEventListener('click', function () {
+        searchEl.value = '';
+        dateEl.value = '';
+        filterEl.value = 'auto';
+        render();
+    });
 
     load();
     setInterval(load, 15000);

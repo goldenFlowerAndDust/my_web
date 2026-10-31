@@ -29,6 +29,7 @@ sys.path.insert(0, str(TOOL_DIR))
 
 from word_archiver import ArchiveError, analyze_only, apply_review_updates, archive_word, check_word, health  # noqa: E402
 from english_tutor import TutorError, ask_tutor, read_tutor_logs  # noqa: E402
+from archive_added_logs import refresh as refresh_added_logs, recover_missing_extra_entries  # noqa: E402
 
 DEFAULT_PORT = 8767
 SHARED_DIR = BASE.parent / "共享工具"
@@ -201,6 +202,8 @@ def main() -> None:
             print("端口必须是数字。")
             return
     refresh_archive()
+    recover_missing_extra_entries()
+    refresh_added_logs()
     server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
     print("词素自动归档服务已启动：")
     print("  工具页: http://127.0.0.1:%d/单词模块/词汇代码生成器.html" % port)

@@ -190,6 +190,13 @@ def append_log(record: dict[str, Any]) -> None:
     with LOG_FILE.open("a", encoding="utf-8", newline="\n") as fh:
         fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
+    # 同步刷新“添加日志/”按天归档；归档失败不能影响主流程。
+    try:
+        from archive_added_logs import refresh as refresh_added_logs
+        refresh_added_logs()
+    except Exception:
+        pass
+
 
 def backup_paths(paths: list[Path]) -> str:
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
