@@ -41,42 +41,24 @@ Get-ChildItem . -Recurse -Filter *.bat | ForEach-Object {
 共享工具/修复BAT换行.ps1
 ```
 
-## 强制恢复 GitHub 覆盖本地
+## 强制恢复（脚本已移除）
 
-双击：
+为避免误触，强制恢复 BAT / PS1 已删除。
 
-```text
-专升本备考/强制恢复GitHub.bat
-```
-
-或者在 PowerShell 里预览（不会覆盖）：
+确实需要时，先备份未提交修改，再手动执行：
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File "force_restore_github.ps1" -DryRun
-```
-
-脚本会：
-
-```text
 git fetch origin
-→ 备份未提交修改到桌面
-→ 备份本地提交分支
-→ 确认后 git reset --hard origin/main
-→ 不执行 git clean -fdx
+git reset --hard origin/main
 ```
 
-因此不会删除：
+不要执行：
 
 ```text
-共享配置/口令.txt
-共享配置/云端同步.json
-英语/数学问答日志
-导出记录
-部署截图
+git clean -fdx
 ```
 
-会覆盖所有已跟踪文件，包括本地未提交的代码修复。  
-当前修复如果还没提交，请先提交/上传，或恢复后从桌面备份的 patch 重新应用。
+它会删除口令、日志、导出记录等被忽略的本机文件。
 
 ## DeepSeek API Key
 
