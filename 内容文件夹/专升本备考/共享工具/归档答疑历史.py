@@ -225,33 +225,32 @@ document.addEventListener("DOMContentLoaded", function () {
 def generate_pages(config: dict, grouped: dict[str, dict[str, list[dict]]]) -> None:
     archive_dir = config["archive_dir"]
     archive_dir.mkdir(parents=True, exist_ok=True)
-    expected: set[Path] = set()
     for category, days in grouped.items():
         folder = archive_dir / category
         folder.mkdir(parents=True, exist_ok=True)
         for date, records in days.items():
             records.sort(key=lambda item: str(item.get("time", "")))
             target = folder / (date + ".html")
+            # 已归档的页面只增不改：绝不覆盖、绝不删除。
+            if target.exists():
+                continue
             target.write_text(
                 daily_html(config, category, date, records),
                 encoding="utf-8",
                 newline="\n",
             )
-            expected.add(target.resolve())
 
-    # 删除已经不存在记录对应的旧归档，避免删除答疑后旧 HTML 仍残留。
-    for old in archive_dir.rglob("*.html"):
-        if old.resolve() not in expected:
-            try:
-                old.unlink()
-            except OSError:
-                pass
-    for folder in sorted(archive_dir.rglob("*"), reverse=True):
-        if folder.is_dir():
-            try:
-                folder.rmdir()
-            except OSError:
-                pass
+
+def merge_archived_dates(config: dict, grouped: dict[str, dict[str, list[dict]]]) -> None:
+    """把磁盘上已有的历史归档日期补进 hub，不因日志缺失而删掉历史链接。"""
+    archive_dir = config["archive_dir"]
+    for category in config["categories"]:
+        folder = archive_dir / category
+        if not folder.is_dir():
+            continue
+        bucket = grouped.setdefault(category, {})
+        for path in folder.glob("*.html"):
+            bucket.setdefault(path.stem, [])
 
 
 def archive_index_html(config: dict) -> str:
@@ -400,6 +399,7 @@ def refresh(subject: str = "all") -> None:
             continue
         grouped = load_records(config)
         generate_pages(config, grouped)
+        merge_archived_dates(config, grouped)
         write_archive_index(config)
         update_hub(config, grouped)
         file_count = sum(len(days) for days in grouped.values())

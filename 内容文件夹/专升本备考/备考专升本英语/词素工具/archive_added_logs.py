@@ -210,20 +210,15 @@ def refresh() -> None:
         if day:
             grouped.setdefault(day, []).append(item)
 
-    expected: set[Path] = {ARCHIVE_DIR / "index.html"}
     for day, day_entries in grouped.items():
         target = ARCHIVE_DIR / (day + ".html")
+        # 已经归档的日期只保留，不覆盖、不删除。
+        if target.exists():
+            continue
         target.write_text(daily_html(day, day_entries), encoding="utf-8", newline="\n")
-        expected.add(target)
-    (ARCHIVE_DIR / "index.html").write_text(index_html(entries), encoding="utf-8", newline="\n")
-
-    # 删除已经不存在日期对应的旧归档，保留 index.html。
-    for old in ARCHIVE_DIR.glob("*.html"):
-        if old.name != "index.html" and old not in expected:
-            try:
-                old.unlink()
-            except OSError:
-                pass
+    index_path = ARCHIVE_DIR / "index.html"
+    if not index_path.exists():
+        index_path.write_text(index_html(entries), encoding="utf-8", newline="\n")
 
 
 def _type_from_category(category: str) -> str:

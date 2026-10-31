@@ -100,6 +100,33 @@ def read_entries(base: Path, subject: dict[str, Any]) -> list[dict[str, Any]]:
     )
 
 
+def read_archive_entries(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, json.JSONDecodeError):
+        return []
+    entries = data.get("entries") if isinstance(data, dict) else None
+    return [item for item in entries if isinstance(item, dict)] if isinstance(entries, list) else []
+
+
+def merge_entries(
+    existing: list[dict[str, Any]],
+    incoming: list[dict[str, Any]],
+    key_func,
+) -> list[dict[str, Any]]:
+    merged: dict[str, dict[str, Any]] = {}
+    for item in existing + incoming:
+        if isinstance(item, dict):
+            merged[key_func(item)] = item
+    return sorted(
+        merged.values(),
+        key=lambda item: str(item.get("time") or item.get("created_at") or ""),
+        reverse=True,
+    )
+
+
 def write_archive(path: Path, subject_key: str, entries: list[dict[str, Any]]) -> None:
     payload = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
@@ -120,17 +147,32 @@ def write_archive(path: Path, subject_key: str, entries: list[dict[str, Any]]) -
 def build_all(base: Path) -> dict[str, int]:
     counts: dict[str, int] = {}
     for key, subject in CATEGORIES.items():
-        entries = read_entries(base, subject)
-        if not entries:
-            print("%s：没有本地日志，保留已有归档不动。" % subject["label"])
-            counts[key] = 0
-            continue
+        incoming = read_entries(base, subject)
         output = base / subject["output"]
+        existing = read_archive_entries(output)
+        if not incoming:
+            print("%s：没有本地日志，保留已有归档不动。" % subject["label"])
+            counts[key] = len(existing)
+            continue
+        entries = merge_entries(existing, incoming, entry_key)
         write_archive(output, key, entries)
-        print("%s：已写入 %d 条历史归档：%s" % (subject["label"], len(entries), output))
+        if len(entries) > len(incoming):
+            print("%s：合并已有归档，共 %d 条（本次日志 %d 条）" % (
+                subject["label"], len(entries), len(incoming)
+            ))
+        else:
+            print("%s：已写入 %d 条历史归档：%s" % (subject["label"], len(entries), output))
         counts[key] = len(entries)
     counts["added_log"] = build_added_log(base)
     return counts
+
+
+def added_log_key(item: dict[str, Any]) -> str:
+    return "\u0001".join([
+        str(item.get("time") or ""),
+        str(item.get("word") or ""),
+        str(item.get("type") or ""),
+    ])
 
 
 def build_added_log(base: Path) -> int:
@@ -159,6 +201,8 @@ def build_added_log(base: Path) -> int:
         print("添加日志：本地没有记录，保留已有归档不动。")
         return 0
     entries.reverse()
+    existing = read_archive_entries(output)
+    entries = merge_entries(existing, entries, added_log_key)
     payload = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "source": "local-archived-log",
