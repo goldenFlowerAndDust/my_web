@@ -179,7 +179,7 @@
         btnAnalyze.hidden = cloud;
         if (btnJsonAudit) btnJsonAudit.hidden = cloud;
         btnArchive.hidden = !cloud;
-        btnArchive.textContent = cloud ? '加入云端待归档' : '分析并写入';
+        btnArchive.textContent = cloud ? '云端解释并加入待归档' : '分析并写入';
         wordInput.placeholder = cloud
             ? '例如：mean，或中文“意思是；平均的”'
             : '例如：friendship';
@@ -189,8 +189,8 @@
             setCloudStatus(
                 cloudConfigured()
                     ? (usingTutorConnection
-                        ? '云端模式：已复用 AI 答疑的连接地址和口令，只入队，不写本地文件。'
-                        : '云端模式：只入队，不写本地文件。输入英文单词或中文意思。')
+                        ? '云端模式：复用 AI 答疑连接，先解释单词，再加入云端待归档；不写本地文件。'
+                        : '云端模式：先解释单词，再加入云端待归档；不写本地文件。')
                     : '先点“云端连接设置”填写地址和口令，再输入英文单词或中文意思。',
                 cloudConfigured() ? 'ok' : 'error'
             );
@@ -349,6 +349,27 @@
         return message;
     }
 
+    function renderCloudExplanation(answer, queueData) {
+        var word = String((queueData && queueData.word) || wordInput.value || '').trim();
+        var meaning = String((queueData && queueData.meaning_zh) || '').trim();
+        lastAnalysis = null;
+        resultBadge.textContent = '云端解释';
+        inputBadge.textContent = '云端已解释';
+        resultArea.innerHTML =
+            '<div class="result_head">' +
+            '<div><span class="result_word">' + esc(word) + '</span>' +
+            (meaning ? '<span class="result_meaning">' + esc(meaning) + '</span>' : '') +
+            '</div>' +
+            '<div class="result_tags"><span class="result_tag">云端解释 · 待归档</span></div>' +
+            '</div>' +
+            '<div class="result_exists" style="white-space:pre-wrap;"><strong>AI 解释</strong><p>' +
+            esc(String(answer || '')) + '</p></div>' +
+            '<div class="result_exists"><strong>' +
+            (queueData && queueData.already_pending ? '这个词已经在待归档队列里。' : '已加入云端待归档。') +
+            '</strong><p>' + esc((queueData && queueData.message) || '') + '</p>' +
+            '<p>运行 <code>同步全部科目.bat</code> 后会在 PC 上写入词库和复习清单。</p></div>';
+    }
+
     async function doCloudQueue() {
         if (busy) return;
         var query = (wordInput.value || '').trim();
@@ -359,14 +380,21 @@
         }
         setBusy(true, 'cloud');
         try {
+            setStatus('正在调用云端 AI 解释单词…', 'busy');
+            var explanation = await cloudPost('/api/tutor', {
+                mode: '单词解释',
+                question: '请解释单词或中文意思“' + query + '”。请给出英文单词、词性、中文释义、常见搭配和一个例句。'
+            });
+            setStatus('解释完成，正在加入云端待归档…', 'busy');
             var data = await cloudPost('/api/queue-word', { query: query });
-            renderCloudQueue(data);
-            setStatus(data.message || '已加入云端待归档。', 'ok');
-            toast(data.already_pending ? '已在云端待归档' : '已加入云端待归档');
+            renderCloudExplanation(explanation.answer || explanation.message || '', data);
+            setStatus('云端解释完成，并已加入待归档。', 'ok');
+            toast('云端解释完成，已加入待归档');
         } catch (err) {
-            renderError(cloudErrorMessage(err));
-            setStatus('加入云端待归档失败：' + cloudErrorMessage(err), 'error');
-            toast('加入云端失败');
+            var message = cloudErrorMessage(err);
+            renderError(message);
+            setStatus('云端解释/入队失败：' + message, 'error');
+            toast('云端解释失败');
         } finally {
             setBusy(false);
         }
@@ -398,8 +426,8 @@
                 inputBadge.textContent = '修复中…';
                 setStatus('正在删除旧记录并重建 HTML / JSON，请稍候…', 'busy');
             } else if (mode === 'cloud') {
-                inputBadge.textContent = '入队中…';
-                setStatus('正在加入云端待归档，不写本地文件…', 'busy');
+                inputBadge.textContent = '云端解释中…';
+                setStatus('正在调用云端 AI 解释并加入待归档，请稍候…', 'busy');
             } else {
                 inputBadge.textContent = '分析中…';
                 setStatus('正在调用 DeepSeek 分析构词，请稍候…', 'busy');
