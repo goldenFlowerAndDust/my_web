@@ -204,3 +204,501 @@ footer:not(:has(*)) {
 .sense_list .colloc .zh {
     color: #7F8C8D;
 }
+
+/* ================= 7. 词卡排板：点击整卡显示/收起 ================= */
+.word_div > li > span:first-child {
+    display: block;
+    line-height: 1.9;
+}
+
+.word_div > li > span:first-child .note {
+    display: block;
+    margin-top: 2px;
+}
+
+.word_div > li .zh {
+    line-height: 1.8;
+}
+
+.word_div > li .meaning_item {
+    display: block;
+    margin: 1px 0;
+}
+
+.ci_word_head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 2px 5px;
+    margin-bottom: 4px;
+    line-height: 1.8;
+}
+
+.ci_word_head .en {
+    display: inline;
+}
+
+.ci_word_head .zh {
+    display: inline;
+}
+
+.word_div > li .example {
+    display: block;
+    margin: 5px 0 2px;
+    line-height: 1.8;
+}
+
+.word_div > li > .note {
+    display: block;
+    margin: 3px 0 0;
+}
+
+.pos_meanings > li {
+    flex-wrap: wrap;
+}
+
+.pos_meanings > li > .zh {
+    flex: 1 1 220px;
+    min-width: 0;
+}
+
+.sense_list .colloc {
+    flex: 0 1 auto;
+}
+
+/* 隐藏时不要留下大块空白：直接收起中文和注释，点击卡片再展开 */
+.hide-zh .zh {
+    display: none !important;
+}
+
+.hide-zh .note {
+    display: none !important;
+}
+
+.hide-zh .zh.show-zh {
+    display: inline !important;
+}
+
+.hide-zh .note.show-note {
+    display: block !important;
+}
+
+/* 分层显示：单词 → 中文释义 → 例句 → 例句中文 */
+.hide-zh .word_div > li .example {
+    display: none !important;
+}
+
+.hide-zh .word_div > li.show-meaning .ci_word_head .zh,
+.hide-zh .word_div > li.show-meaning .sense_list .zh,
+.hide-zh .word_div > li.show-meaning .word_line .zh {
+    display: inline !important;
+}
+
+.hide-zh .word_div > li.show-meaning > .note,
+.hide-zh .word_div > li.show-meaning .answer .note {
+    display: block !important;
+}
+
+.hide-zh .word_div > li.show-example .example {
+    display: block !important;
+}
+
+.hide-zh .word_div > li.show-translation .example .zh {
+    display: inline !important;
+}
+
+/* 分层展开时覆盖页面内联的 opacity/visibility */
+.hide-zh .word_div > li.show-meaning .ci_word_head .zh,
+.hide-zh .word_div > li.show-meaning .sense_list .zh,
+.hide-zh .word_div > li.show-meaning .word_line .zh,
+.hide-zh .word_div > li.show-translation .example .zh {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.hide-zh .word_div > li.show-meaning > .note,
+.hide-zh .word_div > li.show-meaning .answer .note {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* ================= 8. 新词卡：单词 → 词性 → 释义/例句 → 翻译 ================= */
+.word-card .pos_group {
+    display: none;
+}
+
+.word-card.show-pos .pos_group {
+    display: block;
+}
+
+.word-card .pos_meanings {
+    display: none;
+}
+
+.word-card .pos_group.active .pos_meanings {
+    display: block;
+}
+
+.word-card .sense_example,
+.word-card .sense_example_zh {
+    display: none;
+}
+
+.word-card .pos_group.active .sense_example {
+    display: block;
+}
+
+.word-card .sense_item.show-translation .sense_example_zh {
+    display: block;
+}
+
+.word-card .note {
+    display: none;
+}
+
+.word-card.show-pos .note {
+    display: block;
+}
+
+.word-card .word_line .zh {
+    display: none;
+}
+
+.level_tag {
+    display: inline-block;
+    padding: 1px 6px;
+    color: #7F8C8D;
+    background: #F4F6F8;
+    border: 1px solid #E5E9EF;
+    border-radius: 999px;
+    font-size: 0.66rem;
+    line-height: 1.6;
+}
+
+.sense_item {
+    padding: 4px 0;
+    border-bottom: 1px dotted #EDF0F2;
+}
+
+.sense_item:last-child {
+    border-bottom: 0;
+}
+
+.sense_main {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.sense_example {
+    margin: 4px 0 1px;
+    padding-left: 1.1rem;
+    color: #5D6D7E;
+    font-size: 0.78rem;
+}
+
+.sense_example_zh {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: #7F8C8D;
+    font-size: 0.78rem;
+}
+
+.pos_group > .pos_tag {
+    cursor: pointer;
+}
+
+.word_card.show-pos .pos_group > .pos_tag::after {
+    content: " ▸";
+    font-size: 0.7em;
+}
+
+.word_card.show-pos .pos_group.active > .pos_tag::after {
+    content: " ▾";
+}
+
+/* 覆盖 .example 的 display:block，确保例句先收起 */
+.word_div > li.word-card .sense_example,
+.word_div > li.word-card .sense_example_zh {
+    display: none !important;
+}
+
+.word_div > li.word-card .pos_group.active .sense_example {
+    display: block !important;
+}
+
+.word_div > li.word-card .sense_item.show-translation .sense_example_zh {
+    display: block !important;
+}
+
+/* 注释只在展开某个词性后出现 */
+.word-card.show-pos .note {
+    display: none !important;
+}
+
+.word-card.has-active-pos .note {
+    display: block !important;
+}
+
+/* 全部显示/隐藏按钮 */
+.reveal-all-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+    padding: 10px 18px;
+    color: #FFFFFF;
+    background: #5D6D7E;
+    border: 0;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(33, 48, 88, 0.22);
+}
+
+.reveal-all-btn:hover {
+    background: #3E4C59;
+}
+
+.reveal-all .word-card .pos_group,
+.reveal-all .word-card .pos_meanings,
+.reveal-all .word-card .sense_example,
+.reveal-all .word-card .sense_example_zh,
+.reveal-all .word-card .note {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.reveal-all .word-card .word_line .zh,
+.reveal-all .word-card .ci_word_head .zh {
+    display: inline !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 变体词：不参与分层隐藏，永远显示释义/例句/构词 */
+.related-card .zh,
+.related-card .note,
+.related-card .related_example,
+.related-card .related_example_zh {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.related-card .ci_word_head .zh {
+    display: inline;
+}
+
+.related_card,
+.related-card {
+    margin: 8px 0;
+    padding: 8px 10px;
+    border-left: 3px solid #E5E9EF;
+    background: #FCFDFE;
+    border-radius: 0 6px 6px 0;
+}
+
+.related_example,
+.related_example_zh {
+    margin: 3px 0 0 1.2rem;
+    color: #5D6D7E;
+    font-size: 0.8rem;
+}
+
+.related_example_zh {
+    color: #7F8C8D;
+}
+
+/* 释义、搭配、例句全部纵向排列，避免白色框飘到右侧 */
+.pos_meanings > li.sense_item {
+    display: block !important;
+    width: 100%;
+    padding: 6px 0;
+}
+
+.sense_main {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 3px 5px;
+}
+
+.sense_item .colloc,
+.sense_list .colloc {
+    display: block;
+    flex: 0 0 100%;
+    width: auto;
+    margin: 3px 0 0 1.15rem;
+    padding: 2px 0;
+    background: transparent;
+    border: 0;
+    font-size: 0.78rem;
+    color: #7F8C8D;
+}
+
+.sense_item .sense_example,
+.sense_item .sense_example_zh {
+    display: none;
+    width: 100%;
+    margin: 4px 0 0 1.15rem;
+    padding: 0;
+    color: #5D6D7E;
+    font-size: 0.8rem;
+}
+
+.word-card .pos_group.active .sense_item .sense_example {
+    display: block !important;
+}
+
+.word-card .sense_item.show-translation .sense_example_zh {
+    display: block !important;
+}
+
+/* 词卡里的搭配先不展示，避免和例句翻译混在一起 */
+.word-card .colloc {
+    display: none !important;
+}
+
+.reveal-all .word-card .colloc {
+    display: block !important;
+}
+
+/* 全部显示时覆盖分层状态 */
+.reveal-all .word_div > li.word-card .whole,
+.reveal-all .word_div > li.word-card .pos_group,
+.reveal-all .word_div > li.word-card .pos_meanings,
+.reveal-all .word_div > li.word-card .sense_example,
+.reveal-all .word_div > li.word-card .sense_example_zh,
+.reveal-all .word_div > li.word-card .note,
+.reveal-all .word_div > li.word-card .colloc {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 展开某个词性后：释义、搭配、英文例句同步显示；例句翻译等单击句子再出现 */
+.word-card .pos_group.active .sense_item .colloc,
+.word-card .pos_group.active .sense_item .sense_example {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.word-card .pos_group.active .sense_item .sense_example_zh {
+    display: none !important;
+}
+
+.word-card .pos_group.active .sense_item.show-translation .sense_example_zh {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.reveal-all .word_div > li.word-card .pos_group.active .sense_item .sense_example_zh,
+.reveal-all .word_div > li.word-card .sense_item.show-translation .sense_example_zh {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 顶部按钮：固定在标题下方右侧，不随页面滚动，也不占满宽度 */
+.word_top_actions {
+    position: static;
+    top: auto;
+    z-index: auto;
+    display: block;
+    width: auto;
+    max-width: none;
+    height: 37px;
+    padding: 0;
+    margin: 8px 16px 0;
+    background: transparent;
+}
+
+.reveal-all-btn {
+    position: fixed;
+    top: 97px;
+    right: 24px;
+    bottom: auto;
+    z-index: 9999;
+    margin: 0;
+    padding: 4px 11px;
+    color: #5D6D7E;
+    background: #FFFFFF;
+    border: 1px solid #DCE2E8;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(33, 48, 88, 0.12);
+}
+
+.reveal-all-btn:hover {
+    color: #2C3E50;
+    background: #F4F6F8;
+    transform: none;
+}
+
+/* 单词页：按钮放在滚动区外，正文单独滚动，按钮永远可见且不覆盖正文 */
+body.word-scroll-page {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+body.word-scroll-page main {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+body.word-scroll-page main > header {
+    flex: 0 0 auto;
+}
+
+body.word-scroll-page .word_top_actions {
+    flex: 0 0 auto;
+    position: static;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: auto;
+    max-width: none;
+    height: 37px;
+    padding: 0;
+    margin: 8px 16px 0;
+    background: transparent;
+}
+
+body.word-scroll-page .reveal-all-btn {
+    position: static;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    z-index: auto;
+}
+
+body.word-scroll-page #section_1 {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+body.word-scroll-page {
+    margin: 0;
+}
+
+body.word-scroll-page main {
+    box-sizing: border-box;
+}

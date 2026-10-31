@@ -478,11 +478,16 @@
         return type === 'overwrite';
     }
 
+    function isRepairType(type) {
+        return type === 'repair';
+    }
+
     function typeLabel(type) {
         if (isNewType(type)) return '新增';
         if (isPriorityType(type)) return '插队';
         if (isReviewType(type)) return '复习同步';
         if (isOverwriteType(type)) return '覆盖更新';
+        if (isRepairType(type)) return '修复重建';
         return type || '记录';
     }
 
@@ -495,14 +500,15 @@
             atom: '原子词',
             'existing-priority': '已录入，插队复习',
             'review-sync': '复习打卡写回',
-            overwrite: '重新分析并覆盖'
+            overwrite: '重新分析并覆盖',
+            repair: '删除旧记录并重建 HTML + JSON'
         }[type] || '';
     }
 
     function badgeClass(type) {
         if (isNewType(type)) return 'new';
         if (isPriorityType(type)) return 'priority';
-        if (isOverwriteType(type)) return 'new';
+        if (isOverwriteType(type) || isRepairType(type)) return 'new';
         return 'review';
     }
 

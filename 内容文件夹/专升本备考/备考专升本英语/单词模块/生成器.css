@@ -882,3 +882,113 @@
 .cloud_status.is-ok {
     color: #0E6655;
 }
+
+/* 云端连接弹窗 */
+.cloud_dialog {
+    width: min(520px, 92vw);
+    padding: 0;
+    border: 1px solid #D5DBDB;
+    border-radius: 12px;
+    background: #FFFFFF;
+    color: #2C3E50;
+}
+
+.cloud_dialog::backdrop {
+    background: rgba(20, 35, 63, 0.5);
+    backdrop-filter: blur(3px);
+}
+
+.cloud_dialog form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.1rem 1.2rem 1.2rem;
+}
+
+.dialog_head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: 0.35rem;
+}
+
+.dialog_head h2 {
+    margin: 0.15rem 0 0;
+    font-size: 1.15rem;
+}
+
+.dialog_close {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    color: #7F8C8D;
+    background: #F4F6F8;
+    border: 1px solid #D5DBDB;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.dialog_actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.45rem;
+    margin-top: 0.55rem;
+}
+
+.cloud_dialog input {
+    min-height: 2.2rem;
+    padding: 0.4rem 0.55rem;
+    border: 1px solid #D5DBDB;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.8rem;
+}
+
+/* 分析结果顶部的词性分组摘要 */
+.result_pos_groups {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 0.7rem;
+    margin: 0.55rem 0 0.65rem;
+    padding: 0.6rem 0.7rem;
+    background: #F8FAFC;
+    border: 1px solid #E5E9EF;
+    border-radius: 8px;
+}
+
+.result_pos_row {
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    min-width: 0;
+    font-size: 0.8rem;
+}
+
+.result_pos_chip {
+    flex: 0 0 auto;
+    padding: 0.03rem 0.38rem;
+    color: #FFFFFF;
+    background: #8E44AD;
+    border-radius: 4px;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.result_pos_text {
+    color: #2C3E50;
+    line-height: 1.7;
+}
+
+@media (max-width: 620px) {
+    .result_pos_groups {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+}

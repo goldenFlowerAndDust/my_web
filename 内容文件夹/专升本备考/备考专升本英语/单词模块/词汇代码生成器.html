@@ -81,19 +81,34 @@
                 <option value="cloud">云端排队</option>
             </select>
 
-            <div class="cloud_fields" id="cloudFields" hidden>
-                <label class="field_label" for="cloudUrl">云端地址</label>
-                <input id="cloudUrl" type="url" placeholder="https://...workers.dev 或 SCF 函数 URL">
-                <label class="field_label" for="cloudToken">访问口令</label>
-                <input id="cloudToken" type="password" placeholder="X-Tutor-Token">
-                <div class="cloud_actions">
-                    <button type="button" class="btn btn_soft btn_small" id="btnCloudTest">测试连接</button>
-                    <button type="button" class="btn btn_soft btn_small" id="btnCloudExport">导出待归档 JSON</button>
-                </div>
+            <div class="cloud_actions">
+                <button type="button" class="btn btn_soft btn_small" id="btnCloudSettings">云端连接设置</button>
+                <button type="button" class="btn btn_soft btn_small" id="btnCloudExport">导出待归档 JSON</button>
             </div>
             <p id="cloudStatus" class="cloud_status">本地模式：分析并直接写入文件。</p>
         </div>
     </section>
+
+    <dialog id="cloudDialog" class="cloud_dialog">
+        <form method="dialog" id="cloudForm">
+            <div class="dialog_head">
+                <div>
+                    <p class="eyebrow">Cloud Settings</p>
+                    <h2>云端连接设置</h2>
+                </div>
+                <button type="button" class="dialog_close" id="cloudClose" aria-label="关闭">×</button>
+            </div>
+            <label class="field_label" for="cloudUrl">云端地址</label>
+            <input id="cloudUrl" type="url" placeholder="https://...workers.dev 或 SCF 函数 URL">
+            <label class="field_label" for="cloudToken">访问口令</label>
+            <input id="cloudToken" type="password" placeholder="X-Tutor-Token">
+            <p id="cloudDialogStatus" class="cloud_status"></p>
+            <div class="dialog_actions">
+                <button type="button" class="btn btn_soft btn_small" id="btnCloudTest">测试连接</button>
+                <button type="submit" class="btn btn_primary btn_small" id="btnCloudSave">保存</button>
+            </div>
+        </form>
+    </dialog>
 
     <section class="service_bar" id="serviceBar" aria-live="polite">
         <span class="service_dot" id="serviceDot"></span>
@@ -133,6 +148,7 @@
             <div class="gen_actions">
                 <button type="button" class="btn btn_soft" id="btnCheck">检查是否已录入</button>
                 <button type="button" class="btn btn_soft" id="btnAnalyze">AI 分析（不写入）</button>
+                <button type="button" class="btn btn_soft" id="btnJsonAudit">JSON 自查</button>
                 <button type="button" class="btn btn_primary" id="btnArchive">分析并写入</button>
             </div>
 

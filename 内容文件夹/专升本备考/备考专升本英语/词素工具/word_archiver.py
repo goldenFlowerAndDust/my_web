@@ -78,12 +78,14 @@ SYSTEM_PROMPT = r"""你是一位严谨的英语构词法老师，服务对象是
 
 其他要求：
 - word 必须与输入完全一致（小写）。
-- meaning_zh 用简洁中文概括全部释义；senses 1–5 条，**每条必须包含 pos 和 zh**，可选 collocation / collocation_zh。
+- meaning_zh 用简洁中文概括全部释义；senses 1–6 条，**每条必须包含 pos、zh、example、example_zh**，可选 collocation / collocation_zh。
+- 必须覆盖该词常见词性，不能漏掉明显的 n. / v. / adj.；像 mean 这种有名词、动词、形容词用法的，三个词性都要出现。
 - pos 用标准缩写：n. / v. / adj. / adv. / prep. / pron. / conj. / num. / art. / int. / aux. / phr.；同一个词的多个词性要拆成多条 sense，不要把词性只写在 note 末尾。
-- example 必须是自然、适合该词的英文例句；example_zh 是准确中文翻译。
+- 每个 sense 的 example 必须是一个自然、简短、能体现该词性和该义项的英文例句；example_zh 是准确中文翻译。
 - note 只写构词/拼写/易混点，不要重复词性。
 - level 只能是：小学、初中、高中、专升本、超纲。
-- related 只放真实存在的同族词，0–6 条，每条包含 word、meaning_zh、pos、note。
+- related 只放真实存在的同族词，0–6 条，每条包含 word、meaning_zh、pos、example、example_zh、note。
+- 同族词的 example 也必须能体现它的词性和该释义；不要为空。
 - 对没有把握的拆分要选择 atom 或 root_family，不要编造词根。
 - 输出 JSON 字段：
 {
@@ -101,14 +103,14 @@ SYSTEM_PROMPT = r"""你是一位严谨的英语构词法老师，服务对象是
     "components": []
   },
   "senses": [
-    {"pos": "adj.", "zh": "有帮助的；有益的", "collocation": "helpful advice", "collocation_zh": "有用的建议"},
-    {"pos": "adj.", "zh": "乐于助人的", "collocation": "a helpful teacher", "collocation_zh": "乐于助人的老师"}
+    {"pos": "adj.", "zh": "有帮助的；有益的", "example": "She gave me some helpful advice.", "example_zh": "她给了我一些有用的建议。", "collocation": "helpful advice", "collocation_zh": "有用的建议"},
+    {"pos": "adj.", "zh": "乐于助人的", "example": "He is a helpful teacher.", "example_zh": "他是一位乐于助人的老师。", "collocation": "a helpful teacher", "collocation_zh": "乐于助人的老师"}
   ],
   "example": "She gave me some helpful advice.",
   "example_zh": "她给了我一些有用的建议。",
   "note": "help + -ful；-ful 常表示“充满……的”。",
   "related": [
-    {"word": "helpfully", "meaning_zh": "有帮助地", "pos": "adv.", "note": "helpful + -ly"}
+    {"word": "helpfully", "meaning_zh": "有帮助地", "pos": "adv.", "example": "She helpfully pointed out the error.", "example_zh": "她好心地指出了错误。", "note": "helpful + -ly"}
   ]
 }"""
 
@@ -372,11 +374,18 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
     senses_raw = raw.get("senses") or []
     senses: list[dict[str, str]] = []
     if isinstance(senses_raw, list):
-        for item in senses_raw[:5]:
+        for item in senses_raw[:6]:
             if isinstance(item, str):
                 zh = item.strip()
                 if zh:
-                    senses.append({"pos": pos, "zh": zh, "collocation": "", "collocation_zh": ""})
+                    senses.append({
+                        "pos": pos,
+                        "zh": zh,
+                        "example": "",
+                        "example_zh": "",
+                        "collocation": "",
+                        "collocation_zh": "",
+                    })
             elif isinstance(item, dict):
                 zh = str(item.get("zh") or "").strip()
                 if not zh:
@@ -384,11 +393,20 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
                 senses.append({
                     "pos": str(item.get("pos") or pos).strip(),
                     "zh": zh,
+                    "example": str(item.get("example") or "").strip(),
+                    "example_zh": str(item.get("example_zh") or "").strip(),
                     "collocation": str(item.get("collocation") or "").strip(),
                     "collocation_zh": str(item.get("collocation_zh") or "").strip(),
                 })
     if not senses:
-        senses = [{"pos": pos, "zh": meaning, "collocation": "", "collocation_zh": ""}]
+        senses = [{
+            "pos": pos,
+            "zh": meaning,
+            "example": "",
+            "example_zh": "",
+            "collocation": "",
+            "collocation_zh": "",
+        }]
 
     sense_positions: list[str] = []
     for sense in senses:
@@ -421,6 +439,8 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
                 "word": rw,
                 "meaning_zh": str(item.get("meaning_zh") or "").strip(),
                 "pos": str(item.get("pos") or "").strip(),
+                "example": str(item.get("example") or "").strip(),
+                "example_zh": str(item.get("example_zh") or "").strip(),
                 "note": str(item.get("note") or "").strip(),
             })
 
@@ -515,12 +535,18 @@ def _group_senses_by_pos(analysis: dict[str, Any]) -> list[tuple[str, list[dict[
             groups.append((pos, by_pos[pos]))
         by_pos[pos].append(sense)
     if not groups:
-        groups.append((fallback or "其他", [{"zh": analysis.get("meaning_zh", ""), "collocation": "", "collocation_zh": ""}]))
+        groups.append((fallback or "其他", [{
+            "zh": analysis.get("meaning_zh", ""),
+            "example": analysis.get("example", ""),
+            "example_zh": analysis.get("example_zh", ""),
+            "collocation": "",
+            "collocation_zh": "",
+        }]))
     return groups
 
 
 def _sense_items_html(analysis: dict[str, Any]) -> str:
-    controls = "①②③④⑤"
+    controls = "①②③④⑤⑥"
     groups = _group_senses_by_pos(analysis)
     group_rows = []
     number = 0
@@ -534,9 +560,25 @@ def _sense_items_html(analysis: dict[str, Any]) -> str:
                 colloc = ' <span class="colloc"><code class="en">%s</code><span class="zh">%s</span></span>' % (
                     esc(sense["collocation"]), esc(sense.get("collocation_zh", ""))
                 )
+            example = str(sense.get("example") or analysis.get("example") or "").strip()
+            example_zh = str(sense.get("example_zh") or analysis.get("example_zh") or "").strip()
+            example_html = ""
+            if example:
+                example_html += (
+                    '                        <p class="sense_example"><span class="example_label">例</span><code class="en">%s</code></p>\n'
+                    % esc(example)
+                )
+            if example_zh:
+                example_html += (
+                    '                        <p class="sense_example_zh"><span class="zh">%s</span></p>\n'
+                    % esc(example_zh)
+                )
             sense_rows.append(
-                '                        <li><span class="sense_no">%s</span><span class="zh">%s</span>%s</li>'
-                % (controls[number], esc(sense["zh"]), colloc)
+                '                    <li class="sense_item">\n'
+                '                        <div class="sense_main"><span class="sense_no">%s</span><span class="zh">%s</span>%s</div>\n'
+                '%s'
+                '                    </li>'
+                % (controls[number], esc(sense["zh"]), colloc, example_html)
             )
             number += 1
         if sense_rows:
@@ -556,20 +598,18 @@ def word_card_html(analysis: dict[str, Any]) -> str:
     morph = w["morphology"]
     word = w["word"]
     note = w.get("note") or morph.get("explanation", "")
-    return f'''            <li class="word_item" id="word-{esc_attr(word)}" data-word="{esc_attr(word)}">
+    return f'''            <li class="word_item word-card" id="word-{esc_attr(word)}" data-word="{esc_attr(word)}">
                 <div class="word_line">
                     <code class="en">{esc(morph["root"])}(<span class="zh">{esc(morph["root_meaning_zh"])}</span>)</code>
                     <span class="arrow" aria-hidden="true">——&gt;</span>
                     <span class="word_pos">{esc(_pos_summary(w))}</span>
                     <code class="en">{esc(word)}(<span class="zh">{esc(w["meaning_zh"])}</span>)</code>
                     <span class="word_level">{esc(w["level"])}</span>
-                    <button type="button" class="card_toggle">显示</button>
                 </div>
                 <div class="answer">
                     <ul class="sense_list">
 {_sense_items_html(w)}
                     </ul>
-                    <p class="example"><span class="example_label">例</span><code class="en">{esc(w["example"])}</code><span class="zh">{esc(w["example_zh"])}</span></p>
                     <p class="note">{esc(note)}</p>
                 </div>
             </li>'''
@@ -709,18 +749,19 @@ def _ci_card_html(analysis: dict[str, Any], is_main: bool) -> str:
     morph = w["morphology"]
     word = w["word"]
     anchor = (' id="word-%s" data-word="%s"' % (esc_attr(word), esc_attr(word))) if is_main else ""
-    note = " · ".join([p for p in [morph.get("explanation", ""), w.get("level", "")] if p])
+    classes = "word-card" if is_main else ""
+    class_attr = (' class="%s"' % classes) if classes else ""
+    note = str(morph.get("explanation", "") or w.get("note", "")).strip()
     pos = _pos_summary(w)
     pos_html = '<span class="pos_tag">%s</span>' % esc(pos) if pos else ""
-    return f'''            <li{anchor}>
+    level_html = '<span class="level_tag">%s</span>' % esc(w.get("level", "")) if w.get("level") else ""
+    return f'''            <li{class_attr}{anchor}>
                 <div class="ci_word_head">
-                    <code class="en">{esc(word)}</code>{pos_html}
-                    <span class="zh">{esc(w["meaning_zh"])}</span>
+                    <code class="en">{esc(word)}</code>{pos_html}{level_html}
                 </div>
                 <ul class="sense_list pos_sense_list">
 {_sense_items_html(w)}
                 </ul>
-                <p class="example"><span class="example_label">例</span><code class="en">{esc(w["example"])}</code><span class="zh">{esc(w["example_zh"])}</span></p>
                 <p class="note">{esc(note)}</p>
             </li>'''
 
@@ -731,11 +772,20 @@ def _related_cards_html(analysis: dict[str, Any]) -> str:
         pos = str(item.get("pos") or "").strip()
         pos_html = '<span class="pos_tag">%s</span>' % esc(pos) if pos else ""
         note = str(item.get("note") or "").strip()
-        rows.append(f'''            <li>
+        example = str(item.get("example") or "").strip()
+        example_zh = str(item.get("example_zh") or "").strip()
+        example_html = ""
+        if example:
+            example_html += '<p class="related_example"><code class="en">%s</code></p>' % esc(example)
+        if example_zh:
+            example_html += '<p class="related_example_zh"><span class="zh">%s</span></p>' % esc(example_zh)
+        rows.append(f'''            <li class="related-card">
                 <div class="ci_word_head">
                     <code class="en">{esc(item["word"])}</code>{pos_html}
                     <span class="zh">{esc(item.get("meaning_zh", ""))}</span>
+                    <span class="level_tag">{esc(analysis.get("level", ""))}</span>
                 </div>
+                {example_html}
                 <span class="note">{esc(note)}</span>
             </li>''')
     return "\n".join(rows)
@@ -1106,23 +1156,117 @@ def parse_word_meaning_from_page(page_file: str, word: str) -> str:
     return ""
 
 
+def _data_page_relative(item: dict[str, Any]) -> str:
+    path_text = str(item.get("path") or "").split("#")[0]
+    return path_text[3:] if path_text.startswith("../") else path_text
+
+
+def _page_contains_word(relative: str, word: str) -> bool:
+    if not relative:
+        return False
+    page = BASE / relative
+    if not page.exists() or not page.is_file():
+        return False
+    try:
+        text = page.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return False
+    return bool(re.search(
+        r'(?:data-word="' + re.escape(word) + r'"|'
+        r'id="word-' + re.escape(word) + r'"|'
+        r'<code class="en">' + re.escape(word) + r'(?:</code>|\s*\())',
+        text,
+    ))
+
+
 def check_word(word: str) -> dict[str, Any]:
     word = normalize_word(word)
     data = load_data()
     category, item = find_data_item(data, word)
     page_file = find_existing_word(word)
-    exists = bool(item or page_file)
+    data_path = _data_page_relative(item or {})
+    path_ok = bool(item and _page_contains_word(data_path, word))
+    has_html = bool(page_file)
+    has_json = bool(item)
+
+    if has_html and has_json and path_ok:
+        state = "ok"
+        recommended = "overwrite"
+        message = "HTML 和 data.json 都正常；可覆盖原内容，复习进度保留。"
+    elif has_html and not has_json:
+        state = "html_only"
+        recommended = "repair"
+        message = "HTML 存在，但 data.json 缺失；需要修复并重建记录。"
+    elif has_json and not has_html:
+        state = "json_only"
+        recommended = "repair"
+        message = "data.json 存在，但找不到对应 HTML；需要修复并重建页面。"
+    elif has_json and not path_ok:
+        state = "broken"
+        recommended = "repair"
+        message = "data.json 路径失效或指向的页面不含这个词；需要修复。"
+    else:
+        state = "none"
+        recommended = "direct"
+        message = "没有 HTML、也没有 data.json；可直接导入。"
+
     return {
         "ok": True,
-        "exists": exists,
+        "exists": state == "ok",
+        "state": state,
+        "recommended": recommended,
         "word": word,
         "data_category": category,
         "data_item": item,
+        "data_path": data_path,
+        "data_path_ok": path_ok,
         "page_file": page_file,
-        "message": (
-            "已录入：不会新建，也不插队；需要复习时请在复习清单查看。"
-            if exists else "尚未录入，可以分析并写入；写入后会排到明天的额外新增。"
-        ),
+        "has_html": has_html,
+        "has_json": has_json,
+        "message": message,
+    }
+
+
+def audit_word_json() -> dict[str, Any]:
+    """删除 data.json 中“找不到对应 HTML 或页面不含该词”的失效记录。"""
+    data = load_data()
+    removed: list[dict[str, str]] = []
+    for category, arr in list(data.items()):
+        if not isinstance(arr, list):
+            continue
+        kept = []
+        for item in arr:
+            if not isinstance(item, dict) or item.get("kind") != "word":
+                kept.append(item)
+                continue
+            word = str(item.get("name") or "").strip()
+            rel = _data_page_relative(item)
+            if word and _page_contains_word(rel, word):
+                kept.append(item)
+            else:
+                removed.append({
+                    "word": word,
+                    "category": category,
+                    "path": rel,
+                })
+        data[category] = kept
+
+    if removed:
+        backup_paths([DATA_JSON])
+        write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+        append_log({
+            "word": ",".join(item["word"] for item in removed)[:300],
+            "type": "json-audit",
+            "target": "复习清单/data.json",
+            "file": "复习清单/data.json",
+            "schedule": today_str(),
+            "status": "ok",
+        })
+    return {
+        "ok": True,
+        "count": len(removed),
+        "removed": removed,
+        "message": "已清理 %d 条失效 JSON 记录。" % len(removed) if removed else "data.json 没有发现失效记录。",
     }
 
 
@@ -1240,6 +1384,191 @@ def clamp_int(value: Any, default: int = 0) -> int:
         return default
 
 
+def rebuild_in_new_category(
+    word: str,
+    hint: str,
+    analysis: dict[str, Any],
+    old_category: str,
+    item: dict[str, Any],
+    page_file: str,
+) -> dict[str, Any]:
+    """分类改变时：备份、删除旧词素页、按新分类重建并迁移 data.json。"""
+    path_text = str(item.get("path") or "").split("#")[0]
+    relative = path_text[3:] if path_text.startswith("../") else (path_text or page_file)
+    old_page = BASE / relative
+    backup_files = [DATA_JSON, WORD_PAGE]
+    if old_page.exists():
+        backup_files.insert(0, old_page)
+    backup = backup_paths(backup_files)
+
+    target = analysis["target"]
+    if target.get("kind") == "core":
+        location = insert_into_word_page(analysis)
+        location.setdefault("file", "专升本英语核心词汇通关.html")
+        location.setdefault("target", target["category"])
+    else:
+        location = insert_into_ci(analysis)
+
+    data = load_data()
+    old_list = data.get(old_category)
+    if isinstance(old_list, list):
+        data[old_category] = [
+            row for row in old_list
+            if not (isinstance(row, dict) and str(row.get("name") or "") == word)
+        ]
+    new_category = target["category"]
+    new_list = data.get(new_category)
+    if not isinstance(new_list, list):
+        new_list = []
+        data[new_category] = new_list
+
+    created = str(item.get("created") or today_str())
+    new_item = build_data_item(
+        analysis,
+        location,
+        created,
+        extra=bool(item.get("extra", True)),
+        extra_date=str(item.get("extraDate") or ""),
+        source=str(item.get("source") or "overwrite"),
+    )
+    for key in ("level", "nextDate", "lastReviewed", "created", "extra", "extraDate", "source", "priority"):
+        if key in item:
+            new_item[key] = item[key]
+    new_list.append(new_item)
+    write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+
+    if old_page.exists() and old_page.resolve() != WORD_PAGE.resolve():
+        new_page = BASE / str(location.get("file") or "")
+        if not new_page.exists() or new_page.resolve() != old_page.resolve():
+            try:
+                old_page.unlink()
+            except OSError:
+                pass
+
+    append_log({
+        "word": word,
+        "type": "overwrite",
+        "target": new_category,
+        "file": location["file"],
+        "schedule": new_item.get("nextDate", ""),
+        "status": "ok",
+    })
+    return {
+        "ok": True,
+        "exists": False,
+        "overwritten": True,
+        "moved": True,
+        "word": word,
+        "analysis": analysis,
+        "location": location,
+        "data": {
+            "item": new_item,
+            "category": new_category,
+            "schedule": new_item.get("nextDate", ""),
+        },
+        "backup": backup,
+        "summary": "%s 分类已从 %s 改为 %s；旧词素页已备份并删除，复习进度保留。" % (
+            word, old_category, new_category
+        ),
+    }
+
+
+def repair_word(word: str, hint: str = "") -> dict[str, Any]:
+    """删除该词所有旧 data.json 记录，按新分析重建 HTML + JSON，进入额外新增。"""
+    word = normalize_word(word)
+    analysis = analyze_word(word, hint)
+    target = analysis["target"]
+    new_category = target["category"]
+
+    old_page = find_existing_word(word)
+    old_page_path = BASE / old_page if old_page else None
+    data = load_data()
+    old_paths: list[Path] = []
+    for category, arr in list(data.items()):
+        if not isinstance(arr, list):
+            continue
+        kept = []
+        for item in arr:
+            if isinstance(item, dict) and str(item.get("name") or "") == word:
+                rel = _data_page_relative(item)
+                if rel:
+                    old_paths.append(BASE / rel)
+            else:
+                kept.append(item)
+        data[category] = kept
+
+    backup_files = [DATA_JSON, WORD_PAGE]
+    for path in old_paths:
+        if path.exists():
+            backup_files.append(path)
+    if old_page_path and old_page_path.exists():
+        backup_files.append(old_page_path)
+    backup = backup_paths(backup_files)
+
+    if target.get("kind") == "core":
+        location = insert_into_word_page(analysis)
+        location.setdefault("file", "专升本英语核心词汇通关.html")
+        location.setdefault("target", new_category)
+    else:
+        location = insert_into_ci(analysis)
+
+    new_item = build_data_item(
+        analysis,
+        location,
+        today_str(),
+        extra=True,
+        extra_date=(date.today() + timedelta(days=1)).isoformat(),
+        source="repair",
+    )
+    target_list = data.get(new_category)
+    if not isinstance(target_list, list):
+        target_list = []
+        data[new_category] = target_list
+    target_list.append(new_item)
+    write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+
+    # 只删除不再被其他词引用的词素页，避免误删共享词根页。
+    if old_page_path and old_page_path.exists():
+        old_rel = str(old_page_path.relative_to(BASE)).replace("\\", "/")
+        refs = []
+        for arr in data.values():
+            if not isinstance(arr, list):
+                continue
+            for item in arr:
+                if isinstance(item, dict) and _data_page_relative(item).replace("\\", "/") == old_rel:
+                    refs.append(item.get("name"))
+        new_page = BASE / str(location.get("file") or "")
+        if not refs and old_page_path.resolve() != new_page.resolve():
+            try:
+                old_page_path.unlink()
+            except OSError:
+                pass
+
+    append_log({
+        "word": word,
+        "type": "repair",
+        "target": new_category,
+        "file": location["file"],
+        "schedule": new_item.get("nextDate", ""),
+        "status": "ok",
+    })
+    return {
+        "ok": True,
+        "exists": False,
+        "repaired": True,
+        "word": word,
+        "analysis": analysis,
+        "location": location,
+        "data": {
+            "item": new_item,
+            "category": new_category,
+            "schedule": new_item.get("nextDate", ""),
+        },
+        "backup": backup,
+        "summary": "%s 已修复：旧 JSON 记录清理，HTML + JSON 重建，进入额外新增。" % word,
+    }
+
+
 def overwrite_existing_word(
     word: str,
     hint: str,
@@ -1253,12 +1582,10 @@ def overwrite_existing_word(
     目前只覆盖“词素/”下的一词一页（原子词、词根族、复合词）。
     核心词汇通关页是共享页面，不在这里整页覆盖。
     """
-    if not item:
-        raise ArchiveError("页面已存在，但 data.json 里没有对应记录，暂不自动覆盖。")
-    if not category.startswith("词素"):
+    if category and not category.startswith("词素"):
         raise ArchiveError("核心词汇页是共享页面，暂不支持整页覆盖；请先备份后手动处理。")
 
-    path_text = str(item.get("path") or "").split("#")[0]
+    path_text = str((item or {}).get("path") or "").split("#")[0]
     if path_text.startswith("../"):
         relative = path_text[3:]
     elif path_text:
@@ -1271,11 +1598,19 @@ def overwrite_existing_word(
 
     analysis = analyze_word(word, hint)
     new_category = analysis["target"]["category"]
-    if new_category != category:
-        raise ArchiveError(
-            "重新分析后的分类变了（%s → %s），暂不自动覆盖，避免写错页面。"
-            % (category, new_category)
-        )
+    if item and new_category != category:
+        return rebuild_in_new_category(word, hint, analysis, category, item, page_file)
+    if not item and new_category != category:
+        pseudo_item = {
+            "path": "../" + relative,
+            "created": today_str(),
+            "extra": True,
+            "extraDate": (date.today() + timedelta(days=1)).isoformat(),
+        }
+        return rebuild_in_new_category(word, hint, analysis, category, pseudo_item, page_file)
+    if not new_category.startswith("词素"):
+        raise ArchiveError("新分析不属于词素页，暂不覆盖共享核心词汇页。")
+    category = new_category
 
     ci_page, title = _ci_page_path(analysis)
     if ci_page.resolve() != existing_page.resolve():
@@ -1295,23 +1630,32 @@ def overwrite_existing_word(
         "anchor": "word-" + word,
         "target": new_category,
     }
-    created = str(item.get("created") or today_str())
+    if item:
+        created = str(item.get("created") or today_str())
+        extra = bool(item.get("extra", True))
+        extra_date = str(item.get("extraDate") or "")
+    else:
+        created = today_str()
+        extra = True
+        extra_date = (date.today() + timedelta(days=1)).isoformat()
     new_item = build_data_item(
         analysis,
         location,
         created,
-        extra=bool(item.get("extra", True)),
-        extra_date=str(item.get("extraDate") or ""),
-        source=str(item.get("source") or "overwrite"),
+        extra=extra,
+        extra_date=extra_date,
+        source=str((item or {}).get("source") or "overwrite"),
     )
-    for key in ("level", "nextDate", "lastReviewed", "created", "extra", "extraDate", "source", "priority"):
-        if key in item:
-            new_item[key] = item[key]
+    if item:
+        for key in ("level", "nextDate", "lastReviewed", "created", "extra", "extraDate", "source", "priority"):
+            if key in item:
+                new_item[key] = item[key]
 
     data = load_data()
     target_list = data.get(category)
     if not isinstance(target_list, list):
-        raise ArchiveError("data.json 分类异常，无法覆盖：%s" % category)
+        target_list = []
+        data[category] = target_list
     replaced = False
     for idx, current in enumerate(target_list):
         if isinstance(current, dict) and str(current.get("name") or "") == word:
@@ -1319,7 +1663,7 @@ def overwrite_existing_word(
             replaced = True
             break
     if not replaced:
-        raise ArchiveError("data.json 中找不到 %s，无法覆盖。" % word)
+        target_list.append(new_item)
     write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
 
     append_log({
@@ -1350,20 +1694,28 @@ def overwrite_existing_word(
     }
 
 
-def archive_word(word: str, hint: str = "", overwrite: bool = False) -> dict[str, Any]:
+def archive_word(word: str, hint: str = "", overwrite: bool = False, repair: bool = False) -> dict[str, Any]:
     with WRITE_LOCK:
         word = normalize_word(word)
+        if repair:
+            return repair_word(word, hint)
         page_file = find_existing_word(word)
         data_before = load_data()
         category, item = find_data_item(data_before, word)
 
         if page_file or item:
             if not overwrite:
+                needs_repair = bool(page_file and not item)
                 return {
                     "ok": True,
                     "exists": True,
+                    "needs_repair": needs_repair,
                     "word": word,
-                    "message": "已录入：不会重复创建，也不会插队；需要复习时请在复习清单或全部词条中查看。",
+                    "message": (
+                        "页面已存在，但 data.json 里没有对应记录；请用生成器的“覆盖已有 HTML”修复。"
+                        if needs_repair else
+                        "已录入：不会重复创建，也不会插队；需要复习时请在复习清单或全部词条中查看。"
+                    ),
                     "data": {
                         "category": category,
                         "item": item,

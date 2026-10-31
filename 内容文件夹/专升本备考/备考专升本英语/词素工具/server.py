@@ -27,7 +27,7 @@ TOOL_DIR = Path(__file__).resolve().parent
 BASE = TOOL_DIR.parent
 sys.path.insert(0, str(TOOL_DIR))
 
-from word_archiver import ArchiveError, analyze_only, apply_review_updates, archive_word, check_word, health  # noqa: E402
+from word_archiver import ArchiveError, analyze_only, apply_review_updates, archive_word, audit_word_json, check_word, health  # noqa: E402
 from english_tutor import TutorError, ask_tutor, read_tutor_logs  # noqa: E402
 from archive_added_logs import refresh as refresh_added_logs, recover_missing_extra_entries  # noqa: E402
 
@@ -142,7 +142,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):  # noqa: N802
         path = unquote(urlparse(self.path).path)
-        if path not in {"/api/analyze", "/api/archive", "/api/check", "/api/review", "/api/tutor"}:
+        if path not in {"/api/analyze", "/api/archive", "/api/check", "/api/review", "/api/tutor", "/api/json-audit"}:
             self._send_json(404, {"ok": False, "error": "未知接口"})
             return
 
@@ -166,6 +166,10 @@ class Handler(SimpleHTTPRequestHandler):
                 self._send_json(200, result)
                 return
 
+            if path == "/api/json-audit":
+                self._send_json(200, audit_word_json())
+                return
+
             word = str(payload.get("word") or "").strip()
             hint = str(payload.get("hint") or "").strip()
             if not word:
@@ -176,7 +180,12 @@ class Handler(SimpleHTTPRequestHandler):
             elif path == "/api/analyze":
                 result = analyze_only(word, hint)
             else:
-                result = archive_word(word, hint, overwrite=bool(payload.get("overwrite")))
+                result = archive_word(
+                    word,
+                    hint,
+                    overwrite=bool(payload.get("overwrite")),
+                    repair=bool(payload.get("repair")),
+                )
             self._send_json(200, result)
         except ArchiveError as exc:
             self._send_json(400, {"ok": False, "error": str(exc)})

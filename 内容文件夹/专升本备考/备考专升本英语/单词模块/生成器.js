@@ -15,6 +15,7 @@
     var btnCheck = document.getElementById('btnCheck');
     var btnAnalyze = document.getElementById('btnAnalyze');
     var btnArchive = document.getElementById('btnArchive');
+    var btnJsonAudit = document.getElementById('btnJsonAudit');
     var btnHealth = document.getElementById('btnHealth');
     var resultArea = document.getElementById('resultArea');
     var resultBadge = document.getElementById('resultBadge');
@@ -28,17 +29,30 @@
     var toastTimer = null;
 
     var genModeEl = document.getElementById('genMode');
-    var cloudFields = document.getElementById('cloudFields');
+    var cloudDialog = document.getElementById('cloudDialog');
+    var cloudForm = document.getElementById('cloudForm');
+    var btnCloudSettings = document.getElementById('btnCloudSettings');
+    var cloudClose = document.getElementById('cloudClose');
     var cloudUrl = document.getElementById('cloudUrl');
     var cloudToken = document.getElementById('cloudToken');
     var cloudBadge = document.getElementById('cloudBadge');
     var cloudStatus = document.getElementById('cloudStatus');
+    var cloudDialogStatus = document.getElementById('cloudDialogStatus');
     var btnCloudTest = document.getElementById('btnCloudTest');
     var btnCloudExport = document.getElementById('btnCloudExport');
     var CLOUD_CONFIG_KEY = 'english-generator-cloud-v1';
 
     var lastAnalysis = null;
+    var lastCheckState = 'none';
     var busy = false;
+    var actionsLocked = false;
+
+    function lockMainActions(lock) {
+        actionsLocked = Boolean(lock);
+        btnAnalyze.disabled = actionsLocked || busy;
+        btnArchive.disabled = actionsLocked || busy;
+        btnJsonAudit.disabled = busy;
+    }
 
     function esc(value) {
         return String(value == null ? '' : value).replace(/[&<>"']/g, function (ch) {
@@ -109,21 +123,29 @@
         cloudStatus.className = 'cloud_status' + (type ? ' is-' + type : '');
     }
 
+    function setDialogStatus(message, type) {
+        if (!cloudDialogStatus) return;
+        cloudDialogStatus.textContent = message || '';
+        cloudDialogStatus.className = 'cloud_status' + (type ? ' is-' + type : '');
+    }
+
     function applyMode() {
         var cloud = genModeEl.value === 'cloud';
-        if (cloudFields) cloudFields.hidden = !cloud;
         btnCheck.hidden = cloud;
         btnAnalyze.hidden = cloud;
+        if (btnJsonAudit) btnJsonAudit.hidden = cloud;
+        btnArchive.hidden = !cloud;
         btnArchive.textContent = cloud ? '加入云端待归档' : '分析并写入';
         wordInput.placeholder = cloud
             ? '例如：mean，或中文“意思是；平均的”'
             : '例如：friendship';
         if (cloudBadge) cloudBadge.textContent = cloud ? '云端排队' : '本地模式';
+        if (btnCloudExport) btnCloudExport.disabled = !cloud;
         if (cloud) {
             setCloudStatus(
                 cloudConfigured()
                     ? '云端模式：只入队，不写本地文件。输入英文单词或中文意思。'
-                    : '先填写云端地址和访问口令，再输入英文单词或中文意思。',
+                    : '先点“云端连接设置”填写地址和口令，再输入英文单词或中文意思。',
                 cloudConfigured() ? 'ok' : 'error'
             );
         } else {
@@ -167,19 +189,20 @@
         }
         btnCloudTest.disabled = true;
         setCloudStatus('正在检测云端…', '');
+        setDialogStatus('正在检测云端…', '');
         try {
             var resp = await fetch(cloudBase() + '/api/health', { cache: 'no-store' });
             var data = await resp.json().catch(function () { return null; });
             if (!resp.ok || !data || !data.ok) {
                 throw new Error((data && data.error) || ('HTTP ' + resp.status));
             }
-            setCloudStatus(
-                '云端已连接 · ' + (data.model || 'deepseek-chat') +
-                (data.kv_bound ? ' · KV 已绑定' : ' · 未绑定 KV'),
-                data.kv_bound ? 'ok' : 'error'
-            );
+            var message = '云端已连接 · ' + (data.model || 'deepseek-chat') +
+                (data.kv_bound ? ' · KV 已绑定' : ' · 未绑定 KV');
+            setCloudStatus(message, data.kv_bound ? 'ok' : 'error');
+            setDialogStatus(message, data.kv_bound ? 'ok' : 'error');
         } catch (err) {
             setCloudStatus('云端连接失败：' + (err.message || '未知错误'), 'error');
+            setDialogStatus('云端连接失败：' + (err.message || '未知错误'), 'error');
         } finally {
             btnCloudTest.disabled = false;
         }
@@ -302,8 +325,9 @@
     function setBusy(value, mode) {
         busy = value;
         btnCheck.disabled = value;
-        btnAnalyze.disabled = value;
-        btnArchive.disabled = value;
+        btnAnalyze.disabled = value || actionsLocked;
+        btnArchive.disabled = value || actionsLocked;
+        btnJsonAudit.disabled = value;
         btnHealth.disabled = value;
         if (value) {
             if (mode === 'archive') {
@@ -312,6 +336,9 @@
             } else if (mode === 'check') {
                 inputBadge.textContent = '检查中…';
                 setStatus('正在检查是否已录入，不调用 API…', 'busy');
+            } else if (mode === 'repair') {
+                inputBadge.textContent = '修复中…';
+                setStatus('正在删除旧记录并重建 HTML / JSON，请稍候…', 'busy');
             } else if (mode === 'cloud') {
                 inputBadge.textContent = '入队中…';
                 setStatus('正在加入云端待归档，不写本地文件…', 'busy');
@@ -384,17 +411,7 @@
         return '../' + file + anchor;
     }
 
-    function posSummary(analysis) {
-        var values = [];
-        (analysis.senses || []).forEach(function (sense) {
-            var pos = String(sense.pos || '').trim();
-            if (pos && values.indexOf(pos) < 0) values.push(pos);
-        });
-        return values.length ? values.join(' / ') : String(analysis.pos || '');
-    }
-
-    function renderPreview(analysis) {
-        var morph = analysis.morphology || {};
+    function senseGroups(analysis) {
         var groups = [];
         var groupMap = {};
         (analysis.senses || []).forEach(function (sense) {
@@ -408,6 +425,21 @@
         if (!groups.length) {
             groups.push([String(analysis.pos || '其他'), [{ zh: analysis.meaning_zh || '' }]]);
         }
+        return groups;
+    }
+
+    function posSummary(analysis) {
+        var values = [];
+        (analysis.senses || []).forEach(function (sense) {
+            var pos = String(sense.pos || '').trim();
+            if (pos && values.indexOf(pos) < 0) values.push(pos);
+        });
+        return values.length ? values.join(' / ') : String(analysis.pos || '');
+    }
+
+    function renderPreview(analysis) {
+        var morph = analysis.morphology || {};
+        var groups = senseGroups(analysis);
 
         var senses = groups.map(function (group) {
             var pos = group[0];
@@ -446,7 +478,7 @@
             '</div>';
     }
 
-    function renderResult(data, written) {
+    function renderResult(data, written, state) {
         var analysis = data.analysis;
         var morph = analysis.morphology || {};
         var target = analysis.target || {};
@@ -454,6 +486,7 @@
         var schedule = data.data && data.data.schedule;
         var href = fileHref(location);
         var backup = data.backup;
+        var checkState = state || lastCheckState || 'none';
 
         lastAnalysis = analysis;
         resultBadge.textContent = written ? '已写入' : '仅分析';
@@ -476,6 +509,18 @@
             return '<div class="result_row"><span>' + esc(row[0]) + '</span><strong>' + esc(row[1]) + '</strong></div>';
         }).join('');
 
+        var posRows = senseGroups(analysis).map(function (group) {
+            var pos = group[0];
+            var meanings = group[1].map(function (sense) {
+                return String(sense.zh || '').trim();
+            }).filter(Boolean).join('；');
+            if (!meanings) return '';
+            return '<div class="result_pos_row">' +
+                '<span class="result_pos_chip">' + esc(pos) + '</span>' +
+                '<span class="result_pos_text">' + esc(meanings) + '</span>' +
+                '</div>';
+        }).join('');
+
         var actionHtml = '';
         if (written) {
             actionHtml = '<div class="result_actions">' +
@@ -483,21 +528,28 @@
                 '<a class="btn btn_soft btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>' +
                 '<button type="button" class="btn btn_soft btn_small" id="btnAgain">再添加一个</button>' +
                 '</div>';
+        } else if (checkState === 'ok') {
+            actionHtml = '<div class="result_actions">' +
+                '<button type="button" class="btn btn_soft btn_small" id="btnPreviewOverwrite">覆盖原内容（保留进度）</button>' +
+                '</div>';
+        } else if (checkState === 'none') {
+            actionHtml = '<div class="result_actions">' +
+                '<button type="button" class="btn btn_primary btn_small" id="btnPreviewDirect">直接导入</button>' +
+                '</div>';
         } else {
             actionHtml = '<div class="result_actions">' +
-                '<button type="button" class="btn btn_primary btn_small" id="btnWriteFromPreview">写入这个分析</button>' +
-                '<a class="btn btn_soft btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>' +
+                '<button type="button" class="btn btn_primary btn_small" id="btnPreviewRepair">修复并重建</button>' +
                 '</div>';
         }
 
         resultArea.innerHTML =
             '<div class="result_head">' +
-            '<div><span class="result_word">' + esc(analysis.word) + '</span>' +
-            '<span class="result_meaning">' + esc(analysis.meaning_zh) + '</span></div>' +
+            '<div><span class="result_word">' + esc(analysis.word) + '</span></div>' +
             '<div class="result_tags"><span class="result_tag">' + esc(typeLabel(morph.type)) + '</span>' +
             '<span class="result_tag">' + esc(posSummary(analysis)) + '</span>' +
             '<span class="result_tag">' + esc(analysis.level) + '</span></div>' +
             '</div>' +
+            '<div class="result_pos_groups">' + posRows + '</div>' +
             '<div class="result_rows">' + rowsHtml + '</div>' +
             renderPreview(analysis) +
             actionHtml;
@@ -516,12 +568,12 @@
             });
         }
 
-        var writeBtn = document.getElementById('btnWriteFromPreview');
-        if (writeBtn) {
-            writeBtn.addEventListener('click', function () {
-                doArchive();
-            });
-        }
+        var directFromPreview = document.getElementById('btnPreviewDirect');
+        if (directFromPreview) directFromPreview.addEventListener('click', doArchive);
+        var repairFromPreview = document.getElementById('btnPreviewRepair');
+        if (repairFromPreview) repairFromPreview.addEventListener('click', doRepair);
+        var overwriteFromPreview = document.getElementById('btnPreviewOverwrite');
+        if (overwriteFromPreview) overwriteFromPreview.addEventListener('click', doOverwrite);
     }
 
     function renderError(message) {
@@ -535,56 +587,44 @@
     }
 
     function renderCheckResult(data) {
-        var exists = !!data.exists;
+        var state = data.state || (data.exists ? 'ok' : 'none');
         var item = data.data_item || (data.data && data.data.item) || null;
-        resultBadge.textContent = exists ? '已录入' : '未录入';
-        inputBadge.textContent = exists ? '已录入' : '可录入';
+        var labels = {
+            none: '未录入',
+            html_only: 'HTML 在 / JSON 缺失',
+            json_only: 'JSON 在 / HTML 缺失',
+            broken: 'HTML 与 JSON 不一致',
+            ok: '已录入'
+        };
+        resultBadge.textContent = labels[state] || '已检查';
+        inputBadge.textContent = labels[state] || '已检查';
 
         var rows = [];
-        if (data.data_category || (item && item.category)) rows.push(['分类', data.data_category || item.category]);
-        if (data.page_file) rows.push(['页面', data.page_file]);
+        rows.push(['HTML', data.has_html ? ('有 · ' + (data.page_file || '')) : '无']);
+        rows.push(['JSON', data.has_json ? '有' : '无']);
+        if (data.data_path) rows.push(['JSON 路径', data.data_path + (data.data_path_ok ? ' · 有效' : ' · 失效')]);
+        if (data.data_category) rows.push(['分类', data.data_category]);
         if (item) {
             rows.push(['当前等级', '第 ' + (item.level || 0) + ' 次']);
             rows.push(['当前日程', item.nextDate || '']);
         }
-        if (!rows.length) rows.push(['状态', '尚未录入']);
-
         var rowsHtml = rows.map(function (row) {
             return '<div class="result_row"><span>' + esc(row[0]) + '</span><strong>' + esc(row[1]) + '</strong></div>';
         }).join('');
 
-        var body = exists
-            ? '<div class="result_exists">' +
-              '<strong>已录入，不会新建页面。</strong>' +
-              '<p>已录入的词不会重复创建，也不再提供“插队”操作。需要复习时直接在复习清单或全部词条中查看。</p>' +
-              '<p>如果要按新版词性分组重新生成，点“重新分析并覆盖”；复习等级和 nextDate 会保留。</p>' +
-              '</div>'
-            : '<div class="result_not_exists">' +
-              '<strong>尚未录入。</strong>' +
-              '<p>可以点“分析并写入”，AI 会判断分类并创建对应内容；新词会排到明天的“额外新增”。</p>' +
-              '</div>';
-
-        var actions = '<div class="result_actions">' +
-            (exists
-                ? '<button type="button" class="btn btn_soft btn_small" id="btnOverwrite">重新分析并覆盖</button>' +
-                  '<a class="btn btn_primary btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>'
-                : '<button type="button" class="btn btn_primary btn_small" id="btnWriteFromCheck">分析并写入</button>' +
-                  '<a class="btn btn_soft btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>') +
+        var body = '<div class="result_exists">' +
+            '<strong>' + esc(labels[state] || '检查结果') + '</strong>' +
+            '<p>' + esc(data.message || '') + '</p>' +
+            '<p>这里只显示状态，不提供操作。需要写入时，请点“AI 分析（不写入）”，分析结果里只给一个对应按钮。</p>' +
             '</div>';
 
         resultArea.innerHTML =
             '<div class="result_head">' +
             '<div><span class="result_word">' + esc(data.word) + '</span></div>' +
-            '<div class="result_tags"><span class="result_tag">' + (exists ? '已录入' : '新词') + '</span></div>' +
+            '<div class="result_tags"><span class="result_tag">' + esc(labels[state] || '已检查') + '</span></div>' +
             '</div>' +
             '<div class="result_rows">' + rowsHtml + '</div>' +
-            body +
-            actions;
-
-        var writeBtn = document.getElementById('btnWriteFromCheck');
-        if (writeBtn) writeBtn.addEventListener('click', doArchive);
-        var overwriteBtn = document.getElementById('btnOverwrite');
-        if (overwriteBtn) overwriteBtn.addEventListener('click', doOverwrite);
+            body;
     }
 
     async function doAnalyze() {
@@ -597,9 +637,11 @@
         }
         setBusy(true, 'analyze');
         try {
+            var checked = await post('/api/check', { word: word });
+            lastCheckState = checked.state || (checked.exists ? 'ok' : 'none');
             var data = await post('/api/analyze', { word: word, hint: hintInput.value.trim() });
-            renderResult(data, false);
-            setStatus('分析完成：' + data.analysis.target.label + '。尚未写入。', 'ok');
+            renderResult(data, false, lastCheckState);
+            setStatus('分析完成：' + data.analysis.target.label + '。当前状态：' + lastCheckState + '，尚未写入。', 'ok');
             toast('分析完成');
         } catch (err) {
             renderError(err.message);
@@ -631,6 +673,7 @@
                 toast('已录入');
             } else {
                 renderResult(data, true);
+                lockMainActions(false);
                 setStatus('已写入：' + data.location.target + '；额外新增 ' + data.data.schedule + '。', 'ok');
                 toast('已写入，排到明天的额外新增');
             }
@@ -663,11 +706,69 @@
             });
             renderResult(data, true);
             setStatus(data.summary || '已覆盖原内容，复习进度保留。', 'ok');
+            lockMainActions(false);
             toast('已覆盖，复习进度保留');
         } catch (err) {
             renderError(err.message);
             setStatus('覆盖失败：' + err.message, 'error');
             toast('覆盖失败');
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    async function doRepair() {
+        if (busy) return;
+        var word = normalizeWord();
+        if (!validWord(word)) {
+            setStatus('请输入单个英文单词（字母、连字符或撇号）。', 'error');
+            wordInput.focus();
+            return;
+        }
+        if (!window.confirm('修复「' + word + '」？\n\n会删除该词的旧 JSON 记录，重建 HTML 和 JSON，并重新进入额外新增。')) {
+            return;
+        }
+        setBusy(true, 'repair');
+        try {
+            var data = await post('/api/archive', {
+                word: word,
+                hint: hintInput.value.trim(),
+                repair: true
+            });
+            renderResult(data, true);
+            lockMainActions(false);
+            setStatus(data.summary || '修复完成，已进入额外新增。', 'ok');
+            toast('修复完成');
+        } catch (err) {
+            renderError(err.message);
+            setStatus('修复失败：' + err.message, 'error');
+            toast('修复失败');
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    async function doJsonAudit() {
+        if (busy) return;
+        if (!window.confirm('检查 data.json？\n\n会删除所有“找不到 HTML / 页面不含该词”的失效记录，并先备份 data.json。')) {
+            return;
+        }
+        setBusy(true, 'check');
+        try {
+            var data = await post('/api/json-audit', {});
+            var removed = data.removed || [];
+            resultArea.innerHTML =
+                '<div class="result_head"><div><span class="result_word">JSON 自查</span></div>' +
+                '<div class="result_tags"><span class="result_tag">' + (removed.length ? '已清理' : '正常') + '</span></div></div>' +
+                '<div class="result_exists"><strong>' + esc(data.message || '') + '</strong>' +
+                (removed.length ? '<p>' + removed.map(function (x) { return esc(x.word); }).join('、') + '</p>' : '') +
+                '</div>';
+            setStatus(data.message || 'JSON 自查完成。', 'ok');
+            lockMainActions(false);
+            toast('JSON 自查完成');
+        } catch (err) {
+            renderError(err.message);
+            setStatus('JSON 自查失败：' + err.message, 'error');
         } finally {
             setBusy(false);
         }
@@ -700,8 +801,26 @@
     btnAnalyze.addEventListener('click', doAnalyze);
     btnArchive.addEventListener('click', doArchive);
     btnHealth.addEventListener('click', checkHealth);
+    btnJsonAudit.addEventListener('click', doJsonAudit);
     btnCloudTest.addEventListener('click', doCloudTest);
     btnCloudExport.addEventListener('click', doCloudExport);
+    btnCloudSettings.addEventListener('click', function () {
+        setDialogStatus(
+            cloudConfigured() ? '已填写云端连接。' : '填写 Worker 或 SCF 地址，以及对应访问口令。',
+            cloudConfigured() ? 'ok' : ''
+        );
+        if (typeof cloudDialog.showModal === 'function') cloudDialog.showModal();
+        else cloudDialog.setAttribute('open', '');
+    });
+    cloudClose.addEventListener('click', function () {
+        cloudDialog.close();
+    });
+    cloudForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        saveCloudConfig();
+        applyMode();
+        cloudDialog.close();
+    });
     genModeEl.addEventListener('change', applyMode);
     cloudUrl.addEventListener('input', function () {
         saveCloudConfig();
@@ -710,6 +829,10 @@
     cloudToken.addEventListener('input', function () {
         saveCloudConfig();
         if (genModeEl.value === 'cloud') applyMode();
+    });
+
+    wordInput.addEventListener('input', function () {
+        if (actionsLocked) lockMainActions(false);
     });
 
     wordInput.addEventListener('keydown', function (event) {

@@ -78,10 +78,20 @@ def main() -> int:
 
     ok = 0
     existing = 0
+    repaired = 0
     failed = 0
     for word in words:
         try:
             result = archive_word(word, "来自生成器云端待归档")
+            if result.get("needs_repair"):
+                result = archive_word(word, "来自生成器云端待归档", overwrite=True)
+                if result.get("overwritten"):
+                    repaired += 1
+                    print("%s：页面存在、data.json 缺失，已重新分析并补写 data.json" % word)
+                else:
+                    failed += 1
+                    print("%s：页面存在但补写失败" % word)
+                continue
             if result.get("exists"):
                 existing += 1
                 print("%s：已存在，跳过" % word)
@@ -99,7 +109,9 @@ def main() -> int:
             print("%s：失败：%s" % (word, exc))
 
     print("")
-    print("完成：新写入 %d，已存在 %d，失败 %d" % (ok, existing, failed))
+    print("完成：新写入 %d，已存在 %d，修复孤儿页面 %d，失败 %d" % (
+        ok, existing, repaired, failed
+    ))
     return 0 if failed == 0 else 2
 
 

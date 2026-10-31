@@ -32,6 +32,7 @@ TYPE_LABELS = {
     "existing-priority": "已录入，插队复习",
     "review-sync": "复习打卡写回",
     "overwrite": "重新分析并覆盖",
+    "repair": "修复并重建",
 }
 
 
@@ -193,7 +194,15 @@ def index_html(entries: list[dict]) -> str:
 
 
 def refresh() -> None:
-    entries = load_entries()
+    if not LOG_FILE.exists():
+        return
+    try:
+        entries = load_entries()
+    except OSError:
+        return
+    # 日志文件非空却一条都解析不出来，说明读取/写入正忙；不要清空旧归档。
+    if LOG_FILE.stat().st_size > 0 and not entries:
+        return
     ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
     grouped: dict[str, list[dict]] = {}
     for item in entries:
