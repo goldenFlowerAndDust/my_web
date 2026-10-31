@@ -222,6 +222,42 @@ document.addEventListener("DOMContentLoaded", function () {
 """
 
 
+ARTICLE_RE = re.compile(r'<article class="record">.*?</article>', re.S)
+TIME_RE = re.compile(r'<time>(.*?)</time>')
+
+
+def merge_daily_page(target: Path, new_html: str) -> None:
+    """保留旧页面，只把当前日志里新增的时间记录追加进去。"""
+    try:
+        old_html = target.read_text(encoding="utf-8")
+    except OSError:
+        return
+    existing_times = set(TIME_RE.findall(old_html))
+    blocks = ARTICLE_RE.findall(new_html)
+    missing = []
+    for block in blocks:
+        match = TIME_RE.search(block)
+        if not match:
+            continue
+        if match.group(1) not in existing_times:
+            missing.append(block)
+    if not missing:
+        return
+    old_count = len(ARTICLE_RE.findall(old_html))
+    new_count = old_count + len(missing)
+    old_html = re.sub(
+        r"(答疑记录，共 )\d+( 条。)",
+        lambda match: match.group(1) + str(new_count) + match.group(2),
+        old_html,
+        count=1,
+    )
+    pos = old_html.rfind("</div>")
+    if pos < 0:
+        return
+    old_html = old_html[:pos] + "".join(missing) + old_html[pos:]
+    target.write_text(old_html, encoding="utf-8", newline="\n")
+
+
 def generate_pages(config: dict, grouped: dict[str, dict[str, list[dict]]]) -> None:
     archive_dir = config["archive_dir"]
     archive_dir.mkdir(parents=True, exist_ok=True)
@@ -231,11 +267,13 @@ def generate_pages(config: dict, grouped: dict[str, dict[str, list[dict]]]) -> N
         for date, records in days.items():
             records.sort(key=lambda item: str(item.get("time", "")))
             target = folder / (date + ".html")
-            # 已归档的页面只增不改：绝不覆盖、绝不删除。
+            fresh_html = daily_html(config, category, date, records)
             if target.exists():
+                # 已归档页面不覆盖、不删除；只追加日志里新增的时间记录。
+                merge_daily_page(target, fresh_html)
                 continue
             target.write_text(
-                daily_html(config, category, date, records),
+                fresh_html,
                 encoding="utf-8",
                 newline="\n",
             )
