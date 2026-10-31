@@ -17,6 +17,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 import urllib.error
@@ -567,6 +568,64 @@ class SyncRunner:
         saved = str(previous.get("saved") or "")
         return bool(saved and Path(saved).exists())
 
+    @staticmethod
+    def category_counts(entries: list[dict[str, Any]]) -> dict[str, int]:
+        counts: dict[str, int] = {}
+        for item in entries:
+            name = str(item.get("mode") or item.get("category") or "未分类").strip() or "未分类"
+            counts[name] = counts.get(name, 0) + 1
+        return counts
+
+    @staticmethod
+    def parse_import_details(output: str, kind: str) -> dict[str, Any]:
+        """从导入器输出里提取新增/重复/单词归档数量。"""
+        details: dict[str, Any] = {
+            "imported": 0,
+            "duplicates": 0,
+            "failed": 0,
+            "archived": 0,
+            "existing_words": 0,
+            "repaired_words": 0,
+            "categories": {},
+        }
+        category_duplicates = 0
+        for line in output.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            match = re.match(r"^([^：:]+)[：:]\s*新增\s*(\d+)", line)
+            if match:
+                category = match.group(1).strip()
+                if category not in ("合计", "完成"):
+                    details["categories"][category] = int(match.group(2))
+                    duplicate_match = re.search(r"重复\s*(\d+)", line)
+                    if duplicate_match:
+                        category_duplicates += int(duplicate_match.group(1))
+            match = re.search(r"合计[：:]\s*新增\s*(\d+)", line)
+            if match:
+                details["imported"] = int(match.group(1))
+            match = re.search(r"完成[：:]\s*新增\s*(\d+)\s*条", line)
+            if match:
+                details["imported"] = int(match.group(1))
+            match = re.search(r"完成[：:]\s*新写入\s*(\d+)", line)
+            if match:
+                details["archived"] = int(match.group(1))
+                details["imported"] = int(match.group(1))
+            match = re.search(r"合计[：:]\s*新增\s*\d+[，,]\s*重复\s*(\d+)", line)
+            if match:
+                details["duplicates"] = int(match.group(1))
+            match = re.search(r"已存在\s*(\d+)", line)
+            if match:
+                details["existing_words"] = int(match.group(1))
+            match = re.search(r"修复孤儿页面\s*(\d+)", line)
+            if match:
+                details["repaired_words"] = int(match.group(1))
+            match = re.search(r"失败\s*(\d+)", line)
+            if match:
+                details["failed"] = int(match.group(1))
+        details["duplicates"] = max(details["duplicates"], category_duplicates)
+        return details
+
     # ------------------------------------------------------------------
     # 同步
     # ------------------------------------------------------------------
@@ -580,6 +639,9 @@ class SyncRunner:
             "fingerprint": "",
             "route": "",
             "import": {},
+            "categories": {},
+            "imported": 0,
+            "duplicates": 0,
             "message": "",
         }
         try:
@@ -595,6 +657,7 @@ class SyncRunner:
                 entries = []
             clean_entries = [item for item in entries if isinstance(item, dict)]
             result["exported"] = len(clean_entries)
+            result["categories"] = self.category_counts(clean_entries)
             fingerprint = self.fingerprint(
                 clean_entries,
                 "%s|%s|%s" % (
@@ -609,12 +672,19 @@ class SyncRunner:
                 result["status"] = "unchanged"
                 result["saved"] = str(previous.get("saved") or "")
                 result["import"] = previous.get("import") or {}
+                result["imported"] = int(previous.get("imported") or 0)
+                result["duplicates"] = int(previous.get("duplicates") or 0)
+                result["categories"] = previous.get("categories") or result["categories"]
                 result["message"] = "无变化，跳过重复保存/导入。"
                 return result
             if clean_entries:
                 saved = self.save_export(subject, "tutor", clean_entries)
                 result["saved"] = str(saved)
                 result["import"] = self.import_tutor(subject, saved)
+                details = self.parse_import_details(result["import"].get("output", ""), "tutor")
+                result["imported"] = details["imported"]
+                result["duplicates"] = details["duplicates"]
+                result["new_categories"] = details["categories"]
                 if result["import"].get("status") not in ("ok", "skipped"):
                     result["status"] = "import_error"
                 result["message"] = result["import"].get("message", "")
@@ -633,6 +703,11 @@ class SyncRunner:
             "fingerprint": "",
             "route": "",
             "import": {},
+            "words": [],
+            "archived": 0,
+            "existing_words": 0,
+            "repaired_words": 0,
+            "failed": 0,
             "message": "",
         }
         try:
@@ -642,9 +717,14 @@ class SyncRunner:
             if not isinstance(entries, list):
                 entries = []
             clean_entries = [item for item in entries if isinstance(item, dict)]
-            # 只处理生成器来源；其他来源的旧数据保持原样。
             clean_entries = [item for item in clean_entries if str(item.get("source") or "generator") == "generator"]
             result["exported"] = len(clean_entries)
+            words: list[str] = []
+            for item in clean_entries:
+                word = str(item.get("word") or "").strip()
+                if word and word not in words:
+                    words.append(word)
+            result["words"] = words
             fingerprint = self.fingerprint(
                 clean_entries,
                 "%s|%s|pending_words" % (
@@ -658,12 +738,22 @@ class SyncRunner:
                 result["status"] = "unchanged"
                 result["saved"] = str(previous.get("saved") or "")
                 result["import"] = previous.get("import") or {}
+                result["words"] = previous.get("words") or result["words"]
+                result["archived"] = int(previous.get("archived") or 0)
+                result["existing_words"] = int(previous.get("existing_words") or 0)
+                result["repaired_words"] = int(previous.get("repaired_words") or 0)
+                result["failed"] = int(previous.get("failed") or 0)
                 result["message"] = "无变化，跳过重复保存/导入。"
                 return result
             if clean_entries:
                 saved = self.save_export(subject, "pending_words", clean_entries)
                 result["saved"] = str(saved)
                 result["import"] = self.import_pending_words(subject, saved)
+                details = self.parse_import_details(result["import"].get("output", ""), "pending")
+                result["archived"] = details["archived"]
+                result["existing_words"] = details["existing_words"]
+                result["repaired_words"] = details["repaired_words"]
+                result["failed"] = details["failed"]
                 if result["import"].get("status") not in ("ok", "skipped"):
                     result["status"] = "import_error"
                 result["message"] = result["import"].get("message", "")
@@ -763,12 +853,42 @@ class SyncRunner:
                 name, exported, ("（%s）" % message) if message else "")
         if status == "unchanged":
             return "%s：无变化，已跳过重复保存/导入" % name
-        if exported == 0:
-            base = "%s：云端 0 条，无需导入" % name
+
+        if "words" in item:
+            words = [str(word) for word in (item.get("words") or []) if str(word).strip()]
+            if exported == 0:
+                base = "待归档单词：云端 0 个，无需归档"
+            else:
+                history = "、".join(words[:8])
+                if len(words) > 8:
+                    history += " 等 %d 个" % len(words)
+                base = "待归档单词：云端 %d 个" % exported
+                if history:
+                    base += "（%s）" % history
+                base += "；归档 %d 个，已存在 %d 个，失败 %d 个" % (
+                    int(item.get("archived") or 0),
+                    int(item.get("existing_words") or 0),
+                    int(item.get("failed") or 0),
+                )
         else:
-            base = "%s：同步成功，云端 %d 条" % (name, exported)
-            if message:
-                base += "；%s" % message
+            categories = item.get("categories") or {}
+            category_text = ""
+            if isinstance(categories, dict) and categories:
+                category_text = "（%s）" % "、".join(
+                    "%s %d 条" % (str(k), int(v)) for k, v in categories.items()
+                )
+            if exported == 0:
+                base = "%s：云端 0 条，无需导入" % name
+            else:
+                base = "%s：云端 %d 条%s" % (name, exported, category_text)
+                imported = int(item.get("imported") or 0)
+                duplicates = int(item.get("duplicates") or 0)
+                if "imported" in item or "duplicates" in item:
+                    base += "；本地新增 %d 条" % imported
+                    if duplicates:
+                        base += "，重复跳过 %d 条" % duplicates
+                elif message:
+                    base += "；%s" % message
         if route:
             base += "；线路：%s" % route
         return base
