@@ -127,7 +127,10 @@ def merge_entries(
     )
 
 
-def write_archive(path: Path, subject_key: str, entries: list[dict[str, Any]]) -> None:
+def write_archive(path: Path, subject_key: str, entries: list[dict[str, Any]]) -> bool:
+    existing = read_archive_entries(path)
+    if existing == entries:
+        return False
     payload = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "source": "local-jsonl",
@@ -142,6 +145,7 @@ def write_archive(path: Path, subject_key: str, entries: list[dict[str, Any]]) -
         encoding="utf-8",
     )
     os.replace(temp, path)
+    return True
 
 
 def build_all(base: Path) -> dict[str, int]:
@@ -155,8 +159,10 @@ def build_all(base: Path) -> dict[str, int]:
             counts[key] = len(existing)
             continue
         entries = merge_entries(existing, incoming, entry_key)
-        write_archive(output, key, entries)
-        if len(entries) > len(incoming):
+        changed = write_archive(output, key, entries)
+        if not changed:
+            print("%s：无变化，保留现有归档时间戳。" % subject["label"])
+        elif len(entries) > len(incoming):
             print("%s：合并已有归档，共 %d 条（本次日志 %d 条）" % (
                 subject["label"], len(entries), len(incoming)
             ))
@@ -203,6 +209,9 @@ def build_added_log(base: Path) -> int:
     entries.reverse()
     existing = read_archive_entries(output)
     entries = merge_entries(existing, entries, added_log_key)
+    if existing == entries:
+        print("添加日志：无变化，保留现有归档时间戳。")
+        return len(entries)
     payload = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "source": "local-archived-log",
