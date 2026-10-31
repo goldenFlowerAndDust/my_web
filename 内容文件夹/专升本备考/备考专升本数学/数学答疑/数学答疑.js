@@ -941,7 +941,7 @@
     askBtn.addEventListener("click", submitQuestion);
     copyBtn.addEventListener("click", copyAnswer);
     historyRefresh.addEventListener("click", function () { loadHistory(historyCategory); });
-    historyExport.addEventListener("click", exportHistory);
+    if (historyExport) historyExport.addEventListener("click", exportHistory);
     connectionBtn.addEventListener("click", openConnectionDialog);
     connectionClose.addEventListener("click", function () { connectionDialog.close(); });
     connectionMode.addEventListener("change", toggleCloudFields);

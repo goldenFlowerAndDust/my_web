@@ -33,6 +33,13 @@
         </div>
     </header>
 
+    <div class="sync-reminder" style="margin:18px 0;padding:12px 16px;border:1px solid #d9e4ef;border-left:4px solid #2f6f9f;border-radius:8px;background:#f5f9fd;color:#2c3e50;font-size:.9rem;line-height:1.7;">
+        <strong>同步提醒：</strong>本地和云端连接设置会保留。云端待归档单词在电脑上运行
+        <code>专升本备考/同步全部科目.bat</code>，按菜单选 1 同步；前提是 Cloudflare 主线路和腾讯云 SCF 备用线路已按流程配置。
+        只本地用可忽略；建议配置云端，因为本地模式只能在这台 PC 使用。
+        配置说明见 <code>想要自行搭建并使用的前提——第一步/云端配置.html</code>，直接双击打开。
+    </div>
+
     <section class="panel guide_panel" aria-labelledby="guideTitle">
         <div class="guide_head">
             <div>
@@ -61,8 +68,8 @@
         </ol>
         <p class="generator_local_note">
             <strong>本地写入 / 云端排队：</strong>本地模式会直接写 HTML 和 <code>data.json</code>；
-            云端模式只把“英文单词或中文意思”加入云端待归档，再导出 JSON，
-            拖到 <code>导入待归档单词.bat</code> 完成本地同步。
+            云端模式只把“英文单词或中文意思”加入云端待归档。
+            不需要在浏览器导出 JSON；运行 <code>同步全部科目.bat</code> 会自动拉取、保存、导入并更新复习清单。
         </p>
     </section>
 
@@ -83,7 +90,6 @@
 
             <div class="cloud_actions">
                 <button type="button" class="btn btn_soft btn_small" id="btnCloudSettings">云端连接设置</button>
-                <button type="button" class="btn btn_soft btn_small" id="btnCloudExport">导出待归档 JSON</button>
             </div>
             <p id="cloudStatus" class="cloud_status">本地模式：分析并直接写入文件。</p>
         </div>

@@ -160,6 +160,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="把英语答疑导出 JSON 合并到本地日志")
     parser.add_argument("file", help="页面导出的 JSON 文件")
     parser.add_argument("--write", action="store_true", help="真正写入；不加只预览")
+    parser.add_argument(
+        "--delete-cloud",
+        action="store_true",
+        help="写入成功后立即删除云端对应记录；默认保留 24 小时",
+    )
     args = parser.parse_args()
 
     path = Path(args.file).expanduser()
@@ -222,7 +227,10 @@ def main() -> int:
 
     if total_new == 0:
         print("没有需要写入的新记录（已有记录视为已导入）。")
-        run_cleanup(cleanup_url, cleanup_tokens, cleanup_records)
+        if args.delete_cloud:
+            run_cleanup(cleanup_url, cleanup_tokens, cleanup_records)
+        elif cleanup_tokens:
+            print("云端记录按 24 小时保留；本次未立即删除。")
         return 0
 
     backup = backup_logs()
@@ -233,7 +241,10 @@ def main() -> int:
         if merged:
             write_category(category, merged)
     print("已写入本地日志：%s" % LOG_DIR)
-    run_cleanup(cleanup_url, cleanup_tokens, cleanup_records)
+    if args.delete_cloud:
+        run_cleanup(cleanup_url, cleanup_tokens, cleanup_records)
+    elif cleanup_tokens:
+        print("云端记录按 24 小时保留；本次未立即删除。")
     return 0
 
 

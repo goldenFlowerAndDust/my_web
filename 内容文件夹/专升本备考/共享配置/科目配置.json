@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "subjects": [
+    {
+      "id": "english",
+      "label": "英语",
+      "enabled": true,
+      "worker_subject": "english",
+      "export_root": "..\\备考专升本英语\\导出记录",
+      "filename_prefix": "英语答疑记录",
+      "import_adapter": "english",
+      "include_pending_words": true
+    },
+    {
+      "id": "math",
+      "label": "数学",
+      "enabled": true,
+      "worker_subject": "math",
+      "export_root": "..\\备考专升本数学\\导出记录",
+      "filename_prefix": "数学答疑记录",
+      "import_adapter": "math",
+      "include_pending_words": false
+    },
+    {
+      "id": "politics",
+      "label": "政治",
+      "enabled": false,
+      "worker_subject": "politics",
+      "export_root": "..\\备考专升本政治\\导出记录",
+      "filename_prefix": "政治答疑记录",
+      "import_adapter": "politics",
+      "include_pending_words": false
+    },
+    {
+      "id": "it",
+      "label": "信息技术",
+      "enabled": false,
+      "worker_subject": "it",
+      "export_root": "..\\备考专升本信息技术\\导出记录",
+      "filename_prefix": "信息技术答疑记录",
+      "import_adapter": "it",
+      "include_pending_words": false
+    }
+  ]
+}

@@ -1038,7 +1038,7 @@
     historyRefresh.addEventListener("click", function () {
         loadHistory(historyCategory);
     });
-    historyExport.addEventListener("click", exportHistory);
+    if (historyExport) historyExport.addEventListener("click", exportHistory);
     historyTabs.forEach(function (tab) {
         tab.addEventListener("click", function () {
             loadHistory(tab.dataset.category || "all");

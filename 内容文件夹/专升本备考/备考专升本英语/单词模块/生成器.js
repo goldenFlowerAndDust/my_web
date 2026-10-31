@@ -286,12 +286,7 @@
             '<div class="result_exists"><strong>' +
             (data.already_pending ? '这个词已经在队列里。' : '已加入云端待归档。') +
             '</strong><p>' + esc(data.message || '') + '</p>' +
-            '<p>导出 JSON 后，拖到 <code>导入待归档单词.bat</code>；本地会重新分析并写入词库。</p></div>' +
-            '<div class="result_actions">' +
-            '<button type="button" class="btn btn_primary btn_small" id="btnCloudExportNow">导出待归档 JSON</button>' +
-            '</div>';
-        var exportNow = document.getElementById('btnCloudExportNow');
-        if (exportNow) exportNow.addEventListener('click', doCloudExport);
+            '<p>不用浏览器导出。运行 <code>同步全部科目.bat</code>，会自动拉取、分析并写入词库、更新复习清单。</p></div>';
     }
 
     async function doCloudQueue() {
@@ -806,7 +801,7 @@
     btnHealth.addEventListener('click', checkHealth);
     btnJsonAudit.addEventListener('click', doJsonAudit);
     btnCloudTest.addEventListener('click', doCloudTest);
-    btnCloudExport.addEventListener('click', doCloudExport);
+    if (btnCloudExport) btnCloudExport.addEventListener('click', doCloudExport);
     btnCloudSettings.addEventListener('click', function () {
         setDialogStatus(
             cloudConfigured() ? '已填写云端连接。' : '填写 Worker 或 SCF 地址，以及对应访问口令。',

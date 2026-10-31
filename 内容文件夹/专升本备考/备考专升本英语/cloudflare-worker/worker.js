@@ -10,7 +10,7 @@
  *   DEEPSEEK_MODEL           deepseek-chat
  *   ALLOWED_ORIGIN           *（先用 * 测试，之后可改成 https://你的用户名.github.io）
  *   RATE_LIMIT_PER_MINUTE    10
- *   LOG_TTL_DAYS             180
+ *   LOG_RETENTION_HOURS      24（答疑记录与待归档单词保留小时数）
  *
  * 路由：
  *   GET  /api/health
@@ -252,6 +252,35 @@ function normalizeTopic(raw) {
   return MATH_TOPIC_ALIASES[value.toLowerCase()] || "其他";
 }
 
+const POLITICS_CATEGORIES = ["概念辨析", "材料分析", "时政热点", "其他"];
+const POLITICS_ALIASES = {
+  concept: "概念辨析",
+  concepts: "概念辨析",
+  material: "材料分析",
+  analysis: "材料分析",
+  current: "时政热点",
+  news: "时政热点",
+  概念: "概念辨析",
+  材料: "材料分析",
+  时政: "时政热点",
+};
+
+const IT_CATEGORIES = ["基础概念", "操作题", "编程题", "其他"];
+const IT_ALIASES = {
+  concept: "基础概念",
+  concepts: "基础概念",
+  operation: "操作题",
+  operations: "操作题",
+  coding: "编程题",
+  program: "编程题",
+  概念: "基础概念",
+  操作: "操作题",
+  编程: "编程题",
+};
+
+const POLITICS_SYSTEM_PROMPT = `你是一位熟悉专升本政治考纲的教师。用中文讲解，先给结论，再解释概念、材料和答题思路；材料分析题要分点作答，语言准确、适合考场。只输出 Markdown 正文，不要输出系统说明或代码围栏。`;
+const IT_SYSTEM_PROMPT = `你是一位熟悉专升本信息技术/计算机基础的教师。用中文讲解，概念题给准确答案，操作题给步骤，编程题给可运行示例和关键解释。只输出 Markdown 正文，不要输出系统说明或代码围栏。`;
+
 function subjectConfig(subject) {
   if (subject === "math") {
     return {
@@ -266,6 +295,32 @@ function subjectConfig(subject) {
       label: "数学",
     };
   }
+  if (subject === "politics") {
+    return {
+      subject: "politics",
+      categories: POLITICS_CATEGORIES,
+      aliases: POLITICS_ALIASES,
+      topics: [],
+      prompt: POLITICS_SYSTEM_PROMPT,
+      temperature: 0.3,
+      maxTokens: 3200,
+      maxQuestion: 3000,
+      label: "政治",
+    };
+  }
+  if (subject === "it") {
+    return {
+      subject: "it",
+      categories: IT_CATEGORIES,
+      aliases: IT_ALIASES,
+      topics: [],
+      prompt: IT_SYSTEM_PROMPT,
+      temperature: 0.25,
+      maxTokens: 3600,
+      maxQuestion: 4000,
+      label: "信息技术",
+    };
+  }
   return {
     subject: "english",
     categories: CATEGORIES,
@@ -277,6 +332,36 @@ function subjectConfig(subject) {
     maxQuestion: 2000,
     label: "英语",
   };
+}
+
+const SUBJECT_IDS = ["english", "math", "politics", "it"];
+
+function normalizeSubject(raw) {
+  const id = String(raw || "english").trim().toLowerCase();
+  return SUBJECT_IDS.includes(id) ? id : "english";
+}
+
+function logIndexKey(subject, mode) {
+  if (subject === "english") return `index:${mode}`;
+  return `index:${subject}:${mode}`;
+}
+
+function retentionHours(env) {
+  const value = Number(env.LOG_RETENTION_HOURS || 24);
+  return Number.isFinite(value) && value > 0 ? value : 24;
+}
+
+function retentionSeconds(env) {
+  return Math.max(60, Math.round(retentionHours(env) * 3600));
+}
+
+function retentionCutoff(env) {
+  return Date.now() - retentionHours(env) * 3600 * 1000;
+}
+
+function isRecentRecord(item, cutoff) {
+  const created = Date.parse(String((item && item.created_at) || ""));
+  return !Number.isFinite(created) || created >= cutoff;
 }
 
 function formatShanghai(date) {
@@ -347,9 +432,7 @@ async function handleTutor(request, env) {
     return json({ ok: false, error: error.message || "请求体不合法。" }, 400, request, env);
   }
 
-  const subject = String(payload.subject || "english").trim().toLowerCase() === "math"
-    ? "math"
-    : "english";
+  const subject = normalizeSubject(payload.subject);
   const config = subjectConfig(subject);
   const mode = normalizeMode(payload.mode, config.categories, config.aliases);
   const topic = subject === "math" ? normalizeTopic(payload.topic) : "";
@@ -453,20 +536,19 @@ async function handleTutor(request, env) {
     duration_ms: Date.now() - started,
     status: "ok",
   };
-  const key = `log:${subject}:${mode}:${createdAt}:${crypto.randomUUID()}`;
-  const ttl = Math.max(1, Number(env.LOG_TTL_DAYS || 180) || 180) * 86400;
+  const ttl = retentionSeconds(env);
 
   let logged = true;
   let warning = "";
   try {
-    await env.TUTOR_KV.put(key, JSON.stringify(record), { expirationTtl: ttl });
-
-    // 英语沿用旧 index:<mode>，数学使用独立的 index:math:<mode>。
-    const indexKey = subject === "math" ? `index:math:${mode}` : `index:${mode}`;
-    const existing = await env.TUTOR_KV.get(indexKey, "json");
-    const index = Array.isArray(existing) ? existing : [];
+    // 只写分类索引；历史读取也只读索引，避免同一答案在 KV 里存两份。
+    const idxKey = logIndexKey(subject, mode);
+    const existing = await env.TUTOR_KV.get(idxKey, "json");
+    const cutoff = retentionCutoff(env);
+    const index = (Array.isArray(existing) ? existing : [])
+      .filter((item) => isRecentRecord(item, cutoff));
     index.unshift(record);
-    await env.TUTOR_KV.put(indexKey, JSON.stringify(index.slice(0, 50)), { expirationTtl: ttl });
+    await env.TUTOR_KV.put(idxKey, JSON.stringify(index.slice(0, 50)), { expirationTtl: ttl });
   } catch (error) {
     logged = false;
     warning = "答案已生成，但云端日志索引写入失败。";
@@ -515,12 +597,13 @@ async function handlePendingWord(request, env) {
   const now = new Date();
   const createdAt = now.toISOString();
   const time = formatShanghai(now);
-  const ttl = Math.max(1, Number(env.LOG_TTL_DAYS || 180) || 180) * 86400;
+  const ttl = retentionSeconds(env);
 
   try {
     const listed = await env.TUTOR_KV.list({ prefix: PENDING_PREFIX, limit: 1000 });
     const values = await Promise.all(listed.keys.map((key) => env.TUTOR_KV.get(key.name, "json")));
-    const duplicate = values.find((item) => item && String(item.word || "").toLowerCase() === word);
+    const cutoff = retentionCutoff(env);
+    const duplicate = values.find((item) => item && isRecentRecord(item, cutoff) && String(item.word || "").toLowerCase() === word);
     if (duplicate) {
       return json({
         ok: true,
@@ -569,8 +652,10 @@ async function handlePendingWords(request, env) {
     const listed = await env.TUTOR_KV.list({ prefix: PENDING_PREFIX, limit: 1000 });
     const keys = listed.keys.map((key) => key.name);
     const values = await Promise.all(keys.map((key) => env.TUTOR_KV.get(key, "json")));
+    const cutoff = retentionCutoff(env);
     const entries = values
       .filter((item) => item && item.word)
+      .filter((item) => isRecentRecord(item, cutoff))
       .sort((a, b) => String(b.created_at || b.time || "").localeCompare(String(a.created_at || a.time || "")));
     let cleanupToken = "";
     if (entries.length) {
@@ -690,12 +775,13 @@ async function enqueuePendingWord(env, word, question, source, meaningZh) {
   const now = new Date();
   const createdAt = now.toISOString();
   const time = formatShanghai(now);
-  const ttl = Math.max(1, Number(env.LOG_TTL_DAYS || 180) || 180) * 86400;
+  const ttl = retentionSeconds(env);
 
   try {
     const listed = await env.TUTOR_KV.list({ prefix: PENDING_PREFIX, limit: 1000 });
     const values = await Promise.all(listed.keys.map((key) => env.TUTOR_KV.get(key.name, "json")));
-    const duplicate = values.find((item) => item && String(item.word || "").toLowerCase() === word);
+    const cutoff = retentionCutoff(env);
+    const duplicate = values.find((item) => item && isRecentRecord(item, cutoff) && String(item.word || "").toLowerCase() === word);
     if (duplicate) {
       return {
         ok: true,
@@ -793,9 +879,7 @@ async function handleLog(request, env) {
   }
 
   const url = new URL(request.url);
-  const subject = (url.searchParams.get("subject") || "english").toLowerCase() === "math"
-    ? "math"
-    : "english";
+  const subject = normalizeSubject(url.searchParams.get("subject"));
   const config = subjectConfig(subject);
   const rawCategory = url.searchParams.get("category") || "all";
   const category = rawCategory === "all"
@@ -818,15 +902,17 @@ async function handleLog(request, env) {
   try {
     const indexes = await Promise.all(
       categories.map((name) => env.TUTOR_KV.get(
-        subject === "math" ? `index:math:${name}` : `index:${name}`,
+        logIndexKey(subject, name),
         "json",
       )),
     );
+    const cutoff = retentionCutoff(env);
     for (const index of indexes) {
       if (Array.isArray(index)) entries.push(...index);
     }
     entries = entries
       .filter((item) => item && typeof item === "object" && item.answer)
+      .filter((item) => isRecentRecord(item, cutoff))
       .filter((item) => topic === "all" || normalizeTopic(item.topic) === topic)
       .sort((a, b) => String(b.created_at || b.time || "").localeCompare(String(a.created_at || a.time || "")));
     total = entries.length;
@@ -885,7 +971,7 @@ async function handleDeleteTutorLogs(request, env) {
     return json({ ok: false, error: "清理令牌已过期，请重新导出答疑记录。" }, 410, request, env);
   }
 
-  const subject = cleanup.subject === "math" ? "math" : "english";
+  const subject = normalizeSubject(cleanup.subject);
   const config = subjectConfig(subject);
   const records = Array.isArray(payload.records) ? payload.records : [];
   const wanted = new Map();
@@ -905,8 +991,8 @@ async function handleDeleteTutorLogs(request, env) {
   let deleted = 0;
   try {
     for (const [mode, refs] of wanted.entries()) {
-      const indexKey = subject === "math" ? `index:math:${mode}` : `index:${mode}`;
-      const existing = await env.TUTOR_KV.get(indexKey, "json");
+      const key = logIndexKey(subject, mode);
+      const existing = await env.TUTOR_KV.get(key, "json");
       if (!Array.isArray(existing) || !existing.length) continue;
       const kept = existing.filter((item) => {
         if (!item || typeof item !== "object") return true;
@@ -919,8 +1005,7 @@ async function handleDeleteTutorLogs(request, env) {
       });
       if (kept.length !== existing.length) {
         deleted += existing.length - kept.length;
-        const ttl = Math.max(1, Number(env.LOG_TTL_DAYS || 180) || 180) * 86400;
-        await env.TUTOR_KV.put(indexKey, JSON.stringify(kept), { expirationTtl: ttl });
+        await env.TUTOR_KV.put(key, JSON.stringify(kept), { expirationTtl: retentionSeconds(env) });
       }
     }
     return json({ ok: true, deleted }, 200, request, env);
@@ -944,9 +1029,7 @@ async function handleLogDelete(request, env) {
     return json({ ok: false, error: error.message || "请求体不合法。" }, 400, request, env);
   }
 
-  const subject = String(payload.subject || "english").trim().toLowerCase() === "math"
-    ? "math"
-    : "english";
+  const subject = normalizeSubject(payload.subject);
   const config = subjectConfig(subject);
   const mode = normalizeMode(payload.mode, config.categories, config.aliases);
   const createdAt = String(payload.created_at || "").trim();
@@ -958,9 +1041,9 @@ async function handleLogDelete(request, env) {
     return json({ ok: false, error: "缺少要删除的记录时间。" }, 400, request, env);
   }
 
-  const indexKey = subject === "math" ? `index:math:${mode}` : `index:${mode}`;
+  const key = logIndexKey(subject, mode);
   try {
-    const existing = await env.TUTOR_KV.get(indexKey, "json");
+    const existing = await env.TUTOR_KV.get(key, "json");
     if (!Array.isArray(existing) || !existing.length) {
       return json({ ok: true, deleted: 0 }, 200, request, env);
     }
@@ -972,8 +1055,7 @@ async function handleLogDelete(request, env) {
     });
     const deleted = existing.length - kept.length;
     if (deleted > 0) {
-      const ttl = Math.max(1, Number(env.LOG_TTL_DAYS || 180) || 180) * 86400;
-      await env.TUTOR_KV.put(indexKey, JSON.stringify(kept), { expirationTtl: ttl });
+      await env.TUTOR_KV.put(key, JSON.stringify(kept), { expirationTtl: retentionSeconds(env) });
     }
     return json({ ok: true, deleted }, 200, request, env);
   } catch (error) {

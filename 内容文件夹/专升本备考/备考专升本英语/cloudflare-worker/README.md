@@ -59,7 +59,7 @@ TUTOR_ACCESS_TOKEN  = 你自己生成的访问口令
 ```text
 DEEPSEEK_MODEL          = deepseek-chat
 RATE_LIMIT_PER_MINUTE   = 10
-LOG_TTL_DAYS            = 180
+LOG_RETENTION_HOURS     = 24
 ALLOWED_ORIGIN          = *
 ```
 
@@ -149,7 +149,7 @@ localStorage，不写进 HTML/JS 文件。
 - `RATE_LIMIT_PER_MINUTE` 已限制每分钟请求；可在 Cloudflare 再加 WAF 限流。
 - 确认页面来源后把 `ALLOWED_ORIGIN` 从 `*` 改成 `https://你的用户名.github.io`。
 - 在 DeepSeek 后台设置消费上限/提醒；定期轮换 Key。
-- 云端日志在 KV 中，包含问题和回答；注意隐私，设置 `LOG_TTL_DAYS` 自动过期。
+- 云端日志在 KV 中，包含问题和回答；默认只保留 24 小时，由 `LOG_RETENTION_HOURS` 控制。
 - 公开的 Worker 端点即使有口令，也不是绝对安全；不要把它当成高敏感数据服务。
 
 ## 六、常见问题
@@ -177,6 +177,9 @@ GET  /api/pending-words     Header: X-Tutor-Token
 POST /api/delete-pending-words     Body: cleanup_token + words
 ```
 
+> 新版同步不再依赖 delete 接口；它只拉取、保存、导入。云端记录由
+> `LOG_RETENTION_HOURS=24` 自动过期。delete 接口仅保留给旧页面/手动兜底。
+
 > 如果之前部署的是旧版 Worker，需要重新粘贴新版 `worker.js` 并部署，
 > 否则生成器的云端排队和自动清理会提示 404。云端只存待归档单词，分类和写入 HTML
 > 仍由本地 `word_archiver.py` 完成。
@@ -192,24 +195,23 @@ POST /api/delete-pending-words     Body: cleanup_token + words
 
 不接受句子、问句或其他内容；不做构词分类，也不写本地文件。
 
-生成器导出 `pending-words` JSON 后，用本地
-`导入待归档单词.bat` 完成分类写入。
+新的 `同步全部科目.bat` 会直接读取 `/api/pending-words`，保存到英语的
+`导出记录/日期/英语单词待归档-....json`，再自动调用本地导入器。
+导入后**不立即删除云端**，由 24 小时保留策略自动过期。
+不需要浏览器导出，也不再有 `导入待归档单词.bat`。
 
-导出文件会带一个 **6 小时有效的 cleanup_token**。本地导入成功后，
-`import_pending_words.py` 会自动调用 `POST /api/delete-pending-words`，
-只删除本次成功处理的云端待归档记录；失败的词保留以便重试。
-旧导出文件没有这个令牌，不会自动删除；重新从生成器导出即可。
+## 答疑记录保留
 
-## 答疑记录清理
-
-- 云端答疑记录默认保留 180 天，由 Worker 变量 `LOG_TTL_DAYS` 控制；可改成 30 或 60 天。
-- 在答疑页点“导出答疑记录”时，每条记录会附带 6 小时有效的清理令牌。
-- 本地双击 `导入答疑记录.bat` 写入成功后，会自动调用 `POST /api/delete-tutor-logs`，只删除本次成功写入/已存在的记录。
-- 导入失败或没有导入的云端记录继续保留；旧导出文件没有令牌，不会自动删除，重新导出即可。
+- 答疑记录和待归档单词默认保留 24 小时，由 Worker 变量 `LOG_RETENTION_HOURS` 控制。
+- 同一天内 PC / 虚拟机都能读取到云端记录。
+- 本地同步服务只拉取、保存、导入，不调用 delete 接口。
+- 本地 JSON、JSONL、HTML、`data.json` 永久保留；每天最后可上传清洗后的归档到 GitHub 做长期备份。
+- 超过 24 小时的记录不再返回，KV 最终回收；不会无限堆积到 1GB。
+- 旧版导出页的 cleanup_token 仍存在，但默认不再自动删除；手动导入需要显式加 `--delete-cloud`。
 
 ## 八、数学答疑（subject: math）
 
-同一个 Worker 同时支持英语和数学，不需要第二个 Worker。
+同一个 Worker 同时支持英语、数学，并为政治、信息技术预留了 subject 结构。
 
 数学请求：
 
@@ -250,6 +252,18 @@ index:<分类>
 ```
 
 互不影响。
+
+通用科目索引：
+
+```text
+index:<分类>             英语，兼容旧数据
+index:math:<分类>        数学
+index:politics:<分类>    政治
+index:it:<分类>          信息技术
+```
+
+本地 `共享配置/科目配置.json` 控制启用哪些科目、各自的导出目录和导入器。
+政治、信息技术默认 `enabled=false`，以后加配置即可接入同步流程。
 
 数学历史：
 

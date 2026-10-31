@@ -695,9 +695,9 @@
 
         <div class="callout blue">
             <strong>云端答疑记录怎么回到本地：</strong>
-            在答疑页历史记录右上角点 <code>导出记录</code>，下载 JSON；把 JSON 拖到项目根目录的
-            <code>导入答疑记录.bat</code> 上即可合并到本地日志。重复记录会自动跳过，
-            原日志会备份到 <code>词素工具/英语问答日志备份/</code>。
+            不再需要浏览器导出。打开 <code>专升本备考/同步全部科目.bat</code>，选 1 即可自动拉取云端记录、
+            合并到本地日志；需要部署或配置云端时，直接打开
+            <code>想要自行搭建并使用的前提——第一步/云端配置.html</code>。
         </div>
 
         <div class="callout green">
@@ -710,24 +710,38 @@
         <div class="callout">
             <strong>生成器云端排队：</strong>
             生成器切到“云端排队”后，只接受一个英文单词或一个简短中文意思；
-            点“加入云端待归档”，再点“导出待归档 JSON”，把文件拖到
-            <code>导入待归档单词.bat</code>。本地会重新分析并分类写入。
-            本地写入模式则直接分析并写文件，不需要导出。
+            点“加入云端待归档”即可，不需要再导出 JSON。
+            运行 <code>同步全部科目.bat</code> 后会自动拉取、分析并写入词库。
+            本地写入模式则直接分析并写文件，不需要云端。
             已存在且 data.json 正常的词会跳过，不覆盖原 HTML；
             只有页面存在、data.json 缺失时才会自动补建记录。
-            新导出的 JSON 带 6 小时清理令牌；本地导入成功后会自动删除本次成功处理的云端待归档记录。
+            云端记录保留 24 小时，不立即删除。
             生成器检查只显示状态，不提供操作；AI 分析会自己检查，并在结果里只给一个按钮：
             直接导入 / 修复并重建 / 覆盖原内容；
             JSON 自查会清掉找不到 HTML 的失效记录。
         </div>
 
         <div class="callout">
-            <strong>答疑记录照旧：</strong>
-            <code>导出答疑记录</code>仍保留完整问答日志；下载后双击
-            <code>整理云端下载.bat</code>，进入 <code>云端下载/答疑归档</code>，
-            继续按分类和日期归档。它不包含待收录单词。
-            用 <code>导入答疑记录.bat</code> 写入成功后，会自动删除对应的云端记录；
-            未导出的记录默认保留 180 天（Worker 变量 <code>LOG_TTL_DAYS</code>）。
+            <strong>一键同步全部科目：</strong>
+            双击 <code>专升本备考/同步全部科目.bat</code>：
+            直接显示菜单，不会启动即同步。未配置时选 6 可把腾讯云 SCF 设为主线路（推荐国内、不开 VPN），
+            或选 4/5 分别配置主线路和备用线路；选 1 才执行同步。不常驻、不轮询。
+            同步结束会打印每个科目的结果、实际线路和成功/0 条/失败状态，不再需要猜。
+            口令输入时会显示以便核对，主线路失败会自动切换备用线路。
+            本地服务会读取 <code>共享配置/科目配置.json</code>，按每个科目自己的
+            <code>export_root</code> 保存到 <code>导出记录/日期/</code>，
+            自动导入英语、数学答疑记录和英语待归档单词。
+            英语单词会直接更新 HTML、<code>data.json</code> 和复习清单；
+            数学保持自己的日志目录。政治、信息技术默认未启用，以后只加配置。
+            云端记录保留 24 小时，同一天 PC / 虚拟机都能读取，不需要浏览器导出。
+        </div>
+
+        <div class="callout">
+            <strong>答疑记录：</strong>
+            旧的手动导出按钮和 <code>导入答疑记录.bat</code> 已删除。
+            统一由 <code>同步全部科目.bat</code> 直接拉取并导入。
+            云端默认保留 24 小时（Worker 变量 <code>LOG_RETENTION_HOURS</code>）。
+            每天最后可把清洗后的本地归档提交 GitHub 做长期备份。
         </div>
 
         <div class="callout">
@@ -913,9 +927,9 @@
         </div>
 
         <div class="callout">
-            <strong>三个按钮：</strong>
-            “保存”会把当前未同步的打卡写入 <code>data.json</code>；“撤销上一步/全部”会恢复操作并同步写回；
-            “导出 data.json”只作为备份或手动迁移用，日常不需要再手动覆盖。
+            <strong>复习清单按钮：</strong>
+            “保存”会把当前未同步的打卡写入 <code>data.json</code>；“撤销上一步/全部”会恢复操作并同步写回。
+            “导出 data.json”按钮已删除，云端记录统一由 <code>同步全部科目.bat</code> 处理。
         </div>
 
         <div class="callout blue">
@@ -1067,13 +1081,13 @@
             <div class="file-item"><code>复习清单/核心词汇复习清单.html</code><span>每天 20 新 + 20 复习 + 额外新增</span></div>
             <div class="file-item"><code>单词模块/词汇代码生成器.html</code><span>AI 自动归档界面</span></div>
             <div class="file-item"><code>英语答疑/英语答疑.html</code><span>资深英语教师答疑界面</span></div>
-            <div class="file-item"><code>导入答疑记录.bat</code><span>把云端导出的 JSON 合并到本地日志</span></div>
-            <div class="file-item"><code>导入待归档单词.bat</code><span>把生成器导出的云端待归档单词分类写入词库</span></div>
-            <div class="file-item"><code>整理云端下载.bat</code><span>把两类下载 JSON 分到云端下载子文件夹</span></div>
-            <div class="file-item"><code>云端下载/</code><span>答疑归档 / 待归档单词（已 gitignore）</span></div>
+            <div class="file-item"><code>同步全部科目.bat</code><span>一键同步英语/数学云端记录和英语待归档单词</span></div>
+            <div class="file-item"><code>共享配置/科目配置.json</code><span>每个科目自己的导出目录、启用状态和导入器</span></div>
+            <div class="file-item"><code>共享配置/云端同步.json</code><span>Worker / SCF 地址与口令，仅本机保存（已 gitignore）</span></div>
+            <div class="file-item"><code>../想要自行搭建并使用的前提——第一步/云端配置.html</code><span>部署 Cloudflare Worker、腾讯云 SCF 和本地同步前置条件</span></div>
             <div class="file-item"><code>tencent-scf/</code><span>腾讯云 SCF 国内反向代理与部署说明</span></div>
-            <div class="file-item"><code>词素工具/import_pending_words.py</code><span>待归档单词导入脚本</span></div>
-            <div class="file-item"><code>词素工具/import_tutor_logs.py</code><span>本地日志导入脚本（可预览/去重/备份）</span></div>
+            <div class="file-item"><code>词素工具/import_pending_words.py</code><span>待归档单词导入脚本（由同步器自动调用）</span></div>
+            <div class="file-item"><code>词素工具/import_tutor_logs.py</code><span>本地日志导入脚本（由同步器自动调用）</span></div>
             <div class="file-item"><code>词素工具/english_tutor.py</code><span>英语答疑 API 与分类日志</span></div>
             <div class="file-item"><code>词素工具/英语问答日志/</code><span>按分类保存问题与回答（已 gitignore）</span></div>
             <div class="file-item"><code>复习清单/data.json</code><span>全部词条与复习日程</span></div>

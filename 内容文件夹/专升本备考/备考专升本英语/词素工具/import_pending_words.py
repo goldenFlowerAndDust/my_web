@@ -72,6 +72,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="导入云端待归档单词")
     parser.add_argument("file", help="答疑页导出的待归档单词 JSON")
     parser.add_argument("--write", action="store_true", help="真正分类并写入；不加只预览")
+    parser.add_argument(
+        "--delete-cloud",
+        action="store_true",
+        help="写入成功后立即删除云端对应记录；默认保留 24 小时",
+    )
     args = parser.parse_args()
 
     path = Path(args.file).expanduser()
@@ -152,14 +157,16 @@ def main() -> int:
         ok, existing, repaired, failed
     ))
 
-    if processed and cleanup_token:
+    if processed and args.delete_cloud and cleanup_token:
         try:
             deleted = cleanup_cloud(cleanup_url, cleanup_token, processed)
             print("云端已清理 %d 条对应待归档记录。" % deleted)
         except (OSError, ValueError, RuntimeError) as exc:
             print("云端自动清理失败（本地写入已完成，不影响结果）：%s" % exc)
+    elif processed and cleanup_token:
+        print("云端记录按 24 小时保留；本次未立即删除。")
     elif processed and not cleanup_token:
-        print("这份导出文件没有清理令牌；本次未自动删除云端记录。请重新从生成器导出后再导入。")
+        print("这份导出文件没有清理令牌；本次未自动删除云端记录。")
     elif cleanup_url and cleanup_token:
         print("没有成功处理的单词，云端记录保留。")
 

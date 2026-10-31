@@ -1,0 +1,7 @@
+{
+  "url": "https://你的-worker.workers.dev",
+  "token": "Worker 的 TUTOR_ACCESS_TOKEN",
+  "fallback_url": "https://你的腾讯云SCF函数URL",
+  "fallback_token": "SCF 的 PROXY_TOKEN",
+  "timeout_seconds": 30
+}

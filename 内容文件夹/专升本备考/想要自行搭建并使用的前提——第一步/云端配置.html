@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云端配置与本地同步 · 前置条件</title>
+<style>
+:root { --ink:#2c3e50; --muted:#7f8c8d; --line:#e4e9ef; --paper:#fff; --cream:#f6f7f4; --gold:#b7950b; --green:#1f7a5c; --blue:#2f6f9f; }
+* { box-sizing:border-box; }
+body { margin:0; color:var(--ink); background:var(--cream); font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif; line-height:1.8; }
+main { max-width:1080px; margin:0 auto; padding:28px 18px 70px; }
+header { padding:28px 0 18px; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:1.8rem; letter-spacing:.02em; }
+h2 { margin:38px 0 12px; padding-bottom:6px; border-bottom:2px solid #e9edf2; font-size:1.3rem; }
+h3 { margin:22px 0 8px; font-size:1.05rem; color:var(--blue); }
+p { margin:8px 0; }
+a { color:#1f6f9f; text-decoration:none; }
+a:hover { text-decoration:underline; }
+.lead { color:var(--muted); }
+.callout { margin:16px 0; padding:14px 16px; border-left:4px solid var(--gold); background:#fffdf3; border-radius:0 8px 8px 0; }
+.callout.green { border-color:var(--green); background:#f3fbf7; }
+.callout.blue { border-color:var(--blue); background:#f3f8fc; }
+.callout strong { display:block; margin-bottom:4px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin:12px 0; }
+.card { background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+.card h3 { margin-top:0; }
+code { font-family:Consolas,"Courier New",monospace; background:#f1f4f7; padding:1px 5px; border-radius:4px; font-size:.92em; }
+pre { margin:10px 0; padding:14px; overflow:auto; max-height:520px; background:#1f2933; color:#e7edf3; border-radius:10px; line-height:1.55; font-size:.82rem; }
+pre code { background:transparent; padding:0; color:inherit; font-size:inherit; }
+.codehead { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:14px; }
+.codehead h3 { margin:0; }
+.copy-btn { border:1px solid #c8d2dc; background:#fff; color:#3e4c59; border-radius:8px; padding:5px 12px; cursor:pointer; font-family:inherit; font-size:.82rem; }
+.copy-btn:hover { background:#f1f5f9; }
+table { width:100%; border-collapse:collapse; margin:10px 0; background:#fff; }
+th,td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; font-size:.92rem; }
+th { background:#f5f7fa; }
+ol,ul { padding-left:1.4rem; }
+li { margin:5px 0; }
+.nav { display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; }
+.nav a { border:1px solid #d8e0e8; background:#fff; border-radius:999px; padding:5px 12px; font-size:.86rem; }
+.small { color:var(--muted); font-size:.85rem; }
+.badge { display:inline-block; padding:1px 8px; border-radius:999px; background:#eef3f7; color:#43556a; font-size:.78rem; }
+@media (max-width:640px) { pre { max-height:360px; font-size:.74rem; } h1 { font-size:1.45rem; } }
+</style>
+</head>
+<body>
+<main>
+<header>
+    <div class="badge">PREREQUISITES / CONFIG</div>
+    <h1>云端配置与本地同步</h1>
+    <p class="lead">从零部署 Cloudflare Worker、腾讯云 SCF 备用线路，并让本地自动同步。页面里的两段代码可以直接复制。</p>
+    <p class="small">本页位于「想要自行搭建并使用的前提——第一步」文件夹，建议直接在资源管理器双击打开；本地 8767 服务的根目录不包含这个文件夹，从答题页跳转时若 404，请直接打开本文件。</p>
+    <div class="nav">
+        <a href="../备考专升本英语/使用指南.html">返回使用指南</a>
+        <a href="../备考专升本英语/英语答疑/英语答疑.html">英语答疑</a>
+        <a href="../备考专升本数学/数学答疑/数学答疑.html">数学答疑</a>
+        <a href="../备考专升本英语/单词模块/词汇代码生成器.html">词汇生成器</a>
+    </div>
+</header>
+
+<div class="callout green">
+    <strong>先记住最终使用方式</strong>
+    所有云端记录的本地同步只通过 <code>专升本备考/同步全部科目.bat</code> 完成。不要再找浏览器“导出答疑记录”按钮，也不需要手动拖入 bat。
+    启动同步后，程序会按 <code>共享配置/科目配置.json</code> 的 <code>export_root</code> 自动创建日期目录、保存 JSON、调用本地导入器并更新英语复习清单。
+</div>
+
+<h2>一、前置条件</h2>
+<div class="grid">
+    <div class="card"><h3>系统</h3><p>Windows。项目已经带本地 Python 运行环境，双击 <code>同步全部科目.bat</code> 即可。</p></div>
+    <div class="card"><h3>Cloudflare</h3><p>一个 Cloudflare 账号，用于 Worker 和 KV。国际网络访问不稳定时建议同时准备腾讯云 SCF。</p></div>
+    <div class="card"><h3>DeepSeek</h3><p>一个可用的 DeepSeek API Key。Key 只放在 Worker Secret 或本地 <code>共享配置/API.txt</code>，不要写进网页。</p></div>
+    <div class="card"><h3>腾讯云（可选）</h3><p>已开通 SCF，创建 Node.js 函数和 Function URL，作为国内备用反向代理。</p></div>
+</div>
+
+<div class="callout">
+    <strong>网络选择</strong>
+    国内网络直连 <code>workers.dev</code> 经常失败，所以首选腾讯云 SCF 主线路、Cloudflare 备用；或者在本地同步菜单里选 6，把已保存的 SCF 配置切换为主线路。
+</div>
+
+<h2>二、Cloudflare Worker 部署</h2>
+<ol>
+    <li>Cloudflare 控制台 → Workers &amp; Pages → 创建 Worker。</li>
+    <li>创建 KV namespace，绑定变量名必须是 <code>TUTOR_KV</code>。</li>
+    <li>给 Worker 添加 Secret：<code>DEEPSEEK_API_KEY</code>、<code>TUTOR_ACCESS_TOKEN</code>。</li>
+    <li>添加普通变量：<code>LOG_RETENTION_HOURS=24</code>；测试阶段可设 <code>ALLOWED_ORIGIN=*</code>，稳定后改成自己的页面来源。</li>
+    <li>把下面完整 <code>worker.js</code> 粘贴到 Worker 编辑器，Save and Deploy。</li>
+    <li>部署后访问 <code>https://你的worker.workers.dev/api/health</code>，应返回 <code>ok: true</code>、<code>kv_bound: true</code>。</li>
+</ol>
+
+<div class="callout blue">
+    <strong>Worker 变量说明</strong>
+    <code>TUTOR_ACCESS_TOKEN</code> 是本地同步和页面访问口令；<code>DEEPSEEK_API_KEY</code> 永远不要出现在前端代码。
+    <code>LOG_RETENTION_HOURS</code> 默认 24，答疑记录和待归档单词都按这个时间保留。
+</div>
+
+<div class="codehead">
+    <h3>worker.js</h3>
+    <button type="button" class="copy-btn" data-copy="workerCode">复制全部代码</button>
+</div>
+<pre><code id="workerCode">/**
+ * Cloudflare Worker：专升本英语 / 数学答疑代理
+ *
+ * 绑定：
+ *   TUTOR_KV                 KV namespace（日志）
+ * 机密：
+ *   DEEPSEEK_API_KEY         DeepSeek API Key
+ *   TUTOR_ACCESS_TOKEN       页面访问口令（自己生成，至少 24 位）
+ * 变量：
+ *   DEEPSEEK_MODEL           deepseek-chat
+ *   ALLOWED_ORIGIN           *（先用 * 测试，之后可改成 https://你的用户名.github.io）
+ *   RATE_LIMIT_PER_MINUTE    10
+ *   LOG_RETENTION_HOURS      24（答疑记录与待归档单词保留小时数）
+ *
+ * 路由：
+ *   GET  /api/health
+ *   POST /api/tutor           Header: X-Tutor-Token
+ *   GET  /api/tutor-log       Header: X-Tutor-Token
+ *   POST /api/tutor-log-delete Header: X-Tutor-Token
+ *   POST /api/pending-word     Header: X-Tutor-Token
+ *   POST /api/queue-word       Header: X-Tutor-Token
+ *   GET  /api/pending-words    Header: X-Tutor-Token
+ *   POST /api/delete-pending-words     Body: cleanup_token + words
+ *   POST /api/delete-tutor-logs        Body: cleanup_token + records
+ *
+ * /api/tutor 的 subject：
+ *   缺省 / english → 英语教师
+ *   math           → 数学家
+ */
+
+const CATEGORIES = [&quot;单词解释&quot;, &quot;作文&quot;, &quot;句子分析&quot;, &quot;其他&quot;];
+const PENDING_PREFIX = &quot;pending:&quot;;
+const ALIASES = {
+  word: &quot;单词解释&quot;,
+  words: &quot;单词解释&quot;,
+  单词: &quot;单词解释&quot;,
+  词汇: &quot;单词解释&quot;,
+  essay: &quot;作文&quot;,
+  writing: &quot;作文&quot;,
+  composition: &quot;作文&quot;,
+  写作: &quot;作文&quot;,
+  sentence: &quot;句子分析&quot;,
+  sentences: &quot;句子分析&quot;,
+  句子: &quot;句子分析&quot;,
+  grammar: &quot;其他&quot;,
+  语法: &quot;其他&quot;,
+  other: &quot;其他&quot;,
+  qa: &quot;其他&quot;,
+  问答: &quot;其他&quot;,
+};
+
+const SYSTEM_PROMPT = `你是一位资深英语教师，长期从事专升本英语教学，熟悉专升本考试大纲、常见题型、学生失分点和中国学生的英语学习难点。你的回答对象是准备专升本考试的中文母语大学生。
+
+总要求：
+1. 用中文讲解，英文例句、范文和需要学习的表达用英文。
+2. 只输出 Markdown 正文，不要输出 HTML、JSON、代码围栏外的系统说明，也不要提到“日志”“API”“系统提示”。
+3. 先给结论，再解释；语言清楚、具体，不说空话。
+4. 不要使用 Markdown 表格，避免大段无法在手机上阅读的文字；用二级/三级标题、短段落和列表组织。
+5. 涉及语法判断、词义辨析、翻译时，给依据和例子；不确定的内容要明确说“这里需要结合语境判断”，不要编造。
+6. 如果题目信息不足，按最合理的考试语境先作答，并在开头用一句话说明你的假设；不要反问用户。
+7. 遵守题目中的词数、文体、难度要求；没有要求时，按专升本水平作答。
+
+根据用户给出的 mode 执行：
+
+【单词解释】
+- 给出音标、词性、核心中文义（不要堆砌生僻义）。
+- 给 2—3 个高频搭配或短语，并配英文例句和中文翻译。
+- 做易混词/形近词辨析；说明常见错误。
+- 给记忆提示或构词提示；如适合，补充派生词。
+- 如果这个词在专升本阅读/写作中常考，点明用法。
+
+【作文】
+用户会给一个作文题材或题目。按以下顺序输出：
+1. **审题**：判断题目类型、写作对象、立场，给 3 个要点。
+2. **反例**：写一小段学生常见但存在明显问题的英文（明确标注“反例”），然后逐条指出问题：语法、搭配、逻辑、中式英语等。
+3. **修改示范**：把反例改成正确、自然的英文，并说明修改理由。
+4. **范文**：按题目要求写一篇完整范文（没有词数要求时写 120—150 词），结构清楚，适合专升本考场。
+5. **可复用表达**：给 3—5 个可迁移的句式或替换表达。
+反例和范文必须清楚分开，不要把反例当成范文。
+
+【句子分析】
+- 先抄原句（用户没给原句时，先说明缺少原句，再给一个同类型示例，不要假装分析）。
+- 找主干：主语、谓语、宾语/表语。
+- 拆修饰：从句、非谓语、介词短语、插入语，说明各自修饰谁。
+- 点出核心语法/句型，并给一个可迁移的仿写。
+- 给中文翻译；必要时说明易错点。
+
+【其他】
+- 直接回答语法、用法、翻译、备考方法等问题。
+- 先给结论，再给规则/例子/常见错误。
+- 如果问题适合用对比表格，改用并列要点，避免 Markdown 表格。
+
+最后检查：答案是否直接解决了用户的问题？作文是否同时有“反例”和“修改/范文”？句子分析是否真的拆了主干？单词解释是否有例句？`;
+
+const MATH_CATEGORIES = [&quot;题目讲解&quot;, &quot;错题诊断&quot;, &quot;概念公式&quot;, &quot;其他&quot;];
+const RESOLVE_WORD_PROMPT = `你是英语词汇索引器。用户会输入一个英文单词，或一个中文意思。
+你只返回一个 JSON 对象，不要输出其他文字：
+{&quot;word&quot;:&quot;单个小写英文单词&quot;,&quot;meaning_zh&quot;:&quot;对应的简短中文意思&quot;}
+规则：
+1. word 必须是单个小写英文单词，不能是短语、句子或中文。
+2. 如果中文意思对应多个词，选最常用、最适合专升本基础词汇的一个。
+3. 如果无法确定单一英文单词，返回 {&quot;word&quot;:&quot;&quot;,&quot;meaning_zh&quot;:&quot;&quot;}。`;
+const MATH_TOPICS = [
+  &quot;极限&quot;,
+  &quot;导数与微分&quot;,
+  &quot;积分&quot;,
+  &quot;三角函数&quot;,
+  &quot;矩阵&quot;,
+  &quot;向量与空间几何&quot;,
+  &quot;微分方程&quot;,
+  &quot;无穷级数&quot;,
+  &quot;多元函数&quot;,
+  &quot;概率统计&quot;,
+  &quot;其他&quot;,
+];
+const MATH_TOPIC_ALIASES = {
+  limit: &quot;极限&quot;,
+  limits: &quot;极限&quot;,
+  极限: &quot;极限&quot;,
+  derivative: &quot;导数与微分&quot;,
+  differential: &quot;导数与微分&quot;,
+  differentiation: &quot;导数与微分&quot;,
+  导数: &quot;导数与微分&quot;,
+  微分: &quot;导数与微分&quot;,
+  导数与微分: &quot;导数与微分&quot;,
+  integral: &quot;积分&quot;,
+  integration: &quot;积分&quot;,
+  积分: &quot;积分&quot;,
+  trigonometry: &quot;三角函数&quot;,
+  trigonometric: &quot;三角函数&quot;,
+  三角函数: &quot;三角函数&quot;,
+  matrix: &quot;矩阵&quot;,
+  matrices: &quot;矩阵&quot;,
+  矩阵: &quot;矩阵&quot;,
+  vector: &quot;向量与空间几何&quot;,
+  vectors: &quot;向量与空间几何&quot;,
+  向量: &quot;向量与空间几何&quot;,
+  空间几何: &quot;向量与空间几何&quot;,
+  &quot;differential equation&quot;: &quot;微分方程&quot;,
+  微分方程: &quot;微分方程&quot;,
+  series: &quot;无穷级数&quot;,
+  无穷级数: &quot;无穷级数&quot;,
+  multivariable: &quot;多元函数&quot;,
+  多元函数: &quot;多元函数&quot;,
+  probability: &quot;概率统计&quot;,
+  statistics: &quot;概率统计&quot;,
+  概率: &quot;概率统计&quot;,
+  统计: &quot;概率统计&quot;,
+  other: &quot;其他&quot;,
+  其他: &quot;其他&quot;,
+};
+const MATH_ALIASES = {
+  problem: &quot;题目讲解&quot;,
+  question: &quot;题目讲解&quot;,
+  solution: &quot;题目讲解&quot;,
+  题目: &quot;题目讲解&quot;,
+  讲解: &quot;题目讲解&quot;,
+  错题: &quot;错题诊断&quot;,
+  diagnosis: &quot;错题诊断&quot;,
+  mistake: &quot;错题诊断&quot;,
+  error: &quot;错题诊断&quot;,
+  concept: &quot;概念公式&quot;,
+  formula: &quot;概念公式&quot;,
+  概念: &quot;概念公式&quot;,
+  公式: &quot;概念公式&quot;,
+  other: &quot;其他&quot;,
+  qa: &quot;其他&quot;,
+  问答: &quot;其他&quot;,
+};
+
+const MATH_SYSTEM_PROMPT = `你是一位严谨、耐心的专升本数学老师，具有数学家的严谨和教学经验。你熟悉专升本高等数学、初等数学衔接、常见题型、计算易错点和学生的思维卡点。你的回答对象是准备专升本考试的中文母语大学生。
+
+总要求：
+1. 用中文讲解；数学公式用 LaTeX，行内用 $...$，独立公式用 $$...$$。
+2. 只输出 Markdown 正文，不要输出 HTML、JSON、代码围栏外的系统说明，也不要提到“日志”“API”“系统提示”。
+3. 先判断题目类型和知识点，再给结论/步骤；不要跳步，关键变形说明依据。
+4. 计算题要展示过程并检验；证明题要写清已知、求证、关键推理；应用题要写清变量和条件。
+5. 不确定或题目信息不足时，先明确假设，再按最合理的考试语境作答；不要编造条件。
+6. 不要使用 Markdown 表格；用二级/三级标题、短段落、编号列表组织。
+7. 语言具体、克制，不堆砌套话；最后指出最容易错的一步。
+
+根据用户给出的 mode 执行：
+
+【题目讲解】
+- 先抄出/概括题目，确认要求求什么。
+- 指出知识点、所属章节和可能的方法。
+- 给出完整解题步骤，每一步写清依据（公式、定理、等价变形）。
+- 单独标出最终答案，并做代回/量纲/范围检验。
+- 最后给 1—2 个同类题提醒或易错点。
+
+【错题诊断】
+- 先复述学生的解法或错误答案（如果没有，明确说明按常见错误分析）。
+- 找到第一处真正的错误，说明错因（概念、公式条件、计算、逻辑、审题）。
+- 给出正确解法，并对比错误解法的关键差异。
+- 给一个同类型变式，帮助学生迁移。
+
+【概念公式】
+- 给定义、使用条件、几何/代数意义。
+- 写清公式的常见变形和适用边界。
+- 给一个典型例子和一个反例/易错点。
+- 如果多个概念易混，用并列要点对比，不用表格。
+
+【其他】
+- 回答学习方法、考试策略、概念疑问、计算技巧等问题。
+- 先给结论，再给依据和例子。
+- 需要时给出可执行的练习建议。
+
+最后检查：题目条件是否用全？每一步是否可复核？最终答案是否单独标出？公式是否符合 LaTeX？`;
+
+function corsHeaders(request, env) {
+  const configured = String(env.ALLOWED_ORIGIN || &quot;*&quot;).trim();
+  const requestOrigin = request.headers.get(&quot;Origin&quot;) || &quot;&quot;;
+  let allowOrigin = &quot;*&quot;;
+  if (configured !== &quot;*&quot;) {
+    allowOrigin = configured === requestOrigin ? requestOrigin : configured;
+  }
+  return {
+    &quot;Access-Control-Allow-Origin&quot;: allowOrigin,
+    &quot;Access-Control-Allow-Methods&quot;: &quot;GET, POST, OPTIONS&quot;,
+    &quot;Access-Control-Allow-Headers&quot;: &quot;Content-Type, X-Tutor-Token&quot;,
+    &quot;Access-Control-Max-Age&quot;: &quot;86400&quot;,
+    &quot;Vary&quot;: &quot;Origin&quot;,
+  };
+}
+
+function originAllowed(request, env) {
+  const configured = String(env.ALLOWED_ORIGIN || &quot;*&quot;).trim();
+  if (configured === &quot;*&quot;) return true;
+  return (request.headers.get(&quot;Origin&quot;) || &quot;&quot;) === configured;
+}
+
+function json(data, status, request, env) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      &quot;Content-Type&quot;: &quot;application/json; charset=utf-8&quot;,
+      &quot;Cache-Control&quot;: &quot;no-store&quot;,
+      ...corsHeaders(request, env),
+    },
+  });
+}
+
+function normalizeMode(raw, categories = CATEGORIES, aliases = ALIASES) {
+  const value = String(raw || &quot;&quot;).trim();
+  if (categories.includes(value)) return value;
+  return aliases[value.toLowerCase()] || &quot;&quot;;
+}
+
+function normalizeTopic(raw) {
+  const value = String(raw || &quot;&quot;).trim();
+  if (MATH_TOPICS.includes(value)) return value;
+  return MATH_TOPIC_ALIASES[value.toLowerCase()] || &quot;其他&quot;;
+}
+
+const POLITICS_CATEGORIES = [&quot;概念辨析&quot;, &quot;材料分析&quot;, &quot;时政热点&quot;, &quot;其他&quot;];
+const POLITICS_ALIASES = {
+  concept: &quot;概念辨析&quot;,
+  concepts: &quot;概念辨析&quot;,
+  material: &quot;材料分析&quot;,
+  analysis: &quot;材料分析&quot;,
+  current: &quot;时政热点&quot;,
+  news: &quot;时政热点&quot;,
+  概念: &quot;概念辨析&quot;,
+  材料: &quot;材料分析&quot;,
+  时政: &quot;时政热点&quot;,
+};
+
+const IT_CATEGORIES = [&quot;基础概念&quot;, &quot;操作题&quot;, &quot;编程题&quot;, &quot;其他&quot;];
+const IT_ALIASES = {
+  concept: &quot;基础概念&quot;,
+  concepts: &quot;基础概念&quot;,
+  operation: &quot;操作题&quot;,
+  operations: &quot;操作题&quot;,
+  coding: &quot;编程题&quot;,
+  program: &quot;编程题&quot;,
+  概念: &quot;基础概念&quot;,
+  操作: &quot;操作题&quot;,
+  编程: &quot;编程题&quot;,
+};
+
+const POLITICS_SYSTEM_PROMPT = `你是一位熟悉专升本政治考纲的教师。用中文讲解，先给结论，再解释概念、材料和答题思路；材料分析题要分点作答，语言准确、适合考场。只输出 Markdown 正文，不要输出系统说明或代码围栏。`;
+const IT_SYSTEM_PROMPT = `你是一位熟悉专升本信息技术/计算机基础的教师。用中文讲解，概念题给准确答案，操作题给步骤，编程题给可运行示例和关键解释。只输出 Markdown 正文，不要输出系统说明或代码围栏。`;
+
+function subjectConfig(subject) {
+  if (subject === &quot;math&quot;) {
+    return {
+      subject: &quot;math&quot;,
+      categories: MATH_CATEGORIES,
+      aliases: MATH_ALIASES,
+      topics: MATH_TOPICS,
+      prompt: MATH_SYSTEM_PROMPT,
+      temperature: 0.2,
+      maxTokens: 4000,
+      maxQuestion: 4000,
+      label: &quot;数学&quot;,
+    };
+  }
+  if (subject === &quot;politics&quot;) {
+    return {
+      subject: &quot;politics&quot;,
+      categories: POLITICS_CATEGORIES,
+      aliases: POLITICS_ALIASES,
+      topics: [],
+      prompt: POLITICS_SYSTEM_PROMPT,
+      temperature: 0.3,
+      maxTokens: 3200,
+      maxQuestion: 3000,
+      label: &quot;政治&quot;,
+    };
+  }
+  if (subject === &quot;it&quot;) {
+    return {
+      subject: &quot;it&quot;,
+      categories: IT_CATEGORIES,
+      aliases: IT_ALIASES,
+      topics: [],
+      prompt: IT_SYSTEM_PROMPT,
+      temperature: 0.25,
+      maxTokens: 3600,
+      maxQuestion: 4000,
+      label: &quot;信息技术&quot;,
+    };
+  }
+  return {
+    subject: &quot;english&quot;,
+    categories: CATEGORIES,
+    aliases: ALIASES,
+    topics: [],
+    prompt: SYSTEM_PROMPT,
+    temperature: 0.35,
+    maxTokens: 3200,
+    maxQuestion: 2000,
+    label: &quot;英语&quot;,
+  };
+}
+
+const SUBJECT_IDS = [&quot;english&quot;, &quot;math&quot;, &quot;politics&quot;, &quot;it&quot;];
+
+function normalizeSubject(raw) {
+  const id = String(raw || &quot;english&quot;).trim().toLowerCase();
+  return SUBJECT_IDS.includes(id) ? id : &quot;english&quot;;
+}
+
+function logIndexKey(subject, mode) {
+  if (subject === &quot;english&quot;) return `index:${mode}`;
+  return `index:${subject}:${mode}`;
+}
+
+function retentionHours(env) {
+  const value = Number(env.LOG_RETENTION_HOURS || 24);
+  return Number.isFinite(value) &amp;&amp; value &gt; 0 ? value : 24;
+}
+
+function retentionSeconds(env) {
+  return Math.max(60, Math.round(retentionHours(env) * 3600));
+}
+
+function retentionCutoff(env) {
+  return Date.now() - retentionHours(env) * 3600 * 1000;
+}
+
+function isRecentRecord(item, cutoff) {
+  const created = Date.parse(String((item &amp;&amp; item.created_at) || &quot;&quot;));
+  return !Number.isFinite(created) || created &gt;= cutoff;
+}
+
+function formatShanghai(date) {
+  try {
+    const parts = new Intl.DateTimeFormat(&quot;en-CA&quot;, {
+      timeZone: &quot;Asia/Shanghai&quot;,
+      year: &quot;numeric&quot;,
+      month: &quot;2-digit&quot;,
+      day: &quot;2-digit&quot;,
+      hour: &quot;2-digit&quot;,
+      minute: &quot;2-digit&quot;,
+      second: &quot;2-digit&quot;,
+      hour12: false,
+    }).formatToParts(date);
+    const map = {};
+    for (const part of parts) map[part.type] = part.value;
+    return `${map.year}-${map.month}-${map.day} ${map.hour}:${map.minute}:${map.second}`;
+  } catch (error) {
+    return date.toISOString().slice(0, 19).replace(&quot;T&quot;, &quot; &quot;);
+  }
+}
+
+function constantTimeEqual(a, b) {
+  const left = new TextEncoder().encode(String(a || &quot;&quot;));
+  const right = new TextEncoder().encode(String(b || &quot;&quot;));
+  let diff = left.length ^ right.length;
+  const max = Math.max(left.length, right.length);
+  for (let i = 0; i &lt; max; i += 1) {
+    diff |= (left[i] || 0) ^ (right[i] || 0);
+  }
+  return diff === 0;
+}
+
+function authorized(request, env) {
+  const expected = String(env.TUTOR_ACCESS_TOKEN || &quot;&quot;);
+  if (!expected) return false;
+  const provided = request.headers.get(&quot;X-Tutor-Token&quot;) || &quot;&quot;;
+  return constantTimeEqual(provided, expected);
+}
+
+async function readJsonBody(request) {
+  const text = await request.text();
+  if (text.length &gt; 20000) throw new Error(&quot;请求体过大。&quot;);
+  const data = JSON.parse(text);
+  if (!data || typeof data !== &quot;object&quot; || Array.isArray(data)) {
+    throw new Error(&quot;请求体必须是 JSON 对象。&quot;);
+  }
+  return data;
+}
+
+async function handleTutor(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: &quot;访问口令不正确。&quot; }, 401, request, env);
+  }
+
+  const apiKey = String(env.DEEPSEEK_API_KEY || &quot;&quot;);
+  if (!apiKey) {
+    return json({ ok: false, error: &quot;云端未配置 DEEPSEEK_API_KEY。&quot; }, 500, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: &quot;云端未绑定 TUTOR_KV，无法记录日志。&quot; }, 500, request, env);
+  }
+
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: error.message || &quot;请求体不合法。&quot; }, 400, request, env);
+  }
+
+  const subject = normalizeSubject(payload.subject);
+  const config = subjectConfig(subject);
+  const mode = normalizeMode(payload.mode, config.categories, config.aliases);
+  const topic = subject === &quot;math&quot; ? normalizeTopic(payload.topic) : &quot;&quot;;
+  const question = String(payload.question || &quot;&quot;).trim();
+  if (!mode) {
+    return json({
+      ok: false,
+      error: &quot;未知的答疑分类，请使用：&quot; + config.categories.join(&quot; / &quot;) + &quot;。&quot;,
+    }, 400, request, env);
+  }
+  if (!question) {
+    return json({ ok: false, error: &quot;请输入要问的问题。&quot; }, 400, request, env);
+  }
+  if (question.length &gt; config.maxQuestion) {
+    return json({ ok: false, error: &quot;问题太长了，请控制在 &quot; + config.maxQuestion + &quot; 字以内。&quot; }, 400, request, env);
+  }
+
+  const limit = Math.max(1, Math.min(Number(env.RATE_LIMIT_PER_MINUTE || 10) || 10, 100));
+  const ip = request.headers.get(&quot;CF-Connecting-IP&quot;) || &quot;unknown&quot;;
+  const minute = Math.floor(Date.now() / 60000);
+  const rateKey = `rate:${ip}:${minute}`;
+  try {
+    const used = Number((await env.TUTOR_KV.get(rateKey)) || 0);
+    if (used &gt;= limit) {
+      return json({ ok: false, error: &quot;问得太快了，请等一分钟再试。&quot; }, 429, request, env);
+    }
+    await env.TUTOR_KV.put(rateKey, String(used + 1), { expirationTtl: 120 });
+  } catch (error) {
+    return json({ ok: false, error: &quot;云端限流检查失败，请稍后重试。&quot; }, 500, request, env);
+  }
+
+  const model = String(env.DEEPSEEK_MODEL || &quot;deepseek-chat&quot;);
+  const started = Date.now();
+  const controller = new AbortController();
+  const timer = setTimeout(() =&gt; controller.abort(), 120000);
+  let apiResponse;
+  try {
+    apiResponse = await fetch(&quot;https://api.deepseek.com/chat/completions&quot;, {
+      method: &quot;POST&quot;,
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        &quot;Content-Type&quot;: &quot;application/json&quot;,
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: &quot;system&quot;, content: config.prompt },
+          {
+            role: &quot;user&quot;,
+            content: JSON.stringify({ subject, mode, topic, question }, null, 0),
+          },
+        ],
+        temperature: config.temperature,
+        max_tokens: config.maxTokens,
+      }),
+      signal: controller.signal,
+    });
+  } catch (error) {
+    clearTimeout(timer);
+    const message = error.name === &quot;AbortError&quot;
+      ? &quot;DeepSeek API 请求超时，请稍后重试。&quot;
+      : &quot;无法连接 DeepSeek API：&quot; + (error.message || &quot;网络错误&quot;);
+    return json({ ok: false, error: message }, 502, request, env);
+  }
+  clearTimeout(timer);
+
+  if (!apiResponse.ok) {
+    const detail = (await apiResponse.text()).slice(0, 500);
+    return json(
+      { ok: false, error: `DeepSeek API 返回 HTTP ${apiResponse.status}：${detail}` },
+      502,
+      request,
+      env,
+    );
+  }
+
+  let data;
+  try {
+    data = await apiResponse.json();
+  } catch (error) {
+    return json({ ok: false, error: &quot;DeepSeek API 返回内容无法解析。&quot; }, 502, request, env);
+  }
+
+  const answer = String(data?.choices?.[0]?.message?.content || &quot;&quot;).trim();
+  if (!answer) {
+    return json({ ok: false, error: &quot;AI 没有返回内容，请换一种问法重试。&quot; }, 502, request, env);
+  }
+
+  const now = new Date();
+  const time = formatShanghai(now);
+  const createdAt = now.toISOString();
+  const record = {
+    created_at: createdAt,
+    time,
+    subject,
+    mode,
+    topic,
+    question,
+    answer,
+    model,
+    duration_ms: Date.now() - started,
+    status: &quot;ok&quot;,
+  };
+  const ttl = retentionSeconds(env);
+
+  let logged = true;
+  let warning = &quot;&quot;;
+  try {
+    // 只写分类索引；历史读取也只读索引，避免同一答案在 KV 里存两份。
+    const idxKey = logIndexKey(subject, mode);
+    const existing = await env.TUTOR_KV.get(idxKey, &quot;json&quot;);
+    const cutoff = retentionCutoff(env);
+    const index = (Array.isArray(existing) ? existing : [])
+      .filter((item) =&gt; isRecentRecord(item, cutoff));
+    index.unshift(record);
+    await env.TUTOR_KV.put(idxKey, JSON.stringify(index.slice(0, 50)), { expirationTtl: ttl });
+  } catch (error) {
+    logged = false;
+    warning = &quot;答案已生成，但云端日志索引写入失败。&quot;;
+  }
+
+  return json({
+    ok: true,
+    subject,
+    mode,
+    topic,
+    time,
+    answer,
+    model,
+    logged,
+    ...(warning ? { warning } : {}),
+  }, 200, request, env);
+}
+
+function normalizePendingWord(raw) {
+  const word = String(raw || &quot;&quot;).trim();
+  if (!/^[A-Za-z][A-Za-z&#x27;-]{1,40}$/.test(word)) return &quot;&quot;;
+  return word.toLowerCase();
+}
+
+async function handlePendingWord(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: &quot;访问口令不正确。&quot; }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: &quot;云端未绑定 TUTOR_KV。&quot; }, 500, request, env);
+  }
+
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: error.message || &quot;请求体不合法。&quot; }, 400, request, env);
+  }
+
+  const word = normalizePendingWord(payload.word);
+  const question = String(payload.question || &quot;&quot;).trim().slice(0, 2000);
+  if (!word) {
+    return json({ ok: false, error: &quot;待归档的必须是一个英文单词。&quot; }, 400, request, env);
+  }
+
+  const now = new Date();
+  const createdAt = now.toISOString();
+  const time = formatShanghai(now);
+  const ttl = retentionSeconds(env);
+
+  try {
+    const listed = await env.TUTOR_KV.list({ prefix: PENDING_PREFIX, limit: 1000 });
+    const values = await Promise.all(listed.keys.map((key) =&gt; env.TUTOR_KV.get(key.name, &quot;json&quot;)));
+    const cutoff = retentionCutoff(env);
+    const duplicate = values.find((item) =&gt; item &amp;&amp; isRecentRecord(item, cutoff) &amp;&amp; String(item.word || &quot;&quot;).toLowerCase() === word);
+    if (duplicate) {
+      return json({
+        ok: true,
+        queued: false,
+        already_pending: true,
+        word,
+        message: &quot;这个词已经在云端待归档队列中。&quot;,
+      }, 200, request, env);
+    }
+  } catch (error) {
+    // 列表失败时仍然尝试写入，避免用户问完却丢失待归档词。
+  }
+
+  const key = `${PENDING_PREFIX}${createdAt}:${crypto.randomUUID()}`;
+  const record = {
+    created_at: createdAt,
+    time,
+    word,
+    question,
+    source: &quot;tutor&quot;,
+  };
+  try {
+    await env.TUTOR_KV.put(key, JSON.stringify(record), { expirationTtl: ttl });
+  } catch (error) {
+    return json({ ok: false, error: &quot;云端待归档队列写入失败。&quot; }, 500, request, env);
+  }
+
+  return json({
+    ok: true,
+    queued: true,
+    word,
+    time,
+    message: &quot;已加入云端待归档单词；回本地导出后归档。&quot;,
+  }, 200, request, env);
+}
+
+async function handlePendingWords(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: &quot;访问口令不正确。&quot; }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: &quot;云端未绑定 TUTOR_KV。&quot; }, 500, request, env);
+  }
+
+  try {
+    const listed = await env.TUTOR_KV.list({ prefix: PENDING_PREFIX, limit: 1000 });
+    const keys = listed.keys.map((key) =&gt; key.name);
+    const values = await Promise.all(keys.map((key) =&gt; env.TUTOR_KV.get(key, &quot;json&quot;)));
+    const cutoff = retentionCutoff(env);
+    const entries = values
+      .filter((item) =&gt; item &amp;&amp; item.word)
+      .filter((item) =&gt; isRecentRecord(item, cutoff))
+      .sort((a, b) =&gt; String(b.created_at || b.time || &quot;&quot;).localeCompare(String(a.created_at || a.time || &quot;&quot;)));
+    let cleanupToken = &quot;&quot;;
+    if (entries.length) {
+      cleanupToken = crypto.randomUUID().replace(/-/g, &quot;&quot;);
+      await env.TUTOR_KV.put(
+        `cleanup:${cleanupToken}`,
+        JSON.stringify({ keys, created_at: new Date().toISOString() }),
+        { expirationTtl: 21600 }
+      );
+    }
+    return json({
+      ok: true,
+      total: entries.length,
+      entries,
+      cleanup_token: cleanupToken,
+      cleanup_url: new URL(request.url).origin + &quot;/api/delete-pending-words&quot;
+    }, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: &quot;读取云端待归档单词失败。&quot; }, 500, request, env);
+  }
+}
+
+async function handleDeletePendingWords(request, env) {
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: &quot;云端未绑定 TUTOR_KV。&quot; }, 500, request, env);
+  }
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: &quot;请求 JSON 格式不正确。&quot; }, 400, request, env);
+  }
+  const token = String(payload.cleanup_token || &quot;&quot;).trim();
+  if (!/^[a-f0-9]{32}$/.test(token)) {
+    return json({ ok: false, error: &quot;清理令牌无效。&quot; }, 401, request, env);
+  }
+  const words = new Set(
+    (Array.isArray(payload.words) ? payload.words : [])
+      .map((word) =&gt; String(word || &quot;&quot;).trim().toLowerCase())
+      .filter((word) =&gt; /^[a-z][a-z&#x27;-]{1,40}$/.test(word))
+  );
+  if (!words.size) {
+    return json({ ok: false, error: &quot;没有要清理的单词。&quot; }, 400, request, env);
+  }
+
+  try {
+    const cleanup = await env.TUTOR_KV.get(`cleanup:${token}`, &quot;json&quot;);
+    if (!cleanup || !Array.isArray(cleanup.keys)) {
+      return json({ ok: false, error: &quot;清理令牌已过期，请重新导出待归档 JSON。&quot; }, 410, request, env);
+    }
+    let deleted = 0;
+    for (const key of cleanup.keys) {
+      const item = await env.TUTOR_KV.get(key, &quot;json&quot;);
+      if (!item || !words.has(String(item.word || &quot;&quot;).toLowerCase())) continue;
+      await env.TUTOR_KV.delete(key);
+      deleted += 1;
+    }
+    return json({ ok: true, deleted }, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: &quot;删除云端待归档单词失败。&quot; }, 500, request, env);
+  }
+}
+
+function parseJsonLoose(text) {
+  const raw = String(text || &quot;&quot;).trim()
+    .replace(/^```(?:json)?\s*/i, &quot;&quot;)
+    .replace(/\s*```$/, &quot;&quot;);
+  const start = raw.indexOf(&quot;{&quot;);
+  const end = raw.lastIndexOf(&quot;}&quot;);
+  if (start &lt; 0 || end &lt; start) return null;
+  try {
+    return JSON.parse(raw.slice(start, end + 1));
+  } catch (error) {
+    return null;
+  }
+}
+
+async function resolveWordQuery(query, env) {
+  const apiKey = String(env.DEEPSEEK_API_KEY || &quot;&quot;);
+  if (!apiKey) throw new Error(&quot;云端未配置 DEEPSEEK_API_KEY。&quot;);
+  const model = String(env.DEEPSEEK_MODEL || &quot;deepseek-chat&quot;);
+  const controller = new AbortController();
+  const timer = setTimeout(() =&gt; controller.abort(), 30000);
+  let response;
+  try {
+    response = await fetch(&quot;https://api.deepseek.com/chat/completions&quot;, {
+      method: &quot;POST&quot;,
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        &quot;Content-Type&quot;: &quot;application/json&quot;
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: &quot;system&quot;, content: RESOLVE_WORD_PROMPT },
+          { role: &quot;user&quot;, content: query }
+        ],
+        temperature: 0,
+        max_tokens: 200
+      }),
+      signal: controller.signal
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+  if (!response.ok) {
+    const detail = (await response.text()).slice(0, 300);
+    throw new Error(&quot;词义解析失败：&quot; + detail);
+  }
+  const data = await response.json();
+  const content = data &amp;&amp; data.choices &amp;&amp; data.choices[0]
+    &amp;&amp; data.choices[0].message &amp;&amp; data.choices[0].message.content;
+  return parseJsonLoose(content) || {};
+}
+
+async function enqueuePendingWord(env, word, question, source, meaningZh) {
+  const now = new Date();
+  const createdAt = now.toISOString();
+  const time = formatShanghai(now);
+  const ttl = retentionSeconds(env);
+
+  try {
+    const listed = await env.TUTOR_KV.list({ prefix: PENDING_PREFIX, limit: 1000 });
+    const values = await Promise.all(listed.keys.map((key) =&gt; env.TUTOR_KV.get(key.name, &quot;json&quot;)));
+    const cutoff = retentionCutoff(env);
+    const duplicate = values.find((item) =&gt; item &amp;&amp; isRecentRecord(item, cutoff) &amp;&amp; String(item.word || &quot;&quot;).toLowerCase() === word);
+    if (duplicate) {
+      return {
+        ok: true,
+        queued: false,
+        already_pending: true,
+        word,
+        meaning_zh: duplicate.meaning_zh || meaningZh || &quot;&quot;,
+        message: &quot;这个词已经在云端待归档队列中。&quot;
+      };
+    }
+  } catch (error) {
+    // 列表失败时仍然尝试写入，避免用户输入后丢失。
+  }
+
+  const key = `${PENDING_PREFIX}${createdAt}:${crypto.randomUUID()}`;
+  const record = {
+    created_at: createdAt,
+    time,
+    word,
+    question,
+    meaning_zh: meaningZh || &quot;&quot;,
+    source: source || &quot;generator&quot;
+  };
+  await env.TUTOR_KV.put(key, JSON.stringify(record), { expirationTtl: ttl });
+  return {
+    ok: true,
+    queued: true,
+    already_pending: false,
+    word,
+    meaning_zh: meaningZh || &quot;&quot;,
+    time,
+    message: &quot;已加入云端待归档；回本地导出 JSON 后拖入 导入待归档单词.bat。&quot;
+  };
+}
+
+async function handleQueueWord(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: &quot;访问口令不正确。&quot; }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: &quot;云端未绑定 TUTOR_KV。&quot; }, 500, request, env);
+  }
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: error.message || &quot;请求体不合法。&quot; }, 400, request, env);
+  }
+
+  const query = String(payload.query || payload.word || &quot;&quot;).trim().slice(0, 80);
+  if (!query) {
+    return json({ ok: false, error: &quot;请输入一个英文单词或中文意思。&quot; }, 400, request, env);
+  }
+
+  const english = /^[A-Za-z][A-Za-z&#x27;-]{1,40}$/;
+  const hasHan = /[\u4e00-\u9fff]/.test(query);
+  if (!english.test(query) &amp;&amp; !hasHan) {
+    return json({ ok: false, error: &quot;生成器只接受一个英文单词，或一个中文意思。&quot; }, 400, request, env);
+  }
+  if (hasHan &amp;&amp; (query.length &gt; 40 || /[\n\r?？!！。]/.test(query))) {
+    return json({ ok: false, error: &quot;中文只输入简短意思，不要输入完整句子或问句。&quot; }, 400, request, env);
+  }
+
+  let word = &quot;&quot;;
+  let meaningZh = &quot;&quot;;
+  if (english.test(query)) {
+    word = query.toLowerCase();
+  } else {
+    try {
+      const resolved = await resolveWordQuery(query, env);
+      word = String(resolved.word || &quot;&quot;).trim().toLowerCase();
+      meaningZh = String(resolved.meaning_zh || &quot;&quot;).trim();
+    } catch (error) {
+      return json({ ok: false, error: error.message || &quot;词义解析失败。&quot; }, 502, request, env);
+    }
+    if (!english.test(word)) {
+      return json({ ok: false, error: &quot;没有找到对应的单一英文单词，请换一个中文意思。&quot; }, 400, request, env);
+    }
+  }
+
+  try {
+    const result = await enqueuePendingWord(env, word, query, &quot;generator&quot;, meaningZh);
+    return json(result, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: &quot;写入云端待归档失败。&quot; }, 500, request, env);
+  }
+}
+
+async function handleLog(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: &quot;访问口令不正确。&quot; }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: &quot;云端未绑定 TUTOR_KV。&quot; }, 500, request, env);
+  }
+
+  const url = new URL(request.url);
+  const subject = normalizeSubject(url.searchParams.get(&quot;subject&quot;));
+  const config = subjectConfig(subject);
+  const rawCategory = url.searchParams.get(&quot;category&quot;) || &quot;all&quot;;
+  const category = rawCategory === &quot;all&quot;
+    ? &quot;all&quot;
+    : normalizeMode(rawCategory, config.categories, config.aliases);
+  if (!category) {
+    return json({ ok: false, error: &quot;未知的答疑分类。&quot; }, 400, request, env);
+  }
+  const rawTopic = url.searchParams.get(&quot;topic&quot;) || &quot;all&quot;;
+  const topic = subject === &quot;math&quot; &amp;&amp; rawTopic !== &quot;all&quot;
+    ? normalizeTopic(rawTopic)
+    : &quot;all&quot;;
+  let limit = Number(url.searchParams.get(&quot;limit&quot;) || 20);
+  if (!Number.isFinite(limit)) limit = 20;
+  limit = Math.max(1, Math.min(Math.floor(limit), 50));
+
+  const categories = category === &quot;all&quot; ? config.categories : [category];
+  let entries = [];
+  let total = 0;
+  try {
+    const indexes = await Promise.all(
+      categories.map((name) =&gt; env.TUTOR_KV.get(
+        logIndexKey(subject, name),
+        &quot;json&quot;,
+      )),
+    );
+    const cutoff = retentionCutoff(env);
+    for (const index of indexes) {
+      if (Array.isArray(index)) entries.push(...index);
+    }
+    entries = entries
+      .filter((item) =&gt; item &amp;&amp; typeof item === &quot;object&quot; &amp;&amp; item.answer)
+      .filter((item) =&gt; isRecentRecord(item, cutoff))
+      .filter((item) =&gt; topic === &quot;all&quot; || normalizeTopic(item.topic) === topic)
+      .sort((a, b) =&gt; String(b.created_at || b.time || &quot;&quot;).localeCompare(String(a.created_at || a.time || &quot;&quot;)));
+    total = entries.length;
+    entries = entries.slice(0, limit);
+  } catch (error) {
+    return json({ ok: false, error: &quot;读取云端日志失败，请稍后重试。&quot; }, 500, request, env);
+  }
+
+  let cleanupToken = &quot;&quot;;
+  if (url.searchParams.get(&quot;export&quot;) === &quot;1&quot; &amp;&amp; entries.length) {
+    cleanupToken = crypto.randomUUID().replace(/-/g, &quot;&quot;);
+    const refs = entries.map((item) =&gt; ({
+      mode: normalizeMode(item.mode, config.categories, config.aliases),
+      time: String(item.time || &quot;&quot;),
+      question: String(item.question || &quot;&quot;).slice(0, 500)
+    }));
+    try {
+      await env.TUTOR_KV.put(
+        `cleanup-log:${cleanupToken}`,
+        JSON.stringify({ subject, entries: refs }),
+        { expirationTtl: 21600 }
+      );
+    } catch (error) {
+      cleanupToken = &quot;&quot;;
+    }
+  }
+
+  return json({
+    ok: true,
+    subject,
+    category,
+    topic,
+    total,
+    entries,
+    cleanup_token: cleanupToken,
+    cleanup_url: new URL(request.url).origin + &quot;/api/delete-tutor-logs&quot;
+  }, 200, request, env);
+}
+
+async function handleDeleteTutorLogs(request, env) {
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: &quot;云端未绑定 TUTOR_KV。&quot; }, 500, request, env);
+  }
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: &quot;请求 JSON 格式不正确。&quot; }, 400, request, env);
+  }
+  const token = String(payload.cleanup_token || &quot;&quot;).trim();
+  if (!/^[a-f0-9]{32}$/.test(token)) {
+    return json({ ok: false, error: &quot;清理令牌无效。&quot; }, 401, request, env);
+  }
+  const cleanup = await env.TUTOR_KV.get(`cleanup-log:${token}`, &quot;json&quot;);
+  if (!cleanup || !Array.isArray(cleanup.entries)) {
+    return json({ ok: false, error: &quot;清理令牌已过期，请重新导出答疑记录。&quot; }, 410, request, env);
+  }
+
+  const subject = normalizeSubject(cleanup.subject);
+  const config = subjectConfig(subject);
+  const records = Array.isArray(payload.records) ? payload.records : [];
+  const wanted = new Map();
+  for (const record of records) {
+    if (!record || typeof record !== &quot;object&quot;) continue;
+    const mode = normalizeMode(record.mode, config.categories, config.aliases);
+    const time = String(record.time || &quot;&quot;).trim();
+    const question = String(record.question || &quot;&quot;).trim().slice(0, 500);
+    if (!mode || !time || !question) continue;
+    if (!wanted.has(mode)) wanted.set(mode, []);
+    wanted.get(mode).push({ time, question });
+  }
+  if (!wanted.size) {
+    return json({ ok: false, error: &quot;没有要清理的答疑记录。&quot; }, 400, request, env);
+  }
+
+  let deleted = 0;
+  try {
+    for (const [mode, refs] of wanted.entries()) {
+      const key = logIndexKey(subject, mode);
+      const existing = await env.TUTOR_KV.get(key, &quot;json&quot;);
+      if (!Array.isArray(existing) || !existing.length) continue;
+      const kept = existing.filter((item) =&gt; {
+        if (!item || typeof item !== &quot;object&quot;) return true;
+        const itemMode = normalizeMode(item.mode, config.categories, config.aliases);
+        const itemTime = String(item.time || &quot;&quot;).trim();
+        const itemQuestion = String(item.question || &quot;&quot;).trim().slice(0, 500);
+        return !(itemMode === mode &amp;&amp; refs.some((ref) =&gt; (
+          ref.time === itemTime &amp;&amp; ref.question === itemQuestion
+        )));
+      });
+      if (kept.length !== existing.length) {
+        deleted += existing.length - kept.length;
+        await env.TUTOR_KV.put(key, JSON.stringify(kept), { expirationTtl: retentionSeconds(env) });
+      }
+    }
+    return json({ ok: true, deleted }, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: &quot;删除云端答疑记录失败。&quot; }, 500, request, env);
+  }
+}
+
+async function handleLogDelete(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: &quot;访问口令不正确。&quot; }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: &quot;云端未绑定 TUTOR_KV。&quot; }, 500, request, env);
+  }
+
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: error.message || &quot;请求体不合法。&quot; }, 400, request, env);
+  }
+
+  const subject = normalizeSubject(payload.subject);
+  const config = subjectConfig(subject);
+  const mode = normalizeMode(payload.mode, config.categories, config.aliases);
+  const createdAt = String(payload.created_at || &quot;&quot;).trim();
+  const time = String(payload.time || &quot;&quot;).trim();
+  if (!mode) {
+    return json({ ok: false, error: &quot;未知的答疑分类。&quot; }, 400, request, env);
+  }
+  if (!createdAt &amp;&amp; !time) {
+    return json({ ok: false, error: &quot;缺少要删除的记录时间。&quot; }, 400, request, env);
+  }
+
+  const key = logIndexKey(subject, mode);
+  try {
+    const existing = await env.TUTOR_KV.get(key, &quot;json&quot;);
+    if (!Array.isArray(existing) || !existing.length) {
+      return json({ ok: true, deleted: 0 }, 200, request, env);
+    }
+    const kept = existing.filter((item) =&gt; {
+      if (!item || typeof item !== &quot;object&quot;) return true;
+      if (createdAt &amp;&amp; String(item.created_at || &quot;&quot;) === createdAt) return false;
+      if (time &amp;&amp; String(item.time || &quot;&quot;) === time) return false;
+      return true;
+    });
+    const deleted = existing.length - kept.length;
+    if (deleted &gt; 0) {
+      await env.TUTOR_KV.put(key, JSON.stringify(kept), { expirationTtl: retentionSeconds(env) });
+    }
+    return json({ ok: true, deleted }, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: &quot;删除云端答疑记录失败。&quot; }, 500, request, env);
+  }
+}
+
+async function handleRequest(request, env) {
+  const url = new URL(request.url);
+  const path = url.pathname.replace(/\/+$/, &quot;&quot;) || &quot;/&quot;;
+
+  if (request.method === &quot;OPTIONS&quot;) {
+    return new Response(null, { status: 204, headers: corsHeaders(request, env) });
+  }
+
+  if (!originAllowed(request, env)) {
+    return json({ ok: false, error: &quot;来源不在允许列表中。&quot; }, 403, request, env);
+  }
+
+  if (path === &quot;/api/health&quot; &amp;&amp; request.method === &quot;GET&quot;) {
+    return json({
+      ok: true,
+      service: &quot;english-tutor&quot;,
+      model: String(env.DEEPSEEK_MODEL || &quot;deepseek-chat&quot;),
+      has_key: Boolean(env.DEEPSEEK_API_KEY),
+      kv_bound: Boolean(env.TUTOR_KV),
+      auth_required: true,
+      time: formatShanghai(new Date()),
+    }, 200, request, env);
+  }
+
+  if (path === &quot;/api/tutor&quot; &amp;&amp; request.method === &quot;POST&quot;) {
+    return handleTutor(request, env);
+  }
+
+  if (path === &quot;/api/pending-word&quot; &amp;&amp; request.method === &quot;POST&quot;) {
+    return handlePendingWord(request, env);
+  }
+
+  if (path === &quot;/api/queue-word&quot; &amp;&amp; request.method === &quot;POST&quot;) {
+    return handleQueueWord(request, env);
+  }
+
+  if (path === &quot;/api/pending-words&quot; &amp;&amp; request.method === &quot;GET&quot;) {
+    return handlePendingWords(request, env);
+  }
+
+  if (path === &quot;/api/delete-pending-words&quot; &amp;&amp; request.method === &quot;POST&quot;) {
+    return handleDeletePendingWords(request, env);
+  }
+
+  if (path === &quot;/api/delete-tutor-logs&quot; &amp;&amp; request.method === &quot;POST&quot;) {
+    return handleDeleteTutorLogs(request, env);
+  }
+
+  if (path === &quot;/api/tutor-log&quot; &amp;&amp; request.method === &quot;GET&quot;) {
+    return handleLog(request, env);
+  }
+
+  if (path === &quot;/api/tutor-log-delete&quot; &amp;&amp; request.method === &quot;POST&quot;) {
+    return handleLogDelete(request, env);
+  }
+
+  return json({ ok: false, error: &quot;未知接口。&quot; }, 404, request, env);
+}
+
+export default {
+  async fetch(request, env) {
+    try {
+      return await handleRequest(request, env);
+    } catch (error) {
+      console.error(&quot;worker error:&quot;, error &amp;&amp; error.message ? error.message : error);
+      return json({ ok: false, error: &quot;云端服务内部错误。&quot; }, 500, request, env);
+    }
+  },
+};
+</code></pre>
+
+<h2>三、腾讯云 SCF 备用线路</h2>
+<ol>
+    <li>腾讯云 SCF → 创建函数，运行环境选 Node.js 18+，类型选 Web 函数 / Function URL。</li>
+    <li>函数环境变量：
+        <ul>
+            <li><code>UPSTREAM_BASE</code> = 你的 Cloudflare Worker 地址，例如 <code>https://xxx.workers.dev</code></li>
+            <li><code>UPSTREAM_TOKEN</code> = Worker 的 <code>TUTOR_ACCESS_TOKEN</code></li>
+            <li><code>PROXY_TOKEN</code> = 给本地同步/页面使用的 SCF 访问口令</li>
+            <li><code>ALLOWED_ORIGIN</code> = <code>*</code>（测试）或你的页面来源</li>
+        </ul>
+    </li>
+    <li>把下面的 <code>index.js</code> 粘贴到函数代码，部署并启用 Function URL。</li>
+    <li>访问 <code>https://你的SCF函数URL/api/health</code>，应返回和 Worker 类似的 JSON。</li>
+</ol>
+
+<div class="callout">
+    <strong>两个口令不要填反</strong>
+    Cloudflare 主线路使用 Worker 的 <code>TUTOR_ACCESS_TOKEN</code>；腾讯云备用线路使用 SCF 的 <code>PROXY_TOKEN</code>。
+    填反会返回“访问口令不正确”。
+</div>
+
+<div class="codehead">
+    <h3>腾讯云 SCF index.js</h3>
+    <button type="button" class="copy-btn" data-copy="scfCode">复制全部代码</button>
+</div>
+<pre><code id="scfCode">/**
+ * 腾讯云 SCF：国内入口 → 现有 Cloudflare Worker 反向代理
+ *
+ * 环境变量：
+ *   UPSTREAM_BASE   https://english-tutor.goldenfloweranddust.workers.dev
+ *   UPSTREAM_TOKEN  Cloudflare Worker 的 TUTOR_ACCESS_TOKEN
+ *   PROXY_TOKEN     给国内页面使用的新访问口令
+ *   ALLOWED_ORIGIN  https://goldenfloweranddust.github.io（或 *）
+ *
+ * API 网关路径：/api/health、/api/tutor、/api/tutor-log、
+ *               /api/pending-word、/api/pending-words
+ *
+ * 运行环境：Node.js 18+（使用内置 fetch）
+ */
+
+const crypto = require(&quot;crypto&quot;);
+
+function env(name, fallback = &quot;&quot;) {
+  const value = process.env[name];
+  return value === undefined || value === null ? fallback : String(value);
+}
+
+function normalizeHeaders(raw) {
+  const out = {};
+  if (!raw || typeof raw !== &quot;object&quot;) return out;
+  for (const key of Object.keys(raw)) {
+    out[String(key).toLowerCase()] = String(raw[key] ?? &quot;&quot;);
+  }
+  return out;
+}
+
+function allowedOrigin(requestOrigin) {
+  const configured = env(&quot;ALLOWED_ORIGIN&quot;, &quot;*&quot;).trim();
+  if (!configured || configured === &quot;*&quot;) return &quot;*&quot;;
+  if (requestOrigin === configured) return requestOrigin;
+  return configured;
+}
+
+function corsHeaders(origin) {
+  return {
+    &quot;Access-Control-Allow-Origin&quot;: allowedOrigin(origin),
+    &quot;Access-Control-Allow-Methods&quot;: &quot;GET, POST, OPTIONS&quot;,
+    &quot;Access-Control-Allow-Headers&quot;: &quot;Content-Type, X-Tutor-Token&quot;,
+    &quot;Access-Control-Max-Age&quot;: &quot;86400&quot;,
+    Vary: &quot;Origin&quot;,
+  };
+}
+
+function response(statusCode, body, headers = {}) {
+  return {
+    statusCode,
+    headers: {
+      &quot;Cache-Control&quot;: &quot;no-store&quot;,
+      ...headers,
+    },
+    body: typeof body === &quot;string&quot; ? body : JSON.stringify(body),
+  };
+}
+
+function tokenMatches(provided, expected) {
+  if (!provided || !expected) return false;
+  const a = Buffer.from(String(provided));
+  const b = Buffer.from(String(expected));
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
+}
+
+function normalizePath(rawPath) {
+  let path = String(rawPath || &quot;/&quot;);
+  const idx = path.indexOf(&quot;/api/&quot;);
+  if (idx &gt;= 0) {
+    path = path.slice(idx);
+  } else if (path === &quot;/health&quot;) {
+    path = &quot;/api/health&quot;;
+  }
+  path = path.split(&quot;?&quot;)[0].replace(/\/+$/, &quot;&quot;);
+  return path;
+}
+
+function queryString(event, rawPath) {
+  const raw = event.queryString;
+  if (typeof raw === &quot;string&quot; &amp;&amp; raw) {
+    return raw.replace(/^\?/, &quot;&quot;);
+  }
+  if (raw &amp;&amp; typeof raw === &quot;object&quot;) {
+    const search = new URLSearchParams();
+    for (const key of Object.keys(raw)) {
+      if (raw[key] !== undefined &amp;&amp; raw[key] !== null) {
+        search.append(key, String(raw[key]));
+      }
+    }
+    const text = search.toString();
+    if (text) return text;
+  }
+  const params = event.queryStringParameters;
+  if (params &amp;&amp; typeof params === &quot;object&quot;) {
+    const search = new URLSearchParams();
+    for (const key of Object.keys(params)) {
+      if (params[key] !== undefined &amp;&amp; params[key] !== null) {
+        search.append(key, String(params[key]));
+      }
+    }
+    const text = search.toString();
+    if (text) return text;
+  }
+  const at = String(rawPath || &quot;&quot;).indexOf(&quot;?&quot;);
+  return at &gt;= 0 ? String(rawPath).slice(at + 1) : &quot;&quot;;
+}
+
+function readBody(event) {
+  if (event.body === undefined || event.body === null) return undefined;
+  if (event.isBase64Encoded) {
+    return Buffer.from(String(event.body), &quot;base64&quot;).toString(&quot;utf8&quot;);
+  }
+  return String(event.body);
+}
+
+function originRejected(origin) {
+  const configured = env(&quot;ALLOWED_ORIGIN&quot;, &quot;*&quot;).trim();
+  if (!configured || configured === &quot;*&quot;) return false;
+  // 浏览器请求会带 Origin；本地 curl 健康检查没有 Origin，放行。
+  if (!origin) return false;
+  return origin !== configured;
+}
+
+async function handleRequest(event) {
+  const method = String(
+    event.httpMethod || event.requestContext?.httpMethod || &quot;GET&quot;
+  ).toUpperCase();
+  const headers = normalizeHeaders(event.headers);
+  const origin = headers.origin || &quot;&quot;;
+  const cors = corsHeaders(origin);
+
+  if (method === &quot;OPTIONS&quot;) {
+    return { statusCode: 204, headers: cors, body: &quot;&quot; };
+  }
+
+  if (originRejected(origin)) {
+    return response(403, { ok: false, error: &quot;来源不在允许列表中。&quot; }, cors);
+  }
+
+  const path = normalizePath(event.path || event.requestContext?.path || &quot;/&quot;);
+  if (!path.startsWith(&quot;/api/&quot;)) {
+    return response(404, { ok: false, error: &quot;未知接口。&quot; }, cors);
+  }
+
+  const proxyToken = env(&quot;PROXY_TOKEN&quot;);
+  if (!proxyToken) {
+    return response(500, { ok: false, error: &quot;SCF 未配置 PROXY_TOKEN。&quot; }, cors);
+  }
+
+  if (path !== &quot;/api/health&quot;) {
+    if (!tokenMatches(headers[&quot;x-tutor-token&quot;], proxyToken)) {
+      return response(401, { ok: false, error: &quot;访问口令不正确。&quot; }, cors);
+    }
+  }
+
+  const upstreamBase = env(&quot;UPSTREAM_BASE&quot;).replace(/\/+$/, &quot;&quot;);
+  const upstreamToken = env(&quot;UPSTREAM_TOKEN&quot;);
+  if (!upstreamBase || !upstreamToken) {
+    return response(
+      500,
+      { ok: false, error: &quot;SCF 未配置 UPSTREAM_BASE / UPSTREAM_TOKEN。&quot; },
+      cors
+    );
+  }
+
+  const qs = queryString(event, event.path || event.requestContext?.path || &quot;&quot;);
+  const upstreamUrl = upstreamBase + path + (qs ? `?${qs}` : &quot;&quot;);
+  const body = readBody(event);
+  const controller = new AbortController();
+  const timer = setTimeout(() =&gt; controller.abort(), 115000);
+  let upstream;
+  try {
+    upstream = await fetch(upstreamUrl, {
+      method,
+      headers: {
+        &quot;Content-Type&quot;: headers[&quot;content-type&quot;] || &quot;application/json&quot;,
+        Accept: &quot;application/json&quot;,
+        &quot;X-Tutor-Token&quot;: upstreamToken,
+      },
+      body: method === &quot;GET&quot; || method === &quot;HEAD&quot; ? undefined : body,
+      signal: controller.signal,
+    });
+  } catch (error) {
+    clearTimeout(timer);
+    const message =
+      error &amp;&amp; error.name === &quot;AbortError&quot;
+        ? &quot;上游 Cloudflare Worker 请求超时。&quot;
+        : &quot;无法连接上游 Cloudflare Worker：&quot; + (error.message || &quot;网络错误&quot;);
+    return response(502, { ok: false, error: message }, cors);
+  }
+  clearTimeout(timer);
+
+  const text = await upstream.text();
+  return response(upstream.status, text, {
+    ...cors,
+  });
+}
+
+exports.main_handler = async (event) =&gt; {
+  try {
+    return await handleRequest(event || {});
+  } catch (error) {
+    const headers = normalizeHeaders(event &amp;&amp; event.headers);
+    const origin = headers.origin || &quot;&quot;;
+    const message = error &amp;&amp; error.message ? error.message : String(error);
+    console.error(&quot;scf proxy error:&quot;, error);
+    return response(
+      500,
+      { ok: false, error: &quot;SCF 内部错误：&quot; + message },
+      corsHeaders(origin)
+    );
+  }
+};
+</code></pre>
+
+<h2>四、本地配置与第一次同步</h2>
+<ol>
+    <li>确认 <code>共享配置/科目配置.json</code>：英语、数学的 <code>export_root</code> 指向各自科目下的 <code>导出记录</code> 文件夹。日期子目录由程序自动创建。</li>
+    <li>双击 <code>专升本备考/同步全部科目.bat</code>，进入菜单。</li>
+    <li>国际网络可直接用 Cloudflare；国内建议选 <code>6</code>，把腾讯云 SCF 设为主线路。也可以在 <code>4</code> / <code>5</code> 分别填写主线路和备用线路。口令会明文显示，方便核对。</li>
+    <li>选 <code>1</code> 立即同步全部科目。同步结束会打印每个科目的成功/0 条/失败状态和实际线路。</li>
+    <li>英语待归档单词会自动调用 <code>archive_word</code> 写入 HTML、<code>data.json</code>，复习清单随之更新。</li>
+</ol>
+
+<div class="callout green">
+    <strong>本地目录示例</strong>
+    <code>备考专升本英语/导出记录/2026-10-31/英语答疑记录-....json</code><br>
+    <code>备考专升本数学/导出记录/2026-10-31/数学答疑记录-....json</code><br>
+    不需要浏览器下载，不需要手动移动文件。
+</div>
+
+<h2>五、同步规则</h2>
+<table>
+    <thead><tr><th>项目</th><th>规则</th></tr></thead>
+    <tbody>
+        <tr><td>云端保留</td><td>默认 24 小时。同步只读取、不立即删除云端记录。</td></tr>
+        <tr><td>本地保留</td><td>导出的 JSON、本地 JSONL、HTML、<code>data.json</code> 永久保留。</td></tr>
+        <tr><td>重复记录</td><td>按时间/分类/问题去重，重复同步不会重复写入。</td></tr>
+        <tr><td>失败处理</td><td>某个科目失败只影响该科目；本地文件不会删除，云端记录继续保留。</td></tr>
+        <tr><td>多设备</td><td>24 小时内 PC / 移动端都能从云端读取；超过 24 小时以本地/GitHub 备份为准。</td></tr>
+    </tbody>
+</table>
+
+<h2>六、安全</h2>
+<div class="callout">
+    <strong>不要上传这些内容</strong>
+    <code>共享配置/云端同步.json</code>、<code>共享配置/API.txt</code>、<code>共享配置/同步状态.json</code>、各科 <code>导出记录/</code>、问答日志、<code>词素工具/backups/</code>。
+    这些文件已加入 <code>.gitignore</code> 和本机 <code>.git/info/exclude</code>。
+    本目录下的 <code>部署/</code> 截图文件夹也已拉黑，不会上传 GitHub。
+</div>
+<p class="small">访问口令只通过 <code>X-Tutor-Token</code> 请求头发送给你自己的 Worker / SCF，不写入问答记录，不写入 README。</p>
+
+<h2>七、常见问题</h2>
+<h3>英语同步 0 条，数学有记录</h3>
+<p>英语一直在本地模式，本地答疑不会写入 Cloudflare KV。要到云端必须在英语答疑页把连接切到“云端”再提问；否则同步显示 0 条是正常的，不是失败。</p>
+<h3>主线路失败</h3>
+<p>同步会打印线路名称并自动尝试备用线路。两个都失败时不会导入一半，也不会删除云端；检查地址、口令、Worker/SCF 部署和网络。</p>
+<h3>同步后没有新文件</h3>
+<p>如果云端没有新记录，程序会提示“云端 0 条”或“无变化”，不会生成重复 JSON。查看同步菜单第 2 项可以看到上次结果。</p>
+<h3>昨天记录没有拉下来</h3>
+<p>新版 Worker 只返回最近 <code>LOG_RETENTION_HOURS</code>（默认 24 小时）内的记录。需要更早记录时，临时调大 Worker 变量并重新部署，同步后再调回 24。</p>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(function (button) {
+    button.addEventListener('click', async function () {
+        var target = document.getElementById(button.dataset.copy);
+        if (!target) return;
+        var text = target.textContent;
+        try {
+            await navigator.clipboard.writeText(text);
+            button.textContent = '已复制';
+        } catch (error) {
+            var range = document.createRange();
+            range.selectNodeContents(target);
+            var selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            button.textContent = '已选中，按 Ctrl+C';
+        }
+        setTimeout(function () { button.textContent = '复制全部代码'; }, 1800);
+    });
+});
+</script>
+</main>
+</body>
+</html>
