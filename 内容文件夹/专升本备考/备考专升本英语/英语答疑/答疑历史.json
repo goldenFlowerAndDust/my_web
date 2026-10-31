@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-01T01:03:16",
+  "generated_at": "2026-11-01T02:27:51",
   "source": "local-jsonl",
   "subject": "english",
-  "count": 3,
+  "count": 7,
   "entries": [
     {
       "time": "2026-10-31 23:45:56",
@@ -31,6 +31,46 @@
       "answer": "**结论：** mean 是专升本高频多义词，核心有三条线：①动词“意思是、意味着”；②动词“打算、有意”；③形容词“吝啬的、刻薄的”。考试最常考的是 **mean to do / mean doing** 的区别，以及 **means（手段）单复数同形**。\n\n## 一、读音与词性\n\n- 音标：/miːn/\n- 词性：动词（v.）、形容词（adj.）、名词（n.，多见于 means）\n\n## 二、核心中文义（按考频排序）\n\n1. **v. 意思是；表示……的意思**\n   - What does this word mean? 这个词是什么意思？\n2. **v. 意味着；结果是**\n   - Missing the train means waiting for another hour. 错过这班火车意味着再等一小时。\n3. **v. 打算；有意（做某事）**\n   - I didn't mean to hurt you. 我不是有意伤害你。\n4. **adj. 吝啬的；刻薄的**\n   - Don't be so mean to your classmates. 别对同学这么刻薄。\n5. **n. means 手段；方法（单复数同形）**\n   - a means of transport 一种交通方式\n\n## 三、高频搭配与例句\n\n- **mean to do sth.** 打算做某事\n  - I mean to finish the report tonight. 我打算今晚完成报告。\n- **mean doing sth.** 意味着做某事\n  - Being a teacher means being patient. 当老师意味着要有耐心。\n- **be meant to do sth.** 本意是；应该做\n  - This book is meant to help beginners. 这本书旨在帮助初学者。\n- **by means of** 借助；通过\n  - He solved the problem by means of a simple formula. 他借助一个简单公式解决了问题。\n- **by no means** 绝不\n  - This is by no means an easy task. 这绝不是件容易的事。\n\n## 四、易混词/形近词辨析\n\n- **mean to do vs. mean doing**：这是最常考的点。`mean to do` 表示“打算做”（主语是人，主观意图）；`mean doing` 表示“意味着”（主语常是事物或行为）。对比：\n  - I meant to call you, but I forgot. 我本打算给你打电话，但忘了。\n  - This decision means changing our plan. 这个决定意味着要改变计划。\n- **means / mean / meaning**：`means` 是“手段、方法”，单复数同形，谓语看语境；`mean` 是动词或形容词；`meaning` 是名词“意思、意义”。\n  - Every means has been tried. 各种方法都试过了。（means 作主语，这里视为单数概念）\n- **means / medium**：`means` 偏“手段、方式”；`medium` 偏“媒介、媒体”，复数 media。\n- **mean / intend**：两者都可表“打算”，但 `intend` 更正式，`mean` 更口语；考试中 `mean to do` 更常见。\n\n## 五、常见错误\n\n- 错：I didn't mean hurting you. \n  - 对：I didn't mean to hurt you.（表“有意”用 to do）\n- 错：This means to change our plan.\n  - 对：This means changing our plan.（表“意味着”用 doing）\n- 错：By no mean should you give up.\n  - 对：By no means should you give up.（固定短语用 means）\n\n## 六、记忆提示与派生词\n\n- 记忆：把 mean 想成“意思—意图—手段”三兄弟：说“意思”用 mean，说“打算”用 mean to do，说“手段”用 means。\n- 派生：meaning（n. 意思）、meaningful（adj. 有意义的）、meaningless（adj. 无意义的）。\n\n## 七、专升本阅读/写作中的用法\n\n- 阅读中常见 `This means that...`（这意味着……），用来引出结论；也常见 `by no means` 表强调否定。\n- 写作中可用 `mean to do` 表目的，用 `be meant to` 表“旨在”，比 `want to` 更正式。例如：\n  - This policy is meant to reduce students' pressure. 这项政策旨在减轻学生压力。",
       "model": "deepseek-chat",
       "duration_ms": 6947,
+      "status": "ok",
+      "source": "imported"
+    },
+    {
+      "time": "2026-10-30 14:33:22",
+      "mode": "单词解释",
+      "question": "解释 contrast 的核心词义、常见搭配和易混词。",
+      "answer": "**结论**：contrast 的核心意思是“对比、对照”，既可作名词也可作动词；专升本最常考的是 **in contrast / in contrast to / by contrast** 这组搭配，以及它和 compare 的辨析。\n\n## 一、读音与词性\n\n- 音标：名词读 /ˈkɒntrɑːst/（英），/ˈkɑːntræst/（美），**重音在第一音节**；动词读 /kənˈtrɑːst/（英），/kənˈtræst/（美），**重音在第二音节**。这一点常被忽略，但听力中会考。\n- 词性：名词（可数/不可数）、动词（及物/不及物）。\n\n## 二、核心中文义\n\n- 名词：对比、对照；明显的差异、反差。\n- 动词：对比、对照（把两者放在一起看差异）；形成反差。\n\n不要记成“比较”，它的重点在**差异**，不是“相似”。\n\n## 三、高频搭配与例句\n\n- **in contrast (to/with sth)**：相比之下；与……形成对比\n  - *In contrast to his brother, Tom is very outgoing.*\n  - 译：和他哥哥相比，汤姆非常外向。\n- **by contrast**：相比之下（常放句首，后接逗号）\n  - *The north is cold and dry; by contrast, the south is warm and wet.*\n  - 译：北方寒冷干燥；相比之下，南方温暖潮湿。\n- **contrast A with B / contrast A and B**：把 A 与 B 对比\n  - *The essay contrasts city life with country life.*\n  - 译：这篇文章把城市生活和乡村生活做了对比。\n- **form/make a sharp contrast with**：与……形成鲜明对比\n  - *Her calm voice formed a sharp contrast with the noisy room.*\n  - 译：她平静的声音和嘈杂的房间形成了鲜明对比。\n\n## 四、易混词辨析\n\n- **contrast vs. compare**\n  - compare 强调“比较”，既可比相同也可比不同，常用 **compare A with B**（比较差异）、**compare A to B**（比作）。\n  - contrast 只强调“差异、反差”。\n  - 例：*Compare these two answers and you will find some similarities.*（找相同点，用 compare）\n  - 例：*The writer contrasts the two answers to show their differences.*（突出不同，用 contrast）\n- **contrast vs. comparison**\n  - **in comparison with** 是“与……相比”，中性；**in contrast to** 强调“截然不同”。\n  - 写作中不要混用：*In contrast with* 不如 *in contrast to* 常见、规范。\n- **形近词：contract**（合同；收缩）、**contrary**（相反的）。注意拼写：contrast 中间是 **a**，contract 中间也是 a，但词尾不同。\n\n## 五、常见错误\n\n- 错：*In contrast of my hometown...* → 对：**In contrast to/with my hometown...**\n- 错：*Contrast with his sister, he is quiet.* → 对：**In contrast to his sister, he is quiet.**（介词短语作状语，不能直接用动词原形开头）\n- 错：把名词重音读成第二音节（名词应重读第一音节）。\n\n## 六、记忆提示与派生词\n\n- 构词：**contra-**（相反）+ **st**（站，同 stand）→“站在相反两边”→对比、反差。\n- 派生：**contrasting**（adj. 形成对比的），如 *contrasting colors*（对比色）。\n- 同根词：contrary（相反的）、contradict（反驳、矛盾），都含“相反”义，可一起记。\n\n## 七、专升本中的考法\n\n- 阅读中常以 **in contrast / by contrast** 引出转折或对比信息，是定位答案的信号词。\n- 写作中可用于对比论证，如 *In contrast, those who...*，比反复用 *but* 更高级。\n- 完形填空常考介词搭配：**in contrast to/with**，不要选 of。",
+      "model": "deepseek-chat",
+      "duration_ms": 6278,
+      "status": "ok",
+      "source": "imported"
+    },
+    {
+      "time": "2026-10-30 05:31:23",
+      "mode": "其他",
+      "question": "专升本作文开头有哪些自然、不模板化的写法？",
+      "answer": "结论：专升本作文开头要“短、准、有信息”，最稳的做法是用**现象引入、观点直陈、对比反差、设问引出**四种方式之一，第一句就交代话题，第二句亮立场，避免“With the development of society”这类空话。\n\n下面按可操作性讲。\n\n## 一、先避开三类模板化开头\n\n- **万能背景句**：`With the rapid development of society/economy...` 阅卷老师见太多，且信息量为零。\n- **空泛名言**：`As we all know, every coin has two sides.` 与题目无关时反而扣分。\n- **口号式**：`Nowadays, more and more people pay attention to...` 没有具体对象，显得套作。\n\n判断标准：把开头第一句单独拿出来，能否看出这篇作文写什么。看不出，就是模板。\n\n## 二、四种自然写法\n\n**1. 现象引入：用具体事实开头**\n\n先描述一个可观察的现象，再引出观点。\n\n> These days, it is common to see college students spend hours scrolling short videos before sleep. This habit, in my view, does more harm than good.\n\n适合：手机使用、学习习惯、校园生活类题目。\n\n**2. 观点直陈：第一句就给立场**\n\n开门见山，适合议论文。\n\n> I believe that part-time work is a valuable part of college life, as long as students keep a proper balance with study.\n\n适合：利弊分析、观点选择类题目。\n\n**3. 对比反差：用“有人……有人……”制造张力**\n\n注意不要写成 `Some people think..., others think...` 的机械版，要加具体内容。\n\n> Some students treat exams as the only goal of learning, while others see them as a chance to check what they have missed. I prefer the second attitude.\n\n适合：两种观点讨论类题目。\n\n**4. 设问引出：用一个问题聚焦话题**\n\n一问一答，简洁有力，但全文用一次即可。\n\n> Why do so many graduates find their first job disappointing? One reason is that they never thought about what they really want during college.\n\n适合：原因分析、问题解决类题目。\n\n## 三、开头两句话的基本结构\n\n推荐：**第一句引入话题（现象/问题/观点），第二句表明立场或写作目的。**\n\n> Online learning has become part of everyday campus life. In my opinion, it works best when it supports, rather than replaces, classroom teaching.\n\n两句话完成“是什么+我怎么看”，不拖沓，也不模板。\n\n## 四、可复用的开头句式\n\n- `It is common to see ... , but ...`（现象+转折）\n- `I believe that ... , as long as ...`（立场+条件）\n- `Some ... , while others ... . I prefer ...`（对比+选择）\n- `Why ... ? One reason is that ...`（设问+原因）\n- `... has become part of everyday life. In my opinion, ...`（现象+观点）\n\n## 五、常见错误提醒\n\n- 开头堆两个以上“背景句”，正文没时间展开。\n- 第一句用 `As we all know`，但后面内容并不“众所周知”。\n- 设问后不回答，直接跳到例子，逻辑断裂。\n- 开头出现 `I think` 后又接 `in my opinion`，重复。\n\n练习建议：拿近五年真题题目，每篇只写两句话开头，限时3分钟，写完检查“第一句能否看出话题、第二句是否有立场”。",
+      "model": "deepseek-chat",
+      "duration_ms": 6414,
+      "status": "ok",
+      "source": "imported"
+    },
+    {
+      "time": "2026-10-30 04:37:14",
+      "mode": "单词解释",
+      "question": "解释 heaven 的核心词义、常见搭配和易混词。",
+      "answer": "**结论**：`heaven` 的核心义是“天堂、天空”，专升本考试里主要考三件事：可数性（表“天堂”时通常不加冠词、不用复数）、固定搭配（如 `Good heavens!`、`move heaven and earth`），以及和 `sky`、`paradise` 的辨析。\n\n## 音标与词性\n\n- 音标：/ˈhevn/\n- 词性：名词（n.）\n\n## 核心中文义\n\n1. **天堂、天国**（宗教或比喻意义，指上帝、神灵所在之处，或人死后去的极乐世界）\n2. **天空**（文学、书面语用法，相当于 sky，但更文雅、更旧式）\n3. 引申义：**极乐之地、人间仙境**（a place or state of great happiness）\n\n注意：表示“天堂”时，`heaven` 通常**不加冠词、不用复数**，如 `go to heaven`（去世、上天堂），不说 `go to the heaven`。表示“天空”时常用复数 `the heavens`。\n\n## 高频搭配与例句\n\n- **go to heaven** 去世、上天堂\n  - *He believed his wife had gone to heaven.*\n  - 他相信妻子已经上了天堂。\n\n- **Good heavens!** 天哪！（表示惊讶，口语常用）\n  - *Good heavens! Is that the time?*\n  - 天哪！都这个点了？\n\n- **move heaven and earth (to do sth)** 竭尽全力、想尽一切办法\n  - *She moved heaven and earth to get her son into that school.*\n  - 她千方百计把儿子送进了那所学校。\n\n- **the heavens opened** 天突然下起大雨（书面、新闻用语）\n  - *We were halfway home when the heavens opened.*\n  - 我们走到半路，天突然下起了大雨。\n\n- **for heaven's sake** 看在上帝的份上（表请求或轻微不耐烦）\n  - *For heaven's sake, stop arguing!*\n  - 看在老天爷的份上，别吵了！\n\n## 易混词辨析\n\n- **heaven vs. sky**\n  `sky` 是日常用词，指我们头顶的天空，可数，常用 `the sky / the skies`；`heaven(s)` 指天空时偏文学、宗教色彩，日常口语很少用来说“今天天空很蓝”。说天气、飞行、天文现象时用 `sky`：*The sky is clear today.*（不说 *The heaven is clear today.*）\n\n- **heaven vs. paradise**\n  `paradise` 也指“天堂、乐园”，但更强调“完美、幸福的地方”，可用于比喻人间乐土，如 *a tropical paradise*（热带乐园）；`heaven` 宗教色彩更强，且固定搭配多。考试中 `in paradise` 和 `in heaven` 都可能出现，但 `go to heaven` 是固定说法。\n\n- **heaven vs. heavens**\n  单数 `heaven` 多指宗教意义上的“天堂”；复数 `the heavens` 指“天空、苍穹”，也可指“老天爷”。写作中不要混用：*The heavens opened.*（天降大雨）不能说成 *The heaven opened.*\n\n- **形近词：heaven vs. haven**\n  `haven` /ˈheɪvn/ 意为“避风港、避难所”，如 *a safe haven*（安全避难所）。两词拼写只差一个字母，但读音和词义完全不同，阅读中容易看错，需要留意。\n\n## 常见错误\n\n- 错：*He went to the heaven.*\n  对：*He went to heaven.*（表“天堂”不加冠词）\n- 错：*The heaven is blue today.*\n  对：*The sky is blue today.*（日常说天空用 sky）\n- 错：*Good heaven!*\n  对：*Good heavens!*（固定用复数）\n\n## 记忆提示与派生词\n\n- 构词提示：`heaven` 与 `heave`（举起）同源，原义与“举起、高悬”有关，可联想“高高在上的天”。\n- 派生词：`heavenly`（adj. 天堂般的、极好的；天空的），如 *a heavenly voice*（天籁之音）、*heavenly bodies*（天体）。\n- 专升本阅读中，`heaven` 常出现在宗教、文化、习语类文章中；写作里可适当用 `Good heavens!` 或 `move heaven and earth` 增加表达的地道感，但不要滥用。",
+      "model": "deepseek-chat",
+      "duration_ms": 6915,
+      "status": "ok",
+      "source": "imported"
+    },
+    {
+      "time": "2026-10-30 03:40:42",
+      "mode": "单词解释",
+      "question": "hello",
+      "answer": "假设你是在专升本词汇复习中查这个词，下面按考试常用义讲解。\n\n## 结论\n\n**hello** 是英语中最基础的问候语，核心意思是“你好”，主要用于打招呼、接电话或引起注意。它本身不难，但在专升本考试中要注意**拼写、大小写和语境使用**，避免在正式写作中滥用。\n\n## 基本信息\n\n- **音标**：英 /həˈləʊ/；美 /həˈloʊ/\n- **词性**：感叹词（interjection）；也可作名词\n- **核心中文义**：\n  - 你好（打招呼）\n  - 喂（接电话或引起注意）\n\n## 高频搭配与例句\n\n**1. say hello to sb.**\n\n- 意思：向某人问好\n- 例句：Please say hello to your parents for me.\n- 翻译：请代我向你父母问好。\n\n**2. hello there**\n\n- 意思：嗨，你好（较随意，用于引起注意）\n- 例句：Hello there! Are you waiting for someone?\n- 翻译：你好！你在等人吗？\n\n**3. a quick hello**\n\n- 意思：简短地打个招呼\n- 例句：She just stopped by to say a quick hello.\n- 翻译：她只是顺便过来简单打个招呼。\n\n## 易混词/形近词辨析\n\n- **hello vs. hallo/hullo**：都是“你好”的变体，但专升本写作中统一用 **hello** 最稳妥。\n- **hello vs. hi**：**hi** 更随意，多用于熟人之间；**hello** 更中性，口语和书面语都可接受。\n- **hello vs. hey**：**hey** 更口语化，有时带“喂”的提醒意味，正式写作中不建议使用。\n\n## 常见错误\n\n- 拼写错误：写成 **hallo**、**helo**、**hellow**。正确拼写是 **hello**。\n- 大小写问题：句首用 **Hello**；句中一般小写，如 “She said hello to me.”\n- 正式写作中开头滥用：书信或作文开头不宜用 “Hello, everyone” 代替正式称呼，应根据文体选择 “Dear Sir or Madam” 或直接进入主题。\n- 搭配错误：不说 “say hello with sb.”，正确是 **say hello to sb.**\n\n## 记忆提示与派生\n\n- 记忆提示：**hello** 可拆成 **he + llo**，联想“他（he）远远地喊了一声‘你好’”。\n- 派生/相关表达：\n  - **say hello**：打招呼\n  - **hello again**：又见面了（再次打招呼）\n  - **Hello?**：喂？（接电话或表示疑惑）\n\n## 专升本考试中的用法提示\n\n这个词在专升本阅读中通常不是考点词，但在**写作**和**翻译**中要注意：\n\n- 写作中如果题目是正式议论文，不建议用 **hello** 开头。\n- 翻译“他向老师问好”时，用 **He said hello to his teacher.** 比直译更自然。\n- 听力或对话理解中，**hello** 常用于接电话场景，表示“喂”，不是“你好”的完整问候。",
+      "model": "deepseek-chat",
+      "duration_ms": 5428,
       "status": "ok",
       "source": "imported"
     }
