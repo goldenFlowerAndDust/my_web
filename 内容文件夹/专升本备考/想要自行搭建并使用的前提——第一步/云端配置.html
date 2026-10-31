@@ -1491,6 +1491,32 @@ exports.main_handler = async (event) =&gt; {
     不需要浏览器下载，不需要手动移动文件。
 </div>
 
+<h3>GitHub Pages 上的 AI 答疑 / 生词器</h3>
+<div class="callout blue">
+    <strong>连接设置按来源保存，但同一个 GitHub Pages 来源会共用</strong>
+    AI 答疑和生词器都在同一个 <code>https://用户名.github.io</code> 来源下，浏览器 localStorage 按来源隔离。
+    新版生词器会自动读取 AI 答疑的 <code>english-tutor-connection-v1</code> 配置；
+    在 GitHub 上先把 AI 答疑的连接设置填一次，生词器会复用同一地址和口令，并强制使用云端模式。
+    GitHub Pages 上的“本地写入”选项会被禁用，因为静态页面无法访问 PC 的 8767 服务；
+    PC 版仍可随时在本地/云端之间切换。
+    如果生词器仍然报 <code>Failed to fetch</code>，依次检查：
+    <br>1. 地址必须是 <code>https://</code>，不能是 <code>http://127.0.0.1:8767</code>；
+    <br>2. Worker / SCF 的 <code>ALLOWED_ORIGIN</code> 必须是 <code>*</code>，或精确等于 <code>https://你的用户名.github.io</code>（不要带仓库路径）；
+    <br>3. 生词器使用 SCF 时必须填 <code>PROXY_TOKEN</code>，使用 Worker 时填 <code>TUTOR_ACCESS_TOKEN</code>；
+    <br>4. 地址只填根地址，不要带 <code>/api/health</code> 或 <code>/api/queue-word</code>。
+</div>
+
+<div class="callout">
+    <strong>本地历史 + 云端新记录：同时读取</strong>
+    页面现在会同时读取：
+    <br>1. 云端 KV：移动端刚产生的新问题（24 小时内）；
+    <br>2. GitHub 静态归档：<code>英语答疑/答疑历史.json</code>、<code>数学答疑/答疑历史.json</code>、
+    <code>添加日志/添加日志.json</code>。
+    <br>同步器每次运行会从本地 JSONL 生成这些归档；把它们提交 GitHub 后，旧历史永久可见，不受 24 小时限制。
+    <br>原始 JSONL 仍不上传；公开的是生成的归档 JSON。若不想公开问答内容，请不要提交这两个文件。
+    <br>本地 5 条、GitHub 只有 1 条，是因为旧版页面只读 KV；现在云端 1 条 + 归档 5 条会合并去重。
+</div>
+
 <h2>五、同步规则</h2>
 <table>
     <thead><tr><th>项目</th><th>规则</th></tr></thead>
@@ -1509,6 +1535,8 @@ exports.main_handler = async (event) =&gt; {
     <code>共享配置/云端同步.json</code>、<code>共享配置/API.txt</code>、<code>共享配置/同步状态.json</code>、各科 <code>导出记录/</code>、问答日志、<code>词素工具/backups/</code>。
     这些文件已加入 <code>.gitignore</code> 和本机 <code>.git/info/exclude</code>。
     本目录下的 <code>部署/</code> 截图文件夹也已拉黑，不会上传 GitHub。
+    完整的公开内容与隐私检查清单见
+    <a href="../共享工具/公开内容与隐私提醒.md">共享工具/公开内容与隐私提醒.md</a>。
 </div>
 <p class="small">访问口令只通过 <code>X-Tutor-Token</code> 请求头发送给你自己的 Worker / SCF，不写入问答记录，不写入 README。</p>
 

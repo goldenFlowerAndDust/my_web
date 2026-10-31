@@ -373,6 +373,13 @@
 </head>
 <body>
 <div class="wrap">
+    <div style="margin:0 0 14px;padding:12px 16px;border:1px solid #d8e2ec;border-left:4px solid #0D9488;border-radius:8px;background:#F2FBF9;color:#2C3E50;font-size:.9rem;line-height:1.7;">
+        <strong>云端 / 本地提醒：</strong>本地服务在线时读实时 <code>归档日志.jsonl</code>；
+        GitHub 或本地服务未开时读静态 <code>添加日志/添加日志.json</code>。
+        同步和云端配置见
+        <a href="https://goldenfloweranddust.github.io/my_web/内容文件夹/专升本备考/想要自行搭建并使用的前提——第一步/云端配置.html" target="_blank" rel="noopener">云端部署 / 本地同步前置条件</a>。
+        新增单词仍需在 PC 运行 <code>同步全部科目.bat</code> 后重新上传静态 JSON。
+    </div>
     <header class="hero">
         <p class="kicker">VOCABULARY ARCHIVE LOG</p>
         <h1>添加日志<span> · 最近添加</span></h1>
@@ -430,6 +437,11 @@
     var API_BASE = (window.location.protocol === 'http:' && window.location.port === '8767')
         ? ''
         : 'http://127.0.0.1:8767';
+    var isRemotePage = /\.github\.io$/i.test(window.location.hostname) || (
+        window.location.protocol === 'https:' &&
+        !/^(localhost|127\.0\.0\.1|\[::1\])$/i.test(window.location.hostname)
+    );
+    var STATIC_LOG_URL = '添加日志/添加日志.json';
 
     var searchEl = document.getElementById('search');
     var dateEl = document.getElementById('date-filter');
@@ -598,11 +610,36 @@
         return fetch(url, options).finally(function () { clearTimeout(timer); });
     }
 
+    async function loadStaticLog() {
+        try {
+            var resp = await fetchWithTimeout(STATIC_LOG_URL + '?v=' + Date.now(), {
+                cache: 'no-store'
+            }, 8000);
+            if (!resp.ok) return [];
+            var data = await resp.json();
+            return data && Array.isArray(data.entries) ? data.entries : [];
+        } catch (err) {
+            return [];
+        }
+    }
+
     async function load() {
         if (loading) return;
         loading = true;
         refreshEl.disabled = true;
+        var staticEntries = [];
         try {
+            if (isRemotePage) {
+                staticEntries = await loadStaticLog();
+                if (staticEntries.length) {
+                    entries = staticEntries;
+                    setBadge(true, 'GitHub 静态归档 · ' + entries.length + ' 条');
+                    renderStats();
+                    render();
+                    return;
+                }
+                throw new Error('GitHub 静态归档为空；请先在 PC 运行同步并上传 添加日志/添加日志.json。');
+            }
             var resp = await fetchWithTimeout(API_BASE + '/api/log?limit=500', { cache: 'no-store' }, 8000);
             var data = await resp.json();
             if (!resp.ok || !data.ok) throw new Error((data && data.error) || ('HTTP ' + resp.status));
@@ -611,10 +648,20 @@
             renderStats();
             render();
         } catch (err) {
-            setBadge(false, '本地服务未连接');
+            staticEntries = await loadStaticLog();
+            if (staticEntries.length) {
+                entries = staticEntries;
+                setBadge(true, '静态归档 · ' + entries.length + ' 条');
+                renderStats();
+                render();
+                return;
+            }
+            setBadge(false, isRemotePage ? 'GitHub 归档不可用' : '本地服务未连接');
             contentEl.innerHTML = '<div class="error">' +
                 '<strong>无法读取日志。</strong><br>' +
-                '先启动 <code>python 词素工具/server.py</code>，再打开本页。' +
+                (isRemotePage
+                    ? '请先在 PC 运行 <code>同步全部科目.bat</code>，再上传 <code>添加日志/添加日志.json</code>。'
+                    : '先启动 <code>python 词素工具/server.py</code>，再打开本页。') +
                 '<br>错误：' + esc(err.message) +
                 '</div>';
             statTotal.textContent = '—';

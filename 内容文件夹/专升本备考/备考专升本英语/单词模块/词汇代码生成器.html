@@ -37,7 +37,7 @@
         <strong>同步提醒：</strong>本地和云端连接设置会保留。云端待归档单词在电脑上运行
         <code>专升本备考/同步全部科目.bat</code>，按菜单选 1 同步；前提是 Cloudflare 主线路和腾讯云 SCF 备用线路已按流程配置。
         只本地用可忽略；建议配置云端，因为本地模式只能在这台 PC 使用。
-        配置说明见 <code>想要自行搭建并使用的前提——第一步/云端配置.html</code>，直接双击打开。
+        配置说明见 <a href="https://goldenfloweranddust.github.io/my_web/内容文件夹/专升本备考/想要自行搭建并使用的前提——第一步/云端配置.html" target="_blank" rel="noopener">云端部署 / 本地同步前置条件</a>。
     </div>
 
     <section class="panel guide_panel" aria-labelledby="guideTitle">
@@ -67,9 +67,10 @@
             </li>
         </ol>
         <p class="generator_local_note">
-            <strong>本地写入 / 云端排队：</strong>本地模式会直接写 HTML 和 <code>data.json</code>；
-            云端模式只把“英文单词或中文意思”加入云端待归档。
-            不需要在浏览器导出 JSON；运行 <code>同步全部科目.bat</code> 会自动拉取、保存、导入并更新复习清单。
+            <strong>本地写入 / 云端排队：</strong>PC 版可随时在这两种模式之间切换；
+            GitHub Pages 没有本地 8767 服务，只能使用云端排队，本地选项会禁用。
+            本地模式直接写 HTML 和 <code>data.json</code>；云端模式只把单词加入云端待归档，
+            运行 <code>同步全部科目.bat</code> 后会自动拉取、保存、导入并更新复习清单。
         </p>
     </section>
 

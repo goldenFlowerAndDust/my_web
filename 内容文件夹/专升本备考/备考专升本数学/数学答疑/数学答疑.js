@@ -707,6 +707,50 @@
         }
     }
 
+    var staticHistoryPromise = null;
+    var staticHistoryCache = null;
+
+    function staticHistoryKey(item) {
+        return [
+            String(item && (item.created_at || item.time) || ""),
+            String(item && item.mode || ""),
+            String(item && item.question || "")
+        ].join("\u0001");
+    }
+
+    function mergeHistory(primary, archive, category, topic) {
+        var merged = {};
+        (Array.isArray(primary) ? primary : []).concat(
+            Array.isArray(archive) ? archive : []
+        ).forEach(function (item) {
+            if (!item || typeof item !== "object") return;
+            if (category && category !== "all" && item.mode !== category) return;
+            if (topic && topic !== "all" && item.topic !== topic) return;
+            merged[staticHistoryKey(item)] = item;
+        });
+        return Object.keys(merged).map(function (key) { return merged[key]; }).sort(function (a, b) {
+            return String(b.time || b.created_at || "").localeCompare(String(a.time || a.created_at || ""));
+        });
+    }
+
+    function loadStaticHistory() {
+        if (staticHistoryPromise) return staticHistoryPromise;
+        staticHistoryPromise = fetch("答疑历史.json?v=" + Date.now(), { cache: "no-store" })
+            .then(function (resp) {
+                if (!resp.ok) return [];
+                return resp.json();
+            })
+            .then(function (data) {
+                staticHistoryCache = data && Array.isArray(data.entries) ? data.entries : [];
+                return staticHistoryCache;
+            })
+            .catch(function () {
+                staticHistoryCache = [];
+                return [];
+            });
+        return staticHistoryPromise;
+    }
+
     async function loadHistory(category, topic) {
         historyCategory = category || "all";
         if (topic !== undefined) historyTopic = topic || "all";
@@ -715,10 +759,13 @@
             var active = tab.dataset.category === historyCategory;
             tab.classList.toggle("is-active", active);
         });
+
+        var archived = await loadStaticHistory();
+
         if (!connectionReady()) {
-            historyEntries = [];
+            historyEntries = mergeHistory([], archived, historyCategory, historyTopic);
             renderHistory();
-            historyCount.textContent = "—";
+            historyCount.textContent = historyEntries.length + " 条";
             return;
         }
         try {
@@ -732,19 +779,26 @@
             if (!resp.ok || !data || !data.ok) {
                 throw new Error((data && data.error) || "读取历史失败");
             }
-            historyEntries = Array.isArray(data.entries) ? data.entries : [];
+            historyEntries = mergeHistory(
+                Array.isArray(data.entries) ? data.entries : [],
+                archived,
+                historyCategory,
+                historyTopic
+            );
             renderHistory();
-            historyNote.textContent = "日志位置：数学工具/数学问答日志/（按分类保存，已 gitignore）。";
+            historyNote.textContent = "历史 = 本地/云端日志 + GitHub 的 答疑历史.json；原始 JSONL 不上传，归档 JSON 会上传。";
             if (connection.mode === "cloud") {
                 historyNote.textContent += " 当前从 " + providerLabel() + " 读取。";
             }
         } catch (error) {
-            historyEntries = [];
+            historyEntries = mergeHistory([], archived, historyCategory, historyTopic);
             renderHistory();
-            historyList.hidden = true;
-            historyEmpty.hidden = false;
-            historyCount.textContent = "—";
-            historyEmpty.textContent = "读取历史失败：" + (error.message || "未知错误");
+            if (!historyEntries.length) {
+                historyList.hidden = true;
+                historyEmpty.hidden = false;
+                historyCount.textContent = "—";
+                historyEmpty.textContent = "读取历史失败：" + (error.message || "未知错误");
+            }
         }
     }
 

@@ -23,6 +23,8 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+
+from history_archive import build_all as build_history_archives
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -809,6 +811,12 @@ class SyncRunner:
         if not any_enabled:
             self.status["errors"].append("没有启用任何科目。")
 
+        try:
+            self.status["history_archives"] = build_history_archives(self.base)
+        except (OSError, ValueError) as exc:
+            self.status["history_archives"] = {}
+            print("历史归档生成失败：%s" % exc)
+
         self.status["finished_at"] = now_text()
         write_json(self.status_file, self.status)
         # 同一进程内的菜单/自动循环下一次运行也要以本次结果为基准。
@@ -820,6 +828,14 @@ class SyncRunner:
         pending = self.status.get("pending_words") or {}
         if pending:
             print(self.describe_result(pending, "待归档单词"))
+        archives = self.status.get("history_archives") or {}
+        if archives:
+            print("GitHub 历史归档：英语 %d 条，数学 %d 条，添加日志 %d 条" % (
+                int(archives.get("english") or 0),
+                int(archives.get("math") or 0),
+                int(archives.get("added_log") or 0),
+            ))
+            print("记得上传 答疑历史.json 和 添加日志/添加日志.json。")
         print("云端记录不会立即删除，按 24 小时保留。")
         print("同步状态已写入：%s" % self.status_file)
         if self.status["errors"]:
@@ -909,6 +925,12 @@ class SyncRunner:
         pending = data.get("pending_words") or {}
         if pending:
             print(self.describe_result(pending, "待归档单词"))
+        archives = data.get("history_archives") or {}
+        if archives:
+            print("GitHub 历史归档：英语 %d 条，数学 %d 条" % (
+                int(archives.get("english") or 0),
+                int(archives.get("math") or 0),
+            ))
 
 
 def find_default_base() -> Path:

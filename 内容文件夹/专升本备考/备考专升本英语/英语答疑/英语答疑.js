@@ -4,6 +4,10 @@
     var CONNECTION_KEY = "english-tutor-connection-v1";
     var TEST_BASE = window.__TUTOR_API_BASE__ || "";
     var isGitHubPages = /\.github\.io$/i.test(window.location.hostname);
+    var isRemotePage = isGitHubPages || (
+        window.location.protocol === "https:" &&
+        !/^(localhost|127\.0\.0\.1|\[::1\])$/i.test(window.location.hostname)
+    );
 
     var MODES = {
         "单词解释": {
@@ -127,7 +131,7 @@
 
     function defaultConnection() {
         return {
-            mode: isGitHubPages ? "cloud" : "local",
+            mode: isRemotePage ? "cloud" : "local",
             provider: "cloudflare",
             profiles: emptyProfiles()
         };
@@ -415,9 +419,9 @@
 
     function updateHistoryNote() {
         if (connection.mode === "cloud") {
-            historyNote.innerHTML = "日志存放：Cloudflare Worker 的 <code>TUTOR_KV</code>，按分类保存；“访问口令”只保存在当前浏览器 localStorage，不写进网页源码。";
+            historyNote.innerHTML = "日志存放：Cloudflare Worker 的 <code>TUTOR_KV</code>，按分类保存；旧记录合并自 GitHub 的 <code>答疑历史.json</code>。访问口令只保存在当前浏览器 localStorage。";
         } else {
-            historyNote.innerHTML = "日志位置：<code>词素工具/英语问答日志/单词解释.jsonl</code>、<code>作文.jsonl</code>、<code>句子分析.jsonl</code>、<code>其他.jsonl</code>。已加入 <code>.gitignore</code>，不会上传 GitHub。";
+            historyNote.innerHTML = "日志位置：<code>词素工具/英语问答日志/*.jsonl</code>；旧记录同时合并 GitHub 的 <code>答疑历史.json</code>。原始 JSONL 不上传，归档 JSON 会上传。";
         }
     }
 
@@ -856,6 +860,49 @@
         }
     }
 
+    var staticHistoryPromise = null;
+    var staticHistoryCache = null;
+
+    function staticHistoryKey(item) {
+        return [
+            String(item && (item.created_at || item.time) || ""),
+            String(item && item.mode || ""),
+            String(item && item.question || "")
+        ].join("\u0001");
+    }
+
+    function mergeHistory(primary, archive, category) {
+        var merged = {};
+        (Array.isArray(primary) ? primary : []).concat(
+            Array.isArray(archive) ? archive : []
+        ).forEach(function (item) {
+            if (!item || typeof item !== "object") return;
+            if (category && category !== "all" && item.mode !== category) return;
+            merged[staticHistoryKey(item)] = item;
+        });
+        return Object.keys(merged).map(function (key) { return merged[key]; }).sort(function (a, b) {
+            return String(b.time || b.created_at || "").localeCompare(String(a.time || a.created_at || ""));
+        });
+    }
+
+    function loadStaticHistory() {
+        if (staticHistoryPromise) return staticHistoryPromise;
+        staticHistoryPromise = fetch("答疑历史.json?v=" + Date.now(), { cache: "no-store" })
+            .then(function (resp) {
+                if (!resp.ok) return [];
+                return resp.json();
+            })
+            .then(function (data) {
+                staticHistoryCache = data && Array.isArray(data.entries) ? data.entries : [];
+                return staticHistoryCache;
+            })
+            .catch(function () {
+                staticHistoryCache = [];
+                return [];
+            });
+        return staticHistoryPromise;
+    }
+
     async function loadHistory(category) {
         historyCategory = category || "all";
         historyTabs.forEach(function (tab) {
@@ -864,12 +911,15 @@
             tab.setAttribute("aria-selected", active ? "true" : "false");
         });
 
+        var archived = await loadStaticHistory();
+
         if (!connectionReady()) {
-            historyEntries = [];
-            historyList.innerHTML = "";
-            historyEmpty.hidden = false;
-            historyEmpty.textContent = "云端未配置。点“连接设置”填 Worker 地址和访问口令。";
-            historyCount.textContent = "—";
+            historyEntries = mergeHistory([], archived, historyCategory);
+            renderHistory();
+            if (!historyEntries.length) {
+                historyEmpty.hidden = false;
+                historyEmpty.textContent = "还没有历史记录。云端请先点“连接设置”，或等待 答疑历史.json 上传。";
+            }
             return;
         }
 
@@ -883,22 +933,27 @@
             }, 12000);
             var data = await resp.json();
             if (!resp.ok || !data.ok) throw new Error((data && data.error) || ("HTTP " + resp.status));
-            historyEntries = Array.isArray(data.entries) ? data.entries : [];
+            historyEntries = mergeHistory(
+                Array.isArray(data.entries) ? data.entries : [],
+                archived,
+                historyCategory
+            );
             renderHistory();
         } catch (error) {
-            historyEntries = [];
-            historyList.innerHTML = "";
-            historyEmpty.hidden = false;
-            if (error.message && /401|口令/.test(error.message)) {
-                historyEmpty.textContent = "读取日志失败：访问口令不正确。点“连接设置”检查。";
-            } else if (connection.mode === "cloud") {
-                historyEmpty.textContent = "读取云端日志失败：" + (error.message || "未知错误") +
-                    "。如果刚部署，刷新页面或检查 Worker。";
-            } else {
-                historyEmpty.textContent = "读取日志失败：" + (error.message || "未知错误") +
-                    "。如果服务刚更新过，请重启 8767 服务。";
+            historyEntries = mergeHistory([], archived, historyCategory);
+            renderHistory();
+            if (!historyEntries.length) {
+                historyEmpty.hidden = false;
+                if (error.message && /401|口令/.test(error.message)) {
+                    historyEmpty.textContent = "读取日志失败：访问口令不正确。点“连接设置”检查。";
+                } else if (connection.mode === "cloud") {
+                    historyEmpty.textContent = "读取云端日志失败：" + (error.message || "未知错误") +
+                        "。如果刚部署，刷新页面或检查 Worker。";
+                } else {
+                    historyEmpty.textContent = "读取日志失败：" + (error.message || "未知错误") +
+                        "。如果服务刚更新过，请重启 8767 服务。";
+                }
             }
-            historyCount.textContent = "—";
         }
     }
 

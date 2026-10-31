@@ -697,7 +697,18 @@
             <strong>云端答疑记录怎么回到本地：</strong>
             不再需要浏览器导出。打开 <code>专升本备考/同步全部科目.bat</code>，选 1 即可自动拉取云端记录、
             合并到本地日志；需要部署或配置云端时，直接打开
-            <code>想要自行搭建并使用的前提——第一步/云端配置.html</code>。
+            <a href="https://goldenfloweranddust.github.io/my_web/内容文件夹/专升本备考/想要自行搭建并使用的前提——第一步/云端配置.html" target="_blank" rel="noopener">云端部署 / 本地同步前置条件</a>。
+        </div>
+
+        <div class="callout">
+            <strong>GitHub Pages 与本地历史怎么一致：</strong>
+            本地答疑页读取电脑上的 <code>英语问答日志/*.jsonl</code>，GitHub Pages 读取 Cloudflare KV。
+            现在页面会同时合并 GitHub 的 <code>英语答疑/答疑历史.json</code>：
+            云端保留移动端新问题，静态归档保留旧历史，不受 24 小时限制。
+            同步器会从本地 JSONL 生成归档；提交 <code>答疑历史.json</code> 后 GitHub 就会显示本地旧记录。
+            原始 JSONL 仍不上传，公开的是归档 JSON。生词器会自动复用同一 GitHub Pages 来源下 AI 答疑的连接设置；
+            如果仍提示 <code>Failed to fetch</code>，检查地址是否为 https、Worker/SCF 的
+            <code>ALLOWED_ORIGIN</code> 是否允许 <code>https://你的用户名.github.io</code>。
         </div>
 
         <div class="callout green">
@@ -1082,6 +1093,8 @@
             <div class="file-item"><code>复习清单/核心词汇复习清单.html</code><span>每天 20 新 + 20 复习 + 额外新增</span></div>
             <div class="file-item"><code>单词模块/词汇代码生成器.html</code><span>AI 自动归档界面</span></div>
             <div class="file-item"><code>英语答疑/英语答疑.html</code><span>资深英语教师答疑界面</span></div>
+            <div class="file-item"><code>英语答疑/答疑历史.json</code><span>本地旧历史静态归档，GitHub 页面会合并；会公开</span></div>
+            <div class="file-item"><code>添加日志/添加日志.json</code><span>添加日志的静态快照；GitHub 上用它显示，不依赖 8767</span></div>
             <div class="file-item"><code>同步全部科目.bat</code><span>一键同步英语/数学云端记录和英语待归档单词</span></div>
             <div class="file-item"><code>共享配置/科目配置.json</code><span>每个科目自己的导出目录、启用状态和导入器</span></div>
             <div class="file-item"><code>共享配置/云端同步.json</code><span>Worker / SCF 地址与口令，仅本机保存（已 gitignore）</span></div>

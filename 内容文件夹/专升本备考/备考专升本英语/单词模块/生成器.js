@@ -9,6 +9,12 @@
     var API_BASE = (window.location.protocol === 'http:' && window.location.port === '8767')
         ? ''
         : 'http://127.0.0.1:8767';
+    var isGitHubPages = /\.github\.io$/i.test(window.location.hostname);
+    var isRemotePage = isGitHubPages || (
+        window.location.protocol === 'https:' &&
+        !/^(localhost|127\.0\.0\.1|\[::1\])$/i.test(window.location.hostname)
+    );
+    var TUTOR_CONFIG_KEY = 'english-tutor-connection-v1';
 
     var wordInput = document.getElementById('wordInput');
     var hintInput = document.getElementById('hintInput');
@@ -41,6 +47,7 @@
     var btnCloudTest = document.getElementById('btnCloudTest');
     var btnCloudExport = document.getElementById('btnCloudExport');
     var CLOUD_CONFIG_KEY = 'english-generator-cloud-v1';
+    var usingTutorConnection = false;
 
     var lastAnalysis = null;
     var lastCheckState = 'none';
@@ -102,18 +109,52 @@
         }
     }
 
+    function readTutorConnection() {
+        try {
+            var raw = localStorage.getItem(TUTOR_CONFIG_KEY);
+            if (!raw) return null;
+            var data = JSON.parse(raw);
+            if (!data || typeof data !== 'object') return null;
+            var provider = data.provider === 'domestic' ? 'domestic' : 'cloudflare';
+            var profiles = data.profiles && typeof data.profiles === 'object' ? data.profiles : {};
+            var profile = profiles[provider] || {};
+            var url = String(profile.url || data.cloudUrl || '').trim().replace(/\/+$/, '');
+            var token = String(profile.token || data.token || '').trim();
+            if (!url || !token) return null;
+            return {
+                url: url,
+                token: token,
+                mode: data.mode === 'cloud' ? 'cloud' : 'local'
+            };
+        } catch (err) {
+            return null;
+        }
+    }
+
     function loadCloudConfig() {
+        var shared = readTutorConnection();
         try {
             var raw = localStorage.getItem(CLOUD_CONFIG_KEY);
-            if (!raw) return;
-            var data = JSON.parse(raw);
+            var owned = raw ? JSON.parse(raw) : null;
+            var data = shared || owned;
             if (data && (data.mode === 'cloud' || data.mode === 'local')) {
                 genModeEl.value = data.mode;
             }
             if (data && data.url) cloudUrl.value = data.url;
             if (data && data.token) cloudToken.value = data.token;
+            usingTutorConnection = Boolean(shared);
         } catch (err) {
             // 忽略损坏配置。
+        }
+        // GitHub Pages / 任意远程静态页没有本地 8767，只能走云端。
+        // 本地模式仍保留给 PC，不删除选项，只禁用远程页面上的本地项。
+        if (isRemotePage) {
+            genModeEl.value = 'cloud';
+            var localOption = genModeEl.querySelector('option[value="local"]');
+            if (localOption) {
+                localOption.disabled = true;
+                localOption.textContent = '本地写入（仅 PC 可用）';
+            }
         }
     }
 
@@ -130,6 +171,9 @@
     }
 
     function applyMode() {
+        if (isRemotePage && genModeEl.value === 'local') {
+            genModeEl.value = 'cloud';
+        }
         var cloud = genModeEl.value === 'cloud';
         btnCheck.hidden = cloud;
         btnAnalyze.hidden = cloud;
@@ -144,12 +188,20 @@
         if (cloud) {
             setCloudStatus(
                 cloudConfigured()
-                    ? '云端模式：只入队，不写本地文件。输入英文单词或中文意思。'
+                    ? (usingTutorConnection
+                        ? '云端模式：已复用 AI 答疑的连接地址和口令，只入队，不写本地文件。'
+                        : '云端模式：只入队，不写本地文件。输入英文单词或中文意思。')
                     : '先点“云端连接设置”填写地址和口令，再输入英文单词或中文意思。',
                 cloudConfigured() ? 'ok' : 'error'
             );
         } else {
             setCloudStatus('本地模式：分析并直接写入文件。', '');
+        }
+        if (isRemotePage) {
+            setCloudStatus(
+                (cloudStatus.textContent || '') + ' GitHub Pages 只能云端；本地写入请打开 PC 版。',
+                cloudConfigured() ? 'ok' : 'error'
+            );
         }
         saveCloudConfig();
     }
@@ -201,8 +253,8 @@
             setCloudStatus(message, data.kv_bound ? 'ok' : 'error');
             setDialogStatus(message, data.kv_bound ? 'ok' : 'error');
         } catch (err) {
-            setCloudStatus('云端连接失败：' + (err.message || '未知错误'), 'error');
-            setDialogStatus('云端连接失败：' + (err.message || '未知错误'), 'error');
+            setCloudStatus('云端连接失败：' + cloudErrorMessage(err), 'error');
+            setDialogStatus('云端连接失败：' + cloudErrorMessage(err), 'error');
         } finally {
             btnCloudTest.disabled = false;
         }
@@ -264,7 +316,7 @@
             downloadCloudPending(entries, data.cleanup_token || '', data.cleanup_url || '');
             setCloudStatus('已导出 ' + entries.length + ' 个待归档单词；本地导入成功后会自动清理云端队列。', 'ok');
         } catch (err) {
-            setCloudStatus('导出失败：' + (err.message || '未知错误'), 'error');
+            setCloudStatus('导出失败：' + cloudErrorMessage(err), 'error');
         } finally {
             btnCloudExport.disabled = false;
         }
@@ -289,6 +341,14 @@
             '<p>不用浏览器导出。运行 <code>同步全部科目.bat</code>，会自动拉取、分析并写入词库、更新复习清单。</p></div>';
     }
 
+    function cloudErrorMessage(err) {
+        var message = String((err && err.message) || err || '未知错误');
+        if (/Failed to fetch|NetworkError|Load failed/i.test(message)) {
+            return message + '（检查：GitHub 页面是否误用本地模式、地址是否为 https、Worker 的 ALLOWED_ORIGIN 是否允许当前 GitHub Pages 来源）';
+        }
+        return message;
+    }
+
     async function doCloudQueue() {
         if (busy) return;
         var query = (wordInput.value || '').trim();
@@ -304,8 +364,8 @@
             setStatus(data.message || '已加入云端待归档。', 'ok');
             toast(data.already_pending ? '已在云端待归档' : '已加入云端待归档');
         } catch (err) {
-            renderError(err.message);
-            setStatus('加入云端待归档失败：' + err.message, 'error');
+            renderError(cloudErrorMessage(err));
+            setStatus('加入云端待归档失败：' + cloudErrorMessage(err), 'error');
             toast('加入云端失败');
         } finally {
             setBusy(false);
@@ -356,6 +416,28 @@
 
     async function checkHealth() {
         btnHealth.disabled = true;
+        if (isRemotePage) {
+            if (!cloudConfigured()) {
+                setService('warn', '云端模式未配置', '点“云端连接设置”填写 Worker 或 SCF 地址、访问口令。');
+                btnHealth.disabled = false;
+                return;
+            }
+            setService('warn', '正在检测云端服务…', '检查 ' + (cloudBase() || '云端地址') + '/api/health');
+            try {
+                var cloudResp = await fetch(cloudBase() + '/api/health', { cache: 'no-store' });
+                var cloudData = await cloudResp.json().catch(function () { return null; });
+                if (!cloudResp.ok || !cloudData || !cloudData.ok) {
+                    throw new Error((cloudData && cloudData.error) || ('HTTP ' + cloudResp.status));
+                }
+                setService('ok', '云端服务已连接 · ' + (cloudData.model || 'deepseek-chat'),
+                    cloudData.kv_bound ? 'KV 已绑定；只入队，不写本地文件。' : '云端已连接，但 KV 未绑定。');
+            } catch (err) {
+                setService('error', '云端服务未连接', cloudErrorMessage(err));
+            } finally {
+                btnHealth.disabled = false;
+            }
+            return;
+        }
         setService('warn', '正在检测本地服务…', '检查 ' + (API_BASE || '当前地址') + '/api/health');
         try {
             var resp = await fetch(API_BASE + '/api/health', { cache: 'no-store' });
