@@ -1,8 +1,19 @@
 {
-  "generated_at": "2026-10-31T22:56:20",
+  "generated_at": "2026-10-31T23:53:49",
   "source": "local-archived-log",
-  "count": 22,
+  "count": 23,
   "entries": [
+    {
+      "time": "2026-10-31 23:50:55",
+      "word": "word",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：word.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
     {
       "time": "2026-10-31 18:36:30",
       "word": "old",

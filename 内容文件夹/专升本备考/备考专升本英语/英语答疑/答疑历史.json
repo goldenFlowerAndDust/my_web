@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-10-31T23:53:49",
+  "source": "local-jsonl",
+  "subject": "english",
+  "count": 3,
+  "entries": [
+    {
+      "time": "2026-10-31 23:45:56",
+      "mode": "单词解释",
+      "question": "请解释单词或中文意思“Word”。请给出英文单词、词性、中文释义、常见搭配和一个例句。",
+      "answer": "“Word”这个词本身很基础，但在专升本阅读和写作里出现频率很高，下面按考试需要讲清楚。\n\n## 基本信息\n\n- **单词**：word\n- **音标**：英 /wɜːd/，美 /wɜːrd/\n- **词性**：名词（n.）；也可作动词（v.），但专升本阶段主要考名词用法\n- **核心中文义**：\n  1. 词，单词\n  2. 话，言语（常用复数 words）\n  3. 消息，信息（常用搭配 word）\n  4. 诺言（如 keep one's word）\n\n不要一看到 word 就只想到“单词”，阅读中它常表示“消息”或“诺言”，这是常见失分点。\n\n## 高频搭配与例句\n\n- **in other words** 换句话说\n  - *He didn't pass the exam. In other words, he has to take it again.*\n  - 他没通过考试。换句话说，他得再考一次。\n\n- **keep one's word** 遵守诺言\n  - *A person who keeps his word is trusted by others.*\n  - 守信的人会得到他人的信任。\n\n- **have a word with sb.** 和某人谈一谈\n  - *I'd like to have a word with you about the plan.*\n  - 我想和你谈谈这个计划。\n\n- **word for word** 逐字地\n  - *Don't translate the passage word for word.*\n  - 不要逐字翻译这篇文章。\n\n## 易混词辨析\n\n- **word vs. words**\n  - word 作“消息”讲时通常不可数，不加 -s：*I got word that he had arrived.*（我得到消息说他到了。）\n  - words 作“言语、话”讲时常用复数：*His words moved everyone.*（他的话感动了所有人。）\n  - 常见错误：把“我得到一个消息”写成 *I got a word*，应为 *I got word*。\n\n- **word vs. vocabulary**\n  - word 指具体的“一个词”；vocabulary 指“词汇量、词汇总称”。\n  - 错误：*My word is small.* 应说 *My vocabulary is small.*（我的词汇量小。）\n\n- **word vs. term**\n  - word 是普通“词”；term 多指某领域的“术语”。\n  - 例：*This is a medical term.*（这是一个医学术语。）\n\n## 记忆提示与派生词\n\n- 构词提示：word 是日耳曼语来源的基础词，本身不宜再拆；可记“word = 说出来的东西”，由“词”引申为“话→消息→诺言”。\n- 派生词：\n  - **wordy** adj. 啰嗦的，用词过多的（写作中可用来批评冗长表达）\n  - **wording** n. 措辞（*The wording of the question is unclear.* 这个问题的措辞不清楚。）\n  - **wordless** adj. 无言的\n\n## 专升本常考提醒\n\n- 阅读中见到 **word** 单独出现，优先判断是“单词”还是“消息”，看上下文：若后接 that 从句，多为“消息”，如 *Word came that the meeting was put off.*\n- 写作中 **in other words** 是很好用的过渡表达，用来换一种说法解释前句，比重复 same 更自然。\n- 翻译题里“换句话说”“遵守诺言”“逐字翻译”都是高频表达，分别对应 in other words、keep one's word、translate word for word，建议直接背整块。",
+      "model": "deepseek-chat",
+      "duration_ms": 5617,
+      "status": "ok",
+      "source": "imported"
+    },
+    {
+      "time": "2026-10-31 23:43:46",
+      "mode": "单词解释",
+      "question": "请解释单词或中文意思“mean”。请给出英文单词、词性、中文释义、常见搭配和一个例句。",
+      "answer": "**结论**：`mean` 是专升本高频多义词，核心有三类：动词“意思是、意味着”、动词“打算”、形容词“吝啬的/刻薄的”。考试里最常见的是 `mean to do` 和 `mean doing` 的区别，以及 `I mean...` 这类口语插入表达。\n\n## 基本信息\n\n- 单词：**mean**\n- 音标：/miːn/\n- 词性：动词（v.）、形容词（adj.）\n- 核心中文义：\n  - v. 意思是；意味着\n  - v. 打算；有意\n  - adj. 吝啬的；刻薄的\n\n## 高频搭配与例句\n\n- **mean to do sth.** 打算做某事\n  - I didn’t mean to hurt you.\n  - 我并不是有意伤害你。\n\n- **mean doing sth.** 意味着做某事（主语通常是事物）\n  - Missing the train means waiting for another hour.\n  - 错过这班火车意味着要再等一小时。\n\n- **What do you mean by...?** 你……是什么意思？\n  - What do you mean by “deadline”?\n  - 你说的“deadline”是什么意思？\n\n- **be mean to sb.** 对某人刻薄\n  - Don’t be mean to your classmates.\n  - 别对同学刻薄。\n\n## 易混辨析\n\n- **mean to do vs. mean doing**\n  - `mean to do`：主语是人，表示“打算做”。\n  - `mean doing`：主语常是事物，表示“意味着”。\n  - 例：He means to help us.（他打算帮我们。） / This means working harder.（这意味着要更努力。）\n\n- **mean / means / meaning**\n  - `mean` 是动词原形；`means` 可作名词“手段”（单复数同形）；`meaning` 是名词“意思”。\n  - 常见错误：`This means is useful.` ❌ 应为 `This means is useful.` 仅在“这个手段”语境下成立，但更常见是 `This means of transport is useful.`；不要混用 `meaning` 和 `means`。\n\n## 记忆提示\n\n`mean` 的“意思”和“打算”都围绕“心里指向什么”：说一句话指向某个意思，人做一件事指向某个目的。形容词“刻薄/吝啬”可单独记搭配 `be mean to sb.`、`a mean person`。\n\n## 专升本常考点\n\n阅读中常考 `mean` 的词义猜测；语法填空常考 `mean to do` 与 `mean doing`；写作中可用 `This means that...` 引出结果，但注意后面接完整从句。",
+      "model": "deepseek-chat",
+      "duration_ms": 4245,
+      "status": "ok",
+      "source": "imported"
+    },
+    {
+      "time": "2026-10-31 22:28:39",
+      "mode": "单词解释",
+      "question": "解释 mean 的核心词义、常见搭配和易混词。",
+      "answer": "**结论：** mean 是专升本高频多义词，核心有三条线：①动词“意思是、意味着”；②动词“打算、有意”；③形容词“吝啬的、刻薄的”。考试最常考的是 **mean to do / mean doing** 的区别，以及 **means（手段）单复数同形**。\n\n## 一、读音与词性\n\n- 音标：/miːn/\n- 词性：动词（v.）、形容词（adj.）、名词（n.，多见于 means）\n\n## 二、核心中文义（按考频排序）\n\n1. **v. 意思是；表示……的意思**\n   - What does this word mean? 这个词是什么意思？\n2. **v. 意味着；结果是**\n   - Missing the train means waiting for another hour. 错过这班火车意味着再等一小时。\n3. **v. 打算；有意（做某事）**\n   - I didn't mean to hurt you. 我不是有意伤害你。\n4. **adj. 吝啬的；刻薄的**\n   - Don't be so mean to your classmates. 别对同学这么刻薄。\n5. **n. means 手段；方法（单复数同形）**\n   - a means of transport 一种交通方式\n\n## 三、高频搭配与例句\n\n- **mean to do sth.** 打算做某事\n  - I mean to finish the report tonight. 我打算今晚完成报告。\n- **mean doing sth.** 意味着做某事\n  - Being a teacher means being patient. 当老师意味着要有耐心。\n- **be meant to do sth.** 本意是；应该做\n  - This book is meant to help beginners. 这本书旨在帮助初学者。\n- **by means of** 借助；通过\n  - He solved the problem by means of a simple formula. 他借助一个简单公式解决了问题。\n- **by no means** 绝不\n  - This is by no means an easy task. 这绝不是件容易的事。\n\n## 四、易混词/形近词辨析\n\n- **mean to do vs. mean doing**：这是最常考的点。`mean to do` 表示“打算做”（主语是人，主观意图）；`mean doing` 表示“意味着”（主语常是事物或行为）。对比：\n  - I meant to call you, but I forgot. 我本打算给你打电话，但忘了。\n  - This decision means changing our plan. 这个决定意味着要改变计划。\n- **means / mean / meaning**：`means` 是“手段、方法”，单复数同形，谓语看语境；`mean` 是动词或形容词；`meaning` 是名词“意思、意义”。\n  - Every means has been tried. 各种方法都试过了。（means 作主语，这里视为单数概念）\n- **means / medium**：`means` 偏“手段、方式”；`medium` 偏“媒介、媒体”，复数 media。\n- **mean / intend**：两者都可表“打算”，但 `intend` 更正式，`mean` 更口语；考试中 `mean to do` 更常见。\n\n## 五、常见错误\n\n- 错：I didn't mean hurting you. \n  - 对：I didn't mean to hurt you.（表“有意”用 to do）\n- 错：This means to change our plan.\n  - 对：This means changing our plan.（表“意味着”用 doing）\n- 错：By no mean should you give up.\n  - 对：By no means should you give up.（固定短语用 means）\n\n## 六、记忆提示与派生词\n\n- 记忆：把 mean 想成“意思—意图—手段”三兄弟：说“意思”用 mean，说“打算”用 mean to do，说“手段”用 means。\n- 派生：meaning（n. 意思）、meaningful（adj. 有意义的）、meaningless（adj. 无意义的）。\n\n## 七、专升本阅读/写作中的用法\n\n- 阅读中常见 `This means that...`（这意味着……），用来引出结论；也常见 `by no means` 表强调否定。\n- 写作中可用 `mean to do` 表目的，用 `be meant to` 表“旨在”，比 `want to` 更正式。例如：\n  - This policy is meant to reduce students' pressure. 这项政策旨在减轻学生压力。",
+      "model": "deepseek-chat",
+      "duration_ms": 6947,
+      "status": "ok",
+      "source": "imported"
+    }
+  ]
+}

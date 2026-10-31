@@ -33,7 +33,7 @@
         <span class="tag">AI 答疑归档 · 按日保存</span>
     </div>
     <h1>极限 · 2026-10-30</h1>
-    <p class="sub">数学答疑记录，共 1 条。</p>
+    <p class="sub">数学答疑记录，共 2 条。</p>
     <article class="record"><div class="record-meta"><span>题目讲解</span><time>2026-10-30 22:07:00</time></div><h2>$\lim_{x \to -\infty}x(\sqrt{1+x^2}+x)$求极限</h2><div class="answer math">## 题目与知识点
 
 求极限
@@ -111,7 +111,83 @@ x\left(\sqrt{1+x^2}+x\right)=\frac{x}{\sqrt{1+x^2}-x}.
 
 最容易错的一步是**开方时忽略 \(x&lt;0\)**：把 \(\sqrt{1+x^2}\) 直接写成 \(x\sqrt{1+\frac1{x^2}}\) 会多出一个负号，导致答案变成 \(\frac12\)。正确写法是 \(\sqrt{1+x^2}=|x|\sqrt{1+\frac1{x^2}}=-x\sqrt{1+\frac1{x^2}}\)。
 
-同类题提醒：处理 \(x\to -\infty\) 的有理化、同除最高次幂时，凡涉及 \(\sqrt{x^2}=|x|\) 的地方都要先判断 \(x\) 的符号；若改为 \(x\to +\infty\)，同样题目的极限会是 \(\frac12\)，可作对比练习。</div></article>
+同类题提醒：处理 \(x\to -\infty\) 的有理化、同除最高次幂时，凡涉及 \(\sqrt{x^2}=|x|\) 的地方都要先判断 \(x\) 的符号；若改为 \(x\to +\infty\)，同样题目的极限会是 \(\frac12\)，可作对比练习。</div></article><article class="record"><div class="record-meta"><span>题目讲解</span><time>2026-10-30 22:43:16</time></div><h2>$\lim_{x \to \infty}\frac{x∧3-2x+5}{3{x∧5}+2x+3}(2+cosx-3sinx)$求极限</h2><div class="answer math">## 题目整理
+
+求极限
+
+\[
+\lim_{x\to\infty}\frac{x^3-2x+5}{3x^5+2x+3}\,(2+\cos x-3\sin x)
+\]
+
+题目中“$x\wedge 3$”按考试常见写法理解为 $x^3$，即分子为 $x^3-2x+5$。
+
+## 知识点与思路
+
+这是**无穷远处的极限**，涉及两类因子：
+
+1. 有理分式 $\dfrac{x^3-2x+5}{3x^5+2x+3}$，分子次数 3、分母次数 5，属于“分母次数高”的情形，极限为 0；
+2. 三角因子 $2+\cos x-3\sin x$，当 $x\to\infty$ 时 $\cos x,\sin x$ 都不趋于确定值，但它是**有界量**。
+
+因此整体是“**无穷小 × 有界量**”型，应使用定理：无穷小量与有界量的乘积仍为无穷小量。
+
+## 解题步骤
+
+**第一步：处理有理分式部分。**
+
+分子分母同除以 $x^5$：
+
+\[
+\frac{x^3-2x+5}{3x^5+2x+3}
+=\frac{\dfrac{1}{x^2}-\dfrac{2}{x^4}+\dfrac{5}{x^5}}{3+\dfrac{2}{x^4}+\dfrac{3}{x^5}}
+\]
+
+当 $x\to\infty$ 时，$\dfrac{1}{x^2},\dfrac{2}{x^4},\dfrac{5}{x^5},\dfrac{2}{x^4},\dfrac{3}{x^5}$ 均趋于 0，所以
+
+\[
+\lim_{x\to\infty}\frac{x^3-2x+5}{3x^5+2x+3}=\frac{0}{3}=0
+\]
+
+即该分式是 $x\to\infty$ 时的无穷小量。
+
+**第二步：说明三角因子有界。**
+
+对任意实数 $x$，
+
+\[
+|2+\cos x-3\sin x|\le 2+|\cos x|+3|\sin x|\le 2+1+3=6
+\]
+
+所以 $2+\cos x-3\sin x$ 在 $x\to\infty$ 过程中是**有界量**（界可取 6）。
+
+**第三步：用“无穷小 × 有界量”定理。**
+
+设
+
+\[
+\alpha(x)=\frac{x^3-2x+5}{3x^5+2x+3},\qquad \beta(x)=2+\cos x-3\sin x
+\]
+
+由第一步 $\alpha(x)\to 0$，由第二步 $\beta(x)$ 有界。根据定理：无穷小量与有界量的乘积仍为无穷小量，得
+
+\[
+\alpha(x)\beta(x)\to 0
+\]
+
+## 最终答案
+
+\[
+\boxed{\lim_{x\to\infty}\frac{x^3-2x+5}{3x^5+2x+3}(2+\cos x-3\sin x)=0}
+\]
+
+## 检验与说明
+
+- 有理分式次数比较：分子 3 次、分母 5 次，分母次数高，极限为 0，与计算一致。
+- 三角因子虽然不收敛，但有界，不影响“无穷小 × 有界 = 无穷小”的结论。
+- 若误把 $2+\cos x-3\sin x$ 当作趋于某个常数，或试图直接用极限乘积法则 $\lim(uv)=\lim u\cdot\lim v$，就会出错，因为 $\lim\beta(x)$ 不存在，乘积法则不适用。
+
+## 易错点提醒
+
+最容易错的一步是：**看到三角因子就默认它有极限**。本题中 $\cos x,\sin x$ 在 $x\to\infty$ 时都不趋于确定值，不能拆成两个极限相乘；正确做法是先判断有理部分为无穷小，再用有界量定理。同类题中若三角因子无界（如含 $x\sin x$），则不能直接套此定理，需要另作分析。</div></article>
 </div>
 
 <script>

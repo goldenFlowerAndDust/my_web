@@ -254,6 +254,65 @@ def generate_pages(config: dict, grouped: dict[str, dict[str, list[dict]]]) -> N
                 pass
 
 
+def archive_index_html(config: dict) -> str:
+    archive_dir = config["archive_dir"]
+    sections = []
+    for category in config["categories"]:
+        folder = archive_dir / category
+        if not folder.is_dir():
+            continue
+        dates = sorted((p for p in folder.glob("*.html")), reverse=True)
+        if not dates:
+            continue
+        links = "".join(
+            f'<li><a href="{quote(category)}/{quote(path.name)}">{esc(path.stem)}</a></li>'
+            for path in dates
+        )
+        sections.append(
+            '<section class="group">'
+            f"<h2>{esc(category)}</h2><ul class=\"dates\">{links}</ul>"
+            "</section>"
+        )
+    if not sections:
+        sections.append('<p class="empty">暂无归档。完成一次答疑后重新运行归档即可生成。</p>')
+    back = config["back"]
+    if back.startswith("../"):
+        back = back[3:]
+    style = """
+:root{--ink:#172033;--muted:#65718a;--line:#e4e9f2;--paper:#fffdf8;--accent:#2f6f9f;--soft:#f4f7fb}
+*{box-sizing:border-box}
+body{margin:0;padding:28px 16px 56px;background:#f3f6fc;color:var(--ink);font-family:"Noto Sans SC","Microsoft YaHei",sans-serif;line-height:1.75}
+.wrap{max-width:980px;margin:0 auto}
+.top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.top a{color:var(--accent);text-decoration:none;font-size:.9rem}
+.tag{font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:#fff}
+h1{margin:0 0 8px;font-size:1.65rem;letter-spacing:.02em}
+.lead{margin:0 0 22px;color:var(--muted);font-size:.92rem}
+.group{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:0 6px 18px rgba(31,45,70,.04)}
+.group h2{margin:0 0 10px;font-size:1.05rem;color:var(--accent)}
+.dates{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.dates a{display:inline-block;padding:5px 11px;border:1px solid #d9e4ef;border-radius:8px;background:var(--soft);color:#215a80;text-decoration:none;font-size:.88rem}
+.dates a:hover{border-color:var(--accent);background:#eaf3fa}
+.empty{color:var(--muted);font-size:.9rem}
+@media(max-width:600px){body{padding:18px 10px 40px}h1{font-size:1.35rem}.group{padding:14px}.dates a{font-size:.82rem}}
+"""
+    return f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{esc(config['label'])} · AI 答疑归档</title><style>{style}</style></head>
+<body><div class="wrap">
+<div class="top"><a href="{back}">← 返回{esc(config['label'])}主页</a><span class="tag">AI 答疑归档 · 按分类 / 日期</span></div>
+<h1>{esc(config['label'])} AI 答疑归档</h1>
+<p class="lead">点击日期查看当天完整问答。此页面由归档脚本自动生成；新增答疑后重新运行归档即可更新。</p>
+{''.join(sections)}
+</div></body></html>"""
+
+
+def write_archive_index(config: dict) -> None:
+    target = config["archive_dir"] / "index.html"
+    target.write_text(archive_index_html(config), encoding="utf-8", newline="\n")
+
+
 def math_hub_block(config: dict, grouped: dict[str, dict[str, list[dict]]]) -> str:
     parts = ["<!-- AI_ARCHIVE_START -->", "<h2>AI 答疑历史</h2>",
              "<p>按知识分类和日期归档；点击日期查看当天记录。</p>"]
@@ -270,6 +329,13 @@ def math_hub_block(config: dict, grouped: dict[str, dict[str, list[dict]]]) -> s
         parts.append("</ul>")
     if not has_any:
         parts.append("<p>暂无归档。完成一次数学答疑后，重启数学服务即可生成。</p>")
+    index_href = config["hub_prefix"] + "/index.html"
+    parts.append(
+        f'<p><a href="{index_href}" '
+        'style="display:inline-block;padding:6px 10px;border:1px solid #d9e4ef;'
+        'border-radius:8px;background:#f4f7fb;color:#215a80;text-decoration:none;'
+        'font-size:13px;">查看全部 AI 答疑归档 →</a></p>'
+    )
     parts.append("<!-- AI_ARCHIVE_END -->")
     return "\n".join(parts)
 
@@ -296,6 +362,7 @@ def english_hub_block(config: dict, grouped: dict[str, dict[str, list[dict]]]) -
         if has_any
         else '<p class="ai-archive-empty">暂无归档。完成一次英语答疑后，重启词素服务即可生成。</p>'
     )
+    index_href = config["hub_prefix"] + "/index.html"
     return f"""<!-- AI_ARCHIVE_START -->
 <section class="hub-section" data-section="ai-history">
     <div class="section-head">
@@ -306,6 +373,7 @@ def english_hub_block(config: dict, grouped: dict[str, dict[str, list[dict]]]) -
         </div>
     </div>
     {body}
+    <p class="ai-archive-index-link"><a href="{index_href}">查看全部答疑归档 →</a></p>
 </section>
 <!-- AI_ARCHIVE_END -->"""
 
@@ -332,6 +400,7 @@ def refresh(subject: str = "all") -> None:
             continue
         grouped = load_records(config)
         generate_pages(config, grouped)
+        write_archive_index(config)
         update_hub(config, grouped)
         file_count = sum(len(days) for days in grouped.values())
         print(f"归档完成：{config['label']}，{file_count} 个日期文件。")

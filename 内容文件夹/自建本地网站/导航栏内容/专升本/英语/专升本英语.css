@@ -1242,3 +1242,24 @@ button {
     color: var(--faint);
     font-size: 12px;
 }
+
+.ai-archive-index-link {
+    margin: 12px 0 0;
+}
+
+.ai-archive-index-link a {
+    display: inline-block;
+    padding: 7px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--teal);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.ai-archive-index-link a:hover {
+    border-color: var(--teal);
+    background: var(--paper-soft);
+}
