@@ -1,1 +1,4 @@
-
+# Windows 批处理必须使用 CRLF，否则 cmd.exe 会把中文/行首当成命令
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf

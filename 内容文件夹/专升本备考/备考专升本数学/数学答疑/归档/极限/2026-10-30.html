@@ -33,8 +33,85 @@
         <span class="tag">AI 答疑归档 · 按日保存</span>
     </div>
     <h1>极限 · 2026-10-30</h1>
-    <p class="sub">数学答疑记录，共 1 条。</p>
-    <article class="record"><div class="record-meta"><span>题目讲解</span><time>2026-10-30 22:43:16</time></div><h2>$\lim_{x \to \infty}\frac{x∧3-2x+5}{3{x∧5}+2x+3}(2+cosx-3sinx)$求极限</h2><div class="answer math">## 题目整理
+    <p class="sub">数学答疑记录，共 2 条。</p>
+    <article class="record"><div class="record-meta"><span>题目讲解</span><time>2026-10-30 22:07:00</time></div><h2>$\lim_{x \to -\infty}x(\sqrt{1+x^2}+x)$求极限</h2><div class="answer math">## 题目与知识点
+
+求极限
+\[
+\lim_{x\to -\infty}x\left(\sqrt{1+x^2}+x\right).
+\]
+
+知识点：无穷远处函数极限、\(\infty-\infty\) 型处理、分子有理化、无穷小量阶的比较。所属章节：高等数学“极限与连续”。
+
+关键观察：当 \(x\to -\infty\) 时，\(\sqrt{1+x^2}\to +\infty\)，而 \(x\to -\infty\)，括号内是 \(\infty-\infty\) 型，不能直接代入，需要变形。
+
+## 解题步骤
+
+**第一步：有理化括号内的差式。**
+
+利用恒等式
+\[
+\sqrt{1+x^2}+x=\frac{\left(\sqrt{1+x^2}+x\right)\left(\sqrt{1+x^2}-x\right)}{\sqrt{1+x^2}-x}
+=\frac{(1+x^2)-x^2}{\sqrt{1+x^2}-x}
+=\frac{1}{\sqrt{1+x^2}-x}.
+\]
+这里用到平方差公式，且分母 \(\sqrt{1+x^2}-x\neq 0\)（事实上当 \(x\to-\infty\) 时它趋于 \(+\infty\)）。
+
+**第二步：代回原式。**
+
+\[
+x\left(\sqrt{1+x^2}+x\right)=\frac{x}{\sqrt{1+x^2}-x}.
+\]
+
+**第三步：分子分母同除以 \(|x|=-x\)（因为 \(x&lt;0\)）。**
+
+注意 \(x\to -\infty\) 时 \(x&lt;0\)，所以 \(|x|=-x\)，且
+\[
+\sqrt{1+x^2}=|x|\sqrt{\frac{1}{x^2}+1}=-x\sqrt{1+\frac{1}{x^2}}.
+\]
+于是
+\[
+\frac{x}{\sqrt{1+x^2}-x}
+=\frac{x}{-x\sqrt{1+\frac1{x^2}}-x}
+=\frac{x}{-x\left(\sqrt{1+\frac1{x^2}}+1\right)}
+=\frac{1}{-\left(\sqrt{1+\frac1{x^2}}+1\right)}.
+\]
+
+**第四步：取极限。**
+
+当 \(x\to-\infty\) 时，\(\dfrac{1}{x^2}\to 0\)，故
+\[
+\sqrt{1+\frac1{x^2}}\to 1.
+\]
+因此
+\[
+\lim_{x\to-\infty}\frac{1}{-\left(\sqrt{1+\frac1{x^2}}+1\right)}
+=\frac{1}{-(1+1)}=-\frac12.
+\]
+
+## 最终答案
+
+\[
+\boxed{\lim_{x\to -\infty}x\left(\sqrt{1+x^2}+x\right)=-\frac12}
+\]
+
+## 检验
+
+从量级看：当 \(x\to-\infty\) 时，\(\sqrt{1+x^2}=|x|+o(1)=-x+o(1)\)，所以
+\[
+\sqrt{1+x^2}+x=o(1),
+\]
+即括号内是无穷小。更精确地，
+\[
+\sqrt{1+x^2}+x=\frac{1}{\sqrt{1+x^2}-x}\sim \frac{1}{-2x},
+\]
+乘以 \(x\) 得 \(\sim -\dfrac12\)，与计算结果一致。结果是一个有限常数，符合“无穷大乘无穷小”可能得到非零常数的预期。
+
+## 易错点提醒
+
+最容易错的一步是**开方时忽略 \(x&lt;0\)**：把 \(\sqrt{1+x^2}\) 直接写成 \(x\sqrt{1+\frac1{x^2}}\) 会多出一个负号，导致答案变成 \(\frac12\)。正确写法是 \(\sqrt{1+x^2}=|x|\sqrt{1+\frac1{x^2}}=-x\sqrt{1+\frac1{x^2}}\)。
+
+同类题提醒：处理 \(x\to -\infty\) 的有理化、同除最高次幂时，凡涉及 \(\sqrt{x^2}=|x|\) 的地方都要先判断 \(x\) 的符号；若改为 \(x\to +\infty\)，同样题目的极限会是 \(\frac12\)，可作对比练习。</div></article><article class="record"><div class="record-meta"><span>题目讲解</span><time>2026-10-30 22:43:16</time></div><h2>$\lim_{x \to \infty}\frac{x∧3-2x+5}{3{x∧5}+2x+3}(2+cosx-3sinx)$求极限</h2><div class="answer math">## 题目整理
 
 求极限
 

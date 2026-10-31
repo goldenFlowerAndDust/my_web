@@ -1478,9 +1478,10 @@ exports.main_handler = async (event) =&gt; {
 <h2>四、本地配置与第一次同步</h2>
 <ol>
     <li>确认 <code>共享配置/科目配置.json</code>：英语、数学的 <code>export_root</code> 指向各自科目下的 <code>导出记录</code> 文件夹。日期子目录由程序自动创建。</li>
-    <li>双击 <code>专升本备考/同步全部科目.bat</code>，进入菜单。</li>
-    <li>国际网络可直接用 Cloudflare；国内建议选 <code>6</code>，把腾讯云 SCF 设为主线路。也可以在 <code>4</code> / <code>5</code> 分别填写主线路和备用线路。口令会明文显示，方便核对。</li>
-    <li>选 <code>1</code> 立即同步全部科目。同步结束会打印每个科目的成功/0 条/失败状态和实际线路。</li>
+    <li>双击 <code>专升本备考/同步全部科目.bat</code>，显示启动菜单；选 <code>1</code>：先同步一次，完成后自动启动英语 8767、数学 8768，并打开两个答疑页。关闭同步窗口会同时结束两个服务。</li>
+    <li>需要配置线路时直接在启动菜单选 <code>5</code> 配置主线路（Cloudflare），选 <code>6</code> 配置备用线路（腾讯云 SCF），或选 <code>7</code> 直接把 SCF 设为主线路。口令会明文显示，方便核对。</li>
+    <li>配置完成后选 <code>1</code> 同步并启动全部服务，或选 <code>2</code> 只同步不启动服务。</li>
+    <li>同步结束会打印每个科目的成功/0 条/失败状态、实际线路和归档数量。</li>
     <li>英语待归档单词会自动调用 <code>archive_word</code> 写入 HTML、<code>data.json</code>，复习清单随之更新。</li>
 </ol>
 

@@ -4,7 +4,7 @@ set "PYTHONIOENCODING=utf-8"
 set "PYTHONUTF8=1"
 setlocal
 cd /d "%~dp0"
-title 专升本全部科目同步
+title Sync Launcher
 
 set "BUNDLED=%USERPROFILE%\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
 
@@ -18,15 +18,15 @@ pause
 exit /b 1
 
 :bundled
-"%BUNDLED%" "共享配置\sync_all_subjects.py" --menu
+"%BUNDLED%" "sync_launcher.py"
 goto done
 
 :py
-py -3 "共享配置\sync_all_subjects.py" --menu
+py -3 "sync_launcher.py"
 goto done
 
 :python
-python "共享配置\sync_all_subjects.py" --menu
+python "sync_launcher.py"
 goto done
 
 :done

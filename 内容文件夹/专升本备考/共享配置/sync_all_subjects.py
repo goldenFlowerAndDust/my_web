@@ -943,6 +943,11 @@ def main() -> int:
     parser.add_argument("--once", action="store_true", help="同步一次")
     parser.add_argument("--status", action="store_true", help="查看状态")
     parser.add_argument("--setup", action="store_true", help="配置云端连接")
+    parser.add_argument("--configure-primary", action="store_true", help="配置主线路")
+    parser.add_argument("--configure-fallback", action="store_true", help="配置备用线路")
+    parser.add_argument("--scf-primary", action="store_true", help="把腾讯云 SCF 设为主线路")
+    parser.add_argument("--promote-fallback", action="store_true", help="把备用线路切换为主线路")
+    parser.add_argument("--open-subject-config", action="store_true", help="打开科目配置")
     parser.add_argument("--menu", action="store_true", help="打开菜单")
     parser.add_argument("--no-import", action="store_true", help="只拉取保存，不导入")
     args = parser.parse_args()
@@ -952,6 +957,26 @@ def main() -> int:
 
     if args.setup:
         runner.load_cloud_config(interactive=True)
+        return 0
+    if args.configure_primary:
+        runner.configure_cloud_part("primary")
+        return 0
+    if args.configure_fallback:
+        runner.configure_cloud_part("fallback")
+        return 0
+    if args.scf_primary:
+        runner.configure_scf_as_primary()
+        return 0
+    if args.promote_fallback:
+        runner.promote_fallback()
+        return 0
+    if args.open_subject_config:
+        runner.ensure_subject_config()
+        try:
+            os.startfile(str(runner.subject_file))  # type: ignore[attr-defined]
+        except OSError as exc:
+            print("打开失败：%s" % exc)
+            print("路径：%s" % runner.subject_file)
         return 0
     if args.status:
         runner.show_status()
