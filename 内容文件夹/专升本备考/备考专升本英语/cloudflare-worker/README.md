@@ -170,13 +170,15 @@ GET  /api/health
 POST /api/tutor             Header: X-Tutor-Token
 GET  /api/tutor-log         Header: X-Tutor-Token
 POST /api/tutor-log-delete  Header: X-Tutor-Token
+POST /api/delete-tutor-logs Body: cleanup_token + records
 POST /api/queue-word        Header: X-Tutor-Token
 POST /api/pending-word      Header: X-Tutor-Token
 GET  /api/pending-words     Header: X-Tutor-Token
+POST /api/delete-pending-words     Body: cleanup_token + words
 ```
 
 > 如果之前部署的是旧版 Worker，需要重新粘贴新版 `worker.js` 并部署，
-> 否则生成器的云端排队会提示 404。云端只存待归档单词，分类和写入 HTML
+> 否则生成器的云端排队和自动清理会提示 404。云端只存待归档单词，分类和写入 HTML
 > 仍由本地 `word_archiver.py` 完成。
 
 ## 生成器云端排队
@@ -192,6 +194,18 @@ GET  /api/pending-words     Header: X-Tutor-Token
 
 生成器导出 `pending-words` JSON 后，用本地
 `导入待归档单词.bat` 完成分类写入。
+
+导出文件会带一个 **6 小时有效的 cleanup_token**。本地导入成功后，
+`import_pending_words.py` 会自动调用 `POST /api/delete-pending-words`，
+只删除本次成功处理的云端待归档记录；失败的词保留以便重试。
+旧导出文件没有这个令牌，不会自动删除；重新从生成器导出即可。
+
+## 答疑记录清理
+
+- 云端答疑记录默认保留 180 天，由 Worker 变量 `LOG_TTL_DAYS` 控制；可改成 30 或 60 天。
+- 在答疑页点“导出答疑记录”时，每条记录会附带 6 小时有效的清理令牌。
+- 本地双击 `导入答疑记录.bat` 写入成功后，会自动调用 `POST /api/delete-tutor-logs`，只删除本次成功写入/已存在的记录。
+- 导入失败或没有导入的云端记录继续保留；旧导出文件没有令牌，不会自动删除，重新导出即可。
 
 ## 八、数学答疑（subject: math）
 

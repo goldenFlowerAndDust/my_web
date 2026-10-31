@@ -783,10 +783,12 @@
         showToast("正在导出记录…");
         try {
             var all = [];
+            var cleanupTokens = [];
+            var cleanupUrl = "";
             for (var i = 0; i < categories.length; i += 1) {
                 var category = categories[i];
                 var url = apiUrl("/api/tutor-log?category=" +
-                    encodeURIComponent(category) + "&limit=50");
+                    encodeURIComponent(category) + "&limit=50&export=1");
                 var resp = await fetchWithTimeout(url, {
                     cache: "no-store",
                     headers: requestHeaders(false)
@@ -798,6 +800,8 @@
                 if (Array.isArray(data.entries)) {
                     all = all.concat(data.entries);
                 }
+                if (data.cleanup_token) cleanupTokens.push(data.cleanup_token);
+                if (data.cleanup_url) cleanupUrl = data.cleanup_url;
             }
 
             var seen = {};
@@ -826,6 +830,8 @@
             var payload = {
                 exported_at: now.toISOString(),
                 source: connection.mode === "cloud" ? "cloudflare-kv" : "local-jsonl",
+                cleanup_url: cleanupUrl,
+                cleanup_tokens: cleanupTokens,
                 count: entries.length,
                 entries: entries
             };
@@ -842,7 +848,7 @@
             setTimeout(function () {
                 URL.revokeObjectURL(objectUrl);
             }, 1000);
-            showToast("已导出 " + entries.length + " 条记录。");
+            showToast("已导出 " + entries.length + " 条记录；本地导入成功后会自动清理云端。");
         } catch (error) {
             showToast("导出失败：" + (error.message || "未知错误"), true);
         } finally {

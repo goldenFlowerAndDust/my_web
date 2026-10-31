@@ -12,7 +12,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
+import urllib.error
+import urllib.request
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -22,17 +25,52 @@ from english_tutor import LOG_DIR, TUTOR_CATEGORIES
 BACKUP_ROOT = LOG_DIR.parent / "英语问答日志备份"
 
 
-def load_entries(path: Path) -> list[dict[str, Any]]:
+def load_export(path: Path) -> tuple[list[dict[str, Any]], str, list[str]]:
     data = json.loads(path.read_text(encoding="utf-8-sig"))
     if isinstance(data, list):
         entries = data
+        cleanup_url = ""
+        cleanup_tokens: list[str] = []
     elif isinstance(data, dict):
         entries = data.get("entries") or []
+        cleanup_url = str(data.get("cleanup_url") or "").strip()
+        raw_tokens = data.get("cleanup_tokens") or []
+        cleanup_tokens = [
+            str(token).strip()
+            for token in raw_tokens
+            if re.fullmatch(r"[a-f0-9]{32}", str(token).strip())
+        ]
     else:
         raise ValueError("文件格式不对：需要数组或包含 entries 的 JSON 对象。")
     if not isinstance(entries, list):
         raise ValueError("entries 不是数组。")
-    return [item for item in entries if isinstance(item, dict)]
+    return [item for item in entries if isinstance(item, dict)], cleanup_url, cleanup_tokens
+
+
+def cleanup_cloud_logs(cleanup_url: str, cleanup_token: str, records: list[dict[str, str]]) -> int:
+    if not cleanup_url.startswith(("http://", "https://")):
+        raise ValueError("cleanup_url 不是有效地址")
+    if not re.fullmatch(r"[a-f0-9]{32}", cleanup_token):
+        raise ValueError("清理令牌格式不对")
+    body = json.dumps({
+        "cleanup_token": cleanup_token,
+        "records": records,
+    }, ensure_ascii=False).encode("utf-8")
+    request = urllib.request.Request(
+        cleanup_url,
+        data=body,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="ignore")[:300]
+        raise RuntimeError("HTTP %s %s" % (exc.code, detail))
+    if not payload.get("ok"):
+        raise RuntimeError(str(payload.get("error") or "云端清理失败"))
+    return int(payload.get("deleted") or 0)
 
 
 def normalize_entry(item: dict[str, Any]) -> dict[str, Any] | None:
@@ -104,6 +142,20 @@ def write_category(category: str, entries: list[dict[str, Any]]) -> int:
     return len(entries)
 
 
+def run_cleanup(cleanup_url: str, cleanup_tokens: list[str], records: list[dict[str, str]]) -> None:
+    if not records:
+        return
+    if not cleanup_tokens:
+        print("这份导出文件没有清理令牌；本次未自动删除云端答疑记录。请重新从答疑页导出。")
+        return
+    for token in cleanup_tokens:
+        try:
+            deleted = cleanup_cloud_logs(cleanup_url, token, records)
+            print("云端答疑记录已清理 %d 条。" % deleted)
+        except (OSError, ValueError, RuntimeError) as exc:
+            print("云端自动清理失败（本地写入已完成，不影响结果）：%s" % exc)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="把英语答疑导出 JSON 合并到本地日志")
     parser.add_argument("file", help="页面导出的 JSON 文件")
@@ -118,12 +170,13 @@ def main() -> int:
         return 1
 
     try:
-        raw_entries = load_entries(path)
+        raw_entries, cleanup_url, cleanup_tokens = load_export(path)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print("读取失败：%s" % exc)
         return 1
 
     by_category: dict[str, list[dict[str, Any]]] = {name: [] for name in TUTOR_CATEGORIES}
+    cleanup_records: list[dict[str, str]] = []
     skipped = 0
     for item in raw_entries:
         normalized = normalize_entry(item)
@@ -131,6 +184,11 @@ def main() -> int:
             skipped += 1
             continue
         by_category[normalized["mode"]].append(normalized)
+        cleanup_records.append({
+            "mode": normalized["mode"],
+            "time": normalized["time"],
+            "question": normalized["question"],
+        })
 
     total_new = 0
     total_duplicate = 0
@@ -163,7 +221,8 @@ def main() -> int:
         return 0
 
     if total_new == 0:
-        print("没有需要写入的新记录。")
+        print("没有需要写入的新记录（已有记录视为已导入）。")
+        run_cleanup(cleanup_url, cleanup_tokens, cleanup_records)
         return 0
 
     backup = backup_logs()
@@ -174,6 +233,7 @@ def main() -> int:
         if merged:
             write_category(category, merged)
     print("已写入本地日志：%s" % LOG_DIR)
+    run_cleanup(cleanup_url, cleanup_tokens, cleanup_records)
     return 0
 
 

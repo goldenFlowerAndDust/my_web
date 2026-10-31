@@ -208,7 +208,7 @@
         }
     }
 
-    function downloadCloudPending(entries) {
+    function downloadCloudPending(entries, cleanupToken, cleanupUrl) {
         var now = new Date();
         var stamp = now.getFullYear() + '-' +
             String(now.getMonth() + 1).padStart(2, '0') + '-' +
@@ -218,6 +218,9 @@
         var payload = {
             exported_at: now.toISOString(),
             source: 'cloudflare-kv',
+            cloud_url: cloudBase(),
+            cleanup_url: cleanupUrl || '',
+            cleanup_token: cleanupToken || '',
             count: entries.length,
             entries: entries
         };
@@ -258,8 +261,8 @@
                 setCloudStatus('云端没有生成器待归档单词。', 'error');
                 return;
             }
-            downloadCloudPending(entries);
-            setCloudStatus('已导出 ' + entries.length + ' 个待归档单词，拖入 导入待归档单词.bat。', 'ok');
+            downloadCloudPending(entries, data.cleanup_token || '', data.cleanup_url || '');
+            setCloudStatus('已导出 ' + entries.length + ' 个待归档单词；本地导入成功后会自动清理云端队列。', 'ok');
         } catch (err) {
             setCloudStatus('导出失败：' + (err.message || '未知错误'), 'error');
         } finally {

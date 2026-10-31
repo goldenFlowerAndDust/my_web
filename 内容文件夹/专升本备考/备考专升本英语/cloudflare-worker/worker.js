@@ -20,6 +20,8 @@
  *   POST /api/pending-word     Header: X-Tutor-Token
  *   POST /api/queue-word       Header: X-Tutor-Token
  *   GET  /api/pending-words    Header: X-Tutor-Token
+ *   POST /api/delete-pending-words     Body: cleanup_token + words
+ *   POST /api/delete-tutor-logs        Body: cleanup_token + records
  *
  * /api/tutor 的 subject：
  *   缺省 / english → 英语教师
@@ -565,13 +567,70 @@ async function handlePendingWords(request, env) {
 
   try {
     const listed = await env.TUTOR_KV.list({ prefix: PENDING_PREFIX, limit: 1000 });
-    const values = await Promise.all(listed.keys.map((key) => env.TUTOR_KV.get(key.name, "json")));
+    const keys = listed.keys.map((key) => key.name);
+    const values = await Promise.all(keys.map((key) => env.TUTOR_KV.get(key, "json")));
     const entries = values
       .filter((item) => item && item.word)
       .sort((a, b) => String(b.created_at || b.time || "").localeCompare(String(a.created_at || a.time || "")));
-    return json({ ok: true, total: entries.length, entries }, 200, request, env);
+    let cleanupToken = "";
+    if (entries.length) {
+      cleanupToken = crypto.randomUUID().replace(/-/g, "");
+      await env.TUTOR_KV.put(
+        `cleanup:${cleanupToken}`,
+        JSON.stringify({ keys, created_at: new Date().toISOString() }),
+        { expirationTtl: 21600 }
+      );
+    }
+    return json({
+      ok: true,
+      total: entries.length,
+      entries,
+      cleanup_token: cleanupToken,
+      cleanup_url: new URL(request.url).origin + "/api/delete-pending-words"
+    }, 200, request, env);
   } catch (error) {
     return json({ ok: false, error: "读取云端待归档单词失败。" }, 500, request, env);
+  }
+}
+
+async function handleDeletePendingWords(request, env) {
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: "请求 JSON 格式不正确。" }, 400, request, env);
+  }
+  const token = String(payload.cleanup_token || "").trim();
+  if (!/^[a-f0-9]{32}$/.test(token)) {
+    return json({ ok: false, error: "清理令牌无效。" }, 401, request, env);
+  }
+  const words = new Set(
+    (Array.isArray(payload.words) ? payload.words : [])
+      .map((word) => String(word || "").trim().toLowerCase())
+      .filter((word) => /^[a-z][a-z'-]{1,40}$/.test(word))
+  );
+  if (!words.size) {
+    return json({ ok: false, error: "没有要清理的单词。" }, 400, request, env);
+  }
+
+  try {
+    const cleanup = await env.TUTOR_KV.get(`cleanup:${token}`, "json");
+    if (!cleanup || !Array.isArray(cleanup.keys)) {
+      return json({ ok: false, error: "清理令牌已过期，请重新导出待归档 JSON。" }, 410, request, env);
+    }
+    let deleted = 0;
+    for (const key of cleanup.keys) {
+      const item = await env.TUTOR_KV.get(key, "json");
+      if (!item || !words.has(String(item.word || "").toLowerCase())) continue;
+      await env.TUTOR_KV.delete(key);
+      deleted += 1;
+    }
+    return json({ ok: true, deleted }, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: "删除云端待归档单词失败。" }, 500, request, env);
   }
 }
 
@@ -776,7 +835,98 @@ async function handleLog(request, env) {
     return json({ ok: false, error: "读取云端日志失败，请稍后重试。" }, 500, request, env);
   }
 
-  return json({ ok: true, subject, category, topic, total, entries }, 200, request, env);
+  let cleanupToken = "";
+  if (url.searchParams.get("export") === "1" && entries.length) {
+    cleanupToken = crypto.randomUUID().replace(/-/g, "");
+    const refs = entries.map((item) => ({
+      mode: normalizeMode(item.mode, config.categories, config.aliases),
+      time: String(item.time || ""),
+      question: String(item.question || "").slice(0, 500)
+    }));
+    try {
+      await env.TUTOR_KV.put(
+        `cleanup-log:${cleanupToken}`,
+        JSON.stringify({ subject, entries: refs }),
+        { expirationTtl: 21600 }
+      );
+    } catch (error) {
+      cleanupToken = "";
+    }
+  }
+
+  return json({
+    ok: true,
+    subject,
+    category,
+    topic,
+    total,
+    entries,
+    cleanup_token: cleanupToken,
+    cleanup_url: new URL(request.url).origin + "/api/delete-tutor-logs"
+  }, 200, request, env);
+}
+
+async function handleDeleteTutorLogs(request, env) {
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: "请求 JSON 格式不正确。" }, 400, request, env);
+  }
+  const token = String(payload.cleanup_token || "").trim();
+  if (!/^[a-f0-9]{32}$/.test(token)) {
+    return json({ ok: false, error: "清理令牌无效。" }, 401, request, env);
+  }
+  const cleanup = await env.TUTOR_KV.get(`cleanup-log:${token}`, "json");
+  if (!cleanup || !Array.isArray(cleanup.entries)) {
+    return json({ ok: false, error: "清理令牌已过期，请重新导出答疑记录。" }, 410, request, env);
+  }
+
+  const subject = cleanup.subject === "math" ? "math" : "english";
+  const config = subjectConfig(subject);
+  const records = Array.isArray(payload.records) ? payload.records : [];
+  const wanted = new Map();
+  for (const record of records) {
+    if (!record || typeof record !== "object") continue;
+    const mode = normalizeMode(record.mode, config.categories, config.aliases);
+    const time = String(record.time || "").trim();
+    const question = String(record.question || "").trim().slice(0, 500);
+    if (!mode || !time || !question) continue;
+    if (!wanted.has(mode)) wanted.set(mode, []);
+    wanted.get(mode).push({ time, question });
+  }
+  if (!wanted.size) {
+    return json({ ok: false, error: "没有要清理的答疑记录。" }, 400, request, env);
+  }
+
+  let deleted = 0;
+  try {
+    for (const [mode, refs] of wanted.entries()) {
+      const indexKey = subject === "math" ? `index:math:${mode}` : `index:${mode}`;
+      const existing = await env.TUTOR_KV.get(indexKey, "json");
+      if (!Array.isArray(existing) || !existing.length) continue;
+      const kept = existing.filter((item) => {
+        if (!item || typeof item !== "object") return true;
+        const itemMode = normalizeMode(item.mode, config.categories, config.aliases);
+        const itemTime = String(item.time || "").trim();
+        const itemQuestion = String(item.question || "").trim().slice(0, 500);
+        return !(itemMode === mode && refs.some((ref) => (
+          ref.time === itemTime && ref.question === itemQuestion
+        )));
+      });
+      if (kept.length !== existing.length) {
+        deleted += existing.length - kept.length;
+        const ttl = Math.max(1, Number(env.LOG_TTL_DAYS || 180) || 180) * 86400;
+        await env.TUTOR_KV.put(indexKey, JSON.stringify(kept), { expirationTtl: ttl });
+      }
+    }
+    return json({ ok: true, deleted }, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: "删除云端答疑记录失败。" }, 500, request, env);
+  }
 }
 
 async function handleLogDelete(request, env) {
@@ -869,6 +1019,14 @@ async function handleRequest(request, env) {
 
   if (path === "/api/pending-words" && request.method === "GET") {
     return handlePendingWords(request, env);
+  }
+
+  if (path === "/api/delete-pending-words" && request.method === "POST") {
+    return handleDeletePendingWords(request, env);
+  }
+
+  if (path === "/api/delete-tutor-logs" && request.method === "POST") {
+    return handleDeleteTutorLogs(request, env);
   }
 
   if (path === "/api/tutor-log" && request.method === "GET") {

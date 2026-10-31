@@ -13,6 +13,8 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 from word_archiver import ArchiveError, archive_word, normalize_word
@@ -20,17 +22,50 @@ from word_archiver import ArchiveError, archive_word, normalize_word
 WORD_RE = re.compile(r"^[A-Za-z][A-Za-z'-]{1,40}$")
 
 
-def load_entries(path: Path) -> list[dict]:
+def load_pending(path: Path) -> tuple[list[dict], str, str]:
     data = json.loads(path.read_text(encoding="utf-8-sig"))
     if isinstance(data, list):
         entries = data
+        cleanup_url = ""
+        cleanup_token = ""
     elif isinstance(data, dict):
         entries = data.get("entries") or []
+        cloud_url = str(data.get("cloud_url") or "").strip().rstrip("/")
+        cleanup_url = str(data.get("cleanup_url") or "").strip()
+        if not cleanup_url and cloud_url:
+            cleanup_url = cloud_url + "/api/delete-pending-words"
+        cleanup_token = str(data.get("cleanup_token") or "").strip()
     else:
         raise ValueError("文件格式不对：需要数组或包含 entries 的 JSON 对象。")
     if not isinstance(entries, list):
         raise ValueError("entries 不是数组。")
-    return [item for item in entries if isinstance(item, dict)]
+    return [item for item in entries if isinstance(item, dict)], cleanup_url, cleanup_token
+
+
+def cleanup_cloud(cleanup_url: str, cleanup_token: str, words: list[str]) -> int:
+    if not cleanup_url.startswith(("http://", "https://")):
+        raise ValueError("cleanup_url 不是有效地址")
+    if not re.fullmatch(r"[a-f0-9]{32}", cleanup_token):
+        raise ValueError("清理令牌格式不对")
+    body = json.dumps({
+        "cleanup_token": cleanup_token,
+        "words": words,
+    }, ensure_ascii=False).encode("utf-8")
+    request = urllib.request.Request(
+        cleanup_url,
+        data=body,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="ignore")[:300]
+        raise RuntimeError("HTTP %s %s" % (exc.code, detail))
+    if not payload.get("ok"):
+        raise RuntimeError(str(payload.get("error") or "云端清理失败"))
+    return int(payload.get("deleted") or 0)
 
 
 def main() -> int:
@@ -47,7 +82,7 @@ def main() -> int:
         return 1
 
     try:
-        entries = load_entries(path)
+        entries, cleanup_url, cleanup_token = load_pending(path)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print("读取失败：%s" % exc)
         return 1
@@ -80,6 +115,7 @@ def main() -> int:
     existing = 0
     repaired = 0
     failed = 0
+    processed: list[str] = []
     for word in words:
         try:
             result = archive_word(word, "来自生成器云端待归档")
@@ -87,6 +123,7 @@ def main() -> int:
                 result = archive_word(word, "来自生成器云端待归档", overwrite=True)
                 if result.get("overwritten"):
                     repaired += 1
+                    processed.append(word)
                     print("%s：页面存在、data.json 缺失，已重新分析并补写 data.json" % word)
                 else:
                     failed += 1
@@ -94,6 +131,7 @@ def main() -> int:
                 continue
             if result.get("exists"):
                 existing += 1
+                processed.append(word)
                 print("%s：已存在，跳过" % word)
             else:
                 location = result.get("location") or {}
@@ -104,6 +142,7 @@ def main() -> int:
                     schedule,
                 ))
                 ok += 1
+                processed.append(word)
         except (ArchiveError, OSError, ValueError) as exc:
             failed += 1
             print("%s：失败：%s" % (word, exc))
@@ -112,6 +151,18 @@ def main() -> int:
     print("完成：新写入 %d，已存在 %d，修复孤儿页面 %d，失败 %d" % (
         ok, existing, repaired, failed
     ))
+
+    if processed and cleanup_token:
+        try:
+            deleted = cleanup_cloud(cleanup_url, cleanup_token, processed)
+            print("云端已清理 %d 条对应待归档记录。" % deleted)
+        except (OSError, ValueError, RuntimeError) as exc:
+            print("云端自动清理失败（本地写入已完成，不影响结果）：%s" % exc)
+    elif processed and not cleanup_token:
+        print("这份导出文件没有清理令牌；本次未自动删除云端记录。请重新从生成器导出后再导入。")
+    elif cleanup_url and cleanup_token:
+        print("没有成功处理的单词，云端记录保留。")
+
     return 0 if failed == 0 else 2
 
 
