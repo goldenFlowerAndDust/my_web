@@ -18,6 +18,7 @@
  *   GET  /api/tutor-log       Header: X-Tutor-Token
  *   POST /api/tutor-log-delete Header: X-Tutor-Token
  *   POST /api/pending-word     Header: X-Tutor-Token
+ *   POST /api/queue-word       Header: X-Tutor-Token
  *   GET  /api/pending-words    Header: X-Tutor-Token
  *
  * /api/tutor 的 subject：
@@ -90,6 +91,13 @@ const SYSTEM_PROMPT = `你是一位资深英语教师，长期从事专升本英
 最后检查：答案是否直接解决了用户的问题？作文是否同时有“反例”和“修改/范文”？句子分析是否真的拆了主干？单词解释是否有例句？`;
 
 const MATH_CATEGORIES = ["题目讲解", "错题诊断", "概念公式", "其他"];
+const RESOLVE_WORD_PROMPT = `你是英语词汇索引器。用户会输入一个英文单词，或一个中文意思。
+你只返回一个 JSON 对象，不要输出其他文字：
+{"word":"单个小写英文单词","meaning_zh":"对应的简短中文意思"}
+规则：
+1. word 必须是单个小写英文单词，不能是短语、句子或中文。
+2. 如果中文意思对应多个词，选最常用、最适合专升本基础词汇的一个。
+3. 如果无法确定单一英文单词，返回 {"word":"","meaning_zh":""}。`;
 const MATH_TOPICS = [
   "极限",
   "导数与微分",
@@ -567,6 +575,156 @@ async function handlePendingWords(request, env) {
   }
 }
 
+function parseJsonLoose(text) {
+  const raw = String(text || "").trim()
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/, "");
+  const start = raw.indexOf("{");
+  const end = raw.lastIndexOf("}");
+  if (start < 0 || end < start) return null;
+  try {
+    return JSON.parse(raw.slice(start, end + 1));
+  } catch (error) {
+    return null;
+  }
+}
+
+async function resolveWordQuery(query, env) {
+  const apiKey = String(env.DEEPSEEK_API_KEY || "");
+  if (!apiKey) throw new Error("云端未配置 DEEPSEEK_API_KEY。");
+  const model = String(env.DEEPSEEK_MODEL || "deepseek-chat");
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 30000);
+  let response;
+  try {
+    response = await fetch("https://api.deepseek.com/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: "system", content: RESOLVE_WORD_PROMPT },
+          { role: "user", content: query }
+        ],
+        temperature: 0,
+        max_tokens: 200
+      }),
+      signal: controller.signal
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+  if (!response.ok) {
+    const detail = (await response.text()).slice(0, 300);
+    throw new Error("词义解析失败：" + detail);
+  }
+  const data = await response.json();
+  const content = data && data.choices && data.choices[0]
+    && data.choices[0].message && data.choices[0].message.content;
+  return parseJsonLoose(content) || {};
+}
+
+async function enqueuePendingWord(env, word, question, source, meaningZh) {
+  const now = new Date();
+  const createdAt = now.toISOString();
+  const time = formatShanghai(now);
+  const ttl = Math.max(1, Number(env.LOG_TTL_DAYS || 180) || 180) * 86400;
+
+  try {
+    const listed = await env.TUTOR_KV.list({ prefix: PENDING_PREFIX, limit: 1000 });
+    const values = await Promise.all(listed.keys.map((key) => env.TUTOR_KV.get(key.name, "json")));
+    const duplicate = values.find((item) => item && String(item.word || "").toLowerCase() === word);
+    if (duplicate) {
+      return {
+        ok: true,
+        queued: false,
+        already_pending: true,
+        word,
+        meaning_zh: duplicate.meaning_zh || meaningZh || "",
+        message: "这个词已经在云端待归档队列中。"
+      };
+    }
+  } catch (error) {
+    // 列表失败时仍然尝试写入，避免用户输入后丢失。
+  }
+
+  const key = `${PENDING_PREFIX}${createdAt}:${crypto.randomUUID()}`;
+  const record = {
+    created_at: createdAt,
+    time,
+    word,
+    question,
+    meaning_zh: meaningZh || "",
+    source: source || "generator"
+  };
+  await env.TUTOR_KV.put(key, JSON.stringify(record), { expirationTtl: ttl });
+  return {
+    ok: true,
+    queued: true,
+    already_pending: false,
+    word,
+    meaning_zh: meaningZh || "",
+    time,
+    message: "已加入云端待归档；回本地导出 JSON 后拖入 导入待归档单词.bat。"
+  };
+}
+
+async function handleQueueWord(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: error.message || "请求体不合法。" }, 400, request, env);
+  }
+
+  const query = String(payload.query || payload.word || "").trim().slice(0, 80);
+  if (!query) {
+    return json({ ok: false, error: "请输入一个英文单词或中文意思。" }, 400, request, env);
+  }
+
+  const english = /^[A-Za-z][A-Za-z'-]{1,40}$/;
+  const hasHan = /[\u4e00-\u9fff]/.test(query);
+  if (!english.test(query) && !hasHan) {
+    return json({ ok: false, error: "生成器只接受一个英文单词，或一个中文意思。" }, 400, request, env);
+  }
+  if (hasHan && (query.length > 40 || /[\n\r?？!！。]/.test(query))) {
+    return json({ ok: false, error: "中文只输入简短意思，不要输入完整句子或问句。" }, 400, request, env);
+  }
+
+  let word = "";
+  let meaningZh = "";
+  if (english.test(query)) {
+    word = query.toLowerCase();
+  } else {
+    try {
+      const resolved = await resolveWordQuery(query, env);
+      word = String(resolved.word || "").trim().toLowerCase();
+      meaningZh = String(resolved.meaning_zh || "").trim();
+    } catch (error) {
+      return json({ ok: false, error: error.message || "词义解析失败。" }, 502, request, env);
+    }
+    if (!english.test(word)) {
+      return json({ ok: false, error: "没有找到对应的单一英文单词，请换一个中文意思。" }, 400, request, env);
+    }
+  }
+
+  try {
+    const result = await enqueuePendingWord(env, word, query, "generator", meaningZh);
+    return json(result, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: "写入云端待归档失败。" }, 500, request, env);
+  }
+}
+
 async function handleLog(request, env) {
   if (!authorized(request, env)) {
     return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
@@ -703,6 +861,10 @@ async function handleRequest(request, env) {
 
   if (path === "/api/pending-word" && request.method === "POST") {
     return handlePendingWord(request, env);
+  }
+
+  if (path === "/api/queue-word" && request.method === "POST") {
+    return handleQueueWord(request, env);
   }
 
   if (path === "/api/pending-words" && request.method === "GET") {

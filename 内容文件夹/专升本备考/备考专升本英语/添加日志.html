@@ -474,10 +474,15 @@
         return type === 'review-sync';
     }
 
+    function isOverwriteType(type) {
+        return type === 'overwrite';
+    }
+
     function typeLabel(type) {
         if (isNewType(type)) return '新增';
         if (isPriorityType(type)) return '插队';
         if (isReviewType(type)) return '复习同步';
+        if (isOverwriteType(type)) return '覆盖更新';
         return type || '记录';
     }
 
@@ -489,13 +494,15 @@
             compound: '复合词',
             atom: '原子词',
             'existing-priority': '已录入，插队复习',
-            'review-sync': '复习打卡写回'
+            'review-sync': '复习打卡写回',
+            overwrite: '重新分析并覆盖'
         }[type] || '';
     }
 
     function badgeClass(type) {
         if (isNewType(type)) return 'new';
         if (isPriorityType(type)) return 'priority';
+        if (isOverwriteType(type)) return 'new';
         return 'review';
     }
 

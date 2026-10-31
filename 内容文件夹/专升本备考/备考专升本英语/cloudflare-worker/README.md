@@ -170,13 +170,28 @@ GET  /api/health
 POST /api/tutor             Header: X-Tutor-Token
 GET  /api/tutor-log         Header: X-Tutor-Token
 POST /api/tutor-log-delete  Header: X-Tutor-Token
+POST /api/queue-word        Header: X-Tutor-Token
 POST /api/pending-word      Header: X-Tutor-Token
 GET  /api/pending-words     Header: X-Tutor-Token
 ```
 
 > 如果之前部署的是旧版 Worker，需要重新粘贴新版 `worker.js` 并部署，
-> 否则答疑页的“待归档单词”会提示 404。云端只存待归档单词，分类和写入 HTML
+> 否则生成器的云端排队会提示 404。云端只存待归档单词，分类和写入 HTML
 > 仍由本地 `word_archiver.py` 完成。
+
+## 生成器云端排队
+
+`POST /api/queue-word` 只做两件事：
+
+```text
+英文单词 → 直接入队
+中文意思 → AI 解析成单个英文单词后入队
+```
+
+不接受句子、问句或其他内容；不做构词分类，也不写本地文件。
+
+生成器导出 `pending-words` JSON 后，用本地
+`导入待归档单词.bat` 完成分类写入。
 
 ## 八、数学答疑（subject: math）
 

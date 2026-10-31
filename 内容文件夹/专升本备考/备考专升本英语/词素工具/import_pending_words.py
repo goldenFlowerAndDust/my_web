@@ -81,7 +81,7 @@ def main() -> int:
     failed = 0
     for word in words:
         try:
-            result = archive_word(word, "来自英语答疑待归档")
+            result = archive_word(word, "来自生成器云端待归档")
             if result.get("exists"):
                 existing += 1
                 print("%s：已存在，跳过" % word)

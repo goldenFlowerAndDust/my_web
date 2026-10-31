@@ -31,6 +31,7 @@ TYPE_LABELS = {
     "atom": "原子词",
     "existing-priority": "已录入，插队复习",
     "review-sync": "复习打卡写回",
+    "overwrite": "重新分析并覆盖",
 }
 
 

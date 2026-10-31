@@ -68,7 +68,6 @@
     var historyCount = document.getElementById("history-count");
     var historyRefresh = document.getElementById("history-refresh");
     var historyExport = document.getElementById("history-export");
-    var pendingExport = document.getElementById("pending-export");
     var historyNote = document.getElementById("history-note");
     var toastEl = document.getElementById("toast");
     var connectionBtn = document.getElementById("connection-btn");
@@ -420,7 +419,6 @@
         } else {
             historyNote.innerHTML = "日志位置：<code>词素工具/英语问答日志/单词解释.jsonl</code>、<code>作文.jsonl</code>、<code>句子分析.jsonl</code>、<code>其他.jsonl</code>。已加入 <code>.gitignore</code>，不会上传 GitHub。";
         }
-        if (pendingExport) pendingExport.hidden = connection.mode !== "cloud";
     }
 
     function fetchWithTimeout(url, options, timeoutMs) {
@@ -677,10 +675,6 @@
             answerMeta.textContent = data.logged
                 ? logWhere + " · " + (data.model || "deepseek-chat")
                 : "回答已生成，但日志写入失败：" + (data.warning || "请检查配置");
-            var queueMessage = await queueWordAfterAnswer(question, submittedMode);
-            if (queueMessage) {
-                answerMeta.textContent += " · " + queueMessage;
-            }
             copyBtn.disabled = !currentAnswer;
             showToast(data.logged ? "回答完成，已写入日志。" : "回答完成，但日志未写入。", !data.logged);
             if (window.innerWidth < 940) {
@@ -1039,7 +1033,6 @@
         loadHistory(historyCategory);
     });
     historyExport.addEventListener("click", exportHistory);
-    pendingExport.addEventListener("click", exportPendingWords);
     historyTabs.forEach(function (tab) {
         tab.addEventListener("click", function () {
             loadHistory(tab.dataset.category || "all");

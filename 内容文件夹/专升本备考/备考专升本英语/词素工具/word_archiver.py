@@ -390,6 +390,14 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
     if not senses:
         senses = [{"pos": pos, "zh": meaning, "collocation": "", "collocation_zh": ""}]
 
+    sense_positions: list[str] = []
+    for sense in senses:
+        sense_pos = str(sense.get("pos") or "").strip()
+        if sense_pos and sense_pos not in sense_positions:
+            sense_positions.append(sense_pos)
+    if sense_positions:
+        pos = " / ".join(sense_positions)
+
     example = str(raw.get("example") or "").strip()
     example_zh = str(raw.get("example_zh") or "").strip()
     if not example or not example_zh:
@@ -486,6 +494,15 @@ def analyze_word(word: str, hint: str = "") -> dict[str, Any]:
 # 单词页面写入
 # ---------------------------------------------------------------------------
 
+def _pos_summary(analysis: dict[str, Any]) -> str:
+    values: list[str] = []
+    for sense in analysis.get("senses", []):
+        pos = str(sense.get("pos") or "").strip()
+        if pos and pos not in values:
+            values.append(pos)
+    return " / ".join(values) or str(analysis.get("pos") or "").strip()
+
+
 def _group_senses_by_pos(analysis: dict[str, Any]) -> list[tuple[str, list[dict[str, str]]]]:
     """按词性分组，保持 AI 输出顺序；同词性合并到一组。"""
     fallback = str(analysis.get("pos") or "").strip()
@@ -543,7 +560,7 @@ def word_card_html(analysis: dict[str, Any]) -> str:
                 <div class="word_line">
                     <code class="en">{esc(morph["root"])}(<span class="zh">{esc(morph["root_meaning_zh"])}</span>)</code>
                     <span class="arrow" aria-hidden="true">——&gt;</span>
-                    <span class="word_pos">{esc(w["pos"])}</span>
+                    <span class="word_pos">{esc(_pos_summary(w))}</span>
                     <code class="en">{esc(word)}(<span class="zh">{esc(w["meaning_zh"])}</span>)</code>
                     <span class="word_level">{esc(w["level"])}</span>
                     <button type="button" class="card_toggle">显示</button>
@@ -693,7 +710,7 @@ def _ci_card_html(analysis: dict[str, Any], is_main: bool) -> str:
     word = w["word"]
     anchor = (' id="word-%s" data-word="%s"' % (esc_attr(word), esc_attr(word))) if is_main else ""
     note = " · ".join([p for p in [morph.get("explanation", ""), w.get("level", "")] if p])
-    pos = str(w.get("pos") or "").strip()
+    pos = _pos_summary(w)
     pos_html = '<span class="pos_tag">%s</span>' % esc(pos) if pos else ""
     return f'''            <li{anchor}>
                 <div class="ci_word_head">
@@ -889,7 +906,7 @@ def build_data_item(
         "rootZh": morph.get("root_meaning_zh", ""),
         "suffix": morph.get("affix", "") if morph["type"] in {"suffix", "prefix"} else "",
         "suffixLabel": (("-" + morph["affix"]) if morph["type"] == "suffix" else (morph["affix"] + "-")) if morph["type"] in {"suffix", "prefix"} else "",
-        "pos": w["pos"],
+        "pos": _pos_summary(w),
         "levelTag": w["level"],
         "sense": w["senses"][0]["zh"] if w["senses"] else w["meaning_zh"],
         "anchor": "word-" + w["word"],
@@ -1223,7 +1240,117 @@ def clamp_int(value: Any, default: int = 0) -> int:
         return default
 
 
-def archive_word(word: str, hint: str = "") -> dict[str, Any]:
+def overwrite_existing_word(
+    word: str,
+    hint: str,
+    data_before: dict[str, Any],
+    category: str,
+    item: dict[str, Any] | None,
+    page_file: str,
+) -> dict[str, Any]:
+    """重新分析并覆盖已录入的词，保留 level/nextDate 等复习进度。
+
+    目前只覆盖“词素/”下的一词一页（原子词、词根族、复合词）。
+    核心词汇通关页是共享页面，不在这里整页覆盖。
+    """
+    if not item:
+        raise ArchiveError("页面已存在，但 data.json 里没有对应记录，暂不自动覆盖。")
+    if not category.startswith("词素"):
+        raise ArchiveError("核心词汇页是共享页面，暂不支持整页覆盖；请先备份后手动处理。")
+
+    path_text = str(item.get("path") or "").split("#")[0]
+    if path_text.startswith("../"):
+        relative = path_text[3:]
+    elif path_text:
+        relative = path_text
+    else:
+        relative = page_file
+    existing_page = BASE / relative
+    if not existing_page.exists():
+        raise ArchiveError("找不到原单词页面，无法覆盖：%s" % relative)
+
+    analysis = analyze_word(word, hint)
+    new_category = analysis["target"]["category"]
+    if new_category != category:
+        raise ArchiveError(
+            "重新分析后的分类变了（%s → %s），暂不自动覆盖，避免写错页面。"
+            % (category, new_category)
+        )
+
+    ci_page, title = _ci_page_path(analysis)
+    if ci_page.resolve() != existing_page.resolve():
+        # 文件名算法变了也不强行换路径，继续写原路径。
+        pass
+
+    backup = backup_paths([existing_page, DATA_JSON])
+    body_cards = _ci_card_html(analysis, True)
+    related = _related_cards_html(analysis)
+    if related:
+        body_cards += "\n" + related
+    page_html = _ci_page_html(analysis, title, body_cards)
+    write_text_atomic(existing_page, page_html)
+
+    location = {
+        "file": str(existing_page.relative_to(BASE)),
+        "anchor": "word-" + word,
+        "target": new_category,
+    }
+    created = str(item.get("created") or today_str())
+    new_item = build_data_item(
+        analysis,
+        location,
+        created,
+        extra=bool(item.get("extra", True)),
+        extra_date=str(item.get("extraDate") or ""),
+        source=str(item.get("source") or "overwrite"),
+    )
+    for key in ("level", "nextDate", "lastReviewed", "created", "extra", "extraDate", "source", "priority"):
+        if key in item:
+            new_item[key] = item[key]
+
+    data = load_data()
+    target_list = data.get(category)
+    if not isinstance(target_list, list):
+        raise ArchiveError("data.json 分类异常，无法覆盖：%s" % category)
+    replaced = False
+    for idx, current in enumerate(target_list):
+        if isinstance(current, dict) and str(current.get("name") or "") == word:
+            target_list[idx] = new_item
+            replaced = True
+            break
+    if not replaced:
+        raise ArchiveError("data.json 中找不到 %s，无法覆盖。" % word)
+    write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+
+    append_log({
+        "word": word,
+        "type": "overwrite",
+        "target": new_category,
+        "file": location["file"],
+        "schedule": new_item.get("nextDate", ""),
+        "status": "ok",
+    })
+    return {
+        "ok": True,
+        "exists": False,
+        "overwritten": True,
+        "word": word,
+        "analysis": analysis,
+        "location": location,
+        "data": {
+            "item": new_item,
+            "category": category,
+            "schedule": new_item.get("nextDate", ""),
+        },
+        "backup": backup,
+        "summary": "%s 已重新分析并覆盖；复习进度保留，下次复习 %s" % (
+            word,
+            new_item.get("nextDate", "未安排"),
+        ),
+    }
+
+
+def archive_word(word: str, hint: str = "", overwrite: bool = False) -> dict[str, Any]:
     with WRITE_LOCK:
         word = normalize_word(word)
         page_file = find_existing_word(word)
@@ -1231,18 +1358,20 @@ def archive_word(word: str, hint: str = "") -> dict[str, Any]:
         category, item = find_data_item(data_before, word)
 
         if page_file or item:
-            return {
-                "ok": True,
-                "exists": True,
-                "word": word,
-                "message": "已录入：不会重复创建，也不会插队；需要复习时请在复习清单或全部词条中查看。",
-                "data": {
-                    "category": category,
-                    "item": item,
-                    "schedule": (item or {}).get("nextDate", ""),
-                },
-                "page_file": page_file,
-            }
+            if not overwrite:
+                return {
+                    "ok": True,
+                    "exists": True,
+                    "word": word,
+                    "message": "已录入：不会重复创建，也不会插队；需要复习时请在复习清单或全部词条中查看。",
+                    "data": {
+                        "category": category,
+                        "item": item,
+                        "schedule": (item or {}).get("nextDate", ""),
+                    },
+                    "page_file": page_file,
+                }
+            return overwrite_existing_word(word, hint, data_before, category, item, page_file)
 
         analysis = analyze_word(word, hint)
         target = analysis["target"]

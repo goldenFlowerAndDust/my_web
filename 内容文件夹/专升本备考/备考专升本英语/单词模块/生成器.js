@@ -27,6 +27,16 @@
     var toastEl = document.getElementById('toast');
     var toastTimer = null;
 
+    var genModeEl = document.getElementById('genMode');
+    var cloudFields = document.getElementById('cloudFields');
+    var cloudUrl = document.getElementById('cloudUrl');
+    var cloudToken = document.getElementById('cloudToken');
+    var cloudBadge = document.getElementById('cloudBadge');
+    var cloudStatus = document.getElementById('cloudStatus');
+    var btnCloudTest = document.getElementById('btnCloudTest');
+    var btnCloudExport = document.getElementById('btnCloudExport');
+    var CLOUD_CONFIG_KEY = 'english-generator-cloud-v1';
+
     var lastAnalysis = null;
     var busy = false;
 
@@ -58,6 +68,229 @@
         }, 2400);
     }
 
+    function cloudBase() {
+        return (cloudUrl.value || '').trim().replace(/\/+$/, '');
+    }
+
+    function cloudConfigured() {
+        return Boolean(cloudBase() && (cloudToken.value || '').trim());
+    }
+
+    function saveCloudConfig() {
+        try {
+            localStorage.setItem(CLOUD_CONFIG_KEY, JSON.stringify({
+                mode: genModeEl.value,
+                url: cloudBase(),
+                token: cloudToken.value.trim()
+            }));
+        } catch (err) {
+            // localStorage 不可用时忽略。
+        }
+    }
+
+    function loadCloudConfig() {
+        try {
+            var raw = localStorage.getItem(CLOUD_CONFIG_KEY);
+            if (!raw) return;
+            var data = JSON.parse(raw);
+            if (data && (data.mode === 'cloud' || data.mode === 'local')) {
+                genModeEl.value = data.mode;
+            }
+            if (data && data.url) cloudUrl.value = data.url;
+            if (data && data.token) cloudToken.value = data.token;
+        } catch (err) {
+            // 忽略损坏配置。
+        }
+    }
+
+    function setCloudStatus(message, type) {
+        if (!cloudStatus) return;
+        cloudStatus.textContent = message || '';
+        cloudStatus.className = 'cloud_status' + (type ? ' is-' + type : '');
+    }
+
+    function applyMode() {
+        var cloud = genModeEl.value === 'cloud';
+        if (cloudFields) cloudFields.hidden = !cloud;
+        btnCheck.hidden = cloud;
+        btnAnalyze.hidden = cloud;
+        btnArchive.textContent = cloud ? '加入云端待归档' : '分析并写入';
+        wordInput.placeholder = cloud
+            ? '例如：mean，或中文“意思是；平均的”'
+            : '例如：friendship';
+        if (cloudBadge) cloudBadge.textContent = cloud ? '云端排队' : '本地模式';
+        if (cloud) {
+            setCloudStatus(
+                cloudConfigured()
+                    ? '云端模式：只入队，不写本地文件。输入英文单词或中文意思。'
+                    : '先填写云端地址和访问口令，再输入英文单词或中文意思。',
+                cloudConfigured() ? 'ok' : 'error'
+            );
+        } else {
+            setCloudStatus('本地模式：分析并直接写入文件。', '');
+        }
+        saveCloudConfig();
+    }
+
+    function validCloudQuery(value) {
+        var text = String(value || '').trim();
+        if (/^[A-Za-z][A-Za-z'-]{1,40}$/.test(text)) return true;
+        if (!/[\u4e00-\u9fff]/.test(text)) return false;
+        if (text.length > 40 || /[\n\r?？!！。]/.test(text)) return false;
+        return true;
+    }
+
+    async function cloudPost(path, payload) {
+        if (!cloudConfigured()) {
+            throw new Error('先填写云端地址和访问口令。');
+        }
+        var resp = await fetch(cloudBase() + path, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'X-Tutor-Token': cloudToken.value.trim()
+            },
+            body: JSON.stringify(payload)
+        });
+        var data = await resp.json().catch(function () { return null; });
+        if (!resp.ok || !data || !data.ok) {
+            throw new Error((data && data.error) || ('HTTP ' + resp.status));
+        }
+        return data;
+    }
+
+    async function doCloudTest() {
+        if (busy) return;
+        if (!cloudBase()) {
+            setCloudStatus('先填写云端地址。', 'error');
+            return;
+        }
+        btnCloudTest.disabled = true;
+        setCloudStatus('正在检测云端…', '');
+        try {
+            var resp = await fetch(cloudBase() + '/api/health', { cache: 'no-store' });
+            var data = await resp.json().catch(function () { return null; });
+            if (!resp.ok || !data || !data.ok) {
+                throw new Error((data && data.error) || ('HTTP ' + resp.status));
+            }
+            setCloudStatus(
+                '云端已连接 · ' + (data.model || 'deepseek-chat') +
+                (data.kv_bound ? ' · KV 已绑定' : ' · 未绑定 KV'),
+                data.kv_bound ? 'ok' : 'error'
+            );
+        } catch (err) {
+            setCloudStatus('云端连接失败：' + (err.message || '未知错误'), 'error');
+        } finally {
+            btnCloudTest.disabled = false;
+        }
+    }
+
+    function downloadCloudPending(entries) {
+        var now = new Date();
+        var stamp = now.getFullYear() + '-' +
+            String(now.getMonth() + 1).padStart(2, '0') + '-' +
+            String(now.getDate()).padStart(2, '0') + '-' +
+            String(now.getHours()).padStart(2, '0') +
+            String(now.getMinutes()).padStart(2, '0');
+        var payload = {
+            exported_at: now.toISOString(),
+            source: 'cloudflare-kv',
+            count: entries.length,
+            entries: entries
+        };
+        var blob = new Blob([JSON.stringify(payload, null, 2)], {
+            type: 'application/json;charset=utf-8'
+        });
+        var objectUrl = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = objectUrl;
+        link.download = '生成器待归档单词-' + stamp + '.json';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(function () { URL.revokeObjectURL(objectUrl); }, 1000);
+    }
+
+    async function doCloudExport() {
+        if (busy) return;
+        if (!cloudConfigured()) {
+            setCloudStatus('先填写云端地址和访问口令。', 'error');
+            return;
+        }
+        btnCloudExport.disabled = true;
+        setCloudStatus('正在读取云端待归档…', '');
+        try {
+            var resp = await fetch(cloudBase() + '/api/pending-words', {
+                cache: 'no-store',
+                headers: { 'X-Tutor-Token': cloudToken.value.trim() }
+            });
+            var data = await resp.json().catch(function () { return null; });
+            if (!resp.ok || !data || !data.ok) {
+                throw new Error((data && data.error) || ('HTTP ' + resp.status));
+            }
+            var entries = (Array.isArray(data.entries) ? data.entries : []).filter(function (item) {
+                return item && item.source === 'generator';
+            });
+            if (!entries.length) {
+                setCloudStatus('云端没有生成器待归档单词。', 'error');
+                return;
+            }
+            downloadCloudPending(entries);
+            setCloudStatus('已导出 ' + entries.length + ' 个待归档单词，拖入 导入待归档单词.bat。', 'ok');
+        } catch (err) {
+            setCloudStatus('导出失败：' + (err.message || '未知错误'), 'error');
+        } finally {
+            btnCloudExport.disabled = false;
+        }
+    }
+
+    function renderCloudQueue(data) {
+        var word = String(data.word || '');
+        var meaning = String(data.meaning_zh || '');
+        lastAnalysis = null;
+        resultBadge.textContent = data.already_pending ? '已在队列' : '已入队';
+        inputBadge.textContent = '云端待归档';
+        resultArea.innerHTML =
+            '<div class="result_head">' +
+            '<div><span class="result_word">' + esc(word) + '</span>' +
+            (meaning ? '<span class="result_meaning">' + esc(meaning) + '</span>' : '') +
+            '</div>' +
+            '<div class="result_tags"><span class="result_tag">云端待归档</span></div>' +
+            '</div>' +
+            '<div class="result_exists"><strong>' +
+            (data.already_pending ? '这个词已经在队列里。' : '已加入云端待归档。') +
+            '</strong><p>' + esc(data.message || '') + '</p>' +
+            '<p>导出 JSON 后，拖到 <code>导入待归档单词.bat</code>；本地会重新分析并写入词库。</p></div>' +
+            '<div class="result_actions">' +
+            '<button type="button" class="btn btn_primary btn_small" id="btnCloudExportNow">导出待归档 JSON</button>' +
+            '</div>';
+        var exportNow = document.getElementById('btnCloudExportNow');
+        if (exportNow) exportNow.addEventListener('click', doCloudExport);
+    }
+
+    async function doCloudQueue() {
+        if (busy) return;
+        var query = (wordInput.value || '').trim();
+        if (!validCloudQuery(query)) {
+            setStatus('云端只接受一个英文单词，或一个简短中文意思；不要输入句子或问句。', 'error');
+            wordInput.focus();
+            return;
+        }
+        setBusy(true, 'cloud');
+        try {
+            var data = await cloudPost('/api/queue-word', { query: query });
+            renderCloudQueue(data);
+            setStatus(data.message || '已加入云端待归档。', 'ok');
+            toast(data.already_pending ? '已在云端待归档' : '已加入云端待归档');
+        } catch (err) {
+            renderError(err.message);
+            setStatus('加入云端待归档失败：' + err.message, 'error');
+            toast('加入云端失败');
+        } finally {
+            setBusy(false);
+        }
+    }
+
     function normalizeWord() {
         return (wordInput.value || '').trim().toLowerCase();
     }
@@ -79,6 +312,9 @@
             } else if (mode === 'check') {
                 inputBadge.textContent = '检查中…';
                 setStatus('正在检查是否已录入，不调用 API…', 'busy');
+            } else if (mode === 'cloud') {
+                inputBadge.textContent = '入队中…';
+                setStatus('正在加入云端待归档，不写本地文件…', 'busy');
             } else {
                 inputBadge.textContent = '分析中…';
                 setStatus('正在调用 DeepSeek 分析构词，请稍候…', 'busy');
@@ -148,13 +384,43 @@
         return '../' + file + anchor;
     }
 
+    function posSummary(analysis) {
+        var values = [];
+        (analysis.senses || []).forEach(function (sense) {
+            var pos = String(sense.pos || '').trim();
+            if (pos && values.indexOf(pos) < 0) values.push(pos);
+        });
+        return values.length ? values.join(' / ') : String(analysis.pos || '');
+    }
+
     function renderPreview(analysis) {
         var morph = analysis.morphology || {};
-        var senses = (analysis.senses || []).map(function (sense) {
-            var colloc = sense.collocation
-                ? '<span class="preview_colloc"><code>' + esc(sense.collocation) + '</code>' + esc(sense.collocation_zh || '') + '</span>'
-                : '';
-            return '<li><span>' + esc(sense.zh) + '</span>' + colloc + '</li>';
+        var groups = [];
+        var groupMap = {};
+        (analysis.senses || []).forEach(function (sense) {
+            var pos = String(sense.pos || analysis.pos || '其他').trim();
+            if (!groupMap[pos]) {
+                groupMap[pos] = [];
+                groups.push([pos, groupMap[pos]]);
+            }
+            groupMap[pos].push(sense);
+        });
+        if (!groups.length) {
+            groups.push([String(analysis.pos || '其他'), [{ zh: analysis.meaning_zh || '' }]]);
+        }
+
+        var senses = groups.map(function (group) {
+            var pos = group[0];
+            var items = group[1].map(function (sense) {
+                var colloc = sense.collocation
+                    ? '<span class="preview_colloc"><code>' + esc(sense.collocation) + '</code>' + esc(sense.collocation_zh || '') + '</span>'
+                    : '';
+                return '<li><span>' + esc(sense.zh) + '</span>' + colloc + '</li>';
+            }).join('');
+            return '<li class="preview_pos_group">' +
+                '<span class="preview_pos_badge">' + esc(pos) + '</span>' +
+                '<ul class="preview_sense_list">' + items + '</ul>' +
+                '</li>';
         }).join('');
         var related = (analysis.related || []).length
             ? '<div class="preview_related"><strong>同族词</strong>' +
@@ -167,7 +433,7 @@
             '<div class="preview_card_top">' +
             '<span class="preview_word">' + esc(analysis.word) + '</span>' +
             '<span class="preview_meaning">' + esc(analysis.meaning_zh) + '</span>' +
-            '<span class="preview_pos">' + esc(analysis.pos) + '</span>' +
+            '<span class="preview_pos">' + esc(posSummary(analysis)) + '</span>' +
             '</div>' +
             '<p class="preview_formula"><code>' + esc(morph.root || '') + '</code>' +
             '<span>——&gt;</span><code>' + esc(analysis.word) + '</code>' +
@@ -229,7 +495,7 @@
             '<div><span class="result_word">' + esc(analysis.word) + '</span>' +
             '<span class="result_meaning">' + esc(analysis.meaning_zh) + '</span></div>' +
             '<div class="result_tags"><span class="result_tag">' + esc(typeLabel(morph.type)) + '</span>' +
-            '<span class="result_tag">' + esc(analysis.pos) + '</span>' +
+            '<span class="result_tag">' + esc(posSummary(analysis)) + '</span>' +
             '<span class="result_tag">' + esc(analysis.level) + '</span></div>' +
             '</div>' +
             '<div class="result_rows">' + rowsHtml + '</div>' +
@@ -291,6 +557,7 @@
             ? '<div class="result_exists">' +
               '<strong>已录入，不会新建页面。</strong>' +
               '<p>已录入的词不会重复创建，也不再提供“插队”操作。需要复习时直接在复习清单或全部词条中查看。</p>' +
+              '<p>如果要按新版词性分组重新生成，点“重新分析并覆盖”；复习等级和 nextDate 会保留。</p>' +
               '</div>'
             : '<div class="result_not_exists">' +
               '<strong>尚未录入。</strong>' +
@@ -299,7 +566,8 @@
 
         var actions = '<div class="result_actions">' +
             (exists
-                ? '<a class="btn btn_primary btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>'
+                ? '<button type="button" class="btn btn_soft btn_small" id="btnOverwrite">重新分析并覆盖</button>' +
+                  '<a class="btn btn_primary btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>'
                 : '<button type="button" class="btn btn_primary btn_small" id="btnWriteFromCheck">分析并写入</button>' +
                   '<a class="btn btn_soft btn_small" href="../复习清单/核心词汇复习清单.html">去复习清单</a>') +
             '</div>';
@@ -315,6 +583,8 @@
 
         var writeBtn = document.getElementById('btnWriteFromCheck');
         if (writeBtn) writeBtn.addEventListener('click', doArchive);
+        var overwriteBtn = document.getElementById('btnOverwrite');
+        if (overwriteBtn) overwriteBtn.addEventListener('click', doOverwrite);
     }
 
     async function doAnalyze() {
@@ -342,9 +612,13 @@
 
     async function doArchive() {
         if (busy) return;
+        if (genModeEl.value === 'cloud') {
+            await doCloudQueue();
+            return;
+        }
         var word = normalizeWord();
         if (!validWord(word)) {
-            setStatus('请输入单个英文单词（字母、连字符或撇号）。', 'error');
+            setStatus('本地模式只接受英文单词；中文意思请切换云端排队。', 'error');
             wordInput.focus();
             return;
         }
@@ -364,6 +638,36 @@
             renderError(err.message);
             setStatus('写入失败：' + err.message, 'error');
             toast('写入失败');
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    async function doOverwrite() {
+        if (busy) return;
+        var word = normalizeWord();
+        if (!validWord(word)) {
+            setStatus('请输入单个英文单词（字母、连字符或撇号）。', 'error');
+            wordInput.focus();
+            return;
+        }
+        if (!window.confirm('重新分析并覆盖「' + word + '」的页面和释义？\n\n复习进度、等级和 nextDate 会保留；旧页面会先备份。')) {
+            return;
+        }
+        setBusy(true, 'overwrite');
+        try {
+            var data = await post('/api/archive', {
+                word: word,
+                hint: hintInput.value.trim(),
+                overwrite: true
+            });
+            renderResult(data, true);
+            setStatus(data.summary || '已覆盖原内容，复习进度保留。', 'ok');
+            toast('已覆盖，复习进度保留');
+        } catch (err) {
+            renderError(err.message);
+            setStatus('覆盖失败：' + err.message, 'error');
+            toast('覆盖失败');
         } finally {
             setBusy(false);
         }
@@ -396,11 +700,23 @@
     btnAnalyze.addEventListener('click', doAnalyze);
     btnArchive.addEventListener('click', doArchive);
     btnHealth.addEventListener('click', checkHealth);
+    btnCloudTest.addEventListener('click', doCloudTest);
+    btnCloudExport.addEventListener('click', doCloudExport);
+    genModeEl.addEventListener('change', applyMode);
+    cloudUrl.addEventListener('input', function () {
+        saveCloudConfig();
+        if (genModeEl.value === 'cloud') applyMode();
+    });
+    cloudToken.addEventListener('input', function () {
+        saveCloudConfig();
+        if (genModeEl.value === 'cloud') applyMode();
+    });
 
     wordInput.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
             event.preventDefault();
-            doAnalyze();
+            if (genModeEl.value === 'cloud') doCloudQueue();
+            else doAnalyze();
         }
     });
 
@@ -413,5 +729,7 @@
         });
     });
 
+    loadCloudConfig();
+    applyMode();
     checkHealth();
 })();

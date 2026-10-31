@@ -471,14 +471,47 @@
 }
 
 .preview_senses {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 0.7rem;
-    margin: 0.25rem 0 0.45rem;
+    display: block;
+    margin: 0.35rem 0 0.45rem;
     padding: 0;
     list-style: none;
     color: #2C3E50;
     font-size: 0.75rem;
+}
+
+.preview_pos_group {
+    display: block;
+    margin: 0.3rem 0;
+    padding: 0;
+}
+
+.preview_pos_badge {
+    display: inline-block;
+    margin-right: 0.25rem;
+    padding: 0.05rem 0.42rem;
+    color: #FFFFFF;
+    background: #8E44AD;
+    border-radius: 4px;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 0.66rem;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.preview_sense_list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin: 0.15rem 0 0;
+    padding: 0 0 0 0.15rem;
+    list-style: none;
+}
+
+.preview_sense_list > li {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem;
 }
 
 .preview_senses li {
@@ -779,4 +812,73 @@
 
 .generator_local_note strong {
     color: #4d3500;
+}
+
+/* ================= 云端排队设置 ================= */
+.cloud_panel {
+    margin-top: 0.85rem;
+}
+
+.cloud_head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.7rem;
+    margin-bottom: 0.6rem;
+}
+
+.cloud_head h2 {
+    margin: 0.15rem 0 0;
+    font-size: 1.05rem;
+}
+
+.cloud_controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.cloud_controls select,
+.cloud_fields input {
+    min-height: 2.15rem;
+    padding: 0.4rem 0.55rem;
+    border: 1px solid #D5DBDB;
+    border-radius: 6px;
+    background: #FFFFFF;
+    color: #2C3E50;
+    font-family: inherit;
+    font-size: 0.8rem;
+}
+
+.cloud_fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 0.3rem;
+    padding: 0.65rem;
+    background: #F8FAFC;
+    border: 1px dashed #D5DBDB;
+    border-radius: 7px;
+}
+
+.cloud_actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.15rem;
+}
+
+.cloud_status {
+    margin: 0.3rem 0 0;
+    color: #7F8C8D;
+    font-size: 0.72rem;
+    line-height: 1.6;
+}
+
+.cloud_status.is-error {
+    color: #C0392B;
+}
+
+.cloud_status.is-ok {
+    color: #0E6655;
 }

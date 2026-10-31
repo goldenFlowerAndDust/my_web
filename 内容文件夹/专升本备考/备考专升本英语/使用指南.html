@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>使用指南 · 专升本英语词汇系统</title>
-    <meta name="description" content="专升本英语词汇系统使用指南：每天 20 个新词 + 20 个复习 + 额外新增，AI 自动收词、词族/词素分类、打卡日历与常见问题。">
+    <meta name="description" content="专升本英语词汇系统使用指南：每天 20 个新词 + 20 个复习 + 额外新增，生成器云端排队、词族/词素分类、打卡日历与常见问题。">
     <style>
         :root {
             --ink: #2C3E50;
@@ -641,7 +641,7 @@
 
         <div class="callout green">
             <strong>如果你原来有自己的静态服务器：</strong>
-            可以继续用它打开单词页/复习页；但 AI 自动收词仍要启动 <code>8767</code> 服务，
+            可以继续用它打开单词页/复习页；但生成器写入仍要启动 <code>8767</code> 服务，
             因为浏览器不会直接携带 API Key。英语答疑还可以选择部署云端 Worker。
         </div>
 
@@ -701,20 +701,25 @@
         </div>
 
         <div class="callout green">
-            <strong>答疑收词：</strong>
-            单词解释模式会自动收录目标单词。本地模式直接写入词库；云端模式先进入
-            “待归档单词”，在答疑页点 <code>导出待归档单词</code>，再把 JSON 拖到
-            <code>导入待归档单词.bat</code>。本地统一分类，新词进入明天的“额外新增”，不占 20 词。
+            <strong>答疑只答疑，不再收词：</strong>
+            AI 答疑无论单词解释、作文还是句子分析，都不会自动写入词库，也不会进入
+            “待归档单词”。新增或分类单词请用
+            <a href="../单词模块/词汇代码生成器.html">词汇代码生成器</a>。
         </div>
 
         <div class="callout">
-            <strong>两类导出不要混：</strong>
-            <code>导出答疑记录</code>是完整问答日志；
-            <code>导出待归档单词</code>才含结构化的 <code>word</code> 字段，能拖到
-            <code>导入待归档单词.bat</code>。
-            浏览器不能自动把下载文件放进子文件夹；下载后双击
-            <code>整理云端下载.bat</code>，会分到
-            <code>云端下载/答疑归档</code>和<code>云端下载/待归档单词</code>。
+            <strong>生成器云端排队：</strong>
+            生成器切到“云端排队”后，只接受一个英文单词或一个简短中文意思；
+            点“加入云端待归档”，再点“导出待归档 JSON”，把文件拖到
+            <code>导入待归档单词.bat</code>。本地会重新分析并分类写入。
+            本地写入模式则直接分析并写文件，不需要导出。
+        </div>
+
+        <div class="callout">
+            <strong>答疑记录照旧：</strong>
+            <code>导出答疑记录</code>仍保留完整问答日志；下载后双击
+            <code>整理云端下载.bat</code>，进入 <code>云端下载/答疑归档</code>，
+            继续按分类和日期归档。它不包含待收录单词。
         </div>
 
         <div class="callout">
@@ -810,6 +815,13 @@
             <strong>不想调用 API？</strong>
             先点“检查是否已录入”。这个按钮只查词库、词素页和 data.json，不调用 DeepSeek；
             如果已录入，会直接提示，不再提供“插队”操作。
+        </div>
+
+        <div class="callout">
+            <strong>已录入，但想更新词性分组？</strong>
+            在“检查是否已录入”的已录入结果里点<strong>“重新分析并覆盖”</strong>。
+            会保留 level、nextDate 和复习进度，先备份旧页面和 data.json，再按新分析重写。
+            核心词汇通关页是共享页面，暂不支持整页覆盖。
         </div>
 
         <div class="callout">
@@ -1048,7 +1060,7 @@
             <div class="file-item"><code>单词模块/词汇代码生成器.html</code><span>AI 自动归档界面</span></div>
             <div class="file-item"><code>英语答疑/英语答疑.html</code><span>资深英语教师答疑界面</span></div>
             <div class="file-item"><code>导入答疑记录.bat</code><span>把云端导出的 JSON 合并到本地日志</span></div>
-            <div class="file-item"><code>导入待归档单词.bat</code><span>把云端待归档单词分类写入词库</span></div>
+            <div class="file-item"><code>导入待归档单词.bat</code><span>把生成器导出的云端待归档单词分类写入词库</span></div>
             <div class="file-item"><code>整理云端下载.bat</code><span>把两类下载 JSON 分到云端下载子文件夹</span></div>
             <div class="file-item"><code>云端下载/</code><span>答疑归档 / 待归档单词（已 gitignore）</span></div>
             <div class="file-item"><code>tencent-scf/</code><span>腾讯云 SCF 国内反向代理与部署说明</span></div>

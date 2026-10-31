@@ -60,10 +60,39 @@
             </li>
         </ol>
         <p class="generator_local_note">
-            <strong>本地专用：</strong>这个工具会直接写本地 HTML 和 <code>data.json</code>，所以没有云端连接设置。
-            GitHub Pages 上请用 <a href="../英语答疑/英语答疑.html">英语答疑</a> 的“单词解释”；
-            云端单词会先进入待归档队列，再回本地导入分类。
+            <strong>本地写入 / 云端排队：</strong>本地模式会直接写 HTML 和 <code>data.json</code>；
+            云端模式只把“英文单词或中文意思”加入云端待归档，再导出 JSON，
+            拖到 <code>导入待归档单词.bat</code> 完成本地同步。
         </p>
+    </section>
+
+    <section class="panel cloud_panel" aria-labelledby="cloudTitle">
+        <div class="cloud_head">
+            <div>
+                <p class="eyebrow">Cloud</p>
+                <h2 id="cloudTitle">云端设置</h2>
+            </div>
+            <span class="gen_badge" id="cloudBadge">本地模式</span>
+        </div>
+        <div class="cloud_controls">
+            <label class="field_label" for="genMode">运行方式</label>
+            <select id="genMode">
+                <option value="local">本地写入</option>
+                <option value="cloud">云端排队</option>
+            </select>
+
+            <div class="cloud_fields" id="cloudFields" hidden>
+                <label class="field_label" for="cloudUrl">云端地址</label>
+                <input id="cloudUrl" type="url" placeholder="https://...workers.dev 或 SCF 函数 URL">
+                <label class="field_label" for="cloudToken">访问口令</label>
+                <input id="cloudToken" type="password" placeholder="X-Tutor-Token">
+                <div class="cloud_actions">
+                    <button type="button" class="btn btn_soft btn_small" id="btnCloudTest">测试连接</button>
+                    <button type="button" class="btn btn_soft btn_small" id="btnCloudExport">导出待归档 JSON</button>
+                </div>
+            </div>
+            <p id="cloudStatus" class="cloud_status">本地模式：分析并直接写入文件。</p>
+        </div>
     </section>
 
     <section class="service_bar" id="serviceBar" aria-live="polite">

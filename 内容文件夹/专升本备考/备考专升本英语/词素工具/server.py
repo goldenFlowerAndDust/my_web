@@ -176,7 +176,7 @@ class Handler(SimpleHTTPRequestHandler):
             elif path == "/api/analyze":
                 result = analyze_only(word, hint)
             else:
-                result = archive_word(word, hint)
+                result = archive_word(word, hint, overwrite=bool(payload.get("overwrite")))
             self._send_json(200, result)
         except ArchiveError as exc:
             self._send_json(400, {"ok": False, "error": str(exc)})
