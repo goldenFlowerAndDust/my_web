@@ -229,9 +229,7 @@ def refresh() -> None:
 
     for day, day_entries in grouped.items():
         target = ARCHIVE_DIR / (day + ".html")
-        # 历史日期保留旧页面；今天重新生成，清掉旧版混入的复习/覆盖记录。
-        if target.exists() and day != date.today().isoformat():
-            continue
+        # 添加日志只展示真正的首次新增；旧页面也按同一规则重新生成。
         target.write_text(daily_html(day, day_entries), encoding="utf-8", newline="\n")
     today = date.today().isoformat()
     today_target = ARCHIVE_DIR / (today + ".html")
