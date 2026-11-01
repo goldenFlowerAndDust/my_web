@@ -591,6 +591,20 @@
             ? '<span class="badge badge-extra">额外新增</span>'
             : '';
 
+        var pluralBadge = '';
+        if (item.isPlural) {
+            var baseLabel = item.base ? esc(item.base) + ' 的复数' : '复数形式';
+            pluralBadge = '<span class="badge badge-plural">' + baseLabel +
+                (item.basePath ? ' <a href="' + esc(makeHref(item.basePath)) + '">原词</a>' : '') +
+                '</span>';
+        } else if (item.sameForm) {
+            pluralBadge = '<span class="badge badge-plural">单复数同形</span>';
+        } else if (item.hasPlural && item.pluralName) {
+            pluralBadge = '<span class="badge badge-plural">复数：' + esc(item.pluralName) +
+                (item.pluralPath ? ' <a href="' + esc(makeHref(item.pluralPath)) + '">查看</a>' : '') +
+                '</span>';
+        }
+
         return '<li class="review-item word-card ' + mode + (completed ? ' is-done' : '') + '" data-name="' + esc(item.name) + '">' +
             '<div class="word-main">' +
             '<div class="word-line">' +
@@ -599,6 +613,7 @@
             suffixBadge +
             categoryBadge +
             extraBadge +
+            pluralBadge +
             '<span class="badge' + levelClass + '">' + esc(levelLabel(item)) + '</span>' +
             '<span class="badge' + overdueClass + '">' + esc(dateLabel) + '</span>' +
             '</div>' +

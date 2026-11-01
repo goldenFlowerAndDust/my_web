@@ -17,7 +17,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-from word_archiver import ArchiveError, archive_word, normalize_word
+from word_archiver import ArchiveError, archive_word, archive_word_pair, normalize_word
 
 WORD_RE = re.compile(r"^[A-Za-z][A-Za-z'-]{1,40}$")
 
@@ -123,7 +123,7 @@ def main() -> int:
     processed: list[str] = []
     for word in words:
         try:
-            result = archive_word(word, "来自生成器云端待归档")
+            result = archive_word_pair(word, "来自生成器云端待归档")
             if result.get("needs_repair"):
                 result = archive_word(word, "来自生成器云端待归档", overwrite=True)
                 if result.get("overwritten"):

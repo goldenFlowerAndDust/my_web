@@ -428,6 +428,17 @@
     border-color: #A9DFBF;
 }
 
+.badge-plural {
+    background: #F4ECF7;
+    color: #7D3C98;
+}
+
+.badge-plural a {
+    color: #6C3483;
+    text-decoration: underline;
+    margin-left: 0.2rem;
+}
+
 .all-groups {
     display: grid;
     gap: 0.45rem;

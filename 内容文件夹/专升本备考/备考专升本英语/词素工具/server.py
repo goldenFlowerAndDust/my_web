@@ -27,7 +27,7 @@ TOOL_DIR = Path(__file__).resolve().parent
 BASE = TOOL_DIR.parent
 sys.path.insert(0, str(TOOL_DIR))
 
-from word_archiver import ArchiveError, analyze_only, apply_review_updates, archive_word, audit_word_json, check_word, health  # noqa: E402
+from word_archiver import ArchiveError, analyze_only, apply_review_updates, archive_word, archive_word_pair, audit_word_json, check_word, health  # noqa: E402
 from english_tutor import TutorError, ask_tutor, read_tutor_logs  # noqa: E402
 from archive_added_logs import refresh as refresh_added_logs, recover_missing_extra_entries  # noqa: E402
 
@@ -179,13 +179,15 @@ class Handler(SimpleHTTPRequestHandler):
                 result = check_word(word)
             elif path == "/api/analyze":
                 result = analyze_only(word, hint)
-            else:
+            elif payload.get("overwrite") or payload.get("repair"):
                 result = archive_word(
                     word,
                     hint,
                     overwrite=bool(payload.get("overwrite")),
                     repair=bool(payload.get("repair")),
                 )
+            else:
+                result = archive_word_pair(word, hint)
             self._send_json(200, result)
         except ArchiveError as exc:
             self._send_json(400, {"ok": False, "error": str(exc)})

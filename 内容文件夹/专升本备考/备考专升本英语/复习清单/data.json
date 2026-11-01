@@ -2468,7 +2468,11 @@
       "sense": "要求；必要条件",
       "anchor": "word-requirement",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "hasPlural": true,
+      "pluralName": "requirements",
+      "pluralPath": "../专升本英语核心词汇通关.html#word-requirements",
+      "pluralSameMeaning": true
     },
     {
       "name": "excitement",
@@ -6891,31 +6895,6 @@
       "sense": "友谊；友情",
       "anchor": "word-friendship",
       "batch": "自动补充"
-    },
-    {
-      "name": "requirements",
-      "path": "../专升本英语核心词汇通关.html#word-requirements",
-      "category": "核心词汇通关",
-      "level": 0,
-      "nextDate": "2026-11-02",
-      "lastReviewed": null,
-      "created": "2026-11-01",
-      "modified": "2026-11-01",
-      "kind": "word",
-      "word": "requirements",
-      "zh": "要求；需求；必要条件（require 的复数名词形式）",
-      "root": "require",
-      "rootZh": "需要；要求",
-      "suffix": "ment",
-      "suffixLabel": "-ment",
-      "pos": "n.",
-      "levelTag": "专升本",
-      "sense": "要求；规定（常用复数）",
-      "anchor": "word-requirements",
-      "batch": "自动补充",
-      "extra": true,
-      "extraDate": "2026-11-02",
-      "source": "generator"
     }
   ],
   "词素/复合词": [
@@ -7371,6 +7350,37 @@
       "extra": true,
       "extraDate": "2026-11-01",
       "source": "generator"
+    }
+  ],
+  "复数": [
+    {
+      "name": "requirements",
+      "path": "../专升本英语核心词汇通关.html#word-requirements",
+      "category": "核心词汇通关",
+      "level": 0,
+      "nextDate": "2026-11-02",
+      "lastReviewed": null,
+      "created": "2026-11-01",
+      "modified": "2026-11-01",
+      "kind": "alias",
+      "word": "requirements",
+      "zh": "要求；需求；必要条件（require 的复数名词形式）",
+      "root": "require",
+      "rootZh": "需要；要求",
+      "suffix": "ment",
+      "suffixLabel": "-ment",
+      "pos": "n.",
+      "levelTag": "专升本",
+      "sense": "要求；规定（常用复数）",
+      "anchor": "word-requirements",
+      "batch": "自动补充",
+      "extra": true,
+      "extraDate": "2026-11-02",
+      "source": "generator",
+      "base": "requirement",
+      "basePath": "../专升本英语核心词汇通关.html#word-requirement",
+      "isPlural": true,
+      "pluralSameMeaning": true
     }
   ]
 }

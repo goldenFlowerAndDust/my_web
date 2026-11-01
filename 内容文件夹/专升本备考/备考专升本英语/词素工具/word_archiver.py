@@ -87,6 +87,7 @@ SYSTEM_PROMPT = r"""你是一位严谨的英语构词法老师，服务对象是
 - level 只能是：小学、初中、高中、专升本、超纲。
 - related 只放真实存在的同族词，0–6 条，每条包含 word、meaning_zh、pos、example、example_zh、note。
 - 同族词的 example 也必须能体现它的词性和该释义；不要为空。
+- plural 字段必须判断单复数：has_plural 表示是否存在复数；is_plural 表示输入词本身是否复数；singular/plural 写原词和复数；same_form 表示单复数同形；same_meaning 表示复数含义是否与原词相同。不可数名词、形容词、动词等没有复数时 has_plural=false。
 - 对没有把握的拆分要选择 atom 或 root_family，不要编造词根。
 - 输出 JSON 字段：
 {
@@ -94,6 +95,14 @@ SYSTEM_PROMPT = r"""你是一位严谨的英语构词法老师，服务对象是
   "meaning_zh": "有帮助的；有益的",
   "pos": "adj.",
   "level": "小学",
+  "plural": {
+    "has_plural": false,
+    "is_plural": false,
+    "singular": "helpful",
+    "plural": "",
+    "same_form": false,
+    "same_meaning": true
+  },
   "morphology": {
     "type": "suffix",
     "affix": "ful",
@@ -313,6 +322,43 @@ def _as_bool(value: Any) -> bool:
     return bool(value)
 
 
+def _normalize_plural_info(raw: Any, word: str) -> dict[str, Any]:
+    data = raw if isinstance(raw, dict) else {}
+    singular = ""
+    plural = ""
+    for key in ("singular", "base", "singular_word"):
+        value = normalize_word(str(data.get(key) or "")) if str(data.get(key) or "").strip() else ""
+        if value:
+            singular = value
+            break
+    for key in ("plural", "plural_word", "plural_form"):
+        value = normalize_word(str(data.get(key) or "")) if str(data.get(key) or "").strip() else ""
+        if value:
+            plural = value
+            break
+    same_form = _as_bool(data.get("same_form", False))
+    same_meaning = _as_bool(data.get("same_meaning", False))
+    has_plural = _as_bool(data.get("has_plural", bool(plural or same_form)))
+    is_plural = _as_bool(data.get("is_plural", bool(plural and word == plural and singular and singular != plural)))
+    if same_form:
+        singular = singular or word
+        plural = plural or word
+        has_plural = True
+        is_plural = False
+    if not singular:
+        singular = word
+    if has_plural and not plural:
+        plural = word if same_form else ""
+    return {
+        "has_plural": bool(has_plural and plural),
+        "is_plural": is_plural,
+        "singular": singular,
+        "plural": plural,
+        "same_form": same_form,
+        "same_meaning": same_meaning,
+    }
+
+
 def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]:
     word = normalize_word(str(raw.get("word") or expected_word))
     if word != expected_word:
@@ -504,6 +550,7 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
         "example_zh": example_zh,
         "note": note,
         "related": related,
+        "plural": _normalize_plural_info(raw.get("plural"), word),
         "target": {
             "kind": target_kind,
             "category": target_category,
@@ -1831,6 +1878,83 @@ def archive_word(word: str, hint: str = "", overwrite: bool = False, repair: boo
             "status": "ok",
         })
         return result
+
+
+def _link_plural_pair(base_word: str, plural_word: str, same_meaning: bool, same_form: bool) -> None:
+    """在 data.json 里给原词和复数互相加链接；同义复数用 alias，不占复习。"""
+    data = load_data()
+    base_category, base_item = find_data_item(data, base_word)
+    plural_category, plural_item = find_data_item(data, plural_word)
+    if not base_item or not plural_item:
+        return
+    base_path = str(base_item.get("path") or "")
+    plural_path = str(plural_item.get("path") or "")
+    base_item["hasPlural"] = True
+    base_item["pluralName"] = plural_word
+    base_item["pluralPath"] = plural_path
+    base_item["pluralSameMeaning"] = bool(same_meaning)
+    plural_item["base"] = base_word
+    plural_item["basePath"] = base_path
+    plural_item["isPlural"] = True
+    plural_item["pluralSameMeaning"] = bool(same_meaning)
+    if same_form:
+        base_item["sameForm"] = True
+        base_item["pluralName"] = base_word
+        base_item["pluralPath"] = base_path
+        write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+        return
+    if same_meaning:
+        plural_item["kind"] = "alias"
+    else:
+        plural_item["kind"] = "word"
+    if plural_category != "复数" and isinstance(data.get(plural_category), list):
+        try:
+            data[plural_category].remove(plural_item)
+        except ValueError:
+            pass
+        data.setdefault("复数", [])
+        if not isinstance(data["复数"], list):
+            data["复数"] = []
+        data["复数"].append(plural_item)
+    write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+
+
+def archive_word_pair(word: str, hint: str = "") -> dict[str, Any]:
+    """生成器新增单词时，连同 AI 判断出的单复数另一形式一起录入。"""
+    primary = archive_word(word, hint)
+    if not primary.get("ok") or primary.get("exists"):
+        return primary
+    analysis = primary.get("analysis") or {}
+    info = analysis.get("plural") or {}
+    if not info.get("has_plural") or not info.get("plural"):
+        return primary
+    singular = str(info.get("singular") or word)
+    plural = str(info.get("plural") or "")
+    if not singular or not plural:
+        return primary
+    same_form = bool(info.get("same_form")) or singular == plural
+    same_meaning = bool(info.get("same_meaning"))
+    if same_form:
+        _link_plural_pair(singular, plural, True, True)
+        primary["plural_pair"] = {"singular": singular, "plural": plural, "same_form": True}
+        return primary
+
+    counterpart = plural if word == singular else singular
+    if counterpart == word:
+        return primary
+    try:
+        secondary = archive_word(counterpart, hint)
+        _link_plural_pair(singular, plural, same_meaning, False)
+        primary["plural_pair"] = {
+            "singular": singular,
+            "plural": plural,
+            "same_meaning": same_meaning,
+            "counterpart": counterpart,
+            "secondary": secondary,
+        }
+    except (ArchiveError, OSError, ValueError) as exc:
+        primary["pair_warning"] = "复数形式 %s 录入失败：%s" % (counterpart, exc)
+    return primary
 
 
 def analyze_only(word: str, hint: str = "") -> dict[str, Any]:
