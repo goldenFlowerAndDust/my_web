@@ -1536,6 +1536,7 @@ def repair_word(word: str, hint: str = "") -> dict[str, Any]:
     old_page_path = BASE / old_page if old_page else None
     data = load_data()
     old_paths: list[Path] = []
+    original_created = ""
     for category, arr in list(data.items()):
         if not isinstance(arr, list):
             continue
@@ -1545,6 +1546,10 @@ def repair_word(word: str, hint: str = "") -> dict[str, Any]:
                 rel = _data_page_relative(item)
                 if rel:
                     old_paths.append(BASE / rel)
+                created_value = str(item.get("created") or "")
+                if re.fullmatch(r"\d{4}-\d{2}-\d{2}", created_value):
+                    if not original_created or created_value < original_created:
+                        original_created = created_value
             else:
                 kept.append(item)
         data[category] = kept
@@ -1567,7 +1572,7 @@ def repair_word(word: str, hint: str = "") -> dict[str, Any]:
     new_item = build_data_item(
         analysis,
         location,
-        today_str(),
+        original_created or today_str(),
         extra=True,
         extra_date=(date.today() + timedelta(days=1)).isoformat(),
         source="repair",
