@@ -471,7 +471,7 @@ class SyncRunner:
                 return candidate
         raise SyncError("同名导出文件过多：%s" % target)
 
-    def save_export(self, subject: dict[str, Any], kind: str, entries: list[dict[str, Any]]) -> Path:
+    def save_export(self, subject: dict[str, Any], kind: str, entries: list[dict[str, Any]], extra: dict[str, Any] | None = None) -> Path:
         root = self.resolve_export_root(subject["export_root"])
         folder = root / today_text()
         stamp = datetime.now().strftime("%Y-%m-%d-%H%M")
@@ -489,6 +489,8 @@ class SyncRunner:
             "count": len(entries),
             "entries": entries,
         }
+        if extra:
+            payload.update(extra)
         write_json(target, payload)
         return target
 
@@ -813,7 +815,16 @@ class SyncRunner:
                 result["message"] = "无变化，跳过重复保存/导入。"
                 return result
             if clean_entries:
-                saved = self.save_export(subject, "pending_words", clean_entries)
+                saved = self.save_export(
+                    subject,
+                    "pending_words",
+                    clean_entries,
+                    {
+                        "cloud_url": str((self.cloud.get("endpoints") or [{}])[0].get("url") or ""),
+                        "cleanup_url": str(data.get("cleanup_url") or ""),
+                        "cleanup_token": str(data.get("cleanup_token") or ""),
+                    },
+                )
                 result["saved"] = str(saved)
                 result["import"] = self.import_pending_words(subject, saved)
                 details = self.parse_import_details(result["import"].get("output", ""), "pending")

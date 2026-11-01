@@ -1,8 +1,17 @@
 {
-  "generated_at": "2026-11-01T13:03:40",
+  "generated_at": "2026-11-01T13:24:58",
   "source": "local-archived-log",
-  "count": 19,
+  "count": 20,
   "entries": [
+    {
+      "time": "2026-11-01 13:24:56",
+      "word": "requirements",
+      "type": "suffix",
+      "target": "核心词汇通关 · -ment",
+      "file": "专升本英语核心词汇通关.html",
+      "schedule": "2026-11-02",
+      "status": "ok"
+    },
     {
       "time": "2026-10-31 23:46:42",
       "word": "word",

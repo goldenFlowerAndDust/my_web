@@ -348,12 +348,23 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
     if mtype in {"suffix", "prefix"}:
         if not affix or not re.fullmatch(r"[a-z]{1,10}", affix):
             raise ArchiveError("API 给出的词缀不合法。")
+        plural_suffix = False
         if mtype == "suffix" and not word.endswith(affix):
-            raise ArchiveError("API 把 %s 判为后缀 -%s，但单词不以该后缀结尾。" % (word, affix))
+            # requirements = requirement + -ment + 复数 -s，仍归入 -ment 词族。
+            if word.endswith(affix + "s"):
+                plural_suffix = True
+            elif word.endswith(affix + "es"):
+                plural_suffix = True
+            else:
+                raise ArchiveError("API 把 %s 判为后缀 -%s，但单词不以该后缀结尾。" % (word, affix))
         if mtype == "prefix" and not word.startswith(affix):
             raise ArchiveError("API 把 %s 判为前缀 %s-，但单词不以该前缀开头。" % (word, affix))
         if not root:
-            root = word[:-len(affix)] if mtype == "suffix" else word[len(affix):]
+            if mtype == "suffix":
+                cut = len(affix) + (1 if plural_suffix else 0)
+                root = word[:-cut]
+            else:
+                root = word[len(affix):]
         if not root:
             raise ArchiveError("API 没有给出词根/基础词。")
         if not root_zh:
