@@ -21,7 +21,7 @@
 | `词素工具/import_pending_words.py` | 待归档单词导入脚本 |
 | `词素工具/english_tutor.py` | 答疑 API、教师人设、按分类日志 |
 | `skills/english-tutor/SKILL.md` | 资深英语教师答疑 skill |
-| `cloudflare-worker/worker.js` | 可选：GitHub Pages 用的云端答疑代理 |
+| `共享工具/worker.js` | 可选：GitHub Pages 用的云端答疑代理 |
 | `cloudflare-worker/README.md` | Cloudflare Worker 部署步骤 |
 | `tencent-scf/index.js` | 可选：腾讯云 SCF 函数 URL 国内反向代理 |
 | `tencent-scf/README.md` | 腾讯云 SCF / 函数 URL 部署步骤 |

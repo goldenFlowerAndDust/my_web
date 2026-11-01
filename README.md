@@ -342,7 +342,7 @@ priority：0
 - [数学家 Skill](内容文件夹/专升本备考/备考专升本数学/skills/math-tutor/SKILL.md)
 - [Cloudflare Worker 说明](内容文件夹/专升本备考/备考专升本英语/cloudflare-worker/README.md)
 
-> 数学云端答疑需要重新部署新版 `cloudflare-worker/worker.js`；国内 SCF 函数不用改。
+> 数学云端答疑需要重新部署新版 `共享工具/worker.js`；国内 SCF 函数不用改。
 > 本地数学答疑使用有效 DeepSeek Key；优先读 `专升本备考/共享配置/API.txt`，英语/数学共用。
 
 ---
@@ -377,7 +377,7 @@ priority：0
 - 同步结束逐项显示：云端答疑条数和分类、本地新增/重复数量、待归档单词列表、实际归档数量和线路，不再只有“成功/失败”。
 - 同步同时生成本地历史静态归档 `英语答疑/答疑历史.json` / `数学答疑/答疑历史.json`，以及 `添加日志/添加日志.json`；GitHub 页面合并“云端新记录 + 静态旧历史”，不受 24 小时云端保留限制。原始 JSONL 现在也允许上传（会公开问答原文），归档 JSON 同样公开。`添加日志.html` 在 GitHub 上读取静态归档，不再依赖本地 8767。
 - 旧的 `导入待归档单词.bat`、`导入答疑记录.bat`、`导入数学答疑记录.bat`、`整理云端下载.bat` 和页面导出按钮已删除；统一由同步 BAT 自动处理。
-- 部署与前置条件见 [云端配置.html](内容文件夹/专升本备考/想要自行搭建并使用的前提——第一步/云端配置.html)，内含最新 `worker.js` 和腾讯云 SCF `index.js`，可直接复制。
+- 部署与前置条件见 [云端配置.html](内容文件夹/专升本备考/想要自行搭建并使用的前提——第一步/云端配置.html)，内含最新 `共享工具/worker.js` 和腾讯云 SCF `index.js`，可直接复制。
 - 上传 GitHub 前先读 [公开内容与隐私提醒.md](内容文件夹/专升本备考/共享工具/公开内容与隐私提醒.md)：会公开 `答疑历史.json` / `添加日志.json`，原始 JSONL 现在也可选择上传；绝对不要上传口令、API Key 和部署截图。
 - 数学使用自己的导出目录和 `import_math_tutor_logs.py`；政治/信息技术默认 `enabled=false`，以后只加配置。
 - 多设备在 24 小时内可读到同一份云端记录；每天最后把清洗后的本地归档提交 GitHub 做长期备份。
@@ -447,7 +447,7 @@ priority：0
 复习清单/归档/*.json
 添加日志/添加日志.json
 ../想要自行搭建并使用的前提——第一步/云端配置.html
-cloudflare-worker/worker.js
+共享工具/worker.js
 共享配置/sync_all_subjects.py
 共享配置/history_archive.py
 共享配置/service_supervisor.py

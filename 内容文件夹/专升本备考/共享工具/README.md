@@ -44,6 +44,22 @@ python 共享工具/归档答疑历史.py english
 
 不要手动修改 `<!-- AI_ARCHIVE_START -->` 到 `<!-- AI_ARCHIVE_END -->` 之间的内容；下次归档会被覆盖。
 
+## Cloudflare Worker
+
+共享的 Worker 代码：
+
+```text
+共享工具/worker.js
+```
+
+英语和数学共用同一份 Worker。部署说明仍在：
+
+```text
+备考专升本英语/cloudflare-worker/README.md
+```
+
+`wrangler.toml` 的 `main` 已指向 `../共享工具/worker.js`。
+
 ## 公开内容与隐私
 
 上传 GitHub 前请阅读：
@@ -52,5 +68,5 @@ python 共享工具/归档答疑历史.py english
 共享工具/公开内容与隐私提醒.md
 ```
 
-其中列出了会公开的 `答疑历史.json`、`添加日志.json`、不应上传的口令/API Key/原始 JSONL/部署截图，以及误传后的处理步骤。
+其中列出了会公开的 `答疑历史.json`、`添加日志.json`、原始 JSONL，以及不应上传的口令/API Key/部署截图。
 
