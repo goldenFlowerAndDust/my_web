@@ -1,8 +1,17 @@
 {
-  "generated_at": "2026-11-01T02:44:34",
+  "generated_at": "2026-11-01T12:52:10",
   "source": "local-archived-log",
-  "count": 50,
+  "count": 51,
   "entries": [
+    {
+      "time": "2026-11-01 12:52:10",
+      "word": "beautiful",
+      "type": "review-sync",
+      "target": "data.json",
+      "file": "复习清单/data.json",
+      "schedule": "2026-11-01",
+      "status": "ok"
+    },
     {
       "time": "2026-10-31 23:50:55",
       "word": "word",

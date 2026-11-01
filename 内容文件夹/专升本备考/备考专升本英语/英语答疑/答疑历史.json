@@ -1,9 +1,19 @@
 {
-  "generated_at": "2026-11-01T02:44:34",
+  "generated_at": "2026-11-01T12:52:10",
   "source": "local-jsonl",
   "subject": "english",
-  "count": 7,
+  "count": 8,
   "entries": [
+    {
+      "time": "2026-11-01 12:42:39",
+      "mode": "其他",
+      "question": "请用continue造一个句子",
+      "answer": "**结论：** `continue` 最常用作不及物动词，表示“继续（做某事）”；也可作及物动词，后接名词。专升本考试中重点掌握 `continue to do` 和 `continue doing` 两种结构。\n\n**例句：**\n\n- **不及物：** The meeting will continue after lunch.\n  会议将在午饭后继续进行。\n- **continue to do：** She continued to work after she got married.\n  她结婚后继续工作。\n- **continue doing：** He continued reading although it was late.\n  尽管很晚了，他仍继续读书。\n\n**用法要点：**\n\n- `continue to do` 和 `continue doing` 在多数情况下可互换，都表示“继续做同一件事”。\n- 细微区别：`continue to do` 有时强调“接着做另一件事”或“继续做下去”；`continue doing` 更强调“不停地做同一动作”。考试中一般不作严格区分，但写作时注意前后一致。\n- `continue` 后不能直接跟动词原形，错误形式：`continue do`（×）。\n- 常见搭配：`continue with sth.`（继续某事）、`continue for + 时间段`（持续多长时间）。\n\n**易错提醒：**\n\n中国学生常把“继续做某事”直译成 `continue to doing`，这是错误的。正确形式只有 `continue to do` 或 `continue doing`。\n\n**仿写练习：**\n\nDespite the heavy rain, the workers continued to repair the road.\n尽管下着大雨，工人们仍继续修路。",
+      "model": "deepseek-chat",
+      "duration_ms": 2983,
+      "status": "ok",
+      "source": "imported"
+    },
     {
       "time": "2026-10-31 23:45:56",
       "mode": "单词解释",
