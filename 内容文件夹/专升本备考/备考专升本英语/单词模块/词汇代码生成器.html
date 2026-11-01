@@ -69,8 +69,8 @@
         <p class="generator_local_note">
             <strong>本地写入 / 云端排队：</strong>PC 版可随时在这两种模式之间切换；
             GitHub Pages 没有本地 8767 服务，只能使用云端排队，本地选项会禁用。
-            本地模式直接写 HTML 和 <code>data.json</code>；云端模式只把单词加入云端待归档，
-            运行 <code>同步全部科目.bat</code> 后会自动拉取、保存、导入并更新复习清单。
+            本地模式直接写 HTML 和 <code>data.json</code>；云端模式先做 AI 分析（只临时保存在浏览器），
+            确认后再加入云端待归档。运行 <code>同步全部科目.bat</code> 后会自动拉取、保存、导入并更新复习清单。
         </p>
     </section>
 
@@ -181,7 +181,7 @@
                 <div class="result_empty">
                     <span class="result_empty_icon">A</span>
                     <p>输入单词后，这里会显示构词分类、目标文件、复习日程和卡片预览。</p>
-                    <p class="result_empty_hint">“AI 分析”只预览；“分析并写入”才会修改文件。</p>
+                    <p class="result_empty_hint">本地：“AI 分析”只预览，“分析并写入”才修改文件。云端：先分析，确认后才加入待归档。</p>
                 </div>
             </div>
         </section>
@@ -247,7 +247,7 @@
 </main>
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script src="生成器.js?v=20261031-2"></script>
+<script src="生成器.js?v=20261101-3"></script>
 <script src="../返回顶部.js"></script>
 </body>
 </html>

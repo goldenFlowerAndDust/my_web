@@ -168,6 +168,7 @@ localStorage，不写进 HTML/JS 文件。
 ```text
 GET  /api/health
 POST /api/tutor             Header: X-Tutor-Token
+POST /api/tutor-preview     Header: X-Tutor-Token（只分析，不写日志/不入队）
 GET  /api/tutor-log         Header: X-Tutor-Token
 POST /api/tutor-log-delete  Header: X-Tutor-Token
 POST /api/delete-tutor-logs Body: cleanup_token + records
@@ -175,6 +176,9 @@ POST /api/queue-word        Header: X-Tutor-Token
 POST /api/pending-word      Header: X-Tutor-Token
 GET  /api/pending-words     Header: X-Tutor-Token
 POST /api/delete-pending-words     Body: cleanup_token + words
+POST /api/review-queue       Header: X-Tutor-Token
+GET  /api/review-pending     Header: X-Tutor-Token
+POST /api/delete-review-pending    Body: cleanup_token
 ```
 
 > 新版同步不再依赖 delete 接口；它只拉取、保存、导入。云端记录由

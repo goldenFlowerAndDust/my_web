@@ -15,8 +15,12 @@
  * 路由：
  *   GET  /api/health
  *   POST /api/tutor           Header: X-Tutor-Token
+ *   POST /api/tutor-preview   Header: X-Tutor-Token（只分析，不写日志、不入队）
  *   GET  /api/tutor-log       Header: X-Tutor-Token
  *   POST /api/tutor-log-delete Header: X-Tutor-Token
+ *   POST /api/review-queue     Header: X-Tutor-Token
+ *   GET  /api/review-pending   Header: X-Tutor-Token
+ *   POST /api/delete-review-pending  Body: cleanup_token
  *   POST /api/pending-word     Header: X-Tutor-Token
  *   POST /api/queue-word       Header: X-Tutor-Token
  *   GET  /api/pending-words    Header: X-Tutor-Token
@@ -30,6 +34,8 @@
 
 const CATEGORIES = ["单词解释", "作文", "句子分析", "其他"];
 const PENDING_PREFIX = "pending:";
+const REVIEW_PREFIX = "review:";
+const REVIEW_CLEANUP_PREFIX = "review-cleanup:";
 const ALIASES = {
   word: "单词解释",
   words: "单词解释",
@@ -412,7 +418,7 @@ async function readJsonBody(request) {
   return data;
 }
 
-async function handleTutor(request, env) {
+async function handleTutor(request, env, preview = false) {
   if (!authorized(request, env)) {
     return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
   }
@@ -538,20 +544,23 @@ async function handleTutor(request, env) {
   };
   const ttl = retentionSeconds(env);
 
-  let logged = true;
+  let logged = false;
   let warning = "";
-  try {
-    // 只写分类索引；历史读取也只读索引，避免同一答案在 KV 里存两份。
-    const idxKey = logIndexKey(subject, mode);
-    const existing = await env.TUTOR_KV.get(idxKey, "json");
-    const cutoff = retentionCutoff(env);
-    const index = (Array.isArray(existing) ? existing : [])
-      .filter((item) => isRecentRecord(item, cutoff));
-    index.unshift(record);
-    await env.TUTOR_KV.put(idxKey, JSON.stringify(index.slice(0, 50)), { expirationTtl: ttl });
-  } catch (error) {
-    logged = false;
-    warning = "答案已生成，但云端日志索引写入失败。";
+  if (!preview) {
+    try {
+      // 只写分类索引；历史读取也只读索引，避免同一答案在 KV 里存两份。
+      const idxKey = logIndexKey(subject, mode);
+      const existing = await env.TUTOR_KV.get(idxKey, "json");
+      const cutoff = retentionCutoff(env);
+      const index = (Array.isArray(existing) ? existing : [])
+        .filter((item) => isRecentRecord(item, cutoff));
+      index.unshift(record);
+      await env.TUTOR_KV.put(idxKey, JSON.stringify(index.slice(0, 50)), { expirationTtl: ttl });
+      logged = true;
+    } catch (error) {
+      logged = false;
+      warning = "答案已生成，但云端日志索引写入失败。";
+    }
   }
 
   return json({
@@ -562,6 +571,7 @@ async function handleTutor(request, env) {
     time,
     answer,
     model,
+    preview,
     logged,
     ...(warning ? { warning } : {}),
   }, 200, request, env);
@@ -870,6 +880,156 @@ async function handleQueueWord(request, env) {
   }
 }
 
+function normalizeReviewUpdates(raw) {
+  if (!Array.isArray(raw)) {
+    return { updates: [], error: "复习记录必须是数组。" };
+  }
+  if (!raw.length) {
+    return { updates: [], error: "没有需要上传的复习记录。" };
+  }
+  if (raw.length > 200) {
+    return { updates: [], error: "一次最多上传 200 条复习记录。" };
+  }
+  const dateRe = /^\d{4}-\d{2}-\d{2}$/;
+  const merged = new Map();
+  for (const item of raw) {
+    if (!item || typeof item !== "object") {
+      return { updates: [], error: "复习记录格式不正确。" };
+    }
+    const name = String(item.name || "").trim();
+    const level = Number(item.level);
+    const nextDate = String(item.nextDate || "").trim();
+    const lastReviewed = String(item.lastReviewed || "").trim();
+    if (!name) return { updates: [], error: "复习记录缺少单词名。" };
+    if (!Number.isInteger(level) || level < 0 || level > 7) {
+      return { updates: [], error: `${name} 的 level 不合法。` };
+    }
+    if (!dateRe.test(nextDate)) {
+      return { updates: [], error: `${name} 的 nextDate 不合法。` };
+    }
+    if (lastReviewed && !dateRe.test(lastReviewed)) {
+      return { updates: [], error: `${name} 的 lastReviewed 不合法。` };
+    }
+    merged.set(name, { name, level, nextDate, lastReviewed: lastReviewed || null });
+  }
+  return { updates: Array.from(merged.values()), error: "" };
+}
+
+async function handleReviewQueue(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: error.message || "请求体不合法。" }, 400, request, env);
+  }
+  const parsed = normalizeReviewUpdates(payload.updates);
+  if (parsed.error) {
+    return json({ ok: false, error: parsed.error }, 400, request, env);
+  }
+
+  const now = new Date();
+  const createdAt = now.toISOString();
+  const batchId = crypto.randomUUID().replace(/-/g, "");
+  const ttl = retentionSeconds(env);
+  const record = {
+    batch_id: batchId,
+    created_at: createdAt,
+    time: formatShanghai(now),
+    source: "review",
+    updates: parsed.updates,
+  };
+  const key = `${REVIEW_PREFIX}${createdAt}:${batchId}`;
+  try {
+    await env.TUTOR_KV.put(key, JSON.stringify(record), { expirationTtl: ttl });
+  } catch (error) {
+    return json({ ok: false, error: "云端复习队列写入失败。" }, 500, request, env);
+  }
+  return json({
+    ok: true,
+    batch_id: batchId,
+    count: parsed.updates.length,
+    time: record.time,
+    message: "已上传复习批次；24 小时内回本地同步。",
+  }, 200, request, env);
+}
+
+async function handleReviewPending(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+  try {
+    const listed = await env.TUTOR_KV.list({ prefix: REVIEW_PREFIX, limit: 1000 });
+    const keys = listed.keys.map((key) => key.name);
+    const values = await Promise.all(keys.map((key) => env.TUTOR_KV.get(key, "json")));
+    const cutoff = retentionCutoff(env);
+    const batches = values
+      .filter((item) => item && Array.isArray(item.updates) && item.updates.length)
+      .filter((item) => isRecentRecord(item, cutoff))
+      .sort((a, b) => String(a.created_at || "").localeCompare(String(b.created_at || "")));
+    const total = batches.reduce((sum, item) => sum + item.updates.length, 0);
+    let cleanupToken = "";
+    if (keys.length) {
+      cleanupToken = crypto.randomUUID().replace(/-/g, "");
+      await env.TUTOR_KV.put(
+        `${REVIEW_CLEANUP_PREFIX}${cleanupToken}`,
+        JSON.stringify({ keys, created_at: new Date().toISOString() }),
+        { expirationTtl: 21600 }
+      );
+    }
+    return json({
+      ok: true,
+      total,
+      batches,
+      cleanup_token: cleanupToken,
+      cleanup_url: new URL(request.url).origin + "/api/delete-review-pending",
+    }, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: "读取云端复习队列失败。" }, 500, request, env);
+  }
+}
+
+async function handleDeleteReviewPending(request, env) {
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: "请求 JSON 格式不正确。" }, 400, request, env);
+  }
+  const token = String(payload.cleanup_token || "").trim();
+  if (!/^[a-f0-9]{32}$/.test(token)) {
+    return json({ ok: false, error: "清理令牌无效。" }, 401, request, env);
+  }
+  try {
+    const cleanup = await env.TUTOR_KV.get(`${REVIEW_CLEANUP_PREFIX}${token}`, "json");
+    if (!cleanup || !Array.isArray(cleanup.keys)) {
+      return json({ ok: false, error: "清理令牌已过期，请重新拉取。" }, 410, request, env);
+    }
+    let deleted = 0;
+    for (const key of cleanup.keys) {
+      if (typeof key === "string" && key.startsWith(REVIEW_PREFIX)) {
+        await env.TUTOR_KV.delete(key);
+        deleted += 1;
+      }
+    }
+    await env.TUTOR_KV.delete(`${REVIEW_CLEANUP_PREFIX}${token}`);
+    return json({ ok: true, deleted }, 200, request, env);
+  } catch (error) {
+    return json({ ok: false, error: "清理云端复习队列失败。" }, 500, request, env);
+  }
+}
+
 async function handleLog(request, env) {
   if (!authorized(request, env)) {
     return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
@@ -1089,6 +1249,22 @@ async function handleRequest(request, env) {
 
   if (path === "/api/tutor" && request.method === "POST") {
     return handleTutor(request, env);
+  }
+
+  if (path === "/api/tutor-preview" && request.method === "POST") {
+    return handleTutor(request, env, true);
+  }
+
+  if (path === "/api/review-queue" && request.method === "POST") {
+    return handleReviewQueue(request, env);
+  }
+
+  if (path === "/api/review-pending" && request.method === "GET") {
+    return handleReviewPending(request, env);
+  }
+
+  if (path === "/api/delete-review-pending" && request.method === "POST") {
+    return handleDeleteReviewPending(request, env);
   }
 
   if (path === "/api/pending-word" && request.method === "POST") {

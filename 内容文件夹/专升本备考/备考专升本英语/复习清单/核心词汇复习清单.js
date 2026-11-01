@@ -9,9 +9,11 @@
     'use strict';
 
     var DATA_URL = 'data.json';
-    var API_BASE = (window.location.protocol === 'http:' && window.location.port === '8767')
+    var LOCAL_API_BASE = (window.location.protocol === 'http:' && window.location.port === '8767')
         ? ''
         : 'http://127.0.0.1:8767';
+    var isRemotePage = !(window.location.protocol === 'http:' && window.location.port === '8767');
+    var TUTOR_CONFIG_KEY = 'english-tutor-connection-v1';
     var PENDING_KEY = 'reviewPendingChanges';
     var INTERVALS = [1, 3, 7, 15, 30, 60, 90];
     var CORE_CATEGORY = '核心词汇通关';
@@ -23,14 +25,19 @@
     var newList = document.getElementById('new-list');
     var dueList = document.getElementById('due-list');
     var extraList = document.getElementById('extra-list');
+    var doneList = document.getElementById('done-list');
     var newCountEl = document.getElementById('new-count');
     var dueCountEl = document.getElementById('due-count');
     var extraCountEl = document.getElementById('extra-count');
+    var doneCountEl = document.getElementById('done-count');
     var allCountEl = document.getElementById('all-count');
     var newBacklog = document.getElementById('new-backlog');
     var dueBacklog = document.getElementById('due-backlog');
     var allGroups = document.getElementById('all-groups');
     var btnExpandAll = document.getElementById('btn-expand-all');
+    var btnDueAll = document.getElementById('btn-due-all');
+    var btnNewAll = document.getElementById('btn-new-all');
+    var btnExtraAll = document.getElementById('btn-extra-all');
 
     var statTotal = document.getElementById('stat-total');
     var statLearned = document.getElementById('stat-learned');
@@ -42,14 +49,12 @@
 
     var btnReload = document.getElementById('btn-reload');
     var btnSave = document.getElementById('btn-save');
-    var btnUndo = document.getElementById('btn-undo');
-    var btnUndoAll = document.getElementById('btn-undo-all');
     var btnExport = document.getElementById('btn-export');
 
     var fullData = {};
     var wordData = [];
     var originalSnapshot = {};
-    var undoStack = [];
+    var currentGroups = { new: [], due: [], extra: [] };
     var isDirty = false;
     var dataBaseUrl = '';
 
@@ -229,13 +234,39 @@
         });
     }
 
-    async function doSync(updates) {
+    function readCloudConfig() {
         try {
-            var resp = await fetchWithTimeout(API_BASE + '/api/review', {
+            var raw = localStorage.getItem(TUTOR_CONFIG_KEY);
+            if (!raw) return null;
+            var data = JSON.parse(raw);
+            if (!data || typeof data !== 'object') return null;
+            var provider = data.provider === 'domestic' ? 'domestic' : 'cloudflare';
+            var profiles = data.profiles && typeof data.profiles === 'object' ? data.profiles : {};
+            var profile = profiles[provider] || {};
+            var url = String(profile.url || data.cloudUrl || '').trim().replace(/\/+$/, '');
+            var token = String(profile.token || data.token || '').trim();
+            if (!url || !token) return null;
+            return { url: url, token: token };
+        } catch (err) {
+            return null;
+        }
+    }
+
+    async function doSync(updates) {
+        var cloud = isRemotePage ? readCloudConfig() : null;
+        if (isRemotePage && !cloud) {
+            setSyncBadge(false, '未配置云端连接');
+            return { ok: false, error: '先到 AI 答疑页配置云端连接，再来复习。' };
+        }
+        var endpoint = isRemotePage ? cloud.url + '/api/review-queue' : LOCAL_API_BASE + '/api/review';
+        var headers = { 'Content-Type': 'application/json; charset=utf-8' };
+        if (isRemotePage) headers['X-Tutor-Token'] = cloud.token;
+        try {
+            var resp = await fetchWithTimeout(endpoint, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                headers: headers,
                 body: JSON.stringify({ updates: updates })
-            }, 10000);
+            }, 15000);
             var data = await resp.json();
             if (!resp.ok || !data || data.ok === false) {
                 throw new Error((data && data.error) || ('HTTP ' + resp.status));
@@ -250,13 +281,13 @@
             rebuildPending();
             recomputeDirty();
             updateDirtyUI();
-            setSyncBadge(true, 'data.json 自动同步已开启');
+            setSyncBadge(true, isRemotePage ? '已上传云端 · 等待电脑同步' : '已写入本地 data.json');
             return { ok: true, count: data.count || updates.length };
         } catch (err) {
             rebuildPending();
             recomputeDirty();
             updateDirtyUI();
-            setSyncBadge(false, '本地暂存 · 8767 服务未开');
+            setSyncBadge(false, isRemotePage ? '云端上传失败 · 仍保存在浏览器' : '本地暂存 · 8767 服务未开');
             return { ok: false, error: err.message };
         }
     }
@@ -282,9 +313,12 @@
     }
 
     function syncSuffix(result) {
-        return result.ok
-            ? ' 已写入 data.json。'
-            : ' 已保存在浏览器；启动 8767 服务后点“保存”即可同步到 data.json。';
+        if (result.ok) {
+            return isRemotePage ? ' 已上传云端，等待电脑 BAT 拉取。' : ' 已写入本地 data.json。';
+        }
+        return isRemotePage
+            ? ' 已保存在浏览器；请检查云端连接后重试。'
+            : ' 已保存在浏览器；启动 8767 服务后点“统一保存”。';
     }
 
     function setSyncBadge(on, text) {
@@ -295,21 +329,29 @@
     }
 
     function checkSyncHealth() {
-        fetchWithTimeout(API_BASE + '/api/health', { cache: 'no-store' }, 3000)
+        if (isRemotePage) {
+            setSyncBadge(Boolean(readCloudConfig()), readCloudConfig()
+                ? '云端模式 · 点击统一上传'
+                : '未配置云端连接');
+            if (btnSave) btnSave.textContent = '☁️ 统一上传到云端';
+            return;
+        }
+        fetchWithTimeout(LOCAL_API_BASE + '/api/health', { cache: 'no-store' }, 3000)
             .then(function (resp) {
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
                 return resp.json();
             })
             .then(function (data) {
                 if (data && data.ok) {
-                    setSyncBadge(true, 'data.json 自动同步已开启');
+                    setSyncBadge(true, '本地模式 · 点击统一保存');
                 } else {
-                    setSyncBadge(false, '本地暂存 · 服务异常');
+                    setSyncBadge(false, '本地服务异常');
                 }
             })
             .catch(function () {
-                setSyncBadge(false, '本地暂存 · 8767 服务未开');
+                setSyncBadge(false, '本地服务未开 · 仍可暂存');
             });
+        if (btnSave) btnSave.textContent = '💾 统一保存到本地';
     }
 
     function rebuildPending() {
@@ -359,12 +401,14 @@
 
     function updateDirtyUI() {
         if (!btnSave) return;
+        var label = isRemotePage ? '☁️ 统一上传' : '💾 统一保存';
+        var count = pendingCount();
         if (isDirty) {
             btnSave.classList.add('dirty');
-            btnSave.textContent = '💾 保存（有未同步修改）';
+            btnSave.textContent = label + '（' + count + '）';
         } else {
             btnSave.classList.remove('dirty');
-            btnSave.textContent = '💾 保存';
+            btnSave.textContent = label;
         }
     }
 
@@ -419,33 +463,16 @@
                 applied++;
             });
 
-            undoStack = [];
             recomputeDirty();
             renderAll();
             var baseStatus = '已加载 ' + getWordItems().length + ' 个词 · ' + wordData.length +
                 ' 个词条（全部分类）· 每天 20 个新词 + 20 个复习' +
-                (applied > 0 ? '（含 ' + applied + ' 条本地打卡记录）' : '');
-            var pendingUpdates = currentUpdates();
-            if (pendingUpdates.length > 0) {
-                showStatus(baseStatus + '；发现 ' + pendingUpdates.length + ' 条本地记录，正在写入 data.json…');
-                syncUpdates(pendingUpdates).then(function (result) {
-                    if (result.ok) {
-                        showStatus('已加载 ' + getWordItems().length + ' 个词 · ' +
-                            wordData.length + ' 个词条；已将 ' + result.count +
-                            ' 条本地记录写入 data.json。');
-                    } else {
-                        showStatus(baseStatus + '；有 ' + pendingUpdates.length +
-                            ' 条本地记录未同步（启动 8767 服务后点“保存”）。', true);
-                    }
-                });
-            } else {
-                showStatus(baseStatus);
-            }
+                (applied > 0 ? '（含 ' + applied + ' 条待保存复习记录）' : '');
+            showStatus(baseStatus);
         } catch (e) {
             fullData = {};
             wordData = [];
             originalSnapshot = {};
-            undoStack = [];
             isDirty = false;
             updateDirtyUI();
             renderAll();
@@ -464,10 +491,13 @@
     }
 
     function wordCard(item, mode, today) {
+        var completed = mode === 'done' || item.lastReviewed === today;
         var overdue = mode === 'due' ? Math.max(0, diffDays(today, item.nextDate)) : 0;
         var dateLabel;
 
-        if (mode === 'new') {
+        if (completed) {
+            dateLabel = '已完成 · 下次 ' + formatShort(item.nextDate);
+        } else if (mode === 'new') {
             dateLabel = (item.nextDate === today ? '计划 ' : '补学 · 计划 ') +
                 formatShort(item.nextDate);
         } else {
@@ -497,7 +527,7 @@
             ? '<span class="badge badge-extra">额外新增</span>'
             : '';
 
-        return '<li class="review-item word-card ' + mode + '" data-name="' + esc(item.name) + '">' +
+        return '<li class="review-item word-card ' + mode + (completed ? ' is-done' : '') + '" data-name="' + esc(item.name) + '">' +
             '<div class="word-main">' +
             '<div class="word-line">' +
             '<button type="button" class="word-name" data-toggle-zh="' + esc(item.name) + '">' + esc(item.word) + '</button>' +
@@ -512,14 +542,16 @@
             '</div>' +
             '<div class="word-actions">' +
             '<a class="btn-open" href="' + esc(makeHref(item.path)) + '" target="_blank" rel="noopener">打开</a>' +
-            '<button type="button" class="btn-done" data-complete="' + esc(item.name) + '">' +
-            (mode === 'new' ? '学完' : (mode === 'extra' ? '额外完成' : '复习完成')) +
-            '</button>' +
+            (completed
+                ? '<button type="button" class="btn-done" disabled>已完成</button>'
+                : '<button type="button" class="btn-done" data-complete="' + esc(item.name) + '">' +
+                    (mode === 'new' ? '学完' : (mode === 'extra' ? '额外完成' : '复习完成')) +
+                    '</button>') +
             '</div>' +
             '</li>';
     }
 
-    function renderStats(today, words, newItems, dueItems, extraItems) {
+    function renderStats(today, words, newItems, dueItems, extraItems, doneItems) {
         var learned = words.filter(function (item) {
             return item.level > 0 || !!item.lastReviewed;
         }).length;
@@ -538,6 +570,7 @@
         newCountEl.textContent = newItems.length;
         dueCountEl.textContent = dueItems.length;
         if (extraCountEl) extraCountEl.textContent = extraItems.length;
+        if (doneCountEl) doneCountEl.textContent = doneItems.length;
         allCountEl.textContent = wordData.length;
     }
 
@@ -675,7 +708,14 @@
         var dueItems = dueCandidates.slice(0, DAILY_REVIEW);
         var dueBacklogCount = Math.max(0, dueCandidates.length - dueItems.length);
 
-        renderStats(today, words, newItems, dueItems, extraItems);
+        var doneItems = words.filter(function (item) {
+            return item.lastReviewed === today;
+        }).sort(function (a, b) {
+            return a.name.localeCompare(b.name);
+        });
+
+        currentGroups = { new: newItems, due: dueItems, extra: extraItems, done: doneItems };
+        renderStats(today, words, newItems, dueItems, extraItems, doneItems);
 
         if (newBacklog) {
             if (newBacklogCount > 0) {
@@ -711,6 +751,16 @@
                 : '<li class="empty">今天没有额外新增。前一天通过生成器/答疑新增的词会出现在这里，不占 20 新词配额。</li>';
         }
 
+        if (doneList) {
+            doneList.innerHTML = doneItems.length > 0
+                ? doneItems.map(function (item) { return wordCard(item, 'done', today); }).join('')
+                : '<li class="empty">今天还没有完成的词。</li>';
+        }
+
+        if (btnDueAll) btnDueAll.disabled = dueItems.length === 0;
+        if (btnNewAll) btnNewAll.disabled = newItems.length === 0;
+        if (btnExtraAll) btnExtraAll.disabled = extraItems.length === 0;
+
         renderAllGroups(today);
     }
 
@@ -726,94 +776,45 @@
         return null;
     }
 
-    function completeReview(name) {
-        var item = findWord(name);
-        if (!item) return;
-
-        var today = todayString();
-        undoStack.push({
-            name: item.name,
-            level: item.level,
-            nextDate: item.nextDate,
-            lastReviewed: item.lastReviewed
-        });
-
+    function markReviewed(item, today) {
+        if (!item || item.lastReviewed === today) return false;
         var nextLevel = Math.min(INTERVALS.length, clampLevel(item.level) + 1);
         item.level = nextLevel;
         item.lastReviewed = today;
         item.nextDate = addDays(today, INTERVALS[nextLevel - 1]);
-
-        var changed = rebuildPending();
-        recomputeDirty();
-        renderAll();
-
-        var nextText = nextLevel >= INTERVALS.length
-            ? '已完成 90 天轮次，标记为已通关'
-            : '下次复习 ' + formatShort(item.nextDate);
-        var statusBase = '✓ 已打卡：' + item.word + '（第 ' + nextLevel + ' 次 · ' + nextText + '）';
-        showStatus(statusBase + '；正在写入 data.json…');
-        syncUpdates([{
-            name: item.name,
-            level: item.level,
-            nextDate: item.nextDate,
-            lastReviewed: item.lastReviewed
-        }]).then(function (result) {
-            showStatus(statusBase + syncSuffix(result), !result.ok);
-        });
+        return true;
     }
 
-    function undoLast() {
-        if (undoStack.length === 0) {
-            showStatus('没有可撤销的操作。', true);
-            return;
-        }
-        var snap = undoStack.pop();
-        var item = findWord(snap.name);
-        if (!item) return;
-
-        item.level = snap.level;
-        item.nextDate = snap.nextDate;
-        item.lastReviewed = snap.lastReviewed;
-
+    function completeReview(name) {
+        var item = findWord(name);
+        if (!item || item.lastReviewed === todayString()) return;
+        var today = todayString();
+        markReviewed(item, today);
         rebuildPending();
         recomputeDirty();
         renderAll();
-        showStatus('已撤销：' + item.word + '；正在写入 data.json…');
-        syncUpdates([{
-            name: item.name,
-            level: item.level,
-            nextDate: item.nextDate,
-            lastReviewed: item.lastReviewed
-        }]).then(function (result) {
-            showStatus('已撤销：' + item.word + syncSuffix(result), !result.ok);
-        });
+        showStatus('✓ 已加入待保存队列：' + item.word + '（' + pendingCount() + ' 条待保存）');
     }
 
-    function undoAll() {
-        if (undoStack.length === 0) {
-            showStatus('没有可撤销的操作。', true);
+    function completeBatch(mode) {
+        var items = (currentGroups[mode] || []).filter(function (item) {
+            return item.lastReviewed !== todayString();
+        });
+        if (!items.length) return;
+        var labels = { new: '今日新词', due: '复习词', extra: '临时单词' };
+        if (!confirm('确定把「' + (labels[mode] || mode) + '」这一组 ' + items.length + ' 个词全部标记完成？')) {
             return;
         }
-        if (!confirm('撤销本次打开页面后的全部 ' + undoStack.length + ' 步操作？')) return;
-
-        var count = undoStack.length;
-        while (undoStack.length > 0) {
-            var snap = undoStack.pop();
-            var item = findWord(snap.name);
-            if (!item) continue;
-            item.level = snap.level;
-            item.nextDate = snap.nextDate;
-            item.lastReviewed = snap.lastReviewed;
-        }
-
+        var today = todayString();
+        items.forEach(function (item) { markReviewed(item, today); });
         rebuildPending();
         recomputeDirty();
         renderAll();
-        var updates = currentUpdates();
-        showStatus('已撤销 ' + count + ' 步操作；正在写入 data.json…');
-        syncUpdates(updates).then(function (result) {
-            showStatus('已撤销 ' + count + ' 步操作' + syncSuffix(result), !result.ok);
-        });
+        showStatus('✓ 已加入待保存队列：' + items.length + ' 个词（' + pendingCount() + ' 条待保存）');
+    }
+
+    function pendingCount() {
+        return Object.keys(getPending()).length;
     }
 
     async function saveNow() {
@@ -822,15 +823,17 @@
             rebuildPending();
             isDirty = false;
             updateDirtyUI();
-            showStatus('✅ 当前没有需要同步的修改。');
+            showStatus('当前没有需要保存的复习记录。');
             return;
         }
-        showStatus('正在把 ' + updates.length + ' 条打卡写入 data.json…');
+        setSyncBadge(true, isRemotePage ? '正在上传云端…' : '正在写入本地 data.json…');
         var result = await syncUpdates(updates);
         if (result.ok) {
-            showStatus('✅ 已把 ' + result.count + ' 条打卡写入 data.json。');
+            renderAll();
+            showStatus('✅ 已保存 ' + result.count + ' 条记录' + syncSuffix(result));
         } else {
-            showStatus('已保存在浏览器；未写入 data.json。启动 8767 服务后点“保存”重试。', true);
+            renderAll();
+            showStatus('保存失败：' + result.error + '。记录仍留在浏览器。', true);
         }
     }
 
@@ -905,11 +908,14 @@
             case 'btn-save':
                 saveNow();
                 break;
-            case 'btn-undo':
-                undoLast();
+            case 'btn-due-all':
+                completeBatch('due');
                 break;
-            case 'btn-undo-all':
-                undoAll();
+            case 'btn-new-all':
+                completeBatch('new');
+                break;
+            case 'btn-extra-all':
+                completeBatch('extra');
                 break;
             case 'btn-export':
                 exportData();

@@ -38,6 +38,7 @@ CI_DIR = BASE / "词素"
 LOG_FILE = TOOL_DIR / "归档日志.jsonl"
 BACKUP_DIR = TOOL_DIR / "backups"
 REVIEW_BACKUP_DIR = TOOL_DIR / "review_backups"
+REVIEW_ARCHIVE_DIR = BASE / "复习清单" / "归档"
 API_TXT = TOOL_DIR / "API.txt"
 SHARED_KEY_FILE = BASE.parent / "共享配置" / "API.txt"
 HOME_KEY_FILE = Path.home() / ".word_archiver_api_key"
@@ -1014,6 +1015,45 @@ def backup_review_data() -> None:
         shutil.copy2(DATA_JSON, daily)
 
 
+def write_review_daily_archive(day: str | None = None) -> Path:
+    """把当天已复习的词写成一份完整快照；同一天再次写入时整份覆盖。"""
+    target_day = day or today_str()
+    data = load_data()
+    entries: list[dict[str, Any]] = []
+    for category, items in data.items():
+        if not isinstance(items, list):
+            continue
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            if item.get("kind") != "word":
+                continue
+            if str(item.get("lastReviewed") or "") != target_day:
+                continue
+            entries.append({
+                "name": item.get("name") or item.get("word") or "",
+                "category": category,
+                "level": clamp_int(item.get("level")),
+                "nextDate": str(item.get("nextDate") or ""),
+                "lastReviewed": target_day,
+            })
+    if not entries:
+        return REVIEW_ARCHIVE_DIR / (target_day + ".json")
+    entries.sort(key=lambda item: str(item.get("name") or ""))
+    payload = {
+        "date": target_day,
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "count": len(entries),
+        "entries": entries,
+    }
+    REVIEW_ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+    target = REVIEW_ARCHIVE_DIR / (target_day + ".json")
+    temp = target.with_suffix(target.suffix + ".tmp")
+    temp.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    os.replace(temp, target)
+    return target
+
+
 def apply_review_updates(updates: list[dict[str, Any]]) -> dict[str, Any]:
     """把复习清单的 level/nextDate/lastReviewed 写回 data.json。
 
@@ -1057,9 +1097,20 @@ def apply_review_updates(updates: list[dict[str, Any]]) -> dict[str, Any]:
         if errors:
             raise ArchiveError("；".join(errors[:8]))
 
+        changed = [
+            row for row in prepared
+            if (
+                row[1].get("level") != row[2]
+                or str(row[1].get("nextDate") or "") != row[3]
+                or (str(row[1].get("lastReviewed") or "") or None) != row[4]
+            )
+        ]
+        if not changed:
+            return {"ok": True, "count": 0, "updated": [], "unchanged": len(prepared)}
+
         backup_review_data()
         updated: list[dict[str, Any]] = []
-        for category, item, level, next_date, last_reviewed in prepared:
+        for category, item, level, next_date, last_reviewed in changed:
             item["level"] = level
             item["nextDate"] = next_date
             item["lastReviewed"] = last_reviewed
@@ -1073,6 +1124,7 @@ def apply_review_updates(updates: list[dict[str, Any]]) -> dict[str, Any]:
             })
 
         write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+        write_review_daily_archive(today)
         append_log({
             "word": ",".join(str(x.get("name") or "") for x in updated)[:300],
             "type": "review-sync",

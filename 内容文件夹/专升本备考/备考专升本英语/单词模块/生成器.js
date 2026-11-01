@@ -47,7 +47,9 @@
     var btnCloudTest = document.getElementById('btnCloudTest');
     var btnCloudExport = document.getElementById('btnCloudExport');
     var CLOUD_CONFIG_KEY = 'english-generator-cloud-v1';
+    var CLOUD_PREVIEW_KEY = 'english-cloud-preview-v1';
     var usingTutorConnection = false;
+    var cloudPreview = null;
 
     var lastAnalysis = null;
     var lastCheckState = 'none';
@@ -57,8 +59,8 @@
     function lockMainActions(lock) {
         actionsLocked = Boolean(lock);
         btnAnalyze.disabled = actionsLocked || busy;
-        btnArchive.disabled = actionsLocked || busy;
         btnJsonAudit.disabled = busy;
+        updateCloudWriteState();
     }
 
     function esc(value) {
@@ -170,16 +172,74 @@
         cloudDialogStatus.className = 'cloud_status' + (type ? ' is-' + type : '');
     }
 
+    function readCloudPreview() {
+        try {
+            var raw = sessionStorage.getItem(CLOUD_PREVIEW_KEY);
+            if (!raw) return null;
+            var data = JSON.parse(raw);
+            if (!data || !data.query || !data.answer) return null;
+            return data;
+        } catch (err) {
+            return null;
+        }
+    }
+
+    function saveCloudPreview(query, answer) {
+        cloudPreview = { query: query, answer: answer, at: Date.now() };
+        try {
+            sessionStorage.setItem(CLOUD_PREVIEW_KEY, JSON.stringify(cloudPreview));
+        } catch (err) {
+            // 浏览器临时存储不可用时只保留在内存。
+        }
+        updateCloudWriteState();
+    }
+
+    function clearCloudPreview() {
+        cloudPreview = null;
+        try {
+            sessionStorage.removeItem(CLOUD_PREVIEW_KEY);
+        } catch (err) {
+            // 忽略。
+        }
+        updateCloudWriteState();
+    }
+
+    function updateCloudWriteState() {
+        if (!btnArchive) return;
+        var cloud = genModeEl.value === 'cloud';
+        var ready = !cloud || Boolean(cloudPreview && cloudPreview.query === (wordInput.value || '').trim());
+        btnArchive.disabled = busy || actionsLocked || !ready;
+        if (cloud) {
+            btnArchive.textContent = ready ? '确认写入待归档' : '先 AI 分析，再写入待归档';
+        }
+    }
+
+    function renderCloudPreview(answer, query) {
+        resultBadge.textContent = '云端临时分析';
+        resultArea.innerHTML =
+            '<div class="result_card">' +
+            '<div class="result_head"><div><span class="result_word">' + esc(query) + '</span>' +
+            '<div class="result_tags"><span class="result_tag">只分析 · 不写入</span>' +
+            '<span class="result_tag">浏览器临时保存</span></div></div></div>' +
+            '<div class="result_exists" style="white-space:pre-wrap;"><strong>AI 分析</strong><p>' +
+            esc(String(answer || '')) + '</p></div>' +
+            '<div class="result_exists"><strong>下一步</strong>' +
+            '<p>确认无误后，点“确认写入待归档”。不点写入，就不会上传云端，也不会入队。</p></div>' +
+            '</div>';
+    }
+
     function applyMode() {
         if (isRemotePage && genModeEl.value === 'local') {
             genModeEl.value = 'cloud';
         }
         var cloud = genModeEl.value === 'cloud';
         btnCheck.hidden = cloud;
-        btnAnalyze.hidden = cloud;
         if (btnJsonAudit) btnJsonAudit.hidden = cloud;
-        btnArchive.hidden = !cloud;
-        btnArchive.textContent = cloud ? '云端解释并加入待归档' : '分析并写入';
+        btnAnalyze.hidden = false;
+        btnAnalyze.textContent = 'AI 分析（不写入）';
+        btnArchive.hidden = false;
+        btnArchive.textContent = cloud ? '先 AI 分析，再写入待归档' : '分析并写入';
+        updateCloudWriteState();
         wordInput.placeholder = cloud
             ? '例如：mean，或中文“意思是；平均的”'
             : '例如：friendship';
@@ -189,8 +249,8 @@
             setCloudStatus(
                 cloudConfigured()
                     ? (usingTutorConnection
-                        ? '云端模式：复用 AI 答疑连接，先解释单词，再加入云端待归档；不写本地文件。'
-                        : '云端模式：先解释单词，再加入云端待归档；不写本地文件。')
+                        ? '云端模式：先 AI 分析（不写入），确认后再加入云端待归档；结果只临时保存在浏览器。'
+                        : '云端模式：先 AI 分析（不写入），确认后再加入云端待归档；结果只临时保存在浏览器。')
                     : '先点“云端连接设置”填写地址和口令，再输入英文单词或中文意思。',
                 cloudConfigured() ? 'ok' : 'error'
             );
@@ -378,23 +438,24 @@
             wordInput.focus();
             return;
         }
+        if (!cloudPreview || cloudPreview.query !== query) {
+            setStatus('先点“AI 分析（不写入）”，确认结果后再写入待归档。', 'error');
+            wordInput.focus();
+            return;
+        }
         setBusy(true, 'cloud');
         try {
-            setStatus('正在调用云端 AI 解释单词…', 'busy');
-            var explanation = await cloudPost('/api/tutor', {
-                mode: '单词解释',
-                question: '请解释单词或中文意思“' + query + '”。请给出英文单词、词性、中文释义、常见搭配和一个例句。'
-            });
-            setStatus('解释完成，正在加入云端待归档…', 'busy');
+            setStatus('正在把已确认的分析加入云端待归档…', 'busy');
             var data = await cloudPost('/api/queue-word', { query: query });
-            renderCloudExplanation(explanation.answer || explanation.message || '', data);
-            setStatus('云端解释完成，并已加入待归档。', 'ok');
-            toast('云端解释完成，已加入待归档');
+            renderCloudExplanation(cloudPreview.answer, data);
+            clearCloudPreview();
+            setStatus('已加入云端待归档；没有重复调用 AI。', 'ok');
+            toast('已加入待归档');
         } catch (err) {
             var message = cloudErrorMessage(err);
             renderError(message);
-            setStatus('云端解释/入队失败：' + message, 'error');
-            toast('云端解释失败');
+            setStatus('入队失败：' + message, 'error');
+            toast('入队失败');
         } finally {
             setBusy(false);
         }
@@ -426,13 +487,14 @@
                 inputBadge.textContent = '修复中…';
                 setStatus('正在删除旧记录并重建 HTML / JSON，请稍候…', 'busy');
             } else if (mode === 'cloud') {
-                inputBadge.textContent = '云端解释中…';
-                setStatus('正在调用云端 AI 解释并加入待归档，请稍候…', 'busy');
+                inputBadge.textContent = '云端处理中…';
+                setStatus('正在调用云端，请稍候…', 'busy');
             } else {
                 inputBadge.textContent = '分析中…';
                 setStatus('正在调用 DeepSeek 分析构词，请稍候…', 'busy');
             }
         }
+        updateCloudWriteState();
     }
 
     function setService(kind, title, text) {
@@ -735,8 +797,43 @@
             body;
     }
 
+    async function doCloudAnalyze() {
+        if (busy) return;
+        var query = (wordInput.value || '').trim();
+        if (!validCloudQuery(query)) {
+            setStatus('云端分析只接受一个英文单词，或一个简短中文意思；不要输入句子或问句。', 'error');
+            wordInput.focus();
+            return;
+        }
+        setBusy(true, 'cloud');
+        try {
+            setStatus('正在云端 AI 分析（不写入、不记日志）…', 'busy');
+            var data = await cloudPost('/api/tutor-preview', {
+                mode: '单词解释',
+                question: '请解释单词或中文意思“' + query + '”。请给出英文单词、词性、中文释义、常见搭配和一个例句。'
+            });
+            var answer = String(data.answer || data.message || '').trim();
+            if (!answer) throw new Error('云端没有返回分析结果。');
+            saveCloudPreview(query, answer);
+            renderCloudPreview(answer, query);
+            setStatus('分析完成，结果只保存在浏览器；确认后再点“确认写入待归档”。', 'ok');
+            toast('分析完成，尚未写入');
+        } catch (err) {
+            clearCloudPreview();
+            renderError(cloudErrorMessage(err));
+            setStatus('云端分析失败：' + cloudErrorMessage(err), 'error');
+            toast('云端分析失败');
+        } finally {
+            setBusy(false);
+        }
+    }
+
     async function doAnalyze() {
         if (busy) return;
+        if (genModeEl.value === 'cloud') {
+            await doCloudAnalyze();
+            return;
+        }
         var word = normalizeWord();
         if (!validWord(word)) {
             setStatus('请输入单个英文单词（字母、连字符或撇号）。', 'error');
@@ -941,13 +1038,16 @@
 
     wordInput.addEventListener('input', function () {
         if (actionsLocked) lockMainActions(false);
+        updateCloudWriteState();
+        if (genModeEl.value === 'cloud' && cloudPreview && cloudPreview.query !== (wordInput.value || '').trim()) {
+            clearCloudPreview();
+        }
     });
 
     wordInput.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
             event.preventDefault();
-            if (genModeEl.value === 'cloud') doCloudQueue();
-            else doAnalyze();
+            doAnalyze();
         }
     });
 
@@ -957,10 +1057,18 @@
             hintInput.value = '';
             wordInput.focus();
             inputBadge.textContent = '等待分析';
+            updateCloudWriteState();
         });
     });
 
+    cloudPreview = readCloudPreview();
     loadCloudConfig();
     applyMode();
+    if (cloudPreview && genModeEl.value === 'cloud') {
+        wordInput.value = cloudPreview.query;
+        renderCloudPreview(cloudPreview.answer, cloudPreview.query);
+        setStatus('已恢复浏览器中的临时分析结果；确认后再写入待归档。', '');
+    }
+    updateCloudWriteState();
     checkHealth();
 })();

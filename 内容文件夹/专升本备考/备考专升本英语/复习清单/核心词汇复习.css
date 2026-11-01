@@ -393,6 +393,41 @@
     color: #0d9488;
 }
 
+.btn-batch {
+    padding: 0.32rem 0.65rem;
+    border: 1px solid #0d9488;
+    border-radius: 5px;
+    background: #E8F8F5;
+    color: #0f766e;
+    font-size: 0.76rem;
+    cursor: pointer;
+}
+
+.btn-batch:hover {
+    background: #D1F2EB;
+}
+
+.btn-batch:disabled,
+.word-actions .btn-done:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.done-section {
+    border-top: 4px solid #27AE60;
+}
+
+.done-section .review-item.word-card {
+    border-left-color: #27AE60;
+    background: #F4FBF7;
+}
+
+.done-section .btn-done {
+    background: #E8F8F0;
+    color: #1E8449;
+    border-color: #A9DFBF;
+}
+
 .all-groups {
     display: grid;
     gap: 0.45rem;

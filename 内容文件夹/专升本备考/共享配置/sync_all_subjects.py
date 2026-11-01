@@ -697,6 +697,71 @@ class SyncRunner:
             result["message"] = str(exc)
         return result
 
+    def sync_review_updates(self) -> dict[str, Any]:
+        result: dict[str, Any] = {
+            "status": "ok",
+            "exported": 0,
+            "imported": 0,
+            "message": "",
+        }
+        try:
+            data = self.api_get("/api/review-pending")
+        except SyncError as exc:
+            result["status"] = "error"
+            result["message"] = str(exc)
+            return result
+
+        batches = data.get("batches") or []
+        if not isinstance(batches, list) or not batches:
+            result["status"] = "unchanged"
+            result["message"] = "云端没有复习记录"
+            return result
+
+        latest: dict[str, dict[str, Any]] = {}
+        for batch in sorted(
+            [item for item in batches if isinstance(item, dict)],
+            key=lambda item: str(item.get("created_at") or ""),
+        ):
+            updates = batch.get("updates") or []
+            if not isinstance(updates, list):
+                continue
+            for raw in updates:
+                if not isinstance(raw, dict):
+                    continue
+                name = str(raw.get("name") or "").strip()
+                if not name:
+                    continue
+                latest[name] = {
+                    "name": name,
+                    "level": raw.get("level"),
+                    "nextDate": str(raw.get("nextDate") or ""),
+                    "lastReviewed": str(raw.get("lastReviewed") or "") or None,
+                }
+
+        updates = list(latest.values())
+        result["exported"] = len(updates)
+        if not updates:
+            result["status"] = "unchanged"
+            result["message"] = "云端复习批次为空"
+            return result
+
+        try:
+            tool_dir = self.base / "备考专升本英语" / "词素工具"
+            if str(tool_dir) not in sys.path:
+                sys.path.insert(0, str(tool_dir))
+            from word_archiver import apply_review_updates
+
+            applied = apply_review_updates(updates)
+        except Exception as exc:
+            result["status"] = "import_error"
+            result["message"] = str(exc)
+            return result
+
+        result["imported"] = int(applied.get("count") or 0)
+        result["message"] = "已应用 %d 条复习记录" % result["imported"]
+        result["route"] = self.last_route
+        return result
+
     def sync_pending_words(self, subject: dict[str, Any]) -> dict[str, Any]:
         result: dict[str, Any] = {
             "status": "ok",
@@ -811,6 +876,13 @@ class SyncRunner:
         if not any_enabled:
             self.status["errors"].append("没有启用任何科目。")
 
+        if any_enabled:
+            review = self.sync_review_updates()
+            self.status["review_updates"] = review
+            if review.get("status") not in ("ok", "unchanged"):
+                self.status["errors"].append("云端复习同步失败：" + str(review.get("message") or review.get("status")))
+            print("云端复习：%s" % (review["message"] or review["status"]))
+
         try:
             self.status["history_archives"] = build_history_archives(self.base)
         except (OSError, ValueError) as exc:
@@ -828,6 +900,9 @@ class SyncRunner:
         pending = self.status.get("pending_words") or {}
         if pending:
             print(self.describe_result(pending, "待归档单词"))
+        review = self.status.get("review_updates") or {}
+        if review:
+            print(self.describe_result(review, "云端复习"))
         archives = self.status.get("history_archives") or {}
         if archives:
             print("GitHub 历史归档：英语 %d 条，数学 %d 条，添加日志 %d 条" % (
@@ -925,6 +1000,9 @@ class SyncRunner:
         pending = data.get("pending_words") or {}
         if pending:
             print(self.describe_result(pending, "待归档单词"))
+        review = data.get("review_updates") or {}
+        if review:
+            print(self.describe_result(review, "云端复习"))
         archives = data.get("history_archives") or {}
         if archives:
             print("GitHub 历史归档：英语 %d 条，数学 %d 条" % (
