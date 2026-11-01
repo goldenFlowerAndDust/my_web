@@ -22,6 +22,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+ADD_LOG_TYPES = {"suffix", "prefix", "root_family", "compound", "atom"}
+
 CATEGORIES = {
     "english": {
         "label": "英语",
@@ -181,6 +183,28 @@ def added_log_key(item: dict[str, Any]) -> str:
     ])
 
 
+def canonical_added_entries(entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """只保留真正的“新增词”事件，同一个词保留最早一次添加时间。"""
+    by_word: dict[str, dict[str, Any]] = {}
+    for item in entries:
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("type") or "") not in ADD_LOG_TYPES:
+            continue
+        word = str(item.get("word") or "").strip()
+        if not word:
+            continue
+        when = str(item.get("time") or "")
+        old = by_word.get(word)
+        if old is None or when < str(old.get("time") or ""):
+            by_word[word] = item
+    return sorted(
+        by_word.values(),
+        key=lambda item: str(item.get("time") or ""),
+        reverse=True,
+    )
+
+
 def build_added_log(base: Path) -> int:
     source = base / "备考专升本英语" / "词素工具" / "归档日志.jsonl"
     output = base / "备考专升本英语" / "添加日志" / "添加日志.json"
@@ -206,10 +230,10 @@ def build_added_log(base: Path) -> int:
     if not entries:
         print("添加日志：本地没有记录，保留已有归档不动。")
         return 0
-    entries.reverse()
-    existing = read_archive_entries(output)
-    entries = merge_entries(existing, entries, added_log_key)
-    if existing == entries:
+    raw_existing = read_archive_entries(output)
+    existing = canonical_added_entries(raw_existing)
+    entries = canonical_added_entries(existing + entries)
+    if raw_existing == entries:
         print("添加日志：无变化，保留现有归档时间戳。")
         return len(entries)
     payload = {

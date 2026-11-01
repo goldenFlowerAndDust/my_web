@@ -15,7 +15,7 @@ import html
 import json
 import re
 import shutil
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 
 TOOL_DIR = Path(__file__).resolve().parent
@@ -35,6 +35,8 @@ TYPE_LABELS = {
     "repair": "修复并重建",
 }
 
+ADD_LOG_TYPES = {"suffix", "prefix", "root_family", "compound", "atom"}
+
 
 def esc(value) -> str:
     return html.escape(str(value or ""), quote=True)
@@ -52,10 +54,25 @@ def load_entries() -> list[dict]:
             item = json.loads(line)
         except json.JSONDecodeError:
             continue
-        if isinstance(item, dict):
-            entries.append(item)
-    entries.sort(key=lambda item: str(item.get("time", "")), reverse=True)
-    return entries
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("type") or "") not in ADD_LOG_TYPES:
+            continue
+        word = str(item.get("word") or "").strip()
+        if not word:
+            continue
+        entries.append(item)
+    # 只展示真正的“新增词”，同一个词保留最早一次添加时间。
+    by_word: dict[str, dict] = {}
+    for item in entries:
+        word = str(item.get("word") or "")
+        when = str(item.get("time") or "")
+        old = by_word.get(word)
+        if old is None or when < str(old.get("time") or ""):
+            by_word[word] = item
+    result = list(by_word.values())
+    result.sort(key=lambda item: str(item.get("time", "")), reverse=True)
+    return result
 
 
 def date_of(item: dict) -> str:
@@ -212,13 +229,16 @@ def refresh() -> None:
 
     for day, day_entries in grouped.items():
         target = ARCHIVE_DIR / (day + ".html")
-        # 已经归档的日期只保留，不覆盖、不删除。
-        if target.exists():
+        # 历史日期保留旧页面；今天重新生成，清掉旧版混入的复习/覆盖记录。
+        if target.exists() and day != date.today().isoformat():
             continue
         target.write_text(daily_html(day, day_entries), encoding="utf-8", newline="\n")
+    today = date.today().isoformat()
+    today_target = ARCHIVE_DIR / (today + ".html")
+    if today not in grouped and today_target.exists():
+        today_target.write_text(daily_html(today, []), encoding="utf-8", newline="\n")
     index_path = ARCHIVE_DIR / "index.html"
-    if not index_path.exists():
-        index_path.write_text(index_html(entries), encoding="utf-8", newline="\n")
+    index_path.write_text(index_html(entries), encoding="utf-8", newline="\n")
 
 
 def _type_from_category(category: str) -> str:
