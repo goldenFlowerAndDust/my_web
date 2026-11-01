@@ -1,10 +1,17 @@
 {
   "date": "2026-11-01",
-  "generated_at": "2026-11-01T12:52:10",
-  "count": 1,
+  "generated_at": "2026-11-01T17:09:19",
+  "count": 2,
   "entries": [
     {
       "name": "beautiful",
+      "category": "核心词汇通关",
+      "level": 2,
+      "nextDate": "2026-11-04",
+      "lastReviewed": "2026-11-01"
+    },
+    {
+      "name": "careful",
       "category": "核心词汇通关",
       "level": 2,
       "nextDate": "2026-11-04",

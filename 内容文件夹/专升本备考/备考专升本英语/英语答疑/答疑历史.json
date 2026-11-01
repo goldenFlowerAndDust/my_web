@@ -1,9 +1,19 @@
 {
-  "generated_at": "2026-11-01T12:52:10",
+  "generated_at": "2026-11-01T17:09:19",
   "source": "local-jsonl",
   "subject": "english",
-  "count": 8,
+  "count": 9,
   "entries": [
+    {
+      "time": "2026-11-01 17:02:56",
+      "mode": "其他",
+      "question": "require造句",
+      "answer": "**结论：** `require` 是专升本高频动词，核心意思是“需要；要求”。造句时最容易错的是后面接什么：接名词/动名词，或接 `sb. to do sth.`，不能直接接 `sb. do sth.`。\n\n## 基本用法\n\n**1. require + 名词**\n- This job requires patience and good communication skills.\n  这份工作需要耐心和良好的沟通能力。\n\n**2. require + doing（主动形式表被动）**\n- The windows require cleaning.\n  窗户需要清洁了。\n- 注意：这里 `cleaning` 不能用 `to clean`，因为 `require doing` 是固定用法，等于 `require to be done`。\n\n**3. require sb. to do sth.**\n- The school requires students to wear school uniforms.\n  学校要求学生穿校服。\n\n**4. require that + 从句（从句常用 should do，should 可省略）**\n- The rules require that every member (should) attend the meeting.\n  规定要求每位成员都参加会议。\n\n## 常见错误\n\n- 错：The teacher requires us finish the homework today.\n  对：The teacher requires us **to** finish the homework today.\n  依据：`require` 不能像 `let/make` 那样接“宾语 + 动词原形”。\n\n- 错：The room requires to clean.\n  对：The room requires **cleaning**.\n  或：The room requires **to be cleaned**.\n\n- 错：This requires me a lot of time.\n  对：This requires **a lot of time from me**.\n  或更自然：This takes me a lot of time.\n  说明：`require` 不常接双宾语，表达“需要某人时间/精力”时要调整结构。\n\n## 专升本写作可用的句子\n\n- Learning a foreign language requires constant practice and patience.\n  学外语需要持续练习和耐心。\n\n- Students are required to hand in their assignments on time.\n  学生被要求按时交作业。（被动语态很常用）\n\n- The new policy requires that all applicants (should) provide relevant documents.\n  新政策要求所有申请人提供相关文件。\n\n**记忆提示：** 把 `require` 记成“需要某物 / 要求某人去做 / 规定某事应当做”三层，造句时先判断后面是“物、人还是从句”，就不容易写错。",
+      "model": "deepseek-chat",
+      "duration_ms": 3959,
+      "status": "ok",
+      "source": "imported"
+    },
     {
       "time": "2026-11-01 12:42:39",
       "mode": "其他",
