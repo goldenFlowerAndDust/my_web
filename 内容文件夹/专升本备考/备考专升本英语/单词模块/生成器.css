@@ -3,6 +3,10 @@
    共用变量/按钮/面板见 词汇组件.css
    ========================================================================== */
 
+[hidden] {
+    display: none !important;
+}
+
 .page_main,
 .page_main *,
 .page_main *::before,

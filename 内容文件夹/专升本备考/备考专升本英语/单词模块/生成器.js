@@ -210,7 +210,7 @@
         var ready = !cloud || Boolean(cloudPreview && cloudPreview.query === (wordInput.value || '').trim());
         btnArchive.disabled = busy || actionsLocked || !ready;
         if (cloud) {
-            btnArchive.textContent = ready ? '确认写入待归档' : '先 AI 分析，再写入待归档';
+            btnArchive.textContent = ready ? '上传云端' : '先 AI 分析';
         }
     }
 
@@ -224,7 +224,7 @@
             '<div class="result_exists" style="white-space:pre-wrap;"><strong>AI 分析</strong><p>' +
             esc(String(answer || '')) + '</p></div>' +
             '<div class="result_exists"><strong>下一步</strong>' +
-            '<p>确认无误后，点“确认写入待归档”。不点写入，就不会上传云端，也不会入队。</p></div>' +
+            '<p>确认无误后，点“上传云端”。不点上传，就不会进入云端待归档。</p></div>' +
             '</div>';
     }
 
@@ -238,7 +238,7 @@
         btnAnalyze.hidden = false;
         btnAnalyze.textContent = 'AI 分析（不写入）';
         btnArchive.hidden = false;
-        btnArchive.textContent = cloud ? '先 AI 分析，再写入待归档' : '分析并写入';
+        btnArchive.textContent = cloud ? '先 AI 分析' : '分析并写入';
         updateCloudWriteState();
         wordInput.placeholder = cloud
             ? '例如：mean，或中文“意思是；平均的”'
@@ -439,7 +439,7 @@
             return;
         }
         if (!cloudPreview || cloudPreview.query !== query) {
-            setStatus('先点“AI 分析（不写入）”，确认结果后再写入待归档。', 'error');
+            setStatus('先点“AI 分析（不写入）”，确认结果后再上传云端。', 'error');
             wordInput.focus();
             return;
         }
@@ -816,7 +816,7 @@
             if (!answer) throw new Error('云端没有返回分析结果。');
             saveCloudPreview(query, answer);
             renderCloudPreview(answer, query);
-            setStatus('分析完成，结果只保存在浏览器；确认后再点“确认写入待归档”。', 'ok');
+            setStatus('分析完成，结果只保存在浏览器；确认后再点“上传云端”。', 'ok');
             toast('分析完成，尚未写入');
         } catch (err) {
             clearCloudPreview();
@@ -1067,7 +1067,7 @@
     if (cloudPreview && genModeEl.value === 'cloud') {
         wordInput.value = cloudPreview.query;
         renderCloudPreview(cloudPreview.answer, cloudPreview.query);
-        setStatus('已恢复浏览器中的临时分析结果；确认后再写入待归档。', '');
+        setStatus('已恢复浏览器中的临时分析结果；确认后再点“上传云端”。', '');
     }
     updateCloudWriteState();
     checkHealth();
