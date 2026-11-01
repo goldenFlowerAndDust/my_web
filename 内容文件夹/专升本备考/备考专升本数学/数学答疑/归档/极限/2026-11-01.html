@@ -33,7 +33,7 @@
         <span class="tag">AI 答疑归档 · 按日保存</span>
     </div>
     <h1>极限 · 2026-11-01</h1>
-    <p class="sub">数学答疑记录，共 2 条。</p>
+    <p class="sub">数学答疑记录，共 5 条。</p>
     <article class="record"><div class="record-meta"><span>题目讲解</span><time>2026-11-01 12:51:32</time></div><h2>$\lim_{x \to +\infty}x[\sqrt{x^2+2x+5}-(x+1)]$求极限</h2><div class="answer math">## 题目与知识点
 
 求极限
@@ -171,7 +171,269 @@ x\left[\sqrt{x^2+2x+5}-(x+1)\right]
 
 1. **符号错误**是最容易出错的一步：\(1-x^2=-(x-1)(1+x)\)，约分后前面带负号，漏掉负号会得到 \(\frac12\)。
 2. 通分时第一项分子要乘 \((1+x)\)，不要只乘 \(1\)；也不要误把 \(1-x^2\) 写成 \((1-x)^2\)。
-3. 同类题如 \(\lim_{x\to 1}\left(\frac{1}{x-1}-\frac{2}{x^2-1}\right)\)，方法完全相同，先通分再约去 \(x-1\)，建议动手算一遍对比符号差异。</div></article></div>
+3. 同类题如 \(\lim_{x\to 1}\left(\frac{1}{x-1}-\frac{2}{x^2-1}\right)\)，方法完全相同，先通分再约去 \(x-1\)，建议动手算一遍对比符号差异。</div></article><article class="record"><div class="record-meta"><span>题目讲解</span><time>2026-11-01 19:15:31</time></div><h2>$\lim_{x \to 1}(\frac{x＾3-1}{x＾2-1})$求极限</h2><div class="answer math">## 题目
+
+求极限
+\[
+\lim_{x\to 1}\frac{x^3-1}{x^2-1}.
+\]
+
+## 知识点与思路
+
+这是**“$\frac00$ 型”有理函数极限**，属于高等数学第一章“函数极限”中的约去零因子法。
+
+当 $x\to 1$ 时，分子 $1^3-1=0$，分母 $1^2-1=0$，是 $\frac00$ 型未定式。由于分子、分母都是多项式，且都以 $x=1$ 为零点，说明它们都含有因子 $(x-1)$。思路是**因式分解、约去公因子 $(x-1)$**，把未定式化为可直接代入的形式。
+
+用到的公式：
+\[
+a^3-b^3=(a-b)(a^2+ab+b^2),\qquad a^2-b^2=(a-b)(a+b).
+\]
+
+## 解题步骤
+
+**第一步：分解分子。**
+
+取 $a=x,\ b=1$，由立方差公式
+\[
+x^3-1=(x-1)(x^2+x+1).
+\]
+
+**第二步：分解分母。**
+
+由平方差公式
+\[
+x^2-1=(x-1)(x+1).
+\]
+
+**第三步：约去公因子。**
+
+在极限过程中 $x\to 1$，但 $x\ne 1$（极限考察的是 $x$ 无限接近 $1$ 而不等于 $1$ 的情形），所以 $x-1\ne 0$，可以约去：
+\[
+\frac{x^3-1}{x^2-1}
+=\frac{(x-1)(x^2+x+1)}{(x-1)(x+1)}
+=\frac{x^2+x+1}{x+1},\qquad x\ne 1.
+\]
+
+**第四步：代入求极限。**
+
+约分后所得函数在 $x=1$ 处连续，分母 $1+1=2\ne 0$，可直接代入：
+\[
+\lim_{x\to 1}\frac{x^3-1}{x^2-1}
+=\lim_{x\to 1}\frac{x^2+x+1}{x+1}
+=\frac{1^2+1+1}{1+1}
+=\frac{3}{2}.
+\]
+
+## 最终答案
+
+\[
+\boxed{\lim_{x\to 1}\frac{x^3-1}{x^2-1}=\frac32}
+\]
+
+## 检验
+
+- **数值检验**：取 $x=1.01$，原式约为 $\dfrac{1.030301-1}{1.0201-1}=\dfrac{0.030301}{0.0201}\approx 1.5075$；取 $x=0.99$，约为 $\dfrac{0.970299-1}{0.9801-1}=\dfrac{-0.029701}{-0.0199}\approx 1.4925$。两侧都趋近 $1.5$，与 $\frac32$ 吻合。
+- **量纲/范围**：结果为有限实数，符合“$\frac00$ 型约分后连续”的预期。
+
+## 易错点提醒
+
+1. **最容易错的一步**：约分时误以为 $x=1$ 也能约，或约分后仍写“原式在 $x=1$ 无定义所以极限不存在”。要明确：极限与函数在 $x=1$ 处是否有定义无关，约分依据是 $x\to1$ 时 $x\ne1$。
+2. 不要漏写分母的 $(x+1)$，也不要把 $x^3-1$ 错分解成 $(x-1)(x^2+x-1)$，立方差公式第二因子是 $x^2+x+1$。
+3. 同类题如 $\lim_{x\to1}\dfrac{x^n-1}{x-1}=n$，可先用因式分解或洛必达法则验证，但本题用因式分解更直接、更稳。</div></article><article class="record"><div class="record-meta"><span>题目讲解</span><time>2026-11-01 19:25:56</time></div><h2>$\lim_{x \to 0}\frac{1-cosx}{x＾2}$求极限</h2><div class="answer math">## 题目概括
+
+求极限
+\[
+\lim_{x\to 0}\frac{1-\cos x}{x^2}.
+\]
+
+这是专升本高等数学中“函数极限”章节的典型题，属于 \(\frac{0}{0}\) 型未定式。常用方法有三种：等价无穷小替换、三角恒等式变形、洛必达法则。下面给出两种完整解法，并做检验。
+
+## 知识点定位
+
+- 章节：第一章 函数、极限与连续
+- 核心工具：等价无穷小 \(1-\cos x\sim \dfrac{x^2}{2}\ (x\to 0)\)；或二倍角公式 \(1-\cos x=2\sin^2\dfrac{x}{2}\)
+- 题型特征：分子分母都趋于 0，且分子是 \(1-\cos x\) 结构
+
+## 解法一：等价无穷小替换
+
+当 \(x\to 0\) 时，有等价无穷小
+\[
+1-\cos x\sim \frac{x^2}{2}.
+\]
+依据是 \(\cos x\) 的泰勒展开 \(\cos x=1-\dfrac{x^2}{2}+o(x^2)\)，故 \(1-\cos x=\dfrac{x^2}{2}+o(x^2)\)。
+
+于是
+\[
+\lim_{x\to 0}\frac{1-\cos x}{x^2}
+=\lim_{x\to 0}\frac{\frac{x^2}{2}}{x^2}
+=\frac{1}{2}.
+\]
+
+注意：等价无穷小替换只能用于**乘除因子**，本题分子整体作为因子、分母是单项式，替换合法。
+
+## 解法二：二倍角公式 + 重要极限
+
+由 \(1-\cos x=2\sin^2\dfrac{x}{2}\)，得
+\[
+\frac{1-\cos x}{x^2}
+=\frac{2\sin^2\frac{x}{2}}{x^2}
+=2\cdot\frac{\sin^2\frac{x}{2}}{x^2}.
+\]
+把分母写成 \(x^2=4\left(\dfrac{x}{2}\right)^2\)，则
+\[
+\frac{1-\cos x}{x^2}
+=2\cdot\frac{\sin^2\frac{x}{2}}{4\left(\frac{x}{2}\right)^2}
+=\frac{1}{2}\left(\frac{\sin\frac{x}{2}}{\frac{x}{2}}\right)^2.
+\]
+令 \(t=\dfrac{x}{2}\)，当 \(x\to 0\) 时 \(t\to 0\)，由重要极限 \(\lim_{t\to 0}\dfrac{\sin t}{t}=1\)，得
+\[
+\lim_{x\to 0}\frac{1-\cos x}{x^2}
+=\frac{1}{2}\cdot 1^2=\frac{1}{2}.
+\]
+
+## 最终答案
+
+\[
+\boxed{\lim_{x\to 0}\frac{1-\cos x}{x^2}=\frac{1}{2}}
+\]
+
+## 检验
+
+取 \(x=0.01\)：\(1-\cos 0.01\approx 5.0\times 10^{-5}\)，\(x^2=10^{-4}\)，比值约 \(0.5\)，与结论一致。从量纲看，分子 \(1-\cos x\) 与 \(x^2\) 同阶，比值为常数，合理。
+
+## 易错点提醒
+
+1. **最容易错的一步**：把 \(1-\cos x\) 误替换成 \(x^2\)，得到答案 1。正确等价无穷小是 \(1-\cos x\sim \dfrac{x^2}{2}\)，系数 \(\dfrac12\) 不能丢。
+2. 若用洛必达法则，需连求两次导：第一次得 \(\dfrac{\sin x}{2x}\)，第二次得 \(\dfrac{\cos x}{2}\to\dfrac12\)，中间不要漏掉分母求导后的系数 2。
+3. 等价无穷小替换时确认是乘除关系；若分子是 \(1-\cos x+x^3\) 这类加减结构，不能直接整体替换，需先拆分或改用泰勒展开。</div></article><article class="record"><div class="record-meta"><span>概念公式</span><time>2026-11-01 19:29:37</time></div><h2>能列出关于三角函数章节用到的所有公式，以及解释所有公式怎么推导而来的吗？时间不限，重在细节</h2><div class="answer math">## 先说明范围
+
+你问的是“三角函数章节用到的所有公式”，但主题标的是“极限”。结合专升本语境，我按**极限与三角函数交汇处最常用的公式**来讲：这些公式既是三角章节的核心，也是求极限时反复用到的工具。逐个给出**公式、推导依据、使用条件、易错点**。
+
+---
+
+## 一、基础恒等式（一切推导的起点）
+
+### 1. 平方关系
+
+$$\sin^2 x+\cos^2 x=1,\qquad 1+\tan^2 x=\sec^2 x,\qquad 1+\cot^2 x=\csc^2 x$$
+
+**推导**：在单位圆上取点 $(\cos x,\sin x)$，由勾股定理得第一个式子。两边同除 $\cos^2 x$ 得第二个，同除 $\sin^2 x$ 得第三个。
+
+**条件**：后两式要求分母不为零，即 $\cos x\neq 0$ 或 $\sin x\neq 0$。
+
+**极限中的用途**：把 $1-\cos x$ 化成 $2\sin^2\frac{x}{2}$ 的桥梁；处理 $\frac{0}{0}$ 型时约去因子。
+
+### 2. 商数关系
+
+$$\tan x=\frac{\sin x}{\cos x},\qquad \cot x=\frac{\cos x}{\sin x}$$
+
+**推导**：由定义直接得到。
+
+---
+
+## 二、和差角公式（推导其他公式的总源头）
+
+$$\sin(\alpha\pm\beta)=\sin\alpha\cos\beta\pm\cos\alpha\sin\beta$$
+$$\cos(\alpha\pm\beta)=\cos\alpha\cos\beta\mp\sin\alpha\sin\beta$$
+$$\tan(\alpha\pm\beta)=\frac{\tan\alpha\pm\tan\beta}{1\mp\tan\alpha\tan\beta}$$
+
+**推导思路**：先用单位圆上两点间距离公式或向量数量积证明余弦和角公式 $\cos(\alpha-\beta)=\cos\alpha\cos\beta+\sin\alpha\sin\beta$，再用诱导公式 $\cos(\frac{\pi}{2}-\theta)=\sin\theta$ 把正弦化为余弦，最后用商数关系得正切公式。
+
+**条件**：正切公式要求 $\alpha,\beta,\alpha\pm\beta$ 均不等于 $\frac{\pi}{2}+k\pi$。
+
+**极限中的用途**：把 $\sin(x+\Delta x)$ 展开，是推导 $(\sin x)&#x27;=\cos x$ 的关键一步。
+
+---
+
+## 三、二倍角公式
+
+$$\sin 2x=2\sin x\cos x$$
+$$\cos 2x=\cos^2 x-\sin^2 x=2\cos^2 x-1=1-2\sin^2 x$$
+$$\tan 2x=\frac{2\tan x}{1-\tan^2 x}$$
+
+**推导**：在和角公式中令 $\beta=\alpha$ 即得。余弦的三种形式由平方关系互化。
+
+**极限中的核心用途**：由 $\cos 2x=1-2\sin^2 x$ 反解得
+$$1-\cos x=2\sin^2\frac{x}{2},$$
+这是证明 $\lim_{x\to 0}\frac{1-\cos x}{x^2}=\frac{1}{2}$ 的标准手段。
+
+**易错点**：$\cos 2x$ 有三种形式，选哪一种取决于题目要消去 $\sin$ 还是 $\cos$，选错会增加计算量。
+
+---
+
+## 四、半角公式（降幂公式）
+
+$$\sin^2\frac{x}{2}=\frac{1-\cos x}{2},\qquad \cos^2\frac{x}{2}=\frac{1+\cos x}{2}$$
+$$\tan\frac{x}{2}=\frac{\sin x}{1+\cos x}=\frac{1-\cos x}{\sin x}$$
+
+**推导**：把二倍角公式 $\cos x=1-2\sin^2\frac{x}{2}$ 和 $\cos x=2\cos^2\frac{x}{2}-1$ 分别解出 $\sin^2\frac{x}{2}$、$\cos^2\frac{x}{2}$。正切半角由 $\tan\frac{x}{2}=\frac{\sin\frac{x}{2}}{\cos\frac{x}{2}}$ 分子分母同乘 $2\cos\frac{x}{2}$ 或 $2\sin\frac{x}{2}$ 得到。
+
+**条件**：正切半角公式要求 $\sin x\neq 0$ 且 $1+\cos x\neq 0$。
+
+**极限中的用途**：降幂，把二次三角式化为一次，便于与 $x^2$ 比较阶。
+
+---
+
+## 五、积化和差与和差化积
+
+**积化和差**：
+$$\sin\alpha\cos\beta=\frac{1}{2}\big[\sin(\alpha+\beta)+\sin(\alpha-\beta)\big]$$
+$$\cos\alpha\sin\beta=\frac{1}{2}\big[\sin(\alpha+\beta)-\sin(\alpha-\beta)\big]$$
+$$\cos\alpha\cos\beta=\frac{1}{2}\big[\cos(\alpha+\beta)+\cos(\alpha-\beta)\big]$$
+$$\sin\alpha\sin\beta=\frac{1}{2}\big[\cos(\alpha-\beta)-\cos(\alpha+\beta)\big]$$
+
+**推导**：把和差角公式中 $\sin(\alpha+\beta)$ 与 $\sin(\alpha-\beta)$ 相加、相减，其余三式同理。
+
+**和差化积**：令 $A=\alpha+\beta$，$B=\alpha-\beta$，即 $\alpha=\frac{A+B}{2}$，$\beta=\frac{A-B}{2}$，代入积化和差即得，例如
+$$\sin A+\sin B=2\sin\frac{A+B}{2}\cos\frac{A-B}{2}.$$
+
+**极限中的用途**：处理 $\sin ax-\sin bx$ 型极限，化为乘积后直接用 $\frac{\sin u}{u}\to 1$。
+
+---
+
+## 六、两个重要极限（三角极限的基石）
+
+$$\lim_{x\to 0}\frac{\sin x}{x}=1,\qquad \lim_{x\to 0}\frac{1-\cos x}{x^2}=\frac{1}{2}$$
+
+**第一个的推导**：用夹逼定理。在单位圆中，设圆心角 $x\in(0,\frac{\pi}{2})$，比较三个面积：
+$$\frac{1}{2}\sin x&lt;\frac{1}{2}x&lt;\frac{1}{2}\tan x,$$
+同除 $\frac{1}{2}\sin x$ 得 $\cos x&lt;\frac{\sin x}{x}&lt;1$。令 $x\to 0^+$，由 $\cos x\to 1$ 夹逼得极限为 $1$；$x\to 0^-$ 时用 $\frac{\sin x}{x}$ 是偶函数同理。
+
+**第二个的推导**：由 $1-\cos x=2\sin^2\frac{x}{2}$，
+$$\frac{1-\cos x}{x^2}=\frac{2\sin^2\frac{x}{2}}{x^2}=\frac{1}{2}\left(\frac{\sin\frac{x}{2}}{\frac{x}{2}}\right)^2\to\frac{1}{2}.$$
+
+**使用条件**：第一个必须是 $\frac{\sin u}{u}$ 且 $u\to 0$，形式不匹配时先换元。第二个常用来判断 $1-\cos x$ 与 $x^2$ 同阶。
+
+**易错点**：$\lim_{x\to 0}\frac{\sin x}{x}=1$ 不能写成 $\lim_{x\to\infty}$；$\frac{\sin x}{x}$ 在 $x\to\infty$ 时极限为 $0$（有界量乘无穷小）。
+
+---
+
+## 七、等价无穷小（极限计算的高频工具）
+
+当 $x\to 0$ 时：
+$$\sin x\sim x,\qquad \tan x\sim x,\qquad \arcsin x\sim x,\qquad \arctan x\sim x,$$
+$$1-\cos x\sim\frac{x^2}{2}.$$
+
+**推导**：$\sin x\sim x$ 即第一个重要极限；$\tan x=\frac{\sin x}{\cos x}\sim\frac{x}{1}=x$；$1-\cos x\sim\frac{x^2}{2}$ 即第二个重要极限的等价说法。反三角函数的等价性可由换元 $t=\arcsin x$ 后回到 $\frac{\sin t}{t}\to 1$ 得到。
+
+**使用边界**：等价无穷小**只能用于乘除因子替换**，加减法中直接替换可能出错。例如 $\frac{\tan x-\sin x}{x^3}$，若把分子两项都换成 $x$ 得 $0$，是错的；正确做法是
+$$\tan x-\sin x=\tan x(1-\cos x)\sim x\cdot\frac{x^2}{2}=\frac{x^3}{2},$$
+故极限为 $\frac{1}{2}$。
+
+---
+
+## 八、易混点对比
+
+- **二倍角与半角**：二倍角是“角翻倍”，半角（降幂）是“次数降低”，方向相反，不要混用。
+- **和差化积与积化和差**：前者把“和”变“积”，后者把“积”变“和”，看题目要合并还是拆开。
+- **两个重要极限**：第一个解决 $\frac{\sin u}{u}$，第二个解决 $1-\cos x$ 与 $x^2$ 的比，不要互相替代。
+- **等价无穷小**：乘除可换，加减慎换；换之前先提取公因子或通分。
+
+---
+
+## 最容易错的一步
+
+在极限题中看到 $\tan x-\sin x$ 或 $1-\cos x$ 就急着用等价无穷小逐项替换。正确顺序是：**先做三角恒等变形（提公因子、降幂、和差化积），把加减结构变成乘除结构，再替换**。这一步顺序颠倒，是三角极限题失分最集中的地方。</div></article></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
