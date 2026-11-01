@@ -15,6 +15,7 @@
     var isRemotePage = !(window.location.protocol === 'http:' && window.location.port === '8767');
     var TUTOR_CONFIG_KEY = 'english-tutor-connection-v1';
     var PENDING_KEY = 'reviewPendingChanges';
+    var CLOUD_SAVED_KEY = 'reviewCloudSaved';
     var INTERVALS = [1, 3, 7, 15, 30, 60, 90];
     var CORE_CATEGORY = '核心词汇通关';
     var DAILY_NEW = 20;
@@ -205,6 +206,44 @@
         }
     }
 
+    function getCloudSaved() {
+        try {
+            var raw = localStorage.getItem(CLOUD_SAVED_KEY);
+            if (!raw) return {};
+            var obj = JSON.parse(raw);
+            return obj && typeof obj === 'object' ? obj : {};
+        } catch (e) {
+            return {};
+        }
+    }
+
+    function saveCloudSaved(updates) {
+        if (!isRemotePage) return;
+        var saved = getCloudSaved();
+        (updates || []).forEach(function (u) {
+            saved[u.name] = {
+                level: u.level,
+                nextDate: u.nextDate,
+                lastReviewed: u.lastReviewed
+            };
+        });
+        try {
+            localStorage.setItem(CLOUD_SAVED_KEY, JSON.stringify(saved));
+        } catch (e) {
+            // 浏览器存储不可用时仅保留当前页状态。
+        }
+    }
+
+    function clearCloudSaved(names) {
+        var saved = getCloudSaved();
+        (names || []).forEach(function (name) { delete saved[name]; });
+        try {
+            localStorage.setItem(CLOUD_SAVED_KEY, JSON.stringify(saved));
+        } catch (e) {
+            // 忽略。
+        }
+    }
+
     var syncChain = Promise.resolve();
 
     function currentUpdates() {
@@ -270,6 +309,11 @@
             var data = await resp.json();
             if (!resp.ok || !data || data.ok === false) {
                 throw new Error((data && data.error) || ('HTTP ' + resp.status));
+            }
+            if (isRemotePage) {
+                saveCloudSaved(updates);
+            } else {
+                clearCloudSaved(updates.map(function (u) { return u.name; }));
             }
             updates.forEach(function (u) {
                 originalSnapshot[u.name] = {
@@ -461,6 +505,26 @@
                     ? p.lastReviewed
                     : null;
                 applied++;
+            });
+
+            // 云端已上传但本地 BAT 还没拉取的记录，继续在当前浏览器显示。
+            var cloudSaved = getCloudSaved();
+            wordData.forEach(function (item) {
+                if (pending[item.name]) return;
+                var saved = cloudSaved[item.name];
+                if (!saved) return;
+                if (String(saved.lastReviewed || '') < String(item.lastReviewed || '')) return;
+                if (clampLevel(saved.level) < item.level) return;
+                item.level = clampLevel(saved.level);
+                if (/^\d{4}-\d{2}-\d{2}$/.test(saved.nextDate || '')) item.nextDate = saved.nextDate;
+                item.lastReviewed = /^\d{4}-\d{2}-\d{2}$/.test(saved.lastReviewed || '')
+                    ? saved.lastReviewed
+                    : item.lastReviewed;
+                originalSnapshot[item.name] = {
+                    level: item.level,
+                    nextDate: item.nextDate,
+                    lastReviewed: item.lastReviewed
+                };
             });
 
             recomputeDirty();
