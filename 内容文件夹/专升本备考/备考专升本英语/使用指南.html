@@ -664,7 +664,7 @@
             <a class="card" href="复习清单/核心词汇复习清单.html">
                 <span class="card-tag">每日必用</span>
                 <strong>词汇复习清单</strong>
-                <p>每天 20 个新词 + 20 个到期旧词，另有不占额的“额外新增”；所有分类统一管理；完成、撤销、保存、导出。</p>
+                <p>每天 20 个新词 + 20 个到期旧词，另有不占额的“额外新增”；所有分类统一管理；支持每组批量完成、统一保存/上传和导出。</p>
             </a>
             <a class="card" href="单词模块/词汇代码生成器.html">
                 <span class="card-tag">收词工具</span>
@@ -943,15 +943,16 @@
 
         <div class="callout">
             <strong>复习清单按钮：</strong>
-            “保存”会把当前未同步的打卡写入 <code>data.json</code>；“撤销上一步/全部”会恢复操作并同步写回。
-            “导出 data.json”按钮已删除，云端记录统一由 <code>同步全部科目.bat</code> 处理。
+            单词按钮和每组“全部完成/全部复习”只进入浏览器待保存队列，不会逐条请求云端。
+            电脑端点一次“统一保存”写入 <code>data.json</code>；移动端点一次“统一上传”写入云端 24 小时队列。
+            当天完成后按钮禁用，不再提供撤销；“导出 data.json”仍可用于手动备份。
         </div>
 
         <div class="callout blue">
-            <strong>data.json 是主数据，浏览器只是离线兜底：</strong>
-            服务开启时，完成/撤销/保存都会自动写入 <code>复习清单/data.json</code>；
-            刷新日历或原复习页就能看到。服务没开时，记录先暂存在浏览器 localStorage，
-            启动服务后打开复习清单或点“保存”就会自动同步，不会丢。
+            <strong>data.json 是主数据，浏览器只是待保存队列：</strong>
+            电脑端：打开 8767 复习清单 → 操作 → “统一保存”一次写入 <code>data.json</code>。
+            移动端：操作 → “统一上传”一次写入 Cloudflare；电脑 BAT 拉取后写入 <code>data.json</code>。
+            当天复习还会生成 <code>复习清单/归档/YYYY-MM-DD.json</code>，同一天整份覆盖。
         </div>
     </section>
 
@@ -1022,18 +1023,17 @@
         </details>
 
         <details>
-            <summary>完成复习后 data.json 没变，提示“未同步”</summary>
-            <p>说明 8767 服务没启动，或页面通过 <code>file://</code> / 旧静态服务器打开且请求失败。
-                先双击 <code>启动词素服务.bat</code>，再打开复习清单；页面会自动把浏览器里的
-                本地记录同步到 <code>data.json</code>。也可以在复习清单里点一次“保存”。</p>
+            <summary>完成复习后 data.json 没变，提示“未保存”</summary>
+            <p>这是正常的：点击只进入待保存队列。电脑端启动 8767 后，点一次“统一保存”才会写
+                <code>data.json</code>；移动端点“统一上传”只会进入 Cloudflare 24 小时队列，
+                需要回电脑运行同步 BAT 才写入本地。</p>
         </details>
 
         <details>
             <summary>部署到 GitHub Pages 后，线上点复习会改 GitHub 里的 data.json 吗？</summary>
-            <p>不会。GitHub Pages 是静态托管，浏览器没有写仓库的权限。线上点复习只会改当前浏览器的
-                localStorage；只有本地 8767 服务会写本地 <code>data.json</code>。
-                要让 GitHub 上的版本更新，需要本地复习完 → <code>git add / commit / push</code>
-                （或 GitHub Desktop 上传）→ Pages 重新部署。</p>
+            <p>不会。GitHub Pages 是静态托管，浏览器没有写仓库的权限。线上点复习先存在浏览器，
+                点“统一上传”后进入 Cloudflare 24 小时复习队列；电脑 BAT 拉取后写入本地
+                <code>data.json</code>，再提交 Push 才能让 GitHub 版本更新。</p>
         </details>
 
         <details>
