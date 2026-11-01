@@ -1,8 +1,17 @@
 {
-  "generated_at": "2026-11-01T13:24:58",
+  "generated_at": "2026-11-01T17:28:09",
   "source": "local-archived-log",
   "count": 20,
   "entries": [
+    {
+      "time": "2026-11-01 17:24:02",
+      "word": "require",
+      "type": "prefix",
+      "target": "核心词汇通关 · re-",
+      "file": "专升本英语核心词汇通关.html",
+      "schedule": "2026-11-02",
+      "status": "ok"
+    },
     {
       "time": "2026-11-01 13:24:56",
       "word": "requirements",
@@ -13,13 +22,15 @@
       "status": "ok"
     },
     {
-      "time": "2026-10-31 23:46:42",
+      "time": "2026-10-31 23:50:55",
       "word": "word",
       "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：word.html",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：word.html",
       "schedule": "2026-11-01",
-      "status": "ok"
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
       "time": "2026-10-31 18:30:24",
@@ -31,112 +42,125 @@
       "status": "ok"
     },
     {
-      "time": "2026-10-31 15:34:47",
+      "time": "2026-10-31 16:20:05",
       "word": "mean",
       "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：mean.html",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：mean.html",
       "schedule": "2026-11-01",
-      "status": "ok"
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-31 14:53:28",
-      "word": "meaning",
-      "type": "suffix",
-      "target": "核心词汇通关 · -ing",
-      "file": "专升本英语核心词汇通关.html",
-      "schedule": "2026-11-01",
-      "status": "ok"
-    },
-    {
-      "time": "2026-10-31 14:23:32",
-      "word": "hope",
-      "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：hope.html",
-      "schedule": "2026-11-01",
-      "status": "ok"
-    },
-    {
-      "time": "2026-10-31 14:16:05",
-      "word": "help",
-      "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：help.html",
-      "schedule": "2026-11-01",
-      "status": "ok"
-    },
-    {
-      "time": "2026-10-31 14:10:37",
-      "word": "harm",
-      "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：harm.html",
-      "schedule": "2026-11-01",
-      "status": "ok"
-    },
-    {
-      "time": "2026-10-31 14:04:12",
-      "word": "fruit",
-      "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：fruit.html",
-      "schedule": "2026-11-01",
-      "status": "ok"
-    },
-    {
-      "time": "2026-10-31 13:59:57",
-      "word": "color",
-      "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：color.html",
-      "schedule": "2026-11-01",
-      "status": "ok"
-    },
-    {
-      "time": "2026-10-31 13:55:33",
-      "word": "cheer",
-      "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：cheer.html",
-      "schedule": "2026-11-01",
-      "status": "ok"
-    },
-    {
-      "time": "2026-10-31 13:40:29",
+      "time": "2026-10-31 14:36:57",
       "word": "care",
       "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：care.html",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：care.html",
       "schedule": "2026-11-01",
-      "status": "ok"
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-31 13:35:38",
+      "time": "2026-10-31 14:36:57",
+      "word": "cheer",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：cheer.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 14:36:57",
+      "word": "color",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：color.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 14:36:57",
+      "word": "fruit",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：fruit.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 14:36:57",
+      "word": "harm",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：harm.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 14:36:57",
+      "word": "help",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：help.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 14:36:57",
+      "word": "hope",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：hope.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 14:36:57",
       "word": "beauty",
       "type": "root_family",
-      "target": "词素 / 词根族",
-      "file": "词素\\词根族\\词根族：beaut-.html",
+      "target": "词素/词根族",
+      "file": "词素/词根族/词根族：beaut-.html",
       "schedule": "2026-11-01",
-      "status": "ok"
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-30 14:34:58",
+      "time": "2026-10-30 15:04:44",
       "word": "contrast",
       "type": "root_family",
-      "target": "词素 / 词根-本体-变体【派生词】",
-      "file": "词素\\词根-本体-变体【派生词】\\本体-contrast、以及它的变体.html",
+      "target": "词素/词根-本体-变体【派生词】",
+      "file": "词素/词根-本体-变体【派生词】/本体-contrast、以及它的变体.html",
       "schedule": "2026-10-31",
-      "status": "ok"
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-30 05:06:10",
+      "time": "2026-10-30 05:09:58",
       "word": "nasty",
       "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：nasty.html",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：nasty.html",
       "schedule": "2026-10-31",
-      "status": "ok"
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
       "time": "2026-10-30 04:41:02",

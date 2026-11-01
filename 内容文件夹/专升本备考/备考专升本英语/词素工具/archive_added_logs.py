@@ -238,6 +238,19 @@ def refresh() -> None:
     index_path = ARCHIVE_DIR / "index.html"
     index_path.write_text(index_html(entries), encoding="utf-8", newline="\n")
 
+    # 实时页面直接读这个 JSON；和 HTML 归档一起刷新，避免新词只进日志文件、不进页面。
+    live_path = ARCHIVE_DIR / "添加日志.json"
+    live_payload = {
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "source": "local-archived-log",
+        "count": len(entries),
+        "entries": entries,
+    }
+    live_path.write_text(
+        json.dumps(live_payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
 
 def _type_from_category(category: str) -> str:
     if "原子词" in category:

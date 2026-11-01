@@ -1944,6 +1944,22 @@ def archive_word_pair(word: str, hint: str = "") -> dict[str, Any]:
         return primary
     try:
         secondary = archive_word(counterpart, hint)
+        # 页面已存在但 data.json 缺记录时，archive_word 只返回 needs_repair。
+        # 通过复数联动触发时，顺手补数据，并补一条真正的“新增”日志。
+        if secondary.get("needs_repair"):
+            repaired = archive_word(counterpart, hint, repair=True)
+            analysis2 = repaired.get("analysis") or {}
+            data2 = repaired.get("data") or {}
+            append_log({
+                "word": counterpart,
+                "type": analysis2.get("morphology", {}).get("type") or "atom",
+                "target": data2.get("category") or repaired.get("target") or "单复数联动",
+                "file": data2.get("file") or repaired.get("file") or "",
+                "schedule": data2.get("schedule") or "",
+                "status": "ok",
+                "source": "plural-link",
+            })
+            secondary = repaired
         _link_plural_pair(singular, plural, same_meaning, False)
         primary["plural_pair"] = {
             "singular": singular,
