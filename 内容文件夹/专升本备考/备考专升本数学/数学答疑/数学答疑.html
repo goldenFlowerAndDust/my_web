@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数学答疑 · 严谨的数学家老师</title>
     <meta name="description" content="专升本数学答疑：题目讲解、错题诊断、概念公式与学习方法。数学家人设的 AI 用中文讲步骤，公式用 LaTeX 渲染。">
-    <link rel="stylesheet" href="数学答疑.css?v=20261102-3">
+    <link rel="stylesheet" href="数学答疑.css?v=20261102-4">
     <link rel="stylesheet" href="../一些必备脚本/数学公式js/libs/katex.min.css">
 </head>
 <body>
@@ -110,12 +110,12 @@
                     <span id="char-count">0 / 4000</span>
                 </div>
 
-                <div class="question-preview" id="question-preview" hidden>
+                <div class="question-preview" id="question-preview" aria-label="实时渲染预览">
                     <div class="preview-head">
-                        <span>公式预览（将写入历史）</span>
-                        <span class="preview-tip">裸 ^ / _ 会自动转成 LaTeX</span>
+                        <span>实时渲染预览</span>
+                        <span class="preview-tip">输入即更新 · 历史记录按这里显示</span>
                     </div>
-                    <div class="preview-body" id="question-preview-body"></div>
+                    <div class="preview-body" id="question-preview-body"><span class="preview-placeholder">在输入框里写题目，这里会实时显示渲染结果。</span></div>
                 </div>
 
                 <div class="examples" id="examples" aria-label="示例问题"></div>
@@ -273,6 +273,6 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="../一些必备脚本/数学公式js/libs/katex.min.js" defer></script>
 <script src="../一些必备脚本/数学公式js/libs/auto-render.min.js" defer></script>
-<script src="数学答疑.js?v=20261102-2" defer></script>
+<script src="数学答疑.js?v=20261102-4" defer></script>
 </body>
 </html>

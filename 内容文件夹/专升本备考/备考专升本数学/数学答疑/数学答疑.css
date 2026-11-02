@@ -546,6 +546,7 @@ code {
     padding: 10px 12px;
     background: var(--paper-soft);
     border: 1px solid var(--line);
+    border-left: 3px solid #2f6f9f;
     border-radius: 10px;
 }
 
@@ -565,9 +566,21 @@ code {
 }
 
 .preview-head > span:first-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     color: var(--ink);
     font-size: 10.5px;
     font-weight: 700;
+}
+
+.preview-head > span:first-child::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #2f9e6f;
+    box-shadow: 0 0 0 3px rgba(47, 158, 111, 0.12);
 }
 
 .preview-body {
@@ -580,6 +593,11 @@ code {
 
 .preview-body .katex {
     font-size: 1.04em;
+}
+
+.preview-placeholder {
+    color: var(--faint);
+    font-size: 11.5px;
 }
 
 .examples {

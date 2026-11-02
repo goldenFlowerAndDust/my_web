@@ -487,14 +487,12 @@
     function updateQuestionPreview() {
         if (!questionPreview || !previewBody) return;
         var raw = questionEl.value.trim();
-        if (!raw || !/[\^_\\$=<>]/.test(raw)) {
-            questionPreview.hidden = true;
-            previewBody.innerHTML = "";
+        if (!raw) {
+            previewBody.innerHTML = '<span class="preview-placeholder">在输入框里写题目，这里会实时显示渲染结果。</span>';
             return;
         }
         var normalized = normalizeQuestionForStorage(raw);
         previewBody.innerHTML = escapeHtml(normalized).replace(/\n/g, "<br>");
-        questionPreview.hidden = false;
         renderMath(previewBody);
     }
 
