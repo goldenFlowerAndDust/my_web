@@ -14,6 +14,7 @@
 from __future__ import annotations
 
 import argparse
+import getpass
 import hashlib
 import json
 import os
@@ -71,6 +72,17 @@ DEFAULT_SUBJECTS = [
         "include_pending_words": False
     },
 ]
+
+
+def read_secret(prompt: str) -> str:
+    """优先隐藏输入；没有控制台时退回普通输入。"""
+    try:
+        return getpass.getpass(prompt).strip()
+    except (EOFError, OSError):
+        try:
+            return input(prompt).strip()
+        except EOFError:
+            return ""
 
 
 def now_text() -> str:
@@ -233,7 +245,7 @@ class SyncRunner:
         if not url.startswith(("http://", "https://")):
             print("地址必须以 http:// 或 https:// 开头。")
             return False
-        token = input("SCF 的 PROXY_TOKEN（会显示）：").strip()
+        token = read_secret("SCF 的 PROXY_TOKEN（输入时不显示）：")
         if not token:
             print("访问口令不能为空。")
             return False
@@ -271,7 +283,7 @@ class SyncRunner:
             if not url.startswith(("http://", "https://")):
                 print("地址必须以 http:// 或 https:// 开头。")
                 return False
-            token = input("主线路访问口令（会显示）：").strip()
+            token = read_secret("主线路访问口令（输入时不显示）：")
             if not token:
                 print("访问口令不能为空。")
                 return False
@@ -293,7 +305,7 @@ class SyncRunner:
             if not url.startswith(("http://", "https://")):
                 print("地址必须以 http:// 或 https:// 开头。")
                 return False
-            token = input("备用线路访问口令（会显示）：").strip()
+            token = read_secret("备用线路访问口令（输入时不显示）：")
             if not token:
                 print("访问口令不能为空。")
                 return False
@@ -380,7 +392,7 @@ class SyncRunner:
         if not url.startswith(("http://", "https://")):
             print("地址必须以 http:// 或 https:// 开头。")
             return False
-        token = input("主线路访问口令（会显示，确认后再回车）：").strip()
+        token = read_secret("主线路访问口令（输入时不显示，确认后再回车）：")
         if not token:
             print("访问口令不能为空。")
             return False
@@ -390,7 +402,7 @@ class SyncRunner:
             if not fallback_url.startswith(("http://", "https://")):
                 print("备用地址必须以 http:// 或 https:// 开头。")
                 return False
-            fallback_token = input("备用线路访问口令（会显示，确认后再回车）：").strip()
+            fallback_token = read_secret("备用线路访问口令（输入时不显示，确认后再回车）：")
             if not fallback_token:
                 print("备用线路口令不能为空。")
                 return False

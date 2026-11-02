@@ -5,6 +5,7 @@ set "PYTHONUTF8=1"
 setlocal
 cd /d "%~dp0"
 title Sync Launcher
+rem Menu is in sync_launcher.py; option 9 = API / token config
 
 set "BUNDLED=%USERPROFILE%\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
 
