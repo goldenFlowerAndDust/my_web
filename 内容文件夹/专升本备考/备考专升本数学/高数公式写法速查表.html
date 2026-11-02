@@ -46,7 +46,7 @@ body{
 .clear{display:none;border:0;background:#e2e8f0;color:#475569;border-radius:8px;padding:5px 8px;cursor:pointer;font-size:11px}
 .clear.show{display:inline-block}
 .count{white-space:nowrap;color:var(--muted);font-size:12px;padding:0 4px}
-.cat-nav{display:flex;gap:5px;overflow-x:auto;margin-top:9px;padding-top:9px;border-top:1px solid var(--line);scrollbar-width:none}
+.cat-nav{display:flex;gap:5px;overflow-x:auto;margin-top:9px;padding-top:9px;border-top:1px solid var(--line);scrollbar-width:none;touch-action:pan-y;overscroll-behavior-x:contain;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-overflow-scrolling:touch}
 .cat-nav::-webkit-scrollbar{display:none}
 .cat-nav a{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:12px;white-space:nowrap}
 .cat-nav a:hover{background:var(--soft);color:var(--accent)}
@@ -140,7 +140,7 @@ td.desc{color:var(--ink)}
       </label>
       <span class="count" id="count">519 / 519</span>
     </div>
-    <nav class="cat-nav" aria-label="分类导航"><a href="#sec-basic"><span class="nav-icon">{}</span>基础结构与排版<b>30</b></a><a href="#sec-limits"><span class="nav-icon">∞</span>无穷与极限<b>24</b></a><a href="#sec-greek"><span class="nav-icon">α</span>希腊字母<b>45</b></a><a href="#sec-relations"><span class="nav-icon">≤</span>关系符<b>46</b></a><a href="#sec-operators"><span class="nav-icon">±</span>运算与集合<b>63</b></a><a href="#sec-arrows"><span class="nav-icon">→</span>箭头<b>61</b></a><a href="#sec-logic"><span class="nav-icon">∀</span>逻辑与证明<b>20</b></a><a href="#sec-calculus"><span class="nav-icon">∫</span>微积分与极限<b>35</b></a><a href="#sec-bigops"><span class="nav-icon">∑</span>大型运算符<b>18</b></a><a href="#sec-functions"><span class="nav-icon">sin</span>函数与三角<b>28</b></a><a href="#sec-delimiters"><span class="nav-icon">()</span>括号与定界符<b>22</b></a><a href="#sec-accents"><span class="nav-icon">â</span>重音与装饰<b>21</b></a><a href="#sec-matrices"><span class="nav-icon">[]</span>矩阵与分段<b>14</b></a><a href="#sec-fonts"><span class="nav-icon">R</span>字体与文本<b>21</b></a><a href="#sec-spacing"><span class="nav-icon">␣</span>空白与样式<b>12</b></a><a href="#sec-special"><span class="nav-icon">∞</span>特殊符号<b>43</b></a><a href="#sec-templates"><span class="nav-icon">lim</span>常用公式模板<b>16</b></a></nav>
+    <nav class="cat-nav" aria-label="分类导航" title="鼠标滚轮横向浏览；手机长按后左右拖动"><a href="#sec-basic"><span class="nav-icon">{}</span>基础结构与排版<b>30</b></a><a href="#sec-limits"><span class="nav-icon">∞</span>无穷与极限<b>24</b></a><a href="#sec-greek"><span class="nav-icon">α</span>希腊字母<b>45</b></a><a href="#sec-relations"><span class="nav-icon">≤</span>关系符<b>46</b></a><a href="#sec-operators"><span class="nav-icon">±</span>运算与集合<b>63</b></a><a href="#sec-arrows"><span class="nav-icon">→</span>箭头<b>61</b></a><a href="#sec-logic"><span class="nav-icon">∀</span>逻辑与证明<b>20</b></a><a href="#sec-calculus"><span class="nav-icon">∫</span>微积分与极限<b>35</b></a><a href="#sec-bigops"><span class="nav-icon">∑</span>大型运算符<b>18</b></a><a href="#sec-functions"><span class="nav-icon">sin</span>函数与三角<b>28</b></a><a href="#sec-delimiters"><span class="nav-icon">()</span>括号与定界符<b>22</b></a><a href="#sec-accents"><span class="nav-icon">â</span>重音与装饰<b>21</b></a><a href="#sec-matrices"><span class="nav-icon">[]</span>矩阵与分段<b>14</b></a><a href="#sec-fonts"><span class="nav-icon">R</span>字体与文本<b>21</b></a><a href="#sec-spacing"><span class="nav-icon">␣</span>空白与样式<b>12</b></a><a href="#sec-special"><span class="nav-icon">∞</span>特殊符号<b>43</b></a><a href="#sec-templates"><span class="nav-icon">lim</span>常用公式模板<b>16</b></a></nav>
   </div>
 
   <div class="quick-grid" aria-label="高频符号"><button type="button" class="quick" data-query="∞" title="点击筛选：无穷大">
@@ -3655,6 +3655,95 @@ document.addEventListener("DOMContentLoaded", function () {
       showToast("已复制：" + text);
     }
   });
+
+  var catNav = document.querySelector(".cat-nav");
+  if (catNav) {
+    // 桌面：鼠标滚轮直接横向移动分类栏；到两端时把滚动交还给页面。
+    catNav.addEventListener("wheel", function (event) {
+      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      var max = catNav.scrollWidth - catNav.clientWidth;
+      if (max <= 1) return;
+      var step = Math.max(35, Math.min(140, Math.abs(event.deltaY)));
+      var next = Math.max(0, Math.min(max, catNav.scrollLeft + (event.deltaY > 0 ? step : -step)));
+      if (next === catNav.scrollLeft) return;
+      event.preventDefault();
+      catNav.scrollLeft = next;
+    }, { passive: false });
+
+    // 移动端：长按约 220ms 后进入拖动模式，再左右拖动分类栏。
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchStartScroll = 0;
+    var touchDragging = false;
+    var longPressReady = false;
+    var longPressTimer = null;
+
+    function clearLongPress() {
+      if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+      }
+    }
+
+    catNav.addEventListener("touchstart", function (event) {
+      if (event.touches.length !== 1) return;
+      var touch = event.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchStartScroll = catNav.scrollLeft;
+      touchDragging = false;
+      longPressReady = false;
+      clearLongPress();
+      longPressTimer = setTimeout(function () {
+        longPressReady = true;
+        catNav.classList.add("is-longpress");
+      }, 220);
+    }, { passive: true });
+
+    catNav.addEventListener("touchmove", function (event) {
+      if (event.touches.length !== 1) return;
+      var touch = event.touches[0];
+      var dx = touch.clientX - touchStartX;
+      var dy = touch.clientY - touchStartY;
+
+      if (!longPressReady) {
+        // 先纵向滑就认为是在滚动页面，取消长按，避免误触。
+        if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) clearLongPress();
+        return;
+      }
+      if (!touchDragging) {
+        if (Math.abs(dx) <= 3) return;
+        touchDragging = true;
+        catNav.classList.add("is-dragging");
+      }
+      event.preventDefault();
+      catNav.scrollLeft = touchStartScroll - dx;
+    }, { passive: false });
+
+    function endTouch() {
+      clearLongPress();
+      var wasDragging = touchDragging;
+      touchDragging = false;
+      longPressReady = false;
+      catNav.classList.remove("is-longpress", "is-dragging");
+      if (wasDragging) {
+        var blocker = function (clickEvent) {
+          clickEvent.preventDefault();
+          clickEvent.stopPropagation();
+        };
+        catNav.addEventListener("click", blocker, true);
+        setTimeout(function () {
+          catNav.removeEventListener("click", blocker, true);
+        }, 350);
+      }
+    }
+
+    catNav.addEventListener("touchend", endTouch, { passive: true });
+    catNav.addEventListener("touchcancel", endTouch, { passive: true });
+    catNav.addEventListener("contextmenu", function (event) {
+      if (longPressReady) event.preventDefault();
+    });
+  }
 
   var toTop = document.getElementById("toTop");
   window.addEventListener("scroll", function () {
