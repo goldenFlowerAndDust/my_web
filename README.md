@@ -4,22 +4,6 @@
 
 ---
 
-## 专升本干净版仓库
-
-如果只想从“空词库、无历史答疑”的状态开始使用，可以直接克隆这个独立仓库：
-
-**仓库地址：** <https://github.com/goldenFlowerAndDust/Study_html>
-
-**在线主页：** <https://goldenfloweranddust.github.io/Study_html/>
-
-```bash
-git clone https://github.com/goldenFlowerAndDust/Study_html.git
-```
-
-这个仓库保留完整的英语生成器、复习清单、数学资料和公式渲染，只清空了英语单词历史和 AI 答疑历史。适合自己配置 API 和云端后从头开始。
-
----
-
 ## 快速导航
 
 - [Python 二级备考笔记](#python-完整体系)
@@ -477,3 +461,19 @@ priority：0
 ```
 
 不要上传 `词素工具/归档日志.jsonl`、`归档日志.jsonl.recover-bak`，以及 `词素工具/backups/`。`添加日志/` 是公开归档，如不想公开单词名和添加时间，请不要上传该文件夹。
+
+---
+
+## 专升本干净版仓库
+
+如果只想从“空词库、无历史答疑”的状态开始使用，可以直接克隆这个独立仓库：
+
+**仓库地址：** <https://github.com/goldenFlowerAndDust/Study_html>
+
+**在线主页：** <https://goldenfloweranddust.github.io/Study_html/>
+
+```bash
+git clone https://github.com/goldenFlowerAndDust/Study_html.git
+```
+
+这个仓库保留完整的英语生成器、复习清单、数学资料和公式渲染，只清空了英语单词历史和 AI 答疑历史。适合自己配置 API 和云端后从头开始。
