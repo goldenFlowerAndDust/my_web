@@ -36,6 +36,18 @@ body{
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .chip{padding:5px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.08);font-size:11.5px;color:#e2e8f0}
 .chip strong{color:#fff}
+.formula-rule{margin:18px 0;padding:14px 16px 13px;border:1px solid #dbeafe;border-left:4px solid var(--accent);border-radius:14px;background:linear-gradient(135deg,#f8fbff,#eff6ff);box-shadow:0 4px 14px rgba(37,99,235,.06)}
+.rule-head{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px}
+.rule-badge{padding:2px 7px;border-radius:999px;background:var(--accent);color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.5px}
+.rule-head strong{font-size:14px}
+.rule-head>span:last-child{color:var(--muted);font-size:11px}
+.rule-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.rule-item{padding:9px 10px;border:1px solid #e4edf9;border-radius:9px;background:rgba(255,255,255,.72)}
+.rule-item b{display:block;margin-bottom:2px;color:#1e40af;font-size:11.5px}
+.rule-item p{margin:0;color:#475569;font-size:11px;line-height:1.65}
+.formula-rule code{padding:1px 5px;border:1px solid #dbe7f7;border-radius:4px;background:#fff;color:#b91c1c;font-family:Consolas,"Cascadia Code",monospace;font-size:10.5px}
+@media(max-width:900px){.rule-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.formula-rule{margin:14px 0;padding:11px 12px}.rule-head>span:last-child{display:none}.rule-grid{gap:6px}.rule-item{padding:8px}.rule-item p{font-size:10.5px}}
 .toolbar{position:sticky;top:0;z-index:30;margin:18px 0 18px;padding:10px;background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);backdrop-filter:blur(18px)}
 .search-row{display:flex;gap:8px;align-items:center}
 .search-box{display:flex;flex:1;min-width:0;align-items:center;gap:9px;padding:0 13px;background:var(--soft);border:1px solid var(--line);border-radius:12px}
@@ -130,6 +142,20 @@ td.desc{color:var(--ink)}
       <span class="chip">本地 KaTeX</span>
     </div>
   </header>
+
+  <aside class="formula-rule" aria-label="公式渲染规则">
+    <div class="rule-head">
+      <span class="rule-badge">必看</span>
+      <strong>公式渲染规则</strong>
+      <span>照着写，KaTeX 才能稳定显示</span>
+    </div>
+    <div class="rule-grid">
+      <div class="rule-item"><b>推荐写法</b><p>行内 <code>$x^2$</code>，独立 <code>$...$</code>；多字符上下标加花括号：<code>x^{2n}</code>、<code>a_{n+1}</code>。</p></div>
+      <div class="rule-item"><b>裸写也能转</b><p><code>x^2</code>、<code>x_1</code> 会自动变成 <code>$x^{2}$</code>、<code>$x_{1}$</code>，历史记录同样处理。</p></div>
+      <div class="rule-item"><b>手机符号</b><p><code>＾</code>、<code>＿</code>、<code>ˆ</code>、<code>⌃</code> 会自动转成 <code>^</code> / <code>_</code>；<code>x∧2</code> 也会转，但 <code>p∧q</code> 仍是逻辑与。</p></div>
+      <div class="rule-item"><b>半角优先</b><p>公式里尽量用半角 <code>+ - = ( )</code>；全角运算符和长破折号虽会自动修，仍建议直接打半角。</p></div>
+    </div>
+  </aside>
 
   <div class="toolbar">
     <div class="search-row">

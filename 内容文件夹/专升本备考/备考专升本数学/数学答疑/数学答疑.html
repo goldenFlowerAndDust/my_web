@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数学答疑 · 严谨的数学家老师</title>
     <meta name="description" content="专升本数学答疑：题目讲解、错题诊断、概念公式与学习方法。数学家人设的 AI 用中文讲步骤，公式用 LaTeX 渲染。">
-    <link rel="stylesheet" href="数学答疑.css?v=20261102-2">
+    <link rel="stylesheet" href="数学答疑.css?v=20261102-3">
     <link rel="stylesheet" href="../一些必备脚本/数学公式js/libs/katex.min.css">
 </head>
 <body>
@@ -41,6 +41,20 @@
             </div>
         </div>
     </header>
+
+    <aside class="formula-rule" aria-label="公式渲染规则">
+        <div class="rule-head">
+            <span class="rule-badge">公式规则</span>
+            <strong>怎么写才能正确渲染</strong>
+            <a href="../高数公式写法速查表.html">打开公式速查 →</a>
+        </div>
+        <div class="rule-grid">
+            <div class="rule-item"><b>推荐</b><p>行内 <code>$x^2$</code>；多字符上下标用 <code>x^{2n}</code>、<code>a_{n+1}</code>。</p></div>
+            <div class="rule-item"><b>裸写</b><p><code>x^2</code>、<code>x_1</code> 会自动转；提交前看下方“公式预览”。</p></div>
+            <div class="rule-item"><b>手机输入</b><p><code>＾</code>、<code>∧</code> 在指数位置会自动修；<code>p∧q</code> 不会被误改。</p></div>
+            <div class="rule-item"><b>少踩坑</b><p>尽量用半角 <code>+ - = ( )</code>；字母指数有歧义时写 <code>x^{n}</code>。</p></div>
+        </div>
+    </aside>
 
     <div class="sync-reminder" style="margin:18px 0;padding:12px 16px;border:1px solid #d9e4ef;border-left:4px solid #2f6f9f;border-radius:8px;background:#f5f9fd;color:#2c3e50;font-size:.9rem;line-height:1.7;">
         <strong>同步提醒：</strong>本地和云端连接设置会保留。云端记录在电脑上运行
