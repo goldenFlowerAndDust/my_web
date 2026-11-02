@@ -251,6 +251,13 @@
         var text = String(value || "");
         // 中文输入法常把 ^ 打成全角 ＾，先统一成 ASCII。
         text = text.replace(/＾/g, "^").replace(/＿/g, "_");
+        // 有些手机键盘会把 ^ 输出成 ˆ / ⌃ / ˄，这些也直接当乘方符号。
+        text = text.replace(/[ˆ⌃˄]/g, "^");
+        // ∧ 本身是逻辑“且”，只有在“底数 ∧ 数字/花括号”这种明显是乘方的上下文才替换。
+        text = text.replace(/([A-Za-z0-9\)\]\}）］｝])\s*∧\s*(?=[0-9{+\-\\])/g, "$1^");
+        text = text.replace(/([0-9])\s*∧\s*([A-Za-z])/g, "$1^$2");
+        // x^(n+1) 这种写法补上花括号，避免 ^ 只吃到左括号。
+        text = text.replace(/\^\(([^()]*)\)/g, "^{$1}");
         // 裸上标：x^2 -> x^{2}；已经带括号的保持原样。
         text = text.replace(/\^(\{[^}]*\}|\\[a-zA-Z]+|[0-9]+|[A-Za-z])/g, function (_, group) {
             var body = group.charAt(0) === "{" ? group.slice(1, -1) : group;
@@ -276,6 +283,17 @@
                 return piece;
             }
             if (core.indexOf("$") !== -1) return piece;
+            // 手机复制出来的公式常混入全角运算符/长破折号，数学段内统一成 ASCII。
+            core = core.replace(/[—–]/g, "-")
+                .replace(/＋/g, "+")
+                .replace(/－/g, "-")
+                .replace(/＝/g, "=")
+                .replace(/（/g, "(")
+                .replace(/）/g, ")")
+                .replace(/［/g, "[")
+                .replace(/］/g, "]")
+                .replace(/｛/g, "{")
+                .replace(/｝/g, "}");
             var tail = "";
             var punctuation = core.match(/[，。；：、,.!?;:]+$/);
             if (punctuation) {
