@@ -1,3 +1,6 @@
+# 依赖目录：node_modules 不提交；保留 package.json / package-lock.json 和已构建的 libs
+**/node_modules/
+
 # 忽略这些文件夹
 venv/
 .idea/
