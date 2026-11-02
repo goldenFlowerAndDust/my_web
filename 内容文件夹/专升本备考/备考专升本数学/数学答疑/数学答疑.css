@@ -436,6 +436,47 @@ code {
     font-family: var(--font-mono);
 }
 
+.question-preview {
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.question-preview[hidden] {
+    display: none;
+}
+
+.preview-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 12px;
+    color: var(--faint);
+    font-size: 9.5px;
+    line-height: 1.5;
+}
+
+.preview-head > span:first-child {
+    color: var(--ink);
+    font-size: 10.5px;
+    font-weight: 700;
+}
+
+.preview-body {
+    margin-top: 3px;
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+}
+
+.preview-body .katex {
+    font-size: 1.04em;
+}
+
 .examples {
     display: flex;
     flex-wrap: wrap;

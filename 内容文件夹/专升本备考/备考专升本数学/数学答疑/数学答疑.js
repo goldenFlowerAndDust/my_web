@@ -29,6 +29,8 @@
     var questionEl = document.getElementById("question");
     var charCount = document.getElementById("char-count");
     var inputHint = document.getElementById("input-hint");
+    var questionPreview = document.getElementById("question-preview");
+    var previewBody = document.getElementById("question-preview-body");
     var examplesEl = document.getElementById("examples");
     var askBtn = document.getElementById("ask-btn");
 
@@ -245,18 +247,70 @@
             .replace(/\*([^*\n]+)\*/g, "<em>$1</em>");
     }
 
-    function questionHtml(value) {
+    function normalizeBareMathNotation(value) {
         var text = String(value || "");
-        var escaped = escapeHtml(text);
-        if (/\$|\\\(|\\\[/.test(text)) {
-            return escaped;
-        }
-        // 兼容用户直接把 \lim、\sqrt 等裸 LaTeX 写进题目：
-        // 把从反斜杠命令开始、到下一个中文之前的片段包进 $...$。
-        return escaped.replace(/(\\[a-zA-Z]+[\s\S]*?)(?=[\u4e00-\u9fff]|$)/g, function (match) {
-            var body = match.trim();
-            return body ? "$" + body + "$" : match;
+        // 中文输入法常把 ^ 打成全角 ＾，先统一成 ASCII。
+        text = text.replace(/＾/g, "^").replace(/＿/g, "_");
+        // 裸上标：x^2 -> x^{2}；已经带括号的保持原样。
+        text = text.replace(/\^(\{[^}]*\}|\\[a-zA-Z]+|[0-9]+|[A-Za-z])/g, function (_, group) {
+            var body = group.charAt(0) === "{" ? group.slice(1, -1) : group;
+            return "^{" + body + "}";
         });
+        // 裸下标：x_1 -> x_{1}；避免把 my_file 这类单词误判。
+        text = text.replace(/(^|[^A-Za-z0-9])([A-Za-z])_(\{[^}]*\}|\\[a-zA-Z]+|[A-Za-z0-9])/g, function (_, prefix, base, group) {
+            var body = group.charAt(0) === "{" ? group.slice(1, -1) : group;
+            return prefix + base + "_{" + body + "}";
+        });
+        return text;
+    }
+
+    function wrapPlainMath(part) {
+        if (!part) return part;
+        return part.split(/([\u4e00-\u9fff]+)/).map(function (piece) {
+            if (!piece || /^[\u4e00-\u9fff]+$/.test(piece)) return piece;
+            var match = piece.match(/^(\s*)([\s\S]*?)(\s*)$/);
+            var lead = match[1] || "";
+            var core = match[2] || "";
+            var trail = match[3] || "";
+            if (!core || !/[\\^_=<>]/.test(core) || !/[A-Za-z0-9\\]/.test(core)) {
+                return piece;
+            }
+            if (core.indexOf("$") !== -1) return piece;
+            var tail = "";
+            var punctuation = core.match(/[，。；：、,.!?;:]+$/);
+            if (punctuation) {
+                tail = punctuation[0];
+                core = core.slice(0, -tail.length);
+            }
+            if (!core) return piece;
+            return lead + "$" + core + "$" + tail + trail;
+        }).join("");
+    }
+
+    function wrapBareMath(value) {
+        var text = String(value || "");
+        var token = /(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\$[^$\n]*\$|\\\([\s\S]*?\\\))/g;
+        var result = "";
+        var last = 0;
+        var match;
+        while ((match = token.exec(text))) {
+            result += wrapPlainMath(text.slice(last, match.index));
+            result += match[0];
+            last = token.lastIndex;
+        }
+        result += wrapPlainMath(text.slice(last));
+        return result;
+    }
+
+    function normalizeQuestionForStorage(value) {
+        var text = String(value || "").trim();
+        if (!text) return "";
+        return wrapBareMath(normalizeBareMathNotation(text));
+    }
+
+    function questionHtml(value) {
+        // 历史里的旧记录也可能是裸 x^2，显示时同样先规范化。
+        return escapeHtml(normalizeQuestionForStorage(value));
     }
 
     function renderMarkdown(markdown) {
@@ -412,6 +466,20 @@
         charCount.style.color = len >= 4000 ? "var(--red)" : "";
     }
 
+    function updateQuestionPreview() {
+        if (!questionPreview || !previewBody) return;
+        var raw = questionEl.value.trim();
+        if (!raw || !/[\^_\\$=<>]/.test(raw)) {
+            questionPreview.hidden = true;
+            previewBody.innerHTML = "";
+            return;
+        }
+        var normalized = normalizeQuestionForStorage(raw);
+        previewBody.innerHTML = escapeHtml(normalized).replace(/\n/g, "<br>");
+        questionPreview.hidden = false;
+        renderMath(previewBody);
+    }
+
     function setMode(mode) {
         if (!MODE_HINTS[mode]) return;
         currentMode = mode;
@@ -420,7 +488,8 @@
             tab.classList.toggle("is-active", active);
             tab.setAttribute("aria-selected", active ? "true" : "false");
         });
-        inputHint.textContent = MODE_HINTS[mode];
+        inputHint.innerHTML = escapeHtml(MODE_HINTS[mode]);
+        renderMath(inputHint);
         renderExamples();
     }
 
@@ -435,6 +504,7 @@
             btn.addEventListener("click", function () {
                 questionEl.value = item[1];
                 updateCharCount();
+                updateQuestionPreview();
                 questionEl.focus();
             });
             examplesEl.appendChild(btn);
@@ -565,14 +635,19 @@
 
     async function submitQuestion() {
         if (busy) return;
-        var question = questionEl.value.trim();
-        if (!question) {
+        var rawQuestion = questionEl.value.trim();
+        if (!rawQuestion) {
             showToast("先输入题目或问题。", true);
             questionEl.focus();
             return;
         }
-        if (question.length > 4000) {
+        if (rawQuestion.length > 4000) {
             showToast("题目太长了，请控制在 4000 字以内。", true);
+            return;
+        }
+        var question = normalizeQuestionForStorage(rawQuestion);
+        if (question.length > 4000) {
+            showToast("公式规范化后太长了，请精简一下。", true);
             return;
         }
         if (!connectionReady()) {
@@ -985,7 +1060,10 @@
             loadHistory(historyCategory, historyTopicSelect.value);
         });
     }
-    questionEl.addEventListener("input", updateCharCount);
+    questionEl.addEventListener("input", function () {
+        updateCharCount();
+        updateQuestionPreview();
+    });
     questionEl.addEventListener("keydown", function (event) {
         if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
             event.preventDefault();
@@ -1013,6 +1091,7 @@
 
     setMode("题目讲解");
     updateCharCount();
+    updateQuestionPreview();
     showAnswerEmpty();
     checkService();
     loadHistory("all");
