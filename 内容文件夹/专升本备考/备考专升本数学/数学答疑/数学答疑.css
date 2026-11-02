@@ -739,6 +739,22 @@ code {
     border-color: rgba(11, 102, 114, 0.28);
 }
 
+.answer-check {
+    margin: 12px 2px 0;
+    padding: 8px 11px;
+    color: #6d4c13;
+    background: #fffaf0;
+    border: 1px solid #f0d9a7;
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    font-size: 10.5px;
+    line-height: 1.7;
+}
+
+.answer-check strong {
+    color: #8b5e16;
+}
+
 .answer-body {
     flex: 1;
     min-height: 420px;
