@@ -1,8 +1,26 @@
 {
-  "generated_at": "2026-11-01T20:26:55",
+  "generated_at": "2026-11-02T16:27:45",
   "source": "local-archived-log",
-  "count": 20,
+  "count": 22,
   "entries": [
+    {
+      "time": "2026-11-02 16:27:41",
+      "word": "tankers",
+      "type": "suffix",
+      "target": "核心词汇通关 · -er",
+      "file": "专升本英语核心词汇通关.html",
+      "schedule": "2026-11-03",
+      "status": "ok"
+    },
+    {
+      "time": "2026-11-02 16:27:37",
+      "word": "tanker",
+      "type": "suffix",
+      "target": "核心词汇通关 · -er",
+      "file": "专升本英语核心词汇通关.html",
+      "schedule": "2026-11-03",
+      "status": "ok"
+    },
     {
       "time": "2026-11-01 17:24:02",
       "word": "require",
