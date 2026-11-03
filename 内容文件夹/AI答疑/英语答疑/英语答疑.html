@@ -25,6 +25,7 @@
 <body>
 <div class="tabbar">
   <div class="tabs" id="tabs"></div>
+  <button type="button" class="connect" id="connect">连接设置</button>
   <button type="button" class="add" id="add" title="新建问题标签" aria-label="新建问题标签">+</button>
 </div>
 <div class="frames" id="frames"></div>
@@ -39,6 +40,7 @@
   var tabsEl = document.getElementById("tabs");
   var framesEl = document.getElementById("frames");
   var addEl = document.getElementById("add");
+  var connectEl = document.getElementById("connect");
 
   function esc(value) {
     return String(value == null ? "" : value).replace(/[&<>"']/g, function (ch) {
@@ -72,7 +74,11 @@
     frame.addEventListener("load", function () {
       try {
         var doc = frame.contentDocument;
-        var question = doc && doc.getElementById("question");
+        if (!doc) return;
+        var style = doc.createElement("style");
+        style.textContent = ".hero,.sync-reminder,.formula-rule{display:none!important}.shell{max-width:none!important;width:auto!important;padding:0 16px 24px!important}main{margin:0!important;padding:0!important}body{overflow:auto!important}";
+        doc.head.appendChild(style);
+        var question = doc.querySelector("#question");
         if (!question) return;
         question.addEventListener("input", function () {
           tab.title = titleOf(question.value);
@@ -129,6 +135,14 @@
     }
     var tabEl = event.target.closest("[data-tab]");
     if (tabEl) activate(tabEl.getAttribute("data-tab"));
+  });
+  if (connectEl) connectEl.addEventListener("click", function () {
+    var activeTab = tabs.find(function (tab) { return tab.id === active; });
+    var frame = activeTab && document.getElementById(activeTab.frameId);
+    try {
+      var button = frame && frame.contentDocument && frame.contentDocument.getElementById("connection-btn");
+      if (button) button.click();
+    } catch (error) { /* ignore */ }
   });
   addEl.addEventListener("click", add);
   add();

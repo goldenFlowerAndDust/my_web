@@ -1310,7 +1310,7 @@ def check_word(word: str) -> dict[str, Any]:
     elif has_html and not has_json:
         state = "html_only"
         recommended = "repair"
-        message = "HTML 存在，但 data.json 缺失；需要修复并重建记录。"
+        message = "HTML 存在，但 data.json 中没有这个词条；需要修复并重建记录。"
     elif has_json and not has_html:
         state = "json_only"
         recommended = "repair"
@@ -1322,7 +1322,7 @@ def check_word(word: str) -> dict[str, Any]:
     else:
         state = "none"
         recommended = "direct"
-        message = "没有 HTML、也没有 data.json；可直接导入。"
+        message = "data.json 中没有这个词，也没有对应 HTML；可直接导入。"
 
     return {
         "ok": True,
