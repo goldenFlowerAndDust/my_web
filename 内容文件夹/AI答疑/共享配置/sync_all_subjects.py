@@ -25,7 +25,6 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from history_archive import build_all as build_history_archives
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -1068,12 +1067,6 @@ class SyncRunner:
                 self.status["errors"].append("云端复习同步失败：" + str(review.get("message") or review.get("status")))
             print("云端复习：%s" % (review["message"] or review["status"]))
 
-        try:
-            self.status["history_archives"] = build_history_archives(self.base)
-        except (OSError, ValueError) as exc:
-            self.status["history_archives"] = {}
-            print("历史归档生成失败：%s" % exc)
-
         self.status["finished_at"] = now_text()
         write_json(self.status_file, self.status)
         # 同一进程内的菜单/自动循环下一次运行也要以本次结果为基准。
@@ -1091,14 +1084,6 @@ class SyncRunner:
         programming = self.status.get("programming") or {}
         if programming:
             print(self.describe_result(programming, "编程 AI"))
-        archives = self.status.get("history_archives") or {}
-        if archives:
-            print("GitHub 历史归档：英语 %d 条，数学 %d 条，添加日志 %d 条" % (
-                int(archives.get("english") or 0),
-                int(archives.get("math") or 0),
-                int(archives.get("added_log") or 0),
-            ))
-            print("记得上传 答疑历史.json 和 添加日志/添加日志.json。")
         print("云端记录不会立即删除，按 24 小时保留。")
         print("同步状态已写入：%s" % self.status_file)
         if self.status["errors"]:
@@ -1194,12 +1179,6 @@ class SyncRunner:
         review = data.get("review_updates") or {}
         if review:
             print(self.describe_result(review, "云端复习"))
-        archives = data.get("history_archives") or {}
-        if archives:
-            print("GitHub 历史归档：英语 %d 条，数学 %d 条" % (
-                int(archives.get("english") or 0),
-                int(archives.get("math") or 0),
-            ))
 
 
 def find_default_base() -> Path:
@@ -1208,7 +1187,7 @@ def find_default_base() -> Path:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="同步全部科目的云端答疑记录")
-    parser.add_argument("--base", default="", help="专升本备考根目录（一般不用改）")
+    parser.add_argument("--base", default="", help="AI答疑根目录（一般不用改）")
     parser.add_argument("--once", action="store_true", help="同步一次")
     parser.add_argument("--status", action="store_true", help="查看状态")
     parser.add_argument("--setup", action="store_true", help="配置云端连接")

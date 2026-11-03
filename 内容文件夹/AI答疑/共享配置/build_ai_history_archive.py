@@ -108,7 +108,7 @@ def collect() -> dict[tuple[str, str], list[dict[str, Any]]]:
             bucket[key] = record
 
     # 英语：聚合文件 + 原始分类日志
-    for item in load_aggregate(ENGLISH / "英语答疑" / "答疑历史.json"):
+    for item in load_aggregate(AI_ROOT / "英语答疑" / "答疑历史.json"):
         add("英语", str(item.get("mode") or "其他"), item)
     for base in (ENGLISH / "词素工具" / "英语问答日志", AI_ROOT / "英语答疑" / "engine" / "词素工具" / "英语问答日志"):
         for path in sorted(base.glob("*.jsonl")):
@@ -116,12 +116,31 @@ def collect() -> dict[tuple[str, str], list[dict[str, Any]]]:
                 add("英语", path.stem, item)
 
     # 数学：聚合文件 + 原始分类日志
-    for item in load_aggregate(MATH / "数学答疑" / "答疑历史.json"):
+    for item in load_aggregate(AI_ROOT / "数学答疑" / "答疑历史.json"):
         add("数学", str(item.get("mode") or "其他"), item)
     for base in (MATH / "数学工具" / "数学问答日志", AI_ROOT / "数学答疑" / "engine" / "数学工具" / "数学问答日志"):
         for path in sorted(base.glob("*.jsonl")):
             for item in read_jsonl(path):
                 add("数学", path.stem, item)
+
+    # 已生成的历史分片也作为来源，避免兼容文件被覆盖后丢失旧记录。
+    if ARCHIVE.exists():
+        for path in sorted(ARCHIVE.rglob("*.json")):
+            if path.name == "manifest.json":
+                continue
+            try:
+                data = json.loads(path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                continue
+            entries = data.get("entries") if isinstance(data, dict) else None
+            if not isinstance(entries, list):
+                continue
+            subject = str(data.get("subject") or "")
+            category = str(data.get("category") or "其他")
+            if subject:
+                for item in entries:
+                    if isinstance(item, dict):
+                        add(subject, category, item)
 
     # 编程：原始按语言 JSONL（新旧两处都读）
     for base in (PROGRAMMING / "history", AI_ROOT / "编程语言AI" / "history"):
