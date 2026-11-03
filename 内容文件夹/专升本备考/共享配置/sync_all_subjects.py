@@ -854,7 +854,94 @@ class SyncRunner:
             result["message"] = str(exc)
         return result
 
-    def sync_all(self, interactive: bool = False) -> int:
+    def sync_code(self) -> dict[str, Any]:
+        result: dict[str, Any] = {
+            "id": "programming",
+            "label": "编程 AI",
+            "status": "ok",
+            "exported": 0,
+            "imported": 0,
+            "duplicates": 0,
+            "route": "",
+            "message": "",
+        }
+        languages = ("python", "javascript", "web", "mysql", "node")
+        root = self.base / "AI" / "编程语言AI" / "history"
+        total_new = 0
+        total_seen = 0
+        errors: list[str] = []
+        try:
+            for language in languages:
+                try:
+                    data = self.api_get("/api/code-log", {"language": language})
+                except (SyncError, OSError, ValueError) as exc:
+                    errors.append("%s：%s" % (language, exc))
+                    continue
+                entries = data.get("entries")
+                if not isinstance(entries, list):
+                    entries = []
+                entries = [item for item in entries if isinstance(item, dict)]
+                total_seen += len(entries)
+
+                folder = root / language
+                existing: set[str] = set()
+                if folder.exists():
+                    for path in folder.glob("*.jsonl"):
+                        try:
+                            lines = path.read_text(encoding="utf-8-sig").splitlines()
+                        except OSError:
+                            continue
+                        for line in lines:
+                            try:
+                                item = json.loads(line)
+                            except json.JSONDecodeError:
+                                continue
+                            key = "%s|%s" % (item.get("time") or "", item.get("question") or "")
+                            existing.add(key)
+
+                added = 0
+                for item in entries:
+                    time_text = str(item.get("time") or "")
+                    question = str(item.get("question") or "").strip()
+                    if not time_text or not question:
+                        continue
+                    key = "%s|%s" % (time_text, question)
+                    if key in existing:
+                        continue
+                    day = str(item.get("date") or time_text[:10])
+                    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", day):
+                        continue
+                    folder.mkdir(parents=True, exist_ok=True)
+                    target = folder / (day + ".jsonl")
+                    record = dict(item)
+                    record["date"] = day
+                    record["source"] = "cloud-sync"
+                    with target.open("a", encoding="utf-8", newline="\n") as fh:
+                        fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+                    existing.add(key)
+                    added += 1
+                total_new += added
+
+            result["exported"] = total_seen
+            result["imported"] = total_new
+            result["duplicates"] = max(0, total_seen - total_new)
+            result["route"] = self.last_route
+            if errors:
+                result["status"] = "error" if total_new == 0 else "ok"
+                result["message"] = "；".join(errors[:3])
+            elif total_seen == 0:
+                result["status"] = "unchanged"
+                result["message"] = "云端没有编程问答记录。"
+            elif total_new == 0:
+                result["status"] = "unchanged"
+                result["message"] = "没有新记录，本地历史已是最新。"
+            else:
+                result["message"] = "新增 %d 条到本地历史。" % total_new
+        except (OSError, ValueError) as exc:
+            result["status"] = "error"
+            result["message"] = str(exc)
+        return result
+
         self.status = {
             "last_run": now_text(),
             "started_at": now_text(),
@@ -899,6 +986,15 @@ class SyncRunner:
         if not any_enabled:
             self.status["errors"].append("没有启用任何科目。")
 
+        print("")
+        print("=== 编程 AI ===")
+        programming = self.sync_code()
+        self.status["programming"] = programming
+        print("云端 %d 条；%s" % (
+            programming["exported"],
+            programming["message"] or programming["status"],
+        ))
+
         if any_enabled:
             review = self.sync_review_updates()
             self.status["review_updates"] = review
@@ -926,6 +1022,9 @@ class SyncRunner:
         review = self.status.get("review_updates") or {}
         if review:
             print(self.describe_result(review, "云端复习"))
+        programming = self.status.get("programming") or {}
+        if programming:
+            print(self.describe_result(programming, "编程 AI"))
         archives = self.status.get("history_archives") or {}
         if archives:
             print("GitHub 历史归档：英语 %d 条，数学 %d 条，添加日志 %d 条" % (
@@ -941,6 +1040,9 @@ class SyncRunner:
                 print("错误：%s" % error)
             return 1
         failed = [x for x in self.status["subjects"].values() if x.get("status") not in ("ok", "unchanged", "disabled")]
+        programming = self.status.get("programming") or {}
+        if programming.get("status") not in (None, "ok", "unchanged", "disabled"):
+            failed.append(programming)
         pending_status = (self.status.get("pending_words") or {}).get("status")
         if pending_status not in (None, "ok", "unchanged", "skipped"):
             failed.append(self.status.get("pending_words") or {})
