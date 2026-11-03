@@ -5,6 +5,7 @@
   const IS_LOCAL_PAGE = location.protocol === "file:" ||
     ((location.hostname === "127.0.0.1" || location.hostname === "localhost") && location.port === "8769");
   const ROUTE_KEY = "programmingTutor.route";
+  const REMEMBER_KEY = "programmingTutor.rememberSettings";
   const PRIMARY_URL_KEY = "programmingTutor.primaryUrl";
   const PRIMARY_TOKEN_KEY = "programmingTutor.primaryToken";
   const BACKUP_URL_KEY = "programmingTutor.backupUrl";
@@ -12,10 +13,20 @@
   const LEGACY_URL_KEY = "programmingTutor.cloudUrl";
   const LEGACY_TOKEN_KEY = "programmingTutor.cloudToken";
   const cleanUrl = (value) => String(value || "").trim().replace(/\/+$/, "");
-  let primaryUrl = cleanUrl(localStorage.getItem(PRIMARY_URL_KEY) || localStorage.getItem(LEGACY_URL_KEY));
-  let primaryToken = localStorage.getItem(PRIMARY_TOKEN_KEY) || localStorage.getItem(LEGACY_TOKEN_KEY) || "";
-  let backupUrl = cleanUrl(localStorage.getItem(BACKUP_URL_KEY));
-  let backupToken = localStorage.getItem(BACKUP_TOKEN_KEY) || "";
+  const SENSITIVE_KEYS = [
+    PRIMARY_URL_KEY, PRIMARY_TOKEN_KEY, BACKUP_URL_KEY, BACKUP_TOKEN_KEY,
+    LEGACY_URL_KEY, LEGACY_TOKEN_KEY
+  ];
+  let remember = localStorage.getItem(REMEMBER_KEY) === "true";
+  if (!remember) {
+    // 默认不落盘：清掉旧版本可能保存过的地址和令牌。
+    SENSITIVE_KEYS.forEach((key) => localStorage.removeItem(key));
+  }
+  const storage = remember ? localStorage : sessionStorage;
+  let primaryUrl = cleanUrl(storage.getItem(PRIMARY_URL_KEY) || (remember ? localStorage.getItem(LEGACY_URL_KEY) : ""));
+  let primaryToken = storage.getItem(PRIMARY_TOKEN_KEY) || (remember ? localStorage.getItem(LEGACY_TOKEN_KEY) : "") || "";
+  let backupUrl = cleanUrl(storage.getItem(BACKUP_URL_KEY));
+  let backupToken = storage.getItem(BACKUP_TOKEN_KEY) || "";
   let route = localStorage.getItem(ROUTE_KEY) || (IS_LOCAL_PAGE ? "local" : (primaryUrl ? "primary" : (backupUrl ? "backup" : "local")));
   if (!["local", "primary", "backup"].includes(route)) route = "local";
   const $ = (id) => document.getElementById(id);
@@ -39,6 +50,8 @@
   const primaryFields = $("primaryFields");
   const backupFields = $("backupFields");
   const cloudStatus = $("cloudStatus");
+  const rememberSettings = $("rememberSettings");
+  const rememberHint = $("rememberHint");
   let meta = null;
   let historyRecords = [];
   let busy = false;
@@ -414,7 +427,27 @@
   if (primaryTokenInput) primaryTokenInput.value = primaryToken;
   if (backupUrlInput) backupUrlInput.value = backupUrl;
   if (backupTokenInput) backupTokenInput.value = backupToken;
+  if (rememberSettings) rememberSettings.checked = remember;
+  updateRememberHint();
   updateCloudStatus();
+
+  function updateRememberHint() {
+    if (!rememberHint) return;
+    rememberHint.textContent = remember
+      ? "已开启：地址和令牌会保存在这台浏览器，下次打开自动填入。共用电脑请勿开启。"
+      : "默认关闭：地址和令牌只保留在当前标签页，关闭页面后失效。";
+  }
+
+  function persistSensitiveSettings() {
+    const target = remember ? localStorage : sessionStorage;
+    const other = remember ? sessionStorage : localStorage;
+    SENSITIVE_KEYS.forEach((key) => other.removeItem(key));
+    target.setItem(PRIMARY_URL_KEY, primaryUrl);
+    target.setItem(PRIMARY_TOKEN_KEY, primaryToken);
+    target.setItem(BACKUP_URL_KEY, backupUrl);
+    target.setItem(BACKUP_TOKEN_KEY, backupToken);
+    localStorage.setItem(ROUTE_KEY, route);
+  }
 
   function saveSettings() {
     const nextRoute = routeSelect ? routeSelect.value : route;
@@ -424,11 +457,7 @@
     backupUrl = cleanUrl(backupUrlInput ? backupUrlInput.value : backupUrl);
     backupToken = backupTokenInput ? backupTokenInput.value.trim() : backupToken;
     try {
-      localStorage.setItem(ROUTE_KEY, route);
-      localStorage.setItem(PRIMARY_URL_KEY, primaryUrl);
-      localStorage.setItem(PRIMARY_TOKEN_KEY, primaryToken);
-      localStorage.setItem(BACKUP_URL_KEY, backupUrl);
-      localStorage.setItem(BACKUP_TOKEN_KEY, backupToken);
+      persistSensitiveSettings();
     } catch (error) { /* ignore */ }
     if (routeSelect) routeSelect.value = route;
     if (primaryUrlInput) primaryUrlInput.value = primaryUrl;
@@ -441,6 +470,16 @@
   const saveCloudBtn = $("saveCloud");
   const clearCloudBtn = $("clearCloud");
   if (saveCloudBtn) saveCloudBtn.addEventListener("click", saveSettings);
+  if (rememberSettings) {
+    rememberSettings.addEventListener("change", () => {
+      remember = rememberSettings.checked;
+      try {
+        localStorage.setItem(REMEMBER_KEY, String(remember));
+      } catch (error) { /* ignore */ }
+      saveSettings();
+      updateRememberHint();
+    });
+  }
   if (routeSelect) {
     routeSelect.addEventListener("change", () => {
       route = routeSelect.value;
@@ -457,8 +496,10 @@
       backupUrl = "";
       backupToken = "";
       try {
-        [PRIMARY_URL_KEY, PRIMARY_TOKEN_KEY, BACKUP_URL_KEY, BACKUP_TOKEN_KEY,
-          LEGACY_URL_KEY, LEGACY_TOKEN_KEY].forEach((key) => localStorage.removeItem(key));
+        SENSITIVE_KEYS.forEach((key) => {
+          localStorage.removeItem(key);
+          sessionStorage.removeItem(key);
+        });
       } catch (error) { /* ignore */ }
       if (primaryUrlInput) primaryUrlInput.value = "";
       if (primaryTokenInput) primaryTokenInput.value = "";
