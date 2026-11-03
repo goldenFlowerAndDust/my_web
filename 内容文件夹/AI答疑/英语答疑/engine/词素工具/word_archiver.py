@@ -226,7 +226,11 @@ def backup_paths(paths: list[Path]) -> str:
         dest = target / rel
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(path, dest)
-    return str(target.relative_to(BASE))
+    try:
+        return str(target.relative_to(BASE))
+    except ValueError:
+        # 迁移后备份目录在 AI答疑/英语答疑/engine 下，不再位于 BASE 内。
+        return str(target.relative_to(TOOL_DIR))
 
 
 # ---------------------------------------------------------------------------

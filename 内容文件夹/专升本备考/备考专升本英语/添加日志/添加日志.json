@@ -1,8 +1,35 @@
 {
-  "generated_at": "2026-11-03T15:26:10",
+  "generated_at": "2026-11-03T19:52:36",
   "source": "local-archived-log",
-  "count": 22,
+  "count": 25,
   "entries": [
+    {
+      "time": "2026-11-03 19:52:36",
+      "word": "maybe",
+      "type": "compound",
+      "target": "词素 / 复合词",
+      "file": "词素\\复合词\\复合词：maybe.html",
+      "schedule": "2026-11-04",
+      "status": "ok"
+    },
+    {
+      "time": "2026-11-03 19:52:34",
+      "word": "imports",
+      "type": "prefix",
+      "target": "核心词汇通关 · im-",
+      "file": "专升本英语核心词汇通关.html",
+      "schedule": "2026-11-04",
+      "status": "ok"
+    },
+    {
+      "time": "2026-11-03 19:52:30",
+      "word": "import",
+      "type": "prefix",
+      "target": "核心词汇通关 · 新词族 -",
+      "file": "专升本英语核心词汇通关.html",
+      "schedule": "2026-11-04",
+      "status": "ok"
+    },
     {
       "time": "2026-11-02 16:27:41",
       "word": "tankers",

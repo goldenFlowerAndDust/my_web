@@ -959,16 +959,29 @@ class SyncRunner:
                         seen_index.add(key)
                         index_records.append(item)
             index_records.sort(key=lambda item: str(item.get("time") or ""), reverse=True)
+            index_file = root / "index.json"
+            old_payload: dict[str, Any] = {}
+            if index_file.exists():
+                try:
+                    loaded = json.loads(index_file.read_text(encoding="utf-8-sig"))
+                    if isinstance(loaded, dict):
+                        old_payload = loaded
+                except (OSError, ValueError, json.JSONDecodeError):
+                    old_payload = {}
+            new_records = index_records[:2000]
+            unchanged = old_payload.get("records") == new_records
             index_payload = {
-                "generated_at": now_text(),
+                # 内容没变时保留原时间，避免每次同步都产生无意义的 Git 改动。
+                "generated_at": old_payload.get("generated_at") if unchanged and old_payload.get("generated_at") else now_text(),
                 "count": len(index_records),
-                "records": index_records[:2000],
+                "records": new_records,
             }
             root.mkdir(parents=True, exist_ok=True)
-            (root / "index.json").write_text(
-                json.dumps(index_payload, ensure_ascii=False, indent=2) + "\n",
-                encoding="utf-8",
-            )
+            if old_payload != index_payload:
+                index_file.write_text(
+                    json.dumps(index_payload, ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8",
+                )
             result["index"] = str(root / "index.json")
         except (OSError, ValueError) as exc:
             result["status"] = "error"
