@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 答疑中心</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0f1720; --paper:#172230; --line:#2d4053; --text:#e3edf7; --muted:#96acc0; --accent:#69b7e8; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; background:radial-gradient(circle at 20% 0,#1a3042,#0f1720 55%); color:var(--text); font-family:"Microsoft YaHei",system-ui,sans-serif; }
+    main { width:min(980px,92vw); margin:0 auto; padding:64px 0 80px; }
+    .eyebrow { color:var(--accent); letter-spacing:.18em; font-size:12px; }
+    h1 { font-size:clamp(30px,5vw,48px); margin:10px 0 12px; }
+    .sub { color:var(--muted); line-height:1.9; margin:0 0 30px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+    .card { display:block; padding:22px; border:1px solid var(--line); border-radius:16px; background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.02)); color:inherit; text-decoration:none; transition:.18s; }
+    .card:hover { transform:translateY(-3px); border-color:#4f86aa; background:rgba(105,183,232,.08); }
+    .card h2 { margin:0 0 8px; font-size:20px; }
+    .card p { margin:0; color:var(--muted); font-size:13px; line-height:1.8; }
+    .tag { display:inline-block; margin-bottom:12px; padding:3px 8px; border-radius:99px; background:rgba(105,183,232,.14); color:#a9d8f5; font-size:11px; }
+    footer { margin-top:34px; color:#6f879b; font-size:12px; line-height:1.8; }
+    a { color:var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">AI TUTOR CENTER</p>
+  <h1>AI 答疑中心</h1>
+  <p class="sub">英语、数学、编程三个独立答疑入口。共享配置、统一历史归档，页面各走各的端口。</p>
+  <div class="grid">
+    <a class="card" href="英语答疑/英语答疑.html">
+      <span class="tag">ENGLISH</span>
+      <h2>英语答疑</h2>
+      <p>单词解释、作文、句子分析、其他。本地 8767，云端可切换。</p>
+    </a>
+    <a class="card" href="数学答疑/数学答疑.html">
+      <span class="tag">MATH</span>
+      <h2>数学答疑</h2>
+      <p>题目讲解、错题诊断、概念公式、其他。本地 8768，支持公式渲染。</p>
+    </a>
+    <a class="card" href="编程语言AI/index.html">
+      <span class="tag">CODE</span>
+      <h2>编程语言 AI</h2>
+      <p>Python、JavaScript、HTML+CSS、MySQL、Node.js。本地 8769。</p>
+    </a>
+  </div>
+  <footer>
+    本地入口：<code>http://127.0.0.1:8769/AI答疑/</code><br>
+    旧路径保留兼容；历史归档位于 <code>专升本备考/历史归档/</code>。
+  </footer>
+</main>
+</body>
+</html>

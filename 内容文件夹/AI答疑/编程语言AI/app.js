@@ -1,0 +1,727 @@
+(() => {
+  "use strict";
+
+  const LOCAL_API = "http://127.0.0.1:8769";
+  const IS_LOCAL_PAGE = location.protocol === "file:" ||
+    ((location.hostname === "127.0.0.1" || location.hostname === "localhost") && location.port === "8769");
+  const CONNECTION_KEY = "programmingTutor.connection-v2";
+  const REMEMBER_KEY = "programmingTutor.rememberSettings";
+  const LEGACY_ROUTE_KEY = "programmingTutor.route";
+  const LEGACY_PRIMARY_URL_KEY = "programmingTutor.primaryUrl";
+  const LEGACY_PRIMARY_TOKEN_KEY = "programmingTutor.primaryToken";
+  const LEGACY_BACKUP_URL_KEY = "programmingTutor.backupUrl";
+  const LEGACY_BACKUP_TOKEN_KEY = "programmingTutor.backupToken";
+  const LEGACY_URL_KEY = "programmingTutor.cloudUrl";
+  const LEGACY_TOKEN_KEY = "programmingTutor.cloudToken";
+  const cleanUrl = (value) => String(value || "").trim().replace(/\/+$/, "");
+  const SENSITIVE_KEYS = [
+    CONNECTION_KEY, LEGACY_PRIMARY_URL_KEY, LEGACY_PRIMARY_TOKEN_KEY,
+    LEGACY_BACKUP_URL_KEY, LEGACY_BACKUP_TOKEN_KEY, LEGACY_URL_KEY, LEGACY_TOKEN_KEY
+  ];
+  let remember = localStorage.getItem(REMEMBER_KEY) === "true";
+  if (!remember) {
+    SENSITIVE_KEYS.forEach((key) => localStorage.removeItem(key));
+  }
+
+  function normalizeProfile(value) {
+    return {
+      url: cleanUrl(value && value.url),
+      token: String((value && value.token) || "").trim()
+    };
+  }
+
+  function defaultConnection() {
+    return {
+      mode: IS_LOCAL_PAGE ? "local" : "cloud",
+      provider: "cloudflare",
+      profiles: { cloudflare: { url: "", token: "" }, domestic: { url: "", token: "" } }
+    };
+  }
+
+  function loadConnection() {
+    const store = remember ? localStorage : sessionStorage;
+    const result = defaultConnection();
+    try {
+      const raw = store.getItem(CONNECTION_KEY);
+      if (raw) {
+        const data = JSON.parse(raw);
+        if (data && typeof data === "object") {
+          result.mode = data.mode === "cloud" ? "cloud" : "local";
+          result.provider = data.provider === "domestic" ? "domestic" : "cloudflare";
+          result.profiles.cloudflare = normalizeProfile(data.profiles && data.profiles.cloudflare);
+          result.profiles.domestic = normalizeProfile(data.profiles && data.profiles.domestic);
+        }
+      }
+    } catch (error) { /* ignore */ }
+
+    // 兼容旧版主/备线路和单线路配置。
+    const legacyCloudflare = normalizeProfile({
+      url: store.getItem(LEGACY_BACKUP_URL_KEY) || store.getItem(LEGACY_URL_KEY),
+      token: store.getItem(LEGACY_BACKUP_TOKEN_KEY) || store.getItem(LEGACY_TOKEN_KEY)
+    });
+    const legacyDomestic = normalizeProfile({
+      url: store.getItem(LEGACY_PRIMARY_URL_KEY),
+      token: store.getItem(LEGACY_PRIMARY_TOKEN_KEY)
+    });
+    if (!result.profiles.cloudflare.url && legacyCloudflare.url) {
+      result.profiles.cloudflare = legacyCloudflare;
+    }
+    if (!result.profiles.domestic.url && legacyDomestic.url) {
+      result.profiles.domestic = legacyDomestic;
+    }
+    const legacyRoute = store.getItem(LEGACY_ROUTE_KEY);
+    if (legacyRoute === "primary") {
+      result.mode = "cloud";
+      if (!result.profiles.domestic.url) result.provider = "domestic";
+    } else if (legacyRoute === "backup") {
+      result.mode = "cloud";
+    } else if (legacyRoute === "local") {
+      result.mode = "local";
+    }
+    if (result.mode === "cloud" && !result.profiles[result.provider].url) {
+      result.provider = result.profiles.domestic.url ? "domestic" : "cloudflare";
+    }
+    return result;
+  }
+
+  let connection = loadConnection();
+  const $ = (id) => document.getElementById(id);
+  const languageSelect = $("languageSelect");
+  const questionInput = $("question");
+  const askBtn = $("askBtn");
+  const statusEl = $("status");
+  const answerEl = $("answer");
+  const answerTime = $("answerTime");
+  const historyList = $("historyList");
+  const historyTabs = $("historyTabs");
+  const historySearch = $("historySearch");
+  const historyDate = $("historyDate");
+  const historyCount = $("historyCount");
+  const exportHistoryBtn = $("exportHistory");
+  const healthEl = $("health");
+  const heroBadge = $("heroBadge");
+  const languageMeta = $("languageMeta");
+  const blogLinks = $("blogLinks");
+  const themeToggle = $("themeToggle");
+  const connectionMode = $("connectionMode");
+  const cloudProvider = $("cloudProvider");
+  const cloudUrlInput = $("cloudUrl");
+  const cloudTokenInput = $("cloudToken");
+  const cloudFields = $("cloudFields");
+  const cloudStatus = $("cloudStatus");
+  const rememberSettings = $("rememberSettings");
+  const rememberHint = $("rememberHint");
+  let meta = null;
+  let historyRecords = [];
+  let historyFilterLanguage = "all";
+  let busy = false;
+
+  function currentProfile() {
+    return connection.profiles[connection.provider] || { url: "", token: "" };
+  }
+
+  function routeConfig() {
+    if (connection.mode === "local") {
+      return { id: "local", label: "本地 8769", base: LOCAL_API, token: "", local: true };
+    }
+    const profile = currentProfile();
+    return {
+      id: connection.provider,
+      label: connection.provider === "domestic" ? "国内 SCF" : "Cloudflare",
+      base: profile.url,
+      token: profile.token,
+      local: false
+    };
+  }
+
+  const FALLBACK_LANGUAGES = [
+    { id: "python", name: "Python", blog: [["Python 博客", "../../自建本地网站/导航栏内容/博客/python博客.html"]] },
+    { id: "javascript", name: "JavaScript", blog: [["JavaScript 博客", "../../自建本地网站/导航栏内容/博客/JavaScript博客.html"]] },
+    { id: "web", name: "HTML + CSS", blog: [["HTML 博客", "../../自建本地网站/导航栏内容/博客/HTML博客.html"], ["CSS 博客", "../../自建本地网站/导航栏内容/博客/CSS博客.html"]] },
+    { id: "mysql", name: "MySQL", blog: [["MySQL 博客", "../../自建本地网站/导航栏内容/博客/MySQL博客.html"]] },
+    { id: "node", name: "Node.js", blog: [["Node.js 博客", "../../自建本地网站/导航栏内容/博客/Node.js博客.html"]] }
+  ];
+
+  const DESC = {
+    python: "基础语法、数据结构、函数、面向对象、异常、文件和调试。",
+    javascript: "作用域、DOM、事件、异步、Promise、浏览器与调试。",
+    web: "HTML 语义化、CSS 选择器、Flex、Grid、响应式和可访问性。",
+    mysql: "查询、连接、聚合、索引、事务和 MySQL 实践。",
+    node: "模块、文件、HTTP、npm、Express 和异步。"
+  };
+
+  const PLACEHOLDER = {
+    python: "例如：Python 的列表和元组有什么区别？\n也可以粘贴报错信息和相关代码。",
+    javascript: "例如：let 和 var 的核心区别是什么？\n也可以粘贴浏览器报错和代码。",
+    web: "例如：怎么用 Flex 实现水平垂直居中？\n也可以描述想要的布局。",
+    mysql: "例如：LEFT JOIN 后为什么数据变少了？\n请把表结构和 SQL 一起贴上来。",
+    node: "例如：Node.js 的 require 和 import 有什么区别？\n也可以粘贴服务端报错。"
+  };
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
+  }
+
+  function codeBlockHtml(lang, code) {
+    const label = lang ? escapeHtml(lang) : "code";
+    return '<div class="code-block"><div class="code-head"><span>' + label +
+      '</span><button type="button" class="copy-code">复制</button></div><pre><code>' +
+      escapeHtml(code) + "</code></pre></div>";
+  }
+
+  function renderMarkdown(markdown) {
+    const blocks = [];
+    let text = String(markdown || "");
+    text = text.replace(/```([A-Za-z0-9_+-]*)\n([\s\S]*?)```/g, (m, lang, code) => {
+      const token = "@@CODEBLOCK_" + blocks.length + "@@";
+      blocks.push(codeBlockHtml(lang, code.replace(/\n$/, "")));
+      return "\n\n" + token + "\n\n";
+    });
+    text = escapeHtml(text);
+    text = text.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+    text = text.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>");
+    const lines = text.split("\n");
+    const out = [];
+    let listType = "";
+    let paragraph = [];
+
+    function flushParagraph() {
+      if (paragraph.length) {
+        out.push("<p>" + paragraph.join("<br>") + "</p>");
+        paragraph = [];
+      }
+    }
+    function closeList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = "";
+      }
+    }
+
+    for (const raw of lines) {
+      const line = raw.trimEnd();
+      const heading = line.match(/^(#{1,3})\s+(.*)$/);
+      const unordered = line.match(/^\s*[-*]\s+(.*)$/);
+      const ordered = line.match(/^\s*\d+\.\s+(.*)$/);
+      const codeToken = line.match(/^@@CODEBLOCK_\d+@@$/);
+      if (codeToken) {
+        flushParagraph(); closeList();
+        out.push(line);
+      } else if (heading) {
+        flushParagraph(); closeList();
+        const level = heading[1].length;
+        out.push("<h" + level + ">" + heading[2] + "</h" + level + ">");
+      } else if (unordered) {
+        flushParagraph();
+        if (listType !== "ul") { closeList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + unordered[1] + "</li>");
+      } else if (ordered) {
+        flushParagraph();
+        if (listType !== "ol") { closeList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + ordered[1] + "</li>");
+      } else if (!line.trim()) {
+        flushParagraph(); closeList();
+      } else {
+        closeList();
+        paragraph.push(line);
+      }
+    }
+    flushParagraph(); closeList();
+    let html = out.join("\n");
+    blocks.forEach((block, index) => {
+      html = html.replace("@@CODEBLOCK_" + index + "@@", block);
+    });
+    return html;
+  }
+
+  function setStatus(message, kind) {
+    statusEl.textContent = message || "";
+    statusEl.className = "status" + (kind ? " " + kind : "");
+  }
+
+  function applyTheme(theme) {
+    const next = theme === "light" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem("programmingTutor.theme", next);
+    if (themeToggle) {
+      themeToggle.textContent = next === "dark" ? "☀️ 亮色" : "🌙 暗色";
+      themeToggle.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
+    }
+  }
+
+  async function fetchJson(url, options) {
+    const config = routeConfig();
+    if (!config.base) {
+      throw new Error("当前线路未配置地址，请展开左侧“连接设置”。");
+    }
+    const headers = Object.assign({}, (options && options.headers) || {});
+    if (!config.local && config.token) headers["X-Tutor-Token"] = config.token;
+    const response = await fetch(config.base + url, Object.assign({}, options, { headers }));
+    let data = null;
+    try {
+      data = await response.json();
+    } catch (error) {
+      throw new Error(config.local
+        ? "服务返回的不是 JSON，请确认 8769 服务已启动。"
+        : "云端返回的不是 JSON，请检查线路地址和令牌。");
+    }
+    if (!response.ok || !data.ok) {
+      throw new Error((data && data.error) || ("HTTP " + response.status));
+    }
+    return data;
+  }
+
+  function apiPath(localPath, cloudPath) {
+    return routeConfig().local ? localPath : cloudPath;
+  }
+
+  function currentLanguage() {
+    return languageSelect.value || "python";
+  }
+
+  function updateLanguageUi() {
+    const language = currentLanguage();
+    if (!meta) return;
+    const item = meta.languages.find((row) => row.id === language);
+    if (!item) return;
+    heroBadge.textContent = item.name;
+    questionInput.placeholder = PLACEHOLDER[language] || "输入你的编程问题…";
+    const links = (item.blog || []).map(([label, href]) =>
+      '<a href="' + escapeHtml(href) + '">' + escapeHtml(label) + "</a>"
+    ).join(" · ");
+    languageMeta.innerHTML = '<p><strong>' + escapeHtml(item.name) + "</strong></p>" +
+      "<p>" + escapeHtml(DESC[language] || "") + "</p>" +
+      (links ? "<p>" + links + "</p>" : "");
+    if (blogLinks) {
+      blogLinks.innerHTML = '<a href="../../自建本地网站/导航栏内容/博客/HTML博客.html">← 返回博客</a>' +
+        (item.blog || []).map(([label, href]) =>
+          '<a href="' + escapeHtml(href) + '">' + escapeHtml(label) + "</a>"
+        ).join("");
+    }
+    localStorage.setItem("programmingTutor.language", language);
+    loadHistory();
+  }
+
+  async function loadMeta() {
+    try {
+      const data = routeConfig().local
+        ? await fetchJson("/api/meta")
+        : { languages: FALLBACK_LANGUAGES };
+      meta = data;
+      languageSelect.innerHTML = data.languages.map((item) =>
+        '<option value="' + escapeHtml(item.id) + '">' + escapeHtml(item.name) + "</option>"
+      ).join("");
+      const queryLang = new URLSearchParams(location.search).get("lang");
+      const saved = localStorage.getItem("programmingTutor.language");
+      const available = data.languages.map((row) => row.id);
+      const initial = [queryLang, saved, "python"].find((id) => available.includes(id)) || available[0];
+      languageSelect.value = initial;
+      updateLanguageUi();
+      await checkHealth();
+    } catch (error) {
+      meta = { languages: FALLBACK_LANGUAGES };
+      languageSelect.innerHTML = FALLBACK_LANGUAGES.map((item) =>
+        '<option value="' + escapeHtml(item.id) + '">' + escapeHtml(item.name) + "</option>"
+      ).join("");
+      languageSelect.value = new URLSearchParams(location.search).get("lang") || "python";
+      updateLanguageUi();
+      healthEl.textContent = routeConfig().local ? "本地服务未连接（8769）" : "线路未连接";
+      healthEl.className = "health bad";
+      setStatus(error.message, "error");
+    }
+  }
+
+  async function checkHealth() {
+    if (!routeConfig().local) {
+      updateCloudStatus();
+      return;
+    }
+    try {
+      const data = await fetchJson("/api/health");
+      healthEl.textContent = "本地服务 8769 · " + (data.api_key ? "API 已配置" : "缺少 API Key");
+      healthEl.className = "health " + (data.api_key ? "ok" : "bad");
+    } catch (error) {
+      healthEl.textContent = "本地服务未连接（8769）";
+      healthEl.className = "health bad";
+    }
+  }
+
+  function updateCloudStatus() {
+    const config = routeConfig();
+    if (config.local) {
+      healthEl.textContent = "本地模式 8769";
+      healthEl.className = "health ok";
+      if (cloudStatus) {
+        cloudStatus.textContent = "当前走本地服务。";
+        cloudStatus.className = "cloud-status ok";
+      }
+      return;
+    }
+    if (config.base && config.token) {
+      healthEl.textContent = config.label + " · 已配置";
+      healthEl.className = "health ok";
+      if (cloudStatus) {
+        cloudStatus.textContent = "当前走" + config.label + "。保存后如不生效，刷新页面。";
+        cloudStatus.className = "cloud-status ok";
+      }
+    } else {
+      healthEl.textContent = config.label + " 未配置";
+      healthEl.className = "health bad";
+      if (cloudStatus) {
+        cloudStatus.textContent = "请填写" + config.label + "的地址和令牌。";
+        cloudStatus.className = "cloud-status bad";
+      }
+    }
+  }
+
+  async function loadStaticHistory() {
+    const archiveRoot = "../../专升本备考/历史归档";
+    try {
+      const response = await fetch(archiveRoot + "/manifest.json?t=" + Date.now(), { cache: "no-store" });
+      if (response.ok) {
+        const manifest = await response.json();
+        const files = [];
+        Object.values((manifest && manifest.months) || {}).forEach((month) => {
+          const categories = ((month && month.subjects) || {})["编程"] || {};
+          Object.values(categories).forEach((parts) => {
+            (parts || []).forEach((part) => {
+              if (part && part.file) files.push(part.file);
+            });
+          });
+        });
+        const chunks = await Promise.all(files.map(async (file) => {
+          try {
+            const part = await fetch(archiveRoot + "/" + encodeURI(file) + "?t=" + Date.now(), { cache: "no-store" });
+            if (!part.ok) return [];
+            const data = await part.json();
+            return Array.isArray(data.entries) ? data.entries : [];
+          } catch (error) {
+            return [];
+          }
+        }));
+        const records = chunks.flat();
+        if (records.length) return records;
+      }
+    } catch (error) { /* fall through */ }
+    try {
+      const response = await fetch("history/index.json?t=" + Date.now(), { cache: "no-store" });
+      if (!response.ok) return [];
+      const data = await response.json();
+      return Array.isArray(data.records) ? data.records : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function buildHistoryTabs() {
+    if (!historyTabs) return;
+    const rows = [{ id: "all", name: "全部" }].concat(
+      (meta && meta.languages) || FALLBACK_LANGUAGES
+    );
+    historyTabs.innerHTML = rows.map((item) =>
+      '<button type="button" class="history-tab' +
+      (item.id === historyFilterLanguage ? " is-active" : "") +
+      '" data-language="' + escapeHtml(item.id) + '">' + escapeHtml(item.name) + "</button>"
+    ).join("");
+  }
+
+  function filteredHistoryRecords() {
+    const query = (historySearch ? historySearch.value : "").trim().toLowerCase();
+    const range = historyDate ? historyDate.value : "all";
+    const today = new Date();
+    const cutoff = range === "today" ? 0 : (range === "7" ? 7 : (range === "30" ? 30 : null));
+    return historyRecords.filter((item) => {
+      if (historyFilterLanguage !== "all" && item.language !== historyFilterLanguage) return false;
+      if (query) {
+        const haystack = [item.question, item.answer, item.language_name]
+          .map((value) => String(value || "")).join("\n").toLowerCase();
+        if (!haystack.includes(query)) return false;
+      }
+      if (cutoff !== null) {
+        const day = item.date || String(item.time || "").slice(0, 10);
+        const date = new Date(day + "T00:00:00");
+        if (Number.isNaN(date.getTime())) return false;
+        const diff = Math.floor((today - date) / 86400000);
+        if (diff < 0 || diff > cutoff) return false;
+      }
+      return true;
+    });
+  }
+
+  function renderHistory() {
+    const records = filteredHistoryRecords();
+    if (historyCount) {
+      historyCount.textContent = records.length + " / " + historyRecords.length + " 条";
+    }
+    if (!records.length) {
+      historyList.innerHTML = '<p class="history-empty">' +
+        (historyRecords.length ? "没有匹配的历史记录。" : "还没有历史记录，先问一个问题。") + "</p>";
+      return;
+    }
+    const groups = new Map();
+    records.forEach((item) => {
+      const index = historyRecords.indexOf(item);
+      const day = item.date || String(item.time || "").slice(0, 10) || "未知日期";
+      if (!groups.has(day)) groups.set(day, []);
+      groups.get(day).push({ item, index });
+    });
+    historyList.innerHTML = Array.from(groups.entries()).map(([day, rows]) =>
+      '<section class="history-day"><h3>' + escapeHtml(day) + "</h3>" +
+      rows.map(({ item, index }) =>
+        '<article class="history-item"><p class="history-question">' + escapeHtml(item.question) + "</p>" +
+        '<div class="history-meta">' + escapeHtml(item.time || "") + " · " +
+        escapeHtml(item.language_name || "") +
+        ' <button type="button" class="copy-code view-history" data-index="' + index + '">查看</button></div></article>'
+      ).join("") + "</section>"
+    ).join("");
+  }
+
+  async function loadHistory() {
+    historyList.innerHTML = '<p class="history-empty">加载历史…</p>';
+    try {
+      let records = [];
+      if (routeConfig().local) {
+        const data = await fetchJson("/api/history?limit=100");
+        records = data.records || [];
+      } else {
+        records = await loadStaticHistory();
+        if (routeConfig().base && routeConfig().token) {
+          try {
+            const data = await fetchJson("/api/code-log");
+            records = records.concat(data.entries || []);
+          } catch (error) {
+            setStatus("云端历史读取失败，显示 GitHub 静态历史：" + error.message, "error");
+          }
+        }
+      }
+      const seen = new Set();
+      historyRecords = records.filter((item) => {
+        if (!item) return false;
+        const key = [item.language || "", item.time || "", item.question || ""].join("|");
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      }).sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
+      buildHistoryTabs();
+      renderHistory();
+    } catch (error) {
+      historyList.innerHTML = '<p class="history-empty">历史加载失败：' + escapeHtml(error.message) + "</p>";
+      if (historyCount) historyCount.textContent = "—";
+    }
+  }
+
+  function exportHistory() {
+    const records = filteredHistoryRecords();
+    const blob = new Blob([JSON.stringify({ exported_at: new Date().toISOString(), records }, null, 2)], {
+      type: "application/json;charset=utf-8"
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "programming-history-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function ask() {
+    if (busy) return;
+    const question = questionInput.value.trim();
+    if (!question) {
+      setStatus("请先输入问题。", "error");
+      questionInput.focus();
+      return;
+    }
+    busy = true;
+    askBtn.disabled = true;
+    setStatus("正在请求 AI…", "");
+    answerEl.innerHTML = '<div class="empty-state"><strong>生成中</strong><p>请稍等，代码题可能需要更久。</p></div>';
+    answerTime.textContent = "";
+    try {
+      const path = apiPath("/api/ask", "/api/code");
+      const data = await fetchJson(path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: JSON.stringify({ language: currentLanguage(), question: question })
+      });
+      answerEl.innerHTML = renderMarkdown(data.answer || "");
+      answerTime.textContent = (data.language_name || "") + " · " + (data.time || "");
+      setStatus("回答完成。", "ok");
+      await loadHistory();
+      answerEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (error) {
+      answerEl.innerHTML = '<div class="empty-state"><strong>请求失败</strong><p>' +
+        escapeHtml(error.message) + "</p></div>";
+      setStatus(error.message, "error");
+    } finally {
+      busy = false;
+      askBtn.disabled = false;
+    }
+  }
+
+  languageSelect.addEventListener("change", () => {
+    updateLanguageUi();
+    answerEl.innerHTML = '<div class="empty-state"><strong>等待提问</strong><p>已切换到新的语言，可以继续提问。</p></div>';
+    answerTime.textContent = "";
+  });
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+    });
+  }
+  applyTheme(document.documentElement.dataset.theme || localStorage.getItem("programmingTutor.theme") || "dark");
+
+  function saveProfileFromForm() {
+    const profile = currentProfile();
+    profile.url = cleanUrl(cloudUrlInput ? cloudUrlInput.value : profile.url);
+    profile.token = cloudTokenInput ? cloudTokenInput.value.trim() : profile.token;
+  }
+
+  function fillProfileFields() {
+    const profile = currentProfile();
+    if (cloudUrlInput) cloudUrlInput.value = profile.url;
+    if (cloudTokenInput) cloudTokenInput.value = profile.token;
+    if (cloudProvider) cloudProvider.value = connection.provider;
+  }
+
+  function syncCloudFields() {
+    if (cloudFields) cloudFields.hidden = connectionMode.value !== "cloud";
+  }
+
+  function updateRememberHint() {
+    if (!rememberHint) return;
+    rememberHint.textContent = remember
+      ? "已开启：地址和口令保存在这台浏览器，下次打开自动填入。共用电脑请勿开启。"
+      : "默认关闭：地址和口令只在当前标签页有效，关闭页面后失效。";
+  }
+
+  function persistConnection() {
+    const target = remember ? localStorage : sessionStorage;
+    const other = remember ? sessionStorage : localStorage;
+    SENSITIVE_KEYS.forEach((key) => {
+      other.removeItem(key);
+      localStorage.removeItem(key);
+    });
+    target.setItem(CONNECTION_KEY, JSON.stringify(connection));
+  }
+
+  function saveSettings() {
+    if (connectionMode) connection.mode = connectionMode.value === "cloud" ? "cloud" : "local";
+    if (cloudProvider) connection.provider = cloudProvider.value === "domestic" ? "domestic" : "cloudflare";
+    saveProfileFromForm();
+    try {
+      persistConnection();
+    } catch (error) { /* ignore */ }
+    fillProfileFields();
+    syncCloudFields();
+    updateCloudStatus();
+    setStatus("已切换到 " + routeConfig().label + "，正在重新加载…", "ok");
+    loadMeta();
+  }
+
+  if (connectionMode) connectionMode.value = connection.mode;
+  if (cloudProvider) cloudProvider.value = connection.provider;
+  fillProfileFields();
+  syncCloudFields();
+  if (rememberSettings) rememberSettings.checked = remember;
+  updateRememberHint();
+  updateCloudStatus();
+
+  const saveCloudBtn = $("saveCloud");
+  const clearCloudBtn = $("clearCloud");
+  if (saveCloudBtn) saveCloudBtn.addEventListener("click", saveSettings);
+  if (connectionMode) {
+    connectionMode.addEventListener("change", syncCloudFields);
+  }
+  if (cloudProvider) {
+    cloudProvider.addEventListener("change", () => {
+      saveProfileFromForm();
+      connection.provider = cloudProvider.value === "domestic" ? "domestic" : "cloudflare";
+      fillProfileFields();
+    });
+  }
+  if (rememberSettings) {
+    rememberSettings.addEventListener("change", () => {
+      remember = rememberSettings.checked;
+      try {
+        localStorage.setItem(REMEMBER_KEY, String(remember));
+      } catch (error) { /* ignore */ }
+      saveSettings();
+      updateRememberHint();
+    });
+  }
+  if (clearCloudBtn) {
+    clearCloudBtn.addEventListener("click", () => {
+      connection.profiles = {
+        cloudflare: { url: "", token: "" },
+        domestic: { url: "", token: "" }
+      };
+      try {
+        SENSITIVE_KEYS.forEach((key) => {
+          localStorage.removeItem(key);
+          sessionStorage.removeItem(key);
+        });
+      } catch (error) { /* ignore */ }
+      if (cloudUrlInput) cloudUrlInput.value = "";
+      if (cloudTokenInput) cloudTokenInput.value = "";
+      updateCloudStatus();
+      setStatus("线路配置已清除。", "");
+      loadMeta();
+    });
+  }
+
+
+  askBtn.addEventListener("click", ask);
+  questionInput.addEventListener("keydown", (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      event.preventDefault();
+      ask();
+    }
+  });
+
+  $("refreshHistory").addEventListener("click", loadHistory);
+  if (exportHistoryBtn) exportHistoryBtn.addEventListener("click", exportHistory);
+  if (historyTabs) {
+    historyTabs.addEventListener("click", (event) => {
+      const button = event.target.closest(".history-tab");
+      if (!button) return;
+      historyFilterLanguage = button.dataset.language || "all";
+      buildHistoryTabs();
+      renderHistory();
+    });
+  }
+  if (historySearch) {
+    historySearch.addEventListener("input", renderHistory);
+  }
+  if (historyDate) {
+    historyDate.addEventListener("change", renderHistory);
+  }
+  historyList.addEventListener("click", (event) => {
+    const button = event.target.closest(".view-history");
+    if (!button) return;
+    const record = historyRecords[Number(button.dataset.index)];
+    if (!record) return;
+    answerEl.innerHTML = renderMarkdown(record.answer || "");
+    answerTime.textContent = (record.language_name || "") + " · " + (record.time || "");
+    answerEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  document.addEventListener("click", async (event) => {
+    const button = event.target.closest(".copy-code:not(.view-history)");
+    if (!button) return;
+    const code = button.closest("pre")?.querySelector("code")?.textContent || "";
+    try {
+      await navigator.clipboard.writeText(code);
+      button.textContent = "已复制";
+      setTimeout(() => { button.textContent = "复制"; }, 1200);
+    } catch (error) {
+      setStatus("复制失败，请手动选择代码。", "error");
+    }
+  });
+
+  loadMeta();
+})();

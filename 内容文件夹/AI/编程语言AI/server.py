@@ -266,7 +266,7 @@ class Handler(SimpleHTTPRequestHandler):
             return
         if path == "/":
             self.send_response(302)
-            self.send_header("Location", quote("/AI/编程语言AI/", safe="/"))
+            self.send_header("Location", quote("/AI答疑/", safe="/"))
             self.end_headers()
             return
         return super().do_GET()

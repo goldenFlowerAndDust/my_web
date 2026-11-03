@@ -976,6 +976,34 @@ class SyncRunner:
             result["message"] = str(exc)
         return result
 
+    def build_ai_history_archive(self) -> dict[str, Any]:
+        result: dict[str, Any] = {"status": "ok", "message": "", "output": ""}
+        script = self.base / "共享配置" / "build_ai_history_archive.py"
+        if not script.exists():
+            result["status"] = "skipped"
+            result["message"] = "找不到 build_ai_history_archive.py。"
+            return result
+        try:
+            completed = subprocess.run(
+                [sys.executable, str(script)],
+                cwd=str(self.base),
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=120,
+            )
+            result["output"] = (completed.stdout or "") + (completed.stderr or "")
+            if completed.returncode != 0:
+                result["status"] = "error"
+                result["message"] = result["output"][-500:]
+            else:
+                result["message"] = "已重建 5MB 历史分片。"
+        except (OSError, subprocess.SubprocessError) as exc:
+            result["status"] = "error"
+            result["message"] = str(exc)
+        return result
+
     def sync_all(self, interactive: bool = False) -> int:
         self.status = {
             "last_run": now_text(),
@@ -1029,6 +1057,9 @@ class SyncRunner:
             programming["exported"],
             programming["message"] or programming["status"],
         ))
+        archive = self.build_ai_history_archive()
+        self.status["history_archive"] = archive
+        print("历史分片：%s" % (archive["message"] or archive["status"]))
 
         if any_enabled:
             review = self.sync_review_updates()
