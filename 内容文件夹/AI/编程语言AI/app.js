@@ -15,6 +15,7 @@
   const heroBadge = $("heroBadge");
   const languageMeta = $("languageMeta");
   const blogLinks = $("blogLinks");
+  const themeToggle = $("themeToggle");
   let meta = null;
   let historyRecords = [];
   let busy = false;
@@ -118,6 +119,16 @@
     statusEl.className = "status" + (kind ? " " + kind : "");
   }
 
+  function applyTheme(theme) {
+    const next = theme === "light" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem("programmingTutor.theme", next);
+    if (themeToggle) {
+      themeToggle.textContent = next === "dark" ? "☀️ 亮色" : "🌙 暗色";
+      themeToggle.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
+    }
+  }
+
   async function fetchJson(url, options) {
     const response = await fetch(API_BASE + url, options);
     let data = null;
@@ -200,10 +211,19 @@
         historyList.innerHTML = '<p class="history-empty">这个语言还没有历史记录。</p>';
         return;
       }
-      historyList.innerHTML = historyRecords.map((item, index) =>
-        '<article class="history-item"><p class="history-question">' + escapeHtml(item.question) + "</p>" +
-        '<div class="history-meta">' + escapeHtml(item.time || "") + " · " + escapeHtml(item.language_name || "") +
-        ' <button type="button" class="copy-code view-history" data-index="' + index + '">查看</button></div></article>'
+      const groups = new Map();
+      historyRecords.forEach((item, index) => {
+        const day = item.date || String(item.time || "").slice(0, 10) || "未知日期";
+        if (!groups.has(day)) groups.set(day, []);
+        groups.get(day).push({ item, index });
+      });
+      historyList.innerHTML = Array.from(groups.entries()).map(([day, rows]) =>
+        '<section class="history-day"><h3>' + escapeHtml(day) + "</h3>" +
+        rows.map(({ item, index }) =>
+          '<article class="history-item"><p class="history-question">' + escapeHtml(item.question) + "</p>" +
+          '<div class="history-meta">' + escapeHtml(item.time || "") + " · " + escapeHtml(item.language_name || "") +
+          ' <button type="button" class="copy-code view-history" data-index="' + index + '">查看</button></div></article>'
+        ).join("") + "</section>"
       ).join("");
     } catch (error) {
       historyList.innerHTML = '<p class="history-empty">历史加载失败：' + escapeHtml(error.message) + "</p>";
@@ -249,6 +269,13 @@
     answerEl.innerHTML = '<div class="empty-state"><strong>等待提问</strong><p>已切换到新的语言，可以继续提问。</p></div>';
     answerTime.textContent = "";
   });
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+    });
+  }
+  applyTheme(document.documentElement.dataset.theme || localStorage.getItem("programmingTutor.theme") || "dark");
 
   askBtn.addEventListener("click", ask);
   questionInput.addEventListener("keydown", (event) => {

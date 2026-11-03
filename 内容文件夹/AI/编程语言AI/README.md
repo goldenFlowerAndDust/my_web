@@ -46,7 +46,21 @@ style.css        样式
 app.js           Markdown/代码渲染、语言切换、历史
 server.py        本地 8769 服务
 skills/          五种语言的系统提示词预设
-history/         本地答疑历史（不提交 Git）
+history/         按语言/日期保存的本地答疑历史（不提交 Git）
+```
+
+历史结构：
+
+```text
+history/python/2026-11-03.jsonl
+history/javascript/2026-11-03.jsonl
+```
+
+每个语言单独目录，每天一个 JSONL 文件；页面历史按日期分组。
+
+## 主题
+
+页面默认柔和暗色，可在左侧切换亮色/暗色，偏好保存在浏览器本地。
 ```
 
 ## 博客入口

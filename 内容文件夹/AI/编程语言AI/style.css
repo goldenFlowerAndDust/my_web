@@ -168,3 +168,123 @@ textarea:focus { border-color: #9cc9e5; box-shadow: 0 0 0 3px rgba(76,150,201,.1
   .hero-badge { align-self: flex-start; }
   .ask-card, .answer-card, .history-card { padding: 17px; border-radius: 16px; }
 }
+
+.theme-toggle {
+  align-self: flex-start;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  color: #d7e7f7;
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+.theme-toggle:hover { background: rgba(255,255,255,.14); }
+
+/* 柔和暗色主题 */
+:root[data-theme="dark"] {
+  --bg: #0e1722;
+  --paper: #172232;
+  --ink: #dce7f3;
+  --muted: #9aabbe;
+  --line: #29394b;
+  --blue: #78b7d9;
+  --blue-2: #90c9e6;
+  --navy: #0a1420;
+  --navy-2: #122235;
+  --green: #7bc7aa;
+  --code: #09111b;
+  --shadow: 0 18px 50px rgba(0, 0, 0, .22);
+}
+:root[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 8% 0%, #1a2b3b 0, transparent 35%),
+    radial-gradient(circle at 92% 10%, #172b2b 0, transparent 32%),
+    var(--bg);
+}
+:root[data-theme="dark"] .sidebar {
+  background: linear-gradient(165deg, #0a1420, #122235);
+  border-right-color: #243548;
+}
+:root[data-theme="dark"] select {
+  background: #1c2a3b;
+  color: #e2edf8;
+  border-color: #34495e;
+  color-scheme: dark;
+}
+:root[data-theme="dark"] select option {
+  background: #1c2a3b;
+  color: #e2edf8;
+}
+:root[data-theme="dark"] .select-wrap::after { color: #8fa8c1; }
+:root[data-theme="dark"] .language-meta {
+  background: rgba(255,255,255,.045);
+  border-color: #2b3c50;
+  color: #b7c9dc;
+}
+:root[data-theme="dark"] .hero-badge {
+  background: #1c3042;
+  border-color: #2e4a61;
+  color: #a9d3ea;
+}
+:root[data-theme="dark"] textarea {
+  background: #101b28;
+  color: #dce7f3;
+  border-color: #2c3d50;
+}
+:root[data-theme="dark"] textarea:focus {
+  background: #111e2c;
+  border-color: #4e7d9e;
+}
+:root[data-theme="dark"] textarea::placeholder { color: #73869a; }
+:root[data-theme="dark"] .ask-card,
+:root[data-theme="dark"] .answer-card,
+:root[data-theme="dark"] .history-card {
+  background: var(--paper);
+  border-color: var(--line);
+}
+:root[data-theme="dark"] .text-btn {
+  background: #1c2a3b;
+  border-color: #34495e;
+  color: #a9d3ea;
+}
+:root[data-theme="dark"] .history-item {
+  background: #101b28;
+  border-color: #2a3b4e;
+}
+:root[data-theme="dark"] .history-question { color: #dce7f3; }
+:root[data-theme="dark"] .history-meta { color: #8799ad; }
+:root[data-theme="dark"] .history-empty { color: #9aabbe; }
+:root[data-theme="dark"] .markdown-body h2 { border-bottom-color: #263648; }
+:root[data-theme="dark"] .markdown-body code:not(pre code) {
+  background: #1d3143;
+  color: #a9d3ea;
+}
+:root[data-theme="dark"] .markdown-body blockquote {
+  background: #132434;
+  border-left-color: #4e7d9e;
+  color: #a9bfd2;
+}
+:root[data-theme="dark"] .markdown-body strong { color: #f1f7fd; }
+:root[data-theme="dark"] .empty-state { color: #9aabbe; }
+:root[data-theme="dark"] .empty-state strong { color: #dce7f3; }
+:root[data-theme="dark"] .status { color: #9aabbe; }
+:root[data-theme="dark"] .status.error { color: #ffaaa0; }
+:root[data-theme="dark"] .status.ok { color: #7bc7aa; }
+:root[data-theme="dark"] .hint { color: #7f92a6; }
+:root[data-theme="dark"] .section-head span { color: #8799ad; }
+:root[data-theme="dark"] .markdown-body { color: #dce7f3; }
+:root[data-theme="dark"] .sidebar-links a { color: #b7c9dc; }
+:root[data-theme="dark"] .health { color: #8fa1b5; }
+:root[data-theme="dark"] .health.ok { color: #7bc7aa; }
+:root[data-theme="dark"] .health.bad { color: #ffaaa0; }
+
+.history-day { margin-bottom: 16px; }
+.history-day h3 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: #7f8fa4;
+  font-weight: 800;
+}
+:root[data-theme="dark"] .history-day h3 { color: #8799ad; }

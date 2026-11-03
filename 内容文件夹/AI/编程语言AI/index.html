@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>编程语言 AI 答疑</title>
+<script>
+  try {
+    document.documentElement.dataset.theme = localStorage.getItem("programmingTutor.theme") || "dark";
+  } catch (error) {
+    document.documentElement.dataset.theme = "dark";
+  }
+</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,6 +23,7 @@
         <span>Code Tutor</span>
       </div>
     </div>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="切换明暗主题">☀️ 亮色</button>
 
     <label class="field-label" for="languageSelect">当前语言</label>
     <div class="select-wrap">

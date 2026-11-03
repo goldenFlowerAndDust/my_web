@@ -18,7 +18,7 @@ from urllib.parse import parse_qs, quote, urlparse
 TOOL_DIR = Path(__file__).resolve().parent
 CONTENT_DIR = TOOL_DIR.parent.parent
 SKILL_DIR = TOOL_DIR / "skills"
-HISTORY_FILE = TOOL_DIR / "history" / "答疑历史.jsonl"
+HISTORY_DIR = TOOL_DIR / "history"
 API_URL = "https://api.deepseek.com/chat/completions"
 MODEL = "deepseek-chat"
 PORT = 8769
@@ -155,32 +155,42 @@ def call_deepseek(system: str, user: str) -> str:
 
 
 def append_history(language: str, question: str, answer: str) -> None:
-    HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+    now = datetime.now()
+    day = now.strftime("%Y-%m-%d")
     record = {
-        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "time": now.strftime("%Y-%m-%d %H:%M:%S"),
+        "date": day,
         "language": language,
         "language_name": BY_ID[language]["name"],
         "question": question,
         "answer": answer,
     }
-    with HISTORY_FILE.open("a", encoding="utf-8", newline="\n") as fh:
+    folder = HISTORY_DIR / language
+    folder.mkdir(parents=True, exist_ok=True)
+    path = folder / (day + ".jsonl")
+    with path.open("a", encoding="utf-8", newline="\n") as fh:
         fh.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
 def read_history(language: str = "", limit: int = 30) -> list[dict[str, Any]]:
-    if not HISTORY_FILE.exists():
+    if not HISTORY_DIR.exists():
+        return []
+    root = HISTORY_DIR / language if language else HISTORY_DIR
+    if not root.exists():
         return []
     records: list[dict[str, Any]] = []
-    for line in HISTORY_FILE.read_text(encoding="utf-8-sig").splitlines():
-        try:
-            item = json.loads(line)
-        except json.JSONDecodeError:
-            continue
-        if not isinstance(item, dict):
-            continue
-        if language and item.get("language") != language:
-            continue
-        records.append(item)
+    for path in sorted(root.rglob("*.jsonl")):
+        for line in path.read_text(encoding="utf-8-sig").splitlines():
+            try:
+                item = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(item, dict):
+                continue
+            if language and item.get("language") != language:
+                continue
+            records.append(item)
+    records.sort(key=lambda item: str(item.get("time") or ""))
     return records[-max(1, min(limit, 100)):][::-1]
 
 
