@@ -1,73 +1,94 @@
 {
-  "generated_at": "2026-11-03T20:32:47",
+  "generated_at": "2026-11-03T20:47:43",
   "source": "local-archived-log",
   "count": 25,
   "entries": [
     {
-      "time": "2026-11-03 19:52:36",
-      "word": "maybe",
-      "type": "compound",
-      "target": "词素 / 复合词",
-      "file": "词素\\复合词\\复合词：maybe.html",
+      "time": "2026-11-03 20:38:42",
+      "word": "improts",
+      "type": "atom",
+      "target": "词素 / 原子词",
+      "file": "词素\\原子词\\原子词：improts.html",
       "schedule": "2026-11-04",
       "status": "ok"
     },
     {
-      "time": "2026-11-03 19:52:34",
-      "word": "imports",
-      "type": "prefix",
-      "target": "核心词汇通关 · im-",
-      "file": "专升本英语核心词汇通关.html",
+      "time": "2026-11-03 20:38:39",
+      "word": "improt",
+      "type": "atom",
+      "target": "词素 / 原子词",
+      "file": "词素\\原子词\\原子词：improt.html",
       "schedule": "2026-11-04",
       "status": "ok"
     },
     {
-      "time": "2026-11-03 19:52:30",
-      "word": "import",
-      "type": "prefix",
-      "target": "核心词汇通关 · 新词族 -",
-      "file": "专升本英语核心词汇通关.html",
-      "schedule": "2026-11-04",
-      "status": "ok"
-    },
-    {
-      "time": "2026-11-02 16:27:41",
-      "word": "tankers",
-      "type": "suffix",
-      "target": "核心词汇通关 · -er",
-      "file": "专升本英语核心词汇通关.html",
-      "schedule": "2026-11-03",
-      "status": "ok"
-    },
-    {
-      "time": "2026-11-02 16:27:37",
-      "word": "tanker",
-      "type": "suffix",
-      "target": "核心词汇通关 · -er",
-      "file": "专升本英语核心词汇通关.html",
-      "schedule": "2026-11-03",
-      "status": "ok"
-    },
-    {
-      "time": "2026-11-01 17:24:02",
+      "time": "2026-11-03 20:13:32",
       "word": "require",
-      "type": "prefix",
-      "target": "核心词汇通关 · re-",
+      "type": "root_family",
+      "target": "核心词汇通关",
       "file": "专升本英语核心词汇通关.html",
       "schedule": "2026-11-02",
-      "status": "ok"
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
-      "time": "2026-11-01 13:24:56",
+      "time": "2026-11-03 20:13:32",
+      "word": "tanker",
+      "type": "root_family",
+      "target": "核心词汇通关",
+      "file": "专升本英语核心词汇通关.html",
+      "schedule": "2026-11-03",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-11-03 20:13:32",
+      "word": "import",
+      "type": "root_family",
+      "target": "核心词汇通关",
+      "file": "专升本英语核心词汇通关.html",
+      "schedule": "2026-11-04",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-11-03 20:13:32",
       "word": "requirements",
-      "type": "suffix",
-      "target": "核心词汇通关 · -ment",
+      "type": "root_family",
+      "target": "复数",
       "file": "专升本英语核心词汇通关.html",
       "schedule": "2026-11-02",
-      "status": "ok"
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-31 23:50:55",
+      "time": "2026-11-03 20:13:32",
+      "word": "tankers",
+      "type": "root_family",
+      "target": "复数",
+      "file": "专升本英语核心词汇通关.html",
+      "schedule": "2026-11-03",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-11-03 20:13:32",
+      "word": "imports",
+      "type": "root_family",
+      "target": "复数",
+      "file": "专升本英语核心词汇通关.html",
+      "schedule": "2026-11-04",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 23:46:42",
       "word": "word",
       "type": "atom",
       "target": "词素/原子词",
@@ -78,16 +99,18 @@
       "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-31 18:30:24",
-      "word": "old",
-      "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：old.html",
+      "time": "2026-10-31 20:00:03",
+      "word": "meaning",
+      "type": "root_family",
+      "target": "词素/词根-本体-变体【派生词】",
+      "file": "词素/词根-本体-变体【派生词】/本体-mean、以及它的变体.html",
       "schedule": "2026-11-01",
-      "status": "ok"
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-31 16:20:05",
+      "time": "2026-10-31 20:00:03",
       "word": "mean",
       "type": "atom",
       "target": "词素/原子词",
@@ -98,73 +121,18 @@
       "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-31 14:36:57",
-      "word": "care",
+      "time": "2026-10-31 20:00:03",
+      "word": "old",
       "type": "atom",
       "target": "词素/原子词",
-      "file": "词素/原子词/原子词：care.html",
+      "file": "词素/原子词/原子词：old.html",
       "schedule": "2026-11-01",
       "status": "ok",
       "recovered": true,
       "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-31 14:36:57",
-      "word": "cheer",
-      "type": "atom",
-      "target": "词素/原子词",
-      "file": "词素/原子词/原子词：cheer.html",
-      "schedule": "2026-11-01",
-      "status": "ok",
-      "recovered": true,
-      "source": "recovered-from-data"
-    },
-    {
-      "time": "2026-10-31 14:36:57",
-      "word": "color",
-      "type": "atom",
-      "target": "词素/原子词",
-      "file": "词素/原子词/原子词：color.html",
-      "schedule": "2026-11-01",
-      "status": "ok",
-      "recovered": true,
-      "source": "recovered-from-data"
-    },
-    {
-      "time": "2026-10-31 14:36:57",
-      "word": "fruit",
-      "type": "atom",
-      "target": "词素/原子词",
-      "file": "词素/原子词/原子词：fruit.html",
-      "schedule": "2026-11-01",
-      "status": "ok",
-      "recovered": true,
-      "source": "recovered-from-data"
-    },
-    {
-      "time": "2026-10-31 14:36:57",
-      "word": "harm",
-      "type": "atom",
-      "target": "词素/原子词",
-      "file": "词素/原子词/原子词：harm.html",
-      "schedule": "2026-11-01",
-      "status": "ok",
-      "recovered": true,
-      "source": "recovered-from-data"
-    },
-    {
-      "time": "2026-10-31 14:36:57",
-      "word": "help",
-      "type": "atom",
-      "target": "词素/原子词",
-      "file": "词素/原子词/原子词：help.html",
-      "schedule": "2026-11-01",
-      "status": "ok",
-      "recovered": true,
-      "source": "recovered-from-data"
-    },
-    {
-      "time": "2026-10-31 14:36:57",
+      "time": "2026-10-31 14:23:32",
       "word": "hope",
       "type": "atom",
       "target": "词素/原子词",
@@ -175,7 +143,73 @@
       "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-31 14:36:57",
+      "time": "2026-10-31 14:16:05",
+      "word": "help",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：help.html",
+      "schedule": "2026-11-04",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 14:10:37",
+      "word": "harm",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：harm.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 14:04:12",
+      "word": "fruit",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：fruit.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 13:59:57",
+      "word": "color",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：color.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 13:55:33",
+      "word": "cheer",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：cheer.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 13:40:29",
+      "word": "care",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：care.html",
+      "schedule": "2026-11-01",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
+    },
+    {
+      "time": "2026-10-31 13:35:38",
       "word": "beauty",
       "type": "root_family",
       "target": "词素/词根族",
@@ -186,7 +220,7 @@
       "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-30 15:04:44",
+      "time": "2026-10-30 14:34:58",
       "word": "contrast",
       "type": "root_family",
       "target": "词素/词根-本体-变体【派生词】",
@@ -197,7 +231,7 @@
       "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-30 05:09:58",
+      "time": "2026-10-30 05:06:10",
       "word": "nasty",
       "type": "atom",
       "target": "词素/原子词",
@@ -208,49 +242,37 @@
       "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-30 04:41:02",
-      "word": "heaven",
-      "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：heaven.html",
-      "schedule": "2026-10-31",
-      "status": "ok"
-    },
-    {
-      "time": "2026-10-30 04:11:31",
-      "word": "hello",
-      "type": "atom",
-      "target": "词素 / 原子词",
-      "file": "词素\\原子词\\原子词：hello.html",
-      "schedule": "2026-10-31",
-      "status": "ok"
-    },
-    {
-      "time": "2026-10-30 01:38:59",
+      "time": "2026-10-30 05:01:48",
       "word": "deep",
       "type": "root_family",
-      "target": "词素 / 词根-本体-变体【派生词】",
-      "file": "词素\\词根-本体-变体【派生词】\\本体-deep、以及它的变体.html",
+      "target": "词素/词根-本体-变体【派生词】",
+      "file": "词素/词根-本体-变体【派生词】/本体-deep、以及它的变体.html",
       "schedule": "2026-10-31",
-      "status": "ok"
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-30 00:21:02",
-      "word": "sunflower",
-      "type": "compound",
-      "target": "词素 / 复合词",
-      "file": "词素\\复合词\\复合词：sunflower.html",
-      "schedule": "2026-11-13",
-      "status": "ok"
+      "time": "2026-10-30 05:01:48",
+      "word": "hello",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：hello.html",
+      "schedule": "2026-11-04",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     },
     {
-      "time": "2026-10-30 00:20:35",
-      "word": "friendship",
-      "type": "suffix",
-      "target": "核心词汇通关 · 新词族 -ship",
-      "file": "专升本英语核心词汇通关.html",
-      "schedule": "2026-11-13",
-      "status": "ok"
+      "time": "2026-10-30 05:01:48",
+      "word": "heaven",
+      "type": "atom",
+      "target": "词素/原子词",
+      "file": "词素/原子词/原子词：heaven.html",
+      "schedule": "2026-11-03",
+      "status": "ok",
+      "recovered": true,
+      "source": "recovered-from-data"
     }
   ]
 }
