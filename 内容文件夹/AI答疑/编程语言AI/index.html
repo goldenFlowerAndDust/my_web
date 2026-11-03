@@ -88,6 +88,10 @@
     </header>
 
     <section class="ask-card">
+      <div class="session-bar">
+        <div class="session-tabs" id="sessionTabs" role="tablist" aria-label="问题标签"></div>
+        <button type="button" class="session-add" id="addSession" title="新建问题标签" aria-label="新建问题标签">+</button>
+      </div>
       <label class="field-label" for="question">你的问题</label>
       <textarea id="question" rows="7" placeholder="例如：Python 的列表和元组有什么区别？&#10;或者粘贴报错信息和相关代码。"></textarea>
       <div class="ask-actions">

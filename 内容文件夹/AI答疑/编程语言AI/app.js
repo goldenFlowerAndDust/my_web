@@ -98,6 +98,8 @@
   const historyDate = $("historyDate");
   const historyCount = $("historyCount");
   const exportHistoryBtn = $("exportHistory");
+  const sessionTabs = $("sessionTabs");
+  const addSessionBtn = $("addSession");
   const healthEl = $("health");
   const heroBadge = $("heroBadge");
   const languageMeta = $("languageMeta");
@@ -114,7 +116,167 @@
   let meta = null;
   let historyRecords = [];
   let historyFilterLanguage = "all";
-  let busy = false;
+  let sessions = [];
+  let activeSessionId = "";
+  const SESSION_KEY = "programmingTutor.sessions-v1";
+  const MAX_SESSIONS = 8;
+
+  function emptyAnswerHtml() {
+    return '<div class="empty-state"><strong>等待提问</strong><p>输入问题后开始。每个标签会保留自己的问题和回答。</p></div>';
+  }
+
+  function sessionTitle(question) {
+    const text = String(question || "").replace(/\s+/g, " ").trim();
+    return text ? (text.length > 16 ? text.slice(0, 16) + "…" : text) : "新问题";
+  }
+
+  function newSession(language) {
+    return {
+      id: "s" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      title: "新问题",
+      language: language || "python",
+      question: "",
+      answerHtml: emptyAnswerHtml(),
+      answerTime: "",
+      busy: false,
+      error: false
+    };
+  }
+
+  function currentSession() {
+    return sessions.find((item) => item.id === activeSessionId) || sessions[0] || null;
+  }
+
+  function captureSession() {
+    const session = currentSession();
+    if (!session) return;
+    session.question = questionInput.value;
+    session.answerHtml = answerEl.innerHTML;
+    session.answerTime = answerTime.textContent;
+    session.language = languageSelect.value || session.language;
+    if (session.title === "新问题" && session.question.trim()) {
+      session.title = sessionTitle(session.question);
+    }
+  }
+
+  function saveSessions() {
+    try {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessions));
+    } catch (error) { /* ignore */ }
+  }
+
+  function loadSessions() {
+    let stored = null;
+    try {
+      const raw = sessionStorage.getItem(SESSION_KEY);
+      if (raw) stored = JSON.parse(raw);
+    } catch (error) { /* ignore */ }
+    if (Array.isArray(stored)) {
+      sessions = stored.filter((item) => item && typeof item === "object" && item.id)
+        .slice(0, MAX_SESSIONS)
+        .map((item) => Object.assign(newSession(item.language), item));
+      // 刷新后没有正在进行的请求，清掉上次遗留的忙碌状态。
+      sessions.forEach((item) => { item.busy = false; });
+      activeSessionId = localStorage.getItem("programmingTutor.activeSession") || "";
+      if (!sessions.some((item) => item.id === activeSessionId)) activeSessionId = sessions[0].id;
+    }
+    if (!sessions.length) {
+      const savedLanguage = localStorage.getItem("programmingTutor.language") || "python";
+      sessions = [newSession(savedLanguage)];
+      activeSessionId = sessions[0].id;
+    }
+  }
+
+  function renderSessionTabs() {
+    if (!sessionTabs) return;
+    sessionTabs.innerHTML = sessions.map((session) => {
+      const active = session.id === activeSessionId ? " is-active" : "";
+      const busy = session.busy ? " is-busy" : "";
+      const error = session.error ? " is-error" : "";
+      const state = session.busy ? '<span class="session-state">●</span>' :
+        (session.error ? '<span class="session-state">●</span>' :
+          (session.answerTime ? '<span class="session-state">●</span>' : ""));
+      return '<div class="session-tab' + active + busy + error + '" data-session="' +
+        escapeHtml(session.id) + '" role="tab" tabindex="0">' +
+        '<span class="session-title">' + escapeHtml(session.title) + "</span>" +
+        state +
+        '<button type="button" class="session-close" data-close="' + escapeHtml(session.id) +
+        '" title="关闭标签" aria-label="关闭标签">×</button></div>';
+    }).join("");
+  }
+
+  function loadSessionView() {
+    const session = currentSession();
+    if (!session) return;
+    languageSelect.value = session.language || "python";
+    questionInput.value = session.question || "";
+    answerEl.innerHTML = session.answerHtml || emptyAnswerHtml();
+    answerTime.textContent = session.answerTime || "";
+    askBtn.disabled = Boolean(session.busy);
+    if (session.busy) {
+      setStatus("正在请求 AI…", "");
+    } else if (session.error) {
+      setStatus("上一次请求失败，请查看回答区。", "error");
+    } else {
+      setStatus("", "");
+    }
+    localStoragesetLanguage(session.language);
+  }
+
+  function localStoragesetLanguage(language) {
+    try { localStorage.setItem("programmingTutor.language", language || "python"); } catch (error) { /* ignore */ }
+  }
+
+  function switchSession(id) {
+    if (!id || id === activeSessionId) return;
+    captureSession();
+    activeSessionId = id;
+    try { localStorage.setItem("programmingTutor.activeSession", id); } catch (error) { /* ignore */ }
+    renderSessionTabs();
+    loadSessionView();
+    updateLanguageUi(true);
+  }
+
+  function addSession() {
+    captureSession();
+    if (sessions.length >= MAX_SESSIONS) {
+      setStatus("最多同时保留 " + MAX_SESSIONS + " 个问题标签，请先关闭旧标签。", "error");
+      return;
+    }
+    const session = newSession(languageSelect.value || "python");
+    sessions.push(session);
+    activeSessionId = session.id;
+    renderSessionTabs();
+    loadSessionView();
+    updateLanguageUi(true);
+    saveSessions();
+    questionInput.focus();
+  }
+
+  function closeSession(id) {
+    captureSession();
+    const index = sessions.findIndex((item) => item.id === id);
+    if (index < 0) return;
+    sessions.splice(index, 1);
+    if (!sessions.length) {
+      sessions = [newSession(languageSelect.value || "python")];
+      activeSessionId = sessions[0].id;
+    } else if (id === activeSessionId) {
+      activeSessionId = sessions[Math.max(0, index - 1)].id;
+    }
+    renderSessionTabs();
+    loadSessionView();
+    updateLanguageUi(true);
+    saveSessions();
+  }
+
+  function initSessions() {
+    loadSessions();
+    renderSessionTabs();
+    loadSessionView();
+  }
+
+  loadSessions();
 
   function currentProfile() {
     return connection.profiles[connection.provider] || { url: "", token: "" };
@@ -281,8 +443,10 @@
     return languageSelect.value || "python";
   }
 
-  function updateLanguageUi() {
+  function updateLanguageUi(skipHistory) {
     const language = currentLanguage();
+    const session = currentSession();
+    if (session) session.language = language;
     if (!meta) return;
     const item = meta.languages.find((row) => row.id === language);
     if (!item) return;
@@ -301,7 +465,7 @@
         ).join("");
     }
     localStorage.setItem("programmingTutor.language", language);
-    loadHistory();
+    if (!skipHistory) loadHistory();
   }
 
   async function loadMeta() {
@@ -572,48 +736,87 @@
   }
 
   async function ask() {
-    if (busy) return;
+    const session = currentSession();
+    if (!session || session.busy) return;
     const question = questionInput.value.trim();
     if (!question) {
       setStatus("请先输入问题。", "error");
       questionInput.focus();
       return;
     }
-    busy = true;
+    session.question = question;
+    session.language = languageSelect.value || session.language;
+    session.title = sessionTitle(question);
+    session.busy = true;
+    session.error = false;
+    session.answerTime = "";
+    session.answerHtml = '<div class="empty-state"><strong>生成中</strong><p>请稍等，代码题可能需要更久。</p></div>';
     askBtn.disabled = true;
     setStatus("正在请求 AI…", "");
-    answerEl.innerHTML = '<div class="empty-state"><strong>生成中</strong><p>请稍等，代码题可能需要更久。</p></div>';
+    answerEl.innerHTML = session.answerHtml;
     answerTime.textContent = "";
+    renderSessionTabs();
+    saveSessions();
     try {
       const path = apiPath("/api/ask", "/api/code");
       const data = await fetchJson(path, {
         method: "POST",
         headers: { "Content-Type": "application/json; charset=utf-8" },
-        body: JSON.stringify({ language: currentLanguage(), question: question })
+        body: JSON.stringify({ language: session.language, question: question })
       });
-      answerEl.innerHTML = renderMarkdown(data.answer || "");
-      answerTime.textContent = (data.language_name || "") + " · " + (data.time || "");
-      setStatus("回答完成。", "ok");
-      answerEl.scrollIntoView({ behavior: "smooth", block: "start" });
-      // 历史刷新不阻塞回答和按钮恢复；否则云端历史慢时会被误认为回答慢。
-      loadHistory();
+      session.answerHtml = renderMarkdown(data.answer || "");
+      session.answerTime = (data.language_name || "") + " · " + (data.time || "");
+      session.busy = false;
+      session.error = false;
+      if (session.id === activeSessionId) {
+        answerEl.innerHTML = session.answerHtml;
+        answerTime.textContent = session.answerTime;
+        setStatus("回答完成。", "ok");
+        askBtn.disabled = false;
+        answerEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        // 历史刷新不阻塞回答和按钮恢复。
+        loadHistory();
+      }
     } catch (error) {
       const info = classifyError(error.message);
-      answerEl.innerHTML = '<div class="empty-state error-state">' +
+      session.busy = false;
+      session.error = true;
+      session.answerTime = "";
+      session.answerHtml = '<div class="empty-state error-state">' +
         '<div class="error-kind ' + info.kind + '">' + escapeHtml(info.label) + "</div>" +
         "<strong>请求失败</strong><p>" + escapeHtml(info.advice) + "</p>" +
         '<p class="error-raw">原始错误：' + escapeHtml(error.message) + "</p></div>";
-      setStatus(info.label + "：" + info.advice, "error");
+      if (session.id === activeSessionId) {
+        answerEl.innerHTML = session.answerHtml;
+        answerTime.textContent = "";
+        setStatus(info.label + "：" + info.advice, "error");
+        askBtn.disabled = false;
+      }
     } finally {
-      busy = false;
-      askBtn.disabled = false;
+      session.busy = false;
+      if (session.id === activeSessionId) askBtn.disabled = false;
+      renderSessionTabs();
+      saveSessions();
     }
   }
 
   languageSelect.addEventListener("change", () => {
-    updateLanguageUi();
-    answerEl.innerHTML = '<div class="empty-state"><strong>等待提问</strong><p>已切换到新的语言，可以继续提问。</p></div>';
+    const session = currentSession();
+    if (!session) return;
+    if (session.busy) {
+      languageSelect.value = session.language;
+      setStatus("当前标签正在回答，完成后再切换语言。", "error");
+      return;
+    }
+    session.language = languageSelect.value;
+    session.error = false;
+    session.answerHtml = emptyAnswerHtml();
+    session.answerTime = "";
+    answerEl.innerHTML = session.answerHtml;
     answerTime.textContent = "";
+    updateLanguageUi();
+    renderSessionTabs();
+    saveSessions();
   });
 
   if (themeToggle) {
@@ -723,6 +926,36 @@
   }
 
 
+  if (addSessionBtn) addSessionBtn.addEventListener("click", addSession);
+  if (sessionTabs) {
+    sessionTabs.addEventListener("click", (event) => {
+      const close = event.target.closest(".session-close");
+      if (close) {
+        event.stopPropagation();
+        closeSession(close.dataset.close);
+        return;
+      }
+      const tab = event.target.closest(".session-tab");
+      if (tab) switchSession(tab.dataset.session);
+    });
+    sessionTabs.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const tab = event.target.closest(".session-tab");
+      if (tab && !event.target.closest(".session-close")) {
+        event.preventDefault();
+        switchSession(tab.dataset.session);
+      }
+    });
+  }
+  questionInput.addEventListener("input", () => {
+    const session = currentSession();
+    if (!session) return;
+    session.question = questionInput.value;
+    session.title = sessionTitle(session.question);
+    renderSessionTabs();
+    saveSessions();
+  });
+
   askBtn.addEventListener("click", ask);
   questionInput.addEventListener("keydown", (event) => {
     if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
@@ -753,6 +986,14 @@
     if (!button) return;
     const record = historyRecords[Number(button.dataset.index)];
     if (!record) return;
+    const session = currentSession();
+    if (session) {
+      session.answerHtml = renderMarkdown(record.answer || "");
+      session.answerTime = (record.language_name || "") + " · " + (record.time || "");
+      session.error = false;
+      saveSessions();
+      renderSessionTabs();
+    }
     answerEl.innerHTML = renderMarkdown(record.answer || "");
     answerTime.textContent = (record.language_name || "") + " · " + (record.time || "");
     answerEl.scrollIntoView({ behavior: "smooth", block: "start" });

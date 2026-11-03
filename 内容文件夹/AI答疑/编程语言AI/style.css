@@ -379,3 +379,46 @@ textarea:focus { border-color: #9cc9e5; box-shadow: 0 0 0 3px rgba(76,150,201,.1
 .error-kind.local { background: rgba(160,210,255,.14); color: #a9d8f5; }
 .error-kind.unknown { background: rgba(180,180,180,.14); color: #c4c4c4; }
 .error-raw { margin-top: 12px !important; color: #8da3b8 !important; font-size: 11px !important; overflow-wrap: anywhere; }
+
+/* 多问题标签 */
+.session-bar {
+  display: flex; align-items: center; gap: 7px;
+  margin: 0 0 12px; min-width: 0;
+}
+.session-tabs {
+  display: flex; gap: 5px; overflow-x: auto; min-width: 0;
+  padding-bottom: 2px; scrollbar-width: thin;
+}
+.session-tab {
+  display: inline-flex; align-items: center; gap: 5px;
+  flex: 0 0 auto; max-width: 190px; min-height: 30px;
+  padding: 4px 6px 4px 10px; border: 1px solid #33485d;
+  border-radius: 8px; background: #142232; color: #9fb6c9;
+  font-size: 11px; cursor: pointer; user-select: none;
+}
+.session-tab:hover { background: #1c2c3d; }
+.session-tab.is-active { background: #244b66; border-color: #4f8db3; color: #f0f8ff; }
+.session-title {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  max-width: 130px;
+}
+.session-state { color: #8ad0b0; font-size: 10px; }
+.session-tab.is-busy .session-state { color: #ffd278; }
+.session-tab.is-error .session-state { color: #ffaaa0; }
+.session-close {
+  width: 18px; height: 18px; border: 0; border-radius: 4px;
+  background: transparent; color: inherit; cursor: pointer;
+  font-size: 15px; line-height: 1; padding: 0;
+}
+.session-close:hover { background: rgba(255,255,255,.12); }
+.session-add {
+  flex: none; width: 30px; height: 30px; border: 1px solid #3d5a72;
+  border-radius: 8px; background: #172536; color: #a9d8f5;
+  font-size: 20px; line-height: 1; cursor: pointer;
+}
+.session-add:hover { background: #244b66; }
+@media (max-width: 620px) {
+  .session-bar { align-items: flex-start; }
+  .session-tab { max-width: 155px; }
+  .session-title { max-width: 100px; }
+}
