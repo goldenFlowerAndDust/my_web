@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>编程语言 AI 答疑</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">&lt;/&gt;</div>
+      <div>
+        <strong>编程语言 AI</strong>
+        <span>Code Tutor</span>
+      </div>
+    </div>
+
+    <label class="field-label" for="languageSelect">当前语言</label>
+    <div class="select-wrap">
+      <select id="languageSelect" aria-label="选择编程语言"></select>
+    </div>
+
+    <div class="language-meta" id="languageMeta">
+      <p>加载语言配置…</p>
+    </div>
+
+    <div class="sidebar-links">
+      <a href="../../自建本地网站/导航栏内容/博客/HTML博客.html">← 返回博客</a>
+      <a href="../../自建本地网站/导航栏内容/博客/MySQL博客.html">MySQL 笔记</a>
+      <a href="../../自建本地网站/导航栏内容/博客/Node.js博客.html">Node.js 笔记</a>
+    </div>
+
+    <div class="health" id="health">检查本地服务…</div>
+  </aside>
+
+  <main class="main">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">PROGRAMMING TUTOR</p>
+        <h1>编程语言 AI 答疑</h1>
+        <p class="hero-sub">下拉切换语言，直接问概念、报错、代码或项目问题。回答使用 Markdown，代码块可复制。</p>
+      </div>
+      <div class="hero-badge" id="heroBadge">Python</div>
+    </header>
+
+    <section class="ask-card">
+      <label class="field-label" for="question">你的问题</label>
+      <textarea id="question" rows="7" placeholder="例如：Python 的列表和元组有什么区别？&#10;或者粘贴报错信息和相关代码。"></textarea>
+      <div class="ask-actions">
+        <span class="hint">Ctrl + Enter 发送</span>
+        <button type="button" id="askBtn">发送问题</button>
+      </div>
+      <p class="status" id="status" role="status"></p>
+    </section>
+
+    <section class="answer-card">
+      <div class="section-head">
+        <h2>回答</h2>
+        <span id="answerTime"></span>
+      </div>
+      <div class="answer markdown-body" id="answer">
+        <div class="empty-state">
+          <strong>等待提问</strong>
+          <p>选择一个语言，输入问题后开始。回答会保留在下方历史中。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="history-card">
+      <div class="section-head">
+        <h2>历史记录</h2>
+        <button type="button" class="text-btn" id="refreshHistory">刷新</button>
+      </div>
+      <div id="historyList" class="history-list"></div>
+    </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
