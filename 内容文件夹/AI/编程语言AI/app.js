@@ -14,6 +14,7 @@
   const healthEl = $("health");
   const heroBadge = $("heroBadge");
   const languageMeta = $("languageMeta");
+  const blogLinks = $("blogLinks");
   let meta = null;
   let historyRecords = [];
   let busy = false;
@@ -24,6 +25,14 @@
     web: "HTML 语义化、CSS 选择器、Flex、Grid、响应式和可访问性。",
     mysql: "查询、连接、聚合、索引、事务和 MySQL 实践。",
     node: "模块、文件、HTTP、npm、Express 和异步。"
+  };
+
+  const PLACEHOLDER = {
+    python: "例如：Python 的列表和元组有什么区别？\n也可以粘贴报错信息和相关代码。",
+    javascript: "例如：let 和 var 的核心区别是什么？\n也可以粘贴浏览器报错和代码。",
+    web: "例如：怎么用 Flex 实现水平垂直居中？\n也可以描述想要的布局。",
+    mysql: "例如：LEFT JOIN 后为什么数据变少了？\n请把表结构和 SQL 一起贴上来。",
+    node: "例如：Node.js 的 require 和 import 有什么区别？\n也可以粘贴服务端报错。"
   };
 
   function escapeHtml(value) {
@@ -133,12 +142,19 @@
     const item = meta.languages.find((row) => row.id === language);
     if (!item) return;
     heroBadge.textContent = item.name;
+    questionInput.placeholder = PLACEHOLDER[language] || "输入你的编程问题…";
     const links = (item.blog || []).map(([label, href]) =>
       '<a href="' + escapeHtml(href) + '">' + escapeHtml(label) + "</a>"
     ).join(" · ");
     languageMeta.innerHTML = '<p><strong>' + escapeHtml(item.name) + "</strong></p>" +
       "<p>" + escapeHtml(DESC[language] || "") + "</p>" +
       (links ? "<p>" + links + "</p>" : "");
+    if (blogLinks) {
+      blogLinks.innerHTML = '<a href="../../自建本地网站/导航栏内容/博客/HTML博客.html">← 返回博客</a>' +
+        (item.blog || []).map(([label, href]) =>
+          '<a href="' + escapeHtml(href) + '">' + escapeHtml(label) + "</a>"
+        ).join("");
+    }
     localStorage.setItem("programmingTutor.language", language);
     loadHistory();
   }
