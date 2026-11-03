@@ -594,8 +594,9 @@
       answerEl.innerHTML = renderMarkdown(data.answer || "");
       answerTime.textContent = (data.language_name || "") + " · " + (data.time || "");
       setStatus("回答完成。", "ok");
-      await loadHistory();
       answerEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      // 历史刷新不阻塞回答和按钮恢复；否则云端历史慢时会被误认为回答慢。
+      loadHistory();
     } catch (error) {
       const info = classifyError(error.message);
       answerEl.innerHTML = '<div class="empty-state error-state">' +
