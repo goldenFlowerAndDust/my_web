@@ -112,8 +112,25 @@
 
     <section class="history-card">
       <div class="section-head">
-        <h2>历史记录</h2>
-        <button type="button" class="text-btn" id="refreshHistory">刷新</button>
+        <div>
+          <h2>历史记录</h2>
+          <p class="history-desc">按语言、关键词和日期查询；GitHub 归档与云端 24 小时记录自动合并去重。</p>
+        </div>
+        <div class="history-actions">
+          <button type="button" class="text-btn" id="exportHistory">导出</button>
+          <button type="button" class="text-btn" id="refreshHistory">刷新</button>
+        </div>
+      </div>
+      <div class="history-tabs" id="historyTabs" role="tablist" aria-label="按语言筛选"></div>
+      <div class="history-query">
+        <input type="search" id="historySearch" placeholder="搜索问题或回答…" autocomplete="off">
+        <select id="historyDate">
+          <option value="all">全部日期</option>
+          <option value="today">今天</option>
+          <option value="7">近 7 天</option>
+          <option value="30">近 30 天</option>
+        </select>
+        <span class="history-count" id="historyCount">—</span>
       </div>
       <div id="historyList" class="history-list"></div>
     </section>

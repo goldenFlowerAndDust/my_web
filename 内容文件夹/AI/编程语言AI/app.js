@@ -93,6 +93,11 @@
   const answerEl = $("answer");
   const answerTime = $("answerTime");
   const historyList = $("historyList");
+  const historyTabs = $("historyTabs");
+  const historySearch = $("historySearch");
+  const historyDate = $("historyDate");
+  const historyCount = $("historyCount");
+  const exportHistoryBtn = $("exportHistory");
   const healthEl = $("health");
   const heroBadge = $("heroBadge");
   const languageMeta = $("languageMeta");
@@ -108,6 +113,7 @@
   const rememberHint = $("rememberHint");
   let meta = null;
   let historyRecords = [];
+  let historyFilterLanguage = "all";
   let busy = false;
 
   function currentProfile() {
@@ -370,35 +376,92 @@
     }
   }
 
-  async function loadStaticHistory(language) {
+  async function loadStaticHistory() {
     try {
       const response = await fetch("history/index.json?t=" + Date.now(), { cache: "no-store" });
       if (!response.ok) return [];
       const data = await response.json();
-      const records = Array.isArray(data.records) ? data.records : [];
-      return records.filter((item) => item && item.language === language);
+      return Array.isArray(data.records) ? data.records : [];
     } catch (error) {
       return [];
     }
   }
 
+  function buildHistoryTabs() {
+    if (!historyTabs) return;
+    const rows = [{ id: "all", name: "全部" }].concat(
+      (meta && meta.languages) || FALLBACK_LANGUAGES
+    );
+    historyTabs.innerHTML = rows.map((item) =>
+      '<button type="button" class="history-tab' +
+      (item.id === historyFilterLanguage ? " is-active" : "") +
+      '" data-language="' + escapeHtml(item.id) + '">' + escapeHtml(item.name) + "</button>"
+    ).join("");
+  }
+
+  function filteredHistoryRecords() {
+    const query = (historySearch ? historySearch.value : "").trim().toLowerCase();
+    const range = historyDate ? historyDate.value : "all";
+    const today = new Date();
+    const cutoff = range === "today" ? 0 : (range === "7" ? 7 : (range === "30" ? 30 : null));
+    return historyRecords.filter((item) => {
+      if (historyFilterLanguage !== "all" && item.language !== historyFilterLanguage) return false;
+      if (query) {
+        const haystack = [item.question, item.answer, item.language_name]
+          .map((value) => String(value || "")).join("\n").toLowerCase();
+        if (!haystack.includes(query)) return false;
+      }
+      if (cutoff !== null) {
+        const day = item.date || String(item.time || "").slice(0, 10);
+        const date = new Date(day + "T00:00:00");
+        if (Number.isNaN(date.getTime())) return false;
+        const diff = Math.floor((today - date) / 86400000);
+        if (diff < 0 || diff > cutoff) return false;
+      }
+      return true;
+    });
+  }
+
+  function renderHistory() {
+    const records = filteredHistoryRecords();
+    if (historyCount) {
+      historyCount.textContent = records.length + " / " + historyRecords.length + " 条";
+    }
+    if (!records.length) {
+      historyList.innerHTML = '<p class="history-empty">' +
+        (historyRecords.length ? "没有匹配的历史记录。" : "还没有历史记录，先问一个问题。") + "</p>";
+      return;
+    }
+    const groups = new Map();
+    records.forEach((item) => {
+      const index = historyRecords.indexOf(item);
+      const day = item.date || String(item.time || "").slice(0, 10) || "未知日期";
+      if (!groups.has(day)) groups.set(day, []);
+      groups.get(day).push({ item, index });
+    });
+    historyList.innerHTML = Array.from(groups.entries()).map(([day, rows]) =>
+      '<section class="history-day"><h3>' + escapeHtml(day) + "</h3>" +
+      rows.map(({ item, index }) =>
+        '<article class="history-item"><p class="history-question">' + escapeHtml(item.question) + "</p>" +
+        '<div class="history-meta">' + escapeHtml(item.time || "") + " · " +
+        escapeHtml(item.language_name || "") +
+        ' <button type="button" class="copy-code view-history" data-index="' + index + '">查看</button></div></article>'
+      ).join("") + "</section>"
+    ).join("");
+  }
+
   async function loadHistory() {
     historyList.innerHTML = '<p class="history-empty">加载历史…</p>';
     try {
-      const language = currentLanguage();
       let records = [];
       if (routeConfig().local) {
-        const data = await fetchJson(
-          "/api/history?language=" + encodeURIComponent(language) + "&limit=30"
-        );
+        const data = await fetchJson("/api/history?limit=100");
         records = data.records || [];
       } else {
-        records = await loadStaticHistory(language);
+        records = await loadStaticHistory();
         if (routeConfig().base && routeConfig().token) {
           try {
-            const data = await fetchJson(
-              "/api/code-log?language=" + encodeURIComponent(language)
-            );
+            const data = await fetchJson("/api/code-log");
             records = records.concat(data.entries || []);
           } catch (error) {
             setStatus("云端历史读取失败，显示 GitHub 静态历史：" + error.message, "error");
@@ -413,27 +476,27 @@
         seen.add(key);
         return true;
       }).sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
-      if (!historyRecords.length) {
-        historyList.innerHTML = '<p class="history-empty">这个语言还没有历史记录。</p>';
-        return;
-      }
-      const groups = new Map();
-      historyRecords.forEach((item, index) => {
-        const day = item.date || String(item.time || "").slice(0, 10) || "未知日期";
-        if (!groups.has(day)) groups.set(day, []);
-        groups.get(day).push({ item, index });
-      });
-      historyList.innerHTML = Array.from(groups.entries()).map(([day, rows]) =>
-        '<section class="history-day"><h3>' + escapeHtml(day) + "</h3>" +
-        rows.map(({ item, index }) =>
-          '<article class="history-item"><p class="history-question">' + escapeHtml(item.question) + "</p>" +
-          '<div class="history-meta">' + escapeHtml(item.time || "") + " · " + escapeHtml(item.language_name || "") +
-          ' <button type="button" class="copy-code view-history" data-index="' + index + '">查看</button></div></article>'
-        ).join("") + "</section>"
-      ).join("");
+      buildHistoryTabs();
+      renderHistory();
     } catch (error) {
       historyList.innerHTML = '<p class="history-empty">历史加载失败：' + escapeHtml(error.message) + "</p>";
+      if (historyCount) historyCount.textContent = "—";
     }
+  }
+
+  function exportHistory() {
+    const records = filteredHistoryRecords();
+    const blob = new Blob([JSON.stringify({ exported_at: new Date().toISOString(), records }, null, 2)], {
+      type: "application/json;charset=utf-8"
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "programming-history-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
   }
 
   async function ask() {
@@ -593,6 +656,22 @@
   });
 
   $("refreshHistory").addEventListener("click", loadHistory);
+  if (exportHistoryBtn) exportHistoryBtn.addEventListener("click", exportHistory);
+  if (historyTabs) {
+    historyTabs.addEventListener("click", (event) => {
+      const button = event.target.closest(".history-tab");
+      if (!button) return;
+      historyFilterLanguage = button.dataset.language || "all";
+      buildHistoryTabs();
+      renderHistory();
+    });
+  }
+  if (historySearch) {
+    historySearch.addEventListener("input", renderHistory);
+  }
+  if (historyDate) {
+    historyDate.addEventListener("change", renderHistory);
+  }
   historyList.addEventListener("click", (event) => {
     const button = event.target.closest(".view-history");
     if (!button) return;
