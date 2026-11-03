@@ -185,6 +185,11 @@ def config_menu() -> None:
 def auto_start() -> int:
     print("")
     print("========== 一键同步并启动 ==========")
+    missing_key = not API_FILE.exists() or not read_api_key()
+    missing_cloud = not CLOUD_FILE.exists()
+    if missing_key or missing_cloud:
+        print("检测到尚未配置 API Key 或云端线路，先打开配置菜单。")
+        config_menu()
     print("[1/2] 正在同步云端记录…")
     code = run_script("--once")
     if code != 0:
@@ -300,4 +305,7 @@ def menu() -> None:
 if __name__ == "__main__":
     if "--auto" in sys.argv:
         raise SystemExit(auto_start())
+    if "--config" in sys.argv:
+        config_menu()
+        raise SystemExit(0)
     menu()
