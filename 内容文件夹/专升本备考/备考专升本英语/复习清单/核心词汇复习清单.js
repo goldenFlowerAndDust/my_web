@@ -9,10 +9,14 @@
     'use strict';
 
     var DATA_URL = 'data.json';
-    var LOCAL_API_BASE = (window.location.protocol === 'http:' && window.location.port === '8767')
+    var isLocalHost = /^(localhost|127\.0\.0\.1|\[::1\])$/i.test(window.location.hostname);
+    var isLocalPage = window.location.protocol === 'http:' && isLocalHost &&
+        (window.location.port === '8767' || window.location.port === '8769');
+    var LOCAL_API_BASE = window.location.port === '8767'
         ? ''
         : 'http://127.0.0.1:8767';
-    var isRemotePage = !(window.location.protocol === 'http:' && window.location.port === '8767');
+    // 8769 是统一入口，静态页仍由 8767 提供；不能把 8769 当成远程页面。
+    var isRemotePage = !isLocalPage;
     var TUTOR_CONFIG_KEY = 'english-tutor-connection-v1';
     var PENDING_KEY = 'reviewPendingChanges';
     var CLOUD_SAVED_KEY = 'reviewCloudSaved';

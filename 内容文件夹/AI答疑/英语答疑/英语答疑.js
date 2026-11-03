@@ -1,6 +1,13 @@
 (function () {
     "use strict";
 
+    // 8769 只负责 AI 页面；旧英语静态页继续由 8767 提供，保留原有 localStorage 和 API 来源。
+    if (window.location.port === "8769") {
+        document.querySelectorAll('a[href^="../../专升本备考/"], a[href^="../../自建本地网站/"]').forEach(function (link) {
+            link.href = "http://127.0.0.1:8767/" + link.getAttribute("href").replace(/^\.\.\/\.\.\//, "");
+        });
+    }
+
     var CONNECTION_KEY = "english-tutor-connection-v1";
     var REMEMBER_KEY = "english-tutor-connection-remember";
     var TEST_BASE = window.__TUTOR_API_BASE__ || "";

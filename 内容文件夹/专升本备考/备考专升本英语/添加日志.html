@@ -441,7 +441,9 @@
         window.location.protocol === 'https:' &&
         !/^(localhost|127\.0\.0\.1|\[::1\])$/i.test(window.location.hostname)
     );
-    var STATIC_LOG_URL = '添加日志/添加日志.json';
+    var STATIC_LOG_URL = window.location.port === '8769'
+        ? '/专升本备考/备考专升本英语/添加日志/添加日志.json'
+        : '添加日志/添加日志.json';
 
     var searchEl = document.getElementById('search');
     var dateEl = document.getElementById('date-filter');
@@ -644,6 +646,17 @@
             var data = await resp.json();
             if (!resp.ok || !data.ok) throw new Error((data && data.error) || ('HTTP ' + resp.status));
             entries = Array.isArray(data.entries) ? data.entries : [];
+            if (!entries.length) {
+                // 新迁移的服务可能还没有实时日志；用已提交的静态归档补齐旧记录。
+                staticEntries = await loadStaticLog();
+                if (staticEntries.length) {
+                    entries = staticEntries;
+                    setBadge(true, '静态归档 · ' + entries.length + ' 条');
+                    renderStats();
+                    render();
+                    return;
+                }
+            }
             setBadge(true, '日志已连接 · ' + data.total + ' 条');
             renderStats();
             render();
