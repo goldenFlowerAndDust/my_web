@@ -67,6 +67,7 @@ def read_api_key() -> str:
         return env_key
     candidates = [
         TOOL_DIR / "API.txt",
+        CONTENT_DIR / "AI答疑" / "共享配置" / "API.txt",
         CONTENT_DIR / "专升本备考" / "共享配置" / "API.txt",
         Path.home() / ".dsh" / "deepseek_api_key.txt",
     ]
@@ -113,7 +114,7 @@ def call_deepseek(system: str, user: str) -> str:
     key = read_api_key()
     if not key:
         raise ValueError(
-            "缺少 DeepSeek API Key。请写入 内容文件夹/专升本备考/共享配置/API.txt，"
+            "缺少 DeepSeek API Key。请写入 内容文件夹/AI答疑/共享配置/API.txt，"
             "或设置环境变量 DEEPSEEK_API_KEY。"
         )
     payload = {
