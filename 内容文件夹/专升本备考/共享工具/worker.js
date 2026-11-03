@@ -287,6 +287,32 @@ const IT_ALIASES = {
 const POLITICS_SYSTEM_PROMPT = `你是一位熟悉专升本政治考纲的教师。用中文讲解，先给结论，再解释概念、材料和答题思路；材料分析题要分点作答，语言准确、适合考场。只输出 Markdown 正文，不要输出系统说明或代码围栏。`;
 const IT_SYSTEM_PROMPT = `你是一位熟悉专升本信息技术/计算机基础的教师。用中文讲解，概念题给准确答案，操作题给步骤，编程题给可运行示例和关键解释。只输出 Markdown 正文，不要输出系统说明或代码围栏。`;
 
+const CODE_LANGUAGES = {
+  python: {
+    name: "Python",
+    prompt: "你是一位资深的 Python 工程师和中文导师。先判断问题属于概念、报错、代码审查还是实现方案；概念题讲机制并给最小例子，报错题先解释错误类型再定位第一处错误，代码题给完整可运行示例并说明依赖。不要编造标准库或第三方库 API；代码块标注 python。最后指出一个常见误区。",
+  },
+  javascript: {
+    name: "JavaScript",
+    prompt: "你是一位熟悉浏览器和 Node.js 的 JavaScript 工程师。先确认运行环境；讲清作用域、this、原型、事件循环、Promise/async 等机制；写完整可运行代码，标明运行环境；不要编造 DOM、Web API 或框架行为。代码块标注 javascript 或 html。最后指出一个易错点。",
+  },
+  web: {
+    name: "HTML + CSS",
+    prompt: "你是一位重视语义、可访问性和响应式布局的前端工程师。HTML/CSS 问题优先给原生、可维护方案；布局优先 Flex/Grid，说明关键尺寸和响应式断点；不要依赖框架，不编造浏览器支持；分别用 html 和 css 代码块给出可运行片段。最后指出一个常见误区。",
+  },
+  mysql: {
+    name: "MySQL",
+    prompt: "你是一位重视数据正确性的 MySQL 工程师。没有表结构时先声明假设；SQL 先保证结果正确，再谈索引和执行计划；说明 MySQL 版本差异；修改或删除数据时提醒备份、WHERE 条件和事务；不要编造函数、索引行为或执行计划；SQL 用 sql 代码块。最后指出一个易错点。",
+  },
+  node: {
+    name: "Node.js",
+    prompt: "你是一位熟悉 Node.js 运行时和服务器开发的工程师。先确认 Node 版本和 CommonJS/ESM；区分同步/异步，避免阻塞事件循环；文件路径使用 path 模块；服务器示例要能运行并说明端口、路由、错误处理；不要编造 npm 包 API；代码块标注 javascript 或 bash。最后指出一个易错点。",
+  },
+};
+
+const CODE_IDS = Object.keys(CODE_LANGUAGES);
+
+
 function subjectConfig(subject) {
   if (subject === "math") {
     return {
@@ -1223,6 +1249,173 @@ async function handleLogDelete(request, env) {
   }
 }
 
+async function handleCodeTutor(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
+  }
+  const apiKey = String(env.DEEPSEEK_API_KEY || "");
+  if (!apiKey) {
+    return json({ ok: false, error: "云端未配置 DEEPSEEK_API_KEY。" }, 500, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+
+  let payload;
+  try {
+    payload = await readJsonBody(request);
+  } catch (error) {
+    return json({ ok: false, error: error.message || "请求体不合法。" }, 400, request, env);
+  }
+
+  const language = String(payload.language || "").trim().toLowerCase();
+  const config = CODE_LANGUAGES[language];
+  if (!config) {
+    return json({ ok: false, error: "未知语言，请使用：" + CODE_IDS.join(" / ") + "。" }, 400, request, env);
+  }
+  const question = String(payload.question || "").trim();
+  if (!question) {
+    return json({ ok: false, error: "请输入要问的问题。" }, 400, request, env);
+  }
+  if (question.length > 20000) {
+    return json({ ok: false, error: "问题太长，请控制在 20000 字以内。" }, 400, request, env);
+  }
+
+  const limit = Math.max(1, Math.min(Number(env.RATE_LIMIT_PER_MINUTE || 10) || 10, 100));
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const minute = Math.floor(Date.now() / 60000);
+  const rateKey = `rate:code:${ip}:${minute}`;
+  try {
+    const used = Number((await env.TUTOR_KV.get(rateKey)) || 0);
+    if (used >= limit) {
+      return json({ ok: false, error: "问得太快了，请等一分钟再试。" }, 429, request, env);
+    }
+    await env.TUTOR_KV.put(rateKey, String(used + 1), { expirationTtl: 120 });
+  } catch (error) {
+    return json({ ok: false, error: "云端限流检查失败，请稍后重试。" }, 500, request, env);
+  }
+
+  const model = String(env.DEEPSEEK_MODEL || "deepseek-chat");
+  const started = Date.now();
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 120000);
+  let apiResponse;
+  try {
+    apiResponse = await fetch("https://api.deepseek.com/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: "system", content: config.prompt },
+          { role: "user", content: JSON.stringify({ subject: "code", language, question }) },
+        ],
+        temperature: 0.3,
+        max_tokens: 3200,
+      }),
+      signal: controller.signal,
+    });
+  } catch (error) {
+    clearTimeout(timer);
+    const message = error.name === "AbortError"
+      ? "DeepSeek API 请求超时，请稍后重试。"
+      : "无法连接 DeepSeek API：" + (error.message || "网络错误");
+    return json({ ok: false, error: message }, 502, request, env);
+  }
+  clearTimeout(timer);
+
+  if (!apiResponse.ok) {
+    const detail = (await apiResponse.text()).slice(0, 500);
+    return json({ ok: false, error: `DeepSeek API 返回 HTTP ${apiResponse.status}：${detail}` }, 502, request, env);
+  }
+
+  let data;
+  try {
+    data = await apiResponse.json();
+  } catch (error) {
+    return json({ ok: false, error: "DeepSeek API 返回内容无法解析。" }, 502, request, env);
+  }
+  const answer = String(data?.choices?.[0]?.message?.content || "").trim();
+  if (!answer) {
+    return json({ ok: false, error: "AI 没有返回内容，请换一种问法。" }, 502, request, env);
+  }
+
+  const now = new Date();
+  const time = formatShanghai(now);
+  const record = {
+    created_at: now.toISOString(),
+    time,
+    subject: "code",
+    language,
+    language_name: config.name,
+    mode: language,
+    question,
+    answer,
+    model,
+    duration_ms: Date.now() - started,
+    status: "ok",
+  };
+  let logged = false;
+  let warning = "";
+  try {
+    const key = logIndexKey("code", language);
+    const existing = await env.TUTOR_KV.get(key, "json");
+    const cutoff = retentionCutoff(env);
+    const index = (Array.isArray(existing) ? existing : []).filter((item) => isRecentRecord(item, cutoff));
+    index.unshift(record);
+    await env.TUTOR_KV.put(key, JSON.stringify(index.slice(0, 50)), { expirationTtl: retentionSeconds(env) });
+    logged = true;
+  } catch (error) {
+    warning = "答案已生成，但云端日志写入失败。";
+  }
+
+  return json({
+    ok: true,
+    subject: "code",
+    language,
+    language_name: config.name,
+    time,
+    answer,
+    model,
+    logged,
+    warning,
+  }, 200, request, env);
+}
+
+async function handleCodeLog(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+  const url = new URL(request.url);
+  const language = String(url.searchParams.get("language") || "").trim().toLowerCase();
+  if (language && !CODE_LANGUAGES[language]) {
+    return json({ ok: false, error: "未知语言。" }, 400, request, env);
+  }
+  const keys = language ? [language] : CODE_IDS;
+  const cutoff = retentionCutoff(env);
+  const entries = [];
+  for (const id of keys) {
+    const existing = await env.TUTOR_KV.get(logIndexKey("code", id), "json");
+    if (Array.isArray(existing)) {
+      entries.push(...existing.filter((item) => isRecentRecord(item, cutoff)));
+    }
+  }
+  entries.sort((a, b) => String(b.created_at || "").localeCompare(String(a.created_at || "")));
+  return json({
+    ok: true,
+    subject: "code",
+    language: language || "all",
+    total: entries.length,
+    entries: entries.slice(0, 50),
+  }, 200, request, env);
+}
+
 async function handleRequest(request, env) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, "") || "/";
@@ -1253,6 +1446,14 @@ async function handleRequest(request, env) {
 
   if (path === "/api/tutor-preview" && request.method === "POST") {
     return handleTutor(request, env, true);
+  }
+
+  if (path === "/api/code" && request.method === "POST") {
+    return handleCodeTutor(request, env);
+  }
+
+  if (path === "/api/code-log" && request.method === "GET") {
+    return handleCodeLog(request, env);
   }
 
   if (path === "/api/review-queue" && request.method === "POST") {

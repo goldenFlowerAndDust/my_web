@@ -61,7 +61,35 @@ history/javascript/2026-11-03.jsonl
 ## 主题
 
 页面默认柔和暗色，可在左侧切换亮色/暗色，偏好保存在浏览器本地。
+
+## 云端
+
+GitHub Pages 使用时，在页面左侧展开“云端连接设置”，填写：
+
+```text
+Worker 地址
+TUTOR_ACCESS_TOKEN
 ```
+
+云端接口：
+
+```text
+POST /api/code
+GET  /api/code-log?language=python
+```
+
+和英语、数学共用同一个 Worker、同一个 KV、同一个访问令牌。
+
+云端需要 Worker 配置：
+
+```text
+DEEPSEEK_API_KEY
+TUTOR_ACCESS_TOKEN
+TUTOR_KV
+ALLOWED_ORIGIN
+```
+
+本地 8769 仍然只走本地 server.py，不会自动切到云端。
 
 ## 博客入口
 

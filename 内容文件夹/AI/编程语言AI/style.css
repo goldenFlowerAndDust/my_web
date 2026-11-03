@@ -288,3 +288,35 @@ textarea:focus { border-color: #9cc9e5; box-shadow: 0 0 0 3px rgba(76,150,201,.1
   font-weight: 800;
 }
 :root[data-theme="dark"] .history-day h3 { color: #8799ad; }
+
+/* 云端连接设置 */
+.cloud-config {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.045);
+  border-radius: 11px;
+  padding: 10px 12px;
+  color: #c3d5e6;
+  font-size: 11.5px;
+}
+.cloud-config summary { cursor: pointer; font-weight: 700; color: #d5e5f4; }
+.cloud-config[open] summary { margin-bottom: 9px; }
+.cloud-hint { margin: 0 0 9px; line-height: 1.7; color: #92a8be; }
+.cloud-config label { display: block; margin: 7px 0; color: #a8bdd1; }
+.cloud-config input {
+  display: block; width: 100%; margin-top: 4px;
+  border: 1px solid #34495e; background: #101b28; color: #e0edf8;
+  border-radius: 7px; padding: 7px 8px; font: inherit; font-size: 11px;
+}
+.cloud-config input::placeholder { color: #657a8f; }
+.cloud-actions { display: flex; gap: 6px; margin-top: 8px; }
+.cloud-actions button {
+  flex: 1; border: 1px solid #34495e; background: #1c2a3b; color: #c4dbec;
+  border-radius: 7px; padding: 6px; cursor: pointer; font-size: 11px;
+}
+.cloud-actions button:hover { background: #263b50; }
+.cloud-status { margin: 8px 0 0; color: #8fa8bf; line-height: 1.6; }
+.cloud-status.ok { color: #7bc7aa; }
+.cloud-status.bad { color: #ffaaa0; }
+:root[data-theme="light"] .cloud-config {
+  background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.15);
+}

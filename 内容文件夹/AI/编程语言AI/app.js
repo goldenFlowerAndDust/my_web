@@ -2,7 +2,12 @@
   "use strict";
 
   const LOCAL_API = "http://127.0.0.1:8769";
-  const API_BASE = location.protocol === "file:" ? LOCAL_API : "";
+  const IS_LOCAL_PAGE = location.protocol === "file:" ||
+    ((location.hostname === "127.0.0.1" || location.hostname === "localhost") && location.port === "8769");
+  const CLOUD_URL_KEY = "programmingTutor.cloudUrl";
+  const CLOUD_TOKEN_KEY = "programmingTutor.cloudToken";
+  let cloudUrl = (localStorage.getItem(CLOUD_URL_KEY) || "").replace(/\/+$/, "");
+  let cloudToken = localStorage.getItem(CLOUD_TOKEN_KEY) || "";
   const $ = (id) => document.getElementById(id);
   const languageSelect = $("languageSelect");
   const questionInput = $("question");
@@ -16,9 +21,20 @@
   const languageMeta = $("languageMeta");
   const blogLinks = $("blogLinks");
   const themeToggle = $("themeToggle");
+  const cloudUrlInput = $("cloudUrl");
+  const cloudTokenInput = $("cloudToken");
+  const cloudStatus = $("cloudStatus");
   let meta = null;
   let historyRecords = [];
   let busy = false;
+
+  const FALLBACK_LANGUAGES = [
+    { id: "python", name: "Python", blog: [["Python 博客", "../../自建本地网站/导航栏内容/博客/python博客.html"]] },
+    { id: "javascript", name: "JavaScript", blog: [["JavaScript 博客", "../../自建本地网站/导航栏内容/博客/JavaScript博客.html"]] },
+    { id: "web", name: "HTML + CSS", blog: [["HTML 博客", "../../自建本地网站/导航栏内容/博客/HTML博客.html"], ["CSS 博客", "../../自建本地网站/导航栏内容/博客/CSS博客.html"]] },
+    { id: "mysql", name: "MySQL", blog: [["MySQL 博客", "../../自建本地网站/导航栏内容/博客/MySQL博客.html"]] },
+    { id: "node", name: "Node.js", blog: [["Node.js 博客", "../../自建本地网站/导航栏内容/博客/Node.js博客.html"]] }
+  ];
 
   const DESC = {
     python: "基础语法、数据结构、函数、面向对象、异常、文件和调试。",
@@ -130,17 +146,29 @@
   }
 
   async function fetchJson(url, options) {
-    const response = await fetch(API_BASE + url, options);
+    const base = IS_LOCAL_PAGE ? LOCAL_API : cloudUrl;
+    if (!base) {
+      throw new Error("还没有配置云端地址，请展开左侧“云端连接设置”。");
+    }
+    const headers = Object.assign({}, (options && options.headers) || {});
+    if (!IS_LOCAL_PAGE && cloudToken) headers["X-Tutor-Token"] = cloudToken;
+    const response = await fetch(base + url, Object.assign({}, options, { headers }));
     let data = null;
     try {
       data = await response.json();
     } catch (error) {
-      throw new Error("服务返回的不是 JSON，请确认 8769 服务已启动。");
+      throw new Error(IS_LOCAL_PAGE
+        ? "服务返回的不是 JSON，请确认 8769 服务已启动。"
+        : "云端返回的不是 JSON，请检查 Worker 地址和令牌。");
     }
     if (!response.ok || !data.ok) {
       throw new Error((data && data.error) || ("HTTP " + response.status));
     }
     return data;
+  }
+
+  function apiPath(localPath, cloudPath) {
+    return IS_LOCAL_PAGE ? localPath : cloudPath;
   }
 
   function currentLanguage() {
@@ -172,7 +200,9 @@
 
   async function loadMeta() {
     try {
-      const data = await fetchJson("/api/meta");
+      const data = IS_LOCAL_PAGE
+        ? await fetchJson("/api/meta")
+        : { languages: FALLBACK_LANGUAGES };
       meta = data;
       languageSelect.innerHTML = data.languages.map((item) =>
         '<option value="' + escapeHtml(item.id) + '">' + escapeHtml(item.name) + "</option>"
@@ -185,13 +215,23 @@
       updateLanguageUi();
       await checkHealth();
     } catch (error) {
-      healthEl.textContent = "本地服务未连接（8769）";
+      meta = { languages: FALLBACK_LANGUAGES };
+      languageSelect.innerHTML = FALLBACK_LANGUAGES.map((item) =>
+        '<option value="' + escapeHtml(item.id) + '">' + escapeHtml(item.name) + "</option>"
+      ).join("");
+      languageSelect.value = new URLSearchParams(location.search).get("lang") || "python";
+      updateLanguageUi();
+      healthEl.textContent = IS_LOCAL_PAGE ? "本地服务未连接（8769）" : "云端未连接";
       healthEl.className = "health bad";
-      setStatus("请先双击 启动编程答疑服务.bat。", "error");
+      setStatus(error.message, "error");
     }
   }
 
   async function checkHealth() {
+    if (!IS_LOCAL_PAGE) {
+      updateCloudStatus();
+      return;
+    }
     try {
       const data = await fetchJson("/api/health");
       healthEl.textContent = "本地服务 8769 · " + (data.api_key ? "API 已配置" : "缺少 API Key");
@@ -202,11 +242,39 @@
     }
   }
 
+  function updateCloudStatus() {
+    if (IS_LOCAL_PAGE) {
+      healthEl.textContent = "本地模式 8769";
+      healthEl.className = "health ok";
+      if (cloudStatus) cloudStatus.textContent = "当前页面走本地服务，云端设置仅用于 GitHub Pages。";
+      return;
+    }
+    if (cloudUrl && cloudToken) {
+      healthEl.textContent = "云端模式 · 已配置";
+      healthEl.className = "health ok";
+      if (cloudStatus) {
+        cloudStatus.textContent = "已配置云端。保存后如不生效，刷新页面。";
+        cloudStatus.className = "cloud-status ok";
+      }
+    } else {
+      healthEl.textContent = "云端未配置";
+      healthEl.className = "health bad";
+      if (cloudStatus) {
+        cloudStatus.textContent = "请填写 Worker 地址和访问令牌。";
+        cloudStatus.className = "cloud-status bad";
+      }
+    }
+  }
+
   async function loadHistory() {
     historyList.innerHTML = '<p class="history-empty">加载历史…</p>';
     try {
-      const data = await fetchJson("/api/history?language=" + encodeURIComponent(currentLanguage()) + "&limit=30");
-      historyRecords = data.records || [];
+      const path = apiPath(
+        "/api/history?language=" + encodeURIComponent(currentLanguage()) + "&limit=30",
+        "/api/code-log?language=" + encodeURIComponent(currentLanguage())
+      );
+      const data = await fetchJson(path);
+      historyRecords = data.records || data.entries || [];
       if (!historyRecords.length) {
         historyList.innerHTML = '<p class="history-empty">这个语言还没有历史记录。</p>';
         return;
@@ -244,7 +312,8 @@
     answerEl.innerHTML = '<div class="empty-state"><strong>生成中</strong><p>请稍等，代码题可能需要更久。</p></div>';
     answerTime.textContent = "";
     try {
-      const data = await fetchJson("/api/ask", {
+      const path = apiPath("/api/ask", "/api/code");
+      const data = await fetchJson(path, {
         method: "POST",
         headers: { "Content-Type": "application/json; charset=utf-8" },
         body: JSON.stringify({ language: currentLanguage(), question: question })
@@ -276,6 +345,48 @@
     });
   }
   applyTheme(document.documentElement.dataset.theme || localStorage.getItem("programmingTutor.theme") || "dark");
+
+  if (cloudUrlInput) cloudUrlInput.value = cloudUrl;
+  if (cloudTokenInput) cloudTokenInput.value = cloudToken;
+  updateCloudStatus();
+
+  const saveCloudBtn = $("saveCloud");
+  const clearCloudBtn = $("clearCloud");
+  if (saveCloudBtn) {
+    saveCloudBtn.addEventListener("click", () => {
+      cloudUrl = (cloudUrlInput ? cloudUrlInput.value.trim() : "").replace(/\/+$/, "");
+      cloudToken = cloudTokenInput ? cloudTokenInput.value.trim() : "";
+      try {
+        localStorage.setItem(CLOUD_URL_KEY, cloudUrl);
+        localStorage.setItem(CLOUD_TOKEN_KEY, cloudToken);
+      } catch (error) { /* ignore */ }
+      updateCloudStatus();
+      if (IS_LOCAL_PAGE) {
+        setStatus("本地模式不使用云端设置；GitHub Pages 打开时才会启用。", "ok");
+      } else {
+        setStatus("云端配置已保存，正在重新加载…", "ok");
+        loadMeta();
+      }
+    });
+  }
+  if (clearCloudBtn) {
+    clearCloudBtn.addEventListener("click", () => {
+      cloudUrl = "";
+      cloudToken = "";
+      try {
+        localStorage.removeItem(CLOUD_URL_KEY);
+        localStorage.removeItem(CLOUD_TOKEN_KEY);
+      } catch (error) { /* ignore */ }
+      if (cloudUrlInput) cloudUrlInput.value = "";
+      if (cloudTokenInput) cloudTokenInput.value = "";
+      updateCloudStatus();
+      if (!IS_LOCAL_PAGE) {
+        meta = { languages: FALLBACK_LANGUAGES };
+        setStatus("云端配置已清除。", "");
+        loadHistory();
+      }
+    });
+  }
 
   askBtn.addEventListener("click", ask);
   questionInput.addEventListener("keydown", (event) => {
