@@ -1,14 +1,11 @@
 @echo off
 chcp 65001 >nul
 setlocal
-cd /d "%~dp0编程语言AI\engine"
-title Programming Tutor 8769
-
+cd /d "%~dp0"
 set "BUNDLED=%USERPROFILE%\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
-start "" "http://127.0.0.1:8769/AI答疑/"
 if exist "%BUNDLED%" (
-  "%BUNDLED%" "server.py"
+  "%BUNDLED%" "launch.py" code
 ) else (
-  py -3 "server.py"
+  py -3 "launch.py" code
 )
-pause >nul
+if errorlevel 1 pause
