@@ -58,6 +58,24 @@ history/javascript/2026-11-03.jsonl
 
 每个语言单独目录，每天一个 JSONL 文件；页面历史按日期分组。
 
+## 历史
+
+本地：
+
+```text
+history/<language>/<日期>.jsonl
+```
+
+GitHub Pages 读取：
+
+```text
+history/index.json
+```
+
+`同步全部科目.bat` 会把云端 24 小时内的编程问答拉回本地，并重新生成
+`history/index.json`。提交这个文件后，GitHub Pages 就能像数学、英语一样
+显示本地历史；每日 JSONL 不上传。
+
 ## 主题
 
 页面默认柔和暗色，可在左侧切换亮色/暗色，偏好保存在浏览器本地。

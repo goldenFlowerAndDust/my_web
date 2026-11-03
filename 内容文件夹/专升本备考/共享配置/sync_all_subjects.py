@@ -866,7 +866,7 @@ class SyncRunner:
             "message": "",
         }
         languages = ("python", "javascript", "web", "mysql", "node")
-        root = self.base / "AI" / "编程语言AI" / "history"
+        root = self.base.parent / "AI" / "编程语言AI" / "history"
         total_new = 0
         total_seen = 0
         errors: list[str] = []
@@ -937,11 +937,46 @@ class SyncRunner:
                 result["message"] = "没有新记录，本地历史已是最新。"
             else:
                 result["message"] = "新增 %d 条到本地历史。" % total_new
+
+            # 生成 GitHub Pages 可读的汇总历史；每日 JSONL 不上传。
+            index_records: list[dict[str, Any]] = []
+            seen_index: set[str] = set()
+            if root.exists():
+                for path in sorted(root.rglob("*.jsonl")):
+                    for line in path.read_text(encoding="utf-8-sig").splitlines():
+                        try:
+                            item = json.loads(line)
+                        except json.JSONDecodeError:
+                            continue
+                        if not isinstance(item, dict):
+                            continue
+                        key = "%s|%s|%s" % (
+                            item.get("language") or "",
+                            item.get("time") or "",
+                            item.get("question") or "",
+                        )
+                        if key in seen_index:
+                            continue
+                        seen_index.add(key)
+                        index_records.append(item)
+            index_records.sort(key=lambda item: str(item.get("time") or ""), reverse=True)
+            index_payload = {
+                "generated_at": now_text(),
+                "count": len(index_records),
+                "records": index_records[:2000],
+            }
+            root.mkdir(parents=True, exist_ok=True)
+            (root / "index.json").write_text(
+                json.dumps(index_payload, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            result["index"] = str(root / "index.json")
         except (OSError, ValueError) as exc:
             result["status"] = "error"
             result["message"] = str(exc)
         return result
 
+    def sync_all(self, interactive: bool = False) -> int:
         self.status = {
             "last_run": now_text(),
             "started_at": now_text(),

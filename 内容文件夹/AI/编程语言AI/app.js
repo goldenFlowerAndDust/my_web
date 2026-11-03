@@ -266,15 +266,49 @@
     }
   }
 
+  async function loadStaticHistory(language) {
+    try {
+      const response = await fetch("history/index.json?t=" + Date.now(), { cache: "no-store" });
+      if (!response.ok) return [];
+      const data = await response.json();
+      const records = Array.isArray(data.records) ? data.records : [];
+      return records.filter((item) => item && item.language === language);
+    } catch (error) {
+      return [];
+    }
+  }
+
   async function loadHistory() {
     historyList.innerHTML = '<p class="history-empty">加载历史…</p>';
     try {
-      const path = apiPath(
-        "/api/history?language=" + encodeURIComponent(currentLanguage()) + "&limit=30",
-        "/api/code-log?language=" + encodeURIComponent(currentLanguage())
-      );
-      const data = await fetchJson(path);
-      historyRecords = data.records || data.entries || [];
+      const language = currentLanguage();
+      let records = [];
+      if (IS_LOCAL_PAGE) {
+        const data = await fetchJson(
+          "/api/history?language=" + encodeURIComponent(language) + "&limit=30"
+        );
+        records = data.records || [];
+      } else {
+        records = await loadStaticHistory(language);
+        if (cloudUrl && cloudToken) {
+          try {
+            const data = await fetchJson(
+              "/api/code-log?language=" + encodeURIComponent(language)
+            );
+            records = records.concat(data.entries || []);
+          } catch (error) {
+            setStatus("云端历史读取失败，显示 GitHub 静态历史：" + error.message, "error");
+          }
+        }
+      }
+      const seen = new Set();
+      historyRecords = records.filter((item) => {
+        if (!item) return false;
+        const key = [item.language || "", item.time || "", item.question || ""].join("|");
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      }).sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
       if (!historyRecords.length) {
         historyList.innerHTML = '<p class="history-empty">这个语言还没有历史记录。</p>';
         return;
