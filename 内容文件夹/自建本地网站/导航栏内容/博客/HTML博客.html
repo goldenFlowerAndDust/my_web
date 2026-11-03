@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML标签博客</title>
     <link rel="stylesheet" href="../../../自建网站中用到的外部引用/自建网站用的样式表/博客样式表new.css">
     <link rel="stylesheet" href="博客样式.css">
+    <script src="博客主题.js" defer></script>
 </head>
 <body class="blog-page">
 <nav class="blog-topnav">
@@ -13,6 +15,7 @@
   <div class="blog-nav-links">
     <a href="python博客.html">Python</a><a href="JavaScript博客.html">JavaScript</a><a href="HTML博客.html">HTML</a><a href="CSS博客.html">CSS</a><a href="MySQL博客.html">MySQL</a><a href="Node.js博客.html">Node.js</a>
     <a class="blog-ai" href="../../../AI/编程语言AI/index.html?lang=web">问 AI</a>
+    <button type="button" class="blog-theme-toggle" data-theme-toggle>☀️ 亮色</button>
   </div>
 </nav>
 
