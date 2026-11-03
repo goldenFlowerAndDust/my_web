@@ -434,3 +434,86 @@ body.blog-page { max-width: 1180px; }
   .blog-content > ol > li { padding-left: 42px; }
   .blog-backtop { right: 14px; bottom: 14px; }
 }
+
+/* 统一 Python / JavaScript 深层列表与 HTML / CSS 的排版 */
+body.blog-page {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.blog-content ol,
+.blog-content ul {
+  display: block;
+  width: auto;
+  min-height: 0;
+  height: auto;
+  background: transparent;
+  align-items: initial;
+  justify-content: initial;
+  margin: 8px 0 0;
+  padding-left: 1.35em;
+}
+.blog-content li {
+  width: auto;
+  padding-left: 0;
+}
+.blog-content a {
+  display: inline;
+  margin-left: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #4b6a86;
+}
+.blog-content a:hover {
+  background: transparent;
+  color: #2f86b8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.blog-content > ol > li > a {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #23577d;
+}
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5 {
+  margin: 0 0 7px;
+  line-height: 1.5;
+}
+.blog-content h1 { font-size: 17px; color: #244b6b; }
+.blog-content h2 { font-size: 15.5px; color: #244b6b; }
+.blog-content h3 { font-size: 14px; color: #55708a; }
+.blog-content h4,
+.blog-content h5 { font-size: 12px; color: #8192a5; }
+.blog-content span { color: inherit; font-size: inherit; }
+.blog-content > ol > li h2 a,
+.blog-content > ol > li h3 a { color: inherit; }
+.blog-content > ol > li ul,
+.blog-content > ol > li ol {
+  display: block;
+  columns: 2;
+  column-gap: 22px;
+  padding-left: 1.35em;
+  background: transparent;
+}
+.blog-content > ol > li li {
+  break-inside: avoid;
+  padding-left: 0;
+  width: auto;
+}
+:root[data-theme="dark"] .blog-content a { color: #a4bdd2; }
+:root[data-theme="dark"] .blog-content > ol > li > a { color: #a9d3ea; }
+:root[data-theme="dark"] .blog-content h1,
+:root[data-theme="dark"] .blog-content h2 { color: #d4e6f4; }
+:root[data-theme="dark"] .blog-content h3 { color: #b8cede; }
+:root[data-theme="dark"] .blog-content h4,
+:root[data-theme="dark"] .blog-content h5 { color: #91a7ba; }
+@media (max-width: 900px) {
+  .blog-content > ol > li ul,
+  .blog-content > ol > li ol { columns: 1; }
+}
