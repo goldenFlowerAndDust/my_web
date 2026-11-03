@@ -276,7 +276,7 @@
     loadSessionView();
   }
 
-  loadSessions();
+  initSessions();
 
   function currentProfile() {
     return connection.profiles[connection.provider] || { url: "", token: "" };
