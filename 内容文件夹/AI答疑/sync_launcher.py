@@ -182,6 +182,30 @@ def config_menu() -> None:
             print("没有这个选项。")
 
 
+def auto_start() -> int:
+    print("")
+    print("========== 一键同步并启动 ==========")
+    print("[1/2] 正在同步云端记录…")
+    code = run_script("--once")
+    if code != 0:
+        print("同步返回错误，但仍会启动服务；请检查同步结果。")
+    else:
+        print("云端记录已同步，历史分片已更新。")
+    print("")
+    print("[2/2] 正在启动英语 / 数学 / 编程服务…")
+    if not SUPERVISOR.exists():
+        print("找不到服务启动器：%s" % SUPERVISOR)
+        pause()
+        return 1
+    try:
+        subprocess.call([sys.executable, str(SUPERVISOR)])
+    except KeyboardInterrupt:
+        pass
+    print("三个服务已停止。")
+    pause()
+    return 0
+
+
 def menu() -> None:
     while True:
         os.system("cls")
@@ -274,4 +298,6 @@ def menu() -> None:
 
 
 if __name__ == "__main__":
+    if "--auto" in sys.argv:
+        raise SystemExit(auto_start())
     menu()

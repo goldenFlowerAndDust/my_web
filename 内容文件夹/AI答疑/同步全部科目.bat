@@ -18,15 +18,15 @@ pause
 exit /b 1
 
 :bundled
-"%BUNDLED%" "sync_launcher.py"
+"%BUNDLED%" "sync_launcher.py" --auto
 goto done
 
 :py
-py -3 "sync_launcher.py"
+py -3 "sync_launcher.py" --auto
 goto done
 
 :python
-python "sync_launcher.py"
+python "sync_launcher.py" --auto
 goto done
 
 :done
