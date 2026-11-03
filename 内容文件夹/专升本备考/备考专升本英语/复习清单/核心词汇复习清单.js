@@ -274,28 +274,37 @@
     }
 
     function readCloudConfig() {
+        // 优先读当前标签页的会话配置；只有英语答疑勾选保存后才读 localStorage。
+        var stores = [sessionStorage];
         try {
-            var raw = localStorage.getItem(TUTOR_CONFIG_KEY);
-            if (!raw) return null;
-            var data = JSON.parse(raw);
-            if (!data || typeof data !== 'object') return null;
-            var provider = data.provider === 'domestic' ? 'domestic' : 'cloudflare';
-            var profiles = data.profiles && typeof data.profiles === 'object' ? data.profiles : {};
-            var profile = profiles[provider] || {};
-            var url = String(profile.url || data.cloudUrl || '').trim().replace(/\/+$/, '');
-            var token = String(profile.token || data.token || '').trim();
-            if (!url || !token) return null;
-            return { url: url, token: token };
-        } catch (err) {
-            return null;
+            if (localStorage.getItem('english-tutor-connection-remember') === 'true') {
+                stores.push(localStorage);
+            }
+        } catch (err) { /* ignore */ }
+        for (var i = 0; i < stores.length; i += 1) {
+            try {
+                var raw = stores[i].getItem(TUTOR_CONFIG_KEY);
+                if (!raw) continue;
+                var data = JSON.parse(raw);
+                if (!data || typeof data !== 'object') continue;
+                var provider = data.provider === 'domestic' ? 'domestic' : 'cloudflare';
+                var profiles = data.profiles && typeof data.profiles === 'object' ? data.profiles : {};
+                var profile = profiles[provider] || {};
+                var url = String(profile.url || data.cloudUrl || '').trim().replace(/\/+$/, '');
+                var token = String(profile.token || data.token || '').trim();
+                if (url && token) return { url: url, token: token };
+            } catch (err) {
+                // 继续尝试下一个存储。
+            }
         }
+        return null;
     }
 
     async function doSync(updates) {
         var cloud = isRemotePage ? readCloudConfig() : null;
         if (isRemotePage && !cloud) {
-            setSyncBadge(false, '未配置云端连接');
-            return { ok: false, error: '先到 AI 答疑页配置云端连接，再来复习。' };
+            setSyncBadge(false, '未配置云端连接：先到英语答疑配置');
+            return { ok: false, error: '先到英语答疑页配置云端连接（同一标签页，或勾选保存）。' };
         }
         var endpoint = isRemotePage ? cloud.url + '/api/review-queue' : LOCAL_API_BASE + '/api/review';
         var headers = { 'Content-Type': 'application/json; charset=utf-8' };
@@ -375,8 +384,8 @@
     function checkSyncHealth() {
         if (isRemotePage) {
             setSyncBadge(Boolean(readCloudConfig()), readCloudConfig()
-                ? '云端模式 · 点击统一上传'
-                : '未配置云端连接');
+                ? '云端模式 · 复用英语答疑连接'
+                : '未配置云端连接：先到英语答疑配置');
             if (btnSave) btnSave.textContent = '☁️ 统一上传到云端';
             return;
         }
