@@ -4,10 +4,20 @@
   const LOCAL_API = "http://127.0.0.1:8769";
   const IS_LOCAL_PAGE = location.protocol === "file:" ||
     ((location.hostname === "127.0.0.1" || location.hostname === "localhost") && location.port === "8769");
-  const CLOUD_URL_KEY = "programmingTutor.cloudUrl";
-  const CLOUD_TOKEN_KEY = "programmingTutor.cloudToken";
-  let cloudUrl = (localStorage.getItem(CLOUD_URL_KEY) || "").replace(/\/+$/, "");
-  let cloudToken = localStorage.getItem(CLOUD_TOKEN_KEY) || "";
+  const ROUTE_KEY = "programmingTutor.route";
+  const PRIMARY_URL_KEY = "programmingTutor.primaryUrl";
+  const PRIMARY_TOKEN_KEY = "programmingTutor.primaryToken";
+  const BACKUP_URL_KEY = "programmingTutor.backupUrl";
+  const BACKUP_TOKEN_KEY = "programmingTutor.backupToken";
+  const LEGACY_URL_KEY = "programmingTutor.cloudUrl";
+  const LEGACY_TOKEN_KEY = "programmingTutor.cloudToken";
+  const cleanUrl = (value) => String(value || "").trim().replace(/\/+$/, "");
+  let primaryUrl = cleanUrl(localStorage.getItem(PRIMARY_URL_KEY) || localStorage.getItem(LEGACY_URL_KEY));
+  let primaryToken = localStorage.getItem(PRIMARY_TOKEN_KEY) || localStorage.getItem(LEGACY_TOKEN_KEY) || "";
+  let backupUrl = cleanUrl(localStorage.getItem(BACKUP_URL_KEY));
+  let backupToken = localStorage.getItem(BACKUP_TOKEN_KEY) || "";
+  let route = localStorage.getItem(ROUTE_KEY) || (IS_LOCAL_PAGE ? "local" : (primaryUrl ? "primary" : (backupUrl ? "backup" : "local")));
+  if (!["local", "primary", "backup"].includes(route)) route = "local";
   const $ = (id) => document.getElementById(id);
   const languageSelect = $("languageSelect");
   const questionInput = $("question");
@@ -21,12 +31,27 @@
   const languageMeta = $("languageMeta");
   const blogLinks = $("blogLinks");
   const themeToggle = $("themeToggle");
-  const cloudUrlInput = $("cloudUrl");
-  const cloudTokenInput = $("cloudToken");
+  const routeSelect = $("routeSelect");
+  const primaryUrlInput = $("primaryUrl");
+  const primaryTokenInput = $("primaryToken");
+  const backupUrlInput = $("backupUrl");
+  const backupTokenInput = $("backupToken");
+  const primaryFields = $("primaryFields");
+  const backupFields = $("backupFields");
   const cloudStatus = $("cloudStatus");
   let meta = null;
   let historyRecords = [];
   let busy = false;
+
+  function routeConfig() {
+    if (route === "primary") {
+      return { id: "primary", label: "主线路", base: primaryUrl, token: primaryToken, local: false };
+    }
+    if (route === "backup") {
+      return { id: "backup", label: "备用线路", base: backupUrl, token: backupToken, local: false };
+    }
+    return { id: "local", label: "本地 8769", base: LOCAL_API, token: "", local: true };
+  }
 
   const FALLBACK_LANGUAGES = [
     { id: "python", name: "Python", blog: [["Python 博客", "../../自建本地网站/导航栏内容/博客/python博客.html"]] },
@@ -146,20 +171,20 @@
   }
 
   async function fetchJson(url, options) {
-    const base = IS_LOCAL_PAGE ? LOCAL_API : cloudUrl;
-    if (!base) {
-      throw new Error("还没有配置云端地址，请展开左侧“云端连接设置”。");
+    const config = routeConfig();
+    if (!config.base) {
+      throw new Error("当前线路未配置地址，请展开左侧“连接设置”。");
     }
     const headers = Object.assign({}, (options && options.headers) || {});
-    if (!IS_LOCAL_PAGE && cloudToken) headers["X-Tutor-Token"] = cloudToken;
-    const response = await fetch(base + url, Object.assign({}, options, { headers }));
+    if (!config.local && config.token) headers["X-Tutor-Token"] = config.token;
+    const response = await fetch(config.base + url, Object.assign({}, options, { headers }));
     let data = null;
     try {
       data = await response.json();
     } catch (error) {
-      throw new Error(IS_LOCAL_PAGE
+      throw new Error(config.local
         ? "服务返回的不是 JSON，请确认 8769 服务已启动。"
-        : "云端返回的不是 JSON，请检查 Worker 地址和令牌。");
+        : "云端返回的不是 JSON，请检查线路地址和令牌。");
     }
     if (!response.ok || !data.ok) {
       throw new Error((data && data.error) || ("HTTP " + response.status));
@@ -168,7 +193,7 @@
   }
 
   function apiPath(localPath, cloudPath) {
-    return IS_LOCAL_PAGE ? localPath : cloudPath;
+    return routeConfig().local ? localPath : cloudPath;
   }
 
   function currentLanguage() {
@@ -200,7 +225,7 @@
 
   async function loadMeta() {
     try {
-      const data = IS_LOCAL_PAGE
+      const data = routeConfig().local
         ? await fetchJson("/api/meta")
         : { languages: FALLBACK_LANGUAGES };
       meta = data;
@@ -221,14 +246,14 @@
       ).join("");
       languageSelect.value = new URLSearchParams(location.search).get("lang") || "python";
       updateLanguageUi();
-      healthEl.textContent = IS_LOCAL_PAGE ? "本地服务未连接（8769）" : "云端未连接";
+      healthEl.textContent = routeConfig().local ? "本地服务未连接（8769）" : "线路未连接";
       healthEl.className = "health bad";
       setStatus(error.message, "error");
     }
   }
 
   async function checkHealth() {
-    if (!IS_LOCAL_PAGE) {
+    if (!routeConfig().local) {
       updateCloudStatus();
       return;
     }
@@ -243,24 +268,28 @@
   }
 
   function updateCloudStatus() {
-    if (IS_LOCAL_PAGE) {
+    const config = routeConfig();
+    if (config.local) {
       healthEl.textContent = "本地模式 8769";
       healthEl.className = "health ok";
-      if (cloudStatus) cloudStatus.textContent = "当前页面走本地服务，云端设置仅用于 GitHub Pages。";
+      if (cloudStatus) {
+        cloudStatus.textContent = "当前走本地服务。";
+        cloudStatus.className = "cloud-status ok";
+      }
       return;
     }
-    if (cloudUrl && cloudToken) {
-      healthEl.textContent = "云端模式 · 已配置";
+    if (config.base && config.token) {
+      healthEl.textContent = config.label + " · 已配置";
       healthEl.className = "health ok";
       if (cloudStatus) {
-        cloudStatus.textContent = "已配置云端。保存后如不生效，刷新页面。";
+        cloudStatus.textContent = "当前走" + config.label + "。保存后如不生效，刷新页面。";
         cloudStatus.className = "cloud-status ok";
       }
     } else {
-      healthEl.textContent = "云端未配置";
+      healthEl.textContent = config.label + " 未配置";
       healthEl.className = "health bad";
       if (cloudStatus) {
-        cloudStatus.textContent = "请填写 Worker 地址和访问令牌。";
+        cloudStatus.textContent = "请填写" + config.label + "的地址和令牌。";
         cloudStatus.className = "cloud-status bad";
       }
     }
@@ -283,14 +312,14 @@
     try {
       const language = currentLanguage();
       let records = [];
-      if (IS_LOCAL_PAGE) {
+      if (routeConfig().local) {
         const data = await fetchJson(
           "/api/history?language=" + encodeURIComponent(language) + "&limit=30"
         );
         records = data.records || [];
       } else {
         records = await loadStaticHistory(language);
-        if (cloudUrl && cloudToken) {
+        if (routeConfig().base && routeConfig().token) {
           try {
             const data = await fetchJson(
               "/api/code-log?language=" + encodeURIComponent(language)
@@ -380,47 +409,67 @@
   }
   applyTheme(document.documentElement.dataset.theme || localStorage.getItem("programmingTutor.theme") || "dark");
 
-  if (cloudUrlInput) cloudUrlInput.value = cloudUrl;
-  if (cloudTokenInput) cloudTokenInput.value = cloudToken;
+  if (routeSelect) routeSelect.value = route;
+  if (primaryUrlInput) primaryUrlInput.value = primaryUrl;
+  if (primaryTokenInput) primaryTokenInput.value = primaryToken;
+  if (backupUrlInput) backupUrlInput.value = backupUrl;
+  if (backupTokenInput) backupTokenInput.value = backupToken;
   updateCloudStatus();
+
+  function saveSettings() {
+    const nextRoute = routeSelect ? routeSelect.value : route;
+    route = ["local", "primary", "backup"].includes(nextRoute) ? nextRoute : "local";
+    primaryUrl = cleanUrl(primaryUrlInput ? primaryUrlInput.value : primaryUrl);
+    primaryToken = primaryTokenInput ? primaryTokenInput.value.trim() : primaryToken;
+    backupUrl = cleanUrl(backupUrlInput ? backupUrlInput.value : backupUrl);
+    backupToken = backupTokenInput ? backupTokenInput.value.trim() : backupToken;
+    try {
+      localStorage.setItem(ROUTE_KEY, route);
+      localStorage.setItem(PRIMARY_URL_KEY, primaryUrl);
+      localStorage.setItem(PRIMARY_TOKEN_KEY, primaryToken);
+      localStorage.setItem(BACKUP_URL_KEY, backupUrl);
+      localStorage.setItem(BACKUP_TOKEN_KEY, backupToken);
+    } catch (error) { /* ignore */ }
+    if (routeSelect) routeSelect.value = route;
+    if (primaryUrlInput) primaryUrlInput.value = primaryUrl;
+    if (backupUrlInput) backupUrlInput.value = backupUrl;
+    updateCloudStatus();
+    setStatus("已切换到 " + routeConfig().label + "，正在重新加载…", "ok");
+    loadMeta();
+  }
 
   const saveCloudBtn = $("saveCloud");
   const clearCloudBtn = $("clearCloud");
-  if (saveCloudBtn) {
-    saveCloudBtn.addEventListener("click", () => {
-      cloudUrl = (cloudUrlInput ? cloudUrlInput.value.trim() : "").replace(/\/+$/, "");
-      cloudToken = cloudTokenInput ? cloudTokenInput.value.trim() : "";
-      try {
-        localStorage.setItem(CLOUD_URL_KEY, cloudUrl);
-        localStorage.setItem(CLOUD_TOKEN_KEY, cloudToken);
-      } catch (error) { /* ignore */ }
+  if (saveCloudBtn) saveCloudBtn.addEventListener("click", saveSettings);
+  if (routeSelect) {
+    routeSelect.addEventListener("change", () => {
+      route = routeSelect.value;
+      localStorage.setItem(ROUTE_KEY, route);
       updateCloudStatus();
-      if (IS_LOCAL_PAGE) {
-        setStatus("本地模式不使用云端设置；GitHub Pages 打开时才会启用。", "ok");
-      } else {
-        setStatus("云端配置已保存，正在重新加载…", "ok");
-        loadMeta();
-      }
+      setStatus("已切换到 " + routeConfig().label + "。", "ok");
+      loadMeta();
     });
   }
   if (clearCloudBtn) {
     clearCloudBtn.addEventListener("click", () => {
-      cloudUrl = "";
-      cloudToken = "";
+      primaryUrl = "";
+      primaryToken = "";
+      backupUrl = "";
+      backupToken = "";
       try {
-        localStorage.removeItem(CLOUD_URL_KEY);
-        localStorage.removeItem(CLOUD_TOKEN_KEY);
+        [PRIMARY_URL_KEY, PRIMARY_TOKEN_KEY, BACKUP_URL_KEY, BACKUP_TOKEN_KEY,
+          LEGACY_URL_KEY, LEGACY_TOKEN_KEY].forEach((key) => localStorage.removeItem(key));
       } catch (error) { /* ignore */ }
-      if (cloudUrlInput) cloudUrlInput.value = "";
-      if (cloudTokenInput) cloudTokenInput.value = "";
+      if (primaryUrlInput) primaryUrlInput.value = "";
+      if (primaryTokenInput) primaryTokenInput.value = "";
+      if (backupUrlInput) backupUrlInput.value = "";
+      if (backupTokenInput) backupTokenInput.value = "";
       updateCloudStatus();
-      if (!IS_LOCAL_PAGE) {
-        meta = { languages: FALLBACK_LANGUAGES };
-        setStatus("云端配置已清除。", "");
-        loadHistory();
-      }
+      setStatus("线路配置已清除。", "");
+      loadMeta();
     });
   }
+
 
   askBtn.addEventListener("click", ask);
   questionInput.addEventListener("keydown", (event) => {

@@ -320,3 +320,14 @@ textarea:focus { border-color: #9cc9e5; box-shadow: 0 0 0 3px rgba(76,150,201,.1
 :root[data-theme="light"] .cloud-config {
   background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.15);
 }
+
+.route-block {
+  margin: 8px 0; padding: 8px; border-radius: 8px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+}
+.route-block strong { display: block; color: #a9c6dc; font-size: 11px; margin-bottom: 3px; }
+.cloud-config select {
+  width: 100%; margin-top: 4px; border: 1px solid #34495e;
+  background: #101b28; color: #e0edf8; border-radius: 7px;
+  padding: 7px 8px; font: inherit; font-size: 11px;
+}

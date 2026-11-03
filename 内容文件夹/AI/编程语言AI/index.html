@@ -41,14 +41,33 @@
     <div class="health" id="health">检查本地服务…</div>
 
     <details class="cloud-config" id="cloudConfig">
-      <summary>云端连接设置</summary>
-      <p class="cloud-hint">GitHub Pages 上使用时填写 Worker 地址和访问令牌。本地 8769 会自动走本地。</p>
-      <label>Worker 地址
-        <input type="url" id="cloudUrl" placeholder="https://xxx.workers.dev" autocomplete="off">
+      <summary>连接设置</summary>
+      <p class="cloud-hint">和数学、英语一样：本地 / 主线路 / 备用线路，可自由切换。</p>
+      <label>连接方式
+        <select id="routeSelect">
+          <option value="local">本地 8769</option>
+          <option value="primary">主线路（SCF）</option>
+          <option value="backup">备用线路（Worker）</option>
+        </select>
       </label>
-      <label>访问令牌
-        <input type="password" id="cloudToken" placeholder="TUTOR_ACCESS_TOKEN" autocomplete="off">
-      </label>
+      <div class="route-block" id="primaryFields">
+        <strong>主线路</strong>
+        <label>地址
+          <input type="url" id="primaryUrl" placeholder="https://xxx.tencentscf.com" autocomplete="off">
+        </label>
+        <label>令牌
+          <input type="password" id="primaryToken" placeholder="PROXY_TOKEN" autocomplete="off">
+        </label>
+      </div>
+      <div class="route-block" id="backupFields">
+        <strong>备用线路</strong>
+        <label>地址
+          <input type="url" id="backupUrl" placeholder="https://xxx.workers.dev" autocomplete="off">
+        </label>
+        <label>令牌
+          <input type="password" id="backupToken" placeholder="TUTOR_ACCESS_TOKEN" autocomplete="off">
+        </label>
+      </div>
       <div class="cloud-actions">
         <button type="button" id="saveCloud">保存</button>
         <button type="button" id="clearCloud">清除</button>

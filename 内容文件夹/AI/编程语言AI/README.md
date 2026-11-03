@@ -82,12 +82,29 @@ history/index.json
 
 ## 云端
 
-GitHub Pages 使用时，在页面左侧展开“云端连接设置”，填写：
+页面左侧“连接设置”和数学、英语一样支持三种线路：
+
+```text
+本地 8769
+主线路（腾讯云 SCF）
+备用线路（Cloudflare Worker）
+```
+
+主线路填：
+
+```text
+SCF 地址
+PROXY_TOKEN
+```
+
+备用线路填：
 
 ```text
 Worker 地址
 TUTOR_ACCESS_TOKEN
 ```
+
+可以随时切换，选择会保存在浏览器本地。
 
 云端接口：
 
