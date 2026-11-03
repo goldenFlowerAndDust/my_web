@@ -109,6 +109,11 @@
             <input id="cloudUrl" type="url" placeholder="https://...workers.dev 或 SCF 函数 URL">
             <label class="field_label" for="cloudToken">访问口令</label>
             <input id="cloudToken" type="password" placeholder="X-Tutor-Token">
+            <label class="remember-row">
+                <input type="checkbox" id="cloudRemember">
+                <span>保存地址和口令到浏览器本地</span>
+            </label>
+            <p id="cloudRememberHint" class="remember-hint">默认关闭。共用电脑请勿勾选。</p>
             <p id="cloudDialogStatus" class="cloud_status"></p>
             <div class="dialog_actions">
                 <button type="button" class="btn btn_soft btn_small" id="btnCloudTest">测试连接</button>

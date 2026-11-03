@@ -44,10 +44,18 @@
     var cloudBadge = document.getElementById('cloudBadge');
     var cloudStatus = document.getElementById('cloudStatus');
     var cloudDialogStatus = document.getElementById('cloudDialogStatus');
+    var cloudRemember = document.getElementById('cloudRemember');
+    var cloudRememberHint = document.getElementById('cloudRememberHint');
     var btnCloudTest = document.getElementById('btnCloudTest');
     var btnCloudExport = document.getElementById('btnCloudExport');
     var CLOUD_CONFIG_KEY = 'english-generator-cloud-v1';
+    var CLOUD_REMEMBER_KEY = 'english-generator-cloud-remember';
     var CLOUD_PREVIEW_KEY = 'english-cloud-preview-v1';
+    var rememberCloud = false;
+    try {
+        rememberCloud = localStorage.getItem(CLOUD_REMEMBER_KEY) === 'true';
+        if (!rememberCloud) localStorage.removeItem(CLOUD_CONFIG_KEY);
+    } catch (err) { /* ignore */ }
     var usingTutorConnection = false;
     var cloudPreview = null;
 
@@ -101,19 +109,23 @@
 
     function saveCloudConfig() {
         try {
-            localStorage.setItem(CLOUD_CONFIG_KEY, JSON.stringify({
+            var target = rememberCloud ? localStorage : sessionStorage;
+            var other = rememberCloud ? sessionStorage : localStorage;
+            target.setItem(CLOUD_CONFIG_KEY, JSON.stringify({
                 mode: genModeEl.value,
                 url: cloudBase(),
                 token: cloudToken.value.trim()
             }));
+            other.removeItem(CLOUD_CONFIG_KEY);
         } catch (err) {
-            // localStorage 不可用时忽略。
+            // 浏览器存储不可用时忽略。
         }
     }
 
     function readTutorConnection() {
         try {
-            var raw = localStorage.getItem(TUTOR_CONFIG_KEY);
+            var store = rememberCloud ? localStorage : sessionStorage;
+            var raw = store.getItem(TUTOR_CONFIG_KEY);
             if (!raw) return null;
             var data = JSON.parse(raw);
             if (!data || typeof data !== 'object') return null;
@@ -136,7 +148,8 @@
     function loadCloudConfig() {
         var shared = readTutorConnection();
         try {
-            var raw = localStorage.getItem(CLOUD_CONFIG_KEY);
+            var store = rememberCloud ? localStorage : sessionStorage;
+            var raw = store.getItem(CLOUD_CONFIG_KEY);
             var owned = raw ? JSON.parse(raw) : null;
             var data = shared || owned;
             if (data && (data.mode === 'cloud' || data.mode === 'local')) {
@@ -158,6 +171,13 @@
                 localOption.textContent = '本地写入（仅 PC 可用）';
             }
         }
+    }
+
+    function updateCloudRememberHint() {
+        if (!cloudRememberHint) return;
+        cloudRememberHint.textContent = rememberCloud
+            ? '已开启：地址和口令保存在这台浏览器，下次打开自动填入。共用电脑请勿开启。'
+            : '默认关闭：地址和口令只在当前标签页有效，关闭页面后失效。';
     }
 
     function setCloudStatus(message, type) {
@@ -1014,6 +1034,8 @@
             cloudConfigured() ? '已填写云端连接。' : '填写 Worker 或 SCF 地址，以及对应访问口令。',
             cloudConfigured() ? 'ok' : ''
         );
+        if (cloudRemember) cloudRemember.checked = rememberCloud;
+        updateCloudRememberHint();
         if (typeof cloudDialog.showModal === 'function') cloudDialog.showModal();
         else cloudDialog.setAttribute('open', '');
     });
@@ -1026,6 +1048,15 @@
         applyMode();
         cloudDialog.close();
     });
+    if (cloudRemember) {
+        cloudRemember.addEventListener('change', function () {
+            rememberCloud = Boolean(cloudRemember.checked);
+            try { localStorage.setItem(CLOUD_REMEMBER_KEY, String(rememberCloud)); } catch (err) { /* ignore */ }
+            saveCloudConfig();
+            updateCloudRememberHint();
+            if (genModeEl.value === 'cloud') applyMode();
+        });
+    }
     genModeEl.addEventListener('change', applyMode);
     cloudUrl.addEventListener('input', function () {
         saveCloudConfig();
@@ -1061,6 +1092,8 @@
         });
     });
 
+    if (cloudRemember) cloudRemember.checked = rememberCloud;
+    updateCloudRememberHint();
     cloudPreview = readCloudPreview();
     loadCloudConfig();
     applyMode();

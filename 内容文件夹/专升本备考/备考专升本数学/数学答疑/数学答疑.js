@@ -3,6 +3,7 @@
     "use strict";
 
     var CONNECTION_KEY = "math-tutor-connection-v1";
+    var REMEMBER_KEY = "math-tutor-connection-remember";
     var LOCAL_PORT = 8768;
     var SUBJECT = "math";
     var isGitHubPages = /\.github\.io$/i.test(window.location.hostname);
@@ -18,6 +19,13 @@
     var cloudToken = document.getElementById("cloud-token");
     var connectionNote = document.getElementById("connection-note");
     var connectionTest = document.getElementById("connection-test");
+    var connectionRemember = document.getElementById("connection-remember");
+    var connectionRememberHint = document.getElementById("connection-remember-hint");
+    var rememberConnection = false;
+    try {
+        rememberConnection = localStorage.getItem(REMEMBER_KEY) === "true";
+        if (!rememberConnection) localStorage.removeItem(CONNECTION_KEY);
+    } catch (error) { /* ignore */ }
 
     var serviceBadge = document.getElementById("service-badge");
     var offlineNotice = document.getElementById("offline-notice");
@@ -151,7 +159,8 @@
 
     function loadConnection() {
         try {
-            var raw = localStorage.getItem(CONNECTION_KEY);
+            var store = rememberConnection ? localStorage : sessionStorage;
+            var raw = store.getItem(CONNECTION_KEY);
             if (raw) {
                 var parsed = JSON.parse(raw);
                 if (parsed && (parsed.mode === "local" || parsed.mode === "cloud")) {
@@ -159,17 +168,27 @@
                 }
             }
         } catch (error) {
-            // localStorage 可能被浏览器禁用。
+            // 浏览器可能禁用存储。
         }
         return defaultConnection();
     }
 
     function saveConnection(value) {
         try {
-            localStorage.setItem(CONNECTION_KEY, JSON.stringify(value));
+            var target = rememberConnection ? localStorage : sessionStorage;
+            var other = rememberConnection ? sessionStorage : localStorage;
+            target.setItem(CONNECTION_KEY, JSON.stringify(value));
+            other.removeItem(CONNECTION_KEY);
         } catch (error) {
             showToast("浏览器禁止了本地存储，设置只在本次页面有效。", true);
         }
+    }
+
+    function updateRememberHint() {
+        if (!connectionRememberHint) return;
+        connectionRememberHint.textContent = rememberConnection
+            ? "已开启：地址和口令保存在这台浏览器，下次打开自动填入。共用电脑请勿开启。"
+            : "默认关闭：地址和口令只在当前标签页有效，关闭页面后失效。";
     }
 
     var connection = loadConnection();
@@ -976,9 +995,11 @@
         toggleCloudFields();
         connectionNote.textContent = connection.mode === "cloud"
             ? "云端模式：当前线路 " + (dialogProvider === "domestic" ? "国内 SCF" : "Cloudflare") +
-              "。地址和口令只保存在本浏览器。"
+              "。地址和口令默认不保存，勾选后才保存在浏览器。"
             : "本地模式：需要先启动 8768 数学服务；地址和口令不会上传。";
         connectionNote.className = "connection-note";
+        if (connectionRemember) connectionRemember.checked = rememberConnection;
+        updateRememberHint();
         if (!connectionDialog.open) connectionDialog.showModal();
     }
 
@@ -1048,8 +1069,11 @@
             connectionNote.className = "connection-note is-error";
             return;
         }
+        rememberConnection = Boolean(connectionRemember && connectionRemember.checked);
+        try { localStorage.setItem(REMEMBER_KEY, String(rememberConnection)); } catch (error) { /* ignore */ }
         connection = value;
         saveConnection(value);
+        updateRememberHint();
         connectionDialog.close();
         showToast(value.mode === "cloud"
             ? "已切换到" + (value.provider === "domestic" ? "国内 SCF" : "Cloudflare") + "。"

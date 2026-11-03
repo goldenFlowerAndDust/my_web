@@ -1307,3 +1307,11 @@ code {
     flex-wrap: wrap;
     gap: 6px;
 }
+
+
+.remember-row {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin: 10px 0 4px; color: #4a6078; font-size: 13px; line-height: 1.5;
+}
+.remember-row input { width: auto; margin-top: 3px; accent-color: #2f6f9f; }
+.remember-hint { margin: 0 0 8px; color: #7b8da2; font-size: 12px; line-height: 1.6; }
