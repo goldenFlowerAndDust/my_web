@@ -5,7 +5,7 @@ cd /d "%~dp0"
 title Programming Tutor Server 8769
 
 set "BUNDLED=%USERPROFILE%\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
-start "" "http://127.0.0.1:8769/"
+start "" "http://127.0.0.1:8769/AI/编程语言AI/"
 
 if exist "%BUNDLED%" goto bundled
 where py >nul 2>nul

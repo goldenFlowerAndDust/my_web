@@ -13,7 +13,7 @@ from datetime import datetime
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote, urlparse
 
 TOOL_DIR = Path(__file__).resolve().parent
 CONTENT_DIR = TOOL_DIR.parent.parent
@@ -219,7 +219,7 @@ def json_response(handler, status: int, payload: dict[str, Any]) -> None:
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, directory=str(TOOL_DIR), **kwargs)
+        super().__init__(*args, directory=str(CONTENT_DIR), **kwargs)
 
     def end_headers(self):
         self.send_header("Cache-Control", "no-store")
@@ -255,7 +255,10 @@ class Handler(SimpleHTTPRequestHandler):
             json_response(self, 200, {"ok": True, "records": read_history(language, limit)})
             return
         if path == "/":
-            self.path = "/index.html"
+            self.send_response(302)
+            self.send_header("Location", quote("/AI/编程语言AI/", safe="/"))
+            self.end_headers()
+            return
         return super().do_GET()
 
     def do_POST(self):  # noqa: N802
