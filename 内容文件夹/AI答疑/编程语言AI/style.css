@@ -365,3 +365,17 @@ textarea:focus { border-color: #9cc9e5; box-shadow: 0 0 0 3px rgba(76,150,201,.1
   .history-query { grid-template-columns: 1fr 100px; }
   .history-count { grid-column: 1 / -1; }
 }
+
+/* 错误类型判断 */
+.error-state { text-align: left; }
+.error-kind {
+  display: inline-block; margin-bottom: 9px; padding: 4px 9px;
+  border-radius: 999px; font-size: 11px; font-weight: 700; line-height: 1.4;
+}
+.error-kind.deepseek { background: rgba(255,170,160,.14); color: #ffaaa0; }
+.error-kind.config { background: rgba(255,210,120,.14); color: #ffd278; }
+.error-kind.limit { background: rgba(255,190,120,.14); color: #ffc078; }
+.error-kind.request { background: rgba(120,190,255,.14); color: #8fc9ff; }
+.error-kind.local { background: rgba(160,210,255,.14); color: #a9d8f5; }
+.error-kind.unknown { background: rgba(180,180,180,.14); color: #c4c4c4; }
+.error-raw { margin-top: 12px !important; color: #8da3b8 !important; font-size: 11px !important; overflow-wrap: anywhere; }

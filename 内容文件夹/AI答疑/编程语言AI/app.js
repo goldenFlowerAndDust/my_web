@@ -527,6 +527,50 @@
     URL.revokeObjectURL(url);
   }
 
+  function classifyError(message) {
+    const text = String(message || "");
+    if (/(HTTP\s*5\d\d|service_unavailable|too busy|overloaded|bad gateway|gateway timeout)/i.test(text)) {
+      return {
+        kind: "deepseek",
+        label: "DeepSeek 服务故障（不是你的配置）",
+        advice: "接口返回 5xx，通常是 DeepSeek 过载或临时故障。稍后重试，或查看 status.deepseek.com。"
+      };
+    }
+    if (/(HTTP\s*401|HTTP\s*403|invalid_api_key|unauthor|authentication|访问口令|API Key|令牌|未配置)/i.test(text)) {
+      return {
+        kind: "config",
+        label: "配置或密钥问题",
+        advice: "运行“配置.bat”检查 API Key、云端地址和访问口令。"
+      };
+    }
+    if (/(HTTP\s*429|rate limit|quota|额度|余额|限流|too many requests)/i.test(text)) {
+      return {
+        kind: "limit",
+        label: "额度或频率限制",
+        advice: "检查 DeepSeek 余额/额度，或降低提问频率后重试。"
+      };
+    }
+    if (/(HTTP\s*400|invalid_request|请求体|问题太长|未知语言)/i.test(text)) {
+      return {
+        kind: "request",
+        label: "请求参数问题",
+        advice: "检查问题内容、语言选择和输入长度后重试。"
+      };
+    }
+    if (/(Failed to fetch|NetworkError|无法连接|未连接|timed? out|超时|network)/i.test(text)) {
+      return {
+        kind: "local",
+        label: "本地服务或网络问题",
+        advice: "确认 8769 / 8767 / 8768 已启动，并检查网络或代理。"
+      };
+    }
+    return {
+      kind: "unknown",
+      label: "未能判断的错误",
+      advice: "展开下面的原始错误；如果是 5xx，先按 DeepSeek 服务故障处理。"
+    };
+  }
+
   async function ask() {
     if (busy) return;
     const question = questionInput.value.trim();
@@ -553,9 +597,12 @@
       await loadHistory();
       answerEl.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
-      answerEl.innerHTML = '<div class="empty-state"><strong>请求失败</strong><p>' +
-        escapeHtml(error.message) + "</p></div>";
-      setStatus(error.message, "error");
+      const info = classifyError(error.message);
+      answerEl.innerHTML = '<div class="empty-state error-state">' +
+        '<div class="error-kind ' + info.kind + '">' + escapeHtml(info.label) + "</div>" +
+        "<strong>请求失败</strong><p>" + escapeHtml(info.advice) + "</p>" +
+        '<p class="error-raw">原始错误：' + escapeHtml(error.message) + "</p></div>";
+      setStatus(info.label + "：" + info.advice, "error");
     } finally {
       busy = false;
       askBtn.disabled = false;
