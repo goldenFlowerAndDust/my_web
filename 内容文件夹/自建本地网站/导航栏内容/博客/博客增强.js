@@ -39,11 +39,12 @@
     content.className = "blog-content";
 
     const sections = Array.from(list.children).filter((node) => node.tagName === "LI");
+    const usableSections = sections.filter((li) => clean(li.textContent) || li.querySelector("img"));
     const tocLinks = aside.querySelector(".toc-links");
     const tocCount = aside.querySelector(".toc-count");
-    tocCount.textContent = String(sections.length);
+    tocCount.textContent = String(usableSections.length);
 
-    sections.forEach((li, index) => {
+    usableSections.forEach((li, index) => {
       if (!li.id) li.id = "blog-section-" + (index + 1);
       li.classList.add("blog-section");
       const heading = li.querySelector("h2, h3");
@@ -55,6 +56,10 @@
       a.textContent = label;
       a.title = label;
       tocLinks.appendChild(a);
+    });
+
+    sections.forEach((li) => {
+      if (!usableSections.includes(li)) li.classList.add("blog-section-empty");
     });
 
     const search = aside.querySelector("input[type=search]");
