@@ -12,6 +12,24 @@ from typing import Any, Iterable
 
 BASE = Path(r"C:\Users\繁花与尘埃\编程-GitHub\my_web\内容文件夹")
 AI_ROOT = BASE / "AI答疑"
+def write_json_stable(path: Path, payload: dict[str, Any]) -> None:
+    """内容未变化时不重写文件，避免 generated_at 无意义地变化。"""
+    if path.exists():
+        try:
+            old = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError, json.JSONDecodeError):
+            old = None
+        if isinstance(old, dict):
+            old_cmp = dict(old)
+            new_cmp = dict(payload)
+            old_cmp.pop("generated_at", None)
+            new_cmp.pop("generated_at", None)
+            if old_cmp == new_cmp:
+                return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 ARCHIVE = AI_ROOT / "历史归档"
 MAX_BYTES = 5 * 1024 * 1024
 MAX_ANSWER = 500_000
@@ -154,6 +172,14 @@ def collect() -> dict[tuple[str, str], list[dict[str, Any]]]:
 
 
 def write_parts(grouped: dict[tuple[str, str], list[dict[str, Any]]]) -> dict[str, Any]:
+    old_manifest: dict[str, Any] = {}
+    if (ARCHIVE / "manifest.json").exists():
+        try:
+            loaded = json.loads((ARCHIVE / "manifest.json").read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                old_manifest = loaded
+        except (OSError, ValueError, json.JSONDecodeError):
+            old_manifest = {}
     if ARCHIVE.exists():
         # 只重建生成目录，不删除其他用户文件。
         for path in sorted(ARCHIVE.rglob("*"), reverse=True):
@@ -216,18 +242,16 @@ def write_parts(grouped: dict[tuple[str, str], list[dict[str, Any]]]) -> dict[st
             month_item["subjects"].setdefault(subject, {}).setdefault(category, []).extend(parts)
 
     # 根 manifest
+    if old_manifest.get("months") == manifest.get("months") and old_manifest.get("generated_at"):
+        manifest["generated_at"] = old_manifest["generated_at"]
     ARCHIVE.mkdir(parents=True, exist_ok=True)
-    (ARCHIVE / "manifest.json").write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
+    write_json_stable(ARCHIVE / "manifest.json", manifest)
 
     # 每个月份再放一份小 manifest，页面按月份加载。
     for label, month_item in manifest["months"].items():
         folder = ARCHIVE / label
         folder.mkdir(parents=True, exist_ok=True)
-        (folder / "manifest.json").write_text(
-            json.dumps(month_item, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-        )
+        write_json_stable(folder / "manifest.json", month_item)
     return manifest
 
 
@@ -241,14 +265,14 @@ def write_compatibility(grouped: dict[tuple[str, str], list[dict[str, Any]]]) ->
         entries.sort(key=lambda x: str(x.get("time") or ""), reverse=True)
         payload = {"generated_at": now, "source": "历史归档兼容视图", "subject": subject, "count": len(entries), "entries": entries}
         folder.mkdir(parents=True, exist_ok=True)
-        (folder / filename).write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        write_json_stable(folder / filename, payload)
 
     entries = [item for (s, _), rows in grouped.items() if s == "编程" for item in rows]
     entries.sort(key=lambda x: str(x.get("time") or ""), reverse=True)
     payload = {"generated_at": now, "count": len(entries), "records": entries}
     folder = AI_ROOT / "编程语言AI" / "history"
     folder.mkdir(parents=True, exist_ok=True)
-    (folder / "index.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_json_stable(folder / "index.json", payload)
 
 
 if __name__ == "__main__":

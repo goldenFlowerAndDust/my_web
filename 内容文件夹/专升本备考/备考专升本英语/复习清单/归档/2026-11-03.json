@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-03",
+  "generated_at": "2026-11-03T19:54:22",
+  "count": 2,
+  "entries": [
+    {
+      "name": "hello",
+      "category": "词素/原子词",
+      "level": 1,
+      "nextDate": "2026-11-04",
+      "lastReviewed": "2026-11-03"
+    },
+    {
+      "name": "help",
+      "category": "词素/原子词",
+      "level": 1,
+      "nextDate": "2026-11-04",
+      "lastReviewed": "2026-11-03"
+    }
+  ]
+}
