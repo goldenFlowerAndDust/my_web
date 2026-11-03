@@ -908,7 +908,7 @@
 
     function loadStaticHistory() {
         if (staticHistoryPromise) return staticHistoryPromise;
-        var archiveRoot = "../../专升本备考/历史归档";
+        var archiveRoot = "../历史归档";
         staticHistoryPromise = fetch(archiveRoot + "/manifest.json?v=" + Date.now(), { cache: "no-store" })
             .then(function (resp) {
                 if (!resp.ok) throw new Error("manifest");

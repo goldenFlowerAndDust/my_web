@@ -377,7 +377,7 @@
   }
 
   async function loadStaticHistory() {
-    const archiveRoot = "../../专升本备考/历史归档";
+    const archiveRoot = "../历史归档";
     try {
       const response = await fetch(archiveRoot + "/manifest.json?t=" + Date.now(), { cache: "no-store" });
       if (response.ok) {
