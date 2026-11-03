@@ -1,0 +1,40 @@
+﻿/* 英语/数学答疑：与编程 AI 一致的多问题标签 */
+.session-bar {
+    display: flex; align-items: center; gap: 8px;
+    margin: 0 0 14px; min-width: 0;
+}
+.session-tabs {
+    display: flex; gap: 6px; overflow-x: auto; min-width: 0;
+    padding-bottom: 2px;
+}
+.session-tab {
+    display: inline-flex; align-items: center; gap: 5px;
+    flex: 0 0 auto; max-width: 200px; min-height: 32px;
+    padding: 4px 6px 4px 11px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: rgba(255, 253, 248, .78);
+    color: var(--muted); font-size: 12px; cursor: pointer;
+    user-select: none;
+}
+.session-tab:hover { background: var(--paper); }
+.session-tab.is-active {
+    color: var(--navy); border-color: rgba(11, 102, 114, .36);
+    background: var(--paper); box-shadow: var(--shadow-sm);
+}
+.session-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 145px; }
+.session-close {
+    width: 19px; height: 19px; padding: 0; border: 0; border-radius: 50%;
+    background: transparent; color: inherit; cursor: pointer; font-size: 15px; line-height: 1;
+}
+.session-close:hover { background: rgba(31, 42, 61, .1); }
+.session-add {
+    flex: none; width: 32px; height: 32px; border: 1px solid var(--line-strong);
+    border-radius: 50%; background: rgba(255, 253, 248, .78); color: var(--teal);
+    font-size: 21px; line-height: 1; cursor: pointer;
+}
+.session-add:hover { background: var(--paper); }
+@media (max-width: 620px) {
+    .session-tab { max-width: 160px; }
+    .session-title { max-width: 105px; }
+}

@@ -6,6 +6,7 @@
     <title>英语答疑 · 资深英语教师</title>
     <meta name="description" content="专升本英语答疑：单词解释、作文反例与修改、句子分析、语法问答。由资深英语教师人设的 AI 回答，本地服务按分类记录问题和答案。">
     <link rel="stylesheet" href="英语答疑.css">
+    <link rel="stylesheet" href="多问题标签.css">
 </head>
 <body>
 <div class="page-glow" aria-hidden="true"></div>
@@ -54,6 +55,10 @@
     </div>
 
     <main>
+        <div class="session-bar">
+            <div class="session-tabs" id="sessionTabs" role="tablist" aria-label="问题标签"></div>
+            <button type="button" class="session-add" id="addSession" title="新建问题标签" aria-label="新建问题标签">+</button>
+        </div>
         <section class="workspace" aria-label="答疑工作区">
             <div class="ask-panel panel">
                 <div class="panel-heading">
@@ -228,5 +233,6 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="英语答疑.js?v=20261031-2" defer></script>
 <script src="../../专升本备考/备考专升本英语/返回顶部.js"></script>
+    <script src="多问题标签.js?v=20261103-1"></script>
 </body>
 </html>
