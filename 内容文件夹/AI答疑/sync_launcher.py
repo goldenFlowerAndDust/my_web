@@ -130,6 +130,115 @@ def open_config_folder() -> None:
         print("请手动复制上面的路径到资源管理器。")
 
 
+
+def route_label(url: str) -> str:
+    text = str(url or "").lower()
+    if "tencentscf" in text or "scf" in text:
+        return "腾讯云 SCF"
+    if "workers.dev" in text:
+        return "Cloudflare Worker"
+    return "云端线路"
+
+
+def read_cloud_data() -> dict:
+    if not CLOUD_FILE.exists():
+        return {}
+    try:
+        data = json.loads(CLOUD_FILE.read_text(encoding="utf-8-sig"))
+        return data if isinstance(data, dict) else {}
+    except (OSError, ValueError, json.JSONDecodeError):
+        return {}
+
+
+def cloud_routes(data: dict) -> list[dict]:
+    routes: list[dict] = []
+    raw = data.get("endpoints")
+    if isinstance(raw, list) and raw:
+        for item in raw:
+            if isinstance(item, dict) and item.get("url"):
+                routes.append({
+                    "url": str(item.get("url")).rstrip("/"),
+                    "token": str(item.get("token") or ""),
+                    "label": str(item.get("label") or route_label(item.get("url"))),
+                })
+    else:
+        if data.get("url"):
+            routes.append({"url": str(data.get("url")).rstrip("/"), "token": str(data.get("token") or ""), "label": route_label(data.get("url"))})
+        if data.get("fallback_url"):
+            routes.append({"url": str(data.get("fallback_url")).rstrip("/"), "token": str(data.get("fallback_token") or ""), "label": route_label(data.get("fallback_url"))})
+    return routes
+
+
+def save_routes(data: dict, routes: list[dict]) -> None:
+    if routes:
+        data["url"] = routes[0]["url"]
+        data["token"] = routes[0]["token"]
+    else:
+        data.pop("url", None)
+        data.pop("token", None)
+    if len(routes) > 1:
+        data["fallback_url"] = routes[1]["url"]
+        data["fallback_token"] = routes[1]["token"]
+    else:
+        data.pop("fallback_url", None)
+        data.pop("fallback_token", None)
+    data.pop("endpoints", None)
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    tmp = CLOUD_FILE.with_name(CLOUD_FILE.name + ".tmp")
+    tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(CLOUD_FILE)
+
+
+def route_menu() -> None:
+    while True:
+        os.system("cls")
+        data = read_cloud_data()
+        routes = cloud_routes(data)
+        print("")
+        print("========== 查看当前配置 / 云端线路优先级 ==========")
+        print("API Key：%s" % mask_secret(read_api_key()))
+        print("配置文件：%s" % CLOUD_FILE)
+        print("")
+        if not routes:
+            print("云端线路：尚未配置")
+            print("")
+            print("0. 返回一级菜单")
+            try:
+                if input("请选择：").strip() == "0":
+                    return
+            except EOFError:
+                return
+            continue
+        for index, route in enumerate(routes, start=1):
+            mark = "  ← 最先使用" if index == 1 else ""
+            print("%d. %s%s" % (index, route["label"], mark))
+            print("   地址：%s" % route["url"])
+            print("   令牌：%s" % mask_secret(route["token"]))
+        print("")
+        print("输入要调整到第一优先级的线路编号；第一项就是当前最先使用的路线。")
+        print("0. 返回一级菜单")
+        try:
+            choice = input("请选择 [1-%d/0]：" % len(routes)).strip()
+        except EOFError:
+            return
+        if choice == "0":
+            return
+        if not choice.isdigit() or not (1 <= int(choice) <= len(routes)):
+            print("没有这个选项。")
+            pause()
+            continue
+        index = int(choice) - 1
+        if index == 0:
+            print("已经是第一优先级。")
+            pause()
+            continue
+        selected = routes[index]
+        routes = [selected] + routes[:index] + routes[index + 1:]
+        save_routes(data, routes)
+        print("已把 %s 调整为第一优先级。" % selected["label"])
+        pause()
+
+
 def config_menu() -> None:
     while True:
         os.system("cls")
@@ -138,7 +247,7 @@ def config_menu() -> None:
         print("  1. 修改 DeepSeek API Key（本地 API.txt）")
         print("  2. 修改主线路地址与令牌")
         print("  3. 修改备用线路地址与令牌")
-        print("  4. 查看当前配置（脱敏）")
+        print("  4. 查看当前配置 / 调整云端线路优先级")
         print("  5. 打开配置文件夹")
         print("  0. 返回主菜单")
         print("")
@@ -171,9 +280,7 @@ def config_menu() -> None:
             run_script("--configure-fallback")
             pause()
         elif choice == "4":
-            os.system("cls")
-            show_config()
-            pause()
+            route_menu()
         elif choice == "5":
             os.system("cls")
             open_config_folder()
