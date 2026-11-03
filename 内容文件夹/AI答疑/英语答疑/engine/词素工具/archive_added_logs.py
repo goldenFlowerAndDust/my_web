@@ -19,7 +19,8 @@ from datetime import date, datetime
 from pathlib import Path
 
 TOOL_DIR = Path(__file__).resolve().parent
-BASE = Path(r"C:\Users\繁花与尘埃\编程-GitHub\my_web\内容文件夹\专升本备考\备考专升本英语")
+CONTENT_ROOT = Path(__file__).resolve().parents[4]
+BASE = CONTENT_ROOT / "专升本备考" / "备考专升本英语"
 LOG_FILE = TOOL_DIR / "归档日志.jsonl"
 ARCHIVE_DIR = BASE / "添加日志"
 

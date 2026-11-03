@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterable
 
-BASE = Path(r"C:\Users\繁花与尘埃\编程-GitHub\my_web\内容文件夹")
+BASE = Path(__file__).resolve().parents[2]
 AI_ROOT = BASE / "AI答疑"
 def write_json_stable(path: Path, payload: dict[str, Any]) -> None:
     """内容未变化时不重写文件，避免 generated_at 无意义地变化。"""

@@ -30,7 +30,8 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-BASE = Path(r"C:\Users\繁花与尘埃\编程-GitHub\my_web\内容文件夹\专升本备考\备考专升本英语")
+CONTENT_ROOT = Path(__file__).resolve().parents[4]
+BASE = CONTENT_ROOT / "专升本备考" / "备考专升本英语"
 TOOL_DIR = Path(__file__).resolve().parent
 WORD_PAGE = BASE / "专升本英语核心词汇通关.html"
 DATA_JSON = BASE / "复习清单" / "data.json"

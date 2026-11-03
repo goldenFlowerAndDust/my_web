@@ -17,7 +17,8 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 TOOL_DIR = Path(__file__).resolve().parent
-BASE = Path(r"C:\Users\繁花与尘埃\编程-GitHub\my_web\内容文件夹\专升本备考\备考专升本数学")
+CONTENT_ROOT = Path(__file__).resolve().parents[4]
+BASE = CONTENT_ROOT / "专升本备考" / "备考专升本数学"
 sys.path.insert(0, str(TOOL_DIR))
 
 from math_tutor import (  # noqa: E402

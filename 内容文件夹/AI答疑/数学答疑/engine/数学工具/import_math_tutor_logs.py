@@ -17,7 +17,8 @@ from datetime import datetime
 from pathlib import Path
 
 TOOL_DIR = Path(__file__).resolve().parent
-BASE = Path(r"C:\Users\繁花与尘埃\编程-GitHub\my_web\内容文件夹\专升本备考\备考专升本数学")
+CONTENT_ROOT = Path(__file__).resolve().parents[4]
+BASE = CONTENT_ROOT / "专升本备考" / "备考专升本数学"
 sys.path.insert(0, str(TOOL_DIR))
 
 from math_tutor import CATEGORY_FILES, LOG_DIR, TutorError, normalize_mode, normalize_topic  # noqa: E402
