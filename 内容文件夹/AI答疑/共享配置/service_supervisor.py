@@ -102,14 +102,14 @@ def assign_to_job(job, pid: int) -> bool:
         kernel32.CloseHandle(process)
 
 
-def start_service(base: Path, python: str, title: str, script: str, cwd: Path):
+def start_service(base: Path, python: str, title: str, script: str, cwd: Path, args=()):
     startup = subprocess.STARTUPINFO()
     startup.lpTitle = title
     env = dict(__import__("os").environ)
     env["PYTHONIOENCODING"] = "utf-8"
     env["PYTHONUTF8"] = "1"
     process = subprocess.Popen(
-        [python, script],
+        [python, script, *args],
         cwd=str(cwd),
         env=env,
         creationflags=CREATE_NEW_CONSOLE,
@@ -140,8 +140,9 @@ def main() -> int:
 
     base = Path(__file__).resolve().parent.parent
     python = sys.executable
-    english_dir = base / "备考专升本英语"
-    math_dir = base / "备考专升本数学"
+    english_dir = base / "英语答疑" / "engine" / "词素工具"
+    math_dir = base / "数学答疑" / "engine" / "数学工具"
+    programming_dir = base / "编程语言AI" / "engine"
 
     job = create_kill_on_close_job()
     if not job:
@@ -151,7 +152,7 @@ def main() -> int:
     try:
         print("正在启动英语答疑 8767…")
         english = start_service(
-            base, python, "英语答疑 8767", "word_server.py", english_dir
+            base, python, "英语答疑 8767", "server.py", english_dir
         )
         children.append(english)
         if job and not assign_to_job(job, english.pid):
@@ -159,25 +160,31 @@ def main() -> int:
 
         print("正在启动数学答疑 8768…")
         math = start_service(
-            base, python, "数学答疑 8768", "start_math_server.py", math_dir
+            base, python, "数学答疑 8768", "server.py", math_dir, args=("--port", "8768")
         )
         children.append(math)
         if job and not assign_to_job(job, math.pid):
             print("警告：数学服务未能加入自动关闭组。")
 
+        programming = start_service(
+            base, python, "编程答疑 8769", "server.py", programming_dir
+        )
+        children.append(programming)
+        if job and not assign_to_job(job, programming.pid):
+            print("警告：编程服务未能加入自动关闭组。")
+
         english_ok = wait_health(8767)
         math_ok = wait_health(8768)
+        programming_ok = wait_health(8769)
         print("英语 8767：%s" % ("已就绪" if english_ok else "未就绪"))
         print("数学 8768：%s" % ("已就绪" if math_ok else "未就绪"))
+        print("编程 8769：%s" % ("已就绪" if programming_ok else "未就绪"))
 
         if not args.no_browser:
-            if english_ok:
-                webbrowser.open("http://127.0.0.1:8767/英语答疑/英语答疑.html", new=2)
-            if math_ok:
-                webbrowser.open("http://127.0.0.1:8768/数学答疑/数学答疑.html", new=2)
+            webbrowser.open("http://127.0.0.1:8769/AI答疑/", new=2)
 
         print("")
-        print("服务运行中。关闭这个同步窗口，会同时结束英语 8767 和数学 8768。")
+        print("服务运行中。关闭这个同步窗口，会同时结束英语、数学、编程三个服务。")
         print("按 Ctrl+C 也可以结束全部服务。")
         print("")
 
