@@ -82,26 +82,27 @@ history/index.json
 
 ## 云端
 
-页面左侧“连接设置”和数学、英语一样支持三种线路：
+页面左侧“连接设置”和数学、英语一样：
 
 ```text
-本地 8769
-主线路（腾讯云 SCF）
-备用线路（Cloudflare Worker）
+连接方式：本地 8769 / 云端 Worker / SCF
+云端线路：Cloudflare / 国内 SCF
+云端地址
+访问口令
 ```
 
-主线路填：
-
-```text
-SCF 地址
-PROXY_TOKEN
-```
-
-备用线路填：
+Cloudflare 填：
 
 ```text
 Worker 地址
 TUTOR_ACCESS_TOKEN
+```
+
+国内 SCF 填：
+
+```text
+SCF 地址
+PROXY_TOKEN
 ```
 
 可以随时切换。

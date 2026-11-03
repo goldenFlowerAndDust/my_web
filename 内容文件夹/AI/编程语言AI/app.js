@@ -4,31 +4,87 @@
   const LOCAL_API = "http://127.0.0.1:8769";
   const IS_LOCAL_PAGE = location.protocol === "file:" ||
     ((location.hostname === "127.0.0.1" || location.hostname === "localhost") && location.port === "8769");
-  const ROUTE_KEY = "programmingTutor.route";
+  const CONNECTION_KEY = "programmingTutor.connection-v2";
   const REMEMBER_KEY = "programmingTutor.rememberSettings";
-  const PRIMARY_URL_KEY = "programmingTutor.primaryUrl";
-  const PRIMARY_TOKEN_KEY = "programmingTutor.primaryToken";
-  const BACKUP_URL_KEY = "programmingTutor.backupUrl";
-  const BACKUP_TOKEN_KEY = "programmingTutor.backupToken";
+  const LEGACY_ROUTE_KEY = "programmingTutor.route";
+  const LEGACY_PRIMARY_URL_KEY = "programmingTutor.primaryUrl";
+  const LEGACY_PRIMARY_TOKEN_KEY = "programmingTutor.primaryToken";
+  const LEGACY_BACKUP_URL_KEY = "programmingTutor.backupUrl";
+  const LEGACY_BACKUP_TOKEN_KEY = "programmingTutor.backupToken";
   const LEGACY_URL_KEY = "programmingTutor.cloudUrl";
   const LEGACY_TOKEN_KEY = "programmingTutor.cloudToken";
   const cleanUrl = (value) => String(value || "").trim().replace(/\/+$/, "");
   const SENSITIVE_KEYS = [
-    PRIMARY_URL_KEY, PRIMARY_TOKEN_KEY, BACKUP_URL_KEY, BACKUP_TOKEN_KEY,
-    LEGACY_URL_KEY, LEGACY_TOKEN_KEY
+    CONNECTION_KEY, LEGACY_PRIMARY_URL_KEY, LEGACY_PRIMARY_TOKEN_KEY,
+    LEGACY_BACKUP_URL_KEY, LEGACY_BACKUP_TOKEN_KEY, LEGACY_URL_KEY, LEGACY_TOKEN_KEY
   ];
   let remember = localStorage.getItem(REMEMBER_KEY) === "true";
   if (!remember) {
-    // 默认不落盘：清掉旧版本可能保存过的地址和令牌。
     SENSITIVE_KEYS.forEach((key) => localStorage.removeItem(key));
   }
-  const storage = remember ? localStorage : sessionStorage;
-  let primaryUrl = cleanUrl(storage.getItem(PRIMARY_URL_KEY) || (remember ? localStorage.getItem(LEGACY_URL_KEY) : ""));
-  let primaryToken = storage.getItem(PRIMARY_TOKEN_KEY) || (remember ? localStorage.getItem(LEGACY_TOKEN_KEY) : "") || "";
-  let backupUrl = cleanUrl(storage.getItem(BACKUP_URL_KEY));
-  let backupToken = storage.getItem(BACKUP_TOKEN_KEY) || "";
-  let route = localStorage.getItem(ROUTE_KEY) || (IS_LOCAL_PAGE ? "local" : (primaryUrl ? "primary" : (backupUrl ? "backup" : "local")));
-  if (!["local", "primary", "backup"].includes(route)) route = "local";
+
+  function normalizeProfile(value) {
+    return {
+      url: cleanUrl(value && value.url),
+      token: String((value && value.token) || "").trim()
+    };
+  }
+
+  function defaultConnection() {
+    return {
+      mode: IS_LOCAL_PAGE ? "local" : "cloud",
+      provider: "cloudflare",
+      profiles: { cloudflare: { url: "", token: "" }, domestic: { url: "", token: "" } }
+    };
+  }
+
+  function loadConnection() {
+    const store = remember ? localStorage : sessionStorage;
+    const result = defaultConnection();
+    try {
+      const raw = store.getItem(CONNECTION_KEY);
+      if (raw) {
+        const data = JSON.parse(raw);
+        if (data && typeof data === "object") {
+          result.mode = data.mode === "cloud" ? "cloud" : "local";
+          result.provider = data.provider === "domestic" ? "domestic" : "cloudflare";
+          result.profiles.cloudflare = normalizeProfile(data.profiles && data.profiles.cloudflare);
+          result.profiles.domestic = normalizeProfile(data.profiles && data.profiles.domestic);
+        }
+      }
+    } catch (error) { /* ignore */ }
+
+    // 兼容旧版主/备线路和单线路配置。
+    const legacyCloudflare = normalizeProfile({
+      url: store.getItem(LEGACY_BACKUP_URL_KEY) || store.getItem(LEGACY_URL_KEY),
+      token: store.getItem(LEGACY_BACKUP_TOKEN_KEY) || store.getItem(LEGACY_TOKEN_KEY)
+    });
+    const legacyDomestic = normalizeProfile({
+      url: store.getItem(LEGACY_PRIMARY_URL_KEY),
+      token: store.getItem(LEGACY_PRIMARY_TOKEN_KEY)
+    });
+    if (!result.profiles.cloudflare.url && legacyCloudflare.url) {
+      result.profiles.cloudflare = legacyCloudflare;
+    }
+    if (!result.profiles.domestic.url && legacyDomestic.url) {
+      result.profiles.domestic = legacyDomestic;
+    }
+    const legacyRoute = store.getItem(LEGACY_ROUTE_KEY);
+    if (legacyRoute === "primary") {
+      result.mode = "cloud";
+      if (!result.profiles.domestic.url) result.provider = "domestic";
+    } else if (legacyRoute === "backup") {
+      result.mode = "cloud";
+    } else if (legacyRoute === "local") {
+      result.mode = "local";
+    }
+    if (result.mode === "cloud" && !result.profiles[result.provider].url) {
+      result.provider = result.profiles.domestic.url ? "domestic" : "cloudflare";
+    }
+    return result;
+  }
+
+  let connection = loadConnection();
   const $ = (id) => document.getElementById(id);
   const languageSelect = $("languageSelect");
   const questionInput = $("question");
@@ -42,13 +98,11 @@
   const languageMeta = $("languageMeta");
   const blogLinks = $("blogLinks");
   const themeToggle = $("themeToggle");
-  const routeSelect = $("routeSelect");
-  const primaryUrlInput = $("primaryUrl");
-  const primaryTokenInput = $("primaryToken");
-  const backupUrlInput = $("backupUrl");
-  const backupTokenInput = $("backupToken");
-  const primaryFields = $("primaryFields");
-  const backupFields = $("backupFields");
+  const connectionMode = $("connectionMode");
+  const cloudProvider = $("cloudProvider");
+  const cloudUrlInput = $("cloudUrl");
+  const cloudTokenInput = $("cloudToken");
+  const cloudFields = $("cloudFields");
   const cloudStatus = $("cloudStatus");
   const rememberSettings = $("rememberSettings");
   const rememberHint = $("rememberHint");
@@ -56,14 +110,22 @@
   let historyRecords = [];
   let busy = false;
 
+  function currentProfile() {
+    return connection.profiles[connection.provider] || { url: "", token: "" };
+  }
+
   function routeConfig() {
-    if (route === "primary") {
-      return { id: "primary", label: "主线路", base: primaryUrl, token: primaryToken, local: false };
+    if (connection.mode === "local") {
+      return { id: "local", label: "本地 8769", base: LOCAL_API, token: "", local: true };
     }
-    if (route === "backup") {
-      return { id: "backup", label: "备用线路", base: backupUrl, token: backupToken, local: false };
-    }
-    return { id: "local", label: "本地 8769", base: LOCAL_API, token: "", local: true };
+    const profile = currentProfile();
+    return {
+      id: connection.provider,
+      label: connection.provider === "domestic" ? "国内 SCF" : "Cloudflare",
+      base: profile.url,
+      token: profile.token,
+      local: false
+    };
   }
 
   const FALLBACK_LANGUAGES = [
@@ -422,54 +484,75 @@
   }
   applyTheme(document.documentElement.dataset.theme || localStorage.getItem("programmingTutor.theme") || "dark");
 
-  if (routeSelect) routeSelect.value = route;
-  if (primaryUrlInput) primaryUrlInput.value = primaryUrl;
-  if (primaryTokenInput) primaryTokenInput.value = primaryToken;
-  if (backupUrlInput) backupUrlInput.value = backupUrl;
-  if (backupTokenInput) backupTokenInput.value = backupToken;
-  if (rememberSettings) rememberSettings.checked = remember;
-  updateRememberHint();
-  updateCloudStatus();
+  function saveProfileFromForm() {
+    const profile = currentProfile();
+    profile.url = cleanUrl(cloudUrlInput ? cloudUrlInput.value : profile.url);
+    profile.token = cloudTokenInput ? cloudTokenInput.value.trim() : profile.token;
+  }
+
+  function fillProfileFields() {
+    const profile = currentProfile();
+    if (cloudUrlInput) cloudUrlInput.value = profile.url;
+    if (cloudTokenInput) cloudTokenInput.value = profile.token;
+    if (cloudProvider) cloudProvider.value = connection.provider;
+  }
+
+  function syncCloudFields() {
+    if (cloudFields) cloudFields.hidden = connectionMode.value !== "cloud";
+  }
 
   function updateRememberHint() {
     if (!rememberHint) return;
     rememberHint.textContent = remember
-      ? "已开启：地址和令牌会保存在这台浏览器，下次打开自动填入。共用电脑请勿开启。"
-      : "默认关闭：地址和令牌只保留在当前标签页，关闭页面后失效。";
+      ? "已开启：地址和口令保存在这台浏览器，下次打开自动填入。共用电脑请勿开启。"
+      : "默认关闭：地址和口令只在当前标签页有效，关闭页面后失效。";
   }
 
-  function persistSensitiveSettings() {
+  function persistConnection() {
     const target = remember ? localStorage : sessionStorage;
     const other = remember ? sessionStorage : localStorage;
-    SENSITIVE_KEYS.forEach((key) => other.removeItem(key));
-    target.setItem(PRIMARY_URL_KEY, primaryUrl);
-    target.setItem(PRIMARY_TOKEN_KEY, primaryToken);
-    target.setItem(BACKUP_URL_KEY, backupUrl);
-    target.setItem(BACKUP_TOKEN_KEY, backupToken);
-    localStorage.setItem(ROUTE_KEY, route);
+    SENSITIVE_KEYS.forEach((key) => {
+      other.removeItem(key);
+      localStorage.removeItem(key);
+    });
+    target.setItem(CONNECTION_KEY, JSON.stringify(connection));
   }
 
   function saveSettings() {
-    const nextRoute = routeSelect ? routeSelect.value : route;
-    route = ["local", "primary", "backup"].includes(nextRoute) ? nextRoute : "local";
-    primaryUrl = cleanUrl(primaryUrlInput ? primaryUrlInput.value : primaryUrl);
-    primaryToken = primaryTokenInput ? primaryTokenInput.value.trim() : primaryToken;
-    backupUrl = cleanUrl(backupUrlInput ? backupUrlInput.value : backupUrl);
-    backupToken = backupTokenInput ? backupTokenInput.value.trim() : backupToken;
+    if (connectionMode) connection.mode = connectionMode.value === "cloud" ? "cloud" : "local";
+    if (cloudProvider) connection.provider = cloudProvider.value === "domestic" ? "domestic" : "cloudflare";
+    saveProfileFromForm();
     try {
-      persistSensitiveSettings();
+      persistConnection();
     } catch (error) { /* ignore */ }
-    if (routeSelect) routeSelect.value = route;
-    if (primaryUrlInput) primaryUrlInput.value = primaryUrl;
-    if (backupUrlInput) backupUrlInput.value = backupUrl;
+    fillProfileFields();
+    syncCloudFields();
     updateCloudStatus();
     setStatus("已切换到 " + routeConfig().label + "，正在重新加载…", "ok");
     loadMeta();
   }
 
+  if (connectionMode) connectionMode.value = connection.mode;
+  if (cloudProvider) cloudProvider.value = connection.provider;
+  fillProfileFields();
+  syncCloudFields();
+  if (rememberSettings) rememberSettings.checked = remember;
+  updateRememberHint();
+  updateCloudStatus();
+
   const saveCloudBtn = $("saveCloud");
   const clearCloudBtn = $("clearCloud");
   if (saveCloudBtn) saveCloudBtn.addEventListener("click", saveSettings);
+  if (connectionMode) {
+    connectionMode.addEventListener("change", syncCloudFields);
+  }
+  if (cloudProvider) {
+    cloudProvider.addEventListener("change", () => {
+      saveProfileFromForm();
+      connection.provider = cloudProvider.value === "domestic" ? "domestic" : "cloudflare";
+      fillProfileFields();
+    });
+  }
   if (rememberSettings) {
     rememberSettings.addEventListener("change", () => {
       remember = rememberSettings.checked;
@@ -480,31 +563,20 @@
       updateRememberHint();
     });
   }
-  if (routeSelect) {
-    routeSelect.addEventListener("change", () => {
-      route = routeSelect.value;
-      localStorage.setItem(ROUTE_KEY, route);
-      updateCloudStatus();
-      setStatus("已切换到 " + routeConfig().label + "。", "ok");
-      loadMeta();
-    });
-  }
   if (clearCloudBtn) {
     clearCloudBtn.addEventListener("click", () => {
-      primaryUrl = "";
-      primaryToken = "";
-      backupUrl = "";
-      backupToken = "";
+      connection.profiles = {
+        cloudflare: { url: "", token: "" },
+        domestic: { url: "", token: "" }
+      };
       try {
         SENSITIVE_KEYS.forEach((key) => {
           localStorage.removeItem(key);
           sessionStorage.removeItem(key);
         });
       } catch (error) { /* ignore */ }
-      if (primaryUrlInput) primaryUrlInput.value = "";
-      if (primaryTokenInput) primaryTokenInput.value = "";
-      if (backupUrlInput) backupUrlInput.value = "";
-      if (backupTokenInput) backupTokenInput.value = "";
+      if (cloudUrlInput) cloudUrlInput.value = "";
+      if (cloudTokenInput) cloudTokenInput.value = "";
       updateCloudStatus();
       setStatus("线路配置已清除。", "");
       loadMeta();

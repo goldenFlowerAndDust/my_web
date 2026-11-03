@@ -42,37 +42,33 @@
 
     <details class="cloud-config" id="cloudConfig">
       <summary>连接设置</summary>
-      <p class="cloud-hint">和数学、英语一样：本地 / 主线路 / 备用线路，可自由切换。</p>
+      <p class="cloud-hint">和数学、英语一样：本地 / 云端，云端可切换 Cloudflare 或国内 SCF。</p>
       <label>连接方式
-        <select id="routeSelect">
+        <select id="connectionMode">
           <option value="local">本地 8769</option>
-          <option value="primary">主线路（SCF）</option>
-          <option value="backup">备用线路（Worker）</option>
+          <option value="cloud">云端 Worker / SCF</option>
         </select>
       </label>
-      <div class="route-block" id="primaryFields">
-        <strong>主线路</strong>
-        <label>地址
-          <input type="url" id="primaryUrl" placeholder="https://xxx.tencentscf.com" autocomplete="off">
+      <div id="cloudFields" hidden>
+        <label>云端线路
+          <select id="cloudProvider">
+            <option value="cloudflare">Cloudflare（现有）</option>
+            <option value="domestic">国内 SCF（新）</option>
+          </select>
         </label>
-        <label>令牌
-          <input type="password" id="primaryToken" placeholder="PROXY_TOKEN" autocomplete="off">
+        <label>云端地址
+          <input type="url" id="cloudUrl" placeholder="Cloudflare Worker 或腾讯云 SCF 默认域名" autocomplete="off">
         </label>
-      </div>
-      <div class="route-block" id="backupFields">
-        <strong>备用线路</strong>
-        <label>地址
-          <input type="url" id="backupUrl" placeholder="https://xxx.workers.dev" autocomplete="off">
+        <label>访问口令
+          <input type="password" id="cloudToken" placeholder="Cloudflare 填 TUTOR_ACCESS_TOKEN；SCF 填 PROXY_TOKEN" autocomplete="off">
         </label>
-        <label>令牌
-          <input type="password" id="backupToken" placeholder="TUTOR_ACCESS_TOKEN" autocomplete="off">
-        </label>
+        <p class="cloud-hint">地址和口令默认只保留当前标签页，关闭页面后失效。</p>
       </div>
       <label class="remember-row">
         <input type="checkbox" id="rememberSettings">
-        <span>保存地址和令牌到浏览器本地</span>
+        <span>保存地址和口令到浏览器本地</span>
       </label>
-      <p class="remember-hint" id="rememberHint">默认关闭。关闭时只保留在当前标签页，关闭页面后失效。</p>
+      <p class="remember-hint" id="rememberHint">默认关闭。共用电脑请勿勾选。</p>
       <div class="cloud-actions">
         <button type="button" id="saveCloud">保存</button>
         <button type="button" id="clearCloud">清除</button>
