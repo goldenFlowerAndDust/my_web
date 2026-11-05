@@ -173,16 +173,24 @@ def call_deepseek(system: str, user: str, history: object = None) -> tuple[str, 
         },
         method="POST",
     )
-    try:
-        with urllib.request.urlopen(request, timeout=120) as response:
-            raw = response.read().decode("utf-8")
-    except urllib.error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")[:500]
-        raise RuntimeError("DeepSeek API 返回 HTTP %s：%s" % (exc.code, detail)) from exc
-    except urllib.error.URLError as exc:
-        raise RuntimeError("无法连接 DeepSeek API：%s" % exc.reason) from exc
-    except TimeoutError as exc:
-        raise RuntimeError("DeepSeek API 请求超时。") from exc
+    last_error = None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request, timeout=120) as response:
+                raw = response.read().decode("utf-8")
+            last_error = None
+            break
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")[:500]
+            raise RuntimeError("DeepSeek API 返回 HTTP %s：%s" % (exc.code, detail)) from exc
+        except (urllib.error.URLError, TimeoutError) as exc:
+            last_error = exc
+            if attempt < 2:
+                time.sleep(0.8 + attempt * 0.5)
+    if last_error is not None:
+        if isinstance(last_error, TimeoutError):
+            raise RuntimeError("DeepSeek API 请求超时。") from last_error
+        raise RuntimeError("无法连接 DeepSeek API：%s" % last_error.reason) from last_error
     try:
         data = json.loads(raw)
         answer = str(data["choices"][0]["message"]["content"]).strip()

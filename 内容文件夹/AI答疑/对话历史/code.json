@@ -2,7 +2,7 @@
   "version": 1,
   "subject": "code",
   "subject_label": "编程",
-  "updated_at": "2026-11-06 00:00:39",
+  "updated_at": "2026-11-06 00:07:47",
   "max_rounds": 20,
   "windows": {
     "smw3py0427tds": {
@@ -59,13 +59,12 @@
     },
     "smw3q23fntaof": {
       "id": "smw3q23fntaof",
-      "subject": "code",
       "title": "使用fs模块的异步方法读取文件时，若不传入回调函数，方法会返回一个____对象，可以通过.then()或者async/await的方式处理读取结果。",
-      "created_at": "2026-11-05 23:50:18",
-      "updated_at": "2026-11-05 23:50:18",
+      "created_at": "2026-11-06 00:07:47",
+      "updated_at": "2026-11-06 00:07:47",
       "mode": "node",
       "language": "node",
-      "language_name": "Node.js",
+      "language_name": "node",
       "topic": "",
       "max_rounds": 20,
       "rounds": 1,
