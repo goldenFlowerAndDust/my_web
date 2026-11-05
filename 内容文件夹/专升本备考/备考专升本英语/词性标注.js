@@ -87,7 +87,9 @@
                 });
             });
             if (!Object.keys(map).some(function (key) { return sensesOf(map[key]).length; })) return;
+            content.classList.add("hide-answer");
             content.querySelectorAll(".word_item").forEach(function (card) {
+                card.classList.remove("is-open");
                 var word = String(card.getAttribute("data-word") || "").toLowerCase();
                 enhanceCard(card, map[word]);
             });

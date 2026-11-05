@@ -676,7 +676,7 @@
 
 /* 词性义项：复习卡内逐条展示，和录入数据一致 */
 .word-sense-list {
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     gap: 5px 7px;
     margin: 6px 0 0;
@@ -691,3 +691,5 @@
     line-height: 1.5;
 }
 .word-sense-item b { color: #0b6672; font-weight: 700; }
+.word-card.is-open .word-sense-list,
+.all-item.is-open .word-sense-list { display: flex; }

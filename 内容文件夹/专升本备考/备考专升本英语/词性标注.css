@@ -11,3 +11,10 @@
     font-size: .68rem; font-weight: 700; white-space: nowrap;
 }
 .sense_pos_inline { margin-right: 5px; }
+
+
+/* 默认只显示英文；只有 .is-open 的卡片显示词性义项 */
+#wordContent.hide-answer .word_item:not(.is-open) .answer,
+#wordContent.hide-answer .word_item:not(.is-open) .pos_senses {
+    display: none !important;
+}
