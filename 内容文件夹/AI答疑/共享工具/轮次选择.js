@@ -13,6 +13,10 @@
     select.id = "roundSelect";
     select.setAttribute("aria-label", "选择本对话的轮次");
     tools.insertBefore(select, tools.firstChild);
+    var countEl = document.createElement("span");
+    countEl.className = "round-count";
+    countEl.id = "roundCount";
+    tools.insertBefore(countEl, select.nextSibling);
 
     var answerContent = document.getElementById("answer-content");
     var answerEmpty = document.getElementById("answer-empty");
@@ -44,6 +48,7 @@
         }).join("");
         select.hidden = count === 0;
         select.disabled = count === 0;
+        countEl.textContent = count ? "共 " + count + " 轮" : "";
 
         if (count && (forceLatest || activeChanged || count !== lastCount)) {
             select.value = String(count - 1);

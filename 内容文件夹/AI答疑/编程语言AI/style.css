@@ -438,3 +438,6 @@ textarea:focus { border-color: #9cc9e5; box-shadow: 0 0 0 3px rgba(76,150,201,.1
   .round-select { max-width: 170px; }
   .answer { max-height: 65vh; }
 }
+
+
+.round-count { color: #8da3b8; font-size: 11px; white-space: nowrap; }

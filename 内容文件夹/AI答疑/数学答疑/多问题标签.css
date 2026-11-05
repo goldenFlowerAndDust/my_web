@@ -68,3 +68,6 @@
     .round-select { max-width: 150px; }
     .answer-content { max-height: 65vh; }
 }
+
+
+.round-count { color: #8da3b8; font-size: 11px; white-space: nowrap; }

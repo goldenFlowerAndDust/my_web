@@ -93,6 +93,7 @@
   const answerEl = $("answer");
   const answerTime = $("answerTime");
   const roundSelect = $("roundSelect");
+  const roundCount = $("roundCount");
   const historyList = $("historyList");
   const historyTabs = $("historyTabs");
   const historySearch = $("historySearch");
@@ -243,6 +244,7 @@
     }).join("");
     roundSelect.hidden = turns.length === 0;
     roundSelect.disabled = turns.length === 0;
+    if (roundCount) roundCount.textContent = turns.length ? "共 " + turns.length + " 轮" : "";
     if (turns.length && forceLatest) roundSelect.value = String(turns.length - 1);
     if (!turns.length) return;
     if (!roundSelect.value) roundSelect.value = String(turns.length - 1);
@@ -280,7 +282,7 @@
       setStatus("", "");
     }
     localStoragesetLanguage(session.language);
-    renderRoundSelect(false);
+    renderRoundSelect(true);
   }
 
   function localStoragesetLanguage(language) {
