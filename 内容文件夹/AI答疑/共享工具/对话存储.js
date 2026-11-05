@@ -3,6 +3,8 @@
 
     // 本机对话的唯一 JSON 来源：回答轮次和历史记录都从这里读取。
     var KEY = "aiTutor.conversations.v1";
+    var INIT_KEY = "aiTutor.conversations.initialized.v1";
+    var LEGACY_PREFIX = "aiTutor.conversations.legacy.";
     var MAX = 200;
 
     function read() {
@@ -18,7 +20,30 @@
     function write(list) {
         try {
             localStorage.setItem(KEY, JSON.stringify((Array.isArray(list) ? list : []).slice(0, MAX)));
+            localStorage.setItem(INIT_KEY, "1");
         } catch (error) { /* 空间不足时保留当前页面状态 */ }
+    }
+
+    function isLegacyImported(subject) {
+        try {
+            return localStorage.getItem(LEGACY_PREFIX + subject) === "1";
+        } catch (error) {
+            return false;
+        }
+    }
+
+    function markLegacyImported(subject) {
+        try {
+            localStorage.setItem(LEGACY_PREFIX + subject, "1");
+        } catch (error) { /* ignore */ }
+    }
+
+    function isInitialized() {
+        try {
+            return localStorage.getItem(INIT_KEY) === "1" || read().length > 0;
+        } catch (error) {
+            return read().length > 0;
+        }
     }
 
     function text(value) {
@@ -77,6 +102,46 @@
         list.unshift(conversation);
         write(list);
         return conversation;
+    }
+
+    function importEntries(entries, subject) {
+        if (isLegacyImported(subject)) return false;
+        if (!Array.isArray(entries) || !entries.length) {
+            markLegacyImported(subject);
+            return false;
+        }
+        var groups = {};
+        entries.forEach(function (entry, index) {
+            if (!entry || !entry.question || !entry.answer) return;
+            var id = entry.conversation_id || ("legacy-" + String(entry.time || "").replace(/[^0-9]/g, "") + "-" + index);
+            if (!groups[id]) {
+                groups[id] = {
+                    id: id,
+                    subject: subject,
+                    title: String(entry.question).slice(0, 80),
+                    mode: entry.mode || "",
+                    topic: entry.topic || "",
+                    messages: [],
+                    created_at: entry.created_at || Date.now()
+                };
+            }
+            var group = groups[id];
+            group.messages.push({ role: "user", content: String(entry.question) });
+            group.messages.push({
+                role: "assistant",
+                content: String(entry.answer),
+                html: entry.html || "",
+                mode: entry.mode || "",
+                time: entry.time || "",
+                usage: entry.usage || null
+            });
+        });
+        Object.keys(groups).forEach(function (id) {
+            var group = groups[id];
+            if (group.messages.length) upsert(group, subject);
+        });
+        markLegacyImported(subject);
+        return true;
     }
 
     function list(subject) {
@@ -146,6 +211,10 @@
     window.ConversationStore = {
         KEY: KEY,
         upsert: upsert,
+        importEntries: importEntries,
+        isInitialized: isInitialized,
+        isLegacyImported: isLegacyImported,
+        markLegacyImported: markLegacyImported,
         list: list,
         entries: entries,
         clearConversation: clearConversation,

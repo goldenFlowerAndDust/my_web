@@ -750,6 +750,14 @@
 
   function renderHistory() {
     const records = filteredHistoryRecords();
+    if (window.ConversationStore && !window.ConversationStore.isLegacyImported("code")) {
+      window.ConversationStore.importEntries(records, "code");
+      const migrated = window.ConversationStore.entries("code");
+      if (migrated.length) {
+        historyRecords = migrated.sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
+        return renderHistory();
+      }
+    }
     const groups = groupHistoryRecords(records);
     if (historyCount) {
       historyCount.textContent = groups.length + " 个对话 / " + records.length + " 条回答";
@@ -792,7 +800,8 @@
 
   async function loadHistory() {
     historyList.innerHTML = '<p class="history-empty">加载历史…</p>';
-    if (window.ConversationStore) {
+    if (window.ConversationStore && window.ConversationStore.isInitialized() &&
+        window.ConversationStore.isLegacyImported("code")) {
       const stored = window.ConversationStore.entries("code");
       historyRecords = stored.sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
       buildHistoryTabs();

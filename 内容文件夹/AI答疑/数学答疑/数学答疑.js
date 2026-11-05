@@ -800,6 +800,13 @@
     }
 
     function renderHistory() {
+        if (window.ConversationStore && !window.ConversationStore.isLegacyImported("math")) {
+            window.ConversationStore.importEntries(historyEntries, "math");
+            var migrated = window.ConversationStore.entries("math").filter(function (entry) {
+                return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;
+            });
+            if (migrated.length) historyEntries = migrated;
+        }
         historyList.innerHTML = "";
         if (!historyEntries.length) {
             historyList.hidden = true;
@@ -981,7 +988,8 @@
             tab.classList.toggle("is-active", active);
         });
 
-        if (window.ConversationStore) {
+        if (window.ConversationStore && window.ConversationStore.isInitialized() &&
+            window.ConversationStore.isLegacyImported("math")) {
             var allStored = window.ConversationStore.entries("math");
             var stored = allStored.filter(function (entry) {
                 return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;

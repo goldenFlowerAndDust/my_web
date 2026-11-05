@@ -782,6 +782,13 @@
     }
 
     function renderHistory() {
+        if (window.ConversationStore && !window.ConversationStore.isLegacyImported("english")) {
+            window.ConversationStore.importEntries(historyEntries, "english");
+            var migrated = window.ConversationStore.entries("english").filter(function (entry) {
+                return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;
+            });
+            if (migrated.length) historyEntries = migrated;
+        }
         historyList.innerHTML = "";
         if (!historyEntries.length) {
             historyEmpty.hidden = false;
@@ -1062,7 +1069,8 @@
             tab.setAttribute("aria-selected", active ? "true" : "false");
         });
 
-        if (window.ConversationStore) {
+        if (window.ConversationStore && window.ConversationStore.isInitialized() &&
+            window.ConversationStore.isLegacyImported("english")) {
             var allStored = window.ConversationStore.entries("english");
             var stored = allStored.filter(function (entry) {
                 return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;
