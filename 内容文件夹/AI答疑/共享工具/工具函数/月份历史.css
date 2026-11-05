@@ -105,12 +105,32 @@
     color: #203047;
     overflow-wrap: anywhere;
 }
+.month-history-detail .month-history-answer h1,
+.month-history-detail .month-history-answer h2,
+.month-history-detail .month-history-answer h3,
+.month-history-detail .month-history-answer h4 {
+    margin: 12px 0 6px !important;
+    color: #203047 !important;
+    font-weight: 700 !important;
+    line-height: 1.45 !important;
+}
+.month-history-detail .month-history-answer h1 { font-size: 18px !important; }
+.month-history-detail .month-history-answer h2 { font-size: 16px !important; }
+.month-history-detail .month-history-answer h3 { font-size: 14px !important; }
+.month-history-detail .month-history-answer h4 { font-size: 13px !important; }
+.month-history-detail .month-history-answer p,
+.month-history-detail .month-history-answer li {
+    font-size: 13px !important;
+    color: #203047 !important;
+}
 .month-history-answer p { margin: 0 0 8px; }
 .month-history-answer pre {
     overflow: auto;
-    padding: 9px;
+    padding: 10px;
+    border: 1px solid #dce4ee;
     border-radius: 6px;
     background: #f4f7fa;
+    color: #203047;
 }
 .month-history-answer code { font-size: 12px; }
 .month-history-question b,
