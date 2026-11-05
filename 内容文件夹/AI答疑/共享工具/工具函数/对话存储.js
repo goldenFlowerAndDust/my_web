@@ -13,6 +13,7 @@
 
     var remoteBase = String(window.AI_CONVERSATION_BASE || "").replace(/\/$/, "");
     var remoteSubject = String(window.AI_CONVERSATION_SUBJECT || "");
+    var remoteToken = "";
     var remoteReady = Promise.resolve();
     var remoteIds = {};
     var syncTimer = null;
@@ -43,7 +44,10 @@
         if (!remoteBase) return Promise.resolve();
         return fetch(remoteUrl("/api/conversations"), {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: Object.assign(
+                { "Content-Type": "application/json" },
+                remoteToken ? { "X-Tutor-Token": remoteToken } : {}
+            ),
             body: JSON.stringify(Object.assign({ subject: remoteSubject }, payload))
         }).then(function (response) {
             if (!response.ok) throw new Error("HTTP " + response.status);
@@ -79,10 +83,21 @@
         }, 250);
     }
 
+    function setRemote(base, subject, token) {
+        remoteBase = String(base || "").replace(/\/$/, "");
+        remoteSubject = String(subject || remoteSubject || "");
+        remoteToken = String(token || "");
+        remoteIds = {};
+        if (!remoteBase || !remoteSubject) return Promise.resolve(false);
+        remoteReady = initializeRemote();
+        return remoteReady;
+    }
+
     function initializeRemote() {
         if (!remoteBase || !remoteSubject) return Promise.resolve();
         return fetch(remoteUrl("/api/conversations?subject=" + encodeURIComponent(remoteSubject)), {
-            cache: "no-store"
+            cache: "no-store",
+            headers: remoteToken ? { "X-Tutor-Token": remoteToken } : {}
         }).then(function (response) {
             if (!response.ok) throw new Error("HTTP " + response.status);
             return response.json();
@@ -417,6 +432,7 @@
         removeRound: removeRound,
         dump: function (subject) { return read(subject || "english"); },
         ready: initializeRemote(),
+        setRemote: setRemote,
         syncNow: queueSync
     };
 })();

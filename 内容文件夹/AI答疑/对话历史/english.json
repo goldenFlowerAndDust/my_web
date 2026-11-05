@@ -2,7 +2,7 @@
   "version": 1,
   "subject": "english",
   "subject_label": "英语",
-  "updated_at": "2026-11-05 20:24:19",
+  "updated_at": "2026-11-05 20:26:03",
   "max_rounds": 8,
   "windows": {
     "legacy-english-20261030043714-18": {
@@ -84,7 +84,7 @@
       "id": "legacy-english-20261105125303-7",
       "title": "解释deep，并回答我，daj和adv是不是同一个意思",
       "created_at": "2026-11-05 20:24:19",
-      "updated_at": "2026-11-05 20:24:19",
+      "updated_at": "2026-11-05 20:26:03",
       "mode": "单词解释",
       "language": "",
       "language_name": "单词解释",
@@ -209,7 +209,7 @@
       "id": "legacy-english-20261105175214-2",
       "title": "能列出，对应中文翻译的例句吗？",
       "created_at": "2026-11-05 20:24:19",
-      "updated_at": "2026-11-05 20:24:19",
+      "updated_at": "2026-11-05 20:26:03",
       "mode": "单词解释",
       "language": "",
       "language_name": "单词解释",
@@ -284,6 +284,56 @@
           "mode": "单词解释",
           "time": "2026-11-05 17:54:53",
           "language_name": "单词解释"
+        }
+      ]
+    },
+    "legacy-english-20261030143322-16": {
+      "id": "legacy-english-20261030143322-16",
+      "title": "解释 contrast 的核心词义、常见搭配和易混词。",
+      "created_at": "2026-11-05 20:26:03",
+      "updated_at": "2026-11-05 20:26:03",
+      "mode": "单词解释",
+      "language": "",
+      "language_name": "单词解释",
+      "topic": "",
+      "max_rounds": 8,
+      "rounds": 1,
+      "messages": [
+        {
+          "role": "user",
+          "content": "解释 contrast 的核心词义、常见搭配和易混词。"
+        },
+        {
+          "role": "assistant",
+          "content": "**结论**：contrast 的核心意思是“对比、对照”，既可作名词也可作动词；专升本最常考的是 **in contrast / in contrast to / by contrast** 这组搭配，以及它和 compare 的辨析。\n\n## 一、读音与词性\n\n- 音标：名词读 /ˈkɒntrɑːst/（英），/ˈkɑːntræst/（美），**重音在第一音节**；动词读 /kənˈtrɑːst/（英），/kənˈtræst/（美），**重音在第二音节**。这一点常被忽略，但听力中会考。\n- 词性：名词（可数/不可数）、动词（及物/不及物）。\n\n## 二、核心中文义\n\n- 名词：对比、对照；明显的差异、反差。\n- 动词：对比、对照（把两者放在一起看差异）；形成反差。\n\n不要记成“比较”，它的重点在**差异**，不是“相似”。\n\n## 三、高频搭配与例句\n\n- **in contrast (to/with sth)**：相比之下；与……形成对比\n  - *In contrast to his brother, Tom is very outgoing.*\n  - 译：和他哥哥相比，汤姆非常外向。\n- **by contrast**：相比之下（常放句首，后接逗号）\n  - *The north is cold and dry; by contrast, the south is warm and wet.*\n  - 译：北方寒冷干燥；相比之下，南方温暖潮湿。\n- **contrast A with B / contrast A and B**：把 A 与 B 对比\n  - *The essay contrasts city life with country life.*\n  - 译：这篇文章把城市生活和乡村生活做了对比。\n- **form/make a sharp contrast with**：与……形成鲜明对比\n  - *Her calm voice formed a sharp contrast with the noisy room.*\n  - 译：她平静的声音和嘈杂的房间形成了鲜明对比。\n\n## 四、易混词辨析\n\n- **contrast vs. compare**\n  - compare 强调“比较”，既可比相同也可比不同，常用 **compare A with B**（比较差异）、**compare A to B**（比作）。\n  - contrast 只强调“差异、反差”。\n  - 例：*Compare these two answers and you will find some similarities.*（找相同点，用 compare）\n  - 例：*The writer contrasts the two answers to show their differences.*（突出不同，用 contrast）\n- **contrast vs. comparison**\n  - **in comparison with** 是“与……相比”，中性；**in contrast to** 强调“截然不同”。\n  - 写作中不要混用：*In contrast with* 不如 *in contrast to* 常见、规范。\n- **形近词：contract**（合同；收缩）、**contrary**（相反的）。注意拼写：contrast 中间是 **a**，contract 中间也是 a，但词尾不同。\n\n## 五、常见错误\n\n- 错：*In contrast of my hometown...* → 对：**In contrast to/with my hometown...**\n- 错：*Contrast with his sister, he is quiet.* → 对：**In contrast to his sister, he is quiet.**（介词短语作状语，不能直接用动词原形开头）\n- 错：把名词重音读成第二音节（名词应重读第一音节）。\n\n## 六、记忆提示与派生词\n\n- 构词：**contra-**（相反）+ **st**（站，同 stand）→“站在相反两边”→对比、反差。\n- 派生：**contrasting**（adj. 形成对比的），如 *contrasting colors*（对比色）。\n- 同根词：contrary（相反的）、contradict（反驳、矛盾），都含“相反”义，可一起记。\n\n## 七、专升本中的考法\n\n- 阅读中常以 **in contrast / by contrast** 引出转折或对比信息，是定位答案的信号词。\n- 写作中可用于对比论证，如 *In contrast, those who...*，比反复用 *but* 更高级。\n- 完形填空常考介词搭配：**in contrast to/with**，不要选 of。",
+          "mode": "单词解释",
+          "time": "2026-10-30 14:33:22",
+          "language_name": "单词解释"
+        }
+      ]
+    },
+    "legacy-english-20261103190316-9": {
+      "id": "legacy-english-20261103190316-9",
+      "title": "请问，能回答问题吗？",
+      "created_at": "2026-11-05 20:26:03",
+      "updated_at": "2026-11-05 20:26:03",
+      "mode": "其他",
+      "language": "",
+      "language_name": "其他",
+      "topic": "",
+      "max_rounds": 8,
+      "rounds": 1,
+      "messages": [
+        {
+          "role": "user",
+          "content": "请问，能回答问题吗？"
+        },
+        {
+          "role": "assistant",
+          "content": "可以。你直接发题目就行。\n\n为了更准确，建议你按下面方式发：\n\n- **单词**：发单词本身，最好附上你遇到它的句子或阅读上下文。\n- **作文**：发题目或题材，注明有没有词数、文体、时间限制。\n- **句子分析**：把原句完整发来，包括标点。\n- **语法/翻译/备考问题**：把原题和你的疑问一起发来，比如“为什么这里用 which 不用 that”。\n\n如果题目信息不全，我会按专升本考试最常见的情况先作答，并在开头说明假设。你发第一题吧。",
+          "mode": "其他",
+          "time": "2026-11-03 19:03:16",
+          "language_name": "其他"
         }
       ]
     }

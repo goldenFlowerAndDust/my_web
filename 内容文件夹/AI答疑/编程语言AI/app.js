@@ -429,6 +429,21 @@
   } catch (error) { /* ignore */ }
 
   initSessions();
+
+  function syncConversationRemote() {
+    if (!window.ConversationStore || !window.ConversationStore.setRemote) return;
+    const config = routeConfig();
+    window.ConversationStore.setRemote(
+      config.local ? "http://127.0.0.1:8769" : config.base,
+      "code",
+      config.local ? "" : config.token
+    );
+  }
+  window.addEventListener("tutor-conversations-ready", function () {
+    loadHistory();
+  });
+  syncConversationRemote();
+
   window.ProgrammingCloseConversation = function (id) {
     closeSession(id);
     if (window.ConversationStore) window.ConversationStore.clearConversation(id, "code");

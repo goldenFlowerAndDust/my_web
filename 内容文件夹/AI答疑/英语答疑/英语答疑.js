@@ -1331,4 +1331,19 @@
     window.TutorReloadHistory = function () {
         loadHistory(historyCategory);
     };
+
+    function syncConversationRemote() {
+        if (!window.ConversationStore || !window.ConversationStore.setRemote) return;
+        var cloud = connection.mode === "cloud";
+        var profile = activeProfile();
+        window.ConversationStore.setRemote(
+            cloud ? profile.url : "http://127.0.0.1:8767",
+            "english",
+            cloud ? profile.token : ""
+        );
+    }
+    window.addEventListener("tutor-conversations-ready", function () {
+        loadHistory(historyCategory);
+    });
+    syncConversationRemote();
 })();

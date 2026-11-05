@@ -1306,4 +1306,19 @@
     window.TutorReloadHistory = function () {
         loadHistory(historyCategory, historyTopic);
     };
+
+    function syncConversationRemote() {
+        if (!window.ConversationStore || !window.ConversationStore.setRemote) return;
+        var cloud = connection.mode === "cloud";
+        var profile = activeProfile();
+        window.ConversationStore.setRemote(
+            cloud ? profile.url : "http://127.0.0.1:8768",
+            "math",
+            cloud ? profile.token : ""
+        );
+    }
+    window.addEventListener("tutor-conversations-ready", function () {
+        loadHistory(historyCategory, historyTopic);
+    });
+    syncConversationRemote();
 })();
