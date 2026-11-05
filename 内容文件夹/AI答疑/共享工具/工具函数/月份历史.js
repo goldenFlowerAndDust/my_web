@@ -297,6 +297,17 @@
             return;
         }
         var lastDate = "";
+        function metaText(item, roundIndex) {
+            var hasRound = Array.isArray(item.round_tokens) && item.round_tokens.length > roundIndex;
+            var tokens = hasRound ? Number(item.round_tokens[roundIndex] || 0) : Number(item.tokens || 0);
+            var costText = Array.isArray(item.round_cost_texts) && item.round_cost_texts.length > roundIndex
+                ? item.round_cost_texts[roundIndex]
+                : (item.cost_text || "");
+            var tokenText = tokens > 0 ? tokens.toLocaleString("zh-CN") + " tokens · " : "";
+            var moneyText = costText ? costText + " · " : "";
+            return tokenText + moneyText + (item.updated_at || item.created_at || "") + " · " + Number(item.rounds || 0) + " 轮";
+        }
+
         windows.forEach(function (item) {
             var date = String(item.updated_at || item.created_at || "").slice(0, 10);
             if (date && date !== lastDate) {
@@ -311,14 +322,10 @@
             card.setAttribute("data-window-id", item.id);
             var initialRound = Math.max(0, Number(item.rounds || 1) - 1);
             var initialQuestion = (Array.isArray(item.questions) && item.questions[initialRound]) || item.title || "（无问题）";
-            var tokenText = Number(item.tokens || 0) > 0
-                ? Number(item.tokens).toLocaleString("zh-CN") + " tokens · " : "";
-            var costText = item.cost_text ? item.cost_text + " · " : "";
             card.innerHTML =
                 '<div class="month-history-card-head">' +
                 '<span class="month-history-card-title">' + questionHtml(initialQuestion) + "</span>" +
-                '<span class="month-history-card-meta">' + escapeHtml(tokenText + costText + (item.updated_at || item.created_at || "")) +
-                " · " + Number(item.rounds || 0) + " 轮</span>" +
+                '<span class="month-history-card-meta">' + escapeHtml(metaText(item, initialRound)) + "</span>" +
                 "</div>" +
                 '<div class="month-history-card-actions">' +
                 (Number(item.rounds || 0) > 0
@@ -348,6 +355,8 @@
                         title.innerHTML = questionHtml(text);
                         if (window.TutorRenderMath) window.TutorRenderMath(title);
                     }
+                    var meta = card.querySelector(".month-history-card-meta");
+                    if (meta) meta.textContent = metaText(item, selected);
                     var detail = card.querySelector(".month-history-detail");
                     if (!detail.hidden) toggleDetail(card, item, true);
                 });

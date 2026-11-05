@@ -53,13 +53,15 @@ def json_bytes(data: Any) -> bytes:
     return json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
 
 
-def usage_cost(window: dict[str, Any]) -> tuple[int, float]:
+def usage_cost(window: dict[str, Any]) -> tuple[int, float, list[int], list[float]]:
     total = 0
     cost = 0.0
+    round_tokens: list[int] = []
+    round_costs: list[float] = []
     for message in window.get("messages") or []:
-        if message.get("role") != "assistant" or not isinstance(message.get("usage"), dict):
+        if message.get("role") != "assistant":
             continue
-        usage = message["usage"]
+        usage = message.get("usage") if isinstance(message.get("usage"), dict) else {}
         prompt = int(usage.get("prompt_tokens") or 0)
         completion = int(usage.get("completion_tokens") or 0)
         count = int(usage.get("total_tokens") or 0) or prompt + completion
@@ -67,9 +69,12 @@ def usage_cost(window: dict[str, Any]) -> tuple[int, float]:
         miss = int(usage.get("prompt_cache_miss_tokens") or 0)
         if not hit and not miss:
             miss = prompt
+        round_cost = (hit / 1000000.0) * 0.5 + (miss / 1000000.0) * 2.0 + (completion / 1000000.0) * 8.0
+        round_tokens.append(count)
+        round_costs.append(round_cost)
         total += count
-        cost += (hit / 1000000.0) * 0.5 + (miss / 1000000.0) * 2.0 + (completion / 1000000.0) * 8.0
-    return total, cost
+        cost += round_cost
+    return total, cost, round_tokens, round_costs
 
 
 def format_money(value: float) -> str:
@@ -133,7 +138,7 @@ def build_subject(subject: str) -> dict[str, Any]:
             chunk_no += 1
 
         for window in items:
-            token_total, token_cost = usage_cost(window)
+            token_total, token_cost, round_tokens, round_costs = usage_cost(window)
             window_raw = json_bytes(window)
             estimated = current_bytes + len(window_raw) + 2
             if current and (len(current) >= MAX_WINDOWS_PER_CHUNK or estimated > MAX_CHUNK_BYTES):
@@ -150,6 +155,8 @@ def build_subject(subject: str) -> dict[str, Any]:
                 "tokens": token_total,
                 "cost": round(token_cost, 8),
                 "cost_text": "≈RMB " + format_money(token_cost).lstrip("¥"),
+                "round_tokens": round_tokens,
+                "round_cost_texts": ["≈RMB " + format_money(value).lstrip("¥") for value in round_costs],
                 "subject": subject,
                 "language": str(window.get("language") or ""),
                 "language_name": str(window.get("language_name") or ""),

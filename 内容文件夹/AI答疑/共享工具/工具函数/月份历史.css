@@ -249,3 +249,13 @@
 }
 .month-history-detail .month-history-answer li::marker { color: #0b6672; }
 .month-history-dark .month-history-detail .month-history-answer li::marker { color: #7fe3ee; }
+
+
+.month-history-card-meta {
+    color: #53697d !important;
+    font-size: 12px;
+    font-weight: 500;
+}
+.month-history-dark .month-history-card-meta {
+    color: #c9dcec !important;
+}
