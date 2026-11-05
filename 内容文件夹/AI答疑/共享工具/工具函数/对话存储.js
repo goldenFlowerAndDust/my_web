@@ -103,7 +103,7 @@
 
     function resetClientHistoryOnce() {
         if (!window.__AI_HISTORY_LIGHT__) return;
-        var marker = "aiTutor.history.clean.v2";
+        var marker = "aiTutor.history.clean.v3";
         try {
             if (localStorage.getItem(marker) === "1") return;
             var remove = [];
