@@ -110,19 +110,34 @@ def build_prompt(language: str, question: str) -> tuple[str, str]:
     return system, user
 
 
-def call_deepseek(system: str, user: str) -> str:
+def clean_history(history: object, max_messages: int = 40) -> list[dict[str, str]]:
+    if not isinstance(history, list):
+        return []
+    result: list[dict[str, str]] = []
+    for item in history[-max_messages:]:
+        if not isinstance(item, dict):
+            continue
+        role = str(item.get("role") or "").strip()
+        content = str(item.get("content") or "").strip()
+        if role not in {"user", "assistant"} or not content:
+            continue
+        result.append({"role": role, "content": content[:12000]})
+    return result
+
+
+def call_deepseek(system: str, user: str, history: object = None) -> str:
     key = read_api_key()
     if not key:
         raise ValueError(
             "缺少 DeepSeek API Key。请写入 内容文件夹/AI答疑/共享配置/API.txt，"
             "或设置环境变量 DEEPSEEK_API_KEY。"
         )
+    messages = [{"role": "system", "content": system}]
+    messages.extend(clean_history(history))
+    messages.append({"role": "user", "content": user})
     payload = {
         "model": MODEL,
-        "messages": [
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ],
+        "messages": messages,
         "temperature": 0.3,
         "max_tokens": 3200,
     }
@@ -195,7 +210,7 @@ def read_history(language: str = "", limit: int = 30) -> list[dict[str, Any]]:
     return records[-max(1, min(limit, 100)):][::-1]
 
 
-def ask(language: str, question: str) -> dict[str, Any]:
+def ask(language: str, question: str, history: object = None) -> dict[str, Any]:
     language = str(language or "").strip()
     question = str(question or "").strip()
     if language not in BY_ID:
@@ -205,7 +220,7 @@ def ask(language: str, question: str) -> dict[str, Any]:
     if len(question) > 20000:
         raise ValueError("问题太长，请精简到 20000 字以内。")
     system, user = build_prompt(language, question)
-    answer = call_deepseek(system, user)
+    answer = call_deepseek(system, user, history)
     append_history(language, question, answer)
     return {
         "ok": True,
@@ -284,7 +299,7 @@ class Handler(SimpleHTTPRequestHandler):
             json_response(self, 400, {"ok": False, "error": "请求 JSON 格式不正确。"})
             return
         try:
-            result = ask(payload.get("language"), payload.get("question"))
+            result = ask(payload.get("language"), payload.get("question"), payload.get("history"))
             json_response(self, 200, result)
         except ValueError as exc:
             json_response(self, 400, {"ok": False, "error": str(exc)})

@@ -115,6 +115,7 @@ class Handler(SimpleHTTPRequestHandler):
                     payload.get("mode"),
                     payload.get("question"),
                     payload.get("topic"),
+                    payload.get("history"),
                 )
             else:
                 result = delete_tutor_log(

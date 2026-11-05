@@ -444,6 +444,17 @@ async function readJsonBody(request) {
   return data;
 }
 
+function cleanHistory(history, maxMessages) {
+  if (!Array.isArray(history)) return [];
+  return history.slice(-maxMessages).map((item) => {
+    if (!item || typeof item !== "object") return null;
+    const role = String(item.role || "").trim();
+    const content = String(item.content || "").trim();
+    if ((role !== "user" && role !== "assistant") || !content) return null;
+    return { role, content: content.slice(0, 12000) };
+  }).filter(Boolean);
+}
+
 async function handleTutor(request, env, preview = false) {
   if (!authorized(request, env)) {
     return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
@@ -469,6 +480,7 @@ async function handleTutor(request, env, preview = false) {
   const mode = normalizeMode(payload.mode, config.categories, config.aliases);
   const topic = subject === "math" ? normalizeTopic(payload.topic) : "";
   const question = String(payload.question || "").trim();
+  const history = cleanHistory(payload.history, 16);
   if (!mode) {
     return json({
       ok: false,
@@ -512,6 +524,7 @@ async function handleTutor(request, env, preview = false) {
         model,
         messages: [
           { role: "system", content: config.prompt },
+          ...history,
           {
             role: "user",
             content: JSON.stringify({ subject, mode, topic, question }, null, 0),
@@ -1274,6 +1287,7 @@ async function handleCodeTutor(request, env) {
     return json({ ok: false, error: "未知语言，请使用：" + CODE_IDS.join(" / ") + "。" }, 400, request, env);
   }
   const question = String(payload.question || "").trim();
+  const history = cleanHistory(payload.history, 40);
   if (!question) {
     return json({ ok: false, error: "请输入要问的问题。" }, 400, request, env);
   }
@@ -1311,6 +1325,7 @@ async function handleCodeTutor(request, env) {
         model,
         messages: [
           { role: "system", content: config.prompt },
+          ...history,
           { role: "user", content: JSON.stringify({ subject: "code", language, question }) },
         ],
         temperature: 0.3,

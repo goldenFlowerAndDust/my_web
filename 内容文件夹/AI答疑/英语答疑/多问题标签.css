@@ -38,3 +38,12 @@
     .session-tab { max-width: 160px; }
     .session-title { max-width: 105px; }
 }
+
+
+.context-hint {
+    margin-left: 4px;
+    color: #697386;
+    font-size: 11px;
+    white-space: nowrap;
+}
+.context-hint.is-full { color: #b03a2e; font-weight: 700; }

@@ -670,6 +670,10 @@
 
     async function submitQuestion() {
         if (busy) return;
+        if (window.TutorTabs && !window.TutorTabs.canAsk()) {
+            showToast("本对话已达到 " + window.TutorTabs.maxRounds + " 轮上限，请点击 + 新建对话。", true);
+            return;
+        }
         var rawQuestion = questionEl.value.trim();
         if (!rawQuestion) {
             showToast("先输入题目或问题。", true);

@@ -652,6 +652,10 @@
 
     async function submitQuestion() {
         if (busy) return;
+        if (window.TutorTabs && !window.TutorTabs.canAsk()) {
+            showToast("本对话已达到 " + window.TutorTabs.maxRounds + " 轮上限，请点击 + 新建对话。", true);
+            return;
+        }
         if (!connectionReady()) {
             showToast("先配置云端 Worker 地址和访问口令。", true);
             openConnectionDialog();

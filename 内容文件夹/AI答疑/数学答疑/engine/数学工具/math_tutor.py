@@ -198,7 +198,21 @@ def _append_log(record: dict[str, Any], category: str) -> None:
         fh.write(line + "\n")
 
 
-def ask_tutor(mode: str, question: str, topic: str = "其他") -> dict[str, Any]:
+def clean_history(history: object, max_messages: int = 16) -> list[dict[str, str]]:
+    if not isinstance(history, list):
+        return []
+    result: list[dict[str, str]] = []
+    for item in history[-max_messages:]:
+        if not isinstance(item, dict):
+            continue
+        role = str(item.get("role") or "").strip()
+        content = str(item.get("content") or "").strip()
+        if role in {"user", "assistant"} and content:
+            result.append({"role": role, "content": content[:12000]})
+    return result
+
+
+def ask_tutor(mode: str, question: str, topic: str = "其他", history: object = None) -> dict[str, Any]:
     category = normalize_mode(mode)
     topic = normalize_topic(topic)
     question = str(question or "").strip()
@@ -208,17 +222,17 @@ def ask_tutor(mode: str, question: str, topic: str = "其他") -> dict[str, Any]
         raise TutorError("题目太长了，请控制在 4000 字以内。")
 
     key = read_api_key()
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    messages.extend(clean_history(history))
+    messages.append({
+        "role": "user",
+        "content": json.dumps(
+            {"mode": category, "topic": topic, "question": question}, ensure_ascii=False
+        ),
+    })
     payload = {
         "model": MODEL,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {
-                "role": "user",
-                "content": json.dumps(
-                    {"mode": category, "topic": topic, "question": question}, ensure_ascii=False
-                ),
-            },
-        ],
+        "messages": messages,
         "temperature": 0.2,
         "max_tokens": 4000,
     }

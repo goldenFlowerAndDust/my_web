@@ -113,7 +113,21 @@ def _append_log(record: dict[str, Any], category: str) -> None:
         fh.write(line + "\n")
 
 
-def ask_tutor(mode: str, question: str) -> dict[str, Any]:
+def clean_history(history: object, max_messages: int = 16) -> list[dict[str, str]]:
+    if not isinstance(history, list):
+        return []
+    result: list[dict[str, str]] = []
+    for item in history[-max_messages:]:
+        if not isinstance(item, dict):
+            continue
+        role = str(item.get("role") or "").strip()
+        content = str(item.get("content") or "").strip()
+        if role in {"user", "assistant"} and content:
+            result.append({"role": role, "content": content[:12000]})
+    return result
+
+
+def ask_tutor(mode: str, question: str, history: object = None) -> dict[str, Any]:
     category = normalize_mode(mode)
     question = str(question or "").strip()
     if not question:
@@ -126,17 +140,17 @@ def ask_tutor(mode: str, question: str) -> dict[str, Any]:
     except ArchiveError as exc:
         raise TutorError(str(exc)) from exc
 
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    messages.extend(clean_history(history))
+    messages.append({
+        "role": "user",
+        "content": json.dumps(
+            {"mode": category, "question": question}, ensure_ascii=False
+        ),
+    })
     payload = {
         "model": MODEL,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {
-                "role": "user",
-                "content": json.dumps(
-                    {"mode": category, "question": question}, ensure_ascii=False
-                ),
-            },
-        ],
+        "messages": messages,
         "temperature": 0.35,
         "max_tokens": 3200,
     }

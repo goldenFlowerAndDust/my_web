@@ -17,6 +17,7 @@
 
     var KEY = "aiTutor.sessions." + (location.pathname.indexOf("/数学答疑/") >= 0 ? "math" : "english");
     var MAX = 8;
+    var MAX_ROUNDS = 8;
     var sessions = [];
     var active = "";
     var seq = 0;
@@ -56,6 +57,7 @@
         return {
             id: "t" + (++seq).toString(36),
             title: "新问题",
+            messages: [],
             question: "",
             mode: mode() || "",
             answerState: "empty",
@@ -92,7 +94,12 @@
             var raw = sessionStorage.getItem(KEY);
             var list = raw ? JSON.parse(raw) : null;
             if (Array.isArray(list)) {
-                sessions = list.filter(function (s) { return s && typeof s === "object" && s.id; }).slice(0, MAX);
+                sessions = list.filter(function (s) { return s && typeof s === "object" && s.id; }).slice(0, MAX).map(function (s) {
+                    s.messages = Array.isArray(s.messages) ? s.messages.filter(function (m) {
+                        return m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string";
+                    }).slice(-MAX_ROUNDS * 2) : [];
+                    return s;
+                });
             }
         } catch (e) { /* ignore */ }
         if (!sessions.length) sessions = [make()];
@@ -105,6 +112,7 @@
                 '<span class="session-title">' + escape(s.title) + '</span>' +
                 '<button type="button" class="session-close" data-close="' + s.id + '" title="关闭标签">×</button></div>';
         }).join("");
+        updateHint();
     }
 
     function escape(value) {
@@ -130,11 +138,62 @@
         if (answerTime) answerTime.textContent = s.answerTime || "—";
         if (answerMeta) answerMeta.textContent = s.answerMeta || "";
         if (status) status.textContent = s.status || "";
+        updateHint();
     }
 
     function busy() {
         return askBtn && askBtn.disabled;
     }
+
+    function roundsOf(session) {
+        return Math.floor((session && session.messages ? session.messages.length : 0) / 2);
+    }
+
+    function canAsk() {
+        var s = current();
+        return !!s && roundsOf(s) < MAX_ROUNDS;
+    }
+
+    function historyFor(id) {
+        var s = sessions.find(function (item) { return item.id === id; }) || current();
+        return s && Array.isArray(s.messages) ? s.messages.slice(-MAX_ROUNDS * 2) : [];
+    }
+
+    function appendTurnTo(id, questionText, answerText) {
+        var s = sessions.find(function (item) { return item.id === id; });
+        if (!s || !questionText || !answerText) return;
+        s.messages = (Array.isArray(s.messages) ? s.messages : []).concat([
+            { role: "user", content: String(questionText) },
+            { role: "assistant", content: String(answerText) }
+        ]).slice(-MAX_ROUNDS * 2);
+        save();
+        render();
+    }
+
+    var contextHint = document.createElement("span");
+    contextHint.className = "context-hint";
+    contextHint.id = "contextHint";
+    addEl.parentNode.appendChild(contextHint);
+
+    function updateHint() {
+        var s = current();
+        if (!s) return;
+        var rounds = roundsOf(s);
+        contextHint.textContent = rounds >= MAX_ROUNDS
+            ? "本对话已满 " + MAX_ROUNDS + " 轮，请新建对话"
+            : "本对话 " + rounds + "/" + MAX_ROUNDS + " 轮";
+        contextHint.classList.toggle("is-full", rounds >= MAX_ROUNDS);
+    }
+
+    window.TutorTabs = {
+        maxRounds: MAX_ROUNDS,
+        activeId: function () { return active; },
+        canAsk: canAsk,
+        history: function () { return historyFor(active); },
+        historyFor: historyFor,
+        appendTurnTo: appendTurnTo,
+        rounds: function () { return roundsOf(current()); }
+    };
 
     function go(id) {
         if (!id || id === active) return;

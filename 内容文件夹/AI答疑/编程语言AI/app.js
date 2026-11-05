@@ -120,6 +120,7 @@
   let activeSessionId = "";
   const SESSION_KEY = "programmingTutor.sessions-v1";
   const MAX_SESSIONS = 8;
+  const MAX_ROUNDS = 20;
 
   function emptyAnswerHtml() {
     return '<div class="empty-state"><strong>等待提问</strong><p>输入问题后开始。每个标签会保留自己的问题和回答。</p></div>';
@@ -139,7 +140,8 @@
       answerHtml: emptyAnswerHtml(),
       answerTime: "",
       busy: false,
-      error: false
+      error: false,
+      messages: []
     };
   }
 
@@ -174,7 +176,13 @@
     if (Array.isArray(stored)) {
       sessions = stored.filter((item) => item && typeof item === "object" && item.id)
         .slice(0, MAX_SESSIONS)
-        .map((item) => Object.assign(newSession(item.language), item));
+        .map((item) => {
+          const session = Object.assign(newSession(item.language), item);
+          session.messages = Array.isArray(session.messages) ? session.messages.filter((m) =>
+            m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string"
+          ).slice(-MAX_ROUNDS * 2) : [];
+          return session;
+        });
       // 刷新后没有正在进行的请求，清掉上次遗留的忙碌状态。
       sessions.forEach((item) => { item.busy = false; });
       activeSessionId = localStorage.getItem("programmingTutor.activeSession") || "";
@@ -212,7 +220,7 @@
     questionInput.value = session.question || "";
     answerEl.innerHTML = session.answerHtml || emptyAnswerHtml();
     answerTime.textContent = session.answerTime || "";
-    askBtn.disabled = Boolean(session.busy);
+    askBtn.disabled = Boolean(session.busy) || (Array.isArray(session.messages) && session.messages.length >= MAX_ROUNDS * 2);
     if (session.busy) {
       setStatus("正在请求 AI…", "");
     } else if (session.error) {
@@ -738,6 +746,10 @@
   async function ask() {
     const session = currentSession();
     if (!session || session.busy) return;
+    if (Array.isArray(session.messages) && session.messages.length >= MAX_ROUNDS * 2) {
+      setStatus("本对话已达到 " + MAX_ROUNDS + " 轮上限，请点击 + 新建对话。", "error");
+      return;
+    }
     const question = questionInput.value.trim();
     if (!question) {
       setStatus("请先输入问题。", "error");
@@ -762,16 +774,24 @@
       const data = await fetchJson(path, {
         method: "POST",
         headers: { "Content-Type": "application/json; charset=utf-8" },
-        body: JSON.stringify({ language: session.language, question: question })
+        body: JSON.stringify({
+          language: session.language,
+          question: question,
+          history: (session.messages || []).slice(-MAX_ROUNDS * 2)
+        })
       });
       session.answerHtml = renderMarkdown(data.answer || "");
       session.answerTime = (data.language_name || "") + " · " + (data.time || "");
+      session.messages = (session.messages || []).concat([
+        { role: "user", content: question },
+        { role: "assistant", content: data.answer || "" }
+      ]).slice(-MAX_ROUNDS * 2);
       session.busy = false;
       session.error = false;
       if (session.id === activeSessionId) {
         answerEl.innerHTML = session.answerHtml;
         answerTime.textContent = session.answerTime;
-        setStatus("回答完成。", "ok");
+        setStatus("回答完成。本对话 " + Math.floor((session.messages || []).length / 2) + "/" + MAX_ROUNDS + " 轮", "ok");
         askBtn.disabled = false;
         answerEl.scrollIntoView({ behavior: "smooth", block: "start" });
         // 历史刷新不阻塞回答和按钮恢复。
@@ -794,7 +814,7 @@
       }
     } finally {
       session.busy = false;
-      if (session.id === activeSessionId) askBtn.disabled = false;
+      if (session.id === activeSessionId) askBtn.disabled = Array.isArray(session.messages) && session.messages.length >= MAX_ROUNDS * 2;
       renderSessionTabs();
       saveSessions();
     }
