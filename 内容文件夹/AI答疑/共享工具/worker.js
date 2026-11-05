@@ -1277,6 +1277,126 @@ async function handleLogDelete(request, env) {
   }
 }
 
+
+const CONVERSATION_SUBJECTS = {
+  english: { label: "英语", max: 8 },
+  math: { label: "数学", max: 8 },
+  code: { label: "编程", max: 20 },
+};
+
+function emptyConversationDocument(subject) {
+  const config = CONVERSATION_SUBJECTS[subject];
+  return {
+    version: 1,
+    subject,
+    subject_label: config.label,
+    updated_at: new Date().toISOString(),
+    max_rounds: config.max,
+    windows: {},
+  };
+}
+
+function cleanConversationMessages(messages) {
+  if (!Array.isArray(messages)) return [];
+  return messages.filter((m) => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string" && m.content)
+    .map((m) => {
+      const item = { role: m.role, content: m.content };
+      for (const key of ["html", "mode", "time", "language", "language_name"]) {
+        if (m[key]) item[key] = String(m[key]);
+      }
+      if (m.usage && typeof m.usage === "object") item.usage = m.usage;
+      return item;
+    });
+}
+
+async function handleConversations(request, env) {
+  if (!authorized(request, env)) {
+    return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);
+  }
+  if (!env.TUTOR_KV) {
+    return json({ ok: false, error: "云端未绑定 TUTOR_KV。" }, 500, request, env);
+  }
+  const url = new URL(request.url);
+  let payload = {};
+  if (request.method === "POST") {
+    try { payload = await readJsonBody(request); } catch (error) {
+      return json({ ok: false, error: error.message || "请求体不合法。" }, 400, request, env);
+    }
+  }
+  const subject = String(payload.subject || url.searchParams.get("subject") || "").trim();
+  const config = CONVERSATION_SUBJECTS[subject];
+  if (!config) return json({ ok: false, error: "未知科目。" }, 400, request, env);
+  const key = "conversations:" + subject;
+  let doc = null;
+  try {
+    doc = await env.TUTOR_KV.get(key, "json");
+  } catch (error) { /* ignore */ }
+  if (!doc || typeof doc !== "object" || !doc.windows) doc = emptyConversationDocument(subject);
+  doc.subject = subject;
+  doc.subject_label = config.label;
+  doc.max_rounds = config.max;
+
+  if (request.method === "GET") {
+    return json({ ok: true, document: doc }, 200, request, env);
+  }
+  if (request.method !== "POST") {
+    return json({ ok: false, error: "只支持 GET/POST。" }, 405, request, env);
+  }
+  const action = String(payload.action || "upsert");
+  const windowId = String(payload.window_id || "").trim();
+  if (action === "upsert") {
+    if (!windowId) return json({ ok: false, error: "window_id 不能为空。" }, 400, request, env);
+    const messages = cleanConversationMessages(payload.messages);
+    const rounds = Math.floor(messages.length / 2);
+    if (rounds > config.max) {
+      return json({ ok: false, error: config.label + "最多 " + config.max + " 轮。" }, 400, request, env);
+    }
+    if (!messages.length) {
+      delete doc.windows[windowId];
+    } else {
+      doc.windows[windowId] = {
+        id: windowId,
+        title: String(payload.title || "新对话").slice(0, 120),
+        created_at: (doc.windows[windowId] && doc.windows[windowId].created_at) || new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        mode: String(payload.mode || ""),
+        language: String(payload.language || ""),
+        language_name: String(payload.language_name || ""),
+        topic: String(payload.topic || ""),
+        max_rounds: config.max,
+        rounds,
+        messages,
+      };
+    }
+  } else if (action === "remove_round") {
+    const window = doc.windows[windowId];
+    if (!window) return json({ ok: false, error: "窗口不存在。" }, 404, request, env);
+    const messages = cleanConversationMessages(window.messages);
+    const start = Math.max(0, Number(payload.round) || 0) * 2;
+    if (start + 1 >= messages.length) return json({ ok: false, error: "轮次不存在。" }, 404, request, env);
+    messages.splice(start, 2);
+    if (!messages.length) delete doc.windows[windowId];
+    else {
+      window.messages = messages;
+      window.rounds = Math.floor(messages.length / 2);
+      window.updated_at = new Date().toISOString();
+      const firstUser = messages.find((m) => m.role === "user");
+      if (firstUser) window.title = String(firstUser.content || "新对话").slice(0, 120);
+    }
+  } else if (action === "delete_window") {
+    delete doc.windows[windowId];
+  } else {
+    return json({ ok: false, error: "未知对话历史操作。" }, 400, request, env);
+  }
+  doc.updated_at = new Date().toISOString();
+  try {
+    await env.TUTOR_KV.put(key, JSON.stringify(doc));
+  } catch (error) {
+    return json({ ok: false, error: "云端对话历史写入失败。" }, 500, request, env);
+  }
+  return json({ ok: true, document: doc }, 200, request, env);
+}
+
 async function handleCodeTutor(request, env) {
   if (!authorized(request, env)) {
     return json({ ok: false, error: "访问口令不正确。" }, 401, request, env);

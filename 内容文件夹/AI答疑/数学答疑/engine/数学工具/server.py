@@ -18,8 +18,11 @@ from urllib.parse import unquote, urlparse
 
 TOOL_DIR = Path(__file__).resolve().parent
 CONTENT_ROOT = Path(__file__).resolve().parents[4]
-BASE = CONTENT_ROOT / "专升本备考" / "备考专升本数学"
+AI_ROOT = CONTENT_ROOT / "AI答疑"
+CONVERSATION_DIR = AI_ROOT / "共享配置"
 sys.path.insert(0, str(TOOL_DIR))
+sys.path.insert(0, str(CONVERSATION_DIR))
+BASE = CONTENT_ROOT / "专升本备考" / "备考专升本数学"
 
 from math_tutor import (  # noqa: E402
     TutorError,
@@ -28,11 +31,35 @@ from math_tutor import (  # noqa: E402
     health,
     read_tutor_logs,
 )
+from 对话历史 import ConversationError, delete_window, read_document, remove_round, upsert_window  # noqa: E402
 
 DEFAULT_PORT = 8768
 SHARED_DIR = Path(__file__).resolve().parent.parent.parent.parent / "共享工具"
 if str(SHARED_DIR) not in sys.path:
     sys.path.insert(0, str(SHARED_DIR))
+
+
+def _conversation_action(payload: dict) -> dict:
+    action = str(payload.get("action") or "upsert")
+    if action == "upsert":
+        window = upsert_window(
+            "math",
+            payload.get("window_id"),
+            payload.get("title") or "新对话",
+            payload.get("messages") or [],
+            mode=str(payload.get("mode") or ""),
+            language=str(payload.get("language") or ""),
+            language_name=str(payload.get("language_name") or ""),
+            topic=str(payload.get("topic") or ""),
+        )
+        return {"ok": True, "window": window, "document": read_document("math")}
+    if action == "remove_round":
+        window = remove_round("math", payload.get("window_id"), int(payload.get("round") or 0))
+        return {"ok": True, "window": window, "document": read_document("math")}
+    if action == "delete_window":
+        deleted = delete_window("math", payload.get("window_id"))
+        return {"ok": True, "deleted": deleted, "document": read_document("math")}
+    raise ConversationError("未知对话历史操作：%s" % action)
 
 
 def refresh_archive() -> None:
@@ -76,6 +103,12 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):  # noqa: N802
         path = unquote(urlparse(self.path).path)
+        if path == "/api/conversations":
+            try:
+                self._send_json(200, {"ok": True, "document": read_document("math")})
+            except ConversationError as exc:
+                self._send_json(400, {"ok": False, "error": str(exc)})
+            return
         if path == "/api/health":
             self._send_json(200, health())
             return
@@ -100,7 +133,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):  # noqa: N802
         path = urlparse(self.path).path
-        if path not in {"/api/tutor", "/api/tutor-log-delete"}:
+        if path not in {"/api/tutor", "/api/tutor-log-delete", "/api/conversations"}:
             self._send_json(404, {"ok": False, "error": "未知接口。"})
             return
         try:
@@ -110,6 +143,11 @@ class Handler(SimpleHTTPRequestHandler):
             payload = json.loads(self.rfile.read(length).decode("utf-8") or "{}")
             if not isinstance(payload, dict):
                 raise ValueError("请求体必须是 JSON 对象。")
+            if path == "/api/conversations":
+                result = _conversation_action(payload)
+                self._send_json(200, result)
+                return
+
             if path == "/api/tutor":
                 result = ask_tutor(
                     payload.get("mode"),

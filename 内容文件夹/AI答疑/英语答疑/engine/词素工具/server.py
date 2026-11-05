@@ -25,17 +25,44 @@ from urllib.parse import parse_qs, unquote, urlparse
 
 TOOL_DIR = Path(__file__).resolve().parent
 CONTENT_ROOT = Path(__file__).resolve().parents[4]
-BASE = CONTENT_ROOT / "专升本备考" / "备考专升本英语"
+AI_ROOT = CONTENT_ROOT / "AI答疑"
+CONVERSATION_DIR = AI_ROOT / "共享配置"
 sys.path.insert(0, str(TOOL_DIR))
+sys.path.insert(0, str(CONVERSATION_DIR))
+BASE = CONTENT_ROOT / "专升本备考" / "备考专升本英语"
 
 from word_archiver import ArchiveError, analyze_only, apply_review_updates, archive_word, archive_word_pair, audit_word_json, check_word, health  # noqa: E402
 from english_tutor import TutorError, ask_tutor, read_tutor_logs  # noqa: E402
 from archive_added_logs import refresh as refresh_added_logs, recover_missing_extra_entries  # noqa: E402
+from 对话历史 import ConversationError, delete_window, read_document, remove_round, upsert_window  # noqa: E402
 
 DEFAULT_PORT = 8767
 SHARED_DIR = Path(__file__).resolve().parent.parent.parent.parent / "共享工具"
 if str(SHARED_DIR) not in sys.path:
     sys.path.insert(0, str(SHARED_DIR))
+
+
+def _conversation_action(payload: dict) -> dict:
+    action = str(payload.get("action") or "upsert")
+    if action == "upsert":
+        window = upsert_window(
+            "english",
+            payload.get("window_id"),
+            payload.get("title") or "新对话",
+            payload.get("messages") or [],
+            mode=str(payload.get("mode") or ""),
+            language=str(payload.get("language") or ""),
+            language_name=str(payload.get("language_name") or ""),
+            topic=str(payload.get("topic") or ""),
+        )
+        return {"ok": True, "window": window, "document": read_document("english")}
+    if action == "remove_round":
+        window = remove_round("english", payload.get("window_id"), int(payload.get("round") or 0))
+        return {"ok": True, "window": window, "document": read_document("english")}
+    if action == "delete_window":
+        deleted = delete_window("english", payload.get("window_id"))
+        return {"ok": True, "deleted": deleted, "document": read_document("english")}
+    raise ConversationError("未知对话历史操作：%s" % action)
 
 
 def refresh_archive() -> None:
@@ -87,6 +114,12 @@ class Handler(SimpleHTTPRequestHandler):
     # ------------------------------------------------------------------
     def do_GET(self):  # noqa: N802
         path = unquote(urlparse(self.path).path)
+        if path == "/api/conversations":
+            try:
+                self._send_json(200, {"ok": True, "document": read_document("english")})
+            except ConversationError as exc:
+                self._send_json(400, {"ok": False, "error": str(exc)})
+            return
         if path == "/api/health":
             self._send_json(200, health())
             return
@@ -143,7 +176,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):  # noqa: N802
         path = unquote(urlparse(self.path).path)
-        if path not in {"/api/analyze", "/api/archive", "/api/check", "/api/review", "/api/tutor", "/api/json-audit"}:
+        if path not in {"/api/analyze", "/api/archive", "/api/check", "/api/review", "/api/tutor", "/api/json-audit", "/api/conversations"}:
             self._send_json(404, {"ok": False, "error": "未知接口"})
             return
 
@@ -155,6 +188,11 @@ class Handler(SimpleHTTPRequestHandler):
             payload = json.loads(raw)
             if not isinstance(payload, dict):
                 raise ArchiveError("请求体必须是 JSON 对象。")
+
+            if path == "/api/conversations":
+                result = _conversation_action(payload)
+                self._send_json(200, result)
+                return
 
             if path == "/api/tutor":
                 result = ask_tutor(payload.get("mode"), payload.get("question"), payload.get("history"), payload.get("conversation_id"))

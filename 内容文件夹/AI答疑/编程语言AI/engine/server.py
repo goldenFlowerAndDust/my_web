@@ -17,6 +17,10 @@ from urllib.parse import parse_qs, quote, urlparse
 
 TOOL_DIR = Path(__file__).resolve().parent.parent
 CONTENT_DIR = TOOL_DIR.parent.parent
+AI_ROOT = TOOL_DIR.parent
+CONVERSATION_DIR = AI_ROOT / "共享配置"
+sys.path.insert(0, str(CONVERSATION_DIR))
+from 对话历史 import ConversationError, delete_window, read_document, remove_round, upsert_window  # noqa: E402
 SKILL_DIR = TOOL_DIR / "skills"
 HISTORY_DIR = TOOL_DIR / "history"
 API_URL = "https://api.deepseek.com/chat/completions"
@@ -254,6 +258,29 @@ def ask(language: str, question: str, history: object = None, conversation_id: s
     }
 
 
+def _conversation_action(payload: dict) -> dict:
+    action = str(payload.get("action") or "upsert")
+    if action == "upsert":
+        window = upsert_window(
+            "code",
+            payload.get("window_id"),
+            payload.get("title") or "新对话",
+            payload.get("messages") or [],
+            mode=str(payload.get("mode") or ""),
+            language=str(payload.get("language") or ""),
+            language_name=str(payload.get("language_name") or ""),
+            topic=str(payload.get("topic") or ""),
+        )
+        return {"ok": True, "window": window, "document": read_document("code")}
+    if action == "remove_round":
+        window = remove_round("code", payload.get("window_id"), int(payload.get("round") or 0))
+        return {"ok": True, "window": window, "document": read_document("code")}
+    if action == "delete_window":
+        deleted = delete_window("code", payload.get("window_id"))
+        return {"ok": True, "deleted": deleted, "document": read_document("code")}
+    raise ConversationError("未知对话历史操作：%s" % action)
+
+
 def json_response(handler, status: int, payload: dict[str, Any]) -> None:
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     handler.send_response(status)
@@ -280,6 +307,12 @@ class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):  # noqa: N802
         parsed = urlparse(self.path)
         path = parsed.path
+        if path == "/api/conversations":
+            try:
+                json_response(self, 200, {"ok": True, "document": read_document("code")})
+            except ConversationError as exc:
+                json_response(self, 400, {"ok": False, "error": str(exc)})
+            return
         if path == "/api/health":
             skills = {item["id"]: (SKILL_DIR / item["skill"]).exists() for item in LANGUAGES}
             json_response(self, 200, {
@@ -312,7 +345,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):  # noqa: N802
         path = urlparse(self.path).path
-        if path != "/api/ask":
+        if path not in {"/api/ask", "/api/conversations"}:
             json_response(self, 404, {"ok": False, "error": "未知接口。"})
             return
         try:
@@ -322,6 +355,10 @@ class Handler(SimpleHTTPRequestHandler):
             json_response(self, 400, {"ok": False, "error": "请求 JSON 格式不正确。"})
             return
         try:
+            if path == "/api/conversations":
+                result = _conversation_action(payload)
+                json_response(self, 200, result)
+                return
             result = ask(payload.get("language"), payload.get("question"), payload.get("history"), payload.get("conversation_id"))
             json_response(self, 200, result)
         except ValueError as exc:
