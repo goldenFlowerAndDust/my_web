@@ -118,6 +118,27 @@
         return result;
     }
 
+
+    function removeRound(conversationId, roundIndex) {
+        var list = read();
+        var conversation = list.find(function (item) { return item && item.id === conversationId; });
+        if (!conversation) return false;
+        var messages = normalizeMessages(conversation.messages);
+        var start = Math.max(0, Number(roundIndex) || 0) * 2;
+        if (start + 1 >= messages.length) return false;
+        messages.splice(start, 2);
+        if (!messages.length) {
+            write(list.filter(function (item) { return item && item.id !== conversationId; }));
+            return true;
+        }
+        var firstUser = messages.find(function (message) { return message.role === "user"; });
+        conversation.messages = messages;
+        conversation.title = firstUser ? String(firstUser.content).slice(0, 80) : "新对话";
+        conversation.updated_at = Date.now();
+        write(list);
+        return true;
+    }
+
     function clearConversation(id) {
         write(read().filter(function (item) { return item && item.id !== id; }));
     }
@@ -128,6 +149,7 @@
         list: list,
         entries: entries,
         clearConversation: clearConversation,
+        removeRound: removeRound,
         dump: read
     };
 })();

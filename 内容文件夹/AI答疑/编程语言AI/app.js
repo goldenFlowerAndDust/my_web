@@ -328,6 +328,32 @@
     questionInput.focus();
   }
 
+  function removeRound(id, roundIndex) {
+    const session = sessions.find((item) => item.id === id);
+    if (!session || !Array.isArray(session.messages)) return false;
+    const start = Math.max(0, Number(roundIndex) || 0) * 2;
+    if (start + 1 >= session.messages.length) return false;
+    session.messages.splice(start, 2);
+    if (!session.messages.length) {
+      closeSession(id);
+      if (window.ConversationStore) window.ConversationStore.clearConversation(id);
+      return true;
+    }
+    const firstUser = session.messages.find((message) => message.role === "user");
+    session.title = firstUser ? sessionTitle(firstUser.content) : "新问题";
+    session.answerHtml = "";
+    session.answerState = "empty";
+    session.answerTime = "";
+    saveSessions();
+    syncConversationStore();
+    if (id === activeSessionId) {
+      loadSessionView();
+    } else {
+      renderSessionTabs();
+    }
+    return true;
+  }
+
   function closeSession(id) {
     captureSession();
     const index = sessions.findIndex((item) => item.id === id);
@@ -355,6 +381,9 @@
   window.ProgrammingCloseConversation = function (id) {
     closeSession(id);
     if (window.ConversationStore) window.ConversationStore.clearConversation(id);
+  };
+  window.ProgrammingRemoveRound = function (id, roundIndex) {
+    return removeRound(id, roundIndex);
   };
 
   function currentProfile() {
@@ -742,6 +771,7 @@
         (first.conversation_id ? '<button type="button" class="history-conversation-delete" data-delete-conversation="' + escapeHtml(first.conversation_id) + '">删除</button>' : '') +
         "</div>" +
         '<select class="history-round-select" data-history-select>' + options + "</select>" +
+        '<button type="button" class="history-round-delete" data-delete-round="' + group.items[group.items.length - 1].index + '">删除本轮</button>' +
         '<p class="history-conversation-preview">' +
         escapeHtml(String(latest.answer || "").replace(/[#*`>]/g, "").slice(0, 140)) + "</p>" +
         '<button type="button" class="copy-code view-history" data-index="' +
@@ -1161,6 +1191,25 @@
   });
 
   historyList.addEventListener("click", (event) => {
+    const roundButton = event.target.closest("[data-delete-round]");
+    if (roundButton) {
+      const card = roundButton.closest(".history-conversation");
+      const select = card ? card.querySelector("[data-history-select]") : null;
+      const index = Number((select && select.value) || roundButton.dataset.deleteRound || 0);
+      const record = historyRecords[index];
+      if (!record || !record.conversation_id) return;
+      const round = Number(record.round || (select ? select.selectedIndex + 1 : 1));
+      if (!window.confirm("删除第 " + round + " 轮？删除后不可恢复。")) return;
+      let removed = false;
+      if (window.ProgrammingRemoveRound) {
+        removed = window.ProgrammingRemoveRound(record.conversation_id, round - 1);
+      }
+      if (!removed && window.ConversationStore) {
+        window.ConversationStore.removeRound(record.conversation_id, round - 1);
+      }
+      loadHistory();
+      return;
+    }
     const button = event.target.closest(".view-history");
     if (!button) return;
     const card = button.closest(".history-conversation");

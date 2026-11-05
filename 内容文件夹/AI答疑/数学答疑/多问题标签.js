@@ -244,7 +244,8 @@
         appendTurnTo: appendTurnTo,
         rounds: function () { return roundsOf(current()); },
         turns: turns,
-        removeConversation: removeConversation
+        removeConversation: removeConversation,
+        removeRound: removeRound
     };
 
     function go(id) {
@@ -295,6 +296,28 @@
         save();
     }
 
+    function removeRound(id, roundIndex) {
+        var session = sessions.find(function (item) { return item.id === id; });
+        if (!session || !Array.isArray(session.messages)) return false;
+        var start = Math.max(0, Number(roundIndex) || 0) * 2;
+        if (start + 1 >= session.messages.length) return false;
+        if (busy()) return false;
+        session.messages.splice(start, 2);
+        if (!session.messages.length) return removeConversation(id);
+        var firstUser = session.messages.find(function (message) { return message.role === "user"; });
+        session.title = firstUser ? titleOf(firstUser.content) : "新问题";
+        session.answerHtml = "";
+        session.answerState = "empty";
+        session.answerMode = "等待提问";
+        session.answerTime = "—";
+        save();
+        render();
+        restore();
+        syncStore();
+        window.dispatchEvent(new CustomEvent("tutor-turn-added", { detail: { id: id, removed: true } }));
+        return true;
+    }
+
     function removeConversation(id) {
         if (!id) return false;
         var index = sessions.findIndex(function (item) { return item.id === id; });
@@ -306,6 +329,7 @@
         render();
         restore();
         save();
+        if (window.ConversationStore) window.ConversationStore.clearConversation(id);
         return true;
     }
 

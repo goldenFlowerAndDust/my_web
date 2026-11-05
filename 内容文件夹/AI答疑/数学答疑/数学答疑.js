@@ -767,6 +767,18 @@
         return groups;
     }
 
+    function deleteRound(conversationId, roundNumber) {
+        if (!conversationId || !roundNumber || !window.confirm("删除第 " + roundNumber + " 轮？删除后不可恢复。")) return;
+        var removed = false;
+        if (window.TutorTabs && window.TutorTabs.removeRound) {
+            removed = window.TutorTabs.removeRound(conversationId, roundNumber - 1);
+        }
+        if (!removed && window.ConversationStore) {
+            window.ConversationStore.removeRound(conversationId, roundNumber - 1);
+        }
+        loadHistory(historyCategory);
+    }
+
     function deleteConversation(conversationId) {
         if (!conversationId || !window.confirm("删除这个对话？删除后不可恢复。")) return;
         if (window.TutorTabs && window.TutorTabs.removeConversation) {
@@ -836,6 +848,17 @@
                 loadHistoryEntry(Number(select.value));
             });
 
+            var roundDelete = document.createElement("button");
+            roundDelete.type = "button";
+            roundDelete.className = "history-round-delete";
+            roundDelete.textContent = "删除本轮";
+            roundDelete.title = "删除当前选中的这一轮";
+            roundDelete.addEventListener("click", function () {
+                var entry = historyEntries[Number(select.value)];
+                var round = entry && entry.round ? Number(entry.round) : (select.selectedIndex + 1);
+                deleteRound(first.conversation_id, round);
+            });
+
             var preview = document.createElement("button");
             preview.type = "button";
             preview.className = "history-conversation-preview";
@@ -845,6 +868,7 @@
             });
 
             card.appendChild(select);
+            card.appendChild(roundDelete);
             card.appendChild(preview);
             historyList.appendChild(card);
         });

@@ -174,3 +174,17 @@
 .answer-tools { min-width: 0; flex-wrap: wrap; }
 .answer-tools .round-select { min-width: 0; max-width: 100%; }
 .round-select { width: 250px; max-width: 100%; box-sizing: border-box; }
+
+
+.history-round-delete {
+    justify-self: start;
+    border: 1px solid #e3b4ad;
+    border-radius: 6px;
+    padding: 3px 8px;
+    background: #fff6f4;
+    color: #a43b2d;
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+.history-round-delete:hover { border-color: #a43b2d; }
