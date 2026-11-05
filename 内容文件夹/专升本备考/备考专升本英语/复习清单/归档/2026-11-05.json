@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-05",
+  "generated_at": "2026-11-05T14:52:40",
+  "count": 5,
+  "entries": [
+    {
+      "name": "beauty",
+      "category": "词素/词根族",
+      "level": 1,
+      "nextDate": "2026-11-06",
+      "lastReviewed": "2026-11-05"
+    },
+    {
+      "name": "care",
+      "category": "词素/原子词",
+      "level": 1,
+      "nextDate": "2026-11-06",
+      "lastReviewed": "2026-11-05"
+    },
+    {
+      "name": "contrast",
+      "category": "词素/词根-本体-变体【派生词】",
+      "level": 1,
+      "nextDate": "2026-11-06",
+      "lastReviewed": "2026-11-05"
+    },
+    {
+      "name": "deep",
+      "category": "词素/词根-本体-变体【派生词】",
+      "level": 1,
+      "nextDate": "2026-11-06",
+      "lastReviewed": "2026-11-05"
+    },
+    {
+      "name": "nasty",
+      "category": "词素/原子词",
+      "level": 1,
+      "nextDate": "2026-11-06",
+      "lastReviewed": "2026-11-05"
+    }
+  ]
+}
