@@ -31,7 +31,7 @@ sys.path.insert(0, str(TOOL_DIR))
 sys.path.insert(0, str(CONVERSATION_DIR))
 BASE = CONTENT_ROOT / "专升本备考" / "备考专升本英语"
 
-from word_archiver import ArchiveError, analyze_only, apply_review_updates, archive_word, archive_word_pair, audit_word_json, check_word, health  # noqa: E402
+from word_archiver import ArchiveError, analyze_only, apply_review_updates, archive_word, archive_word_pair, audit_word_json, check_word, health, repair_missing_standalone  # noqa: E402
 from english_tutor import TutorError, ask_tutor, read_tutor_logs  # noqa: E402
 from archive_added_logs import refresh as refresh_added_logs, recover_missing_extra_entries  # noqa: E402
 from 对话历史 import ConversationError, delete_window, read_document, read_history_document, remove_round, upsert_window  # noqa: E402
@@ -181,7 +181,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):  # noqa: N802
         path = unquote(urlparse(self.path).path)
-        if path not in {"/api/analyze", "/api/archive", "/api/check", "/api/review", "/api/tutor", "/api/json-audit", "/api/conversations"}:
+        if path not in {"/api/analyze", "/api/archive", "/api/check", "/api/review", "/api/tutor", "/api/json-audit", "/api/conversations", "/api/repair"}:
             self._send_json(404, {"ok": False, "error": "未知接口"})
             return
 
@@ -211,6 +211,10 @@ class Handler(SimpleHTTPRequestHandler):
 
             if path == "/api/json-audit":
                 self._send_json(200, audit_word_json())
+                return
+
+            if path == "/api/repair":
+                self._send_json(200, repair_missing_standalone())
                 return
 
             word = str(payload.get("word") or "").strip()

@@ -1059,14 +1059,14 @@ def ensure_standalone_for_core_word(word: str) -> bool:
     if not WORD_PAGE.exists():
         return False
     path = CI_DIR / "生词收录" / (safe_component(word, "word") + ".html")
-    if path.exists():
-        return False
     page = read_text(WORD_PAGE)
     card = _core_word_card_html(page, word)
-    if not card:
-        return False
-    path.parent.mkdir(parents=True, exist_ok=True)
-    shell = f'''<!DOCTYPE html>
+    changed = False
+    if not path.exists():
+        if not card:
+            return False
+        path.parent.mkdir(parents=True, exist_ok=True)
+        shell = f'''<!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
@@ -1088,19 +1088,55 @@ def ensure_standalone_for_core_word(word: str) -> bool:
 </body>
 </html>
 '''
-    write_text_atomic(path, shell)
+        write_text_atomic(path, shell)
+        changed = True
     data = load_data()
-    changed = False
+    target_path = "../" + str(path.relative_to(BASE)).replace("\\", "/") + "#word-" + word
     for items in data.values():
         if not isinstance(items, list):
             continue
         for item in items:
-            if isinstance(item, dict) and item.get("word") == word:
-                item["path"] = "../" + str(path.relative_to(BASE)).replace("\\", "/") + "#word-" + word
+            if isinstance(item, dict) and item.get("word") == word and item.get("path") != target_path:
+                item["path"] = target_path
                 changed = True
     if changed:
         write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
-    return True
+    return changed
+
+
+def repair_missing_standalone() -> dict[str, Any]:
+    """扫描 data.json，为只有核心页路径的词补独立词素页。"""
+    data = load_data()
+    repaired: list[dict[str, str]] = []
+    skipped: list[str] = []
+    for category, items in data.items():
+        if not isinstance(items, list):
+            continue
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            word = str(item.get("word") or item.get("name") or "").strip()
+            if not word:
+                continue
+            current = str(item.get("path") or "")
+            expected = "词素/生词收录/" + word + ".html"
+            normalized = current.replace("\\", "/")
+            if expected in normalized:
+                continue
+            # 只修复仍指向核心词汇页的旧路径；已有其他词素页的词不强行搬动。
+            if "专升本英语核心词汇通关.html" not in normalized and normalized:
+                continue
+            if ensure_standalone_for_core_word(word):
+                repaired.append({"word": word, "category": category})
+            else:
+                skipped.append(word)
+    return {
+        "ok": True,
+        "repaired": repaired,
+        "skipped": skipped,
+        "repaired_count": len(repaired),
+        "skipped_count": len(skipped),
+    }
 
 
 def load_data() -> dict[str, Any]:

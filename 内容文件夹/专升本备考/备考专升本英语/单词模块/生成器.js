@@ -32,6 +32,7 @@
     var btnAnalyze = document.getElementById('btnAnalyze');
     var btnArchive = document.getElementById('btnArchive');
     var btnJsonAudit = document.getElementById('btnJsonAudit');
+    var btnScanRepair = document.getElementById('btnScanRepair');
     var btnHealth = document.getElementById('btnHealth');
     var resultArea = document.getElementById('resultArea');
     var resultBadge = document.getElementById('resultBadge');
@@ -78,6 +79,7 @@
         actionsLocked = Boolean(lock);
         btnAnalyze.disabled = actionsLocked || busy;
         btnJsonAudit.disabled = busy;
+        if (btnScanRepair) btnScanRepair.disabled = busy;
         updateCloudWriteState();
     }
 
@@ -265,6 +267,7 @@
         var cloud = genModeEl.value === 'cloud';
         btnCheck.hidden = cloud;
         if (btnJsonAudit) btnJsonAudit.hidden = cloud;
+        if (btnScanRepair) btnScanRepair.hidden = cloud;
         btnAnalyze.hidden = false;
         btnAnalyze.textContent = 'AI 分析（不写入）';
         btnArchive.hidden = false;
@@ -505,6 +508,7 @@
         btnAnalyze.disabled = value || actionsLocked;
         btnArchive.disabled = value || actionsLocked;
         btnJsonAudit.disabled = value;
+        if (btnScanRepair) btnScanRepair.disabled = value;
         btnHealth.disabled = value;
         if (value) {
             if (mode === 'archive') {
@@ -516,6 +520,9 @@
             } else if (mode === 'repair') {
                 inputBadge.textContent = '修复中…';
                 setStatus('正在删除旧记录并重建 HTML / JSON，请稍候…', 'busy');
+            } else if (mode === 'scan') {
+                inputBadge.textContent = '扫描中…';
+                setStatus('正在扫描 data.json 并补齐词素页面…', 'busy');
             } else if (mode === 'cloud') {
                 inputBadge.textContent = '云端处理中…';
                 setStatus('正在调用云端，请稍候…', 'busy');
@@ -1015,6 +1022,34 @@
         }
     }
 
+    async function doScanRepair() {
+        if (busy) return;
+        if (!window.confirm('扫描 data.json？\n\n会把仍指向核心词汇页的旧路径补成独立词素页，并更新复习路径。已有词素页不会重复创建。')) {
+            return;
+        }
+        setBusy(true, 'scan');
+        try {
+            var data = await post('/api/repair', {});
+            var repaired = data.repaired || [];
+            var skipped = data.skipped || [];
+            resultArea.innerHTML =
+                '<div class="result_head"><div><span class="result_word">词素路径扫描</span></div>' +
+                '<div class="result_tags"><span class="result_tag">' + (repaired.length ? '已修复 ' + repaired.length : '无需修复') + '</span></div></div>' +
+                '<div class="result_exists"><strong>扫描完成</strong>' +
+                '<p>已补独立词素页：' + (repaired.length ? repaired.map(function (x) { return esc(x.word); }).join('、') : '无') + '</p>' +
+                (skipped.length ? '<p>跳过（找不到核心页词条）：' + skipped.map(esc).join('、') + '</p>' : '') +
+                '<p>以后复习清单会优先打开词素页。</p></div>';
+            setStatus('修复完成：' + repaired.length + ' 个；跳过 ' + skipped.length + ' 个。', 'ok');
+            lockMainActions(false);
+            toast('词素路径扫描完成');
+        } catch (err) {
+            renderError(err.message);
+            setStatus('扫描修复失败：' + err.message, 'error');
+        } finally {
+            setBusy(false);
+        }
+    }
+
     async function doCheck() {
         if (busy) return;
         var word = normalizeWord();
@@ -1043,6 +1078,7 @@
     btnArchive.addEventListener('click', doArchive);
     btnHealth.addEventListener('click', checkHealth);
     btnJsonAudit.addEventListener('click', doJsonAudit);
+    if (btnScanRepair) btnScanRepair.addEventListener('click', doScanRepair);
     btnCloudTest.addEventListener('click', doCloudTest);
     if (btnCloudExport) btnCloudExport.addEventListener('click', doCloudExport);
     btnCloudSettings.addEventListener('click', function () {
