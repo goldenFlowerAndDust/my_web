@@ -106,6 +106,12 @@
         }).then(function (payload) {
             var document = payload && payload.document;
             var hasRemote = document && document.windows && Object.keys(document.windows).length > 0;
+            window.__AI_CONVERSATION_DEBUG__ = {
+                base: remoteBase,
+                subject: remoteSubject,
+                cloudWindows: document && document.windows ? Object.keys(document.windows) : [],
+                hasRemote: Boolean(hasRemote)
+            };
             if (hasRemote) {
                 applyRemoteDocument(document);
             } else {

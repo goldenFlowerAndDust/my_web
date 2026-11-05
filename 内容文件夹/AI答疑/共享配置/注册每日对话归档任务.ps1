@@ -35,17 +35,9 @@ if ($WhatIf) {
     return
 }
 
-$taskArgs = @(
-    "/Create",
-    "/SC", "DAILY",
-    "/TN", $TaskName,
-    "/TR", $action,
-    "/ST", $Time,
-    "/F"
-)
-$process = Start-Process -FilePath "schtasks.exe" -ArgumentList $taskArgs -Wait -PassThru -NoNewWindow
-if ($process.ExitCode -ne 0) {
-    throw "注册计划任务失败，退出码 $($process.ExitCode)。请用管理员 PowerShell 再试。"
-}
+$taskAction = New-ScheduledTaskAction -Execute $PythonPath -Argument ('"{0}"' -f $script)
+$taskTrigger = New-ScheduledTaskTrigger -Daily -At $Time
+$task = New-ScheduledTask -Action $taskAction -Trigger $taskTrigger -Description "每天归档英语、数学、编程 AI 对话历史 JSON"
+Register-ScheduledTask -TaskName $TaskName -InputObject $task -Force | Out-Null
 Write-Host "已注册：$TaskName"
-Write-Host "查看：schtasks /Query /TN `"$TaskName`" /V /FO LIST"
+Write-Host "查看：Get-ScheduledTask -TaskName `"$TaskName`""
