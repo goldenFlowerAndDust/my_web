@@ -9,6 +9,7 @@
         var host = document.querySelector("main") || document.body;
         var section = document.createElement("section");
         section.className = "month-history-embedded";
+        section.id = "ai-history";
         section.innerHTML = '<div class="month-history-head"><p class="month-history-kicker">AI HISTORY</p>' +
             "<h2>AI 历史记录</h2><p>按月份和日期查看历史问答，点击后才加载完整回答。</p></div>";
         host.appendChild(section);
@@ -61,7 +62,66 @@
 
     function answerHtml(text) {
         if (window.TutorRenderAnswer) return window.TutorRenderAnswer(text);
-        return escapeHtml(text);
+        return simpleMarkdown(text);
+    }
+
+    function simpleMarkdown(markdown) {
+        var source = String(markdown || "").replace(/\r\n/g, "\n");
+        var codeBlocks = [];
+        source = source.replace(/```[A-Za-z0-9_+-]*\n([\s\S]*?)```/g, function (_, code) {
+            codeBlocks.push("<pre><code>" + escapeHtml(code.replace(/\n$/, "")) + "</code></pre>");
+            return "\n@@HISTORY_CODE_" + (codeBlocks.length - 1) + "@@\n";
+        });
+        source = escapeHtml(source);
+        source = source.replace(/`([^`\n]+)`/g, "<code>$1</code>");
+        source = source.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>");
+        var lines = source.split("\n");
+        var out = [];
+        var list = "";
+        var paragraph = [];
+        function flushParagraph() {
+            if (paragraph.length) {
+                out.push("<p>" + paragraph.join("<br>") + "</p>");
+                paragraph = [];
+            }
+        }
+        function closeList() {
+            if (list) { out.push("</" + list + ">"); list = ""; }
+        }
+        lines.forEach(function (line) {
+            var textLine = line.trim();
+            var code = textLine.match(/^@@HISTORY_CODE_(\d+)@@$/);
+            if (code) {
+                flushParagraph(); closeList();
+                out.push(codeBlocks[Number(code[1])] || "");
+                return;
+            }
+            if (!textLine) { flushParagraph(); closeList(); return; }
+            var heading = textLine.match(/^(#{1,4})\s+(.*)$/);
+            if (heading) {
+                flushParagraph(); closeList();
+                var level = heading[1].length <= 2 ? 2 : heading[1].length;
+                out.push("<h" + level + ">" + heading[2] + "</h" + level + ">");
+                return;
+            }
+            var bullet = textLine.match(/^[-*]\s+(.*)$/);
+            if (bullet) {
+                flushParagraph();
+                if (list !== "ul") { closeList(); out.push("<ul>"); list = "ul"; }
+                out.push("<li>" + bullet[1] + "</li>");
+                return;
+            }
+            var numbered = textLine.match(/^\d+[.)]\s+(.*)$/);
+            if (numbered) {
+                flushParagraph();
+                if (list !== "ol") { closeList(); out.push("<ol>"); list = "ol"; }
+                out.push("<li>" + numbered[1] + "</li>");
+                return;
+            }
+            paragraph.push(textLine);
+        });
+        flushParagraph(); closeList();
+        return out.join("");
     }
 
     function fetchJson(url) {
