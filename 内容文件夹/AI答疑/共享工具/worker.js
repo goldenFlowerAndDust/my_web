@@ -1293,6 +1293,7 @@ function emptyConversationDocument(subject) {
     updated_at: new Date().toISOString(),
     max_rounds: config.max,
     windows: {},
+    deleted: {},
   };
 }
 
@@ -1332,6 +1333,7 @@ async function handleConversations(request, env) {
     doc = await env.TUTOR_KV.get(key, "json");
   } catch (error) { /* ignore */ }
   if (!doc || typeof doc !== "object" || !doc.windows) doc = emptyConversationDocument(subject);
+  if (!doc.deleted || typeof doc.deleted !== "object") doc.deleted = {};
   doc.subject = subject;
   doc.subject_label = config.label;
   doc.max_rounds = config.max;
@@ -1351,8 +1353,10 @@ async function handleConversations(request, env) {
     if (rounds > config.max) {
       return json({ ok: false, error: config.label + "最多 " + config.max + " 轮。" }, 400, request, env);
     }
+    delete doc.deleted[windowId];
     if (!messages.length) {
       delete doc.windows[windowId];
+      doc.deleted[windowId] = new Date().toISOString();
     } else {
       doc.windows[windowId] = {
         id: windowId,
@@ -1375,8 +1379,10 @@ async function handleConversations(request, env) {
     const start = Math.max(0, Number(payload.round) || 0) * 2;
     if (start + 1 >= messages.length) return json({ ok: false, error: "轮次不存在。" }, 404, request, env);
     messages.splice(start, 2);
-    if (!messages.length) delete doc.windows[windowId];
-    else {
+    if (!messages.length) {
+      delete doc.windows[windowId];
+      doc.deleted[windowId] = new Date().toISOString();
+    } else {
       window.messages = messages;
       window.rounds = Math.floor(messages.length / 2);
       window.updated_at = new Date().toISOString();
@@ -1385,6 +1391,7 @@ async function handleConversations(request, env) {
     }
   } else if (action === "delete_window") {
     delete doc.windows[windowId];
+    doc.deleted[windowId] = new Date().toISOString();
   } else {
     return json({ ok: false, error: "未知对话历史操作。" }, 400, request, env);
   }

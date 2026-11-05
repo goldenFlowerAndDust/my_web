@@ -47,6 +47,7 @@ def empty_document(subject: str) -> dict[str, Any]:
         "updated_at": now_text(),
         "max_rounds": MAX_ROUNDS[subject],
         "windows": {},
+        "deleted": {},
     }
 
 
@@ -84,7 +85,11 @@ def read_document(subject: str) -> dict[str, Any]:
     windows = data.get("windows")
     if not isinstance(windows, dict):
         windows = {}
+    deleted = data.get("deleted")
+    if not isinstance(deleted, dict):
+        deleted = {}
     data["windows"] = windows
+    data["deleted"] = deleted
     return data
 
 
@@ -174,8 +179,11 @@ def upsert_window(
         "rounds": rounds,
         "messages": normalized,
     }
+    deleted = data.setdefault("deleted", {})
+    deleted.pop(window_id, None)
     if not normalized:
         windows.pop(window_id, None)
+        deleted[window_id] = now_text()
     else:
         windows[window_id] = window
     write_document(subject, data)
@@ -196,6 +204,7 @@ def remove_round(subject: str, window_id: str, round_index: int) -> dict[str, An
     messages = messages[:start] + messages[start + 2:]
     if not messages:
         windows.pop(str(window_id), None)
+        data.setdefault("deleted", {})[str(window_id)] = now_text()
         write_document(subject, data)
         return {}
     window["messages"] = messages
@@ -216,6 +225,7 @@ def delete_window(subject: str, window_id: str) -> bool:
     if str(window_id) not in windows:
         return False
     windows.pop(str(window_id), None)
+    data.setdefault("deleted", {})[str(window_id)] = now_text()
     write_document(subject, data)
     return True
 

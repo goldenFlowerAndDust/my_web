@@ -30,7 +30,7 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from 归档对话历史 import archive_once
-from 对话历史 import MAX_ROUNDS as CONVERSATION_MAX_ROUNDS, read_document, upsert_window
+from 对话历史 import MAX_ROUNDS as CONVERSATION_MAX_ROUNDS, delete_window, read_document, upsert_window
 from 对话同步 import merge_documents
 from typing import Any
 
@@ -520,8 +520,10 @@ class SyncRunner:
             try:
                 cloud = self.api_get("/api/conversations", {"subject": subject}).get("document") or {}
                 local = read_document(subject)
-                merged, upload = merge_documents(local, cloud)
+                merged, upload, deletions = merge_documents(local, cloud)
                 merged_windows = list((merged.get("windows") or {}).values())
+                for window_id in deletions:
+                    delete_window(subject, window_id)
                 for window in merged_windows:
                     if not isinstance(window, dict) or not window.get("id"):
                         continue
@@ -535,6 +537,13 @@ class SyncRunner:
                         language_name=str(window.get("language_name") or ""),
                         topic=str(window.get("topic") or ""),
                     )
+                for window_id in deletions:
+                    self.api_post("/api/conversations", {
+                        "subject": subject,
+                        "action": "delete_window",
+                        "window_id": window_id,
+                    })
+                    result["uploaded"] += 1
                 for window in upload:
                     self.api_post("/api/conversations", {
                         "subject": subject,
@@ -549,7 +558,7 @@ class SyncRunner:
                     })
                     result["uploaded"] += 1
                 result["downloaded"] += len(merged_windows)
-                result["subjects"][subject] = {"status": "ok", "windows": len(merged_windows), "uploaded": len(upload)}
+                result["subjects"][subject] = {"status": "ok", "windows": len(merged_windows), "uploaded": len(upload) + len(deletions), "deleted": len(deletions)}
                 print("对话历史 %s：本地/云端合并 %d 个窗口，上传 %d 个" % (subject, len(merged_windows), len(upload)))
             except Exception as exc:  # noqa: BLE001
                 result["status"] = "error"

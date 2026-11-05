@@ -25,19 +25,37 @@ def merge_window(local: dict[str, Any] | None, cloud: dict[str, Any] | None) -> 
     return (local, "local") if _updated_at(local) >= _updated_at(cloud) else (cloud, "cloud")
 
 
-def merge_documents(local: dict[str, Any], cloud: dict[str, Any]) -> tuple[dict[str, Any], list[dict[str, Any]]]:
-    """合并两套 windows，返回 (合并文档, 需要上传到云端的窗口列表)。"""
+def merge_documents(local: dict[str, Any], cloud: dict[str, Any]) -> tuple[dict[str, Any], list[dict[str, Any]], list[str]]:
+    """合并两套 windows，返回 (合并文档, 需要上传的窗口, 需要删除的窗口 ID)。"""
     local_windows = (local or {}).get("windows") if isinstance(local, dict) else {}
     cloud_windows = (cloud or {}).get("windows") if isinstance(cloud, dict) else {}
+    local_deleted = (local or {}).get("deleted") if isinstance(local, dict) else {}
+    cloud_deleted = (cloud or {}).get("deleted") if isinstance(cloud, dict) else {}
     if not isinstance(local_windows, dict):
         local_windows = {}
     if not isinstance(cloud_windows, dict):
         cloud_windows = {}
+    if not isinstance(local_deleted, dict):
+        local_deleted = {}
+    if not isinstance(cloud_deleted, dict):
+        cloud_deleted = {}
 
     merged = {}
+    merged_deleted = {}
     upload: list[dict[str, Any]] = []
-    for window_id in sorted(set(local_windows) | set(cloud_windows)):
-        winner, source = merge_window(local_windows.get(window_id), cloud_windows.get(window_id))
+    deletions: list[str] = []
+    for window_id in sorted(set(local_windows) | set(cloud_windows) | set(local_deleted) | set(cloud_deleted)):
+        tombstone = max(str(local_deleted.get(window_id) or ""), str(cloud_deleted.get(window_id) or ""))
+        local_window = local_windows.get(window_id)
+        cloud_window = cloud_windows.get(window_id)
+        winner, source = merge_window(local_window, cloud_window)
+        window_time = str((winner or {}).get("updated_at") or "")
+        if tombstone and tombstone >= window_time:
+            merged_deleted[window_id] = tombstone
+            cloud_tombstone = str(cloud_deleted.get(window_id) or "")
+            if not cloud_tombstone or tombstone > cloud_tombstone:
+                deletions.append(window_id)
+            continue
         if winner is None:
             continue
         merged[window_id] = winner
@@ -45,6 +63,10 @@ def merge_documents(local: dict[str, Any], cloud: dict[str, Any]) -> tuple[dict[
             cloud_window = cloud_windows.get(window_id)
             if not cloud_window or _updated_at(winner) > _updated_at(cloud_window):
                 upload.append(winner)
+        if cloud_deleted.get(window_id):
+            upload.append(winner)
+
     result = dict(local or {})
     result["windows"] = merged
-    return result, upload
+    result["deleted"] = merged_deleted
+    return result, upload, deletions
