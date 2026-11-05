@@ -144,6 +144,7 @@
                 });
                 if (entry.item) enhanceCard(clone, entry.item);
                 clone.setAttribute("data-pos", pos);
+                clone.setAttribute("data-anchor", word);
                 ol.appendChild(clone);
             });
             view.appendChild(group);
@@ -188,6 +189,20 @@
             toggle.textContent = open ? "收起" : "显示";
         });
         var hash = location.hash || "";
-        setView(hash.indexOf("#group_") === 0 || hash.indexOf("#word-") === 0 ? "family" : "pos");
+        var familyHash = hash.indexOf("#group_") === 0;
+        setView(familyHash ? "family" : "pos");
+        if (hash.indexOf("#word-") === 0) {
+            var word = hash.slice(6).toLowerCase();
+            setTimeout(function () {
+                var target = null;
+                Array.prototype.forEach.call(view.querySelectorAll(".word_item"), function (card) {
+                    if (!target && String(card.getAttribute("data-anchor") || "").toLowerCase() === word) target = card;
+                });
+                if (target) {
+                    target.classList.add("is-open");
+                    target.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+            }, 0);
+        }
     }
 })();
