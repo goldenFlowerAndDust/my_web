@@ -1296,4 +1296,7 @@
     window.TutorRenderAnswer = function (text) {
         return renderMarkdown(text || "");
     };
+    window.TutorReloadHistory = function () {
+        loadHistory(historyCategory);
+    };
 })();

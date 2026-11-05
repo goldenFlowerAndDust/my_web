@@ -1263,4 +1263,7 @@
     window.TutorRenderMath = function (root) {
         if (root) renderMath(root);
     };
+    window.TutorReloadHistory = function () {
+        loadHistory(historyCategory, historyTopic);
+    };
 })();

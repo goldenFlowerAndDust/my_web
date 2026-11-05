@@ -188,3 +188,16 @@
     cursor: pointer;
 }
 .history-round-delete:hover { border-color: #a43b2d; }
+
+
+.answer-round-delete {
+    border: 1px solid #e3b4ad;
+    border-radius: 6px;
+    padding: 3px 8px;
+    background: #fff6f4;
+    color: #a43b2d;
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+.answer-round-delete:hover { border-color: #a43b2d; }

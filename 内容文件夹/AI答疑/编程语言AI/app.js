@@ -95,6 +95,7 @@
   const roundSelect = $("roundSelect");
   const roundCount = $("roundCount");
   const answerToken = $("answerToken");
+  const answerRoundDelete = $("answerRoundDelete");
   const historyList = $("historyList");
   const historyTabs = $("historyTabs");
   const historySearch = $("historySearch");
@@ -256,6 +257,7 @@
     roundSelect.hidden = turns.length === 0;
     roundSelect.disabled = turns.length === 0;
     if (roundCount) roundCount.textContent = turns.length ? "共 " + turns.length + " 轮" : "";
+    if (answerRoundDelete) answerRoundDelete.hidden = turns.length === 0;
     if (!turns.length && answerToken) answerToken.textContent = "";
     if (turns.length && forceLatest) roundSelect.value = String(turns.length - 1);
     if (!turns.length) return;
@@ -1132,6 +1134,25 @@
 
   if (roundSelect) {
     roundSelect.addEventListener("change", () => showRound(Number(roundSelect.value) || 0));
+  }
+  if (answerRoundDelete) {
+    answerRoundDelete.addEventListener("click", () => {
+      const session = currentSession();
+      const index = Number(roundSelect && roundSelect.value);
+      if (!session || !Number.isFinite(index)) return;
+      if (!window.confirm("删除第 " + (index + 1) + " 轮？删除后不可恢复。")) return;
+      const removed = window.ProgrammingRemoveRound ? window.ProgrammingRemoveRound(session.id, index) : false;
+      if (!removed && window.ConversationStore) {
+        window.ConversationStore.removeRound(session.id, index);
+      }
+      renderRoundSelect(true);
+      if (!conversationTurns().length) {
+        answerEl.innerHTML = emptyAnswerHtml();
+        answerTime.textContent = "";
+        if (answerToken) answerToken.textContent = "";
+      }
+      loadHistory();
+    });
   }
   askBtn.addEventListener("click", ask);
   questionInput.addEventListener("keydown", (event) => {

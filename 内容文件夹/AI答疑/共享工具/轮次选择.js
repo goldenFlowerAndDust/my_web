@@ -18,6 +18,14 @@
     countEl.id = "roundCount";
     tools.insertBefore(countEl, select.nextSibling);
 
+    var deleteRoundBtn = document.createElement("button");
+    deleteRoundBtn.type = "button";
+    deleteRoundBtn.className = "answer-round-delete";
+    deleteRoundBtn.id = "answerRoundDelete";
+    deleteRoundBtn.textContent = "删除本轮";
+    deleteRoundBtn.title = "删除当前选中的这一轮";
+    tools.insertBefore(deleteRoundBtn, countEl.nextSibling);
+
     var answerContent = document.getElementById("answer-content");
     var answerEmpty = document.getElementById("answer-empty");
     var answerLoading = document.getElementById("answer-loading");
@@ -49,6 +57,7 @@
         select.hidden = count === 0;
         select.disabled = count === 0;
         countEl.textContent = count ? "共 " + count + " 轮" : "";
+        deleteRoundBtn.hidden = count === 0;
         if (!count) {
             var tokenEl = document.getElementById("answer-token");
             if (tokenEl) tokenEl.textContent = "";
@@ -80,6 +89,30 @@
 
     select.addEventListener("change", function () {
         showTurn(Number(select.value) || 0);
+    });
+
+    deleteRoundBtn.addEventListener("click", function () {
+        var turns = tabs.turns();
+        var index = Number(select.value);
+        var turn = turns[index];
+        if (!turn) return;
+        if (!window.confirm("删除第 " + (index + 1) + " 轮？删除后不可恢复。")) return;
+        var id = tabs.activeId();
+        var removed = tabs.removeRound ? tabs.removeRound(id, index) : false;
+        if (!removed && window.ConversationStore) {
+            window.ConversationStore.removeRound(id, index);
+        }
+        refresh(true);
+        var remaining = tabs.turns();
+        if (!remaining.length && answerContent) {
+            answerContent.innerHTML = "";
+            answerContent.hidden = true;
+            if (answerEmpty) answerEmpty.hidden = false;
+            if (answerMode) answerMode.textContent = "等待提问";
+            if (answerTime) answerTime.textContent = "—";
+            if (window.renderTokenCost) window.renderTokenCost(document.getElementById("answer-token"), null);
+        }
+        if (window.TutorReloadHistory) window.TutorReloadHistory();
     });
     window.addEventListener("tutor-context-updated", function () { refresh(false); });
     window.addEventListener("tutor-turn-added", function () {

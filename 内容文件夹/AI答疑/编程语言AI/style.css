@@ -523,3 +523,11 @@ textarea:focus { border-color: #9cc9e5; box-shadow: 0 0 0 3px rgba(76,150,201,.1
   font: inherit; font-size: 11px; cursor: pointer;
 }
 .history-round-delete:hover { border-color: #f0b5bd; }
+
+
+.answer-round-delete {
+  border: 1px solid #6d3540; border-radius: 6px;
+  padding: 3px 8px; background: #2a151b; color: #f0b5bd;
+  font: inherit; font-size: 11px; cursor: pointer;
+}
+.answer-round-delete:hover { border-color: #f0b5bd; }
