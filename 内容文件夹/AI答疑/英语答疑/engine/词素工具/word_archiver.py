@@ -24,8 +24,17 @@ import os
 import re
 import shutil
 import threading
+import time
 import urllib.error
 import urllib.request
+
+try:
+    from 网络代理 import configure as _configure_proxy
+except ImportError:
+    _configure_proxy = None
+if _configure_proxy:
+    _configure_proxy()
+
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -318,16 +327,25 @@ def call_deepseek(word: str, hint: str = "") -> dict[str, Any]:
         },
         method="POST",
     )
-    try:
-        with urllib.request.urlopen(req, timeout=90) as resp:
-            raw = resp.read().decode("utf-8", errors="replace")
-    except urllib.error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")[:500]
-        raise ArchiveError("DeepSeek API 返回 HTTP %s：%s" % (exc.code, detail)) from exc
-    except urllib.error.URLError as exc:
-        raise ArchiveError("无法连接 DeepSeek API：%s" % exc.reason) from exc
-    except TimeoutError as exc:
-        raise ArchiveError("DeepSeek API 请求超时，请稍后重试。") from exc
+    last_error = None
+    raw = ""
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=90) as resp:
+                raw = resp.read().decode("utf-8", errors="replace")
+            last_error = None
+            break
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")[:500]
+            raise ArchiveError("DeepSeek API 返回 HTTP %s：%s" % (exc.code, detail)) from exc
+        except (urllib.error.URLError, TimeoutError) as exc:
+            last_error = exc
+            if attempt < 2:
+                time.sleep(0.8 + attempt * 0.5)
+    if last_error is not None:
+        if isinstance(last_error, TimeoutError):
+            raise ArchiveError("DeepSeek API 请求超时，请稍后重试。") from last_error
+        raise ArchiveError("无法连接 DeepSeek API：%s" % last_error.reason) from last_error
 
     try:
         data = json.loads(raw)

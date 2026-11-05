@@ -11425,6 +11425,52 @@
       ],
       "posSource": "ai",
       "posMigratedAt": "2026-11-05 15:21:29"
+    },
+    {
+      "name": "friend",
+      "path": "../词素/原子词/原子词：friend.html#word-friend",
+      "category": "词素/原子词",
+      "level": 0,
+      "nextDate": "2026-11-07",
+      "lastReviewed": null,
+      "created": "2026-11-06",
+      "modified": "2026-11-06",
+      "kind": "word",
+      "word": "friend",
+      "zh": "朋友；友人；支持者",
+      "root": "friend",
+      "rootZh": "朋友；友人；支持者",
+      "suffix": "",
+      "suffixLabel": "",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "levelTag": "小学",
+      "sense": "朋友；友人",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "朋友；友人",
+          "example": "She is my best friend.",
+          "example_zh": "她是我最好的朋友。",
+          "collocation": "best friend",
+          "collocation_zh": "最好的朋友"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "支持者；赞助者",
+          "example": "He is a friend of the museum.",
+          "example_zh": "他是博物馆的支持者。",
+          "collocation": "a friend of",
+          "collocation_zh": "……的支持者"
+        }
+      ],
+      "anchor": "word-friend",
+      "batch": "自动补充",
+      "extra": true,
+      "extraDate": "2026-11-07",
+      "source": "repair"
     }
   ],
   "词素/词根族": [
