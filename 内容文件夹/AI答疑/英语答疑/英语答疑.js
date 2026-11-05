@@ -859,9 +859,25 @@
                 loadHistoryEntry(Number(select.value));
             });
 
+            var resume = document.createElement("button");
+            resume.type = "button";
+            resume.className = "history-resume";
+            resume.textContent = "继续提问";
+            resume.title = "从这个对话快照继续提问";
+            resume.addEventListener("click", function () {
+                var entry = historyEntries[Number(select.value)];
+                var round = entry && entry.round ? Number(entry.round) : (select.selectedIndex + 1);
+                if (window.TutorTabs && window.TutorTabs.resumeConversation) {
+                    if (window.TutorTabs.resumeConversation(first.conversation_id, round)) {
+                        document.querySelector(".ask-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                }
+            });
+
             card.appendChild(select);
             card.appendChild(roundDelete);
             card.appendChild(preview);
+            card.appendChild(resume);
             historyList.appendChild(card);
         });
     }

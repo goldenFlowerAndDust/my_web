@@ -246,7 +246,8 @@
         rounds: function () { return roundsOf(current()); },
         turns: turns,
         removeConversation: removeConversation,
-        removeRound: removeRound
+        removeRound: removeRound,
+        resumeConversation: resumeConversation
     };
 
     function go(id) {
@@ -316,6 +317,43 @@
         restore();
         syncStore();
         window.dispatchEvent(new CustomEvent("tutor-turn-added", { detail: { id: id, removed: true } }));
+        return true;
+    }
+
+    function resumeConversation(id, roundLimit) {
+        if (!id || !window.ConversationStore) return false;
+        var conversation = window.ConversationStore.list(storeSubject()).find(function (item) { return item.id === id; });
+        if (!conversation || !Array.isArray(conversation.messages) || !conversation.messages.length) return false;
+        var pairs = Math.max(1, Math.min(Number(roundLimit) || conversation.messages.length / 2, conversation.messages.length / 2));
+        var messages = conversation.messages.slice(0, Math.floor(pairs) * 2);
+        if (sessions.length >= MAX) {
+            if (status) status.textContent = "最多同时保留 " + MAX + " 个标签，请先关闭一个。";
+            return false;
+        }
+        var session = make();
+        sessions.push(session);
+        session.messages = messages;
+        session.title = "续：" + (conversation.title || titleOf(messages[0] && messages[0].content) || "历史对话");
+        session.mode = conversation.mode || session.mode;
+        session.question = "";
+        session.answerState = "content";
+        session.answerHtml = "";
+        session.answerMode = "";
+        session.answerTime = "";
+        session.status = "";
+        var lastAssistant = messages.slice().reverse().find(function (m) { return m.role === "assistant"; });
+        if (lastAssistant) {
+            session.answerHtml = lastAssistant.html ||
+                (window.TutorRenderAnswer ? window.TutorRenderAnswer(lastAssistant.content || "") : "");
+            session.answerMode = lastAssistant.mode || session.mode || "历史回答";
+            session.answerTime = lastAssistant.time || "";
+        }
+        active = id;
+        render();
+        restore();
+        save();
+        syncStore();
+        question.focus();
         return true;
     }
 

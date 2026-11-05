@@ -356,6 +356,47 @@
     return true;
   }
 
+  function resumeConversation(id, roundLimit) {
+    if (!id || !window.ConversationStore) return false;
+    const conversation = window.ConversationStore.list("code").find((item) => item.id === id);
+    if (!conversation || !Array.isArray(conversation.messages) || !conversation.messages.length) return false;
+    const pairs = Math.max(1, Math.min(Number(roundLimit) || conversation.messages.length / 2,
+      Math.floor(conversation.messages.length / 2)));
+    const messages = conversation.messages.slice(0, pairs * 2);
+    if (sessions.length >= MAX_SESSIONS) {
+      setStatus("最多同时保留 " + MAX_SESSIONS + " 个标签，请先关闭一个。", "error");
+      return false;
+    }
+    const session = newSession(conversation.language || languageSelect.value || "python");
+    sessions.push(session);
+    session.language = conversation.language || session.language;
+    session.title = "续：" + (conversation.title || "历史对话");
+    session.messages = messages;
+    session.question = "";
+    session.busy = false;
+    session.error = false;
+    session.answerState = "content";
+    session.answerTime = "";
+    const lastAssistant = messages.slice().reverse().find((message) => message.role === "assistant");
+    session.answerHtml = lastAssistant
+      ? (lastAssistant.html || renderMarkdown(lastAssistant.content || ""))
+      : "";
+    if (lastAssistant) {
+      session.answerTime = (lastAssistant.language_name || conversation.language_name || "") +
+        " · " + (lastAssistant.time || "");
+    }
+    activeSessionId = id;
+    try { localStorage.setItem("programmingTutor.activeSession", id); } catch (error) { /* ignore */ }
+    if (session.language) languageSelect.value = session.language;
+    renderSessionTabs();
+    loadSessionView();
+    updateLanguageUi(true);
+    saveSessions();
+    syncConversationStore();
+    questionInput.focus();
+    return true;
+  }
+
   function closeSession(id) {
     captureSession();
     const index = sessions.findIndex((item) => item.id === id);
@@ -386,6 +427,9 @@
   };
   window.ProgrammingRemoveRound = function (id, roundIndex) {
     return removeRound(id, roundIndex);
+  };
+  window.ProgrammingResumeConversation = function (id, roundLimit) {
+    return resumeConversation(id, roundLimit);
   };
 
   function currentProfile() {
@@ -819,6 +863,8 @@
         escapeHtml(String(latest.answer || "").replace(/[#*`>]/g, "").slice(0, 140)) + "</p>" +
         '<button type="button" class="copy-code view-history" data-index="' +
         group.items[group.items.length - 1].index + '">查看选中的回答</button>' +
+        '<button type="button" class="history-resume" data-resume-conversation="' +
+        escapeHtml(first.conversation_id || "") + '">继续提问</button>' +
         "</div>";
     }).join("");
     Array.from(historyList.querySelectorAll("[data-history-select]")).forEach((select) => {
@@ -981,7 +1027,9 @@
           content: data.answer || "",
           html: renderMarkdown(data.answer || ""),
           time: (data.language_name || "") + " · " + (data.time || ""),
-          usage: data.usage || null
+          usage: data.usage || null,
+          language: session.language || "",
+          language_name: data.language_name || ""
         }
       ]).slice(-MAX_ROUNDS * 2);
       syncConversationStore();
@@ -1256,6 +1304,20 @@
   });
 
   historyList.addEventListener("click", (event) => {
+    const resumeButton = event.target.closest("[data-resume-conversation]");
+    if (resumeButton) {
+      const card = resumeButton.closest(".history-conversation");
+      const select = card ? card.querySelector("[data-history-select]") : null;
+      const record = historyRecords[Number(select && select.value)];
+      const id = resumeButton.getAttribute("data-resume-conversation");
+      if (id && window.ProgrammingResumeConversation) {
+        const round = record && record.round ? Number(record.round) : (select ? select.selectedIndex + 1 : 1);
+        if (window.ProgrammingResumeConversation(id, round)) {
+          document.querySelector(".ask-card").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+      return;
+    }
     const roundButton = event.target.closest("[data-delete-round]");
     if (roundButton) {
       const card = roundButton.closest(".history-conversation");

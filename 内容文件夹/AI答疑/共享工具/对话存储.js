@@ -112,6 +112,15 @@
         return "新对话";
     }
 
+    function languageFromTime(value) {
+        var name = String(value || "").split("·")[0].trim();
+        var map = {
+            "Python": "python", "JavaScript": "javascript", "Node.js": "node",
+            "HTML + CSS": "web", "HTML+CSS": "web", "MySQL": "mysql"
+        };
+        return map[name] || "";
+    }
+
     function normalizeMessages(messages) {
         if (!Array.isArray(messages)) return [];
         return messages.filter(function (m) {
@@ -122,6 +131,8 @@
                 item.html = String(m.html || "");
                 item.mode = String(m.mode || "");
                 item.time = String(m.time || "");
+                item.language = String(m.language || "");
+                item.language_name = String(m.language_name || "");
                 item.usage = m.usage && typeof m.usage === "object" ? m.usage : null;
             }
             return item;
@@ -187,6 +198,8 @@
                 html: entry.html || "",
                 mode: entry.mode || "",
                 time: entry.time || "",
+                language: entry.language || (subject === "code" ? entry.mode : "") || "",
+                language_name: entry.language_name || entry.language || entry.mode || "",
                 usage: entry.usage || null
             });
         });
@@ -220,9 +233,11 @@
                     title: conversation.title,
                     mode: assistant.mode || conversation.mode || "",
                     topic: conversation.topic || "",
-                    language: conversation.language || (conversation.subject === "code" ? conversation.mode : "") || "",
-                    language_name: conversation.language_name ||
-                        (conversation.subject === "code" ? (conversation.language || conversation.mode) : "") || "",
+                    language: assistant.language || languageFromTime(assistant.time) ||
+                        conversation.language || (conversation.subject === "code" ? conversation.mode : "") || "",
+                    language_name: assistant.language_name || conversation.language_name ||
+                        assistant.language || conversation.language ||
+                        (conversation.subject === "code" ? conversation.mode : "") || "",
                     question: user.content,
                     answer: assistant.content,
                     html: assistant.html || "",
