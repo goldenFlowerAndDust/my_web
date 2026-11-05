@@ -6,7 +6,12 @@
 .month-history-head h2 { margin: 4px 0 6px; }
 .month-history-head p { margin: 0 0 12px; font-size: 12px; color: var(--muted, #697386); }
 .month-history-kicker { font-size: 10px; letter-spacing: .14em; color: var(--accent, #0b6672); }
-.month-history-day { margin: 16px 0 7px; font-size: 12px; color: var(--accent, #0b6672); }
+.month-history-day {
+    margin: 16px 0 7px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #14202e !important;
+}
 .month-history-toolbar {
     display: flex;
     flex-wrap: wrap;
@@ -80,6 +85,7 @@
     font-size: 11px;
 }
 .month-history-open,
+.month-history-cost,
 .month-history-resume {
     padding: 4px 9px;
     border: 1px solid var(--line-strong, #cfd9e6);
@@ -91,6 +97,7 @@
     cursor: pointer;
 }
 .month-history-open:hover,
+.month-history-cost:hover,
 .month-history-resume:hover { background: rgba(11, 102, 114, .08); }
 .month-history-detail {
     margin-top: 9px;
@@ -167,6 +174,7 @@
 .month-history-dark .month-history-label select,
 .month-history-dark .month-history-round-select,
 .month-history-dark .month-history-open,
+.month-history-dark .month-history-cost,
 .month-history-dark .month-history-resume,
 .month-history-dark .month-history-delete,
 .month-history-dark .month-history-delete-round {
@@ -258,4 +266,23 @@
 }
 .month-history-dark .month-history-card-meta {
     color: #c9dcec !important;
+}
+
+
+.month-history-dark .month-history-day {
+    color: #f5fbff !important;
+}
+.month-history-cost-panel {
+    margin-top: 8px;
+    padding: 8px 10px;
+    border: 1px solid #d7e2ec;
+    border-radius: 6px;
+    background: #f4f8fb;
+    color: #203047;
+    font-size: 12px;
+}
+.month-history-dark .month-history-cost-panel {
+    border-color: #35506d;
+    background: #0b1624;
+    color: #dbe8f5;
 }

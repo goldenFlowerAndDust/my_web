@@ -335,6 +335,7 @@
                       }).join("") + "</select>"
                     : "") +
                 '<button type="button" class="month-history-open">查看回答</button>' +
+                '<button type="button" class="month-history-cost" title="显示当前对话花费的 token 以及对应 RMB">显示花费</button>' +
                 '<button type="button" class="month-history-delete-round">删除本轮</button>' +
                 '<button type="button" class="month-history-delete">删除对话</button>' +
                 (window.TutorTabs && window.TutorTabs.resumeConversation
@@ -342,6 +343,7 @@
                     : (window.ProgrammingResumeConversation
                         ? '<button type="button" class="month-history-resume">继续提问</button>' : "")) +
                 "</div>" +
+                '<div class="month-history-cost-panel" hidden></div>' +
                 '<div class="month-history-detail" hidden></div>';
 
             var roundSelect = card.querySelector(".month-history-round-select");
@@ -364,6 +366,19 @@
             card.querySelector(".month-history-open").addEventListener("click", function () {
                 toggleDetail(card, item);
             });
+            var costButton = card.querySelector(".month-history-cost");
+            var costPanel = card.querySelector(".month-history-cost-panel");
+            if (costButton && costPanel) {
+                var costSummary = Number(item.tokens || 0) > 0
+                    ? "当前对话共 " + Number(item.tokens).toLocaleString("zh-CN") + " tokens · " + (item.cost_text || "≈RMB 0.000000")
+                    : "当前对话暂无 token 记录";
+                costPanel.textContent = costSummary;
+                costButton.addEventListener("click", function () {
+                    var show = costPanel.hidden;
+                    costPanel.hidden = !show;
+                    costButton.textContent = show ? "隐藏花费" : "显示花费";
+                });
+            }
             var resume = card.querySelector(".month-history-resume");
             if (resume) resume.addEventListener("click", function () {
                 var selectedRound = roundSelect ? Number(roundSelect.value) : Math.max(0, Number(item.rounds || 1) - 1);
