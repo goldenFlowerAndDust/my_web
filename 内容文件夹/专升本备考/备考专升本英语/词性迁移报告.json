@@ -1,0 +1,5320 @@
+{
+  "generated_at": "2026-11-05 15:21:29",
+  "data": "复习清单\\data.json",
+  "counts": {
+    "data_items": 346,
+    "word_items": 329,
+    "ai_results": 22
+  },
+  "sources": {
+    "legacy": 307,
+    "ai": 22
+  },
+  "unresolved": [],
+  "page_mismatch": {
+    "page_not_data": [
+      "imports",
+      "requirements",
+      "tankers"
+    ],
+    "data_not_page": [
+      "beauty",
+      "care",
+      "cheer",
+      "color",
+      "contrast",
+      "deep",
+      "fruit",
+      "harm",
+      "heaven",
+      "hello",
+      "help",
+      "hope",
+      "improt",
+      "maybe",
+      "mean",
+      "meaning",
+      "nasty",
+      "old",
+      "sunflower",
+      "word"
+    ]
+  },
+  "details": [
+    {
+      "name": "helpful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有帮助的；有用的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "careful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "小心的；谨慎的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "useful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有用的；实用的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "beautiful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "美丽的；漂亮的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "successful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "成功的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "meaningful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有意义的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "colorful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "色彩丰富的；多彩的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "powerful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "强大的；有力的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "wonderful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "极好的；精彩的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "thankful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "感激的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "painful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "疼痛的；引起疼痛的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "peaceful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "和平的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "hopeful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "抱有希望的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "harmful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有害的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "cheerful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "愉快的；高兴的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "thoughtful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "体贴的；考虑周到的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "fruitful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "富有成效的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "stressful",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有压力的；令人紧张的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "careless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "粗心的；疏忽的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "useless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无用的；不能用的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "hopeless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "绝望的；无望的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "homeless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无家可归的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "helpless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无助的；需要帮助的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "endless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无尽的；无穷的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "fearless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无畏的；勇敢的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "colorless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无色的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "powerless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无力的；没有力量的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "meaningless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无意义的；无目的的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "thoughtless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "欠考虑的；轻率的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "harmless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无害的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "doubtless",
+      "category": "核心词汇通关",
+      "pos": "adj. / adv.",
+      "pos_zh": "形容词 / 副词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无疑的；不容怀疑的",
+          "example": "It is doubtless that he will come.",
+          "example_zh": "他无疑会来。",
+          "collocation": "be doubtless that",
+          "collocation_zh": "……是无疑的"
+        },
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "无疑地；肯定地",
+          "example": "She is doubtless the best player on the team.",
+          "example_zh": "她无疑是队里最好的球员。",
+          "collocation": "doubtless the best",
+          "collocation_zh": "无疑是最好的"
+        },
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "很可能；大概",
+          "example": "He will doubtless arrive late again.",
+          "example_zh": "他很可能又会迟到。",
+          "collocation": "doubtless arrive",
+          "collocation_zh": "很可能到达"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "shameless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无耻的；不知羞耻的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "speechless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "说不出话的；哑口无言的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "sleepless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "失眠的；睡不着的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "priceless",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无价的；极珍贵的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "regardless",
+      "category": "核心词汇通关",
+      "pos": "adv. / adj.",
+      "pos_zh": "副词 / 形容词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "不管怎样；无论如何",
+          "example": "Regardless, we must finish the work today.",
+          "example_zh": "无论如何，我们今天必须完成这项工作。",
+          "collocation": "regardless of",
+          "collocation_zh": "不管；不顾"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不顾的；不加理会的",
+          "example": "He went ahead regardless of the danger.",
+          "example_zh": "他不顾危险继续前进。",
+          "collocation": "regardless of danger",
+          "collocation_zh": "不顾危险"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "readable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可读的；易读的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "drinkable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可饮用的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "eatable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可食用的；能吃的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "usable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可用的；能用的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "enjoyable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "令人愉快的；有乐趣的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "believable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可信的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "teachable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可教的；可训的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "changeable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "易变的；变化无常的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "comfortable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "舒适的；舒服的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "valuable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有价值的；贵重的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "suitable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "合适的；适宜的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "available",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可获得的；可用的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "remarkable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "显著的；非凡的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "reliable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可靠的；可信赖的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "affordable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "买得起的；负担得起的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "predictable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可预测的；可预料的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "renewable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可再生的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "acceptable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可接受的；合意的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "action",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "行动；行为"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "education",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "教育；培养"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "information",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "信息；资料"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "preparation",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "准备；预备"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "celebration",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "庆祝；庆祝活动"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "protection",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "保护；防护"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "invention",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "发明；发明物"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "solution",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "解决办法"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "attention",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "注意；关注"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "invitation",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "邀请；请柬"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "operation",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "手术"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "examination",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "考试"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "communication",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "交流；沟通"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "competition",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "竞争"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "production",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "生产；产量"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "introduction",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "介绍"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "transportation",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "运输；交通"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "organization",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "组织；机构"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "decision",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "决定；决心"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "conclusion",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "结论"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "expression",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "表达；表述"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "impression",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "印象"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "permission",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "许可；允许"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "admission",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "录取；准入"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "expansion",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "扩张；扩大"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "extension",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "延伸；扩建"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "tension",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "紧张；紧张局势"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "vision",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "视力；视觉"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "revision",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "复习"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "provision",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "供应；提供"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "conversion",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "转换；改造"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "suspension",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "暂停"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "submission",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "提交"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "transmission",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "传播；传染"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "possession",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "拥有；占有"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "profession",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "职业；行业"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "development",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "发展；成长"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "improvement",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "改善；提高"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "achievement",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "成就；成绩"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "agreement",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "协议；协定"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "argument",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "争论；争吵"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "arrangement",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "安排；准备工作"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "management",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "管理；经营"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "treatment",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "治疗；疗法"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "movement",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "运动；活动"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "equipment",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "设备；装备"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "government",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "政府"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "punishment",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "惩罚；处罚"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "settlement",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "解决；协议"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "advertisement",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "广告"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "commitment",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "承诺；保证"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "requirement",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "要求；必要条件"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "excitement",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "兴奋；激动"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "entertainment",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "娱乐；娱乐活动"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "happiness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "幸福；快乐"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "sadness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "悲伤；难过"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "kindness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "善良；好意"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "darkness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "黑暗；暗处"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "weakness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "弱点；缺点"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "illness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "疾病"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "business",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "生意；商业"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "awareness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "意识；认识"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "readiness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "准备就绪"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "effectiveness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "有效性；效果"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "friendliness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "友好；亲切"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "loneliness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "孤独；寂寞"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "brightness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "明亮；亮度"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "coldness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "寒冷"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "emptiness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "空虚；空旷"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "tiredness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "疲倦；疲劳"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "usefulness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "有用性；用处"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "carelessness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "粗心；疏忽"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "ability",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "能力"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "activity",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "活动"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "reality",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "现实；真实"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "quality",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "质量；品质"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "quantity",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "数量"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "diversity",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "多样性；差异"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "creativity",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "创造力"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "responsibility",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "责任；职责"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "possibility",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "可能性"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "necessity",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "必要性"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "majority",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "大多数"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "minority",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "少数"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "security",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "安全；保障"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "curiosity",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "好奇心"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "popularity",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "受欢迎；普及"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "similarity",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "相似性；相似之处"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "formality",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "正式；礼节"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "nationality",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "国籍"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "active",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "活跃的；积极的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "creative",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有创造力的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "effective",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有效的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "attractive",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有吸引力的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "competitive",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有竞争力的；竞争激烈的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "protective",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "保护的；防护的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "productive",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "多产的；高效的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "sensitive",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "敏感的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "positive",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "积极的；肯定的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "negative",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "消极的；否定的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "expensive",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "昂贵的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "impressive",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "令人印象深刻的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "decisive",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "决定性的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "informative",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "提供信息的；增长见闻的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "objective",
+      "category": "核心词汇通关",
+      "pos": "n. / adj.",
+      "pos_zh": "名词 / 形容词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "目标；目的",
+          "example": "Our main objective is to improve students' reading skills.",
+          "example_zh": "我们的主要目标是提高学生的阅读能力。",
+          "collocation": "main objective",
+          "collocation_zh": "主要目标"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "客观的；无偏见的",
+          "example": "A judge must remain objective.",
+          "example_zh": "法官必须保持客观。",
+          "collocation": "objective view",
+          "collocation_zh": "客观的看法"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "（与想法、感受相对的）客观存在的；实际的",
+          "example": "She has an objective need for medical care.",
+          "example_zh": "她确实有医疗方面的客观需求。"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "subjective",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "主观的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "alternative",
+      "category": "核心词汇通关",
+      "pos": "adj. / n.",
+      "pos_zh": "形容词 / 名词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可供替代的；另外的",
+          "example": "We need an alternative plan.",
+          "example_zh": "我们需要一个替代方案。",
+          "collocation": "alternative plan",
+          "collocation_zh": "替代方案"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "非传统的；另类的",
+          "example": "He enjoys alternative music.",
+          "example_zh": "他喜欢另类音乐。",
+          "collocation": "alternative music",
+          "collocation_zh": "另类音乐"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "可供选择的事物；替代品",
+          "example": "We have no alternative but to wait.",
+          "example_zh": "我们别无选择，只能等待。",
+          "collocation": "have no alternative",
+          "collocation_zh": "别无选择"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "extensive",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "广泛的；大量的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "famous",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "著名的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "dangerous",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "危险的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "nervous",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "紧张的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "humorous",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "幽默的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "courageous",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "勇敢的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "disastrous",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "灾难性的；糟糕的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "mysterious",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "神秘的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "religious",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "宗教的；虔诚的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "ridiculous",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "荒谬的；可笑的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "anxious",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "焦虑的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "various",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "各种各样的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "envious",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "羡慕的；嫉妒的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "glorious",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "光荣的；辉煌的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "poisonous",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有毒的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "mountainous",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "多山的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "ambitious",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有雄心的；有抱负的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "curious",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "好奇的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "generous",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "慷慨的；大方的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unhappy",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不快乐的；不满意的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不能的；无法的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unfair",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不公平的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unhealthy",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不健康的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unknown",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "未知的；不知名的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unusual",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不寻常的；特别的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unnecessary",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不必要的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "uncomfortable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不舒服的；不自在的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unemployed",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "失业的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unlimited",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无限的；无限制的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "uncertain",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不确定的；迟疑的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unexpected",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "意外的；出乎意料的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unforgettable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "难忘的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unbelievable",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "难以置信的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unwilling",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不愿意的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unsafe",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不安全的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "unpack",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "打开（包装）；卸下"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "uncover",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "揭开；发现"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "review",
+      "category": "核心词汇通关",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "回顾；复习",
+          "example": "I need to do a quick review of my notes before the exam.",
+          "example_zh": "考试前我需要快速复习一下笔记。",
+          "collocation": "do a review",
+          "collocation_zh": "进行复习"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "评论；评价",
+          "example": "The movie received good reviews from critics.",
+          "example_zh": "这部电影得到了评论家的好评。",
+          "collocation": "movie review",
+          "collocation_zh": "影评"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "审查；检阅",
+          "example": "The policy is under review.",
+          "example_zh": "该政策正在审查中。",
+          "collocation": "under review",
+          "collocation_zh": "在审查中"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "回顾；复习",
+          "example": "Let's review the key points of the lesson.",
+          "example_zh": "我们来复习一下这节课的重点。",
+          "collocation": "review the lesson",
+          "collocation_zh": "复习功课"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "评论；写评论",
+          "example": "She reviews books for a local newspaper.",
+          "example_zh": "她为当地报纸写书评。",
+          "collocation": "review a book",
+          "collocation_zh": "评论一本书"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "审查；检阅",
+          "example": "The committee will review the proposal next week.",
+          "example_zh": "委员会下周将审查该提案。",
+          "collocation": "review a proposal",
+          "collocation_zh": "审查提案"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "return",
+      "category": "核心词汇通关",
+      "pos": "v. / n. / adj.",
+      "pos_zh": "动词 / 名词 / 形容词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "返回；回来",
+          "example": "He returned home late last night.",
+          "example_zh": "他昨晚很晚才回家。",
+          "collocation": "return home",
+          "collocation_zh": "回家"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "归还；退还",
+          "example": "Please return the book to the library.",
+          "example_zh": "请把书还给图书馆。",
+          "collocation": "return sth to sb",
+          "collocation_zh": "把某物还给某人"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "回报；回应",
+          "example": "She returned his smile.",
+          "example_zh": "她对他回以微笑。",
+          "collocation": "return a smile",
+          "collocation_zh": "回以微笑"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "返回；归来",
+          "example": "We look forward to your return.",
+          "example_zh": "我们期待你的归来。",
+          "collocation": "on one's return",
+          "collocation_zh": "在某人回来时"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "收益；回报",
+          "example": "The investment brought a high return.",
+          "example_zh": "这项投资带来了高回报。",
+          "collocation": "high return",
+          "collocation_zh": "高回报"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "返回的；回程的",
+          "example": "We bought a return ticket to Beijing.",
+          "example_zh": "我们买了一张去北京的往返票。",
+          "collocation": "return ticket",
+          "collocation_zh": "往返票"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "rebuild",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "重建"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "recover",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "恢复；康复"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "reduce",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "减少；降低"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "reflect",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "反映"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "reform",
+      "category": "核心词汇通关",
+      "pos": "v. / n. / adj.",
+      "pos_zh": "动词 / 名词 / 形容词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "改革；改进",
+          "example": "The government decided to reform the tax system.",
+          "example_zh": "政府决定改革税收制度。",
+          "collocation": "reform the system",
+          "collocation_zh": "改革制度"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "改造；使改过自新",
+          "example": "The program aims to reform young offenders.",
+          "example_zh": "该项目旨在改造年轻罪犯。",
+          "collocation": "reform offenders",
+          "collocation_zh": "改造罪犯"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "改革；改良",
+          "example": "The country is going through a period of economic reform.",
+          "example_zh": "这个国家正经历经济改革时期。",
+          "collocation": "economic reform",
+          "collocation_zh": "经济改革"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "改革的；改革派的",
+          "example": "He is a member of the reform movement.",
+          "example_zh": "他是改革运动的成员。",
+          "collocation": "reform movement",
+          "collocation_zh": "改革运动"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "refresh",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "使恢复精力"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "reject",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "拒绝；排斥"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "relax",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "放松；休息"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "release",
+      "category": "核心词汇通关",
+      "pos": "v. / n.",
+      "pos_zh": "动词 / 名词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "释放；放走",
+          "example": "The police released the suspect.",
+          "example_zh": "警察释放了嫌疑人。",
+          "collocation": "release a prisoner",
+          "collocation_zh": "释放囚犯"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "发布；发行",
+          "example": "The band will release a new album next month.",
+          "example_zh": "乐队下个月将发行新专辑。",
+          "collocation": "release an album",
+          "collocation_zh": "发行专辑"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "排放；放出",
+          "example": "The factory released harmful chemicals into the river.",
+          "example_zh": "工厂向河里排放有害化学物质。",
+          "collocation": "release chemicals",
+          "collocation_zh": "排放化学物质"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "释放；获释",
+          "example": "The prisoner was given an early release.",
+          "example_zh": "囚犯获得了提前释放。",
+          "collocation": "early release",
+          "collocation_zh": "提前释放"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "发布；发行",
+          "example": "The release of the new movie was delayed.",
+          "example_zh": "新电影的发行被推迟了。",
+          "collocation": "film release",
+          "collocation_zh": "电影发行"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "remain",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "保持"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "remind",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "提醒"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "remove",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "移除；去除"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "replace",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "取代；替换"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "research",
+      "category": "核心词汇通关",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "研究；调查",
+          "example": "She is doing research on climate change.",
+          "example_zh": "她正在做关于气候变化的研究。",
+          "collocation": "do research on",
+          "collocation_zh": "做关于……的研究"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "研究；调查",
+          "example": "They are researching the causes of the disease.",
+          "example_zh": "他们正在研究这种疾病的成因。",
+          "collocation": "research into",
+          "collocation_zh": "调查；研究"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "respect",
+      "category": "核心词汇通关",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "尊重；尊敬",
+          "example": "We should show respect for our teachers.",
+          "example_zh": "我们应该尊敬老师。",
+          "collocation": "show respect for",
+          "collocation_zh": "对……表示尊重"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "方面",
+          "example": "In many respects, this plan is better.",
+          "example_zh": "在许多方面，这个计划更好。",
+          "collocation": "in many respects",
+          "collocation_zh": "在许多方面"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "尊重；尊敬",
+          "example": "You must respect your parents.",
+          "example_zh": "你必须尊重你的父母。",
+          "collocation": "respect someone",
+          "collocation_zh": "尊重某人"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "遵守（规则、意愿等）",
+          "example": "Please respect the rules of the game.",
+          "example_zh": "请遵守游戏规则。",
+          "collocation": "respect the rules",
+          "collocation_zh": "遵守规则"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "teacher",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "教师；老师"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "worker",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "工人；工作者"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "driver",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "司机；驾驶员"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "writer",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "作家；作者"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "reader",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "读者"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "learner",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "学习者"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "speaker",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "演讲者"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "leader",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "领导者"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "manager",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "经理；管理者"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "consumer",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "消费者"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "producer",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "生产者；制片人"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "employer",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "雇主"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "computer",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "计算机；电脑"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "printer",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "打印机"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "cleaner",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "清洁工"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "container",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "容器；集装箱"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "recorder",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "录音机"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "player",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "运动员"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "reading",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "阅读"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "swimming",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "游泳"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "running",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "跑步"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "learning",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "学习"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "teaching",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "教学"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "writing",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "写作"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "shopping",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "购物"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "cooking",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "烹饪"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "dancing",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "跳舞"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "singing",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "唱歌"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "painting",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "绘画；画作"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "meeting",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "会议"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "feeling",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "感觉；情感"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "interesting",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有趣的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "exciting",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "令人兴奋的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "boring",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无聊的；乏味的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "amazing",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "令人惊叹的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "challenging",
+      "category": "核心词汇通关",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有挑战性的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "actress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女演员"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "waitress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女服务员"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "hostess",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女主人；女主持人"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "princess",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "公主；王妃"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "goddess",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女神"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "lioness",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "母狮"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "empress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女皇；皇后"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "mistress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女主人"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "heiress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女继承人"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "authoress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女作家"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "manageress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女经理"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "stewardess",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女乘务员"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "conductress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女售票员"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "huntress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女猎人"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "tigress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "母虎"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "seamstress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女裁缝"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "sorceress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女巫；女魔法师"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "enchantress",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女巫；迷人的女子"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "quickly",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "快速地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "carefully",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "小心地；仔细地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "completely",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "完全地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "finally",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "最后；终于"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "recently",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "最近"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "probably",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "很可能"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "fortunately",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "幸运地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "surprisingly",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "令人惊讶地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "seriously",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "严肃地；严重地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "gradually",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "逐渐地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "regularly",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "定期地；规律地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "immediately",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "立即"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "easily",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "容易地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "clearly",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "清楚地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "exactly",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "确切地；正是"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "naturally",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "自然地"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "suddenly",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "突然"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "truly",
+      "category": "核心词汇通关",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "真正地；确实"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "youngster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "年轻人；少年"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "gangster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "歹徒；黑帮成员"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "trickster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "骗子；爱恶作剧的人"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "prankster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "爱恶作剧的人"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "mobster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "暴徒；黑帮成员"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "hipster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "潮人；赶时髦的人"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "spinster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "老处女（贬义）"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "pollster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "民意调查员"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "huckster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "推销员；叫卖者"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "jokester",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "爱开玩笑的人"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "punster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "爱说双关语的人"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "roadster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "敞篷跑车"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "speedster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "超速驾驶者；高速车"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "teamster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "卡车司机"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "songster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "歌手；鸣禽"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "rhymester",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "打油诗人（贬义）"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "gamester",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "赌徒"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "tapster",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "酒吧服务员（古旧）"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "friendship",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "友谊；友情"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "require",
+      "category": "核心词汇通关",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "需要"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "tanker",
+      "category": "核心词汇通关",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "油轮；油槽船"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "import",
+      "category": "核心词汇通关",
+      "pos": "v. / n.",
+      "pos_zh": "动词 / 名词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "进口；输入",
+          "example": "The country imports most of its oil.",
+          "example_zh": "这个国家大部分石油依靠进口。",
+          "collocation": "import from",
+          "collocation_zh": "从……进口"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "进口；进口商品",
+          "example": "The government wants to reduce imports.",
+          "example_zh": "政府想要减少进口。",
+          "collocation": "reduce imports",
+          "collocation_zh": "减少进口"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "重要性；含义",
+          "example": "The matter is of great import.",
+          "example_zh": "这件事非常重要。",
+          "collocation": "of great import",
+          "collocation_zh": "非常重要"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "sunflower",
+      "category": "词素/复合词",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "向日葵"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "maybe",
+      "category": "词素/复合词",
+      "pos": "adv.",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "也许，可能；或许"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "deep",
+      "category": "词素/词根-本体-变体【派生词】",
+      "pos": "adj. / adv. / n.",
+      "pos_zh": "形容词 / 副词 / 名词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "深的（从表面到底部距离大）",
+          "example": "The lake is very deep.",
+          "example_zh": "这个湖很深。",
+          "collocation": "deep water",
+          "collocation_zh": "深水"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "深刻的；深奥的",
+          "example": "This is a deep book about life.",
+          "example_zh": "这是一本关于生活的深刻的书。",
+          "collocation": "deep thought",
+          "collocation_zh": "深刻的思想"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "深切的；强烈的",
+          "example": "She felt deep sadness.",
+          "example_zh": "她感到深切的悲伤。",
+          "collocation": "deep sadness",
+          "collocation_zh": "深切的悲伤"
+        },
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "深深地；在深处",
+          "example": "He dug deep into the ground.",
+          "example_zh": "他往地里挖得很深。",
+          "collocation": "dig deep",
+          "collocation_zh": "挖得深"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "深处；深海（常与 the 连用）",
+          "example": "The ship sank into the deep.",
+          "example_zh": "船沉入了深处。",
+          "collocation": "the deep",
+          "collocation_zh": "深处"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "contrast",
+      "category": "词素/词根-本体-变体【派生词】",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "对比；对照；差异",
+          "example": "There is a sharp contrast between the two cities.",
+          "example_zh": "这两座城市之间有着鲜明的对比。",
+          "collocation": "in contrast to",
+          "collocation_zh": "与……形成对比"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "形成对比的人或事物",
+          "example": "Her calm voice was a contrast to his angry shouts.",
+          "example_zh": "她平静的声音与他愤怒的喊叫形成了对比。"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "对比；对照",
+          "example": "The report contrasts the two methods.",
+          "example_zh": "这份报告对这两种方法进行了对比。",
+          "collocation": "contrast A with B",
+          "collocation_zh": "把A与B作对比"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "形成对比；显出差异",
+          "example": "The bright dress contrasts with the dark background.",
+          "example_zh": "这条鲜艳的裙子与深色背景形成了对比。",
+          "collocation": "contrast with",
+          "collocation_zh": "与……形成对比"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "meaning",
+      "category": "词素/词根-本体-变体【派生词】",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "意思；含义"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "hello",
+      "category": "词素/原子词",
+      "pos": "interj.",
+      "pos_zh": "感叹词",
+      "senses": [
+        {
+          "pos": "interj.",
+          "pos_zh": "感叹词",
+          "zh": "你好；喂"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "heaven",
+      "category": "词素/原子词",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "天堂；天国"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "nasty",
+      "category": "词素/原子词",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "令人不快的；讨厌的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "care",
+      "category": "词素/原子词",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "关心；照料",
+          "example": "She shows great care for her patients.",
+          "example_zh": "她对病人非常关心。",
+          "collocation": "take care of",
+          "collocation_zh": "照顾"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "小心；谨慎",
+          "example": "Handle the glass with care.",
+          "example_zh": "小心拿放玻璃杯。",
+          "collocation": "with care",
+          "collocation_zh": "小心地"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "关心；在意",
+          "example": "I don't care what he says.",
+          "example_zh": "我不在乎他说什么。",
+          "collocation": "care about",
+          "collocation_zh": "关心"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "照顾；照料",
+          "example": "She cares for her elderly mother.",
+          "example_zh": "她照顾年迈的母亲。",
+          "collocation": "care for",
+          "collocation_zh": "照顾"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "cheer",
+      "category": "词素/原子词",
+      "pos": "v. / n.",
+      "pos_zh": "动词 / 名词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "欢呼；喝彩",
+          "example": "The crowd cheered loudly when the team scored.",
+          "example_zh": "球队得分时，人群大声欢呼。",
+          "collocation": "cheer loudly",
+          "collocation_zh": "大声欢呼"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "使高兴；鼓舞",
+          "example": "Good news cheered everyone up.",
+          "example_zh": "好消息使大家振作起来。",
+          "collocation": "cheer up",
+          "collocation_zh": "使振作起来"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "欢呼声；喝彩声",
+          "example": "A great cheer went up from the crowd.",
+          "example_zh": "人群中爆发出巨大的欢呼声。",
+          "collocation": "a great cheer",
+          "collocation_zh": "巨大的欢呼声"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "愉快；高兴",
+          "example": "The children were full of cheer at the party.",
+          "example_zh": "孩子们在聚会上充满了欢乐。",
+          "collocation": "full of cheer",
+          "collocation_zh": "充满欢乐"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "color",
+      "category": "词素/原子词",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "颜色；色彩",
+          "example": "What is your favorite color?",
+          "example_zh": "你最喜欢什么颜色？",
+          "collocation": "favorite color",
+          "collocation_zh": "最喜欢的颜色"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "颜料；彩色",
+          "example": "The children painted with bright colors.",
+          "example_zh": "孩子们用鲜艳的颜料画画。",
+          "collocation": "in color",
+          "collocation_zh": "彩色的"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "给……着色；涂色",
+          "example": "She colored the picture with crayons.",
+          "example_zh": "她用蜡笔给图画上色。",
+          "collocation": "color the picture",
+          "collocation_zh": "给图画上色"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "影响；渲染",
+          "example": "His judgment was colored by anger.",
+          "example_zh": "他的判断受到了愤怒的影响。",
+          "collocation": "color one's judgment",
+          "collocation_zh": "影响某人的判断"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "fruit",
+      "category": "词素/原子词",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "水果"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "harm",
+      "category": "词素/原子词",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "伤害；损害",
+          "example": "The storm did great harm to the crops.",
+          "example_zh": "暴风雨对庄稼造成了很大损害。",
+          "collocation": "do harm to",
+          "collocation_zh": "对……造成伤害"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "危害；坏处",
+          "example": "There is no harm in asking.",
+          "example_zh": "问一问没有坏处。",
+          "collocation": "no harm in doing sth.",
+          "collocation_zh": "做某事没有坏处"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "伤害；损害",
+          "example": "Smoking can harm your health.",
+          "example_zh": "吸烟会损害你的健康。",
+          "collocation": "harm one's health",
+          "collocation_zh": "损害某人的健康"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "help",
+      "category": "词素/原子词",
+      "pos": "v. / n. / interj.",
+      "pos_zh": "动词 / 名词 / 感叹词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "帮助；援助",
+          "example": "Can you help me carry this box?",
+          "example_zh": "你能帮我搬这个箱子吗？",
+          "collocation": "help sb. do sth.",
+          "collocation_zh": "帮助某人做某事"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "有助于；改善",
+          "example": "This medicine will help your cough.",
+          "example_zh": "这种药对您的咳嗽有帮助。",
+          "collocation": "help with",
+          "collocation_zh": "有助于"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "帮助；援助",
+          "example": "Thank you for your help.",
+          "example_zh": "谢谢你的帮助。",
+          "collocation": "with the help of",
+          "collocation_zh": "在……的帮助下"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "帮手；有帮助的人或物",
+          "example": "You are a great help to me.",
+          "example_zh": "你对我帮助很大。",
+          "collocation": "a great help",
+          "collocation_zh": "很大的帮助"
+        },
+        {
+          "pos": "interj.",
+          "pos_zh": "感叹词",
+          "zh": "救命",
+          "example": "Help! I'm stuck!",
+          "example_zh": "救命！我被困住了！"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "hope",
+      "category": "词素/原子词",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "希望；期望",
+          "example": "There is still hope of finding survivors.",
+          "example_zh": "仍然有找到幸存者的希望。",
+          "collocation": "hope of",
+          "collocation_zh": "……的希望"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "希望的人或事物",
+          "example": "She is the hope of the family.",
+          "example_zh": "她是这个家庭的希望。",
+          "collocation": "the hope of",
+          "collocation_zh": "……的希望"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "希望；期望",
+          "example": "I hope you will come to my party.",
+          "example_zh": "我希望你能来参加我的聚会。",
+          "collocation": "hope to do sth",
+          "collocation_zh": "希望做某事"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "mean",
+      "category": "词素/原子词",
+      "pos": "v. / adj.",
+      "pos_zh": "动词 / 形容词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "意思是；表示……的意思",
+          "example": "What does this word mean?",
+          "example_zh": "这个词是什么意思？",
+          "collocation": "mean a word",
+          "collocation_zh": "表示某词的意思"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "意味着；导致",
+          "example": "Missing the bus means being late.",
+          "example_zh": "错过公交车意味着迟到。"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "打算；意欲",
+          "example": "I didn't mean to hurt you.",
+          "example_zh": "我不是有意伤害你的。",
+          "collocation": "mean to do sth.",
+          "collocation_zh": "打算做某事"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "吝啬的；小气的",
+          "example": "He is too mean to buy a gift.",
+          "example_zh": "他太小气了，连礼物都不买。"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "刻薄的；不友善的",
+          "example": "Don't be mean to your little brother.",
+          "example_zh": "不要对你弟弟刻薄。"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "平均的；中间的",
+          "example": "The mean temperature is about 20 degrees.",
+          "example_zh": "平均温度约为20度。",
+          "collocation": "mean value",
+          "collocation_zh": "平均值"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "old",
+      "category": "词素/原子词",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "老的；年老的"
+        }
+      ],
+      "source": "legacy"
+    },
+    {
+      "name": "word",
+      "category": "词素/原子词",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "词；单词",
+          "example": "What does this word mean?",
+          "example_zh": "这个单词是什么意思？",
+          "collocation": "a new word",
+          "collocation_zh": "一个新单词"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "话语；言语",
+          "example": "He left without a word.",
+          "example_zh": "他一句话也没说就离开了。",
+          "collocation": "without a word",
+          "collocation_zh": "一言不发"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "消息；信息",
+          "example": "Please send me word when you arrive.",
+          "example_zh": "你到达后请给我捎个信。",
+          "collocation": "send word",
+          "collocation_zh": "捎信"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "诺言；保证",
+          "example": "He kept his word and came back.",
+          "example_zh": "他信守诺言回来了。",
+          "collocation": "keep one's word",
+          "collocation_zh": "信守诺言"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "用词语表达；措辞",
+          "example": "She worded her reply carefully.",
+          "example_zh": "她措辞谨慎地作了回答。",
+          "collocation": "word a question",
+          "collocation_zh": "措辞提问"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "improt",
+      "category": "词素/原子词",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "进口；进口商品（拼写有误，应为 import）",
+          "example": "The country limits the improt of luxury cars.",
+          "example_zh": "这个国家限制豪华汽车的进口。",
+          "collocation": "the improt of goods",
+          "collocation_zh": "货物的进口"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "进口；输入；导入（拼写有误，应为 import）",
+          "example": "They improt most of their oil from abroad.",
+          "example_zh": "他们的大部分石油从国外进口。",
+          "collocation": "improt data",
+          "collocation_zh": "导入数据"
+        }
+      ],
+      "source": "ai"
+    },
+    {
+      "name": "beauty",
+      "category": "词素/词根族",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "美；美丽"
+        }
+      ],
+      "source": "legacy"
+    }
+  ],
+  "pos_distribution": {
+    "n.": 164,
+    "adj.": 109,
+    "adv.": 19,
+    "v.": 14,
+    "n. / v.": 10,
+    "v. / n.": 3,
+    "v. / n. / adj.": 2,
+    "adj. / adv.": 1,
+    "adv. / adj.": 1,
+    "n. / adj.": 1,
+    "adj. / n.": 1,
+    "adj. / adv. / n.": 1,
+    "interj.": 1,
+    "v. / n. / interj.": 1,
+    "v. / adj.": 1
+  }
+}

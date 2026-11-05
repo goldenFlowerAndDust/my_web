@@ -10,6 +10,16 @@
         ? ''
         : 'http://127.0.0.1:8767';
     var isGitHubPages = /\.github\.io$/i.test(window.location.hostname);
+    var POS_ZH = {
+        "n.": "名词", "v.": "动词", "vt.": "及物动词", "vi.": "不及物动词",
+        "adj.": "形容词", "adv.": "副词", "pron.": "代词", "prep.": "介词",
+        "conj.": "连词", "num.": "数词", "art.": "冠词", "interj.": "感叹词",
+        "aux.": "助动词", "modal": "情态动词", "phrase": "短语"
+    };
+    function posLabel(pos) {
+        var key = String(pos || "").trim();
+        return POS_ZH[key] ? key + " " + POS_ZH[key] : (key || "其他");
+    }
     var isRemotePage = isGitHubPages || (
         window.location.protocol === 'https:' &&
         !/^(localhost|127\.0\.0\.1|\[::1\])$/i.test(window.location.hostname)
@@ -624,7 +634,7 @@
             var pos = String(sense.pos || '').trim();
             if (pos && values.indexOf(pos) < 0) values.push(pos);
         });
-        return values.length ? values.join(' / ') : String(analysis.pos || '');
+        return values.length ? values.map(posLabel).join(' / ') : posLabel(analysis.pos);
     }
 
     function renderPreview(analysis) {
@@ -640,7 +650,7 @@
                 return '<li><span>' + esc(sense.zh) + '</span>' + colloc + '</li>';
             }).join('');
             return '<li class="preview_pos_group">' +
-                '<span class="preview_pos_badge">' + esc(pos) + '</span>' +
+                '<span class="preview_pos_badge">' + esc(posLabel(pos)) + '</span>' +
                 '<ul class="preview_sense_list">' + items + '</ul>' +
                 '</li>';
         }).join('');
@@ -706,7 +716,7 @@
             }).filter(Boolean).join('；');
             if (!meanings) return '';
             return '<div class="result_pos_row">' +
-                '<span class="result_pos_chip">' + esc(pos) + '</span>' +
+                '<span class="result_pos_chip">' + esc(posLabel(pos)) + '</span>' +
                 '<span class="result_pos_text">' + esc(meanings) + '</span>' +
                 '</div>';
         }).join('');
@@ -795,6 +805,12 @@
         if (data.data_path) rows.push(['JSON 路径', data.data_path + (data.data_path_ok ? ' · 有效' : ' · 失效')]);
         if (data.data_category) rows.push(['分类', data.data_category]);
         if (item) {
+            if (item.pos || item.pos_zh) rows.push(['词性', item.pos && item.pos_zh ? item.pos + ' ' + item.pos_zh : (item.pos_zh || item.pos)]);
+            if (Array.isArray(item.senses) && item.senses.length) {
+                rows.push(['义项', item.senses.map(function (sense) {
+                    return posLabel(sense.pos) + '：' + String(sense.zh || '');
+                }).join('；')]);
+            }
             rows.push(['当前等级', '第 ' + (item.level || 0) + ' 次']);
             rows.push(['当前日程', item.nextDate || '']);
         }

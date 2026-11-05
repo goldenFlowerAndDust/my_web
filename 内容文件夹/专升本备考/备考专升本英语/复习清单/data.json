@@ -158,7 +158,17 @@
       "sense": "有帮助的；有用的",
       "anchor": "word-helpful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有帮助的；有用的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "careful",
@@ -180,7 +190,17 @@
       "sense": "小心的；谨慎的",
       "anchor": "word-careful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "小心的；谨慎的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "useful",
@@ -202,7 +222,17 @@
       "sense": "有用的；实用的",
       "anchor": "word-useful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有用的；实用的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "beautiful",
@@ -224,7 +254,17 @@
       "sense": "美丽的；漂亮的",
       "anchor": "word-beautiful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "美丽的；漂亮的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "successful",
@@ -246,7 +286,17 @@
       "sense": "成功的",
       "anchor": "word-successful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "成功的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "meaningful",
@@ -268,7 +318,17 @@
       "sense": "有意义的",
       "anchor": "word-meaningful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有意义的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "colorful",
@@ -290,7 +350,17 @@
       "sense": "色彩丰富的；多彩的",
       "anchor": "word-colorful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "色彩丰富的；多彩的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "powerful",
@@ -312,7 +382,17 @@
       "sense": "强大的；有力的",
       "anchor": "word-powerful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "强大的；有力的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "wonderful",
@@ -334,7 +414,17 @@
       "sense": "极好的；精彩的",
       "anchor": "word-wonderful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "极好的；精彩的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "thankful",
@@ -356,7 +446,17 @@
       "sense": "感激的",
       "anchor": "word-thankful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "感激的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "painful",
@@ -378,7 +478,17 @@
       "sense": "疼痛的；引起疼痛的",
       "anchor": "word-painful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "疼痛的；引起疼痛的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "peaceful",
@@ -400,7 +510,17 @@
       "sense": "和平的",
       "anchor": "word-peaceful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "和平的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "hopeful",
@@ -422,7 +542,17 @@
       "sense": "抱有希望的",
       "anchor": "word-hopeful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "抱有希望的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "harmful",
@@ -444,7 +574,17 @@
       "sense": "有害的",
       "anchor": "word-harmful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有害的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "cheerful",
@@ -466,7 +606,17 @@
       "sense": "愉快的；高兴的",
       "anchor": "word-cheerful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "愉快的；高兴的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "thoughtful",
@@ -488,7 +638,17 @@
       "sense": "体贴的；考虑周到的",
       "anchor": "word-thoughtful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "体贴的；考虑周到的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "fruitful",
@@ -510,7 +670,17 @@
       "sense": "富有成效的",
       "anchor": "word-fruitful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "富有成效的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "stressful",
@@ -532,7 +702,17 @@
       "sense": "有压力的；令人紧张的",
       "anchor": "word-stressful",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有压力的；令人紧张的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "careless",
@@ -554,7 +734,17 @@
       "sense": "粗心的；疏忽的",
       "anchor": "word-careless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "粗心的；疏忽的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "useless",
@@ -576,7 +766,17 @@
       "sense": "无用的；不能用的",
       "anchor": "word-useless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无用的；不能用的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "hopeless",
@@ -598,7 +798,17 @@
       "sense": "绝望的；无望的",
       "anchor": "word-hopeless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "绝望的；无望的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "homeless",
@@ -620,7 +830,17 @@
       "sense": "无家可归的",
       "anchor": "word-homeless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无家可归的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "helpless",
@@ -642,7 +862,17 @@
       "sense": "无助的；需要帮助的",
       "anchor": "word-helpless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无助的；需要帮助的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "endless",
@@ -664,7 +894,17 @@
       "sense": "无尽的；无穷的",
       "anchor": "word-endless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无尽的；无穷的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "fearless",
@@ -686,7 +926,17 @@
       "sense": "无畏的；勇敢的",
       "anchor": "word-fearless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无畏的；勇敢的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "colorless",
@@ -708,7 +958,17 @@
       "sense": "无色的",
       "anchor": "word-colorless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无色的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "powerless",
@@ -730,7 +990,17 @@
       "sense": "无力的；没有力量的",
       "anchor": "word-powerless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无力的；没有力量的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "meaningless",
@@ -752,7 +1022,17 @@
       "sense": "无意义的；无目的的",
       "anchor": "word-meaningless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无意义的；无目的的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "thoughtless",
@@ -774,7 +1054,17 @@
       "sense": "欠考虑的；轻率的",
       "anchor": "word-thoughtless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "欠考虑的；轻率的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "harmless",
@@ -796,7 +1086,17 @@
       "sense": "无害的",
       "anchor": "word-harmless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无害的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "doubtless",
@@ -813,12 +1113,44 @@
       "rootZh": "怀疑",
       "suffix": "less",
       "suffixLabel": "-less",
-      "pos": "adj./adv.",
+      "pos": "adj. / adv.",
       "levelTag": "专升本",
-      "sense": "无疑的；确定的",
+      "sense": "无疑的；不容怀疑的",
       "anchor": "word-doubtless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词 / 副词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无疑的；不容怀疑的",
+          "example": "It is doubtless that he will come.",
+          "example_zh": "他无疑会来。",
+          "collocation": "be doubtless that",
+          "collocation_zh": "……是无疑的"
+        },
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "无疑地；肯定地",
+          "example": "She is doubtless the best player on the team.",
+          "example_zh": "她无疑是队里最好的球员。",
+          "collocation": "doubtless the best",
+          "collocation_zh": "无疑是最好的"
+        },
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "很可能；大概",
+          "example": "He will doubtless arrive late again.",
+          "example_zh": "他很可能又会迟到。",
+          "collocation": "doubtless arrive",
+          "collocation_zh": "很可能到达"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "shameless",
@@ -840,7 +1172,17 @@
       "sense": "无耻的；不知羞耻的",
       "anchor": "word-shameless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无耻的；不知羞耻的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "speechless",
@@ -862,7 +1204,17 @@
       "sense": "说不出话的；哑口无言的",
       "anchor": "word-speechless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "说不出话的；哑口无言的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "sleepless",
@@ -884,7 +1236,17 @@
       "sense": "失眠的；睡不着的",
       "anchor": "word-sleepless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "失眠的；睡不着的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "priceless",
@@ -906,7 +1268,17 @@
       "sense": "无价的；极珍贵的",
       "anchor": "word-priceless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无价的；极珍贵的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "regardless",
@@ -923,12 +1295,35 @@
       "rootZh": "关注；尊重",
       "suffix": "less",
       "suffixLabel": "-less",
-      "pos": "adj./adv.",
+      "pos": "adv. / adj.",
       "levelTag": "专升本",
-      "sense": "不顾的；不关心的",
+      "sense": "不管怎样；无论如何",
       "anchor": "word-regardless",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词 / 形容词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "不管怎样；无论如何",
+          "example": "Regardless, we must finish the work today.",
+          "example_zh": "无论如何，我们今天必须完成这项工作。",
+          "collocation": "regardless of",
+          "collocation_zh": "不管；不顾"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不顾的；不加理会的",
+          "example": "He went ahead regardless of the danger.",
+          "example_zh": "他不顾危险继续前进。",
+          "collocation": "regardless of danger",
+          "collocation_zh": "不顾危险"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "readable",
@@ -950,7 +1345,17 @@
       "sense": "可读的；易读的",
       "anchor": "word-readable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可读的；易读的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "drinkable",
@@ -972,7 +1377,17 @@
       "sense": "可饮用的",
       "anchor": "word-drinkable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可饮用的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "eatable",
@@ -994,7 +1409,17 @@
       "sense": "可食用的；能吃的",
       "anchor": "word-eatable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可食用的；能吃的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "usable",
@@ -1016,7 +1441,17 @@
       "sense": "可用的；能用的",
       "anchor": "word-usable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可用的；能用的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "enjoyable",
@@ -1038,7 +1473,17 @@
       "sense": "令人愉快的；有乐趣的",
       "anchor": "word-enjoyable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "令人愉快的；有乐趣的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "believable",
@@ -1060,7 +1505,17 @@
       "sense": "可信的",
       "anchor": "word-believable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可信的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "teachable",
@@ -1082,7 +1537,17 @@
       "sense": "可教的；可训的",
       "anchor": "word-teachable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可教的；可训的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "changeable",
@@ -1104,7 +1569,17 @@
       "sense": "易变的；变化无常的",
       "anchor": "word-changeable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "易变的；变化无常的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "comfortable",
@@ -1126,7 +1601,17 @@
       "sense": "舒适的；舒服的",
       "anchor": "word-comfortable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "舒适的；舒服的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "valuable",
@@ -1148,7 +1633,17 @@
       "sense": "有价值的；贵重的",
       "anchor": "word-valuable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有价值的；贵重的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "suitable",
@@ -1170,7 +1665,17 @@
       "sense": "合适的；适宜的",
       "anchor": "word-suitable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "合适的；适宜的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "available",
@@ -1192,7 +1697,17 @@
       "sense": "可获得的；可用的",
       "anchor": "word-available",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可获得的；可用的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "remarkable",
@@ -1214,7 +1729,17 @@
       "sense": "显著的；非凡的",
       "anchor": "word-remarkable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "显著的；非凡的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "reliable",
@@ -1236,7 +1761,17 @@
       "sense": "可靠的；可信赖的",
       "anchor": "word-reliable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可靠的；可信赖的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "affordable",
@@ -1258,7 +1793,17 @@
       "sense": "买得起的；负担得起的",
       "anchor": "word-affordable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "买得起的；负担得起的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "predictable",
@@ -1280,7 +1825,17 @@
       "sense": "可预测的；可预料的",
       "anchor": "word-predictable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可预测的；可预料的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "renewable",
@@ -1302,7 +1857,17 @@
       "sense": "可再生的",
       "anchor": "word-renewable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可再生的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "acceptable",
@@ -1324,7 +1889,17 @@
       "sense": "可接受的；合意的",
       "anchor": "word-acceptable",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可接受的；合意的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "action",
@@ -1346,7 +1921,17 @@
       "sense": "行动；行为",
       "anchor": "word-action",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "行动；行为"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "education",
@@ -1368,7 +1953,17 @@
       "sense": "教育；培养",
       "anchor": "word-education",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "教育；培养"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "information",
@@ -1390,7 +1985,17 @@
       "sense": "信息；资料",
       "anchor": "word-information",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "信息；资料"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "preparation",
@@ -1412,7 +2017,17 @@
       "sense": "准备；预备",
       "anchor": "word-preparation",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "准备；预备"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "celebration",
@@ -1434,7 +2049,17 @@
       "sense": "庆祝；庆祝活动",
       "anchor": "word-celebration",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "庆祝；庆祝活动"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "protection",
@@ -1456,7 +2081,17 @@
       "sense": "保护；防护",
       "anchor": "word-protection",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "保护；防护"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "invention",
@@ -1478,7 +2113,17 @@
       "sense": "发明；发明物",
       "anchor": "word-invention",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "发明；发明物"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "solution",
@@ -1500,7 +2145,17 @@
       "sense": "解决办法",
       "anchor": "word-solution",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "解决办法"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "attention",
@@ -1522,7 +2177,17 @@
       "sense": "注意；关注",
       "anchor": "word-attention",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "注意；关注"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "invitation",
@@ -1544,7 +2209,17 @@
       "sense": "邀请；请柬",
       "anchor": "word-invitation",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "邀请；请柬"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "operation",
@@ -1566,7 +2241,17 @@
       "sense": "手术",
       "anchor": "word-operation",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "手术"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "examination",
@@ -1588,7 +2273,17 @@
       "sense": "考试",
       "anchor": "word-examination",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "考试"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "communication",
@@ -1610,7 +2305,17 @@
       "sense": "交流；沟通",
       "anchor": "word-communication",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "交流；沟通"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "competition",
@@ -1632,7 +2337,17 @@
       "sense": "竞争",
       "anchor": "word-competition",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "竞争"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "production",
@@ -1654,7 +2369,17 @@
       "sense": "生产；产量",
       "anchor": "word-production",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "生产；产量"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "introduction",
@@ -1676,7 +2401,17 @@
       "sense": "介绍",
       "anchor": "word-introduction",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "介绍"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "transportation",
@@ -1698,7 +2433,17 @@
       "sense": "运输；交通",
       "anchor": "word-transportation",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "运输；交通"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "organization",
@@ -1720,7 +2465,17 @@
       "sense": "组织；机构",
       "anchor": "word-organization",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "组织；机构"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "decision",
@@ -1742,7 +2497,17 @@
       "sense": "决定；决心",
       "anchor": "word-decision",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "决定；决心"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "conclusion",
@@ -1764,7 +2529,17 @@
       "sense": "结论",
       "anchor": "word-conclusion",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "结论"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "expression",
@@ -1786,7 +2561,17 @@
       "sense": "表达；表述",
       "anchor": "word-expression",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "表达；表述"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "impression",
@@ -1808,7 +2593,17 @@
       "sense": "印象",
       "anchor": "word-impression",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "印象"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "permission",
@@ -1830,7 +2625,17 @@
       "sense": "许可；允许",
       "anchor": "word-permission",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "许可；允许"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "admission",
@@ -1852,7 +2657,17 @@
       "sense": "录取；准入",
       "anchor": "word-admission",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "录取；准入"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "expansion",
@@ -1874,7 +2689,17 @@
       "sense": "扩张；扩大",
       "anchor": "word-expansion",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "扩张；扩大"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "extension",
@@ -1896,7 +2721,17 @@
       "sense": "延伸；扩建",
       "anchor": "word-extension",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "延伸；扩建"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "tension",
@@ -1918,7 +2753,17 @@
       "sense": "紧张；紧张局势",
       "anchor": "word-tension",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "紧张；紧张局势"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "vision",
@@ -1940,7 +2785,17 @@
       "sense": "视力；视觉",
       "anchor": "word-vision",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "视力；视觉"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "revision",
@@ -1962,7 +2817,17 @@
       "sense": "复习",
       "anchor": "word-revision",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "复习"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "provision",
@@ -1984,7 +2849,17 @@
       "sense": "供应；提供",
       "anchor": "word-provision",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "供应；提供"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "conversion",
@@ -2006,7 +2881,17 @@
       "sense": "转换；改造",
       "anchor": "word-conversion",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "转换；改造"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "suspension",
@@ -2028,7 +2913,17 @@
       "sense": "暂停",
       "anchor": "word-suspension",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "暂停"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "submission",
@@ -2050,7 +2945,17 @@
       "sense": "提交",
       "anchor": "word-submission",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "提交"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "transmission",
@@ -2072,7 +2977,17 @@
       "sense": "传播；传染",
       "anchor": "word-transmission",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "传播；传染"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "possession",
@@ -2094,7 +3009,17 @@
       "sense": "拥有；占有",
       "anchor": "word-possession",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "拥有；占有"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "profession",
@@ -2116,7 +3041,17 @@
       "sense": "职业；行业",
       "anchor": "word-profession",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "职业；行业"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "development",
@@ -2138,7 +3073,17 @@
       "sense": "发展；成长",
       "anchor": "word-development",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "发展；成长"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "improvement",
@@ -2160,7 +3105,17 @@
       "sense": "改善；提高",
       "anchor": "word-improvement",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "改善；提高"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "achievement",
@@ -2182,7 +3137,17 @@
       "sense": "成就；成绩",
       "anchor": "word-achievement",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "成就；成绩"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "agreement",
@@ -2204,7 +3169,17 @@
       "sense": "协议；协定",
       "anchor": "word-agreement",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "协议；协定"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "argument",
@@ -2226,7 +3201,17 @@
       "sense": "争论；争吵",
       "anchor": "word-argument",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "争论；争吵"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "arrangement",
@@ -2248,7 +3233,17 @@
       "sense": "安排；准备工作",
       "anchor": "word-arrangement",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "安排；准备工作"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "management",
@@ -2270,7 +3265,17 @@
       "sense": "管理；经营",
       "anchor": "word-management",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "管理；经营"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "treatment",
@@ -2292,7 +3297,17 @@
       "sense": "治疗；疗法",
       "anchor": "word-treatment",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "治疗；疗法"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "movement",
@@ -2314,7 +3329,17 @@
       "sense": "运动；活动",
       "anchor": "word-movement",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "运动；活动"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "equipment",
@@ -2336,7 +3361,17 @@
       "sense": "设备；装备",
       "anchor": "word-equipment",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "设备；装备"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "government",
@@ -2358,7 +3393,17 @@
       "sense": "政府",
       "anchor": "word-government",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "政府"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "punishment",
@@ -2380,7 +3425,17 @@
       "sense": "惩罚；处罚",
       "anchor": "word-punishment",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "惩罚；处罚"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "settlement",
@@ -2402,7 +3457,17 @@
       "sense": "解决；协议",
       "anchor": "word-settlement",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "解决；协议"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "advertisement",
@@ -2424,7 +3489,17 @@
       "sense": "广告",
       "anchor": "word-advertisement",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "广告"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "commitment",
@@ -2446,7 +3521,17 @@
       "sense": "承诺；保证",
       "anchor": "word-commitment",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "承诺；保证"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "requirement",
@@ -2472,7 +3557,17 @@
       "hasPlural": true,
       "pluralName": "requirements",
       "pluralPath": "../专升本英语核心词汇通关.html#word-requirements",
-      "pluralSameMeaning": true
+      "pluralSameMeaning": true,
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "要求；必要条件"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "excitement",
@@ -2494,7 +3589,17 @@
       "sense": "兴奋；激动",
       "anchor": "word-excitement",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "兴奋；激动"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "entertainment",
@@ -2516,7 +3621,17 @@
       "sense": "娱乐；娱乐活动",
       "anchor": "word-entertainment",
       "batch": "第一批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "娱乐；娱乐活动"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "happiness",
@@ -2538,7 +3653,17 @@
       "sense": "幸福；快乐",
       "anchor": "word-happiness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "幸福；快乐"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "sadness",
@@ -2560,7 +3685,17 @@
       "sense": "悲伤；难过",
       "anchor": "word-sadness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "悲伤；难过"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "kindness",
@@ -2582,7 +3717,17 @@
       "sense": "善良；好意",
       "anchor": "word-kindness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "善良；好意"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "darkness",
@@ -2604,7 +3749,17 @@
       "sense": "黑暗；暗处",
       "anchor": "word-darkness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "黑暗；暗处"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "weakness",
@@ -2626,7 +3781,17 @@
       "sense": "弱点；缺点",
       "anchor": "word-weakness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "弱点；缺点"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "illness",
@@ -2648,7 +3813,17 @@
       "sense": "疾病",
       "anchor": "word-illness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "疾病"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "business",
@@ -2670,7 +3845,17 @@
       "sense": "生意；商业",
       "anchor": "word-business",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "生意；商业"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "awareness",
@@ -2692,7 +3877,17 @@
       "sense": "意识；认识",
       "anchor": "word-awareness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "意识；认识"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "readiness",
@@ -2714,7 +3909,17 @@
       "sense": "准备就绪",
       "anchor": "word-readiness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "准备就绪"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "effectiveness",
@@ -2736,7 +3941,17 @@
       "sense": "有效性；效果",
       "anchor": "word-effectiveness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "有效性；效果"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "friendliness",
@@ -2758,7 +3973,17 @@
       "sense": "友好；亲切",
       "anchor": "word-friendliness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "友好；亲切"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "loneliness",
@@ -2780,7 +4005,17 @@
       "sense": "孤独；寂寞",
       "anchor": "word-loneliness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "孤独；寂寞"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "brightness",
@@ -2802,7 +4037,17 @@
       "sense": "明亮；亮度",
       "anchor": "word-brightness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "明亮；亮度"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "coldness",
@@ -2824,7 +4069,17 @@
       "sense": "寒冷",
       "anchor": "word-coldness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "寒冷"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "emptiness",
@@ -2846,7 +4101,17 @@
       "sense": "空虚；空旷",
       "anchor": "word-emptiness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "空虚；空旷"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "tiredness",
@@ -2868,7 +4133,17 @@
       "sense": "疲倦；疲劳",
       "anchor": "word-tiredness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "疲倦；疲劳"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "usefulness",
@@ -2890,7 +4165,17 @@
       "sense": "有用性；用处",
       "anchor": "word-usefulness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "有用性；用处"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "carelessness",
@@ -2912,7 +4197,17 @@
       "sense": "粗心；疏忽",
       "anchor": "word-carelessness",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "粗心；疏忽"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "ability",
@@ -2934,7 +4229,17 @@
       "sense": "能力",
       "anchor": "word-ability",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "能力"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "activity",
@@ -2956,7 +4261,17 @@
       "sense": "活动",
       "anchor": "word-activity",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "活动"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "reality",
@@ -2978,7 +4293,17 @@
       "sense": "现实；真实",
       "anchor": "word-reality",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "现实；真实"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "quality",
@@ -3000,7 +4325,17 @@
       "sense": "质量；品质",
       "anchor": "word-quality",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "质量；品质"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "quantity",
@@ -3022,7 +4357,17 @@
       "sense": "数量",
       "anchor": "word-quantity",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "数量"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "diversity",
@@ -3044,7 +4389,17 @@
       "sense": "多样性；差异",
       "anchor": "word-diversity",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "多样性；差异"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "creativity",
@@ -3066,7 +4421,17 @@
       "sense": "创造力",
       "anchor": "word-creativity",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "创造力"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "responsibility",
@@ -3088,7 +4453,17 @@
       "sense": "责任；职责",
       "anchor": "word-responsibility",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "责任；职责"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "possibility",
@@ -3110,7 +4485,17 @@
       "sense": "可能性",
       "anchor": "word-possibility",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "可能性"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "necessity",
@@ -3132,7 +4517,17 @@
       "sense": "必要性",
       "anchor": "word-necessity",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "必要性"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "majority",
@@ -3154,7 +4549,17 @@
       "sense": "大多数",
       "anchor": "word-majority",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "大多数"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "minority",
@@ -3176,7 +4581,17 @@
       "sense": "少数",
       "anchor": "word-minority",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "少数"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "security",
@@ -3198,7 +4613,17 @@
       "sense": "安全；保障",
       "anchor": "word-security",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "安全；保障"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "curiosity",
@@ -3220,7 +4645,17 @@
       "sense": "好奇心",
       "anchor": "word-curiosity",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "好奇心"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "popularity",
@@ -3242,7 +4677,17 @@
       "sense": "受欢迎；普及",
       "anchor": "word-popularity",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "受欢迎；普及"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "similarity",
@@ -3264,7 +4709,17 @@
       "sense": "相似性；相似之处",
       "anchor": "word-similarity",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "相似性；相似之处"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "formality",
@@ -3286,7 +4741,17 @@
       "sense": "正式；礼节",
       "anchor": "word-formality",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "正式；礼节"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "nationality",
@@ -3308,7 +4773,17 @@
       "sense": "国籍",
       "anchor": "word-nationality",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "国籍"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "active",
@@ -3330,7 +4805,17 @@
       "sense": "活跃的；积极的",
       "anchor": "word-active",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "活跃的；积极的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "creative",
@@ -3352,7 +4837,17 @@
       "sense": "有创造力的",
       "anchor": "word-creative",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有创造力的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "effective",
@@ -3374,7 +4869,17 @@
       "sense": "有效的",
       "anchor": "word-effective",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有效的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "attractive",
@@ -3396,7 +4901,17 @@
       "sense": "有吸引力的",
       "anchor": "word-attractive",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有吸引力的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "competitive",
@@ -3418,7 +4933,17 @@
       "sense": "有竞争力的；竞争激烈的",
       "anchor": "word-competitive",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有竞争力的；竞争激烈的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "protective",
@@ -3440,7 +4965,17 @@
       "sense": "保护的；防护的",
       "anchor": "word-protective",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "保护的；防护的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "productive",
@@ -3462,7 +4997,17 @@
       "sense": "多产的；高效的",
       "anchor": "word-productive",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "多产的；高效的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "sensitive",
@@ -3484,7 +5029,17 @@
       "sense": "敏感的",
       "anchor": "word-sensitive",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "敏感的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "positive",
@@ -3506,7 +5061,17 @@
       "sense": "积极的；肯定的",
       "anchor": "word-positive",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "积极的；肯定的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "negative",
@@ -3528,7 +5093,17 @@
       "sense": "消极的；否定的",
       "anchor": "word-negative",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "消极的；否定的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "expensive",
@@ -3550,7 +5125,17 @@
       "sense": "昂贵的",
       "anchor": "word-expensive",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "昂贵的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "impressive",
@@ -3572,7 +5157,17 @@
       "sense": "令人印象深刻的",
       "anchor": "word-impressive",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "令人印象深刻的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "decisive",
@@ -3594,7 +5189,17 @@
       "sense": "决定性的",
       "anchor": "word-decisive",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "决定性的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "informative",
@@ -3616,7 +5221,17 @@
       "sense": "提供信息的；增长见闻的",
       "anchor": "word-informative",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "提供信息的；增长见闻的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "objective",
@@ -3633,12 +5248,42 @@
       "rootZh": "物体；反对",
       "suffix": "ive",
       "suffixLabel": "-ive",
-      "pos": "adj./n.",
+      "pos": "n. / adj.",
       "levelTag": "专升本",
-      "sense": "客观的",
+      "sense": "目标；目的",
       "anchor": "word-objective",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词 / 形容词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "目标；目的",
+          "example": "Our main objective is to improve students' reading skills.",
+          "example_zh": "我们的主要目标是提高学生的阅读能力。",
+          "collocation": "main objective",
+          "collocation_zh": "主要目标"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "客观的；无偏见的",
+          "example": "A judge must remain objective.",
+          "example_zh": "法官必须保持客观。",
+          "collocation": "objective view",
+          "collocation_zh": "客观的看法"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "（与想法、感受相对的）客观存在的；实际的",
+          "example": "She has an objective need for medical care.",
+          "example_zh": "她确实有医疗方面的客观需求。"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "subjective",
@@ -3660,7 +5305,17 @@
       "sense": "主观的",
       "anchor": "word-subjective",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "主观的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "alternative",
@@ -3677,12 +5332,44 @@
       "rootZh": "改变",
       "suffix": "ive",
       "suffixLabel": "-ive",
-      "pos": "adj./n.",
+      "pos": "adj. / n.",
       "levelTag": "专升本",
-      "sense": "替代的；可供选择的",
+      "sense": "可供替代的；另外的",
       "anchor": "word-alternative",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词 / 名词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "可供替代的；另外的",
+          "example": "We need an alternative plan.",
+          "example_zh": "我们需要一个替代方案。",
+          "collocation": "alternative plan",
+          "collocation_zh": "替代方案"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "非传统的；另类的",
+          "example": "He enjoys alternative music.",
+          "example_zh": "他喜欢另类音乐。",
+          "collocation": "alternative music",
+          "collocation_zh": "另类音乐"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "可供选择的事物；替代品",
+          "example": "We have no alternative but to wait.",
+          "example_zh": "我们别无选择，只能等待。",
+          "collocation": "have no alternative",
+          "collocation_zh": "别无选择"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "extensive",
@@ -3704,7 +5391,17 @@
       "sense": "广泛的；大量的",
       "anchor": "word-extensive",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "广泛的；大量的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "famous",
@@ -3726,7 +5423,17 @@
       "sense": "著名的",
       "anchor": "word-famous",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "著名的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "dangerous",
@@ -3748,7 +5455,17 @@
       "sense": "危险的",
       "anchor": "word-dangerous",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "危险的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "nervous",
@@ -3770,7 +5487,17 @@
       "sense": "紧张的",
       "anchor": "word-nervous",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "紧张的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "humorous",
@@ -3792,7 +5519,17 @@
       "sense": "幽默的",
       "anchor": "word-humorous",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "幽默的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "courageous",
@@ -3814,7 +5551,17 @@
       "sense": "勇敢的",
       "anchor": "word-courageous",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "勇敢的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "disastrous",
@@ -3836,7 +5583,17 @@
       "sense": "灾难性的；糟糕的",
       "anchor": "word-disastrous",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "灾难性的；糟糕的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "mysterious",
@@ -3858,7 +5615,17 @@
       "sense": "神秘的",
       "anchor": "word-mysterious",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "神秘的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "religious",
@@ -3880,7 +5647,17 @@
       "sense": "宗教的；虔诚的",
       "anchor": "word-religious",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "宗教的；虔诚的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "ridiculous",
@@ -3902,7 +5679,17 @@
       "sense": "荒谬的；可笑的",
       "anchor": "word-ridiculous",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "荒谬的；可笑的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "anxious",
@@ -3924,7 +5711,17 @@
       "sense": "焦虑的",
       "anchor": "word-anxious",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "焦虑的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "various",
@@ -3946,7 +5743,17 @@
       "sense": "各种各样的",
       "anchor": "word-various",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "各种各样的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "envious",
@@ -3968,7 +5775,17 @@
       "sense": "羡慕的；嫉妒的",
       "anchor": "word-envious",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "羡慕的；嫉妒的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "glorious",
@@ -3990,7 +5807,17 @@
       "sense": "光荣的；辉煌的",
       "anchor": "word-glorious",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "光荣的；辉煌的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "poisonous",
@@ -4012,7 +5839,17 @@
       "sense": "有毒的",
       "anchor": "word-poisonous",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有毒的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "mountainous",
@@ -4034,7 +5871,17 @@
       "sense": "多山的",
       "anchor": "word-mountainous",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "多山的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "ambitious",
@@ -4056,7 +5903,17 @@
       "sense": "有雄心的；有抱负的",
       "anchor": "word-ambitious",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有雄心的；有抱负的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "curious",
@@ -4078,7 +5935,17 @@
       "sense": "好奇的",
       "anchor": "word-curious",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "好奇的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "generous",
@@ -4100,7 +5967,17 @@
       "sense": "慷慨的；大方的",
       "anchor": "word-generous",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "慷慨的；大方的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unhappy",
@@ -4122,7 +5999,17 @@
       "sense": "不快乐的；不满意的",
       "anchor": "word-unhappy",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不快乐的；不满意的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unable",
@@ -4144,7 +6031,17 @@
       "sense": "不能的；无法的",
       "anchor": "word-unable",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不能的；无法的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unfair",
@@ -4166,7 +6063,17 @@
       "sense": "不公平的",
       "anchor": "word-unfair",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不公平的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unhealthy",
@@ -4188,7 +6095,17 @@
       "sense": "不健康的",
       "anchor": "word-unhealthy",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不健康的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unknown",
@@ -4210,7 +6127,17 @@
       "sense": "未知的；不知名的",
       "anchor": "word-unknown",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "未知的；不知名的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unusual",
@@ -4232,7 +6159,17 @@
       "sense": "不寻常的；特别的",
       "anchor": "word-unusual",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不寻常的；特别的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unnecessary",
@@ -4254,7 +6191,17 @@
       "sense": "不必要的",
       "anchor": "word-unnecessary",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不必要的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "uncomfortable",
@@ -4276,7 +6223,17 @@
       "sense": "不舒服的；不自在的",
       "anchor": "word-uncomfortable",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不舒服的；不自在的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unemployed",
@@ -4298,7 +6255,17 @@
       "sense": "失业的",
       "anchor": "word-unemployed",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "失业的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unlimited",
@@ -4320,7 +6287,17 @@
       "sense": "无限的；无限制的",
       "anchor": "word-unlimited",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无限的；无限制的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "uncertain",
@@ -4342,7 +6319,17 @@
       "sense": "不确定的；迟疑的",
       "anchor": "word-uncertain",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不确定的；迟疑的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unexpected",
@@ -4364,7 +6351,17 @@
       "sense": "意外的；出乎意料的",
       "anchor": "word-unexpected",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "意外的；出乎意料的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unforgettable",
@@ -4386,7 +6383,17 @@
       "sense": "难忘的",
       "anchor": "word-unforgettable",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "难忘的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unbelievable",
@@ -4408,7 +6415,17 @@
       "sense": "难以置信的",
       "anchor": "word-unbelievable",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "难以置信的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unwilling",
@@ -4430,7 +6447,17 @@
       "sense": "不愿意的",
       "anchor": "word-unwilling",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不愿意的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unsafe",
@@ -4452,7 +6479,17 @@
       "sense": "不安全的",
       "anchor": "word-unsafe",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "不安全的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "unpack",
@@ -4474,7 +6511,17 @@
       "sense": "打开（包装）；卸下",
       "anchor": "word-unpack",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "打开（包装）；卸下"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "uncover",
@@ -4496,7 +6543,17 @@
       "sense": "揭开；发现",
       "anchor": "word-uncover",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "揭开；发现"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "review",
@@ -4513,12 +6570,71 @@
       "rootZh": "看；观点",
       "suffix": "re",
       "suffixLabel": "re-",
-      "pos": "v./n.",
+      "pos": "n. / v.",
       "levelTag": "初中",
-      "sense": "复习；回顾",
+      "sense": "回顾；复习",
       "anchor": "word-review",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "回顾；复习",
+          "example": "I need to do a quick review of my notes before the exam.",
+          "example_zh": "考试前我需要快速复习一下笔记。",
+          "collocation": "do a review",
+          "collocation_zh": "进行复习"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "评论；评价",
+          "example": "The movie received good reviews from critics.",
+          "example_zh": "这部电影得到了评论家的好评。",
+          "collocation": "movie review",
+          "collocation_zh": "影评"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "审查；检阅",
+          "example": "The policy is under review.",
+          "example_zh": "该政策正在审查中。",
+          "collocation": "under review",
+          "collocation_zh": "在审查中"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "回顾；复习",
+          "example": "Let's review the key points of the lesson.",
+          "example_zh": "我们来复习一下这节课的重点。",
+          "collocation": "review the lesson",
+          "collocation_zh": "复习功课"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "评论；写评论",
+          "example": "She reviews books for a local newspaper.",
+          "example_zh": "她为当地报纸写书评。",
+          "collocation": "review a book",
+          "collocation_zh": "评论一本书"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "审查；检阅",
+          "example": "The committee will review the proposal next week.",
+          "example_zh": "委员会下周将审查该提案。",
+          "collocation": "review a proposal",
+          "collocation_zh": "审查提案"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "return",
@@ -4535,12 +6651,71 @@
       "rootZh": "转动；轮流",
       "suffix": "re",
       "suffixLabel": "re-",
-      "pos": "v./n.",
+      "pos": "v. / n. / adj.",
       "levelTag": "小学",
-      "sense": "返回",
+      "sense": "返回；回来",
       "anchor": "word-return",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词 / 名词 / 形容词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "返回；回来",
+          "example": "He returned home late last night.",
+          "example_zh": "他昨晚很晚才回家。",
+          "collocation": "return home",
+          "collocation_zh": "回家"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "归还；退还",
+          "example": "Please return the book to the library.",
+          "example_zh": "请把书还给图书馆。",
+          "collocation": "return sth to sb",
+          "collocation_zh": "把某物还给某人"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "回报；回应",
+          "example": "She returned his smile.",
+          "example_zh": "她对他回以微笑。",
+          "collocation": "return a smile",
+          "collocation_zh": "回以微笑"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "返回；归来",
+          "example": "We look forward to your return.",
+          "example_zh": "我们期待你的归来。",
+          "collocation": "on one's return",
+          "collocation_zh": "在某人回来时"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "收益；回报",
+          "example": "The investment brought a high return.",
+          "example_zh": "这项投资带来了高回报。",
+          "collocation": "high return",
+          "collocation_zh": "高回报"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "返回的；回程的",
+          "example": "We bought a return ticket to Beijing.",
+          "example_zh": "我们买了一张去北京的往返票。",
+          "collocation": "return ticket",
+          "collocation_zh": "往返票"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "rebuild",
@@ -4562,7 +6737,17 @@
       "sense": "重建",
       "anchor": "word-rebuild",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "重建"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "recover",
@@ -4584,7 +6769,17 @@
       "sense": "恢复；康复",
       "anchor": "word-recover",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "恢复；康复"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "reduce",
@@ -4606,7 +6801,17 @@
       "sense": "减少；降低",
       "anchor": "word-reduce",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "减少；降低"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "reflect",
@@ -4628,7 +6833,17 @@
       "sense": "反映",
       "anchor": "word-reflect",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "反映"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "reform",
@@ -4645,12 +6860,53 @@
       "rootZh": "形式；形成",
       "suffix": "re",
       "suffixLabel": "re-",
-      "pos": "v./n.",
+      "pos": "v. / n. / adj.",
       "levelTag": "专升本",
-      "sense": "改革；改造",
+      "sense": "改革；改进",
       "anchor": "word-reform",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词 / 名词 / 形容词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "改革；改进",
+          "example": "The government decided to reform the tax system.",
+          "example_zh": "政府决定改革税收制度。",
+          "collocation": "reform the system",
+          "collocation_zh": "改革制度"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "改造；使改过自新",
+          "example": "The program aims to reform young offenders.",
+          "example_zh": "该项目旨在改造年轻罪犯。",
+          "collocation": "reform offenders",
+          "collocation_zh": "改造罪犯"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "改革；改良",
+          "example": "The country is going through a period of economic reform.",
+          "example_zh": "这个国家正经历经济改革时期。",
+          "collocation": "economic reform",
+          "collocation_zh": "经济改革"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "改革的；改革派的",
+          "example": "He is a member of the reform movement.",
+          "example_zh": "他是改革运动的成员。",
+          "collocation": "reform movement",
+          "collocation_zh": "改革运动"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "refresh",
@@ -4672,7 +6928,17 @@
       "sense": "使恢复精力",
       "anchor": "word-refresh",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "使恢复精力"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "reject",
@@ -4694,7 +6960,17 @@
       "sense": "拒绝；排斥",
       "anchor": "word-reject",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "拒绝；排斥"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "relax",
@@ -4716,7 +6992,17 @@
       "sense": "放松；休息",
       "anchor": "word-relax",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "放松；休息"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "release",
@@ -4733,12 +7019,62 @@
       "rootZh": "释放（词根）",
       "suffix": "re",
       "suffixLabel": "re-",
-      "pos": "v./n.",
+      "pos": "v. / n.",
       "levelTag": "专升本",
-      "sense": "发布",
+      "sense": "释放；放走",
       "anchor": "word-release",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词 / 名词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "释放；放走",
+          "example": "The police released the suspect.",
+          "example_zh": "警察释放了嫌疑人。",
+          "collocation": "release a prisoner",
+          "collocation_zh": "释放囚犯"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "发布；发行",
+          "example": "The band will release a new album next month.",
+          "example_zh": "乐队下个月将发行新专辑。",
+          "collocation": "release an album",
+          "collocation_zh": "发行专辑"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "排放；放出",
+          "example": "The factory released harmful chemicals into the river.",
+          "example_zh": "工厂向河里排放有害化学物质。",
+          "collocation": "release chemicals",
+          "collocation_zh": "排放化学物质"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "释放；获释",
+          "example": "The prisoner was given an early release.",
+          "example_zh": "囚犯获得了提前释放。",
+          "collocation": "early release",
+          "collocation_zh": "提前释放"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "发布；发行",
+          "example": "The release of the new movie was delayed.",
+          "example_zh": "新电影的发行被推迟了。",
+          "collocation": "film release",
+          "collocation_zh": "电影发行"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "remain",
@@ -4760,7 +7096,17 @@
       "sense": "保持",
       "anchor": "word-remain",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "保持"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "remind",
@@ -4782,7 +7128,17 @@
       "sense": "提醒",
       "anchor": "word-remind",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "提醒"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "remove",
@@ -4804,7 +7160,17 @@
       "sense": "移除；去除",
       "anchor": "word-remove",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "移除；去除"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "replace",
@@ -4826,7 +7192,17 @@
       "sense": "取代；替换",
       "anchor": "word-replace",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "取代；替换"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "research",
@@ -4843,12 +7219,35 @@
       "rootZh": "搜索",
       "suffix": "re",
       "suffixLabel": "re-",
-      "pos": "n./v.",
+      "pos": "n. / v.",
       "levelTag": "初中",
       "sense": "研究；调查",
       "anchor": "word-research",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "研究；调查",
+          "example": "She is doing research on climate change.",
+          "example_zh": "她正在做关于气候变化的研究。",
+          "collocation": "do research on",
+          "collocation_zh": "做关于……的研究"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "研究；调查",
+          "example": "They are researching the causes of the disease.",
+          "example_zh": "他们正在研究这种疾病的成因。",
+          "collocation": "research into",
+          "collocation_zh": "调查；研究"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "respect",
@@ -4865,12 +7264,53 @@
       "rootZh": "看（词根）",
       "suffix": "re",
       "suffixLabel": "re-",
-      "pos": "n./v.",
+      "pos": "n. / v.",
       "levelTag": "初中",
-      "sense": "尊重",
+      "sense": "尊重；尊敬",
       "anchor": "word-respect",
       "batch": "第二批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "尊重；尊敬",
+          "example": "We should show respect for our teachers.",
+          "example_zh": "我们应该尊敬老师。",
+          "collocation": "show respect for",
+          "collocation_zh": "对……表示尊重"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "方面",
+          "example": "In many respects, this plan is better.",
+          "example_zh": "在许多方面，这个计划更好。",
+          "collocation": "in many respects",
+          "collocation_zh": "在许多方面"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "尊重；尊敬",
+          "example": "You must respect your parents.",
+          "example_zh": "你必须尊重你的父母。",
+          "collocation": "respect someone",
+          "collocation_zh": "尊重某人"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "遵守（规则、意愿等）",
+          "example": "Please respect the rules of the game.",
+          "example_zh": "请遵守游戏规则。",
+          "collocation": "respect the rules",
+          "collocation_zh": "遵守规则"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "teacher",
@@ -4892,7 +7332,17 @@
       "sense": "教师；老师",
       "anchor": "word-teacher",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "教师；老师"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "worker",
@@ -4914,7 +7364,17 @@
       "sense": "工人；工作者",
       "anchor": "word-worker",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "工人；工作者"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "driver",
@@ -4936,7 +7396,17 @@
       "sense": "司机；驾驶员",
       "anchor": "word-driver",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "司机；驾驶员"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "writer",
@@ -4958,7 +7428,17 @@
       "sense": "作家；作者",
       "anchor": "word-writer",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "作家；作者"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "reader",
@@ -4980,7 +7460,17 @@
       "sense": "读者",
       "anchor": "word-reader",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "读者"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "learner",
@@ -5002,7 +7492,17 @@
       "sense": "学习者",
       "anchor": "word-learner",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "学习者"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "speaker",
@@ -5024,7 +7524,17 @@
       "sense": "演讲者",
       "anchor": "word-speaker",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "演讲者"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "leader",
@@ -5046,7 +7556,17 @@
       "sense": "领导者",
       "anchor": "word-leader",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "领导者"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "manager",
@@ -5068,7 +7588,17 @@
       "sense": "经理；管理者",
       "anchor": "word-manager",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "经理；管理者"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "consumer",
@@ -5090,7 +7620,17 @@
       "sense": "消费者",
       "anchor": "word-consumer",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "消费者"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "producer",
@@ -5112,7 +7652,17 @@
       "sense": "生产者；制片人",
       "anchor": "word-producer",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "生产者；制片人"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "employer",
@@ -5134,7 +7684,17 @@
       "sense": "雇主",
       "anchor": "word-employer",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "雇主"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "computer",
@@ -5156,7 +7716,17 @@
       "sense": "计算机；电脑",
       "anchor": "word-computer",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "计算机；电脑"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "printer",
@@ -5178,7 +7748,17 @@
       "sense": "打印机",
       "anchor": "word-printer",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "打印机"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "cleaner",
@@ -5200,7 +7780,17 @@
       "sense": "清洁工",
       "anchor": "word-cleaner",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "清洁工"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "container",
@@ -5222,7 +7812,17 @@
       "sense": "容器；集装箱",
       "anchor": "word-container",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "容器；集装箱"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "recorder",
@@ -5244,7 +7844,17 @@
       "sense": "录音机",
       "anchor": "word-recorder",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "录音机"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "player",
@@ -5266,7 +7876,17 @@
       "sense": "运动员",
       "anchor": "word-player",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "运动员"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "reading",
@@ -5288,7 +7908,17 @@
       "sense": "阅读",
       "anchor": "word-reading",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "阅读"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "swimming",
@@ -5310,7 +7940,17 @@
       "sense": "游泳",
       "anchor": "word-swimming",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "游泳"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "running",
@@ -5332,7 +7972,17 @@
       "sense": "跑步",
       "anchor": "word-running",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "跑步"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "learning",
@@ -5354,7 +8004,17 @@
       "sense": "学习",
       "anchor": "word-learning",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "学习"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "teaching",
@@ -5376,7 +8036,17 @@
       "sense": "教学",
       "anchor": "word-teaching",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "教学"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "writing",
@@ -5398,7 +8068,17 @@
       "sense": "写作",
       "anchor": "word-writing",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "写作"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "shopping",
@@ -5420,7 +8100,17 @@
       "sense": "购物",
       "anchor": "word-shopping",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "购物"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "cooking",
@@ -5442,7 +8132,17 @@
       "sense": "烹饪",
       "anchor": "word-cooking",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "烹饪"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "dancing",
@@ -5464,7 +8164,17 @@
       "sense": "跳舞",
       "anchor": "word-dancing",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "跳舞"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "singing",
@@ -5486,7 +8196,17 @@
       "sense": "唱歌",
       "anchor": "word-singing",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "唱歌"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "painting",
@@ -5508,7 +8228,17 @@
       "sense": "绘画；画作",
       "anchor": "word-painting",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "绘画；画作"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "meeting",
@@ -5530,7 +8260,17 @@
       "sense": "会议",
       "anchor": "word-meeting",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "会议"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "feeling",
@@ -5552,7 +8292,17 @@
       "sense": "感觉；情感",
       "anchor": "word-feeling",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "感觉；情感"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "interesting",
@@ -5574,7 +8324,17 @@
       "sense": "有趣的",
       "anchor": "word-interesting",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有趣的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "exciting",
@@ -5596,7 +8356,17 @@
       "sense": "令人兴奋的",
       "anchor": "word-exciting",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "令人兴奋的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "boring",
@@ -5618,7 +8388,17 @@
       "sense": "无聊的；乏味的",
       "anchor": "word-boring",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "无聊的；乏味的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "amazing",
@@ -5640,7 +8420,17 @@
       "sense": "令人惊叹的",
       "anchor": "word-amazing",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "令人惊叹的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "challenging",
@@ -5662,7 +8452,17 @@
       "sense": "有挑战性的",
       "anchor": "word-challenging",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "有挑战性的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "actress",
@@ -5684,7 +8484,17 @@
       "sense": "女演员",
       "anchor": "word-actress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女演员"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "waitress",
@@ -5706,7 +8516,17 @@
       "sense": "女服务员",
       "anchor": "word-waitress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女服务员"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "hostess",
@@ -5728,7 +8548,17 @@
       "sense": "女主人；女主持人",
       "anchor": "word-hostess",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女主人；女主持人"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "princess",
@@ -5750,7 +8580,17 @@
       "sense": "公主；王妃",
       "anchor": "word-princess",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "公主；王妃"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "goddess",
@@ -5772,7 +8612,17 @@
       "sense": "女神",
       "anchor": "word-goddess",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女神"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "lioness",
@@ -5794,7 +8644,17 @@
       "sense": "母狮",
       "anchor": "word-lioness",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "母狮"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "empress",
@@ -5816,7 +8676,17 @@
       "sense": "女皇；皇后",
       "anchor": "word-empress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女皇；皇后"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "mistress",
@@ -5838,7 +8708,17 @@
       "sense": "女主人",
       "anchor": "word-mistress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女主人"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "heiress",
@@ -5860,7 +8740,17 @@
       "sense": "女继承人",
       "anchor": "word-heiress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女继承人"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "authoress",
@@ -5882,7 +8772,17 @@
       "sense": "女作家",
       "anchor": "word-authoress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女作家"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "manageress",
@@ -5904,7 +8804,17 @@
       "sense": "女经理",
       "anchor": "word-manageress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女经理"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "stewardess",
@@ -5926,7 +8836,17 @@
       "sense": "女乘务员",
       "anchor": "word-stewardess",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女乘务员"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "conductress",
@@ -5948,7 +8868,17 @@
       "sense": "女售票员",
       "anchor": "word-conductress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女售票员"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "huntress",
@@ -5970,7 +8900,17 @@
       "sense": "女猎人",
       "anchor": "word-huntress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女猎人"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "tigress",
@@ -5992,7 +8932,17 @@
       "sense": "母虎",
       "anchor": "word-tigress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "母虎"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "seamstress",
@@ -6014,7 +8964,17 @@
       "sense": "女裁缝",
       "anchor": "word-seamstress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女裁缝"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "sorceress",
@@ -6036,7 +8996,17 @@
       "sense": "女巫；女魔法师",
       "anchor": "word-sorceress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女巫；女魔法师"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "enchantress",
@@ -6058,7 +9028,17 @@
       "sense": "女巫；迷人的女子",
       "anchor": "word-enchantress",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "女巫；迷人的女子"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "quickly",
@@ -6080,7 +9060,17 @@
       "sense": "快速地",
       "anchor": "word-quickly",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "快速地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "carefully",
@@ -6102,7 +9092,17 @@
       "sense": "小心地；仔细地",
       "anchor": "word-carefully",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "小心地；仔细地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "completely",
@@ -6124,7 +9124,17 @@
       "sense": "完全地",
       "anchor": "word-completely",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "完全地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "finally",
@@ -6146,7 +9156,17 @@
       "sense": "最后；终于",
       "anchor": "word-finally",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "最后；终于"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "recently",
@@ -6168,7 +9188,17 @@
       "sense": "最近",
       "anchor": "word-recently",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "最近"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "probably",
@@ -6190,7 +9220,17 @@
       "sense": "很可能",
       "anchor": "word-probably",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "很可能"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "fortunately",
@@ -6212,7 +9252,17 @@
       "sense": "幸运地",
       "anchor": "word-fortunately",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "幸运地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "surprisingly",
@@ -6234,7 +9284,17 @@
       "sense": "令人惊讶地",
       "anchor": "word-surprisingly",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "令人惊讶地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "seriously",
@@ -6256,7 +9316,17 @@
       "sense": "严肃地；严重地",
       "anchor": "word-seriously",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "严肃地；严重地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "gradually",
@@ -6278,7 +9348,17 @@
       "sense": "逐渐地",
       "anchor": "word-gradually",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "逐渐地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "regularly",
@@ -6300,7 +9380,17 @@
       "sense": "定期地；规律地",
       "anchor": "word-regularly",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "定期地；规律地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "immediately",
@@ -6322,7 +9412,17 @@
       "sense": "立即",
       "anchor": "word-immediately",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "立即"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "easily",
@@ -6344,7 +9444,17 @@
       "sense": "容易地",
       "anchor": "word-easily",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "容易地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "clearly",
@@ -6366,7 +9476,17 @@
       "sense": "清楚地",
       "anchor": "word-clearly",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "清楚地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "exactly",
@@ -6388,7 +9508,17 @@
       "sense": "确切地；正是",
       "anchor": "word-exactly",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "确切地；正是"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "naturally",
@@ -6410,7 +9540,17 @@
       "sense": "自然地",
       "anchor": "word-naturally",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "自然地"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "suddenly",
@@ -6432,7 +9572,17 @@
       "sense": "突然",
       "anchor": "word-suddenly",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "突然"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "truly",
@@ -6454,7 +9604,17 @@
       "sense": "真正地；确实",
       "anchor": "word-truly",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "真正地；确实"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "youngster",
@@ -6476,7 +9636,17 @@
       "sense": "年轻人；少年",
       "anchor": "word-youngster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "年轻人；少年"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "gangster",
@@ -6498,7 +9668,17 @@
       "sense": "歹徒；黑帮成员",
       "anchor": "word-gangster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "歹徒；黑帮成员"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "trickster",
@@ -6520,7 +9700,17 @@
       "sense": "骗子；爱恶作剧的人",
       "anchor": "word-trickster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "骗子；爱恶作剧的人"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "prankster",
@@ -6542,7 +9732,17 @@
       "sense": "爱恶作剧的人",
       "anchor": "word-prankster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "爱恶作剧的人"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "mobster",
@@ -6564,7 +9764,17 @@
       "sense": "暴徒；黑帮成员",
       "anchor": "word-mobster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "暴徒；黑帮成员"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "hipster",
@@ -6586,7 +9796,17 @@
       "sense": "潮人；赶时髦的人",
       "anchor": "word-hipster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "潮人；赶时髦的人"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "spinster",
@@ -6608,7 +9828,17 @@
       "sense": "老处女（贬义）",
       "anchor": "word-spinster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "老处女（贬义）"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "pollster",
@@ -6630,7 +9860,17 @@
       "sense": "民意调查员",
       "anchor": "word-pollster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "民意调查员"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "huckster",
@@ -6652,7 +9892,17 @@
       "sense": "推销员；叫卖者",
       "anchor": "word-huckster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "推销员；叫卖者"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "jokester",
@@ -6674,7 +9924,17 @@
       "sense": "爱开玩笑的人",
       "anchor": "word-jokester",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "爱开玩笑的人"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "punster",
@@ -6696,7 +9956,17 @@
       "sense": "爱说双关语的人",
       "anchor": "word-punster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "爱说双关语的人"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "roadster",
@@ -6718,7 +9988,17 @@
       "sense": "敞篷跑车",
       "anchor": "word-roadster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "敞篷跑车"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "speedster",
@@ -6740,7 +10020,17 @@
       "sense": "超速驾驶者；高速车",
       "anchor": "word-speedster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "超速驾驶者；高速车"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "teamster",
@@ -6762,7 +10052,17 @@
       "sense": "卡车司机",
       "anchor": "word-teamster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "卡车司机"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "songster",
@@ -6784,7 +10084,17 @@
       "sense": "歌手；鸣禽",
       "anchor": "word-songster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "歌手；鸣禽"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "rhymester",
@@ -6806,7 +10116,17 @@
       "sense": "打油诗人（贬义）",
       "anchor": "word-rhymester",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "打油诗人（贬义）"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "gamester",
@@ -6828,7 +10148,17 @@
       "sense": "赌徒",
       "anchor": "word-gamester",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "赌徒"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "tapster",
@@ -6850,7 +10180,17 @@
       "sense": "酒吧服务员（古旧）",
       "anchor": "word-tapster",
       "batch": "第三批",
-      "kind": "word"
+      "kind": "word",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "酒吧服务员（古旧）"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "friendship",
@@ -6872,7 +10212,17 @@
       "levelTag": "初中",
       "sense": "友谊；友情",
       "anchor": "word-friendship",
-      "batch": "自动补充"
+      "batch": "自动补充",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "友谊；友情"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "require",
@@ -6897,7 +10247,17 @@
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-02",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "动词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "需要"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "tanker",
@@ -6926,7 +10286,17 @@
       "hasPlural": true,
       "pluralName": "tankers",
       "pluralPath": "../专升本英语核心词汇通关.html#word-tankers",
-      "pluralSameMeaning": true
+      "pluralSameMeaning": true,
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "油轮；油槽船"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "import",
@@ -6955,7 +10325,39 @@
       "hasPlural": true,
       "pluralName": "imports",
       "pluralPath": "../专升本英语核心词汇通关.html#word-imports",
-      "pluralSameMeaning": true
+      "pluralSameMeaning": true,
+      "pos_zh": "动词 / 名词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "进口；输入",
+          "example": "The country imports most of its oil.",
+          "example_zh": "这个国家大部分石油依靠进口。",
+          "collocation": "import from",
+          "collocation_zh": "从……进口"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "进口；进口商品",
+          "example": "The government wants to reduce imports.",
+          "example_zh": "政府想要减少进口。",
+          "collocation": "reduce imports",
+          "collocation_zh": "减少进口"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "重要性；含义",
+          "example": "The matter is of great import.",
+          "example_zh": "这件事非常重要。",
+          "collocation": "of great import",
+          "collocation_zh": "非常重要"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     }
   ],
   "词素/复合词": [
@@ -6979,7 +10381,17 @@
       "levelTag": "小学",
       "sense": "向日葵",
       "anchor": "word-sunflower",
-      "batch": "自动补充"
+      "batch": "自动补充",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "向日葵"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "maybe",
@@ -7004,7 +10416,17 @@
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-04",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "副词",
+      "senses": [
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "也许，可能；或许"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     }
   ],
   "词素/词根-本体-变体【派生词】": [
@@ -7024,14 +10446,64 @@
       "rootZh": "深的；深",
       "suffix": "",
       "suffixLabel": "",
-      "pos": "adj./adv.",
+      "pos": "adj. / adv. / n.",
       "levelTag": "初中",
-      "sense": "深的；深处的",
+      "sense": "深的（从表面到底部距离大）",
       "anchor": "word-deep",
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-10-31",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "形容词 / 副词 / 名词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "深的（从表面到底部距离大）",
+          "example": "The lake is very deep.",
+          "example_zh": "这个湖很深。",
+          "collocation": "deep water",
+          "collocation_zh": "深水"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "深刻的；深奥的",
+          "example": "This is a deep book about life.",
+          "example_zh": "这是一本关于生活的深刻的书。",
+          "collocation": "deep thought",
+          "collocation_zh": "深刻的思想"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "深切的；强烈的",
+          "example": "She felt deep sadness.",
+          "example_zh": "她感到深切的悲伤。",
+          "collocation": "deep sadness",
+          "collocation_zh": "深切的悲伤"
+        },
+        {
+          "pos": "adv.",
+          "pos_zh": "副词",
+          "zh": "深深地；在深处",
+          "example": "He dug deep into the ground.",
+          "example_zh": "他往地里挖得很深。",
+          "collocation": "dig deep",
+          "collocation_zh": "挖得深"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "深处；深海（常与 the 连用）",
+          "example": "The ship sank into the deep.",
+          "example_zh": "船沉入了深处。",
+          "collocation": "the deep",
+          "collocation_zh": "深处"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "contrast",
@@ -7049,14 +10521,53 @@
       "rootZh": "对比；对照（来自拉丁语 contra- 相反 + stare 站）",
       "suffix": "",
       "suffixLabel": "",
-      "pos": "n./v.",
+      "pos": "n. / v.",
       "levelTag": "专升本",
-      "sense": "对比；对照",
+      "sense": "对比；对照；差异",
       "anchor": "word-contrast",
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-10-31",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "对比；对照；差异",
+          "example": "There is a sharp contrast between the two cities.",
+          "example_zh": "这两座城市之间有着鲜明的对比。",
+          "collocation": "in contrast to",
+          "collocation_zh": "与……形成对比"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "形成对比的人或事物",
+          "example": "Her calm voice was a contrast to his angry shouts.",
+          "example_zh": "她平静的声音与他愤怒的喊叫形成了对比。"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "对比；对照",
+          "example": "The report contrasts the two methods.",
+          "example_zh": "这份报告对这两种方法进行了对比。",
+          "collocation": "contrast A with B",
+          "collocation_zh": "把A与B作对比"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "形成对比；显出差异",
+          "example": "The bright dress contrasts with the dark background.",
+          "example_zh": "这条鲜艳的裙子与深色背景形成了对比。",
+          "collocation": "contrast with",
+          "collocation_zh": "与……形成对比"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "meaning",
@@ -7081,7 +10592,17 @@
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "overwrite"
+      "source": "overwrite",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "意思；含义"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     }
   ],
   "词素/原子词": [
@@ -7101,14 +10622,24 @@
       "rootZh": "你好",
       "suffix": "",
       "suffixLabel": "",
-      "pos": "int.",
+      "pos": "interj.",
       "levelTag": "小学",
       "sense": "你好；喂",
       "anchor": "word-hello",
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-10-31",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "感叹词",
+      "senses": [
+        {
+          "pos": "interj.",
+          "pos_zh": "感叹词",
+          "zh": "你好；喂"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "heaven",
@@ -7133,7 +10664,17 @@
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-10-31",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "天堂；天国"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "nasty",
@@ -7158,7 +10699,17 @@
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-10-31",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "令人不快的；讨厌的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "care",
@@ -7176,14 +10727,55 @@
       "rootZh": "关心；忧虑",
       "suffix": "",
       "suffixLabel": "",
-      "pos": "n./v.",
+      "pos": "n. / v.",
       "levelTag": "小学",
-      "sense": "关心；在乎",
+      "sense": "关心；照料",
       "anchor": "word-care",
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "关心；照料",
+          "example": "She shows great care for her patients.",
+          "example_zh": "她对病人非常关心。",
+          "collocation": "take care of",
+          "collocation_zh": "照顾"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "小心；谨慎",
+          "example": "Handle the glass with care.",
+          "example_zh": "小心拿放玻璃杯。",
+          "collocation": "with care",
+          "collocation_zh": "小心地"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "关心；在意",
+          "example": "I don't care what he says.",
+          "example_zh": "我不在乎他说什么。",
+          "collocation": "care about",
+          "collocation_zh": "关心"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "照顾；照料",
+          "example": "She cares for her elderly mother.",
+          "example_zh": "她照顾年迈的母亲。",
+          "collocation": "care for",
+          "collocation_zh": "照顾"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "cheer",
@@ -7201,14 +10793,55 @@
       "rootZh": "欢呼；振奋",
       "suffix": "",
       "suffixLabel": "",
-      "pos": "v./n.",
+      "pos": "v. / n.",
       "levelTag": "初中",
       "sense": "欢呼；喝彩",
       "anchor": "word-cheer",
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "动词 / 名词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "欢呼；喝彩",
+          "example": "The crowd cheered loudly when the team scored.",
+          "example_zh": "球队得分时，人群大声欢呼。",
+          "collocation": "cheer loudly",
+          "collocation_zh": "大声欢呼"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "使高兴；鼓舞",
+          "example": "Good news cheered everyone up.",
+          "example_zh": "好消息使大家振作起来。",
+          "collocation": "cheer up",
+          "collocation_zh": "使振作起来"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "欢呼声；喝彩声",
+          "example": "A great cheer went up from the crowd.",
+          "example_zh": "人群中爆发出巨大的欢呼声。",
+          "collocation": "a great cheer",
+          "collocation_zh": "巨大的欢呼声"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "愉快；高兴",
+          "example": "The children were full of cheer at the party.",
+          "example_zh": "孩子们在聚会上充满了欢乐。",
+          "collocation": "full of cheer",
+          "collocation_zh": "充满欢乐"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "color",
@@ -7226,14 +10859,55 @@
       "rootZh": "颜色；覆盖；隐藏",
       "suffix": "",
       "suffixLabel": "",
-      "pos": "n./v.",
+      "pos": "n. / v.",
       "levelTag": "小学",
       "sense": "颜色；色彩",
       "anchor": "word-color",
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "颜色；色彩",
+          "example": "What is your favorite color?",
+          "example_zh": "你最喜欢什么颜色？",
+          "collocation": "favorite color",
+          "collocation_zh": "最喜欢的颜色"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "颜料；彩色",
+          "example": "The children painted with bright colors.",
+          "example_zh": "孩子们用鲜艳的颜料画画。",
+          "collocation": "in color",
+          "collocation_zh": "彩色的"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "给……着色；涂色",
+          "example": "She colored the picture with crayons.",
+          "example_zh": "她用蜡笔给图画上色。",
+          "collocation": "color the picture",
+          "collocation_zh": "给图画上色"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "影响；渲染",
+          "example": "His judgment was colored by anger.",
+          "example_zh": "他的判断受到了愤怒的影响。",
+          "collocation": "color one's judgment",
+          "collocation_zh": "影响某人的判断"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "fruit",
@@ -7258,7 +10932,17 @@
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "水果"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "harm",
@@ -7276,14 +10960,46 @@
       "rootZh": "伤害；损害",
       "suffix": "",
       "suffixLabel": "",
-      "pos": "n./v.",
+      "pos": "n. / v.",
       "levelTag": "初中",
-      "sense": "伤害；损害（名词）",
+      "sense": "伤害；损害",
       "anchor": "word-harm",
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "伤害；损害",
+          "example": "The storm did great harm to the crops.",
+          "example_zh": "暴风雨对庄稼造成了很大损害。",
+          "collocation": "do harm to",
+          "collocation_zh": "对……造成伤害"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "危害；坏处",
+          "example": "There is no harm in asking.",
+          "example_zh": "问一问没有坏处。",
+          "collocation": "no harm in doing sth.",
+          "collocation_zh": "做某事没有坏处"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "伤害；损害",
+          "example": "Smoking can harm your health.",
+          "example_zh": "吸烟会损害你的健康。",
+          "collocation": "harm one's health",
+          "collocation_zh": "损害某人的健康"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "help",
@@ -7301,14 +11017,62 @@
       "rootZh": "帮助",
       "suffix": "",
       "suffixLabel": "",
-      "pos": "v./n.",
+      "pos": "v. / n. / interj.",
       "levelTag": "小学",
-      "sense": "帮助；协助",
+      "sense": "帮助；援助",
       "anchor": "word-help",
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "动词 / 名词 / 感叹词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "帮助；援助",
+          "example": "Can you help me carry this box?",
+          "example_zh": "你能帮我搬这个箱子吗？",
+          "collocation": "help sb. do sth.",
+          "collocation_zh": "帮助某人做某事"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "有助于；改善",
+          "example": "This medicine will help your cough.",
+          "example_zh": "这种药对您的咳嗽有帮助。",
+          "collocation": "help with",
+          "collocation_zh": "有助于"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "帮助；援助",
+          "example": "Thank you for your help.",
+          "example_zh": "谢谢你的帮助。",
+          "collocation": "with the help of",
+          "collocation_zh": "在……的帮助下"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "帮手；有帮助的人或物",
+          "example": "You are a great help to me.",
+          "example_zh": "你对我帮助很大。",
+          "collocation": "a great help",
+          "collocation_zh": "很大的帮助"
+        },
+        {
+          "pos": "interj.",
+          "pos_zh": "感叹词",
+          "zh": "救命",
+          "example": "Help! I'm stuck!",
+          "example_zh": "救命！我被困住了！"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "hope",
@@ -7326,14 +11090,46 @@
       "rootZh": "希望",
       "suffix": "",
       "suffixLabel": "",
-      "pos": "n./v.",
+      "pos": "n. / v.",
       "levelTag": "小学",
-      "sense": "希望；期望（名词）",
+      "sense": "希望；期望",
       "anchor": "word-hope",
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "希望；期望",
+          "example": "There is still hope of finding survivors.",
+          "example_zh": "仍然有找到幸存者的希望。",
+          "collocation": "hope of",
+          "collocation_zh": "……的希望"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "希望的人或事物",
+          "example": "She is the hope of the family.",
+          "example_zh": "她是这个家庭的希望。",
+          "collocation": "the hope of",
+          "collocation_zh": "……的希望"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "希望；期望",
+          "example": "I hope you will come to my party.",
+          "example_zh": "我希望你能来参加我的聚会。",
+          "collocation": "hope to do sth",
+          "collocation_zh": "希望做某事"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "mean",
@@ -7358,7 +11154,60 @@
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "repair"
+      "source": "repair",
+      "pos_zh": "动词 / 形容词",
+      "senses": [
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "意思是；表示……的意思",
+          "example": "What does this word mean?",
+          "example_zh": "这个词是什么意思？",
+          "collocation": "mean a word",
+          "collocation_zh": "表示某词的意思"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "意味着；导致",
+          "example": "Missing the bus means being late.",
+          "example_zh": "错过公交车意味着迟到。"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "打算；意欲",
+          "example": "I didn't mean to hurt you.",
+          "example_zh": "我不是有意伤害你的。",
+          "collocation": "mean to do sth.",
+          "collocation_zh": "打算做某事"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "吝啬的；小气的",
+          "example": "He is too mean to buy a gift.",
+          "example_zh": "他太小气了，连礼物都不买。"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "刻薄的；不友善的",
+          "example": "Don't be mean to your little brother.",
+          "example_zh": "不要对你弟弟刻薄。"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "平均的；中间的",
+          "example": "The mean temperature is about 20 degrees.",
+          "example_zh": "平均温度约为20度。",
+          "collocation": "mean value",
+          "collocation_zh": "平均值"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "old",
@@ -7383,7 +11232,17 @@
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "形容词",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "老的；年老的"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "word",
@@ -7408,7 +11267,57 @@
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "词；单词",
+          "example": "What does this word mean?",
+          "example_zh": "这个单词是什么意思？",
+          "collocation": "a new word",
+          "collocation_zh": "一个新单词"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "话语；言语",
+          "example": "He left without a word.",
+          "example_zh": "他一句话也没说就离开了。",
+          "collocation": "without a word",
+          "collocation_zh": "一言不发"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "消息；信息",
+          "example": "Please send me word when you arrive.",
+          "example_zh": "你到达后请给我捎个信。",
+          "collocation": "send word",
+          "collocation_zh": "捎信"
+        },
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "诺言；保证",
+          "example": "He kept his word and came back.",
+          "example_zh": "他信守诺言回来了。",
+          "collocation": "keep one's word",
+          "collocation_zh": "信守诺言"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "用词语表达；措辞",
+          "example": "She worded her reply carefully.",
+          "example_zh": "她措辞谨慎地作了回答。",
+          "collocation": "word a question",
+          "collocation_zh": "措辞提问"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     },
     {
       "name": "improt",
@@ -7428,7 +11337,7 @@
       "suffixLabel": "",
       "pos": "n. / v.",
       "levelTag": "专升本",
-      "sense": "（疑为 import 的误拼）进口；进口商品",
+      "sense": "进口；进口商品（拼写有误，应为 import）",
       "anchor": "word-improt",
       "batch": "自动补充",
       "extra": true,
@@ -7437,7 +11346,30 @@
       "hasPlural": true,
       "pluralName": "improts",
       "pluralPath": "../词素/原子词/原子词：improts.html#word-improts",
-      "pluralSameMeaning": true
+      "pluralSameMeaning": true,
+      "pos_zh": "名词 / 动词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "进口；进口商品（拼写有误，应为 import）",
+          "example": "The country limits the improt of luxury cars.",
+          "example_zh": "这个国家限制豪华汽车的进口。",
+          "collocation": "the improt of goods",
+          "collocation_zh": "货物的进口"
+        },
+        {
+          "pos": "v.",
+          "pos_zh": "动词",
+          "zh": "进口；输入；导入（拼写有误，应为 import）",
+          "example": "They improt most of their oil from abroad.",
+          "example_zh": "他们的大部分石油从国外进口。",
+          "collocation": "improt data",
+          "collocation_zh": "导入数据"
+        }
+      ],
+      "posSource": "ai",
+      "posMigratedAt": "2026-11-05 15:21:29"
     }
   ],
   "词素/词根族": [
@@ -7464,7 +11396,17 @@
       "batch": "自动补充",
       "extra": true,
       "extraDate": "2026-11-01",
-      "source": "generator"
+      "source": "generator",
+      "pos_zh": "名词",
+      "senses": [
+        {
+          "pos": "n.",
+          "pos_zh": "名词",
+          "zh": "美；美丽"
+        }
+      ],
+      "posSource": "legacy",
+      "posMigratedAt": "2026-11-05 15:21:29"
     }
   ],
   "复数": [

@@ -1,0 +1,38 @@
+{
+  "words": 329,
+  "senses": 393,
+  "pos_sources": {
+    "legacy": 307,
+    "ai": 22
+  },
+  "page_cards": 312,
+  "page_not_data": [
+    "imports",
+    "requirements",
+    "tankers"
+  ],
+  "data_not_page": [
+    "beauty",
+    "care",
+    "cheer",
+    "color",
+    "contrast",
+    "deep",
+    "fruit",
+    "harm",
+    "heaven",
+    "hello",
+    "help",
+    "hope",
+    "improt",
+    "maybe",
+    "mean",
+    "meaning",
+    "nasty",
+    "old",
+    "sunflower",
+    "word"
+  ],
+  "issues": [],
+  "absolute_path_hits": []
+}

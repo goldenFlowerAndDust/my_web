@@ -1,0 +1,176 @@
+{
+  "generated_at": "2026-11-05 15:18:40",
+  "paths": {
+    "data": "复习清单\\data.json",
+    "html": "专升本英语核心词汇通关.html"
+  },
+  "counts": {
+    "data_items": 346,
+    "word_items": 329,
+    "page_cards": 312,
+    "unique_page_words": 312
+  },
+  "missing": {
+    "no_pos_word_items": 0,
+    "no_senses_word_items": 329,
+    "no_pos_zh_word_items": 329,
+    "page_not_in_data": [
+      "imports",
+      "requirements",
+      "tankers"
+    ],
+    "word_not_on_core_page": [
+      "beauty",
+      "care",
+      "cheer",
+      "color",
+      "contrast",
+      "deep",
+      "fruit",
+      "harm",
+      "heaven",
+      "hello",
+      "help",
+      "hope",
+      "improt",
+      "maybe",
+      "mean",
+      "meaning",
+      "nasty",
+      "old",
+      "sunflower",
+      "word"
+    ]
+  },
+  "multi_pos_candidates": [
+    {
+      "name": "doubtless",
+      "pos": "adj./adv.",
+      "senses": []
+    },
+    {
+      "name": "regardless",
+      "pos": "adj./adv.",
+      "senses": []
+    },
+    {
+      "name": "objective",
+      "pos": "adj./n.",
+      "senses": []
+    },
+    {
+      "name": "alternative",
+      "pos": "adj./n.",
+      "senses": []
+    },
+    {
+      "name": "review",
+      "pos": "v./n.",
+      "senses": []
+    },
+    {
+      "name": "return",
+      "pos": "v./n.",
+      "senses": []
+    },
+    {
+      "name": "reform",
+      "pos": "v./n.",
+      "senses": []
+    },
+    {
+      "name": "release",
+      "pos": "v./n.",
+      "senses": []
+    },
+    {
+      "name": "research",
+      "pos": "n./v.",
+      "senses": []
+    },
+    {
+      "name": "respect",
+      "pos": "n./v.",
+      "senses": []
+    },
+    {
+      "name": "import",
+      "pos": "v. / n.",
+      "senses": []
+    },
+    {
+      "name": "deep",
+      "pos": "adj./adv.",
+      "senses": []
+    },
+    {
+      "name": "contrast",
+      "pos": "n./v.",
+      "senses": []
+    },
+    {
+      "name": "care",
+      "pos": "n./v.",
+      "senses": []
+    },
+    {
+      "name": "cheer",
+      "pos": "v./n.",
+      "senses": []
+    },
+    {
+      "name": "color",
+      "pos": "n./v.",
+      "senses": []
+    },
+    {
+      "name": "harm",
+      "pos": "n./v.",
+      "senses": []
+    },
+    {
+      "name": "help",
+      "pos": "v./n.",
+      "senses": []
+    },
+    {
+      "name": "hope",
+      "pos": "n./v.",
+      "senses": []
+    },
+    {
+      "name": "mean",
+      "pos": "v. / adj.",
+      "senses": []
+    },
+    {
+      "name": "word",
+      "pos": "n. / v.",
+      "senses": []
+    },
+    {
+      "name": "improt",
+      "pos": "n. / v.",
+      "senses": []
+    }
+  ],
+  "pos_distribution": {
+    "n.": 164,
+    "adj.": 109,
+    "adv.": 19,
+    "v.": 14,
+    "n./v.": 7,
+    "v./n.": 6,
+    "adj./adv.": 3,
+    "adj./n.": 2,
+    "n. / v.": 2,
+    "v. / n.": 1,
+    "int.": 1,
+    "v. / adj.": 1
+  },
+  "notes": [
+    "all word items currently use legacy sense:string; no senses arrays",
+    "core page contains 312 cards, data has 333 word items; 21 words live outside core page",
+    "13 items have no pos and are likely group/meta records"
+  ]
+}

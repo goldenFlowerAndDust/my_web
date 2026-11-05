@@ -553,7 +553,7 @@
             return dateOf(item) === q;
         }
 
-        return [item.time, item.word, item.target, item.file, item.type, item.schedule]
+        return [item.time, item.word, item.pos, item.pos_zh, item.sense, item.target, item.file, item.type, item.schedule]
             .some(function (value) { return String(value || '').toLowerCase().indexOf(q) >= 0; });
     }
 
@@ -573,6 +573,7 @@
             return '<tr>' +
                 '<td class="time">' + esc(item.time || '') + '</td>' +
                 '<td><span class="word">' + esc(wordText) + more + '</span></td>' +
+                '<td class="pos-cell">' + esc(item.pos && item.pos_zh ? (item.pos + ' ' + item.pos_zh) : (item.pos_zh || item.pos || '—')) + '</td>' +
                 '<td><span class="badge ' + badgeClass(item.type) + '">' + esc(typeLabel(item.type)) + '</span>' +
                 '<span class="type-detail">' + esc(typeDetail(item.type)) + '</span></td>' +
                 '<td class="target">' + esc(item.target || item.file || '') + '</td>' +
@@ -582,7 +583,7 @@
         }).join('');
 
         contentEl.innerHTML = '<div class="table-wrap"><table>' +
-            '<thead><tr><th>时间</th><th>单词</th><th>类型</th><th>分类 / 目标</th><th>文件</th><th>复习日程</th></tr></thead>' +
+            '<thead><tr><th>时间</th><th>单词</th><th>词性</th><th>类型</th><th>分类 / 目标</th><th>文件</th><th>复习日程</th></tr></thead>' +
             '<tbody>' + rows + '</tbody></table></div>';
     }
 

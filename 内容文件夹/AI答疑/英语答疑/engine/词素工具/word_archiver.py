@@ -48,6 +48,30 @@ API_KEY_FILE = TOOL_DIR / "api_key.txt"  # 兼容旧位置
 API_URL = os.environ.get("DEEPSEEK_API_URL", "https://api.deepseek.com/chat/completions")
 MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
 DAILY_NEW = 20
+POS_ZH = {
+    "n.": "名词", "v.": "动词", "vt.": "及物动词", "vi.": "不及物动词",
+    "adj.": "形容词", "adv.": "副词", "pron.": "代词", "prep.": "介词",
+    "conj.": "连词", "num.": "数词", "art.": "冠词", "interj.": "感叹词",
+    "aux.": "助动词", "modal": "情态动词", "phrase": "短语",
+}
+
+
+def normalize_pos(value: object) -> str:
+    text = str(value or "").strip().lower().replace("，", "/").replace(",", "/")
+    text = re.sub(r"\s+", "", text).strip(".")
+    if text in {"int", "intj", "interj", "interjection"}:
+        return "interj."
+    if text in {"phr", "phrase"}:
+        return "phrase"
+    if text in {"n", "v", "vt", "vi", "adj", "adv", "pron", "prep", "conj", "num", "art", "aux"}:
+        return text + "."
+    return text
+
+
+def pos_zh(value: str) -> str:
+    return POS_ZH.get(normalize_pos(value), "其他")
+
+
 WRITE_LOCK = threading.Lock()
 
 TYPE_LABELS = {
@@ -202,6 +226,19 @@ def append_log(record: dict[str, Any]) -> None:
         "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         **record,
     }
+    # 添加日志自动带出词性，避免每个归档分支重复拼字段。
+    if "pos" not in entry and entry.get("word") and "," not in str(entry.get("word")):
+        try:
+            data = load_data()
+            category, item = find_data_item(data, str(entry.get("word")))
+            if item:
+                entry["pos"] = str(item.get("pos") or "")
+                entry["pos_zh"] = str(item.get("pos_zh") or "")
+                senses = item.get("senses") or []
+                if senses and isinstance(senses[0], dict):
+                    entry["sense"] = str(senses[0].get("zh") or " ")
+        except (OSError, ValueError, ArchiveError):
+            pass
     with LOG_FILE.open("a", encoding="utf-8", newline="\n") as fh:
         fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
@@ -442,7 +479,8 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
                 zh = item.strip()
                 if zh:
                     senses.append({
-                        "pos": pos,
+                        "pos": normalize_pos(pos),
+                        "pos_zh": pos_zh(pos),
                         "zh": zh,
                         "example": "",
                         "example_zh": "",
@@ -453,8 +491,10 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
                 zh = str(item.get("zh") or "").strip()
                 if not zh:
                     continue
+                sense_pos = normalize_pos(item.get("pos") or pos)
                 senses.append({
-                    "pos": str(item.get("pos") or pos).strip(),
+                    "pos": sense_pos,
+                    "pos_zh": pos_zh(sense_pos),
                     "zh": zh,
                     "example": str(item.get("example") or "").strip(),
                     "example_zh": str(item.get("example_zh") or "").strip(),
@@ -463,7 +503,8 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
                 })
     if not senses:
         senses = [{
-            "pos": pos,
+            "pos": normalize_pos(pos),
+            "pos_zh": pos_zh(pos),
             "zh": meaning,
             "example": "",
             "example_zh": "",
@@ -473,7 +514,7 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
 
     sense_positions: list[str] = []
     for sense in senses:
-        sense_pos = str(sense.get("pos") or "").strip()
+        sense_pos = normalize_pos(sense.get("pos") or "")
         if sense_pos and sense_pos not in sense_positions:
             sense_positions.append(sense_pos)
     if sense_positions:
@@ -540,6 +581,7 @@ def validate_analysis(raw: dict[str, Any], expected_word: str) -> dict[str, Any]
         "word": word,
         "meaning_zh": meaning,
         "pos": pos,
+        "pos_zh": " / ".join(dict.fromkeys(pos_zh(S["pos"]) for S in senses)),
         "level": level,
         "morphology": {
             "type": mtype,
@@ -1021,8 +1063,10 @@ def build_data_item(
         "suffix": morph.get("affix", "") if morph["type"] in {"suffix", "prefix"} else "",
         "suffixLabel": (("-" + morph["affix"]) if morph["type"] == "suffix" else (morph["affix"] + "-")) if morph["type"] in {"suffix", "prefix"} else "",
         "pos": _pos_summary(w),
+        "pos_zh": " / ".join(dict.fromkeys(pos_zh(s.get("pos")) for s in w.get("senses", []))),
         "levelTag": w["level"],
         "sense": w["senses"][0]["zh"] if w["senses"] else w["meaning_zh"],
+        "senses": [dict(s) for s in w.get("senses", [])],
         "anchor": "word-" + w["word"],
         "batch": "自动补充",
     }

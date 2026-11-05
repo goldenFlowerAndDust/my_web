@@ -1,0 +1,866 @@
+{
+  "doubtless": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "adj.",
+        "zh": "无疑的；不容怀疑的",
+        "example": "It is doubtless that he will come.",
+        "example_zh": "他无疑会来。",
+        "collocation": "be doubtless that",
+        "collocation_zh": "……是无疑的"
+      },
+      {
+        "pos": "adv.",
+        "zh": "无疑地；肯定地",
+        "example": "She is doubtless the best player on the team.",
+        "example_zh": "她无疑是队里最好的球员。",
+        "collocation": "doubtless the best",
+        "collocation_zh": "无疑是最好的"
+      },
+      {
+        "pos": "adv.",
+        "zh": "很可能；大概",
+        "example": "He will doubtless arrive late again.",
+        "example_zh": "他很可能又会迟到。",
+        "collocation": "doubtless arrive",
+        "collocation_zh": "很可能到达"
+      }
+    ],
+    "pos": "adj. / adv.",
+    "meaning_zh": "无疑的；无疑地；很可能",
+    "elapsed": 3.4
+  },
+  "regardless": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "adv.",
+        "zh": "不管怎样；无论如何",
+        "example": "Regardless, we must finish the work today.",
+        "example_zh": "无论如何，我们今天必须完成这项工作。",
+        "collocation": "regardless of",
+        "collocation_zh": "不管；不顾"
+      },
+      {
+        "pos": "adj.",
+        "zh": "不顾的；不加理会的",
+        "example": "He went ahead regardless of the danger.",
+        "example_zh": "他不顾危险继续前进。",
+        "collocation": "regardless of danger",
+        "collocation_zh": "不顾危险"
+      }
+    ],
+    "pos": "adv. / adj.",
+    "meaning_zh": "不管怎样；无论如何；不顾",
+    "elapsed": 3.12
+  },
+  "objective": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "目标；目的",
+        "example": "Our main objective is to improve students' reading skills.",
+        "example_zh": "我们的主要目标是提高学生的阅读能力。",
+        "collocation": "main objective",
+        "collocation_zh": "主要目标"
+      },
+      {
+        "pos": "adj.",
+        "zh": "客观的；无偏见的",
+        "example": "A judge must remain objective.",
+        "example_zh": "法官必须保持客观。",
+        "collocation": "objective view",
+        "collocation_zh": "客观的看法"
+      },
+      {
+        "pos": "adj.",
+        "zh": "（与想法、感受相对的）客观存在的；实际的",
+        "example": "She has an objective need for medical care.",
+        "example_zh": "她确实有医疗方面的客观需求。",
+        "collocation": "",
+        "collocation_zh": ""
+      }
+    ],
+    "pos": "n. / adj.",
+    "meaning_zh": "目标；目的；客观的；无偏见的",
+    "elapsed": 2.71
+  },
+  "alternative": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "adj.",
+        "zh": "可供替代的；另外的",
+        "example": "We need an alternative plan.",
+        "example_zh": "我们需要一个替代方案。",
+        "collocation": "alternative plan",
+        "collocation_zh": "替代方案"
+      },
+      {
+        "pos": "adj.",
+        "zh": "非传统的；另类的",
+        "example": "He enjoys alternative music.",
+        "example_zh": "他喜欢另类音乐。",
+        "collocation": "alternative music",
+        "collocation_zh": "另类音乐"
+      },
+      {
+        "pos": "n.",
+        "zh": "可供选择的事物；替代品",
+        "example": "We have no alternative but to wait.",
+        "example_zh": "我们别无选择，只能等待。",
+        "collocation": "have no alternative",
+        "collocation_zh": "别无选择"
+      }
+    ],
+    "pos": "adj. / n.",
+    "meaning_zh": "可供替代的；非传统的；替代品；选择",
+    "elapsed": 2.97
+  },
+  "review": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "回顾；复习",
+        "example": "I need to do a quick review of my notes before the exam.",
+        "example_zh": "考试前我需要快速复习一下笔记。",
+        "collocation": "do a review",
+        "collocation_zh": "进行复习"
+      },
+      {
+        "pos": "n.",
+        "zh": "评论；评价",
+        "example": "The movie received good reviews from critics.",
+        "example_zh": "这部电影得到了评论家的好评。",
+        "collocation": "movie review",
+        "collocation_zh": "影评"
+      },
+      {
+        "pos": "n.",
+        "zh": "审查；检阅",
+        "example": "The policy is under review.",
+        "example_zh": "该政策正在审查中。",
+        "collocation": "under review",
+        "collocation_zh": "在审查中"
+      },
+      {
+        "pos": "v.",
+        "zh": "回顾；复习",
+        "example": "Let's review the key points of the lesson.",
+        "example_zh": "我们来复习一下这节课的重点。",
+        "collocation": "review the lesson",
+        "collocation_zh": "复习功课"
+      },
+      {
+        "pos": "v.",
+        "zh": "评论；写评论",
+        "example": "She reviews books for a local newspaper.",
+        "example_zh": "她为当地报纸写书评。",
+        "collocation": "review a book",
+        "collocation_zh": "评论一本书"
+      },
+      {
+        "pos": "v.",
+        "zh": "审查；检阅",
+        "example": "The committee will review the proposal next week.",
+        "example_zh": "委员会下周将审查该提案。",
+        "collocation": "review a proposal",
+        "collocation_zh": "审查提案"
+      }
+    ],
+    "pos": "n. / v.",
+    "meaning_zh": "回顾；复习；评论；审查；检阅",
+    "elapsed": 4.15
+  },
+  "return": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "v.",
+        "zh": "返回；回来",
+        "example": "He returned home late last night.",
+        "example_zh": "他昨晚很晚才回家。",
+        "collocation": "return home",
+        "collocation_zh": "回家"
+      },
+      {
+        "pos": "v.",
+        "zh": "归还；退还",
+        "example": "Please return the book to the library.",
+        "example_zh": "请把书还给图书馆。",
+        "collocation": "return sth to sb",
+        "collocation_zh": "把某物还给某人"
+      },
+      {
+        "pos": "v.",
+        "zh": "回报；回应",
+        "example": "She returned his smile.",
+        "example_zh": "她对他回以微笑。",
+        "collocation": "return a smile",
+        "collocation_zh": "回以微笑"
+      },
+      {
+        "pos": "n.",
+        "zh": "返回；归来",
+        "example": "We look forward to your return.",
+        "example_zh": "我们期待你的归来。",
+        "collocation": "on one's return",
+        "collocation_zh": "在某人回来时"
+      },
+      {
+        "pos": "n.",
+        "zh": "收益；回报",
+        "example": "The investment brought a high return.",
+        "example_zh": "这项投资带来了高回报。",
+        "collocation": "high return",
+        "collocation_zh": "高回报"
+      },
+      {
+        "pos": "adj.",
+        "zh": "返回的；回程的",
+        "example": "We bought a return ticket to Beijing.",
+        "example_zh": "我们买了一张去北京的往返票。",
+        "collocation": "return ticket",
+        "collocation_zh": "往返票"
+      }
+    ],
+    "pos": "v. / n. / adj.",
+    "meaning_zh": "返回；归还；回报；收益；返回的",
+    "elapsed": 3.91
+  },
+  "reform": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "v.",
+        "zh": "改革；改进",
+        "example": "The government decided to reform the tax system.",
+        "example_zh": "政府决定改革税收制度。",
+        "collocation": "reform the system",
+        "collocation_zh": "改革制度"
+      },
+      {
+        "pos": "v.",
+        "zh": "改造；使改过自新",
+        "example": "The program aims to reform young offenders.",
+        "example_zh": "该项目旨在改造年轻罪犯。",
+        "collocation": "reform offenders",
+        "collocation_zh": "改造罪犯"
+      },
+      {
+        "pos": "n.",
+        "zh": "改革；改良",
+        "example": "The country is going through a period of economic reform.",
+        "example_zh": "这个国家正经历经济改革时期。",
+        "collocation": "economic reform",
+        "collocation_zh": "经济改革"
+      },
+      {
+        "pos": "adj.",
+        "zh": "改革的；改革派的",
+        "example": "He is a member of the reform movement.",
+        "example_zh": "他是改革运动的成员。",
+        "collocation": "reform movement",
+        "collocation_zh": "改革运动"
+      }
+    ],
+    "pos": "v. / n. / adj.",
+    "meaning_zh": "改革；改进；改造；改革的",
+    "elapsed": 3.62
+  },
+  "release": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "v.",
+        "zh": "释放；放走",
+        "example": "The police released the suspect.",
+        "example_zh": "警察释放了嫌疑人。",
+        "collocation": "release a prisoner",
+        "collocation_zh": "释放囚犯"
+      },
+      {
+        "pos": "v.",
+        "zh": "发布；发行",
+        "example": "The band will release a new album next month.",
+        "example_zh": "乐队下个月将发行新专辑。",
+        "collocation": "release an album",
+        "collocation_zh": "发行专辑"
+      },
+      {
+        "pos": "v.",
+        "zh": "排放；放出",
+        "example": "The factory released harmful chemicals into the river.",
+        "example_zh": "工厂向河里排放有害化学物质。",
+        "collocation": "release chemicals",
+        "collocation_zh": "排放化学物质"
+      },
+      {
+        "pos": "n.",
+        "zh": "释放；获释",
+        "example": "The prisoner was given an early release.",
+        "example_zh": "囚犯获得了提前释放。",
+        "collocation": "early release",
+        "collocation_zh": "提前释放"
+      },
+      {
+        "pos": "n.",
+        "zh": "发布；发行",
+        "example": "The release of the new movie was delayed.",
+        "example_zh": "新电影的发行被推迟了。",
+        "collocation": "film release",
+        "collocation_zh": "电影发行"
+      }
+    ],
+    "pos": "v. / n.",
+    "meaning_zh": "释放；发布；发行；排放；释放（名词）",
+    "elapsed": 3.73
+  },
+  "research": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "研究；调查",
+        "example": "She is doing research on climate change.",
+        "example_zh": "她正在做关于气候变化的研究。",
+        "collocation": "do research on",
+        "collocation_zh": "做关于……的研究"
+      },
+      {
+        "pos": "v.",
+        "zh": "研究；调查",
+        "example": "They are researching the causes of the disease.",
+        "example_zh": "他们正在研究这种疾病的成因。",
+        "collocation": "research into",
+        "collocation_zh": "调查；研究"
+      }
+    ],
+    "pos": "n. / v.",
+    "meaning_zh": "研究；调查；探究",
+    "elapsed": 3.09
+  },
+  "respect": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "尊重；尊敬",
+        "example": "We should show respect for our teachers.",
+        "example_zh": "我们应该尊敬老师。",
+        "collocation": "show respect for",
+        "collocation_zh": "对……表示尊重"
+      },
+      {
+        "pos": "n.",
+        "zh": "方面",
+        "example": "In many respects, this plan is better.",
+        "example_zh": "在许多方面，这个计划更好。",
+        "collocation": "in many respects",
+        "collocation_zh": "在许多方面"
+      },
+      {
+        "pos": "v.",
+        "zh": "尊重；尊敬",
+        "example": "You must respect your parents.",
+        "example_zh": "你必须尊重你的父母。",
+        "collocation": "respect someone",
+        "collocation_zh": "尊重某人"
+      },
+      {
+        "pos": "v.",
+        "zh": "遵守（规则、意愿等）",
+        "example": "Please respect the rules of the game.",
+        "example_zh": "请遵守游戏规则。",
+        "collocation": "respect the rules",
+        "collocation_zh": "遵守规则"
+      }
+    ],
+    "pos": "n. / v.",
+    "meaning_zh": "尊重；尊敬；敬意；方面；关于；尊重（动词）",
+    "elapsed": 4.22
+  },
+  "import": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "v.",
+        "zh": "进口；输入",
+        "example": "The country imports most of its oil.",
+        "example_zh": "这个国家大部分石油依靠进口。",
+        "collocation": "import from",
+        "collocation_zh": "从……进口"
+      },
+      {
+        "pos": "n.",
+        "zh": "进口；进口商品",
+        "example": "The government wants to reduce imports.",
+        "example_zh": "政府想要减少进口。",
+        "collocation": "reduce imports",
+        "collocation_zh": "减少进口"
+      },
+      {
+        "pos": "n.",
+        "zh": "重要性；含义",
+        "example": "The matter is of great import.",
+        "example_zh": "这件事非常重要。",
+        "collocation": "of great import",
+        "collocation_zh": "非常重要"
+      }
+    ],
+    "pos": "v. / n.",
+    "meaning_zh": "进口；输入；进口商品；重要性；含义",
+    "elapsed": 3.55
+  },
+  "deep": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "adj.",
+        "zh": "深的（从表面到底部距离大）",
+        "example": "The lake is very deep.",
+        "example_zh": "这个湖很深。",
+        "collocation": "deep water",
+        "collocation_zh": "深水"
+      },
+      {
+        "pos": "adj.",
+        "zh": "深刻的；深奥的",
+        "example": "This is a deep book about life.",
+        "example_zh": "这是一本关于生活的深刻的书。",
+        "collocation": "deep thought",
+        "collocation_zh": "深刻的思想"
+      },
+      {
+        "pos": "adj.",
+        "zh": "深切的；强烈的",
+        "example": "She felt deep sadness.",
+        "example_zh": "她感到深切的悲伤。",
+        "collocation": "deep sadness",
+        "collocation_zh": "深切的悲伤"
+      },
+      {
+        "pos": "adv.",
+        "zh": "深深地；在深处",
+        "example": "He dug deep into the ground.",
+        "example_zh": "他往地里挖得很深。",
+        "collocation": "dig deep",
+        "collocation_zh": "挖得深"
+      },
+      {
+        "pos": "n.",
+        "zh": "深处；深海（常与 the 连用）",
+        "example": "The ship sank into the deep.",
+        "example_zh": "船沉入了深处。",
+        "collocation": "the deep",
+        "collocation_zh": "深处"
+      }
+    ],
+    "pos": "adj. / adv. / n.",
+    "meaning_zh": "深的；深刻的；深切的；深处；深地",
+    "elapsed": 3.66
+  },
+  "contrast": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "对比；对照；差异",
+        "example": "There is a sharp contrast between the two cities.",
+        "example_zh": "这两座城市之间有着鲜明的对比。",
+        "collocation": "in contrast to",
+        "collocation_zh": "与……形成对比"
+      },
+      {
+        "pos": "n.",
+        "zh": "形成对比的人或事物",
+        "example": "Her calm voice was a contrast to his angry shouts.",
+        "example_zh": "她平静的声音与他愤怒的喊叫形成了对比。",
+        "collocation": "",
+        "collocation_zh": ""
+      },
+      {
+        "pos": "v.",
+        "zh": "对比；对照",
+        "example": "The report contrasts the two methods.",
+        "example_zh": "这份报告对这两种方法进行了对比。",
+        "collocation": "contrast A with B",
+        "collocation_zh": "把A与B作对比"
+      },
+      {
+        "pos": "v.",
+        "zh": "形成对比；显出差异",
+        "example": "The bright dress contrasts with the dark background.",
+        "example_zh": "这条鲜艳的裙子与深色背景形成了对比。",
+        "collocation": "contrast with",
+        "collocation_zh": "与……形成对比"
+      }
+    ],
+    "pos": "n. / v.",
+    "meaning_zh": "对比；对照；差异；形成对比",
+    "elapsed": 3.68
+  },
+  "care": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "关心；照料",
+        "example": "She shows great care for her patients.",
+        "example_zh": "她对病人非常关心。",
+        "collocation": "take care of",
+        "collocation_zh": "照顾"
+      },
+      {
+        "pos": "n.",
+        "zh": "小心；谨慎",
+        "example": "Handle the glass with care.",
+        "example_zh": "小心拿放玻璃杯。",
+        "collocation": "with care",
+        "collocation_zh": "小心地"
+      },
+      {
+        "pos": "v.",
+        "zh": "关心；在意",
+        "example": "I don't care what he says.",
+        "example_zh": "我不在乎他说什么。",
+        "collocation": "care about",
+        "collocation_zh": "关心"
+      },
+      {
+        "pos": "v.",
+        "zh": "照顾；照料",
+        "example": "She cares for her elderly mother.",
+        "example_zh": "她照顾年迈的母亲。",
+        "collocation": "care for",
+        "collocation_zh": "照顾"
+      }
+    ],
+    "pos": "n. / v.",
+    "meaning_zh": "关心；照顾；小心；在意；护理",
+    "elapsed": 3.55
+  },
+  "cheer": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "v.",
+        "zh": "欢呼；喝彩",
+        "example": "The crowd cheered loudly when the team scored.",
+        "example_zh": "球队得分时，人群大声欢呼。",
+        "collocation": "cheer loudly",
+        "collocation_zh": "大声欢呼"
+      },
+      {
+        "pos": "v.",
+        "zh": "使高兴；鼓舞",
+        "example": "Good news cheered everyone up.",
+        "example_zh": "好消息使大家振作起来。",
+        "collocation": "cheer up",
+        "collocation_zh": "使振作起来"
+      },
+      {
+        "pos": "n.",
+        "zh": "欢呼声；喝彩声",
+        "example": "A great cheer went up from the crowd.",
+        "example_zh": "人群中爆发出巨大的欢呼声。",
+        "collocation": "a great cheer",
+        "collocation_zh": "巨大的欢呼声"
+      },
+      {
+        "pos": "n.",
+        "zh": "愉快；高兴",
+        "example": "The children were full of cheer at the party.",
+        "example_zh": "孩子们在聚会上充满了欢乐。",
+        "collocation": "full of cheer",
+        "collocation_zh": "充满欢乐"
+      }
+    ],
+    "pos": "v. / n.",
+    "meaning_zh": "欢呼；喝彩；使高兴；鼓舞；愉快",
+    "elapsed": 3.99
+  },
+  "color": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "颜色；色彩",
+        "example": "What is your favorite color?",
+        "example_zh": "你最喜欢什么颜色？",
+        "collocation": "favorite color",
+        "collocation_zh": "最喜欢的颜色"
+      },
+      {
+        "pos": "n.",
+        "zh": "颜料；彩色",
+        "example": "The children painted with bright colors.",
+        "example_zh": "孩子们用鲜艳的颜料画画。",
+        "collocation": "in color",
+        "collocation_zh": "彩色的"
+      },
+      {
+        "pos": "v.",
+        "zh": "给……着色；涂色",
+        "example": "She colored the picture with crayons.",
+        "example_zh": "她用蜡笔给图画上色。",
+        "collocation": "color the picture",
+        "collocation_zh": "给图画上色"
+      },
+      {
+        "pos": "v.",
+        "zh": "影响；渲染",
+        "example": "His judgment was colored by anger.",
+        "example_zh": "他的判断受到了愤怒的影响。",
+        "collocation": "color one's judgment",
+        "collocation_zh": "影响某人的判断"
+      }
+    ],
+    "pos": "n. / v.",
+    "meaning_zh": "颜色；色彩；给……着色；影响",
+    "elapsed": 3.19
+  },
+  "harm": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "伤害；损害",
+        "example": "The storm did great harm to the crops.",
+        "example_zh": "暴风雨对庄稼造成了很大损害。",
+        "collocation": "do harm to",
+        "collocation_zh": "对……造成伤害"
+      },
+      {
+        "pos": "n.",
+        "zh": "危害；坏处",
+        "example": "There is no harm in asking.",
+        "example_zh": "问一问没有坏处。",
+        "collocation": "no harm in doing sth.",
+        "collocation_zh": "做某事没有坏处"
+      },
+      {
+        "pos": "v.",
+        "zh": "伤害；损害",
+        "example": "Smoking can harm your health.",
+        "example_zh": "吸烟会损害你的健康。",
+        "collocation": "harm one's health",
+        "collocation_zh": "损害某人的健康"
+      }
+    ],
+    "pos": "n. / v.",
+    "meaning_zh": "伤害；损害；危害",
+    "elapsed": 2.45
+  },
+  "help": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "v.",
+        "zh": "帮助；援助",
+        "example": "Can you help me carry this box?",
+        "example_zh": "你能帮我搬这个箱子吗？",
+        "collocation": "help sb. do sth.",
+        "collocation_zh": "帮助某人做某事"
+      },
+      {
+        "pos": "v.",
+        "zh": "有助于；改善",
+        "example": "This medicine will help your cough.",
+        "example_zh": "这种药对您的咳嗽有帮助。",
+        "collocation": "help with",
+        "collocation_zh": "有助于"
+      },
+      {
+        "pos": "n.",
+        "zh": "帮助；援助",
+        "example": "Thank you for your help.",
+        "example_zh": "谢谢你的帮助。",
+        "collocation": "with the help of",
+        "collocation_zh": "在……的帮助下"
+      },
+      {
+        "pos": "n.",
+        "zh": "帮手；有帮助的人或物",
+        "example": "You are a great help to me.",
+        "example_zh": "你对我帮助很大。",
+        "collocation": "a great help",
+        "collocation_zh": "很大的帮助"
+      },
+      {
+        "pos": "int.",
+        "zh": "救命",
+        "example": "Help! I'm stuck!",
+        "example_zh": "救命！我被困住了！",
+        "collocation": "",
+        "collocation_zh": ""
+      }
+    ],
+    "pos": "v. / n. / int.",
+    "meaning_zh": "帮助；援助；有助于；救命；帮手",
+    "elapsed": 3.43
+  },
+  "hope": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "希望；期望",
+        "example": "There is still hope of finding survivors.",
+        "example_zh": "仍然有找到幸存者的希望。",
+        "collocation": "hope of",
+        "collocation_zh": "……的希望"
+      },
+      {
+        "pos": "n.",
+        "zh": "希望的人或事物",
+        "example": "She is the hope of the family.",
+        "example_zh": "她是这个家庭的希望。",
+        "collocation": "the hope of",
+        "collocation_zh": "……的希望"
+      },
+      {
+        "pos": "v.",
+        "zh": "希望；期望",
+        "example": "I hope you will come to my party.",
+        "example_zh": "我希望你能来参加我的聚会。",
+        "collocation": "hope to do sth",
+        "collocation_zh": "希望做某事"
+      }
+    ],
+    "pos": "n. / v.",
+    "meaning_zh": "希望；期望；希望（做某事）",
+    "elapsed": 3.37
+  },
+  "mean": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "v.",
+        "zh": "意思是；表示……的意思",
+        "example": "What does this word mean?",
+        "example_zh": "这个词是什么意思？",
+        "collocation": "mean a word",
+        "collocation_zh": "表示某词的意思"
+      },
+      {
+        "pos": "v.",
+        "zh": "意味着；导致",
+        "example": "Missing the bus means being late.",
+        "example_zh": "错过公交车意味着迟到。",
+        "collocation": "",
+        "collocation_zh": ""
+      },
+      {
+        "pos": "v.",
+        "zh": "打算；意欲",
+        "example": "I didn't mean to hurt you.",
+        "example_zh": "我不是有意伤害你的。",
+        "collocation": "mean to do sth.",
+        "collocation_zh": "打算做某事"
+      },
+      {
+        "pos": "adj.",
+        "zh": "吝啬的；小气的",
+        "example": "He is too mean to buy a gift.",
+        "example_zh": "他太小气了，连礼物都不买。",
+        "collocation": "",
+        "collocation_zh": ""
+      },
+      {
+        "pos": "adj.",
+        "zh": "刻薄的；不友善的",
+        "example": "Don't be mean to your little brother.",
+        "example_zh": "不要对你弟弟刻薄。",
+        "collocation": "",
+        "collocation_zh": ""
+      },
+      {
+        "pos": "adj.",
+        "zh": "平均的；中间的",
+        "example": "The mean temperature is about 20 degrees.",
+        "example_zh": "平均温度约为20度。",
+        "collocation": "mean value",
+        "collocation_zh": "平均值"
+      }
+    ],
+    "pos": "v. / adj.",
+    "meaning_zh": "意思是；意味着；打算；吝啬的；刻薄的；平均的；平均值；中间",
+    "elapsed": 3.84
+  },
+  "word": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "词；单词",
+        "example": "What does this word mean?",
+        "example_zh": "这个单词是什么意思？",
+        "collocation": "a new word",
+        "collocation_zh": "一个新单词"
+      },
+      {
+        "pos": "n.",
+        "zh": "话语；言语",
+        "example": "He left without a word.",
+        "example_zh": "他一句话也没说就离开了。",
+        "collocation": "without a word",
+        "collocation_zh": "一言不发"
+      },
+      {
+        "pos": "n.",
+        "zh": "消息；信息",
+        "example": "Please send me word when you arrive.",
+        "example_zh": "你到达后请给我捎个信。",
+        "collocation": "send word",
+        "collocation_zh": "捎信"
+      },
+      {
+        "pos": "n.",
+        "zh": "诺言；保证",
+        "example": "He kept his word and came back.",
+        "example_zh": "他信守诺言回来了。",
+        "collocation": "keep one's word",
+        "collocation_zh": "信守诺言"
+      },
+      {
+        "pos": "v.",
+        "zh": "用词语表达；措辞",
+        "example": "She worded her reply carefully.",
+        "example_zh": "她措辞谨慎地作了回答。",
+        "collocation": "word a question",
+        "collocation_zh": "措辞提问"
+      }
+    ],
+    "pos": "n. / v.",
+    "meaning_zh": "词；单词；话语；消息；诺言；用词语表达",
+    "elapsed": 3.64
+  },
+  "improt": {
+    "ok": true,
+    "senses": [
+      {
+        "pos": "n.",
+        "zh": "进口；进口商品（拼写有误，应为 import）",
+        "example": "The country limits the improt of luxury cars.",
+        "example_zh": "这个国家限制豪华汽车的进口。",
+        "collocation": "the improt of goods",
+        "collocation_zh": "货物的进口"
+      },
+      {
+        "pos": "v.",
+        "zh": "进口；输入；导入（拼写有误，应为 import）",
+        "example": "They improt most of their oil from abroad.",
+        "example_zh": "他们的大部分石油从国外进口。",
+        "collocation": "improt data",
+        "collocation_zh": "导入数据"
+      }
+    ],
+    "pos": "n. / v.",
+    "meaning_zh": "（拼写有误，应为 import）进口；输入；进口商品；导入",
+    "elapsed": 3.47
+  }
+}

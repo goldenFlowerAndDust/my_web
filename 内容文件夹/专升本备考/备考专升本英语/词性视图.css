@@ -1,0 +1,34 @@
+﻿/* 核心词汇页词性视图 */
+.pos_view_bar {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin: 0 0 12px; padding: 9px 12px;
+    border: 1px solid var(--line); border-radius: 10px;
+    background: rgba(255, 253, 248, .82);
+}
+.pos_view_buttons { display: inline-flex; gap: 4px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); }
+.pos_view_buttons button { border: 0; border-radius: 999px; padding: 5px 12px; background: transparent; color: var(--muted); font: inherit; font-size: .76rem; cursor: pointer; }
+.pos_view_buttons button.is-active { background: var(--navy); color: #fff; }
+.pos_search { flex: 1 1 220px; min-width: 150px; height: 31px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 7px; background: #fff; color: var(--ink); font: inherit; font-size: .8rem; }
+.pos_view_count { color: var(--muted); font-size: .72rem; white-space: nowrap; }
+.pos_view { padding-top: 4px; }
+.pos_nav { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 0 0 14px; }
+.pos_nav_label { color: var(--muted); font-size: .76rem; font-weight: 700; }
+.pos_nav a { display: inline-flex; gap: 4px; align-items: center; padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--teal); font-size: .75rem; text-decoration: none; }
+.pos_nav a span { color: var(--muted); font-size: .68rem; }
+.pos_group { margin: 0 0 18px; }
+.pos_group > h2 { display: flex; align-items: baseline; gap: 8px; margin: 0 0 8px; padding-bottom: 7px; border-bottom: 2px solid var(--line-strong); color: var(--navy); font-size: 1.15rem; }
+.pos_group > h2 span { color: var(--muted); font-size: .74rem; font-weight: 400; }
+.pos_word_div { margin: 0; padding: 0; list-style: none; }
+.pos_view .word_item { margin: 7px 0; }
+.pos_view .word_item .answer { display: none; }
+.pos_view .word_item.is-open .answer { display: block; }
+.pos_senses { margin: 6px 0 8px; padding: 7px 9px; border-left: 3px solid var(--teal); background: rgba(11, 102, 114, .05); }
+.pos_sense { display: flex; gap: 8px; align-items: baseline; margin: 3px 0; color: var(--ink); font-size: .8rem; }
+.pos_tag { display: inline-block; flex: none; padding: 2px 6px; border-radius: 4px; background: rgba(11, 102, 114, .12); color: var(--teal); font-size: .68rem; font-weight: 700; white-space: nowrap; }
+.sense_pos_inline { margin-right: 5px; }
+@media (max-width: 620px) { .pos_view_bar { align-items: stretch; } .pos_view_buttons { width: 100%; } .pos_view_buttons button { flex: 1; } }
+
+/* 保证两个视图按钮始终可见 */
+.pos_view_buttons { flex-wrap: nowrap; }
+.pos_view_buttons button { display: inline-flex !important; visibility: visible !important; opacity: 1 !important; }
+.pos_view_buttons button.is-active { background: #14233f !important; color: #fff !important; }

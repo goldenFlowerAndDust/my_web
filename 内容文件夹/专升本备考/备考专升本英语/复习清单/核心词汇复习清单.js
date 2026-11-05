@@ -169,6 +169,9 @@
             name: name,
             word: item.word || name,
             zh: item.zh || '',
+            pos: item.pos || '',
+            pos_zh: item.pos_zh || '',
+            senses: Array.isArray(item.senses) ? item.senses : [],
             root: item.root || '',
             level: level,
             created: created,
@@ -589,7 +592,9 @@
         var subParts = [];
         if (item.root) subParts.push('词根 <span class="root">' + esc(item.root) + '</span>');
         if (item.levelTag) subParts.push(esc(item.levelTag));
-        if (item.pos) subParts.push(esc(item.pos));
+        if (item.pos && item.pos_zh) subParts.push(esc(item.pos + " " + item.pos_zh));
+        else if (item.pos_zh) subParts.push(esc(item.pos_zh));
+        else if (item.pos) subParts.push(esc(item.pos));
         if (item.category && item.category !== CORE_CATEGORY) {
             subParts.push(esc(item.category));
         }
