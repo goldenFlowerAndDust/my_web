@@ -434,9 +434,9 @@ function authorized(request, env) {
   return constantTimeEqual(provided, expected);
 }
 
-async function readJsonBody(request) {
+async function readJsonBody(request, maxLength = 20000) {
   const text = await request.text();
-  if (text.length > 20000) throw new Error("请求体过大。");
+  if (text.length > maxLength) throw new Error("请求体过大。");
   const data = JSON.parse(text);
   if (!data || typeof data !== "object" || Array.isArray(data)) {
     throw new Error("请求体必须是 JSON 对象。");
@@ -1320,7 +1320,7 @@ async function handleConversations(request, env) {
   const url = new URL(request.url);
   let payload = {};
   if (request.method === "POST") {
-    try { payload = await readJsonBody(request); } catch (error) {
+    try { payload = await readJsonBody(request, 5000000); } catch (error) {
       return json({ ok: false, error: error.message || "请求体不合法。" }, 400, request, env);
     }
   }
