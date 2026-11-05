@@ -250,7 +250,7 @@
     const turns = conversationTurns();
     roundSelect.innerHTML = turns.map((turn) => {
       const text = String(turn.question || "").replace(/\s+/g, " ").trim();
-      const label = text.length > 34 ? text.slice(0, 34) + "…" : (text || "（无问题）");
+      const label = text.length > 24 ? text.slice(0, 24) + "…" : (text || "（无问题）");
       return '<option value="' + (turn.index - 1) + '">第' + turn.index + '轮 · ' + escapeHtml(label) + "</option>";
     }).join("");
     roundSelect.hidden = turns.length === 0;
