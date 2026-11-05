@@ -86,7 +86,9 @@
     }
 
     function save() {
-        try { sessionStorage.setItem(KEY, JSON.stringify(sessions)); } catch (e) { /* ignore */ }
+        if (!window.__AI_HISTORY_LIGHT__) {
+            try { sessionStorage.setItem(KEY, JSON.stringify(sessions)); } catch (e) { /* ignore */ }
+        }
         syncStore();
     }
 
@@ -106,6 +108,11 @@
     }
 
     function load() {
+        if (window.__AI_HISTORY_LIGHT__) {
+            sessions = [make()];
+            active = sessions[0].id;
+            return;
+        }
         try {
             var raw = sessionStorage.getItem(KEY);
             var list = raw ? JSON.parse(raw) : null;

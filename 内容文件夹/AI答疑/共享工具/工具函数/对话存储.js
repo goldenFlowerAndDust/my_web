@@ -8,6 +8,7 @@
     var LEGACY_PREFIX = "aiTutor.conversations.legacy.";
     var DELETED_PREFIX = "aiTutor.conversations.deleted.";
     var SUBJECTS = ["english", "math", "code"];
+    var MEMORY = {};
     var MAX = 200;
 
 
@@ -188,6 +189,7 @@
     }
 
     function read(subject) {
+        if (window.__AI_HISTORY_LIGHT__) return (MEMORY[subject] || []).slice();
         try {
             var key = storageKey(subject);
             var raw = localStorage.getItem(key);
@@ -207,6 +209,11 @@
     }
 
     function write(list, subject) {
+        if (window.__AI_HISTORY_LIGHT__) {
+            MEMORY[subject] = (Array.isArray(list) ? list : []).slice(0, MAX);
+            queueSync();
+            return;
+        }
         try {
             localStorage.setItem(storageKey(subject), JSON.stringify((Array.isArray(list) ? list : []).slice(0, MAX)));
             localStorage.setItem(globalInitKey(subject), "1");

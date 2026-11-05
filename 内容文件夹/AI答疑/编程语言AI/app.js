@@ -175,12 +175,19 @@
   }
 
   function saveSessions() {
+    if (window.__AI_HISTORY_LIGHT__) return;
     try {
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessions));
     } catch (error) { /* ignore */ }
   }
 
   function loadSessions() {
+    if (window.__AI_HISTORY_LIGHT__) {
+      const savedLanguage = localStorage.getItem("programmingTutor.language") || "python";
+      sessions = [newSession(savedLanguage)];
+      activeSessionId = sessions[0].id;
+      return;
+    }
     let stored = null;
     try {
       const raw = sessionStorage.getItem(SESSION_KEY);
