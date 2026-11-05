@@ -741,6 +741,11 @@
         }
     }
 
+    function truncate(value, max) {
+        var text = String(value == null ? "" : value).replace(/\s+/g, " ").trim();
+        return text.length > max ? text.slice(0, max) + "…" : text;
+    }
+
     function groupHistoryEntries(entries) {
         var groups = [];
         var map = {};
@@ -800,8 +805,11 @@
     }
 
     function renderHistory() {
-        if (window.ConversationStore && !window.ConversationStore.isLegacyImported("math")) {
-            window.ConversationStore.importEntries(historyEntries, "math");
+        if (window.ConversationStore &&
+            (!window.ConversationStore.isLegacyImported("math") ||
+             (!window.ConversationStore.entries("math").length &&
+              !window.ConversationStore.isDeleted("math")))) {
+            window.ConversationStore.importEntries(historyEntries, "math", true);
             var migrated = window.ConversationStore.entries("math").filter(function (entry) {
                 return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;
             });
@@ -989,7 +997,9 @@
         });
 
         if (window.ConversationStore && window.ConversationStore.isInitialized("math") &&
-            window.ConversationStore.isLegacyImported("math")) {
+            window.ConversationStore.isLegacyImported("math") &&
+            (window.ConversationStore.entries("math").length ||
+             window.ConversationStore.isDeleted("math"))) {
             var allStored = window.ConversationStore.entries("math");
             var stored = allStored.filter(function (entry) {
                 return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;

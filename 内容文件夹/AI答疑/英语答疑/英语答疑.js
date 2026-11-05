@@ -782,8 +782,11 @@
     }
 
     function renderHistory() {
-        if (window.ConversationStore && !window.ConversationStore.isLegacyImported("english")) {
-            window.ConversationStore.importEntries(historyEntries, "english");
+        if (window.ConversationStore &&
+            (!window.ConversationStore.isLegacyImported("english") ||
+             (!window.ConversationStore.entries("english").length &&
+              !window.ConversationStore.isDeleted("english")))) {
+            window.ConversationStore.importEntries(historyEntries, "english", true);
             var migrated = window.ConversationStore.entries("english").filter(function (entry) {
                 return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;
             });
@@ -1070,7 +1073,9 @@
         });
 
         if (window.ConversationStore && window.ConversationStore.isInitialized("english") &&
-            window.ConversationStore.isLegacyImported("english")) {
+            window.ConversationStore.isLegacyImported("english") &&
+            (window.ConversationStore.entries("english").length ||
+             window.ConversationStore.isDeleted("english"))) {
             var allStored = window.ConversationStore.entries("english");
             var stored = allStored.filter(function (entry) {
                 return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;

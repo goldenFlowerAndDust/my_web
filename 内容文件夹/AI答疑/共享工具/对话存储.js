@@ -6,6 +6,7 @@
     var OLD_KEY = "aiTutor.conversations.v1";
     var INIT_PREFIX = "aiTutor.conversations.initialized.v2.";
     var LEGACY_PREFIX = "aiTutor.conversations.legacy.";
+    var DELETED_PREFIX = "aiTutor.conversations.deleted.";
     var SUBJECTS = ["english", "math", "code"];
     var MAX = 200;
 
@@ -64,6 +65,26 @@
     function markLegacyImported(subject) {
         try {
             localStorage.setItem(LEGACY_PREFIX + subject, "1");
+        } catch (error) { /* ignore */ }
+    }
+
+    function isDeleted(subject) {
+        try {
+            return localStorage.getItem(DELETED_PREFIX + subject) === "1";
+        } catch (error) {
+            return false;
+        }
+    }
+
+    function markDeleted(subject) {
+        try {
+            localStorage.setItem(DELETED_PREFIX + subject, "1");
+        } catch (error) { /* ignore */ }
+    }
+
+    function clearDeleted(subject) {
+        try {
+            localStorage.removeItem(DELETED_PREFIX + subject);
         } catch (error) { /* ignore */ }
     }
 
@@ -130,11 +151,12 @@
         list = list.filter(function (item) { return item && item.id !== conversation.id; });
         list.unshift(conversation);
         write(list, subject);
+        clearDeleted(subject);
         return conversation;
     }
 
-    function importEntries(entries, subject) {
-        if (!subject || isLegacyImported(subject)) return false;
+    function importEntries(entries, subject, force) {
+        if (!subject || (isLegacyImported(subject) && !force) || isDeleted(subject)) return false;
         if (!Array.isArray(entries) || !entries.length) {
             markLegacyImported(subject);
             return false;
@@ -203,7 +225,8 @@
                     html: assistant.html || "",
                     usage: assistant.usage || null,
                     time: assistant.time || "",
-                    date: String(assistant.time || "").slice(0, 10),
+                    date: (String(assistant.time || "").match(/\d{4}-\d{2}-\d{2}/) || [""])[0] ||
+                        String(assistant.time || "").slice(0, 10),
                     round: pairIndex,
                     created_at: conversation.created_at,
                     updated_at: conversation.updated_at
@@ -226,6 +249,7 @@
             messages.splice(start, 2);
             if (!messages.length) {
                 write(list.filter(function (item) { return item && item.id !== conversationId; }), currentSubject);
+                markDeleted(currentSubject);
                 return true;
             }
             var firstUser = messages.find(function (message) { return message.role === "user"; });
@@ -241,9 +265,11 @@
     function clearConversation(id, subject) {
         var subjects = subject ? [subject] : SUBJECTS;
         subjects.forEach(function (currentSubject) {
-            write(read(currentSubject).filter(function (item) {
+            var remaining = read(currentSubject).filter(function (item) {
                 return item && item.id !== id;
-            }), currentSubject);
+            });
+            write(remaining, currentSubject);
+            if (!remaining.length) markDeleted(currentSubject);
         });
     }
 
@@ -253,6 +279,7 @@
         importEntries: importEntries,
         isInitialized: isInitialized,
         isLegacyImported: isLegacyImported,
+        isDeleted: isDeleted,
         markLegacyImported: markLegacyImported,
         list: list,
         entries: entries,

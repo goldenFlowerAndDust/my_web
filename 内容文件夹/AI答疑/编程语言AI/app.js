@@ -750,8 +750,11 @@
 
   function renderHistory() {
     const records = filteredHistoryRecords();
-    if (window.ConversationStore && !window.ConversationStore.isLegacyImported("code")) {
-      window.ConversationStore.importEntries(records, "code");
+    if (window.ConversationStore &&
+        (!window.ConversationStore.isLegacyImported("code") ||
+         (!window.ConversationStore.entries("code").length &&
+          !window.ConversationStore.isDeleted("code")))) {
+      window.ConversationStore.importEntries(records, "code", true);
       const migrated = window.ConversationStore.entries("code");
       if (migrated.length) {
         historyRecords = migrated.sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
@@ -801,7 +804,9 @@
   async function loadHistory() {
     historyList.innerHTML = '<p class="history-empty">加载历史…</p>';
     if (window.ConversationStore && window.ConversationStore.isInitialized("code") &&
-        window.ConversationStore.isLegacyImported("code")) {
+        window.ConversationStore.isLegacyImported("code") &&
+        (window.ConversationStore.entries("code").length ||
+         window.ConversationStore.isDeleted("code"))) {
       const stored = window.ConversationStore.entries("code");
       historyRecords = stored.sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
       buildHistoryTabs();
