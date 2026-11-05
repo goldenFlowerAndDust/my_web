@@ -949,6 +949,19 @@
             tab.classList.toggle("is-active", active);
         });
 
+        if (window.ConversationStore) {
+            var allStored = window.ConversationStore.entries("math");
+            if (allStored.length) {
+                var stored = allStored.filter(function (entry) {
+                    return (!historyCategory || historyCategory === "all" || entry.mode === historyCategory) &&
+                        (!historyTopic || historyTopic === "all" || entry.topic === historyTopic);
+                });
+                historyEntries = stored;
+                renderHistory();
+                return;
+            }
+        }
+
         var archived = await loadStaticHistory();
 
         if (!connectionReady()) {

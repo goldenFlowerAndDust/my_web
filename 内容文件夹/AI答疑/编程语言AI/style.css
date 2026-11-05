@@ -476,6 +476,8 @@ textarea:focus { border-color: #9cc9e5; box-shadow: 0 0 0 3px rgba(76,150,201,.1
   gap: 10px;
 }
 .history-conversation-title {
+  flex: 1 1 auto;
+  min-width: 0;
   color: #dce7f3;
   font-size: 13px;
   font-weight: 700;

@@ -164,6 +164,15 @@
     }
   }
 
+  function syncConversationStore() {
+    if (!window.ConversationStore) return;
+    sessions.forEach((session) => {
+      if (session && Array.isArray(session.messages) && session.messages.length) {
+        window.ConversationStore.upsert(session, "code");
+      }
+    });
+  }
+
   function saveSessions() {
     try {
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessions));
@@ -746,6 +755,15 @@
 
   async function loadHistory() {
     historyList.innerHTML = '<p class="history-empty">加载历史…</p>';
+    if (window.ConversationStore) {
+      const stored = window.ConversationStore.entries("code");
+      if (stored.length) {
+        historyRecords = stored.sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
+        buildHistoryTabs();
+        renderHistory();
+        return;
+      }
+    }
     try {
       let records = [];
       if (routeConfig().local) {
@@ -887,6 +905,7 @@
           usage: data.usage || null
         }
       ]).slice(-MAX_ROUNDS * 2);
+      syncConversationStore();
       renderRoundSelect(true);
       session.busy = false;
       session.error = false;

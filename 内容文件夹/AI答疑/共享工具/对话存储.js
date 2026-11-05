@@ -1,0 +1,133 @@
+(function () {
+    "use strict";
+
+    // 本机对话的唯一 JSON 来源：回答轮次和历史记录都从这里读取。
+    var KEY = "aiTutor.conversations.v1";
+    var MAX = 200;
+
+    function read() {
+        try {
+            var raw = localStorage.getItem(KEY);
+            var list = raw ? JSON.parse(raw) : [];
+            return Array.isArray(list) ? list : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function write(list) {
+        try {
+            localStorage.setItem(KEY, JSON.stringify((Array.isArray(list) ? list : []).slice(0, MAX)));
+        } catch (error) { /* 空间不足时保留当前页面状态 */ }
+    }
+
+    function text(value) {
+        return String(value == null ? "" : value).replace(/\s+/g, " ").trim();
+    }
+
+    function titleOf(session) {
+        var title = text(session && session.title);
+        if (title && title !== "新问题") return title.slice(0, 80);
+        var messages = (session && session.messages) || [];
+        for (var i = 0; i < messages.length; i += 1) {
+            if (messages[i] && messages[i].role === "user" && text(messages[i].content)) {
+                return text(messages[i].content).slice(0, 80);
+            }
+        }
+        return "新对话";
+    }
+
+    function normalizeMessages(messages) {
+        if (!Array.isArray(messages)) return [];
+        return messages.filter(function (m) {
+            return m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string";
+        }).map(function (m) {
+            var item = { role: m.role, content: m.content };
+            if (m.role === "assistant") {
+                item.html = String(m.html || "");
+                item.mode = String(m.mode || "");
+                item.time = String(m.time || "");
+                item.usage = m.usage && typeof m.usage === "object" ? m.usage : null;
+            }
+            return item;
+        });
+    }
+
+    function upsert(session, subject) {
+        if (!session || !session.id) return;
+        var messages = normalizeMessages(session.messages);
+        if (!messages.length) return;
+        var assistant = messages.find(function (m) { return m.role === "assistant"; }) || {};
+        var conversation = {
+            id: String(session.id),
+            subject: String(subject || ""),
+            title: titleOf(session),
+            mode: String(session.mode || assistant.mode || ""),
+            topic: String(session.topic || ""),
+            language: String(session.language || ""),
+            language_name: String(session.languageName || session.language_name || session.language || ""),
+            updated_at: Date.now(),
+            messages: messages
+        };
+        var list = read();
+        var existing = list.find(function (item) { return item && item.id === conversation.id; });
+        if (existing && existing.created_at) conversation.created_at = existing.created_at;
+        else conversation.created_at = conversation.updated_at;
+        list = list.filter(function (item) { return item && item.id !== conversation.id; });
+        list.unshift(conversation);
+        write(list);
+        return conversation;
+    }
+
+    function list(subject) {
+        return read().filter(function (item) {
+            return item && item.id && (!subject || item.subject === subject);
+        });
+    }
+
+    function entries(subject) {
+        var result = [];
+        list(subject).forEach(function (conversation) {
+            var pairIndex = 0;
+            var messages = normalizeMessages(conversation.messages);
+            for (var i = 0; i + 1 < messages.length; i += 2) {
+                var user = messages[i];
+                var assistant = messages[i + 1];
+                if (user.role !== "user" || assistant.role !== "assistant") continue;
+                pairIndex += 1;
+                result.push({
+                    conversation_id: conversation.id,
+                    subject: conversation.subject,
+                    title: conversation.title,
+                    mode: assistant.mode || conversation.mode || "",
+                    topic: conversation.topic || "",
+                    language: conversation.language || "",
+                    language_name: conversation.language_name || "",
+                    question: user.content,
+                    answer: assistant.content,
+                    html: assistant.html || "",
+                    usage: assistant.usage || null,
+                    time: assistant.time || "",
+                    date: String(assistant.time || "").slice(0, 10),
+                    round: pairIndex,
+                    created_at: conversation.created_at,
+                    updated_at: conversation.updated_at
+                });
+            }
+        });
+        return result;
+    }
+
+    function clearConversation(id) {
+        write(read().filter(function (item) { return item && item.id !== id; }));
+    }
+
+    window.ConversationStore = {
+        KEY: KEY,
+        upsert: upsert,
+        list: list,
+        entries: entries,
+        clearConversation: clearConversation,
+        dump: read
+    };
+})();

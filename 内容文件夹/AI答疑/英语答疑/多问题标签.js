@@ -87,6 +87,20 @@
 
     function save() {
         try { sessionStorage.setItem(KEY, JSON.stringify(sessions)); } catch (e) { /* ignore */ }
+        syncStore();
+    }
+
+    function storeSubject() {
+        return location.pathname.indexOf("/数学答疑/") >= 0 ? "math" : "english";
+    }
+
+    function syncStore() {
+        if (!window.ConversationStore) return;
+        sessions.forEach(function (item) {
+            if (item && Array.isArray(item.messages) && item.messages.length) {
+                window.ConversationStore.upsert(item, storeSubject());
+            }
+        });
     }
 
     function load() {
@@ -180,6 +194,7 @@
         ]).slice(-MAX_ROUNDS * 2);
         save();
         render();
+        syncStore();
         window.dispatchEvent(new CustomEvent("tutor-context-updated"));
         window.dispatchEvent(new CustomEvent("tutor-turn-added", { detail: { id: id } }));
     }
@@ -312,4 +327,5 @@
     load();
     render();
     restore();
+    syncStore();
 })();
