@@ -767,6 +767,15 @@
         return groups;
     }
 
+    function deleteConversation(conversationId) {
+        if (!conversationId || !window.confirm("删除这个对话？删除后不可恢复。")) return;
+        if (window.TutorTabs && window.TutorTabs.removeConversation) {
+            window.TutorTabs.removeConversation(conversationId);
+        }
+        if (window.ConversationStore) window.ConversationStore.clearConversation(conversationId);
+        loadHistory(historyCategory, historyTopic);
+    }
+
     function loadHistoryEntry(index) {
         var item = historyEntries[index];
         if (!item) return;
@@ -800,6 +809,16 @@
             head.innerHTML = '<span class="history-conversation-title">' +
                 escapeHtml(truncate(first.question || "（无原题）", 80)) + "</span>" +
                 '<span class="history-conversation-count">共 ' + group.items.length + " 轮</span>";
+            var headDelete = document.createElement("button");
+            headDelete.type = "button";
+            headDelete.className = "history-conversation-delete";
+            headDelete.textContent = "删除";
+            headDelete.title = "删除这个对话";
+            headDelete.addEventListener("click", function (event) {
+                event.stopPropagation();
+                deleteConversation(first.conversation_id);
+            });
+            head.appendChild(headDelete);
             card.appendChild(head);
 
             var select = document.createElement("select");
@@ -809,7 +828,7 @@
                 var option = document.createElement("option");
                 option.value = String(row.index);
                 option.textContent = "第" + (roundIndex + 1) + "轮 · " +
-                    truncate(row.entry.question || "（无问题）", 46);
+                    truncate(row.entry.question || "（无问题）", 28);
                 select.appendChild(option);
             });
             select.value = String(group.items[group.items.length - 1].index);
@@ -825,19 +844,8 @@
                 loadHistoryEntry(Number(select.value));
             });
 
-            var del = document.createElement("button");
-            del.type = "button";
-            del.className = "history-delete";
-            del.textContent = "删除本轮";
-            del.title = "删除当前选中的这一轮";
-            del.addEventListener("click", function (event) {
-                event.stopPropagation();
-                deleteHistoryItem(historyEntries[Number(select.value)]);
-            });
-
             card.appendChild(select);
             card.appendChild(preview);
-            card.appendChild(del);
             historyList.appendChild(card);
         });
     }
@@ -951,15 +959,12 @@
 
         if (window.ConversationStore) {
             var allStored = window.ConversationStore.entries("math");
-            if (allStored.length) {
-                var stored = allStored.filter(function (entry) {
-                    return (!historyCategory || historyCategory === "all" || entry.mode === historyCategory) &&
-                        (!historyTopic || historyTopic === "all" || entry.topic === historyTopic);
-                });
-                historyEntries = stored;
-                renderHistory();
-                return;
-            }
+            var stored = allStored.filter(function (entry) {
+                return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;
+            });
+            historyEntries = stored;
+            renderHistory();
+            return;
         }
 
         var archived = await loadStaticHistory();

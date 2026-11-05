@@ -243,7 +243,8 @@
         historyFor: historyFor,
         appendTurnTo: appendTurnTo,
         rounds: function () { return roundsOf(current()); },
-        turns: turns
+        turns: turns,
+        removeConversation: removeConversation
     };
 
     function go(id) {
@@ -292,6 +293,20 @@
         render();
         restore();
         save();
+    }
+
+    function removeConversation(id) {
+        if (!id) return false;
+        var index = sessions.findIndex(function (item) { return item.id === id; });
+        if (index < 0) return false;
+        if (busy()) return false;
+        sessions.splice(index, 1);
+        if (!sessions.length) sessions = [make()];
+        if (active === id) active = sessions[Math.max(0, index - 1)].id;
+        render();
+        restore();
+        save();
+        return true;
     }
 
     question.addEventListener("input", function () {

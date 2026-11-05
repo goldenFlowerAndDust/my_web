@@ -500,3 +500,18 @@ textarea:focus { border-color: #9cc9e5; box-shadow: 0 0 0 3px rgba(76,150,201,.1
 :root[data-theme="light"] .history-round-select { background: #fff; color: #203047; border-color: #cfd9e6; }
 :root[data-theme="light"] .history-conversation-preview,
 :root[data-theme="light"] .history-conversation-count { color: #697386; }
+
+
+/* 历史卡片和轮次标题不撑出容器 */
+.history-list, .history-conversation, .history-conversation-head { min-width: 0; }
+.history-conversation { max-width: 100%; overflow: hidden; }
+.history-conversation-head { overflow: hidden; }
+.history-conversation-title { display: block; max-width: 100%; }
+.history-round-select { min-width: 0; max-width: 100%; box-sizing: border-box; }
+.history-conversation-delete {
+  flex: none; border: 1px solid #6d3540; border-radius: 6px;
+  padding: 3px 8px; background: #2a151b; color: #f0b5bd;
+  font: inherit; font-size: 11px; cursor: pointer;
+}
+.history-conversation-delete:hover { border-color: #f0b5bd; }
+.answer-head-tools { min-width: 0; flex-wrap: wrap; }

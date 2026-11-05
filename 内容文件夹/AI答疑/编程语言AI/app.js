@@ -352,6 +352,10 @@
   }
 
   initSessions();
+  window.ProgrammingCloseConversation = function (id) {
+    closeSession(id);
+    if (window.ConversationStore) window.ConversationStore.clearConversation(id);
+  };
 
   function currentProfile() {
     return connection.profiles[connection.provider] || { url: "", token: "" };
@@ -729,12 +733,13 @@
       const latest = group.items[group.items.length - 1].item;
       const options = group.items.map((row, roundIndex) =>
         '<option value="' + row.index + '">第' + (roundIndex + 1) + '轮 · ' +
-        escapeHtml(String(row.item.question || "（无问题）").slice(0, 46)) + "</option>"
+        escapeHtml(String(row.item.question || "（无问题）").slice(0, 28)) + "</option>"
       ).join("");
       return '<div class="history-conversation">' +
         '<div class="history-conversation-head">' +
         '<span class="history-conversation-title">' + escapeHtml(first.question || "（无原题）") + "</span>" +
         '<span class="history-conversation-count">共 ' + group.items.length + ' 轮</span>' +
+        (first.conversation_id ? '<button type="button" class="history-conversation-delete" data-delete-conversation="' + escapeHtml(first.conversation_id) + '">删除</button>' : '') +
         "</div>" +
         '<select class="history-round-select" data-history-select>' + options + "</select>" +
         '<p class="history-conversation-preview">' +
@@ -757,12 +762,10 @@
     historyList.innerHTML = '<p class="history-empty">加载历史…</p>';
     if (window.ConversationStore) {
       const stored = window.ConversationStore.entries("code");
-      if (stored.length) {
-        historyRecords = stored.sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
-        buildHistoryTabs();
-        renderHistory();
-        return;
-      }
+      historyRecords = stored.sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
+      buildHistoryTabs();
+      renderHistory();
+      return;
     }
     try {
       let records = [];
@@ -1146,6 +1149,15 @@
     if (event.target.closest("[data-history-select]")) {
       viewHistoryRecord(Number(event.target.value));
     }
+  });
+
+  historyList.addEventListener("click", (event) => {
+    const deleteButton = event.target.closest("[data-delete-conversation]");
+    if (!deleteButton) return;
+    const id = deleteButton.getAttribute("data-delete-conversation");
+    if (!id || !window.confirm("删除这个对话？删除后不可恢复。")) return;
+    if (window.ProgrammingCloseConversation) window.ProgrammingCloseConversation(id);
+    loadHistory();
   });
 
   historyList.addEventListener("click", (event) => {

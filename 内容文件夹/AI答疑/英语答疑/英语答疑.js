@@ -803,6 +803,16 @@
             head.innerHTML = '<span class="history-conversation-title">' +
                 escapeHtml(truncate(first.question || "（无原题）", 80)) + "</span>" +
                 '<span class="history-conversation-count">共 ' + group.items.length + " 轮</span>";
+            var del = document.createElement("button");
+            del.type = "button";
+            del.className = "history-conversation-delete";
+            del.textContent = "删除";
+            del.title = "删除这个对话";
+            del.addEventListener("click", function (event) {
+                event.stopPropagation();
+                deleteConversation(first.conversation_id);
+            });
+            head.appendChild(del);
             card.appendChild(head);
 
             var select = document.createElement("select");
@@ -812,7 +822,7 @@
                 var option = document.createElement("option");
                 option.value = String(row.index);
                 option.textContent = "第" + (roundIndex + 1) + "轮 · " +
-                    truncate(row.entry.question || "（无问题）", 46);
+                    truncate(row.entry.question || "（无问题）", 28);
                 select.appendChild(option);
             });
             select.value = String(group.items[group.items.length - 1].index);
@@ -832,6 +842,15 @@
             card.appendChild(preview);
             historyList.appendChild(card);
         });
+    }
+
+    function deleteConversation(conversationId) {
+        if (!conversationId || !window.confirm("删除这个对话？删除后不可恢复。")) return;
+        if (window.TutorTabs && window.TutorTabs.removeConversation) {
+            window.TutorTabs.removeConversation(conversationId);
+        }
+        if (window.ConversationStore) window.ConversationStore.clearConversation(conversationId);
+        loadHistory(historyCategory);
     }
 
     function loadHistoryEntry(index) {
@@ -1021,14 +1040,12 @@
 
         if (window.ConversationStore) {
             var allStored = window.ConversationStore.entries("english");
-            if (allStored.length) {
-                var stored = allStored.filter(function (entry) {
-                    return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;
-                });
-                historyEntries = stored;
-                renderHistory();
-                return;
-            }
+            var stored = allStored.filter(function (entry) {
+                return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;
+            });
+            historyEntries = stored;
+            renderHistory();
+            return;
         }
 
         var archived = await loadStaticHistory();

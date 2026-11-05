@@ -150,3 +150,27 @@
     -webkit-box-orient: vertical;
 }
 .history-conversation-preview:hover { color: var(--teal); }
+
+
+/* 历史卡片和轮次标题不撑出容器 */
+.history-list, .history-section, .history-conversation, .history-conversation-head { min-width: 0; }
+.history-conversation { max-width: 100%; overflow: hidden; }
+.history-conversation-head { overflow: hidden; }
+.history-conversation-title { display: block; max-width: 100%; }
+.history-round-select { min-width: 0; max-width: 100%; box-sizing: border-box; }
+.history-conversation-preview { max-width: 100%; }
+.history-conversation-delete {
+    flex: none;
+    border: 1px solid #e3b4ad;
+    border-radius: 6px;
+    padding: 3px 8px;
+    background: #fff6f4;
+    color: #a43b2d;
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+.history-conversation-delete:hover { border-color: #a43b2d; }
+.answer-tools { min-width: 0; flex-wrap: wrap; }
+.answer-tools .round-select { min-width: 0; max-width: 100%; }
+.round-select { width: 250px; max-width: 100%; box-sizing: border-box; }

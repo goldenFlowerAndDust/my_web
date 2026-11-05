@@ -30,7 +30,7 @@
 
     function trim(text) {
         var value = String(text || "").replace(/\s+/g, " ").trim();
-        return value.length > 34 ? value.slice(0, 34) + "…" : (value || "（无问题）");
+        return value.length > 24 ? value.slice(0, 24) + "…" : (value || "（无问题）");
     }
 
     function refresh(forceLatest) {
