@@ -30,6 +30,8 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from 归档对话历史 import archive_once
+from 对话历史 import MAX_ROUNDS as CONVERSATION_MAX_ROUNDS, read_document, upsert_window
+from 对话同步 import merge_documents
 from typing import Any
 
 DEFAULT_SUBJECTS = [
@@ -470,6 +472,90 @@ class SyncRunner:
             if index + 1 < len(endpoints):
                 print("线路 %s 失败，切换备用线路..." % endpoint.get("label", "线路"))
         raise SyncError("所有云端线路都失败：" + "；".join(errors))
+
+    def api_post(self, path: str, payload: dict[str, Any]) -> dict[str, Any]:
+        errors: list[str] = []
+        self.last_route = ""
+        endpoints = self.cloud.get("endpoints") or []
+        body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        for index, endpoint in enumerate(endpoints):
+            request = urllib.request.Request(
+                endpoint["url"] + path,
+                data=body,
+                headers={
+                    "X-Tutor-Token": endpoint["token"],
+                    "Content-Type": "application/json; charset=utf-8",
+                    "Accept": "application/json",
+                },
+                method="POST",
+            )
+            try:
+                with urllib.request.urlopen(request, timeout=self.cloud["timeout_seconds"]) as response:
+                    raw = response.read().decode("utf-8", errors="replace")
+            except urllib.error.HTTPError as exc:
+                detail = exc.read().decode("utf-8", errors="replace")[:300]
+                errors.append("%s HTTP %s：%s" % (endpoint.get("label", "线路"), exc.code, detail))
+            except (urllib.error.URLError, TimeoutError, OSError) as exc:
+                errors.append("%s 连接失败：%s" % (endpoint.get("label", "线路"), exc))
+            else:
+                try:
+                    data = json.loads(raw)
+                except json.JSONDecodeError as exc:
+                    errors.append("%s 返回的不是 JSON：%s" % (endpoint.get("label", "线路"), exc))
+                else:
+                    if isinstance(data, dict) and data.get("ok"):
+                        self.last_route = str(endpoint.get("label") or "线路")
+                        return data
+                    errors.append("%s 返回失败：%s" % (
+                        endpoint.get("label", "线路"),
+                        str((data or {}).get("error") if isinstance(data, dict) else data),
+                    ))
+            if index + 1 < len(endpoints):
+                print("线路 %s 失败，切换备用线路..." % endpoint.get("label", "线路"))
+        raise SyncError("所有云端线路都失败：" + "；".join(errors))
+
+    def sync_conversations(self) -> dict[str, Any]:
+        result: dict[str, Any] = {"status": "ok", "subjects": {}, "uploaded": 0, "downloaded": 0}
+        for subject in ("english", "math", "code"):
+            try:
+                cloud = self.api_get("/api/conversations", {"subject": subject}).get("document") or {}
+                local = read_document(subject)
+                merged, upload = merge_documents(local, cloud)
+                merged_windows = list((merged.get("windows") or {}).values())
+                for window in merged_windows:
+                    if not isinstance(window, dict) or not window.get("id"):
+                        continue
+                    upsert_window(
+                        subject,
+                        window["id"],
+                        window.get("title") or "新对话",
+                        window.get("messages") or [],
+                        mode=str(window.get("mode") or ""),
+                        language=str(window.get("language") or ""),
+                        language_name=str(window.get("language_name") or ""),
+                        topic=str(window.get("topic") or ""),
+                    )
+                for window in upload:
+                    self.api_post("/api/conversations", {
+                        "subject": subject,
+                        "action": "upsert",
+                        "window_id": window.get("id"),
+                        "title": window.get("title") or "新对话",
+                        "messages": window.get("messages") or [],
+                        "mode": window.get("mode") or "",
+                        "language": window.get("language") or "",
+                        "language_name": window.get("language_name") or "",
+                        "topic": window.get("topic") or "",
+                    })
+                    result["uploaded"] += 1
+                result["downloaded"] += len(merged_windows)
+                result["subjects"][subject] = {"status": "ok", "windows": len(merged_windows), "uploaded": len(upload)}
+                print("对话历史 %s：本地/云端合并 %d 个窗口，上传 %d 个" % (subject, len(merged_windows), len(upload)))
+            except Exception as exc:  # noqa: BLE001
+                result["status"] = "error"
+                result["subjects"][subject] = {"status": "error", "message": str(exc)}
+                print("对话历史 %s 同步失败：%s" % (subject, exc))
+        return result
 
     # ------------------------------------------------------------------
     # 保存
@@ -1072,6 +1158,11 @@ class SyncRunner:
             programming["exported"],
             programming["message"] or programming["status"],
         ))
+        conversation_sync = self.sync_conversations()
+        self.status["conversation_sync"] = conversation_sync
+        if conversation_sync.get("status") != "ok":
+            self.status["errors"].append("对话历史同步失败")
+
         archive = self.build_ai_history_archive()
         self.status["history_archive"] = archive
         print("历史分片：%s" % (archive["message"] or archive["status"]))
