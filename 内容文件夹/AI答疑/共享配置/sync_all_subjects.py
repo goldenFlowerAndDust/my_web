@@ -27,6 +27,9 @@ import urllib.request
 
 from datetime import datetime
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from 归档对话历史 import archive_once
 from typing import Any
 
 DEFAULT_SUBJECTS = [
@@ -1080,6 +1083,17 @@ class SyncRunner:
                 self.status["errors"].append("云端复习同步失败：" + str(review.get("message") or review.get("status")))
             print("云端复习：%s" % (review["message"] or review["status"]))
 
+        try:
+            archived_files = archive_once()
+            self.status["conversation_archive"] = {
+                "status": "ok" if archived_files else "unchanged",
+                "count": len(archived_files),
+                "message": "已归档 %d 个对话文件" % len(archived_files) if archived_files else "今日对话历史无变化",
+            }
+            print("对话历史归档：%s" % self.status["conversation_archive"]["message"])
+        except Exception as exc:  # noqa: BLE001
+            self.status["conversation_archive"] = {"status": "error", "message": str(exc)}
+            print("对话历史归档失败：%s" % exc)
         self.status["finished_at"] = now_text()
         write_json(self.status_file, self.status)
         # 同一进程内的菜单/自动循环下一次运行也要以本次结果为基准。

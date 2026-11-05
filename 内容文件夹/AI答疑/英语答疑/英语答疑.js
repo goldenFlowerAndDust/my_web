@@ -1081,6 +1081,9 @@
         return staticHistoryPromise;
     }
     async function loadHistory(category) {
+        if (window.ConversationStore && window.ConversationStore.ready) {
+            await window.ConversationStore.ready;
+        }
         historyCategory = category || "all";
         historyTabs.forEach(function (tab) {
             var active = tab.dataset.category === historyCategory;

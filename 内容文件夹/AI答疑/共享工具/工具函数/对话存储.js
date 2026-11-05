@@ -10,6 +10,102 @@
     var SUBJECTS = ["english", "math", "code"];
     var MAX = 200;
 
+
+    var remoteBase = String(window.AI_CONVERSATION_BASE || "").replace(/\/$/, "");
+    var remoteSubject = String(window.AI_CONVERSATION_SUBJECT || "");
+    var remoteReady = Promise.resolve();
+    var remoteIds = {};
+    var syncTimer = null;
+
+    function remoteUrl(path) {
+        return remoteBase ? remoteBase + path : path;
+    }
+
+    function applyRemoteDocument(document) {
+        if (!document || !document.windows || typeof document.windows !== "object") return false;
+        var list = Object.keys(document.windows).map(function (key) {
+            var item = document.windows[key];
+            if (!item || typeof item !== "object") return null;
+            item.id = item.id || key;
+            item.subject = remoteSubject;
+            return item;
+        }).filter(Boolean);
+        remoteIds = {};
+        list.forEach(function (item) { remoteIds[item.id] = true; });
+        try {
+            localStorage.setItem(storageKey(remoteSubject), JSON.stringify(list));
+            localStorage.setItem(globalInitKey(remoteSubject), "1");
+        } catch (error) { /* ignore */ }
+        return true;
+    }
+
+    function postConversation(payload) {
+        if (!remoteBase) return Promise.resolve();
+        return fetch(remoteUrl("/api/conversations"), {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(Object.assign({ subject: remoteSubject }, payload))
+        }).then(function (response) {
+            if (!response.ok) throw new Error("HTTP " + response.status);
+            return response.json();
+        }).catch(function () { /* 本地缓存继续工作 */ });
+    }
+
+    function queueSync() {
+        if (!remoteBase || !remoteSubject) return;
+        if (syncTimer) clearTimeout(syncTimer);
+        syncTimer = setTimeout(function () {
+            syncTimer = null;
+            var list = read(remoteSubject);
+            var currentIds = {};
+            list.forEach(function (item) { if (item && item.id) currentIds[item.id] = true; });
+            var jobs = Object.keys(remoteIds).filter(function (id) { return !currentIds[id]; })
+                .map(function (id) { return postConversation({ action: "delete_window", window_id: id }); });
+            list.forEach(function (item) {
+                if (!item || !item.id) return;
+                jobs.push(postConversation({
+                    action: "upsert",
+                    window_id: item.id,
+                    title: item.title || "新对话",
+                    mode: item.mode || "",
+                    topic: item.topic || "",
+                    language: item.language || "",
+                    language_name: item.language_name || "",
+                    messages: item.messages || []
+                }));
+            });
+            remoteIds = currentIds;
+            Promise.all(jobs).catch(function () { /* ignore */ });
+        }, 250);
+    }
+
+    function initializeRemote() {
+        if (!remoteBase || !remoteSubject) return Promise.resolve();
+        return fetch(remoteUrl("/api/conversations?subject=" + encodeURIComponent(remoteSubject)), {
+            cache: "no-store"
+        }).then(function (response) {
+            if (!response.ok) throw new Error("HTTP " + response.status);
+            return response.json();
+        }).then(function (payload) {
+            var document = payload && payload.document;
+            var hasRemote = document && document.windows && Object.keys(document.windows).length > 0;
+            if (hasRemote) {
+                applyRemoteDocument(document);
+            } else {
+                // 服务端为空时，把浏览器已有历史迁移上去。
+                var local = read(remoteSubject);
+                remoteIds = {};
+                local.forEach(function (item) { if (item && item.id) remoteIds[item.id] = true; });
+                if (local.length) queueSync();
+            }
+            document = null;
+            window.dispatchEvent(new CustomEvent("tutor-conversations-ready", { detail: { subject: remoteSubject } }));
+            return true;
+        }).catch(function () {
+            return false;
+        });
+    }
+
     function storageKey(subject) {
         return KEY_PREFIX + String(subject || "unknown");
     }
@@ -51,6 +147,7 @@
         try {
             localStorage.setItem(storageKey(subject), JSON.stringify((Array.isArray(list) ? list : []).slice(0, MAX)));
             localStorage.setItem(globalInitKey(subject), "1");
+            queueSync();
         } catch (error) { /* 空间不足时保留当前页面状态 */ }
     }
 
@@ -318,6 +415,8 @@
         entries: entries,
         clearConversation: clearConversation,
         removeRound: removeRound,
-        dump: function (subject) { return read(subject || "english"); }
+        dump: function (subject) { return read(subject || "english"); },
+        ready: initializeRemote(),
+        syncNow: queueSync
     };
 })();

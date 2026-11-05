@@ -1006,6 +1006,9 @@
         return staticHistoryPromise;
     }
     async function loadHistory(category, topic) {
+        if (window.ConversationStore && window.ConversationStore.ready) {
+            await window.ConversationStore.ready;
+        }
         historyCategory = category || "all";
         if (topic !== undefined) historyTopic = topic || "all";
         if (historyTopicSelect) historyTopicSelect.value = historyTopic;

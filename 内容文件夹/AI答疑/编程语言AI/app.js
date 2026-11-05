@@ -889,6 +889,9 @@
   }
 
   async function loadHistory() {
+    if (window.ConversationStore && window.ConversationStore.ready) {
+      await window.ConversationStore.ready;
+    }
     historyList.innerHTML = '<p class="history-empty">加载历史…</p>';
     if (window.ConversationStore && window.ConversationStore.isInitialized("code") &&
         window.ConversationStore.isLegacyImported("code") &&
