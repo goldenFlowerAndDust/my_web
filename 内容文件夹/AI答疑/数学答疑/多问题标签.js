@@ -348,11 +348,12 @@
             session.answerMode = lastAssistant.mode || session.mode || "历史回答";
             session.answerTime = lastAssistant.time || "";
         }
-        active = id;
+        active = session.id;
         render();
         restore();
         save();
         syncStore();
+        window.dispatchEvent(new CustomEvent("tutor-turn-added", { detail: { id: session.id, resumed: true } }));
         question.focus();
         return true;
     }

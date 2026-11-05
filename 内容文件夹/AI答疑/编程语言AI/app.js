@@ -307,8 +307,8 @@
   function switchSession(id) {
     if (!id || id === activeSessionId) return;
     captureSession();
-    activeSessionId = id;
-    try { localStorage.setItem("programmingTutor.activeSession", id); } catch (error) { /* ignore */ }
+    activeSessionId = session.id;
+    try { localStorage.setItem("programmingTutor.activeSession", session.id); } catch (error) { /* ignore */ }
     renderSessionTabs();
     loadSessionView();
     updateLanguageUi(true);
@@ -419,6 +419,14 @@
     renderSessionTabs();
     loadSessionView();
   }
+
+  // 一次性合并旧编程历史：旧版按轮次语言分类，可能漏掉 Python。
+  try {
+    if (localStorage.getItem("programmingTutor.historyMerge.v2") !== "1") {
+      localStorage.removeItem("aiTutor.conversations.legacy.code");
+      localStorage.setItem("programmingTutor.historyMerge.v2", "1");
+    }
+  } catch (error) { /* ignore */ }
 
   initSessions();
   window.ProgrammingCloseConversation = function (id) {
@@ -630,7 +638,10 @@
   function updateLanguageUi(skipHistory) {
     const language = currentLanguage();
     const session = currentSession();
-    if (session) session.language = language;
+    // 一个提问窗口固定一个语言分类：第一次提问后不再跟着下拉框漂移。
+    if (session && (!Array.isArray(session.messages) || !session.messages.length)) {
+      session.language = language;
+    }
     if (!meta) return;
     const item = meta.languages.find((row) => row.id === language);
     if (!item) return;

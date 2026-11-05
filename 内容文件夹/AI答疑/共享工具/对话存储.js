@@ -233,11 +233,13 @@
                     title: conversation.title,
                     mode: assistant.mode || conversation.mode || "",
                     topic: conversation.topic || "",
-                    language: assistant.language || languageFromTime(assistant.time) ||
-                        conversation.language || (conversation.subject === "code" ? conversation.mode : "") || "",
-                    language_name: assistant.language_name || conversation.language_name ||
-                        assistant.language || conversation.language ||
-                        (conversation.subject === "code" ? conversation.mode : "") || "",
+                    language: (conversation.subject === "code"
+                        ? (conversation.language || assistant.language || languageFromTime(assistant.time) || conversation.mode)
+                        : (conversation.language || "")) || "",
+                    language_name: (conversation.subject === "code"
+                        ? (conversation.language_name || conversation.language || assistant.language_name ||
+                           languageFromTime(assistant.time) || conversation.mode)
+                        : (conversation.language_name || conversation.language || "")) || "",
                     question: user.content,
                     answer: assistant.content,
                     html: assistant.html || "",
