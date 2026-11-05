@@ -570,6 +570,8 @@ class SyncRunner:
                         language=str(window.get("language") or ""),
                         language_name=str(window.get("language_name") or ""),
                         topic=str(window.get("topic") or ""),
+                        created_at=str(window.get("created_at") or ""),
+                        updated_at=str(window.get("updated_at") or ""),
                     )
                 for window_id in deletions:
                     self.api_post("/api/conversations", {

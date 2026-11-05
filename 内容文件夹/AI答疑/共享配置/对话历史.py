@@ -160,6 +160,8 @@ def upsert_window(
     language: str = "",
     language_name: str = "",
     topic: str = "",
+    created_at: str = "",
+    updated_at: str = "",
 ) -> dict[str, Any]:
     subject = normalize_subject(subject)
     window_id = str(window_id or "").strip()
@@ -177,8 +179,8 @@ def upsert_window(
     window = {
         "id": window_id,
         "title": str(title or "新对话")[:120],
-        "created_at": existing.get("created_at") or now_text(),
-        "updated_at": now_text(),
+        "created_at": created_at or existing.get("created_at") or now_text(),
+        "updated_at": updated_at or now_text(),
         "mode": str(mode or existing.get("mode") or ""),
         "language": str(language or existing.get("language") or ""),
         "language_name": str(language_name or existing.get("language_name") or ""),
