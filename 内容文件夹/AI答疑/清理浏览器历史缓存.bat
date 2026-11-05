@@ -12,12 +12,7 @@ if exist "%BUNDLED%" (
 
 timeout /t 3 /nobreak >nul
 start "" "http://127.0.0.1:8769/AI答疑/清理浏览器历史缓存.html"
-timeout /t 1 /nobreak >nul
-start "" "http://127.0.0.1:8767/AI答疑/清理浏览器历史缓存.html"
-timeout /t 1 /nobreak >nul
-start "" "http://127.0.0.1:8768/AI答疑/清理浏览器历史缓存.html"
 echo.
-echo 已在浏览器打开三个端口的清理页：
-echo   8769 / 8767 / 8768
-echo 每个页面会自动清理一次，请关闭页面后回到 AI 页面按 Ctrl + F5。
+echo 已打开清理页：http://127.0.0.1:8769/AI答疑/清理浏览器历史缓存.html
+echo 页面会自动清理；完成后关闭所有旧 AI 页面，再重新打开并 Ctrl + F5。
 pause
