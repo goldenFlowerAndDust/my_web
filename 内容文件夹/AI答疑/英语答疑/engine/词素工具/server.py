@@ -34,7 +34,7 @@ BASE = CONTENT_ROOT / "专升本备考" / "备考专升本英语"
 from word_archiver import ArchiveError, analyze_only, apply_review_updates, archive_word, archive_word_pair, audit_word_json, check_word, health  # noqa: E402
 from english_tutor import TutorError, ask_tutor, read_tutor_logs  # noqa: E402
 from archive_added_logs import refresh as refresh_added_logs, recover_missing_extra_entries  # noqa: E402
-from 对话历史 import ConversationError, delete_window, read_document, remove_round, upsert_window  # noqa: E402
+from 对话历史 import ConversationError, delete_window, read_document, read_history_document, remove_round, upsert_window  # noqa: E402
 
 DEFAULT_PORT = 8767
 SHARED_DIR = Path(__file__).resolve().parent.parent.parent.parent / "共享工具"
@@ -116,7 +116,7 @@ class Handler(SimpleHTTPRequestHandler):
         path = unquote(urlparse(self.path).path)
         if path == "/api/conversations":
             try:
-                self._send_json(200, {"ok": True, "document": read_document("english")})
+                self._send_json(200, {"ok": True, "document": read_history_document("english")})
             except ConversationError as exc:
                 self._send_json(400, {"ok": False, "error": str(exc)})
             return

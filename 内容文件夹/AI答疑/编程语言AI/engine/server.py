@@ -20,7 +20,7 @@ CONTENT_DIR = TOOL_DIR.parent.parent
 AI_ROOT = TOOL_DIR.parent
 CONVERSATION_DIR = AI_ROOT / "共享配置"
 sys.path.insert(0, str(CONVERSATION_DIR))
-from 对话历史 import ConversationError, delete_window, read_document, remove_round, upsert_window  # noqa: E402
+from 对话历史 import ConversationError, delete_window, read_document, read_history_document, remove_round, upsert_window  # noqa: E402
 SKILL_DIR = TOOL_DIR / "skills"
 HISTORY_DIR = TOOL_DIR / "history"
 API_URL = "https://api.deepseek.com/chat/completions"
@@ -309,7 +309,7 @@ class Handler(SimpleHTTPRequestHandler):
         path = parsed.path
         if path == "/api/conversations":
             try:
-                json_response(self, 200, {"ok": True, "document": read_document("code")})
+                json_response(self, 200, {"ok": True, "document": read_history_document("code")})
             except ConversationError as exc:
                 json_response(self, 400, {"ok": False, "error": str(exc)})
             return

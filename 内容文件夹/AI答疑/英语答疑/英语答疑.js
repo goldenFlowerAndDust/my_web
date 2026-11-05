@@ -1340,10 +1340,11 @@
         if (!window.ConversationStore || !window.ConversationStore.setRemote) return;
         var cloud = connection.mode === "cloud";
         var profile = activeProfile();
+        // 历史以本地 JSON 为准；云端只做临时问答日志，由“同步全部科目”合并回本地。
         return window.ConversationStore.setRemote(
-            cloud ? profile.url : "http://127.0.0.1:8767",
+            "http://127.0.0.1:8767",
             "english",
-            cloud ? profile.token : ""
+            ""
         );
     }
     window.addEventListener("tutor-conversations-ready", function () {

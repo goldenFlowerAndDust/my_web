@@ -31,7 +31,7 @@ from math_tutor import (  # noqa: E402
     health,
     read_tutor_logs,
 )
-from 对话历史 import ConversationError, delete_window, read_document, remove_round, upsert_window  # noqa: E402
+from 对话历史 import ConversationError, delete_window, read_document, read_history_document, remove_round, upsert_window  # noqa: E402
 
 DEFAULT_PORT = 8768
 SHARED_DIR = Path(__file__).resolve().parent.parent.parent.parent / "共享工具"
@@ -105,7 +105,7 @@ class Handler(SimpleHTTPRequestHandler):
         path = unquote(urlparse(self.path).path)
         if path == "/api/conversations":
             try:
-                self._send_json(200, {"ok": True, "document": read_document("math")})
+                self._send_json(200, {"ok": True, "document": read_history_document("math")})
             except ConversationError as exc:
                 self._send_json(400, {"ok": False, "error": str(exc)})
             return

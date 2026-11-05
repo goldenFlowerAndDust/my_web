@@ -432,12 +432,8 @@
 
   function syncConversationRemote() {
     if (!window.ConversationStore || !window.ConversationStore.setRemote) return;
-    const config = routeConfig();
-    window.ConversationStore.setRemote(
-      config.local ? "http://127.0.0.1:8769" : config.base,
-      "code",
-      config.local ? "" : config.token
-    );
+    // 历史以本地 JSON 为准；云端只做临时问答日志。
+    window.ConversationStore.setRemote("http://127.0.0.1:8769", "code", "");
   }
   window.addEventListener("tutor-conversations-ready", function () {
     loadHistory();

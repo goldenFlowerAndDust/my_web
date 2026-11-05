@@ -1397,7 +1397,8 @@ async function handleConversations(request, env) {
   }
   doc.updated_at = new Date().toISOString();
   try {
-    await env.TUTOR_KV.put(key, JSON.stringify(doc));
+    // 云端只是临时中转：24 小时后自动过期，本地 JSON 才是长期历史。
+    await env.TUTOR_KV.put(key, JSON.stringify(doc), { expirationTtl: 86400 });
   } catch (error) {
     return json({ ok: false, error: "云端对话历史写入失败。" }, 500, request, env);
   }

@@ -58,6 +58,50 @@ def normalize_subject(subject: str) -> str:
     return subject
 
 
+ARCHIVE_ROOT = AI_ROOT / "历史归档" / "对话历史"
+
+
+def _merge_window(local: dict[str, Any] | None, incoming: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not local:
+        return incoming
+    if not incoming:
+        return local
+    return local if str(local.get("updated_at") or "") >= str(incoming.get("updated_at") or "") else incoming
+
+
+def read_history_document(subject: str) -> dict[str, Any]:
+    """读取当前 JSON，并合并每日归档快照。
+
+    同一个窗口按更新时间和删除墓碑去重，历史界面因此能读到每天归档的 JSON。
+    """
+    subject = normalize_subject(subject)
+    base = read_document(subject)
+    windows = dict(base.get("windows") or {})
+    deleted = dict(base.get("deleted") or {})
+    if ARCHIVE_ROOT.exists():
+        for snapshot in sorted(ARCHIVE_ROOT.glob("*/" + subject + "*.json")):
+            try:
+                data = json.loads(snapshot.read_text(encoding="utf-8-sig"))
+            except (OSError, json.JSONDecodeError):
+                continue
+            if not isinstance(data, dict):
+                continue
+            for window_id, window in (data.get("windows") or {}).items():
+                if not isinstance(window, dict):
+                    continue
+                windows[window_id] = _merge_window(windows.get(window_id), window)
+            for window_id, stamp in (data.get("deleted") or {}).items():
+                deleted[window_id] = max(str(deleted.get(window_id) or ""), str(stamp or ""))
+    for window_id in list(windows):
+        stamp = str(deleted.get(window_id) or "")
+        window_time = str((windows.get(window_id) or {}).get("updated_at") or "")
+        if stamp and stamp >= window_time:
+            windows.pop(window_id, None)
+    base["windows"] = windows
+    base["deleted"] = deleted
+    return base
+
+
 def ensure_file(subject: str) -> Path:
     subject = normalize_subject(subject)
     path = path_for(subject)
