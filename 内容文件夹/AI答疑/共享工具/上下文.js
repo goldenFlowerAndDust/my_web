@@ -43,18 +43,21 @@
         nextInit.body = JSON.stringify(body);
 
         return nativeFetch.call(window, input, nextInit).then(function (response) {
-            if (response.ok) {
-                response.clone().json().then(function (data) {
-                    if (data && data.ok && data.answer && question) {
-                        var answerHtml = "";
-                        try {
-                            answerHtml = window.TutorRenderAnswer ? window.TutorRenderAnswer(data.answer || "") : "";
-                        } catch (renderError) { answerHtml = ""; }
-                        tabs.appendTurnTo(sessionId, question, data.answer, answerHtml, data.mode, data.time, data.usage);
-                    }
-                }).catch(function () { /* ignore */ });
-            }
-            return response;
+            if (!response.ok) return response;
+            // 先记录到对话 JSON，再让页面继续处理回答；
+            // 否则回答完成后立刻刷新历史时，新的一轮可能还没写入。
+            return response.clone().json().then(function (data) {
+                if (data && data.ok && data.answer && question) {
+                    var answerHtml = "";
+                    try {
+                        answerHtml = window.TutorRenderAnswer ? window.TutorRenderAnswer(data.answer || "") : "";
+                    } catch (renderError) { answerHtml = ""; }
+                    tabs.appendTurnTo(sessionId, question, data.answer, answerHtml, data.mode, data.time, data.usage);
+                }
+                return response;
+            }).catch(function () {
+                return response;
+            });
         });
     };
 })();
