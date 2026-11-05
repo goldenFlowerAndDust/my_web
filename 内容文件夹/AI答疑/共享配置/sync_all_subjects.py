@@ -34,6 +34,38 @@ from 对话历史 import MAX_ROUNDS as CONVERSATION_MAX_ROUNDS, delete_window, r
 from 对话同步 import merge_documents
 from typing import Any
 
+
+def configure_system_proxy() -> None:
+    """Windows 系统代理只在 WinHTTP 中，Python urllib 默认不会使用它。"""
+    if os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy"):
+        return
+    try:
+        import winreg
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Internet Settings") as key:
+            enabled, _ = winreg.QueryValueEx(key, "ProxyEnable")
+            server, _ = winreg.QueryValueEx(key, "ProxyServer")
+    except OSError:
+        return
+    if not enabled or not server:
+        return
+    server = str(server).strip()
+    if "=" in server:
+        parts = {}
+        for item in server.split(";"):
+            if "=" in item:
+                name, value = item.split("=", 1)
+                parts[name.strip().lower()] = value.strip()
+        server = parts.get("https") or parts.get("http") or ""
+    if not server:
+        return
+    if not server.startswith(("http://", "https://")):
+        server = "http://" + server
+    os.environ.setdefault("HTTPS_PROXY", server)
+    os.environ.setdefault("HTTP_PROXY", server)
+
+
+configure_system_proxy()
+
 DEFAULT_SUBJECTS = [
     {
         "id": "english",
@@ -445,6 +477,7 @@ class SyncRunner:
                 headers={
                     "X-Tutor-Token": endpoint["token"],
                     "Accept": "application/json",
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AI-Tutor-Sync/1.0",
                 },
                 method="GET",
             )
@@ -486,6 +519,7 @@ class SyncRunner:
                     "X-Tutor-Token": endpoint["token"],
                     "Content-Type": "application/json; charset=utf-8",
                     "Accept": "application/json",
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AI-Tutor-Sync/1.0",
                 },
                 method="POST",
             )
