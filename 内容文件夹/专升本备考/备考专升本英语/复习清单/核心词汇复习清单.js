@@ -623,6 +623,13 @@
                 '</span>';
         }
 
+        var sensesHtml = '';
+        if (Array.isArray(item.senses) && item.senses.length) {
+            sensesHtml = '<div class="word-sense-list">' + item.senses.map(function (sense) {
+                return '<span class="word-sense-item"><b>' + esc(sense.pos || '') + ' ' + esc(sense.pos_zh || '') + '</b>：' + esc(sense.zh || '') + '</span>';
+            }).join('') + '</div>';
+        }
+
         return '<li class="review-item word-card ' + mode + (completed ? ' is-done' : '') + '" data-name="' + esc(item.name) + '">' +
             '<div class="word-main">' +
             '<div class="word-line">' +
@@ -636,6 +643,7 @@
             '<span class="badge' + overdueClass + '">' + esc(dateLabel) + '</span>' +
             '</div>' +
             '<div class="word-sub">' + subParts.join(' · ') + '</div>' +
+            sensesHtml +
             '</div>' +
             '<div class="word-actions">' +
             '<a class="btn-open" href="' + esc(makeHref(item.path)) + '" target="_blank" rel="noopener">打开</a>' +
