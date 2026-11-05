@@ -91,6 +91,7 @@
         window.__AI_CONVERSATION_REMOTE__ = { base: remoteBase, subject: remoteSubject, hasToken: Boolean(remoteToken) };
         if (!remoteBase || !remoteSubject) return Promise.resolve(false);
         remoteReady = initializeRemote();
+        window.ConversationStore.ready = remoteReady;
         return remoteReady;
     }
 

@@ -1323,7 +1323,11 @@
     showAnswerState("empty");
     updateHistoryNote();
     checkService();
-    loadHistory("all");
+    if (window.ConversationStore && window.ConversationStore.setRemote) {
+        syncConversationRemote().then(function () { loadHistory("all"); });
+    } else {
+        loadHistory("all");
+    }
 
     window.TutorRenderAnswer = function (text) {
         return renderMarkdown(text || "");
@@ -1336,7 +1340,7 @@
         if (!window.ConversationStore || !window.ConversationStore.setRemote) return;
         var cloud = connection.mode === "cloud";
         var profile = activeProfile();
-        window.ConversationStore.setRemote(
+        return window.ConversationStore.setRemote(
             cloud ? profile.url : "http://127.0.0.1:8767",
             "english",
             cloud ? profile.token : ""
@@ -1345,5 +1349,4 @@
     window.addEventListener("tutor-conversations-ready", function () {
         loadHistory(historyCategory);
     });
-    syncConversationRemote();
 })();
