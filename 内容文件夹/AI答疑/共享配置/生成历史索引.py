@@ -114,10 +114,11 @@ def build_subject(subject: str) -> dict[str, Any]:
             current[window_id] = window
             summaries.append({
                 "id": window_id,
-                "title": str(window.get("title") or "新对话")[:120],
+                "title": str(window.get("title") or "新对话"),
                 "created_at": str(window.get("created_at") or ""),
                 "updated_at": str(window.get("updated_at") or ""),
                 "rounds": int(window.get("rounds") or 0),
+                "subject": subject,
                 "language": str(window.get("language") or ""),
                 "language_name": str(window.get("language_name") or ""),
                 "mode": str(window.get("mode") or ""),

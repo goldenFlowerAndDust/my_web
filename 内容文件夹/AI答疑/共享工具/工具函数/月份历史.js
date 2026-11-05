@@ -28,7 +28,10 @@
     var historyRoot = script && script.src
         ? new URL("../../历史/", script.src)
         : new URL("../历史/", location.href);
-
+    var MODE_TABS = {
+        english: [["all", "全部"], ["单词解释", "单词解释"], ["句子分析", "句子分析"], ["作文", "作文"], ["其他", "其他"]],
+        math: [["all", "全部"], ["题目讲解", "题目讲解"], ["错题诊断", "错题分析"], ["概念公式", "概念公式"], ["其他", "其他"]]
+    };
     var state = {
         months: [],
         month: "",
@@ -37,6 +40,7 @@
         cards: [],
         selectedId: "",
         language: "",
+        category: "all",
         loading: false
     };
 
@@ -106,8 +110,38 @@
         var lang = document.getElementById("month-history-language-select");
         if (lang) lang.addEventListener("change", function () {
             state.language = lang.value;
+            var appLang = document.getElementById("languageSelect");
+            if (appLang) appLang.value = lang.value;
             renderSummaries();
         });
+        var appLanguage = document.getElementById("languageSelect");
+        if (appLanguage) {
+            state.language = appLanguage.value || state.language;
+            appLanguage.addEventListener("change", function () {
+                state.language = appLanguage.value;
+                if (lang) lang.value = appLanguage.value;
+                renderSummaries();
+            });
+        }
+        if (MODE_TABS[subject]) {
+            var categories = document.createElement("div");
+            categories.id = "month-history-categories";
+            categories.className = "month-history-categories";
+            categories.innerHTML = MODE_TABS[subject].map(function (item) {
+                return '<button type="button" data-category="' + escapeHtml(item[0]) + '"' +
+                    (item[0] === state.category ? ' class="is-active"' : "") + ">" + escapeHtml(item[1]) + "</button>";
+            }).join("");
+            toolbar.appendChild(categories);
+            categories.addEventListener("click", function (event) {
+                var button = event.target.closest("[data-category]");
+                if (!button) return;
+                state.category = button.getAttribute("data-category");
+                Array.from(categories.querySelectorAll("[data-category]")).forEach(function (item) {
+                    item.classList.toggle("is-active", item === button);
+                });
+                renderSummaries();
+            });
+        }
     }
 
     function renderEmpty(text) {
@@ -142,13 +176,21 @@
         select.innerHTML = '<option value="">全部语言</option>' + Object.keys(seen).sort().map(function (value) {
             return '<option value="' + escapeHtml(value) + '">' + escapeHtml(seen[value]) + "</option>";
         }).join("");
-        select.value = seen[current] ? current : "";
+        select.value = seen[current] ? current : (state.language && seen[state.language] ? state.language : "");
         state.language = select.value;
     }
 
     function renderSummaries() {
         list.innerHTML = "";
         var windows = (state.monthIndex && state.monthIndex.windows) || [];
+        windows = windows.filter(function (item) {
+            return !item.subject || String(item.subject) === subject;
+        });
+        if (MODE_TABS[subject] && state.category !== "all") {
+            windows = windows.filter(function (item) {
+                return String(item.mode || "") === state.category;
+            });
+        }
         var activeLanguage = languageFilter || state.language;
         if (activeLanguage) {
             windows = windows.filter(function (item) {
@@ -158,7 +200,7 @@
         document.getElementById("month-history-count").textContent =
             state.month + " · " + windows.length + " 个对话";
         if (!windows.length) {
-            renderEmpty("这个月还没有历史记录。");
+            renderEmpty(state.category !== "all" ? "这个分类下还没有记录。" : "这个月还没有历史记录。");
             return;
         }
         var lastDate = "";
