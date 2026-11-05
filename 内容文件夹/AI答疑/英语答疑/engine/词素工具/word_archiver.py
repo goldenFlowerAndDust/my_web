@@ -989,6 +989,102 @@ def insert_into_ci(analysis: dict[str, Any]) -> dict[str, Any]:
 # 复习数据 / 日程
 # ---------------------------------------------------------------------------
 
+def _standalone_page_path(analysis: dict[str, Any]) -> Path:
+    word = safe_component(analysis["word"], "word")
+    return CI_DIR / "生词收录" / (word + ".html")
+
+
+def insert_standalone_word_page(analysis: dict[str, Any]) -> dict[str, Any]:
+    """每个通过生词器新增的词都有一张独立的词素 HTML 卡片。"""
+    path = _standalone_page_path(analysis)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    word = analysis["word"]
+    if path.exists():
+        page = read_text(path)
+        if re.search(r'data-word="' + re.escape(word) + r'"', page):
+            raise ArchiveError("%s 中已经有 %s，未重复写入。" % (path.name, word))
+    title = "单词：%s" % word
+    cards = _ci_card_html(analysis, True)
+    related = _related_cards_html(analysis)
+    if related:
+        cards += "\n" + related
+    page = _ci_page_html(analysis, title, cards)
+    write_text_atomic(path, page)
+    return {
+        "target": "词素 · 生词收录",
+        "file": str(path.relative_to(BASE)),
+        "created": True,
+        "anchor": "word-" + word,
+    }
+
+
+def _core_word_card_html(page: str, word: str) -> str:
+    start = page.find('id="word-' + word + '"')
+    if start < 0:
+        return ""
+    start = page.rfind("<li", 0, start)
+    if start < 0:
+        return ""
+    depth = 0
+    for match in re.finditer(r"<li\b|</li>", page[start:]):
+        if match.group(0).startswith("<li"):
+            depth += 1
+        else:
+            depth -= 1
+            if depth == 0:
+                return page[start:start + match.end()]
+    return ""
+
+
+def ensure_standalone_for_core_word(word: str) -> bool:
+    """已有核心页词条补一张独立词素页面；不重新调用 AI。"""
+    if not WORD_PAGE.exists():
+        return False
+    path = CI_DIR / "生词收录" / (safe_component(word, "word") + ".html")
+    if path.exists():
+        return False
+    page = read_text(WORD_PAGE)
+    card = _core_word_card_html(page, word)
+    if not card:
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    shell = f'''<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单词：{esc(word)}</title>
+    <link rel="stylesheet" href="../../../../frontend——前端/JavaScript/JavaScript通用样式表.css">
+    <link rel="stylesheet" href="../../单词独有样式表.css">
+</head>
+<body>
+<main>
+    <header><h1>单词：{esc(word)}</h1></header>
+    <section id="section_1">
+        <ol class="word_div">
+{card}
+        </ol>
+    </section>
+</main>
+<script src="../../显示或隐藏.js"></script>
+</body>
+</html>
+'''
+    write_text_atomic(path, shell)
+    data = load_data()
+    changed = False
+    for items in data.values():
+        if not isinstance(items, list):
+            continue
+        for item in items:
+            if isinstance(item, dict) and item.get("word") == word:
+                item["path"] = "../" + str(path.relative_to(BASE)).replace("\\", "/") + "#word-" + word
+                changed = True
+    if changed:
+        write_text_atomic(DATA_JSON, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+    return True
+
+
 def load_data() -> dict[str, Any]:
     if not DATA_JSON.exists():
         raise ArchiveError("找不到 复习清单/data.json。")
@@ -1869,6 +1965,11 @@ def archive_word(word: str, hint: str = "", overwrite: bool = False, repair: boo
 
         if page_file or item:
             if not overwrite:
+                if page_file and "专升本英语核心词汇通关.html" in page_file:
+                    try:
+                        ensure_standalone_for_core_word(word)
+                    except (ArchiveError, OSError, ValueError):
+                        pass
                 needs_repair = bool(page_file and not item)
                 return {
                     "ok": True,
@@ -1892,36 +1993,36 @@ def archive_word(word: str, hint: str = "", overwrite: bool = False, repair: boo
         analysis = analyze_word(word, hint)
         target = analysis["target"]
 
-        files_to_backup = [WORD_PAGE, DATA_JSON]
-        if target["kind"] != "core":
-            ci_path, _ = _ci_page_path(analysis)
-            files_to_backup.append(ci_path)
+        standalone_path = _standalone_page_path(analysis)
+        files_to_backup = [WORD_PAGE, DATA_JSON, standalone_path]
         backup = backup_paths(files_to_backup)
 
+        # 词素 HTML 是首选，所有新词都必须先有自己的独立页面。
+        location = insert_standalone_word_page(analysis)
+        core_location = None
         if target["kind"] == "core":
-            location = insert_into_word_page(analysis)
-            data_result = append_data_item(analysis, {
-                "file": "专升本英语核心词汇通关.html",
-                "anchor": location["anchor"],
-            }, extra=True, source="generator")
-        else:
-            location = insert_into_ci(analysis)
-            data_result = append_data_item(analysis, location, extra=True, source="generator")
+            # 可前后缀记忆的词，再额外写入核心词汇通关页。
+            core_location = insert_into_word_page(analysis)
+        data_result = append_data_item(analysis, location, extra=True, source="generator")
 
+        target_label = location["target"]
+        if core_location:
+            target_label += " + " + core_location["target"]
         result = {
             "ok": True,
             "exists": False,
             "word": word,
             "analysis": analysis,
             "location": location,
+            "core_location": core_location,
             "data": data_result,
             "backup": backup,
-            "summary": "%s → %s；额外新增 %s" % (word, location["target"], data_result["schedule"]),
+            "summary": "%s → %s；额外新增 %s" % (word, target_label, data_result["schedule"]),
         }
         append_log({
             "word": word,
             "type": analysis["morphology"]["type"],
-            "target": location["target"],
+            "target": target_label,
             "file": location["file"],
             "schedule": data_result["schedule"],
             "status": "ok",

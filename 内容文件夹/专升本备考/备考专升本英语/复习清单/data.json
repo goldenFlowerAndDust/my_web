@@ -10358,6 +10358,61 @@
       ],
       "posSource": "ai",
       "posMigratedAt": "2026-11-05 15:21:29"
+    },
+    {
+      "name": "friendly",
+      "path": "../词素/生词收录/friendly.html#word-friendly",
+      "category": "核心词汇通关",
+      "level": 0,
+      "nextDate": "2026-11-07",
+      "lastReviewed": null,
+      "created": "2026-11-06",
+      "modified": "2026-11-06",
+      "kind": "word",
+      "word": "friendly",
+      "zh": "友好的；友善的；亲切的",
+      "root": "friend",
+      "rootZh": "朋友",
+      "suffix": "ly",
+      "suffixLabel": "-ly",
+      "pos": "adj.",
+      "pos_zh": "形容词",
+      "levelTag": "初中",
+      "sense": "友好的；友善的",
+      "senses": [
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "友好的；友善的",
+          "example": "She is very friendly to everyone.",
+          "example_zh": "她对每个人都很友好。",
+          "collocation": "be friendly to sb.",
+          "collocation_zh": "对某人友好"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "亲切的；和蔼的",
+          "example": "The hotel staff gave us a friendly smile.",
+          "example_zh": "酒店员工给了我们一个亲切的微笑。",
+          "collocation": "a friendly smile",
+          "collocation_zh": "亲切的微笑"
+        },
+        {
+          "pos": "adj.",
+          "pos_zh": "形容词",
+          "zh": "（环境、气氛等）舒适的；宜人的",
+          "example": "This small town has a friendly atmosphere.",
+          "example_zh": "这个小镇有一种宜人的氛围。",
+          "collocation": "a friendly atmosphere",
+          "collocation_zh": "宜人的氛围"
+        }
+      ],
+      "anchor": "word-friendly",
+      "batch": "自动补充",
+      "extra": true,
+      "extraDate": "2026-11-07",
+      "source": "generator"
     }
   ],
   "词素/复合词": [
