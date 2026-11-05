@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>清理 AI 历史浏览器缓存</title>
+<style>
+    body { margin: 0; padding: 32px; font: 15px/1.7 system-ui, "Microsoft YaHei", sans-serif; color: #203047; background: #f6f4ee; }
+    main { max-width: 760px; margin: 0 auto; padding: 24px; border: 1px solid #dce4ee; border-radius: 14px; background: #fffdf8; }
+    h1 { margin: 0 0 8px; font-size: 22px; }
+    p { margin: 6px 0; color: #526070; }
+    code { padding: 2px 5px; border-radius: 4px; background: #eef3f7; }
+    button { margin: 12px 8px 0 0; padding: 8px 14px; border: 1px solid #0b6672; border-radius: 8px; background: #0b6672; color: #fff; font: inherit; cursor: pointer; }
+    button.secondary { background: #fff; color: #0b6672; }
+    #status { margin-top: 18px; padding: 12px; border-radius: 8px; background: #eef7f4; white-space: pre-wrap; }
+    #keys { max-height: 220px; overflow: auto; font: 12px/1.6 Consolas, monospace; color: #697386; }
+</style>
+</head>
+<body>
+<main>
+    <h1>清理 AI 历史浏览器缓存</h1>
+    <p>当前页面来源：<code id="origin"></code></p>
+    <p>只会清理 AI 对话历史和标签缓存，不会删除连接地址、口令、主题设置。</p>
+    <p>清理后请关闭本页，回到 AI 页面按 <code>Ctrl + F5</code>。</p>
+    <button id="clear">立即清理</button>
+    <button id="reload" class="secondary">重新检查</button>
+    <div id="status">准备清理……</div>
+    <div id="keys"></div>
+</main>
+<script>
+(function () {
+    "use strict";
+    var PREFIXES = [
+        "aiTutor.conversations.",
+        "aiTutor.sessions.",
+        "programmingTutor.sessions",
+        "aiTutor.history.clean."
+    ];
+    var EXACT = [
+        "programmingTutor.activeSession"
+    ];
+    function shouldRemove(key) {
+        return EXACT.indexOf(key) >= 0 || PREFIXES.some(function (prefix) {
+            return key.indexOf(prefix) === 0;
+        });
+    }
+    function keysOf(storage) {
+        var result = [];
+        try {
+            for (var i = 0; i < storage.length; i += 1) result.push(storage.key(i));
+        } catch (error) { /* ignore */ }
+        return result;
+    }
+    function clearAll() {
+        var removed = [];
+        var localKeys = keysOf(localStorage);
+        var sessionKeys = keysOf(sessionStorage);
+        localKeys.concat(sessionKeys).forEach(function (key) {
+            if (!key || !shouldRemove(key)) return;
+            if (localKeys.indexOf(key) >= 0) localStorage.removeItem(key);
+            if (sessionKeys.indexOf(key) >= 0) sessionStorage.removeItem(key);
+            removed.push(key);
+        });
+        // 让新版本页面重新执行一次客户端清理标记。
+        try { localStorage.removeItem("aiTutor.history.clean.v3"); } catch (error) { /* ignore */ }
+        show(removed);
+    }
+    function show(removed) {
+        var remaining = keysOf(localStorage).filter(shouldRemove).concat(keysOf(sessionStorage).filter(shouldRemove));
+        document.getElementById("status").textContent =
+            "清理完成。\n删除 " + removed.length + " 个缓存项。\n剩余历史相关项：" + remaining.length;
+        document.getElementById("keys").textContent = remaining.length
+            ? "仍存在：\n" + remaining.join("\n")
+            : "没有剩余历史缓存。";
+    }
+    document.getElementById("origin").textContent = location.origin;
+    document.getElementById("clear").addEventListener("click", clearAll);
+    document.getElementById("reload").addEventListener("click", function () { location.reload(); });
+    clearAll();
+})();
+</script>
+</body>
+</html>
