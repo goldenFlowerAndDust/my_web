@@ -2,7 +2,7 @@
   "version": 1,
   "subject": "code",
   "subject_label": "编程",
-  "updated_at": "2026-11-05 22:31:05",
+  "updated_at": "2026-11-05 22:33:50",
   "max_rounds": 20,
   "windows": {
     "legacy-code-20261103173153-3": {
@@ -100,8 +100,8 @@
     "smw3fz5qjvmtn": {
       "id": "smw3fz5qjvmtn",
       "title": "续：续：续：续：Node.js中全局变量____表示当前执行脚本所在的目录的绝对路径，通常和path.join配合使用来拼接静态资源等文件的绝对路径。",
-      "created_at": "2026-11-05 22:22:38",
-      "updated_at": "2026-11-05 22:22:38",
+      "created_at": "2026-11-05 22:26:07",
+      "updated_at": "2026-11-05 22:26:07",
       "mode": "node",
       "language": "node",
       "language_name": "node",
@@ -126,8 +126,8 @@
     "smw3f63zgwlcs": {
       "id": "smw3f63zgwlcs",
       "title": "续：续：续：Node.js中全局变量____表示当前执行脚本所在的目录的绝对路径，通常和path.join配合使用来拼接静态资源等文件的绝对路径。",
-      "created_at": "2026-11-05 22:22:39",
-      "updated_at": "2026-11-05 22:22:39",
+      "created_at": "2026-11-05 22:26:06",
+      "updated_at": "2026-11-05 22:26:06",
       "mode": "node",
       "language": "node",
       "language_name": "node",
@@ -152,8 +152,8 @@
     "smw3f4rc7m992": {
       "id": "smw3f4rc7m992",
       "title": "续：续：Python 的 print 是函数还是语句？只回答一句。",
-      "created_at": "2026-11-05 22:22:39",
-      "updated_at": "2026-11-05 22:22:39",
+      "created_at": "2026-11-05 22:26:04",
+      "updated_at": "2026-11-05 22:26:04",
       "mode": "",
       "language": "python",
       "language_name": "python",
@@ -177,8 +177,8 @@
     "smw3my7uu90fj": {
       "id": "smw3my7uu90fj",
       "title": "续：Python 的 print 是函数还是语句？只回答一句。",
-      "created_at": "2026-11-05 22:23:11",
-      "updated_at": "2026-11-05 22:23:11",
+      "created_at": "2026-11-05 22:26:10",
+      "updated_at": "2026-11-05 22:26:10",
       "mode": "",
       "language": "python",
       "language_name": "python",
@@ -199,8 +199,8 @@
     "smw3fic369nil": {
       "id": "smw3fic369nil",
       "title": "续：Node.js中全局变量____表示当前执行脚本所在的目录的绝对路径，通常和path.join配合使用来拼接静态资源等文件的绝对路径。",
-      "created_at": "2026-11-05 22:23:11",
-      "updated_at": "2026-11-05 22:23:15",
+      "created_at": "2026-11-05 22:26:07",
+      "updated_at": "2026-11-05 22:26:07",
       "mode": "node",
       "language": "node",
       "language_name": "node",
@@ -225,8 +225,8 @@
     "smw3f5fckrern": {
       "id": "smw3f5fckrern",
       "title": "续：续：Node.js中全局变量____表示当前执行脚本所在的目录的绝对路径，通常和path.join配合使用来拼接静态资源等文件的绝对路径。",
-      "created_at": "2026-11-05 22:23:11",
-      "updated_at": "2026-11-05 22:23:11",
+      "created_at": "2026-11-05 22:26:05",
+      "updated_at": "2026-11-05 22:26:05",
       "mode": "node",
       "language": "node",
       "language_name": "node",
@@ -251,8 +251,8 @@
     "smw3myb4vv0x4": {
       "id": "smw3myb4vv0x4",
       "title": "续：使用fs模块的异步方法读取文件时，若不传入回调函数，方法会返回一个____对象，可以通过.then()或者async/await的方式处理读取结果。",
-      "created_at": "2026-11-05 22:23:15",
-      "updated_at": "2026-11-05 22:23:15",
+      "created_at": "2026-11-05 22:26:11",
+      "updated_at": "2026-11-05 22:26:11",
       "mode": "node",
       "language": "node",
       "language_name": "node",

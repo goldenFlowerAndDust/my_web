@@ -47,6 +47,16 @@
 .month-history-card-title { min-width: 0; font-size: 12px; font-weight: 600; color: var(--ink, #203047); overflow-wrap: anywhere; }
 .month-history-card-meta { flex: none; font-size: 10px; color: var(--muted, #697386); }
 .month-history-card-actions { display: flex; gap: 8px; margin-top: 7px; }
+.month-history-round-select {
+    max-width: 130px;
+    padding: 4px 6px;
+    border: 1px solid var(--line-strong, #cfd9e6);
+    border-radius: 6px;
+    background: var(--paper, #fffdf8);
+    color: var(--ink, #203047);
+    font: inherit;
+    font-size: 11px;
+}
 .month-history-open,
 .month-history-resume {
     padding: 4px 9px;

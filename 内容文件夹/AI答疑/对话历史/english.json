@@ -2,7 +2,7 @@
   "version": 1,
   "subject": "english",
   "subject_label": "英语",
-  "updated_at": "2026-11-05 22:31:05",
+  "updated_at": "2026-11-05 22:33:17",
   "max_rounds": 8,
   "windows": {
     "legacy-english-20261030043714-18": {
@@ -459,8 +459,8 @@
     "tmw3fws904z8u": {
       "id": "tmw3fws904z8u",
       "title": "续：解释 mean 的核心词义、常见搭配和易混词。",
-      "created_at": "2026-11-05 19:06:07",
-      "updated_at": "2026-11-05 19:06:15",
+      "created_at": "2026-11-05 22:25:59",
+      "updated_at": "2026-11-05 22:25:59",
       "mode": "单词解释",
       "language": "",
       "language_name": "",
@@ -483,8 +483,8 @@
     "tmw3f2yzzmxbr": {
       "id": "tmw3f2yzzmxbr",
       "title": "续：续：能列出每种中文解释的至少一个例句…",
-      "created_at": "2026-11-05 22:18:15",
-      "updated_at": "2026-11-05 22:20:18",
+      "created_at": "2026-11-05 22:25:55",
+      "updated_at": "2026-11-05 22:25:55",
       "mode": "单词解释",
       "language": "",
       "language_name": "",
@@ -533,8 +533,8 @@
     "legacy-20261105130502-3": {
       "id": "legacy-20261105130502-3",
       "title": "beauty，beautiful，beautifully，beautify。分别代表什么意思，以及对应的词性，和后缀用法。-ful，-ly，-fy。以及为什么是",
-      "created_at": "2026-11-05 22:18:15",
-      "updated_at": "2026-11-05 22:20:18",
+      "created_at": "2026-11-05 22:25:53",
+      "updated_at": "2026-11-05 22:25:53",
       "mode": "单词解释",
       "language": "",
       "language_name": "",
@@ -557,8 +557,8 @@
     "tmw3f8g699u42": {
       "id": "tmw3f8g699u42",
       "title": "续：解释deep，并回答我，daj和adv是不是同一个意思",
-      "created_at": "2026-11-05 18:47:11",
-      "updated_at": "2026-11-05 18:47:20",
+      "created_at": "2026-11-05 22:25:57",
+      "updated_at": "2026-11-05 22:25:57",
       "mode": "单词解释",
       "language": "",
       "language_name": "",
@@ -1053,7 +1053,6 @@
     },
     "tmw3d3ozhuq1r": {
       "id": "tmw3d3ozhuq1r",
-      "subject": "english",
       "title": "能列出，对应中文翻译的例句吗？",
       "created_at": "2026-11-05 17:52:14",
       "updated_at": "2026-11-05 17:52:14",
@@ -1071,14 +1070,13 @@
         {
           "role": "assistant",
           "content": "你这条消息没有给出具体单词，我按最合理的考试语境假设：你想问的是“怎样为单词配例句、并给出对应中文翻译”。下面先给方法，再给一组专升本高频词的例句示范。\n\n## 结论\n\n单词解释里的例句要满足三点：**短、典型、能体现搭配**。中文翻译要紧跟英文，做到“一句英文一句中文”，不要只给词义。\n\n## 例句的写法\n\n- 每个词给 2—3 个例句，优先覆盖高频搭配。\n- 例句长度控制在 8—15 词，接近专升本阅读和写作难度。\n- 中文翻译要自然，不要逐词硬译。\n- 例句里最好能看出这个词的**词性和常见结构**。\n\n## 示范：专升本高频词\n\n**achieve** /əˈtʃiːv/ v. 实现；达到\n\n- 搭配：achieve a goal, achieve success\n- 例句：She worked hard to **achieve** her goal.（她努力工作以实现目标。）\n- 例句：Hard work can help you **achieve** success.（努力能帮你取得成功。）\n\n**affect** /əˈfekt/ v. 影响\n\n- 搭配：affect health, be affected by\n- 例句：Lack of sleep can **affect** your health.（睡眠不足会影响健康。）\n- 例句：The plan was **affected** by the weather.（这个计划受到了天气的影响。）\n\n**benefit** /ˈbenɪfɪt/ n. 好处；v. 受益\n\n- 搭配：benefit from, bring benefits to\n- 例句：Students can **benefit from** reading every day.（学生每天阅读会受益。）\n- 例句：Exercise **brings** great **benefits to** our health.（锻炼对我们的健康大有好处。）\n\n**contribute** /kənˈtrɪbjuːt/ v. 贡献；促成\n\n- 搭配：contribute to, contribute money\n- 例句：Everyone should **contribute to** the team.（每个人都应为团队作贡献。）\n- 例句：Regular exercise **contributes to** good health.（经常锻炼有助于健康。）\n\n**efficient** /ɪˈfɪʃnt/ adj. 高效的\n\n- 搭配：an efficient way, be efficient in\n- 例句：This is an **efficient way** to learn new words.（这是学新词的高效方法。）\n- 例句：She is **efficient in** dealing with problems.（她处理问题很高效。）\n\n## 易错提醒\n\n- **affect** 是动词，**effect** 常作名词，别混用。\n- **benefit from** 后面接“来源”，不要写成 benefit of 当动词用。\n- **contribute to** 的 to 是介词，后面接名词或动名词。\n\n如果你把具体单词发给我，我可以按“音标—词性—核心义—搭配—例句—辨析”的完整格式逐条列出。",
-          "time": "2026-11-05 17:52:14",
-          "mode": "单词解释"
+          "mode": "单词解释",
+          "time": "2026-11-05 17:52:14"
         }
       ]
     },
     "tmw3n2f422t6o": {
       "id": "tmw3n2f422t6o",
-      "subject": "english",
       "title": "能将每个中文翻译，列一个句子吗？我英语知识储备约等于0，句子根本看不懂。主谓宾、副词、定语...根本就是天文，句子是完全看不东",
       "created_at": "2026-11-05 22:27:48",
       "updated_at": "2026-11-05 22:27:48",
@@ -1096,8 +1094,8 @@
         {
           "role": "assistant",
           "content": "**先说明假设：** 你希望把上面 `care` 的每个中文义项都配一个**简单英文句子**，并且句子要短到“零基础也能看懂”。下面我按这个标准重写，每个句子只保留最核心的主谓宾，生词尽量少，并逐句拆给你看。\n\n## 一、先给你一个“看懂句子”的最小工具\n\n你不需要先学“定语、状语”这些术语。先只认三样东西：\n\n- **谁**（主语）：句子里“做动作的人或物”\n- **做什么**（谓语动词）：动作或状态\n- **什么**（宾语）：动作的对象\n\n比如 `I love you.`：谁？`I`；做什么？`love`；什么？`you`。就完了。\n\n下面每个句子我都按“谁 + 做什么 + 什么”标出来。\n\n## 二、care 作名词的句子\n\n**1. 照顾：`take care of`**\n\n- 句子：**She takes care of her mother.**\n- 中文：她照顾她的母亲。\n- 拆：谁？`She`（她）；做什么？`takes care of`（照顾）；什么？`her mother`（她的母亲）。\n- 注意：`takes` 后面的 `s` 是因为主语 `she` 是“他/她/它”，动词要加 `s`，这是英语的固定规则。\n\n**2. 小心：`with care`**\n\n- 句子：**Please drive with care.**\n- 中文：请小心开车。\n- 拆：`Please` 是“请”；谁？你没出现，其实是“你”；做什么？`drive`（开车）；`with care` 是“小心地”，放在动词后面。\n- 注意：`with care` 整体就是“小心地”，不用逐字翻成“带着小心”。\n\n**3. 医疗保健：`health care`**\n\n- 句子：**Health care is expensive.**\n- 中文：医疗保健很贵。\n- 拆：谁？`Health care`（医疗保健）；做什么？`is`（是）；什么？`expensive`（贵的）。\n- 注意：`is` 是“是”，这里不是动作，是“状态”。\n\n## 三、care 作动词的句子\n\n**4. 在乎：`care about`**\n\n- 句子：**I care about my family.**\n- 中文：我在乎我的家人。\n- 拆：谁？`I`（我）；做什么？`care about`（在乎）；什么？`my family`（我的家人）。\n- 注意：`care` 后面必须跟 `about` 才能接“在乎的东西”，不能写 `I care my family`。\n\n**5. 不在乎（否定）：`don't care about`**\n\n- 句子：**He doesn't care about money.**\n- 中文：他不在乎钱。\n- 拆：谁？`He`（他）；做什么？`doesn't care about`（不在乎）；什么？`money`（钱）。\n- 注意：`doesn't` 是“不”，因为主语是 `he`，所以用 `doesn't`，后面动词 `care` 不再加 `s`。\n\n**6. 照顾（动词）：`care for`**\n\n- 句子：**Nurses care for old people.**\n- 中文：护士照顾老人。\n- 拆：谁？`Nurses`（护士们）；做什么？`care for`（照顾）；什么？`old people`（老人）。\n- 注意：`Nurses` 加 `s` 是“很多护士”，动词 `care` 就不加 `s`。\n\n**7. 喜欢（多用于否定）：`don't care for`**\n\n- 句子：**I don't care for coffee.**\n- 中文：我不太喜欢咖啡。\n- 拆：谁？`I`；做什么？`don't care for`（不喜欢）；什么？`coffee`（咖啡）。\n- 注意：这里 `care for` 不是“照顾”，是“喜欢”，要看语境。\n\n**8. 愿意：`care to do`**\n\n- 句子：**Would you care to sit down?**\n- 中文：你愿意坐下吗？\n- 拆：谁？`you`（你）；做什么？`care to sit down`（愿意坐下）。\n- 注意：`Would you care to...?` 整体就是“你愿意……吗？”，是固定问法，先整句记，不用拆太细。\n\n## 四、给你一个“零基础读句”的顺序\n\n以后看到句子，按这个顺序问自己：\n\n1. **找动词**：哪个词是“做”或“是”？（`takes / drive / is / care / doesn't care / care for`）\n2. **动词前面是谁**：谁在做？（`She / you / Health care / I / He / Nurses`）\n3. **动词后面是什么**：动作落到谁身上？（`her mother / my family / money / old people`）\n4. **剩下的词**：多半是“怎么、什么时候、在哪里”，先放一边。\n\n## 五、最容易错的两句，再强调一次\n\n- 错：`I care money.`\n- 对：`I care about money.`（“在乎”必须带 `about`）\n- 错：`She take care of her mother.`\n- 对：`She takes care of her mother.`（主语是 `she/he/it`，动词加 `s`）\n\n## 六、你现在只需要先记住这 4 个整块\n\n不用先学语法术语，先把这四块当“词组”背：\n\n- `take care of` = 照顾\n- `care about` = 在乎\n- `care for` = 照顾 / 喜欢\n- `Would you care to...?` = 你愿意……吗？\n\n这四块能覆盖专升本里 `care` 的绝大多数考法。",
-          "time": "2026-11-05 22:27:48",
-          "mode": "单词解释"
+          "mode": "单词解释",
+          "time": "2026-11-05 22:27:48"
         }
       ]
     }

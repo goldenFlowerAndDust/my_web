@@ -2,7 +2,7 @@
   "version": 1,
   "subject": "math",
   "subject_label": "数学",
-  "updated_at": "2026-11-05 22:31:05",
+  "updated_at": "2026-11-05 22:33:49",
   "max_rounds": 8,
   "windows": {
     "archive-math-84b2179e4790f51a": {
@@ -294,8 +294,8 @@
     "tmw3fxv8mi45x": {
       "id": "tmw3fxv8mi45x",
       "title": "续：积分$：\\int \\sqrt{2x+1}dx $，我的想法是：用第一类换元法，令$u=2x+1$ 所以：原式$= 2\\int u^{2} du=2\\time",
-      "created_at": "2026-11-05 22:22:14",
-      "updated_at": "2026-11-05 22:22:14",
+      "created_at": "2026-11-05 22:26:02",
+      "updated_at": "2026-11-05 22:26:02",
       "mode": "错题诊断",
       "language": "",
       "language_name": "",
@@ -318,8 +318,8 @@
     "legacy-20261103011651-3": {
       "id": "legacy-20261103011651-3",
       "title": "积分$：\\int \\sqrt{2x+1}dx $，我的想法是：用第一类换元法，令$u=2x+1$ 所以：原式$= 2\\int u^{2} du=2\\times",
-      "created_at": "2026-11-05 22:22:14",
-      "updated_at": "2026-11-05 22:22:14",
+      "created_at": "2026-11-05 22:26:01",
+      "updated_at": "2026-11-05 22:26:01",
       "mode": "错题诊断",
       "language": "",
       "language_name": "",

@@ -154,6 +154,12 @@
                 " · " + Number(item.rounds || 0) + " 轮</span>" +
                 "</div>" +
                 '<div class="month-history-card-actions">' +
+                (Number(item.rounds || 0) > 0
+                    ? '<select class="month-history-round-select" aria-label="选择这个对话的轮次">' +
+                      Array.from({ length: Number(item.rounds || 0) }, function (_, i) {
+                          return '<option value="' + i + '">第' + (i + 1) + '轮</option>';
+                      }).join("") + "</select>"
+                    : "") +
                 '<button type="button" class="month-history-open">查看回答</button>' +
                 (window.TutorTabs && window.TutorTabs.resumeConversation
                     ? '<button type="button" class="month-history-resume">继续提问</button>'
@@ -162,20 +168,29 @@
                 "</div>" +
                 '<div class="month-history-detail" hidden></div>';
 
+            var roundSelect = card.querySelector(".month-history-round-select");
+            if (roundSelect) {
+                roundSelect.value = String(Math.max(0, Number(item.rounds || 1) - 1));
+                roundSelect.addEventListener("change", function () {
+                    var detail = card.querySelector(".month-history-detail");
+                    if (!detail.hidden) toggleDetail(card, item, true);
+                });
+            }
             card.querySelector(".month-history-open").addEventListener("click", function () {
                 toggleDetail(card, item);
             });
             var resume = card.querySelector(".month-history-resume");
             if (resume) resume.addEventListener("click", function () {
+                var selectedRound = roundSelect ? Number(roundSelect.value) : Math.max(0, Number(item.rounds || 1) - 1);
                 loadChunk(item).then(function (data) {
                     var windowData = (data.windows || {})[item.id];
                     if (!windowData) return;
                     if (window.TutorTabs && window.TutorTabs.resumeWindow) {
-                        window.TutorTabs.resumeWindow(windowData, Number(item.rounds || 1));
+                        window.TutorTabs.resumeWindow(windowData, selectedRound + 1);
                         var ask = document.querySelector(".ask-panel");
                         if (ask && ask.scrollIntoView) ask.scrollIntoView({ behavior: "smooth", block: "start" });
                     } else if (window.ProgrammingResumeWindow) {
-                        window.ProgrammingResumeWindow(windowData, Number(item.rounds || 1));
+                        window.ProgrammingResumeWindow(windowData, selectedRound + 1);
                         var ask2 = document.querySelector(".ask-panel, .composer");
                         if (ask2 && ask2.scrollIntoView) ask2.scrollIntoView({ behavior: "smooth", block: "start" });
                     }
@@ -195,9 +210,9 @@
             });
     }
 
-    function toggleDetail(card, item) {
+    function toggleDetail(card, item, force) {
         var detail = card.querySelector(".month-history-detail");
-        if (!detail.hidden) {
+        if (!force && !detail.hidden) {
             detail.hidden = true;
             return;
         }
@@ -210,16 +225,15 @@
                 return;
             }
             var messages = windowData.messages || [];
-            var html = "";
-            for (var i = 0; i < messages.length; i += 2) {
-                var user = messages[i] || {};
-                var assistant = messages[i + 1] || {};
-                html += '<section class="month-history-round">' +
-                    '<div class="month-history-question"><b>问</b>' + questionHtml(user.content || "") + "</div>" +
-                    '<div class="month-history-answer"><b>答</b>' + answerHtml(assistant.content || "") + "</div>" +
-                    "</section>";
-            }
-            detail.innerHTML = html || '<p class="month-history-empty">这一轮没有内容。</p>';
+            var select = card.querySelector(".month-history-round-select");
+            var selected = select ? Math.max(0, Number(select.value) || 0) : 0;
+            var start = selected * 2;
+            var user = messages[start] || {};
+            var assistant = messages[start + 1] || {};
+            detail.innerHTML = '<section class="month-history-round">' +
+                '<div class="month-history-question"><b>问</b>' + questionHtml(user.content || "") + "</div>" +
+                '<div class="month-history-answer"><b>答</b>' + answerHtml(assistant.content || "") + "</div>" +
+                "</section>";
             if (window.TutorRenderMath) window.TutorRenderMath(detail);
         }).catch(function (error) {
             detail.innerHTML = '<p class="month-history-error">回答读取失败：' + escapeHtml(error.message) + "</p>";
