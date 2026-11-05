@@ -29,7 +29,6 @@ from datetime import datetime
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from 归档对话历史 import archive_once
 from 对话历史 import MAX_ROUNDS as CONVERSATION_MAX_ROUNDS, delete_window, read_document, upsert_window
 from 对话同步 import merge_documents
 from 生成历史索引 import build_all as build_history_index
@@ -1121,34 +1120,6 @@ class SyncRunner:
             result["message"] = str(exc)
         return result
 
-    def build_ai_history_archive(self) -> dict[str, Any]:
-        result: dict[str, Any] = {"status": "ok", "message": "", "output": ""}
-        script = self.base / "共享配置" / "build_ai_history_archive.py"
-        if not script.exists():
-            result["status"] = "skipped"
-            result["message"] = "找不到 build_ai_history_archive.py。"
-            return result
-        try:
-            completed = subprocess.run(
-                [sys.executable, str(script)],
-                cwd=str(self.base),
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                timeout=120,
-            )
-            result["output"] = (completed.stdout or "") + (completed.stderr or "")
-            if completed.returncode != 0:
-                result["status"] = "error"
-                result["message"] = result["output"][-500:]
-            else:
-                result["message"] = "已重建 5MB 历史分片。"
-        except (OSError, subprocess.SubprocessError) as exc:
-            result["status"] = "error"
-            result["message"] = str(exc)
-        return result
-
     def sync_all(self, interactive: bool = False) -> int:
         self.status = {
             "last_run": now_text(),
@@ -1214,10 +1185,6 @@ class SyncRunner:
             self.status["history_months"] = {"ok": False, "error": str(exc)}
             print("按月历史索引生成失败：%s" % exc)
 
-        archive = self.build_ai_history_archive()
-        self.status["history_archive"] = archive
-        print("历史分片：%s" % (archive["message"] or archive["status"]))
-
         if any_enabled:
             review = self.sync_review_updates()
             self.status["review_updates"] = review
@@ -1225,17 +1192,6 @@ class SyncRunner:
                 self.status["errors"].append("云端复习同步失败：" + str(review.get("message") or review.get("status")))
             print("云端复习：%s" % (review["message"] or review["status"]))
 
-        try:
-            archived_files = archive_once()
-            self.status["conversation_archive"] = {
-                "status": "ok" if archived_files else "unchanged",
-                "count": len(archived_files),
-                "message": "已归档 %d 个对话文件" % len(archived_files) if archived_files else "今日对话历史无变化",
-            }
-            print("对话历史归档：%s" % self.status["conversation_archive"]["message"])
-        except Exception as exc:  # noqa: BLE001
-            self.status["conversation_archive"] = {"status": "error", "message": str(exc)}
-            print("对话历史归档失败：%s" % exc)
         self.status["finished_at"] = now_text()
         write_json(self.status_file, self.status)
         # 同一进程内的菜单/自动循环下一次运行也要以本次结果为基准。

@@ -2,14 +2,32 @@
     "use strict";
 
     // 只读静态月索引：先加载目录，再加载当月摘要；详情点击后才请求 chunk。
+    var script = document.currentScript;
     var sourceList = document.getElementById("history-list") || document.getElementById("historyList");
-    if (!sourceList) return;
+    var generatedHost = false;
+    if (!sourceList) {
+        var host = document.querySelector("main") || document.body;
+        var section = document.createElement("section");
+        section.className = "month-history-embedded";
+        section.innerHTML = '<div class="month-history-head"><p class="month-history-kicker">AI HISTORY</p>' +
+            "<h2>AI 历史记录</h2><p>按月份和日期查看历史问答，点击后才加载完整回答。</p></div>";
+        host.appendChild(section);
+        sourceList = document.createElement("div");
+        sourceList.className = "month-history-source";
+        section.appendChild(sourceList);
+        generatedHost = true;
+    }
     var list = null;
-    var subject = document.body.getAttribute("data-history-subject") || "";
+    var subject = (script && script.dataset.subject) ||
+        document.body.getAttribute("data-history-subject") || "";
     if (!subject) {
         var path = decodeURIComponent(location.pathname);
         subject = /数学答疑/.test(path) ? "math" : (/编程语言AI/.test(path) ? "code" : "english");
     }
+    var languageFilter = (script && script.dataset.language) || "";
+    var historyRoot = script && script.src
+        ? new URL("../../历史/", script.src)
+        : new URL("../历史/", location.href);
 
     var state = {
         months: [],
@@ -22,7 +40,7 @@
     };
 
     function base(relative) {
-        return new URL(relative, location.href).toString();
+        return new URL(relative, historyRoot).toString();
     }
 
     function escapeHtml(value) {
@@ -64,6 +82,8 @@
         if (oldTabs) oldTabs.style.display = "none";
         var desc = document.querySelector(".history-desc");
         if (desc) desc.textContent = "按月份加载摘要；点击“查看回答”后才读取该对话详情。";
+        var oldArchive = document.querySelector('.hub-section[data-section="ai-history"]');
+        if (oldArchive) oldArchive.style.display = "none";
 
         var toolbar = document.createElement("div");
         toolbar.id = "month-history-toolbar";
@@ -103,13 +123,27 @@
     function renderSummaries() {
         list.innerHTML = "";
         var windows = (state.monthIndex && state.monthIndex.windows) || [];
+        if (languageFilter) {
+            windows = windows.filter(function (item) {
+                return String(item.language || "") === languageFilter;
+            });
+        }
         document.getElementById("month-history-count").textContent =
             state.month + " · " + windows.length + " 个对话";
         if (!windows.length) {
             renderEmpty("这个月还没有历史记录。");
             return;
         }
+        var lastDate = "";
         windows.forEach(function (item) {
+            var date = String(item.updated_at || item.created_at || "").slice(0, 10);
+            if (date && date !== lastDate) {
+                var day = document.createElement("h3");
+                day.className = "month-history-day";
+                day.textContent = date;
+                list.appendChild(day);
+                lastDate = date;
+            }
             var card = document.createElement("article");
             card.className = "month-history-card";
             card.setAttribute("data-window-id", item.id);

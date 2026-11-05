@@ -1,3 +1,12 @@
+.month-history-embedded {
+    max-width: 980px;
+    margin: 40px auto;
+    padding: 0 18px;
+}
+.month-history-head h2 { margin: 4px 0 6px; }
+.month-history-head p { margin: 0 0 12px; font-size: 12px; color: var(--muted, #697386); }
+.month-history-kicker { font-size: 10px; letter-spacing: .14em; color: var(--accent, #0b6672); }
+.month-history-day { margin: 16px 0 7px; font-size: 12px; color: var(--accent, #0b6672); }
 .month-history-toolbar {
     display: flex;
     flex-wrap: wrap;

@@ -76,14 +76,6 @@ def _conversation_action(payload: dict) -> dict:
     raise ConversationError("未知对话历史操作：%s" % action)
 
 
-def refresh_archive() -> None:
-    try:
-        from 归档答疑历史 import refresh
-        refresh("english")
-    except Exception as exc:  # noqa: BLE001
-        print("答疑归档更新失败（不影响服务）：%s" % exc)
-
-
 class Handler(SimpleHTTPRequestHandler):
     server_version = "WordArchiver/1.0"
 
@@ -207,7 +199,6 @@ class Handler(SimpleHTTPRequestHandler):
 
             if path == "/api/tutor":
                 result = ask_tutor(payload.get("mode"), payload.get("question"), payload.get("history"), payload.get("conversation_id"))
-                refresh_archive()
                 self._send_json(200, result)
                 return
 
@@ -254,16 +245,6 @@ class Handler(SimpleHTTPRequestHandler):
         sys.stderr.write("[%s] %s\n" % (self.log_date_time_string(), format % args))
 
 
-def archive_conversation_history() -> None:
-    try:
-        from 归档对话历史 import archive_once
-        files = archive_once()
-        if files:
-            print("对话历史已归档：%d 个文件" % len(files))
-    except Exception as exc:  # noqa: BLE001
-        print("对话历史归档失败（不影响服务）：%s" % exc)
-
-
 def main() -> None:
     port = DEFAULT_PORT
     if len(sys.argv) > 1:
@@ -272,8 +253,6 @@ def main() -> None:
         except ValueError:
             print("端口必须是数字。")
             return
-    archive_conversation_history()
-    refresh_archive()
     recover_missing_extra_entries()
     refresh_added_logs()
     server = ThreadingHTTPServer(("127.0.0.1", port), Handler)

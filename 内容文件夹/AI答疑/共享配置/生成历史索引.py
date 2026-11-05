@@ -112,6 +112,9 @@ def build_subject(subject: str) -> dict[str, Any]:
                 "created_at": str(window.get("created_at") or ""),
                 "updated_at": str(window.get("updated_at") or ""),
                 "rounds": int(window.get("rounds") or 0),
+                "language": str(window.get("language") or ""),
+                "language_name": str(window.get("language_name") or ""),
+                "mode": str(window.get("mode") or ""),
                 "chunk": "chunk-%04d.json" % chunk_no,
             })
             current_bytes += len(window_raw) + 2
