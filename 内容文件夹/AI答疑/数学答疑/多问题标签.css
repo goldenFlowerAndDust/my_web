@@ -216,3 +216,65 @@
     cursor: pointer;
 }
 .history-resume:hover { border-color: #0b6672; }
+
+
+/* 数学轮次：自定义下拉才能渲染公式 */
+.round-picker { position: relative; min-width: 0; max-width: 280px; }
+.round-picker-trigger {
+    max-width: 280px;
+    min-height: 30px;
+    padding: 4px 26px 4px 9px;
+    border: 1px solid var(--line-strong);
+    border-radius: 7px;
+    background: #fffdf8;
+    color: var(--ink);
+    font: inherit;
+    font-size: 11px;
+    text-align: left;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+}
+.round-picker-trigger::after {
+    content: "▾";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+}
+.round-picker-menu {
+    position: absolute;
+    z-index: 40;
+    top: calc(100% + 4px);
+    left: 0;
+    width: min(420px, 86vw);
+    max-height: 46vh;
+    overflow-y: auto;
+    padding: 5px;
+    border: 1px solid var(--line-strong);
+    border-radius: 9px;
+    background: #fffdf8;
+    box-shadow: 0 12px 32px rgba(20, 35, 63, .18);
+}
+.round-picker-item {
+    display: block;
+    width: 100%;
+    padding: 7px 8px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ink);
+    text-align: left;
+    font: inherit;
+    font-size: 11px;
+    line-height: 1.6;
+    cursor: pointer;
+}
+.round-picker-item:hover, .round-picker-item.is-active { background: rgba(11, 102, 114, .1); }
+.round-picker-number { color: #0b6672; font-weight: 700; }
+@media (max-width: 620px) {
+    .round-picker, .round-picker-trigger { max-width: 150px; }
+}

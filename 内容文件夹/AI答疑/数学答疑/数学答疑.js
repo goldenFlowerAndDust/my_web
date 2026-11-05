@@ -1296,6 +1296,7 @@
     window.TutorRenderAnswer = function (text) {
         return renderMarkdown(text || "");
     };
+    window.TutorRenderQuestion = questionHtml;
     window.TutorRenderMath = function (root) {
         if (root) renderMath(root);
     };

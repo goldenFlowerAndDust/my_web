@@ -385,8 +385,8 @@
       session.answerTime = (lastAssistant.language_name || conversation.language_name || "") +
         " · " + (lastAssistant.time || "");
     }
-    activeSessionId = id;
-    try { localStorage.setItem("programmingTutor.activeSession", id); } catch (error) { /* ignore */ }
+    activeSessionId = session.id;
+    try { localStorage.setItem("programmingTutor.activeSession", session.id); } catch (error) { /* ignore */ }
     if (session.language) languageSelect.value = session.language;
     renderSessionTabs();
     loadSessionView();
@@ -422,9 +422,9 @@
 
   // 一次性合并旧编程历史：旧版按轮次语言分类，可能漏掉 Python。
   try {
-    if (localStorage.getItem("programmingTutor.historyMerge.v2") !== "1") {
+    if (localStorage.getItem("programmingTutor.historyMerge.v3") !== "1") {
       localStorage.removeItem("aiTutor.conversations.legacy.code");
-      localStorage.setItem("programmingTutor.historyMerge.v2", "1");
+      localStorage.setItem("programmingTutor.historyMerge.v3", "1");
     }
   } catch (error) { /* ignore */ }
 

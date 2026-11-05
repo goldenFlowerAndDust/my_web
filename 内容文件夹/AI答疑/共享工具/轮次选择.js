@@ -41,6 +41,85 @@
         return value.length > 24 ? value.slice(0, 24) + "…" : (value || "（无问题）");
     }
 
+    function escapeHtml(value) {
+        return String(value == null ? "" : value).replace(/[&<>"']/g, function (ch) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch];
+        });
+    }
+
+    function questionHtml(value) {
+        if (window.TutorRenderQuestion) return window.TutorRenderQuestion(value);
+        return escapeHtml(trim(value));
+    }
+
+    // 数学的原生 select 无法渲染公式，换成自定义下拉；英语保留原生 select。
+    var picker = null;
+    var pickerTrigger = null;
+    var pickerMenu = null;
+    if (tabs.subject === "math") {
+        select.hidden = true;
+        select.setAttribute("aria-hidden", "true");
+        select.tabIndex = -1;
+        picker = document.createElement("div");
+        picker.className = "round-picker";
+        pickerTrigger = document.createElement("button");
+        pickerTrigger.type = "button";
+        pickerTrigger.className = "round-picker-trigger";
+        pickerTrigger.setAttribute("aria-haspopup", "listbox");
+        pickerTrigger.setAttribute("aria-expanded", "false");
+        pickerMenu = document.createElement("div");
+        pickerMenu.className = "round-picker-menu";
+        pickerMenu.setAttribute("role", "listbox");
+        picker.appendChild(pickerTrigger);
+        picker.appendChild(pickerMenu);
+        tools.insertBefore(picker, select);
+        pickerTrigger.addEventListener("click", function (event) {
+            event.stopPropagation();
+            var open = pickerMenu.hidden;
+            pickerMenu.hidden = !open;
+            pickerTrigger.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        document.addEventListener("click", function (event) {
+            if (!picker.contains(event.target)) {
+                pickerMenu.hidden = true;
+                pickerTrigger.setAttribute("aria-expanded", "false");
+            }
+        });
+    }
+
+    function renderPicker() {
+        if (!picker) return;
+        var turns = tabs.turns();
+        var index = Number(select.value) || 0;
+        var current = turns[index];
+        picker.hidden = turns.length === 0;
+        pickerTrigger.hidden = turns.length === 0;
+        pickerMenu.innerHTML = turns.map(function (turn, i) {
+            return '<button type="button" class="round-picker-item' +
+                (i === index ? " is-active" : "") + '" data-round-index="' + i + '">' +
+                '<span class="round-picker-number">第' + turn.index + '轮 ·</span> ' +
+                questionHtml(turn.question) + "</button>";
+        }).join("");
+        if (current) {
+            pickerTrigger.innerHTML = '<span class="round-picker-number">第' + current.index + '轮 ·</span> ' +
+                questionHtml(current.question);
+            pickerTrigger.setAttribute("aria-expanded", pickerMenu.hidden ? "false" : "true");
+            if (window.TutorRenderMath) window.TutorRenderMath(pickerTrigger);
+        } else {
+            pickerTrigger.innerHTML = "";
+        }
+        Array.from(pickerMenu.querySelectorAll("[data-round-index]")).forEach(function (button) {
+            if (window.TutorRenderMath) window.TutorRenderMath(button);
+            button.addEventListener("click", function () {
+                select.value = button.getAttribute("data-round-index");
+                showTurn(Number(select.value) || 0);
+                pickerMenu.hidden = true;
+                pickerTrigger.setAttribute("aria-expanded", "false");
+                renderPicker();
+            });
+        });
+    }
+
     function refresh(forceLatest) {
         var turns = tabs.turns();
         var active = tabs.activeId();
@@ -54,7 +133,7 @@
                     return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch];
                 }) + "</option>";
         }).join("");
-        select.hidden = count === 0;
+        select.hidden = picker ? true : count === 0;
         select.disabled = count === 0;
         countEl.textContent = count ? "共 " + count + " 轮" : "";
         deleteRoundBtn.hidden = count === 0;
@@ -67,6 +146,7 @@
             select.value = String(count - 1);
         }
         lastCount = count;
+        renderPicker();
         if (count) showTurn(Number(select.value) || 0);
     }
 
@@ -85,6 +165,7 @@
         if (answerTime) answerTime.textContent = turn.time || "—";
         if (window.TutorRenderMath) window.TutorRenderMath(answerContent);
         if (window.renderTokenCost) window.renderTokenCost(document.getElementById("answer-token"), turn.usage);
+        if (picker) renderPicker();
     }
 
     select.addEventListener("change", function () {
@@ -124,4 +205,8 @@
         }
     });
     refresh(true);
+    // 主应用脚本是 defer，确保它加载后再渲染一次数学公式。
+    window.addEventListener("load", function () {
+        refresh(false);
+    });
 })();

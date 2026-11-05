@@ -91,7 +91,9 @@
     }
 
     function storeSubject() {
-        return location.pathname.indexOf("/数学答疑/") >= 0 ? "math" : "english";
+        var path = "";
+        try { path = decodeURIComponent(location.pathname || ""); } catch (error) { path = location.pathname || ""; }
+        return path.indexOf("/数学答疑/") >= 0 ? "math" : "english";
     }
 
     function syncStore() {
