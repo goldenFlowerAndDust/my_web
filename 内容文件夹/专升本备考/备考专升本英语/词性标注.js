@@ -63,8 +63,17 @@
         card.setAttribute("data-pos", senses[0].pos);
     }
 
-    fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" })
-        .then(function (response) { return response.ok ? response.json() : null; })
+    function loadData() {
+        if (location.protocol === "file:" && window.__WORD_DATA__) {
+            return Promise.resolve(window.__WORD_DATA__);
+        }
+        return fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" })
+            .then(function (response) { return response.ok ? response.json() : null; })
+            .catch(function () { return window.__WORD_DATA__ || null; });
+    }
+
+    loadData()
+        .then(function (data) { return data; })
         .then(function (data) {
             if (!data || typeof data !== "object") return;
             var map = {};

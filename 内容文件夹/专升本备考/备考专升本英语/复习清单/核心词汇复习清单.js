@@ -8,6 +8,21 @@
 (function () {
     'use strict';
 
+    // file:// 下浏览器禁止 fetch 本地 data.json；使用页面内嵌数据查看。
+    if (location.protocol === "file:" && window.__WORD_DATA__) {
+        var nativeFetch = window.fetch;
+        window.fetch = function (input, init) {
+            var url = typeof input === "string" ? input : (input && input.url) || "";
+            if (url.indexOf("data.json") >= 0 && !/^https?:/i.test(url)) {
+                return Promise.resolve(new Response(JSON.stringify(window.__WORD_DATA__), {
+                    status: 200,
+                    headers: { "Content-Type": "application/json; charset=utf-8" }
+                }));
+            }
+            return nativeFetch.apply(window, arguments);
+        };
+    }
+
     var DATA_URL = 'data.json';
     var isLocalHost = /^(localhost|127\.0\.0\.1|\[::1\])$/i.test(window.location.hostname);
     var isLocalPage = window.location.protocol === 'http:' && isLocalHost &&
