@@ -2,7 +2,7 @@
   "version": 1,
   "subject": "english",
   "subject_label": "英语",
-  "updated_at": "2026-11-05 21:46:53",
+  "updated_at": "2026-11-05 21:48:15",
   "max_rounds": 8,
   "windows": {
     "legacy-english-20261030043714-18": {
@@ -338,9 +338,5 @@
       ]
     }
   },
-  "deleted": {
-    "local-test": "2026-11-05 20:30:16",
-    "cloud-test": "2026-11-05 20:30:16",
-    "month-auto-test": "2026-11-05 21:46:53"
-  }
+  "deleted": {}
 }
