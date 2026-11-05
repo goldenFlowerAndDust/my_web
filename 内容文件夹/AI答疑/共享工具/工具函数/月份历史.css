@@ -145,3 +145,67 @@
     .month-history-card-head { display: block; }
     .month-history-card-meta { display: block; margin-top: 3px; }
 }
+
+
+.history-math-raw {
+    margin: 8px 0;
+    overflow-x: auto;
+}
+.month-history-dark .month-history-toolbar,
+.month-history-dark .month-history-card {
+    border-color: #29415c;
+    background: #101b2b;
+    color: #dbe8f5;
+}
+.month-history-dark .month-history-card-title,
+.month-history-dark .month-history-day,
+.month-history-dark .month-history-count,
+.month-history-dark .month-history-label,
+.month-history-dark .month-history-note {
+    color: #dbe8f5;
+}
+.month-history-dark .month-history-label select,
+.month-history-dark .month-history-round-select,
+.month-history-dark .month-history-open,
+.month-history-dark .month-history-resume,
+.month-history-dark .month-history-delete,
+.month-history-dark .month-history-delete-round {
+    border-color: #35506d;
+    background: #17263a;
+    color: #e5f0fb;
+}
+.month-history-dark .month-history-detail {
+    border-top-color: #29415c;
+}
+.month-history-dark .month-history-question,
+.month-history-dark .month-history-answer,
+.month-history-dark .month-history-answer p,
+.month-history-dark .month-history-answer li {
+    color: #dbe8f5 !important;
+}
+.month-history-dark .month-history-answer h1,
+.month-history-dark .month-history-answer h2,
+.month-history-dark .month-history-answer h3,
+.month-history-dark .month-history-answer h4 {
+    color: #e9f4ff !important;
+}
+.month-history-dark .month-history-answer pre {
+    border-color: #2b4058;
+    background: #091321;
+    color: #d7e9ff;
+}
+.month-history-dark .month-history-answer code {
+    color: #d7e9ff;
+    background: #1b2c42;
+}
+.month-history-dark .month-history-answer strong { color: #ffffff; }
+.month-history-dark .month-history-categories button {
+    border-color: #35506d;
+    background: #17263a;
+    color: #b9cee2;
+}
+.month-history-dark .month-history-categories button.is-active {
+    border-color: #42b8c4;
+    background: rgba(66, 184, 196, .16);
+    color: #7fe3ee;
+}

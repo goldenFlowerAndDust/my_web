@@ -12,6 +12,7 @@
         section.id = "ai-history";
         section.innerHTML = '<div class="month-history-head"><p class="month-history-kicker">AI HISTORY</p>' +
             "<h2>AI 历史记录</h2><p>按月份和日期查看历史问答，点击后才加载完整回答。</p></div>";
+        if (isDarkTheme()) section.classList.add("month-history-dark");
         host.appendChild(section);
         sourceList = document.createElement("div");
         sourceList.className = "month-history-source";
@@ -29,6 +30,19 @@
     var historyRoot = script && script.src
         ? new URL("../../历史/", script.src)
         : new URL("../历史/", location.href);
+
+    function isDarkTheme() {
+        if (document.documentElement.dataset.theme === "dark") return true;
+        try {
+            var bg = getComputedStyle(document.body).backgroundColor || "";
+            var match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+            if (match) {
+                var luminance = 0.299 * Number(match[1]) + 0.587 * Number(match[2]) + 0.114 * Number(match[3]);
+                return luminance < 95;
+            }
+        } catch (error) { /* ignore */ }
+        return false;
+    }
     var MODE_TABS = {
         english: [["all", "全部"], ["单词解释", "单词解释"], ["句子分析", "句子分析"], ["作文", "作文"], ["其他", "其他"]],
         math: [["all", "全部"], ["题目讲解", "题目讲解"], ["错题诊断", "错题分析"], ["概念公式", "概念公式"], ["其他", "其他"]]
@@ -72,6 +86,11 @@
             codeBlocks.push("<pre><code>" + escapeHtml(code.replace(/\n$/, "")) + "</code></pre>");
             return "\n@@HISTORY_CODE_" + (codeBlocks.length - 1) + "@@\n";
         });
+        var mathBlocks = [];
+        source = source.replace(/\$\$([\s\S]*?)\$\$|\\\[([\s\S]*?)\\\]/g, function (match) {
+            mathBlocks.push(match);
+            return "\n@@HISTORY_MATH_" + (mathBlocks.length - 1) + "@@\n";
+        });
         source = escapeHtml(source);
         source = source.replace(/`([^`\n]+)`/g, "<code>$1</code>");
         source = source.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>");
@@ -97,6 +116,12 @@
                 return;
             }
             if (!textLine) { flushParagraph(); closeList(); return; }
+            var mathBlock = textLine.match(/^@@HISTORY_MATH_(\d+)@@$/);
+            if (mathBlock) {
+                flushParagraph(); closeList();
+                out.push('<div class="history-math-raw">' + escapeHtml(mathBlocks[Number(mathBlock[1])] || "") + "</div>");
+                return;
+            }
             var heading = textLine.match(/^(#{1,4})\s+(.*)$/);
             if (heading) {
                 flushParagraph(); closeList();
@@ -134,6 +159,7 @@
     function insertToolbar() {
         if (list) return;
         var panel = sourceList.parentElement;
+        if (isDarkTheme()) panel.classList.add("month-history-dark");
         list = document.createElement("div");
         list.id = "month-history-list";
         list.className = "month-history-list";
