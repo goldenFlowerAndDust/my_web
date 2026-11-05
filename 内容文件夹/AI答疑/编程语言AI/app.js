@@ -338,7 +338,7 @@
     session.messages.splice(start, 2);
     if (!session.messages.length) {
       closeSession(id);
-      if (window.ConversationStore) window.ConversationStore.clearConversation(id);
+      if (window.ConversationStore) window.ConversationStore.clearConversation(id, "code");
       return true;
     }
     const firstUser = session.messages.find((message) => message.role === "user");
@@ -382,7 +382,7 @@
   initSessions();
   window.ProgrammingCloseConversation = function (id) {
     closeSession(id);
-    if (window.ConversationStore) window.ConversationStore.clearConversation(id);
+    if (window.ConversationStore) window.ConversationStore.clearConversation(id, "code");
   };
   window.ProgrammingRemoveRound = function (id, roundIndex) {
     return removeRound(id, roundIndex);
@@ -800,7 +800,7 @@
 
   async function loadHistory() {
     historyList.innerHTML = '<p class="history-empty">加载历史…</p>';
-    if (window.ConversationStore && window.ConversationStore.isInitialized() &&
+    if (window.ConversationStore && window.ConversationStore.isInitialized("code") &&
         window.ConversationStore.isLegacyImported("code")) {
       const stored = window.ConversationStore.entries("code");
       historyRecords = stored.sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
@@ -1152,7 +1152,7 @@
       if (!window.confirm("删除第 " + (index + 1) + " 轮？删除后不可恢复。")) return;
       const removed = window.ProgrammingRemoveRound ? window.ProgrammingRemoveRound(session.id, index) : false;
       if (!removed && window.ConversationStore) {
-        window.ConversationStore.removeRound(session.id, index);
+        window.ConversationStore.removeRound(session.id, index, "code");
       }
       renderRoundSelect(true);
       if (!conversationTurns().length) {
@@ -1235,7 +1235,7 @@
         removed = window.ProgrammingRemoveRound(record.conversation_id, round - 1);
       }
       if (!removed && window.ConversationStore) {
-        window.ConversationStore.removeRound(record.conversation_id, round - 1);
+        window.ConversationStore.removeRound(record.conversation_id, round - 1, "code");
       }
       loadHistory();
       return;

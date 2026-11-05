@@ -870,7 +870,7 @@
             removed = window.TutorTabs.removeRound(conversationId, roundNumber - 1);
         }
         if (!removed && window.ConversationStore) {
-            window.ConversationStore.removeRound(conversationId, roundNumber - 1);
+            window.ConversationStore.removeRound(conversationId, roundNumber - 1, "english");
         }
         loadHistory(historyCategory);
     }
@@ -880,7 +880,7 @@
         if (window.TutorTabs && window.TutorTabs.removeConversation) {
             window.TutorTabs.removeConversation(conversationId);
         }
-        if (window.ConversationStore) window.ConversationStore.clearConversation(conversationId);
+        if (window.ConversationStore) window.ConversationStore.clearConversation(conversationId, "english");
         loadHistory(historyCategory);
     }
 
@@ -1069,7 +1069,7 @@
             tab.setAttribute("aria-selected", active ? "true" : "false");
         });
 
-        if (window.ConversationStore && window.ConversationStore.isInitialized() &&
+        if (window.ConversationStore && window.ConversationStore.isInitialized("english") &&
             window.ConversationStore.isLegacyImported("english")) {
             var allStored = window.ConversationStore.entries("english");
             var stored = allStored.filter(function (entry) {

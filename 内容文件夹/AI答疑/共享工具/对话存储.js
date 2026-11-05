@@ -1,15 +1,25 @@
 (function () {
     "use strict";
 
-    // 本机对话的唯一 JSON 来源：回答轮次和历史记录都从这里读取。
-    var KEY = "aiTutor.conversations.v1";
-    var INIT_KEY = "aiTutor.conversations.initialized.v1";
+    // 本科目独立存储：英语 / 数学 / 编程各一份 JSON，互不混用。
+    var KEY_PREFIX = "aiTutor.conversations.v2.";
+    var OLD_KEY = "aiTutor.conversations.v1";
+    var INIT_PREFIX = "aiTutor.conversations.initialized.v2.";
     var LEGACY_PREFIX = "aiTutor.conversations.legacy.";
+    var SUBJECTS = ["english", "math", "code"];
     var MAX = 200;
 
-    function read() {
+    function storageKey(subject) {
+        return KEY_PREFIX + String(subject || "unknown");
+    }
+
+    function globalInitKey(subject) {
+        return INIT_PREFIX + String(subject || "unknown");
+    }
+
+    function readOldGlobal() {
         try {
-            var raw = localStorage.getItem(KEY);
+            var raw = localStorage.getItem(OLD_KEY);
             var list = raw ? JSON.parse(raw) : [];
             return Array.isArray(list) ? list : [];
         } catch (error) {
@@ -17,10 +27,29 @@
         }
     }
 
-    function write(list) {
+    function read(subject) {
         try {
-            localStorage.setItem(KEY, JSON.stringify((Array.isArray(list) ? list : []).slice(0, MAX)));
-            localStorage.setItem(INIT_KEY, "1");
+            var key = storageKey(subject);
+            var raw = localStorage.getItem(key);
+            if (raw) {
+                var list = JSON.parse(raw);
+                return Array.isArray(list) ? list : [];
+            }
+            // 把旧版共用的 v1 JSON 按 subject 拆到新键，避免科目串数据。
+            var old = readOldGlobal().filter(function (item) {
+                return item && item.subject === subject;
+            });
+            if (old.length) write(old, subject);
+            return old;
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function write(list, subject) {
+        try {
+            localStorage.setItem(storageKey(subject), JSON.stringify((Array.isArray(list) ? list : []).slice(0, MAX)));
+            localStorage.setItem(globalInitKey(subject), "1");
         } catch (error) { /* 空间不足时保留当前页面状态 */ }
     }
 
@@ -38,11 +67,11 @@
         } catch (error) { /* ignore */ }
     }
 
-    function isInitialized() {
+    function isInitialized(subject) {
         try {
-            return localStorage.getItem(INIT_KEY) === "1" || read().length > 0;
+            return localStorage.getItem(globalInitKey(subject)) === "1" || read(subject).length > 0;
         } catch (error) {
-            return read().length > 0;
+            return read(subject).length > 0;
         }
     }
 
@@ -79,13 +108,13 @@
     }
 
     function upsert(session, subject) {
-        if (!session || !session.id) return;
+        if (!session || !session.id || !subject) return;
         var messages = normalizeMessages(session.messages);
         if (!messages.length) return;
         var assistant = messages.find(function (m) { return m.role === "assistant"; }) || {};
         var conversation = {
             id: String(session.id),
-            subject: String(subject || ""),
+            subject: String(subject),
             title: titleOf(session),
             mode: String(session.mode || assistant.mode || ""),
             topic: String(session.topic || ""),
@@ -94,18 +123,18 @@
             updated_at: Date.now(),
             messages: messages
         };
-        var list = read();
+        var list = read(subject);
         var existing = list.find(function (item) { return item && item.id === conversation.id; });
         if (existing && existing.created_at) conversation.created_at = existing.created_at;
         else conversation.created_at = conversation.updated_at;
         list = list.filter(function (item) { return item && item.id !== conversation.id; });
         list.unshift(conversation);
-        write(list);
+        write(list, subject);
         return conversation;
     }
 
     function importEntries(entries, subject) {
-        if (isLegacyImported(subject)) return false;
+        if (!subject || isLegacyImported(subject)) return false;
         if (!Array.isArray(entries) || !entries.length) {
             markLegacyImported(subject);
             return false;
@@ -113,7 +142,8 @@
         var groups = {};
         entries.forEach(function (entry, index) {
             if (!entry || !entry.question || !entry.answer) return;
-            var id = entry.conversation_id || ("legacy-" + String(entry.time || "").replace(/[^0-9]/g, "") + "-" + index);
+            var id = entry.conversation_id || ("legacy-" + subject + "-" +
+                String(entry.time || "").replace(/[^0-9]/g, "") + "-" + index);
             if (!groups[id]) {
                 groups[id] = {
                     id: id,
@@ -145,7 +175,7 @@
     }
 
     function list(subject) {
-        return read().filter(function (item) {
+        return read(subject).filter(function (item) {
             return item && item.id && (!subject || item.subject === subject);
         });
     }
@@ -183,33 +213,42 @@
         return result;
     }
 
-
-    function removeRound(conversationId, roundIndex) {
-        var list = read();
-        var conversation = list.find(function (item) { return item && item.id === conversationId; });
-        if (!conversation) return false;
-        var messages = normalizeMessages(conversation.messages);
-        var start = Math.max(0, Number(roundIndex) || 0) * 2;
-        if (start + 1 >= messages.length) return false;
-        messages.splice(start, 2);
-        if (!messages.length) {
-            write(list.filter(function (item) { return item && item.id !== conversationId; }));
+    function removeRound(conversationId, roundIndex, subject) {
+        var subjects = subject ? [subject] : SUBJECTS;
+        for (var s = 0; s < subjects.length; s += 1) {
+            var currentSubject = subjects[s];
+            var list = read(currentSubject);
+            var conversation = list.find(function (item) { return item && item.id === conversationId; });
+            if (!conversation) continue;
+            var messages = normalizeMessages(conversation.messages);
+            var start = Math.max(0, Number(roundIndex) || 0) * 2;
+            if (start + 1 >= messages.length) return false;
+            messages.splice(start, 2);
+            if (!messages.length) {
+                write(list.filter(function (item) { return item && item.id !== conversationId; }), currentSubject);
+                return true;
+            }
+            var firstUser = messages.find(function (message) { return message.role === "user"; });
+            conversation.messages = messages;
+            conversation.title = firstUser ? String(firstUser.content).slice(0, 80) : "新对话";
+            conversation.updated_at = Date.now();
+            write(list, currentSubject);
             return true;
         }
-        var firstUser = messages.find(function (message) { return message.role === "user"; });
-        conversation.messages = messages;
-        conversation.title = firstUser ? String(firstUser.content).slice(0, 80) : "新对话";
-        conversation.updated_at = Date.now();
-        write(list);
-        return true;
+        return false;
     }
 
-    function clearConversation(id) {
-        write(read().filter(function (item) { return item && item.id !== id; }));
+    function clearConversation(id, subject) {
+        var subjects = subject ? [subject] : SUBJECTS;
+        subjects.forEach(function (currentSubject) {
+            write(read(currentSubject).filter(function (item) {
+                return item && item.id !== id;
+            }), currentSubject);
+        });
     }
 
     window.ConversationStore = {
-        KEY: KEY,
+        KEY_PREFIX: KEY_PREFIX,
         upsert: upsert,
         importEntries: importEntries,
         isInitialized: isInitialized,
@@ -219,6 +258,6 @@
         entries: entries,
         clearConversation: clearConversation,
         removeRound: removeRound,
-        dump: read
+        dump: function (subject) { return read(subject || "english"); }
     };
 })();

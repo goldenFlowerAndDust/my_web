@@ -236,6 +236,7 @@
     }
 
     window.TutorTabs = {
+        subject: storeSubject(),
         maxRounds: MAX_ROUNDS,
         activeId: function () { return active; },
         canAsk: canAsk,
@@ -329,7 +330,7 @@
         render();
         restore();
         save();
-        if (window.ConversationStore) window.ConversationStore.clearConversation(id);
+        if (window.ConversationStore) window.ConversationStore.clearConversation(id, storeSubject());
         return true;
     }
 

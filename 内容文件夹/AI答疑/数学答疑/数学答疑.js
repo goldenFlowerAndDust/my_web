@@ -774,7 +774,7 @@
             removed = window.TutorTabs.removeRound(conversationId, roundNumber - 1);
         }
         if (!removed && window.ConversationStore) {
-            window.ConversationStore.removeRound(conversationId, roundNumber - 1);
+            window.ConversationStore.removeRound(conversationId, roundNumber - 1, "math");
         }
         loadHistory(historyCategory);
     }
@@ -784,7 +784,7 @@
         if (window.TutorTabs && window.TutorTabs.removeConversation) {
             window.TutorTabs.removeConversation(conversationId);
         }
-        if (window.ConversationStore) window.ConversationStore.clearConversation(conversationId);
+        if (window.ConversationStore) window.ConversationStore.clearConversation(conversationId, "math");
         loadHistory(historyCategory, historyTopic);
     }
 
@@ -988,7 +988,7 @@
             tab.classList.toggle("is-active", active);
         });
 
-        if (window.ConversationStore && window.ConversationStore.isInitialized() &&
+        if (window.ConversationStore && window.ConversationStore.isInitialized("math") &&
             window.ConversationStore.isLegacyImported("math")) {
             var allStored = window.ConversationStore.entries("math");
             var stored = allStored.filter(function (entry) {

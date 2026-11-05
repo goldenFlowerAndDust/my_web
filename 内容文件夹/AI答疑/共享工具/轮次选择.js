@@ -100,7 +100,7 @@
         var id = tabs.activeId();
         var removed = tabs.removeRound ? tabs.removeRound(id, index) : false;
         if (!removed && window.ConversationStore) {
-            window.ConversationStore.removeRound(id, index);
+            window.ConversationStore.removeRound(id, index, tabs.subject);
         }
         refresh(true);
         var remaining = tabs.turns();
