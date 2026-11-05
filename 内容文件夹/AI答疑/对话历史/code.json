@@ -2,7 +2,8 @@
   "version": 1,
   "subject": "code",
   "subject_label": "编程",
-  "updated_at": "2026-11-05 20:21:00",
+  "updated_at": "2026-11-05 20:39:05",
   "max_rounds": 20,
-  "windows": {}
+  "windows": {},
+  "deleted": {}
 }

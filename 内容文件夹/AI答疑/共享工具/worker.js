@@ -1589,6 +1589,10 @@ async function handleRequest(request, env) {
     return json({ ok: false, error: "来源不在允许列表中。" }, 403, request, env);
   }
 
+  if (path === "/api/conversations" && (request.method === "GET" || request.method === "POST")) {
+    return handleConversations(request, env);
+  }
+
   if (path === "/api/health" && request.method === "GET") {
     return json({
       ok: true,
