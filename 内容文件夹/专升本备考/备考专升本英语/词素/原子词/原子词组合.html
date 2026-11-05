@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原子词组合 · 构词根目录</title>
+    <meta name="description" content="专升本英语原子词库：按字母和释义浏览不可再分的核心原子词，点击进入独立词素页面。">
+    <style>
+        :root {
+            --bg: #f4efe5;
+            --paper: #fffdf8;
+            --ink: #203047;
+            --muted: #64748b;
+            --line: #d9e2ec;
+            --accent: #0b6672;
+            --accent-soft: #e3f2f3;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 12% 8%, rgba(11, 102, 114, .07), transparent 30%),
+                linear-gradient(180deg, #f7f2e8 0%, var(--bg) 100%);
+            font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+        }
+        a { color: var(--accent); }
+        .page {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 38px 0 64px;
+        }
+        .topline {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 26px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+        .topline a { text-decoration: none; font-weight: 700; }
+        .hero {
+            padding: 28px 30px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: var(--paper);
+            box-shadow: 0 14px 34px rgba(30, 50, 70, .06);
+        }
+        .kicker {
+            margin: 0 0 8px;
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .16em;
+        }
+        h1 {
+            margin: 0;
+            font-size: clamp(30px, 4vw, 44px);
+            letter-spacing: -.03em;
+        }
+        .hero p {
+            max-width: 760px;
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .pill {
+            padding: 6px 11px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin: 22px 0 10px;
+        }
+        .search {
+            flex: 1 1 320px;
+            min-width: 220px;
+            padding: 11px 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--paper);
+            color: var(--ink);
+            font: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+        .search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(11, 102, 114, .1); }
+        .letters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .letters button {
+            min-width: 29px;
+            padding: 6px 7px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: var(--paper);
+            color: var(--muted);
+            font: inherit;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .letters button.is-active,
+        .letters button:hover {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: #fff;
+        }
+        .status {
+            margin: 14px 0 18px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+        .group { margin: 24px 0 0; }
+        .group-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 10px;
+            color: var(--ink);
+            font-size: 14px;
+        }
+        .group-title span {
+            display: inline-grid;
+            place-items: center;
+            width: 27px;
+            height: 27px;
+            border-radius: 7px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 800;
+        }
+        .group-title small { color: var(--muted); font-weight: 400; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+            gap: 11px;
+        }
+        .card {
+            display: block;
+            padding: 15px 16px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: var(--paper);
+            color: inherit;
+            text-decoration: none;
+            transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(11, 102, 114, .45);
+            box-shadow: 0 8px 20px rgba(30, 50, 70, .08);
+        }
+        .card-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .word {
+            color: var(--accent);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px;
+            font-weight: 700;
+        }
+        .pos { color: var(--muted); font-size: 11px; white-space: nowrap; }
+        .zh {
+            margin: 7px 0 0;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+        .note {
+            margin: 8px 0 0;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+        .empty {
+            padding: 34px;
+            border: 1px dashed var(--line);
+            border-radius: 12px;
+            color: var(--muted);
+            text-align: center;
+        }
+        .footer {
+            margin-top: 34px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        .footer a { font-weight: 700; }
+        @media (max-width: 620px) {
+            .page { padding-top: 22px; }
+            .hero { padding: 21px; }
+            .toolbar { align-items: stretch; }
+            .letters { order: 3; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="topline">
+        <a href="../../专升本英语核心词汇通关.html">← 核心词汇通关</a>
+        <a href="../../复习清单/核心词汇复习清单.html">复习清单 →</a>
+    </div>
+
+    <header class="hero">
+        <p class="kicker">ATOM WORDS · 构词根目录</p>
+        <h1>原子词组合</h1>
+        <p>
+            原子词是不可再分的基础词，也是前后缀记忆的根。这里把生词器收录的原子词集中在一起，
+            方便先认词根，再扩展 friend → friendly → friendship，或者 care → careful → carefully。
+        </p>
+        <div class="hero-meta">
+            <span class="pill" id="atomCount">读取中…</span>
+            <span class="pill">点击卡片进入独立词素页</span>
+            <span class="pill">复习清单仍按词素 HTML 打开</span>
+        </div>
+    </header>
+
+    <div class="toolbar">
+        <input class="search" id="atomSearch" type="search" placeholder="搜索原子词或中文释义…" autocomplete="off">
+        <div class="letters" id="letterBar"></div>
+    </div>
+
+    <p class="status" id="atomStatus">正在读取 data.json…</p>
+    <div id="atomList"></div>
+
+    <footer class="footer">
+        <p>原子词来源：<code>复习清单/data.json</code> 中分类为 <code>词素/原子词</code> 的词条。</p>
+        <p>新收录的原子词会自动进入本页；前缀/后缀词仍进入 <code>词素/生词收录</code> 并额外写入核心词汇页。</p>
+    </footer>
+</div>
+
+<script>
+(function () {
+    'use strict';
+    var DATA_URL = '../../复习清单/data.json';
+    var listEl = document.getElementById('atomList');
+    var statusEl = document.getElementById('atomStatus');
+    var countEl = document.getElementById('atomCount');
+    var searchEl = document.getElementById('atomSearch');
+    var letterBar = document.getElementById('letterBar');
+    var atoms = [];
+    var activeLetter = '';
+
+    function esc(value) {
+        return String(value == null ? '' : value).replace(/[&<>"']/g, function (ch) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+        });
+    }
+
+    function lettersOf(word) {
+        var first = String(word || '').charAt(0).toUpperCase();
+        return /[A-Z]/.test(first) ? first : '#';
+    }
+
+    function linkFor(item) {
+        var base = new URL('../../复习清单/', location.href);
+        return new URL(String(item.path || ''), base).href;
+    }
+
+    function render() {
+        var query = String(searchEl.value || '').trim().toLowerCase();
+        var visible = atoms.filter(function (item) {
+            var word = String(item.word || item.name || '');
+            var zh = String(item.zh || item.sense || '');
+            if (activeLetter && lettersOf(word) !== activeLetter) return false;
+            if (!query) return true;
+            return word.toLowerCase().indexOf(query) >= 0 || zh.toLowerCase().indexOf(query) >= 0;
+        });
+
+        var groups = {};
+        visible.forEach(function (item) {
+            var key = lettersOf(item.word || item.name);
+            (groups[key] || (groups[key] = [])).push(item);
+        });
+
+        listEl.innerHTML = Object.keys(groups).sort().map(function (letter) {
+            var cards = groups[letter].sort(function (a, b) {
+                return String(a.word || a.name).localeCompare(String(b.word || b.name));
+            }).map(function (item) {
+                var word = String(item.word || item.name || '');
+                var zh = String(item.zh || item.sense || '');
+                var pos = String(item.pos || item.pos_zh || '');
+                return '<a class="card" href="' + esc(linkFor(item)) + '">' +
+                    '<div class="card-head"><span class="word">' + esc(word) + '</span><span class="pos">' + esc(pos) + '</span></div>' +
+                    '<p class="zh">' + esc(zh) + '</p>' +
+                    '<p class="note">根词 / 原子词 · 点击进入词素页</p></a>';
+            }).join('');
+            return '<section class="group"><h2 class="group-title"><span>' + esc(letter) + '</span> ' + esc(letter) +
+                ' 组 <small>' + groups[letter].length + ' 个词</small></h2><div class="grid">' + cards + '</div></section>';
+        }).join('');
+
+        if (!visible.length) {
+            listEl.innerHTML = '<div class="empty">没有匹配的原子词。</div>';
+        }
+        statusEl.textContent = '共 ' + atoms.length + ' 个原子词，当前显示 ' + visible.length + ' 个。';
+        countEl.textContent = atoms.length + ' 个原子词';
+    }
+
+    function renderLetters() {
+        var set = {};
+        atoms.forEach(function (item) { set[lettersOf(item.word || item.name)] = true; });
+        var keys = Object.keys(set).sort();
+        letterBar.innerHTML = '<button type="button" data-letter="">全部</button>' + keys.map(function (letter) {
+            return '<button type="button" data-letter="' + esc(letter) + '">' + esc(letter) + '</button>';
+        }).join('');
+        letterBar.querySelectorAll('button').forEach(function (button) {
+            button.addEventListener('click', function () {
+                activeLetter = button.getAttribute('data-letter') || '';
+                letterBar.querySelectorAll('button').forEach(function (item) {
+                    item.classList.toggle('is-active', item === button);
+                });
+                render();
+            });
+        });
+        var all = letterBar.querySelector('button[data-letter=""]');
+        if (all) all.classList.add('is-active');
+    }
+
+    fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' })
+        .then(function (response) {
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            return response.json();
+        })
+        .then(function (data) {
+            var items = data && data['词素/原子词'];
+            atoms = (Array.isArray(items) ? items : []).filter(function (item) {
+                return item && (item.word || item.name);
+            });
+            renderLetters();
+            render();
+        })
+        .catch(function (error) {
+            statusEl.textContent = '读取失败：' + error.message + '。请通过 HTTP 打开本页，不要直接双击 file://。';
+            countEl.textContent = '读取失败';
+        });
+
+    searchEl.addEventListener('input', render);
+})();
+</script>
+</body>
+</html>

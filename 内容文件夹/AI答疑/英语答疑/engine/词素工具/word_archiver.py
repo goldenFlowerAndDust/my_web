@@ -1009,6 +1009,8 @@ def insert_into_ci(analysis: dict[str, Any]) -> dict[str, Any]:
 
 def _standalone_page_path(analysis: dict[str, Any]) -> Path:
     word = safe_component(analysis["word"], "word")
+    if analysis.get("target", {}).get("kind") == "atom":
+        return CI_DIR / "原子词" / ("原子词：" + word + ".html")
     return CI_DIR / "生词收录" / (word + ".html")
 
 
@@ -1021,7 +1023,8 @@ def insert_standalone_word_page(analysis: dict[str, Any]) -> dict[str, Any]:
         page = read_text(path)
         if re.search(r'data-word="' + re.escape(word) + r'"', page):
             raise ArchiveError("%s 中已经有 %s，未重复写入。" % (path.name, word))
-    title = "单词：%s" % word
+    is_atom = analysis.get("target", {}).get("kind") == "atom"
+    title = ("原子词：%s" if is_atom else "单词：%s") % word
     cards = _ci_card_html(analysis, True)
     related = _related_cards_html(analysis)
     if related:
@@ -1029,7 +1032,7 @@ def insert_standalone_word_page(analysis: dict[str, Any]) -> dict[str, Any]:
     page = _ci_page_html(analysis, title, cards)
     write_text_atomic(path, page)
     return {
-        "target": "词素 · 生词收录",
+        "target": "词素 · 原子词" if is_atom else "词素 · 生词收录",
         "file": str(path.relative_to(BASE)),
         "created": True,
         "anchor": "word-" + word,
