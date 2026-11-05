@@ -249,7 +249,8 @@
         turns: turns,
         removeConversation: removeConversation,
         removeRound: removeRound,
-        resumeConversation: resumeConversation
+        resumeConversation: resumeConversation,
+        resumeWindow: resumeWindow
     };
 
     function go(id) {
@@ -320,6 +321,14 @@
         syncStore();
         window.dispatchEvent(new CustomEvent("tutor-turn-added", { detail: { id: id, removed: true } }));
         return true;
+    }
+
+    function resumeWindow(conversation, roundLimit) {
+        if (!conversation || !conversation.id) return false;
+        if (window.ConversationStore && window.ConversationStore.upsert) {
+            window.ConversationStore.upsert(conversation, storeSubject());
+        }
+        return resumeConversation(conversation.id, roundLimit);
     }
 
     function resumeConversation(id, roundLimit) {

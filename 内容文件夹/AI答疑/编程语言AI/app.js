@@ -356,6 +356,14 @@
     return true;
   }
 
+  function resumeWindow(conversation, roundLimit) {
+    if (!conversation || !conversation.id) return false;
+    if (window.ConversationStore && window.ConversationStore.upsert) {
+      window.ConversationStore.upsert(conversation, "code");
+    }
+    return resumeConversation(conversation.id, roundLimit);
+  }
+
   function resumeConversation(id, roundLimit) {
     if (!id || !window.ConversationStore) return false;
     const conversation = window.ConversationStore.list("code").find((item) => item.id === id);
@@ -449,6 +457,9 @@
   };
   window.ProgrammingResumeConversation = function (id, roundLimit) {
     return resumeConversation(id, roundLimit);
+  };
+  window.ProgrammingResumeWindow = function (conversation, roundLimit) {
+    return resumeWindow(conversation, roundLimit);
   };
 
   function currentProfile() {

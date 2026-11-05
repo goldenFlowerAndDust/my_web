@@ -167,11 +167,19 @@
             });
             var resume = card.querySelector(".month-history-resume");
             if (resume) resume.addEventListener("click", function () {
-                if (window.TutorTabs && window.TutorTabs.resumeConversation) {
-                    window.TutorTabs.resumeConversation(item.id, Number(item.rounds || 1));
-                } else if (window.ProgrammingResumeConversation) {
-                    window.ProgrammingResumeConversation(item.id, Number(item.rounds || 1));
-                }
+                loadChunk(item).then(function (data) {
+                    var windowData = (data.windows || {})[item.id];
+                    if (!windowData) return;
+                    if (window.TutorTabs && window.TutorTabs.resumeWindow) {
+                        window.TutorTabs.resumeWindow(windowData, Number(item.rounds || 1));
+                        var ask = document.querySelector(".ask-panel");
+                        if (ask && ask.scrollIntoView) ask.scrollIntoView({ behavior: "smooth", block: "start" });
+                    } else if (window.ProgrammingResumeWindow) {
+                        window.ProgrammingResumeWindow(windowData, Number(item.rounds || 1));
+                        var ask2 = document.querySelector(".ask-panel, .composer");
+                        if (ask2 && ask2.scrollIntoView) ask2.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                });
             });
             list.appendChild(card);
         });
