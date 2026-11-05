@@ -626,6 +626,39 @@
         }
     }
 
+    async function enrichEntriesWithPos() {
+        if (!entries.length) return;
+        var needs = entries.some(function (item) {
+            return !item.pos && item.word && String(item.word).indexOf(',') < 0;
+        });
+        if (!needs) return;
+        try {
+            var resp = await fetch('复习清单/data.json?t=' + Date.now(), { cache: 'no-store' });
+            if (!resp.ok) return;
+            var data = await resp.json();
+            var map = {};
+            Object.keys(data || {}).forEach(function (category) {
+                if (!Array.isArray(data[category])) return;
+                data[category].forEach(function (item) {
+                    if (item && item.kind === 'word' && item.name) {
+                        map[String(item.name).toLowerCase()] = item;
+                        if (item.pluralName) map[String(item.pluralName).toLowerCase()] = item;
+                    }
+                });
+            });
+            entries.forEach(function (entry) {
+                if (entry.pos || !entry.word || String(entry.word).indexOf(',') >= 0) return;
+                var item = map[String(entry.word).toLowerCase()];
+                if (!item) return;
+                entry.pos = item.pos || '';
+                entry.pos_zh = item.pos_zh || '';
+                if (Array.isArray(item.senses) && item.senses.length) {
+                    entry.sense = item.senses[0].zh || '';
+                }
+            });
+        } catch (error) { /* 旧日志没有词性时保持 — */ }
+    }
+
     async function load() {
         if (loading) return;
         loading = true;
@@ -636,6 +669,7 @@
                 staticEntries = await loadStaticLog();
                 if (staticEntries.length) {
                     entries = staticEntries;
+                    await enrichEntriesWithPos();
                     setBadge(true, 'GitHub 静态归档 · ' + entries.length + ' 条');
                     renderStats();
                     render();
@@ -658,6 +692,7 @@
                     return;
                 }
             }
+            await enrichEntriesWithPos();
             setBadge(true, '日志已连接 · ' + data.total + ' 条');
             renderStats();
             render();
@@ -665,6 +700,7 @@
             staticEntries = await loadStaticLog();
             if (staticEntries.length) {
                 entries = staticEntries;
+                await enrichEntriesWithPos();
                 setBadge(true, '静态归档 · ' + entries.length + ' 条');
                 renderStats();
                 render();
