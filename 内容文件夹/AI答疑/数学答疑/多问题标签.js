@@ -28,7 +28,7 @@
 
     function titleOf(value) {
         var text = String(value || "").replace(/\s+/g, " ").trim();
-        return text ? (text.length > 16 ? text.slice(0, 16) + "…" : text) : "新问题";
+        return text || "新问题";
     }
 
     function current() {

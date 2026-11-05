@@ -236,11 +236,11 @@
 
     function titleOf(session) {
         var title = text(session && session.title);
-        if (title && title !== "新问题") return title.slice(0, 80);
+        if (title && title !== "新问题") return title;
         var messages = (session && session.messages) || [];
         for (var i = 0; i < messages.length; i += 1) {
             if (messages[i] && messages[i].role === "user" && text(messages[i].content)) {
-                return text(messages[i].content).slice(0, 80);
+                return text(messages[i].content);
             }
         }
         return "新对话";

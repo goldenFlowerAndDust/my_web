@@ -204,7 +204,7 @@ def upsert_window(
     existing = windows.get(window_id) if isinstance(windows.get(window_id), dict) else {}
     window = {
         "id": window_id,
-        "title": str(title or "新对话")[:120],
+        "title": str(title or "新对话"),
         "created_at": normalize_time(created_at) or existing.get("created_at") or now_text(),
         "updated_at": normalize_time(updated_at) or now_text(),
         "mode": str(mode or existing.get("mode") or ""),
@@ -248,7 +248,7 @@ def remove_round(subject: str, window_id: str, round_index: int) -> dict[str, An
     window["updated_at"] = now_text()
     first_user = next((m for m in messages if m.get("role") == "user"), None)
     if first_user:
-        window["title"] = str(first_user.get("content") or "新对话")[:120]
+        window["title"] = str(first_user.get("content") or "新对话")
     windows[str(window_id)] = window
     write_document(subject, data)
     return window
