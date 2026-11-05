@@ -1,0 +1,73 @@
+.month-history-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--line, #dce4ee);
+    border-radius: 9px;
+    background: var(--paper, #fffdf8);
+}
+.month-history-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted, #697386);
+}
+.month-history-label select {
+    min-width: 170px;
+    padding: 5px 8px;
+    border: 1px solid var(--line-strong, #cfd9e6);
+    border-radius: 6px;
+    background: var(--paper, #fffdf8);
+    color: var(--ink, #203047);
+    font: inherit;
+}
+.month-history-count { font-size: 11px; color: var(--muted, #697386); }
+.month-history-note { margin-left: auto; font-size: 10px; color: var(--muted, #697386); }
+.month-history-card {
+    border: 1px solid var(--line, #dce4ee);
+    border-radius: 9px;
+    margin-bottom: 9px;
+    padding: 9px 11px;
+    background: var(--paper, #fffdf8);
+}
+.month-history-card-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.month-history-card-title { min-width: 0; font-size: 12px; font-weight: 600; color: var(--ink, #203047); overflow-wrap: anywhere; }
+.month-history-card-meta { flex: none; font-size: 10px; color: var(--muted, #697386); }
+.month-history-card-actions { display: flex; gap: 8px; margin-top: 7px; }
+.month-history-open,
+.month-history-resume {
+    padding: 4px 9px;
+    border: 1px solid var(--line-strong, #cfd9e6);
+    border-radius: 6px;
+    background: var(--paper, #fffdf8);
+    color: var(--ink, #203047);
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+.month-history-open:hover,
+.month-history-resume:hover { background: rgba(11, 102, 114, .08); }
+.month-history-detail {
+    margin-top: 9px;
+    padding-top: 9px;
+    border-top: 1px dashed var(--line, #dce4ee);
+}
+.month-history-round { margin-bottom: 12px; }
+.month-history-question,
+.month-history-answer { font-size: 11px; line-height: 1.75; overflow-wrap: anywhere; }
+.month-history-question b,
+.month-history-answer b { display: inline-block; min-width: 1.2em; color: var(--accent, #0b6672); }
+.month-history-answer { margin-top: 5px; }
+.month-history-loading,
+.month-history-empty,
+.month-history-error { padding: 12px; font-size: 11px; color: var(--muted, #697386); }
+.month-history-error { color: #a33; }
+@media (max-width: 620px) {
+    .month-history-note { display: none; }
+    .month-history-card-head { display: block; }
+    .month-history-card-meta { display: block; margin-top: 3px; }
+}

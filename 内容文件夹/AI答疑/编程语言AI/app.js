@@ -900,6 +900,7 @@
   }
 
   async function loadHistory() {
+    if (window.__AI_HISTORY_LIGHT__) return;
     if (window.ConversationStore && window.ConversationStore.ready) {
       await window.ConversationStore.ready;
     }

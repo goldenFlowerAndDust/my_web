@@ -52,6 +52,9 @@
         }).then(function (response) {
             if (!response.ok) throw new Error("HTTP " + response.status);
             return response.json();
+        }).then(function (data) {
+            window.dispatchEvent(new CustomEvent("tutor-history-updated", { detail: { subject: remoteSubject } }));
+            return data;
         }).catch(function () { /* 本地缓存继续工作 */ });
     }
 
@@ -96,6 +99,8 @@
     }
 
     function initializeRemote() {
+        // 历史界面改用按月静态索引后，不再在页面启动时拉取全部 messages。
+        if (window.__AI_HISTORY_LIGHT__) return Promise.resolve(false);
         if (!remoteBase || !remoteSubject) return Promise.resolve();
         return fetch(remoteUrl("/api/conversations?subject=" + encodeURIComponent(remoteSubject)), {
             cache: "no-store",

@@ -258,6 +258,14 @@ def ask(language: str, question: str, history: object = None, conversation_id: s
     }
 
 
+def rebuild_month_history(subject: str) -> None:
+    try:
+        from 生成历史索引 import build_subject
+        build_subject(subject)
+    except Exception as exc:  # noqa: BLE001
+        print("按月历史索引更新失败（不影响回答）：%s" % exc)
+
+
 def _conversation_action(payload: dict) -> dict:
     action = str(payload.get("action") or "upsert")
     if action == "upsert":
@@ -271,12 +279,15 @@ def _conversation_action(payload: dict) -> dict:
             language_name=str(payload.get("language_name") or ""),
             topic=str(payload.get("topic") or ""),
         )
+        rebuild_month_history("code")
         return {"ok": True, "window": window, "document": read_document("code")}
     if action == "remove_round":
         window = remove_round("code", payload.get("window_id"), int(payload.get("round") or 0))
+        rebuild_month_history("code")
         return {"ok": True, "window": window, "document": read_document("code")}
     if action == "delete_window":
         deleted = delete_window("code", payload.get("window_id"))
+        rebuild_month_history("code")
         return {"ok": True, "deleted": deleted, "document": read_document("code")}
     raise ConversationError("未知对话历史操作：%s" % action)
 
