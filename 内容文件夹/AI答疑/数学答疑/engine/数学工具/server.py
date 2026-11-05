@@ -180,12 +180,23 @@ class Handler(SimpleHTTPRequestHandler):
         super().end_headers()
 
 
+def archive_conversation_history() -> None:
+    try:
+        from 归档对话历史 import archive_once
+        files = archive_once()
+        if files:
+            print("对话历史已归档：%d 个文件" % len(files))
+    except Exception as exc:  # noqa: BLE001
+        print("对话历史归档失败（不影响服务）：%s" % exc)
+
+
 def main() -> None:
     import argparse
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
     args = parser.parse_args()
+    archive_conversation_history()
     refresh_archive()
     server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
     print("数学答疑服务已启动：http://127.0.0.1:%d/数学答疑/数学答疑.html" % args.port)

@@ -370,6 +370,16 @@ class Handler(SimpleHTTPRequestHandler):
         sys.stderr.write("[%s] %s\n" % (datetime.now().strftime("%H:%M:%S"), fmt % args))
 
 
+def archive_conversation_history() -> None:
+    try:
+        from 归档对话历史 import archive_once
+        files = archive_once()
+        if files:
+            print("对话历史已归档：%d 个文件" % len(files))
+    except Exception as exc:  # noqa: BLE001
+        print("对话历史归档失败（不影响服务）：%s" % exc)
+
+
 def main() -> None:
     global PORT
     if len(sys.argv) > 1:
@@ -385,6 +395,7 @@ def main() -> None:
     print("  技能: %s" % SKILL_DIR)
     print("  按 Ctrl+C 停止")
     print("=" * 54)
+    archive_conversation_history()
     server = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     try:
         server.serve_forever()
