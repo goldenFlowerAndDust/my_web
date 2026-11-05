@@ -1168,4 +1168,11 @@
     showAnswerEmpty();
     checkService();
     loadHistory("all");
+
+    window.TutorRenderAnswer = function (text) {
+        return renderMarkdown(text || "");
+    };
+    window.TutorRenderMath = function (root) {
+        if (root) renderMath(root);
+    };
 })();

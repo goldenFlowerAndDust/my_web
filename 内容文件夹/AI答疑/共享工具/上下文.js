@@ -45,7 +45,11 @@
             if (response.ok) {
                 response.clone().json().then(function (data) {
                     if (data && data.ok && data.answer && question) {
-                        tabs.appendTurnTo(sessionId, question, data.answer);
+                        var answerHtml = "";
+                        try {
+                            answerHtml = window.TutorRenderAnswer ? window.TutorRenderAnswer(data.answer || "") : "";
+                        } catch (renderError) { answerHtml = ""; }
+                        tabs.appendTurnTo(sessionId, question, data.answer, answerHtml, data.mode, data.time);
                     }
                 }).catch(function () { /* ignore */ });
             }

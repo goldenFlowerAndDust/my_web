@@ -47,3 +47,24 @@
     white-space: nowrap;
 }
 .context-hint.is-full { color: #b03a2e; font-weight: 700; }
+
+
+/* 每个对话的轮次下拉 */
+.round-select {
+    max-width: 250px;
+    height: 28px;
+    padding: 0 8px;
+    border: 1px solid var(--line-strong);
+    border-radius: 7px;
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+    font-size: 11px;
+}
+.round-select:disabled { opacity: .55; }
+/* 长回答在卡片内滚动，不把整页拉长 */
+.answer-content { max-height: 58vh; overflow-y: auto; padding-right: 4px; }
+@media (max-width: 620px) {
+    .round-select { max-width: 150px; }
+    .answer-content { max-height: 65vh; }
+}

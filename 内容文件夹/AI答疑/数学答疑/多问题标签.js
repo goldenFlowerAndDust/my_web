@@ -113,6 +113,7 @@
                 '<button type="button" class="session-close" data-close="' + s.id + '" title="关闭标签">×</button></div>';
         }).join("");
         updateHint();
+        window.dispatchEvent(new CustomEvent("tutor-context-updated"));
     }
 
     function escape(value) {
@@ -159,15 +160,42 @@
         return s && Array.isArray(s.messages) ? s.messages.slice(-MAX_ROUNDS * 2) : [];
     }
 
-    function appendTurnTo(id, questionText, answerText) {
+    function appendTurnTo(id, questionText, answerText, answerHtml, answerMode, answerTime) {
         var s = sessions.find(function (item) { return item.id === id; });
         if (!s || !questionText || !answerText) return;
         s.messages = (Array.isArray(s.messages) ? s.messages : []).concat([
             { role: "user", content: String(questionText) },
-            { role: "assistant", content: String(answerText) }
+            {
+                role: "assistant",
+                content: String(answerText),
+                html: String(answerHtml || ""),
+                mode: String(answerMode || ""),
+                time: String(answerTime || "")
+            }
         ]).slice(-MAX_ROUNDS * 2);
         save();
         render();
+        window.dispatchEvent(new CustomEvent("tutor-context-updated"));
+    }
+
+    function turns() {
+        var s = current();
+        var result = [];
+        if (!s || !Array.isArray(s.messages)) return result;
+        for (var i = 0; i + 1 < s.messages.length; i += 2) {
+            var user = s.messages[i];
+            var assistant = s.messages[i + 1];
+            if (!user || !assistant || user.role !== "user" || assistant.role !== "assistant") continue;
+            result.push({
+                index: result.length + 1,
+                question: user.content,
+                answer: assistant.content,
+                html: assistant.html || "",
+                mode: assistant.mode || "",
+                time: assistant.time || ""
+            });
+        }
+        return result;
     }
 
     var contextHint = document.createElement("span");
@@ -192,7 +220,8 @@
         history: function () { return historyFor(active); },
         historyFor: historyFor,
         appendTurnTo: appendTurnTo,
-        rounds: function () { return roundsOf(current()); }
+        rounds: function () { return roundsOf(current()); },
+        turns: turns
     };
 
     function go(id) {

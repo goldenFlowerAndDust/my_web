@@ -422,3 +422,19 @@ textarea:focus { border-color: #9cc9e5; box-shadow: 0 0 0 3px rgba(76,150,201,.1
   .session-tab { max-width: 155px; }
   .session-title { max-width: 100px; }
 }
+
+
+/* 对话轮次与滚动回答 */
+.answer-head-tools { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.round-select {
+  max-width: 260px; height: 28px; padding: 0 8px;
+  border: 1px solid #33485d; border-radius: 7px;
+  background: #142232; color: #dce7f3; font: inherit; font-size: 11px;
+}
+.round-select:disabled { opacity: .55; }
+.answer { max-height: 58vh; overflow-y: auto; }
+@media (max-width: 620px) {
+  .answer-head-tools { width: 100%; justify-content: space-between; }
+  .round-select { max-width: 170px; }
+  .answer { max-height: 65vh; }
+}

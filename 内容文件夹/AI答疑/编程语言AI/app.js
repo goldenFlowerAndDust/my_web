@@ -92,6 +92,7 @@
   const statusEl = $("status");
   const answerEl = $("answer");
   const answerTime = $("answerTime");
+  const roundSelect = $("roundSelect");
   const historyList = $("historyList");
   const historyTabs = $("historyTabs");
   const historySearch = $("historySearch");
@@ -213,6 +214,56 @@
     }).join("");
   }
 
+  function conversationTurns() {
+    const session = currentSession();
+    const turns = [];
+    if (!session || !Array.isArray(session.messages)) return turns;
+    for (let i = 0; i + 1 < session.messages.length; i += 2) {
+      const user = session.messages[i];
+      const assistant = session.messages[i + 1];
+      if (!user || !assistant || user.role !== "user" || assistant.role !== "assistant") continue;
+      turns.push({
+        index: turns.length + 1,
+        question: user.content || "",
+        answer: assistant.content || "",
+        html: assistant.html || "",
+        time: assistant.time || ""
+      });
+    }
+    return turns;
+  }
+
+  function renderRoundSelect(forceLatest) {
+    if (!roundSelect) return;
+    const turns = conversationTurns();
+    roundSelect.innerHTML = turns.map((turn) => {
+      const text = String(turn.question || "").replace(/\s+/g, " ").trim();
+      const label = text.length > 34 ? text.slice(0, 34) + "…" : (text || "（无问题）");
+      return '<option value="' + (turn.index - 1) + '">第' + turn.index + '轮 · ' + escapeHtml(label) + "</option>";
+    }).join("");
+    roundSelect.hidden = turns.length === 0;
+    roundSelect.disabled = turns.length === 0;
+    if (turns.length && forceLatest) roundSelect.value = String(turns.length - 1);
+    if (!turns.length) return;
+    if (!roundSelect.value) roundSelect.value = String(turns.length - 1);
+    showRound(Number(roundSelect.value) || 0);
+  }
+
+  function showRound(index) {
+    const turns = conversationTurns();
+    const turn = turns[index];
+    if (!turn) return;
+    const html = turn.html || renderMarkdown(turn.answer || "");
+    answerEl.innerHTML = html;
+    answerTime.textContent = turn.time || "";
+    const session = currentSession();
+    if (session) {
+      session.answerHtml = html;
+      session.answerTime = turn.time || "";
+      saveSessions();
+    }
+  }
+
   function loadSessionView() {
     const session = currentSession();
     if (!session) return;
@@ -229,6 +280,7 @@
       setStatus("", "");
     }
     localStoragesetLanguage(session.language);
+    renderRoundSelect(false);
   }
 
   function localStoragesetLanguage(language) {
@@ -784,8 +836,14 @@
       session.answerTime = (data.language_name || "") + " · " + (data.time || "");
       session.messages = (session.messages || []).concat([
         { role: "user", content: question },
-        { role: "assistant", content: data.answer || "" }
+        {
+          role: "assistant",
+          content: data.answer || "",
+          html: renderMarkdown(data.answer || ""),
+          time: (data.language_name || "") + " · " + (data.time || "")
+        }
       ]).slice(-MAX_ROUNDS * 2);
+      renderRoundSelect(true);
       session.busy = false;
       session.error = false;
       if (session.id === activeSessionId) {
@@ -976,6 +1034,9 @@
     saveSessions();
   });
 
+  if (roundSelect) {
+    roundSelect.addEventListener("change", () => showRound(Number(roundSelect.value) || 0));
+  }
   askBtn.addEventListener("click", ask);
   questionInput.addEventListener("keydown", (event) => {
     if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {

@@ -1192,4 +1192,8 @@
     updateHistoryNote();
     checkService();
     loadHistory("all");
+
+    window.TutorRenderAnswer = function (text) {
+        return renderMarkdown(text || "");
+    };
 })();
