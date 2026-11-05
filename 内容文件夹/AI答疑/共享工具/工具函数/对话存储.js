@@ -88,6 +88,7 @@
         remoteSubject = String(subject || remoteSubject || "");
         remoteToken = String(token || "");
         remoteIds = {};
+        window.__AI_CONVERSATION_REMOTE__ = { base: remoteBase, subject: remoteSubject, hasToken: Boolean(remoteToken) };
         if (!remoteBase || !remoteSubject) return Promise.resolve(false);
         remoteReady = initializeRemote();
         return remoteReady;
