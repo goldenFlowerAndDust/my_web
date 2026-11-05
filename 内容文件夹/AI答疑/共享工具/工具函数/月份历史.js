@@ -35,8 +35,10 @@
         if (document.documentElement.dataset.theme === "dark") return true;
         try {
             var bg = getComputedStyle(document.body).backgroundColor || "";
-            var match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+            var match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?/);
             if (match) {
+                var alpha = match[4] === undefined ? 1 : Number(match[4]);
+                if (alpha < 0.5) return false;
                 var luminance = 0.299 * Number(match[1]) + 0.587 * Number(match[2]) + 0.114 * Number(match[3]);
                 return luminance < 95;
             }
@@ -314,6 +316,8 @@
                 var day = document.createElement("h3");
                 day.className = "month-history-day";
                 day.textContent = date;
+                day.style.setProperty("color", isDarkTheme() ? "#f5fbff" : "#14202e", "important");
+                day.style.setProperty("font-weight", "700", "important");
                 list.appendChild(day);
                 lastDate = date;
             }
