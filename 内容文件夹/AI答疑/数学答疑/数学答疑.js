@@ -834,7 +834,7 @@
             var head = document.createElement("div");
             head.className = "history-conversation-head";
             head.innerHTML = '<span class="history-conversation-title">' +
-                escapeHtml(truncate(first.question || "（无原题）", 80)) + "</span>" +
+                questionHtml(truncate(first.question || "（无原题）", 80)) + "</span>" +
                 '<span class="history-conversation-count">共 ' + group.items.length + " 轮</span>";
             var headDelete = document.createElement("button");
             headDelete.type = "button";
@@ -877,7 +877,8 @@
             var preview = document.createElement("button");
             preview.type = "button";
             preview.className = "history-conversation-preview";
-            preview.textContent = truncate(String(group.items[group.items.length - 1].entry.answer || "").replace(/[#*`>]/g, ""), 120);
+            preview.innerHTML = renderMarkdown(String(group.items[group.items.length - 1].entry.answer || ""));
+            renderMath(preview);
             preview.addEventListener("click", function () {
                 loadHistoryEntry(Number(select.value));
             });
@@ -886,6 +887,7 @@
             card.appendChild(roundDelete);
             card.appendChild(preview);
             historyList.appendChild(card);
+            renderMath(head.querySelector(".history-conversation-title"));
         });
     }
 

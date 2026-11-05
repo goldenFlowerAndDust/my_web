@@ -173,6 +173,8 @@
                     title: String(entry.question).slice(0, 80),
                     mode: entry.mode || "",
                     topic: entry.topic || "",
+                    language: entry.language || (subject === "code" ? entry.mode : "") || "",
+                    language_name: entry.language_name || entry.language || entry.mode || "",
                     messages: [],
                     created_at: entry.created_at || Date.now()
                 };
@@ -218,8 +220,9 @@
                     title: conversation.title,
                     mode: assistant.mode || conversation.mode || "",
                     topic: conversation.topic || "",
-                    language: conversation.language || "",
-                    language_name: conversation.language_name || "",
+                    language: conversation.language || (conversation.subject === "code" ? conversation.mode : "") || "",
+                    language_name: conversation.language_name ||
+                        (conversation.subject === "code" ? (conversation.language || conversation.mode) : "") || "",
                     question: user.content,
                     answer: assistant.content,
                     html: assistant.html || "",

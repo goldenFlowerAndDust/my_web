@@ -392,16 +392,34 @@
     return connection.profiles[connection.provider] || { url: "", token: "" };
   }
 
-  function routeConfig() {
+  function routeCandidates() {
     if (connection.mode === "local") {
-      return { id: "local", label: "本地 8769", base: LOCAL_API, token: "", local: true };
+      return [{ id: "local", label: "本地 8769", base: LOCAL_API, token: "", local: true }];
     }
-    const profile = currentProfile();
-    return {
+    const order = connection.provider === "domestic"
+      ? ["domestic", "cloudflare"]
+      : ["cloudflare", "domestic"];
+    const routes = [];
+    order.forEach((id) => {
+      const profile = connection.profiles[id] || { url: "", token: "" };
+      if (!profile.url || !profile.token) return;
+      routes.push({
+        id,
+        label: id === "domestic" ? "国内 SCF" : "Cloudflare",
+        base: profile.url,
+        token: profile.token,
+        local: false
+      });
+    });
+    return routes;
+  }
+
+  function routeConfig() {
+    return routeCandidates()[0] || {
       id: connection.provider,
       label: connection.provider === "domestic" ? "国内 SCF" : "Cloudflare",
-      base: profile.url,
-      token: profile.token,
+      base: "",
+      token: "",
       local: false
     };
   }
@@ -524,25 +542,37 @@
   }
 
   async function fetchJson(url, options) {
-    const config = routeConfig();
-    if (!config.base) {
+    const routes = routeCandidates();
+    if (!routes.length) {
       throw new Error("当前线路未配置地址，请展开左侧“连接设置”。");
     }
-    const headers = Object.assign({}, (options && options.headers) || {});
-    if (!config.local && config.token) headers["X-Tutor-Token"] = config.token;
-    const response = await fetch(config.base + url, Object.assign({}, options, { headers }));
-    let data = null;
-    try {
-      data = await response.json();
-    } catch (error) {
-      throw new Error(config.local
-        ? "服务返回的不是 JSON，请确认 8769 服务已启动。"
-        : "云端返回的不是 JSON，请检查线路地址和令牌。");
+    const errors = [];
+    for (let index = 0; index < routes.length; index += 1) {
+      const config = routes[index];
+      const headers = Object.assign({}, (options && options.headers) || {});
+      if (!config.local && config.token) headers["X-Tutor-Token"] = config.token;
+      try {
+        const response = await fetch(config.base + url, Object.assign({}, options, { headers }));
+        let data = null;
+        try {
+          data = await response.json();
+        } catch (error) {
+          throw new Error(config.local
+            ? "服务返回的不是 JSON，请确认 8769 服务已启动。"
+            : "云端返回的不是 JSON，请检查线路地址和令牌。");
+        }
+        if (!response.ok || !data.ok) {
+          throw new Error((data && data.error) || ("HTTP " + response.status));
+        }
+        return data;
+      } catch (error) {
+        errors.push(config.label + "：" + (error && error.message ? error.message : error));
+        if (index + 1 < routes.length) {
+          setStatus("线路 " + config.label + " 失败，切换备用线路…", "");
+        }
+      }
     }
-    if (!response.ok || !data.ok) {
-      throw new Error((data && data.error) || ("HTTP " + response.status));
-    }
-    return data;
+    throw new Error("所有云端线路都失败：" + errors.join("；"));
   }
 
   function apiPath(localPath, cloudPath) {
