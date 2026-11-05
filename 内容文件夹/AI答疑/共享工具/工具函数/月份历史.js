@@ -216,9 +216,11 @@
             var card = document.createElement("article");
             card.className = "month-history-card";
             card.setAttribute("data-window-id", item.id);
+            var initialRound = Math.max(0, Number(item.rounds || 1) - 1);
+            var initialQuestion = (Array.isArray(item.questions) && item.questions[initialRound]) || item.title || "（无问题）";
             card.innerHTML =
                 '<div class="month-history-card-head">' +
-                '<span class="month-history-card-title">' + questionHtml(item.title || "（无问题）") + "</span>" +
+                '<span class="month-history-card-title">' + questionHtml(initialQuestion) + "</span>" +
                 '<span class="month-history-card-meta">' + escapeHtml(item.updated_at || item.created_at || "") +
                 " · " + Number(item.rounds || 0) + " 轮</span>" +
                 "</div>" +
@@ -241,8 +243,15 @@
 
             var roundSelect = card.querySelector(".month-history-round-select");
             if (roundSelect) {
-                roundSelect.value = String(Math.max(0, Number(item.rounds || 1) - 1));
+                roundSelect.value = String(initialRound);
                 roundSelect.addEventListener("change", function () {
+                    var selected = Number(roundSelect.value) || 0;
+                    var title = card.querySelector(".month-history-card-title");
+                    var text = (Array.isArray(item.questions) && item.questions[selected]) || item.title || "（无问题）";
+                    if (title) {
+                        title.innerHTML = questionHtml(text);
+                        if (window.TutorRenderMath) window.TutorRenderMath(title);
+                    }
                     var detail = card.querySelector(".month-history-detail");
                     if (!detail.hidden) toggleDetail(card, item, true);
                 });

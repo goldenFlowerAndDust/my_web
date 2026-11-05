@@ -1128,6 +1128,24 @@
       setStatus("当前标签正在回答，完成后再切换语言。", "error");
       return;
     }
+    if (Array.isArray(session.messages) && session.messages.length) {
+      // 已有问答的窗口不能中途换语言，否则历史会混在同一窗口。
+      captureSession();
+      if (sessions.length >= MAX_SESSIONS) {
+        languageSelect.value = session.language;
+        setStatus("最多同时保留 " + MAX_SESSIONS + " 个标签，请先关闭一个。", "error");
+        return;
+      }
+      const next = newSession(languageSelect.value);
+      sessions.push(next);
+      activeSessionId = next.id;
+      renderSessionTabs();
+      loadSessionView();
+      updateLanguageUi(true);
+      saveSessions();
+      questionInput.focus();
+      return;
+    }
     session.language = languageSelect.value;
     session.error = false;
     session.answerHtml = emptyAnswerHtml();

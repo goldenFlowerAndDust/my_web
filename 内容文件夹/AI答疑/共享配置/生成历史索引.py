@@ -118,6 +118,7 @@ def build_subject(subject: str) -> dict[str, Any]:
                 "created_at": str(window.get("created_at") or ""),
                 "updated_at": str(window.get("updated_at") or ""),
                 "rounds": int(window.get("rounds") or 0),
+                "questions": [str(m.get("content") or "") for m in (window.get("messages") or []) if m.get("role") == "user"],
                 "subject": subject,
                 "language": str(window.get("language") or ""),
                 "language_name": str(window.get("language_name") or ""),

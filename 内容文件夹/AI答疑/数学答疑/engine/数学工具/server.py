@@ -161,13 +161,14 @@ class Handler(SimpleHTTPRequestHandler):
                     payload.get("history"),
                     payload.get("conversation_id"),
                 )
-            else:
-                result = delete_tutor_log(
-                    payload.get("mode"),
-                    payload.get("created_at"),
-                    payload.get("time"),
-                )
                 self._send_json(200, result)
+                return
+            result = delete_tutor_log(
+                payload.get("mode"),
+                payload.get("created_at"),
+                payload.get("time"),
+            )
+            self._send_json(200, result)
         except ValueError as exc:
             self._send_json(400, {"ok": False, "error": str(exc)})
         except TutorError as exc:

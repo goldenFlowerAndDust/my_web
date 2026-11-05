@@ -2,20 +2,20 @@
   "version": 1,
   "subject": "english",
   "subject_label": "英语",
-  "updated_at": "2026-11-05 23:35:53",
+  "updated_at": "2026-11-05 23:41:00",
   "max_rounds": 8,
   "windows": {
     "tmw3pch8fupkw": {
       "id": "tmw3pch8fupkw",
-      "title": "可以清楚解释下，adj.(形容词)、n.(名词)等等，具体代表什么吗？",
-      "created_at": "2026-11-05 23:31:15",
-      "updated_at": "2026-11-05 23:32:49",
+      "title": "可以，那就写10个短的例句，只有主谓宾",
+      "created_at": "2026-11-05 23:39:08",
+      "updated_at": "2026-11-05 23:41:00",
       "mode": "单词解释",
       "language": "",
       "language_name": "",
       "topic": "",
       "max_rounds": 8,
-      "rounds": 2,
+      "rounds": 4,
       "messages": [
         {
           "role": "user",
@@ -51,6 +51,42 @@
             "total_tokens": 3856,
             "prompt_cache_hit_tokens": 640,
             "prompt_cache_miss_tokens": 2523
+          }
+        },
+        {
+          "role": "user",
+          "content": "能将每个中文翻译，列一个句子吗？我英语知识储备约等于0，句子根本看不懂。主谓宾、副词、定语...根本就是天文，句子是完全看不懂"
+        },
+        {
+          "role": "assistant",
+          "content": "**假设：** 你英语基础接近零，所以下面每个例句都配“逐词对照 + 整句翻译”，先让你看懂句子在说什么，再慢慢熟悉“谁做什么”。\n\n**先给你一个最简单的框架：** 一个英语句子最常见的样子是“**谁 + 做什么 + 什么**”，也就是“主语 + 动词 + 宾语”。比如 I like music. = 我 喜欢 音乐。先把这一条记住，下面的句子都按这个思路拆。\n\n## 一、先认识几个“句子零件”\n\n- **主语**：句子在说“谁”或“什么”。例：I（我）、She（她）、The book（这本书）。\n- **谓语/动词**：主语“做什么”或“是什么”。例：like（喜欢）、is（是）、run（跑）。\n- **宾语**：动作的承受者。例：music（音乐）、English（英语）。\n- **形容词**：形容名词，像“漂亮的、重要的”。例：happy（开心的）。\n- **副词**：形容动作怎么做，像“快速地、非常”。例：quickly（快速地）。\n- **介词**：表示“在、像、和”等关系的小词。例：in（在……里）、like（像）。\n\n不用一次全懂，先看句子。\n\n## 二、like 各词性的例句，逐词对照\n\n**1. v. 喜欢**\n\n- 原句：**I like music.**\n- 逐词：I（我）+ like（喜欢）+ music（音乐）\n- 翻译：我喜欢音乐。\n- 说明：主语 I，动词 like，宾语 music。最标准的“主谓宾”。\n\n- 原句：**She likes reading English novels.**\n- 逐词：She（她）+ likes（喜欢）+ reading（读）+ English（英语的）+ novels（小说）\n- 翻译：她喜欢读英文小说。\n- 说明：likes 是 like 的第三人称单数；reading 在这里当“读”这件事。\n\n**2. prep. 像**\n\n- 原句：**He looks like his father.**\n- 逐词：He（他）+ looks（看起来）+ like（像）+ his（他的）+ father（父亲）\n- 翻译：他看起来像他父亲。\n- 说明：look like 是固定搭配，“看起来像”。\n\n- 原句：**I feel like taking a walk.**\n- 逐词：I（我）+ feel（感觉）+ like（像/想要）+ taking（拿/进行）+ a（一个）+ walk（散步）\n- 翻译：我想散散步。\n- 说明：feel like doing 是固定搭配，意思是“想要做某事”，不能按字面翻成“感觉像拿散步”。\n\n**3. conj. 像……一样（口语）**\n\n- 原句：**Do it like I told you.**\n- 逐词：Do（做）+ it（它）+ like（像）+ I（我）+ told（告诉过）+ you（你）\n- 翻译：照我告诉你的那样做。\n- 说明：这是口语用法；正式写作里更推荐 **Do it as I told you.**\n\n**4. adj. 相似的**\n\n- 原句：**They have like interests.**\n- 逐词：They（他们）+ have（有）+ like（相似的）+ interests（兴趣）\n- 翻译：他们有相似的兴趣。\n- 说明：这里 like 是形容词，修饰 interests。日常更常说 **similar interests**。\n\n**5. n. 同类的人/物；好恶**\n\n- 原句：**Everyone has his likes and dislikes.**\n- 逐词：Everyone（每个人）+ has（有）+ his（他的）+ likes（喜欢的东西）+ and（和）+ dislikes（不喜欢的东西）\n- 翻译：每个人都有自己的好恶。\n- 说明：likes and dislikes 是固定表达，“喜欢和不喜欢的东西”。\n\n## 三、给你一个“看句子”的小步骤\n\n1. 先找动词：like、looks、feel、has 这类词。\n2. 动词前面通常是主语：I、She、He、They。\n3. 动词后面通常是宾语或表语：music、his father、interests。\n4. 剩下的 like、in、to 这类小词，先按固定搭配记，不用一开始就分析语法。\n\n## 四、你现在最该做的\n\n- 先背“主谓宾”最短句：I like music. / She likes English. / He is a student.\n- 固定搭配整块记：look like（看起来像）、feel like doing（想要做）、likes and dislikes（好恶）。\n- 看不懂长句时，先圈动词，再找“谁”和“什么”，不要逐字硬翻。\n\n如果你愿意，下一步我可以只用“主语+动词+宾语”给你写 10 个最短例句，每个都逐词对照。",
+          "html": "<p><strong>假设：</strong> 你英语基础接近零，所以下面每个例句都配“逐词对照 + 整句翻译”，先让你看懂句子在说什么，再慢慢熟悉“谁做什么”。</p>\n<p><strong>先给你一个最简单的框架：</strong> 一个英语句子最常见的样子是“<strong>谁 + 做什么 + 什么</strong>”，也就是“主语 + 动词 + 宾语”。比如 I like music. = 我 喜欢 音乐。先把这一条记住，下面的句子都按这个思路拆。</p>\n<h2>一、先认识几个“句子零件”</h2>\n<ul>\n<li><strong>主语</strong>：句子在说“谁”或“什么”。例：I（我）、She（她）、The book（这本书）。</li>\n<li><strong>谓语/动词</strong>：主语“做什么”或“是什么”。例：like（喜欢）、is（是）、run（跑）。</li>\n<li><strong>宾语</strong>：动作的承受者。例：music（音乐）、English（英语）。</li>\n<li><strong>形容词</strong>：形容名词，像“漂亮的、重要的”。例：happy（开心的）。</li>\n<li><strong>副词</strong>：形容动作怎么做，像“快速地、非常”。例：quickly（快速地）。</li>\n<li><strong>介词</strong>：表示“在、像、和”等关系的小词。例：in（在……里）、like（像）。</li>\n</ul>\n<p>不用一次全懂，先看句子。</p>\n<h2>二、like 各词性的例句，逐词对照</h2>\n<p><strong>1. v. 喜欢</strong></p>\n<ul>\n<li>原句：<strong>I like music.</strong></li>\n<li>逐词：I（我）+ like（喜欢）+ music（音乐）</li>\n<li>翻译：我喜欢音乐。</li>\n<li>说明：主语 I，动词 like，宾语 music。最标准的“主谓宾”。</li>\n</ul>\n<ul>\n<li>原句：<strong>She likes reading English novels.</strong></li>\n<li>逐词：She（她）+ likes（喜欢）+ reading（读）+ English（英语的）+ novels（小说）</li>\n<li>翻译：她喜欢读英文小说。</li>\n<li>说明：likes 是 like 的第三人称单数；reading 在这里当“读”这件事。</li>\n</ul>\n<p><strong>2. prep. 像</strong></p>\n<ul>\n<li>原句：<strong>He looks like his father.</strong></li>\n<li>逐词：He（他）+ looks（看起来）+ like（像）+ his（他的）+ father（父亲）</li>\n<li>翻译：他看起来像他父亲。</li>\n<li>说明：look like 是固定搭配，“看起来像”。</li>\n</ul>\n<ul>\n<li>原句：<strong>I feel like taking a walk.</strong></li>\n<li>逐词：I（我）+ feel（感觉）+ like（像/想要）+ taking（拿/进行）+ a（一个）+ walk（散步）</li>\n<li>翻译：我想散散步。</li>\n<li>说明：feel like doing 是固定搭配，意思是“想要做某事”，不能按字面翻成“感觉像拿散步”。</li>\n</ul>\n<p><strong>3. conj. 像……一样（口语）</strong></p>\n<ul>\n<li>原句：<strong>Do it like I told you.</strong></li>\n<li>逐词：Do（做）+ it（它）+ like（像）+ I（我）+ told（告诉过）+ you（你）</li>\n<li>翻译：照我告诉你的那样做。</li>\n<li>说明：这是口语用法；正式写作里更推荐 <strong>Do it as I told you.</strong></li>\n</ul>\n<p><strong>4. adj. 相似的</strong></p>\n<ul>\n<li>原句：<strong>They have like interests.</strong></li>\n<li>逐词：They（他们）+ have（有）+ like（相似的）+ interests（兴趣）</li>\n<li>翻译：他们有相似的兴趣。</li>\n<li>说明：这里 like 是形容词，修饰 interests。日常更常说 <strong>similar interests</strong>。</li>\n</ul>\n<p><strong>5. n. 同类的人/物；好恶</strong></p>\n<ul>\n<li>原句：<strong>Everyone has his likes and dislikes.</strong></li>\n<li>逐词：Everyone（每个人）+ has（有）+ his（他的）+ likes（喜欢的东西）+ and（和）+ dislikes（不喜欢的东西）</li>\n<li>翻译：每个人都有自己的好恶。</li>\n<li>说明：likes and dislikes 是固定表达，“喜欢和不喜欢的东西”。</li>\n</ul>\n<h2>三、给你一个“看句子”的小步骤</h2>\n<ol>\n<li>先找动词：like、looks、feel、has 这类词。</li>\n<li>动词前面通常是主语：I、She、He、They。</li>\n<li>动词后面通常是宾语或表语：music、his father、interests。</li>\n<li>剩下的 like、in、to 这类小词，先按固定搭配记，不用一开始就分析语法。</li>\n</ol>\n<h2>四、你现在最该做的</h2>\n<ul>\n<li>先背“主谓宾”最短句：I like music. / She likes English. / He is a student.</li>\n<li>固定搭配整块记：look like（看起来像）、feel like doing（想要做）、likes and dislikes（好恶）。</li>\n<li>看不懂长句时，先圈动词，再找“谁”和“什么”，不要逐字硬翻。</li>\n</ul>\n<p>如果你愿意，下一步我可以只用“主语+动词+宾语”给你写 10 个最短例句，每个都逐词对照。</p>",
+          "mode": "单词解释",
+          "time": "2026-11-05 23:39:53",
+          "usage": {
+            "prompt_tokens": 2682,
+            "completion_tokens": 1042,
+            "total_tokens": 3724,
+            "prompt_cache_hit_tokens": 1664,
+            "prompt_cache_miss_tokens": 1018
+          }
+        },
+        {
+          "role": "user",
+          "content": "可以，那就写10个短的例句，只有主谓宾"
+        },
+        {
+          "role": "assistant",
+          "content": "**假设：** 你要的是最基础的“主语 + 动词 + 宾语”短句，每个都逐词对照，适合零基础起步。\n\n**先记住一句话：** 英语最短的完整句子就是“**谁 + 做什么 + 什么**”。下面 10 句都按这个结构写，先看懂，再模仿。\n\n## 10 个主谓宾短句\n\n**1. I like music.**\n- 逐词：I（我）+ like（喜欢）+ music（音乐）\n- 翻译：我喜欢音乐。\n\n**2. She reads books.**\n- 逐词：She（她）+ reads（读）+ books（书）\n- 翻译：她读书。\n- 说明：she 是“她”，动词要加 s，变成 reads。\n\n**3. He drinks water.**\n- 逐词：He（他）+ drinks（喝）+ water（水）\n- 翻译：他喝水。\n- 说明：he 后面动词也加 s。\n\n**4. We study English.**\n- 逐词：We（我们）+ study（学习）+ English（英语）\n- 翻译：我们学英语。\n\n**5. They play football.**\n- 逐词：They（他们）+ play（踢/玩）+ football（足球）\n- 翻译：他们踢足球。\n\n**6. My mother cooks dinner.**\n- 逐词：My（我的）+ mother（妈妈）+ cooks（做）+ dinner（晚饭）\n- 翻译：我妈妈做晚饭。\n- 说明：主语是 my mother，核心词 mother 是“她”，所以 cook 加 s。\n\n**7. The boy eats an apple.**\n- 逐词：The（这个）+ boy（男孩）+ eats（吃）+ an（一个）+ apple（苹果）\n- 翻译：这个男孩吃一个苹果。\n- 说明：apple 以元音音开头，用 an，不用 a。\n\n**8. Tom likes dogs.**\n- 逐词：Tom（汤姆）+ likes（喜欢）+ dogs（狗）\n- 翻译：汤姆喜欢狗。\n- 说明：Tom 是一个人，相当于“他”，like 加 s。\n\n**9. The students clean the classroom.**\n- 逐词：The（这些）+ students（学生）+ clean（打扫）+ the（这个）+ classroom（教室）\n- 翻译：学生们打扫教室。\n- 说明：students 是复数，动词 clean 不加 s。\n\n**10. My father drives a car.**\n- 逐词：My（我的）+ father（爸爸）+ drives（开）+ a（一辆）+ car（汽车）\n- 翻译：我爸爸开一辆车。\n- 说明：father 相当于“他”，drive 加 s，变成 drives。\n\n## 你现在要盯住的两个点\n\n- **主语是 he / she / it / 一个人**：动词一般加 s，如 reads、drinks、likes、drives。\n- **主语是 I / we / they / 复数**：动词用原形，如 like、study、play、clean。\n\n## 怎么练\n\n- 先遮住翻译，只看英文，试着说出“谁做什么”。\n- 再把主语换掉练：I like music. → She likes music. → They like music.\n- 不要急着学长句，先把这 10 句读顺、抄熟。\n\n下一步可以给你 10 个“主语 + be 动词 + 表语”的句子，比如 She is a teacher.，把“是什么”这一类也补上。",
+          "html": "<p><strong>假设：</strong> 你要的是最基础的“主语 + 动词 + 宾语”短句，每个都逐词对照，适合零基础起步。</p>\n<p><strong>先记住一句话：</strong> 英语最短的完整句子就是“<strong>谁 + 做什么 + 什么</strong>”。下面 10 句都按这个结构写，先看懂，再模仿。</p>\n<h2>10 个主谓宾短句</h2>\n<p><strong>1. I like music.</strong></p>\n<ul>\n<li>逐词：I（我）+ like（喜欢）+ music（音乐）</li>\n<li>翻译：我喜欢音乐。</li>\n</ul>\n<p><strong>2. She reads books.</strong></p>\n<ul>\n<li>逐词：She（她）+ reads（读）+ books（书）</li>\n<li>翻译：她读书。</li>\n<li>说明：she 是“她”，动词要加 s，变成 reads。</li>\n</ul>\n<p><strong>3. He drinks water.</strong></p>\n<ul>\n<li>逐词：He（他）+ drinks（喝）+ water（水）</li>\n<li>翻译：他喝水。</li>\n<li>说明：he 后面动词也加 s。</li>\n</ul>\n<p><strong>4. We study English.</strong></p>\n<ul>\n<li>逐词：We（我们）+ study（学习）+ English（英语）</li>\n<li>翻译：我们学英语。</li>\n</ul>\n<p><strong>5. They play football.</strong></p>\n<ul>\n<li>逐词：They（他们）+ play（踢/玩）+ football（足球）</li>\n<li>翻译：他们踢足球。</li>\n</ul>\n<p><strong>6. My mother cooks dinner.</strong></p>\n<ul>\n<li>逐词：My（我的）+ mother（妈妈）+ cooks（做）+ dinner（晚饭）</li>\n<li>翻译：我妈妈做晚饭。</li>\n<li>说明：主语是 my mother，核心词 mother 是“她”，所以 cook 加 s。</li>\n</ul>\n<p><strong>7. The boy eats an apple.</strong></p>\n<ul>\n<li>逐词：The（这个）+ boy（男孩）+ eats（吃）+ an（一个）+ apple（苹果）</li>\n<li>翻译：这个男孩吃一个苹果。</li>\n<li>说明：apple 以元音音开头，用 an，不用 a。</li>\n</ul>\n<p><strong>8. Tom likes dogs.</strong></p>\n<ul>\n<li>逐词：Tom（汤姆）+ likes（喜欢）+ dogs（狗）</li>\n<li>翻译：汤姆喜欢狗。</li>\n<li>说明：Tom 是一个人，相当于“他”，like 加 s。</li>\n</ul>\n<p><strong>9. The students clean the classroom.</strong></p>\n<ul>\n<li>逐词：The（这些）+ students（学生）+ clean（打扫）+ the（这个）+ classroom（教室）</li>\n<li>翻译：学生们打扫教室。</li>\n<li>说明：students 是复数，动词 clean 不加 s。</li>\n</ul>\n<p><strong>10. My father drives a car.</strong></p>\n<ul>\n<li>逐词：My（我的）+ father（爸爸）+ drives（开）+ a（一辆）+ car（汽车）</li>\n<li>翻译：我爸爸开一辆车。</li>\n<li>说明：father 相当于“他”，drive 加 s，变成 drives。</li>\n</ul>\n<h2>你现在要盯住的两个点</h2>\n<ul>\n<li><strong>主语是 he / she / it / 一个人</strong>：动词一般加 s，如 reads、drinks、likes、drives。</li>\n<li><strong>主语是 I / we / they / 复数</strong>：动词用原形，如 like、study、play、clean。</li>\n</ul>\n<h2>怎么练</h2>\n<ul>\n<li>先遮住翻译，只看英文，试着说出“谁做什么”。</li>\n<li>再把主语换掉练：I like music. → She likes music. → They like music.</li>\n<li>不要急着学长句，先把这 10 句读顺、抄熟。</li>\n</ul>\n<p>下一步可以给你 10 个“主语 + be 动词 + 表语”的句子，比如 She is a teacher.，把“是什么”这一类也补上。</p>",
+          "mode": "单词解释",
+          "time": "2026-11-05 23:41:00",
+          "usage": {
+            "prompt_tokens": 3741,
+            "completion_tokens": 741,
+            "total_tokens": 4482,
+            "prompt_cache_hit_tokens": 2560,
+            "prompt_cache_miss_tokens": 1181
           }
         }
       ]
