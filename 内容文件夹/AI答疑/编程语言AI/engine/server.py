@@ -278,6 +278,8 @@ def _conversation_action(payload: dict) -> dict:
             language=str(payload.get("language") or ""),
             language_name=str(payload.get("language_name") or ""),
             topic=str(payload.get("topic") or ""),
+            created_at=str(payload.get("created_at") or ""),
+            updated_at=str(payload.get("updated_at") or ""),
         )
         rebuild_month_history("code")
         return {"ok": True, "window": window, "document": read_document("code")}

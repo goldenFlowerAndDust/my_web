@@ -78,6 +78,8 @@
                     topic: item.topic || "",
                     language: item.language || "",
                     language_name: item.language_name || "",
+                    created_at: item.created_at || "",
+                    updated_at: item.updated_at || "",
                     messages: item.messages || []
                 }));
             });
