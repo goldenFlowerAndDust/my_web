@@ -1,4 +1,4 @@
-﻿/* 核心词汇页：在原词族页上补充词性标注和筛选，不另建视图 */
+﻿/* 核心词汇页：在词族页内为每个词补全词性中文义项，不再分视图/筛选 */
 (function () {
     "use strict";
 
@@ -6,7 +6,6 @@
     var content = document.getElementById("wordContent");
     if (!content) return;
 
-    var POS_ORDER = ["n.", "v.", "adj.", "adv.", "interj.", "pron.", "prep.", "conj.", "num.", "art.", "aux.", "modal", "phrase"];
     var POS_ZH = {
         "n.": "名词", "v.": "动词", "vt.": "及物动词", "vi.": "不及物动词",
         "adj.": "形容词", "adv.": "副词", "pron.": "代词", "prep.": "介词",
@@ -79,63 +78,10 @@
                 });
             });
             if (!Object.keys(map).some(function (key) { return sensesOf(map[key]).length; })) return;
-
-            var cards = Array.prototype.slice.call(content.querySelectorAll(".word_item"));
-            cards.forEach(function (card) {
+            content.querySelectorAll(".word_item").forEach(function (card) {
                 var word = String(card.getAttribute("data-word") || "").toLowerCase();
                 enhanceCard(card, map[word]);
             });
-
-            var available = [];
-            cards.forEach(function (card) {
-                var word = String(card.getAttribute("data-word") || "").toLowerCase();
-                var item = map[word];
-                sensesOf(item).forEach(function (s) {
-                    if (available.indexOf(s.pos) < 0) available.push(s.pos);
-                });
-            });
-            available.sort(function (a, b) {
-                var ia = POS_ORDER.indexOf(a), ib = POS_ORDER.indexOf(b);
-                return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
-            });
-
-            var bar = document.createElement("div");
-            bar.className = "pos_filter_bar";
-            bar.innerHTML = '<span class="pos_filter_label">按词性筛选：</span>' +
-                '<button type="button" class="is-active" data-filter="all">全部</button>' +
-                available.map(function (pos) {
-                    return '<button type="button" data-filter="' + esc(pos) + '">' + esc(posLabel(pos)) + '</button>';
-                }).join("") +
-                '<span class="pos_filter_count"></span>';
-            content.parentNode.insertBefore(bar, content);
-
-            var countEl = bar.querySelector(".pos_filter_count");
-            function applyFilter(filter) {
-                var visible = 0;
-                cards.forEach(function (card) {
-                    var word = String(card.getAttribute("data-word") || "").toLowerCase();
-                    var item = map[word];
-                    var show = filter === "all" || sensesOf(item).some(function (s) { return s.pos === filter; });
-                    card.hidden = !show;
-                    if (show) visible++;
-                    var group = card.closest(".word_group");
-                    if (group) {
-                        group.hidden = !Array.prototype.some.call(group.querySelectorAll(".word_item"), function (row) {
-                            return !row.hidden;
-                        });
-                    }
-                });
-                countEl.textContent = visible + " 词";
-                Array.prototype.forEach.call(bar.querySelectorAll("[data-filter]"), function (button) {
-                    button.classList.toggle("is-active", button.getAttribute("data-filter") === filter);
-                });
-            }
-            bar.addEventListener("click", function (event) {
-                var button = event.target.closest("[data-filter]");
-                if (!button) return;
-                applyFilter(button.getAttribute("data-filter"));
-            });
-            applyFilter("all");
         })
-        .catch(function () { /* 离线或 file:// 打开时保留原词族页面 */ });
+        .catch(function () { /* file:// 或未启动服务时保留原词族页面 */ });
 })();

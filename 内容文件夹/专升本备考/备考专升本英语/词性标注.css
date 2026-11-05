@@ -1,19 +1,4 @@
-﻿/* 核心词汇页：词性标注与筛选 */
-.pos_filter_bar {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 7px;
-    margin: 0 0 14px; padding: 9px 12px;
-    border: 1px solid var(--line); border-radius: 10px;
-    background: rgba(255, 253, 248, .82);
-}
-.pos_filter_label { color: var(--muted); font-size: .76rem; font-weight: 700; }
-.pos_filter_bar button {
-    border: 1px solid var(--line); border-radius: 999px;
-    padding: 4px 10px; background: var(--paper); color: var(--teal);
-    font: inherit; font-size: .75rem; cursor: pointer;
-}
-.pos_filter_bar button:hover { border-color: var(--teal); }
-.pos_filter_bar button.is-active { background: #14233f; border-color: #14233f; color: #fff; }
-.pos_filter_count { margin-left: auto; color: var(--muted); font-size: .72rem; }
+﻿/* 核心词汇页：词性中文义项（单页，不筛选） */
 .pos_senses {
     margin: 6px 0 8px; padding: 7px 9px;
     border-left: 3px solid #0b6672;
@@ -26,4 +11,3 @@
     font-size: .68rem; font-weight: 700; white-space: nowrap;
 }
 .sense_pos_inline { margin-right: 5px; }
-@media (max-width: 620px) { .pos_filter_count { width: 100%; margin-left: 0; } }
