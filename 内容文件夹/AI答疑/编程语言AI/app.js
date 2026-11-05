@@ -375,10 +375,18 @@
       setStatus("最多同时保留 " + MAX_SESSIONS + " 个标签，请先关闭一个。", "error");
       return false;
     }
+    const existing = sessions.find((item) => item.id === conversation.id);
+    if (existing) {
+      activeSessionId = existing.id;
+      renderSessionTabs();
+      loadSessionView();
+      return true;
+    }
     const session = newSession(conversation.language || languageSelect.value || "python");
+    session.id = conversation.id;
     sessions.push(session);
     session.language = conversation.language || session.language;
-    session.title = "续：" + (conversation.title || "历史对话");
+    session.title = conversation.title || "历史对话";
     session.messages = messages;
     session.question = "";
     session.busy = false;

@@ -341,10 +341,19 @@
             if (status) status.textContent = "最多同时保留 " + MAX + " 个标签，请先关闭一个。";
             return false;
         }
+        var existing = sessions.find(function (item) { return item.id === conversation.id; });
+        if (existing) {
+            active = existing.id;
+            render();
+            restore();
+            question.focus();
+            return true;
+        }
         var session = make();
+        session.id = conversation.id;
         sessions.push(session);
         session.messages = messages;
-        session.title = "续：" + (conversation.title || titleOf(messages[0] && messages[0].content) || "历史对话");
+        session.title = conversation.title || titleOf(messages[0] && messages[0].content) || "历史对话";
         session.mode = conversation.mode || session.mode;
         session.question = "";
         session.answerState = "content";

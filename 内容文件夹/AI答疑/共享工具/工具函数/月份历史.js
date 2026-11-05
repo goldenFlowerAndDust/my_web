@@ -36,6 +36,7 @@
         chunks: {},
         cards: [],
         selectedId: "",
+        language: "",
         loading: false
     };
 
@@ -91,6 +92,9 @@
         toolbar.innerHTML =
             '<label class="month-history-label">月份' +
             '<select id="month-history-select" aria-label="选择历史月份"></select></label>' +
+            (subject === "code" && !languageFilter
+                ? '<label class="month-history-label">语言<select id="month-history-language-select" aria-label="选择编程语言"><option value="">全部语言</option></select></label>'
+                : "") +
             '<span id="month-history-count" class="month-history-count"></span>' +
             '<span id="month-history-note" class="month-history-note">先读月份索引，点开对话再读回答</span>';
         panel.insertBefore(toolbar, sourceList);
@@ -98,6 +102,11 @@
         var select = document.getElementById("month-history-select");
         select.addEventListener("change", function () {
             loadMonth(select.value);
+        });
+        var lang = document.getElementById("month-history-language-select");
+        if (lang) lang.addEventListener("change", function () {
+            state.language = lang.value;
+            renderSummaries();
         });
     }
 
@@ -120,12 +129,30 @@
         if (state.month) select.value = state.month;
     }
 
+    function renderLanguageOptions() {
+        var select = document.getElementById("month-history-language-select");
+        if (!select) return;
+        var seen = {};
+        (state.monthIndex && state.monthIndex.windows || []).forEach(function (item) {
+            var value = String(item.language || "");
+            if (!value) return;
+            seen[value] = String(item.language_name || value);
+        });
+        var current = select.value;
+        select.innerHTML = '<option value="">全部语言</option>' + Object.keys(seen).sort().map(function (value) {
+            return '<option value="' + escapeHtml(value) + '">' + escapeHtml(seen[value]) + "</option>";
+        }).join("");
+        select.value = seen[current] ? current : "";
+        state.language = select.value;
+    }
+
     function renderSummaries() {
         list.innerHTML = "";
         var windows = (state.monthIndex && state.monthIndex.windows) || [];
-        if (languageFilter) {
+        var activeLanguage = languageFilter || state.language;
+        if (activeLanguage) {
             windows = windows.filter(function (item) {
-                return String(item.language || "") === languageFilter;
+                return String(item.language || "") === activeLanguage;
             });
         }
         document.getElementById("month-history-count").textContent =
@@ -149,7 +176,7 @@
             card.setAttribute("data-window-id", item.id);
             card.innerHTML =
                 '<div class="month-history-card-head">' +
-                '<span class="month-history-card-title">' + escapeHtml(item.title || "（无问题）") + "</span>" +
+                '<span class="month-history-card-title">' + questionHtml(item.title || "（无问题）") + "</span>" +
                 '<span class="month-history-card-meta">' + escapeHtml(item.updated_at || item.created_at || "") +
                 " · " + Number(item.rounds || 0) + " 轮</span>" +
                 "</div>" +
@@ -161,6 +188,8 @@
                       }).join("") + "</select>"
                     : "") +
                 '<button type="button" class="month-history-open">查看回答</button>' +
+                '<button type="button" class="month-history-delete-round">删除本轮</button>' +
+                '<button type="button" class="month-history-delete">删除对话</button>' +
                 (window.TutorTabs && window.TutorTabs.resumeConversation
                     ? '<button type="button" class="month-history-resume">继续提问</button>'
                     : (window.ProgrammingResumeConversation
@@ -196,7 +225,19 @@
                     }
                 });
             });
+            var del = card.querySelector(".month-history-delete");
+            if (del) del.addEventListener("click", function () {
+                if (!window.confirm("删除这个对话？")) return;
+                callConversationApi({ action: "delete_window", window_id: item.id }).then(refreshNow);
+            });
+            var delRound = card.querySelector(".month-history-delete-round");
+            if (delRound) delRound.addEventListener("click", function () {
+                var index = roundSelect ? Number(roundSelect.value) : Math.max(0, Number(item.rounds || 1) - 1);
+                if (!window.confirm("删除第 " + (index + 1) + " 轮？")) return;
+                callConversationApi({ action: "remove_round", window_id: item.id, round: index }).then(refreshNow);
+            });
             list.appendChild(card);
+            if (window.TutorRenderMath) window.TutorRenderMath(card);
         });
         list.style.display = "";
     }
@@ -250,11 +291,31 @@
         fetchJson(base("../历史/" + subject + "/" + month + "/index.json"))
             .then(function (data) {
                 state.monthIndex = data;
+                renderLanguageOptions();
                 renderSummaries();
             })
             .catch(function (error) {
                 renderEmpty("月份索引读取失败：" + error.message);
             });
+    }
+
+    function callConversationApi(payload) {
+        var port = subject === "math" ? 8768 : (subject === "code" ? 8769 : 8767);
+        var url = location.protocol + "//" + (location.hostname || "127.0.0.1") + ":" + port + "/api/conversations";
+        return fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(Object.assign({ subject: subject }, payload))
+        }).then(function (response) {
+            if (!response.ok) throw new Error("HTTP " + response.status);
+            return response.json();
+        }).catch(function (error) {
+            window.alert("操作失败：" + error.message);
+        });
+    }
+
+    function refreshNow() {
+        if (list) init();
     }
 
     function init() {
