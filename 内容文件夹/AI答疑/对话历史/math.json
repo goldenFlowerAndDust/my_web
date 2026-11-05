@@ -2,8 +2,59 @@
   "version": 1,
   "subject": "math",
   "subject_label": "数学",
-  "updated_at": "2026-11-06 00:01:33",
+  "updated_at": "2026-11-06 00:30:23",
   "max_rounds": 8,
-  "windows": {},
+  "windows": {
+    "tmw3rdlbx3zto": {
+      "id": "tmw3rdlbx3zto",
+      "title": "请问？求极限，标准步骤是什么？能拿满分的那种",
+      "created_at": "2026-11-06 00:27:25",
+      "updated_at": "2026-11-06 00:30:22",
+      "mode": "题目讲解",
+      "language": "",
+      "language_name": "",
+      "topic": "",
+      "max_rounds": 8,
+      "rounds": 2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "求极限$：\\lim_{x \\to \\infty}(\\sqrt{x^{2}+2x}-\\sqrt{x^{2}-x})$"
+        },
+        {
+          "role": "assistant",
+          "content": "## 题目与知识点\n\n求极限：\n\\[\n\\lim_{x\\to\\infty}\\left(\\sqrt{x^{2}+2x}-\\sqrt{x^{2}-x}\\right)\n\\]\n\n这是“\\(\\infty-\\infty\\)”型极限，属于高等数学第一章“极限”中**根式差的有理化**问题。核心方法是分子有理化，把差式转化为商式，再分析分子、分母的最高次项。\n\n## 解题步骤\n\n**第一步：有理化。**\n\n利用恒等式 \\((a-b)(a+b)=a^2-b^2\\)，令\n\\[\na=\\sqrt{x^{2}+2x},\\qquad b=\\sqrt{x^{2}-x},\n\\]\n则\n\\[\n\\sqrt{x^{2}+2x}-\\sqrt{x^{2}-x}\n=\\frac{(x^{2}+2x)-(x^{2}-x)}{\\sqrt{x^{2}+2x}+\\sqrt{x^{2}-x}}\n=\\frac{3x}{\\sqrt{x^{2}+2x}+\\sqrt{x^{2}-x}}.\n\\]\n\n这一步的依据是分子有理化，注意分子相减后 \\(x^2\\) 消去，只剩 \\(3x\\)。\n\n**第二步：分析 \\(x\\to+\\infty\\) 时分子、分母的阶。**\n\n分子是 \\(3x\\)，为一次项。分母中\n\\[\n\\sqrt{x^{2}+2x}=|x|\\sqrt{1+\\frac{2}{x}},\\qquad\n\\sqrt{x^{2}-x}=|x|\\sqrt{1-\\frac{1}{x}}.\n\\]\n由于 \\(x\\to+\\infty\\)，有 \\(x>0\\)，故 \\(|x|=x\\)。于是\n\\[\n\\sqrt{x^{2}+2x}+\\sqrt{x^{2}-x}\n=x\\left(\\sqrt{1+\\frac{2}{x}}+\\sqrt{1-\\frac{1}{x}}\\right).\n\\]\n\n**第三步：约去公因子 \\(x\\) 并取极限。**\n\n原式\n\\[\n=\\lim_{x\\to+\\infty}\\frac{3x}{x\\left(\\sqrt{1+\\frac{2}{x}}+\\sqrt{1-\\frac{1}{x}}\\right)}\n=\\lim_{x\\to+\\infty}\\frac{3}{\\sqrt{1+\\frac{2}{x}}+\\sqrt{1-\\frac{1}{x}}}.\n\\]\n当 \\(x\\to+\\infty\\) 时，\\(\\frac{2}{x}\\to0\\)，\\(\\frac{1}{x}\\to0\\)，故\n\\[\n\\sqrt{1+\\frac{2}{x}}\\to1,\\qquad \\sqrt{1-\\frac{1}{x}}\\to1.\n\\]\n分母趋于 \\(1+1=2\\)，所以\n\\[\n\\text{原式}=\\frac{3}{2}.\n\\]\n\n## 最终答案\n\n\\[\n\\boxed{\\lim_{x\\to\\infty}\\left(\\sqrt{x^{2}+2x}-\\sqrt{x^{2}-x}\\right)=\\frac{3}{2}}\n\\]\n\n**检验：** 当 \\(x\\) 很大时，\n\\[\n\\sqrt{x^2+2x}\\approx x+1,\\qquad \\sqrt{x^2-x}\\approx x-\\frac12,\n\\]\n两者之差约为 \\(\\frac32\\)，与计算结果一致。量纲上，分子 \\(3x\\) 与分母中的 \\(x\\) 同阶，极限为常数，合理。\n\n## 易错点与同类题提醒\n\n1. **最容易错的一步：** 有理化后忘记分母中的 \\(x\\) 要按 \\(|x|\\) 处理。本题 \\(x\\to+\\infty\\)，所以 \\(|x|=x\\)；若题目改为 \\(x\\to-\\infty\\)，则 \\(|x|=-x\\)，结果会变为 \\(-\\frac32\\)。审题时务必看清趋向。\n2. **同类题提醒：** 遇到 \\(\\sqrt{ax^2+bx+c}-\\sqrt{ax^2+dx+e}\\) 型，先有理化，再比较分子一次项系数与分母中 \\(\\sqrt{a}+\\sqrt{a}=2\\sqrt{a}\\)，极限为 \\(\\frac{b-d}{2\\sqrt{a}}\\)（\\(x\\to+\\infty\\) 时）。例如本题 \\(a=1,b=2,d=-1\\)，得 \\(\\frac{2-(-1)}{2}=\\frac32\\)，可作为快速验算。",
+          "html": "<h2>题目与知识点</h2>\n<p>求极限：</p>\n<div class=\"math-display\">$$\n\\lim_{x\\to\\infty}\\left(\\sqrt{x^{2}+2x}-\\sqrt{x^{2}-x}\\right)\n$$</div>\n<p>这是“\\(\\infty-\\infty\\)”型极限，属于高等数学第一章“极限”中<strong>根式差的有理化</strong>问题。核心方法是分子有理化，把差式转化为商式，再分析分子、分母的最高次项。</p>\n<h2>解题步骤</h2>\n<p><strong>第一步：有理化。</strong></p>\n<p>利用恒等式 \\((a-b)(a+b)=a^2-b^2\\)，令</p>\n<div class=\"math-display\">$$\na=\\sqrt{x^{2}+2x},\\qquad b=\\sqrt{x^{2}-x},\n$$</div>\n<p>则</p>\n<div class=\"math-display\">$$\n\\sqrt{x^{2}+2x}-\\sqrt{x^{2}-x}\n=\\frac{(x^{2}+2x)-(x^{2}-x)}{\\sqrt{x^{2}+2x}+\\sqrt{x^{2}-x}}\n=\\frac{3x}{\\sqrt{x^{2}+2x}+\\sqrt{x^{2}-x}}.\n$$</div>\n<p>这一步的依据是分子有理化，注意分子相减后 \\(x^2\\) 消去，只剩 \\(3x\\)。</p>\n<p><strong>第二步：分析 \\(x\\to+\\infty\\) 时分子、分母的阶。</strong></p>\n<p>分子是 \\(3x\\)，为一次项。分母中</p>\n<div class=\"math-display\">$$\n\\sqrt{x^{2}+2x}=|x|\\sqrt{1+\\frac{2}{x}},\\qquad\n\\sqrt{x^{2}-x}=|x|\\sqrt{1-\\frac{1}{x}}.\n$$</div>\n<p>由于 \\(x\\to+\\infty\\)，有 \\(x&gt;0\\)，故 \\(|x|=x\\)。于是</p>\n<div class=\"math-display\">$$\n\\sqrt{x^{2}+2x}+\\sqrt{x^{2}-x}\n=x\\left(\\sqrt{1+\\frac{2}{x}}+\\sqrt{1-\\frac{1}{x}}\\right).\n$$</div>\n<p><strong>第三步：约去公因子 \\(x\\) 并取极限。</strong></p>\n<p>原式</p>\n<div class=\"math-display\">$$\n=\\lim_{x\\to+\\infty}\\frac{3x}{x\\left(\\sqrt{1+\\frac{2}{x}}+\\sqrt{1-\\frac{1}{x}}\\right)}\n=\\lim_{x\\to+\\infty}\\frac{3}{\\sqrt{1+\\frac{2}{x}}+\\sqrt{1-\\frac{1}{x}}}.\n$$</div>\n<p>当 \\(x\\to+\\infty\\) 时，\\(\\frac{2}{x}\\to0\\)，\\(\\frac{1}{x}\\to0\\)，故</p>\n<div class=\"math-display\">$$\n\\sqrt{1+\\frac{2}{x}}\\to1,\\qquad \\sqrt{1-\\frac{1}{x}}\\to1.\n$$</div>\n<p>分母趋于 \\(1+1=2\\)，所以</p>\n<div class=\"math-display\">$$\n\\text{原式}=\\frac{3}{2}.\n$$</div>\n<h2>最终答案</h2>\n<div class=\"math-display\">$$\n\\boxed{\\lim_{x\\to\\infty}\\left(\\sqrt{x^{2}+2x}-\\sqrt{x^{2}-x}\\right)=\\frac{3}{2}}\n$$</div>\n<p><strong>检验：</strong> 当 \\(x\\) 很大时，</p>\n<div class=\"math-display\">$$\n\\sqrt{x^2+2x}\\approx x+1,\\qquad \\sqrt{x^2-x}\\approx x-\\frac12,\n$$</div>\n<p>两者之差约为 \\(\\frac32\\)，与计算结果一致。量纲上，分子 \\(3x\\) 与分母中的 \\(x\\) 同阶，极限为常数，合理。</p>\n<h2>易错点与同类题提醒</h2>\n<ol>\n<li><strong>最容易错的一步：</strong> 有理化后忘记分母中的 \\(x\\) 要按 \\(|x|\\) 处理。本题 \\(x\\to+\\infty\\)，所以 \\(|x|=x\\)；若题目改为 \\(x\\to-\\infty\\)，则 \\(|x|=-x\\)，结果会变为 \\(-\\frac32\\)。审题时务必看清趋向。</li>\n<li><strong>同类题提醒：</strong> 遇到 \\(\\sqrt{ax^2+bx+c}-\\sqrt{ax^2+dx+e}\\) 型，先有理化，再比较分子一次项系数与分母中 \\(\\sqrt{a}+\\sqrt{a}=2\\sqrt{a}\\)，极限为 \\(\\frac{b-d}{2\\sqrt{a}}\\)（\\(x\\to+\\infty\\) 时）。例如本题 \\(a=1,b=2,d=-1\\)，得 \\(\\frac{2-(-1)}{2}=\\frac32\\)，可作为快速验算。</li>\n</ol>",
+          "mode": "题目讲解",
+          "time": "2026-11-06 00:27:25",
+          "usage": {
+            "prompt_tokens": 588,
+            "completion_tokens": 900,
+            "total_tokens": 1488,
+            "prompt_cache_hit_tokens": 384,
+            "prompt_cache_miss_tokens": 204
+          }
+        },
+        {
+          "role": "user",
+          "content": "请问？求极限，标准步骤是什么？能拿满分的那种"
+        },
+        {
+          "role": "assistant",
+          "content": "## 题目概括与要求\n\n你问的是：求极限的**标准步骤**是什么，要能拿满分的那种。这不是一道具体计算题，而是方法流程问题。下面按专升本考试阅卷习惯，给出可操作的通用步骤，并用一个例子贯穿说明。\n\n## 知识点定位\n\n极限是高等数学第一章核心内容，专升本常考类型包括：代入型、\\(\\frac00\\) 型、\\(\\frac{\\infty}{\\infty}\\) 型、\\(\\infty-\\infty\\) 型、\\(0\\cdot\\infty\\) 型、\\(1^\\infty\\) 型，以及分段点、无穷远处极限。满分的关键不是“算出数”，而是**写清类型判断、变形依据、等价替换条件**。\n\n## 标准步骤（通用流程）\n\n**第一步：先代入，判断类型。**\n\n把趋向值直接代入表达式，看是否出现未定式。写出“当 \\(x\\to\\square\\) 时，原式为 \\(\\frac00\\) 型”或“为 \\(\\infty-\\infty\\) 型”。这一步是阅卷老师找的“类型分”。\n\n**第二步：选方法，写依据。**\n\n根据类型选对应方法，并在解答中写明依据：\n\n1. 连续函数直接代入：依据“初等函数在定义区间内连续”。\n2. \\(\\frac00\\) 型：优先因式分解、有理化、等价无穷小替换；洛必达法则要写“满足 \\(\\frac00\\) 型且导数存在”。\n3. \\(\\frac{\\infty}{\\infty}\\) 型：抓最高次项，或洛必达。\n4. \\(\\infty-\\infty\\) 型：有理化、通分、提公因子。\n5. \\(1^\\infty\\) 型：取对数或凑 \\((1+u)^{1/u}\\to e\\)。\n6. 分段点：分别求左右极限，写“左极限 \\(=\\) 右极限 \\(=\\) 函数值”才连续。\n\n**第三步：逐步变形，每步可复核。**\n\n关键变形要写依据，例如“分子有理化”“由 \\(\\sin x\\sim x\\ (x\\to0)\\)”“分子分母同除以 \\(x^2\\)”。不要跳步，尤其等价无穷小替换只能用于**乘除因子**，加减项中替换要谨慎。\n\n**第四步：写出极限值，单独标出。**\n\n最后一行用 \\(\\boxed{}\\) 或“故原式 \\(=\\)”单独写答案。\n\n**第五步：检验。**\n\n代回近似、看量纲、看符号、看是否与类型一致。例如 \\(\\frac{\\infty}{\\infty}\\) 型结果为常数，说明分子分母同阶，合理。\n\n## 贯穿例子\n\n求\n\\[\n\\lim_{x\\to0}\\frac{\\sqrt{1+x}-1}{x}.\n\\]\n\n**第一步：** 代入 \\(x=0\\)，分子 \\(\\sqrt1-1=0\\)，分母 \\(0\\)，是 \\(\\frac00\\) 型。\n\n**第二步：** 选有理化。依据：分子含根式差，有理化可消去零因子。\n\n**第三步：**\n\\[\n\\frac{\\sqrt{1+x}-1}{x}\n=\\frac{(\\sqrt{1+x}-1)(\\sqrt{1+x}+1)}{x(\\sqrt{1+x}+1)}\n=\\frac{(1+x)-1}{x(\\sqrt{1+x}+1)}\n=\\frac{x}{x(\\sqrt{1+x}+1)}.\n\\]\n约去 \\(x\\)（\\(x\\ne0\\)）：\n\\[\n=\\frac{1}{\\sqrt{1+x}+1}.\n\\]\n\n**第四步：**\n\\[\n\\lim_{x\\to0}\\frac{1}{\\sqrt{1+x}+1}=\\frac{1}{1+1}=\\frac12.\n\\]\n故\n\\[\n\\boxed{\\lim_{x\\to0}\\frac{\\sqrt{1+x}-1}{x}=\\frac12}.\n\\]\n\n**第五步检验：** 当 \\(x\\) 很小时，\\(\\sqrt{1+x}\\approx1+\\frac{x}{2}\\)，分子约 \\(\\frac{x}{2}\\)，除以 \\(x\\) 得 \\(\\frac12\\)，一致。\n\n## 满分要点与易错点\n\n1. **必须写类型判断。** 只写变形不写“\\(\\frac00\\) 型”，容易丢步骤分。\n2. **等价无穷小替换有边界。** \\(\\sin x\\sim x\\)、\\(e^x-1\\sim x\\)、\\(\\ln(1+x)\\sim x\\) 只能替换乘除因子；加减中替换可能改变主项，导致错误。\n3. **洛必达法则要验条件。** 必须是 \\(\\frac00\\) 或 \\(\\frac{\\infty}{\\infty}\\) 型，且求导后极限存在或为无穷；不能对非未定式乱用。\n4. **最容易错的一步：** 有理化后约分时忽略 \\(x\\ne0\\) 的条件，或 \\(x\\to-\\infty\\) 时把 \\(\\sqrt{x^2}\\) 写成 \\(x\\) 而不是 \\(|x|=-x\\)。本题若改为 \\(x\\to-\\infty\\)，\\(\\sqrt{x^2}=|x|=-x\\)，符号要单独讨论。\n\n**练习建议：** 按“判断类型—写方法依据—逐步变形—标答案—检验”五步，各练 2 道 \\(\\frac00\\) 型、2 道 \\(\\infty-\\infty\\) 型、1 道 \\(1^\\infty\\) 型，重点训练第一步和第三步的依据书写。",
+          "html": "<h2>题目概括与要求</h2>\n<p>你问的是：求极限的<strong>标准步骤</strong>是什么，要能拿满分的那种。这不是一道具体计算题，而是方法流程问题。下面按专升本考试阅卷习惯，给出可操作的通用步骤，并用一个例子贯穿说明。</p>\n<h2>知识点定位</h2>\n<p>极限是高等数学第一章核心内容，专升本常考类型包括：代入型、\\(\\frac00\\) 型、\\(\\frac{\\infty}{\\infty}\\) 型、\\(\\infty-\\infty\\) 型、\\(0\\cdot\\infty\\) 型、\\(1^\\infty\\) 型，以及分段点、无穷远处极限。满分的关键不是“算出数”，而是<strong>写清类型判断、变形依据、等价替换条件</strong>。</p>\n<h2>标准步骤（通用流程）</h2>\n<p><strong>第一步：先代入，判断类型。</strong></p>\n<p>把趋向值直接代入表达式，看是否出现未定式。写出“当 \\(x\\to\\square\\) 时，原式为 \\(\\frac00\\) 型”或“为 \\(\\infty-\\infty\\) 型”。这一步是阅卷老师找的“类型分”。</p>\n<p><strong>第二步：选方法，写依据。</strong></p>\n<p>根据类型选对应方法，并在解答中写明依据：</p>\n<ol>\n<li>连续函数直接代入：依据“初等函数在定义区间内连续”。</li>\n<li>\\(\\frac00\\) 型：优先因式分解、有理化、等价无穷小替换；洛必达法则要写“满足 \\(\\frac00\\) 型且导数存在”。</li>\n<li>\\(\\frac{\\infty}{\\infty}\\) 型：抓最高次项，或洛必达。</li>\n<li>\\(\\infty-\\infty\\) 型：有理化、通分、提公因子。</li>\n<li>\\(1^\\infty\\) 型：取对数或凑 \\((1+u)^{1/u}\\to e\\)。</li>\n<li>分段点：分别求左右极限，写“左极限 \\(=\\) 右极限 \\(=\\) 函数值”才连续。</li>\n</ol>\n<p><strong>第三步：逐步变形，每步可复核。</strong></p>\n<p>关键变形要写依据，例如“分子有理化”“由 \\(\\sin x\\sim x\\ (x\\to0)\\)”“分子分母同除以 \\(x^2\\)”。不要跳步，尤其等价无穷小替换只能用于<strong>乘除因子</strong>，加减项中替换要谨慎。</p>\n<p><strong>第四步：写出极限值，单独标出。</strong></p>\n<p>最后一行用 \\(\\boxed{}\\) 或“故原式 \\(=\\)”单独写答案。</p>\n<p><strong>第五步：检验。</strong></p>\n<p>代回近似、看量纲、看符号、看是否与类型一致。例如 \\(\\frac{\\infty}{\\infty}\\) 型结果为常数，说明分子分母同阶，合理。</p>\n<h2>贯穿例子</h2>\n<p>求</p>\n<div class=\"math-display\">$$\n\\lim_{x\\to0}\\frac{\\sqrt{1+x}-1}{x}.\n$$</div>\n<p><strong>第一步：</strong> 代入 \\(x=0\\)，分子 \\(\\sqrt1-1=0\\)，分母 \\(0\\)，是 \\(\\frac00\\) 型。</p>\n<p><strong>第二步：</strong> 选有理化。依据：分子含根式差，有理化可消去零因子。</p>\n<p><strong>第三步：</strong></p>\n<div class=\"math-display\">$$\n\\frac{\\sqrt{1+x}-1}{x}\n=\\frac{(\\sqrt{1+x}-1)(\\sqrt{1+x}+1)}{x(\\sqrt{1+x}+1)}\n=\\frac{(1+x)-1}{x(\\sqrt{1+x}+1)}\n=\\frac{x}{x(\\sqrt{1+x}+1)}.\n$$</div>\n<p>约去 \\(x\\)（\\(x\\ne0\\)）：</p>\n<div class=\"math-display\">$$\n=\\frac{1}{\\sqrt{1+x}+1}.\n$$</div>\n<p><strong>第四步：</strong></p>\n<div class=\"math-display\">$$\n\\lim_{x\\to0}\\frac{1}{\\sqrt{1+x}+1}=\\frac{1}{1+1}=\\frac12.\n$$</div>\n<p>故</p>\n<div class=\"math-display\">$$\n\\boxed{\\lim_{x\\to0}\\frac{\\sqrt{1+x}-1}{x}=\\frac12}.\n$$</div>\n<p><strong>第五步检验：</strong> 当 \\(x\\) 很小时，\\(\\sqrt{1+x}\\approx1+\\frac{x}{2}\\)，分子约 \\(\\frac{x}{2}\\)，除以 \\(x\\) 得 \\(\\frac12\\)，一致。</p>\n<h2>满分要点与易错点</h2>\n<ol>\n<li><strong>必须写类型判断。</strong> 只写变形不写“\\(\\frac00\\) 型”，容易丢步骤分。</li>\n<li><strong>等价无穷小替换有边界。</strong> \\(\\sin x\\sim x\\)、\\(e^x-1\\sim x\\)、\\(\\ln(1+x)\\sim x\\) 只能替换乘除因子；加减中替换可能改变主项，导致错误。</li>\n<li><strong>洛必达法则要验条件。</strong> 必须是 \\(\\frac00\\) 或 \\(\\frac{\\infty}{\\infty}\\) 型，且求导后极限存在或为无穷；不能对非未定式乱用。</li>\n<li><strong>最容易错的一步：</strong> 有理化后约分时忽略 \\(x\\ne0\\) 的条件，或 \\(x\\to-\\infty\\) 时把 \\(\\sqrt{x^2}\\) 写成 \\(x\\) 而不是 \\(|x|=-x\\)。本题若改为 \\(x\\to-\\infty\\)，\\(\\sqrt{x^2}=|x|=-x\\)，符号要单独讨论。</li>\n</ol>\n<p><strong>练习建议：</strong> 按“判断类型—写方法依据—逐步变形—标答案—检验”五步，各练 2 道 \\(\\frac00\\) 型、2 道 \\(\\infty-\\infty\\) 型、1 道 \\(1^\\infty\\) 型，重点训练第一步和第三步的依据书写。</p>",
+          "mode": "题目讲解",
+          "time": "2026-11-06 00:30:22",
+          "usage": {
+            "prompt_tokens": 1503,
+            "completion_tokens": 1155,
+            "total_tokens": 2658,
+            "prompt_cache_hit_tokens": 512,
+            "prompt_cache_miss_tokens": 991
+          }
+        }
+      ]
+    }
+  },
   "deleted": {}
 }

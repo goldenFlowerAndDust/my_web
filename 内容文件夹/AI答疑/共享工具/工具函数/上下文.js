@@ -35,7 +35,7 @@
         var sessionId = tabs.activeId();
         var question = String(body.question || "");
         if (sessionId) body.conversation_id = sessionId;
-        var history = tabs.history();
+        var history = tabs.history().slice(-4); // 只带最近 2 轮，降低上下文体积
         if (history.length) body.history = history;
 
         var nextInit = {};

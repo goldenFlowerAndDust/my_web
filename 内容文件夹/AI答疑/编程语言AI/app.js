@@ -1067,7 +1067,7 @@
           language: session.language,
           question: question,
           conversation_id: session.id,
-          history: (session.messages || []).slice(-MAX_ROUNDS * 2)
+          history: (session.messages || []).slice(-6) // 最近 3 轮，控制上下文长度
         })
       });
       session.answerHtml = renderMarkdown(data.answer || "");

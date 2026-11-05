@@ -85,6 +85,13 @@
         if (oldCount) oldCount.style.display = "none";
         var oldTabs = document.getElementById("history-tabs") || document.querySelector(".history-tabs");
         if (oldTabs) oldTabs.style.display = "none";
+        document.querySelectorAll(".history-query, .history-actions").forEach(function (node) {
+            node.style.display = "none";
+        });
+        ["historySearch", "historyDate", "exportHistory", "refreshHistory", "historyCount", "historyDateLabel"].forEach(function (id) {
+            var node = document.getElementById(id);
+            if (node) node.style.display = "none";
+        });
         var desc = document.querySelector(".history-desc");
         if (desc) desc.textContent = "按月份加载摘要；点击“查看回答”后才读取该对话详情。";
         var oldArchive = document.querySelector('.hub-section[data-section="ai-history"]');

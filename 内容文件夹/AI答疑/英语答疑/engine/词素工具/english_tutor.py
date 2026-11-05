@@ -7,6 +7,14 @@ import json
 import time
 import urllib.error
 import urllib.request
+
+try:
+    from 网络代理 import configure as _configure_proxy
+except ImportError:
+    _configure_proxy = None
+if _configure_proxy:
+    _configure_proxy()
+
 from datetime import datetime
 from pathlib import Path
 from typing import Any

@@ -9,6 +9,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+
 from datetime import datetime
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -20,6 +21,12 @@ CONTENT_DIR = TOOL_DIR.parent.parent
 AI_ROOT = TOOL_DIR.parent
 CONVERSATION_DIR = AI_ROOT / "共享配置"
 sys.path.insert(0, str(CONVERSATION_DIR))
+try:
+    from 网络代理 import configure as _configure_proxy
+except ImportError:
+    _configure_proxy = None
+if _configure_proxy:
+    _configure_proxy()
 from 对话历史 import ConversationError, delete_window, read_document, read_history_document, remove_round, upsert_window  # noqa: E402
 SKILL_DIR = TOOL_DIR / "skills"
 HISTORY_DIR = TOOL_DIR / "history"
