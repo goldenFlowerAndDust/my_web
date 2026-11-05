@@ -713,17 +713,6 @@
                 : "回答已生成，但日志写入失败：" + (data.warning || "请检查配置");
             copyBtn.disabled = !currentAnswer;
             showToast(data.logged ? "回答完成，已写入日志。" : "回答完成，但日志未写入。", !data.logged);
-            if (window.TutorTabs && window.TutorTabs.appendTurnTo) {
-                window.TutorTabs.appendTurnTo(
-                    window.TutorTabs.activeId(),
-                    question,
-                    currentAnswer,
-                    answerContent.innerHTML,
-                    data.mode || submittedMode,
-                    data.time || "",
-                    data.usage || null
-                );
-            }
             if (window.innerWidth < 940) {
                 document.querySelector(".answer-panel").scrollIntoView({ behavior: "smooth", block: "start" });
             }

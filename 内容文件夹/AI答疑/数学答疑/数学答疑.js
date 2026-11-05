@@ -722,17 +722,6 @@
                 (data.logged === false ? "（日志写入失败）" : "") +
                 " · " + (data.model || "deepseek-chat");
             showToast("回答完成。");
-            if (window.TutorTabs && window.TutorTabs.appendTurnTo) {
-                window.TutorTabs.appendTurnTo(
-                    window.TutorTabs.activeId(),
-                    question,
-                    data.answer || "",
-                    answerContent.innerHTML,
-                    data.mode || currentMode,
-                    data.time || "",
-                    data.usage || null
-                );
-            }
             // 新记录可能不属于当前筛选；回到“全部”，避免看起来没保存。
             historyTopic = "all";
             if (historyTopicSelect) historyTopicSelect.value = "all";
