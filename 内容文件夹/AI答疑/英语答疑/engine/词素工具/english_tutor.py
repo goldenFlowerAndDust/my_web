@@ -127,7 +127,25 @@ def clean_history(history: object, max_messages: int = 16) -> list[dict[str, str
     return result
 
 
-def ask_tutor(mode: str, question: str, history: object = None) -> dict[str, Any]:
+def normalize_usage(raw: object) -> dict[str, int]:
+    if not isinstance(raw, dict):
+        return {}
+    keys = (
+        "prompt_tokens", "completion_tokens", "total_tokens",
+        "prompt_cache_hit_tokens", "prompt_cache_miss_tokens",
+    )
+    usage: dict[str, int] = {}
+    for key in keys:
+        try:
+            usage[key] = int(raw.get(key) or 0)
+        except (TypeError, ValueError):
+            usage[key] = 0
+    total = usage.get("total_tokens") or (usage.get("prompt_tokens", 0) + usage.get("completion_tokens", 0))
+    usage["total_tokens"] = total
+    return usage
+
+
+def ask_tutor(mode: str, question: str, history: object = None, conversation_id: str = "") -> dict[str, Any]:
     category = normalize_mode(mode)
     question = str(question or "").strip()
     if not question:
@@ -185,13 +203,17 @@ def ask_tutor(mode: str, question: str, history: object = None) -> dict[str, Any
     if not answer:
         raise TutorError("AI 没有返回内容，请换一种问法重试。")
 
+    usage = normalize_usage(data.get("usage"))
+
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     record = {
         "time": now,
         "mode": category,
+        "conversation_id": str(conversation_id or "").strip()[:64],
         "question": question,
         "answer": answer,
         "model": MODEL,
+        "usage": usage,
         "duration_ms": int((time.monotonic() - started) * 1000),
         "status": "ok",
     }
@@ -210,6 +232,7 @@ def ask_tutor(mode: str, question: str, history: object = None) -> dict[str, Any
         "answer": answer,
         "model": MODEL,
         "logged": logged,
+        "usage": usage,
     }
     if warning:
         result["warning"] = warning

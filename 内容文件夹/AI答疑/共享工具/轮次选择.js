@@ -49,6 +49,10 @@
         select.hidden = count === 0;
         select.disabled = count === 0;
         countEl.textContent = count ? "共 " + count + " 轮" : "";
+        if (!count) {
+            var tokenEl = document.getElementById("answer-token");
+            if (tokenEl) tokenEl.textContent = "";
+        }
 
         if (count && (forceLatest || activeChanged || count !== lastCount)) {
             select.value = String(count - 1);
@@ -71,11 +75,20 @@
         if (answerMode) answerMode.textContent = turn.mode || "历史回答";
         if (answerTime) answerTime.textContent = turn.time || "—";
         if (window.TutorRenderMath) window.TutorRenderMath(answerContent);
+        if (window.renderTokenCost) window.renderTokenCost(document.getElementById("answer-token"), turn.usage);
     }
 
     select.addEventListener("change", function () {
         showTurn(Number(select.value) || 0);
     });
     window.addEventListener("tutor-context-updated", function () { refresh(false); });
+    window.addEventListener("tutor-turn-added", function () {
+        refresh(true);
+        var turns = tabs.turns();
+        if (turns.length) {
+            select.value = String(turns.length - 1);
+            showTurn(turns.length - 1);
+        }
+    });
     refresh(true);
 })();

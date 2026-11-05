@@ -34,6 +34,7 @@
 
         var sessionId = tabs.activeId();
         var question = String(body.question || "");
+        if (sessionId) body.conversation_id = sessionId;
         var history = tabs.history();
         if (history.length) body.history = history;
 
@@ -49,7 +50,7 @@
                         try {
                             answerHtml = window.TutorRenderAnswer ? window.TutorRenderAnswer(data.answer || "") : "";
                         } catch (renderError) { answerHtml = ""; }
-                        tabs.appendTurnTo(sessionId, question, data.answer, answerHtml, data.mode, data.time);
+                        tabs.appendTurnTo(sessionId, question, data.answer, answerHtml, data.mode, data.time, data.usage);
                     }
                 }).catch(function () { /* ignore */ });
             }

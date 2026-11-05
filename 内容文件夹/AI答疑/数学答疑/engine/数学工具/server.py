@@ -116,6 +116,7 @@ class Handler(SimpleHTTPRequestHandler):
                     payload.get("question"),
                     payload.get("topic"),
                     payload.get("history"),
+                    payload.get("conversation_id"),
                 )
             else:
                 result = delete_tutor_log(

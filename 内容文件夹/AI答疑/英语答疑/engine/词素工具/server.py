@@ -157,7 +157,7 @@ class Handler(SimpleHTTPRequestHandler):
                 raise ArchiveError("请求体必须是 JSON 对象。")
 
             if path == "/api/tutor":
-                result = ask_tutor(payload.get("mode"), payload.get("question"), payload.get("history"))
+                result = ask_tutor(payload.get("mode"), payload.get("question"), payload.get("history"), payload.get("conversation_id"))
                 refresh_archive()
                 self._send_json(200, result)
                 return

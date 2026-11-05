@@ -741,6 +741,43 @@
         }
     }
 
+    function groupHistoryEntries(entries) {
+        var groups = [];
+        var map = {};
+        entries.forEach(function (entry, index) {
+            var key = entry && entry.conversation_id
+                ? "c:" + String(entry.conversation_id)
+                : "s:" + index;
+            if (!map[key]) {
+                map[key] = { key: key, items: [] };
+                groups.push(map[key]);
+            }
+            map[key].items.push({ entry: entry, index: index });
+        });
+        groups.forEach(function (group) {
+            group.items.sort(function (a, b) {
+                return String(a.entry.time || "").localeCompare(String(b.entry.time || ""));
+            });
+        });
+        groups.sort(function (a, b) {
+            var at = a.items[a.items.length - 1].entry.time || "";
+            var bt = b.items[b.items.length - 1].entry.time || "";
+            return String(bt).localeCompare(String(at));
+        });
+        return groups;
+    }
+
+    function loadHistoryEntry(index) {
+        var item = historyEntries[index];
+        if (!item) return;
+        renderAnswer(item.answer || "");
+        answerMode.textContent = item.mode || "历史记录";
+        answerTime.textContent = item.time || "";
+        answerMeta.textContent = "历史记录 · " + (item.model || "deepseek-chat");
+        if (window.renderTokenCost) window.renderTokenCost(document.getElementById("answer-token"), item.usage);
+        document.querySelector(".answer-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
     function renderHistory() {
         historyList.innerHTML = "";
         if (!historyEntries.length) {
@@ -751,48 +788,57 @@
         }
         historyList.hidden = false;
         historyEmpty.hidden = true;
-        historyCount.textContent = historyEntries.length + " 条";
-        historyEntries.forEach(function (item, index) {
-            var row = document.createElement("div");
-            row.className = "history-row";
+        var groups = groupHistoryEntries(historyEntries);
+        historyCount.textContent = groups.length + " 个对话 · " + historyEntries.length + " 条回答";
+        groups.forEach(function (group) {
+            var first = group.items[0].entry;
+            var card = document.createElement("div");
+            card.className = "history-conversation";
 
-            var btn = document.createElement("button");
-            btn.type = "button";
-            btn.className = "history-item";
-            btn.dataset.index = String(index);
-            var question = String(item.question || "（无原题）");
-            var answer = String(item.answer || "");
-            var preview = answer.replace(/\s+/g, " ").slice(0, 120);
-            btn.innerHTML =
-                '<span class="history-item-top">' +
-                '<span class="history-topic-badge">' + escapeHtml(item.topic || "其他") + "</span>" +
-                '<span class="history-mode">' + escapeHtml(item.mode || "其他") + "</span>" +
-                '<span class="history-time">' + escapeHtml(item.time || "") + "</span>" +
-                "</span>" +
-                '<span class="history-question">' + questionHtml(question) + "</span>" +
-                '<span class="history-preview">' + escapeHtml(preview) + "</span>";
-            btn.addEventListener("click", function () {
-                renderAnswer(answer);
-                answerMode.textContent = item.mode || "历史记录";
-                answerTime.textContent = item.time || "";
-                answerMeta.textContent = "历史记录 · " + (item.model || "deepseek-chat");
-                document.querySelector(".answer-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+            var head = document.createElement("div");
+            head.className = "history-conversation-head";
+            head.innerHTML = '<span class="history-conversation-title">' +
+                escapeHtml(truncate(first.question || "（无原题）", 80)) + "</span>" +
+                '<span class="history-conversation-count">共 ' + group.items.length + " 轮</span>";
+            card.appendChild(head);
+
+            var select = document.createElement("select");
+            select.className = "history-round-select";
+            select.setAttribute("aria-label", "选择这个对话的轮次");
+            group.items.forEach(function (row, roundIndex) {
+                var option = document.createElement("option");
+                option.value = String(row.index);
+                option.textContent = "第" + (roundIndex + 1) + "轮 · " +
+                    truncate(row.entry.question || "（无问题）", 46);
+                select.appendChild(option);
+            });
+            select.value = String(group.items[group.items.length - 1].index);
+            select.addEventListener("change", function () {
+                loadHistoryEntry(Number(select.value));
+            });
+
+            var preview = document.createElement("button");
+            preview.type = "button";
+            preview.className = "history-conversation-preview";
+            preview.textContent = truncate(String(group.items[group.items.length - 1].entry.answer || "").replace(/[#*`>]/g, ""), 120);
+            preview.addEventListener("click", function () {
+                loadHistoryEntry(Number(select.value));
             });
 
             var del = document.createElement("button");
             del.type = "button";
             del.className = "history-delete";
-            del.textContent = "删除";
-            del.title = "删除这条答疑记录";
+            del.textContent = "删除本轮";
+            del.title = "删除当前选中的这一轮";
             del.addEventListener("click", function (event) {
                 event.stopPropagation();
-                deleteHistoryItem(item);
+                deleteHistoryItem(historyEntries[Number(select.value)]);
             });
 
-            row.append(btn, del);
-            historyList.appendChild(row);
-            // 原题里的 LaTeX 也要像正文一样渲染。
-            renderMath(btn.querySelector(".history-question"));
+            card.appendChild(select);
+            card.appendChild(preview);
+            card.appendChild(del);
+            historyList.appendChild(card);
         });
     }
 

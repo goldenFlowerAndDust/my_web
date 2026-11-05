@@ -755,6 +755,32 @@
         return text.length > length ? text.slice(0, length) + "…" : text;
     }
 
+    function groupHistoryEntries(entries) {
+        var groups = [];
+        var map = {};
+        entries.forEach(function (entry, index) {
+            var key = entry && entry.conversation_id
+                ? "c:" + String(entry.conversation_id)
+                : "s:" + index;
+            if (!map[key]) {
+                map[key] = { key: key, items: [] };
+                groups.push(map[key]);
+            }
+            map[key].items.push({ entry: entry, index: index });
+        });
+        groups.forEach(function (group) {
+            group.items.sort(function (a, b) {
+                return String(a.entry.time || "").localeCompare(String(b.entry.time || ""));
+            });
+        });
+        groups.sort(function (a, b) {
+            var at = a.items[a.items.length - 1].entry.time || "";
+            var bt = b.items[b.items.length - 1].entry.time || "";
+            return String(bt).localeCompare(String(at));
+        });
+        return groups;
+    }
+
     function renderHistory() {
         historyList.innerHTML = "";
         if (!historyEntries.length) {
@@ -764,27 +790,47 @@
             return;
         }
         historyEmpty.hidden = true;
-        historyCount.textContent = historyEntries.length + " 条";
-        historyEntries.forEach(function (entry, index) {
-            var button = document.createElement("button");
-            button.type = "button";
-            button.className = "history-item";
-            button.dataset.index = String(index);
-            var mode = entry.mode || "其他";
-            var time = entry.time || "";
-            var question = truncate(entry.question || "", 68);
-            var answer = truncate(String(entry.answer || "").replace(/[#*`>]/g, ""), 80);
-            button.innerHTML =
-                '<span class="history-item-top">' +
-                '<span class="history-mode">' + escapeHtml(mode) + "</span>" +
-                '<span class="history-time">' + escapeHtml(time) + "</span>" +
-                "</span>" +
-                '<span class="history-question">' + escapeHtml(question) + "</span>" +
-                '<span class="history-preview">' + escapeHtml(answer) + "</span>";
-            button.addEventListener("click", function () {
-                loadHistoryEntry(index);
+        var groups = groupHistoryEntries(historyEntries);
+        historyCount.textContent = groups.length + " 个对话 · " + historyEntries.length + " 条回答";
+        groups.forEach(function (group) {
+            var first = group.items[0].entry;
+            var latest = group.items[group.items.length - 1].entry;
+            var card = document.createElement("div");
+            card.className = "history-conversation";
+
+            var head = document.createElement("div");
+            head.className = "history-conversation-head";
+            head.innerHTML = '<span class="history-conversation-title">' +
+                escapeHtml(truncate(first.question || "（无原题）", 80)) + "</span>" +
+                '<span class="history-conversation-count">共 ' + group.items.length + " 轮</span>";
+            card.appendChild(head);
+
+            var select = document.createElement("select");
+            select.className = "history-round-select";
+            select.setAttribute("aria-label", "选择这个对话的轮次");
+            group.items.forEach(function (row, roundIndex) {
+                var option = document.createElement("option");
+                option.value = String(row.index);
+                option.textContent = "第" + (roundIndex + 1) + "轮 · " +
+                    truncate(row.entry.question || "（无问题）", 46);
+                select.appendChild(option);
             });
-            historyList.appendChild(button);
+            select.value = String(group.items[group.items.length - 1].index);
+            select.addEventListener("change", function () {
+                loadHistoryEntry(Number(select.value));
+            });
+
+            var preview = document.createElement("button");
+            preview.type = "button";
+            preview.className = "history-conversation-preview";
+            preview.textContent = truncate(String(latest.answer || "").replace(/[#*`>]/g, ""), 120);
+            preview.addEventListener("click", function () {
+                loadHistoryEntry(Number(select.value));
+            });
+
+            card.appendChild(select);
+            card.appendChild(preview);
+            historyList.appendChild(card);
         });
     }
 
@@ -802,6 +848,7 @@
             ? "来自云端历史 · KV"
             : "来自历史记录 · 已写入对应分类日志";
         copyBtn.disabled = !currentAnswer;
+        if (window.renderTokenCost) window.renderTokenCost(document.getElementById("answer-token"), entry.usage);
         showAnswerState(currentAnswer ? "content" : "empty");
         document.querySelector(".answer-panel").scrollIntoView({ behavior: "smooth", block: "start" });
         showToast("已载入历史记录。");

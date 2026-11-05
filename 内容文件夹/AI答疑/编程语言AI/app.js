@@ -94,6 +94,7 @@
   const answerTime = $("answerTime");
   const roundSelect = $("roundSelect");
   const roundCount = $("roundCount");
+  const answerToken = $("answerToken");
   const historyList = $("historyList");
   const historyTabs = $("historyTabs");
   const historySearch = $("historySearch");
@@ -228,7 +229,8 @@
         question: user.content || "",
         answer: assistant.content || "",
         html: assistant.html || "",
-        time: assistant.time || ""
+        time: assistant.time || "",
+        usage: assistant.usage || null
       });
     }
     return turns;
@@ -245,6 +247,7 @@
     roundSelect.hidden = turns.length === 0;
     roundSelect.disabled = turns.length === 0;
     if (roundCount) roundCount.textContent = turns.length ? "共 " + turns.length + " 轮" : "";
+    if (!turns.length && answerToken) answerToken.textContent = "";
     if (turns.length && forceLatest) roundSelect.value = String(turns.length - 1);
     if (!turns.length) return;
     if (!roundSelect.value) roundSelect.value = String(turns.length - 1);
@@ -258,6 +261,7 @@
     const html = turn.html || renderMarkdown(turn.answer || "");
     answerEl.innerHTML = html;
     answerTime.textContent = turn.time || "";
+    if (window.renderTokenCost) window.renderTokenCost(document.getElementById("answerToken"), turn.usage);
     const session = currentSession();
     if (session) {
       session.answerHtml = html;
@@ -676,32 +680,68 @@
     });
   }
 
+  function groupHistoryRecords(records) {
+    const groups = [];
+    const map = new Map();
+    records.forEach((item) => {
+      const index = historyRecords.indexOf(item);
+      const key = item.conversation_id ? "c:" + item.conversation_id : "s:" + index;
+      if (!map.has(key)) {
+        const group = { key, items: [] };
+        map.set(key, group);
+        groups.push(group);
+      }
+      map.get(key).items.push({ item, index });
+    });
+    groups.forEach((group) => {
+      group.items.sort((a, b) => String(a.item.time || "").localeCompare(String(b.item.time || "")));
+    });
+    groups.sort((a, b) => {
+      const at = a.items[a.items.length - 1].item.time || "";
+      const bt = b.items[b.items.length - 1].item.time || "";
+      return String(bt).localeCompare(String(at));
+    });
+    return groups;
+  }
+
   function renderHistory() {
     const records = filteredHistoryRecords();
+    const groups = groupHistoryRecords(records);
     if (historyCount) {
-      historyCount.textContent = records.length + " / " + historyRecords.length + " 条";
+      historyCount.textContent = groups.length + " 个对话 / " + records.length + " 条回答";
     }
     if (!records.length) {
       historyList.innerHTML = '<p class="history-empty">' +
         (historyRecords.length ? "没有匹配的历史记录。" : "还没有历史记录，先问一个问题。") + "</p>";
       return;
     }
-    const groups = new Map();
-    records.forEach((item) => {
-      const index = historyRecords.indexOf(item);
-      const day = item.date || String(item.time || "").slice(0, 10) || "未知日期";
-      if (!groups.has(day)) groups.set(day, []);
-      groups.get(day).push({ item, index });
+    historyList.innerHTML = groups.map((group) => {
+      const first = group.items[0].item;
+      const latest = group.items[group.items.length - 1].item;
+      const options = group.items.map((row, roundIndex) =>
+        '<option value="' + row.index + '">第' + (roundIndex + 1) + '轮 · ' +
+        escapeHtml(String(row.item.question || "（无问题）").slice(0, 46)) + "</option>"
+      ).join("");
+      return '<div class="history-conversation">' +
+        '<div class="history-conversation-head">' +
+        '<span class="history-conversation-title">' + escapeHtml(first.question || "（无原题）") + "</span>" +
+        '<span class="history-conversation-count">共 ' + group.items.length + ' 轮</span>' +
+        "</div>" +
+        '<select class="history-round-select" data-history-select>' + options + "</select>" +
+        '<p class="history-conversation-preview">' +
+        escapeHtml(String(latest.answer || "").replace(/[#*`>]/g, "").slice(0, 140)) + "</p>" +
+        '<button type="button" class="copy-code view-history" data-index="' +
+        group.items[group.items.length - 1].index + '">查看选中的回答</button>' +
+        "</div>";
+    }).join("");
+    Array.from(historyList.querySelectorAll("[data-history-select]")).forEach((select) => {
+      select.value = String(groupHistoryValue(select));
     });
-    historyList.innerHTML = Array.from(groups.entries()).map(([day, rows]) =>
-      '<section class="history-day"><h3>' + escapeHtml(day) + "</h3>" +
-      rows.map(({ item, index }) =>
-        '<article class="history-item"><p class="history-question">' + escapeHtml(item.question) + "</p>" +
-        '<div class="history-meta">' + escapeHtml(item.time || "") + " · " +
-        escapeHtml(item.language_name || "") +
-        ' <button type="button" class="copy-code view-history" data-index="' + index + '">查看</button></div></article>'
-      ).join("") + "</section>"
-    ).join("");
+  }
+
+  function groupHistoryValue(select) {
+    const options = Array.from(select.options);
+    return options.length ? options[options.length - 1].value : "";
   }
 
   async function loadHistory() {
@@ -831,6 +871,7 @@
         body: JSON.stringify({
           language: session.language,
           question: question,
+          conversation_id: session.id,
           history: (session.messages || []).slice(-MAX_ROUNDS * 2)
         })
       });
@@ -842,7 +883,8 @@
           role: "assistant",
           content: data.answer || "",
           html: renderMarkdown(data.answer || ""),
-          time: (data.language_name || "") + " · " + (data.time || "")
+          time: (data.language_name || "") + " · " + (data.time || ""),
+          usage: data.usage || null
         }
       ]).slice(-MAX_ROUNDS * 2);
       renderRoundSelect(true);
@@ -1064,10 +1106,8 @@
   if (historyDate) {
     historyDate.addEventListener("change", renderHistory);
   }
-  historyList.addEventListener("click", (event) => {
-    const button = event.target.closest(".view-history");
-    if (!button) return;
-    const record = historyRecords[Number(button.dataset.index)];
+  function viewHistoryRecord(index) {
+    const record = historyRecords[index];
     if (!record) return;
     const session = currentSession();
     if (session) {
@@ -1079,7 +1119,22 @@
     }
     answerEl.innerHTML = renderMarkdown(record.answer || "");
     answerTime.textContent = (record.language_name || "") + " · " + (record.time || "");
+    if (window.renderTokenCost) window.renderTokenCost(document.getElementById("answerToken"), record.usage);
     answerEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  historyList.addEventListener("change", (event) => {
+    if (event.target.closest("[data-history-select]")) {
+      viewHistoryRecord(Number(event.target.value));
+    }
+  });
+
+  historyList.addEventListener("click", (event) => {
+    const button = event.target.closest(".view-history");
+    if (!button) return;
+    const card = button.closest(".history-conversation");
+    const select = card ? card.querySelector("[data-history-select]") : null;
+    viewHistoryRecord(Number((select && select.value) || button.dataset.index || 0));
   });
 
   document.addEventListener("click", async (event) => {

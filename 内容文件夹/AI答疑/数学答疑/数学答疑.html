@@ -7,7 +7,7 @@
     <meta name="description" content="专升本数学答疑：题目讲解、错题诊断、概念公式与学习方法。数学家人设的 AI 用中文讲步骤，公式用 LaTeX 渲染。">
     <link rel="stylesheet" href="数学答疑.css?v=20261102-5">
     <link rel="stylesheet" href="assets/数学公式js/libs/katex.min.css">
-    <link rel="stylesheet" href="多问题标签.css">
+    <link rel="stylesheet" href="多问题标签.css?v=20261105-2">
 </head>
 <body>
 <div class="page-glow" aria-hidden="true"></div>
@@ -135,6 +135,8 @@
                         <span class="btn-arrow" aria-hidden="true">→</span>
                     </button>
                 </div>
+
+                <p class="token-note">每次回答按 DeepSeek 实际用量估算 token 和人民币；价格在共享工具/token成本.js 配置，实际扣费以平台账单为准。</p>
             </div>
 
             <div class="answer-panel panel" aria-live="polite">
@@ -174,6 +176,7 @@
                 </div>
 
                 <div class="answer-foot">
+                    <span class="answer-token" id="answer-token"></span>
                     <span id="answer-time">—</span>
                     <span id="answer-meta">回答只用于学习参考，重要考试信息请以考纲和老师为准。</span>
                 </div>
@@ -289,9 +292,10 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="assets/数学公式js/libs/katex.min.js" defer></script>
 <script src="assets/数学公式js/libs/auto-render.min.js" defer></script>
-<script src="数学答疑.js?v=20261105-3" defer></script>
-    <script src="多问题标签.js?v=20261105-2"></script>
-    <script src="../共享工具/上下文.js?v=20261105-2"></script>
-    <script src="../共享工具/轮次选择.js?v=20261105-3"></script>
+<script src="数学答疑.js?v=20261105-5" defer></script>
+    <script src="多问题标签.js?v=20261105-4"></script>
+    <script src="../共享工具/上下文.js?v=20261105-4"></script>
+    <script src="../共享工具/token成本.js?v=20261105-2"></script>
+    <script src="../共享工具/轮次选择.js?v=20261105-5"></script>
 </body>
 </html>

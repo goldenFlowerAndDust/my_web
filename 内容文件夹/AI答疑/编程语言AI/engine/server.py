@@ -110,6 +110,25 @@ def build_prompt(language: str, question: str) -> tuple[str, str]:
     return system, user
 
 
+def normalize_usage(raw: object) -> dict[str, int]:
+    if not isinstance(raw, dict):
+        return {}
+    keys = (
+        "prompt_tokens", "completion_tokens", "total_tokens",
+        "prompt_cache_hit_tokens", "prompt_cache_miss_tokens",
+    )
+    usage: dict[str, int] = {}
+    for key in keys:
+        try:
+            usage[key] = int(raw.get(key) or 0)
+        except (TypeError, ValueError):
+            usage[key] = 0
+    usage["total_tokens"] = usage.get("total_tokens") or (
+        usage.get("prompt_tokens", 0) + usage.get("completion_tokens", 0)
+    )
+    return usage
+
+
 def clean_history(history: object, max_messages: int = 40) -> list[dict[str, str]]:
     if not isinstance(history, list):
         return []
@@ -125,7 +144,7 @@ def clean_history(history: object, max_messages: int = 40) -> list[dict[str, str
     return result
 
 
-def call_deepseek(system: str, user: str, history: object = None) -> str:
+def call_deepseek(system: str, user: str, history: object = None) -> tuple[str, dict[str, int]]:
     key = read_api_key()
     if not key:
         raise ValueError(
@@ -167,10 +186,10 @@ def call_deepseek(system: str, user: str, history: object = None) -> str:
         raise RuntimeError("DeepSeek API 响应格式异常。") from exc
     if not answer:
         raise RuntimeError("AI 没有返回内容，请换一种问法。")
-    return answer
+    return answer, normalize_usage(data.get("usage"))
 
 
-def append_history(language: str, question: str, answer: str) -> None:
+def append_history(language: str, question: str, answer: str, conversation_id: str = "", usage: object = None) -> None:
     now = datetime.now()
     day = now.strftime("%Y-%m-%d")
     record = {
@@ -178,8 +197,10 @@ def append_history(language: str, question: str, answer: str) -> None:
         "date": day,
         "language": language,
         "language_name": BY_ID[language]["name"],
+        "conversation_id": str(conversation_id or "").strip()[:64],
         "question": question,
         "answer": answer,
+        "usage": normalize_usage(usage),
     }
     folder = HISTORY_DIR / language
     folder.mkdir(parents=True, exist_ok=True)
@@ -210,7 +231,7 @@ def read_history(language: str = "", limit: int = 30) -> list[dict[str, Any]]:
     return records[-max(1, min(limit, 100)):][::-1]
 
 
-def ask(language: str, question: str, history: object = None) -> dict[str, Any]:
+def ask(language: str, question: str, history: object = None, conversation_id: str = "") -> dict[str, Any]:
     language = str(language or "").strip()
     question = str(question or "").strip()
     if language not in BY_ID:
@@ -220,14 +241,16 @@ def ask(language: str, question: str, history: object = None) -> dict[str, Any]:
     if len(question) > 20000:
         raise ValueError("问题太长，请精简到 20000 字以内。")
     system, user = build_prompt(language, question)
-    answer = call_deepseek(system, user, history)
-    append_history(language, question, answer)
+    answer, usage = call_deepseek(system, user, history)
+    append_history(language, question, answer, conversation_id, usage)
     return {
         "ok": True,
         "language": language,
         "language_name": BY_ID[language]["name"],
         "answer": answer,
         "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "usage": usage,
+        "conversation_id": str(conversation_id or "").strip()[:64],
     }
 
 
@@ -299,7 +322,7 @@ class Handler(SimpleHTTPRequestHandler):
             json_response(self, 400, {"ok": False, "error": "请求 JSON 格式不正确。"})
             return
         try:
-            result = ask(payload.get("language"), payload.get("question"), payload.get("history"))
+            result = ask(payload.get("language"), payload.get("question"), payload.get("history"), payload.get("conversation_id"))
             json_response(self, 200, result)
         except ValueError as exc:
             json_response(self, 400, {"ok": False, "error": str(exc)})

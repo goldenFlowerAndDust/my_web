@@ -444,6 +444,17 @@ async function readJsonBody(request) {
   return data;
 }
 
+function normalizeUsage(raw) {
+  if (!raw || typeof raw !== "object") return {};
+  const usage = {};
+  for (const key of ["prompt_tokens", "completion_tokens", "total_tokens", "prompt_cache_hit_tokens", "prompt_cache_miss_tokens"]) {
+    const value = Number(raw[key]);
+    usage[key] = Number.isFinite(value) ? value : 0;
+  }
+  if (!usage.total_tokens) usage.total_tokens = (usage.prompt_tokens || 0) + (usage.completion_tokens || 0);
+  return usage;
+}
+
 function cleanHistory(history, maxMessages) {
   if (!Array.isArray(history)) return [];
   return history.slice(-maxMessages).map((item) => {
@@ -480,6 +491,7 @@ async function handleTutor(request, env, preview = false) {
   const mode = normalizeMode(payload.mode, config.categories, config.aliases);
   const topic = subject === "math" ? normalizeTopic(payload.topic) : "";
   const question = String(payload.question || "").trim();
+  const conversationId = String(payload.conversation_id || "").trim().slice(0, 64);
   const history = cleanHistory(payload.history, 16);
   if (!mode) {
     return json({
@@ -577,6 +589,8 @@ async function handleTutor(request, env, preview = false) {
     topic,
     question,
     answer,
+    conversation_id: conversationId,
+    usage: normalizeUsage(data?.usage),
     model,
     duration_ms: Date.now() - started,
     status: "ok",
@@ -612,6 +626,7 @@ async function handleTutor(request, env, preview = false) {
     model,
     preview,
     logged,
+    usage: normalizeUsage(data?.usage),
     ...(warning ? { warning } : {}),
   }, 200, request, env);
 }
@@ -1287,6 +1302,7 @@ async function handleCodeTutor(request, env) {
     return json({ ok: false, error: "未知语言，请使用：" + CODE_IDS.join(" / ") + "。" }, 400, request, env);
   }
   const question = String(payload.question || "").trim();
+  const conversationId = String(payload.conversation_id || "").trim().slice(0, 64);
   const history = cleanHistory(payload.history, 40);
   if (!question) {
     return json({ ok: false, error: "请输入要问的问题。" }, 400, request, env);
@@ -1369,6 +1385,8 @@ async function handleCodeTutor(request, env) {
     mode: language,
     question,
     answer,
+    conversation_id: conversationId,
+    usage: normalizeUsage(data?.usage),
     model,
     duration_ms: Date.now() - started,
     status: "ok",
@@ -1397,6 +1415,7 @@ async function handleCodeTutor(request, env) {
     model,
     logged,
     warning,
+    usage: normalizeUsage(data?.usage),
   }, 200, request, env);
 }
 

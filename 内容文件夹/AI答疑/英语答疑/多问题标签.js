@@ -55,7 +55,7 @@
 
     function make() {
         return {
-            id: "t" + (++seq).toString(36),
+            id: "t" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
             title: "新问题",
             messages: [],
             question: "",
@@ -103,6 +103,10 @@
             }
         } catch (e) { /* ignore */ }
         if (!sessions.length) sessions = [make()];
+        sessions.forEach(function (item) {
+            var parsed = parseInt(String(item.id || "").replace(/^t/, ""), 36);
+            if (Number.isFinite(parsed) && parsed > seq) seq = parsed;
+        });
         active = sessions[0].id;
     }
 
@@ -160,7 +164,7 @@
         return s && Array.isArray(s.messages) ? s.messages.slice(-MAX_ROUNDS * 2) : [];
     }
 
-    function appendTurnTo(id, questionText, answerText, answerHtml, answerMode, answerTime) {
+    function appendTurnTo(id, questionText, answerText, answerHtml, answerMode, answerTime, usage) {
         var s = sessions.find(function (item) { return item.id === id; });
         if (!s || !questionText || !answerText) return;
         s.messages = (Array.isArray(s.messages) ? s.messages : []).concat([
@@ -170,12 +174,14 @@
                 content: String(answerText),
                 html: String(answerHtml || ""),
                 mode: String(answerMode || ""),
-                time: String(answerTime || "")
+                time: String(answerTime || ""),
+                usage: usage && typeof usage === "object" ? usage : null
             }
         ]).slice(-MAX_ROUNDS * 2);
         save();
         render();
         window.dispatchEvent(new CustomEvent("tutor-context-updated"));
+        window.dispatchEvent(new CustomEvent("tutor-turn-added", { detail: { id: id } }));
     }
 
     function turns() {
@@ -192,7 +198,8 @@
                 answer: assistant.content,
                 html: assistant.html || "",
                 mode: assistant.mode || "",
-                time: assistant.time || ""
+                time: assistant.time || "",
+                usage: assistant.usage || null
             });
         }
         return result;

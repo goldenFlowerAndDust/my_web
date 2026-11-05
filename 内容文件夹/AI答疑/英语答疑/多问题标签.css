@@ -71,3 +71,80 @@
 
 
 .round-count { color: #8da3b8; font-size: 11px; white-space: nowrap; }
+
+
+/* token 成本说明与本次用量 */
+.token-note {
+    margin: 12px 0 0;
+    padding-top: 9px;
+    border-top: 1px dashed var(--line);
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+.answer-token {
+    flex-basis: 100%;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+.answer-foot { flex-wrap: wrap; }
+
+
+/* 历史记录按对话分组 */
+.history-conversation {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: var(--paper);
+    display: grid;
+    gap: 7px;
+}
+.history-conversation-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+}
+.history-conversation-title {
+    color: var(--ink);
+    font-weight: 700;
+    font-size: .86rem;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.history-conversation-count {
+    flex: none;
+    color: var(--muted);
+    font-size: .72rem;
+}
+.history-round-select {
+    width: 100%;
+    height: 30px;
+    padding: 0 8px;
+    border: 1px solid var(--line-strong);
+    border-radius: 7px;
+    background: #fffdf8;
+    color: var(--ink);
+    font: inherit;
+    font-size: .78rem;
+}
+.history-conversation-preview {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--muted);
+    text-align: left;
+    font: inherit;
+    font-size: .76rem;
+    line-height: 1.6;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.history-conversation-preview:hover { color: var(--teal); }
