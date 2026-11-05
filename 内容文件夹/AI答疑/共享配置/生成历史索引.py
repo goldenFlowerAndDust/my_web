@@ -53,6 +53,33 @@ def json_bytes(data: Any) -> bytes:
     return json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
 
 
+def usage_cost(window: dict[str, Any]) -> tuple[int, float]:
+    total = 0
+    cost = 0.0
+    for message in window.get("messages") or []:
+        if message.get("role") != "assistant" or not isinstance(message.get("usage"), dict):
+            continue
+        usage = message["usage"]
+        prompt = int(usage.get("prompt_tokens") or 0)
+        completion = int(usage.get("completion_tokens") or 0)
+        count = int(usage.get("total_tokens") or 0) or prompt + completion
+        hit = int(usage.get("prompt_cache_hit_tokens") or 0)
+        miss = int(usage.get("prompt_cache_miss_tokens") or 0)
+        if not hit and not miss:
+            miss = prompt
+        total += count
+        cost += (hit / 1000000.0) * 0.5 + (miss / 1000000.0) * 2.0 + (completion / 1000000.0) * 8.0
+    return total, cost
+
+
+def format_money(value: float) -> str:
+    if value < 0.01:
+        return "¥%.6f" % value
+    if value < 1:
+        return "¥%.4f" % value
+    return "¥%.2f" % value
+
+
 def build_subject(subject: str) -> dict[str, Any]:
     document = read_history_document(subject)
     windows = document.get("windows") or {}
@@ -106,6 +133,7 @@ def build_subject(subject: str) -> dict[str, Any]:
             chunk_no += 1
 
         for window in items:
+            token_total, token_cost = usage_cost(window)
             window_raw = json_bytes(window)
             estimated = current_bytes + len(window_raw) + 2
             if current and (len(current) >= MAX_WINDOWS_PER_CHUNK or estimated > MAX_CHUNK_BYTES):
@@ -119,7 +147,9 @@ def build_subject(subject: str) -> dict[str, Any]:
                 "updated_at": str(window.get("updated_at") or ""),
                 "rounds": int(window.get("rounds") or 0),
                 "questions": [str(m.get("content") or "") for m in (window.get("messages") or []) if m.get("role") == "user"],
-                "tokens": sum(int((m.get("usage") or {}).get("total_tokens") or 0) for m in (window.get("messages") or []) if m.get("role") == "assistant"),
+                "tokens": token_total,
+                "cost": round(token_cost, 8),
+                "cost_text": "≈RMB " + format_money(token_cost).lstrip("¥"),
                 "subject": subject,
                 "language": str(window.get("language") or ""),
                 "language_name": str(window.get("language_name") or ""),

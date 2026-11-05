@@ -313,10 +313,11 @@
             var initialQuestion = (Array.isArray(item.questions) && item.questions[initialRound]) || item.title || "（无问题）";
             var tokenText = Number(item.tokens || 0) > 0
                 ? Number(item.tokens).toLocaleString("zh-CN") + " tokens · " : "";
+            var costText = item.cost_text ? item.cost_text + " · " : "";
             card.innerHTML =
                 '<div class="month-history-card-head">' +
                 '<span class="month-history-card-title">' + questionHtml(initialQuestion) + "</span>" +
-                '<span class="month-history-card-meta">' + escapeHtml(tokenText + (item.updated_at || item.created_at || "")) +
+                '<span class="month-history-card-meta">' + escapeHtml(tokenText + costText + (item.updated_at || item.created_at || "")) +
                 " · " + Number(item.rounds || 0) + " 轮</span>" +
                 "</div>" +
                 '<div class="month-history-card-actions">' +
