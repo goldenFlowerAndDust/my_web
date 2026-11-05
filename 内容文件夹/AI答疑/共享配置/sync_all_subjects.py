@@ -32,6 +32,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from 归档对话历史 import archive_once
 from 对话历史 import MAX_ROUNDS as CONVERSATION_MAX_ROUNDS, delete_window, read_document, upsert_window
 from 对话同步 import merge_documents
+from 生成历史索引 import build_all as build_history_index
 from typing import Any
 
 
@@ -1205,6 +1206,13 @@ class SyncRunner:
         self.status["conversation_sync"] = conversation_sync
         if conversation_sync.get("status") != "ok":
             self.status["errors"].append("对话历史同步失败")
+
+        try:
+            self.status["history_months"] = build_history_index()
+            print("按月历史索引：已重新生成")
+        except Exception as exc:  # noqa: BLE001
+            self.status["history_months"] = {"ok": False, "error": str(exc)}
+            print("按月历史索引生成失败：%s" % exc)
 
         archive = self.build_ai_history_archive()
         self.status["history_archive"] = archive
