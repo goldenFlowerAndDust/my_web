@@ -476,6 +476,12 @@
   window.ProgrammingResumeWindow = function (conversation, roundLimit) {
     return resumeWindow(conversation, roundLimit);
   };
+  window.TutorRenderAnswer = function (text) {
+    return renderMarkdown(text || "");
+  };
+  window.TutorRenderQuestion = function (text) {
+    return escapeHtml(text || "");
+  };
 
   function currentProfile() {
     return connection.profiles[connection.provider] || { url: "", token: "" };
@@ -1067,7 +1073,10 @@
           language: session.language,
           question: question,
           conversation_id: session.id,
-          history: (session.messages || []).slice(-6) // 最近 3 轮，控制上下文长度
+          history: (session.messages || []).map((message) => ({
+            role: message.role,
+            content: String(message.content || "")
+          }))
         })
       });
       session.answerHtml = renderMarkdown(data.answer || "");

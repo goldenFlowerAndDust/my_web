@@ -99,7 +99,20 @@
 }
 .month-history-round { margin-bottom: 12px; }
 .month-history-question,
-.month-history-answer { font-size: 11px; line-height: 1.75; overflow-wrap: anywhere; }
+.month-history-answer {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #203047;
+    overflow-wrap: anywhere;
+}
+.month-history-answer p { margin: 0 0 8px; }
+.month-history-answer pre {
+    overflow: auto;
+    padding: 9px;
+    border-radius: 6px;
+    background: #f4f7fa;
+}
+.month-history-answer code { font-size: 12px; }
 .month-history-question b,
 .month-history-answer b { display: inline-block; min-width: 1.2em; color: var(--accent, #0b6672); }
 .month-history-answer { margin-top: 5px; }
