@@ -100,9 +100,35 @@
         return remoteReady;
     }
 
+    function resetClientHistoryOnce() {
+        if (!window.__AI_HISTORY_LIGHT__) return;
+        var marker = "aiTutor.history.clean.v2";
+        try {
+            if (localStorage.getItem(marker) === "1") return;
+            var remove = [];
+            for (var i = 0; i < localStorage.length; i += 1) {
+                var key = localStorage.key(i);
+                if (key && (key.indexOf("aiTutor.conversations.") === 0)) remove.push(key);
+            }
+            remove.forEach(function (key) { localStorage.removeItem(key); });
+            var sessionRemove = [];
+            for (var j = 0; j < sessionStorage.length; j += 1) {
+                var skey = sessionStorage.key(j);
+                if (skey && (/^aiTutor\.sessions\./.test(skey) || /^programmingTutor\.sessions/.test(skey))) {
+                    sessionRemove.push(skey);
+                }
+            }
+            sessionRemove.forEach(function (key) { sessionStorage.removeItem(key); });
+            localStorage.setItem(marker, "1");
+        } catch (error) { /* ignore */ }
+    }
+
     function initializeRemote() {
         // 历史界面改用按月静态索引后，不再在页面启动时拉取全部 messages。
-        if (window.__AI_HISTORY_LIGHT__) return Promise.resolve(false);
+        if (window.__AI_HISTORY_LIGHT__) {
+            resetClientHistoryOnce();
+            return Promise.resolve(false);
+        }
         if (!remoteBase || !remoteSubject) return Promise.resolve();
         return fetch(remoteUrl("/api/conversations?subject=" + encodeURIComponent(remoteSubject)), {
             cache: "no-store",
