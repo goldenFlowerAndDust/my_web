@@ -813,7 +813,7 @@
             var migrated = window.ConversationStore.entries("math").filter(function (entry) {
                 return !historyCategory || historyCategory === "all" || entry.mode === historyCategory;
             });
-            if (migrated.length) historyEntries = migrated;
+            historyEntries = migrated;
         }
         historyList.innerHTML = "";
         if (!historyEntries.length) {
@@ -855,7 +855,7 @@
                 var option = document.createElement("option");
                 option.value = String(row.index);
                 option.textContent = "第" + (roundIndex + 1) + "轮 · " +
-                    truncate(row.entry.question || "（无问题）", 28);
+                    (row.entry.question || "（无问题）");
                 select.appendChild(option);
             });
             select.value = String(group.items[group.items.length - 1].index);

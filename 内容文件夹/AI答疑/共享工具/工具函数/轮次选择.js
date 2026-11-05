@@ -38,7 +38,7 @@
 
     function trim(text) {
         var value = String(text || "").replace(/\s+/g, " ").trim();
-        return value.length > 24 ? value.slice(0, 24) + "…" : (value || "（无问题）");
+        return value || "（无问题）";
     }
 
     function escapeHtml(value) {
@@ -60,6 +60,7 @@
         select.hidden = true;
         select.setAttribute("aria-hidden", "true");
         select.tabIndex = -1;
+        select.dataset.roundTextReady = "1";
         picker = document.createElement("div");
         picker.className = "round-picker";
         pickerTrigger = document.createElement("button");

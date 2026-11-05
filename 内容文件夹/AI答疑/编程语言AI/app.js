@@ -251,7 +251,7 @@
     const turns = conversationTurns();
     roundSelect.innerHTML = turns.map((turn) => {
       const text = String(turn.question || "").replace(/\s+/g, " ").trim();
-      const label = text.length > 24 ? text.slice(0, 24) + "…" : (text || "（无问题）");
+      const label = text || "（无问题）";
       return '<option value="' + (turn.index - 1) + '">第' + turn.index + '轮 · ' + escapeHtml(label) + "</option>";
     }).join("");
     roundSelect.hidden = turns.length === 0;
@@ -860,7 +860,7 @@
       const latest = group.items[group.items.length - 1].item;
       const options = group.items.map((row, roundIndex) =>
         '<option value="' + row.index + '">第' + (roundIndex + 1) + '轮 · ' +
-        escapeHtml(String(row.item.question || "（无问题）").slice(0, 28)) + "</option>"
+        escapeHtml(String(row.item.question || "（无问题）")) + "</option>"
       ).join("");
       return '<div class="history-conversation">' +
         '<div class="history-conversation-head">' +

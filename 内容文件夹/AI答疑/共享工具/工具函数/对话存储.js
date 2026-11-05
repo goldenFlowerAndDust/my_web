@@ -175,6 +175,7 @@
         var groups = {};
         entries.forEach(function (entry, index) {
             if (!entry || !entry.question || !entry.answer) return;
+            if (!modeBelongs(entry.mode, subject)) return;
             var id = entry.conversation_id || ("legacy-" + subject + "-" +
                 String(entry.time || "").replace(/[^0-9]/g, "") + "-" + index);
             if (!groups[id]) {
@@ -211,6 +212,17 @@
         return true;
     }
 
+    function modeBelongs(mode, subject) {
+        var value = String(mode || "");
+        if (subject === "math") {
+            return ["单词解释", "作文", "句子分析"].indexOf(value) < 0;
+        }
+        if (subject === "english") {
+            return ["题目讲解", "错题诊断", "概念公式"].indexOf(value) < 0;
+        }
+        return true;
+    }
+
     function list(subject) {
         return read(subject).filter(function (item) {
             return item && item.id && (!subject || item.subject === subject);
@@ -227,6 +239,7 @@
                 var assistant = messages[i + 1];
                 if (user.role !== "user" || assistant.role !== "assistant") continue;
                 pairIndex += 1;
+                if (!modeBelongs(assistant.mode || conversation.mode, subject)) continue;
                 result.push({
                     conversation_id: conversation.id,
                     subject: conversation.subject,

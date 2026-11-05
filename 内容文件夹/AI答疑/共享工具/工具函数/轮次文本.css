@@ -1,0 +1,66 @@
+/* 三科统一的轮次文本：按钮显示完整问题，浮层可选择任意一轮 */
+.round-text-picker {
+    position: relative;
+    min-width: 0;
+    max-width: 100%;
+}
+.round-text-trigger {
+    width: 100%;
+    min-height: 30px;
+    padding: 5px 28px 5px 9px;
+    border: 1px solid var(--line-strong, #cfd9e6);
+    border-radius: 7px;
+    background: var(--paper, #fffdf8);
+    color: var(--ink, #203047);
+    font: inherit;
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.round-text-trigger::after {
+    content: "▾";
+    position: absolute;
+    right: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted, #697386);
+}
+.round-text-menu {
+    position: absolute;
+    z-index: 60;
+    top: calc(100% + 4px);
+    left: 0;
+    width: min(520px, 88vw);
+    max-height: 48vh;
+    overflow-y: auto;
+    padding: 5px;
+    border: 1px solid var(--line-strong, #cfd9e6);
+    border-radius: 9px;
+    background: var(--paper, #fffdf8);
+    box-shadow: 0 12px 32px rgba(20, 35, 63, .18);
+}
+.round-text-item {
+    display: block;
+    width: 100%;
+    padding: 8px 9px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ink, #203047);
+    text-align: left;
+    font: inherit;
+    font-size: 11px;
+    line-height: 1.7;
+    cursor: pointer;
+}
+.round-text-item:hover,
+.round-text-item.is-active { background: rgba(11, 102, 114, .1); }
+.round-text-item .katex { font-size: 1em; }
+@media (max-width: 620px) {
+    .round-text-trigger { font-size: 10px; }
+    .round-text-menu { width: 86vw; }
+}
