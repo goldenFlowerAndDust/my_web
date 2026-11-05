@@ -2,14 +2,14 @@
   "version": 1,
   "subject": "code",
   "subject_label": "编程",
-  "updated_at": "2026-11-05 22:24:09",
+  "updated_at": "2026-11-05 22:31:05",
   "max_rounds": 20,
   "windows": {
     "legacy-code-20261103173153-3": {
       "id": "legacy-code-20261103173153-3",
       "title": "使用fs模块的异步方法读取文件时，若不传入回调函数，方法会返回一个____对象，可以通过.then()或者async/await的方式处理读取结果。",
-      "created_at": "2026-11-03 17:31:53",
-      "updated_at": "2026-11-03 17:31:53",
+      "created_at": "2026-11-05 22:11:31",
+      "updated_at": "2026-11-05 22:11:31",
       "mode": "node",
       "language": "node",
       "language_name": "Node.js",
@@ -34,8 +34,8 @@
     "archive-code-130cf451a92d4962": {
       "id": "archive-code-130cf451a92d4962",
       "title": "Node.js中全局变量____表示当前执行脚本所在的目录的绝对路径，通常和path.join配合使用来拼接静态资源等文件的绝对路径。",
-      "created_at": "2026-11-03 19:00:53",
-      "updated_at": "2026-11-03 19:00:53",
+      "created_at": "2026-11-05 22:11:28",
+      "updated_at": "2026-11-05 22:11:28",
       "mode": "node",
       "language": "node",
       "language_name": "node",
@@ -56,8 +56,8 @@
     "archive-code-3e9e8c6184396bff": {
       "id": "archive-code-3e9e8c6184396bff",
       "title": "path模块中，____方法可以获取一个路径中的文件扩展名部分，返回结果包含扩展名前的点号。",
-      "created_at": "2026-11-03 14:12:40",
-      "updated_at": "2026-11-03 14:12:40",
+      "created_at": "2026-11-05 22:11:29",
+      "updated_at": "2026-11-05 22:11:29",
       "mode": "node",
       "language": "node",
       "language_name": "node",
@@ -78,8 +78,8 @@
     "archive-code-d3f1e591222647a2": {
       "id": "archive-code-d3f1e591222647a2",
       "title": "Python 的 print 是函数还是语句？只回答一句。",
-      "created_at": "2026-11-03 17:57:41",
-      "updated_at": "2026-11-03 17:57:41",
+      "created_at": "2026-11-05 22:11:30",
+      "updated_at": "2026-11-05 22:11:30",
       "mode": "python",
       "language": "python",
       "language_name": "python",
@@ -256,6 +256,32 @@
       "mode": "node",
       "language": "node",
       "language_name": "node",
+      "topic": "",
+      "max_rounds": 20,
+      "rounds": 1,
+      "messages": [
+        {
+          "role": "user",
+          "content": "使用fs模块的异步方法读取文件时，若不传入回调函数，方法会返回一个____对象，可以通过.then()或者async/await的方式处理读取结果。"
+        },
+        {
+          "role": "assistant",
+          "content": "# 填空答案\n\n**Promise**\n\n## 说明\n\n从 Node.js **v10.0.0** 起，`fs` 模块的异步方法（如 `fs.readFile`、`fs.writeFile`、`fs.stat` 等）在**不传入回调函数**时，会返回一个 `Promise` 对象。这是 Node 官方为 `fs` 模块添加的\"promise 化\"行为（并非 `fs.promises` 子模块，而是同一方法在省略回调时的重载）。\n\n```javascript\nconst fs = require('fs');\n\n// 不传回调 → 返回 Promise\nfs.readFile('./data.txt', 'utf8')\n  .then(data => console.log(data))\n  .catch(err => console.error(err));\n\n// 或 async/await\nasync function read() {\n  try {\n    const data = await fs.readFile('./data.txt', 'utf8');\n    console.log(data);\n  } catch (err) {\n    console.error(err);\n  }\n}\nread();\n```\n\n## 补充要点\n\n- **传了回调** → 返回 `undefined`，走回调风格（`(err, data) => {}`）。\n- **不传回调** → 返回 `Promise`，可用 `.then()` / `await`。\n- 也可以显式使用 `require('fs').promises` 或 `require('node:fs/promises')`，语义更清晰，推荐在新代码中使用。\n- 该行为在 **v10.0.0** 引入，**v14.0.0** 起稳定。\n\n## 一个易错点\n\n⚠️ **不要同时传回调又 `await` 返回值**。例如：\n\n```javascript\n// 错误：传了回调，返回值是 undefined，await 得到 undefined\nconst data = await fs.readFile('./data.txt', 'utf8', (err, d) => {});\n```\n\n此时 `fs.readFile` 走的是回调分支，返回 `undefined`，`await undefined` 立即得到 `undefined`，且回调里的错误不会被 `try/catch` 捕获，容易造成\"静默失败\"。**回调风格和 Promise 风格二选一，不要混用。**",
+          "mode": "node",
+          "time": "2026-11-03 19:00:46",
+          "language": "node",
+          "language_name": "Node.js"
+        }
+      ]
+    },
+    "legacy-code-20261103190046-1": {
+      "id": "legacy-code-20261103190046-1",
+      "title": "使用fs模块的异步方法读取文件时，若不传入回调函数，方法会返回一个____对象，可以通过.then()或者async/await的方式处理读取结果。",
+      "created_at": "2026-11-05 22:11:31",
+      "updated_at": "2026-11-05 22:11:31",
+      "mode": "node",
+      "language": "node",
+      "language_name": "Node.js",
       "topic": "",
       "max_rounds": 20,
       "rounds": 1,

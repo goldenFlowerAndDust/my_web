@@ -136,6 +136,13 @@
         });
     }
 
+    function nowText() {
+        var d = new Date();
+        function pad(n) { return String(n).padStart(2, "0"); }
+        return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) +
+            " " + pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds());
+    }
+
     function storageKey(subject) {
         return KEY_PREFIX + String(subject || "unknown");
     }
@@ -279,7 +286,7 @@
             topic: String(session.topic || ""),
             language: String(session.language || ""),
             language_name: String(session.languageName || session.language_name || session.language || ""),
-            updated_at: Date.now(),
+            updated_at: nowText(),
             messages: messages
         };
         var list = read(subject);

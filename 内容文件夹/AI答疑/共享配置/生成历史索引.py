@@ -36,7 +36,13 @@ def now_text() -> str:
 
 def window_month(window: dict[str, Any]) -> str:
     for key in ("updated_at", "created_at"):
-        value = str(window.get(key) or "")
+        value = window.get(key)
+        if isinstance(value, (int, float)):
+            try:
+                value = datetime.fromtimestamp(float(value) / (1000 if float(value) > 100000000000 else 1)).strftime("%Y-%m-%d %H:%M:%S")
+            except (ValueError, OSError, OverflowError):
+                value = ""
+        value = str(value or "")
         match = MONTH_RE.match(value)
         if match:
             return match.group(1)

@@ -28,6 +28,32 @@ class ConversationError(ValueError):
     pass
 
 
+def normalize_time(value: Any) -> str:
+    if value is None or value == "":
+        return ""
+    if isinstance(value, (int, float)):
+        try:
+            return datetime.fromtimestamp(float(value) / (1000 if float(value) > 100000000000 else 1)).strftime("%Y-%m-%d %H:%M:%S")
+        except (ValueError, OSError, OverflowError):
+            return ""
+    text = str(value).strip()
+    if text.isdigit() and len(text) >= 12:
+        try:
+            return datetime.fromtimestamp(int(text) / 1000).strftime("%Y-%m-%d %H:%M:%S")
+        except (ValueError, OSError, OverflowError):
+            return ""
+    if "T" in text:
+        try:
+            from datetime import timezone
+            parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+            if parsed.tzinfo is not None:
+                parsed = parsed.astimezone()
+            return parsed.strftime("%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            pass
+    return text
+
+
 def now_text() -> str:
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -179,8 +205,8 @@ def upsert_window(
     window = {
         "id": window_id,
         "title": str(title or "新对话")[:120],
-        "created_at": created_at or existing.get("created_at") or now_text(),
-        "updated_at": updated_at or now_text(),
+        "created_at": normalize_time(created_at) or existing.get("created_at") or now_text(),
+        "updated_at": normalize_time(updated_at) or now_text(),
         "mode": str(mode or existing.get("mode") or ""),
         "language": str(language or existing.get("language") or ""),
         "language_name": str(language_name or existing.get("language_name") or ""),
