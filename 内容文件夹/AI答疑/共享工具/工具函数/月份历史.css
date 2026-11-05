@@ -209,3 +209,43 @@
     background: rgba(66, 184, 196, .16);
     color: #7fe3ee;
 }
+
+
+/* 历史列表统一左对齐，清除编程页全局列表底色/居中 */
+.month-history-embedded,
+.month-history-list,
+.month-history-detail,
+.month-history-answer,
+.month-history-question {
+    text-align: left !important;
+}
+.month-history-embedded {
+    max-width: 1100px;
+    margin: 28px auto;
+    padding: 0 18px;
+    box-sizing: border-box;
+}
+.month-history-detail .month-history-answer ul,
+.month-history-detail .month-history-answer ol {
+    display: block !important;
+    margin: 8px 0 !important;
+    padding: 0 0 0 24px !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: inherit !important;
+    text-align: left !important;
+    list-style-position: outside !important;
+}
+.month-history-detail .month-history-answer ul { list-style-type: disc !important; }
+.month-history-detail .month-history-answer ol { list-style-type: decimal !important; }
+.month-history-detail .month-history-answer li {
+    display: list-item !important;
+    margin: 3px 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: inherit !important;
+    text-align: left !important;
+}
+.month-history-detail .month-history-answer li::marker { color: #0b6672; }
+.month-history-dark .month-history-detail .month-history-answer li::marker { color: #7fe3ee; }
