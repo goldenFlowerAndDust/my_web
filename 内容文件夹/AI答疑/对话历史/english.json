@@ -2,7 +2,7 @@
   "version": 1,
   "subject": "english",
   "subject_label": "英语",
-  "updated_at": "2026-11-06 17:03:20",
+  "updated_at": "2026-11-06 17:30:12",
   "max_rounds": 8,
   "windows": {
     "tmw3pch8fupkw": {
@@ -113,6 +113,7 @@
   "deleted": {
     "test-dual-20261106": "2026-11-06 16:59:45",
     "tmw4qxfyq4dmk": "2026-11-06 17:02:23",
-    "test-conv-api": "2026-11-06 17:03:20"
+    "test-conv-api": "2026-11-06 17:03:20",
+    "test-dual-final": "2026-11-06 17:30:12"
   }
 }

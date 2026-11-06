@@ -905,6 +905,14 @@ class SyncRunner:
             return result
 
         result["imported"] = int(applied.get("count") or 0)
+        # 用当前成功的云端线路清理，避免使用返回里的 workers.dev 备用地址。
+        cleanup_token = str(data.get("cleanup_token") or "").strip()
+        if cleanup_token and result["imported"] > 0:
+            try:
+                cleaned = self.api_post("/api/delete-review-pending", {"cleanup_token": cleanup_token})
+                result["cleaned"] = int(cleaned.get("deleted") or 0)
+            except SyncError as exc:
+                result["cleanup_error"] = str(exc)
         result["message"] = "已应用 %d 条复习记录" % result["imported"]
         result["route"] = self.last_route
         return result
@@ -980,6 +988,17 @@ class SyncRunner:
                 if result["import"].get("status") not in ("ok", "skipped"):
                     result["status"] = "import_error"
                 result["message"] = result["import"].get("message", "")
+                cleanup_token = str(data.get("cleanup_token") or "").strip()
+                if cleanup_token and result["import"].get("status") in ("ok", "skipped"):
+                    cleaned = [word for word in words if word]
+                    try:
+                        removed = self.api_post(
+                            "/api/delete-pending-words",
+                            {"cleanup_token": cleanup_token, "words": cleaned},
+                        )
+                        result["cleaned"] = int(removed.get("deleted") or 0)
+                    except SyncError as exc:
+                        result["cleanup_error"] = str(exc)
             else:
                 result["message"] = "云端没有待归档单词。"
         except (SyncError, OSError, ValueError) as exc:
