@@ -239,7 +239,7 @@
     function updateCloudWriteState() {
         if (!btnArchive) return;
         var cloud = genModeEl.value === 'cloud';
-        var ready = !cloud || Boolean(cloudPreview && cloudPreview.query === (wordInput.value || '').trim());
+        var ready = !cloud || Boolean(cloudPreview && cloudPreview.query === cloudQueryText());
         btnArchive.disabled = busy || actionsLocked || !ready;
         if (cloud) {
             btnArchive.textContent = ready ? '上传云端' : '先 AI 分析';
@@ -465,7 +465,7 @@
 
     async function doCloudQueue() {
         if (busy) return;
-        var query = (wordInput.value || '').trim();
+        var query = cloudQueryText();
         if (!validCloudQuery(query)) {
             setStatus('云端只接受一个英文单词，或一个简短中文意思；不要输入句子或问句。', 'error');
             wordInput.focus();
@@ -842,7 +842,7 @@
 
     async function doCloudAnalyze() {
         if (busy) return;
-        var query = (wordInput.value || '').trim();
+        var query = cloudQueryText();
         if (!validCloudQuery(query)) {
             setStatus('云端分析只接受一个英文单词，或一个简短中文意思；不要输入句子或问句。', 'error');
             wordInput.focus();
