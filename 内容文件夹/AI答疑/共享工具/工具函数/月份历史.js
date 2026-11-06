@@ -149,21 +149,52 @@
         renderSummaries();
     }
 
-    function loadRemoteHistory() {
+    function applyRemoteDocument(document) {
+        var windows = document && document.windows ? document.windows : {};
+        var listItems = Object.keys(windows).map(function (id) {
+            var item = summarizeRemoteWindow(Object.assign({ id: id }, windows[id] || {}));
+            return item;
+        }).filter(function (item) { return item.rounds > 0; });
+        if (!listItems.length) return false;
+        state.remoteMode = true;
+        state.remoteWindows = windows;
+        state.remoteSummaries = listItems;
+        state.monthIndex = null;
+        state.chunks = {};
+        return renderRemoteMonths();
+    }
+
+    function cloudCacheKey() {
+        return "aiTutor.cloudHistory.session." + subject;
+    }
+
+    function readCloudCache() {
+        try {
+            var raw = sessionStorage.getItem(cloudCacheKey());
+            if (!raw) return null;
+            var data = JSON.parse(raw);
+            return data && data.document && data.document.windows ? data.document : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function writeCloudCache(document) {
+        try {
+            sessionStorage.setItem(cloudCacheKey(), JSON.stringify({ saved_at: new Date().toISOString(), document: document }));
+        } catch (error) { /* 配额满时不影响 KV 历史 */ }
+    }
+
+    function loadRemoteHistory(useCache) {
         if (!window.ConversationStore || !window.ConversationStore.remoteDocument) return Promise.resolve(false);
+        if (useCache) {
+            var cached = readCloudCache();
+            if (cached && applyRemoteDocument(cached)) return Promise.resolve(true);
+        }
         return window.ConversationStore.remoteDocument().then(function (document) {
-            var windows = document && document.windows ? document.windows : {};
-            var listItems = Object.keys(windows).map(function (id) {
-                var item = summarizeRemoteWindow(Object.assign({ id: id }, windows[id] || {}));
-                return item;
-            }).filter(function (item) { return item.rounds > 0; });
-            if (!listItems.length) return false;
-            state.remoteMode = true;
-            state.remoteWindows = windows;
-            state.remoteSummaries = listItems;
-            state.monthIndex = null;
-            state.chunks = {};
-            return renderRemoteMonths();
+            if (!document || !applyRemoteDocument(document)) return false;
+            writeCloudCache(document);
+            return true;
         }).catch(function () { return false; });
     }
 
@@ -610,7 +641,7 @@
         list.innerHTML = '<p class="month-history-loading">正在读取历史索引...</p>';
         list.style.display = "";
         if (cloudMode()) {
-            loadRemoteHistory().then(function (loaded) {
+            loadRemoteHistory(true).then(function (loaded) {
                 if (!loaded) initStatic();
             });
             return;
@@ -652,7 +683,7 @@
         refreshTimer = setTimeout(function () {
             refreshTimer = null;
             if (cloudMode()) {
-                loadRemoteHistory().then(function (loaded) {
+                loadRemoteHistory(false).then(function (loaded) {
                     if (!loaded) initStatic();
                 });
                 return;
