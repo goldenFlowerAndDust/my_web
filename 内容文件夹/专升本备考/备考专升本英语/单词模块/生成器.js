@@ -299,6 +299,10 @@
         saveCloudConfig();
     }
 
+    function cloudQueryText() {
+        return (wordInput.value || "").trim() || (hintInput.value || "").trim();
+    }
+
     function validCloudQuery(value) {
         var text = String(value || '').trim();
         if (/^[A-Za-z][A-Za-z'-]{1,40}$/.test(text)) return true;
