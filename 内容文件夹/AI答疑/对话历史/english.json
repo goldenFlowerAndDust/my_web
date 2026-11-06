@@ -2,7 +2,7 @@
   "version": 1,
   "subject": "english",
   "subject_label": "英语",
-  "updated_at": "2026-11-06 17:02:23",
+  "updated_at": "2026-11-06 17:03:20",
   "max_rounds": 8,
   "windows": {
     "tmw3pch8fupkw": {
@@ -108,32 +108,11 @@
           }
         }
       ]
-    },
-    "test-conv-api": {
-      "id": "test-conv-api",
-      "title": "test",
-      "created_at": "2026-11-06 16:57:01",
-      "updated_at": "2026-11-06 16:57:01",
-      "mode": "",
-      "language": "",
-      "language_name": "",
-      "topic": "",
-      "max_rounds": 8,
-      "rounds": 1,
-      "messages": [
-        {
-          "role": "user",
-          "content": "test"
-        },
-        {
-          "role": "assistant",
-          "content": "ok"
-        }
-      ]
     }
   },
   "deleted": {
     "test-dual-20261106": "2026-11-06 16:59:45",
-    "tmw4qxfyq4dmk": "2026-11-06 17:02:23"
+    "tmw4qxfyq4dmk": "2026-11-06 17:02:23",
+    "test-conv-api": "2026-11-06 17:03:20"
   }
 }
