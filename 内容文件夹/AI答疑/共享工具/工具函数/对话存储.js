@@ -17,6 +17,9 @@
     var remoteToken = "";
     var remoteReady = Promise.resolve();
     var remoteIds = {};
+    var mirrorBase = "";
+    var mirrorSubject = "";
+    var mirrorToken = "";
     var syncTimer = null;
 
     function remoteUrl(path) {
@@ -41,26 +44,34 @@
         return true;
     }
 
-    function postConversation(payload) {
-        if (!remoteBase) return Promise.resolve();
-        return fetch(remoteUrl("/api/conversations"), {
+    function postTo(base, subject, token, payload) {
+        if (!base || !subject) return Promise.resolve(null);
+        return fetch(base + "/api/conversations", {
             method: "POST",
             headers: Object.assign(
                 { "Content-Type": "application/json" },
-                remoteToken ? { "X-Tutor-Token": remoteToken } : {}
+                token ? { "X-Tutor-Token": token } : {}
             ),
-            body: JSON.stringify(Object.assign({ subject: remoteSubject }, payload))
+            body: JSON.stringify(Object.assign({ subject: subject }, payload))
         }).then(function (response) {
             if (!response.ok) throw new Error("HTTP " + response.status);
             return response.json();
-        }).then(function (data) {
-            window.dispatchEvent(new CustomEvent("tutor-history-updated", { detail: { subject: remoteSubject } }));
-            return data;
+        });
+    }
+
+    function postConversation(payload) {
+        var jobs = [];
+        if (remoteBase && remoteSubject) jobs.push(postTo(remoteBase, remoteSubject, remoteToken, payload));
+        if (mirrorBase && mirrorSubject) jobs.push(postTo(mirrorBase, mirrorSubject, mirrorToken, payload));
+        if (!jobs.length) return Promise.resolve();
+        return Promise.all(jobs).then(function (results) {
+            window.dispatchEvent(new CustomEvent("tutor-history-updated", { detail: { subject: remoteSubject || mirrorSubject } }));
+            return results[0] || null;
         }).catch(function () { /* 本地缓存继续工作 */ });
     }
 
     function queueSync() {
-        if (!remoteBase || !remoteSubject) return;
+        if ((!remoteBase || !remoteSubject) && (!mirrorBase || !mirrorSubject)) return;
         if (syncTimer) clearTimeout(syncTimer);
         syncTimer = setTimeout(function () {
             syncTimer = null;
@@ -99,6 +110,13 @@
         remoteReady = initializeRemote();
         window.ConversationStore.ready = remoteReady;
         return remoteReady;
+    }
+
+    function setMirror(base, subject, token) {
+        mirrorBase = String(base || "").replace(/\/$/, "");
+        mirrorSubject = String(subject || mirrorSubject || "");
+        mirrorToken = String(token || "");
+        window.__AI_CONVERSATION_MIRROR__ = { base: mirrorBase, subject: mirrorSubject, hasToken: Boolean(mirrorToken) };
     }
 
     function resetClientHistoryOnce() {
@@ -488,6 +506,7 @@
         dump: function (subject) { return read(subject || "english"); },
         ready: initializeRemote(),
         setRemote: setRemote,
+        setMirror: setMirror,
         syncNow: queueSync
     };
 })();

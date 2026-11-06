@@ -1270,7 +1270,7 @@
             ? "已切换到" + (value.provider === "domestic" ? "国内 SCF" : "Cloudflare") + "。"
             : "已切换到本地服务。");
         checkService();
-        loadHistory(historyCategory);
+        syncConversationRemote().then(function () { loadHistory(historyCategory); });
     }
 
     modeTabs.forEach(function (tab) {
@@ -1341,12 +1341,21 @@
         if (!window.ConversationStore || !window.ConversationStore.setRemote) return;
         var cloud = connection.mode === "cloud";
         var profile = activeProfile();
-        // 历史以本地 JSON 为准；云端只做临时问答日志，由“同步全部科目”合并回本地。
-        return window.ConversationStore.setRemote(
-            "http://127.0.0.1:8767",
-            "english",
-            ""
-        );
+        if (cloud && profile && profile.url) {
+            // 云端问答也写入云端对话；同时镜像到本地 8767，保证本地历史立即更新。
+            if (window.ConversationStore.setMirror) {
+                window.ConversationStore.setMirror("http://127.0.0.1:8767", "english", "");
+            }
+            return window.ConversationStore.setRemote(
+                normalizeBase(profile.url),
+                "english",
+                profile.token || ""
+            );
+        }
+        if (window.ConversationStore.setMirror) {
+            window.ConversationStore.setMirror("", "english", "");
+        }
+        return window.ConversationStore.setRemote("http://127.0.0.1:8767", "english", "");
     }
     window.addEventListener("tutor-conversations-ready", function () {
         loadHistory(historyCategory);

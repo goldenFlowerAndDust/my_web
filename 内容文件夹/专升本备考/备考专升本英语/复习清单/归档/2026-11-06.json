@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-06",
+  "generated_at": "2026-11-06T16:45:04",
+  "count": 3,
+  "entries": [
+    {
+      "name": "color",
+      "category": "词素/原子词",
+      "level": 1,
+      "nextDate": "2026-11-07",
+      "lastReviewed": "2026-11-06"
+    },
+    {
+      "name": "fruit",
+      "category": "词素/原子词",
+      "level": 1,
+      "nextDate": "2026-11-07",
+      "lastReviewed": "2026-11-06"
+    },
+    {
+      "name": "old",
+      "category": "词素/原子词",
+      "level": 1,
+      "nextDate": "2026-11-07",
+      "lastReviewed": "2026-11-06"
+    }
+  ]
+}

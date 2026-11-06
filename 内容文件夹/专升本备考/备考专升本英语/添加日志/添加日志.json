@@ -1,8 +1,32 @@
 {
-  "generated_at": "2026-11-06T16:07:53",
+  "generated_at": "2026-11-06T16:59:29",
   "source": "local-archived-log",
-  "count": 28,
+  "count": 30,
   "entries": [
+    {
+      "time": "2026-11-06 16:44:47",
+      "word": "fathers",
+      "type": "suffix",
+      "target": "词素 · 生词收录 + 核心词汇通关 · 新词族 -s",
+      "file": "词素\\生词收录\\fathers.html",
+      "schedule": "2026-11-07",
+      "status": "ok",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "sense": "父亲们"
+    },
+    {
+      "time": "2026-11-06 16:44:24",
+      "word": "father",
+      "type": "atom",
+      "target": "词素 · 原子词",
+      "file": "词素\\原子词\\原子词：father.html",
+      "schedule": "2026-11-07",
+      "status": "ok",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "sense": "父亲"
+    },
     {
       "time": "2026-11-06 01:59:25",
       "word": "friendly",

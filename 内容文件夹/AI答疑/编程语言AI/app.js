@@ -455,8 +455,17 @@
 
   function syncConversationRemote() {
     if (!window.ConversationStore || !window.ConversationStore.setRemote) return;
-    // 历史以本地 JSON 为准；云端只做临时问答日志。
-    window.ConversationStore.setRemote("http://127.0.0.1:8769", "code", "");
+    const profile = activeProfile();
+    if (connection.mode === "cloud" && profile && profile.url) {
+      if (window.ConversationStore.setMirror) {
+        window.ConversationStore.setMirror("http://127.0.0.1:8769", "code", "");
+      }
+      return window.ConversationStore.setRemote(String(profile.url).replace(/\/$/, ""), "code", profile.token || "");
+    }
+    if (window.ConversationStore.setMirror) {
+      window.ConversationStore.setMirror("", "code", "");
+    }
+    return window.ConversationStore.setRemote("http://127.0.0.1:8769", "code", "");
   }
   window.addEventListener("tutor-conversations-ready", function () {
     loadHistory();
@@ -1218,6 +1227,7 @@
     syncCloudFields();
     updateCloudStatus();
     setStatus("已切换到 " + routeConfig().label + "，正在重新加载…", "ok");
+    syncConversationRemote();
     loadMeta();
   }
 

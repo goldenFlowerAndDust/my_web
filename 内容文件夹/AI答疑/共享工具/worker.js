@@ -213,12 +213,16 @@ const MATH_SYSTEM_PROMPT = `你是一位严谨、耐心的专升本数学老师�
 
 最后检查：题目条件是否用全？每一步是否可复核？最终答案是否单独标出？公式是否符合 LaTeX？`;
 
+function isLocalOrigin(origin) {
+  return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(String(origin || ""));
+}
+
 function corsHeaders(request, env) {
   const configured = String(env.ALLOWED_ORIGIN || "*").trim();
   const requestOrigin = request.headers.get("Origin") || "";
   let allowOrigin = "*";
   if (configured !== "*") {
-    allowOrigin = configured === requestOrigin ? requestOrigin : configured;
+    allowOrigin = (configured === requestOrigin || isLocalOrigin(requestOrigin)) ? requestOrigin : configured;
   }
   return {
     "Access-Control-Allow-Origin": allowOrigin,
@@ -232,7 +236,8 @@ function corsHeaders(request, env) {
 function originAllowed(request, env) {
   const configured = String(env.ALLOWED_ORIGIN || "*").trim();
   if (configured === "*") return true;
-  return (request.headers.get("Origin") || "") === configured;
+  const origin = request.headers.get("Origin") || "";
+  return origin === configured || isLocalOrigin(origin);
 }
 
 function json(data, status, request, env) {
