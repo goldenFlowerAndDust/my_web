@@ -58,11 +58,113 @@
         selectedId: "",
         language: "",
         category: "all",
-        loading: false
+        loading: false,
+        remoteMode: false,
+        remoteWindows: {},
+        remoteSummaries: []
     };
 
     function base(relative) {
         return new URL(relative, historyRoot).toString();
+    }
+
+    function cloudMode() {
+        var remote = window.__AI_CONVERSATION_REMOTE__;
+        return Boolean(remote && remote.base && !/^(https?:\/\/)?(127\.0\.0\.1|localhost)(:|\/|$)/.test(remote.base));
+    }
+
+    function remoteMoney(value) {
+        if (!value) return "≈RMB 0.000000";
+        var text = Number(value) < 0.01 ? value.toFixed(6) : (Number(value) < 1 ? value.toFixed(4) : value.toFixed(2));
+        return "≈RMB " + text;
+    }
+
+    function summarizeRemoteWindow(windowData) {
+        var messages = Array.isArray(windowData.messages) ? windowData.messages : [];
+        var questions = [];
+        var roundTokens = [];
+        var roundCosts = [];
+        var totalTokens = 0;
+        var totalCost = 0;
+        messages.forEach(function (message) {
+            if (message.role === "user") {
+                questions.push(String(message.content || ""));
+                return;
+            }
+            if (message.role !== "assistant") return;
+            var usage = message.usage && typeof message.usage === "object" ? message.usage : {};
+            var prompt = Number(usage.prompt_tokens || 0);
+            var completion = Number(usage.completion_tokens || 0);
+            var tokens = Number(usage.total_tokens || 0) || prompt + completion;
+            var hit = Number(usage.prompt_cache_hit_tokens || 0);
+            var miss = Number(usage.prompt_cache_miss_tokens || 0);
+            if (!hit && !miss) miss = prompt;
+            var cost = (hit / 1000000) * 0.5 + (miss / 1000000) * 2 + (completion / 1000000) * 8;
+            roundTokens.push(tokens);
+            roundCosts.push(remoteMoney(cost));
+            totalTokens += tokens;
+            totalCost += cost;
+        });
+        var copy = Object.assign({}, windowData);
+        copy.id = windowData.id;
+        copy.title = String(windowData.title || questions[0] || "新对话");
+        copy.questions = questions;
+        copy.rounds = Math.max(Number(windowData.rounds || 0), Math.floor(messages.length / 2));
+        copy.tokens = totalTokens;
+        copy.cost_text = remoteMoney(totalCost);
+        copy.round_tokens = roundTokens;
+        copy.round_cost_texts = roundCosts;
+        return copy;
+    }
+
+    function renderRemoteMonths() {
+        var current = new Date();
+        var currentMonth = current.getFullYear() + "-" + String(current.getMonth() + 1).padStart(2, "0");
+        state.months = Object.keys(state.remoteSummaries.reduce(function (out, item) {
+            var month = String(item.updated_at || item.created_at || "").slice(0, 7);
+            if (!month) month = "未知";
+            out[month] = (out[month] || 0) + 1;
+            return out;
+        }, {})).sort().reverse().map(function (month) {
+            return { month: month, count: state.remoteSummaries.filter(function (item) {
+                return String(item.updated_at || item.created_at || "").slice(0, 7) === month;
+            }).length };
+        });
+        if (!state.months.length) return false;
+        state.month = state.months.some(function (item) { return item.month === currentMonth; })
+            ? currentMonth : state.months[0].month;
+        renderMonths();
+        loadRemoteMonth(state.month);
+        return true;
+    }
+
+    function loadRemoteMonth(month) {
+        state.month = month;
+        state.monthIndex = {
+            windows: state.remoteSummaries.filter(function (item) {
+                return String(item.updated_at || item.created_at || "").slice(0, 7) === month;
+            })
+        };
+        renderLanguageOptions();
+        renderSummaries();
+    }
+
+    function loadRemoteHistory() {
+        if (!window.ConversationStore || !window.ConversationStore.remoteDocument) return Promise.resolve(false);
+        return window.ConversationStore.remoteDocument().then(function (document) {
+            var windows = document && document.windows ? document.windows : {};
+            var listItems = Object.keys(windows).map(function (id) {
+                var item = summarizeRemoteWindow(Object.assign({ id: id }, windows[id] || {}));
+                return item;
+            }).filter(function (item) { return item.rounds > 0; });
+            if (!listItems.length) return false;
+            state.remoteMode = true;
+            state.remoteWindows = windows;
+            state.remoteSummaries = listItems;
+            state.monthIndex = null;
+            state.chunks = {};
+            return renderRemoteMonths();
+        }).catch(function () { return false; });
     }
 
     function escapeHtml(value) {
@@ -418,6 +520,9 @@
     }
 
     function loadChunk(item) {
+        if (state.remoteMode && state.remoteWindows[item.id]) {
+            return Promise.resolve({ windows: { [item.id]: state.remoteWindows[item.id] } });
+        }
         if (state.chunks[item.chunk]) return Promise.resolve(state.chunks[item.chunk]);
         return fetchJson(base("../历史/" + subject + "/" + state.month + "/" + item.chunk))
             .then(function (data) {
@@ -458,6 +563,10 @@
 
     function loadMonth(month) {
         if (!month) return;
+        if (state.remoteMode && state.remoteSummaries.length) {
+            loadRemoteMonth(month);
+            return;
+        }
         state.month = month;
         state.monthIndex = null;
         state.chunks = {};
@@ -475,6 +584,9 @@
     }
 
     function callConversationApi(payload) {
+        if (cloudMode() && window.ConversationStore && window.ConversationStore.remoteAction) {
+            return window.ConversationStore.remoteAction(payload);
+        }
         var port = subject === "math" ? 8768 : (subject === "code" ? 8769 : 8767);
         var url = location.protocol + "//" + (location.hostname || "127.0.0.1") + ":" + port + "/api/conversations";
         return fetch(url, {
@@ -495,6 +607,21 @@
 
     function init() {
         insertToolbar();
+        list.innerHTML = '<p class="month-history-loading">正在读取历史索引...</p>';
+        list.style.display = "";
+        if (cloudMode()) {
+            loadRemoteHistory().then(function (loaded) {
+                if (!loaded) initStatic();
+            });
+            return;
+        }
+        initStatic();
+    }
+
+    function initStatic() {
+        state.remoteMode = false;
+        state.remoteWindows = {};
+        state.remoteSummaries = [];
         list.innerHTML = '<p class="month-history-loading">正在读取月份索引...</p>';
         list.style.display = "";
         fetchJson(base("../历史/" + subject + "/index.json")).then(function (data) {
@@ -524,6 +651,12 @@
         if (refreshTimer) clearTimeout(refreshTimer);
         refreshTimer = setTimeout(function () {
             refreshTimer = null;
+            if (cloudMode()) {
+                loadRemoteHistory().then(function (loaded) {
+                    if (!loaded) initStatic();
+                });
+                return;
+            }
             fetchJson(base("../历史/" + subject + "/index.json")).then(function (data) {
                 state.months = (data.months || []).slice().sort(function (a, b) {
                     return String(b.month).localeCompare(String(a.month));
@@ -539,6 +672,12 @@
                 loadMonth(state.month);
             }).catch(function () { /* 保留当前月份 */ });
         }, 350);
+    });
+
+    window.addEventListener("tutor-conversations-ready", function (event) {
+        var readySubject = event && event.detail && event.detail.subject;
+        if (readySubject && readySubject !== subject) return;
+        if (cloudMode()) init();
     });
 
     if (document.readyState === "loading") {

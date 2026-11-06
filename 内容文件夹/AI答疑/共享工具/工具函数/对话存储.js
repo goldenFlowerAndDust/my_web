@@ -109,7 +109,21 @@
         if (!remoteBase || !remoteSubject) return Promise.resolve(false);
         remoteReady = initializeRemote();
         window.ConversationStore.ready = remoteReady;
+        window.dispatchEvent(new CustomEvent("tutor-conversations-ready", { detail: { subject: remoteSubject } }));
         return remoteReady;
+    }
+
+    function fetchRemoteDocument() {
+        if (!remoteBase || !remoteSubject) return Promise.resolve(null);
+        return fetch(remoteUrl("/api/conversations?subject=" + encodeURIComponent(remoteSubject)), {
+            cache: "no-store",
+            headers: remoteToken ? { "X-Tutor-Token": remoteToken } : {}
+        }).then(function (response) {
+            if (!response.ok) throw new Error("HTTP " + response.status);
+            return response.json();
+        }).then(function (payload) {
+            return payload && payload.document ? payload.document : null;
+        });
     }
 
     function setMirror(base, subject, token) {
@@ -507,6 +521,8 @@
         ready: initializeRemote(),
         setRemote: setRemote,
         setMirror: setMirror,
+        remoteDocument: fetchRemoteDocument,
+        remoteAction: postConversation,
         syncNow: queueSync
     };
 })();
