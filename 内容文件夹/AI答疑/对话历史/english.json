@@ -2,14 +2,14 @@
   "version": 1,
   "subject": "english",
   "subject_label": "英语",
-  "updated_at": "2026-11-06 17:40:24",
+  "updated_at": "2026-11-06 18:44:44",
   "max_rounds": 8,
   "windows": {
     "tmw3pch8fupkw": {
       "id": "tmw3pch8fupkw",
       "title": "请问，可以回答问题吗？",
-      "created_at": "2026-11-06 17:40:23",
-      "updated_at": "2026-11-06 17:40:23",
+      "created_at": "2026-11-06 16:44:53",
+      "updated_at": "2026-11-06 17:38:21",
       "mode": "单词解释",
       "language": "",
       "language_name": "",
@@ -123,6 +123,46 @@
             "total_tokens": 5188,
             "prompt_cache_hit_tokens": 4608,
             "prompt_cache_miss_tokens": 239
+          }
+        }
+      ]
+    },
+    "test-kv-live": {
+      "id": "test-kv-live",
+      "title": "你好，可以回答问题吗？",
+      "created_at": "2026-11-06 17:47:11",
+      "updated_at": "2026-11-06 18:07:42",
+      "mode": "单词解释",
+      "language": "",
+      "language_name": "",
+      "topic": "",
+      "max_rounds": 8,
+      "rounds": 2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "kv live"
+        },
+        {
+          "role": "assistant",
+          "content": "ok"
+        },
+        {
+          "role": "user",
+          "content": "你好，可以回答问题吗？"
+        },
+        {
+          "role": "assistant",
+          "content": "可以。下面按“单词解释”模式处理你给的 **kv live**。先说明假设：这不像一个普通英语单词，更像 **Kv Live** 这类专有名称/产品名/平台名；没有上下文时，不能按普通词汇硬拆成“kv + live”来编词义。这里需要结合语境判断。\n\n## 结论\n\n**kv live** 不是专升本英语大纲里的常规单词或固定短语。若出现在阅读材料中，最合理的理解是：**专有名称**，可能是某个直播平台、频道、节目、产品功能或品牌名，整体按名称处理，不逐词翻译。\n\n## 分项说明\n\n- **kv**：不是常见独立英语单词。可能是缩写、品牌名、用户名、技术术语缩写等。没有上下文时不能确定含义。\n- **live**：常见词，读作 /laɪv/（作形容词/副词，表示“现场直播的/地”）或 /lɪv/（作动词，表示“居住；生活”）。\n  - 在 **kv live** 这类名称中，通常读 /laɪv/，表示“直播”。\n  - 例：a live show（现场直播的节目）\n  - 例：The match is live on TV.（这场比赛在电视上直播。）\n\n## 高频搭配（live）\n\n- **live broadcast**：现场直播\n  - The ceremony was a live broadcast.（这场典礼是现场直播。）\n- **go live**：开始直播；正式上线\n  - The new channel will go live at 8 p.m.（新频道晚上8点开始直播。）\n- **live stream**：网络直播\n  - Many students watch live streams on their phones.（很多学生用手机看网络直播。）\n\n## 易混辨析\n\n- **live /laɪv/**：现场直播的；活的\n- **live /lɪv/**：居住；生活\n- **alive /əˈlaɪv/**：活着的，通常作表语\n- **lively /ˈlaɪvli/**：活泼的；生动的\n\n常见错误：把 **live** 在“直播”语境中读成 /lɪv/；或把 **live** 和 **alive** 混用，如误写 *a live animal* 与 *an alive animal*。前者可表示“活的动物”，后者一般不这样用。\n\n## 记忆提示\n\n**live** 作“直播”时和 **life** 拼写接近，但读音是 /laɪv/；可以记 **live show = 现场直播的节目**。**kv** 这里不建议强行记忆，按专有名称整体识别即可。\n\n## 专升本考试提醒\n\n如果阅读中出现 **Kv Live**，优先把它当作**专有名词**，不要逐字母翻译；重点看它后面的谓语、介词搭配和上下文功能。例如 **Kv Live will start at 7 p.m.** 中，它作主语，意思是“Kv Live 这个直播/平台/节目将在晚上7点开始”。如果写作中要表达“直播”，用 **live stream / live broadcast** 更稳妥，不要生造 **kv live**。",
+          "html": "<p>可以。下面按“单词解释”模式处理你给的 <strong>kv live</strong>。先说明假设：这不像一个普通英语单词，更像 <strong>Kv Live</strong> 这类专有名称/产品名/平台名；没有上下文时，不能按普通词汇硬拆成“kv + live”来编词义。这里需要结合语境判断。</p>\n<h2>结论</h2>\n<p><strong>kv live</strong> 不是专升本英语大纲里的常规单词或固定短语。若出现在阅读材料中，最合理的理解是：<strong>专有名称</strong>，可能是某个直播平台、频道、节目、产品功能或品牌名，整体按名称处理，不逐词翻译。</p>\n<h2>分项说明</h2>\n<ul>\n<li><strong>kv</strong>：不是常见独立英语单词。可能是缩写、品牌名、用户名、技术术语缩写等。没有上下文时不能确定含义。</li>\n<li><strong>live</strong>：常见词，读作 /laɪv/（作形容词/副词，表示“现场直播的/地”）或 /lɪv/（作动词，表示“居住；生活”）。</li>\n<li>在 <strong>kv live</strong> 这类名称中，通常读 /laɪv/，表示“直播”。</li>\n<li>例：a live show（现场直播的节目）</li>\n<li>例：The match is live on TV.（这场比赛在电视上直播。）</li>\n</ul>\n<h2>高频搭配（live）</h2>\n<ul>\n<li><strong>live broadcast</strong>：现场直播</li>\n<li>The ceremony was a live broadcast.（这场典礼是现场直播。）</li>\n<li><strong>go live</strong>：开始直播；正式上线</li>\n<li>The new channel will go live at 8 p.m.（新频道晚上8点开始直播。）</li>\n<li><strong>live stream</strong>：网络直播</li>\n<li>Many students watch live streams on their phones.（很多学生用手机看网络直播。）</li>\n</ul>\n<h2>易混辨析</h2>\n<ul>\n<li><strong>live /laɪv/</strong>：现场直播的；活的</li>\n<li><strong>live /lɪv/</strong>：居住；生活</li>\n<li><strong>alive /əˈlaɪv/</strong>：活着的，通常作表语</li>\n<li><strong>lively /ˈlaɪvli/</strong>：活泼的；生动的</li>\n</ul>\n<p>常见错误：把 <strong>live</strong> 在“直播”语境中读成 /lɪv/；或把 <strong>live</strong> 和 <strong>alive</strong> 混用，如误写 <em>a live animal</em> 与 <em>an alive animal</em>。前者可表示“活的动物”，后者一般不这样用。</p>\n<h2>记忆提示</h2>\n<p><strong>live</strong> 作“直播”时和 <strong>life</strong> 拼写接近，但读音是 /laɪv/；可以记 <strong>live show = 现场直播的节目</strong>。<strong>kv</strong> 这里不建议强行记忆，按专有名称整体识别即可。</p>\n<h2>专升本考试提醒</h2>\n<p>如果阅读中出现 <strong>Kv Live</strong>，优先把它当作<strong>专有名词</strong>，不要逐字母翻译；重点看它后面的谓语、介词搭配和上下文功能。例如 <strong>Kv Live will start at 7 p.m.</strong> 中，它作主语，意思是“Kv Live 这个直播/平台/节目将在晚上7点开始”。如果写作中要表达“直播”，用 <strong>live stream / live broadcast</strong> 更稳妥，不要生造 <strong>kv live</strong>。</p>",
+          "mode": "单词解释",
+          "time": "2026-11-06 18:07:41",
+          "usage": {
+            "prompt_tokens": 730,
+            "completion_tokens": 672,
+            "total_tokens": 1402,
+            "prompt_cache_hit_tokens": 512,
+            "prompt_cache_miss_tokens": 218
           }
         }
       ]

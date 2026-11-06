@@ -1,7 +1,7 @@
 {
   "date": "2026-11-06",
-  "generated_at": "2026-11-06T16:45:04",
-  "count": 3,
+  "generated_at": "2026-11-06T18:44:48",
+  "count": 6,
   "entries": [
     {
       "name": "color",
@@ -18,7 +18,28 @@
       "lastReviewed": "2026-11-06"
     },
     {
+      "name": "improt",
+      "category": "词素/原子词",
+      "level": 1,
+      "nextDate": "2026-11-07",
+      "lastReviewed": "2026-11-06"
+    },
+    {
+      "name": "maybe",
+      "category": "词素/复合词",
+      "level": 1,
+      "nextDate": "2026-11-07",
+      "lastReviewed": "2026-11-06"
+    },
+    {
       "name": "old",
+      "category": "词素/原子词",
+      "level": 1,
+      "nextDate": "2026-11-07",
+      "lastReviewed": "2026-11-06"
+    },
+    {
+      "name": "word",
       "category": "词素/原子词",
       "level": 1,
       "nextDate": "2026-11-07",

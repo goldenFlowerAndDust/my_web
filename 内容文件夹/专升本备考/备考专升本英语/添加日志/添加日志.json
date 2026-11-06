@@ -1,8 +1,32 @@
 {
-  "generated_at": "2026-11-06T17:40:12",
+  "generated_at": "2026-11-06T18:44:50",
   "source": "local-archived-log",
-  "count": 30,
+  "count": 32,
   "entries": [
+    {
+      "time": "2026-11-06 18:44:34",
+      "word": "keyboards",
+      "type": "compound",
+      "target": "词素 · 生词收录",
+      "file": "词素\\生词收录\\keyboards.html",
+      "schedule": "2026-11-07",
+      "status": "ok",
+      "pos": "n.",
+      "pos_zh": "名词",
+      "sense": "键盘（复数）"
+    },
+    {
+      "time": "2026-11-06 18:44:33",
+      "word": "keyboard",
+      "type": "compound",
+      "target": "词素 · 生词收录",
+      "file": "词素\\生词收录\\keyboard.html",
+      "schedule": "2026-11-07",
+      "status": "ok",
+      "pos": "n. / v.",
+      "pos_zh": "名词 / 动词",
+      "sense": "键盘（电脑或乐器的）"
+    },
     {
       "time": "2026-11-06 16:44:47",
       "word": "fathers",

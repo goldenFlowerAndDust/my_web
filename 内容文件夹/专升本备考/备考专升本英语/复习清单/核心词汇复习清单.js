@@ -8,16 +8,26 @@
 (function () {
     'use strict';
 
-    // file:// 下浏览器禁止 fetch 本地 data.json；使用页面内嵌数据查看。
-    if (location.protocol === "file:" && window.__WORD_DATA__) {
+    // file:// 或本地 HTTP 的 data.json 读取失败时，用内嵌快照兜底。
+    var isLocalDataPage = location.protocol === "file:" ||
+        /^(localhost|127\.0\.0\.1|\[::1\])$/i.test(location.hostname);
+    if (isLocalDataPage && window.__WORD_DATA__) {
         var nativeFetch = window.fetch;
+        function embeddedDataResponse() {
+            return new Response(JSON.stringify(window.__WORD_DATA__), {
+                status: 200,
+                headers: { "Content-Type": "application/json; charset=utf-8" }
+            });
+        }
         window.fetch = function (input, init) {
             var url = typeof input === "string" ? input : (input && input.url) || "";
             if (url.indexOf("data.json") >= 0 && !/^https?:/i.test(url)) {
-                return Promise.resolve(new Response(JSON.stringify(window.__WORD_DATA__), {
-                    status: 200,
-                    headers: { "Content-Type": "application/json; charset=utf-8" }
-                }));
+                return nativeFetch.apply(window, arguments).then(function (response) {
+                    if (response.ok) return response;
+                    return embeddedDataResponse();
+                }).catch(function () {
+                    return embeddedDataResponse();
+                });
             }
             return nativeFetch.apply(window, arguments);
         };
