@@ -23,8 +23,8 @@
 | `skills/english-tutor/SKILL.md` | 资深英语教师答疑 skill |
 | `共享工具/worker.js` | 可选：GitHub Pages 用的云端答疑代理 |
 | `cloudflare-worker/README.md` | Cloudflare Worker 部署步骤 |
-| `tencent-scf/index.js` | 可选：腾讯云 SCF 函数 URL 国内反向代理 |
-| `tencent-scf/README.md` | 腾讯云 SCF / 函数 URL 部署步骤 |
+| `AI答疑/共享配置/tencent-scf/index.js` | 可选：腾讯云 SCF 函数 URL 国内反向代理 |
+| `AI答疑/共享配置/tencent-scf/README.md` | 腾讯云 SCF / 函数 URL 部署步骤 |
 | `添加日志.html` | 查看最近自动添加的单词、分类、文件和时间 |
 | `skills/word-auto-archive/SKILL.md` | 给 agent 使用的项目 skill 说明 |
 | `词素工具/backups/` | 每次写入前的自动备份 |
@@ -159,7 +159,7 @@ Key 存 Cloudflare Secret，日志存 KV；访问口令只存在浏览器 localS
 不买服务器、不买域名；函数 URL 自带 HTTPS 默认域名，不需要备案。  
 页面“连接设置”里线路选 `国内 SCF`，填 SCF 地址和 `PROXY_TOKEN`。
 Cloudflare 线路的地址和口令会单独保存，不会被覆盖。  
-部署步骤见 `tencent-scf/README.md`。
+部署步骤见 `AI答疑/共享配置/tencent-scf/README.md`。
 
 ## 答疑历史自动归档
 

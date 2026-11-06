@@ -1783,7 +1783,7 @@ CORS：关闭（函数自己返回 CORS）
 ## 11.10 SCF 部署顺序
 
 1. 创建 SCF 函数，Node.js 18
-2. 粘贴 `tencent-scf/index.js`
+2. 粘贴 `AI答疑/共享配置/tencent-scf/index.js`
 3. 配置环境变量
 4. 超时 120 秒
 5. 创建函数 URL
@@ -2277,7 +2277,7 @@ category → date → records
 ## 16.3 腾讯云 SCF
 
 1. Node.js 18 函数
-2. 粘贴 `tencent-scf/index.js`
+2. 粘贴 `AI答疑/共享配置/tencent-scf/index.js`
 3. 环境变量
 4. 超时 120
 5. 函数 URL：公网、开放、CORS 关闭
