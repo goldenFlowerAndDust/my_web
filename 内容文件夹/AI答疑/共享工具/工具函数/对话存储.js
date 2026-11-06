@@ -64,10 +64,12 @@
         if (remoteBase && remoteSubject) jobs.push(postTo(remoteBase, remoteSubject, remoteToken, payload));
         if (mirrorBase && mirrorSubject) jobs.push(postTo(mirrorBase, mirrorSubject, mirrorToken, payload));
         if (!jobs.length) return Promise.resolve();
-        return Promise.all(jobs).then(function (results) {
+        return Promise.all(jobs.map(function (job) {
+            return job.catch(function () { return null; });
+        })).then(function (results) {
             window.dispatchEvent(new CustomEvent("tutor-history-updated", { detail: { subject: remoteSubject || mirrorSubject } }));
             return results[0] || null;
-        }).catch(function () { /* 本地缓存继续工作 */ });
+        });
     }
 
     function queueSync() {
