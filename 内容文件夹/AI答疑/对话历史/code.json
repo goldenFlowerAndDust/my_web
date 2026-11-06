@@ -2,7 +2,7 @@
   "version": 1,
   "subject": "code",
   "subject_label": "编程",
-  "updated_at": "2026-11-06 18:45:16",
+  "updated_at": "2026-11-06 18:54:28",
   "max_rounds": 20,
   "windows": {
     "smw3py0427tds": {
@@ -60,8 +60,8 @@
     "smw3q23fntaof": {
       "id": "smw3q23fntaof",
       "title": "你好，可以回答问题吗？",
-      "created_at": "2026-11-06 18:45:15",
-      "updated_at": "2026-11-06 18:45:15",
+      "created_at": "2026-11-06 16:45:00",
+      "updated_at": "2026-11-06 18:42:19",
       "mode": "node",
       "language": "node",
       "language_name": "node",
