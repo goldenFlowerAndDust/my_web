@@ -477,7 +477,7 @@
                 '<button type="button" class="month-history-delete">删除对话</button>' +
                 (window.TutorTabs && window.TutorTabs.resumeConversation
                     ? '<button type="button" class="month-history-resume">继续提问</button>'
-                    : (window.ProgrammingResumeConversation
+                    : (window.ProgrammingResumeWindow
                         ? '<button type="button" class="month-history-resume">继续提问</button>' : "")) +
                 "</div>" +
                 '<div class="month-history-cost-panel" hidden></div>' +
@@ -518,16 +518,17 @@
             }
             var resume = card.querySelector(".month-history-resume");
             if (resume) resume.addEventListener("click", function () {
-                var selectedRound = roundSelect ? Number(roundSelect.value) : Math.max(0, Number(item.rounds || 1) - 1);
                 loadChunk(item).then(function (data) {
                     var windowData = (data.windows || {})[item.id];
                     if (!windowData) return;
+                    // 始终从完整历史的最后一轮继续；下拉选择只用于查看旧轮次。
+                    var fullRounds = Math.max(1, Math.ceil((windowData.messages || []).length / 2), Number(windowData.rounds || 0));
                     if (window.TutorTabs && window.TutorTabs.resumeWindow) {
-                        window.TutorTabs.resumeWindow(windowData, selectedRound + 1);
+                        window.TutorTabs.resumeWindow(windowData, fullRounds);
                         var ask = document.querySelector(".ask-panel");
                         if (ask && ask.scrollIntoView) ask.scrollIntoView({ behavior: "smooth", block: "start" });
                     } else if (window.ProgrammingResumeWindow) {
-                        window.ProgrammingResumeWindow(windowData, selectedRound + 1);
+                        window.ProgrammingResumeWindow(windowData, fullRounds);
                         var ask2 = document.querySelector(".ask-panel, .composer");
                         if (ask2 && ask2.scrollIntoView) ask2.scrollIntoView({ behavior: "smooth", block: "start" });
                     }

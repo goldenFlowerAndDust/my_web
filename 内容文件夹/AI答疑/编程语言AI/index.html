@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="style.css?v=20261105-9">
   <link rel="stylesheet" href="../共享工具/工具函数/轮次文本.css?v=20261105-3">
   <link rel="stylesheet" href="../共享工具/工具函数/月份历史.css?v=20261106-8">
+<link rel="preconnect" href="https://1397632333-ils8m8rg4x.ap-hongkong.tencentscf.com" crossorigin>
+<link rel="dns-prefetch" href="https://english-tutor.goldenfloweranddust.workers.dev">
 </head>
 <body>
 <div class="app-shell">
@@ -42,16 +44,16 @@
 
     <div class="health" id="health">检查本地服务…</div>
 
-    <details class="cloud-config" id="cloudConfig">
+    <details class="cloud-config" id="cloudConfig" open>
       <summary>连接设置</summary>
       <p class="cloud-hint">和数学、英语一样：本地 / 云端，云端可切换 Cloudflare 或国内 SCF。</p>
       <label>连接方式
-        <select id="connectionMode">
+        <select id="connectionMode" onchange="document.getElementById('cloudFields').hidden=this.value!=='cloud'">
           <option value="local">本地 8769</option>
           <option value="cloud">云端 Worker / SCF</option>
         </select>
       </label>
-      <div id="cloudFields" hidden>
+      <div id="cloudFields">
         <label>云端线路
           <select id="cloudProvider">
             <option value="cloudflare">Cloudflare（现有）</option>
@@ -152,8 +154,8 @@
 <script src="../共享工具/工具函数/token成本.js?v=20261105-2"></script>
   <script>window.__AI_HISTORY_LIGHT__=true;window.AI_CONVERSATION_BASE="http://127.0.0.1:8769";window.AI_CONVERSATION_SUBJECT="code";</script>
   <script src="../共享工具/工具函数/对话存储.js?v=20261106-4"></script>
-  <script src="app.js?v=20261106-2"></script>
+  <script src="app.js?v=20261106-3"></script>
   <script src="../共享工具/工具函数/轮次文本.js?v=20261105-3"></script>
-  <script src="../共享工具/工具函数/月份历史.js?v=20261106-10"></script>
+  <script src="../共享工具/工具函数/月份历史.js?v=20261106-11"></script>
 </body>
 </html>

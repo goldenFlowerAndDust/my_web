@@ -455,7 +455,7 @@
 
   function syncConversationRemote() {
     if (!window.ConversationStore || !window.ConversationStore.setRemote) return;
-    const profile = activeProfile();
+    const profile = currentProfile();
     if (connection.mode === "cloud" && profile && profile.url) {
       if (window.ConversationStore.setMirror) {
         window.ConversationStore.setMirror("http://127.0.0.1:8769", "code", "");
