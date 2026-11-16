@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Auth cookie guard",
+    "description": "Checks and clears excess dsh-auth-* cookies at desktop startup so the welcome page cannot fail authentication with HTTP 431."
+  }
+}

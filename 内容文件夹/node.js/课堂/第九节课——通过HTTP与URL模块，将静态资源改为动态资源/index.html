@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>产品展示</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        img {
+            width: 1800px;
+            height: 1300px;
+        }
+    </style>
+</head>
+<body>
+<section class="product-box">
+    <h2>产品展示</h2>
+    <a href="#">更多产品</a>
+
+    <!-- 关键：一定要引 dist/ 里的构建产物，而不是 src/ 里的源码 -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!-- 商品列表容器：class="product" 加在 ul 上，不是加在 script 上 -->
+    <ul class="product"></ul>
+
+    <script>
+        $.ajax({
+            url: "http://localhost:3000"
+        }).then(res => {
+            // 服务端返回 text/plain，res 是字符串；若以后改成 application/json，jQuery 会直接给你对象
+            const data = typeof res === "string" ? JSON.parse(res) : res;
+            const pArr = data.data;
+
+            for (let i = 0; i < pArr.length; i++) {
+                console.log(pArr[i].name); // 测试输出，在浏览器控制台查看
+                $('.product').append(`<li><a href="#"><img src="${pArr[i].imag}" alt=""><p>${pArr[i].name}<br><span>长度：${pArr[i].size}</span></p></a></li>`);
+            }
+        }).catch(err => {
+            console.error('请求失败：', err);
+        });
+    </script>
+</section>
+</body>
+</html>

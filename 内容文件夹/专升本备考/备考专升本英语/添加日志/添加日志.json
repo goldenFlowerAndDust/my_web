@@ -1,8 +1,20 @@
 {
-  "generated_at": "2026-11-10T13:00:38",
+  "generated_at": "2026-11-16T22:49:51",
   "source": "local-archived-log",
-  "count": 33,
+  "count": 34,
   "entries": [
+    {
+      "time": "2026-11-16 22:49:51",
+      "word": "seek",
+      "type": "atom",
+      "target": "词素 · 原子词",
+      "file": "词素\\原子词\\原子词：seek.html",
+      "schedule": "2026-11-17",
+      "status": "ok",
+      "pos": "v.",
+      "pos_zh": "动词",
+      "sense": "寻找；寻求"
+    },
     {
       "time": "2026-11-06 20:15:44",
       "word": "grandmothers",

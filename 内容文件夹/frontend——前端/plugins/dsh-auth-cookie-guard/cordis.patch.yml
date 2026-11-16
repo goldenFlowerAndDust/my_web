@@ -1,0 +1,14 @@
+# Bundle patch applied after the shipped layers.
+# 1. Insert the startup guard.
+# 2. Shorten the auth-cookie lifetime as a fallback for launches where the
+#    Chromium cookie database is already held open and cannot be cleaned.
+- insert:
+    - id: auth-cookie-guard
+      name: '@local/dsh-auth-cookie-guard'
+      config:
+        maxCookies: 50
+        maxHeaderBytes: 10240
+        keepNewest: 1
+- id: connection
+  config:
+    cookieMaxAgeDays: 7

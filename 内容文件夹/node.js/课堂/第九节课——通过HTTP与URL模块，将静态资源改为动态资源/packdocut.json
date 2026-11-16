@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "崩坏星穹铁道——图片一",
+      "img_id": "1",
+      "size": "93mm",
+      "imag": "./image/图1.jpg",
+      "price": "20",
+      "add_time": "2026-11-8",
+      "sort": "10"
+    },
+    {
+      "id": "2",
+      "name": "崩坏星穹铁道——图片二",
+      "img_id": "2",
+      "size": "93mm",
+      "imag": "./image/图2.jpg",
+      "price": "20",
+      "add_time": "2026-11-8",
+      "sort": "15"
+    },
+    {
+      "id": "3",
+      "name": "崩坏星穹铁道——图片三",
+      "img_id": "3",
+      "size": "93mm",
+      "imag": "./image/图3.jpg",
+      "price": "20",
+      "add_time": "2026-11-9",
+      "sort": "10"
+    },
+    {
+      "id": "4",
+      "name": "崩坏星穹铁道——图片四",
+      "img_id": "4",
+      "size": "93mm",
+      "imag": "./image/图4.jpg",
+      "price": "20",
+      "add_time": "2026-11-10",
+      "sort": "10"
+    },
+    {
+      "id": "5",
+      "name": "崩坏星穹铁道——图片五",
+      "img_id": "5",
+      "size": "93mm",
+      "imag": "./image/图5.jpg",
+      "price": "20",
+      "add_time": "2026-11-10",
+      "sort": "10"
+    }
+  ]
+}

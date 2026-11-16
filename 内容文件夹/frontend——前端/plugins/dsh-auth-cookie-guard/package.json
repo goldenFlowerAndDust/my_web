@@ -1,0 +1,25 @@
+{
+  "name": "@local/dsh-auth-cookie-guard",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Clears excess desktop dsh-auth-* cookies at startup so the welcome page cannot fail authentication with HTTP 431.",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "tools/prune-cookies.mjs"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

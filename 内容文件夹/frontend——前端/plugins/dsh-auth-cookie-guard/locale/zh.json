@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "认证 Cookie 守卫",
+    "description": "桌面端启动时检查并清理超量的 dsh-auth-* Cookie，避免欢迎页认证失败（HTTP 431）。"
+  }
+}
