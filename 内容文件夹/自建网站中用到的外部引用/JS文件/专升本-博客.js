@@ -168,7 +168,7 @@
 
   const eyebrow = document.createElement("span");
   eyebrow.className = "hero-eyebrow";
-  eyebrow.textContent = "MATH · STUDY HUB";
+  eyebrow.textContent = body.dataset.eyebrow || "MATH · STUDY HUB";
 
   const title = document.createElement("h1");
   title.id = "page-title";
@@ -176,6 +176,7 @@
 
   const description = document.createElement("p");
   description.textContent =
+    body.dataset.description ||
     "从基础知识到高等数学，把章节、题型、笔记与复习资料整理成一张清晰的学习地图。";
 
   heroCopy.append(eyebrow, title, description);
@@ -554,7 +555,7 @@
   const footer = document.createElement("footer");
   footer.className = "page-footer";
   const footerLeft = document.createElement("span");
-  footerLeft.textContent = "专升本 · 数学 / LOCAL STUDY INDEX";
+  footerLeft.textContent = body.dataset.footer || "专升本 · 数学 / LOCAL STUDY INDEX";
   const footerRight = document.createElement("span");
   footerRight.textContent = "KNOWLEDGE MAP · 2026";
   footer.append(footerLeft, footerRight);

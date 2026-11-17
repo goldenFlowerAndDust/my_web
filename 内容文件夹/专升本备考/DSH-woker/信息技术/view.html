@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>阅读 · 信息技术 · DSH 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../共享配置/css/notes.css">
+</head>
+<body class="reader-page">
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<header class="topbar">
+  <a class="topbar-back" href="index.html">← 目录</a>
+  <span class="topbar-title" id="bar-title">信息技术笔记</span>
+  <div class="topbar-actions">
+    <button class="icon-btn" id="toc-toggle" type="button" aria-label="展开目录">目录</button>
+    <button class="icon-btn" id="font" type="button" aria-label="切换字号">AM</button>
+    <button class="icon-btn" id="print" type="button" aria-label="打印">打印</button>
+    <button class="icon-btn" id="theme" type="button" aria-label="切换深色模式">☾</button>
+  </div>
+</header>
+
+<main class="reader-shell">
+  <aside class="toc" id="toc-panel">
+    <p class="toc-title">本页目录</p>
+    <nav id="toc" aria-label="页内导航"></nav>
+  </aside>
+
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag" id="doc-cat">笔记</span>
+      <h1 id="doc-title">加载中…</h1>
+      <div class="doc-meta" id="doc-meta"></div>
+    </header>
+    <article class="doc" id="doc"></article>
+    <nav class="pager" id="pager" aria-label="上下一篇"></nav>
+  </div>
+</main>
+
+<button class="back-top" type="button" aria-label="返回顶部">↑</button>
+<footer class="page-footer">
+  <span>DSH-woker · 信息技术</span>
+  <span>← → 翻页 · Esc 返回目录</span>
+</footer>
+
+<script src="./data.js"></script>
+<script src="../共享配置/vendor/katex/katex.min.js"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js"></script>
+<script src="../共享配置/js/reader.js"></script>
+</body>
+</html>

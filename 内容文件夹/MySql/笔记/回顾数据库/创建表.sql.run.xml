@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="创建表.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
+    <script-file value="$PROJECT_DIR$/my_web/内容文件夹/node.js/课堂/第十一节课——express/项目文件/创建表.sql" />
+    <script-mode>FILE</script-mode>
+    <data-source id="076a426d-b720-4139-8394-7a50119352b4" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生查询</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="box">
+        <h1>学生查询</h1>
+
+        <div class="search">
+            <input id="kw" type="text" placeholder="输入姓名，留空查全部" autocomplete="off">
+            <button id="btn" type="button">查询</button>
+        </div>
+
+        <p id="msg" class="msg"></p>
+
+        <table>
+            <thead>
+                <tr><th>学号</th><th>姓名</th><th>性别</th></tr>
+            </thead>
+            <tbody id="tbody">
+                <tr><td colspan="3" class="empty">点“查询”加载数据</td></tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="JS.js"></script>
+</body>
+</html>
