@@ -818,3 +818,16 @@ img { max-width: 100%; }
   /* 抽屉打开时锁住正文滚动 */
   body.toc-open { overflow: hidden; }
 }
+
+/* ===== 卡片追加记录行（答疑归档跨天追问时显示） ===== */
+.card-append {
+  display: block;
+  margin: 6px 0 2px;
+  padding: 3px 8px;
+  border-left: 3px solid var(--amber, #db8a1f);
+  border-radius: 0 6px 6px 0;
+  background: color-mix(in srgb, var(--amber, #db8a1f) 10%, transparent);
+  color: var(--text);
+  font-size: 12.5px;
+  line-height: 1.6;
+}

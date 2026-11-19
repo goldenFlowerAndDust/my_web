@@ -35,7 +35,9 @@ def now_text() -> str:
 
 
 def window_month(window: dict[str, Any]) -> str:
-    for key in ("updated_at", "created_at"):
+    # 归类月份以“第一次提问”为准，追加不会让对话跨月搬家；
+    # updated_at 只用于同月内的排序（体现“最近有活动”）。
+    for key in ("created_at", "updated_at"):
         value = window.get(key)
         if isinstance(value, (int, float)):
             try:
@@ -47,6 +49,49 @@ def window_month(window: dict[str, Any]) -> str:
         if match:
             return match.group(1)
     return "unknown"
+
+
+LEGACY_SNAPSHOT = BASE_DIR / "共享配置" / "历史归档" / "遗留归档快照.json"
+
+
+def legacy_windows(subject: str) -> list[dict[str, Any]]:
+    """旧版归档快照里的问答（10 月底那批只存在于旧页面的记录）。
+
+    只补进月索引展示，不写回 历史记录/对话，避免同步时被当成新窗口上传云端。
+    """
+    if not LEGACY_SNAPSHOT.exists():
+        return []
+    try:
+        data = json.loads(LEGACY_SNAPSHOT.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    rows = data.get(subject) or []
+    out: list[dict[str, Any]] = []
+    for index, row in enumerate(rows):
+        if not isinstance(row, dict):
+            continue
+        question = str(row.get("question") or "").strip()
+        if not question:
+            continue
+        stamp = str(row.get("time") or "")
+        out.append({
+            "id": "legacy-%s-%02d" % (stamp[:10] or "0000-00-00", index),
+            "title": question[:40],
+            "created_at": stamp,
+            "updated_at": stamp,
+            "mode": str(row.get("mode") or ""),
+            "topic": str(row.get("topic") or ""),
+            "language": "",
+            "language_name": "",
+            "rounds": 1,
+            "max_rounds": MAX_ROUNDS.get(subject, 10),
+            "messages": [
+                {"role": "user", "content": question, "time": stamp},
+                {"role": "assistant", "content": str(row.get("answer") or ""), "time": stamp},
+            ],
+            "source": "旧版归档",
+        })
+    return out
 
 
 def json_bytes(data: Any) -> bytes:
@@ -102,6 +147,20 @@ def build_subject(subject: str) -> dict[str, Any]:
         window["rounds"] = len(window.get("messages") or []) // 2
         window["max_rounds"] = MAX_ROUNDS[subject]
         buckets.setdefault(window_month(window), []).append(window)
+
+    # 旧版归档快照：补进月索引（这些不在对话历史里，所以按内容去重）
+    seen = set()
+    for window in windows.values():
+        if not isinstance(window, dict):
+            continue
+        for message in (window.get("messages") or []):
+            seen.add(re.sub(r"\s+", "", str(message.get("content") or ""))[:120])
+    for legacy in legacy_windows(subject):
+        key = re.sub(r"\s+", "", legacy["messages"][0]["content"])[:120]
+        if key in seen:
+            continue
+        seen.add(key)
+        buckets.setdefault(window_month(legacy), []).append(legacy)
 
     subject_tmp = OUTPUT_ROOT / (subject + ".tmp")
     if subject_tmp.exists():

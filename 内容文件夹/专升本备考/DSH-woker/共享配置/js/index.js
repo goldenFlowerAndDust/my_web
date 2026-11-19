@@ -96,10 +96,15 @@
       .toLocaleLowerCase("zh-CN");
 
     const words = doc.chars ? doc.chars + " 字" : "";
+    // doc.append：可选的“追加记录”行（答疑归档跨天追问时由构建脚本写入）
+    const appendLine = doc.append
+      ? `<span class="card-append">↳ ${doc.append}</span>`
+      : "";
     card.innerHTML = `
       <span class="card-tag">${doc.category || "未分类"}</span>
       <h3>${doc.title}</h3>
       <p>${doc.summary || "（暂无摘要）"}</p>
+      ${appendLine}
       <span class="card-meta">
         <span>${words}</span>
         <span>${doc.updated || ""}</span>

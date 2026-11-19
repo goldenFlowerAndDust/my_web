@@ -202,6 +202,22 @@ def upsert_window(
     data = read_document(subject)
     windows = data["windows"]
     existing = windows.get(window_id) if isinstance(windows.get(window_id), dict) else {}
+
+    # 每条消息补提问时间：已有时间的保留（历史追问的真实时间），
+    # 新消息用本次保存时间。老数据没有时间的，按同位置旧消息的窗口时间兜底。
+    save_time = normalize_time(updated_at) or now_text()
+    old_messages = existing.get("messages") if isinstance(existing.get("messages"), list) else []
+    for index, message in enumerate(normalized):
+        if message.get("time"):
+            continue
+        previous = old_messages[index] if index < len(old_messages) and isinstance(old_messages[index], dict) else None
+        if previous and previous.get("time"):
+            message["time"] = str(previous["time"])
+        elif previous and str(previous.get("content") or "") == str(message.get("content") or ""):
+            message["time"] = str(existing.get("updated_at") or save_time)
+        else:
+            message["time"] = save_time
+
     window = {
         "id": window_id,
         "title": str(title or "新对话"),

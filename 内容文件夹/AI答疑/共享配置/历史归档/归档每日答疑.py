@@ -77,16 +77,33 @@ def norm(text: str) -> str:
     return re.sub(r"\s+", "", str(text or ""))
 
 
+_TIME_RE = re.compile(r"(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})")
+
+
+def clean_time(value) -> str:
+    """从可能带前缀标签的 time 字段里取出 YYYY-MM-DD HH:MM:SS。"""
+    match = _TIME_RE.search(str(value or ""))
+    return (match.group(1) + " " + match.group(2)) if match else ""
+
+
 # ---------------- 数据收集 ----------------
 
-def make_conversation(time: str, mode: str, topic: str, rounds: list[tuple[str, str]], source: str) -> dict:
+def make_conversation(time: str, mode: str, topic: str, rounds: list, source: str) -> dict:
+    """rounds 的元素可以是 (问, 答) 或 (问, 答, 时间)。"""
+    items = []
+    for item in rounds:
+        question = item[0] if len(item) > 0 else ""
+        answer = item[1] if len(item) > 1 else ""
+        stamp = item[2] if len(item) > 2 else ""
+        if question:
+            items.append({"q": question, "a": answer, "time": str(stamp or "")})
     return {
         "time": time or "",
         "mode": mode or "",
         "topic": topic or "",
-        "rounds": [{"q": q, "a": a} for q, a in rounds if q],
+        "rounds": items,
         "source": source,
-        "first_q": rounds[0][0] if rounds else "",
+        "first_q": items[0]["q"] if items else "",
     }
 
 
@@ -132,19 +149,23 @@ def conversation_records(subject: str) -> list[dict]:
             continue
         rounds = []
         pending = None
+        pending_time = ""
         for m in (w.get("messages") or []):
             role, content = m.get("role"), str(m.get("content") or "").strip()
             if not content:
                 continue
             if role == "user":
                 pending = content
+                pending_time = clean_time(m.get("time"))
             elif role == "assistant" and pending is not None:
-                rounds.append((pending, content))
+                rounds.append((pending, content, pending_time))
                 pending = None
+                pending_time = ""
         if not rounds:
             continue
+        # 归属日固定为“第一次提问”的时间；updated_at 只用于显示最后活动
         out.append(make_conversation(
-            str(w.get("updated_at") or w.get("created_at") or ""),
+            clean_time(w.get("created_at")) or clean_time(w.get("updated_at")),
             str(w.get("mode") or "").strip(),
             str(w.get("topic") or "").strip(),
             rounds,
@@ -474,23 +495,47 @@ def demote_headings(text: str) -> str:
 
 
 def build_markdown(label: str, date: str, conversations: list[dict]) -> str:
-    lines = [f"# {date} · {label}答疑归档", ""]
+    # 归属日固定；跨天追问的轮次单独统计，写进标题和每轮标记里
+    appended: list[str] = []
+    for conv in conversations:
+        for item in conv["rounds"]:
+            stamp = str(item.get("time") or "")
+            if stamp[:10] and stamp[:10] != date:
+                appended.append(stamp)
+
+    title = f"# {date} · {label}答疑归档"
+    if appended:
+        days = sorted({s[:10] for s in appended})
+        title += f"（{days[0]}{'等' if len(days) > 1 else ''} 追加 {len(appended)} 轮）"
+
+    lines = [title, ""]
     lines.append("> 自动生成，每次同步整篇覆盖，请勿手工修改。")
+    lines.append("> 归属日期以第一次提问为准，之后追加不会迁移。")
+    if appended:
+        lines.append("> 本篇含跨天追加：" + "、".join(sorted({s[:10] for s in appended})) + f"，共 {len(appended)} 轮。")
     lines.append("")
+
     for idx, conv in enumerate(conversations, 1):
         rounds = conv["rounds"]
+        last = next((str(r.get("time") or "") for r in reversed(rounds) if r.get("time")), "")
         lines.append(f"## {idx}. {brief(conv)}")
         lines.append("")
-        lines.append(f"- 时间：{conv['time'] or '未知'}")
+        lines.append(f"- 首发：{conv['time'] or '未知'}")
+        if last and last[:10] != date:
+            lines.append(f"- 最后追加：{last}")
         lines.append(f"- 轮次：{len(rounds)}")
         lines.append(f"- 来源：{conv['source']}")
         lines.append("")
         for r, item in enumerate(rounds, 1):
-            lines.append(f"### 问 {r}")
+            stamp = str(item.get("time") or "")
+            mark = ""
+            if stamp[:10] and stamp[:10] != date:
+                mark = f"（{stamp[:16]} 追加）"
+            lines.append(f"### 问 {r}{mark}")
             lines.append("")
             lines.append(fix_math_punctuation(format_math_md(normalize_math(item["q"]))))
             lines.append("")
-            lines.append(f"### 答 {r}")
+            lines.append(f"### 答 {r}{mark}")
             lines.append("")
             lines.append(demote_headings(fix_math_punctuation(format_math_md(normalize_math(item["a"])))) or "（无回答记录）")
             lines.append("")
@@ -616,6 +661,9 @@ EXTRA_CSS = """
    侧边栏抽屉、左下角开关、公式定界符兼容统一由共享的 notes.css / reader.js 提供 */
 .doc h2.topic-head{border-left:4px solid var(--primary,#425fe8);padding-left:.6em;background:linear-gradient(90deg,rgba(66,95,232,.10),transparent);border-radius:0 8px 8px 0}
 .doc h3.round-head{font-size:.98rem;color:var(--muted,#5b6b82);margin:20px 0 6px;letter-spacing:.02em}
+/* 顶部归属日期信息条 */
+.doc p.arc-dates{margin:0 0 16px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-soft);font-size:13.5px;color:var(--muted)}
+.doc p.arc-dates strong{color:var(--text);font-weight:700}
 """
 
 
@@ -748,13 +796,17 @@ def archive_subject(subject: str, cfg: dict) -> dict:
 
     docs = []
     keep = set()
+    md_keep = set()
     for date in sorted(by_date, reverse=True):
         y, m, d = date.split("-")
+        # md 直接放在月文件夹下，文件名用完整日期
         day_dir = root / y / m
         day_dir.mkdir(parents=True, exist_ok=True)
 
         md_text = build_markdown(cfg["label"], date, by_date[date])
-        (day_dir / f"{d}.md").write_text(md_text, encoding="utf-8")
+        md_path = day_dir / f"{date}.md"   # 完整日期，文件夹和文件都能一眼对上
+        md_path.write_text(md_text, encoding="utf-8")
+        md_keep.add(md_path)
 
         body_html, toc = md_to_html(md_text)
         slug = f"{y}/{m}/{d}"
@@ -762,23 +814,48 @@ def archive_subject(subject: str, cfg: dict) -> dict:
         topics = sorted({(c.get("topic") or c.get("mode") or "未分类") for c in by_date[date]})
         first_q = (by_date[date][0].get("first_q") or "") if by_date[date] else ""
         summary = "【%s】%s" % (" / ".join(topics[:3]), re.sub(r"\s+", " ", first_q)[:80])
+        # 跨天追加：单独给卡片一条“追加记录”行
+        appended = [
+            str(r.get("time") or "")
+            for c in by_date[date]
+            for r in c.get("rounds", [])
+            if str(r.get("time") or "")[:10] not in ("", date)
+        ]
+        append_note = ""
+        if appended:
+            days = sorted({s[:10] for s in appended})
+            append_note = "%s 追加 %d 轮" % ("、".join(d[5:] for d in days), len(appended))
+
+        # 顶部信息条：归属日期固定显示；有跨天追加时再显示最近追加日期
+        last_append_day = max((s[:10] for s in appended), default="")
+        banner_bits = ["归属日期 <strong>%s</strong>" % date]
+        if last_append_day:
+            banner_bits.append("最近追加 <strong>%s</strong>" % last_append_day)
+        banner = '<p class="arc-dates">' + "　｜　".join(banner_bits) + "</p>"
+
+        title_text = f"{date} · {cfg['label']}答疑归档"
+        if last_append_day:
+            title_text += f"（{last_append_day} 追加 {len(appended)} 轮）"
 
         payload = {
             "slug": slug,
-            "title": f"{date} · {cfg['label']}答疑归档",
+            "title": title_text,
             "category": f"{y} 年 {m} 月",
-            "html": body_html,
+            "html": banner + body_html,
             "toc": toc,
             "chars": len(re.sub(r"\s+", "", md_text)),
             "updated": date,
             "topics": topics,
             "count": len(by_date[date]),
         }
-        (root / "content" / f"{date}.js").write_text(
+        js_dir = content_dir / y / m
+        js_dir.mkdir(parents=True, exist_ok=True)
+        js_path = js_dir / f"{date}.js"
+        js_path.write_text(
             "window.__DSH_DOC = " + js_safe(json.dumps(payload, ensure_ascii=False)) + ";\n",
             encoding="utf-8",
         )
-        keep.add(f"{date}.js")
+        keep.add(js_path)
         docs.append({
             "slug": slug,
             "title": payload["title"],
@@ -786,17 +863,30 @@ def archive_subject(subject: str, cfg: dict) -> dict:
             "summary": summary,
             "chars": payload["chars"],
             "updated": date,
-            "file": f"content/{date}.js",
+            "file": f"content/{y}/{m}/{date}.js",
+            "append": append_note,
         })
 
     removed = 0
-    for f in content_dir.glob("*.js"):
-        if f.name not in keep:
+    for f in content_dir.rglob("*.js"):
+        if f not in keep:
             f.unlink(); removed += 1
     for f in root.rglob("*.html"):
         if f.name in ("index.html", "view.html"):
             continue
         f.unlink(); removed += 1
+    # 清掉已不存在的日期留下的 md，并回收空目录
+    for f in root.rglob("*.md"):
+        if f not in md_keep:
+            f.unlink(); removed += 1
+    for folder in sorted((d for d in root.rglob("*") if d.is_dir()), key=lambda x: len(x.parts), reverse=True):
+        if folder == content_dir or folder == root:
+            continue
+        try:
+            if not any(folder.iterdir()):
+                folder.rmdir(); removed += 1
+        except OSError:
+            pass
 
     # 用"最新一条记录的时间"作为生成时间：数据没变时输出完全一致，避免每次同步都产生无意义改动
     all_times = [c["time"] for v in by_date.values() for c in v if c.get("time")]
