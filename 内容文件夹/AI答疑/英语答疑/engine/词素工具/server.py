@@ -175,6 +175,12 @@ class Handler(SimpleHTTPRequestHandler):
     # ------------------------------------------------------------------
     # POST
     # ------------------------------------------------------------------
+    def end_headers(self):
+        # 静态页面与脚本不缓存：改了 js/css 刷新即生效
+        self.send_header("Cache-Control", "no-store, must-revalidate")
+        self.send_header("Pragma", "no-cache")
+        super().end_headers()
+
     def do_OPTIONS(self):  # noqa: N802
         self.send_response(204)
         self._cors()

@@ -39,6 +39,49 @@ from 生成历史索引 import build_all as build_history_index
 from typing import Any
 
 
+def build_dsh_notes(base: Path) -> dict:
+    """把 DSH-woker 里新增/修改的 .md 编译成网页（需要本机 Node.js）。
+
+    失败不影响同步主流程，只在结果里标记。
+    """
+    import shutil as _shutil
+    import subprocess as _subprocess
+
+    tools = Path(base).parent / "专升本备考" / "DSH-woker" / "共享配置" / "tools"
+    script = tools / "build.mjs"
+    if not script.exists():
+        return {"ok": False, "message": "找不到 build.mjs"}
+
+    node = _shutil.which("node")
+    if not node:
+        return {"ok": False, "message": "未安装 Node.js，跳过笔记编译"}
+
+    try:
+        proc = _subprocess.run(
+            [node, str(script)],
+            cwd=str(tools),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=180,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {"ok": False, "message": str(exc)}
+
+    out = (proc.stdout or "").strip()
+    if proc.returncode != 0:
+        detail = (proc.stderr or out or "构建失败").strip().splitlines()
+        return {"ok": False, "message": detail[-1][:200] if detail else "构建失败"}
+
+    total = "?"
+    for line in out.splitlines():
+        if "共" in line and "篇" in line:
+            total = line.strip()
+            break
+    return {"ok": True, "message": total, "output": out}
+
+
 def configure_system_proxy() -> None:
     """Windows 系统代理只在 WinHTTP 中，Python urllib 默认不会使用它。"""
     if os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy"):
@@ -1219,6 +1262,14 @@ class SyncRunner:
             self.status["daily_archive"] = {"ok": False, "error": str(exc)}
             print("每日答疑归档生成失败：%s" % exc)
 
+        # DSH 笔记：把新增/修改的 .md 编译成网页
+        build = build_dsh_notes(self.base)
+        self.status["dsh_build"] = build
+        if build.get("ok"):
+            print("DSH 笔记编译：完成（%s）" % build.get("message"))
+        else:
+            print("DSH 笔记编译：%s" % build.get("message"))
+
         if any_enabled:
             review = self.sync_review_updates()
             self.status["review_updates"] = review
@@ -1243,6 +1294,27 @@ class SyncRunner:
         programming = self.status.get("programming") or {}
         if programming:
             print(self.describe_result(programming, "编程 AI"))
+
+        # 归档与笔记编译的结果，方便在 bat 窗口里一眼看到
+        label_map = {"english": "英语", "math": "数学", "code": "编程"}
+        archive = self.status.get("daily_archive") or {}
+        archive_results = archive.get("results") or []
+        if archive_results:
+            detail = "，".join(
+                "%s %d 天" % (label_map.get(str(x.get("subject")), str(x.get("subject"))), int(x.get("days") or 0))
+                for x in archive_results
+            )
+            print("  · 每日归档：%s" % detail)
+        elif archive:
+            print("  · 每日归档：失败（%s）" % (archive.get("error") or "未知原因"))
+
+        build = self.status.get("dsh_build") or {}
+        if build:
+            if build.get("ok"):
+                print("  · 笔记编译：成功（%s）" % (build.get("message") or "已更新"))
+            else:
+                print("  · 笔记编译：未完成（%s）" % (build.get("message") or "未知原因"))
+
         print("云端记录不会立即删除，按 24 小时保留。")
         print("同步状态已写入：%s" % self.status_file)
         if self.status["errors"]:

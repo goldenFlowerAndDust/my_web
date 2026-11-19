@@ -732,3 +732,89 @@ img { max-width: 100%; }
   .doc h2 { break-after: avoid; }
   .doc pre, .doc blockquote, .doc table { break-inside: avoid; }
 }
+
+/* ===== 响应式侧边栏抽屉（reader.js 自动注入开关按钮） ===== */
+.menu-toggle { display: none; }
+
+.drawer-overlay { display: none; }
+
+@media (max-width: 980px) {
+  /* 侧边栏：从左滑出，而不是插到正文上方 */
+  .toc {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: min(84vw, 320px);
+    max-height: none;
+    margin: 0;
+    background: var(--surface-solid);
+    border-radius: 0 16px 16px 0;
+    transform: translateX(-105%);
+    transition: transform 0.26s ease;
+    z-index: 80;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.28);
+    order: 0;
+  }
+
+  .toc.is-open { transform: translateX(0); }
+
+  /* 顶栏的“目录”按钮隐藏，改用左下角圆钮 */
+  #toc-toggle { display: none !important; }
+
+  .menu-toggle {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    left: 16px;
+    bottom: 18px;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--text);
+    background: color-mix(in srgb, var(--surface-solid) 94%, transparent);
+    box-shadow: 0 10px 28px rgba(23, 32, 51, 0.2);
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 90;
+  }
+
+  body:has(.toc.is-open) .drawer-overlay,
+  .drawer-overlay.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 10, 22, 0.42);
+    z-index: 79;
+  }
+}
+
+/* ---------- 抽屉修正：滚动、公式缩放、按钮避让 ---------- */
+@media (max-width: 980px) {
+  .toc {
+    padding: 18px 14px 26px;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .toc-title { font-size: 11px; }
+
+  .toc a { line-height: 1.45; }
+
+  /* 目录里的公式别太抢戏 */
+  .toc .katex { font-size: 0.9em; }
+
+  /* 抽屉打开时，左下角按钮让位，避免压在目录上 */
+  .menu-toggle { transition: opacity 0.18s ease, transform 0.18s ease; }
+
+  body.toc-open .menu-toggle {
+    opacity: 0;
+    transform: scale(0.86);
+    pointer-events: none;
+  }
+
+  /* 抽屉打开时锁住正文滚动 */
+  body.toc-open { overflow: hidden; }
+}

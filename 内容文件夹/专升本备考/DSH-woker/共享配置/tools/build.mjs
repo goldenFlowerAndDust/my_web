@@ -12,6 +12,26 @@ import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..");
 
+/* 静态资源版本号：取共享样式/脚本的最新修改时间。
+   链接带 ?v=<版本> 后，改完 css/js 刷新即可生效，不会被浏览器旧缓存顶掉。 */
+const SHARED_DIR = path.join(ROOT, "共享配置");
+const ASSET_VERSION = (() => {
+  const files = [
+    path.join(SHARED_DIR, "css", "notes.css"),
+    path.join(SHARED_DIR, "js", "index.js"),
+    path.join(SHARED_DIR, "js", "reader.js"),
+  ];
+  let latest = 0;
+  for (const file of files) {
+    try {
+      latest = Math.max(latest, fs.statSync(file).mtimeMs);
+    } catch {
+      /* 文件缺失时忽略 */
+    }
+  }
+  return String(Math.floor(latest));
+})();
+
 const SUBJECTS = [
   {
     dir: "英语",
@@ -156,8 +176,96 @@ const parseList = (lines) => {
   return root.children.map(renderNode).join("");
 };
 
+/* --------------------------------------------------------------------------
+   公式规范化：把各种非常规写法统一成 KaTeX 能直接渲染的形式
+   （假乘方符号、全角标点、Unicode 运算符、\(...\) 定界符、单行 $$ 块等）
+   -------------------------------------------------------------------------- */
+const MATH_CHAR_ALIASES = {
+  "＾": "^", "︿": "^", "ˆ": "^", "⌃": "^", "˄": "^", "ᵔ": "^",
+  "∧": "^", "⋀": "^", "⋏": "^", "Λ": "^", "＿": "_",
+  "′": "'", "″": "''",
+  "—": "-", "–": "-", "−": "-", "－": "-",
+  "×": "\\times ", "÷": "\\div ", "·": "\\cdot ", "±": "\\pm ",
+  "≤": "\\le ", "≥": "\\ge ", "≠": "\\ne ", "≈": "\\approx ",
+  "∞": "\\infty ", "→": "\\to ", "⇒": "\\Rightarrow ",
+  "∫": "\\int ", "∑": "\\sum ", "√": "\\sqrt ",
+  "１": "1", "２": "2", "３": "3", "４": "4", "５": "5",
+  "６": "6", "７": "7", "８": "8", "９": "9", "０": "0",
+  "＋": "+", "＝": "=", "／": "/",
+};
+
+const MATH_EDGE_PUNCT = "：，；！？。、（）";
+
+const normalizeMathBody = (body) => {
+  let s = String(body || "");
+  // \text{…} 里的中文原样保留
+  const parts = s.split(/(\\text\{[^}]*\})/);
+  for (let i = 0; i < parts.length; i += 2) {
+    let seg = parts[i];
+    for (const [bad, good] of Object.entries(MATH_CHAR_ALIASES)) {
+      if (seg.includes(bad)) seg = seg.split(bad).join(good);
+    }
+    // ^' 不是合法 TeX
+    seg = seg.replace(/\^('+)/g, (_, p) => "^{" + "\\prime".repeat(p.length) + "}");
+    // 裸中文包进 \text{}
+    seg = seg.replace(/[\u4e00-\u9fff]+/g, (m) => "\\text{" + m + "}");
+    parts[i] = seg;
+  }
+  s = parts.join("");
+  return s
+    .replace(/：/g, ":").replace(/，/g, ", ").replace(/；/g, "; ")
+    .replace(/！/g, "!").replace(/？/g, "?").replace(/。/g, ".");
+};
+
+const normalizeMathInMarkdown = (markdown) => {
+  let text = String(markdown || "").replace(/\r\n?/g, "\n");
+
+  // 1) \[ \] / \( \) → $$ / $（用函数替换，避免 $ 在替换串里有特殊含义）
+  text = text.replace(/(?<!\\)\\\[/g, () => "$$").replace(/(?<!\\)\\\]/g, () => "$$");
+  text = text.replace(/(?<!\\)\\\(/g, () => "$").replace(/(?<!\\)\\\)/g, () => "$");
+
+  // 2) 先把块级 $$…$$ 整段抽出，用占位符保护，避免和行内公式互相干扰
+  const blocks = [];
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (_, body) => {
+    const inner = normalizeMathBody(body.trim());
+    if (!inner) return "";
+    blocks.push(inner);
+    return "\u0000B" + (blocks.length - 1) + "\u0000";
+  });
+
+  // 3) 行内 $…$：首尾全角标点移到公式外，内部规范化
+  text = text.replace(/(?<!\\)\$(?!\$)([^$\n]+?)(?<!\\)\$(?!\$)/g, (_, body) => {
+    let inner = String(body || "");
+    let lead = "";
+    let trail = "";
+    while (inner && MATH_EDGE_PUNCT.includes(inner[0])) {
+      lead += inner[0];
+      inner = inner.slice(1);
+    }
+    while (inner && MATH_EDGE_PUNCT.includes(inner[inner.length - 1])) {
+      trail = inner[inner.length - 1] + trail;
+      inner = inner.slice(0, -1);
+    }
+    inner = inner.trim();
+    if (!inner) return lead + trail;
+    return lead + "$" + normalizeMathBody(inner) + "$" + trail;
+  });
+
+  // 4) 兜底：某行行内 $ 落单就整行转义（此时文本里已无 $$）
+  text = text
+    .split("\n")
+    .map((line) => {
+      const singles = line.match(/(?<!\\)\$(?!\$)/g) || [];
+      return singles.length % 2 === 1 ? line.replace(/(?<!\\)\$(?!\$)/g, () => "\\$") : line;
+    })
+    .join("\n");
+
+  // 5) 还原块级公式：统一成独占三行的写法
+  return text.replace(/\u0000B(\d+)\u0000/g, (_, index) => "\n$$\n" + blocks[Number(index)] + "\n$$\n");
+};
+
 const renderMarkdown = (markdown) => {
-  const lines = markdown.replace(/\r\n?/g, "\n").split("\n");
+  const lines = normalizeMathInMarkdown(markdown).split("\n");
   const html = [];
   const toc = [];
   let title = "";
@@ -411,8 +519,8 @@ const head = (title, extra = "") => `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#425fe8">
 <title>${title}</title>
-<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css">
-<link rel="stylesheet" href="../共享配置/css/notes.css">
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=${ASSET_VERSION}">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=${ASSET_VERSION}">
 ${extra}</head>`;
 
 const buildIndex = (subject, docs, generatedAt) => `${head(`${subject.name} · DSH 笔记`)}
@@ -454,7 +562,7 @@ const buildIndex = (subject, docs, generatedAt) => `${head(`${subject.name} · D
 </footer>
 
 <script src="./data.js"></script>
-<script src="../共享配置/js/index.js"></script>
+<script src="../共享配置/js/index.js?v=${ASSET_VERSION}"></script>
 </body>
 </html>
 `;
@@ -498,9 +606,9 @@ const buildView = (subject) => `${head(`阅读 · ${subject.name} · DSH 笔记`
 </footer>
 
 <script src="./data.js"></script>
-<script src="../共享配置/vendor/katex/katex.min.js"></script>
-<script src="../共享配置/vendor/katex/auto-render.min.js"></script>
-<script src="../共享配置/js/reader.js"></script>
+<script src="../共享配置/vendor/katex/katex.min.js?v=${ASSET_VERSION}"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=${ASSET_VERSION}"></script>
+<script src="../共享配置/js/reader.js?v=${ASSET_VERSION}"></script>
 </body>
 </html>
 `;

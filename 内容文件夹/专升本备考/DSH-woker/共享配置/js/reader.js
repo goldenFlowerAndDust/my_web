@@ -201,14 +201,18 @@
   const enhance = () => {
     if (!docEl) return;
 
-    if (window.renderMathInElement && /\$/.test(docEl.innerHTML)) {
+    /* 公式：同时支持 $$ $$ / $ $ / \[ \] / \( \)，避免 LaTeX 标准定界符原样显示 */
+    if (window.renderMathInElement && /[$\\]/.test(docEl.innerHTML)) {
       try {
         window.renderMathInElement(docEl, {
           delimiters: [
             { left: "$$", right: "$$", display: true },
+            { left: "\\[", right: "\\]", display: true },
             { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
           ],
           throwOnError: false,
+          ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
         });
       } catch (error) {
         /* 公式出错不影响正文 */
@@ -390,6 +394,62 @@
   window.addEventListener("hashchange", () => {
     if (window.location.hash.startsWith(DOC_PREFIX)) render();
   });
+
+  /* ---------- 响应式：左下角开关 + 侧边栏抽屉（与数学笔记章节页一致） ---------- */
+  (() => {
+    if (!tocPanel || !tocToggle) return;
+
+    let menuBtn = document.getElementById("menu-toggle");
+    if (!menuBtn) {
+      menuBtn = document.createElement("button");
+      menuBtn.id = "menu-toggle";
+      menuBtn.className = "menu-toggle";
+      menuBtn.type = "button";
+      menuBtn.setAttribute("aria-label", "打开目录");
+      menuBtn.textContent = "☰";
+      document.body.appendChild(menuBtn);
+    }
+    menuBtn.setAttribute("aria-expanded", "false");
+
+    let overlay = document.getElementById("drawer-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "drawer-overlay";
+      overlay.className = "drawer-overlay";
+      document.body.appendChild(overlay);
+    }
+
+    const isOpen = () => tocPanel.classList.contains("is-open");
+    const sync = () => {
+      const open = isOpen();
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      overlay.classList.toggle("open", open);
+      document.body.classList.toggle("toc-open", open);
+    };
+
+    if (!menuBtn.dataset.bound) {
+      menuBtn.dataset.bound = "1";
+      menuBtn.addEventListener("click", () => {
+        tocToggle.click();
+        sync();
+      });
+    }
+    if (!overlay.dataset.bound) {
+      overlay.dataset.bound = "1";
+      overlay.addEventListener("click", () => {
+        if (isOpen()) {
+          tocToggle.click();
+          sync();
+        }
+      });
+    }
+
+    new MutationObserver(sync).observe(tocPanel, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    sync();
+  })();
 
   onScroll();
 })();

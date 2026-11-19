@@ -27,6 +27,21 @@ HIST = AI / "历史记录" / "对话"
 
 DSH = "../../../专升本备考/DSH-woker/共享配置"
 
+
+def _asset_version() -> str:
+    """共享 css/js 的最新修改时间，作为 ?v= 版本号，避免浏览器吃旧缓存。"""
+    root = (AI / ".." / "专升本备考" / "DSH-woker" / "共享配置").resolve()
+    latest = 0
+    for rel in ("css/notes.css", "js/index.js", "js/reader.js"):
+        try:
+            latest = max(latest, int((root / rel).stat().st_mtime * 1000))
+        except OSError:
+            pass
+    return str(latest)
+
+
+ASSET_V = _asset_version()
+
 SUBJECTS = {
     "english": {
         "dir": "英语",
@@ -138,12 +153,194 @@ def conversation_records(subject: str) -> list[dict]:
     return out
 
 
-def normalize_math(text: str) -> str:
-    """把旧归档里的 LaTeX 定界符统一成 $ / $$，否则 KaTeX 不渲染。"""
+def format_math_md(text: str) -> str:
+    """让 md 里的公式对阅读器更友好。
+
+    1. 行内的 $$...$$ 降级成 $...$（严格的 md 阅读器要求 $$ 独占一行）
+    2. 行内 $ ... $ 去掉内侧空格（有些解析器会因此判定不是公式）
+    3. ``` 代码块内不处理
+    """
     t = str(text or "")
-    t = t.replace("\\[", "$$").replace("\\]", "$$")
-    t = t.replace("\\(", "$").replace("\\)", "$")
-    return t
+    parts = re.split(r"(```[\s\S]*?```)", t)
+    for i in range(0, len(parts), 2):
+        seg = parts[i]
+        out_lines = []
+        for line in seg.splitlines():
+            s = line.strip()
+            # 单行的 $$...$$ 展开成三行：多数 md 阅读器只认这种块级写法
+            if s.startswith("$$") and s.endswith("$$") and s.count("$$") == 2 and len(s) > 4:
+                inner = s[2:-2].strip()
+                if inner:
+                    indent = line[: len(line) - len(line.lstrip())]
+                    out_lines.extend([indent + "$$", indent + inner, indent + "$$"])
+                    continue
+                out_lines.append(line)
+                continue
+            if "$$" in line:
+                # 与文字混排的 $$...$$ 降级为行内 $...$
+                line = re.sub(r"\$\$([^$]+?)\$\$", lambda m: "$" + m.group(1).strip() + "$", line)
+            out_lines.append(line)
+        seg = "\n".join(out_lines)
+
+        # 行内 $ 内侧空格
+        def _trim(m: re.Match) -> str:
+            return "$" + m.group(1).strip() + "$"
+
+        seg = re.sub(r"(?<!\$)\$(?!\$)([^$\n]+?)\$(?!\$)", _trim, seg)
+
+        # 含 \newline 的行内公式（多为用户手打的多行过程）行内渲染必失败，
+        # 提升为块级公式
+        def _promote(m: re.Match) -> str:
+            inner = m.group(1)
+            if "\\newline" in inner:
+                body = inner.replace("\\newline", "\\\\").strip()
+                body = re.sub(r"^(?:\\\\\s*)+", "", body)
+                body = re.sub(r"(?:\\\\\s*)+$", "", body).strip()
+                if not body:
+                    return m.group(0)
+                return "\n\n$$\n" + body + "\n$$\n\n"
+            return m.group(0)
+
+        seg = re.sub(r"(?<!\$)\$(?!\$)([^$\n]+?)\$(?!\$)", _promote, seg)
+
+        # 误配对的 $：内侧是纯中文、完全不含 LaTeX 命令时，按普通文字处理
+        # （含 \text{中文} 之类的合法公式不受影响）
+        def _unescape_cjk(m: re.Match) -> str:
+            inner = m.group(1)
+            if re.search(r"[\u4e00-\u9fff]", inner) and "\\" not in inner:
+                return "\\$" + inner + "\\$"
+            return m.group(0)
+
+        seg = re.sub(r"(?<!\$)\$(?!\$)([^$\n]*?)\$(?!\$)", _unescape_cjk, seg)
+        parts[i] = seg
+    return "".join(parts)
+
+
+MATH_SYMBOLS = {
+    # 各种输入法打出来的"乘方"符号
+    "＾": "^", "︿": "^", "ˆ": "^", "⌃": "^", "˄": "^", "∧": "^", "⋀": "^", "ᵔ": "^",
+    "＿": "_",
+    "′": "'", "″": "''", "‘": "'", "’": "'",
+    "—": "-", "–": "-", "−": "-", "－": "-",
+    "×": "\\times ", "÷": "\\div ", "·": "\\cdot ", "±": "\\pm ",
+    "≤": "\\le ", "≥": "\\ge ", "≠": "\\ne ", "≈": "\\approx ",
+    "∞": "\\infty ", "→": "\\to ", "⇒": "\\Rightarrow ",
+    "∫": "\\int ", "∑": "\\sum ", "√": "\\sqrt ",
+    "１": "1", "２": "2", "３": "3", "４": "4", "５": "5",
+    "６": "6", "７": "7", "８": "8", "９": "9", "０": "0",
+    "＋": "+", "＝": "=", "（": "(", "）": ")", "／": "/",
+}
+
+
+def fix_math_punctuation(text: str) -> str:
+    """公式里的中文全角标点会让 KaTeX 报错（Typora 里表现为整条公式不渲染）。
+
+    - 公式首尾的全角标点移到公式外
+    - 公式内部的全角标点换成半角
+    - 只剩标点的空公式块整块删掉
+    """
+    t = str(text or "")
+    punct = "：，；！？。、（）【】“”‘’"
+    table = str.maketrans({
+        "：": ":", "，": ", ", "；": "; ", "！": "!", "？": "?",
+        "（": "(", "）": ")", "。": ".", "、": ", ",
+    })
+
+    def norm(inner: str) -> str:
+        # \text{…} 里的中文保留原样，其余部分才做标点/符号归一
+        pieces = re.split(r"(\\text\{[^}]*\})", inner)
+        for i in range(0, len(pieces), 2):
+            seg = pieces[i].translate(table)
+            for bad, good in MATH_SYMBOLS.items():
+                if bad in seg:
+                    seg = seg.replace(bad, good)
+            # ^' 不是合法 TeX，改成 ^{\prime}
+            seg = re.sub(r"\^('+)", lambda m: "^{" + r"\prime" * len(m.group(1)) + "}", seg)
+            # 公式里裸奔的中文包进 \text{}
+            seg = re.sub(r"[\u4e00-\u9fff]+", lambda m: "\\text{" + m.group(0) + "}", seg)
+            pieces[i] = seg
+        return "".join(pieces)
+
+    def block_repl(m: re.Match) -> str:
+        body = norm(m.group(1))
+        if not re.search(r"[0-9A-Za-z\\]", body):     # 只剩标点 → 删掉整块
+            return ""
+        return "$$" + body + "$$"
+
+    t = re.sub(r"\$\$([\s\S]*?)\$\$", block_repl, t)
+
+    def inline_repl(m: re.Match) -> str:
+        inner = m.group(1)
+        lead = ""
+        while inner and inner[0] in punct:
+            lead += inner[0]
+            inner = inner[1:]
+        trail = ""
+        while inner and inner[-1] in punct:
+            trail = inner[-1] + trail
+            inner = inner[:-1]
+        if not inner.strip():
+            return lead + trail
+        return lead + "$" + norm(inner) + "$" + trail
+
+    t = re.sub(r"(?<!\$)\$(?!\$)([^$\n]+?)\$(?!\$)", inline_repl, t)
+
+    # 最后一道保险：逐行检查行内 $ 是否成对，落单就把这一行的 $ 全转义，
+    # 避免一个孤立的 $ 把后文全部吞掉。
+    out_lines = []
+    in_block = False
+    for line in t.splitlines():
+        if line.strip() == "$$":
+            in_block = not in_block
+            out_lines.append(line)
+            continue
+        if not in_block:
+            singles = re.findall(r"(?<!\\)\$(?!\$)", line)
+            if len(singles) % 2 == 1:
+                line = re.sub(r"(?<!\\)\$(?!\$)", r"\\$", line)
+        out_lines.append(line)
+    t = "\n".join(out_lines)
+
+    # Typora 对紧贴中文的 $ 解析不稳定：在中文与 $ 之间补一个空格
+    cjk_edge = re.compile(r"[\u4e00-\u9fff：，；！？、（）「」『』“”]")
+
+    def pad(text: str) -> str:
+        result = []
+        last = 0
+        for m in re.finditer(r"(?<!\\)\$(?!\$)([^$\n]+?)(?<!\\)\$(?!\$)", text):
+            start, end = m.start(), m.end()
+            before = text[start - 1] if start > 0 else ""
+            after = text[end] if end < len(text) else ""
+            result.append(text[last:start])
+            if before and cjk_edge.match(before):
+                result.append(" ")
+            result.append(m.group(0))
+            if after and cjk_edge.match(after):
+                result.append(" ")
+            last = end
+        result.append(text[last:])
+        return "".join(result)
+
+    return pad(t)
+
+
+def normalize_math(text: str) -> str:
+    """统一公式定界符为 $ / $$。
+
+    AI 回答里既有 $...$，也有 LaTeX 标准的 \\(...\\) 与 \\[...\\]；
+    md 阅读器和网页阅读器对后者的支持不一致，所以生成 md 时统一。
+    代码块（```）内不处理，避免破坏代码示例。
+    """
+    t = str(text or "")
+    parts = re.split(r"(```[\s\S]*?```)", t)
+    for i in range(0, len(parts), 2):          # 偶数索引是代码块之外的正文
+        seg = parts[i]
+        seg = re.sub(r"(?<!\\)\\\[", "$$", seg)   # \[ -> $$（跳过 \\[ 换行）
+        seg = re.sub(r"(?<!\\)\\\]", "$$", seg)
+        seg = re.sub(r"(?<!\\)\\\(", "$", seg)    # \( -> $
+        seg = re.sub(r"(?<!\\)\\\)", "$", seg)
+        parts[i] = seg
+    return "".join(parts)
 
 
 def legacy_records(subject: str, cfg: dict) -> list[dict]:
@@ -291,11 +488,11 @@ def build_markdown(label: str, date: str, conversations: list[dict]) -> str:
         for r, item in enumerate(rounds, 1):
             lines.append(f"### 问 {r}")
             lines.append("")
-            lines.append(item["q"])
+            lines.append(fix_math_punctuation(format_math_md(normalize_math(item["q"]))))
             lines.append("")
             lines.append(f"### 答 {r}")
             lines.append("")
-            lines.append(demote_headings(item["a"]) or "（无回答记录）")
+            lines.append(demote_headings(fix_math_punctuation(format_math_md(normalize_math(item["a"])))) or "（无回答记录）")
             lines.append("")
         lines.append("---")
         lines.append("")
@@ -415,14 +612,10 @@ def md_to_html(md: str) -> tuple[str, list[dict]]:
 # ---------------- 页面 ----------------
 
 EXTRA_CSS = """
-/* 正文：对话标题高亮，问/答标题弱化 */
+/* 正文：对话标题高亮，问/答标题弱化
+   侧边栏抽屉、左下角开关、公式定界符兼容统一由共享的 notes.css / reader.js 提供 */
 .doc h2.topic-head{border-left:4px solid var(--primary,#425fe8);padding-left:.6em;background:linear-gradient(90deg,rgba(66,95,232,.10),transparent);border-radius:0 8px 8px 0}
 .doc h3.round-head{font-size:.98rem;color:var(--muted,#5b6b82);margin:20px 0 6px;letter-spacing:.02em}
-/* 侧边栏两级：对话 = 粗体，问N/答N = 缩进并带竖线 */
-.toc a:not(.lv3){font-weight:700}
-.toc a.lv3{padding-left:26px;position:relative;font-size:12.8px;opacity:.9}
-.toc a.lv3::before{content:"";position:absolute;left:12px;top:2px;bottom:2px;width:1px;background:currentColor;opacity:.22}
-.toc a.lv3.is-active{opacity:1}
 """
 
 
@@ -434,8 +627,8 @@ def head(title: str) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#425fe8">
 <title>{html_mod.escape(title)}</title>
-<link rel="stylesheet" href="{DSH}/vendor/katex/katex.min.css">
-<link rel="stylesheet" href="{DSH}/css/notes.css">
+<link rel="stylesheet" href="{DSH}/vendor/katex/katex.min.css?v={ASSET_V}">
+<link rel="stylesheet" href="{DSH}/css/notes.css?v={ASSET_V}">
 <style>{EXTRA_CSS}</style>
 </head>"""
 
@@ -480,7 +673,7 @@ def build_index(cfg: dict, total: int, generated_at: str) -> str:
 </footer>
 
 <script src="./data.js"></script>
-<script src="{DSH}/js/index.js"></script>
+<script src="{DSH}/js/index.js?v={ASSET_V}"></script>
 </body>
 </html>
 """
@@ -504,7 +697,7 @@ def build_view(cfg: dict) -> str:
 
 <main class="reader-shell">
   <aside class="toc" id="toc-panel">
-    <p class="toc-title">当天分类</p>
+    <p class="toc-title">本页目录</p>
     <nav id="toc" aria-label="页内导航"></nav>
   </aside>
 
@@ -526,9 +719,9 @@ def build_view(cfg: dict) -> str:
 </footer>
 
 <script src="./data.js"></script>
-<script src="{DSH}/vendor/katex/katex.min.js"></script>
-<script src="{DSH}/vendor/katex/auto-render.min.js"></script>
-<script src="{DSH}/js/reader.js"></script>
+<script src="{DSH}/vendor/katex/katex.min.js?v={ASSET_V}"></script>
+<script src="{DSH}/vendor/katex/auto-render.min.js?v={ASSET_V}"></script>
+<script src="{DSH}/js/reader.js?v={ASSET_V}"></script>
 </body>
 </html>
 """
@@ -605,7 +798,9 @@ def archive_subject(subject: str, cfg: dict) -> dict:
             continue
         f.unlink(); removed += 1
 
-    generated_at = now_text()
+    # 用"最新一条记录的时间"作为生成时间：数据没变时输出完全一致，避免每次同步都产生无意义改动
+    all_times = [c["time"] for v in by_date.values() for c in v if c.get("time")]
+    generated_at = max(all_times)[:16] if all_times else "—"
     index_data = {
         "subject": cfg["dir"],
         "subjectName": cfg["name"],

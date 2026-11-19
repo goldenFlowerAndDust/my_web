@@ -271,7 +271,9 @@
         // 中文输入法常把 ^ 打成全角 ＾，先统一成 ASCII。
         text = text.replace(/＾/g, "^").replace(/＿/g, "_");
         // 有些手机键盘会把 ^ 输出成 ˆ / ⌃ / ˄，这些也直接当乘方符号。
-        text = text.replace(/[ˆ⌃˄]/g, "^");
+        // ︿(U+FE3F) 是中文输入法（搜狗/QQ）在中文状态下按 ^ 打出来的宽字符，最常见；
+        // ⋀ / ᵔ 同理按乘方处理。
+        text = text.replace(/[ˆ⌃˄︿⋀ᵔ]/g, "^");
         // ∧ 本身是逻辑“且”，只有在“底数 ∧ 数字/花括号”这种明显是乘方的上下文才替换。
         text = text.replace(/([A-Za-z0-9\)\]\}）］｝])\s*∧\s*(?=[0-9{+\-\\])/g, "$1^");
         text = text.replace(/([0-9])\s*∧\s*([A-Za-z])/g, "$1^$2");
@@ -292,7 +294,14 @@
 
     function wrapPlainMath(part) {
         if (!part) return part;
-        return part.split(/([\u4e00-\u9fff]+)/).map(function (piece) {
+        // 中文当底数：面积^2 → $\text{面积}^{2}$（否则会拆成孤立的上标 $^{2}$，KaTeX 报错）
+        var holders = [];
+        part = part.replace(/([\u4e00-\u9fff]+)\s*\^(\{[^}]*\}|[0-9]+|[A-Za-z])/g, function (_, base, group) {
+            var body = group.charAt(0) === "{" ? group.slice(1, -1) : group;
+            holders.push("$\\text{" + base + "}^{" + body + "}$");
+            return "\u0001" + (holders.length - 1) + "\u0001";
+        });
+        var rendered = part.split(/([\u4e00-\u9fff]+)/).map(function (piece) {
             if (!piece || /^[\u4e00-\u9fff]+$/.test(piece)) return piece;
             var match = piece.match(/^(\s*)([\s\S]*?)(\s*)$/);
             var lead = match[1] || "";
@@ -302,6 +311,8 @@
                 return piece;
             }
             if (core.indexOf("$") !== -1) return piece;
+            // 落单的上标/下标（前面没有底数）不包成公式，否则必然渲染失败
+            if (/^[\^_]/.test(core)) return piece;
             // 手机复制出来的公式常混入全角运算符/长破折号，数学段内统一成 ASCII。
             core = core.replace(/[—–]/g, "-")
                 .replace(/＋/g, "+")
@@ -322,6 +333,9 @@
             if (!core) return piece;
             return lead + "$" + core + "$" + tail + trail;
         }).join("");
+        return rendered.replace(/\u0001(\d+)\u0001/g, function (_, index) {
+            return holders[Number(index)] || "";
+        });
     }
 
     function wrapBareMath(value) {
@@ -478,8 +492,38 @@
         return html.join("\n");
     }
 
+    // 各种输入法/符号面板打出来的“乘方”符号，统一成 ASCII ^。
+    // ⋀(U+22C0)、∧(U+2227)、︿(U+FE3F) 最常从符号面板或 AI 回答里出现，手打打不出来。
+    var MATH_CHAR_ALIASES = {
+        "＾": "^", "︿": "^", "ˆ": "^", "⌃": "^", "˄": "^", "ᵔ": "^",
+        "∧": "^", "⋀": "^", "⋏": "^", "Λ": "^",
+        "＿": "_", "−": "-", "—": "-", "–": "-", "－": "-",
+        "×": "\\times ", "÷": "\\div ", "≤": "\\le ", "≥": "\\ge ", "≠": "\\ne "
+    };
+
+    function normalizeMathCharsInDom(container) {
+        if (!container || !document.createTreeWalker) return;
+        var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null);
+        var node;
+        while ((node = walker.nextNode())) {
+            var el = node.parentElement;
+            if (!el) continue;
+            if (el.closest && el.closest("code, pre, script, style, textarea, .katex, option")) continue;
+            var text = node.nodeValue || "";
+            var next = text;
+            for (var ch in MATH_CHAR_ALIASES) {
+                if (next.indexOf(ch) !== -1) {
+                    next = next.split(ch).join(MATH_CHAR_ALIASES[ch]);
+                }
+            }
+            if (next !== text) node.nodeValue = next;
+        }
+    }
+
     function renderMath(container) {
         if (!container || typeof window.renderMathInElement !== "function") return;
+        // 先把各种“假乘方”符号换成 ^，否则 KaTeX 会整条公式报错
+        normalizeMathCharsInDom(container);
         try {
             window.renderMathInElement(container, {
                 delimiters: [
