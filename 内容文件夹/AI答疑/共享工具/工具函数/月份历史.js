@@ -28,8 +28,8 @@
     }
     var languageFilter = (script && script.dataset.language) || "";
     var historyRoot = script && script.src
-        ? new URL("../../历史/", script.src)
-        : new URL("../历史/", location.href);
+        ? new URL("../../历史记录/月份/", script.src)
+        : new URL("../历史记录/月份/", location.href);
 
     function isDarkTheme() {
         if (document.documentElement.dataset.theme === "dark") return true;
@@ -58,6 +58,7 @@
         selectedId: "",
         language: "",
         category: "all",
+        topic: "all",
         loading: false,
         remoteMode: false,
         remoteWindows: {},
@@ -146,6 +147,7 @@
             })
         };
         renderLanguageOptions();
+        renderTopicOptions();
         renderSummaries();
     }
 
@@ -327,6 +329,9 @@
             (subject === "code" && !languageFilter
                 ? '<label class="month-history-label">语言<select id="month-history-language-select" aria-label="选择编程语言"><option value="">全部语言</option></select></label>'
                 : "") +
+            (subject === "math"
+                ? '<label class="month-history-label">知识分类<select id="month-history-topic-select" aria-label="选择知识分类"><option value="all">全部</option></select></label>'
+                : "") +
             '<span id="month-history-count" class="month-history-count"></span>' +
             '<span id="month-history-note" class="month-history-note">先读月份索引，点开对话再读回答</span>';
         panel.insertBefore(toolbar, sourceList);
@@ -340,6 +345,12 @@
             state.language = lang.value;
             var appLang = document.getElementById("languageSelect");
             if (appLang) appLang.value = lang.value;
+            renderSummaries();
+        });
+        // 数学：知识分类下拉（与题目类型按钮同时生效）
+        var topicSel = document.getElementById("month-history-topic-select");
+        if (topicSel) topicSel.addEventListener("change", function () {
+            state.topic = topicSel.value;
             renderSummaries();
         });
         var appLanguage = document.getElementById("languageSelect");
@@ -391,8 +402,24 @@
         if (state.month) select.value = state.month;
     }
 
-    function renderLanguageOptions() {
-        var select = document.getElementById("month-history-language-select");
+    function renderTopicOptions() {
+        var sel = document.getElementById("month-history-topic-select");
+        if (!sel) return;
+        var seen = {};
+        ((state.monthIndex && state.monthIndex.windows) || []).forEach(function (item) {
+            var value = String(item.topic || "").trim();
+            if (value) seen[value] = true;
+        });
+        var current = state.topic;
+        sel.innerHTML = '<option value="all">全部</option>' +
+            Object.keys(seen).sort().map(function (value) {
+                return '<option value="' + escapeHtml(value) + '">' + escapeHtml(value) + "</option>";
+            }).join("");
+        sel.value = seen[current] ? current : "all";
+        state.topic = sel.value;
+    }
+
+    function renderLanguageOptions() {        var select = document.getElementById("month-history-language-select");
         if (!select) return;
         var seen = {};
         (state.monthIndex && state.monthIndex.windows || []).forEach(function (item) {
@@ -417,6 +444,12 @@
         if (MODE_TABS[subject] && state.category !== "all") {
             windows = windows.filter(function (item) {
                 return String(item.mode || "") === state.category;
+            });
+        }
+        // 数学：知识分类与题目类型两个条件必须同时满足
+        if (subject === "math" && state.topic && state.topic !== "all") {
+            windows = windows.filter(function (item) {
+                return String(item.topic || "") === state.topic;
             });
         }
         var activeLanguage = languageFilter || state.language;
@@ -556,7 +589,7 @@
             return Promise.resolve({ windows: { [item.id]: state.remoteWindows[item.id] } });
         }
         if (state.chunks[item.chunk]) return Promise.resolve(state.chunks[item.chunk]);
-        return fetchJson(base("../历史/" + subject + "/" + state.month + "/" + item.chunk))
+        return fetchJson(base(subject + "/" + state.month + "/" + item.chunk))
             .then(function (data) {
                 state.chunks[item.chunk] = data;
                 return data;
@@ -604,10 +637,11 @@
         state.chunks = {};
         list.innerHTML = '<p class="month-history-loading">正在读取 ' + escapeHtml(month) + " 索引...</p>";
         list.style.display = "";
-        fetchJson(base("../历史/" + subject + "/" + month + "/index.json"))
+        fetchJson(base(subject + "/" + month + "/index.json"))
             .then(function (data) {
                 state.monthIndex = data;
                 renderLanguageOptions();
+                renderTopicOptions();
                 renderSummaries();
             })
             .catch(function (error) {
@@ -656,7 +690,7 @@
         state.remoteSummaries = [];
         list.innerHTML = '<p class="month-history-loading">正在读取月份索引...</p>';
         list.style.display = "";
-        fetchJson(base("../历史/" + subject + "/index.json")).then(function (data) {
+        fetchJson(base(subject + "/index.json")).then(function (data) {
             state.months = (data.months || []).slice().sort(function (a, b) {
                 return String(b.month).localeCompare(String(a.month));
             });
@@ -689,7 +723,7 @@
                 });
                 return;
             }
-            fetchJson(base("../历史/" + subject + "/index.json")).then(function (data) {
+            fetchJson(base(subject + "/index.json")).then(function (data) {
                 state.months = (data.months || []).slice().sort(function (a, b) {
                     return String(b.month).localeCompare(String(a.month));
                 });

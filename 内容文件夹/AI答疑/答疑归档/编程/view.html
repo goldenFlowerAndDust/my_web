@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>阅读 · 编程答疑归档</title>
+<link rel="stylesheet" href="../../../专升本备考/DSH-woker/共享配置/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../../../专升本备考/DSH-woker/共享配置/css/notes.css">
+<style>
+/* 正文：对话标题高亮，问/答标题弱化 */
+.doc h2.topic-head{border-left:4px solid var(--primary,#425fe8);padding-left:.6em;background:linear-gradient(90deg,rgba(66,95,232,.10),transparent);border-radius:0 8px 8px 0}
+.doc h3.round-head{font-size:.98rem;color:var(--muted,#5b6b82);margin:20px 0 6px;letter-spacing:.02em}
+/* 侧边栏两级：对话 = 粗体，问N/答N = 缩进并带竖线 */
+.toc a:not(.lv3){font-weight:700}
+.toc a.lv3{padding-left:26px;position:relative;font-size:12.8px;opacity:.9}
+.toc a.lv3::before{content:"";position:absolute;left:12px;top:2px;bottom:2px;width:1px;background:currentColor;opacity:.22}
+.toc a.lv3.is-active{opacity:1}
+</style>
+</head>
+<body class="reader-page">
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<header class="topbar">
+  <a class="topbar-back" href="index.html">← 目录</a>
+  <span class="topbar-title" id="bar-title">编程答疑归档</span>
+  <div class="topbar-actions">
+    <button class="icon-btn" id="toc-toggle" type="button" aria-label="展开目录">目录</button>
+    <button class="icon-btn" id="font" type="button" aria-label="切换字号">AM</button>
+    <button class="icon-btn" id="print" type="button" aria-label="打印">打印</button>
+    <button class="icon-btn" id="theme" type="button" aria-label="切换深色模式">☾</button>
+  </div>
+</header>
+
+<main class="reader-shell">
+  <aside class="toc" id="toc-panel">
+    <p class="toc-title">当天分类</p>
+    <nav id="toc" aria-label="页内导航"></nav>
+  </aside>
+
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag" id="doc-cat">归档</span>
+      <h1 id="doc-title">加载中…</h1>
+      <div class="doc-meta" id="doc-meta"></div>
+    </header>
+    <article class="doc" id="doc"></article>
+    <nav class="pager" id="pager" aria-label="上一天/下一天"></nav>
+  </div>
+</main>
+
+<button class="back-top" type="button" aria-label="返回顶部">↑</button>
+<footer class="page-footer">
+  <span>每日答疑归档 · 编程</span>
+  <span>← → 翻页 · Esc 返回目录</span>
+</footer>
+
+<script src="./data.js"></script>
+<script src="../../../专升本备考/DSH-woker/共享配置/vendor/katex/katex.min.js"></script>
+<script src="../../../专升本备考/DSH-woker/共享配置/vendor/katex/auto-render.min.js"></script>
+<script src="../../../专升本备考/DSH-woker/共享配置/js/reader.js"></script>
+</body>
+</html>

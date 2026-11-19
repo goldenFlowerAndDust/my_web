@@ -26,9 +26,10 @@ from urllib.parse import parse_qs, unquote, urlparse
 TOOL_DIR = Path(__file__).resolve().parent
 CONTENT_ROOT = Path(__file__).resolve().parents[4]
 AI_ROOT = CONTENT_ROOT / "AI答疑"
-CONVERSATION_DIR = AI_ROOT / "共享配置"
+CONVERSATION_DIR = AI_ROOT / "共享配置" / "历史归档"
 sys.path.insert(0, str(TOOL_DIR))
 sys.path.insert(0, str(CONVERSATION_DIR))
+sys.path.insert(0, str(AI_ROOT / "共享配置" / "网络"))
 BASE = CONTENT_ROOT / "专升本备考" / "备考专升本英语"
 
 from word_archiver import ArchiveError, analyze_only, apply_review_updates, archive_word, archive_word_pair, audit_word_json, check_word, health, repair_missing_standalone  # noqa: E402

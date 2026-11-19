@@ -147,4 +147,34 @@
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeDrawer();
   });
+
+  // ---- 可选功能：只在页面存在对应元素时生效 ----
+  // 打印按钮
+  const printButton = document.getElementById("print-button");
+  if (printButton) {
+    printButton.addEventListener("click", () => window.print());
+  }
+
+  // 目录当前章节高亮（IntersectionObserver）
+  const tocTargets = document.querySelectorAll(".toc a[data-target]");
+  if (tocTargets.length && "IntersectionObserver" in window) {
+    const headings = document.querySelectorAll(".content h2[id], .content h3[id]");
+    if (headings.length) {
+      const linkMap = new Map();
+      tocTargets.forEach((link) => linkMap.set(link.dataset.target, link));
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (!visible.length) return;
+          tocTargets.forEach((link) => link.classList.remove("active"));
+          const active = linkMap.get(visible[0].target.id);
+          if (active) active.classList.add("active");
+        },
+        { rootMargin: "-12% 0px -78% 0px", threshold: [0, 1] },
+      );
+      headings.forEach((heading) => observer.observe(heading));
+    }
+  }
 })();

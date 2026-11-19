@@ -1,0 +1,1 @@
+window.DSH_INDEX = {"subject": "编程", "subjectName": "编程答疑归档", "description": "按 年/月/日 汇总当天全部答疑。", "generatedAt": "2026-11-19 15:18", "docs": [{"slug": "2026/11/06", "title": "2026-11-06 · 编程答疑归档", "category": "2026 年 11 月", "summary": "【node / python / 未分类】解释一下：print()方法", "chars": 9188, "updated": "2026-11-06", "file": "content/2026-11-06.js"}]};

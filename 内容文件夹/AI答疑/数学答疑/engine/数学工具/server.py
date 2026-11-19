@@ -19,9 +19,10 @@ from urllib.parse import unquote, urlparse
 TOOL_DIR = Path(__file__).resolve().parent
 CONTENT_ROOT = Path(__file__).resolve().parents[4]
 AI_ROOT = CONTENT_ROOT / "AI答疑"
-CONVERSATION_DIR = AI_ROOT / "共享配置"
+CONVERSATION_DIR = AI_ROOT / "共享配置" / "历史归档"
 sys.path.insert(0, str(TOOL_DIR))
 sys.path.insert(0, str(CONVERSATION_DIR))
+sys.path.insert(0, str(AI_ROOT / "共享配置" / "网络"))
 BASE = CONTENT_ROOT / "专升本备考" / "备考专升本数学"
 
 from math_tutor import (  # noqa: E402

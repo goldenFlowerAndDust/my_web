@@ -157,7 +157,7 @@ def read_api_key() -> str:
         return env_key
 
     candidates = [
-        Path(__file__).resolve().parent.parent.parent.parent / "共享配置" / "API.txt",
+        Path(__file__).resolve().parent.parent.parent.parent / "共享配置" / "数据" / "API.txt",
         TOOL_DIR / "API.txt",
         BASE.parent / "备考专升本英语" / "词素工具" / "API.txt",
         Path.home() / ".word_archiver_api_key",
@@ -170,7 +170,7 @@ def read_api_key() -> str:
         if key:
             return key
     raise TutorError(
-        "缺少 DeepSeek API Key。请把 Key 写入 专升本备考/共享配置/API.txt，"
+        "缺少 DeepSeek API Key。请把 Key 写入 专升本备考/共享配置/数据/API.txt，"
         "或设置环境变量 DEEPSEEK_API_KEY。"
     )
 

@@ -10,9 +10,9 @@ import sys
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
-SYNC = BASE / "共享配置" / "sync_all_subjects.py"
-SUPERVISOR = BASE / "共享配置" / "service_supervisor.py"
-CONFIG_DIR = BASE / "共享配置"
+SYNC = BASE / "共享配置" / "同步" / "sync_all_subjects.py"
+SUPERVISOR = BASE / "共享配置" / "运行" / "service_supervisor.py"
+CONFIG_DIR = BASE / "共享配置" / "数据"
 API_FILE = CONFIG_DIR / "API.txt"
 CLOUD_FILE = CONFIG_DIR / "云端同步.json"
 

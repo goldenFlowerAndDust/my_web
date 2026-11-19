@@ -10,7 +10,7 @@
 
 API Key 读取顺序：
 - 环境变量 DEEPSEEK_API_KEY
-- 专升本备考/共享配置/API.txt（推荐，英语/数学共用）
+- 专升本备考/共享配置/数据/API.txt（推荐，英语/数学共用）
 - 词素工具/API.txt（旧位置，兼容）
 - 用户目录 .word_archiver_api_key（备用）
 - 兼容旧位置：词素工具/api_key.txt
@@ -50,7 +50,7 @@ BACKUP_DIR = TOOL_DIR / "backups"
 REVIEW_BACKUP_DIR = TOOL_DIR / "review_backups"
 REVIEW_ARCHIVE_DIR = BASE / "复习清单" / "归档"
 API_TXT = TOOL_DIR / "API.txt"
-SHARED_KEY_FILE = Path(__file__).resolve().parent.parent.parent.parent / "共享配置" / "API.txt"
+SHARED_KEY_FILE = Path(__file__).resolve().parent.parent.parent.parent / "共享配置" / "数据" / "API.txt"
 HOME_KEY_FILE = Path.home() / ".word_archiver_api_key"
 API_KEY_FILE = TOOL_DIR / "api_key.txt"  # 兼容旧位置
 
@@ -177,7 +177,7 @@ def read_api_key() -> str:
             if key:
                 return key
     raise ArchiveError(
-        "未配置 API Key：请写入 专升本备考/共享配置/API.txt，"
+        "未配置 API Key：请写入 专升本备考/共享配置/数据/API.txt，"
         "或设置 DEEPSEEK_API_KEY。"
     )
 

@@ -72,13 +72,13 @@ async function load() {
         // 发 GET 请求（同源，所以用相对路径就行）
         // 第一次 await：等响应头回来
         const res = await fetch(url)
-
+        console.log(res)
         // 状态码不是 2xx 时抛错，进入 catch
         if (!res.ok) throw new Error('服务返回 ' + res.status)
 
         // 第二次 await：读取响应体并解析成 JS 数组
         const rows = await res.json()
-
+        console.log(rows)
         renderRows(rows)                              // 渲染表格
         showMessage('共 ' + rows.length + ' 条')        // 显示条数
     } catch (err) {

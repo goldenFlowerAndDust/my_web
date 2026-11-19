@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生管理系统</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+    <h1>学生管理系统</h1>
+
+    <!-- ========== 表单：新增 / 编辑共用 ========== -->
+    <section class="card">
+        <h2 id="formTitle">新增学生</h2>
+        <form id="form" class="grid">
+            <label>学号 <input id="sno" required maxlength="20" placeholder="如 2026010"></label>
+            <label>姓名 <input id="name" required maxlength="50" placeholder="如 张三"></label>
+            <label>性别
+                <select id="gender">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </label>
+            <label>年龄 <input id="age" type="number" min="1" max="150" placeholder="如 19"></label>
+            <label>班级 <input id="class_name" maxlength="50" placeholder="如 计算机1班"></label>
+
+            <div class="actions">
+                <button type="submit" id="submitBtn">添加</button>
+                <button type="button" id="cancelBtn" class="ghost" hidden>取消编辑</button>
+            </div>
+        </form>
+        <p id="formMsg" class="msg"></p>
+    </section>
+
+    <!-- ========== 搜索 + 列表 ========== -->
+    <section class="card">
+        <div class="toolbar">
+            <input id="kw" placeholder="输入学号 / 姓名 / 班级搜索">
+            <button id="searchBtn">搜索</button>
+            <button id="resetBtn" class="ghost">重置</button>
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>学号</th><th>姓名</th><th>性别</th><th>年龄</th><th>班级</th><th class="col-op">操作</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            <tr><td colspan="6" class="empty">加载中…</td></tr>
+            </tbody>
+        </table>
+
+        <div class="pager">
+            <button id="prevBtn" class="ghost">上一页</button>
+            <span id="pageInfo">1 / 1</span>
+            <button id="nextBtn" class="ghost">下一页</button>
+            <span class="spacer"></span>
+            <span id="totalInfo" class="muted"></span>
+        </div>
+    </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

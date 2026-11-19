@@ -1,1 +1,1 @@
-window.DSH_INDEX = {"subject":"政治","subjectName":"政治","description":"专升本政治笔记。把 .md 放进 政治/ 下的分类目录，重新构建即可出现。","generatedAt":"2026-11-17 21:43","docs":[]};
+window.DSH_INDEX = {"subject":"政治","subjectName":"政治","description":"专升本政治笔记。把 .md 放进 政治/ 下的分类目录，重新构建即可出现。","generatedAt":"2026-11-18 08:56","docs":[]};
