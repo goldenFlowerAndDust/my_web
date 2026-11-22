@@ -39,6 +39,55 @@ from 生成历史索引 import build_all as build_history_index
 from typing import Any
 
 
+def archive_word_snapshot(base: Path) -> dict:
+    """把当前的 复习清单/data.json 按 年/月/日 存一份快照，历史不删除。
+
+    同一天重复同步只更新当天那份（记录当天最终进度），往日快照永不改动。
+    """
+    folder = Path(base).parent / "专升本备考" / "备考专升本英语" / "复习清单"
+    src = folder / "data.json"
+    if not src.exists():
+        return {"ok": False, "message": "找不到复习清单/data.json"}
+    stamp = datetime.now().strftime("%Y-%m-%d")
+    year, month, day = stamp.split("-")
+    target_dir = folder / "快照" / year / month
+    try:
+        target_dir.mkdir(parents=True, exist_ok=True)
+        target = target_dir / (day + ".json")
+        payload = src.read_text(encoding="utf-8")
+        if target.exists() and target.read_text(encoding="utf-8") == payload:
+            return {"ok": True, "message": "%s/%s/%s.json 未变化" % (year, month, day)}
+        target.write_text(payload, encoding="utf-8")
+    except OSError as exc:
+        return {"ok": False, "message": str(exc)}
+    return {"ok": True, "message": "%s/%s/%s.json 已更新" % (year, month, day)}
+
+
+def rebuild_word_embed(base: Path) -> dict:
+    """把 复习清单/data.json 重新嵌成 data-embed.js。
+
+    file:// 打开复习页时 fetch 会被浏览器拦，页面回退到这份内嵌快照；
+    不同步重建的话，本地看到的永远是旧进度。
+    """
+    folder = Path(base).parent / "专升本备考" / "备考专升本英语" / "复习清单"
+    src = folder / "data.json"
+    dst = folder / "data-embed.js"
+    if not src.exists():
+        return {"ok": False, "message": "找不到复习清单/data.json"}
+    try:
+        data = json.loads(src.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        return {"ok": False, "message": str(exc)}
+    payload = "window.__WORD_DATA__ = " + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";\n"
+    try:
+        if dst.exists() and dst.read_text(encoding="utf-8") == payload:
+            return {"ok": True, "message": "未变化"}
+        dst.write_text(payload, encoding="utf-8")
+    except OSError as exc:
+        return {"ok": False, "message": str(exc)}
+    return {"ok": True, "message": "已更新"}
+
+
 def build_dsh_notes(base: Path) -> dict:
     """把 DSH-woker 里新增/修改的 .md 编译成网页（需要本机 Node.js）。
 
@@ -1276,6 +1325,16 @@ class SyncRunner:
             if review.get("status") not in ("ok", "unchanged"):
                 self.status["errors"].append("云端复习同步失败：" + str(review.get("message") or review.get("status")))
             print("云端复习：%s" % (review["message"] or review["status"]))
+
+        # 复习数据可能刚被云端更新，重建 file:// 用的内嵌快照
+        embed = rebuild_word_embed(self.base)
+        self.status["word_embed"] = embed
+        print("单词数据快照（内嵌）：%s" % embed.get("message"))
+
+        # 按 年/月/日 归档一份，历史保留不覆盖
+        snapshot = archive_word_snapshot(self.base)
+        self.status["word_snapshot"] = snapshot
+        print("单词数据快照（归档）：%s" % snapshot.get("message"))
 
         self.status["finished_at"] = now_text()
         write_json(self.status_file, self.status)

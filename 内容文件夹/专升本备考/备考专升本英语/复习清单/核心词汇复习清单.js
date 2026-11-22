@@ -1073,6 +1073,44 @@
         loadData();
     });
 
+    /* 页面关闭/切走时自动上传未保存的复习记录，避免忘记点“统一保存” */
+    var closeFlushDone = false;
+    function flushPendingOnClose() {
+        if (closeFlushDone) return;
+        var updates;
+        try {
+            updates = currentUpdates();
+        } catch (e) {
+            return;
+        }
+        if (!updates.length) return;
+        var endpoint;
+        var headers = { 'Content-Type': 'application/json; charset=utf-8' };
+        if (isRemotePage) {
+            var cloud = readCloudConfig();
+            if (!cloud || !cloud.url) return;
+            endpoint = cloud.url + '/api/review-queue';
+            headers['X-Tutor-Token'] = cloud.token;
+        } else {
+            endpoint = LOCAL_API_BASE + '/api/review';
+        }
+        closeFlushDone = true;
+        try {
+            /* keepalive：页面关闭后请求仍会继续完成 */
+            fetch(endpoint, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ updates: updates }),
+                keepalive: true
+            }).catch(function () { /* 失败也无妨，记录仍在浏览器里 */ });
+        } catch (e) { /* 尽力而为 */ }
+    }
+
+    window.addEventListener('pagehide', flushPendingOnClose);
+    document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'hidden') flushPendingOnClose();
+    });
+
     checkSyncHealth();
     loadData();
 })();

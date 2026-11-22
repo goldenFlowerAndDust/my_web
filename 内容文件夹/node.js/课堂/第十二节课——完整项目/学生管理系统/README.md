@@ -3,6 +3,12 @@
 > 一条完整的双向链路：**页面 → fetch → Express → MySQL → JSON → 页面**。
 > 覆盖 **查（搜索+分页）、增、改、删** 四个接口，前后端都带输入校验和错误提示。
 
+> 📂 **目录约定**
+>
+> - **根目录**：只放文档（`README.md`、`工程文档.md`）和模板（`.env.example`）——这里是**你自己动手写的位置**
+> - **`示例\`**：一份完整可运行的参考实现（server.js / db.js / public / init.sql / 启动.cmd / node_modules）
+> - **怎么用**：先看文档自己写，卡住了再翻 `示例\` 对照；别直接抄根目录没有的东西
+
 ---
 
 ## 0. 这个项目能学到什么
@@ -39,39 +45,48 @@ net start MySQL80
 
 **方式 A：Navicat（推荐）**
 
-1. 用 root 连接打开 `sql/init.sql`；
+1. 用 root 连接打开 `示例/init.sql`；
 2. 全选 → `Ctrl + Enter` 运行；
 3. 最后应输出 `学生总数 = 8`。
 
-**方式 B：命令行**
+**方式 B：命令行**（在项目根目录执行）
 
 ```bash
 cd D:\GitHub\my_web\内容文件夹\node.js\课堂\第十二节课——完整项目\学生管理系统
-"E:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p < sql\init.sql
+"E:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p < 示例\init.sql
 ```
 
 > ⚠️ 脚本开头是 `DROP DATABASE IF EXISTS student_app`，**每次执行都会清空重建**。熟悉之后建议去掉这行。
+> 你自己写的时候，把建表语句写进自己的 `init.sql`，别直接用示例的。
 
 ---
 
-## 3. 安装依赖
+## 3. 安装依赖（只装一次）
+
+依赖装在**根目录**，根目录和 `示例\` 共用同一份，不用装两次。
 
 ```bash
 cd D:\GitHub\my_web\内容文件夹\node.js\课堂\第十二节课——完整项目\学生管理系统
 npm install express mysql2
 ```
 
+目前的根目录已经有 `node_modules`（express 5.3.0 + mysql2 3.24.6），**这一步已经做过了**。
+
+> 为什么共用？Node 找包是**逐级向上**找 `node_modules` 的：
+> `示例\server.js` 会先看 `示例\node_modules`（没有）→ 再看上级 `学生管理系统\node_modules`（找到）。
+> 反过来不行：根目录的代码**找不到**子目录里的包。所以包要放在**上面**。
+
 ---
 
 ## 4. 配置数据库密码
 
-1. 复制 `.env.example` 为 `.env`：
+根目录的 `.env.example` 是**给你自己项目用的模板**：
 
 ```bash
 copy .env.example .env
 ```
 
-2. 打开 `.env`，把 `DB_PASSWORD` 改成你自己的 MySQL 密码：
+然后打开 `.env` 填上你的密码：
 
 ```ini
 PORT=3100
@@ -82,15 +97,21 @@ DB_PASSWORD=你的密码
 DB_NAME=student_app
 ```
 
-> `.env` 已经写进 `.gitignore`，不会被提交。**代码里永远不要写密码。**
+> `示例\.env` 我已经配好了，可以直接跑示例看效果。
+> `.env` 已在 `.gitignore` 里，不会被提交。**代码里永远不要写密码。**
 
 ---
 
 ## 5. 启动
 
+**跑示例（看效果）：**
+
 ```bash
+cd D:\GitHub\my_web\内容文件夹\node.js\课堂\第十二节课——完整项目\学生管理系统\示例
 node --env-file=.env server.js
 ```
+
+或者直接**双击 `示例\启动.cmd`**。
 
 看到这一行就成功：
 
@@ -98,8 +119,8 @@ node --env-file=.env server.js
 学生管理系统已启动：http://localhost:3100
 ```
 
-> 端口用 **3100**，是为了避开你之前那个占着 3000 的旧服务。
-> 如果 3100 也被占，改 `.env` 里的 `PORT`。
+> 端口用 **3100**，避开你之前那个占着 3000 的旧服务。被占就改 `.env` 里的 `PORT`。
+> 等你自己写完，就在**根目录**用同样的命令启动你自己的 `server.js`。
 
 ---
 
@@ -157,16 +178,20 @@ Invoke-RestMethod -Method Delete -Uri http://localhost:3100/api/students/9
 ## 8. 文件地图
 
 ```
-学生管理系统/
-├─ server.js          后端入口：4 个接口 + 404 + 错误处理
-├─ db.js              连接池（唯一连数据库的地方）
-├─ .env.example       配置模板（复制成 .env 用）
-├─ .gitignore         忽略 node_modules 和 .env
-├─ sql/init.sql       建库建表 + 8 条示例数据
-└─ public/
-   ├─ index.html      页面结构：表单 + 搜索 + 表格 + 分页
-   ├─ style.css       样式
-   └─ app.js          前端逻辑：请求 / 渲染 / 增删改
+学生管理系统/                 ← 你自己在这里写
+├─ README.md                 操作步骤（本文档）
+├─ 工程文档.md                架构 / 接口 / 知识清单 / 验收题
+├─ .env.example              配置模板（copy 成 .env）
+├─ .gitignore                忽略 node_modules / .env
+├─ package.json              ★ 唯一的依赖清单（express + mysql2）
+├─ node_modules/             ★ 唯一的依赖目录（根和示例共用）
+└─ 示例/                      参考实现（可运行，别直接抄）
+   ├─ server.js              4 个接口 + 404 + 错误处理
+   ├─ db.js                  连接池
+   ├─ public/                index.html / style.css / app.js
+   ├─ init.sql               建库建表 + 8 条数据
+   ├─ 启动.cmd               一键启动
+   └─ .env / .env.example   示例自己的配置
 ```
 
 ### 请求怎么走
@@ -189,8 +214,9 @@ Invoke-RestMethod -Method Delete -Uri http://localhost:3100/api/students/9
 | 现象 | 原因 | 处理 |
 |---|---|---|
 | `ECONNREFUSED` | MySQL 没启动 | `net start MySQL80` |
-| `ER_ACCESS_DENIED_ERROR` | `.env` 里密码错 | 改 `.env` |
-| `ER_BAD_DB_ERROR` | 没建库 / 库名不对 | 跑 `sql/init.sql` |
+| `ER_ACCESS_DENIED_ERROR`（`using password: YES`） | `.env` 里密码错 | 改 `.env` |
+| `ER_ACCESS_DENIED_ERROR`（`using password: NO`） | **启动时没带 `--env-file=.env`**，或 `.env` 根本不存在 | 用 `示例\启动.cmd`，或 `node --env-file=.env server.js` |
+| `ER_BAD_DB_ERROR` | 没建库 / 库名不对 | 跑 `示例/init.sql` |
 | `EADDRINUSE` | 端口被占 | 改 `.env` 的 `PORT` |
 | 启动服务时报 `System error 5` | 不是管理员 | 用“以管理员身份”打开终端再 `net start MySQL80` |
 | 服务显示 Stopped 但启动类型是 Automatic | 进程崩溃了（不会自动拉起） | 手动 `net start MySQL80`；原因见文末 |
