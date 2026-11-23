@@ -6,6 +6,9 @@ setlocal
 cd /d "%~dp0"
 title Sync Launcher
 
+rem 科目：英语、数学、编程、政治、信息技术
+rem 科目是否启用由 共享配置\数据\科目配置.json 控制
+
 set "BUNDLED=%USERPROFILE%\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
 
 if exist "%BUNDLED%" goto bundled

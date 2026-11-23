@@ -186,7 +186,7 @@ DEFAULT_SUBJECTS = [
     {
         "id": "politics",
         "label": "政治",
-        "enabled": False,
+        "enabled": True,
         "worker_subject": "politics",
         "export_root": "..\\备考专升本政治\\导出记录",
         "filename_prefix": "政治答疑记录",
@@ -196,7 +196,7 @@ DEFAULT_SUBJECTS = [
     {
         "id": "it",
         "label": "信息技术",
-        "enabled": False,
+        "enabled": True,
         "worker_subject": "it",
         "export_root": "..\\备考专升本信息技术\\导出记录",
         "filename_prefix": "信息技术答疑记录",
@@ -779,6 +779,8 @@ class SyncRunner:
             script = self.base / "英语答疑" / "engine" / "词素工具" / "import_tutor_logs.py"
         elif adapter == "math":
             script = self.base / "数学答疑" / "engine" / "数学工具" / "import_math_tutor_logs.py"
+        elif adapter in ("politics", "it"):
+            return self.import_local_history(subject, json_file)
         else:
             return {
                 "status": "adapter_missing",
@@ -788,6 +790,74 @@ class SyncRunner:
                 ),
             }
         return self.run_import(script, json_file)
+
+    def import_local_history(self, subject: dict[str, Any], json_file: Path) -> dict[str, Any]:
+        """政治 / 信息技术：把云端的问答写进本机答疑页自己的 history 日志。
+
+        这两个页面不靠旧的英语/数学导入器；直接写 server.py 同格式的 jsonl，
+        之后归档每日答疑.py 就能像其它科目一样按天生成。
+        """
+        try:
+            payload = json.loads(json_file.read_text(encoding="utf-8"))
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            return {"status": "import_error", "exit_code": None, "message": str(exc)}
+
+        entries = payload.get("entries")
+        if not isinstance(entries, list):
+            entries = []
+        folder_name = "政治答疑" if subject["id"] == "politics" else "信息技术答疑"
+        root = self.base / folder_name / "history" / subject["worker_subject"]
+        root.mkdir(parents=True, exist_ok=True)
+
+        existing: set[str] = set()
+        for path in root.glob("*.jsonl"):
+            try:
+                lines = path.read_text(encoding="utf-8-sig").splitlines()
+            except OSError:
+                continue
+            for line in lines:
+                try:
+                    item = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if isinstance(item, dict):
+                    existing.add("%s|%s" % (item.get("time") or "", item.get("question") or ""))
+
+        added = 0
+        for item in entries:
+            if not isinstance(item, dict):
+                continue
+            question = str(item.get("question") or "").strip()
+            if not question:
+                continue
+            time_text = str(item.get("time") or item.get("created_at") or "").strip()
+            day = str(item.get("date") or time_text[:10] or today_text())
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", day):
+                day = today_text()
+            key = "%s|%s" % (time_text, question)
+            if key in existing:
+                continue
+            record = {
+                "time": time_text,
+                "date": day,
+                "language": subject["worker_subject"],
+                "language_name": subject["label"],
+                "question": question,
+                "answer": str(item.get("answer") or "").strip(),
+                "mode": str(item.get("mode") or "其他").strip() or "其他",
+                "source": "cloud-sync",
+            }
+            target = root / (day + ".jsonl")
+            with target.open("a", encoding="utf-8", newline="\n") as fh:
+                fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+            existing.add(key)
+            added += 1
+        return {
+            "status": "ok",
+            "exit_code": 0,
+            "output": "完成：新增 %d 条" % added,
+            "message": "新增 %d 条到本地历史。" % added,
+        }
 
     def import_pending_words(self, subject: dict[str, Any], json_file: Path) -> dict[str, Any]:
         script = self.base / "英语答疑" / "engine" / "词素工具" / "import_pending_words.py"
@@ -1355,7 +1425,7 @@ class SyncRunner:
             print(self.describe_result(programming, "编程 AI"))
 
         # 归档与笔记编译的结果，方便在 bat 窗口里一眼看到
-        label_map = {"english": "英语", "math": "数学", "code": "编程"}
+        label_map = {"english": "英语", "math": "数学", "code": "编程", "politics": "政治", "it": "信息技术"}
         archive = self.status.get("daily_archive") or {}
         archive_results = archive.get("results") or []
         if archive_results:

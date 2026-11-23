@@ -24,7 +24,10 @@
         document.body.getAttribute("data-history-subject") || "";
     if (!subject) {
         var path = decodeURIComponent(location.pathname);
-        subject = /数学答疑/.test(path) ? "math" : (/编程语言AI/.test(path) ? "code" : "english");
+        subject = /数学答疑/.test(path) ? "math"
+            : (/编程语言AI/.test(path) ? "code"
+            : (/信息技术答疑/.test(path) ? "it"
+            : (/政治答疑/.test(path) ? "politics" : "english")));
     }
     var languageFilter = (script && script.dataset.language) || "";
     var historyRoot = script && script.src
@@ -47,7 +50,9 @@
     }
     var MODE_TABS = {
         english: [["all", "全部"], ["单词解释", "单词解释"], ["句子分析", "句子分析"], ["作文", "作文"], ["其他", "其他"]],
-        math: [["all", "全部"], ["题目讲解", "题目讲解"], ["错题诊断", "错题分析"], ["概念公式", "概念公式"], ["其他", "其他"]]
+        math: [["all", "全部"], ["题目讲解", "题目讲解"], ["错题诊断", "错题分析"], ["概念公式", "概念公式"], ["其他", "其他"]],
+        politics: [["all", "全部"], ["概念辨析", "概念辨析"], ["材料分析", "材料分析"], ["时政热点", "时政热点"], ["其他", "其他"]],
+        it: [["all", "全部"], ["基础概念", "基础概念"], ["操作题", "操作题"], ["编程题", "编程题"], ["其他", "其他"]]
     };
     var state = {
         months: [],
@@ -653,7 +658,10 @@
         if (cloudMode() && window.ConversationStore && window.ConversationStore.remoteAction) {
             return window.ConversationStore.remoteAction(payload);
         }
-        var port = subject === "math" ? 8768 : (subject === "code" ? 8769 : 8767);
+        var port = subject === "math" ? 8768
+            : (subject === "code" ? 8769
+            : (subject === "politics" ? 8770
+            : (subject === "it" ? 8771 : 8767)));
         var url = location.protocol + "//" + (location.hostname || "127.0.0.1") + ":" + port + "/api/conversations";
         return fetch(url, {
             method: "POST",

@@ -7,7 +7,7 @@
     var INIT_PREFIX = "aiTutor.conversations.initialized.v2.";
     var LEGACY_PREFIX = "aiTutor.conversations.legacy.";
     var DELETED_PREFIX = "aiTutor.conversations.deleted.";
-    var SUBJECTS = ["english", "math", "code"];
+    var SUBJECTS = ["english", "math", "code", "politics", "it"];
     var MEMORY = {};
     var MAX = 200;
 

@@ -24,7 +24,7 @@
     {
       "id": "politics",
       "label": "政治",
-      "enabled": false,
+      "enabled": true,
       "worker_subject": "politics",
       "export_root": "..\\导出记录\\政治",
       "filename_prefix": "政治答疑记录",
@@ -34,7 +34,7 @@
     {
       "id": "it",
       "label": "信息技术",
-      "enabled": false,
+      "enabled": true,
       "worker_subject": "it",
       "export_root": "..\\导出记录\\信息技术",
       "filename_prefix": "信息技术答疑记录",

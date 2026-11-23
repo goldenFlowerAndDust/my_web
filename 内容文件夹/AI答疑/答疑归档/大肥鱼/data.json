@@ -3,14 +3,14 @@
  "subjectName": "大肥鱼 · API答疑归档",
  "description": "按 年/月/日 汇总大肥鱼通过 API 回答的问题；公式本地渲染。",
  "source": "fish-api",
- "generatedAt": "2026-11-23 21:56",
+ "generatedAt": "2026-11-23 22:27",
  "docs": [
   {
    "slug": "2026/11/23",
    "title": "2026-11-23 · 大肥鱼答疑归档",
    "category": "2026 年 11 月",
-   "summary": "【鱼API】求极限 lim(x→0) (1+2x)^(1/x+3)",
-   "chars": 1011,
+   "summary": "【鱼API】CPU是什么？",
+   "chars": 2507,
    "updated": "2026-11-23",
    "file": "content/2026/11/2026-11-23.js",
    "append": ""
