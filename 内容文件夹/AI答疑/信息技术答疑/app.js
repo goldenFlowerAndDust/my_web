@@ -2,8 +2,7 @@
   "use strict";
 
   const LOCAL_API = "http://127.0.0.1:8771";
-  const IS_LOCAL_PAGE = location.protocol === "file:" ||
-    ((location.hostname === "127.0.0.1" || location.hostname === "localhost") && (location.port === "8771" || location.port === "8769"));
+  const IS_LOCAL_PAGE = location.protocol === "file:" || location.hostname === "127.0.0.1" || location.hostname === "localhost";
   const CONNECTION_KEY = "itTutor.connection-v2";
   const REMEMBER_KEY = "itTutor.rememberSettings";
   const LEGACY_ROUTE_KEY = "itTutor.route";
