@@ -627,6 +627,7 @@ async function handleTutor(request, env, preview = false) {
   return json({
     ok: true,
     subject,
+    language_name: config.label,
     mode,
     topic,
     time,

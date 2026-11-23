@@ -1069,12 +1069,14 @@
     renderSessionTabs();
     saveSessions();
     try {
-      const path = apiPath("/api/ask", "/api/code");
+      const path = apiPath("/api/ask", "/api/tutor");
       const data = await fetchJson(path, {
         method: "POST",
         headers: { "Content-Type": "application/json; charset=utf-8" },
         body: JSON.stringify({
           language: session.language,
+          subject: "it",
+          mode: "其他",
           question: question,
           conversation_id: session.id,
           history: (session.messages || []).map((message) => ({
