@@ -267,7 +267,7 @@ def build_subject(subject: str) -> dict[str, Any]:
 def build_all() -> dict[str, Any]:
     OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
     results = {}
-    for subject in ("english", "math", "code"):
+    for subject in ("english", "math", "code", "politics", "it"):
         results[subject] = build_subject(subject)
     return {"ok": True, "updated_at": now_text(), "subjects": results}
 

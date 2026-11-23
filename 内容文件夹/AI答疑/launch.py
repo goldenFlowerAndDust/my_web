@@ -18,6 +18,8 @@ SERVICES = {
     8767: (ROOT / "英语答疑" / "engine" / "词素工具", ["server.py"]),
     8768: (ROOT / "数学答疑" / "engine" / "数学工具", ["server.py", "--port", "8768"]),
     8769: (ROOT / "编程语言AI" / "engine", ["server.py"]),
+    8770: (ROOT / "政治答疑" / "engine", ["server.py"]),
+    8771: (ROOT / "信息技术答疑" / "engine", ["server.py"]),
 }
 
 PAGES = {
@@ -25,6 +27,8 @@ PAGES = {
     "english": "http://127.0.0.1:8769/AI答疑/英语答疑/英语答疑.html",
     "math": "http://127.0.0.1:8769/AI答疑/数学答疑/数学答疑.html",
     "code": "http://127.0.0.1:8769/AI答疑/编程语言AI/index.html",
+    "politics": "http://127.0.0.1:8769/AI答疑/政治答疑/index.html",
+    "it": "http://127.0.0.1:8769/AI答疑/信息技术答疑/index.html",
 }
 
 
@@ -52,7 +56,7 @@ def start(port: int) -> None:
 def main() -> int:
     key = (sys.argv[1] if len(sys.argv) > 1 else "hub").strip().lower()
     url = PAGES.get(key, PAGES["hub"])
-    for port in (8767, 8768, 8769):
+    for port in (8767, 8768, 8769, 8770, 8771):
         start(port)
     deadline = time.time() + 20
     while time.time() < deadline:

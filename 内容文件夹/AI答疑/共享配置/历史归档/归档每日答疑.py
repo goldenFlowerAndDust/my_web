@@ -70,6 +70,24 @@ SUBJECTS = {
         "home": "../../../自建本地网站/导航栏内容/专升本/数学/专升本数学.html",
         "logs": None,
     },
+    "politics": {
+        "dir": "政治",
+        "label": "政治",
+        "name": "政治答疑归档",
+        "kicker": "POLITICS · DAILY ARCHIVE",
+        "description": "按 年/月/日 汇总当天全部政治答疑。",
+        "home": "../../../自建本地网站/导航栏内容/专升本/政治/专升本政治.html",
+        "logs": AI / "政治答疑" / "history" / "politics",
+    },
+    "it": {
+        "dir": "信息技术",
+        "label": "信息技术",
+        "name": "信息技术答疑归档",
+        "kicker": "IT · DAILY ARCHIVE",
+        "description": "按 年/月/日 汇总当天全部信息技术答疑。",
+        "home": "../../../自建本地网站/导航栏内容/专升本/信息技术/专升本信息技术.html",
+        "logs": AI / "信息技术答疑" / "history" / "it",
+    },
 }
 
 

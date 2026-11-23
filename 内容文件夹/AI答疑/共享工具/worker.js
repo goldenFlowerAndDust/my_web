@@ -1,5 +1,5 @@
 /**
- * Cloudflare Worker：专升本英语 / 数学答疑代理
+ * Cloudflare Worker：专升本英语 / 数学 / 政治 / 信息技术答疑代理
  *
  * 绑定：
  *   TUTOR_KV                 KV namespace（日志）
@@ -30,6 +30,9 @@
  * /api/tutor 的 subject：
  *   缺省 / english → 英语教师
  *   math           → 数学家
+ *   politics       → 政治老师
+ *   it             → 信息技术老师
+ *   编程仍走独立的 /api/code 接口
  */
 
 const CATEGORIES = ["单词解释", "作文", "句子分析", "其他"];
@@ -289,8 +292,8 @@ const IT_ALIASES = {
   编程: "编程题",
 };
 
-const POLITICS_SYSTEM_PROMPT = `你是一位熟悉专升本政治考纲的教师。用中文讲解，先给结论，再解释概念、材料和答题思路；材料分析题要分点作答，语言准确、适合考场。只输出 Markdown 正文，不要输出系统说明或代码围栏。`;
-const IT_SYSTEM_PROMPT = `你是一位熟悉专升本信息技术/计算机基础的教师。用中文讲解，概念题给准确答案，操作题给步骤，编程题给可运行示例和关键解释。只输出 Markdown 正文，不要输出系统说明或代码围栏。`;
+const POLITICS_SYSTEM_PROMPT = `你是一位熟悉江西专升本政治考纲的教师，服务对象是准备专升本的中文母语大学生。用中文回答，先判断题型（选择题、简答题、辨析题、材料分析题），再给结论、考点和答题思路；材料分析题必须分点写清“材料 + 理论 + 结论”。涉及考试政策、分值、题型、报名时间，加一句“以当年江西省教育考试院文件为准”；不编造会议原文、文件号、具体日期和数据。只输出 Markdown 正文，不要输出系统说明或代码围栏。`;
+const IT_SYSTEM_PROMPT = `你是一位熟悉江西专升本信息技术/计算机基础的教师，服务对象是准备专升本的中文母语大学生。用中文回答：概念题给准确答案并解释，操作题按菜单路径分步骤写，编程题给可运行示例和关键解释。重点覆盖计算机基础、Windows、Word/Excel/PowerPoint、网络与信息安全；不编造软件功能和快捷键，版本差异要说明；涉及考试范围加“以当年江西省教育考试院文件为准”。只输出 Markdown 正文，不要输出系统说明或代码围栏。`;
 
 const CODE_LANGUAGES = {
   python: {
@@ -1287,6 +1290,8 @@ const CONVERSATION_SUBJECTS = {
   english: { label: "英语", max: 8 },
   math: { label: "数学", max: 8 },
   code: { label: "编程", max: 20 },
+  politics: { label: "政治", max: 12 },
+  it: { label: "信息技术", max: 12 },
 };
 
 function emptyConversationDocument(subject) {

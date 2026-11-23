@@ -20,8 +20,8 @@ from typing import Any
 
 AI_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = AI_ROOT / "历史记录" / "对话"
-MAX_ROUNDS = {"english": 8, "math": 8, "code": 20}
-SUBJECT_LABELS = {"english": "英语", "math": "数学", "code": "编程"}
+MAX_ROUNDS = {"english": 8, "math": 8, "code": 20, "politics": 12, "it": 12}
+SUBJECT_LABELS = {"english": "英语", "math": "数学", "code": "编程", "politics": "政治", "it": "信息技术"}
 
 
 class ConversationError(ValueError):
