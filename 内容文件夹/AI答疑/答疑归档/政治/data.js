@@ -1,1 +1,1 @@
-window.DSH_INDEX = {"subject": "政治", "subjectName": "政治答疑归档", "description": "按 年/月/日 汇总当天全部政治答疑。", "generatedAt": "—", "docs": []};
+window.DSH_INDEX = {"subject": "政治", "subjectName": "政治答疑归档", "description": "按 年/月/日 汇总当天全部政治答疑。", "generatedAt": "2026-11-23 22:56", "docs": [{"slug": "2026/11/23", "title": "2026-11-23 · 政治答疑归档", "category": "2026 年 11 月", "summary": "【其他】可以回答问题吗？", "chars": 240, "updated": "2026-11-23", "file": "content/2026/11/2026-11-23.js", "append": ""}]};
