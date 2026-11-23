@@ -444,7 +444,10 @@
 
   const sectionLinks = [];
   const sections = [];
-  const children = Array.from(sourceItem.children);
+  /* 允许页面用多个 <li> 分段书写：按顺序合并所有 li 的子节点，避免后面的 <li> 被忽略 */
+  const children = Array.from(rootList.querySelectorAll(":scope > li")).flatMap(
+    (item) => Array.from(item.children),
+  );
   let activeHeading = null;
   let activeNodes = [];
   let sectionIndex = 0;
