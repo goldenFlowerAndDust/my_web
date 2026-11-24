@@ -60,7 +60,7 @@
 ## 3. 连接一个 MySQL 的正确姿势
 
 ```js
-// ab.js —— 只负责“连上”，导出连接对象给别的文件用
+// ab.mjs —— 只负责“连上”，导出连接对象给别的文件用
 const mysql = require('mysql2')
 
 const conn = mysql.createConnection({
@@ -178,7 +178,7 @@ const [del] = await conn.query('DELETE FROM product WHERE id = ? LIMIT 1', [6])
 ### 6.1 回调版（最初的写法，不用 async）
 
 ```js
-const ab = require('./ab.js')
+const ab = require('./ab.mjs')
 const conn = ab.conn          // 注意：不是 conn.promise()
 
 // 查
@@ -214,7 +214,7 @@ conn.query(sql1, (err, rows) => {
 ### 6.2 async 版（后来改的）
 
 ```js
-const ab = require('./ab.js')
+const ab = require('./ab.mjs')
 const conn = ab.conn.promise()   // ★ 差别就在这一行
 
 async function main() {

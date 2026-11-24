@@ -1,0 +1,235 @@
+<!-- source: 课堂/第十节课——MySQL模块/第一次学习MySQL模块.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>第一次学习 MySQL 模块 · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂</span>
+      <h1>第一次学习 MySQL 模块</h1>
+      <div class="doc-meta">数据来源：课堂/第十节课——MySQL模块/第一次学习MySQL模块.md · 更新于 2026-11-24</div>
+    </header>
+    <article class="doc"><blockquote><p>日期：2026-11-10  环境：Windows / MySQL 8.0.46 / Node.js v24 / mysql2 3.24.6  目标：让 Node 连上 MySQL，跑通「查 → 增 → 改」，为作业交差。</p></blockquote>
+<hr>
+<h2 id="sec-1">0. 一句话总结</h2>
+<p>这节课真正难的不是 SQL 语法，而是 <strong>三件环境上的事</strong>：MySQL 服务没启动、数据目录被强杀留下残骸、Node 驱动与 MySQL 8 的认证方式不兼容。SQL 本身的坑（拼写、引号）反而不难，难在报错信息看不出层次。</p>
+<hr>
+<h2 id="sec-2">1. 环境现状（下次直接查这一节，别再翻）</h2>
+<table><thead><tr><th>项目</th><th>值</th></tr></thead><tbody><tr><td>MySQL 版本</td><td>8.0.46</td></tr><tr><td>安装目录</td><td><code>E:\Program Files\MySQL\MySQL Server 8.0</code></td></tr><tr><td>数据目录</td><td><code>E:\ProgramData\MySQL\MySQL Server 8.0\Data</code></td></tr><tr><td>配置文件</td><td><code>E:\ProgramData\MySQL\MySQL Server 8.0\my.ini</code></td></tr><tr><td>错误日志</td><td><code>...\Data\WIN-A17UA1DV8BB.err</code></td></tr><tr><td>端口</td><td>3306</td></tr><tr><td>Windows 服务名</td><td><strong>MySQL80</strong></td></tr><tr><td>默认认证插件</td><td><code>caching_sha2_password</code></td></tr><tr><td>可用账号</td><td><strong>node / node123456</strong>（专用账号）</td></tr><tr><td>数据库</td><td><code>DuDaInfo</code></td></tr><tr><td>表</td><td><code>product</code>（引擎 <strong>MyISAM</strong>，无事务）</td></tr><tr><td>Node 驱动</td><td><code>mysql2@3.24.6</code>（同时装了旧的 <code>mysql@2.18.1</code>）</td></tr></tbody></table>
+<blockquote><p>注意：MySQL 装在 <strong>E 盘</strong>，不是 C 盘。C 盘那次安装失败过，<code>C:\Program Files\MySQL</code> 下只有 Workbench / Shell / Router，没有 Server。</p></blockquote>
+<hr>
+<h2 id="sec-3">2. 报错考古：今天踩过的 12 个坑</h2>
+<table><thead><tr><th>#</th><th>报错</th><th>真正原因</th><th>解决</th></tr></thead><tbody><tr><td>1</td><td><code>2002 - Can't connect ... (10061)</code></td><td>MySQL80 服务没启动，3306 无人监听</td><td><code>net start MySQL80</code></td></tr><tr><td>2</td><td><code>read ECONNRESET</code></td><td>服务在握手时被强杀（日志无 Normal shutdown）</td><td>重启服务</td></tr><tr><td>3</td><td><code>3681 - Schema 'dudainfo' does not exist, but schema directory ... was found</code></td><td>强杀 mysqld 后，磁盘目录留下、数据字典回滚</td><td>停服务 → 把 <code>Data\dudainfo</code> 改名 → 起服务</td></tr><tr><td>4</td><td><code>getaddrinfo ENOTFOUND localhost_3306</code></td><td>把 Navicat 的<strong>连接名</strong>当成了主机地址</td><td><code>host: '127.0.0.1'</code>，端口单独写 <code>port: 3306</code></td></tr><tr><td>5</td><td><code>ER_NOT_SUPPORTED_AUTH_MODE</code></td><td>老驱动 <code>mysql@2.18.1</code> 不支持 <code>caching_sha2_password</code></td><td>换 <code>mysql2</code></td></tr><tr><td>6</td><td><code>Access denied for user 'root'@'localhost' (using password: YES)</code></td><td>root 密码已遗忘</td><td>新建 <code>node</code> 账号</td></tr><tr><td>7</td><td><code>1064 ... near 'FORM product order by ...'</code></td><td><code>FROM</code> 拼成 <code>FORM</code></td><td>改正</td></tr><tr><td>8</td><td><code>INSET IGNORE</code> + 引号错位 + 值个数不对</td><td>一处拼错、一处引号把逗号包进字符串、10 字段只给 9 值</td><td>重写语句</td></tr><tr><td>9</td><td><code>1292 Incorrect date value: '2007'</code></td><td>日期没加引号，<code>2026-10-9</code> 被算成减法</td><td><code>'2026-10-09'</code></td></tr><tr><td>10</td><td><code>Can't add new command when connection is in closed state</code></td><td>三个回调各自 <code>conn.end()</code>，连接被提前关闭</td><td>只保留最后一次 <code>end()</code></td></tr><tr><td>11</td><td><code>Callback function is not available with promise clients</code></td><td><code>await conn.query(sql, callback)</code> 两种风格混写</td><td>二选一</td></tr><tr><td>12</td><td>脚本什么都没干就结束</td><td>async 函数 <code>main()</code> 定义了却<strong>没有调用</strong></td><td>末尾加 <code>main()</code></td></tr></tbody></table>
+<h3 id="sec-4">几条值得记住的判断</h3>
+<ul><li><code>10061</code> / <code>ECONNREFUSED</code> = 服务没起；<code>ECONNRESET</code> = 连上了但对面死了；<code>1045</code> = 密码错；<code>1064</code> = SQL 语法。</li><li>报错里 <code>near 'xxx'</code> 的 <strong>xxx 第一个词</strong>就是出错位置。</li><li>服务被强行结束时，MySQL 错误日志<strong>不会</strong>写 <code>Normal shutdown</code>，也不会写崩溃信息 —— 这就是判断依据。</li></ul>
+<hr>
+<h2 id="sec-5">3. 连接一个 MySQL 的正确姿势</h2>
+<pre><code class="language-js"><span class="code-comment">// ab.mjs —— 只负责“连上”，导出连接对象给别的文件用</span>
+const mysql = require('mysql2')
+
+const conn = mysql.createConnection({
+    host: 'localhost',      <span class="code-comment">// 主机名或 IP，绝不能写 Navicat 的连接名</span>
+    port: 3306,             <span class="code-comment">// 端口单独一个属性</span>
+    user: 'node',
+    password: 'node123456',
+    database: 'DuDaInfo',
+    dateStrings: true,      <span class="code-comment">// DATE 直接返回 '2026-10-09'，不转成 Date</span>
+})
+
+conn.connect((err) =&gt; {
+    if (err) {
+        console.log('连接失败！' + err.message)
+        return
+    }
+    console.log('连接成功')
+})
+
+module.exports.conn = conn</code></pre>
+<table><thead><tr><th>配置项</th><th>说明</th><th>常见错误</th></tr></thead><tbody><tr><td><code>host</code></td><td>主机名 / IP</td><td>写成 <code>localhost_3306</code> → ENOTFOUND</td></tr><tr><td><code>port</code></td><td>端口，数字</td><td>拼进 host → ENOTFOUND</td></tr><tr><td><code>user</code> / <code>password</code></td><td>账号密码</td><td>密码错 → 1045</td></tr><tr><td><code>database</code></td><td>库名</td><td>库不存在 → 1049</td></tr><tr><td><code>dateStrings</code></td><td>DATE/DATETIME 返回字符串</td><td>不设会拿到 Date，打印成 UTC 少一天</td></tr><tr><td><code>decimalNumbers</code></td><td>DECIMAL 转 number</td><td>默认返回字符串，防精度丢失</td></tr></tbody></table>
+<hr>
+<h2 id="sec-6">4. <code>query()</code> 的返回值（最容易搞错的地方）</h2>
+<pre><code class="language-js">const [rows, fields] = await conn.query(sql)</code></pre>
+<table><thead><tr><th>元素</th><th>SELECT</th><th>INSERT / UPDATE / DELETE</th></tr></thead><tbody><tr><td><code>[0]</code></td><td><strong>对象数组</strong>，每行一个对象，键 = 列名</td><td>一个 <code>ResultSetHeader</code> 对象</td></tr><tr><td><code>[1]</code></td><td>字段元数据数组（一般不用）</td><td><code>undefined</code></td></tr></tbody></table>
+<pre><code class="language-js"><span class="code-comment">// 查</span>
+const [rows] = await conn.query('SELECT id, name FROM product')
+rows.length          <span class="code-comment">// 行数（空表是 0）</span>
+rows[0].name         <span class="code-comment">// 按列名取值</span>
+
+<span class="code-comment">// 写</span>
+const [result] = await conn.query('UPDATE product SET price = ? WHERE id = ?', [99, 3])
+result.affectedRows  <span class="code-comment">// 匹配到几行</span>
+result.changedRows   <span class="code-comment">// 实际改了几行</span>
+result.insertId      <span class="code-comment">// INSERT 时的新 id</span></code></pre>
+<p><strong>三个坑</strong>：</p>
+<ol><li>忘记解构 → 拿到的是 <code>[rows, fields]</code>，<code>result.name</code> 是 <code>undefined</code>；</li><li>查不到数据返回 <code>[]</code>（空数组，真值），判断要用 <code>rows.length === 0</code>；</li><li>增删改时 <code>result</code> 不是数组，是对象 —— <code>result[0]</code> 会取不到。</li></ol>
+<hr>
+<h2 id="sec-7">5. 增删改查的四种写法</h2>
+<pre><code class="language-js"><span class="code-comment">// 查：按时间倒序取前两条</span>
+const [rows] = await conn.query(
+    'SELECT id, name, price, add_time FROM product ORDER BY add_time DESC LIMIT 0, 2'
+)
+
+<span class="code-comment">// 增：IGNORE 表示主键冲突时跳过（不报错）</span>
+const [add] = await conn.query(
+    'INSERT IGNORE INTO product (id, name, cat_id, size, price, add_time, sort) VALUES (?,?,?,?,?,?,?)',
+    [6, '香蕉', 2, '60mm', 30.00, '2026-11-11', 10]
+)
+
+<span class="code-comment">// 改：WHERE 是命门</span>
+const [upd] = await conn.query(
+    'UPDATE product SET price = ? WHERE id = ?',
+    [88.8, 3]
+)
+
+<span class="code-comment">// 删：先 SELECT 确认，再删，加 LIMIT 兜底</span>
+const [del] = await conn.query('DELETE FROM product WHERE id = ? LIMIT 1', [6])</code></pre>
+<table><thead><tr><th>语句</th><th>少了 WHERE 会怎样</th></tr></thead><tbody><tr><td><code>UPDATE</code></td><td><strong>全表所有行都被改</strong></td></tr><tr><td><code>DELETE</code></td><td><strong>全表清空</strong>（表结构还在）</td></tr></tbody></table>
+<blockquote><p><code>DELETE FROM product</code> 不写 WHERE = 删除全部行。<code>affectedRows</code> 会等于总行数，这就是最后一道保险。</p></blockquote>
+<h3 id="sec-8">行与列的概念</h3>
+<pre><code>        字段/列（竖）：id | name | price
+记录/行（横） 1  | PC008-1 | 2000.00    ← 一条商品 = 一行
+记录/行（横） 2  | PC008-3A | 599.00</code></pre>
+<p><code>DELETE</code> 删的是<strong>行</strong>（横向的一条记录）；删列用 <code>ALTER TABLE ... DROP COLUMN</code>，删表用 <code>DROP TABLE</code>。</p>
+<hr>
+<h2 id="sec-9">6. 回调版 vs Promise 版（本课最大的分水岭）</h2>
+<blockquote><p>同一个查询，mysql2 有<strong>两套 API</strong>。一开始写的是回调版（非异步），后来改成 async 版。两者能力完全一样，区别在<strong>错误处理和顺序控制</strong>。</p></blockquote>
+<hr>
+<h3 id="sec-10">6.1 回调版（最初的写法，不用 async）</h3>
+<pre><code class="language-js">const ab = require('./ab.mjs')
+const conn = ab.conn          <span class="code-comment">// 注意：不是 conn.promise()</span>
+
+<span class="code-comment">// 查</span>
+conn.query(sql1, (err, rows) =&gt; {
+    if (err) { console.error('查询失败：' + err.message); return conn.end() }
+    console.table(rows)
+
+    <span class="code-comment">// 增 —— 必须嵌在“查”的回调里，才能保证在查之后执行</span>
+    conn.query(sql2, (err, add) =&gt; {
+        if (err) { console.error('添加失败：' + err.message); return conn.end() }
+        console.log('影响行数：' + add.affectedRows)
+
+        <span class="code-comment">// 改 —— 再嵌一层</span>
+        conn.query(sql3, (err, upd) =&gt; {
+            if (err) { console.error('修改失败：' + err.message); return conn.end() }
+            console.log('匹配：' + upd.affectedRows)
+
+            conn.end()        <span class="code-comment">// 只在最内层关一次</span>
+        })
+    })
+})</code></pre>
+<p><strong>特征</strong>：</p>
+<ul><li>结果在<strong>回调参数</strong>里（<code>(err, rows)</code>），不是返回值；</li><li><strong>每层都要写 <code>if (err)</code></strong>，漏一层就静默失败；</li><li>顺序靠<strong>物理嵌套</strong>保证，嵌得越深越往右缩进（回调地狱）；</li><li><code>end()</code> 的位置极敏感 —— 写早了连接提前关，写漏了进程不退出。</li></ul>
+<hr>
+<h3 id="sec-11">6.2 async 版（后来改的）</h3>
+<pre><code class="language-js">const ab = require('./ab.mjs')
+const conn = ab.conn.promise()   <span class="code-comment">// ★ 差别就在这一行</span>
+
+async function main() {
+    try {
+        const [rows] = await conn.query(sql1)
+        const [add] = await conn.query(sql2)
+        const [upd] = await conn.query(sql3)
+    } catch (err) {
+        console.error(err.code + ' | ' + err.message)
+    } finally {
+        await conn.end()
+    }
+}
+main()</code></pre>
+<p><strong>特征</strong>：</p>
+<ul><li>结果在<strong>返回值</strong>里（<code>const [rows] =</code>），不是回调参数；</li><li><strong>一个 <code>catch</code> 兜住三个 <code>await</code></strong>，不会漏；</li><li>顺序靠<strong>代码顺序</strong>保证，从上到下，不需要嵌套；</li><li><code>end()</code> 放 <code>finally</code>，成功失败都只执行一次。</li></ul>
+<hr>
+<h3 id="sec-12">6.3 逐项对照（重点看这张表）</h3>
+<table><thead><tr><th>维度</th><th>回调版（非异步）</th><th>async 版</th></tr></thead><tbody><tr><td>入口</td><td><code>require('mysql2')</code> / <code>ab.conn</code></td><td><code>require('mysql2/promise')</code> / <code>ab.conn.promise()</code></td></tr><tr><td>拿结果的方式</td><td>回调第二个参数 <code>(err, rows)</code></td><td>返回值 <code>const [rows] = await ...</code></td></tr><tr><td>错误处理</td><td><strong>每层</strong>一个 <code>if (err)</code></td><td><strong>一个</strong> <code>try/catch</code> 全接</td></tr><tr><td>漏处理错误的后果</td><td>静默失败，拿到 <code>undefined</code> 继续跑</td><td>直接抛错（unhandled rejection）</td></tr><tr><td>执行顺序</td><td>靠<strong>嵌套</strong>，不嵌套就乱序</td><td>靠<strong>代码顺序</strong>，天然串行</td></tr><tr><td>代码形状</td><td>每多一步多缩进一层（↘ 阶梯）</td><td>平铺，缩进不变</td></tr><tr><td>关闭连接</td><td>容易写多个 <code>end()</code> 或忘记写</td><td><code>finally</code> 里一次</td></tr><tr><td>可读性</td><td>3 步以上明显变差</td><td>10 步也清楚</td></tr><tr><td>适合场景</td><td>一次性小脚本、单条语句</td><td>有分支/循环/多语句的业务逻辑</td></tr></tbody></table>
+<p><strong>一句话</strong>：回调版把「下一步」写在<strong>回调里面</strong>，async 版把「下一步」写在<strong>下一行</strong>。</p>
+<hr>
+<h3 id="sec-13">6.4 最初的写法是怎么崩的（三个真实故障）</h3>
+<table><thead><tr><th>现象</th><th>原因</th><th>属于哪一版</th></tr></thead><tbody><tr><td><code>Can't add new command when connection is in closed state</code></td><td>三条语句平铺、每个回调各写一个 <code>conn.end()</code>，第一次就关掉了连接</td><td>回调版</td></tr><tr><td>终端不退出、卡住</td><td>漏写 <code>end()</code>，连接一直开着</td><td>回调版</td></tr><tr><td>什么都没执行</td><td><code>main()</code> 定义了但没调用</td><td>async 版</td></tr><tr><td><code>Callback function is not available with promise clients</code></td><td><strong>混写</strong>：Promise 版的 <code>query</code> 又塞了回调</td><td>两版混用</td></tr></tbody></table>
+<blockquote><p>回调版的坑是「顺序 + 忘记关」；async 版的坑是「忘记调用 + 忘记 await」。两类都经历过一遍，就基本不会再犯。</p></blockquote>
+<hr>
+<h3 id="sec-14">6.5 千万不能混写</h3>
+<pre><code class="language-js"><span class="code-comment">// ❌ Promise 版的 query 不接受回调</span>
+await conn.query(sql, (err, rows) =&gt; { ... })
+<span class="code-comment">// -&gt; Callback function is not available with promise clients.</span>
+
+<span class="code-comment">// ✅ 二选一</span>
+conn.query(sql, (err, rows) =&gt; { ... })     <span class="code-comment">// 纯回调</span>
+const [rows] = await conn.query(sql)        <span class="code-comment">// 纯 Promise</span></code></pre>
+<p><strong>判断方法</strong>：这个 <code>query</code> 的返回值有 <code>.then</code> 吗？有就是 Promise 版，只能用 <code>await</code>。</p>
+<hr>
+<h3 id="sec-15">6.6 其他库的同类对应（同一个规律）</h3>
+<table><thead><tr><th>库</th><th>回调入口</th><th>Promise 入口</th></tr></thead><tbody><tr><td><code>fs</code></td><td><code>fs.readFile(p, cb)</code></td><td><code>fs.promises.readFile(p)</code></td></tr><tr><td><code>mysql2</code></td><td><code>require('mysql2')</code></td><td><code>require('mysql2/promise')</code> 或 <code>.promise()</code></td></tr><tr><td><code>child_process</code></td><td><code>exec(cmd, cb)</code></td><td><code>util.promisify(exec)</code></td></tr><tr><td>老 <code>mysql</code></td><td>只有回调</td><td>❌ 真的没有</td></tr></tbody></table>
+<p>规律：<strong>错误优先回调 <code>(err, data)</code> 的库，几乎都有对应的 Promise 包装</strong>，只是入口不同。</p>
+<hr>
+<h2 id="sec-16">7. 错误处理：一次 catch 怎么定位到具体语句</h2>
+<p><code>err</code> 带的信息（实测）：</p>
+<table><thead><tr><th>字段</th><th>例子</th><th>用途</th></tr></thead><tbody><tr><td><code>err.code</code></td><td><code>ER_BAD_FIELD_ERROR</code></td><td>判断错误类别（推荐用这个）</td></tr><tr><td><code>err.errno</code></td><td><code>1054</code></td><td>和网上查到的编号对应</td></tr><tr><td><code>err.message</code> / <code>err.sqlMessage</code></td><td><code>Unknown column 'nmae' in 'field list'</code></td><td>人话描述，指出方向</td></tr><tr><td><code>err.sqlState</code></td><td><code>42S22</code></td><td>标准 SQL 状态码</td></tr><tr><td><code>err.sql</code></td><td>你执行的那条语句</td><td>直接看到原文</td></tr><tr><td><code>err.stack</code></td><td>调用栈</td><td>定位到第几行</td></tr></tbody></table>
+<blockquote><p>注意：<code>err.message</code> 是<strong>属性</strong>，写成 <code>err.message()</code> 会报 TypeError。</p></blockquote>
+<p>单 catch 丢的不是错误信息，而是“哪一步”。用<strong>阶段变量</strong>补上：</p>
+<pre><code class="language-js">let step = '连接'
+try {
+    step = '查询最新两条';  const [rows] = await conn.query(sql1)
+    step = '添加商品';      const [add]  = await conn.query(sql2)
+    step = '修改商品';      const [upd]  = await conn.query(sql3)
+} catch (err) {
+    console.error(`❌ 步骤：\${step}`)
+    console.error(`   类型：${err.code} (${err.errno})`)
+    console.error(`   描述：\${err.message}`)
+    if (err.sql) console.error(`   SQL：\${err.sql}`)
+}</code></pre>
+<h3 id="sec-17">错误码速查</h3>
+<table><thead><tr><th>code</th><th>errno</th><th>含义</th><th>常见原因</th></tr></thead><tbody><tr><td><code>ER_PARSE_ERROR</code></td><td>1064</td><td>语法错误</td><td>FROM 写成 FORM、少逗号、少引号</td></tr><tr><td><code>ER_BAD_FIELD_ERROR</code></td><td>1054</td><td>字段不存在</td><td>列名拼错</td></tr><tr><td><code>ER_NO_SUCH_TABLE</code></td><td>1146</td><td>表不存在</td><td>库没选对 / 表名错</td></tr><tr><td><code>ER_BAD_DB_ERROR</code></td><td>1049</td><td>库不存在</td><td><code>database</code> 配置错</td></tr><tr><td><code>ER_DUP_ENTRY</code></td><td>1062</td><td>主键重复</td><td>INSERT 已存在的 id</td></tr><tr><td><code>ER_TRUNCATED_WRONG_VALUE</code></td><td>1292</td><td>值类型不对</td><td>日期没加引号</td></tr><tr><td><code>ER_ACCESS_DENIED_ERROR</code></td><td>1045</td><td>认证失败</td><td>用户/密码/host</td></tr><tr><td><code>ECONNREFUSED</code></td><td>—</td><td>连不上</td><td>服务没启动</td></tr></tbody></table>
+<hr>
+<h2 id="sec-18">8. 三条铁律</h2>
+<p><strong>① 引号决定“值”还是“表达式”</strong></p>
+<pre><code class="language-sql">UPDATE product SET add_time = 2026-10-9 WHERE id = 3    -- ❌ 2026-10-9 = 2007
+UPDATE product SET add_time = '2026-10-09' WHERE id = 3 -- ✅</code></pre>
+<p>数字不加引号，字符串和日期必须加；日期统一写 <code>YYYY-MM-DD</code>。</p>
+<p><strong>② 用 <code>?</code> 占位符，不拼字符串</strong></p>
+<pre><code class="language-js">'UPDATE product SET price = ? WHERE id = ?', [88.8, 3]</code></pre>
+<p>占位符由驱动负责转义，不会有引号错位，还能防 SQL 注入。</p>
+<p><strong>③ 一个连接只 <code>end()</code> 一次，放 finally</strong></p>
+<p>多个回调各写一个 <code>end()</code>，必然出现：</p>
+<pre><code>Cannot enqueue Query after invoking quit
+Can't add new command when connection is in closed state</code></pre>
+<hr>
+<h2 id="sec-19">9. 这个目录里有什么</h2>
+<table><thead><tr><th>文件</th><th>作用</th></tr></thead><tbody><tr><td><code>DuDaInfo-任务+实训数据库语句.sql</code></td><td>老师原版建库脚本（不可重复执行）</td></tr><tr><td><code>DuDaInfo-修复版.sql</code></td><td>加了 <code>DROP DATABASE IF EXISTS</code>，可重复跑</td></tr><tr><td><code>作业/ab.js</code></td><td>连接配置，导出 conn</td></tr><tr><td><code>作业/manage.js</code></td><td>查 / 增 / 改（回调 + Promise 版结构）</td></tr><tr><td><code>作业/manage-async.js</code></td><td>纯 async/await 参考实现</td></tr><tr><td><code>作业/test-sql.js</code></td><td>命令行试跑 SQL：<code>node test-sql.js &quot;SELECT ...&quot;</code></td></tr></tbody></table>
+<hr>
+<h2 id="sec-20">10. 遗留问题（下次补）</h2>
+<ol><li><strong><code>product</code> 是 MyISAM</strong>：不支持事务，<code>DELETE</code> / <code>UPDATE</code> 删错了无法 <code>ROLLBACK</code>。学事务要用 InnoDB；</li><li><strong>root 密码未知</strong>：目前用 <code>node</code> 账号。要恢复 root，可走 <code>--skip-grant-tables</code> 流程；</li><li><strong>MySQL80 服务被强停过两次</strong>：建议设为「自动」+ 恢复策略「失败后重启」，并检查安全软件的“开机加速”是否接管；</li><li><strong>SQL 没有预校验</strong>：Navicat 只有高亮，WebStorm 需要「连库 + 语言注入」；当前靠 <code>test-sql.js</code> 试跑；</li><li><strong>还没写 Express 接口</strong>：后面把这张表接成 HTTP 接口（<code>GET /api/products</code>），就是第 9 节课的“真动态”。</li></ol>
+<hr>
+<h2 id="sec-21">11. 自测</h2>
+<ol><li><code>10061</code>、<code>1045</code>、<code>1064</code>、<code>ER_DUP_ENTRY</code> 分别代表什么？</li><li><code>const [rows] = await conn.query(...)</code> 里，<code>rows</code> 在 SELECT 和 INSERT 时分别是什么？</li><li>为什么 <code>UPDATE ... SET add_time = 2026-10-9</code> 会失败？</li><li>一个文件里出现三个 <code>conn.end()</code> 会发生什么？</li><li><code>require('mysql2')</code> 和 <code>require('mysql2/promise')</code> 的区别？</li><li>查不到数据时返回 <code>null</code> 还是 <code>[]</code>？怎么判断？</li><li><code>affectedRows</code> 和 <code>changedRows</code> 有什么区别？</li><li>为什么删除前要先 <code>SELECT</code> 一遍？</li><li>同一个「查 → 增 → 改」流程，回调版和 async 版在<strong>错误处理</strong>和<strong>执行顺序</strong>上最大的区别是什么？</li><li>写出回调版的骨架（三层嵌套），再写出等价的 async 版（不嵌套），对比一下行数。</li></ol>
+<hr>
+<h2 id="sec-22">12. 下一次的起点</h2>
+<pre><code class="language-bash"># 1. 确认服务
+net start MySQL80
+netstat -ano | findstr :3306
+
+# 2. 试跑一条 SQL
+cd 课堂\第十节课——MySQL模块\作业
+node test-sql.js &quot;SELECT id, name, price FROM product LIMIT 3&quot;
+
+# 3. 跑完整流程
+node manage-async.js</code></pre>
+<blockquote><p>想继续深入：① 换 InnoDB 学事务；② 用 Express 把 product 做成 REST 接口；③ 前端 fetch 渲染 —— 正好接回第 7、8、9 节课。</p></blockquote></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第十节课——MySQL模块/第一次学习MySQL模块.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!-- source: 查询/node作业.sql -->
+<!-- source-root: MySql -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>node作业 · MySQL 笔记</title>
+<link rel="stylesheet" href="../共享配置/css/mysql-notes.css?v=20261124-3">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){}</script>
+</head>
+<body class="doc-page">
+<script>if (location.search.includes("embed=1")) document.body.classList.add("is-embed");</script>
+<nav class="topbar">
+  <a class="topbar-back" href="index.html">← 目录</a>
+  <span class="topbar-title">node作业</span>
+  <div class="topbar-actions"><button class="icon-btn" type="button" data-theme-toggle>亮色</button></div>
+</nav>
+<main class="doc-page">
+  <header class="doc-head">
+    <div>
+      <span class="hero-kicker">查询练习 · 查询练习</span>
+      <h1>node作业</h1>
+      <div class="doc-meta">
+        <span>来源：查询/node作业.sql</span>
+        <span>56 行</span>
+        <span>更新 2026-11-10</span>
+      </div>
+    </div>
+  </header>
+  <section class="sql-card">
+    <div class="sql-toolbar">
+      <span class="sql-file">查询/node作业.sql</span>
+      <button class="copy-btn" type="button" id="copy-sql">复制 SQL</button>
+    </div>
+    <pre class="sql-code" id="sql-code"><div class="sql-line"><span class="ln">1</span><code><span class="sql-comment">/* ============================================================</span></code></div>
+<div class="sql-line"><span class="ln">2</span><code><span class="sql-comment">   DuDaInfo —— 可重复执行的修复版</span></code></div>
+<div class="sql-line"><span class="ln">3</span><code><span class="sql-comment">   与老师原版的区别只有三处：</span></code></div>
+<div class="sql-line"><span class="ln">4</span><code><span class="sql-comment">   1. 开头加 DROP DATABASE IF EXISTS，重复运行不会报 1007 / 1050</span></code></div>
+<div class="sql-line"><span class="ln">5</span><code><span class="sql-comment">   2. CREATE DATABASE 加 IF NOT EXISTS</span></code></div>
+<div class="sql-line"><span class="ln">6</span><code><span class="sql-comment">   3. 结尾加一段查询，方便确认数据真的进去了</span></code></div>
+<div class="sql-line"><span class="ln">7</span><code><span class="sql-comment">   表结构、字段、数据保持老师原样（MyISAM / utf8）；只把库默认字符集换成 utf8mb4（能存 emoji，中文数据完全兼容）</span></code></div>
+<div class="sql-line"><span class="ln">8</span><code><span class="sql-comment">   ============================================================ */</span></code></div>
+<div class="sql-line"><span class="ln">9</span><code></code></div>
+<div class="sql-line"><span class="ln">10</span><code><span class="sql-keyword">DROP</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">EXISTS</span> <span class="sql-ident">DuDaInfo</span>;</code></div>
+<div class="sql-line"><span class="ln">11</span><code></code></div>
+<div class="sql-line"><span class="ln">12</span><code><span class="sql-comment">/* 创建数据库  */</span></code></div>
+<div class="sql-line"><span class="ln">13</span><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">EXISTS</span> <span class="sql-ident">DuDaInfo</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-ident">CHARACTER</span> <span class="sql-keyword">SET</span> <span class="sql-ident">utf8mb4</span>;</code></div>
+<div class="sql-line"><span class="ln">14</span><code></code></div>
+<div class="sql-line"><span class="ln">15</span><code><span class="sql-comment">/* 指定默认数据库  */</span></code></div>
+<div class="sql-line"><span class="ln">16</span><code><span class="sql-keyword">USE</span> <span class="sql-ident">DuDaInfo</span>;</code></div>
+<div class="sql-line"><span class="ln">17</span><code></code></div>
+<div class="sql-line"><span class="ln">18</span><code></code></div>
+<div class="sql-line"><span class="ln">19</span><code><span class="sql-comment">/* 创建表  */</span></code></div>
+<div class="sql-line"><span class="ln">20</span><code><span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> <span class="sql-ident">product</span></code></div>
+<div class="sql-line"><span class="ln">21</span><code>(</code></div>
+<div class="sql-line"><span class="ln">22</span><code>    <span class="sql-ident">id</span>       <span class="sql-ident">mediumint</span> <span class="sql-ident">unsigned</span>      <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">AUTO_INCREMENT</span>,</code></div>
+<div class="sql-line"><span class="ln">23</span><code>    <span class="sql-ident">name</span>     <span class="sql-ident">varchar</span>(<span class="sql-number">150</span>)            <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span>,</code></div>
+<div class="sql-line"><span class="ln">24</span><code>    <span class="sql-ident">cat_id</span>   <span class="sql-ident">smallint</span>                <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-number">0</span>,</code></div>
+<div class="sql-line"><span class="ln">25</span><code>    <span class="sql-ident">size</span>     <span class="sql-ident">varchar</span>(<span class="sql-number">20</span>),</code></div>
+<div class="sql-line"><span class="ln">26</span><code>    <span class="sql-ident">price</span>    <span class="sql-ident">decimal</span>(<span class="sql-number">10</span>, <span class="sql-number">2</span>) <span class="sql-ident">unsigned</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-number">0.00</span>,</code></div>
+<div class="sql-line"><span class="ln">27</span><code>    <span class="sql-ident">image</span>    <span class="sql-ident">varchar</span>(<span class="sql-number">100</span>),</code></div>
+<div class="sql-line"><span class="ln">28</span><code>    <span class="sql-ident">content</span>  <span class="sql-ident">longtext</span>,</code></div>
+<div class="sql-line"><span class="ln">29</span><code>    <span class="sql-ident">keywords</span> <span class="sql-ident">varchar</span>(<span class="sql-number">255</span>),</code></div>
+<div class="sql-line"><span class="ln">30</span><code>    <span class="sql-ident">add_time</span> <span class="sql-function">date</span>,</code></div>
+<div class="sql-line"><span class="ln">31</span><code>    <span class="sql-ident">sort</span>     <span class="sql-ident">tinyint</span> <span class="sql-ident">unsigned</span>        <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-number">0</span>,</code></div>
+<div class="sql-line"><span class="ln">32</span><code>    <span class="sql-keyword">PRIMARY</span> <span class="sql-keyword">KEY</span> (<span class="sql-ident">id</span>)</code></div>
+<div class="sql-line"><span class="ln">33</span><code>) <span class="sql-ident">ENGINE</span> <span class="sql-operator">=</span> <span class="sql-ident">MyISAM</span></code></div>
+<div class="sql-line"><span class="ln">34</span><code>  <span class="sql-keyword">DEFAULT</span> <span class="sql-ident">CHARSET</span> <span class="sql-operator">=</span> <span class="sql-ident">utf8</span>;</code></div>
+<div class="sql-line"><span class="ln">35</span><code></code></div>
+<div class="sql-line"><span class="ln">36</span><code></code></div>
+<div class="sql-line"><span class="ln">37</span><code><span class="sql-comment">/* 查看表结构  */</span></code></div>
+<div class="sql-line"><span class="ln">38</span><code><span class="sql-keyword">desc</span> <span class="sql-ident">product</span>;</code></div>
+<div class="sql-line"><span class="ln">39</span><code></code></div>
+<div class="sql-line"><span class="ln">40</span><code></code></div>
+<div class="sql-line"><span class="ln">41</span><code><span class="sql-comment">/* 表中插入记录  */</span></code></div>
+<div class="sql-line"><span class="ln">42</span><code><span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> <span class="sql-ident">product</span></code></div>
+<div class="sql-line"><span class="ln">43</span><code><span class="sql-keyword">VALUES</span> (<span class="sql-number">1</span>, <span class="sql-string">'PC008-1 BENZ.with diode'</span>, <span class="sql-number">1</span>, <span class="sql-string">'93mm'</span>, <span class="sql-number">2000.00</span>, <span class="sql-string">'images/pro-1.jpg'</span>, <span class="sql-string">'PC008-1 BENZ.with diode'</span>,</code></div>
+<div class="sql-line"><span class="ln">44</span><code>        <span class="sql-string">'PC008-1 BENZ.with diode'</span>, <span class="sql-string">'2022-10-11'</span>, <span class="sql-number">10</span>),</code></div>
+<div class="sql-line"><span class="ln">45</span><code>       (<span class="sql-number">2</span>, <span class="sql-string">'PC008-3A'</span>, <span class="sql-number">1</span>, <span class="sql-string">'101mm'</span>, <span class="sql-number">599.00</span>, <span class="sql-string">'images/pro-2.jpg'</span>, <span class="sql-string">'PC008-3A'</span>, <span class="sql-string">'PC008-3A'</span>, <span class="sql-string">'2022-10-15'</span>, <span class="sql-number">10</span>),</code></div>
+<div class="sql-line"><span class="ln">46</span><code>       (<span class="sql-number">3</span>, <span class="sql-string">'PC009-6 with diode'</span>, <span class="sql-number">2</span>, <span class="sql-string">'94mm'</span>, <span class="sql-number">1399.00</span>, <span class="sql-string">'images/pro-3.jpg'</span>, <span class="sql-string">'PC009-6 with diode'</span>, <span class="sql-string">'PC009-6 with diode'</span>,</code></div>
+<div class="sql-line"><span class="ln">47</span><code>        <span class="sql-string">'2022-11-15'</span>, <span class="sql-number">10</span>),</code></div>
+<div class="sql-line"><span class="ln">48</span><code>       (<span class="sql-number">4</span>, <span class="sql-string">'PC009-3ZZ'</span>, <span class="sql-number">2</span>, <span class="sql-string">'101mm'</span>, <span class="sql-number">999.00</span>, <span class="sql-string">'images/pro-4.jpg'</span>, <span class="sql-string">'PC009-3ZZ'</span>, <span class="sql-string">'PC009-3ZZ'</span>, <span class="sql-string">'2022-12-31'</span>, <span class="sql-number">10</span>);</code></div>
+<div class="sql-line"><span class="ln">49</span><code></code></div>
+<div class="sql-line"><span class="ln">50</span><code></code></div>
+<div class="sql-line"><span class="ln">51</span><code><span class="sql-comment">/* 验证：应输出 4 */</span></code></div>
+<div class="sql-line"><span class="ln">52</span><code><span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(<span class="sql-operator">*</span>) <span class="sql-keyword">AS</span> 总条数</code></div>
+<div class="sql-line"><span class="ln">53</span><code><span class="sql-keyword">FROM</span> <span class="sql-ident">product</span>;</code></div>
+<div class="sql-line"><span class="ln">54</span><code><span class="sql-keyword">SELECT</span> <span class="sql-ident">id</span>, <span class="sql-ident">name</span>, <span class="sql-ident">size</span>, <span class="sql-ident">price</span>, <span class="sql-ident">add_time</span></code></div>
+<div class="sql-line"><span class="ln">55</span><code><span class="sql-keyword">FROM</span> <span class="sql-ident">product</span>;</code></div>
+<div class="sql-line"><span class="ln">56</span><code></code></div></pre>
+    <textarea id="sql-raw" hidden>/* ============================================================
+   DuDaInfo —— 可重复执行的修复版
+   与老师原版的区别只有三处：
+   1. 开头加 DROP DATABASE IF EXISTS，重复运行不会报 1007 / 1050
+   2. CREATE DATABASE 加 IF NOT EXISTS
+   3. 结尾加一段查询，方便确认数据真的进去了
+   表结构、字段、数据保持老师原样（MyISAM / utf8）；只把库默认字符集换成 utf8mb4（能存 emoji，中文数据完全兼容）
+   ============================================================ */
+
+DROP DATABASE IF EXISTS DuDaInfo;
+
+/* 创建数据库  */
+CREATE DATABASE IF NOT EXISTS DuDaInfo DEFAULT CHARACTER SET utf8mb4;
+
+/* 指定默认数据库  */
+USE DuDaInfo;
+
+
+/* 创建表  */
+CREATE TABLE product
+(
+    id       mediumint unsigned      NOT NULL AUTO_INCREMENT,
+    name     varchar(150)            NOT NULL,
+    cat_id   smallint                NOT NULL DEFAULT 0,
+    size     varchar(20),
+    price    decimal(10, 2) unsigned NOT NULL DEFAULT 0.00,
+    image    varchar(100),
+    content  longtext,
+    keywords varchar(255),
+    add_time date,
+    sort     tinyint unsigned        NOT NULL DEFAULT 0,
+    PRIMARY KEY (id)
+) ENGINE = MyISAM
+  DEFAULT CHARSET = utf8;
+
+
+/* 查看表结构  */
+desc product;
+
+
+/* 表中插入记录  */
+INSERT INTO product
+VALUES (1, 'PC008-1 BENZ.with diode', 1, '93mm', 2000.00, 'images/pro-1.jpg', 'PC008-1 BENZ.with diode',
+        'PC008-1 BENZ.with diode', '2022-10-11', 10),
+       (2, 'PC008-3A', 1, '101mm', 599.00, 'images/pro-2.jpg', 'PC008-3A', 'PC008-3A', '2022-10-15', 10),
+       (3, 'PC009-6 with diode', 2, '94mm', 1399.00, 'images/pro-3.jpg', 'PC009-6 with diode', 'PC009-6 with diode',
+        '2022-11-15', 10),
+       (4, 'PC009-3ZZ', 2, '101mm', 999.00, 'images/pro-4.jpg', 'PC009-3ZZ', 'PC009-3ZZ', '2022-12-31', 10);
+
+
+/* 验证：应输出 4 */
+SELECT COUNT(*) AS 总条数
+FROM product;
+SELECT id, name, size, price, add_time
+FROM product;
+</textarea>
+  </section>
+  <footer class="doc-foot">
+    <span><a href="doc-b99f28515e.html">← 创建表</a></span>
+    <span></span>
+  </footer>
+</main>
+<script>
+(() => {
+  const root = document.documentElement, KEY = "programmingTutor.theme";
+  const apply = (theme) => {
+    root.dataset.theme = theme === "light" ? "light" : "dark";
+    document.querySelectorAll("[data-theme-toggle]").forEach((b) => { b.textContent = root.dataset.theme === "dark" ? "亮色" : "暗色"; });
+  };
+  apply(localStorage.getItem(KEY) || root.dataset.theme || "dark");
+  document.querySelectorAll("[data-theme-toggle]").forEach((b) => b.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem(KEY, next); apply(next);
+  }));
+})();
+</script>
+<script>
+document.getElementById("copy-sql")?.addEventListener("click", async () => {
+  const raw = document.getElementById("sql-raw").value;
+  try { await navigator.clipboard.writeText(raw); document.getElementById("copy-sql").textContent = "已复制"; setTimeout(() => document.getElementById("copy-sql").textContent = "复制 SQL", 1300); }
+  catch (e) { document.getElementById("copy-sql").textContent = "复制失败"; }
+});
+</script>
+</body>
+</html>

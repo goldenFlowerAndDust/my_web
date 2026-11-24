@@ -1,0 +1,120 @@
+<!-- source: 课堂/第六节课——异步执行扩展/第六节课-总结.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>第六节课 ｜ 异步执行扩展：Promise 与 async/await · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂</span>
+      <h1>第六节课 ｜ 异步执行扩展：Promise 与 async/await</h1>
+      <div class="doc-meta">数据来源：课堂/第六节课——异步执行扩展/第六节课-总结.md · 更新于 2026-11-10</div>
+    </header>
+    <article class="doc"><blockquote><p>板块定位：把前几节课的「回调嵌套」换成「链式 / 同步写法」，这是后面写接口、连数据库的必备语法。本板块已有文件：<code>JavaScript_Promise_异步操作示例.docx</code>（讲义），作业在 <code>作业/第三次作业</code></p></blockquote>
+<hr>
+<h2 id="sec-1">一、为什么要有 Promise</h2>
+<p>回调写法在多层嵌套时会变成「回调地狱」，而且错误要一层层手动传递：</p>
+<pre><code class="language-js">readFile(a, (err, d1) =&gt; {
+    if (err) return ...
+    readFile(b, (err, d2) =&gt; {
+        if (err) return ...
+        readFile(c, (err, d3) =&gt; { <span class="code-comment">/* 三层，还不算业务逻辑 */</span> })
+    })
+})</code></pre>
+<p>Promise 把「将来的结果」变成一个<strong>对象</strong>，可以 <code>await</code>，也可以 <code>.then</code> 链式处理，错误统一 <code>catch</code>。</p>
+<hr>
+<h2 id="sec-2">二、三个状态（重点）</h2>
+<table><thead><tr><th>状态</th><th>含义</th><th>能否再变</th></tr></thead><tbody><tr><td><code>pending</code></td><td>进行中</td><td>可以变成下面两种之一</td></tr><tr><td><code>fulfilled</code></td><td>成功（resolve）</td><td>❌ 不可逆</td></tr><tr><td><code>rejected</code></td><td>失败（reject）</td><td>❌ 不可逆</td></tr></tbody></table>
+<blockquote><p>「不可逆」是常考点：<code>resolve</code> 之后再去 <code>reject</code> 是无效的。</p></blockquote>
+<hr>
+<h2 id="sec-3">三、写法模板</h2>
+<pre><code class="language-js"><span class="code-comment">// 1. 造一个 Promise</span>
+function fetchUser(id) {
+    return new Promise((resolve, reject) =&gt; {
+        console.log('开始请求')            <span class="code-comment">// ← 注意：执行器是【同步】执行的</span>
+        setTimeout(() =&gt; {
+            id &gt; 0 ? resolve({ id, name: '张三' })
+                   : reject(new Error('用户不存在'))
+        }, 1500)
+    })
+}
+
+<span class="code-comment">// 2. .then / .catch 写法</span>
+fetchUser(1)
+    .then(user =&gt; console.log('收到', user))
+    .catch(err =&gt; console.log('出错', err.message))
+    .finally(() =&gt; console.log('结束，成功失败都会执行'))
+
+<span class="code-comment">// 3. async / await 写法（推荐）</span>
+async function main() {
+    try {
+        const user = await fetchUser(1)
+        console.log('收到', user)
+    } catch (err) {
+        console.log('捕获', err.message)
+    }
+}
+main()</code></pre>
+<hr>
+<h2 id="sec-4">四、方法速查</h2>
+<table><thead><tr><th>API</th><th>作用</th><th>关键点</th></tr></thead><tbody><tr><td><code>Promise.resolve(v)</code></td><td>造一个已成功的 Promise</td><td>常用在函数返回值统一</td></tr><tr><td><code>Promise.reject(e)</code></td><td>造一个已失败的 Promise</td><td></td></tr><tr><td><code>.then(onOk, onErr)</code></td><td>注册回调</td><td><strong>返回新的 Promise</strong>，所以能链式</td></tr><tr><td><code>.catch(fn)</code></td><td>捕获链上任意一环的错误</td><td>等价于 <code>.then(null, fn)</code></td></tr><tr><td><code>.finally(fn)</code></td><td>无论如何都执行</td><td>不改变结果，不算「处理」</td></tr><tr><td><code>Promise.all([...])</code></td><td>全部成功才成功</td><td><strong>一个失败就整体失败</strong></td></tr><tr><td><code>Promise.allSettled([...])</code></td><td>等全部结束</td><td>不会因单个失败而中断</td></tr><tr><td><code>Promise.race([...])</code></td><td>第一个结束的说了算</td><td>成功或失败都算</td></tr><tr><td><code>Promise.any([...])</code></td><td>第一个<strong>成功</strong>的说了算</td><td>全失败才 reject</td></tr></tbody></table>
+<hr>
+<h2 id="sec-5">五、讲义里讲透的部分</h2>
+<ul><li>三种状态、<code>pending → fulfilled/rejected</code> 的转换；</li><li><code>.then/.catch</code> 与 <code>await</code> 两种写法的对照；</li><li>用 <code>setTimeout</code> 模拟网络请求、用 <code>fetch</code> 请求真实接口；</li><li>一句话总结很到位：「<code>.then/.catch</code> 是注册回调，状态改变时才执行」。</li></ul>
+<hr>
+<h2 id="sec-6">六、容易遗漏（讲义没覆盖，但马上会用到）</h2>
+<h3 id="sec-7">1. <code>new Promise(...)</code> 里的代码是<strong>同步立刻执行</strong>的</h3>
+<p><code>console.log('开始请求')</code> 不等 <code>then</code>，创建 Promise 的那一刻就打印了。只有 <code>resolve</code> 之后的 <code>.then</code> 才排进微任务。</p>
+<h3 id="sec-8">2. <code>async</code> 函数永远返回 Promise</h3>
+<pre><code class="language-js">async function f() { return 1 }
+f().then(v =&gt; console.log(v))  <span class="code-comment">// 1</span>
+
+async function g() { throw new Error('x') }   <span class="code-comment">// 等价于 return Promise.reject</span>
+g().catch(e =&gt; console.log(e.message))</code></pre>
+<p>所以 <code>await</code> 一个非 Promise 值也没问题，会被包一层。</p>
+<h3 id="sec-9">3. <code>await</code> 不会阻塞主线程</h3>
+<p>它只「挂起当前 async 函数」，主线程继续跑后面的同步代码。这也是为什么 <code>main()</code> 后面的 <code>console.log</code> 会先执行。</p>
+<h3 id="sec-10">4. 串行 vs 并行（性能差别很大）</h3>
+<pre><code class="language-js"><span class="code-comment">// ❌ 串行：两个请求一个等一个</span>
+const a = await fetch(url1)
+const b = await fetch(url2)      <span class="code-comment">// 总耗时 = t1 + t2</span>
+
+<span class="code-comment">// ✅ 并行：同时发起</span>
+const [a, b] = await Promise.all([fetch(url1), fetch(url2)])   <span class="code-comment">// 总耗时 = max(t1, t2)</span></code></pre>
+<h3 id="sec-11">5. 忘了 <code>return</code> / <code>await</code> 是最常见的 bug</h3>
+<pre><code class="language-js">const user = getUser(1)          <span class="code-comment">// ❌ 拿到的是 Promise，不是用户</span>
+const user = await getUser(1)    <span class="code-comment">// ✅</span></code></pre>
+<h3 id="sec-12">6. 未处理的 rejection 会让 Node 直接崩</h3>
+<p><code>await</code> 不写 <code>try/catch</code>、<code>.then</code> 不接 <code>.catch</code>，进程会抛 <code>UnhandledPromiseRejection</code>。所有异步入口都要有兜底。</p>
+<h3 id="sec-13">7. <code>fetch</code> 只有在<strong>网络层失败</strong>时才 reject</h3>
+<p>HTTP 404 / 500 不会进 <code>catch</code>，必须自己判断：</p>
+<pre><code class="language-js">const res = await fetch(url)
+if (!res.ok) throw new Error('状态码：' + res.status)
+const data = await res.json()   <span class="code-comment">// .json() 也是异步，也要 await</span></code></pre>
+<h3 id="sec-14">8. 宏任务 / 微任务的顺序（面试常问）</h3>
+<pre><code class="language-js">console.log(1)
+setTimeout(() =&gt; console.log(2), 0)
+Promise.resolve().then(() =&gt; console.log(3))
+console.log(4)
+<span class="code-comment">// 输出：1 4 3 2   （微任务先于宏任务）</span></code></pre>
+<hr>
+<h2 id="sec-15">七、自测</h2>
+<ol><li>Promise 有哪三种状态？<code>resolve</code> 之后还能 <code>reject</code> 吗？</li><li><code>async function f(){}</code> 的返回值是什么类型？</li><li><code>Promise.all</code> 里有一个失败，整体会怎样？想等全部结束用哪个？</li><li>下面两段代码耗时差多少：<code>await a; await b;</code> 与 <code>await Promise.all([a, b])</code>？</li><li><code>fetch</code> 返回 404 会进 <code>catch</code> 吗？为什么？</li></ol></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第六节课——异步执行扩展/第六节课-总结.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-// 用 async/await 重写的一版（不动 ab.js，也不动 manage.js）
+// 用 async/await 重写的一版（不动 ab.mjs，也不动 manage.js）
 let ab = require('./ab.js')
 
 // ★ 关键：把回调式连接包装成 Promise 版

@@ -1,0 +1,67 @@
+<!-- source: 课堂/第十二节课——完整项目/学生管理系统/示例/init.sql -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>init · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂 · SQL</span>
+      <h1>init</h1>
+      <div class="doc-meta">数据来源：课堂/第十二节课——完整项目/学生管理系统/示例/init.sql · 更新于 2026-11-20</div>
+    </header>
+    <article class="doc"><pre class="node-sql"><code><span class="sql-comment">-- ============================================================</span>
+<span class="sql-comment">-- 初始化脚本：建库 + 建表 + 插入示例数据</span>
+<span class="sql-comment">-- 执行方式（任选）：</span>
+<span class="sql-comment">--   1) Navicat 里打开本文件，全选运行</span>
+<span class="sql-comment">--   2) 命令行：mysql -u root -p &lt; sql/init.sql</span>
+<span class="sql-comment">-- 注意：开头会先删库，重复执行不会报错</span>
+<span class="sql-comment">-- ============================================================</span>
+
+<span class="sql-keyword">DROP</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">EXISTS</span> <span class="sql-ident">student_app</span>;
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">DATABASE</span> <span class="sql-ident">student_app</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-ident">CHARACTER</span> <span class="sql-keyword">SET</span> <span class="sql-ident">utf8mb4</span> <span class="sql-ident">COLLATE</span> <span class="sql-ident">utf8mb4_general_ci</span>;
+<span class="sql-keyword">USE</span> <span class="sql-ident">student_app</span>;
+
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> <span class="sql-ident">students</span>
+(
+    <span class="sql-ident">id</span>         <span class="sql-ident">INT</span> <span class="sql-ident">UNSIGNED</span> <span class="sql-keyword">PRIMARY</span> <span class="sql-keyword">KEY</span> <span class="sql-keyword">AUTO_INCREMENT</span> <span class="sql-ident">COMMENT</span> <span class="sql-string">'主键'</span>,
+    <span class="sql-ident">sno</span>        <span class="sql-ident">VARCHAR</span>(<span class="sql-number">20</span>)      <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">UNIQUE</span> <span class="sql-ident">COMMENT</span> <span class="sql-string">'学号，唯一'</span>,
+    <span class="sql-ident">name</span>       <span class="sql-ident">VARCHAR</span>(<span class="sql-number">50</span>)      <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-ident">COMMENT</span> <span class="sql-string">'姓名'</span>,
+    <span class="sql-ident">gender</span>     <span class="sql-ident">ENUM</span> (<span class="sql-string">'男'</span>,<span class="sql-string">'女'</span>) <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-string">'男'</span> <span class="sql-ident">COMMENT</span> <span class="sql-string">'性别'</span>,
+    <span class="sql-ident">age</span>        <span class="sql-ident">TINYINT</span> <span class="sql-ident">UNSIGNED</span> <span class="sql-keyword">NULL</span> <span class="sql-ident">COMMENT</span> <span class="sql-string">'年龄'</span>,
+    <span class="sql-ident">class_name</span> <span class="sql-ident">VARCHAR</span>(<span class="sql-number">50</span>)      <span class="sql-keyword">NULL</span> <span class="sql-ident">COMMENT</span> <span class="sql-string">'班级'</span>,
+    <span class="sql-ident">created_at</span> <span class="sql-ident">DATETIME</span>         <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-ident">CURRENT_TIMESTAMP</span> <span class="sql-ident">COMMENT</span> <span class="sql-string">'创建时间'</span>
+) <span class="sql-ident">ENGINE</span> <span class="sql-operator">=</span> <span class="sql-ident">InnoDB</span>
+  <span class="sql-keyword">DEFAULT</span> <span class="sql-ident">CHARSET</span> <span class="sql-operator">=</span> <span class="sql-ident">utf8mb4</span> <span class="sql-ident">COMMENT</span> <span class="sql-operator">=</span> <span class="sql-string">'学生表'</span>;
+
+<span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> <span class="sql-ident">students</span> (<span class="sql-ident">sno</span>, <span class="sql-ident">name</span>, <span class="sql-ident">gender</span>, <span class="sql-ident">age</span>, <span class="sql-ident">class_name</span>)
+<span class="sql-keyword">VALUES</span> (<span class="sql-string">'2026001'</span>, <span class="sql-string">'张三'</span>, <span class="sql-string">'男'</span>, <span class="sql-number">19</span>, <span class="sql-string">'计算机1班'</span>),
+       (<span class="sql-string">'2026002'</span>, <span class="sql-string">'李四'</span>, <span class="sql-string">'女'</span>, <span class="sql-number">20</span>, <span class="sql-string">'计算机1班'</span>),
+       (<span class="sql-string">'2026003'</span>, <span class="sql-string">'王五'</span>, <span class="sql-string">'男'</span>, <span class="sql-number">19</span>, <span class="sql-string">'计算机2班'</span>),
+       (<span class="sql-string">'2026004'</span>, <span class="sql-string">'赵六'</span>, <span class="sql-string">'女'</span>, <span class="sql-number">20</span>, <span class="sql-string">'计算机2班'</span>),
+       (<span class="sql-string">'2026005'</span>, <span class="sql-string">'孙七'</span>, <span class="sql-string">'男'</span>, <span class="sql-number">21</span>, <span class="sql-string">'软件1班'</span>),
+       (<span class="sql-string">'2026006'</span>, <span class="sql-string">'周八'</span>, <span class="sql-string">'女'</span>, <span class="sql-number">19</span>, <span class="sql-string">'软件1班'</span>),
+       (<span class="sql-string">'2026007'</span>, <span class="sql-string">'吴九'</span>, <span class="sql-string">'男'</span>, <span class="sql-number">20</span>, <span class="sql-string">'网络1班'</span>),
+       (<span class="sql-string">'2026008'</span>, <span class="sql-string">'郑十'</span>, <span class="sql-string">'女'</span>, <span class="sql-number">21</span>, <span class="sql-string">'网络1班'</span>);
+
+<span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(<span class="sql-operator">*</span>) <span class="sql-keyword">AS</span> 学生总数
+<span class="sql-keyword">FROM</span> <span class="sql-ident">students</span>;
+</code></pre></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第十二节课——完整项目/学生管理系统/示例/init.sql</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

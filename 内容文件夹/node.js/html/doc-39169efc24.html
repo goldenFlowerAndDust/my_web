@@ -1,0 +1,141 @@
+<!-- source: 课堂/第十二节课——完整项目/学生管理系统/README.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>学生管理系统（全栈完整示例） · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂</span>
+      <h1>学生管理系统（全栈完整示例）</h1>
+      <div class="doc-meta">数据来源：课堂/第十二节课——完整项目/学生管理系统/README.md · 更新于 2026-11-20</div>
+    </header>
+    <article class="doc"><blockquote><p>一条完整的双向链路：<strong>页面 → fetch → Express → MySQL → JSON → 页面</strong>。覆盖 <strong>查（搜索+分页）、增、改、删</strong> 四个接口，前后端都带输入校验和错误提示。</p></blockquote>
+<blockquote><p>📂 <strong>目录约定</strong></p>
+<ul><li><strong>根目录</strong>：只放文档（<code>README.md</code>、<code>工程文档.md</code>）和模板（<code>.env.example</code>）——这里是<strong>你自己动手写的位置</strong></li><li><strong><code>示例\</code></strong>：一份完整可运行的参考实现（server.js / db.js / public / init.sql / 启动.cmd / node_modules）</li><li><strong>怎么用</strong>：先看文档自己写，卡住了再翻 <code>示例\</code> 对照；别直接抄根目录没有的东西</li></ul></blockquote>
+<hr>
+<h2 id="sec-1">0. 这个项目能学到什么</h2>
+<table><thead><tr><th>能力</th><th>落在哪个文件</th></tr></thead><tbody><tr><td>Express 路由 + 中间件</td><td><code>server.js</code></td></tr><tr><td>连接池、参数化查询（防注入）</td><td><code>db.js</code> + <code>server.js</code></td></tr><tr><td>分页 / 模糊搜索的 SQL 写法</td><td><code>server.js</code> 的 <code>GET /api/students</code></td></tr><tr><td>REST 风格（GET/POST/PUT/DELETE）</td><td><code>server.js</code> 四个接口</td></tr><tr><td><code>fetch</code> 两种方法（GET 带参 / POST 带 body）</td><td><code>public/app.js</code></td></tr><tr><td>表单校验 + 错误提示</td><td>前后端各一份</td></tr><tr><td>动态渲染表格、事件委托</td><td><code>public/app.js</code></td></tr><tr><td>配置与代码分离（.env）</td><td><code>.env.example</code></td></tr></tbody></table>
+<hr>
+<h2 id="sec-2">1. 前提</h2>
+<pre><code class="language-bash">node -v        # 需要 18+（用 --env-file 需要 20+，你这台是 24）
+npm -v</code></pre>
+<p>MySQL 服务要在运行：</p>
+<pre><code class="language-bash">net start MySQL80</code></pre>
+<hr>
+<h2 id="sec-3">2. 建库建表</h2>
+<p><strong>方式 A：Navicat（推荐）</strong></p>
+<ol><li>用 root 连接打开 <code>示例/init.sql</code>；</li><li>全选 → <code>Ctrl + Enter</code> 运行；</li><li>最后应输出 <code>学生总数 = 8</code>。</li></ol>
+<p><strong>方式 B：命令行</strong>（在项目根目录执行）</p>
+<pre><code class="language-bash">cd D:\GitHub\my_web\内容文件夹\node.js\课堂\第十二节课——完整项目\学生管理系统
+&quot;E:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe&quot; -u root -p &lt; 示例\init.sql</code></pre>
+<blockquote><p>⚠️ 脚本开头是 <code>DROP DATABASE IF EXISTS student_app</code>，<strong>每次执行都会清空重建</strong>。熟悉之后建议去掉这行。你自己写的时候，把建表语句写进自己的 <code>init.sql</code>，别直接用示例的。</p></blockquote>
+<hr>
+<h2 id="sec-4">3. 安装依赖（只装一次）</h2>
+<p>依赖装在<strong>根目录</strong>，根目录和 <code>示例\</code> 共用同一份，不用装两次。</p>
+<pre><code class="language-bash">cd D:\GitHub\my_web\内容文件夹\node.js\课堂\第十二节课——完整项目\学生管理系统
+npm install express mysql2</code></pre>
+<p>目前的根目录已经有 <code>node_modules</code>（express 5.3.0 + mysql2 3.24.6），<strong>这一步已经做过了</strong>。</p>
+<blockquote><p>为什么共用？Node 找包是<strong>逐级向上</strong>找 <code>node_modules</code> 的：<code>示例\server.js</code> 会先看 <code>示例\node_modules</code>（没有）→ 再看上级 <code>学生管理系统\node_modules</code>（找到）。反过来不行：根目录的代码<strong>找不到</strong>子目录里的包。所以包要放在<strong>上面</strong>。</p></blockquote>
+<hr>
+<h2 id="sec-5">4. 配置数据库密码</h2>
+<p>根目录的 <code>.env.example</code> 是<strong>给你自己项目用的模板</strong>：</p>
+<pre><code class="language-bash">copy .env.example .env</code></pre>
+<p>然后打开 <code>.env</code> 填上你的密码：</p>
+<pre><code class="language-ini">PORT=3100
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=你的密码
+DB_NAME=student_app</code></pre>
+<blockquote><p><code>示例\.env</code> 我已经配好了，可以直接跑示例看效果。<code>.env</code> 已在 <code>.gitignore</code> 里，不会被提交。<strong>代码里永远不要写密码。</strong></p></blockquote>
+<hr>
+<h2 id="sec-6">5. 启动</h2>
+<p><strong>跑示例（看效果）：</strong></p>
+<pre><code class="language-bash">cd D:\GitHub\my_web\内容文件夹\node.js\课堂\第十二节课——完整项目\学生管理系统\示例
+node --env-file=.env server.js</code></pre>
+<p>或者直接<strong>双击 <code>示例\启动.cmd</code></strong>。</p>
+<p>看到这一行就成功：</p>
+<pre><code>学生管理系统已启动：http:<span class="code-comment">//localhost:3100</span></code></pre>
+<blockquote><p>端口用 <strong>3100</strong>，避开你之前那个占着 3000 的旧服务。被占就改 <code>.env</code> 里的 <code>PORT</code>。等你自己写完，就在<strong>根目录</strong>用同样的命令启动你自己的 <code>server.js</code>。</p></blockquote>
+<hr>
+<h2 id="sec-7">6. 验证（先验接口，再看页面）</h2>
+<p><strong>① 浏览器直接访问接口</strong></p>
+<pre><code>http:<span class="code-comment">//localhost:3100/api/students</span></code></pre>
+<p>应该看到 JSON：</p>
+<pre><code class="language-json">{&quot;list&quot;:[{&quot;id&quot;:8,&quot;sno&quot;:&quot;2026008&quot;,&quot;name&quot;:&quot;郑十&quot;,...}],&quot;total&quot;:8,&quot;page&quot;:1,&quot;size&quot;:5,&quot;pages&quot;:2}</code></pre>
+<p><strong>② 带参数试试</strong></p>
+<pre><code>http:<span class="code-comment">//localhost:3100/api/students?kw=软件&amp;page=1&amp;size=5</span></code></pre>
+<p><strong>③ 用 PowerShell 测增删改（可选）</strong></p>
+<pre><code class="language-powershell"># 新增
+Invoke-RestMethod -Method Post -Uri http:<span class="code-comment">//localhost:3100/api/students `</span>
+  -ContentType 'application/json; charset=utf-8' `
+  -Body '{&quot;sno&quot;:&quot;2026009&quot;,&quot;name&quot;:&quot;测试&quot;,&quot;gender&quot;:&quot;男&quot;,&quot;age&quot;:19,&quot;class_name&quot;:&quot;测试班&quot;}'
+
+# 修改（把 9 换成实际 id）
+Invoke-RestMethod -Method Put -Uri http:<span class="code-comment">//localhost:3100/api/students/9 `</span>
+  -ContentType 'application/json; charset=utf-8' `
+  -Body '{&quot;sno&quot;:&quot;2026009&quot;,&quot;name&quot;:&quot;改名了&quot;,&quot;gender&quot;:&quot;女&quot;}'
+
+# 删除
+Invoke-RestMethod -Method Delete -Uri http:<span class="code-comment">//localhost:3100/api/students/9</span></code></pre>
+<h2 id="sec-8">7. 打开页面</h2>
+<p>浏览器访问 <strong>http://localhost:3100</strong>（不要双击 html 文件，也不要走 WebStorm 内置服务器——那样接口会 404）。</p>
+<p>能做的事：</p>
+<ul><li>列表默认每页 5 条，可以翻页；</li><li>搜索框输学号/姓名/班级，回车或点搜索；</li><li>上方表单填完点「添加」；</li><li>每行点「编辑」→ 表单变成编辑态 → 改完点「保存修改」；</li><li>点「删除」会二次确认。</li></ul>
+<hr>
+<h2 id="sec-9">8. 文件地图</h2>
+<pre><code>学生管理系统/                 ← 你自己在这里写
+├─ README.md                 操作步骤（本文档）
+├─ 工程文档.md                架构 / 接口 / 知识清单 / 验收题
+├─ .env.example              配置模板（copy 成 .env）
+├─ .gitignore                忽略 node_modules / .env
+├─ package.json              ★ 唯一的依赖清单（express + mysql2）
+├─ node_modules/             ★ 唯一的依赖目录（根和示例共用）
+└─ 示例/                      参考实现（可运行，别直接抄）
+   ├─ server.js              4 个接口 + 404 + 错误处理
+   ├─ db.js                  连接池
+   ├─ public/                index.html / style.css / app.js
+   ├─ init.sql               建库建表 + 8 条数据
+   ├─ 启动.cmd               一键启动
+   └─ .env / .env.example   示例自己的配置</code></pre>
+<h3 id="sec-10">请求怎么走</h3>
+<pre><code>点「添加」
+  → app.js 组装 body
+  → fetch('/api/students', { method:'POST', body: JSON })
+  → server.js 的 app.post('/api/students')
+  → validate() 校验
+  → pool.query('INSERT ...')
+  → res.status(201).json({ id })
+  → app.js 收到成功 → 重新 load() 列表</code></pre>
+<hr>
+<h2 id="sec-11">9. 常见错误对照</h2>
+<table><thead><tr><th>现象</th><th>原因</th><th>处理</th></tr></thead><tbody><tr><td><code>ECONNREFUSED</code></td><td>MySQL 没启动</td><td><code>net start MySQL80</code></td></tr><tr><td><code>ER_ACCESS_DENIED_ERROR</code>（<code>using password: YES</code>）</td><td><code>.env</code> 里密码错</td><td>改 <code>.env</code></td></tr><tr><td><code>ER_ACCESS_DENIED_ERROR</code>（<code>using password: NO</code>）</td><td><strong>启动时没带 <code>--env-file=.env</code></strong>，或 <code>.env</code> 根本不存在</td><td>用 <code>示例\启动.cmd</code>，或 <code>node --env-file=.env server.js</code></td></tr><tr><td><code>ER_BAD_DB_ERROR</code></td><td>没建库 / 库名不对</td><td>跑 <code>示例/init.sql</code></td></tr><tr><td><code>EADDRINUSE</code></td><td>端口被占</td><td>改 <code>.env</code> 的 <code>PORT</code></td></tr><tr><td>启动服务时报 <code>System error 5</code></td><td>不是管理员</td><td>用“以管理员身份”打开终端再 <code>net start MySQL80</code></td></tr><tr><td>服务显示 Stopped 但启动类型是 Automatic</td><td>进程崩溃了（不会自动拉起）</td><td>手动 <code>net start MySQL80</code>；原因见文末</td></tr><tr><td>页面 404</td><td>用 file:// 或 WebStorm 内置服务器打开</td><td>用 <code>http://localhost:3100</code></td></tr><tr><td>接口 404</td><td>路径拼错</td><td>对照第 6 节的 URL</td></tr><tr><td>添加提示「学号已存在」</td><td><code>sno</code> 有唯一索引</td><td>换个学号</td></tr><tr><td>页面没数据但接口有</td><td>前端字段名对不上</td><td>检查 <code>app.js</code> 里的 <code>s.no</code> / <code>s.name</code> 等</td></tr></tbody></table>
+<hr>
+<h2 id="sec-12">10. 进阶练习（做完这四步算“会了”）</h2>
+<ol><li><strong>加排序</strong>：点击表头按年龄/学号排序（后端接 <code>sort</code> 参数）；</li><li><strong>加批量删除</strong>：表格每行加复选框，一次删多条（<code>DELETE ... WHERE id IN (?)</code>）；</li><li><strong>加登录</strong>：没登录不能增删改（先用最简单的 session，再考虑 JWT）；</li><li><strong>换成连接池之外的写法</strong>：把 <code>db.js</code> 改成单连接，感受一下并发时为什么会卡（体会连接池的价值）。</li></ol>
+<hr>
+<h2 id="sec-13">11. 清理</h2>
+<pre><code class="language-sql">DROP DATABASE student_app;   -- 不玩了就删掉，干净</code></pre>
+<hr>
+<h2 id="sec-14">12. 一句话</h2>
+<blockquote><p><strong>前端只做三件事：发请求、渲染、改状态；后端只做三件事：收参数、校验、查库。</strong>中间靠 JSON 串起来 —— 这就是全栈。</p></blockquote>
+<p>更新：2026-11-18</p></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第十二节课——完整项目/学生管理系统/README.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

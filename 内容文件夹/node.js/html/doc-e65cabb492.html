@@ -1,0 +1,237 @@
+<!-- source: 课堂/第十二节课——完整项目/学生管理系统/工程文档.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>学生管理系统 · 工程文档 · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂</span>
+      <h1>学生管理系统 · 工程文档</h1>
+      <div class="doc-meta">数据来源：课堂/第十二节课——完整项目/学生管理系统/工程文档.md · 更新于 2026-11-20</div>
+    </header>
+    <article class="doc"><blockquote><p>版本：v1.0 ｜ 日期：2026-11-20  一句话：一个最小但<strong>完整</strong>的全栈项目——前端页面能查、能加、能改、能删，所有操作真实落到 MySQL。</p></blockquote>
+<blockquote><p>📂 <strong>目录约定</strong></p>
+<ul><li><strong>根目录</strong>：只有文档和 <code>.env.example</code> —— 你自己写代码的地方</li><li><strong><code>示例\</code></strong>：完整可运行的参考实现</li><li>本文下面提到的 <code>server.js</code>、<code>db.js</code>、<code>public/</code>、<code>init.sql</code>、<code>启动.cmd</code>，<strong>都位于 <code>示例\</code> 下</strong>（为简洁省略前缀）</li></ul></blockquote>
+<hr>
+<h2 id="sec-1">一、项目概览</h2>
+<h3 id="sec-2">1.1 功能清单</h3>
+<table><thead><tr><th>功能</th><th>用户操作</th><th>背后发生了什么</th></tr></thead><tbody><tr><td>列表 + 分页</td><td>打开页面 / 点翻页</td><td><code>GET /api/students?page=1&amp;size=5</code> → <code>SELECT ... LIMIT ? OFFSET ?</code></td></tr><tr><td>搜索</td><td>输入学号/姓名/班级</td><td><code>GET /api/students?kw=软件</code> → <code>WHERE sno LIKE ? OR name LIKE ? OR class_name LIKE ?</code></td></tr><tr><td>新增</td><td>填表单点「添加」</td><td><code>POST /api/students</code> → <code>INSERT INTO students ...</code></td></tr><tr><td>修改</td><td>点「编辑」改完保存</td><td><code>PUT /api/students/:id</code> → <code>UPDATE students SET ... WHERE id = ?</code></td></tr><tr><td>删除</td><td>点「删除」并确认</td><td><code>DELETE /api/students/:id</code> → <code>DELETE FROM students WHERE id = ?</code></td></tr></tbody></table>
+<h3 id="sec-3">1.2 技术栈</h3>
+<table><thead><tr><th>层</th><th>技术</th><th>版本</th><th>作用</th></tr></thead><tbody><tr><td>页面结构</td><td>HTML</td><td>—</td><td>表单、表格、分页按钮</td></tr><tr><td>样式</td><td>CSS</td><td>—</td><td>卡片、表格、按钮态</td></tr><tr><td>浏览器逻辑</td><td>原生 JavaScript</td><td>ES2020+</td><td>fetch、渲染、事件</td></tr><tr><td>服务端</td><td>Node.js + Express</td><td>24 / 5.3.0</td><td>路由、参数解析、响应</td></tr><tr><td>数据库</td><td>MySQL</td><td>8.0.46</td><td>存储学生数据</td></tr><tr><td>驱动</td><td>mysql2</td><td>3.24.6</td><td>连接池 + Promise</td></tr></tbody></table>
+<hr>
+<h2 id="sec-4">二、架构与数据流</h2>
+<h3 id="sec-5">2.1 分层</h3>
+<pre><code>浏览器
+ ├─ index.html   结构
+ ├─ style.css    外观
+ └─ app.js       fetch ─┐
+                        │ HTTP + JSON
+Express 服务（server.js + db.js）
+ ├─ 静态托管      ← / 、/style.css 、/app.js
+ ├─ 路由          ← /api/students
+ ├─ 校验          ← validate()
+ └─ 连接池        ← pool.query()
+                        │ SQL
+MySQL（student_app.students）</code></pre>
+<h3 id="sec-6">2.2 一次「添加」的完整时序</h3>
+<pre><code>1. 用户填表单，点「添加」
+2. app.js 阻止表单默认提交（e.preventDefault）
+3. 组装 body = { sno, name, gender, age, class_name }
+4. fetch('/api/students', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) })
+5. server.js：express.json() 解析 body → req.body
+6. validate(req.body) 校验 → 不通过直接 400
+7. pool.query('INSERT ...', [...]) → MySQL 写入
+8. res.status(201).json({ id, message })
+9. app.js 收到成功 → form.reset() → load() 重新拉列表
+10. 页面刷新出新记录</code></pre>
+<hr>
+<h2 id="sec-7">三、目录结构</h2>
+<pre><code>学生管理系统/                ← 你自己的实现放这里
+├─ README.md                操作步骤
+├─ 工程文档.md               本文档
+├─ .env.example             配置模板
+├─ .gitignore               忽略 node_modules / .env
+├─ package.json             ★ 唯一依赖清单（express + mysql2）
+├─ node_modules/            ★ 唯一依赖目录，根与示例共用
+└─ 示例/                     参考实现（可运行）
+   ├─ server.js             后端入口：4 个接口 + 404 + 错误处理（148 行）
+   ├─ db.js                 连接池（21 行，唯一连库处）
+   ├─ .env                  示例自己的配置（不提交）
+   ├─ .env.example          示例的配置模板
+   ├─ init.sql              建库建表 + 8 条示例数据
+   ├─ 启动.cmd              一键启动
+   └─ public/
+      ├─ index.html         页面结构
+      ├─ style.css          样式
+      └─ app.js             前端逻辑（213 行）</code></pre>
+<hr>
+<h2 id="sec-8">四、数据库设计</h2>
+<h3 id="sec-9">4.1 表结构 <code>student_app.students</code></h3>
+<table><thead><tr><th>字段</th><th>类型</th><th>约束</th><th>说明</th></tr></thead><tbody><tr><td><code>id</code></td><td>INT UNSIGNED</td><td>PK, AUTO_INCREMENT</td><td>主键，前端用不到但接口要用</td></tr><tr><td><code>sno</code></td><td>VARCHAR(20)</td><td>NOT NULL, <strong>UNIQUE</strong></td><td>学号，唯一 → 重复插入会报 <code>ER_DUP_ENTRY</code></td></tr><tr><td><code>name</code></td><td>VARCHAR(50)</td><td>NOT NULL</td><td>姓名</td></tr><tr><td><code>gender</code></td><td>ENUM('男','女')</td><td>NOT NULL DEFAULT '男'</td><td>值域限制，插入非法值会被拒</td></tr><tr><td><code>age</code></td><td>TINYINT UNSIGNED</td><td>NULL</td><td>允许空（未知年龄）</td></tr><tr><td><code>class_name</code></td><td>VARCHAR(50)</td><td>NULL</td><td>班级</td></tr><tr><td><code>created_at</code></td><td>DATETIME</td><td>NOT NULL DEFAULT CURRENT_TIMESTAMP</td><td>插入时自动填充，前端展示用</td></tr></tbody></table>
+<h3 id="sec-10">4.2 几个设计决定，为什么这么做</h3>
+<table><thead><tr><th>决定</th><th>原因</th></tr></thead><tbody><tr><td>用自增 <code>id</code> 做主键，而不是 <code>sno</code></td><td>学号可能录错要改；主键一旦被业务字段占用，改起来会牵连外键</td></tr><tr><td><code>sno</code> 加 UNIQUE</td><td>业务上不允许重复；数据库层兜底，比只在 JS 里判重可靠</td></tr><tr><td><code>gender</code> 用 ENUM</td><td>取值只有两个，写错直接报错，不必在代码里反复校验</td></tr><tr><td><code>created_at</code> 用 DEFAULT</td><td>不用前端传，也不怕忘</td></tr><tr><td>表用 InnoDB</td><td>支持事务、行锁，是默认选择</td></tr></tbody></table>
+<hr>
+<h2 id="sec-11">五、接口文档</h2>
+<h3 id="sec-12">5.0 统一约定</h3>
+<table><thead><tr><th>约定</th><th>内容</th></tr></thead><tbody><tr><td>数据格式</td><td>请求/响应都是 <code>application/json; charset=utf-8</code></td></tr><tr><td>成功响应</td><td>2xx + JSON 数据</td></tr><tr><td>失败响应</td><td>4xx/5xx + <code>{ &quot;error&quot;: &quot;人话描述&quot; }</code></td></tr><tr><td>字符集</td><td>全链路 UTF-8（库 utf8mb4）</td></tr><tr><td>认证</td><td>暂无（学习阶段）</td></tr></tbody></table>
+<h3 id="sec-13">5.1 列表 + 搜索 + 分页</h3>
+<pre><code>GET /api/students?kw=软件&amp;page=1&amp;size=5</code></pre>
+<table><thead><tr><th>参数</th><th>必填</th><th>默认</th><th>说明</th></tr></thead><tbody><tr><td><code>kw</code></td><td>否</td><td>空</td><td>模糊匹配 学号 / 姓名 / 班级</td></tr><tr><td><code>page</code></td><td>否</td><td>1</td><td>页码，从 1 开始</td></tr><tr><td><code>size</code></td><td>否</td><td>5</td><td>每页条数，最大 50</td></tr></tbody></table>
+<p>成功响应：</p>
+<pre><code class="language-json">{
+  &quot;list&quot;: [
+    { &quot;id&quot;: 6, &quot;sno&quot;: &quot;2026006&quot;, &quot;name&quot;: &quot;周八&quot;, &quot;gender&quot;: &quot;女&quot;, &quot;age&quot;: 19, &quot;class_name&quot;: &quot;软件1班&quot;, &quot;created_at&quot;: &quot;2026-11-20 10:22:17&quot; }
+  ],
+  &quot;total&quot;: 2,
+  &quot;page&quot;: 1,
+  &quot;size&quot;: 5,
+  &quot;pages&quot;: 1
+}</code></pre>
+<blockquote><p><code>pages</code> 由后端算好，前端直接用来禁用「下一页」按钮。</p></blockquote>
+<h3 id="sec-14">5.2 新增</h3>
+<pre><code>POST /api/students
+Content-Type: application/json
+
+{ &quot;sno&quot;: &quot;2026999&quot;, &quot;name&quot;: &quot;新来的&quot;, &quot;gender&quot;: &quot;女&quot;, &quot;age&quot;: 18, &quot;class_name&quot;: &quot;测试班&quot; }</code></pre>
+<table><thead><tr><th>响应</th><th>说明</th></tr></thead><tbody><tr><td><code>201 { &quot;id&quot;: 9, &quot;message&quot;: &quot;添加成功&quot; }</code></td><td>成功</td></tr><tr><td><code>400 { &quot;error&quot;: &quot;学号不能为空&quot; }</code></td><td>校验失败</td></tr><tr><td><code>400 { &quot;error&quot;: &quot;性别只能是 男/女&quot; }</code></td><td>枚举非法</td></tr><tr><td><code>400 { &quot;error&quot;: &quot;学号已存在&quot; }</code></td><td>唯一索引冲突</td></tr></tbody></table>
+<h3 id="sec-15">5.3 修改</h3>
+<pre><code>PUT /api/students/:id</code></pre>
+<p>请求体同新增。响应：<code>200 { &quot;message&quot;: &quot;修改成功&quot; }</code> / <code>404 { &quot;error&quot;: &quot;找不到这个学生&quot; }</code>。</p>
+<h3 id="sec-16">5.4 删除</h3>
+<pre><code>DELETE /api/students/:id</code></pre>
+<p>响应：<code>200 { &quot;message&quot;: &quot;删除成功&quot; }</code> / <code>404 { &quot;error&quot;: &quot;找不到这个学生&quot; }</code>。</p>
+<h3 id="sec-17">5.5 错误码对照</h3>
+<table><thead><tr><th>状态码</th><th>什么时候</th><th>前端怎么处理</th></tr></thead><tbody><tr><td>200</td><td>查询/修改/删除成功</td><td>刷新列表</td></tr><tr><td>201</td><td>新增成功</td><td>清空表单 + 刷新</td></tr><tr><td>400</td><td>参数不合法</td><td>显示 <code>error</code> 文案</td></tr><tr><td>404</td><td>id 不存在 / 接口路径错</td><td>同上</td></tr><tr><td>500</td><td>服务端异常（如数据库连不上）</td><td>同上，需看服务端控制台</td></tr></tbody></table>
+<hr>
+<h2 id="sec-18">六、前端设计</h2>
+<h3 id="sec-19">6.1 状态：页面只有 5 个变量</h3>
+<pre><code class="language-js">const state = {
+    page: 1,          <span class="code-comment">// 当前页</span>
+    size: 5,          <span class="code-comment">// 每页几条</span>
+    kw: '',           <span class="code-comment">// 搜索关键字</span>
+    pages: 1,         <span class="code-comment">// 总页数（后端算的）</span>
+    editingId: null,  <span class="code-comment">// null=新增；有数字=正在编辑这条</span>
+    list: [],         <span class="code-comment">// 当前页数据（编辑时回填表单）</span>
+}</code></pre>
+<p><strong>所有界面变化都由这 5 个变量推导</strong>：改 <code>page</code> 再 <code>load()</code>，表格就换了页；改 <code>editingId</code>，表单就切换形态。这叫“状态驱动”，比到处 <code>innerHTML</code> 好维护。</p>
+<h3 id="sec-20">6.2 三个核心函数</h3>
+<table><thead><tr><th>函数</th><th>位置</th><th>职责</th></tr></thead><tbody><tr><td><code>api(url, options)</code></td><td>app.js:46</td><td>统一发请求：自动加 JSON 头、解析 JSON、把 <code>error</code> 抛成异常</td></tr><tr><td><code>load()</code></td><td>app.js:99</td><td>按当前 state 拉数据 → 渲染表格 + 分页信息</td></tr><tr><td><code>renderRows(list)</code></td><td>app.js:57</td><td>数组 → <code>&lt;tr&gt;</code> 字符串，空数据给提示</td></tr></tbody></table>
+<h3 id="sec-21">6.3 新增 / 编辑共用一个表单</h3>
+<pre><code>editingId === null  →  表单是“新增”，按钮文字「添加」
+editingId === 9     →  表单是“编辑”，按钮文字「保存修改」
+提交时看 editingId 决定 POST 还是 PUT</code></pre>
+<p>这是最常见的省代码手法：<strong>一个表单 + 一个标志位</strong>，比写两个表单干净。</p>
+<h3 id="sec-22">6.4 为什么用事件委托</h3>
+<pre><code class="language-js">tbody.addEventListener('click', e =&gt; { const btn = e.target.closest('button') ... })</code></pre>
+<p>表格行是动态生成的。如果每次渲染都给每个按钮绑一次监听，旧的监听不会自动销毁，越绑越多。<strong>绑在父元素上、靠 <code>closest()</code> 判断点的是谁</strong>，一次绑定终身有效。</p>
+<h3 id="sec-23">6.5 防 XSS</h3>
+<pre><code class="language-js">const esc = s =&gt; String(s ?? '').replace(/[&amp;&lt;&gt;&quot;']/g, c =&gt; ...)</code></pre>
+<p>渲染时用 <code>esc()</code> 转义。虽然本项目数据来自数据库、相对可信，但<strong>这个习惯必须从现在养成</strong>——一旦以后允许用户自己填内容，不转义就是漏洞。</p>
+<hr>
+<h2 id="sec-24">七、工程化实践</h2>
+<table><thead><tr><th>实践</th><th>在本项目里的样子</th><th>为什么重要</th></tr></thead><tbody><tr><td><strong>配置与代码分离</strong></td><td><code>.env</code> + <code>process.env</code>，代码里零密码</td><td>换环境不用改代码；密码不进 Git</td></tr><tr><td><strong>忽略敏感文件</strong></td><td><code>.gitignore</code> 里有 <code>.env</code>、<code>node_modules/</code></td><td>一次失误就能把密码传上 GitHub</td></tr><tr><td><strong>依赖只装一次</strong></td><td>根目录 <code>node_modules</code>，示例通过「向上查找」共用</td><td>子目录不需要再装一遍包</td></tr><tr><td><strong>连接池</strong></td><td><code>db.js</code> 里 <code>createPool</code></td><td>并发请求复用连接，不反复握手</td></tr><tr><td><strong>参数化查询</strong></td><td>所有 SQL 都用 <code>?</code></td><td>防 SQL 注入</td></tr><tr><td><strong>统一错误处理</strong></td><td><code>server.js:142</code> 的 4 参数中间件</td><td>避免每个接口都写一遍 try/catch 的返回</td></tr><tr><td><strong>REST 语义</strong></td><td>GET 查、POST 增、PUT 改、DELETE 删</td><td>别人（和未来的你）一看就懂</td></tr><tr><td><strong>一键启动</strong></td><td><code>示例\启动.cmd</code></td><td>不用记命令，也不用担心忘参数</td></tr></tbody></table>
+<hr>
+<h2 id="sec-25">八、知识清单（独立完成需要掌握的全部）</h2>
+<blockquote><p>用法：逐条自评。<strong>“掌握标准”能不看资料做到，才打勾。</strong>优先级：★★★ 不会就写不出来；★★ 决定代码质量；★ 锦上添花。</p></blockquote>
+<h3 id="sec-26">8.1 HTML（★★★ 基础）</h3>
+<table><thead><tr><th>知识点</th><th>掌握标准</th><th>本项目位置</th></tr></thead><tbody><tr><td>表单 <code>&lt;form&gt;</code> + <code>submit</code> 事件</td><td>知道默认会刷新页面，会用 <code>e.preventDefault()</code> 阻止</td><td>index.html 表单</td></tr><tr><td><code>&lt;input&gt;</code> 的 type / required / maxlength</td><td>能约束输入，知道 <code>required</code> 是浏览器原生校验</td><td>学号/姓名/年龄</td></tr><tr><td><code>&lt;select&gt;</code> + <code>&lt;option&gt;</code></td><td>能写出固定选项的下拉框</td><td>性别</td></tr><tr><td><code>&lt;table&gt;/&lt;thead&gt;/&lt;tbody&gt;/&lt;tr&gt;/&lt;th&gt;/&lt;td&gt;</code></td><td>能徒手写出带表头的表格</td><td>列表</td></tr><tr><td><code>colspan</code></td><td>知道空数据时一行占满所有列</td><td>“没有数据”提示</td></tr><tr><td><code>id</code> vs <code>class</code></td><td>id 唯一用于 JS 取元素，class 可重复用于样式</td><td>全项目</td></tr><tr><td><code>label</code> 包裹 input</td><td>点文字也能聚焦输入框</td><td>表单</td></tr></tbody></table>
+<h3 id="sec-27">8.2 CSS（★★）</h3>
+<table><thead><tr><th>知识点</th><th>掌握标准</th><th>本项目位置</th></tr></thead><tbody><tr><td>盒模型 + <code>box-sizing: border-box</code></td><td>知道宽高含不含 padding/border</td><td>style.css 第一行</td></tr><tr><td>Flex</td><td>能用 <code>display:flex</code> + <code>gap</code> 做一行工具栏</td><td><code>.toolbar</code></td></tr><tr><td>Grid</td><td>能用 <code>repeat(auto-fit, minmax(...))</code> 做自适应表单</td><td><code>.grid</code></td></tr><tr><td>选择器：元素/类/后代/伪类</td><td>能写出 <code>tbody tr:hover</code> 这种组合</td><td>表格悬停</td></tr><tr><td><code>:focus</code></td><td>输入框聚焦高亮</td><td>input:focus</td></tr><tr><td><code>button:disabled</code></td><td>请求期间按钮变灰</td><td>提交时禁用</td></tr><tr><td>居中：<code>max-width</code> + <code>margin: 0 auto</code></td><td>页面主体居中</td><td><code>.wrap</code></td></tr></tbody></table>
+<h3 id="sec-28">8.3 JavaScript 语言（★★★）</h3>
+<table><thead><tr><th>知识点</th><th>掌握标准</th><th>本项目位置</th></tr></thead><tbody><tr><td><code>const</code> / <code>let</code></td><td>知道什么时候用哪个，默认 const</td><td>全项目</td></tr><tr><td>模板字符串</td><td>能拼多行 HTML 并插值</td><td>renderRows</td></tr><tr><td>解构</td><td><code>const [rows] = ...</code>、<code>const { sno, name } = req.body</code></td><td>前后端都有</td></tr><tr><td>展开运算符</td><td><code>{ ...options, method }</code>、<code>[...params, size, offset]</code></td><td>api()、分页 SQL</td></tr><tr><td><code>??</code> 与 `\</td><td>\</td><td>` 的区别</td><td><code>??</code> 只兜 null/undefined；`\</td><td>\</td><td>` 连 0 和 '' 都兜</td><td><code>s.age ?? '-'</code></td></tr><tr><td>数组 <code>map</code></td><td>能把数组变成另一组东西（这里是 HTML 串）</td><td>renderRows</td></tr><tr><td>数组 <code>find</code></td><td>按条件找一条</td><td>startEdit</td></tr><tr><td><code>String.prototype.trim</code></td><td>去首尾空格</td><td>表单取值</td></tr><tr><td><code>URLSearchParams</code></td><td>拼查询串，省去手动 encode</td><td>load()</td></tr><tr><td><code>async</code> / <code>await</code></td><td>知道 await 只能在 async 函数里</td><td>全部接口调用</td></tr><tr><td><code>try / catch / finally</code></td><td><code>finally</code> 用来恢复按钮状态</td><td>表单提交</td></tr><tr><td><code>JSON.stringify</code> / <code>JSON.parse</code></td><td>知道什么时候要序列化</td><td>fetch body / res.json</td></tr><tr><td>事件对象 <code>e.target</code> / <code>e.preventDefault</code></td><td>能拿到触发元素并阻止默认行为</td><td>表单、表格按钮</td></tr></tbody></table>
+<h3 id="sec-29">8.4 浏览器 API（★★★）</h3>
+<table><thead><tr><th>知识点</th><th>掌握标准</th><th>本项目位置</th></tr></thead><tbody><tr><td><code>document.getElementById</code></td><td>能取到元素</td><td>app.js 顶部</td></tr><tr><td><code>element.value</code></td><td>读输入框内容</td><td>表单取值</td></tr><tr><td><code>addEventListener</code></td><td>能绑 click / submit / keydown</td><td>全项目</td></tr><tr><td><code>event Delegation</code>（事件委托）</td><td>会绑父元素 + <code>closest()</code></td><td>表格操作按钮</td></tr><tr><td><code>fetch(url, options)</code></td><td>会发 GET / POST / PUT / DELETE</td><td>api()</td></tr><tr><td><code>response.ok</code> / <code>response.status</code></td><td>会判断失败</td><td>api()</td></tr><tr><td><code>response.json()</code></td><td>知道它返回 Promise，要 await</td><td>api()</td></tr><tr><td><code>confirm()</code></td><td>删除前二次确认</td><td>删除</td></tr><tr><td><code>scrollTo</code></td><td>编辑时回到表单</td><td>startEdit</td></tr></tbody></table>
+<h3 id="sec-30">8.5 网络 / HTTP（★★★）</h3>
+<table><thead><tr><th>知识点</th><th>掌握标准</th><th>本项目位置</th></tr></thead><tbody><tr><td>请求 = 方法 + URL + 头 + 体</td><td>能说清四部分</td><td>全部接口</td></tr><tr><td>方法语义</td><td>GET 查 / POST 增 / PUT 改 / DELETE 删</td><td>4 个接口</td></tr><tr><td>状态码</td><td>200/201/400/404/500 各表示什么</td><td>接口文档</td></tr><tr><td><code>Content-Type: application/json</code></td><td>知道不写后端就解析不出 body</td><td>fetch 头</td></tr><tr><td>同源</td><td>知道为什么 <code>/api</code> 写相对路径就行</td><td>前端 fetch</td></tr><tr><td>两次 await</td><td>fetch 一次等头，<code>res.json()</code> 一次等 body</td><td>见 README 排错</td></tr></tbody></table>
+<h3 id="sec-31">8.6 Node.js（★★★）</h3>
+<table><thead><tr><th>知识点</th><th>掌握标准</th><th>本项目位置</th></tr></thead><tbody><tr><td>CommonJS：<code>require</code> / <code>module.exports</code></td><td>会拆分模块并导出</td><td>示例\db.js ↔ server.js</td></tr><tr><td><strong>模块解析：向上找 node_modules</strong></td><td>知道 <code>示例\</code> 能用根目录的包、根目录用不了子目录的包</td><td>全项目依赖布局</td></tr><tr><td><code>process.env</code></td><td>会读环境变量</td><td>db.js</td></tr><tr><td><code>--env-file=.env</code></td><td>知道不带就会读不到配置</td><td>示例\启动.cmd</td></tr><tr><td><code>path.join(__dirname, ...)</code></td><td>知道相对路径坑</td><td>静态托管</td></tr><tr><td>npm 安装 / package.json</td><td>会装依赖、看版本</td><td>npm install</td></tr><tr><td>端口被占（EADDRINUSE）</td><td>会换端口排查</td><td>启动报错</td></tr></tbody></table>
+<h3 id="sec-32">8.7 Express（★★★）</h3>
+<table><thead><tr><th>知识点</th><th>掌握标准</th><th>本项目位置</th></tr></thead><tbody><tr><td><code>express()</code> / <code>app.listen</code></td><td>能起一个服务</td><td>server.js:1、147</td></tr><tr><td><code>express.static</code></td><td>会托管静态目录</td><td>server.js:17</td></tr><tr><td><code>express.json()</code></td><td>知道它是把 body 解析进 req.body 的中间件</td><td>server.js:13</td></tr><tr><td><code>app.get/post/put/delete</code></td><td>能写 4 种路由</td><td>server.js:41/77/98/122</td></tr><tr><td><code>req.query</code> / <code>req.params</code> / <code>req.body</code></td><td>分清三者来源</td><td>各接口</td></tr><tr><td><code>res.json</code> / <code>res.status</code></td><td>会链式返回</td><td>全项目</td></tr><tr><td>中间件顺序</td><td>知道 static → 路由 → 404 → 错误处理</td><td>server.js</td></tr><tr><td>错误处理中间件（4 参数）</td><td>知道必须放最后</td><td>server.js:142</td></tr><tr><td><code>next(err)</code></td><td>知道接口里出错怎么交给统一处理</td><td>各接口 catch</td></tr></tbody></table>
+<h3 id="sec-33">8.8 MySQL（★★★）</h3>
+<table><thead><tr><th>知识点</th><th>掌握标准</th><th>本项目位置</th></tr></thead><tbody><tr><td>建库建表、字段类型</td><td>能写出带约束的 CREATE TABLE</td><td>示例/init.sql</td></tr><tr><td>约束：PK / UNIQUE / NOT NULL / DEFAULT / ENUM</td><td>知道各自解决什么问题</td><td>表设计</td></tr><tr><td>INSERT / UPDATE / DELETE / SELECT</td><td>会增删改查</td><td>4 个接口</td></tr><tr><td><code>WHERE ... LIKE ?</code></td><td>会模糊搜索</td><td>GET 列表</td></tr><tr><td><code>LIMIT ? OFFSET ?</code></td><td>会分页，(page-1)*size</td><td>GET 列表</td></tr><tr><td><code>COUNT(*)</code></td><td>会算总数和总页数</td><td>GET 列表</td></tr><tr><td><code>ORDER BY</code></td><td>会排序</td><td><code>ORDER BY id DESC</code></td></tr><tr><td><strong>参数化查询 <code>?</code></strong></td><td>知道拼接字符串会被注入</td><td>全部 SQL</td></tr><tr><td>错误码：ER_DUP_ENTRY / ER_ACCESS_DENIED / ER_BAD_DB_ERROR</td><td>会对照处理</td><td>server.js、README</td></tr></tbody></table>
+<h3 id="sec-34">8.9 工程化（★★）</h3>
+<table><thead><tr><th>知识点</th><th>掌握标准</th></tr></thead><tbody><tr><td><code>.env</code> + <code>.gitignore</code></td><td>会配置，且知道<strong>为什么密码不能进仓库</strong></td></tr><tr><td>连接池 vs 单连接</td><td>能说出池子解决了什么</td></tr><tr><td>REST 命名</td><td>资源用名词复数：<code>/api/students</code></td></tr><tr><td>统一的错误返回格式</td><td>前端只写一次错误处理</td></tr><tr><td>日志</td><td>至少 <code>console.error</code> 带上 code 和 message</td></tr></tbody></table>
+<hr>
+<h2 id="sec-35">九、从零独立完成（照着打勾）</h2>
+<blockquote><p>想做第二遍时，<strong>不要看现有代码</strong>，从空文件夹开始，按这份清单走。括号里是参考耗时，熟练后应该更快。</p></blockquote>
+<h3 id="sec-36">阶段 A：环境与骨架（20 分钟）</h3>
+<ul><li>[ ] 新建文件夹，<code>npm init -y</code></li><li>[ ] <code>npm install express mysql2</code></li><li>[ ] 确认 <code>node -v</code>、MySQL 服务在跑</li><li>[ ] 建 <code>public/</code> 目录</li></ul>
+<h3 id="sec-37">阶段 B：数据库（15 分钟）</h3>
+<ul><li>[ ] 写 <code>示例/init.sql</code>：建库 + 建表（含 id/sno/name/gender/age/class_name/created_at）</li><li>[ ] <code>sno</code> 加 UNIQUE，<code>gender</code> 用 ENUM，<code>created_at</code> 用 DEFAULT CURRENT_TIMESTAMP</li><li>[ ] 插入 8 条测试数据（为了能试分页）</li><li>[ ] 执行脚本，<code>SELECT COUNT(*)</code> 确认 8 条</li></ul>
+<h3 id="sec-38">阶段 C：后端（60 分钟）</h3>
+<ul><li>[ ] <code>db.js</code>：用 <code>createPool</code> 建连接池，参数从 <code>process.env</code> 读</li><li>[ ] <code>server.js</code>：<code>express()</code> + <code>express.json()</code> + <code>express.static</code></li><li>[ ] 写 <code>GET /api/students</code>：接收 kw/page/size，返回 <code>{ list, total, page, size, pages }</code></li><li>[ ] 写 <code>POST /api/students</code>：校验 → INSERT → 201</li><li>[ ] 写 <code>PUT /api/students/:id</code>：校验 → UPDATE → 404 判断</li><li>[ ] 写 <code>DELETE /api/students/:id</code>：DELETE → 404 判断</li><li>[ ] 加 404 中间件 + 4 参数错误处理中间件</li><li>[ ] 用浏览器/Invoke-RestMethod 把 4 个接口<strong>先测通</strong>（此时还没有页面）</li></ul>
+<h3 id="sec-39">阶段 D：前端（90 分钟）</h3>
+<ul><li>[ ] <code>index.html</code>：表单（5 个字段 + 提交按钮）</li><li>[ ] <code>index.html</code>：搜索框 + 表格骨架 + 分页按钮</li><li>[ ] <code>style.css</code>：卡片、表格边框、按钮 hover/disabled</li><li>[ ] <code>app.js</code>：<code>api()</code> 封装（统一头、统一错误）</li><li>[ ] <code>app.js</code>：<code>load()</code> 拉数据 + <code>renderRows()</code> 渲染</li><li>[ ] <code>app.js</code>：表单提交（先做新增）</li><li>[ ] <code>app.js</code>：编辑（回填表单 + 切换 POST/PUT）</li><li>[ ] <code>app.js</code>：删除（confirm + DELETE）</li><li>[ ] <code>app.js</code>：搜索 + 翻页</li></ul>
+<h3 id="sec-40">阶段 E：联调与打磨（30 分钟）</h3>
+<ul><li>[ ] 每个按钮点一遍，看 Network 面板状态码</li><li>[ ] 故意输入空学号 / 非法性别 / 重复学号，确认提示友好</li><li>[ ] 断开 MySQL（<code>net stop MySQL80</code>）看前端是否显示错误而不是白屏</li><li>[ ] 加 <code>.env</code> / <code>.gitignore</code> / <code>示例\启动.cmd</code></li></ul>
+<hr>
+<h2 id="sec-41">十、验收标准（能答上来才算真会）</h2>
+<h3 id="sec-42">10.1 概念题</h3>
+<table><thead><tr><th>#</th><th>问题</th><th>参考答案要点</th></tr></thead><tbody><tr><td>1</td><td>浏览器为什么不直接连 MySQL？</td><td>浏览器没有 MySQL 驱动/端口协议，也没有账号；必须由服务端代理</td></tr><tr><td>2</td><td>为什么 <code>/api/students</code> 不写 <code>http://localhost:3100</code>？</td><td>同源，相对路径自动跟随页面所在服务器</td></tr><tr><td>3</td><td><code>fetch</code> 为什么要两次 <code>await</code>？</td><td>第一次等响应头，第二次 <code>res.json()</code> 读 body 流</td></tr><tr><td>4</td><td><code>express.json()</code> 是干什么的？不写会怎样？</td><td>把 JSON 请求体解析到 <code>req.body</code>；不写 <code>req.body</code> 是 undefined</td></tr><tr><td>5</td><td>为什么 SQL 要用 <code>?</code> 而不是拼字符串？</td><td>防 SQL 注入，驱动会转义</td></tr><tr><td>6</td><td><code>LIMIT 5 OFFSET 5</code> 取的是第几页？</td><td>第 2 页（page=2, size=5）</td></tr><tr><td>7</td><td>为什么 <code>sno</code> 要有 UNIQUE？</td><td>业务不允许重复；数据库兜底，比 JS 判重可靠</td></tr><tr><td>8</td><td>编辑和新增为什么能共用一个表单？</td><td>用 <code>editingId</code> 区分，提交时决定 POST/PUT</td></tr><tr><td>9</td><td>为什么按钮事件绑在 <code>tbody</code> 上？</td><td>行是动态生成的，事件委托避免重复绑定</td></tr><tr><td>10</td><td>报 <code>using password: NO</code> 是什么意思？</td><td>没给密码（<code>.env</code> 没加载），不是密码错</td></tr><tr><td>11</td><td>500 和 400 的区别？</td><td>500 是服务端出错（代码/数据库），400 是请求方参数不对</td></tr><tr><td>12</td><td>为什么 <code>.env</code> 要写进 <code>.gitignore</code>？</td><td>里面是密码，提交等于公开泄露</td></tr></tbody></table>
+<h3 id="sec-43">10.2 动手题（改需求，不改坏原有功能）</h3>
+<table><thead><tr><th>#</th><th>题目</th><th>提示</th></tr></thead><tbody><tr><td>1</td><td>每页显示 10 条</td><td>改 <code>state.size</code> 和后端默认值</td></tr><tr><td>2</td><td>按年龄从大到小排序</td><td>后端加 <code>sort</code> 参数，前端表头加点击</td></tr><tr><td>3</td><td>只显示某个班级</td><td>加 <code>class</code> 参数，或复用 kw</td></tr><tr><td>4</td><td>批量删除</td><td>复选框 + <code>DELETE ... WHERE id IN (?)</code>，注意数组展开</td></tr><tr><td>5</td><td>加一个「备注」字段</td><td>建表 → 后端 4 处 → 前端表单/表格，完整体验一遍“改数据模型”</td></tr><tr><td>6</td><td>加登录页</td><td>先做最简单的：固定账号密码 + session，再考虑 JWT</td></tr></tbody></table>
+<hr>
+<h2 id="sec-44">十一、调试方法（三层定位）</h2>
+<pre><code>现象出在哪一层？
+
+① 页面没反应 / 样式没生效
+   → F12 Console 有没有红色报错
+   → Elements 看元素在不在、class 对不对
+
+② 请求发出去了但结果不对
+   → F12 Network 看：状态码、请求 URL、请求体、响应体
+   → 状态 404 = 路径/服务器错；400 = 参数；500 = 服务端
+
+③ 服务端报错
+   → 看运行终端里的 console.error
+   → 对照 README 的错误表（ECONNREFUSED / ER_DUP_ENTRY / ...）
+
+④ 数据库里没数据
+   → Navicat/WebStorm 里直接 SELECT 一次，确认到底写没写进去</code></pre>
+<h3 id="sec-45">三个高频错误</h3>
+<table><thead><tr><th>错误</th><th>真正原因</th><th>一句话排查</th></tr></thead><tbody><tr><td>页面 404，但服务端有路由</td><td>页面不是这个服务托管的（file:// 或 WebStorm 63342）</td><td>看地址栏端口是不是服务端口</td></tr><tr><td><code>using password: NO</code></td><td>启动时没带 <code>--env-file=.env</code></td><td>看启动命令</td></tr><tr><td>新增后列表没变</td><td>前端没重新 <code>load()</code></td><td>看提交成功分支里有没有调 load</td></tr></tbody></table>
+<hr>
+<h2 id="sec-46">十二、下一步（做完这些，这个项目才算“用过”）</h2>
+<table><thead><tr><th>顺序</th><th>任务</th><th>会学到</th></tr></thead><tbody><tr><td>1</td><td>加排序</td><td>动态 SQL 拼接与白名单校验（不能直接拼字段名！）</td></tr><tr><td>2</td><td>加批量删除</td><td><code>IN (?)</code> 数组参数、事务</td></tr><tr><td>3</td><td>加「导出 Excel」</td><td>后端生成文件、<code>Content-Disposition</code></td></tr><tr><td>4</td><td>加登录</td><td>session/cookie 或 JWT、密码哈希（bcrypt）</td></tr><tr><td>5</td><td>拆路由文件</td><td><code>routes/students.js</code> + <code>express.Router()</code></td></tr><tr><td>6</td><td>换前端框架</td><td>Vue/React，体会“组件化”解决了什么</td></tr><tr><td>7</td><td>部署到局域网</td><td>手机同 WiFi 访问、防火墙放行</td></tr></tbody></table>
+<hr>
+<h2 id="sec-47">十三、命令速查</h2>
+<pre><code class="language-bash"># 跑示例（在 示例\ 目录里）
+cd D:\GitHub\my_web\内容文件夹\node.js\课堂\第十二节课——完整项目\学生管理系统\示例
+node --env-file=.env server.js        # 或双击 示例\启动.cmd
+
+# 装依赖（自己写的项目，在根目录）
+npm init -y
+npm install express mysql2
+
+# 建库（在项目根目录，用的是示例的 SQL）
+&quot;E:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe&quot; -u root -p &lt; 示例\init.sql
+
+# 测接口
+curl http:<span class="code-comment">//localhost:3100/api/students</span></code></pre>
+<pre><code class="language-powershell"># 看端口占用
+Get-NetTCPConnection -LocalPort 3100 -State Listen | Select-Object OwningProcess
+# 看是哪个进程
+Get-CimInstance Win32_Process -Filter &quot;ProcessId=12345&quot; | Select-Object CommandLine</code></pre>
+<hr>
+<h2 id="sec-48">十四、一句话总结</h2>
+<blockquote><p><strong>前端只做三件事：发请求、渲染、改状态。</strong> <strong>后端只做三件事：收参数、校验、查库。</strong> <strong>中间用 JSON 串起来——这十二个字，就是全栈。</strong></p></blockquote>
+<p>更新：2026-11-20</p></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第十二节课——完整项目/学生管理系统/工程文档.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

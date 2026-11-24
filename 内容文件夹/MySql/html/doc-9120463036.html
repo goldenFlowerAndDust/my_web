@@ -1,0 +1,394 @@
+<!-- source: 笔记/学习笔记存放地/MySQL关于表相关命令.sql -->
+<!-- source-root: MySql -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MySQL关于表相关命令 · MySQL 笔记</title>
+<link rel="stylesheet" href="../共享配置/css/mysql-notes.css?v=20261124-3">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){}</script>
+</head>
+<body class="doc-page">
+<script>if (location.search.includes("embed=1")) document.body.classList.add("is-embed");</script>
+<nav class="topbar">
+  <a class="topbar-back" href="index.html">← 目录</a>
+  <span class="topbar-title">MySQL关于表相关命令</span>
+  <div class="topbar-actions"><button class="icon-btn" type="button" data-theme-toggle>亮色</button></div>
+</nav>
+<main class="doc-page">
+  <header class="doc-head">
+    <div>
+      <span class="hero-kicker">笔记 · 学习笔记</span>
+      <h1>MySQL关于表相关命令</h1>
+      <div class="doc-meta">
+        <span>来源：笔记/学习笔记存放地/MySQL关于表相关命令.sql</span>
+        <span>165 行</span>
+        <span>更新 2026-09-03</span>
+      </div>
+    </div>
+  </header>
+  <section class="sql-card">
+    <div class="sql-toolbar">
+      <span class="sql-file">笔记/学习笔记存放地/MySQL关于表相关命令.sql</span>
+      <button class="copy-btn" type="button" id="copy-sql">复制 SQL</button>
+    </div>
+    <pre class="sql-code" id="sql-code"><div class="sql-line"><span class="ln">1</span><code><span class="sql-comment">/* 命令创建表 create table if not exists 表格名(</span></code></div>
+<div class="sql-line"><span class="ln">2</span><code><span class="sql-comment">    字段  字符类型()——可多次建立  设置字段就是设置列。NOT NULL(是否为空)  </span></code></div>
+<div class="sql-line"><span class="ln">3</span><code><span class="sql-comment">    PRIMARY KEY(是否这是为主键)——可以放在最后也可以放在主键字段后面</span></code></div>
+<div class="sql-line"><span class="ln">4</span><code><span class="sql-comment">    </span></code></div>
+<div class="sql-line"><span class="ln">5</span><code><span class="sql-comment">      注意事项：</span></code></div>
+<div class="sql-line"><span class="ln">6</span><code><span class="sql-comment">            1.外层用小括号</span></code></div>
+<div class="sql-line"><span class="ln">7</span><code><span class="sql-comment">            2.除最后一个字段以外末尾都要添加(英文逗号)</span></code></div>
+<div class="sql-line"><span class="ln">8</span><code><span class="sql-comment">            3.外层最后用【英文分号】隔开</span></code></div>
+<div class="sql-line"><span class="ln">9</span><code><span class="sql-comment">  </span></code></div>
+<div class="sql-line"><span class="ln">10</span><code><span class="sql-comment">    关于数据类型(自查询MySQL数据类型)</span></code></div>
+<div class="sql-line"><span class="ln">11</span><code><span class="sql-comment">)</span></code></div>
+<div class="sql-line"><span class="ln">12</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">13</span><code></code></div>
+<div class="sql-line"><span class="ln">14</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">table</span> <span class="sql-keyword">if</span> <span class="sql-keyword">not</span> <span class="sql-keyword">exists</span> <span class="sql-string">`第一次命令建表`</span>(</code></div>
+<div class="sql-line"><span class="ln">15</span><code>  读者编号 <span class="sql-ident">char</span>(<span class="sql-number">6</span>) <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">PRIMARY</span> <span class="sql-keyword">KEY</span>,</code></div>
+<div class="sql-line"><span class="ln">16</span><code>  姓名 <span class="sql-ident">char</span>(<span class="sql-number">10</span>) <span class="sql-keyword">not</span> <span class="sql-keyword">NULL</span>,</code></div>
+<div class="sql-line"><span class="ln">17</span><code>  类别号 <span class="sql-ident">char</span>(<span class="sql-number">2</span>) <span class="sql-keyword">not</span> <span class="sql-keyword">NULL</span>,</code></div>
+<div class="sql-line"><span class="ln">18</span><code>  单位 <span class="sql-ident">varchar</span>(<span class="sql-number">20</span>) <span class="sql-keyword">NULL</span>,</code></div>
+<div class="sql-line"><span class="ln">19</span><code>  有效性 <span class="sql-ident">char</span>(<span class="sql-number">10</span>) <span class="sql-keyword">NULL</span></code></div>
+<div class="sql-line"><span class="ln">20</span><code>);</code></div>
+<div class="sql-line"><span class="ln">21</span><code></code></div>
+<div class="sql-line"><span class="ln">22</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">23</span><code><span class="sql-comment">    复制表结构：</span></code></div>
+<div class="sql-line"><span class="ln">24</span><code><span class="sql-comment">            1.like：会复制主键、索引、自增属性、默认值、注释等所有表结构信息，但是数据为空</span></code></div>
+<div class="sql-line"><span class="ln">25</span><code><span class="sql-comment">                1)语法：create table 新表名 LIKE 原表;</span></code></div>
+<div class="sql-line"><span class="ln">26</span><code><span class="sql-comment">                2)使用场景：需要一张和原表结构相同但暂时不填充数据的空表</span></code></div>
+<div class="sql-line"><span class="ln">27</span><code><span class="sql-comment">                </span></code></div>
+<div class="sql-line"><span class="ln">28</span><code><span class="sql-comment">            2.as select : 复制列名和数据类型，不会复制[主键、索引、自增属性、默认值、注释等所有表结构信息]</span></code></div>
+<div class="sql-line"><span class="ln">29</span><code><span class="sql-comment">                1)语法：create table 新表名 AS SELECT * FROM 原表;</span></code></div>
+<div class="sql-line"><span class="ln">30</span><code><span class="sql-comment">                2)使用场景：需要一张包含数据的新表，但是约束要求不高</span></code></div>
+<div class="sql-line"><span class="ln">31</span><code><span class="sql-comment">                </span></code></div>
+<div class="sql-line"><span class="ln">32</span><code><span class="sql-comment">            3.相同部分：都会将字段复制</span></code></div>
+<div class="sql-line"><span class="ln">33</span><code><span class="sql-comment">                </span></code></div>
+<div class="sql-line"><span class="ln">34</span><code></code></div>
+<div class="sql-line"><span class="ln">35</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">36</span><code></code></div>
+<div class="sql-line"><span class="ln">37</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次建表副本_空表`</span> <span class="sql-keyword">LIKE</span> <span class="sql-string">`第一次命令建表`</span>;</code></div>
+<div class="sql-line"><span class="ln">38</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次建表副本_AS`</span> <span class="sql-keyword">AS</span> <span class="sql-keyword">SELECT</span> <span class="sql-operator">*</span> <span class="sql-keyword">FROM</span> <span class="sql-string">`第一次命令建表`</span>;</code></div>
+<div class="sql-line"><span class="ln">39</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次建表副本_删除表素材`</span> <span class="sql-keyword">AS</span> <span class="sql-keyword">SELECT</span> <span class="sql-operator">*</span> <span class="sql-keyword">FROM</span> <span class="sql-string">`第一次命令建表`</span>;</code></div>
+<div class="sql-line"><span class="ln">40</span><code></code></div>
+<div class="sql-line"><span class="ln">41</span><code></code></div>
+<div class="sql-line"><span class="ln">42</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">43</span><code><span class="sql-comment">      删除表： 语法： drop table if exists 表名</span></code></div>
+<div class="sql-line"><span class="ln">44</span><code><span class="sql-comment">  </span></code></div>
+<div class="sql-line"><span class="ln">45</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">46</span><code><span class="sql-keyword">drop</span> <span class="sql-keyword">table</span> <span class="sql-keyword">if</span> <span class="sql-keyword">exists</span> <span class="sql-string">`第一次建表副本_删除表素材`</span>;</code></div>
+<div class="sql-line"><span class="ln">47</span><code></code></div>
+<div class="sql-line"><span class="ln">48</span><code></code></div>
+<div class="sql-line"><span class="ln">49</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">50</span><code><span class="sql-comment">    显示数据库下全部表： 语法： show tables;</span></code></div>
+<div class="sql-line"><span class="ln">51</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">52</span><code></code></div>
+<div class="sql-line"><span class="ln">53</span><code><span class="sql-keyword">show</span> <span class="sql-ident">TABLES</span>;</code></div>
+<div class="sql-line"><span class="ln">54</span><code></code></div>
+<div class="sql-line"><span class="ln">55</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">56</span><code></code></div>
+<div class="sql-line"><span class="ln">57</span><code><span class="sql-comment">    显示某张表的定义信息 ： 语法： show create table 表名</span></code></div>
+<div class="sql-line"><span class="ln">58</span><code></code></div>
+<div class="sql-line"><span class="ln">59</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">60</span><code></code></div>
+<div class="sql-line"><span class="ln">61</span><code><span class="sql-keyword">show</span> <span class="sql-keyword">create</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次建表副本_空表`</span>;</code></div>
+<div class="sql-line"><span class="ln">62</span><code></code></div>
+<div class="sql-line"><span class="ln">63</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">64</span><code></code></div>
+<div class="sql-line"><span class="ln">65</span><code><span class="sql-comment">    显示表各列信息： 语法： desc 表名</span></code></div>
+<div class="sql-line"><span class="ln">66</span><code></code></div>
+<div class="sql-line"><span class="ln">67</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">68</span><code></code></div>
+<div class="sql-line"><span class="ln">69</span><code><span class="sql-keyword">desc</span> <span class="sql-string">`第一次命令建表`</span>;</code></div>
+<div class="sql-line"><span class="ln">70</span><code></code></div>
+<div class="sql-line"><span class="ln">71</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">72</span><code></code></div>
+<div class="sql-line"><span class="ln">73</span><code><span class="sql-comment">  显示表某列信息： 语法： desc 表名 列名</span></code></div>
+<div class="sql-line"><span class="ln">74</span><code><span class="sql-comment">  </span></code></div>
+<div class="sql-line"><span class="ln">75</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">76</span><code></code></div>
+<div class="sql-line"><span class="ln">77</span><code><span class="sql-keyword">desc</span> <span class="sql-string">`第一次命令建表`</span> 读者编号;</code></div>
+<div class="sql-line"><span class="ln">78</span><code></code></div>
+<div class="sql-line"><span class="ln">79</span><code></code></div>
+<div class="sql-line"><span class="ln">80</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">81</span><code></code></div>
+<div class="sql-line"><span class="ln">82</span><code><span class="sql-comment">  修改表——添加列</span></code></div>
+<div class="sql-line"><span class="ln">83</span><code><span class="sql-comment">        1.默认加在后面      语法：alter table 表名 add 列名 int;</span></code></div>
+<div class="sql-line"><span class="ln">84</span><code><span class="sql-comment">        2.First放在首位     语法：alter table 表名 add 列名 int first;</span></code></div>
+<div class="sql-line"><span class="ln">85</span><code><span class="sql-comment">        3.after 放在某列后  语法：alter table 表名 add 列名 int after 字段名(就是需要添加列前面的列名);</span></code></div>
+<div class="sql-line"><span class="ln">86</span><code></code></div>
+<div class="sql-line"><span class="ln">87</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">88</span><code></code></div>
+<div class="sql-line"><span class="ln">89</span><code></code></div>
+<div class="sql-line"><span class="ln">90</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次命令建表`</span> <span class="sql-ident">add</span> 默认添加列 <span class="sql-ident">int</span>;</code></div>
+<div class="sql-line"><span class="ln">91</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次命令建表`</span> <span class="sql-ident">add</span> 添加位置在首位 <span class="sql-ident">int</span> <span class="sql-ident">FIRST</span>;</code></div>
+<div class="sql-line"><span class="ln">92</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次命令建表`</span> <span class="sql-ident">add</span> 添加在<span class="sql-ident">_</span>类别号<span class="sql-ident">_</span>后面 <span class="sql-ident">int</span> <span class="sql-ident">after</span> 类别号;</code></div>
+<div class="sql-line"><span class="ln">93</span><code></code></div>
+<div class="sql-line"><span class="ln">94</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">95</span><code></code></div>
+<div class="sql-line"><span class="ln">96</span><code><span class="sql-comment">  修改表——默认值(指的是当记录为null时，默认显示[当设置为可以为null时，null的优先级最高])</span></code></div>
+<div class="sql-line"><span class="ln">97</span><code><span class="sql-comment">      1.仅修改默认值，不该其他属性   语法： alter table 表名 alter column(MySQL可以省略) 列名 set default 默认值; ←——当只需要改默认值，用它最好   所谓默认值指的是当字段列内容是空的时候，显示的值。  当字段允许null,优先级是null</span></code></div>
+<div class="sql-line"><span class="ln">98</span><code><span class="sql-comment">      2.重新定义列，同时修改默认值   语法： alter table 表名 modify column(MySQL可以省略) 列名 数据类型 (若设置非空或主键，需要一并写出来) default 默认值;</span></code></div>
+<div class="sql-line"><span class="ln">99</span><code><span class="sql-comment">      3.默认值是字符串，所以用单引号('默认值')包裹。表名、列名都是名字，需要用单反引号包裹(`表名/列名`)</span></code></div>
+<div class="sql-line"><span class="ln">100</span><code></code></div>
+<div class="sql-line"><span class="ln">101</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">102</span><code></code></div>
+<div class="sql-line"><span class="ln">103</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次命令建表`</span> <span class="sql-keyword">alter</span> <span class="sql-ident">column</span> 姓名 <span class="sql-keyword">set</span> <span class="sql-keyword">default</span> <span class="sql-string">'张三'</span>;</code></div>
+<div class="sql-line"><span class="ln">104</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次命令建表`</span> <span class="sql-ident">modify</span> <span class="sql-ident">column</span>  单位 <span class="sql-ident">varchar</span>(<span class="sql-number">15</span>) <span class="sql-keyword">not</span> <span class="sql-keyword">null</span> <span class="sql-keyword">default</span> <span class="sql-string">'职院'</span>;</code></div>
+<div class="sql-line"><span class="ln">105</span><code></code></div>
+<div class="sql-line"><span class="ln">106</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">107</span><code></code></div>
+<div class="sql-line"><span class="ln">108</span><code><span class="sql-comment">    修改表——字段重命名 ，数据类型不改也要加上原类型否则报错：</span></code></div>
+<div class="sql-line"><span class="ln">109</span><code><span class="sql-comment">                                        1.语法：alter table 表名 change 列名 新列名 新数据类型  约束(not null....)  [FIRDT|AFTER某列]</span></code></div>
+<div class="sql-line"><span class="ln">110</span><code><span class="sql-comment">                                        2.[FIRDT|AFTER某列]——指的是更改后放置哪一列，不填默认在原位</span></code></div>
+<div class="sql-line"><span class="ln">111</span><code><span class="sql-comment">                                        3.数据类型【不改也要写上】</span></code></div>
+<div class="sql-line"><span class="ln">112</span><code></code></div>
+<div class="sql-line"><span class="ln">113</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">114</span><code></code></div>
+<div class="sql-line"><span class="ln">115</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次命令建表`</span> <span class="sql-ident">change</span> 有效性 有效性改名<span class="sql-ident">_</span>并放置姓名后面  <span class="sql-ident">char</span>(<span class="sql-number">10</span>) <span class="sql-keyword">null</span> <span class="sql-ident">after</span> 姓名;</code></div>
+<div class="sql-line"><span class="ln">116</span><code></code></div>
+<div class="sql-line"><span class="ln">117</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">118</span><code></code></div>
+<div class="sql-line"><span class="ln">119</span><code></code></div>
+<div class="sql-line"><span class="ln">120</span><code><span class="sql-comment">    修改表——修改字段属性(数据类型、位置.....):</span></code></div>
+<div class="sql-line"><span class="ln">121</span><code><span class="sql-comment">                      1.语法: alter table 表名 modify column 列名 数据类型(或约束.....)</span></code></div>
+<div class="sql-line"><span class="ln">122</span><code><span class="sql-comment">                      2.语法: alter table 表名 列名 列名 数据类型(或约束.....)————因为change，所以一定要写两次列名</span></code></div>
+<div class="sql-line"><span class="ln">123</span><code></code></div>
+<div class="sql-line"><span class="ln">124</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">125</span><code></code></div>
+<div class="sql-line"><span class="ln">126</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span>  <span class="sql-string">`第一次命令建表`</span> <span class="sql-ident">modify</span> <span class="sql-ident">column</span> 类别号 <span class="sql-ident">char</span>(<span class="sql-number">5</span>) <span class="sql-keyword">null</span> ;</code></div>
+<div class="sql-line"><span class="ln">127</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次命令建表`</span> <span class="sql-ident">change</span> <span class="sql-string">`添加在_类别号_后面`</span> <span class="sql-string">`添加在_类别号_后面`</span> <span class="sql-ident">char</span>(<span class="sql-number">10</span>) <span class="sql-keyword">null</span>;</code></div>
+<div class="sql-line"><span class="ln">128</span><code></code></div>
+<div class="sql-line"><span class="ln">129</span><code></code></div>
+<div class="sql-line"><span class="ln">130</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">131</span><code></code></div>
+<div class="sql-line"><span class="ln">132</span><code></code></div>
+<div class="sql-line"><span class="ln">133</span><code><span class="sql-comment">      修改表——删除字段 ： 语法： alter table 表名 drop 列名</span></code></div>
+<div class="sql-line"><span class="ln">134</span><code></code></div>
+<div class="sql-line"><span class="ln">135</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">136</span><code></code></div>
+<div class="sql-line"><span class="ln">137</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次建表副本_空表`</span> <span class="sql-keyword">drop</span> 有效性;</code></div>
+<div class="sql-line"><span class="ln">138</span><code></code></div>
+<div class="sql-line"><span class="ln">139</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">140</span><code></code></div>
+<div class="sql-line"><span class="ln">141</span><code><span class="sql-comment">    修改表——重命名表： 语法 ： alter table 表名 rename to 新表名</span></code></div>
+<div class="sql-line"><span class="ln">142</span><code></code></div>
+<div class="sql-line"><span class="ln">143</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">144</span><code></code></div>
+<div class="sql-line"><span class="ln">145</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-string">`第一次建表副本_空表`</span> <span class="sql-ident">rename</span> <span class="sql-ident">to</span> <span class="sql-string">`单次重命名表`</span>;</code></div>
+<div class="sql-line"><span class="ln">146</span><code></code></div>
+<div class="sql-line"><span class="ln">147</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">148</span><code></code></div>
+<div class="sql-line"><span class="ln">149</span><code><span class="sql-comment">    修改表——重命名多次表： 语法： rename table 表1名 to 新表1名, 表2名 to 新表2名; .........【每重命名表，用英文逗号隔开】</span></code></div>
+<div class="sql-line"><span class="ln">150</span><code></code></div>
+<div class="sql-line"><span class="ln">151</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">152</span><code></code></div>
+<div class="sql-line"><span class="ln">153</span><code></code></div>
+<div class="sql-line"><span class="ln">154</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">table</span> <span class="sql-keyword">if</span> <span class="sql-keyword">not</span> <span class="sql-keyword">exists</span> <span class="sql-string">`表1`</span>(</code></div>
+<div class="sql-line"><span class="ln">155</span><code>  <span class="sql-string">`字段`</span> <span class="sql-ident">char</span>(<span class="sql-number">5</span>) <span class="sql-keyword">not</span> <span class="sql-keyword">null</span> <span class="sql-keyword">primary</span> <span class="sql-keyword">KEY</span>,</code></div>
+<div class="sql-line"><span class="ln">156</span><code>  <span class="sql-string">`字段2`</span> <span class="sql-ident">int</span>(<span class="sql-number">5</span>) <span class="sql-keyword">null</span></code></div>
+<div class="sql-line"><span class="ln">157</span><code>);</code></div>
+<div class="sql-line"><span class="ln">158</span><code></code></div>
+<div class="sql-line"><span class="ln">159</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">table</span> <span class="sql-string">`表1_副本1`</span> <span class="sql-keyword">LIKE</span> <span class="sql-string">`表1`</span>;</code></div>
+<div class="sql-line"><span class="ln">160</span><code></code></div>
+<div class="sql-line"><span class="ln">161</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">table</span> <span class="sql-string">`表1_副本2`</span> <span class="sql-keyword">AS</span> <span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-string">`表1`</span>;</code></div>
+<div class="sql-line"><span class="ln">162</span><code></code></div>
+<div class="sql-line"><span class="ln">163</span><code><span class="sql-ident">rename</span> <span class="sql-keyword">table</span> <span class="sql-string">`表1`</span> <span class="sql-ident">to</span> <span class="sql-string">`重命名多次表_实验表`</span>, <span class="sql-string">`表1_副本1`</span> <span class="sql-ident">to</span> <span class="sql-string">`重命名多次表_实验表1`</span>, <span class="sql-string">`表1_副本2`</span> <span class="sql-ident">to</span> <span class="sql-string">`重命名多次表_实验表2`</span>;</code></div>
+<div class="sql-line"><span class="ln">164</span><code></code></div>
+<div class="sql-line"><span class="ln">165</span><code></code></div></pre>
+    <textarea id="sql-raw" hidden>/* 命令创建表 create table if not exists 表格名(
+    字段  字符类型()——可多次建立  设置字段就是设置列。NOT NULL(是否为空)  
+    PRIMARY KEY(是否这是为主键)——可以放在最后也可以放在主键字段后面
+    
+      注意事项：
+            1.外层用小括号
+            2.除最后一个字段以外末尾都要添加(英文逗号)
+            3.外层最后用【英文分号】隔开
+  
+    关于数据类型(自查询MySQL数据类型)
+)
+*/
+
+create table if not exists `第一次命令建表`(
+  读者编号 char(6) NOT NULL PRIMARY KEY,
+  姓名 char(10) not NULL,
+  类别号 char(2) not NULL,
+  单位 varchar(20) NULL,
+  有效性 char(10) NULL
+);
+
+/*
+    复制表结构：
+            1.like：会复制主键、索引、自增属性、默认值、注释等所有表结构信息，但是数据为空
+                1)语法：create table 新表名 LIKE 原表;
+                2)使用场景：需要一张和原表结构相同但暂时不填充数据的空表
+                
+            2.as select : 复制列名和数据类型，不会复制[主键、索引、自增属性、默认值、注释等所有表结构信息]
+                1)语法：create table 新表名 AS SELECT * FROM 原表;
+                2)使用场景：需要一张包含数据的新表，但是约束要求不高
+                
+            3.相同部分：都会将字段复制
+                
+
+*/
+
+create table `第一次建表副本_空表` LIKE `第一次命令建表`;
+create table `第一次建表副本_AS` AS SELECT * FROM `第一次命令建表`;
+create table `第一次建表副本_删除表素材` AS SELECT * FROM `第一次命令建表`;
+
+
+/*
+      删除表： 语法： drop table if exists 表名
+  
+*/
+drop table if exists `第一次建表副本_删除表素材`;
+
+
+/*
+    显示数据库下全部表： 语法： show tables;
+*/
+
+show TABLES;
+
+/*
+
+    显示某张表的定义信息 ： 语法： show create table 表名
+
+*/
+
+show create table `第一次建表副本_空表`;
+
+/*
+
+    显示表各列信息： 语法： desc 表名
+
+*/
+
+desc `第一次命令建表`;
+
+/*
+
+  显示表某列信息： 语法： desc 表名 列名
+  
+*/
+
+desc `第一次命令建表` 读者编号;
+
+
+/*
+
+  修改表——添加列
+        1.默认加在后面      语法：alter table 表名 add 列名 int;
+        2.First放在首位     语法：alter table 表名 add 列名 int first;
+        3.after 放在某列后  语法：alter table 表名 add 列名 int after 字段名(就是需要添加列前面的列名);
+
+*/
+
+
+alter table `第一次命令建表` add 默认添加列 int;
+alter table `第一次命令建表` add 添加位置在首位 int FIRST;
+alter table `第一次命令建表` add 添加在_类别号_后面 int after 类别号;
+
+/*
+
+  修改表——默认值(指的是当记录为null时，默认显示[当设置为可以为null时，null的优先级最高])
+      1.仅修改默认值，不该其他属性   语法： alter table 表名 alter column(MySQL可以省略) 列名 set default 默认值; ←——当只需要改默认值，用它最好   所谓默认值指的是当字段列内容是空的时候，显示的值。  当字段允许null,优先级是null
+      2.重新定义列，同时修改默认值   语法： alter table 表名 modify column(MySQL可以省略) 列名 数据类型 (若设置非空或主键，需要一并写出来) default 默认值;
+      3.默认值是字符串，所以用单引号('默认值')包裹。表名、列名都是名字，需要用单反引号包裹(`表名/列名`)
+
+*/
+
+alter table `第一次命令建表` alter column 姓名 set default '张三';
+alter table `第一次命令建表` modify column  单位 varchar(15) not null default '职院';
+
+/*
+
+    修改表——字段重命名 ，数据类型不改也要加上原类型否则报错：
+                                        1.语法：alter table 表名 change 列名 新列名 新数据类型  约束(not null....)  [FIRDT|AFTER某列]
+                                        2.[FIRDT|AFTER某列]——指的是更改后放置哪一列，不填默认在原位
+                                        3.数据类型【不改也要写上】
+
+*/
+
+alter table `第一次命令建表` change 有效性 有效性改名_并放置姓名后面  char(10) null after 姓名;
+
+/*
+
+
+    修改表——修改字段属性(数据类型、位置.....):
+                      1.语法: alter table 表名 modify column 列名 数据类型(或约束.....)
+                      2.语法: alter table 表名 列名 列名 数据类型(或约束.....)————因为change，所以一定要写两次列名
+
+*/
+
+alter table  `第一次命令建表` modify column 类别号 char(5) null ;
+alter table `第一次命令建表` change `添加在_类别号_后面` `添加在_类别号_后面` char(10) null;
+
+
+/*
+
+
+      修改表——删除字段 ： 语法： alter table 表名 drop 列名
+
+*/
+
+alter table `第一次建表副本_空表` drop 有效性;
+
+/*
+
+    修改表——重命名表： 语法 ： alter table 表名 rename to 新表名
+
+*/
+
+alter table `第一次建表副本_空表` rename to `单次重命名表`;
+
+/*
+
+    修改表——重命名多次表： 语法： rename table 表1名 to 新表1名, 表2名 to 新表2名; .........【每重命名表，用英文逗号隔开】
+
+*/
+
+
+create table if not exists `表1`(
+  `字段` char(5) not null primary KEY,
+  `字段2` int(5) null
+);
+
+create table `表1_副本1` LIKE `表1`;
+
+create table `表1_副本2` AS select * from `表1`;
+
+rename table `表1` to `重命名多次表_实验表`, `表1_副本1` to `重命名多次表_实验表1`, `表1_副本2` to `重命名多次表_实验表2`;
+
+</textarea>
+  </section>
+  <footer class="doc-foot">
+    <span><a href="doc-dbc8f4c492.html">← MySQL数据类型</a></span>
+    <span><a href="doc-7ba3f762ba.html">数据完整性约束 →</a></span>
+  </footer>
+</main>
+<script>
+(() => {
+  const root = document.documentElement, KEY = "programmingTutor.theme";
+  const apply = (theme) => {
+    root.dataset.theme = theme === "light" ? "light" : "dark";
+    document.querySelectorAll("[data-theme-toggle]").forEach((b) => { b.textContent = root.dataset.theme === "dark" ? "亮色" : "暗色"; });
+  };
+  apply(localStorage.getItem(KEY) || root.dataset.theme || "dark");
+  document.querySelectorAll("[data-theme-toggle]").forEach((b) => b.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem(KEY, next); apply(next);
+  }));
+})();
+</script>
+<script>
+document.getElementById("copy-sql")?.addEventListener("click", async () => {
+  const raw = document.getElementById("sql-raw").value;
+  try { await navigator.clipboard.writeText(raw); document.getElementById("copy-sql").textContent = "已复制"; setTimeout(() => document.getElementById("copy-sql").textContent = "复制 SQL", 1300); }
+  catch (e) { document.getElementById("copy-sql").textContent = "复制失败"; }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!-- source: 课堂/第十节课——MySQL模块/DuDaInfo-修复版.sql -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>DuDaInfo-修复版 · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂 · SQL</span>
+      <h1>DuDaInfo-修复版</h1>
+      <div class="doc-meta">数据来源：课堂/第十节课——MySQL模块/DuDaInfo-修复版.sql · 更新于 2026-11-10</div>
+    </header>
+    <article class="doc"><pre class="node-sql"><code>﻿<span class="sql-comment">/* ============================================================</span>
+<span class="sql-comment">   DuDaInfo —— 可重复执行的修复版</span>
+<span class="sql-comment">   与老师原版的区别只有三处：</span>
+<span class="sql-comment">   1. 开头加 DROP DATABASE IF EXISTS，重复运行不会报 1007 / 1050</span>
+<span class="sql-comment">   2. CREATE DATABASE 加 IF NOT EXISTS</span>
+<span class="sql-comment">   3. 结尾加一段查询，方便确认数据真的进去了</span>
+<span class="sql-comment">   表结构、字段、数据保持老师原样（MyISAM / utf8）；只把库默认字符集换成 utf8mb4（能存 emoji，中文数据完全兼容）</span>
+<span class="sql-comment">   ============================================================ */</span>
+
+<span class="sql-keyword">DROP</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">EXISTS</span> <span class="sql-ident">DuDaInfo</span>;
+
+<span class="sql-comment">/* 创建数据库  */</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">IF</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">EXISTS</span> <span class="sql-ident">DuDaInfo</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-ident">CHARACTER</span> <span class="sql-keyword">SET</span> <span class="sql-ident">utf8mb4</span>;
+
+<span class="sql-comment">/* 指定默认数据库  */</span>
+<span class="sql-keyword">USE</span> <span class="sql-ident">DuDaInfo</span>;
+
+
+<span class="sql-comment">/* 创建表  */</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> <span class="sql-ident">product</span>(
+ <span class="sql-ident">id</span> <span class="sql-ident">mediumint</span> <span class="sql-ident">unsigned</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">AUTO_INCREMENT</span>,
+ <span class="sql-ident">name</span> <span class="sql-ident">varchar</span>(<span class="sql-number">150</span>) <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span>,
+ <span class="sql-ident">cat_id</span> <span class="sql-ident">smallint</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-number">0</span>,
+ <span class="sql-ident">size</span> <span class="sql-ident">varchar</span>(<span class="sql-number">20</span>),
+ <span class="sql-ident">price</span> <span class="sql-ident">decimal</span>(<span class="sql-number">10</span>,<span class="sql-number">2</span>) <span class="sql-ident">unsigned</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-number">0.00</span>,
+ <span class="sql-ident">image</span> <span class="sql-ident">varchar</span>(<span class="sql-number">100</span>) ,
+ <span class="sql-ident">content</span> <span class="sql-ident">longtext</span>,
+ <span class="sql-ident">keywords</span> <span class="sql-ident">varchar</span>(<span class="sql-number">255</span>),
+ <span class="sql-ident">add_time</span> <span class="sql-function">date</span>,
+ <span class="sql-ident">sort</span> <span class="sql-ident">tinyint</span> <span class="sql-ident">unsigned</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-number">0</span>,
+ <span class="sql-keyword">PRIMARY</span> <span class="sql-keyword">KEY</span> (<span class="sql-ident">id</span>)
+) <span class="sql-ident">ENGINE</span><span class="sql-operator">=</span><span class="sql-ident">MyISAM</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-ident">CHARSET</span><span class="sql-operator">=</span><span class="sql-ident">utf8</span>;
+
+
+<span class="sql-comment">/* 查看表结构  */</span>
+<span class="sql-keyword">desc</span> <span class="sql-ident">product</span>;
+
+
+<span class="sql-comment">/* 表中插入记录  */</span>
+<span class="sql-keyword">INSERT</span> <span class="sql-keyword">INTO</span> <span class="sql-ident">product</span> <span class="sql-keyword">VALUES</span>
+ (<span class="sql-number">1</span>, <span class="sql-string">'PC008-1 BENZ.with diode'</span>, <span class="sql-number">1</span>, <span class="sql-string">'93mm'</span>, <span class="sql-number">2000.00</span>, <span class="sql-string">'images/pro-1.jpg'</span>, <span class="sql-string">'PC008-1 BENZ.with diode'</span>, <span class="sql-string">'PC008-1 BENZ.with diode'</span>, <span class="sql-string">'2022-10-11'</span>, <span class="sql-number">10</span>),
+ (<span class="sql-number">2</span>, <span class="sql-string">'PC008-3A'</span>, <span class="sql-number">1</span>, <span class="sql-string">'101mm'</span>, <span class="sql-number">599.00</span>, <span class="sql-string">'images/pro-2.jpg'</span>, <span class="sql-string">'PC008-3A'</span>, <span class="sql-string">'PC008-3A'</span>, <span class="sql-string">'2022-10-15'</span>, <span class="sql-number">10</span>),
+ (<span class="sql-number">3</span>, <span class="sql-string">'PC009-6 with diode'</span>, <span class="sql-number">2</span>, <span class="sql-string">'94mm'</span>, <span class="sql-number">1399.00</span>, <span class="sql-string">'images/pro-3.jpg'</span>, <span class="sql-string">'PC009-6 with diode'</span>, <span class="sql-string">'PC009-6 with diode'</span>, <span class="sql-string">'2022-11-15'</span>, <span class="sql-number">10</span>),
+ (<span class="sql-number">4</span>, <span class="sql-string">'PC009-3ZZ'</span>, <span class="sql-number">2</span>, <span class="sql-string">'101mm'</span>, <span class="sql-number">999.00</span>, <span class="sql-string">'images/pro-4.jpg'</span>, <span class="sql-string">'PC009-3ZZ'</span>, <span class="sql-string">'PC009-3ZZ'</span>, <span class="sql-string">'2022-12-31'</span>, <span class="sql-number">10</span>);
+
+
+<span class="sql-comment">/* 验证：应输出 4 */</span>
+<span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(<span class="sql-operator">*</span>) <span class="sql-keyword">AS</span> 总条数 <span class="sql-keyword">FROM</span> <span class="sql-ident">product</span>;
+<span class="sql-keyword">SELECT</span> <span class="sql-ident">id</span>, <span class="sql-ident">name</span>, <span class="sql-ident">size</span>, <span class="sql-ident">price</span>, <span class="sql-ident">add_time</span> <span class="sql-keyword">FROM</span> <span class="sql-ident">product</span>;
+</code></pre></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第十节课——MySQL模块/DuDaInfo-修复版.sql</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

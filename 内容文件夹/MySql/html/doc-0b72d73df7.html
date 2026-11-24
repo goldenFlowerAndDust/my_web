@@ -1,0 +1,102 @@
+<!-- source: 笔记/学习笔记存放地/视图查询.sql -->
+<!-- source-root: MySql -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>视图查询 · MySQL 笔记</title>
+<link rel="stylesheet" href="../共享配置/css/mysql-notes.css?v=20261124-3">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){}</script>
+</head>
+<body class="doc-page">
+<script>if (location.search.includes("embed=1")) document.body.classList.add("is-embed");</script>
+<nav class="topbar">
+  <a class="topbar-back" href="index.html">← 目录</a>
+  <span class="topbar-title">视图查询</span>
+  <div class="topbar-actions"><button class="icon-btn" type="button" data-theme-toggle>亮色</button></div>
+</nav>
+<main class="doc-page">
+  <header class="doc-head">
+    <div>
+      <span class="hero-kicker">笔记 · 学习笔记</span>
+      <h1>视图查询</h1>
+      <div class="doc-meta">
+        <span>来源：笔记/学习笔记存放地/视图查询.sql</span>
+        <span>19 行</span>
+        <span>更新 2026-09-03</span>
+      </div>
+    </div>
+  </header>
+  <section class="sql-card">
+    <div class="sql-toolbar">
+      <span class="sql-file">笔记/学习笔记存放地/视图查询.sql</span>
+      <button class="copy-btn" type="button" id="copy-sql">复制 SQL</button>
+    </div>
+    <pre class="sql-code" id="sql-code"><div class="sql-line"><span class="ln">1</span><code><span class="sql-comment">--  创建视图 语法：create [or replace] 视图名 [列名列表] as select 语句 视图列名高于表字段列名</span></code></div>
+<div class="sql-line"><span class="ln">2</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">view</span> <span class="sql-ident">jsj_sell</span> <span class="sql-keyword">AS</span></code></div>
+<div class="sql-line"><span class="ln">3</span><code><span class="sql-keyword">select</span> 订单号,<span class="sql-ident">book</span>.<span class="sql-string">`图书编号`</span>,书名,订购册数 <span class="sql-keyword">from</span> <span class="sql-ident">book</span> <span class="sql-keyword">join</span> <span class="sql-ident">sell</span> <span class="sql-ident">using</span>(图书编号) <span class="sql-keyword">where</span> 图书类别 <span class="sql-operator">=</span> <span class="sql-string">'计算机'</span>;</code></div>
+<div class="sql-line"><span class="ln">4</span><code></code></div>
+<div class="sql-line"><span class="ln">5</span><code><span class="sql-comment">-- </span></code></div>
+<div class="sql-line"><span class="ln">6</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">or</span> <span class="sql-ident">replace</span> <span class="sql-keyword">view</span> <span class="sql-ident">sale_AVG</span>(<span class="sql-ident">name</span>,<span class="sql-ident">sale_avg</span>) <span class="sql-keyword">AS</span></code></div>
+<div class="sql-line"><span class="ln">7</span><code><span class="sql-keyword">select</span> 书名,<span class="sql-function">avg</span>(订购册数) <span class="sql-keyword">from</span> <span class="sql-ident">jsj_sell</span> <span class="sql-keyword">GROUP</span> <span class="sql-keyword">BY</span> 书名;</code></div>
+<div class="sql-line"><span class="ln">8</span><code></code></div>
+<div class="sql-line"><span class="ln">9</span><code><span class="sql-comment">-- </span></code></div>
+<div class="sql-line"><span class="ln">10</span><code><span class="sql-keyword">select</span> 订单号,订购册数 <span class="sql-keyword">from</span> <span class="sql-ident">jsj_sell</span>;</code></div>
+<div class="sql-line"><span class="ln">11</span><code></code></div>
+<div class="sql-line"><span class="ln">12</span><code><span class="sql-comment">-- 可更新视图 jsj_sell 不可插入、删除、不能同时修改</span></code></div>
+<div class="sql-line"><span class="ln">13</span><code></code></div>
+<div class="sql-line"><span class="ln">14</span><code><span class="sql-comment">-- insert into 视图名 values(值......) </span></code></div>
+<div class="sql-line"><span class="ln">15</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">or</span> <span class="sql-ident">replace</span> <span class="sql-ident">jsj_book</span> <span class="sql-keyword">as</span> <span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">book</span> <span class="sql-keyword">where</span> 图书类别 <span class="sql-operator">=</span> <span class="sql-string">'计算机'</span> <span class="sql-ident">with</span> <span class="sql-keyword">check</span> <span class="sql-ident">option</span>;</code></div>
+<div class="sql-line"><span class="ln">16</span><code><span class="sql-keyword">insert</span> <span class="sql-keyword">into</span> <span class="sql-ident">jsj_book</span> <span class="sql-keyword">values</span>()</code></div>
+<div class="sql-line"><span class="ln">17</span><code></code></div>
+<div class="sql-line"><span class="ln">18</span><code><span class="sql-comment">--  修改视图</span></code></div>
+<div class="sql-line"><span class="ln">19</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">view</span> <span class="sql-ident">jsj_book</span> <span class="sql-keyword">as</span> <span class="sql-keyword">alter</span> </code></div></pre>
+    <textarea id="sql-raw" hidden>--  创建视图 语法：create [or replace] 视图名 [列名列表] as select 语句 视图列名高于表字段列名
+create view jsj_sell AS
+select 订单号,book.`图书编号`,书名,订购册数 from book join sell using(图书编号) where 图书类别 = '计算机';
+
+-- 
+create or replace view sale_AVG(name,sale_avg) AS
+select 书名,avg(订购册数) from jsj_sell GROUP BY 书名;
+
+-- 
+select 订单号,订购册数 from jsj_sell;
+
+-- 可更新视图 jsj_sell 不可插入、删除、不能同时修改
+
+-- insert into 视图名 values(值......) 
+create or replace jsj_book as select * from book where 图书类别 = '计算机' with check option;
+insert into jsj_book values()
+
+--  修改视图
+alter view jsj_book as alter </textarea>
+  </section>
+  <footer class="doc-foot">
+    <span><a href="doc-9884fbc46b.html">← 索引笔记</a></span>
+    <span><a href="doc-49b83f09c9.html">分区笔记 →</a></span>
+  </footer>
+</main>
+<script>
+(() => {
+  const root = document.documentElement, KEY = "programmingTutor.theme";
+  const apply = (theme) => {
+    root.dataset.theme = theme === "light" ? "light" : "dark";
+    document.querySelectorAll("[data-theme-toggle]").forEach((b) => { b.textContent = root.dataset.theme === "dark" ? "亮色" : "暗色"; });
+  };
+  apply(localStorage.getItem(KEY) || root.dataset.theme || "dark");
+  document.querySelectorAll("[data-theme-toggle]").forEach((b) => b.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem(KEY, next); apply(next);
+  }));
+})();
+</script>
+<script>
+document.getElementById("copy-sql")?.addEventListener("click", async () => {
+  const raw = document.getElementById("sql-raw").value;
+  try { await navigator.clipboard.writeText(raw); document.getElementById("copy-sql").textContent = "已复制"; setTimeout(() => document.getElementById("copy-sql").textContent = "复制 SQL", 1300); }
+  catch (e) { document.getElementById("copy-sql").textContent = "复制失败"; }
+});
+</script>
+</body>
+</html>

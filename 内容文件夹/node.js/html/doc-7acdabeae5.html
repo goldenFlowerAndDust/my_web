@@ -1,0 +1,48 @@
+<!-- source: 模块总览/README.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>模块总览（Node.js 侧） · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">模块总览</span>
+      <h1>模块总览（Node.js 侧）</h1>
+      <div class="doc-meta">数据来源：模块总览/README.md · 更新于 2026-11-17</div>
+    </header>
+    <article class="doc"><blockquote><p>这里只放 <strong>Node.js 学习项目</strong>用到的东西。   DSH 的插件清单在另一个地方：<code>D:\DeepSeekHarness-自创插件\外部插件\DSH外部插件清单.md</code></p></blockquote>
+<hr>
+<h2 id="sec-1">本目录内容</h2>
+<table><thead><tr><th>文件</th><th>内容</th></tr></thead><tbody><tr><td><a href="../模块总览/Node项目外部依赖清单.md" target="_blank" rel="noopener">Node项目外部依赖清单.md</a></td><td>npm 包、数据库软件、IDE 插件，含版本与安装命令</td></tr></tbody></table>
+<hr>
+<h2 id="sec-2">一句话结论</h2>
+<p>整套学习项目真正需要安装的外部依赖<strong>只有 4 个 npm 包</strong>：</p>
+<pre><code class="language-bash">npm install express    # 第十一节课：Web 框架
+npm install mysql2     # 第十、十一节课：MySQL 驱动
+npm install jquery     # 第九节课：前端 DOM / ajax
+npm install moment     # 第二节课：日期处理</code></pre>
+<p>其余都是 Node 自带：<code>fs</code>、<code>path</code>、<code>http</code>、<code>url</code>、<code>os</code> —— <strong>不需要装包</strong>。</p>
+<h2 id="sec-3">两个踩过的坑</h2>
+<table><thead><tr><th>包</th><th>问题</th></tr></thead><tbody><tr><td><code>fs@0.0.1-security</code></td><td>npm 上的空壳占位包，装了也没用，<code>require('fs')</code> 走内置</td></tr><tr><td><code>ajax@0.0.4</code></td><td>不是 jQuery，浏览器里用不了；<code>\$</code> 只能来自 jQuery</td></tr></tbody></table>
+<h2 id="sec-4">包管理器的区别（四个都叫“装包”）</h2>
+<table><thead><tr><th>工具</th><th>命令</th><th>锁文件</th></tr></thead><tbody><tr><td>npm</td><td><code>npm install</code></td><td><code>package-lock.json</code></td></tr><tr><td>yarn</td><td><code>yarn add</code></td><td><code>yarn.lock</code></td></tr><tr><td>cnpm</td><td><code>cnpm install</code></td><td><code>package-lock.json</code>（用的是国内镜像）</td></tr><tr><td>pnpm</td><td><code>pnpm add</code></td><td><code>pnpm-lock.yaml</code></td></tr></tbody></table>
+<blockquote><p><strong>包（package）</strong> 是能发布到 registry 的东西；<strong>模块（module）</strong> 是 Node 加载的单位（一个文件）。内置模块、第三方包、本地 <code>./</code> 文件，<code>require</code> 进来都用同一个概念——模块。</p></blockquote>
+<p>更新：2026-11-17</p></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：模块总览/README.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

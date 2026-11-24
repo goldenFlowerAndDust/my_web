@@ -4,40 +4,103 @@
     <meta charset="UTF-8">
     <script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node.js 博客</title>
-    <link rel="stylesheet" href="../../../自建网站中用到的外部引用/自建网站用的样式表/博客样式表new.css">
-    <link rel="stylesheet" href="博客样式.css">
+    <title>Node.js 学习主页</title>
+    <meta name="description" content="Node.js 学习主页：课堂笔记、模块总览、作业归档与统一阅读入口。">
+    <link rel="stylesheet" href="../../../自建网站中用到的外部引用/自建网站用的样式表/博客主页样式表.css">
     <script src="博客主题.js" defer></script>
-    <script src="博客增强.js" defer></script>
     <link rel="stylesheet" href="../../../AI答疑/共享工具/工具函数/月份历史.css?v=20261105-3">
 </head>
 <body class="blog-page">
 <nav class="blog-topnav">
-  <a class="blog-brand" href="../../../AI答疑/编程语言AI/index.html?lang=node">编程 AI 答疑</a>
+  <a class="blog-brand" href="../../../AI答疑/编程语言AI/index.html?lang=node">Node.js · 学习主页</a>
   <div class="blog-nav-links">
     <a href="python博客.html">Python</a>
     <a href="JavaScript博客.html">JavaScript</a>
     <a href="HTML博客.html">HTML</a>
     <a href="CSS博客.html">CSS</a>
     <a href="MySQL博客.html">MySQL</a>
-    <a href="Node.js博客.html">Node.js</a>
+    <a href="Node.js博客.html" aria-current="page">Node.js</a>
     <a class="blog-ai" href="../../../AI答疑/编程语言AI/index.html?lang=node">问 AI</a>
     <button type="button" class="blog-theme-toggle" data-theme-toggle>☀️ 亮色</button>
   </div>
 </nav>
-<header>Node.js 博客</header>
-<p class="blog-intro">Node.js 还没有系统学习，这一页先作为路线和实验入口。重点先弄清楚模块、异步和 HTTP，不急着上框架。</p>
 
-<ul class="blog-topic-grid">
-  <li><h2>模块系统</h2><p>CommonJS 的 require/module.exports，以及 ESM 的 import/export。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=node">问模块区别 →</a></li>
-  <li><h2>文件系统</h2><p>fs 的同步/异步 API、路径处理、读取和写入文件。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=node">问文件读写 →</a></li>
-  <li><h2>HTTP 服务</h2><p>用 http 模块创建服务器、处理请求和返回响应。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=node">问 HTTP →</a></li>
-  <li><h2>npm 与依赖</h2><p>package.json、依赖类型、脚本和版本锁定。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=node">问 npm →</a></li>
-  <li><h2>Express</h2><p>路由、中间件、错误处理和项目结构。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=node">问 Express →</a></li>
-  <li><h2>异步与调试</h2><p>Promise、async/await、错误传播和事件循环。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=node">问异步 →</a></li>
-</ul>
+<main class="blog-home">
+  <section class="blog-hero" aria-labelledby="node-title">
+    <span class="blog-eyebrow">NODE.JS · STUDY HUB</span>
+    <h1 id="node-title">Node.js 学习主页</h1>
+    <p>从模块、异步和 fs，到 HTTP、Express 与完整项目。课堂笔记、作业和排错记录已经整理成统一归档，先看总览，再按课次往下读。</p>
+    <div class="blog-hero-actions">
+      <a class="blog-action primary" href="../../../node.js/html/index.html">进入笔记目录 →</a>
+      <a class="blog-action" href="../../../AI答疑/编程语言AI/index.html?lang=node">问 Node.js AI</a>
+    </div>
+    <div class="blog-hero-stats" aria-label="学习内容统计">
+      <div class="blog-hero-stat"><strong>26</strong><span>归档笔记</span></div>
+      <div class="blog-hero-stat"><strong>21</strong><span>课堂记录</span></div>
+      <div class="blog-hero-stat"><strong>4</strong><span>内容分类</span></div>
+    </div>
+  </section>
 
-<div class="blog-note">学习建议：先写一个只返回 “hello” 的 HTTP 服务，再逐步加路由、文件和错误处理；每加一层都回来记一个小例子。</div>
-    <script src="../../../AI答疑/共享工具/工具函数/月份历史.js?v=20261105-3" data-subject="code" data-language="node"></script>
+  <div class="blog-section-head">
+    <div>
+      <h2>学习路线</h2>
+      <p>先建立模块和异步的底层直觉，再进入 HTTP 服务与项目实战。</p>
+    </div>
+    <span class="blog-section-mark">ROADMAP · 01—06</span>
+  </div>
+
+  <ul class="blog-topic-grid">
+    <li>
+      <span class="blog-card-kicker">01 · MODULE</span>
+      <h2>模块系统</h2>
+      <p>CommonJS 的 require / module.exports，以及 ESM 的 import / export。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=node">问模块区别 →</a>
+    </li>
+    <li>
+      <span class="blog-card-kicker">02 · FS</span>
+      <h2>文件系统</h2>
+      <p>fs 的同步/异步 API、路径处理、读取和写入文件。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=node">问文件读写 →</a>
+    </li>
+    <li>
+      <span class="blog-card-kicker">03 · HTTP</span>
+      <h2>HTTP 服务</h2>
+      <p>用 http 模块创建服务器、处理请求和返回响应。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=node">问 HTTP →</a>
+    </li>
+    <li>
+      <span class="blog-card-kicker">04 · NPM</span>
+      <h2>npm 与依赖</h2>
+      <p>package.json、依赖类型、脚本和版本锁定。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=node">问 npm →</a>
+    </li>
+    <li>
+      <span class="blog-card-kicker">05 · EXPRESS</span>
+      <h2>Express</h2>
+      <p>路由、中间件、错误处理和项目结构。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=node">问 Express →</a>
+    </li>
+    <li>
+      <span class="blog-card-kicker">06 · ASYNC</span>
+      <h2>异步与调试</h2>
+      <p>Promise、async/await、错误传播和事件循环。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=node">问异步 →</a>
+    </li>
+    <li class="is-featured">
+      <div class="blog-featured-copy">
+        <span class="blog-card-kicker">ARCHIVE · ALL NOTES</span>
+        <h2>笔记归档 · HTML</h2>
+        <p>把 node.js 目录下的课堂、作业、模块总览和项目笔记按目录归档成 HTML，统一阅读、搜索、目录跳转和翻页。</p>
+      </div>
+      <a href="../../../node.js/html/index.html">进入笔记目录 →</a>
+    </li>
+  </ul>
+
+  <div class="blog-note">
+    <strong>学习建议：</strong>先写一个只返回 “hello” 的 HTTP 服务，再逐步加路由、文件和错误处理；每加一层都回到归档里记一个小例子。
+  </div>
+</main>
+
+<script src="../../../AI答疑/共享工具/工具函数/月份历史.js?v=20261105-3" data-subject="code" data-language="node"></script>
 </body>
 </html>

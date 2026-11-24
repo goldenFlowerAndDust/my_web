@@ -1,0 +1,86 @@
+<!-- source: 课堂/第八节课——URL模块/第八节课-总结.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>第八节课 ｜ url 模块：解析与拼接地址 · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂</span>
+      <h1>第八节课 ｜ url 模块：解析与拼接地址</h1>
+      <div class="doc-meta">数据来源：课堂/第八节课——URL模块/第八节课-总结.md · 更新于 2026-11-10</div>
+    </header>
+    <article class="doc"><blockquote><p>板块定位：服务器收到的 <code>req.url</code> 只是一串字符串，要从中取出路径、参数，就得靠 URL 解析。这是「路由 / 分页 / 搜索」的前置技能。本板块已有文件：<code>URL模块.js</code>（只有 parse + format 两行，笔记最薄的一个板块，建议重点补）</p></blockquote>
+<hr>
+<h2 id="sec-1">一、模块的作用</h2>
+<p>把一个 URL 字符串拆成结构化字段，或者反过来把字段拼回字符串。</p>
+<pre><code>https:<span class="code-comment">//user:pass@example.com:8080/api/list?id=1&amp;page=2#top</span>
+└─协议─┘ └─认证─┘ └──主机──┘ └端口┘ └──路径──┘└──查询──┘└哈希┘</code></pre>
+<hr>
+<h2 id="sec-2">二、你笔记里的旧 API（legacy，已废弃）</h2>
+<pre><code class="language-js">const url = require('url')
+const u = url.parse('https:<span class="code-comment">//a.com:8080/p?x=1#h')   // 字符串 → 对象</span>
+const s = url.format(u)                              <span class="code-comment">// 对象 → 字符串</span></code></pre>
+<table><thead><tr><th>字段</th><th>内容（以 <code>https://a.com:8080/p?x=1#h</code> 为例）</th></tr></thead><tbody><tr><td><code>protocol</code></td><td><code>https:</code></td></tr><tr><td><code>host</code></td><td><code>a.com:8080</code></td></tr><tr><td><code>hostname</code></td><td><code>a.com</code></td></tr><tr><td><code>port</code></td><td><code>8080</code></td></tr><tr><td><code>pathname</code></td><td><code>/p</code></td></tr><tr><td><code>search</code></td><td><code>?x=1</code>（带问号）</td></tr><tr><td><code>query</code></td><td><code>x=1</code>（字符串；第二个参数传 true 则变成对象）</td></tr><tr><td><code>hash</code></td><td><code>#h</code>（带井号）</td></tr><tr><td><code>href</code></td><td>完整原始地址</td></tr></tbody></table>
+<p>⚠️ <code>url.parse</code> / <code>url.format</code> / <code>url.resolve</code> 从 Node 19 起标记为<strong>弃用（DEP0169）</strong>，新代码不建议再用；课本这么写是因为老教材，考场上写没问题，实际项目请用下面的 WHATWG 版。</p>
+<hr>
+<h2 id="sec-3">三、现在推荐的写法：全局 <code>URL</code>（无需 require）</h2>
+<pre><code class="language-js">const u = new URL('https:<span class="code-comment">//a.com:8080/p?x=1&amp;page=2#h')</span>
+
+u.protocol   <span class="code-comment">// 'https:'</span>
+u.hostname   <span class="code-comment">// 'a.com'</span>
+u.port       <span class="code-comment">// '8080'</span>
+u.pathname   <span class="code-comment">// '/p'</span>
+u.search     <span class="code-comment">// '?x=1&amp;page=2'</span>
+u.hash       <span class="code-comment">// '#h'</span>
+u.origin     <span class="code-comment">// 'https://a.com:8080'</span>
+
+<span class="code-comment">// 取参数（重点）</span>
+u.searchParams.get('page')        <span class="code-comment">// '2'</span>
+u.searchParams.has('x')           <span class="code-comment">// true</span>
+u.searchParams.getAll('tag')      <span class="code-comment">// 同名参数全部取回</span>
+u.toString()                      <span class="code-comment">// 拼回字符串</span></code></pre>
+<p><strong>相对地址必须给 base</strong>：</p>
+<pre><code class="language-js">new URL('/api/list', 'http:<span class="code-comment">//localhost:3000')   // http://localhost:3000/api/list</span>
+new URL('/api/list')                            <span class="code-comment">// ❌ 抛 TypeError: Invalid URL</span></code></pre>
+<hr>
+<h2 id="sec-4">四、服务器里怎么用（实战）</h2>
+<pre><code class="language-js">const http = require('http')
+
+http.createServer((req, res) =&gt; {
+    <span class="code-comment">// req.url 只有 '/api/list?id=1&amp;page=2'，没有域名，所以要给个 base</span>
+    const u = new URL(req.url, 'http:<span class="code-comment">//' + req.headers.host)</span>
+
+    if (u.pathname === '/api/list') {
+        const page = Number(u.searchParams.get('page')) || 1
+        const size = Number(u.searchParams.get('size')) || 10
+        <span class="code-comment">// ...按 page/size 取数据</span>
+    }
+})</code></pre>
+<hr>
+<h2 id="sec-5">五、其他相关工具</h2>
+<table><thead><tr><th>工具</th><th>作用</th><th>备注</th></tr></thead><tbody><tr><td><code>decodeURIComponent(s)</code></td><td>把 <code>%E5%9B%BE1.jpg</code> 还原成「图1.jpg」</td><td>中文参数必用</td></tr><tr><td><code>encodeURIComponent(s)</code></td><td>反向编码</td><td>拼查询串、下载文件名时用</td></tr><tr><td><code>querystring.parse(s)</code></td><td>查串 → 对象</td><td>legacy，等价 <code>new URLSearchParams(s)</code></td></tr><tr><td><code>querystring.stringify(o)</code></td><td>对象 → 查串</td><td>legacy</td></tr><tr><td><code>new URLSearchParams(s)</code></td><td>查询串专用解析</td><td>全局可用，支持 <code>.get/.set/.append/.delete</code></td></tr></tbody></table>
+<hr>
+<h2 id="sec-6">六、容易遗漏（这个板块最需要补的）</h2>
+<ol><li><strong>只学了 parse/format 两个方法</strong>，而它们在 Node 19+ 已弃用 —— 至少要知道 <code>new URL()</code> 的存在，否则面试/项目里会显得落后一整代；</li><li><strong>没写「怎么取查询参数」</strong>，而这才是服务器里 90% 的使用场景（<code>?page=2&amp;kw=星穹</code>）；</li><li><strong>没写中文/特殊字符的编解码</strong>，<code>req.url</code> 里的中文永远是 <code>%E5%9B%BE</code> 形式，不 <code>decodeURIComponent</code> 就拿不到原值；</li><li><strong><code>url.parse(req.url)</code> 得到的是相对路径对象</strong>，<code>host</code> 是 null，这点和 <code>new URL(req.url, base)</code> 不同；</li><li><code>search</code> 带 <code>?</code>、<code>hash</code> 带 <code>#</code> —— 做字符串比较时容易多带一个符号导致匹配不上；</li><li><code>url.parse(u, true)</code> 的第二个参数 <code>true</code> 会把 <code>query</code> 解析成对象，课本大概率会用到，建议补上。</li></ol>
+<hr>
+<h2 id="sec-7">七、自测</h2>
+<ol><li><code>url.parse('/api?id=1')</code> 得到的 <code>host</code> 是什么？为什么？</li><li>用 WHATWG 写法取 <code>http://x.com/list?page=3</code> 里的 <code>page</code>，怎么写？</li><li><code>decodeURIComponent('%E5%9B%BE1.jpg')</code> 的结果是什么？</li><li><code>u.search</code> 和 <code>u.pathname</code> 分别包不包含 <code>?</code>？</li></ol></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第八节课——URL模块/第八节课-总结.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

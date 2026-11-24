@@ -1,0 +1,141 @@
+<!-- source: 课堂/第十一节课——express/全栈知识点串联复习.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>全栈知识点串联复习 · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂</span>
+      <h1>全栈知识点串联复习</h1>
+      <div class="doc-meta">数据来源：课堂/第十一节课——express/全栈知识点串联复习.md · 更新于 2026-11-17</div>
+    </header>
+    <article class="doc"><blockquote><p>目的：把 HTML / CSS / 浏览器 JS / Node / Express / MySQL 这一串东西，<strong>按“一条请求怎么走”重新排一遍</strong>。不是按语言背，而是按流程记 —— 这才是你“学过却串不起来”的解药。</p></blockquote>
+<hr>
+<h2 id="sec-1">〇、为什么“都学过，但跟没学一样”</h2>
+<p>因为你脑子里的知识是<strong>按语言分类</strong>存的：</p>
+<pre><code>HTML 一套 ｜ CSS 一套 ｜ JS 一套 ｜ Node 一套 ｜ MySQL 一套</code></pre>
+<p>但真正做项目时，任务是<strong>按流程</strong>来的：</p>
+<pre><code>用户点一下 → 浏览器发请求 → 服务器查库 → 返回数据 → 页面变化</code></pre>
+<p><strong>同一个“流程”会横穿五门语言</strong>。所以复习必须换成“横着看”：一条线走完，五门语言各负责哪一段。</p>
+<hr>
+<h1>一、专题：地址（重点）</h1>
+<blockquote><p>你说“总感觉少了点什么，抓不到”—— 你缺的不是定义，是<strong>“谁在解析这个地址、以哪里为原点”</strong>。</p></blockquote>
+<h2 id="sec-2">1.1 地址就是一张快递单</h2>
+<pre><code>https:<span class="code-comment">//shop.example.com:8080/api/students?kw=张#result</span>
+└─┬─┘   └──────┬──────┘└┬┘└─────┬─────┘└──┬──┘└──┬─┘
+ 协议       域名       端口   路径        查询    锚点</code></pre>
+<table><thead><tr><th>部分</th><th>快递类比</th><th>说明</th></tr></thead><tbody><tr><td>协议 <code>https</code></td><td>用顺丰还是平邮</td><td>传输方式，http 明文 / https 加密</td></tr><tr><td>域名</td><td>收件城市</td><td>找哪台服务器</td></tr><tr><td>端口 <code>8080</code></td><td>城市里的哪栋楼</td><td>一台机器上跑多个服务，靠端口区分</td></tr><tr><td>路径 <code>/api/students</code></td><td>楼里哪个房间</td><td>你要哪个资源</td></tr><tr><td>查询 <code>?kw=张</code></td><td>快递单上的备注</td><td>附带要求：“只要张三的”</td></tr><tr><td>锚点 <code>#result</code></td><td>信里的“请看第 3 页”</td><td><strong>服务器根本看不到它</strong>，只有浏览器自己用</td></tr></tbody></table>
+<p>最后一条值得单独记：<strong><code>#</code> 后面的内容不会发给服务器</strong>。所以 <code>a href=&quot;#&quot;</code> 只是让浏览器跳到页内某个位置，根本不会产生请求。</p>
+<h2 id="sec-3">1.2 系统里有三种“地址”，你卡住就是因为它仨长得一样</h2>
+<p>这是最关键的一节。你之前所有“地址相关”的困惑，都源于把它们混成一锅：</p>
+<table><thead><tr><th>类型</th><th>长什么样</th><th>谁解析它</th><th>解析基准</th></tr></thead><tbody><tr><td><strong>① URL（网络地址）</strong></td><td><code>/api/students?kw=张</code></td><td>浏览器 / fetch</td><td>当前页面的地址</td></tr><tr><td><strong>② 文件路径（磁盘地址）</strong></td><td><code>D:\项目\public\index.html</code></td><td>Node 的 fs / path</td><td>由 <code>__dirname</code> 或 <code>process.cwd()</code> 决定</td></tr><tr><td><strong>③ 普通字符串</strong></td><td>数据库里存的 <code>images/图1.jpg</code></td><td><strong>没有任何人</strong>，除非你把它交给 ① 或 ②</td><td>无</td></tr></tbody></table>
+<p><strong>类比</strong>：</p>
+<ul><li>① 是“寄信地址”—— 邮局（浏览器/服务器）负责投递；</li><li>② 是“你自己抽屉的编号”—— 只有你家里人（Node）知道；</li><li>③ 是“便签上随手写的一行字”—— 谁也不知道它指向哪，直到有人拿它去邮局或者去开抽屉。</li></ul>
+<p>数据库里 <code>image</code> 字段存 <code>images/pro-1.jpg</code>，它<strong>本身不是地址</strong>，只是一行字。浏览器把它放进 <code>&lt;img src&gt;</code> 时，它才变成 ①；Node 把它丢给 <code>fs.readFile</code> 时，它才变成 ②。</p>
+<h2 id="sec-4">1.3 最关键的一条：相对地址 → 看“谁在解析”</h2>
+<blockquote><p><strong>同一句“往前走 100 米”，在北京和在上海指的地方完全不同。</strong>相对地址就是这句“往前走 100 米”，<strong>原点（基准）由解析它的人决定</strong>。</p></blockquote>
+<table><thead><tr><th>谁在解析</th><th>以什么为原点</th><th>例子</th></tr></thead><tbody><tr><td>浏览器（读 HTML 里的 <code>src</code>/<code>href</code>）</td><td><strong>当前页面的 URL</strong></td><td>页面是 <code>/</code>，<code>style.css</code> → 请求 <code>/style.css</code></td></tr><tr><td>浏览器的 <code>fetch('/api/x')</code></td><td><strong>当前页面的 URL</strong></td><td>页面在 <code>http://localhost:3000/</code>，则请求 <code>http://localhost:3000/api/x</code></td></tr><tr><td>Node 的 <code>fs.readFile('./a.txt')</code></td><td><strong><code>process.cwd()</code>（启动 node 时的目录）</strong></td><td>在别的目录启动就找不到</td></tr><tr><td>Node 的 <code>path.join(__dirname, 'a.txt')</code></td><td><strong>脚本自己所在的目录</strong></td><td>永远稳定，推荐</td></tr><tr><td><code>express.static('public')</code></td><td><strong>你传给它的那个目录</strong></td><td>请求 <code>/a.png</code> → 找 <code>public/a.png</code></td></tr></tbody></table>
+<p><strong>这就是你“死都抓不到”的那块</strong>：你没意识到“地址”不是绝对的，它有<strong>原点</strong>，而原点随场景变化。</p>
+<h2 id="sec-5">1.4 一个真实例子完整走一遍</h2>
+<p><code>index.html</code> 里写了：</p>
+<pre><code class="language-html">&lt;img src=&quot;image/图1.jpg&quot;&gt;</code></pre>
+<p>发生的顺序：</p>
+<pre><code>① 浏览器当前地址：http:<span class="code-comment">//localhost:3000/</span>
+② 看到 src=&quot;image/图1.jpg&quot;，是相对地址
+③ 以页面地址为原点拼：http:<span class="code-comment">//localhost:3000/image/图1.jpg</span>
+④ 浏览器发请求：GET /image/%E5%9B%BE1.jpg
+⑤ Express 的 static 中间件接管：
+     根目录 = 项目文件\
+     请求路径 /image/图1.jpg
+     拼接 → 项目文件\image\图1.jpg        ← 这时才变成“磁盘地址”
+⑥ fs 读文件 → 返回二进制 → 浏览器渲染</code></pre>
+<p><strong>注意第 ⑤ 步</strong>：URL 和磁盘路径之间，是<strong>你配置的静态目录</strong>在换算。<code>app.use(express.static(path.join(__dirname)))</code> 就是那句“邮局分拣规则”。</p>
+<h2 id="sec-6">1.5 你项目里的地址全景表</h2>
+<table><thead><tr><th>出现在哪</th><th>形式</th><th>谁解析</th><th>指向</th></tr></thead><tbody><tr><td>浏览器地址栏</td><td><code>localhost:3000</code></td><td>浏览器</td><td>服务器根</td></tr><tr><td><code>&lt;link href=&quot;style.css&quot;&gt;</code></td><td>相对 URL</td><td>浏览器</td><td><code>/style.css</code></td></tr><tr><td><code>&lt;script src=&quot;JS.js&quot;&gt;</code></td><td>相对 URL</td><td>浏览器</td><td><code>/JS.js</code></td></tr><tr><td><code>fetch('/api/students?kw=张')</code></td><td>相对 URL</td><td>浏览器</td><td>同源接口</td></tr><tr><td>服务器里 <code>req.url</code></td><td><code>/api/students?kw=%E5%BC%A0</code></td><td><code>req.query</code> 帮你拆</td><td>路径 + 参数</td></tr><tr><td><code>path.join(__dirname, 'index.html')</code></td><td>磁盘路径</td><td>Node</td><td>真实文件</td></tr><tr><td>数据库 <code>image</code> 字段</td><td>普通字符串</td><td>没人 → 交给浏览器才生效</td><td>未来拼成 URL</td></tr></tbody></table>
+<h2 id="sec-7">1.6 最常见的 404，都是这三类原因</h2>
+<table><thead><tr><th>现象</th><th>真正原因</th><th>怎么查</th></tr></thead><tbody><tr><td>文件明明在，浏览器 404</td><td>浏览器按<strong>页面地址</strong>解析，路径多/少了一层</td><td>DevTools 看实际请求的 URL</td></tr><tr><td>Node 里读不到文件</td><td>相对路径按 <strong><code>process.cwd()</code></strong> 算，不是脚本所在目录</td><td>改用 <code>path.join(__dirname, ...)</code></td></tr><tr><td>中文文件名 404</td><td>URL 里是 <code>%E5%9B%BE</code>，服务器没解码</td><td>用 <code>decodeURIComponent</code></td></tr></tbody></table>
+<blockquote><p><strong>一句话记住</strong>：地址 = “去哪” + “干什么”，但<strong>“从哪算起”由解析者决定</strong>。写地址前先问：这是给谁看的？浏览器还是 Node？</p></blockquote>
+<hr>
+<h1>二、语言清单（按你项目里实际用到的整理）</h1>
+<blockquote><p>每条格式：<strong>作用</strong> → 你项目里的例子。只列用过的，不铺开全量手册。</p></blockquote>
+<h2 id="sec-8">2.1 HTML —— 页面骨架</h2>
+<table><thead><tr><th>知识点</th><th>作用</th><th>项目里的例子</th></tr></thead><tbody><tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>声明用现代标准渲染</td><td>第一行</td></tr><tr><td><code>&lt;html lang=&quot;zh-CN&quot;&gt;</code></td><td>页面语言，影响朗读/翻译</td><td></td></tr><tr><td><code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code></td><td>告诉浏览器用什么编码，<strong>中文不乱码的前提</strong></td><td></td></tr><tr><td><code>&lt;meta name=&quot;viewport&quot;&gt;</code></td><td>手机上按设备宽度显示</td><td></td></tr><tr><td><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;</code></td><td>引入 CSS</td><td></td></tr><tr><td><code>&lt;script src=&quot;JS.js&quot;&gt;&lt;/script&gt;</code></td><td>引入 JS，放 <code>&lt;/body&gt;</code> 前</td><td></td></tr><tr><td><code>&lt;table&gt;/&lt;thead&gt;/&lt;tbody&gt;/&lt;tr&gt;/&lt;th&gt;/&lt;td&gt;</code></td><td>表格结构</td><td>学生表格</td></tr><tr><td><code>colspan=&quot;3&quot;</code></td><td>一格横跨 3 列</td><td>“没有匹配的学生”那一行</td></tr><tr><td><code>&lt;input type=&quot;text&quot; placeholder=&quot;...&quot;&gt;</code></td><td>输入框，<code>placeholder</code> 是提示文字</td><td>姓名输入框</td></tr><tr><td><code>value</code> 与 <code>placeholder</code> 的区别</td><td><code>value</code> 是<strong>真实默认值</strong>，<code>placeholder</code> 只是灰字提示</td><td>你之前把提示语写进 <code>value</code> 了</td></tr><tr><td><code>&lt;button type=&quot;button&quot;&gt;</code></td><td>按钮；<code>type</code> 不写时在 form 里会变成提交</td><td>查询按钮</td></tr><tr><td><code>id</code> 与 <code>class</code></td><td><code>id</code> 唯一（JS 定位用），<code>class</code> 可重复（样式用）</td><td><code>id=&quot;kw&quot;</code> / <code>class=&quot;box&quot;</code></td></tr><tr><td><code>disabled</code></td><td>禁用元素</td><td>请求期间禁用按钮</td></tr><tr><td>注释 <code>&lt;!-- --&gt;</code></td><td>不显示</td><td></td></tr></tbody></table>
+<h2 id="sec-9">2.2 CSS —— 外观</h2>
+<table><thead><tr><th>知识点</th><th>作用</th><th>例子</th></tr></thead><tbody><tr><td>选择器 <code>body</code> / <code>.box</code> / <code>#kw</code></td><td>元素 / 类 / id</td><td><code>.search</code></td></tr><tr><td>群组 <code>th, td</code></td><td>多个选择器同一套样式</td><td></td></tr><tr><td>伪类 <code>:hover</code> <code>:focus</code></td><td>悬停 / 聚焦时</td><td>表格行高亮、输入框发光</td></tr><tr><td><code>* { box-sizing: border-box }</code></td><td>宽高包含 padding 和 border，算尺寸更直观</td><td></td></tr><tr><td><code>margin</code> / <code>padding</code></td><td>外边距 / 内边距</td><td></td></tr><tr><td><code>display: flex</code> + <code>gap</code></td><td>横向排列并留空隙</td><td>输入框 + 按钮同一行</td></tr><tr><td><code>flex: 1</code></td><td>占据剩余空间</td><td>输入框自动拉满</td></tr><tr><td><code>justify-content</code> / <code>align-items</code></td><td>主轴 / 交叉轴对齐</td><td></td></tr><tr><td><code>max-width</code> + <code>margin: 0 auto</code></td><td>限宽并水平居中</td><td>卡片布局</td></tr><tr><td><code>border-collapse: collapse</code></td><td>表格边框合并成一条线</td><td></td></tr><tr><td><code>border-radius</code> / <code>box-shadow</code></td><td>圆角 / 阴影</td><td>卡片</td></tr><tr><td><code>font-family: system-ui, &quot;Microsoft YaHei&quot;</code></td><td>字体回退链</td><td></td></tr><tr><td><code>cursor: pointer</code></td><td>鼠标变小手</td><td>按钮</td></tr><tr><td>单位 <code>px</code> / <code>%</code></td><td>固定 / 相对父元素</td><td></td></tr></tbody></table>
+<h2 id="sec-10">2.3 浏览器 JavaScript —— 让页面动起来</h2>
+<h3 id="sec-11">找元素</h3>
+<table><thead><tr><th>方法</th><th>作用</th></tr></thead><tbody><tr><td><code>document.getElementById('kw')</code></td><td>按 id 找一个</td></tr><tr><td><code>document.querySelector('.box')</code></td><td>按 CSS 选择器找<strong>第一个</strong></td></tr><tr><td><code>document.querySelectorAll('tr')</code></td><td>找全部，返回类数组</td></tr></tbody></table>
+<h3 id="sec-12">改内容 / 结构</h3>
+<table><thead><tr><th>属性/方法</th><th>作用</th><th>注意</th></tr></thead><tbody><tr><td><code>el.textContent</code></td><td>读写纯文本</td><td><strong>安全</strong>，不解析 HTML</td></tr><tr><td><code>el.innerHTML</code></td><td>读写 HTML 字符串</td><td><strong>有 XSS 风险</strong>，只用于你自己写的固定片段</td></tr><tr><td><code>document.createElement('tr')</code></td><td>造一个新元素</td><td>造出来还没上树</td></tr><tr><td><code>parent.appendChild(child)</code></td><td>把子元素塞进父元素</td><td>上树后才显示</td></tr><tr><td><code>el.value</code></td><td>输入框当前内容</td><td>用户输入靠它拿</td></tr><tr><td><code>el.disabled = true</code></td><td>禁用</td><td>防重复点击</td></tr><tr><td><code>el.className = 'msg error'</code></td><td>整体替换 class</td><td></td></tr><tr><td><code>input.value.trim()</code></td><td>去掉首尾空格</td><td>用户常手滑多打空格</td></tr></tbody></table>
+<h3 id="sec-13">事件</h3>
+<table><thead><tr><th>写法</th><th>作用</th></tr></thead><tbody><tr><td><code>btn.addEventListener('click', load)</code></td><td>点击时调用 <code>load</code></td></tr><tr><td><code>input.addEventListener('keydown', e =&gt; ...)</code></td><td>按键</td></tr><tr><td><code>e.key === 'Enter'</code></td><td>判断按的是回车</td></tr></tbody></table>
+<h3 id="sec-14">异步与网络</h3>
+<table><thead><tr><th>知识点</th><th>作用</th><th>关键点</th></tr></thead><tbody><tr><td><code>fetch(url)</code></td><td>发请求</td><td>返回 <strong>Promise&lt;Response&gt;</strong></td></tr><tr><td><code>await fetch(...)</code></td><td>等响应头回来</td><td>此时 body 还没读完</td></tr><tr><td><code>res.ok</code></td><td><code>status</code> 在 200~299</td><td>判断成败</td></tr><tr><td><code>res.status</code></td><td>状态码数字</td><td></td></tr><tr><td><code>res.headers.get('content-type')</code></td><td>读响应头</td><td></td></tr><tr><td><code>await res.json()</code></td><td>读 body 并解析成对象</td><td><strong>第二次 await</strong></td></tr><tr><td><code>await res.text()</code></td><td>读 body 成纯文本</td><td></td></tr><tr><td><code>async</code> / <code>await</code></td><td>用同步写法写异步</td><td><code>await</code> 只能在 async 函数里</td></tr><tr><td><code>try / catch / finally</code></td><td>捕获错误 + 收尾</td><td><code>finally</code> 恢复按钮</td></tr><tr><td><code>encodeURIComponent(s)</code></td><td>把中文等字符编码进 URL</td><td><code>?kw=张</code> → <code>%E5%BC%A0</code></td></tr><tr><td>模板字符串 `<code> </code>%${kw}%<code> </code>`</td><td>\text{拼字符串}</td><td>\text{反引号} + <code>${}</code></td></tr><tr><td><code>??</code></td><td>空值兜底（null/undefined 才生效）</td><td><code>s[key] ?? ''</code></td></tr><tr><td>`</td><td></td><td>`</td><td>假值兜底（0/''/false 也算）</td><td>`req.query.kw</td><td></td><td>''`</td></tr><tr><td><code>for...of</code></td><td>遍历数组元素</td><td><code>for (const s of rows)</code></td></tr></tbody></table>
+<h2 id="sec-15">2.4 Node.js / CommonJS —— 服务器端的运行环境</h2>
+<table><thead><tr><th>知识点</th><th>作用</th><th>注意</th></tr></thead><tbody><tr><td><code>require('模块')</code></td><td>引入模块</td><td>内置直接写名字，本地要写 <code>./</code></td></tr><tr><td><code>module.exports = x</code></td><td>导出，别人 require 拿到的就是它</td><td>一个文件一个出口</td></tr><tr><td><code>exports.a = 1</code></td><td>挂属性（指向 module.exports）</td><td>整体重新赋值 <code>exports = {}</code> 会失效</td></tr><tr><td><code>__dirname</code></td><td><strong>当前脚本所在目录</strong>（绝对路径）</td><td>拼文件路径就用它</td></tr><tr><td><code>__filename</code></td><td>当前脚本完整路径</td><td></td></tr><tr><td><code>process.cwd()</code></td><td><strong>启动 node 时所在目录</strong></td><td>会变，不可靠</td></tr><tr><td><code>path.join(a, b)</code></td><td>拼接路径，自动处理分隔符</td><td>拼磁盘路径</td></tr><tr><td><code>path.resolve(a, b)</code></td><td>拼成绝对路径</td><td>依赖 cwd</td></tr><tr><td><code>path.dirname</code> / <code>basename</code> / <code>extname</code></td><td>取目录 / 文件名 / 后缀</td><td>改后缀时用</td></tr><tr><td><code>fs.readFile(p, 'utf-8', cb)</code></td><td>异步读文件（回调）</td><td>err 在前</td></tr><tr><td><code>fs.readFileSync(p, 'utf-8')</code></td><td>同步读，直接返回内容</td><td>出错抛异常</td></tr><tr><td><code>fs.promises.readFile(p)</code></td><td>Promise 版</td><td>可 await</td></tr><tr><td><code>http.createServer(cb)</code></td><td>建 HTTP 服务（原生）</td><td>Express 底层就是它</td></tr><tr><td><code>server.listen(端口, cb)</code></td><td>监听端口</td><td>端口被占报 EADDRINUSE</td></tr><tr><td><code>res.writeHead(状态码, 头)</code></td><td>发状态码 + 响应头（只一次）</td><td></td></tr><tr><td><code>res.end(内容)</code></td><td>发 body 并结束（只一次）</td><td></td></tr><tr><td><code>process.argv</code></td><td>命令行参数</td><td><code>node a.js 参数</code></td></tr></tbody></table>
+<h3 id="sec-16">Node 的两种模块格式（你现在用的是哪种）</h3>
+<table><thead><tr><th></th><th>CommonJS（默认）</th><th>ES Module</th></tr></thead><tbody><tr><td>引入</td><td><code>require()</code></td><td><code>import</code></td></tr><tr><td>导出</td><td><code>module.exports</code></td><td><code>export</code></td></tr><tr><td>顶层 await</td><td>❌ 不允许</td><td>✅ 允许</td></tr><tr><td>判断依据</td><td><code>package.json</code> 没写 type</td><td><code>&quot;type&quot;: &quot;module&quot;</code></td></tr></tbody></table>
+<blockquote><p>你遇到过的 <code>await is only valid in async functions</code> 就是这个原因。</p></blockquote>
+<h2 id="sec-17">2.5 Express —— 用 5 行代替原生的 50 行</h2>
+<table><thead><tr><th>知识点</th><th>作用</th><th>例子</th></tr></thead><tbody><tr><td><code>express()</code></td><td>创建应用</td><td><code>const app = express()</code></td></tr><tr><td><code>app.use(x)</code></td><td>挂中间件（什么请求都先过一遍）</td><td><code>app.use(express.static(...))</code></td></tr><tr><td><code>express.static(目录)</code></td><td>静态文件托管</td><td>把 <code>项目文件</code> 当作网站根</td></tr><tr><td><code>express.json()</code></td><td>解析 JSON 请求体 → <code>req.body</code></td><td>POST 时必需</td></tr><tr><td><code>app.get(路径, 处理函数)</code></td><td>定义 GET 路由</td><td><code>/api/students</code></td></tr><tr><td><code>app.post/put/delete</code></td><td>其他方法的路由</td><td></td></tr><tr><td><code>app.listen(端口, cb)</code></td><td>启动服务</td><td>3000</td></tr><tr><td><code>req.query</code></td><td>URL 里的 <code>?a=1</code></td><td><code>req.query.kw</code></td></tr><tr><td><code>req.params</code></td><td>路径里的 <code>/:id</code></td><td><code>/api/user/5</code></td></tr><tr><td><code>req.body</code></td><td>请求体（需 json 中间件）</td><td>POST 提交的数据</td></tr><tr><td><code>req.method</code> / <code>req.url</code></td><td>方法 / 原始路径</td><td></td></tr><tr><td><code>res.json(obj)</code></td><td>返回 JSON（设头 + 序列化 + end）</td><td></td></tr><tr><td><code>res.send(str/obj)</code></td><td>返回字符串或对象（自动判类型）</td><td></td></tr><tr><td><code>res.status(500)</code></td><td>设置状态码，可链式</td><td><code>.status(500).json(...)</code></td></tr><tr><td><code>res.set(k, v)</code> / <code>res.type(t)</code></td><td>设置响应头 / 内容类型</td><td></td></tr><tr><td>中间件签名 <code>(req, res, next)</code></td><td>不调 <code>next()</code> 就停在原地</td><td>鉴权、日志都这么写</td></tr><tr><td><code>(err, req, res, next)</code></td><td>错误处理中间件（4 个参数）</td><td>放最后</td></tr></tbody></table>
+<h2 id="sec-18">2.6 MySQL —— 数据住的地方</h2>
+<h3 id="sec-19">结构（DDL）</h3>
+<table><thead><tr><th>语句</th><th>作用</th></tr></thead><tbody><tr><td><code>CREATE DATABASE 库名</code></td><td>建库</td></tr><tr><td><code>USE 库名</code></td><td>切库</td></tr><tr><td><code>CREATE TABLE 表(字段 类型 约束)</code></td><td>建表</td></tr><tr><td><code>ALTER TABLE ... ADD/MODIFY/DROP</code></td><td>改表</td></tr><tr><td><code>DROP TABLE / DROP DATABASE</code></td><td>删表 / 删库</td></tr><tr><td><code>DESC 表</code></td><td>看表结构</td></tr></tbody></table>
+<h3 id="sec-20">类型（建表选类型）</h3>
+<table><thead><tr><th>类型</th><th>用途</th><th></th></tr></thead><tbody><tr><td><code>INT</code> / <code>TINYINT</code></td><td>整数 / 小整数</td><td></td></tr><tr><td><code>DECIMAL(10,2)</code></td><td>金额，精确小数</td><td></td></tr><tr><td><code>CHAR(2)</code> / <code>VARCHAR(50)</code></td><td>定长 / 变长字符串</td><td></td></tr><tr><td><code>DATE</code> / <code>DATETIME</code></td><td>日期 / 日期时间</td><td></td></tr><tr><td><code>TEXT</code> / <code>LONGTEXT</code></td><td>长文本</td><td></td></tr><tr><td><code>ENUM('男','女')</code></td><td>只能取列出的值</td><td></td></tr></tbody></table>
+<h3 id="sec-21">约束（管住数据）</h3>
+<table><thead><tr><th>约束</th><th>作用</th></tr></thead><tbody><tr><td><code>PRIMARY KEY</code></td><td>主键，唯一且非空</td></tr><tr><td><code>AUTO_INCREMENT</code></td><td>自增</td></tr><tr><td><code>NOT NULL</code></td><td>不能为空</td></tr><tr><td><code>DEFAULT 值</code></td><td>默认值</td></tr><tr><td><code>UNIQUE</code></td><td>唯一</td></tr><tr><td><code>CHECK (条件)</code></td><td>值必须满足条件（8.0.16+ 才真生效）</td></tr><tr><td><code>FOREIGN KEY</code></td><td>外键，关联另一张表</td></tr></tbody></table>
+<h3 id="sec-22">数据操作（DML）</h3>
+<table><thead><tr><th>语句</th><th>作用</th><th>危险点</th></tr></thead><tbody><tr><td><code>SELECT 字段 FROM 表 WHERE 条件</code></td><td>查</td><td></td></tr><tr><td><code>INSERT INTO 表(字段) VALUES(...)</code></td><td>增</td><td>字段与值个数必须一致</td></tr><tr><td><code>UPDATE 表 SET 字段=值 WHERE 条件</code></td><td>改</td><td><strong>忘写 WHERE 全表改</strong></td></tr><tr><td><code>DELETE FROM 表 WHERE 条件</code></td><td>删</td><td><strong>忘写 WHERE 全表清空</strong></td></tr></tbody></table>
+<h3 id="sec-23">查询加分项</h3>
+<table><thead><tr><th>关键字</th><th>作用</th></tr></thead><tbody><tr><td><code>WHERE ... LIKE '%张%'</code></td><td>模糊匹配</td></tr><tr><td><code>ORDER BY 字段 DESC</code></td><td>排序</td></tr><tr><td><code>LIMIT 0, 10</code></td><td>分页</td></tr><tr><td><code>GROUP BY</code> + <code>COUNT/SUM</code></td><td>分组统计</td></tr><tr><td><code>JOIN</code></td><td>多表连接</td></tr><tr><td>子查询</td><td>用查询结果当条件</td></tr></tbody></table>
+<hr>
+<h1>三、把五门语言“串起来”的三张对照表</h1>
+<h2 id="sec-24">3.1 同一样东西，在五层里叫什么</h2>
+<table><thead><tr><th>概念</th><th>HTML</th><th>浏览器 JS</th><th>Node</th><th>Express</th><th>MySQL</th></tr></thead><tbody><tr><td><strong>数据</strong></td><td>标签里的文字</td><td>JS 对象/数组</td><td>JS 对象</td><td><code>req.body</code> / <code>res.json</code></td><td>行</td></tr><tr><td><strong>地址</strong></td><td><code>href</code> / <code>src</code></td><td><code>fetch(url)</code></td><td><code>path.join</code></td><td><code>req.url</code> / <code>req.query</code></td><td><code>image</code> 字段</td></tr><tr><td><strong>动作</strong></td><td>点击按钮</td><td><code>addEventListener</code></td><td>路由回调</td><td><code>app.get</code></td><td><code>SELECT</code></td></tr><tr><td><strong>错误</strong></td><td>页面提示</td><td><code>catch</code></td><td><code>err.code</code></td><td><code>res.status(500)</code></td><td>错误码 1064/1045</td></tr><tr><td><strong>等待</strong></td><td>加载中</td><td><code>await</code></td><td><code>fs</code> 异步</td><td>数据库查询</td><td>——</td></tr></tbody></table>
+<h2 id="sec-25">3.2 一条请求的完整旅程（按顺序背下来就串起来了）</h2>
+<pre><code>1. HTML    页面里 &lt;button id=&quot;btn&quot;&gt;  → 用户点击
+2. JS.js   btn.addEventListener('click', load) 触发
+3. JS.js   fetch('/api/students?kw=张')  ← ① URL
+4. 网络    浏览器发 HTTP 请求（方法/头/可选 body）
+5. Express app.get('/api/students') 匹配路由
+6. Express req.query.kw 取出参数 '张'
+7. sql.js  conn.query('SELECT ... LIKE ?', ['%张%'])  ← ② SQL
+8. MySQL   执行查询，返回行
+9. Express res.json(rows)  ← ③ 对象转 JSON + 设头 + 发 body
+10. JS.js  await res.json()  ← ④ JSON 转回对象
+11. JS.js  renderRows(rows)  → createElement / appendChild
+12. CSS    新元素的样式自动生效</code></pre>
+<p><strong>这 12 行就是你的整个项目。</strong> 任何新功能，都是在这条线上插一个环节。</p>
+<h2 id="sec-26">3.3 出问题时怎么定位（看错误落在哪一段）</h2>
+<table><thead><tr><th>症状</th><th>落在哪一段</th><th>先查什么</th></tr></thead><tbody><tr><td>页面空白、按钮没反应</td><td>1~3</td><td>F12 Console 有没有红色报错</td></tr><tr><td>请求 404</td><td>3~5</td><td>Network 里请求的 URL 对不对</td></tr><tr><td>返回 500</td><td>6~9</td><td>服务端控制台 / <code>err.message</code></td></tr><tr><td>返回 <code>[]</code> 但库里有数据</td><td>7</td><td>SQL 条件写错 / 库名表名</td></tr><tr><td>页面有数据但不显示</td><td>10~11</td><td><code>rows</code> 有没有解构、字段名对不对</td></tr><tr><td>样子丑</td><td>12</td><td>CSS 选择器没命中</td></tr></tbody></table>
+<hr>
+<h1>四、怎么复习才有效（别再从头看一遍）</h1>
+<h2 id="sec-27">4.1 一个问题自测法</h2>
+<p>对着项目问自己，<strong>能答上来就是真懂</strong>：</p>
+<ol><li>我把 <code>app.use(express.static(...))</code> 删了，会怎样？</li><li>我把 <code>await res.json()</code> 的 <code>await</code> 去掉，页面会怎样？</li><li>我把 SQL 的 <code>?</code> 换成直接拼 <code>'%' + kw + '%'</code>，有什么风险？</li><li>我把 <code>path.join(__dirname)</code> 换成 <code>'./'</code>，从别的目录启动会怎样？</li><li>我把 <code>res.json(rows)</code> 写两遍，报什么错？</li><li>数据库里 <code>学号</code> 从 int 改成 varchar，前端要改吗？</li></ol>
+<h2 id="sec-28">4.2 三天计划</h2>
+<table><thead><tr><th>天</th><th>做什么</th><th>目标</th></tr></thead><tbody><tr><td>第 1 天</td><td><strong>删掉 <code>JS.js</code> 自己重写</strong>（HTML/CSS/服务端不动）</td><td>搞清楚前端怎么取数据、怎么渲染</td></tr><tr><td>第 2 天</td><td><strong>删掉 <code>node.js</code> 自己重写</strong>（前端/数据库不动）</td><td>搞清楚路由、参数、响应</td></tr><tr><td>第 3 天</td><td><strong>不看任何代码，从空文件夹建一套</strong></td><td>卡住的地方就是真缺口</td></tr></tbody></table>
+<h2 id="sec-29">4.3 一个判断“真会了”的标准</h2>
+<blockquote><p><strong>能对着空白文件，一边写一边讲出“这一行在整条链路的哪一步”。</strong>讲不出来，说明还是背的。</p></blockquote>
+<hr>
+<p>更新：2026-11-17</p></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第十一节课——express/全栈知识点串联复习.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

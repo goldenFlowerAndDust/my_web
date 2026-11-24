@@ -1,0 +1,29 @@
+{
+  "name": "MySQL",
+  "title": "MySQL 笔记归档",
+  "description": "扫描 MySql 目录下的全部 SQL 笔记，按「笔记 / 查询练习」分区，生成可直接阅读、搜索和复制的 HTML。",
+  "output": "html",
+  "sourceRoot": ".",
+  "exclude": [
+    "html",
+    "共享配置",
+    "node_modules",
+    ".git"
+  ],
+  "noteOrder": [
+    "MySQL基础代码",
+    "MySQL数据类型",
+    "MySQL关于表相关命令",
+    "数据完整性约束",
+    "插入数据命令",
+    "数据查找",
+    "分类汇总",
+    "多表查询",
+    "子查询",
+    "数据查找综合实例",
+    "索引笔记",
+    "视图查询",
+    "分区笔记",
+    "数据库注意事项"
+  ]
+}

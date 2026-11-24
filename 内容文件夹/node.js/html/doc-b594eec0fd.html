@@ -1,0 +1,97 @@
+<!-- source: 课堂/第七节课——HTTP模块/第七节课-总结.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>第七节课 ｜ http 模块：自己搭一个 Web 服务器 · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂</span>
+      <h1>第七节课 ｜ http 模块：自己搭一个 Web 服务器</h1>
+      <div class="doc-meta">数据来源：课堂/第七节课——HTTP模块/第七节课-总结.md · 更新于 2026-11-10</div>
+    </header>
+    <article class="doc"><blockquote><p>板块定位：Node 从「玩文件」进入「对外提供服务」，理解 <code>req / res</code> 这对东西，是后面 Express 的地基。本板块已有文件：<code>HTTP模块.js</code>（两个服务器：文本响应 + 文件下载）、<code>image/</code>（三层报错截图）</p></blockquote>
+<hr>
+<h2 id="sec-1">一、重点</h2>
+<ol><li>服务器 = 一个<strong>一直挂着的进程</strong>，监听端口，每来一个请求就执行一次回调。</li><li><code>http.createServer((req, res) =&gt; {})</code> 的等价写法是 <code>server.on('request', cb)</code>。</li><li><code>req</code> 是「请求」：网址、方法、请求头；<code>res</code> 是「响应」：状态码、响应头、正文。</li><li><strong>响应头决定浏览器怎么处理内容</strong>：<code>Content-Type</code> 决定「当文本/图片/下载」，<code>Content-Disposition</code> 决定「直接打开还是下载」。</li><li>大文件不要一次读进内存，用 <code>fs.createReadStream().pipe(res)</code> 流式输出。</li></ol>
+<hr>
+<h2 id="sec-2">二、API 速查</h2>
+<table><thead><tr><th>对象/方法</th><th>作用</th><th>关键点</th></tr></thead><tbody><tr><td><code>http.createServer(cb)</code></td><td>创建服务器</td><td>返回 server 实例，此时还没监听</td></tr><tr><td><code>server.listen(port, cb)</code></td><td>监听端口</td><td>端口被占抛 <code>EADDRINUSE</code></td></tr><tr><td><code>server.close(cb)</code></td><td>关闭服务器</td><td></td></tr><tr><td><code>req.url</code></td><td>请求路径（含 query）</td><td>用它来做路由分发</td></tr><tr><td><code>req.method</code></td><td>GET / POST …</td><td></td></tr><tr><td><code>req.headers</code></td><td>请求头对象</td><td>键名全小写</td></tr><tr><td><code>res.statusCode</code></td><td>状态码（属性，不是方法）</td><td>200 / 404 / 500</td></tr><tr><td><code>res.setHeader(name, value)</code></td><td>设置响应头</td><td>值必须是 ASCII，中文要 <code>encodeURIComponent</code></td></tr><tr><td><code>res.writeHead(status, headers)</code></td><td>一次设置状态码 + 多个头</td><td>与已 <code>setHeader</code> 的合并</td></tr><tr><td><code>res.write(chunk)</code></td><td>写正文（可多次）</td><td></td></tr><tr><td><code>res.end(data)</code></td><td>结束响应</td><td><strong>只能调用一次</strong>，之后的写入全部无效</td></tr><tr><td><code>fs.createReadStream(p)</code></td><td>创建可读流</td><td>大文件首选</td></tr><tr><td><code>readStream.pipe(res)</code></td><td>流对接</td><td>不用手动 <code>end</code></td></tr></tbody></table>
+<hr>
+<h2 id="sec-3">三、写法模板</h2>
+<pre><code class="language-js">const http = require('http')
+const fs = require('fs')
+const path = require('path')
+
+const server = http.createServer((req, res) =&gt; {
+    <span class="code-comment">// 1. 简单路由</span>
+    if (req.url === '/' || req.url.startsWith('/?')) {
+        res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' })
+        return res.end('响应成功')
+    }
+
+    <span class="code-comment">// 2. 文件下载</span>
+    const filePath = path.join(__dirname, './代码.zip')
+    if (!fs.existsSync(filePath)) {
+        res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' })
+        return res.end('抱歉，文件丢失')
+    }
+
+    res.setHeader('Content-Type', 'application/octet-stream')
+    res.setHeader('Content-Disposition',
+        `attachment; filename=&quot;download.zip&quot;; filename*=UTF-8''\${encodeURIComponent('代码.zip')}`)
+
+    const stream = fs.createReadStream(filePath)
+    stream.on('error', () =&gt; res.end('读取失败'))   <span class="code-comment">// 流也要兜底，否则进程可能崩</span>
+    stream.pipe(res)
+})
+
+server.listen(3000, () =&gt; console.log('http:<span class="code-comment">//localhost:3000'))</span></code></pre>
+<hr>
+<h2 id="sec-4">四、你笔记里做得对的地方</h2>
+<ul><li><code>createServer</code> 默认就是 <code>request</code> 事件、要监听多个事件时才需要 <code>server.on</code> —— 这条理解得很准；</li><li>列出 <code>request / connection / close / error / upgrade</code> 五类事件，比课本全；</li><li><code>res.statusCode</code> 是<strong>属性</strong>不是方法、<code>res.end()</code> 只能一次、分支里记得 <code>return</code> —— 三个都是新手最容易翻车的地方，你全记下了；</li><li><code>Content-Disposition</code> 用了 <code>filename*=UTF-8''</code> 的 RFC 5987 写法，中文文件名才不会乱码，这段已经超出课本要求；</li><li>三层截图（第一次失败、路径问题失败、当前网页下载失败）说明你是靠<strong>报错倒推</strong>学过来的，这个习惯很好。</li></ul>
+<hr>
+<h2 id="sec-5">五、容易遗漏 / 建议补充</h2>
+<h3 id="sec-6">1. <code>res.write</code> 可以多次，<code>res.end</code> 只能一次</h3>
+<p>你写「一个服务器，只能有一个 <code>.end()</code>」——更准确的是「<strong>一个响应</strong>只能 end 一次」。服务器可以有无数个请求、无数次 end。</p>
+<h3 id="sec-7">2. 端口占用的处理</h3>
+<pre><code class="language-js">server.on('error', (err) =&gt; {
+    if (err.code === 'EADDRINUSE') console.log('端口被占用，换个端口或用 taskkill 结束旧进程')
+})</code></pre>
+<p>开发时最常见的就是「上一个 node 没关，3000 还被占着」。</p>
+<h3 id="sec-8">3. 请求体（POST 数据）要自己收集</h3>
+<p><code>req</code> 是流，不会一次性给你 body：</p>
+<pre><code class="language-js">let body = ''
+req.on('data', chunk =&gt; body += chunk)
+req.on('end', () =&gt; { console.log('收到：', body) })</code></pre>
+<h3 id="sec-9">4. 路由还没有，先用 <code>req.url</code> 判断</h3>
+<p>你现在对所有请求返回同一个东西。想区分页面/接口，就得 <code>if (req.url === '/data') ...</code>。路由表、中间件就是后面的 Express 帮你做的事。</p>
+<h3 id="sec-10">5. 跨域（CORS）</h3>
+<p>前端 <code>file://</code> 或不同端口访问时会被浏览器拦，服务端要放行：</p>
+<pre><code class="language-js">res.setHeader('Access-Control-Allow-Origin', '*')</code></pre>
+<p>第九节课就是被这个卡过的地方。</p>
+<h3 id="sec-11">6. 大文件与断点续传（进阶，知道即可）</h3>
+<ul><li>普通下载用 <code>pipe</code> 就够；</li><li>支持断点续传要读 <code>req.headers.range</code>，回 <code>206 Partial Content</code> + <code>Content-Range</code>；</li><li>需要显示下载进度条时可以设 <code>Content-Length</code>。</li></ul>
+<h3 id="sec-12">7. 一些细节</h3>
+<ul><li><code>localhost:250</code> 这种低位端口在 Linux/macOS 需要管理员权限（Windows 一般不用）；</li><li><code>setHeader</code> 的值不能含中文，文件名要用 <code>encodeURIComponent</code>；</li><li>301/302 + <code>Location</code> 才会跳转，这一点你笔记里写对了；</li><li>用 <code>path.join(__dirname, ...)</code> 拼路径，别用相对当前目录的 <code>./</code>，否则换个启动目录就 404。</li></ul>
+<hr>
+<h2 id="sec-13">六、自测</h2>
+<ol><li><code>createServer(cb)</code> 和 <code>server.on('request', cb)</code> 有什么区别？</li><li><code>res.write()</code> 和 <code>res.end()</code> 各能调用几次？重复 <code>end</code> 会怎样？</li><li>想让浏览器<strong>下载</strong>而不是打开一个 <code>.zip</code>，要设哪两个响应头？</li><li>为什么下载大文件要用 <code>createReadStream().pipe(res)</code>，而不用 <code>readFile</code>？</li><li>端口被占用时，报错里的 <code>code</code> 是什么？</li></ol></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第七节课——HTTP模块/第七节课-总结.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

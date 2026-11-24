@@ -1,0 +1,242 @@
+<!-- source: 笔记/学习笔记存放地/分区笔记.sql -->
+<!-- source-root: MySql -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分区笔记 · MySQL 笔记</title>
+<link rel="stylesheet" href="../共享配置/css/mysql-notes.css?v=20261124-3">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){}</script>
+</head>
+<body class="doc-page">
+<script>if (location.search.includes("embed=1")) document.body.classList.add("is-embed");</script>
+<nav class="topbar">
+  <a class="topbar-back" href="index.html">← 目录</a>
+  <span class="topbar-title">分区笔记</span>
+  <div class="topbar-actions"><button class="icon-btn" type="button" data-theme-toggle>亮色</button></div>
+</nav>
+<main class="doc-page">
+  <header class="doc-head">
+    <div>
+      <span class="hero-kicker">笔记 · 学习笔记</span>
+      <h1>分区笔记</h1>
+      <div class="doc-meta">
+        <span>来源：笔记/学习笔记存放地/分区笔记.sql</span>
+        <span>89 行</span>
+        <span>更新 2026-09-03</span>
+      </div>
+    </div>
+  </header>
+  <section class="sql-card">
+    <div class="sql-toolbar">
+      <span class="sql-file">笔记/学习笔记存放地/分区笔记.sql</span>
+      <button class="copy-btn" type="button" id="copy-sql">复制 SQL</button>
+    </div>
+    <pre class="sql-code" id="sql-code"><div class="sql-line"><span class="ln">1</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">2</span><code><span class="sql-comment">	分区：数据类型必须是整型，存在主键或唯一键则分区列从主键或唯一键取部分，若不存在，则任何列</span></code></div>
+<div class="sql-line"><span class="ln">3</span><code><span class="sql-comment">*/</span> </code></div>
+<div class="sql-line"><span class="ln">4</span><code><span class="sql-keyword">show</span> <span class="sql-ident">plugins</span>; <span class="sql-comment">-- 8.0之后自带原生功能，不绑定插件</span></code></div>
+<div class="sql-line"><span class="ln">5</span><code></code></div>
+<div class="sql-line"><span class="ln">6</span><code><span class="sql-comment">-- range分区 取值范围 连续且不重叠</span></code></div>
+<div class="sql-line"><span class="ln">7</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">8</span><code><span class="sql-comment">	partition by range(表达式)：</span></code></div>
+<div class="sql-line"><span class="ln">9</span><code><span class="sql-comment">	</span></code></div>
+<div class="sql-line"><span class="ln">10</span><code><span class="sql-comment">	</span></code></div>
+<div class="sql-line"><span class="ln">11</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">12</span><code></code></div>
+<div class="sql-line"><span class="ln">13</span><code><span class="sql-comment">--  讲sell表的数据按订购时间进行分区，2020年前的放P1区，2021-2022年放P2分区，2022年以后的放P3分区。</span></code></div>
+<div class="sql-line"><span class="ln">14</span><code></code></div>
+<div class="sql-line"><span class="ln">15</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-keyword">PARTITION</span> <span class="sql-keyword">by</span> <span class="sql-ident">range</span> (<span class="sql-function">year</span>(订购时间))</code></div>
+<div class="sql-line"><span class="ln">16</span><code>(</code></div>
+<div class="sql-line"><span class="ln">17</span><code>	<span class="sql-keyword">PARTITION</span> <span class="sql-ident">p1</span> <span class="sql-keyword">values</span> <span class="sql-ident">less</span> <span class="sql-ident">than</span>(<span class="sql-number">2020</span>),</code></div>
+<div class="sql-line"><span class="ln">18</span><code>	<span class="sql-keyword">PARTITION</span> <span class="sql-ident">p2</span> <span class="sql-keyword">values</span> <span class="sql-ident">less</span> <span class="sql-ident">than</span>(<span class="sql-number">2022</span>),</code></div>
+<div class="sql-line"><span class="ln">19</span><code>	<span class="sql-keyword">PARTITION</span> <span class="sql-ident">p3</span> <span class="sql-keyword">values</span> <span class="sql-ident">less</span> <span class="sql-ident">than</span> <span class="sql-ident">MAXVALUE</span></code></div>
+<div class="sql-line"><span class="ln">20</span><code>);</code></div>
+<div class="sql-line"><span class="ln">21</span><code></code></div>
+<div class="sql-line"><span class="ln">22</span><code><span class="sql-comment">-- 查看该表所有分区</span></code></div>
+<div class="sql-line"><span class="ln">23</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">information_schema</span>.<span class="sql-string">`PARTITIONS`</span> <span class="sql-keyword">where</span> <span class="sql-ident">table_name</span> <span class="sql-operator">=</span> <span class="sql-string">'sell'</span>;</code></div>
+<div class="sql-line"><span class="ln">24</span><code></code></div>
+<div class="sql-line"><span class="ln">25</span><code><span class="sql-comment">-- 查看分区P2 2021-2022</span></code></div>
+<div class="sql-line"><span class="ln">26</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">sell</span> <span class="sql-keyword">partition</span>(<span class="sql-ident">p2</span>);</code></div>
+<div class="sql-line"><span class="ln">27</span><code></code></div>
+<div class="sql-line"><span class="ln">28</span><code><span class="sql-comment">--  删除2021-2022</span></code></div>
+<div class="sql-line"><span class="ln">29</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-keyword">drop</span> <span class="sql-keyword">partition</span> <span class="sql-ident">p2</span>;</code></div>
+<div class="sql-line"><span class="ln">30</span><code></code></div>
+<div class="sql-line"><span class="ln">31</span><code></code></div>
+<div class="sql-line"><span class="ln">32</span><code><span class="sql-comment">-- 2.list 离散值</span></code></div>
+<div class="sql-line"><span class="ln">33</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">34</span><code><span class="sql-comment">	partition by list() ();</span></code></div>
+<div class="sql-line"><span class="ln">35</span><code><span class="sql-comment">	</span></code></div>
+<div class="sql-line"><span class="ln">36</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">37</span><code></code></div>
+<div class="sql-line"><span class="ln">38</span><code><span class="sql-comment">-- 1代表结清，放入分区p1 0表示未结清 ，放入分区p2</span></code></div>
+<div class="sql-line"><span class="ln">39</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-keyword">partition</span> <span class="sql-keyword">by</span> <span class="sql-ident">list</span>(是否结清)</code></div>
+<div class="sql-line"><span class="ln">40</span><code>(</code></div>
+<div class="sql-line"><span class="ln">41</span><code>	<span class="sql-keyword">partition</span> <span class="sql-ident">p1</span> <span class="sql-keyword">values</span> <span class="sql-keyword">in</span>(<span class="sql-number">1</span>),<span class="sql-keyword">partition</span> <span class="sql-ident">p2</span> <span class="sql-keyword">in</span>(<span class="sql-number">0</span>)</code></div>
+<div class="sql-line"><span class="ln">42</span><code>);</code></div>
+<div class="sql-line"><span class="ln">43</span><code></code></div>
+<div class="sql-line"><span class="ln">44</span><code></code></div>
+<div class="sql-line"><span class="ln">45</span><code><span class="sql-comment">-- hash 分区 partition by [linear] hash() [partition n]</span></code></div>
+<div class="sql-line"><span class="ln">46</span><code><span class="sql-comment">-- 对n求余，分区名是系统自动生成，不能指定，从p0,p1.......</span></code></div>
+<div class="sql-line"><span class="ln">47</span><code><span class="sql-comment">-- n被分割成分区的数量，缺省为1</span></code></div>
+<div class="sql-line"><span class="ln">48</span><code><span class="sql-comment">-- 讲sell表的数据按订单号进行hash分区，共分为3个分区</span></code></div>
+<div class="sql-line"><span class="ln">49</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-keyword">partition</span> <span class="sql-keyword">by</span> <span class="sql-ident">hash</span>(订单号) <span class="sql-keyword">partition</span> <span class="sql-number">3</span>;</code></div>
+<div class="sql-line"><span class="ln">50</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">sell</span> <span class="sql-keyword">partition</span>(<span class="sql-ident">p1</span>);</code></div>
+<div class="sql-line"><span class="ln">51</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">sell</span> <span class="sql-keyword">partition</span>(<span class="sql-ident">p2</span>);</code></div>
+<div class="sql-line"><span class="ln">52</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">sell</span> <span class="sql-keyword">partition</span>(<span class="sql-ident">p3</span>);</code></div>
+<div class="sql-line"><span class="ln">53</span><code></code></div>
+<div class="sql-line"><span class="ln">54</span><code><span class="sql-comment">--  key分区 列的md5值</span></code></div>
+<div class="sql-line"><span class="ln">55</span><code></code></div>
+<div class="sql-line"><span class="ln">56</span><code><span class="sql-comment">-- 假设sell表中订单号为主键，字段为整数类型。将sell表的数据按订单号进行key分区，共分为3个分区。</span></code></div>
+<div class="sql-line"><span class="ln">57</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-keyword">partition</span> <span class="sql-keyword">by</span> <span class="sql-keyword">key</span>(订单号) <span class="sql-keyword">partition</span> <span class="sql-number">3</span>;</code></div>
+<div class="sql-line"><span class="ln">58</span><code><span class="sql-comment">-- 有主键(唯一键)可不指定，默认用主键(唯一键)</span></code></div>
+<div class="sql-line"><span class="ln">59</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-keyword">partition</span> <span class="sql-keyword">by</span> <span class="sql-keyword">key</span>() <span class="sql-keyword">partition</span> <span class="sql-number">3</span>;</code></div>
+<div class="sql-line"><span class="ln">60</span><code></code></div>
+<div class="sql-line"><span class="ln">61</span><code><span class="sql-comment">-- 移除分区 保留数据</span></code></div>
+<div class="sql-line"><span class="ln">62</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-ident">remove</span> <span class="sql-ident">partitioning</span>;</code></div>
+<div class="sql-line"><span class="ln">63</span><code></code></div>
+<div class="sql-line"><span class="ln">64</span><code><span class="sql-comment">-- 删除分区 删除数据</span></code></div>
+<div class="sql-line"><span class="ln">65</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-keyword">drop</span> <span class="sql-keyword">partition</span> <span class="sql-ident">p2</span>;</code></div>
+<div class="sql-line"><span class="ln">66</span><code></code></div>
+<div class="sql-line"><span class="ln">67</span><code><span class="sql-comment">-- 增加分区</span></code></div>
+<div class="sql-line"><span class="ln">68</span><code><span class="sql-comment">-- 对于免单的订单，&quot;是否结清&quot;字段中用2表示，需要增加一个分区p3，用于存放免单的订单</span></code></div>
+<div class="sql-line"><span class="ln">69</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-ident">add</span> <span class="sql-keyword">partition</span>(<span class="sql-keyword">partition</span> <span class="sql-ident">p3</span> <span class="sql-keyword">values</span> <span class="sql-keyword">in</span>(<span class="sql-number">2</span>));</code></div>
+<div class="sql-line"><span class="ln">70</span><code></code></div>
+<div class="sql-line"><span class="ln">71</span><code><span class="sql-comment">--  重新分区（合并分区） 连续分区才能合并</span></code></div>
+<div class="sql-line"><span class="ln">72</span><code></code></div>
+<div class="sql-line"><span class="ln">73</span><code><span class="sql-comment">-- sell 表已经按&quot;是否结清&quot;列分为3个分区</span></code></div>
+<div class="sql-line"><span class="ln">74</span><code></code></div>
+<div class="sql-line"><span class="ln">75</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-ident">reorganize</span> <span class="sql-keyword">partition</span> <span class="sql-ident">p2</span>,<span class="sql-ident">p3</span> <span class="sql-keyword">into</span> (<span class="sql-keyword">partition</span> <span class="sql-ident">m</span> <span class="sql-keyword">values</span> <span class="sql-keyword">in</span>(<span class="sql-number">0</span>,<span class="sql-number">2</span>))</code></div>
+<div class="sql-line"><span class="ln">76</span><code></code></div>
+<div class="sql-line"><span class="ln">77</span><code></code></div>
+<div class="sql-line"><span class="ln">78</span><code><span class="sql-comment">-- 拆分区 into()</span></code></div>
+<div class="sql-line"><span class="ln">79</span><code></code></div>
+<div class="sql-line"><span class="ln">80</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-ident">reorganize</span> <span class="sql-keyword">into</span>(</code></div>
+<div class="sql-line"><span class="ln">81</span><code>	<span class="sql-keyword">partition</span> <span class="sql-ident">p3</span> <span class="sql-keyword">values</span> <span class="sql-ident">less</span> <span class="sql-ident">than</span>(<span class="sql-number">2024</span>),</code></div>
+<div class="sql-line"><span class="ln">82</span><code>	<span class="sql-keyword">partition</span> <span class="sql-ident">p4</span> <span class="sql-keyword">values</span> <span class="sql-ident">less</span> <span class="sql-ident">than</span> <span class="sql-ident">MAXVALUE</span></code></div>
+<div class="sql-line"><span class="ln">83</span><code>);</code></div>
+<div class="sql-line"><span class="ln">84</span><code></code></div>
+<div class="sql-line"><span class="ln">85</span><code><span class="sql-comment">-- hash/key增加分区 2表示要增加分区的个数</span></code></div>
+<div class="sql-line"><span class="ln">86</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-ident">add</span> <span class="sql-keyword">partition</span> <span class="sql-keyword">partition</span> <span class="sql-number">2</span>;</code></div>
+<div class="sql-line"><span class="ln">87</span><code></code></div>
+<div class="sql-line"><span class="ln">88</span><code><span class="sql-comment">-- hash、key合并分区 2表示要删除分区的数目</span></code></div>
+<div class="sql-line"><span class="ln">89</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">sell</span> <span class="sql-function">coalesce</span> <span class="sql-keyword">partition</span> <span class="sql-number">1</span>;</code></div></pre>
+    <textarea id="sql-raw" hidden>/*
+	分区：数据类型必须是整型，存在主键或唯一键则分区列从主键或唯一键取部分，若不存在，则任何列
+*/ 
+show plugins; -- 8.0之后自带原生功能，不绑定插件
+
+-- range分区 取值范围 连续且不重叠
+/*
+	partition by range(表达式)：
+	
+	
+*/
+
+--  讲sell表的数据按订购时间进行分区，2020年前的放P1区，2021-2022年放P2分区，2022年以后的放P3分区。
+
+alter table sell PARTITION by range (year(订购时间))
+(
+	PARTITION p1 values less than(2020),
+	PARTITION p2 values less than(2022),
+	PARTITION p3 values less than MAXVALUE
+);
+
+-- 查看该表所有分区
+select * from information_schema.`PARTITIONS` where table_name = 'sell';
+
+-- 查看分区P2 2021-2022
+select * from sell partition(p2);
+
+--  删除2021-2022
+alter table sell drop partition p2;
+
+
+-- 2.list 离散值
+/*
+	partition by list() ();
+	
+*/
+
+-- 1代表结清，放入分区p1 0表示未结清 ，放入分区p2
+alter table sell partition by list(是否结清)
+(
+	partition p1 values in(1),partition p2 in(0)
+);
+
+
+-- hash 分区 partition by [linear] hash() [partition n]
+-- 对n求余，分区名是系统自动生成，不能指定，从p0,p1.......
+-- n被分割成分区的数量，缺省为1
+-- 讲sell表的数据按订单号进行hash分区，共分为3个分区
+alter table sell partition by hash(订单号) partition 3;
+select * from sell partition(p1);
+select * from sell partition(p2);
+select * from sell partition(p3);
+
+--  key分区 列的md5值
+
+-- 假设sell表中订单号为主键，字段为整数类型。将sell表的数据按订单号进行key分区，共分为3个分区。
+alter table sell partition by key(订单号) partition 3;
+-- 有主键(唯一键)可不指定，默认用主键(唯一键)
+alter table sell partition by key() partition 3;
+
+-- 移除分区 保留数据
+alter table sell remove partitioning;
+
+-- 删除分区 删除数据
+alter table sell drop partition p2;
+
+-- 增加分区
+-- 对于免单的订单，&quot;是否结清&quot;字段中用2表示，需要增加一个分区p3，用于存放免单的订单
+alter table sell add partition(partition p3 values in(2));
+
+--  重新分区（合并分区） 连续分区才能合并
+
+-- sell 表已经按&quot;是否结清&quot;列分为3个分区
+
+alter table sell reorganize partition p2,p3 into (partition m values in(0,2))
+
+
+-- 拆分区 into()
+
+alter table sell reorganize into(
+	partition p3 values less than(2024),
+	partition p4 values less than MAXVALUE
+);
+
+-- hash/key增加分区 2表示要增加分区的个数
+alter table sell add partition partition 2;
+
+-- hash、key合并分区 2表示要删除分区的数目
+alter table sell coalesce partition 1;</textarea>
+  </section>
+  <footer class="doc-foot">
+    <span><a href="doc-0b72d73df7.html">← 视图查询</a></span>
+    <span><a href="doc-90df1a5496.html">数据库注意事项 →</a></span>
+  </footer>
+</main>
+<script>
+(() => {
+  const root = document.documentElement, KEY = "programmingTutor.theme";
+  const apply = (theme) => {
+    root.dataset.theme = theme === "light" ? "light" : "dark";
+    document.querySelectorAll("[data-theme-toggle]").forEach((b) => { b.textContent = root.dataset.theme === "dark" ? "亮色" : "暗色"; });
+  };
+  apply(localStorage.getItem(KEY) || root.dataset.theme || "dark");
+  document.querySelectorAll("[data-theme-toggle]").forEach((b) => b.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem(KEY, next); apply(next);
+  }));
+})();
+</script>
+<script>
+document.getElementById("copy-sql")?.addEventListener("click", async () => {
+  const raw = document.getElementById("sql-raw").value;
+  try { await navigator.clipboard.writeText(raw); document.getElementById("copy-sql").textContent = "已复制"; setTimeout(() => document.getElementById("copy-sql").textContent = "复制 SQL", 1300); }
+  catch (e) { document.getElementById("copy-sql").textContent = "复制失败"; }
+});
+</script>
+</body>
+</html>

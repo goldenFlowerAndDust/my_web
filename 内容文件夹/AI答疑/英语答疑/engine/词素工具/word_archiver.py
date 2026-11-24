@@ -27,6 +27,80 @@ import threading
 import time
 import urllib.error
 import urllib.request
+try:
+    import requests
+except ImportError:  # 兼容没装 requests 的环境，退回 urllib
+    requests = None
+# 2026-11-24 校园网下 TLS1.3 握手会超时，强制用 TLS1.2（Node 侧不受影响）
+_SSL_CTX = None
+
+
+def _ssl_context():
+    global _SSL_CTX
+    if _SSL_CTX is None:
+        import ssl
+        try:
+            ctx = ssl.create_default_context()
+            ctx.maximum_version = ssl.TLSVersion.TLSv1_2
+            _SSL_CTX = ctx
+        except Exception:
+            _SSL_CTX = ssl.create_default_context()
+    return _SSL_CTX
+
+
+def _post_paced(url: str, headers: dict[str, str], body: bytes, chunk: int = 500, delay: float = 0.02) -> str:
+    """校园网会丢掉一次性写入的大请求体；分小块+间隔发送才不会被掐。
+
+    2026-11-24 实测：一次写 2.7KB 必被远端断开，500B/20ms 分片则正常。
+    """
+    import socket
+    import ssl
+    from urllib.parse import urlsplit
+
+    parts = urlsplit(url)
+    host = parts.hostname or ''
+    port = parts.port or 443
+    path = parts.path or '/'
+    if parts.query:
+        path += '?' + parts.query
+
+    ctx = _ssl_context()
+    raw_sock = socket.create_connection((host, port), timeout=60)
+    sock = ctx.wrap_socket(raw_sock, server_hostname=host)
+    try:
+        head = (
+            'POST %s HTTP/1.1\r\nHost: %s\r\n' % (path, host)
+            + ''.join('%s: %s\r\n' % (k, v) for k, v in headers.items())
+            + 'Content-Length: %d\r\nConnection: close\r\n\r\n' % len(body)
+        ).encode('utf-8')
+        data = head + body
+        for i in range(0, len(data), chunk):
+            sock.sendall(data[i:i + chunk])
+            if delay:
+                time.sleep(delay)
+        buf = b''
+        while True:
+            part2 = sock.recv(8192)
+            if not part2:
+                break
+            buf += part2
+    finally:
+        sock.close()
+
+    text = buf.decode('utf-8', errors='replace')
+    if not text:
+        raise ArchiveError('DeepSeek API 没有返回内容（连接被掐断）。')
+    status_line, _, rest = text.partition('\r\n')
+    try:
+        status = int(status_line.split()[1])
+    except (IndexError, ValueError) as exc:
+        raise ArchiveError('DeepSeek API 响应异常：%s' % text[:200]) from exc
+    header_blob, _, body_text = rest.partition('\r\n\r\n')
+    if 'transfer-encoding: chunked' in header_blob.lower():
+        body_text = _dechunk(body_text)
+    if status >= 400:
+        raise ArchiveError('DeepSeek API 返回 HTTP %s：%s' % (status, body_text[:500]))
+    return body_text
 
 try:
     from 网络代理 import configure as _configure_proxy
@@ -50,7 +124,7 @@ BACKUP_DIR = TOOL_DIR / "backups"
 REVIEW_BACKUP_DIR = TOOL_DIR / "review_backups"
 REVIEW_ARCHIVE_DIR = BASE / "复习清单" / "归档"
 API_TXT = TOOL_DIR / "API.txt"
-SHARED_KEY_FILE = Path(__file__).resolve().parent.parent.parent.parent / "共享配置" / "数据" / "API.txt"
+SHARED_KEY_FILE = Path(__file__).resolve().parents[3] / "共享配置" / "数据" / "API.txt"
 HOME_KEY_FILE = Path.home() / ".word_archiver_api_key"
 API_KEY_FILE = TOOL_DIR / "api_key.txt"  # 兼容旧位置
 
@@ -324,28 +398,76 @@ def call_deepseek(word: str, hint: str = "") -> dict[str, Any]:
         headers={
             "Authorization": "Bearer " + key,
             "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "dafiyu-word-archiver/1.0",
         },
         method="POST",
     )
     last_error = None
     raw = ""
-    for attempt in range(3):
-        try:
-            with urllib.request.urlopen(req, timeout=90) as resp:
-                raw = resp.read().decode("utf-8", errors="replace")
-            last_error = None
-            break
-        except urllib.error.HTTPError as exc:
-            detail = exc.read().decode("utf-8", errors="replace")[:500]
-            raise ArchiveError("DeepSeek API 返回 HTTP %s：%s" % (exc.code, detail)) from exc
-        except (urllib.error.URLError, TimeoutError) as exc:
-            last_error = exc
-            if attempt < 2:
-                time.sleep(0.8 + attempt * 0.5)
-    if last_error is not None:
-        if isinstance(last_error, TimeoutError):
-            raise ArchiveError("DeepSeek API 请求超时，请稍后重试。") from last_error
-        raise ArchiveError("无法连接 DeepSeek API：%s" % last_error.reason) from last_error
+    try:
+        raw = _post_paced(API_URL, {
+            "Authorization": "Bearer " + key,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "dafiyu-word-archiver/1.0",
+            "Accept-Encoding": "identity",
+        }, json.dumps(payload, ensure_ascii=False).encode("utf-8"))
+        last_error = None
+    except Exception as _paced_exc:  # 分片也失败时退回原路径
+        last_error = _paced_exc
+        raw = ""
+    if raw:
+        pass
+    elif requests is not None:
+        # 2026-11-24：校园网/杀软环境下 urllib 的 TLS1.2 会被远端直接断开，
+        # requests 走系统 TLS 栈正常；优先用它。
+        for attempt in range(3):
+            try:
+                resp = requests.post(
+                    API_URL,
+                    headers={
+                        "Authorization": "Bearer " + key,
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                        "User-Agent": "dafiyu-word-archiver/1.0",
+                    },
+                    json=payload,
+                    timeout=90,
+                )
+                if resp.status_code >= 400:
+                    raise ArchiveError(
+                        "DeepSeek API 返回 HTTP %s：%s" % (resp.status_code, resp.text[:500])
+                    )
+                raw = resp.text
+                last_error = None
+                break
+            except ArchiveError:
+                raise
+            except requests.RequestException as exc:
+                last_error = exc
+                if attempt < 2:
+                    time.sleep(0.8 + attempt * 0.5)
+        if last_error is not None:
+            raise ArchiveError("无法连接 DeepSeek API：%s" % last_error) from last_error
+    else:
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(req, timeout=90, context=_ssl_context()) as resp:
+                    raw = resp.read().decode("utf-8", errors="replace")
+                last_error = None
+                break
+            except urllib.error.HTTPError as exc:
+                detail = exc.read().decode("utf-8", errors="replace")[:500]
+                raise ArchiveError("DeepSeek API 返回 HTTP %s：%s" % (exc.code, detail)) from exc
+            except (urllib.error.URLError, TimeoutError) as exc:
+                last_error = exc
+                if attempt < 2:
+                    time.sleep(0.8 + attempt * 0.5)
+        if last_error is not None:
+            if isinstance(last_error, TimeoutError):
+                raise ArchiveError("DeepSeek API 请求超时，请稍后重试。") from last_error
+            raise ArchiveError("无法连接 DeepSeek API：%s" % last_error.reason) from last_error
 
     try:
         data = json.loads(raw)

@@ -1,0 +1,178 @@
+<!-- source: 笔记/学习笔记存放地/多表查询.sql -->
+<!-- source-root: MySql -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>多表查询 · MySQL 笔记</title>
+<link rel="stylesheet" href="../共享配置/css/mysql-notes.css?v=20261124-3">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){}</script>
+</head>
+<body class="doc-page">
+<script>if (location.search.includes("embed=1")) document.body.classList.add("is-embed");</script>
+<nav class="topbar">
+  <a class="topbar-back" href="index.html">← 目录</a>
+  <span class="topbar-title">多表查询</span>
+  <div class="topbar-actions"><button class="icon-btn" type="button" data-theme-toggle>亮色</button></div>
+</nav>
+<main class="doc-page">
+  <header class="doc-head">
+    <div>
+      <span class="hero-kicker">笔记 · 学习笔记</span>
+      <h1>多表查询</h1>
+      <div class="doc-meta">
+        <span>来源：笔记/学习笔记存放地/多表查询.sql</span>
+        <span>57 行</span>
+        <span>更新 2026-09-03</span>
+      </div>
+    </div>
+  </header>
+  <section class="sql-card">
+    <div class="sql-toolbar">
+      <span class="sql-file">笔记/学习笔记存放地/多表查询.sql</span>
+      <button class="copy-btn" type="button" id="copy-sql">复制 SQL</button>
+    </div>
+    <pre class="sql-code" id="sql-code"><div class="sql-line"><span class="ln">1</span><code><span class="sql-comment">-- 多表查询 ：</span></code></div>
+<div class="sql-line"><span class="ln">2</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">3</span><code><span class="sql-comment">	指定数据库的两种方法：</span></code></div>
+<div class="sql-line"><span class="ln">4</span><code><span class="sql-comment">	</span></code></div>
+<div class="sql-line"><span class="ln">5</span><code><span class="sql-comment">	1.select* from 数据库.表名 (单次指定)</span></code></div>
+<div class="sql-line"><span class="ln">6</span><code><span class="sql-comment">	2.use 数据库 (后续均用此数据库)</span></code></div>
+<div class="sql-line"><span class="ln">7</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">8</span><code></code></div>
+<div class="sql-line"><span class="ln">9</span><code><span class="sql-keyword">use</span> <span class="sql-ident">mysqll</span>;</code></div>
+<div class="sql-line"><span class="ln">10</span><code></code></div>
+<div class="sql-line"><span class="ln">11</span><code><span class="sql-keyword">SELECT</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">mysqll</span>.<span class="sql-ident">book</span>;</code></div>
+<div class="sql-line"><span class="ln">12</span><code></code></div>
+<div class="sql-line"><span class="ln">13</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">14</span><code><span class="sql-comment">	表名取别名：</span></code></div>
+<div class="sql-line"><span class="ln">15</span><code><span class="sql-comment">		select 表名 as 新表名;</span></code></div>
+<div class="sql-line"><span class="ln">16</span><code><span class="sql-comment">		as可以省略</span></code></div>
+<div class="sql-line"><span class="ln">17</span><code><span class="sql-comment">		</span></code></div>
+<div class="sql-line"><span class="ln">18</span><code><span class="sql-comment">		注意：该名后，后续的表名用新表名</span></code></div>
+<div class="sql-line"><span class="ln">19</span><code><span class="sql-comment">	</span></code></div>
+<div class="sql-line"><span class="ln">20</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">21</span><code></code></div>
+<div class="sql-line"><span class="ln">22</span><code></code></div>
+<div class="sql-line"><span class="ln">23</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">24</span><code><span class="sql-comment">	多表查询：</span></code></div>
+<div class="sql-line"><span class="ln">25</span><code><span class="sql-comment">	语法: select 需要查找字段名(英文逗号隔开) from 所有字段所在的表名(多个表，英文逗号隔开) where【条件是多个表内字段相等】</span></code></div>
+<div class="sql-line"><span class="ln">26</span><code></code></div>
+<div class="sql-line"><span class="ln">27</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">28</span><code></code></div>
+<div class="sql-line"><span class="ln">29</span><code><span class="sql-keyword">select</span> 书名,订购册数,订购时间 <span class="sql-keyword">from</span> <span class="sql-ident">book</span>,<span class="sql-ident">sell</span></code></div>
+<div class="sql-line"><span class="ln">30</span><code><span class="sql-keyword">where</span> <span class="sql-ident">book</span>.<span class="sql-string">`图书编号`</span> <span class="sql-operator">=</span> <span class="sql-ident">sell</span>.<span class="sql-string">`图书编号`</span>;</code></div>
+<div class="sql-line"><span class="ln">31</span><code></code></div>
+<div class="sql-line"><span class="ln">32</span><code><span class="sql-comment">-- 查找购买mysql数据库且订购数量大于5的图书信息</span></code></div>
+<div class="sql-line"><span class="ln">33</span><code></code></div>
+<div class="sql-line"><span class="ln">34</span><code><span class="sql-keyword">select</span> <span class="sql-ident">book</span>.<span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">book</span>,<span class="sql-ident">sell</span> </code></div>
+<div class="sql-line"><span class="ln">35</span><code><span class="sql-keyword">WHERE</span> <span class="sql-ident">book</span>.<span class="sql-string">`图书编号`</span> <span class="sql-operator">=</span> <span class="sql-ident">sell</span>.<span class="sql-string">`图书编号`</span></code></div>
+<div class="sql-line"><span class="ln">36</span><code><span class="sql-keyword">and</span> <span class="sql-ident">book</span>.<span class="sql-string">`书名`</span> <span class="sql-operator">=</span> <span class="sql-string">'MYSQL数据库'</span> <span class="sql-keyword">AND</span> <span class="sql-ident">sell</span>.<span class="sql-string">`订购册数`</span> <span class="sql-operator">&gt;</span> <span class="sql-number">5</span>;</code></div>
+<div class="sql-line"><span class="ln">37</span><code></code></div>
+<div class="sql-line"><span class="ln">38</span><code><span class="sql-comment">-- 查询订购数量大于5本图书的会员姓名和订购册数</span></code></div>
+<div class="sql-line"><span class="ln">39</span><code></code></div>
+<div class="sql-line"><span class="ln">40</span><code><span class="sql-keyword">select</span> 姓名 <span class="sql-keyword">as</span> <span class="sql-string">'会员姓名'</span>,订购册数 <span class="sql-keyword">from</span> <span class="sql-ident">members</span>,<span class="sql-ident">sell</span></code></div>
+<div class="sql-line"><span class="ln">41</span><code><span class="sql-keyword">where</span> <span class="sql-ident">members</span>.<span class="sql-string">`用户号`</span> <span class="sql-operator">=</span> <span class="sql-ident">sell</span>.<span class="sql-string">`用户号`</span> <span class="sql-keyword">and</span> <span class="sql-ident">sell</span>.<span class="sql-string">`订购册数`</span> <span class="sql-operator">&gt;</span> <span class="sql-number">5</span>;</code></div>
+<div class="sql-line"><span class="ln">42</span><code></code></div>
+<div class="sql-line"><span class="ln">43</span><code><span class="sql-comment">-- 查询购买&quot;网页程序设计&quot; 且订购数量大于5本图书和会员姓名和订购册数</span></code></div>
+<div class="sql-line"><span class="ln">44</span><code></code></div>
+<div class="sql-line"><span class="ln">45</span><code><span class="sql-keyword">select</span> 图书，姓名 <span class="sql-keyword">as</span> 会员姓名，订购册数 <span class="sql-keyword">from</span> <span class="sql-ident">book</span>,<span class="sql-ident">members</span>,<span class="sql-ident">sell</span></code></div>
+<div class="sql-line"><span class="ln">46</span><code><span class="sql-keyword">where</span> <span class="sql-ident">book</span>.<span class="sql-string">`图书编号`</span> <span class="sql-operator">=</span> <span class="sql-ident">sell</span>.<span class="sql-string">`图书编号`</span> <span class="sql-keyword">and</span> <span class="sql-ident">sell</span>.<span class="sql-string">`用户号`</span> <span class="sql-operator">=</span> <span class="sql-ident">members</span>.<span class="sql-string">`用户号`</span></code></div>
+<div class="sql-line"><span class="ln">47</span><code><span class="sql-keyword">and</span> <span class="sql-ident">book</span>.<span class="sql-string">`书名`</span> <span class="sql-operator">=</span> <span class="sql-string">'网页程序设计'</span> <span class="sql-keyword">and</span> <span class="sql-ident">sell</span>.<span class="sql-string">`订购册数`</span> <span class="sql-operator">&gt;</span> <span class="sql-number">5</span>;</code></div>
+<div class="sql-line"><span class="ln">48</span><code></code></div>
+<div class="sql-line"><span class="ln">49</span><code></code></div>
+<div class="sql-line"><span class="ln">50</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">51</span><code><span class="sql-comment">	join 使用方法 ： </span></code></div>
+<div class="sql-line"><span class="ln">52</span><code><span class="sql-comment">					select 字段名 from 表1 join 表2 on 表1和表2相同字段(形式：表1.字段名 = 表2.字段名) join 表3 表3和表2相同字段 ....... where 条件  不使用using，字段名需要选定具体的表</span></code></div>
+<div class="sql-line"><span class="ln">53</span><code><span class="sql-comment">					select 字段名 from 表1 join 表2 using(表1和表2相同字段名) join 表3 using(表2和表3字段名) ...... where 条件   使用using，字段名不需要选定具体的表</span></code></div>
+<div class="sql-line"><span class="ln">54</span><code><span class="sql-comment"> </span></code></div>
+<div class="sql-line"><span class="ln">55</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">56</span><code></code></div>
+<div class="sql-line"><span class="ln">57</span><code></code></div></pre>
+    <textarea id="sql-raw" hidden>-- 多表查询 ：
+/*
+	指定数据库的两种方法：
+	
+	1.select* from 数据库.表名 (单次指定)
+	2.use 数据库 (后续均用此数据库)
+*/
+
+use mysqll;
+
+SELECT * from mysqll.book;
+
+/*
+	表名取别名：
+		select 表名 as 新表名;
+		as可以省略
+		
+		注意：该名后，后续的表名用新表名
+	
+*/
+
+
+/*
+	多表查询：
+	语法: select 需要查找字段名(英文逗号隔开) from 所有字段所在的表名(多个表，英文逗号隔开) where【条件是多个表内字段相等】
+
+*/
+
+select 书名,订购册数,订购时间 from book,sell
+where book.`图书编号` = sell.`图书编号`;
+
+-- 查找购买mysql数据库且订购数量大于5的图书信息
+
+select book.* from book,sell 
+WHERE book.`图书编号` = sell.`图书编号`
+and book.`书名` = 'MYSQL数据库' AND sell.`订购册数` &gt; 5;
+
+-- 查询订购数量大于5本图书的会员姓名和订购册数
+
+select 姓名 as '会员姓名',订购册数 from members,sell
+where members.`用户号` = sell.`用户号` and sell.`订购册数` &gt; 5;
+
+-- 查询购买&quot;网页程序设计&quot; 且订购数量大于5本图书和会员姓名和订购册数
+
+select 图书，姓名 as 会员姓名，订购册数 from book,members,sell
+where book.`图书编号` = sell.`图书编号` and sell.`用户号` = members.`用户号`
+and book.`书名` = '网页程序设计' and sell.`订购册数` &gt; 5;
+
+
+/*
+	join 使用方法 ： 
+					select 字段名 from 表1 join 表2 on 表1和表2相同字段(形式：表1.字段名 = 表2.字段名) join 表3 表3和表2相同字段 ....... where 条件  不使用using，字段名需要选定具体的表
+					select 字段名 from 表1 join 表2 using(表1和表2相同字段名) join 表3 using(表2和表3字段名) ...... where 条件   使用using，字段名不需要选定具体的表
+ 
+*/
+
+</textarea>
+  </section>
+  <footer class="doc-foot">
+    <span><a href="doc-9d08da45c6.html">← 分类汇总</a></span>
+    <span><a href="doc-4a605ee1c6.html">子查询 →</a></span>
+  </footer>
+</main>
+<script>
+(() => {
+  const root = document.documentElement, KEY = "programmingTutor.theme";
+  const apply = (theme) => {
+    root.dataset.theme = theme === "light" ? "light" : "dark";
+    document.querySelectorAll("[data-theme-toggle]").forEach((b) => { b.textContent = root.dataset.theme === "dark" ? "亮色" : "暗色"; });
+  };
+  apply(localStorage.getItem(KEY) || root.dataset.theme || "dark");
+  document.querySelectorAll("[data-theme-toggle]").forEach((b) => b.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem(KEY, next); apply(next);
+  }));
+})();
+</script>
+<script>
+document.getElementById("copy-sql")?.addEventListener("click", async () => {
+  const raw = document.getElementById("sql-raw").value;
+  try { await navigator.clipboard.writeText(raw); document.getElementById("copy-sql").textContent = "已复制"; setTimeout(() => document.getElementById("copy-sql").textContent = "复制 SQL", 1300); }
+  catch (e) { document.getElementById("copy-sql").textContent = "复制失败"; }
+});
+</script>
+</body>
+</html>

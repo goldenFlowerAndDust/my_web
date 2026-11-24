@@ -1,0 +1,146 @@
+<!-- source: 笔记/学习笔记存放地/索引笔记.sql -->
+<!-- source-root: MySql -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>索引笔记 · MySQL 笔记</title>
+<link rel="stylesheet" href="../共享配置/css/mysql-notes.css?v=20261124-3">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){}</script>
+</head>
+<body class="doc-page">
+<script>if (location.search.includes("embed=1")) document.body.classList.add("is-embed");</script>
+<nav class="topbar">
+  <a class="topbar-back" href="index.html">← 目录</a>
+  <span class="topbar-title">索引笔记</span>
+  <div class="topbar-actions"><button class="icon-btn" type="button" data-theme-toggle>亮色</button></div>
+</nav>
+<main class="doc-page">
+  <header class="doc-head">
+    <div>
+      <span class="hero-kicker">笔记 · 学习笔记</span>
+      <h1>索引笔记</h1>
+      <div class="doc-meta">
+        <span>来源：笔记/学习笔记存放地/索引笔记.sql</span>
+        <span>41 行</span>
+        <span>更新 2026-09-03</span>
+      </div>
+    </div>
+  </header>
+  <section class="sql-card">
+    <div class="sql-toolbar">
+      <span class="sql-file">笔记/学习笔记存放地/索引笔记.sql</span>
+      <button class="copy-btn" type="button" id="copy-sql">复制 SQL</button>
+    </div>
+    <pre class="sql-code" id="sql-code"><div class="sql-line"><span class="ln">1</span><code><span class="sql-comment">--  索引——是一种提高查找速度的</span></code></div>
+<div class="sql-line"><span class="ln">2</span><code></code></div>
+<div class="sql-line"><span class="ln">3</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">4</span><code><span class="sql-comment">	二分索引</span></code></div>
+<div class="sql-line"><span class="ln">5</span><code></code></div>
+<div class="sql-line"><span class="ln">6</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">7</span><code></code></div>
+<div class="sql-line"><span class="ln">8</span><code><span class="sql-comment">-- create 唯一索引/全文索引 index 索引名 on  表名(字段名 长度 asc/desc ,.....)</span></code></div>
+<div class="sql-line"><span class="ln">9</span><code></code></div>
+<div class="sql-line"><span class="ln">10</span><code></code></div>
+<div class="sql-line"><span class="ln">11</span><code><span class="sql-comment">--  根据Book表的书名列上的去建立6个字符建立一个升序索引 name_book</span></code></div>
+<div class="sql-line"><span class="ln">12</span><code></code></div>
+<div class="sql-line"><span class="ln">13</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">index</span> <span class="sql-ident">name_book</span> <span class="sql-keyword">on</span> <span class="sql-ident">book</span>(书名(<span class="sql-number">6</span>));</code></div>
+<div class="sql-line"><span class="ln">14</span><code><span class="sql-keyword">explain</span> <span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">book</span> <span class="sql-keyword">where</span> 书名 <span class="sql-operator">=</span> <span class="sql-string">'abcd'</span>;</code></div>
+<div class="sql-line"><span class="ln">15</span><code></code></div>
+<div class="sql-line"><span class="ln">16</span><code><span class="sql-comment">--  用户号和图书编号 建立一个复合索引sfz_bn_sell</span></code></div>
+<div class="sql-line"><span class="ln">17</span><code></code></div>
+<div class="sql-line"><span class="ln">18</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">index</span> <span class="sql-ident">sfz_bn_sell</span> <span class="sql-keyword">on</span> <span class="sql-ident">sell</span>(用户号,图书编号);</code></div>
+<div class="sql-line"><span class="ln">19</span><code></code></div>
+<div class="sql-line"><span class="ln">20</span><code></code></div>
+<div class="sql-line"><span class="ln">21</span><code><span class="sql-comment">-- 假设Book表中主键设定，为book表创建以图书编号为主键索引,出版社,作者和出版时间为复合索引，以加速表的检索速度</span></code></div>
+<div class="sql-line"><span class="ln">22</span><code></code></div>
+<div class="sql-line"><span class="ln">23</span><code><span class="sql-keyword">alter</span> <span class="sql-keyword">table</span> <span class="sql-ident">book</span></code></div>
+<div class="sql-line"><span class="ln">24</span><code><span class="sql-ident">add</span> <span class="sql-keyword">PRIMARY</span> <span class="sql-keyword">key</span>(图书编号),</code></div>
+<div class="sql-line"><span class="ln">25</span><code><span class="sql-ident">add</span> <span class="sql-keyword">index</span> (出版社,作者,出版时间);</code></div>
+<div class="sql-line"><span class="ln">26</span><code></code></div>
+<div class="sql-line"><span class="ln">27</span><code><span class="sql-comment">-- 索引失效：</span></code></div>
+<div class="sql-line"><span class="ln">28</span><code><span class="sql-keyword">EXPLAIN</span> <span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">book</span> <span class="sql-keyword">where</span> 出版社 <span class="sql-operator">=</span> <span class="sql-string">'avde'</span>;</code></div>
+<div class="sql-line"><span class="ln">29</span><code><span class="sql-keyword">EXPLAIN</span> <span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">book</span> <span class="sql-keyword">where</span> 作者 <span class="sql-operator">=</span> <span class="sql-string">'avde'</span>;</code></div>
+<div class="sql-line"><span class="ln">30</span><code><span class="sql-keyword">EXPLAIN</span> <span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">book</span> <span class="sql-keyword">where</span> 作者 <span class="sql-operator">=</span> <span class="sql-string">'avde'</span> <span class="sql-keyword">and</span> 出版社 <span class="sql-operator">=</span> <span class="sql-string">'avde'</span>;</code></div>
+<div class="sql-line"><span class="ln">31</span><code><span class="sql-keyword">EXPLAIN</span> <span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">book</span> <span class="sql-keyword">where</span> 出版时间 <span class="sql-operator">=</span> <span class="sql-string">'21-1-1'</span> <span class="sql-keyword">and</span> 出版社 <span class="sql-operator">=</span> <span class="sql-string">'avde'</span>;</code></div>
+<div class="sql-line"><span class="ln">32</span><code><span class="sql-keyword">EXPLAIN</span> <span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-ident">book</span> <span class="sql-keyword">where</span> 出版时间 <span class="sql-operator">=</span> <span class="sql-string">'21-1-1'</span> <span class="sql-keyword">and</span> 出版社 <span class="sql-operator">=</span> <span class="sql-string">'avde'</span> 作者 <span class="sql-operator">=</span> <span class="sql-string">'11'</span>;</code></div>
+<div class="sql-line"><span class="ln">33</span><code></code></div>
+<div class="sql-line"><span class="ln">34</span><code><span class="sql-comment">--  全直匹配</span></code></div>
+<div class="sql-line"><span class="ln">35</span><code><span class="sql-comment">-- 最左前缀原则：不能跳过中间列</span></code></div>
+<div class="sql-line"><span class="ln">36</span><code><span class="sql-comment">-- (带头大哥不能死，中间兄弟不能断)</span></code></div>
+<div class="sql-line"><span class="ln">37</span><code><span class="sql-comment">-- 索引列不能计算</span></code></div>
+<div class="sql-line"><span class="ln">38</span><code></code></div>
+<div class="sql-line"><span class="ln">39</span><code><span class="sql-comment">-- 创建表时创建索引</span></code></div>
+<div class="sql-line"><span class="ln">40</span><code><span class="sql-comment">-- 删除索引: drop index 索引名 on 表名</span></code></div>
+<div class="sql-line"><span class="ln">41</span><code><span class="sql-comment">-- 删除索引: alter table 表名 drop primary key , drop index 出版社;</span></code></div></pre>
+    <textarea id="sql-raw" hidden>--  索引——是一种提高查找速度的
+
+/*
+	二分索引
+
+*/
+
+-- create 唯一索引/全文索引 index 索引名 on  表名(字段名 长度 asc/desc ,.....)
+
+
+--  根据Book表的书名列上的去建立6个字符建立一个升序索引 name_book
+
+create index name_book on book(书名(6));
+explain select * from book where 书名 = 'abcd';
+
+--  用户号和图书编号 建立一个复合索引sfz_bn_sell
+
+create index sfz_bn_sell on sell(用户号,图书编号);
+
+
+-- 假设Book表中主键设定，为book表创建以图书编号为主键索引,出版社,作者和出版时间为复合索引，以加速表的检索速度
+
+alter table book
+add PRIMARY key(图书编号),
+add index (出版社,作者,出版时间);
+
+-- 索引失效：
+EXPLAIN select * from book where 出版社 = 'avde';
+EXPLAIN select * from book where 作者 = 'avde';
+EXPLAIN select * from book where 作者 = 'avde' and 出版社 = 'avde';
+EXPLAIN select * from book where 出版时间 = '21-1-1' and 出版社 = 'avde';
+EXPLAIN select * from book where 出版时间 = '21-1-1' and 出版社 = 'avde' 作者 = '11';
+
+--  全直匹配
+-- 最左前缀原则：不能跳过中间列
+-- (带头大哥不能死，中间兄弟不能断)
+-- 索引列不能计算
+
+-- 创建表时创建索引
+-- 删除索引: drop index 索引名 on 表名
+-- 删除索引: alter table 表名 drop primary key , drop index 出版社;</textarea>
+  </section>
+  <footer class="doc-foot">
+    <span><a href="doc-1c08244819.html">← 数据查找综合实例</a></span>
+    <span><a href="doc-0b72d73df7.html">视图查询 →</a></span>
+  </footer>
+</main>
+<script>
+(() => {
+  const root = document.documentElement, KEY = "programmingTutor.theme";
+  const apply = (theme) => {
+    root.dataset.theme = theme === "light" ? "light" : "dark";
+    document.querySelectorAll("[data-theme-toggle]").forEach((b) => { b.textContent = root.dataset.theme === "dark" ? "亮色" : "暗色"; });
+  };
+  apply(localStorage.getItem(KEY) || root.dataset.theme || "dark");
+  document.querySelectorAll("[data-theme-toggle]").forEach((b) => b.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem(KEY, next); apply(next);
+  }));
+})();
+</script>
+<script>
+document.getElementById("copy-sql")?.addEventListener("click", async () => {
+  const raw = document.getElementById("sql-raw").value;
+  try { await navigator.clipboard.writeText(raw); document.getElementById("copy-sql").textContent = "已复制"; setTimeout(() => document.getElementById("copy-sql").textContent = "复制 SQL", 1300); }
+  catch (e) { document.getElementById("copy-sql").textContent = "复制失败"; }
+});
+</script>
+</body>
+</html>

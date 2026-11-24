@@ -1,0 +1,91 @@
+<!-- source: 课堂/第二节课/第二节课-总结.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>第二节课 ｜ 模块化开发 + npm 包管理 · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂</span>
+      <h1>第二节课 ｜ 模块化开发 + npm 包管理</h1>
+      <div class="doc-meta">数据来源：课堂/第二节课/第二节课-总结.md · 更新于 2026-11-10</div>
+    </header>
+    <article class="doc"><blockquote><p>板块定位：把「一个文件写完」拆成「多个模块 + 第三方包」，这是 Node 项目的组织方式起点。本板块已有文件：<code>main.js</code>、<code>price.js</code>、<code>shopp.js</code>、<code>注意.txt</code>、<code>package.json</code>、<code>node_modules/moment</code></p></blockquote>
+<hr>
+<h2 id="sec-1">一、重点（这个板块解决什么问题）</h2>
+<ol><li><strong>自定义模块</strong>：<code>price.js</code> 只负责算钱，<code>main.js</code> / <code>shopp.js</code> 通过 <code>require('./price')</code> 使用它。</li><li><strong>第三方包</strong>：用 <code>npm install moment</code> 引入日期库，不自己手写日期格式化。</li><li><strong>模块的边界</strong>：文件里没写 <code>module.exports</code> 的东西，外面拿不到；写了的才是「出口」。</li></ol>
+<hr>
+<h2 id="sec-2">二、模块系统的核心规则（CommonJS）</h2>
+<table><thead><tr><th>规则</th><th>说明</th></tr></thead><tbody><tr><td>每个 <code>.js</code> 文件就是一个模块</td><td>有自己独立的作用域，不是全局</td></tr><tr><td><code>module.exports = {...}</code></td><td>导出内容，外面 <code>require</code> 拿到的就是它</td></tr><tr><td><code>require('./price')</code></td><td>加载模块，<strong>返回 module.exports 的值</strong></td></tr><tr><td>路径必须带 <code>./</code></td><td>写 <code>require('price')</code> 会去 <code>node_modules</code> 找包，找不到就报 <code>Cannot find module</code></td></tr><tr><td>后缀可省略</td><td><code>./price</code> 会依次尝试 <code>price.js</code> → <code>price.json</code> → <code>price/index.js</code></td></tr><tr><td><strong>只执行一次</strong></td><td>同一个模块第二次 <code>require</code> 走缓存，不会重新执行代码</td></tr></tbody></table>
+<blockquote><p>模块缓存这条，你可以在 <code>price.js</code> 里加一句 <code>console.log('price 模块被执行')</code>，再 require 两次，只会打印一次。</p></blockquote>
+<hr>
+<h2 id="sec-3">三、npm 与 package.json</h2>
+<pre><code class="language-bash">npm init -y            # 生成 package.json（注意：不是 pip init -y，那是 Python）
+npm install moment     # 下载包到 node_modules，并写入 dependencies
+npm uninstall moment   # 卸载
+npm ls                 # 看当前装了哪些包
+npm install            # 按 package.json 重新装回所有依赖</code></pre>
+<table><thead><tr><th>文件/目录</th><th>作用</th><th>要不要提交到 Git</th></tr></thead><tbody><tr><td><code>package.json</code></td><td>项目名、依赖清单、脚本</td><td>✅ 提交</td></tr><tr><td><code>package-lock.json</code></td><td>锁定每个包的确切版本，保证别人装到一样的</td><td>✅ 提交</td></tr><tr><td><code>node_modules/</code></td><td>实际下载下来的代码，体积巨大可重建</td><td>❌ 不提交</td></tr><tr><td><code>dependencies</code> / <code>devDependencies</code></td><td>运行时依赖 / 只在开发时用的工具</td><td>按需</td></tr></tbody></table>
+<hr>
+<h2 id="sec-4">四、写法模板</h2>
+<pre><code class="language-js"><span class="code-comment">// ---- 导出方式 1：对象（你现在用的）----</span>
+function sumprice(a, b) { return a * b }
+module.exports = { sumprice }
+
+<span class="code-comment">// ---- 导出方式 2：直接导出函数 ----</span>
+module.exports = function (a, b) { return a * b }
+
+<span class="code-comment">// ---- 导出方式 3：单个挂载（exports 指向 module.exports）----</span>
+exports.sumprice = function (a, b) { return a * b }
+<span class="code-comment">// 注意：exports = { sumprice } 是无效的，它只是把局部变量指向了新对象</span></code></pre>
+<pre><code class="language-js"><span class="code-comment">// ---- 使用 ----</span>
+const price = require('./price')        <span class="code-comment">// 自定义模块</span>
+const moment = require('moment')        <span class="code-comment">// 第三方包</span>
+console.log(price.sumprice(50, 30))     <span class="code-comment">// 1500</span></code></pre>
+<hr>
+<h2 id="sec-5">五、你笔记里做得对的地方</h2>
+<ul><li><code>price.js</code> 职责单一、<code>module.exports = {sumprice}</code> 导出对象，是标准写法；</li><li><code>注意.txt</code> 抓住了「先初始化、再装包」的顺序，这个顺序感是对的。</li></ul>
+<hr>
+<h2 id="sec-6">六、容易遗漏 / 建议补充（实测过）</h2>
+<h3 id="sec-7">1. <code>注意.txt</code> 里的命令写错了</h3>
+<p>你写的是 <code>pip init -y</code>、<code>pip install moment</code>，这是 Python 的命令。Node 里是 <strong><code>npm</code></strong>：</p>
+<pre><code class="language-text">npm init -y        ✅        pip init -y        ❌
+npm install moment ✅        pip install moment ❌</code></pre>
+<h3 id="sec-8">2. <code>moment.locale('zh-cn')</code> 在 Node 里不生效</h3>
+<p>浏览器版 moment 自带语言包，Node 版是<strong>按需加载</strong>的，必须先 require 语言包（实测）：</p>
+<pre><code class="language-js">const moment = require('moment')
+console.log(moment('2020-10-08').format('LL'))  <span class="code-comment">// October 8, 2020（英文）</span>
+
+require('moment/locale/zh-cn')                  <span class="code-comment">// ★ 少了这行，locale 就是摆设</span>
+moment.locale('zh-cn')
+console.log(moment('2020-10-08').format('LL'))  <span class="code-comment">// 2020年10月8日</span></code></pre>
+<h3 id="sec-9">3. 格式串 <code>'Y-M-D'</code> 不是你以为的那个意思</h3>
+<p>moment 的 token 里：<code>YYYY</code> 是四位年，<code>Y</code> 是「带符号的任意位数年份」。你数据里写的是 <code>20200-10-08</code>（五位，疑似把 2020 打成 20200），所以实测输出：</p>
+<pre><code class="language-text">moment('20200-10-08', 'Y-M-D').format('Y年M月D日')  -&gt;  &quot;+20200年10月8日&quot;
+moment('2020-10-08', 'YYYY-MM-DD').format('YYYY年MM月DD日')  -&gt;  &quot;2020年10月08日&quot;</code></pre>
+<p><strong>两件事一起改</strong>：数据里的年份改成 <code>2020</code>，格式串改成 <code>YYYY-MM-DD</code> / <code>YYYY年MM月DD日</code>。</p>
+<h3 id="sec-10">4. 函数名和实现不符</h3>
+<p><code>sumprice(a, b) { return a * b }</code> 是<strong>乘法</strong>（单价 × 数量），名字叫 sum（求和）会误导后来的自己。建议 <code>calcTotal</code> / <code>getTotalPrice</code>。</p>
+<h3 id="sec-11">5. 其他值得知道的</h3>
+<ul><li><code>require</code> 是<strong>同步</strong>加载，这也是后面为什么会有 ESM（<code>import</code>）的原因；</li><li>moment 官方已进入维护模式，新项目推荐 <code>dayjs</code>（2KB vs moment 300KB 左右）；</li><li>不要 <code>require</code> 一个不存在的包名，Node 会抛 <code>Cannot find module 'xxx'</code>，先看 <code>node_modules</code> 是否真的装上了。</li></ul>
+<hr>
+<h2 id="sec-12">七、自测</h2>
+<ol><li><code>require('./price')</code> 和 <code>require('price')</code> 有什么区别？</li><li>同一个模块 require 两次，里面的 <code>console.log</code> 会打印几次？为什么？</li><li><code>exports.sumprice = fn</code> 能用，<code>exports = { sumprice: fn }</code> 为什么不能用？</li><li><code>node_modules</code> 为什么要写进 <code>.gitignore</code>？</li></ol></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第二节课/第二节课-总结.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

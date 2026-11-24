@@ -1,0 +1,78 @@
+<!-- source: 笔记/回顾数据库/回顾创建表.sql -->
+<!-- source-root: MySql -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>回顾创建表 · MySQL 笔记</title>
+<link rel="stylesheet" href="../共享配置/css/mysql-notes.css?v=20261124-3">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){}</script>
+</head>
+<body class="doc-page">
+<script>if (location.search.includes("embed=1")) document.body.classList.add("is-embed");</script>
+<nav class="topbar">
+  <a class="topbar-back" href="index.html">← 目录</a>
+  <span class="topbar-title">回顾创建表</span>
+  <div class="topbar-actions"><button class="icon-btn" type="button" data-theme-toggle>亮色</button></div>
+</nav>
+<main class="doc-page">
+  <header class="doc-head">
+    <div>
+      <span class="hero-kicker">笔记 · 回顾数据库</span>
+      <h1>回顾创建表</h1>
+      <div class="doc-meta">
+        <span>来源：笔记/回顾数据库/回顾创建表.sql</span>
+        <span>7 行</span>
+        <span>更新 2026-11-03</span>
+      </div>
+    </div>
+  </header>
+  <section class="sql-card">
+    <div class="sql-toolbar">
+      <span class="sql-file">笔记/回顾数据库/回顾创建表.sql</span>
+      <button class="copy-btn" type="button" id="copy-sql">复制 SQL</button>
+    </div>
+    <pre class="sql-code" id="sql-code"><div class="sql-line"><span class="ln">1</span><code><span class="sql-comment">-- 回顾创建表</span></code></div>
+<div class="sql-line"><span class="ln">2</span><code></code></div>
+<div class="sql-line"><span class="ln">3</span><code><span class="sql-keyword">create</span> <span class="sql-keyword">table</span> <span class="sql-keyword">if</span> <span class="sql-keyword">not</span> <span class="sql-keyword">exists</span> <span class="sql-string">`students`</span> (</code></div>
+<div class="sql-line"><span class="ln">4</span><code>  <span class="sql-string">`学号`</span> <span class="sql-ident">char</span>(<span class="sql-number">6</span>) <span class="sql-keyword">not</span> <span class="sql-keyword">null</span>  <span class="sql-keyword">PRIMARY</span> <span class="sql-keyword">KEY</span>;</code></div>
+<div class="sql-line"><span class="ln">5</span><code>  <span class="sql-string">`姓名`</span> <span class="sql-ident">char</span>(<span class="sql-number">1</span>) <span class="sql-keyword">not</span> <span class="sql-keyword">null</span>;</code></div>
+<div class="sql-line"><span class="ln">6</span><code>  <span class="sql-string">`班级`</span> <span class="sql-ident">char</span>(<span class="sql-number">10</span>) <span class="sql-keyword">not</span> <span class="sql-keyword">null</span>;</code></div>
+<div class="sql-line"><span class="ln">7</span><code>)</code></div></pre>
+    <textarea id="sql-raw" hidden>-- 回顾创建表
+
+create table if not exists `students` (
+  `学号` char(6) not null  PRIMARY KEY;
+  `姓名` char(1) not null;
+  `班级` char(10) not null;
+)</textarea>
+  </section>
+  <footer class="doc-foot">
+    <span><a href="doc-8614960b11.html">← 创建-回顾数据库</a></span>
+    <span><a href="doc-b3a3794e22.html">1 →</a></span>
+  </footer>
+</main>
+<script>
+(() => {
+  const root = document.documentElement, KEY = "programmingTutor.theme";
+  const apply = (theme) => {
+    root.dataset.theme = theme === "light" ? "light" : "dark";
+    document.querySelectorAll("[data-theme-toggle]").forEach((b) => { b.textContent = root.dataset.theme === "dark" ? "亮色" : "暗色"; });
+  };
+  apply(localStorage.getItem(KEY) || root.dataset.theme || "dark");
+  document.querySelectorAll("[data-theme-toggle]").forEach((b) => b.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem(KEY, next); apply(next);
+  }));
+})();
+</script>
+<script>
+document.getElementById("copy-sql")?.addEventListener("click", async () => {
+  const raw = document.getElementById("sql-raw").value;
+  try { await navigator.clipboard.writeText(raw); document.getElementById("copy-sql").textContent = "已复制"; setTimeout(() => document.getElementById("copy-sql").textContent = "复制 SQL", 1300); }
+  catch (e) { document.getElementById("copy-sql").textContent = "复制失败"; }
+});
+</script>
+</body>
+</html>

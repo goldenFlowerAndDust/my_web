@@ -1,0 +1,44 @@
+<!-- source: 作业/第一次作业/第一次作业-总结.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>第一次作业 ｜ 环境验证：跑通第一个 Node 程序 · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">作业</span>
+      <h1>第一次作业 ｜ 环境验证：跑通第一个 Node 程序</h1>
+      <div class="doc-meta">数据来源：作业/第一次作业/第一次作业-总结.md · 更新于 2026-11-10</div>
+    </header>
+    <article class="doc"><blockquote><p>板块定位：确认 Node 装好了、能跑 <code>.js</code> 文件，这是所有后续内容的地基。本板块已有文件：<code>hello.js</code>、<code>安装截图.png</code>、<code>运行截图.png</code></p></blockquote>
+<hr>
+<h2 id="sec-1">一、这一份作业做了什么</h2>
+<pre><code class="language-js">console.log('hello node.js')</code></pre>
+<p>配两张截图：安装成功界面 + 终端运行结果。</p>
+<hr>
+<h2 id="sec-2">二、背后要知道的事</h2>
+<table><thead><tr><th>知识点</th><th>说明</th></tr></thead><tbody><tr><td><code>node 文件名.js</code></td><td>用 Node 执行脚本，不是浏览器</td></tr><tr><td><code>node -v</code> / <code>npm -v</code></td><td>查版本，装没装一看便知</td></tr><tr><td>REPL</td><td>直接输入 <code>node</code> 进入交互环境，<code>Ctrl+C</code> 两次退出</td></tr><tr><td>运行环境区别</td><td>Node 里没有 <code>window</code>、<code>document</code>、<code>alert</code>，有 <code>process</code>、<code>fs</code>、<code>require</code></td></tr><tr><td>文件编码</td><td>保存为 UTF-8，否则中文输出乱码</td></tr><tr><td>路径</td><td>终端要在 <code>hello.js</code> 所在目录，或给绝对路径</td></tr></tbody></table>
+<hr>
+<h2 id="sec-3">三、容易遗漏</h2>
+<ol><li><strong><code>node</code> 不是内部或外部命令</strong>：说明没装好或没进 PATH，重装时勾选 “Add to PATH”；</li><li><strong><code>console.log</code> 只是打印</strong>，Node 没有浏览器控制台，输出就在终端；</li><li><strong><code>.mjs</code> / <code>&quot;type&quot;: &quot;module&quot;</code></strong>：默认是 CommonJS（<code>require</code>），想用 <code>import</code> 需要额外设置，这个区别第六、九节课会反复遇到；</li><li><strong>同一段代码在浏览器能跑、Node 报错</strong>：多半用了 <code>document</code>/<code>window</code>，Node 里不存在；</li><li>运行结束进程就退出，没有常驻概念 —— 到第七节课的服务器才会「一直挂着」。</li></ol>
+<hr>
+<h2 id="sec-4">四、自测</h2>
+<ol><li><code>node hello.js</code> 和双击 <code>hello.js</code> 有什么区别？</li><li>为什么 <code>console.log(document)</code> 在 Node 里报错？</li><li>怎么查看当前 Node 版本？</li></ol></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：作业/第一次作业/第一次作业-总结.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

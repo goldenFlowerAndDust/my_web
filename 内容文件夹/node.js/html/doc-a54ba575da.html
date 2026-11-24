@@ -1,0 +1,96 @@
+<!-- source: 课堂/第十二节课——完整项目/学生管理系统/前端最小必备.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>前端最小必备（HTML / CSS） · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂</span>
+      <h1>前端最小必备（HTML / CSS）</h1>
+      <div class="doc-meta">数据来源：课堂/第十二节课——完整项目/学生管理系统/前端最小必备.md · 更新于 2026-11-20</div>
+    </header>
+    <article class="doc"><blockquote><p>这不是模板库，是<strong>检查清单</strong>。  明天先闭卷写，卡住了再看这一页——<strong>别照着抄</strong>。</p></blockquote>
+<hr>
+<h2 id="sec-1">一、必须能默写的一页骨架</h2>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;标题&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main class=&quot;wrap&quot;&gt;
+        &lt;h1&gt;页面标题&lt;/h1&gt;
+        &lt;p&gt;一段文字&lt;/p&gt;
+    &lt;/main&gt;
+    &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><strong>自测</strong>：合上文档，白纸写一遍。能写对 90% 就算过。</p>
+<hr>
+<h2 id="sec-2">二、表单（这个项目用得最多）</h2>
+<p>需要的标签只有 6 个：<code>form</code>、<code>label</code>、<code>input</code>、<code>select</code>、<code>option</code>、<code>button</code>。</p>
+<table><thead><tr><th>想做什么</th><th>怎么写（关键词回忆）</th></tr></thead><tbody><tr><td>输入框</td><td><code>&lt;input type=&quot;text&quot; id=&quot;&quot; placeholder=&quot;&quot;&gt;</code></td></tr><tr><td>数字</td><td><code>type=&quot;number&quot; min max</code></td></tr><tr><td>下拉</td><td><code>&lt;select id=&quot;&quot;&gt;&lt;option value=&quot;男&quot;&gt;男&lt;/option&gt;&lt;/select&gt;</code></td></tr><tr><td>按钮（不提交）</td><td><code>&lt;button type=&quot;button&quot;&gt;</code></td></tr><tr><td>提交按钮</td><td><code>&lt;button type=&quot;submit&quot;&gt;</code> 或 <code>type=&quot;submit&quot;</code> 省略</td></tr><tr><td>必填</td><td><code>required</code></td></tr><tr><td>文字点击也能聚焦</td><td>用 <code>&lt;label&gt;</code> 包住 input</td></tr></tbody></table>
+<p><strong>最小表单</strong>：</p>
+<pre><code class="language-html">&lt;form id=&quot;form&quot;&gt;
+    &lt;label&gt;姓名 &lt;input id=&quot;name&quot; required&gt;&lt;/label&gt;
+    &lt;label&gt;性别
+        &lt;select id=&quot;gender&quot;&gt;
+            &lt;option value=&quot;男&quot;&gt;男&lt;/option&gt;
+            &lt;option value=&quot;女&quot;&gt;女&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/label&gt;
+    &lt;button type=&quot;submit&quot;&gt;提交&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<hr>
+<h2 id="sec-3">三、表格（列表页必备）</h2>
+<p>只需要记住<strong>三层</strong>：<code>table &gt; thead/tbody &gt; tr &gt; th/td</code>。</p>
+<pre><code class="language-html">&lt;table&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;学号&lt;/th&gt;&lt;th&gt;姓名&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;2026001&lt;/td&gt;&lt;td&gt;张三&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<table><thead><tr><th>细节</th><th>写法</th></tr></thead><tbody><tr><td>表头用 <code>th</code></td><td>自动加粗居中</td></tr><tr><td>空数据占满整行</td><td><code>&lt;td colspan=&quot;3&quot;&gt;没有数据&lt;/td&gt;</code></td></tr><tr><td>边框合并</td><td>CSS <code>border-collapse: collapse</code></td></tr></tbody></table>
+<hr>
+<h2 id="sec-4">四、CSS：只背这 10 条</h2>
+<table><thead><tr><th>想做什么</th><th>属性</th></tr></thead><tbody><tr><td>内容居中、限宽</td><td><code>max-width: 900px; margin: 0 auto;</code></td></tr><tr><td>盒模型</td><td><code>* { box-sizing: border-box; }</code></td></tr><tr><td>内边距 / 外边距</td><td><code>padding</code> / <code>margin</code></td></tr><tr><td>横向排列</td><td><code>display: flex; gap: 8px;</code></td></tr><tr><td>占满剩余宽度</td><td><code>flex: 1;</code></td></tr><tr><td>表单自适应多列</td><td><code>display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));</code></td></tr><tr><td>边框</td><td><code>border: 1px solid #d1d5db; border-radius: 6px;</code></td></tr><tr><td>表格边框合并</td><td><code>border-collapse: collapse;</code></td></tr><tr><td>悬停变色</td><td><code>tr:hover { background: #f8fafc; }</code></td></tr><tr><td>聚焦高亮</td><td><code>input:focus { border-color: #3b82f6; }</code></td></tr></tbody></table>
+<p><strong>颜色够用就行</strong>：主色 <code>#3b82f6</code>、边框 <code>#d1d5db</code>、浅灰底 <code>#f9fafb</code>、正文 <code>#1f2937</code>、次要字 <code>#6b7280</code>。</p>
+<hr>
+<h2 id="sec-5">五、写不出来时的三步自救</h2>
+<ol><li><strong>先结构后样式</strong>：先把标签写全（丑没关系），确认浏览器能显示，再加 CSS；</li><li><strong>查 MDN</strong>：只查单个标签/属性，看完立刻关掉继续写，不要顺着链接一路点；</li><li><strong>对照 <code>示例\public\</code></strong>：只看它用了哪些标签/属性，不看排版细节 —— 排版明天再练。</li></ol>
+<hr>
+<h2 id="sec-6">六、明天的 40 分钟练法</h2>
+<pre><code>0-10 分钟：闭卷写 index.html（只要表单 + 表格 + 搜索框，不写 CSS）
+10-15 分钟：打开浏览器看，补齐漏掉的标签
+15-25 分钟：闭卷写 style.css（只求能看，不求好看）
+25-30 分钟：对照 示例\public\style.css，只记自己漏掉的那几条
+30-40 分钟：合上一切，再写一遍 --- 这次写不出来的，就是明天真正要补的</code></pre>
+<blockquote><p>关键：<strong>同一个东西写两遍</strong>，比看十遍有用得多。</p></blockquote>
+<hr>
+<h2 id="sec-7">七、心态上的一个事实</h2>
+<p>HTML/CSS 属于<strong>查表型知识</strong>，不是推理型：</p>
+<ul><li>数据库、SQL、Promise 是<strong>逻辑</strong>——想明白了就记住了；</li><li>HTML 标签、CSS 属性是<strong>清单</strong>——不常用就会忘，忘了查一下就好。</li></ul>
+<p>所以“写不出 HTML”不代表你退步了，只代表这段时间没写过。<strong>查着写、写几遍，手感两天就回来。</strong></p>
+<p>更新：2026-11-21</p></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第十二节课——完整项目/学生管理系统/前端最小必备.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

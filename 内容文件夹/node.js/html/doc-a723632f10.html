@@ -1,0 +1,176 @@
+<!-- source: 课堂/第十二节课——完整项目/学生管理系统/环境变量与进程.md -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>process、.env、loadEnvFile —— 一次讲透 · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂</span>
+      <h1>process、.env、loadEnvFile —— 一次讲透</h1>
+      <div class="doc-meta">数据来源：课堂/第十二节课——完整项目/学生管理系统/环境变量与进程.md · 更新于 2026-11-24</div>
+    </header>
+    <article class="doc"><blockquote><p>这篇解决三个困惑：① <code>process</code> 到底是什么；② <code>loadEnvFile</code> 干了什么；③ 它和 <code>fs.readFile</code> 差在哪、自己写要怎么解析。文中结论都在 Node 24 上实测过。</p></blockquote>
+<hr>
+<h2 id="sec-1">一、<code>process</code> 是 Node 的全局对象</h2>
+<p>代表<strong>当前这个 Node 进程</strong>。不用 <code>require</code>、不用 <code>import</code>，任何文件里直接能写。</p>
+<p>浏览器里对应的是 <code>window</code>；Node 里就是 <code>process</code>。</p>
+<table><thead><tr><th>成员</th><th>是什么</th><th>例子</th></tr></thead><tbody><tr><td><code>process.env</code></td><td><strong>环境变量对象</strong>（普通对象，值全是字符串）</td><td><code>process.env.DB_USER</code></td></tr><tr><td><code>process.argv</code></td><td>命令行参数数组</td><td><code>node a.mjs 张三</code> → <code>['node','a.mjs','张三']</code></td></tr><tr><td><code>process.cwd()</code></td><td>当前工作目录</td><td><code>D:\...\实操</code></td></tr><tr><td><code>process.version</code></td><td>Node 版本</td><td><code>v24.21.0</code></td></tr><tr><td><code>process.platform</code></td><td>系统</td><td><code>win32</code></td></tr><tr><td><code>process.exit(1)</code></td><td>退出进程，1 表示失败</td><td></td></tr><tr><td><code>process.loadEnvFile(path)</code></td><td>加载 .env 文件（20.12+）</td><td>见下文</td></tr></tbody></table>
+<hr>
+<h2 id="sec-2">二、<code>process.env</code> 就是一个普通对象</h2>
+<pre><code class="language-js">console.log(process.env.DB_USER)   <span class="code-comment">// undefined（还没加载时）</span></code></pre>
+<p>它初始只有系统/终端里已有的环境变量。<strong><code>.env</code> 文件里的内容不会自动进来</strong>，要有人把它读进来。</p>
+<p>两条铁律（实测）：</p>
+<table><thead><tr><th>规则</th><th>现象</th></tr></thead><tbody><tr><td>值全是<strong>字符串</strong></td><td><code>DB_PORT=3306</code> → <code>process.env.DB_PORT === '3306'</code>（不是数字）</td></tr><tr><td><strong>不覆盖</strong>已存在的变量</td><td>终端里先 <code>set DB_USER=预设值</code>，再加载 .env，<code>process.env.DB_USER</code> 仍是「预设值」</td></tr></tbody></table>
+<p>所以代码里常见这种写法：</p>
+<pre><code class="language-js">port: Number(process.env.DB_PORT) || 3306      <span class="code-comment">// 字符串要转数字</span></code></pre>
+<hr>
+<h2 id="sec-3">三、<code>loadEnvFile</code> 到底做了什么</h2>
+<pre><code class="language-js">process.loadEnvFile('./.env')</code></pre>
+<p>它做三件事：<strong>读文件 → 按 KEY=VALUE 解析 → 写进 <code>process.env</code></strong>。</p>
+<p>关键点（很多人误会的地方）：</p>
+<pre><code class="language-js">const ret = process.loadEnvFile('./.env')
+console.log(ret)   <span class="code-comment">// undefined —— 它不返回数据！</span></code></pre>
+<blockquote><p><strong>它不给你数据，它改的是 <code>process.env</code>。</strong></p></blockquote>
+<p>所以“为什么不用任何操作就能直接用”——因为<strong>你用的不是它的返回值，而是本来就在的 <code>process.env</code></strong>，只是被填满了。</p>
+<p>实测：</p>
+<pre><code class="language-text">调用前：DB_USER = undefined
+返回值：undefined
+调用后：DB_USER = &quot;root&quot;</code></pre>
+<hr>
+<h2 id="sec-4">四、<code>.env</code> 文件的格式</h2>
+<pre><code class="language-ini"># 这是注释，以 # 开头
+PORT=3100
+DB_HOST=127.0.0.1
+DB_PASSWORD=&quot;abc=123&quot;     ← 值里可以有 =，也可以包引号</code></pre>
+<table><thead><tr><th>规则</th><th>说明</th></tr></thead><tbody><tr><td>一行一个</td><td><code>键=值</code></td></tr><tr><td><code>#</code> 开头是注释</td><td>空行忽略</td></tr><tr><td>键和值之间可以空格</td><td>会自动 trim</td></tr><tr><td>值可以是字符串</td><td><code>&quot;abc&quot;</code>、<code>'abc'</code> 的引号会被去掉</td></tr><tr><td>不支持嵌套</td><td>只有一层 KEY=VALUE，不是 JSON</td></tr></tbody></table>
+<hr>
+<h2 id="sec-5">五、和 <code>fs.readFile</code> 的区别</h2>
+<table><thead><tr><th></th><th><code>fs.readFileSync('./.env','utf8')</code></th><th><code>process.loadEnvFile('./.env')</code></th></tr></thead><tbody><tr><td>返回什么</td><td><strong>文件全部文本</strong></td><td><code>undefined</code></td></tr><tr><td>副作用</td><td>无</td><td><strong>写入 <code>process.env</code></strong></td></tr><tr><td>解析</td><td>你负责</td><td>它负责</td></tr><tr><td>通用性</td><td>任何文件</td><td><strong>只认 .env 格式</strong></td></tr><tr><td>出错</td><td>文件不存在 → 抛异常</td><td>文件不存在 → 抛异常</td></tr></tbody></table>
+<p>一句话：<strong><code>loadEnvFile</code> = <code>readFile</code> + 解析 + 塞进 <code>process.env</code></strong>，是专门为 <code>.env</code> 准备的现成实现。</p>
+<hr>
+<h2 id="sec-6">六、自己用 readFile 解析（原理搞清楚）</h2>
+<p>思路：<strong>每行按第一个 <code>=</code> 切成两半 → <code>[键, 值]</code> → 放进对象</strong>。</p>
+<h3 id="sec-7">写法 A：for 循环（直观）</h3>
+<pre><code class="language-js">import fs from 'node:fs'
+
+const text = fs.readFileSync('./.env', 'utf8')
+const obj = {}
+
+for (const line of text.split(/\r?\n/)) {
+    const s = line.trim()
+    if (!s || s.startsWith('#')) continue      <span class="code-comment">// 跳过空行和注释</span>
+
+    const i = s.indexOf('=')                    <span class="code-comment">// ★ 用第一个 = 切</span>
+    if (i &lt; 0) continue
+
+    obj[s.slice(0, i).trim()] = s.slice(i + 1).trim()
+}
+
+console.log(obj)   <span class="code-comment">// { PORT: '3100', DB_HOST: '127.0.0.1', ... }</span></code></pre>
+<h3 id="sec-8">写法 B：<code>Object.fromEntries</code>（简洁）</h3>
+<pre><code class="language-js">const obj = Object.fromEntries(
+    fs.readFileSync('./.env', 'utf8')
+        .split(/\r?\n/)
+        .map(l =&gt; l.trim())
+        .filter(l =&gt; l &amp;&amp; !l.startsWith('#'))
+        .map(l =&gt; {
+            const i = l.indexOf('=')
+            return [l.slice(0, i).trim(), l.slice(i + 1).trim()]
+        })
+)</code></pre>
+<p><code>Object.fromEntries([[k,v],[k,v]])</code> → <code>{ k: v }</code>，专门把“键值对数组”变成对象。</p>
+<h3 id="sec-9">三个必须注意的细节</h3>
+<table><thead><tr><th>细节</th><th>为什么</th></tr></thead><tbody><tr><td>用 <code>indexOf('=')</code> 而不是 <code>split('=')</code></td><td>密码里可能有 <code>=</code>，只切第一个才是对的</td></tr><tr><td>换行用 <code>/\r?\n/</code></td><td>Windows 文件是 <code>\r\n</code>，只按 <code>\n</code> 切会留下 <code>\r</code>，密码多个不可见字符</td></tr><tr><td>去掉成对引号</td><td><code>DB_PASSWORD=&quot;abc&quot;</code> 里引号不是密码的一部分</td></tr></tbody></table>
+<hr>
+<h2 id="sec-10">七、加载 .env 的三种方式</h2>
+<table><thead><tr><th>方式</th><th>怎么写</th><th>谁负责</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td><strong>命令行参数</strong></td><td><code>node --env-file=.env server.mjs</code></td><td>Node 启动时</td><td>零代码</td><td>忘带就报错、依赖工作目录</td></tr><tr><td><strong>代码里加载</strong></td><td><code>process.loadEnvFile(path)</code></td><td>你的代码</td><td>不会忘、可指定绝对路径</td><td>多一行代码</td></tr><tr><td><strong>第三方包</strong></td><td><code>import 'dotenv/config'</code></td><td>dotenv 包</td><td>兼容老 Node</td><td>要装包，内置方法已够用</td></tr></tbody></table>
+<blockquote><p>你现在用的是第二种：<code>process.loadEnvFile(path.join(import.meta.dirname, '.env'))</code>，用 <code>import.meta.dirname</code> 定位，所以<strong>不管从哪个目录启动都能找到</strong>。</p></blockquote>
+<hr>
+<h2 id="sec-11">八、ESM（.mjs）相关的小抄</h2>
+<table><thead><tr><th>想干的事</th><th>CJS（.js）</th><th>ESM（.mjs）</th></tr></thead><tbody><tr><td>导入</td><td><code>require('./a')</code></td><td><code>import a from './a.mjs'</code>（<strong>扩展名不能省</strong>）</td></tr><tr><td>导出</td><td><code>module.exports = x</code></td><td><code>export { x }</code> / <code>export default x</code></td></tr><tr><td>当前目录</td><td><code>__dirname</code></td><td><code>import.meta.dirname</code>（20.11+）</td></tr><tr><td>顶层 await</td><td>不行</td><td>可以</td></tr><tr><td>内置模块</td><td><code>require('fs')</code></td><td><code>import fs from 'node:fs'</code>（<code>node:</code> 前缀可选但推荐）</td></tr></tbody></table>
+<p>常见报错：</p>
+<table><thead><tr><th>报错</th><th>原因</th></tr></thead><tbody><tr><td><code>require is not defined</code></td><td>.mjs 里用了 require</td></tr><tr><td><code>ERR_MODULE_NOT_FOUND</code></td><td>import 路径少了 <code>.mjs</code></td></tr><tr><td><code>__dirname is not defined</code></td><td>ESM 没有它，用 <code>import.meta.dirname</code></td></tr></tbody></table>
+<hr>
+<h2 id="sec-12">九、本项目里怎么落地（ab.mjs）</h2>
+<pre><code class="language-js">import mysql from 'mysql2/promise'
+import path from 'node:path'
+
+<span class="code-comment">// 自动加载同目录的 .env —— 不用再写 --env-file</span>
+try {
+    process.loadEnvFile(path.join(import.meta.dirname, '.env'))
+} catch {
+    console.warn('[提示] 没找到 .env，将使用默认配置')
+}
+
+const connection = mysql.createPool({
+    host: process.env.DB_HOST || '127.0.0.1',
+    port: Number(process.env.DB_PORT) || 3306,
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD ?? '',
+    database: process.env.DB_NAME || 'new_student_app',
+    dateStrings: true,
+})
+
+export { connection as conn }</code></pre>
+<hr>
+<h2 id="sec-13">十、报错对照表</h2>
+<table><thead><tr><th>报错</th><th>真正原因</th><th>处理</th></tr></thead><tbody><tr><td><code>using password: NO</code></td><td>密码是空串 → <code>.env</code> 没加载</td><td>检查是否调用了 loadEnvFile / 带 <code>--env-file</code></td></tr><tr><td><code>using password: YES</code></td><td>密码给了但不对</td><td>改 <code>.env</code>（注意 <code>\r</code>、引号、空格）</td></tr><tr><td><code>node: .env: not found</code></td><td><code>--env-file</code> 指的文件不存在</td><td>路径写对，或用 <code>import.meta.dirname</code> 定位</td></tr><tr><td><code>ER_BAD_DB_ERROR</code></td><td>库名不对/没建库</td><td>对照 <code>.env</code> 的 <code>DB_NAME</code></td></tr><tr><td><code>require is not defined</code></td><td>.mjs 里用了 require</td><td>改 <code>import</code></td></tr></tbody></table>
+<hr>
+<h2 id="sec-14">十一、自测</h2>
+<ol><li><code>process</code> 需要 <code>import</code> 吗？为什么？</li><li><code>process.loadEnvFile()</code> 的返回值是什么？那它是怎么影响到你的代码的？</li><li><code>process.env.DB_PORT</code> 是数字还是字符串？要拿它算数该怎么办？</li><li>终端里已经设了 <code>DB_USER=abc</code>，<code>.env</code> 里写 <code>DB_USER=root</code>，加载后是哪个？</li><li>手写解析时，为什么用 <code>indexOf('=')</code> 而不是 <code>split('=')</code>？</li><li><code>loadEnvFile</code> 和 <code>readFile</code> 的关系，用一句话说清。</li></ol>
+<hr>
+<hr>
+<h2 id="sec-15">十二、.env 是永久存储吗？（重点）</h2>
+<blockquote><h3 id="sec-1">⚠️ 结论先说</h3>
+<p><strong><code>.env</code> 是文件，永久的；<code>process.env</code> 是内存，进程一退出就没了。</strong> <code>loadEnvFile</code> 只做「文件 → 内存」，<strong>从不回写文件</strong>。</p></blockquote>
+<h3 id="sec-16">12.1 三个东西，三种生命周期</h3>
+<table><thead><tr><th>东西</th><th>存在哪</th><th>活多久</th><th>谁能改</th></tr></thead><tbody><tr><td><strong><code>.env</code> 文件</strong></td><td>磁盘</td><td><strong>永久</strong></td><td>只有你手动编辑</td></tr><tr><td><strong><code>process.env</code></strong></td><td><strong>内存</strong></td><td><strong>这个进程活着期间</strong></td><td>代码随时可改，退出即消失</td></tr><tr><td>数据库</td><td>磁盘</td><td>永久</td><td>SQL</td></tr></tbody></table>
+<blockquote><p>✅ 正确理解：<strong>持久化的是文件，内存只是启动时的一份副本。</strong> ❌ 错误理解：“我代码里改了 <code>process.env</code>，下次启动还在”——<strong>不会</strong>。</p></blockquote>
+<h3 id="sec-17">12.2 实测：两个进程对比</h3>
+<pre><code class="language-text">=== 第一个进程 ===
+读到 DB_USER = root
+设置 TEST_KEY = 我改的临时值
+把 DB_USER 改成 = 被我改了
+
+=== 第二个进程（全新启动）===
+TEST_KEY = undefined          ← 上一个进程设的，没了
+没加载时 DB_USER = undefined   ← 内存是空的
+加载 .env 后 DB_USER = root    ← 从文件重新读，还是原值
+
+.env 文件是否被修改: 没有 ✅</code></pre>
+<blockquote><p>🔑 <strong>重点</strong>：第二个进程里 <code>DB_USER</code> 又变回 <code>root</code> —— 因为第一个进程的修改<strong>只活在它自己的内存里</strong>。</p></blockquote>
+<h3 id="sec-18">12.3 什么时候才执行</h3>
+<p><code>ab.mjs</code> 顶层的 <code>loadEnvFile(...)</code> 在 <strong>它被加载的那一刻</strong>执行，不是等 <code>conn.query()</code>：</p>
+<pre><code class="language-js">import { conn } from './ab.mjs'   <span class="code-comment">// ← 这一句就触发了 loadEnvFile</span></code></pre>
+<pre><code class="language-bash">node ab.mjs        # 直接跑：触发
+node server.mjs    # server.mjs 里 import 了它：同样触发</code></pre>
+<blockquote><p>✅ <strong>只执行一次</strong>：Node 对同一个模块只执行一次，第二次 <code>import</code> 拿的是缓存。所以 <code>.env</code> 不会重复加载，连接池也不会重复创建。</p></blockquote>
+<h3 id="sec-19">12.4 影响范围（谁看得到）</h3>
+<table><thead><tr><th>对象</th><th>会不会受影响</th></tr></thead><tbody><tr><td><code>.env</code> 文件本身</td><td>❌ 完全不动</td></tr><tr><td>当前进程的 <code>process.env</code></td><td>✅ 被填充</td></tr><tr><td>别的终端 / 别的 node 进程</td><td>❌ 完全不知道</td></tr><tr><td>进程退出后</td><td>❌ 内存里的值消失</td></tr><tr><td><strong>当前进程 spawn 的子进程</strong></td><td>✅ <strong>会继承</strong>（实测：父进程 set 的变量，子进程能读到）</td></tr></tbody></table>
+<blockquote><p>⚠️ 所以“进程树内部能传下去，但进程一结束就断”——不会留到下次启动。</p></blockquote>
+<h3 id="sec-20">12.5 一句话记住</h3>
+<blockquote><h3 id="sec-1">🎯 <code>.env</code> 是“开机读一次的配置单”</h3>
+<h3 id="sec-2">🎯 <code>process.env</code> 是“读进内存的那一份”</h3>
+<h3 id="sec-3">🎯 进程结束，内存清单销毁；文件永远是原来的内容</h3></blockquote>
+<p><strong>推论：</strong></p>
+<ul><li>想改配置 → <strong>改 <code>.env</code> 文件</strong>；</li><li>想存运行数据（登录状态、计数、业务数据）→ <strong>存数据库</strong>；</li><li>不要在 <code>.env</code> 里放会变的东西，它只是“启动参数”。</li></ul>
+<p>更新：2026-11-24</p></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第十二节课——完整项目/学生管理系统/环境变量与进程.md</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

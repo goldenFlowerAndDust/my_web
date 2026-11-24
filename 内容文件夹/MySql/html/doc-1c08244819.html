@@ -1,0 +1,426 @@
+<!-- source: 笔记/学习笔记存放地/数据查找综合实例.sql -->
+<!-- source-root: MySql -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>数据查找综合实例 · MySQL 笔记</title>
+<link rel="stylesheet" href="../共享配置/css/mysql-notes.css?v=20261124-3">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){}</script>
+</head>
+<body class="doc-page">
+<script>if (location.search.includes("embed=1")) document.body.classList.add("is-embed");</script>
+<nav class="topbar">
+  <a class="topbar-back" href="index.html">← 目录</a>
+  <span class="topbar-title">数据查找综合实例</span>
+  <div class="topbar-actions"><button class="icon-btn" type="button" data-theme-toggle>亮色</button></div>
+</nav>
+<main class="doc-page">
+  <header class="doc-head">
+    <div>
+      <span class="hero-kicker">笔记 · 学习笔记</span>
+      <h1>数据查找综合实例</h1>
+      <div class="doc-meta">
+        <span>来源：笔记/学习笔记存放地/数据查找综合实例.sql</span>
+        <span>181 行</span>
+        <span>更新 2026-09-03</span>
+      </div>
+    </div>
+  </header>
+  <section class="sql-card">
+    <div class="sql-toolbar">
+      <span class="sql-file">笔记/学习笔记存放地/数据查找综合实例.sql</span>
+      <button class="copy-btn" type="button" id="copy-sql">复制 SQL</button>
+    </div>
+    <pre class="sql-code" id="sql-code"><div class="sql-line"><span class="ln">1</span><code><span class="sql-comment">-- 一、列查询</span></code></div>
+<div class="sql-line"><span class="ln">2</span><code></code></div>
+<div class="sql-line"><span class="ln">3</span><code><span class="sql-comment">-- 1. distinct 消除重复行</span></code></div>
+<div class="sql-line"><span class="ln">4</span><code><span class="sql-keyword">select</span> <span class="sql-keyword">DISTINCT</span> 书号,<span class="sql-string">`库存状态`</span> <span class="sql-keyword">from</span> <span class="sql-string">`库存表`</span>;</code></div>
+<div class="sql-line"><span class="ln">5</span><code></code></div>
+<div class="sql-line"><span class="ln">6</span><code><span class="sql-comment">-- 2. as 替换字段名,可以省略</span></code></div>
+<div class="sql-line"><span class="ln">7</span><code></code></div>
+<div class="sql-line"><span class="ln">8</span><code><span class="sql-keyword">select</span> <span class="sql-string">`姓名`</span> <span class="sql-keyword">as</span> <span class="sql-ident">name</span> , 单位 <span class="sql-ident">college</span> <span class="sql-keyword">from</span> <span class="sql-string">`读者表`</span>;</code></div>
+<div class="sql-line"><span class="ln">9</span><code></code></div>
+<div class="sql-line"><span class="ln">10</span><code><span class="sql-comment">-- 3. ROUND(数字, 小数位数)</span></code></div>
+<div class="sql-line"><span class="ln">11</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">12</span><code><span class="sql-comment">  数字：要处理的数值（可以是字段、表达式或常量）</span></code></div>
+<div class="sql-line"><span class="ln">13</span><code></code></div>
+<div class="sql-line"><span class="ln">14</span><code><span class="sql-comment">  小数位数（可选）：</span></code></div>
+<div class="sql-line"><span class="ln">15</span><code></code></div>
+<div class="sql-line"><span class="ln">16</span><code><span class="sql-comment">    指定正数（如 2）→ 四舍五入保留 n 位小数</span></code></div>
+<div class="sql-line"><span class="ln">17</span><code></code></div>
+<div class="sql-line"><span class="ln">18</span><code><span class="sql-comment">    省略或为 0 → 四舍五入取整</span></code></div>
+<div class="sql-line"><span class="ln">19</span><code></code></div>
+<div class="sql-line"><span class="ln">20</span><code><span class="sql-comment">    指定负数（如 -1）→ 四舍五入到十位、百位等</span></code></div>
+<div class="sql-line"><span class="ln">21</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">22</span><code></code></div>
+<div class="sql-line"><span class="ln">23</span><code><span class="sql-keyword">select</span> <span class="sql-string">`书名`</span>, <span class="sql-function">ROUND</span>(数量<span class="sql-operator">*</span><span class="sql-string">`单价`</span>) 金额 <span class="sql-keyword">from</span> <span class="sql-string">`图书表`</span>;</code></div>
+<div class="sql-line"><span class="ln">24</span><code></code></div>
+<div class="sql-line"><span class="ln">25</span><code><span class="sql-comment">-- 4. 语法: case when 条件 then 当符合条件时，返回值的值</span></code></div>
+<div class="sql-line"><span class="ln">26</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">27</span><code><span class="sql-comment">  CASE 是 MySQL 中的条件表达式，类似于编程语言中的: </span></code></div>
+<div class="sql-line"><span class="ln">28</span><code><span class="sql-comment">  if-else if-else，根据不同条件返回不同结果。它必须从 CASE 开始，以 END 结束。</span></code></div>
+<div class="sql-line"><span class="ln">29</span><code><span class="sql-comment">  语法形式:</span></code></div>
+<div class="sql-line"><span class="ln">30</span><code><span class="sql-comment">    1.</span></code></div>
+<div class="sql-line"><span class="ln">31</span><code><span class="sql-comment">    CASE </span></code></div>
+<div class="sql-line"><span class="ln">32</span><code><span class="sql-comment">    WHEN 条件1 THEN 结果1</span></code></div>
+<div class="sql-line"><span class="ln">33</span><code><span class="sql-comment">    WHEN 条件2 THEN 结果2</span></code></div>
+<div class="sql-line"><span class="ln">34</span><code><span class="sql-comment">    ...</span></code></div>
+<div class="sql-line"><span class="ln">35</span><code><span class="sql-comment">    ELSE 默认结果</span></code></div>
+<div class="sql-line"><span class="ln">36</span><code><span class="sql-comment">    END</span></code></div>
+<div class="sql-line"><span class="ln">37</span><code><span class="sql-comment">    ····依次判断 WHEN 后的条件，第一个满足的条件返回对应的 THEN 结果</span></code></div>
+<div class="sql-line"><span class="ln">38</span><code><span class="sql-comment">    ····如果都不满足，返回 ELSE 后的值（ELSE 可省略，省略时返回 NULL）</span></code></div>
+<div class="sql-line"><span class="ln">39</span><code><span class="sql-comment">    2.</span></code></div>
+<div class="sql-line"><span class="ln">40</span><code><span class="sql-comment">    CASE 表达式</span></code></div>
+<div class="sql-line"><span class="ln">41</span><code><span class="sql-comment">    WHEN 值1 THEN 结果1</span></code></div>
+<div class="sql-line"><span class="ln">42</span><code><span class="sql-comment">    WHEN 值2 THEN 结果2</span></code></div>
+<div class="sql-line"><span class="ln">43</span><code><span class="sql-comment">    ...</span></code></div>
+<div class="sql-line"><span class="ln">44</span><code><span class="sql-comment">    ELSE 默认结果</span></code></div>
+<div class="sql-line"><span class="ln">45</span><code><span class="sql-comment">    END</span></code></div>
+<div class="sql-line"><span class="ln">46</span><code><span class="sql-comment">    ···先计算 表达式 的值，然后与 WHEN 后的值逐一比较，相等则返回对应的 THEN 结果</span></code></div>
+<div class="sql-line"><span class="ln">47</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">48</span><code></code></div>
+<div class="sql-line"><span class="ln">49</span><code><span class="sql-keyword">SELECT</span> 条码,</code></div>
+<div class="sql-line"><span class="ln">50</span><code></code></div>
+<div class="sql-line"><span class="ln">51</span><code><span class="sql-keyword">CASE</span> </code></div>
+<div class="sql-line"><span class="ln">52</span><code>	<span class="sql-keyword">WHEN</span> <span class="sql-string">`库存状态`</span> <span class="sql-operator">=</span> <span class="sql-string">'在馆'</span> <span class="sql-keyword">THEN</span> <span class="sql-number">1</span>  <span class="sql-comment">-- 当库存状态为在馆，则返回数字1</span></code></div>
+<div class="sql-line"><span class="ln">53</span><code>	<span class="sql-keyword">WHEN</span> <span class="sql-string">`库存状态`</span> <span class="sql-operator">=</span> <span class="sql-string">'借出'</span> <span class="sql-keyword">THEN</span> <span class="sql-number">0</span>  <span class="sql-comment">-- 当库存状态为借出，则返回数字0</span></code></div>
+<div class="sql-line"><span class="ln">54</span><code>	<span class="sql-keyword">WHEN</span> <span class="sql-string">`库存状态`</span> <span class="sql-operator">=</span> <span class="sql-string">'丢失'</span> <span class="sql-keyword">THEN</span> <span class="sql-operator">-</span><span class="sql-number">1</span> <span class="sql-comment">-- 当库存状态为丢失，则返回数字-1</span></code></div>
+<div class="sql-line"><span class="ln">55</span><code><span class="sql-keyword">END</span> <span class="sql-string">`库存状态`</span> <span class="sql-comment">-- 将字段名 更名 为 库存状态</span></code></div>
+<div class="sql-line"><span class="ln">56</span><code><span class="sql-keyword">FROM</span> <span class="sql-string">`库存表`</span>; <span class="sql-comment">-- 引用表格</span></code></div>
+<div class="sql-line"><span class="ln">57</span><code></code></div>
+<div class="sql-line"><span class="ln">58</span><code><span class="sql-comment">-- 二、条件查询</span></code></div>
+<div class="sql-line"><span class="ln">59</span><code></code></div>
+<div class="sql-line"><span class="ln">60</span><code><span class="sql-comment">-- 1. select(查询关键字) 字段(必须在表前决定可以通过as改名,as可以省略) from(引用表格关键字) 表名 where(条件关键字) 条件表达式</span></code></div>
+<div class="sql-line"><span class="ln">61</span><code><span class="sql-keyword">select</span> <span class="sql-string">`书名`</span>,<span class="sql-string">`数量`</span>,<span class="sql-string">`出版社`</span> <span class="sql-keyword">from</span> <span class="sql-string">`图书表`</span> <span class="sql-keyword">where</span> 数量<span class="sql-operator">&gt;</span><span class="sql-number">10</span>;</code></div>
+<div class="sql-line"><span class="ln">62</span><code></code></div>
+<div class="sql-line"><span class="ln">63</span><code><span class="sql-comment">-- 2. 查询含有A的字符   当查询的条件没有具体字段,使用[*]可以查询到符合条件的所有字敦</span></code></div>
+<div class="sql-line"><span class="ln">64</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">65</span><code><span class="sql-comment">  模糊查询(重点)关键字Like:</span></code></div>
+<div class="sql-line"><span class="ln">66</span><code><span class="sql-comment">    1.模糊查询用于匹配不完整、不确定的信息，核心是 LIKE 关键字配合通配符。</span></code></div>
+<div class="sql-line"><span class="ln">67</span><code><span class="sql-comment">    2.语法:SELECT 字段 FROM 表名 WHERE 列名 LIKE '带通配符的字符串';</span></code></div>
+<div class="sql-line"><span class="ln">68</span><code><span class="sql-comment">  通配符	含义	                          示例</span></code></div>
+<div class="sql-line"><span class="ln">69</span><code></code></div>
+<div class="sql-line"><span class="ln">70</span><code><span class="sql-comment">  %	      代表任意多个字符（包括 0 个）	  '张%' → 以“张”开头的任意内容</span></code></div>
+<div class="sql-line"><span class="ln">71</span><code><span class="sql-comment">  _	      代表1个任意字符	              '张_' → “张” + 恰好 1 个字符（如“张三”）</span></code></div>
+<div class="sql-line"><span class="ln">72</span><code><span class="sql-comment">  </span></code></div>
+<div class="sql-line"><span class="ln">73</span><code><span class="sql-comment">  注意事项:</span></code></div>
+<div class="sql-line"><span class="ln">74</span><code><span class="sql-comment">    大小写敏感问题：</span></code></div>
+<div class="sql-line"><span class="ln">75</span><code><span class="sql-comment">        默认情况下，MySQL 的 LIKE 对英文字母不区分大小写，所以 %A% 也会匹配包含 a 的记录</span></code></div>
+<div class="sql-line"><span class="ln">76</span><code><span class="sql-comment">        如果需要区分大小写，可以加 BINARY 关键字：WHERE BINARY 书名 LIKE '%A%'（只匹配大写 A）</span></code></div>
+<div class="sql-line"><span class="ln">77</span><code><span class="sql-comment">    中文环境：%A% 只匹配英文字母 A，不会匹配中文“啊”等</span></code></div>
+<div class="sql-line"><span class="ln">78</span><code><span class="sql-comment">    性能：%A% 因为通配符在开头，无法使用索引，大数据量时查询较慢</span></code></div>
+<div class="sql-line"><span class="ln">79</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">80</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-string">`库存表`</span> <span class="sql-keyword">where</span> <span class="sql-string">`位置`</span> <span class="sql-keyword">LIKE</span> <span class="sql-string">'%A%'</span> <span class="sql-keyword">and</span>  <span class="sql-string">`库存状态`</span> <span class="sql-operator">=</span> <span class="sql-string">'借出'</span>;</code></div>
+<div class="sql-line"><span class="ln">81</span><code></code></div>
+<div class="sql-line"><span class="ln">82</span><code><span class="sql-comment">-- 3. BETWEEN ... AND ...（针对范围条件） 优先级: () &gt; and &gt; or</span></code></div>
+<div class="sql-line"><span class="ln">83</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-string">`图书表`</span> <span class="sql-keyword">where</span> <span class="sql-string">`类别`</span> <span class="sql-operator">=</span> (<span class="sql-string">'财金'</span> <span class="sql-keyword">or</span> <span class="sql-string">`类别`</span> <span class="sql-operator">=</span> <span class="sql-string">'文学'</span>) <span class="sql-keyword">and</span> <span class="sql-string">`数量`</span> <span class="sql-operator">&gt;</span> <span class="sql-number">5</span>;</code></div>
+<div class="sql-line"><span class="ln">84</span><code></code></div>
+<div class="sql-line"><span class="ln">85</span><code><span class="sql-comment">-- 4. </span></code></div>
+<div class="sql-line"><span class="ln">86</span><code><span class="sql-comment">/*  判断为空:</span></code></div>
+<div class="sql-line"><span class="ln">87</span><code><span class="sql-comment">      WHERE 字段名 IS NULL</span></code></div>
+<div class="sql-line"><span class="ln">88</span><code><span class="sql-comment">    判断不为空:</span></code></div>
+<div class="sql-line"><span class="ln">89</span><code><span class="sql-comment">      WHERE 字段名 IS not NULL</span></code></div>
+<div class="sql-line"><span class="ln">90</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">91</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-string">`借阅表`</span> <span class="sql-keyword">where</span> <span class="sql-string">`还书日期`</span> <span class="sql-keyword">is</span> <span class="sql-keyword">NULL</span>;</code></div>
+<div class="sql-line"><span class="ln">92</span><code></code></div>
+<div class="sql-line"><span class="ln">93</span><code><span class="sql-comment">-- 三、多表查询</span></code></div>
+<div class="sql-line"><span class="ln">94</span><code></code></div>
+<div class="sql-line"><span class="ln">95</span><code><span class="sql-comment">-- 1.</span></code></div>
+<div class="sql-line"><span class="ln">96</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">97</span><code><span class="sql-comment">  多表查询：</span></code></div>
+<div class="sql-line"><span class="ln">98</span><code><span class="sql-comment">    1.先查找两个或多个表相同字段</span></code></div>
+<div class="sql-line"><span class="ln">99</span><code><span class="sql-comment">    2.当有多个表，先看联系，再连接</span></code></div>
+<div class="sql-line"><span class="ln">100</span><code><span class="sql-comment">    3.查询方式有两种：</span></code></div>
+<div class="sql-line"><span class="ln">101</span><code><span class="sql-comment">        1.通过 where 的方式，将两个或多个表相同字段，通过=连接(非常不推荐)</span></code></div>
+<div class="sql-line"><span class="ln">102</span><code><span class="sql-comment">        2.通过 join方式：</span></code></div>
+<div class="sql-line"><span class="ln">103</span><code><span class="sql-comment">            第一种情况(ON关键字)： select 字段 from 表1 join 表2 on 表1.相同字段 = 表2.相同字段 join .....</span></code></div>
+<div class="sql-line"><span class="ln">104</span><code><span class="sql-comment">            第二种情况(using关键字) ：select 字段 from 表1 join 表2 using(相同字段) join 表3 using(相同字段)...</span></code></div>
+<div class="sql-line"><span class="ln">105</span><code><span class="sql-comment">        推荐采用join using 的方法：              </span></code></div>
+<div class="sql-line"><span class="ln">106</span><code><span class="sql-comment">    特性	        USING（受限）	              ON（自由）</span></code></div>
+<div class="sql-line"><span class="ln">107</span><code><span class="sql-comment">  连接条件	  强制要求同名字段	          可以写任意表达式</span></code></div>
+<div class="sql-line"><span class="ln">108</span><code><span class="sql-comment">  潜在风险	  低——不会写出无意义的连接	  高——可能写出 ON 1=1 或字段类型不匹配的“瞎连”</span></code></div>
+<div class="sql-line"><span class="ln">109</span><code><span class="sql-comment">  代码可读性	一眼看出连接依据	          需要仔细看条件才能理解</span></code></div>
+<div class="sql-line"><span class="ln">110</span><code><span class="sql-comment">  结果列	    自动去重，清爽	            可能产生重复列名，需手动处理</span></code></div>
+<div class="sql-line"><span class="ln">111</span><code><span class="sql-comment">  团队协作	  强制命名规范，代码风格统一	每个人可能写不同样式的条件</span></code></div>
+<div class="sql-line"><span class="ln">112</span><code><span class="sql-comment">  </span></code></div>
+<div class="sql-line"><span class="ln">113</span><code><span class="sql-comment">  注意：当多个表之间不是全部字段统一，可以先试着找关系，逐个join using</span></code></div>
+<div class="sql-line"><span class="ln">114</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">115</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-string">`读者表`</span> <span class="sql-keyword">join</span> <span class="sql-string">`借阅表`</span> <span class="sql-ident">using</span>(<span class="sql-string">`读者编号`</span>) <span class="sql-keyword">where</span> <span class="sql-string">`读者表`</span>.<span class="sql-string">`姓名`</span><span class="sql-operator">=</span><span class="sql-string">'张小东'</span>;</code></div>
+<div class="sql-line"><span class="ln">116</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-string">`读者表`</span> <span class="sql-keyword">join</span> <span class="sql-string">`借阅表`</span> <span class="sql-keyword">on</span> <span class="sql-string">`读者表`</span>.<span class="sql-string">`读者编号`</span> <span class="sql-operator">=</span> <span class="sql-string">`借阅表`</span>.<span class="sql-string">`读者编号`</span> <span class="sql-keyword">where</span> <span class="sql-string">`读者表`</span>.<span class="sql-string">`姓名`</span> <span class="sql-operator">=</span> <span class="sql-string">'张小东'</span>;</code></div>
+<div class="sql-line"><span class="ln">117</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-string">`读者表`</span>,<span class="sql-string">`借阅表`</span> <span class="sql-keyword">where</span> <span class="sql-string">`读者表`</span>.<span class="sql-string">`读者编号`</span><span class="sql-operator">=</span><span class="sql-string">`借阅表`</span>.<span class="sql-string">`读者编号`</span> <span class="sql-keyword">and</span> <span class="sql-string">`读者表`</span>.<span class="sql-string">`姓名`</span> <span class="sql-operator">=</span> <span class="sql-string">'张小东'</span>;</code></div>
+<div class="sql-line"><span class="ln">118</span><code></code></div>
+<div class="sql-line"><span class="ln">119</span><code><span class="sql-comment">-- 2.</span></code></div>
+<div class="sql-line"><span class="ln">120</span><code></code></div>
+<div class="sql-line"><span class="ln">121</span><code><span class="sql-keyword">select</span> 书号,<span class="sql-string">`条码`</span> <span class="sql-keyword">from</span> <span class="sql-string">`借阅表`</span> <span class="sql-keyword">join</span> <span class="sql-string">`库存表`</span> <span class="sql-ident">using</span>(条码) <span class="sql-keyword">join</span> <span class="sql-string">`图书表`</span> <span class="sql-ident">using</span>(书号) <span class="sql-keyword">where</span> <span class="sql-string">`借阅表`</span>.<span class="sql-string">`借阅状态`</span> <span class="sql-operator">=</span> <span class="sql-string">'借阅'</span>;</code></div>
+<div class="sql-line"><span class="ln">122</span><code></code></div>
+<div class="sql-line"><span class="ln">123</span><code><span class="sql-comment">-- 3.</span></code></div>
+<div class="sql-line"><span class="ln">124</span><code></code></div>
+<div class="sql-line"><span class="ln">125</span><code><span class="sql-keyword">select</span> <span class="sql-string">`姓名`</span>,单位,<span class="sql-string">`可借天数`</span>,<span class="sql-string">`可借数量`</span> <span class="sql-keyword">from</span> <span class="sql-string">`读者表`</span> <span class="sql-keyword">join</span> <span class="sql-string">`读者类型表`</span> <span class="sql-ident">using</span>(类别号);</code></div>
+<div class="sql-line"><span class="ln">126</span><code></code></div>
+<div class="sql-line"><span class="ln">127</span><code><span class="sql-comment">-- 4.</span></code></div>
+<div class="sql-line"><span class="ln">128</span><code><span class="sql-keyword">select</span> 姓名,书名,借阅日期,借阅状态 <span class="sql-keyword">from</span> <span class="sql-string">`读者表`</span> <span class="sql-keyword">join</span> <span class="sql-string">`借阅表`</span> <span class="sql-ident">using</span>(<span class="sql-string">`读者编号`</span>) <span class="sql-keyword">join</span> <span class="sql-string">`库存表`</span> <span class="sql-ident">using</span>(条码) <span class="sql-keyword">join</span> <span class="sql-string">`图书表`</span> <span class="sql-ident">using</span>(书号);</code></div>
+<div class="sql-line"><span class="ln">129</span><code></code></div>
+<div class="sql-line"><span class="ln">130</span><code><span class="sql-comment">-- 5. 外连接:外连接是 SQL 中用于保留不匹配行的连接方式。当两个表连接时，如果某行在另一个表中没有对应的匹配行，内连接（INNER JOIN）会丢弃该行，而外连接会保留它，缺失的字段用 NULL 填充。</span></code></div>
+<div class="sql-line"><span class="ln">131</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">132</span><code></code></div>
+<div class="sql-line"><span class="ln">133</span><code><span class="sql-comment">  左外连接	LEFT JOIN 或 LEFT OUTER JOIN	左表全部行 + 右表匹配行</span></code></div>
+<div class="sql-line"><span class="ln">134</span><code><span class="sql-comment">  右外连接	RIGHT JOIN 或 RIGHT OUTER JOIN	右表全部行 + 左表匹配行</span></code></div>
+<div class="sql-line"><span class="ln">135</span><code><span class="sql-comment">  </span></code></div>
+<div class="sql-line"><span class="ln">136</span><code><span class="sql-comment">  左连接：左表全部保留。右表有匹配 → 正常显示；右表无匹配 → 右表字段全为 NULL。</span></code></div>
+<div class="sql-line"><span class="ln">137</span><code><span class="sql-comment">  右连接：右表全部保留。左表有匹配 → 正常显示；左表无匹配 → 左表字段全为 NULL。</span></code></div>
+<div class="sql-line"><span class="ln">138</span><code><span class="sql-comment">  内连接：不保留任何无匹配的行，因此永远不会出现 NULL（除非数据本身是 NULL）。</span></code></div>
+<div class="sql-line"><span class="ln">139</span><code><span class="sql-comment">  </span></code></div>
+<div class="sql-line"><span class="ln">140</span><code><span class="sql-comment">  想让哪个表的字段在没匹配时显示为 NULL，就把那个表放在外连接的“反方向”。</span></code></div>
+<div class="sql-line"><span class="ln">141</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">142</span><code></code></div>
+<div class="sql-line"><span class="ln">143</span><code><span class="sql-keyword">select</span> 书名,条码,位置,<span class="sql-string">`借阅表`</span>.<span class="sql-string">`读者编号`</span> <span class="sql-keyword">from</span> <span class="sql-string">`图书表`</span> <span class="sql-keyword">join</span> <span class="sql-string">`库存表`</span> <span class="sql-ident">using</span>(书号) <span class="sql-keyword">left</span> <span class="sql-keyword">join</span> <span class="sql-string">`借阅表`</span> <span class="sql-ident">using</span>(条码);</code></div>
+<div class="sql-line"><span class="ln">144</span><code></code></div>
+<div class="sql-line"><span class="ln">145</span><code></code></div>
+<div class="sql-line"><span class="ln">146</span><code><span class="sql-comment">-- 四、分类汇总</span></code></div>
+<div class="sql-line"><span class="ln">147</span><code></code></div>
+<div class="sql-line"><span class="ln">148</span><code><span class="sql-comment">-- 1. group by hving(分组后使用) where(分组前使用)</span></code></div>
+<div class="sql-line"><span class="ln">149</span><code><span class="sql-keyword">select</span> 单位,<span class="sql-function">count</span>(<span class="sql-operator">*</span>) 人数 <span class="sql-keyword">from</span> <span class="sql-string">`读者表`</span> <span class="sql-keyword">group</span> <span class="sql-keyword">by</span> 单位;</code></div>
+<div class="sql-line"><span class="ln">150</span><code></code></div>
+<div class="sql-line"><span class="ln">151</span><code><span class="sql-comment">-- 2.</span></code></div>
+<div class="sql-line"><span class="ln">152</span><code><span class="sql-keyword">select</span> 单位,<span class="sql-function">count</span>(<span class="sql-operator">*</span>) 读者人数 <span class="sql-keyword">from</span> <span class="sql-string">`读者表`</span> <span class="sql-keyword">group</span> <span class="sql-keyword">by</span> 单位 <span class="sql-keyword">having</span> <span class="sql-function">count</span>(<span class="sql-operator">*</span>) <span class="sql-operator">&gt;</span><span class="sql-operator">=</span><span class="sql-number">2</span>;</code></div>
+<div class="sql-line"><span class="ln">153</span><code></code></div>
+<div class="sql-line"><span class="ln">154</span><code><span class="sql-comment">-- 3.</span></code></div>
+<div class="sql-line"><span class="ln">155</span><code><span class="sql-keyword">select</span> 出版社,<span class="sql-function">AVG</span>(单价) <span class="sql-keyword">as</span> 平均单价 , <span class="sql-function">ROUND</span>(<span class="sql-function">SUM</span>(单价<span class="sql-operator">*</span>数量)) <span class="sql-keyword">as</span> 总金额 <span class="sql-keyword">from</span> <span class="sql-string">`图书表`</span> <span class="sql-keyword">GROUP</span> <span class="sql-keyword">BY</span> 出版社;</code></div>
+<div class="sql-line"><span class="ln">156</span><code></code></div>
+<div class="sql-line"><span class="ln">157</span><code><span class="sql-comment">-- 4. with rollup 小计</span></code></div>
+<div class="sql-line"><span class="ln">158</span><code></code></div>
+<div class="sql-line"><span class="ln">159</span><code><span class="sql-keyword">select</span> 读者编号,条码,<span class="sql-function">COUNT</span>(<span class="sql-operator">*</span>) <span class="sql-keyword">as</span> 借阅次数 <span class="sql-keyword">from</span> <span class="sql-string">`借阅表`</span> <span class="sql-keyword">GROUP</span> <span class="sql-keyword">BY</span>  读者编号,条码 <span class="sql-ident">with</span> <span class="sql-ident">rollup</span>;</code></div>
+<div class="sql-line"><span class="ln">160</span><code></code></div>
+<div class="sql-line"><span class="ln">161</span><code><span class="sql-comment">/*</span></code></div>
+<div class="sql-line"><span class="ln">162</span><code><span class="sql-comment">  二、常用聚合函数</span></code></div>
+<div class="sql-line"><span class="ln">163</span><code><span class="sql-comment">函数	                      作用	                              示例</span></code></div>
+<div class="sql-line"><span class="ln">164</span><code><span class="sql-comment">COUNT(*)	              统计组内行数（含 NULL）	          每种图书的库存数量</span></code></div>
+<div class="sql-line"><span class="ln">165</span><code><span class="sql-comment">COUNT(列名)	            统计该列非 NULL 值的个数	        有联系电话的会员数</span></code></div>
+<div class="sql-line"><span class="ln">166</span><code><span class="sql-comment">SUM(列名)	              求和	                            每种图书的总订购册数</span></code></div>
+<div class="sql-line"><span class="ln">167</span><code><span class="sql-comment">AVG(列名)	              平均值	                          各类图书的平均单价</span></code></div>
+<div class="sql-line"><span class="ln">168</span><code><span class="sql-comment">MAX(列名)	              最大值	                          最晚的注册时间</span></code></div>
+<div class="sql-line"><span class="ln">169</span><code><span class="sql-comment">MIN(列名)	              最小值	                          最早的出版年份</span></code></div>
+<div class="sql-line"><span class="ln">170</span><code><span class="sql-comment">*/</span></code></div>
+<div class="sql-line"><span class="ln">171</span><code></code></div>
+<div class="sql-line"><span class="ln">172</span><code><span class="sql-comment">-- 5. 排序 order by   降序 desc 升序 asc</span></code></div>
+<div class="sql-line"><span class="ln">173</span><code></code></div>
+<div class="sql-line"><span class="ln">174</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-string">`图书表`</span> <span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> 数量 <span class="sql-keyword">desc</span>;</code></div>
+<div class="sql-line"><span class="ln">175</span><code></code></div>
+<div class="sql-line"><span class="ln">176</span><code><span class="sql-comment">--  6.</span></code></div>
+<div class="sql-line"><span class="ln">177</span><code></code></div>
+<div class="sql-line"><span class="ln">178</span><code><span class="sql-keyword">select</span> <span class="sql-operator">*</span> <span class="sql-keyword">from</span> <span class="sql-string">`借阅表`</span> <span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> <span class="sql-string">`借阅状态`</span>,<span class="sql-string">`借阅日期`</span> <span class="sql-keyword">asc</span>;</code></div>
+<div class="sql-line"><span class="ln">179</span><code></code></div>
+<div class="sql-line"><span class="ln">180</span><code><span class="sql-comment">-- 7.</span></code></div>
+<div class="sql-line"><span class="ln">181</span><code><span class="sql-keyword">SELECT</span> 读者类型表.<span class="sql-string">`类名`</span> <span class="sql-keyword">AS</span> 类别,读者表.单位,<span class="sql-function">COUNT</span>(<span class="sql-operator">*</span>) <span class="sql-keyword">AS</span> 借阅次数 <span class="sql-keyword">FROM</span> 借阅表 <span class="sql-keyword">JOIN</span> 读者表 <span class="sql-ident">using</span>(读者编号) <span class="sql-keyword">JOIN</span> 读者类型表 <span class="sql-ident">using</span>(类别号) <span class="sql-keyword">GROUP</span> <span class="sql-keyword">BY</span> 读者类型表.类名, 读者表.单位 <span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> 借阅次数 <span class="sql-keyword">DESC</span>;</code></div></pre>
+    <textarea id="sql-raw" hidden>-- 一、列查询
+
+-- 1. distinct 消除重复行
+select DISTINCT 书号,`库存状态` from `库存表`;
+
+-- 2. as 替换字段名,可以省略
+
+select `姓名` as name , 单位 college from `读者表`;
+
+-- 3. ROUND(数字, 小数位数)
+/*
+  数字：要处理的数值（可以是字段、表达式或常量）
+
+  小数位数（可选）：
+
+    指定正数（如 2）→ 四舍五入保留 n 位小数
+
+    省略或为 0 → 四舍五入取整
+
+    指定负数（如 -1）→ 四舍五入到十位、百位等
+*/
+
+select `书名`, ROUND(数量*`单价`) 金额 from `图书表`;
+
+-- 4. 语法: case when 条件 then 当符合条件时，返回值的值
+/*
+  CASE 是 MySQL 中的条件表达式，类似于编程语言中的: 
+  if-else if-else，根据不同条件返回不同结果。它必须从 CASE 开始，以 END 结束。
+  语法形式:
+    1.
+    CASE 
+    WHEN 条件1 THEN 结果1
+    WHEN 条件2 THEN 结果2
+    ...
+    ELSE 默认结果
+    END
+    ····依次判断 WHEN 后的条件，第一个满足的条件返回对应的 THEN 结果
+    ····如果都不满足，返回 ELSE 后的值（ELSE 可省略，省略时返回 NULL）
+    2.
+    CASE 表达式
+    WHEN 值1 THEN 结果1
+    WHEN 值2 THEN 结果2
+    ...
+    ELSE 默认结果
+    END
+    ···先计算 表达式 的值，然后与 WHEN 后的值逐一比较，相等则返回对应的 THEN 结果
+*/
+
+SELECT 条码,
+
+CASE 
+	WHEN `库存状态` = '在馆' THEN 1  -- 当库存状态为在馆，则返回数字1
+	WHEN `库存状态` = '借出' THEN 0  -- 当库存状态为借出，则返回数字0
+	WHEN `库存状态` = '丢失' THEN -1 -- 当库存状态为丢失，则返回数字-1
+END `库存状态` -- 将字段名 更名 为 库存状态
+FROM `库存表`; -- 引用表格
+
+-- 二、条件查询
+
+-- 1. select(查询关键字) 字段(必须在表前决定可以通过as改名,as可以省略) from(引用表格关键字) 表名 where(条件关键字) 条件表达式
+select `书名`,`数量`,`出版社` from `图书表` where 数量&gt;10;
+
+-- 2. 查询含有A的字符   当查询的条件没有具体字段,使用[*]可以查询到符合条件的所有字敦
+/*
+  模糊查询(重点)关键字Like:
+    1.模糊查询用于匹配不完整、不确定的信息，核心是 LIKE 关键字配合通配符。
+    2.语法:SELECT 字段 FROM 表名 WHERE 列名 LIKE '带通配符的字符串';
+  通配符	含义	                          示例
+
+  %	      代表任意多个字符（包括 0 个）	  '张%' → 以“张”开头的任意内容
+  _	      代表1个任意字符	              '张_' → “张” + 恰好 1 个字符（如“张三”）
+  
+  注意事项:
+    大小写敏感问题：
+        默认情况下，MySQL 的 LIKE 对英文字母不区分大小写，所以 %A% 也会匹配包含 a 的记录
+        如果需要区分大小写，可以加 BINARY 关键字：WHERE BINARY 书名 LIKE '%A%'（只匹配大写 A）
+    中文环境：%A% 只匹配英文字母 A，不会匹配中文“啊”等
+    性能：%A% 因为通配符在开头，无法使用索引，大数据量时查询较慢
+*/
+select * from `库存表` where `位置` LIKE '%A%' and  `库存状态` = '借出';
+
+-- 3. BETWEEN ... AND ...（针对范围条件） 优先级: () &gt; and &gt; or
+select * from `图书表` where `类别` = ('财金' or `类别` = '文学') and `数量` &gt; 5;
+
+-- 4. 
+/*  判断为空:
+      WHERE 字段名 IS NULL
+    判断不为空:
+      WHERE 字段名 IS not NULL
+*/
+select * from `借阅表` where `还书日期` is NULL;
+
+-- 三、多表查询
+
+-- 1.
+/*
+  多表查询：
+    1.先查找两个或多个表相同字段
+    2.当有多个表，先看联系，再连接
+    3.查询方式有两种：
+        1.通过 where 的方式，将两个或多个表相同字段，通过=连接(非常不推荐)
+        2.通过 join方式：
+            第一种情况(ON关键字)： select 字段 from 表1 join 表2 on 表1.相同字段 = 表2.相同字段 join .....
+            第二种情况(using关键字) ：select 字段 from 表1 join 表2 using(相同字段) join 表3 using(相同字段)...
+        推荐采用join using 的方法：              
+    特性	        USING（受限）	              ON（自由）
+  连接条件	  强制要求同名字段	          可以写任意表达式
+  潜在风险	  低——不会写出无意义的连接	  高——可能写出 ON 1=1 或字段类型不匹配的“瞎连”
+  代码可读性	一眼看出连接依据	          需要仔细看条件才能理解
+  结果列	    自动去重，清爽	            可能产生重复列名，需手动处理
+  团队协作	  强制命名规范，代码风格统一	每个人可能写不同样式的条件
+  
+  注意：当多个表之间不是全部字段统一，可以先试着找关系，逐个join using
+*/
+select * from `读者表` join `借阅表` using(`读者编号`) where `读者表`.`姓名`='张小东';
+select * from `读者表` join `借阅表` on `读者表`.`读者编号` = `借阅表`.`读者编号` where `读者表`.`姓名` = '张小东';
+select * from `读者表`,`借阅表` where `读者表`.`读者编号`=`借阅表`.`读者编号` and `读者表`.`姓名` = '张小东';
+
+-- 2.
+
+select 书号,`条码` from `借阅表` join `库存表` using(条码) join `图书表` using(书号) where `借阅表`.`借阅状态` = '借阅';
+
+-- 3.
+
+select `姓名`,单位,`可借天数`,`可借数量` from `读者表` join `读者类型表` using(类别号);
+
+-- 4.
+select 姓名,书名,借阅日期,借阅状态 from `读者表` join `借阅表` using(`读者编号`) join `库存表` using(条码) join `图书表` using(书号);
+
+-- 5. 外连接:外连接是 SQL 中用于保留不匹配行的连接方式。当两个表连接时，如果某行在另一个表中没有对应的匹配行，内连接（INNER JOIN）会丢弃该行，而外连接会保留它，缺失的字段用 NULL 填充。
+/*
+
+  左外连接	LEFT JOIN 或 LEFT OUTER JOIN	左表全部行 + 右表匹配行
+  右外连接	RIGHT JOIN 或 RIGHT OUTER JOIN	右表全部行 + 左表匹配行
+  
+  左连接：左表全部保留。右表有匹配 → 正常显示；右表无匹配 → 右表字段全为 NULL。
+  右连接：右表全部保留。左表有匹配 → 正常显示；左表无匹配 → 左表字段全为 NULL。
+  内连接：不保留任何无匹配的行，因此永远不会出现 NULL（除非数据本身是 NULL）。
+  
+  想让哪个表的字段在没匹配时显示为 NULL，就把那个表放在外连接的“反方向”。
+*/
+
+select 书名,条码,位置,`借阅表`.`读者编号` from `图书表` join `库存表` using(书号) left join `借阅表` using(条码);
+
+
+-- 四、分类汇总
+
+-- 1. group by hving(分组后使用) where(分组前使用)
+select 单位,count(*) 人数 from `读者表` group by 单位;
+
+-- 2.
+select 单位,count(*) 读者人数 from `读者表` group by 单位 having count(*) &gt;=2;
+
+-- 3.
+select 出版社,AVG(单价) as 平均单价 , ROUND(SUM(单价*数量)) as 总金额 from `图书表` GROUP BY 出版社;
+
+-- 4. with rollup 小计
+
+select 读者编号,条码,COUNT(*) as 借阅次数 from `借阅表` GROUP BY  读者编号,条码 with rollup;
+
+/*
+  二、常用聚合函数
+函数	                      作用	                              示例
+COUNT(*)	              统计组内行数（含 NULL）	          每种图书的库存数量
+COUNT(列名)	            统计该列非 NULL 值的个数	        有联系电话的会员数
+SUM(列名)	              求和	                            每种图书的总订购册数
+AVG(列名)	              平均值	                          各类图书的平均单价
+MAX(列名)	              最大值	                          最晚的注册时间
+MIN(列名)	              最小值	                          最早的出版年份
+*/
+
+-- 5. 排序 order by   降序 desc 升序 asc
+
+select * from `图书表` ORDER BY 数量 desc;
+
+--  6.
+
+select * from `借阅表` ORDER BY `借阅状态`,`借阅日期` asc;
+
+-- 7.
+SELECT 读者类型表.`类名` AS 类别,读者表.单位,COUNT(*) AS 借阅次数 FROM 借阅表 JOIN 读者表 using(读者编号) JOIN 读者类型表 using(类别号) GROUP BY 读者类型表.类名, 读者表.单位 ORDER BY 借阅次数 DESC;</textarea>
+  </section>
+  <footer class="doc-foot">
+    <span><a href="doc-4a605ee1c6.html">← 子查询</a></span>
+    <span><a href="doc-9884fbc46b.html">索引笔记 →</a></span>
+  </footer>
+</main>
+<script>
+(() => {
+  const root = document.documentElement, KEY = "programmingTutor.theme";
+  const apply = (theme) => {
+    root.dataset.theme = theme === "light" ? "light" : "dark";
+    document.querySelectorAll("[data-theme-toggle]").forEach((b) => { b.textContent = root.dataset.theme === "dark" ? "亮色" : "暗色"; });
+  };
+  apply(localStorage.getItem(KEY) || root.dataset.theme || "dark");
+  document.querySelectorAll("[data-theme-toggle]").forEach((b) => b.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem(KEY, next); apply(next);
+  }));
+})();
+</script>
+<script>
+document.getElementById("copy-sql")?.addEventListener("click", async () => {
+  const raw = document.getElementById("sql-raw").value;
+  try { await navigator.clipboard.writeText(raw); document.getElementById("copy-sql").textContent = "已复制"; setTimeout(() => document.getElementById("copy-sql").textContent = "复制 SQL", 1300); }
+  catch (e) { document.getElementById("copy-sql").textContent = "复制失败"; }
+});
+</script>
+</body>
+</html>

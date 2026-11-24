@@ -1,0 +1,17 @@
+{
+  "title": "Node.js 笔记归档",
+  "name": "Node.js",
+  "description": "扫描 node.js 目录下的全部 Markdown，按目录归档为 HTML，并提供统一阅读界面。",
+  "sourceRoot": ".",
+  "output": "html",
+  "viewer": "view.html",
+  "home": "../../自建本地网站/导航栏内容/博客/Node.js博客.html",
+  "exclude": [
+    "html",
+    "共享配置",
+    "node_modules",
+    ".git",
+    ".tmp_docx.py",
+    ".tmp_docx.txt"
+  ]
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目——前后端互通</title>
+    <link rel="stylesheet" href="./web.css">
+</head>
+<body>
+<h1>学生管理器</h1>
+<section>
+    <!--表单界面操作卡片：新增学生-->
+    <div class="card">
+        <h2>新增学生</h2>
+        <form>
+            <label for="student_id"><span>学号</span><input type="text" id="student_id" required placeholder="如：20253101680"></label>
+            <label for="name"><span>姓名</span><input type="text" id="name" required placeholder="如：张三"></label>
+            <label for="gender"><span>性别</span><select name="gender" id="gender">
+                <option>男</option>
+                <option>女</option>
+                <option>未知</option>
+            </select></label>
+            <label for="age"><span>年龄</span><input type="text" id="age" required placeholder="如：18"></label>
+            <label for="class_name"><span>班级</span><input type="text" id="class_name" required placeholder="如：软件技术三班"></label>
+            <label for="created_at">自定义时间<span></span><input type="text" id="created_at" placeholder="默认是数据写入时间"></label>
+            <label for="submit"><input type="submit" value="添加" id="submit"></label>
+        </form>
+    </div>
+
+    <div class="table">
+        <h2>table</h2>
+    </div>
+</section>
+</body>
+</html>

@@ -4,40 +4,104 @@
     <meta charset="UTF-8">
     <script>try{document.documentElement.dataset.theme=localStorage.getItem("programmingTutor.theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MySQL 博客</title>
-    <link rel="stylesheet" href="../../../自建网站中用到的外部引用/自建网站用的样式表/博客样式表new.css">
-    <link rel="stylesheet" href="博客样式.css">
+    <title>MySQL 学习主页</title>
+    <meta name="description" content="MySQL 学习主页：SQL 笔记、查询练习、归档阅读与 AI 答疑入口。">
+    <link rel="stylesheet" href="../../../自建网站中用到的外部引用/自建网站用的样式表/博客主页样式表.css">
     <script src="博客主题.js" defer></script>
-    <script src="博客增强.js" defer></script>
     <link rel="stylesheet" href="../../../AI答疑/共享工具/工具函数/月份历史.css?v=20261105-3">
 </head>
 <body class="blog-page">
 <nav class="blog-topnav">
-  <a class="blog-brand" href="../../../AI答疑/编程语言AI/index.html?lang=mysql">编程 AI 答疑</a>
+  <a class="blog-brand" href="../../../AI答疑/编程语言AI/index.html?lang=mysql">MySQL · 学习主页</a>
   <div class="blog-nav-links">
     <a href="python博客.html">Python</a>
     <a href="JavaScript博客.html">JavaScript</a>
     <a href="HTML博客.html">HTML</a>
     <a href="CSS博客.html">CSS</a>
-    <a href="MySQL博客.html">MySQL</a>
+    <a href="MySQL博客.html" aria-current="page">MySQL</a>
     <a href="Node.js博客.html">Node.js</a>
     <a class="blog-ai" href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问 AI</a>
     <button type="button" class="blog-theme-toggle" data-theme-toggle>☀️ 亮色</button>
   </div>
 </nav>
-<header>MySQL 博客</header>
-<p class="blog-intro">MySQL 目前以学习路线和查询练习为主。还没有系统整理完整笔记，先把入口、关键词和提问方式搭好；后续学习时直接在下面补内容。</p>
 
-<ul class="blog-topic-grid">
-  <li><h2>基础查询</h2><p>SELECT、WHERE、ORDER BY、LIMIT、NULL 与三值逻辑。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">用 AI 查漏补缺 →</a></li>
-  <li><h2>表与字段</h2><p>建表、数据类型、主键、唯一约束、默认值。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问表结构设计 →</a></li>
-  <li><h2>增删改查</h2><p>INSERT、UPDATE、DELETE，以及 WHERE 条件和事务保护。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问写入与修改 →</a></li>
-  <li><h2>连接查询</h2><p>INNER JOIN、LEFT JOIN、多表关系，以及 ON 与 WHERE 的区别。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问 JOIN →</a></li>
-  <li><h2>聚合与分组</h2><p>COUNT、SUM、AVG、GROUP BY、HAVING。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问聚合查询 →</a></li>
-  <li><h2>索引与事务</h2><p>最左前缀、执行计划、事务、隔离级别和锁的基础。</p><a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问索引原理 →</a></li>
-</ul>
+<main class="blog-home">
+  <section class="blog-hero" aria-labelledby="mysql-title">
+    <span class="blog-eyebrow">MYSQL · STUDY HUB</span>
+    <h1 id="mysql-title">MySQL 学习主页</h1>
+    <p>从建库建表、数据类型和约束，到查询、汇总、多表连接、子查询、索引与视图。所有 SQL 笔记已经按「笔记 / 查询练习」分开归档，原文可搜索、可复制。</p>
+    <div class="blog-hero-actions">
+      <a class="blog-action primary" href="../../../MySql/html/view.html">进入 SQL 笔记归档 →</a>
+      <a class="blog-action" href="../../../MySql/html/index.html">浏览全部目录</a>
+      <a class="blog-action" href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问 MySQL AI</a>
+    </div>
+    <div class="blog-hero-stats" aria-label="学习内容统计">
+      <div class="blog-hero-stat"><strong>19</strong><span>篇 SQL</span></div>
+      <div class="blog-hero-stat"><strong>17</strong><span>学习笔记</span></div>
+      <div class="blog-hero-stat"><strong>2</strong><span>查询练习</span></div>
+    </div>
+  </section>
 
-<div class="blog-note">学习建议：每学一个主题，就在这一页补一个自己的例子；遇到报错或写不出的 SQL，直接点“问 AI”，把表结构和目标一起贴过去。</div>
-    <script src="../../../AI答疑/共享工具/工具函数/月份历史.js?v=20261105-3" data-subject="code" data-language="mysql"></script>
+  <div class="blog-section-head">
+    <div>
+      <h2>学习路线</h2>
+      <p>先掌握表结构与数据类型，再把查询、连接和汇总练熟，最后进入索引、视图与分区。</p>
+    </div>
+    <span class="blog-section-mark">ROADMAP · 01—06</span>
+  </div>
+
+  <ul class="blog-topic-grid">
+    <li>
+      <span class="blog-card-kicker">01 · SELECT</span>
+      <h2>基础查询</h2>
+      <p>SELECT、WHERE、ORDER BY、LIMIT，以及 NULL 与三值逻辑。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">用 AI 查漏补缺 →</a>
+    </li>
+    <li>
+      <span class="blog-card-kicker">02 · TABLE</span>
+      <h2>表与字段</h2>
+      <p>建库建表、数据类型、主键、唯一约束和默认值。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问表结构设计 →</a>
+    </li>
+    <li>
+      <span class="blog-card-kicker">03 · DML</span>
+      <h2>增删改查</h2>
+      <p>INSERT、UPDATE、DELETE，以及 WHERE 条件和事务保护。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问写入与修改 →</a>
+    </li>
+    <li>
+      <span class="blog-card-kicker">04 · JOIN</span>
+      <h2>连接查询</h2>
+      <p>INNER JOIN、LEFT JOIN、多表关系，以及 ON 与 WHERE 的区别。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问 JOIN →</a>
+    </li>
+    <li>
+      <span class="blog-card-kicker">05 · GROUP</span>
+      <h2>聚合与分组</h2>
+      <p>COUNT、SUM、AVG、GROUP BY、HAVING 与分组统计。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问聚合查询 →</a>
+    </li>
+    <li>
+      <span class="blog-card-kicker">06 · INDEX</span>
+      <h2>索引与事务</h2>
+      <p>最左前缀、执行计划、事务、隔离级别和锁的基础。</p>
+      <a href="../../../AI答疑/编程语言AI/index.html?lang=mysql">问索引原理 →</a>
+    </li>
+    <li class="is-featured">
+      <div class="blog-featured-copy">
+        <span class="blog-card-kicker">ARCHIVE · ALL SQL</span>
+        <h2>SQL 笔记归档 · HTML</h2>
+        <p>全部 19 篇 SQL 原文按「笔记 / 查询练习」分区，支持语法高亮、搜索、目录跳转、复制 SQL 和独立阅读。</p>
+      </div>
+      <a href="../../../MySql/html/view.html">进入 SQL 笔记归档 →</a>
+    </li>
+  </ul>
+
+  <div class="blog-note">
+    <strong>学习建议：</strong>每学一个主题，就回到归档里补一个自己的 SQL 例子；遇到报错或写不出的查询，点「问 AI」，把表结构和目标一起贴过去。
+  </div>
+</main>
+
+<script src="../../../AI答疑/共享工具/工具函数/月份历史.js?v=20261105-3" data-subject="code" data-language="mysql"></script>
 </body>
 </html>

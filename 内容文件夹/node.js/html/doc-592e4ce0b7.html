@@ -1,0 +1,45 @@
+<!-- source: 课堂/第十一节课——express/项目文件/创建表.sql -->
+<!-- source-root: node.js -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-size="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#425fe8">
+<title>创建表 · Node.js 笔记</title>
+<link rel="stylesheet" href="../共享配置/vendor/katex/katex.min.css?v=1795535133865">
+<link rel="stylesheet" href="../共享配置/css/notes.css?v=1795535133865">
+</head>
+<body class="reader-page">
+<main class="reader-shell">
+  <div class="doc-wrap">
+    <header class="doc-head">
+      <span class="card-tag">课堂 · SQL</span>
+      <h1>创建表</h1>
+      <div class="doc-meta">数据来源：课堂/第十一节课——express/项目文件/创建表.sql · 更新于 2026-11-17</div>
+    </header>
+    <article class="doc"><pre class="node-sql"><code><span class="sql-keyword">use</span> <span class="sql-string">`回顾数据库`</span>;
+
+<span class="sql-comment">-- 创建表</span>
+<span class="sql-keyword">create</span> <span class="sql-keyword">table</span> <span class="sql-keyword">if</span> <span class="sql-keyword">not</span> <span class="sql-keyword">exists</span> <span class="sql-string">`students`</span> (
+    <span class="sql-string">`学号`</span> <span class="sql-ident">int</span>(<span class="sql-number">11</span>) <span class="sql-keyword">not</span> <span class="sql-keyword">null</span> <span class="sql-keyword">primary</span> <span class="sql-keyword">key</span>,
+    <span class="sql-string">`姓名`</span> <span class="sql-ident">char</span>(<span class="sql-number">5</span>) <span class="sql-keyword">not</span> <span class="sql-keyword">null</span>,
+    <span class="sql-string">`性别`</span> <span class="sql-ident">char</span>(<span class="sql-number">2</span>) <span class="sql-keyword">not</span> <span class="sql-keyword">null</span>,
+
+    <span class="sql-keyword">check</span>(<span class="sql-string">`性别`</span> <span class="sql-keyword">in</span> (<span class="sql-string">'男'</span>,<span class="sql-string">'女'</span>))
+);
+
+<span class="sql-comment">-- 填入信息</span>
+<span class="sql-keyword">insert</span> <span class="sql-ident">ignore</span> <span class="sql-keyword">into</span> <span class="sql-string">`students`</span>(学号,姓名,性别) <span class="sql-ident">value</span> (<span class="sql-number">2026106128</span>,<span class="sql-string">'张三'</span>,<span class="sql-string">'男'</span>);
+<span class="sql-keyword">insert</span> <span class="sql-ident">ignore</span> <span class="sql-keyword">into</span> <span class="sql-string">`students`</span>(学号,姓名,性别) <span class="sql-ident">value</span> (<span class="sql-number">2026106129</span>,<span class="sql-string">'李四'</span>,<span class="sql-string">'女'</span>);
+<span class="sql-keyword">insert</span> <span class="sql-ident">ignore</span> <span class="sql-keyword">into</span> <span class="sql-string">`students`</span>(学号,姓名,性别) <span class="sql-ident">value</span> (<span class="sql-number">2026106130</span>,<span class="sql-string">'王五'</span>,<span class="sql-string">'男'</span>);</code></pre></article>
+  </div>
+</main>
+<footer class="page-footer"><span>Node.js · 笔记归档</span><span>数据来源：课堂/第十一节课——express/项目文件/创建表.sql</span></footer>
+<script src="../共享配置/vendor/katex/katex.min.js?v=1795535133865"></script>
+<script src="../共享配置/vendor/katex/auto-render.min.js?v=1795535133865"></script>
+<script>
+try { renderMathInElement(document.body, { delimiters: [{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}], throwOnError:false }); } catch (e) {}
+</script>
+</body>
+</html>

@@ -1016,7 +1016,7 @@
       return {
         kind: "config",
         label: "配置或密钥问题",
-        advice: "运行“配置.bat”检查 API Key、云端地址和访问口令。"
+        advice: "运行“工具/配置.bat”检查 API Key、云端地址和访问口令。"
       };
     }
     if (/(HTTP\s*429|rate limit|quota|额度|余额|限流|too many requests)/i.test(text)) {

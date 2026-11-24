@@ -5,7 +5,7 @@ const mysql = require('mysql2/promise')
 
 // 用连接池而不是单个连接：
 // 池子会复用连接，多个请求并发时不用反复握手，也不会互相阻塞
-const pool = mysql.createPool({
+const pool = mysql.createPool({ // createPool` 的核心作用是：创建一个可复用的资源池对象，而不是每次使用时新建一个连接/资源。
     host: process.env.DB_HOST || '127.0.0.1',
     port: Number(process.env.DB_PORT) || 3306,
     user: process.env.DB_USER || 'root',

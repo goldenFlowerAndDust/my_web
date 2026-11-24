@@ -1,14 +1,10 @@
 @echo off
+setlocal EnableExtensions
 chcp 65001 >nul
+cd /d "%~dp0"
 set "PYTHONIOENCODING=utf-8"
 set "PYTHONUTF8=1"
-setlocal
-cd /d "%~dp0"
-title Sync Launcher
-
-rem 科目：英语、数学、编程、政治、信息技术
-rem 科目是否启用由 共享配置\数据\科目配置.json 控制
-
+title AI Answer Sync / Node.js / MySQL
 set "BUNDLED=%USERPROFILE%\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
 
 if exist "%BUNDLED%" goto bundled
@@ -16,22 +12,28 @@ where py >nul 2>nul
 if not errorlevel 1 goto py
 where python >nul 2>nul
 if not errorlevel 1 goto python
+
 echo Python not found.
-pause
-exit /b 1
+set "CODE=1"
+goto done
 
 :bundled
-"%BUNDLED%" "sync_launcher.py" --auto
+"%BUNDLED%" "sync_archives.py"
+set "CODE=%ERRORLEVEL%"
 goto done
 
 :py
-py -3 "sync_launcher.py" --auto
+py -3 "sync_archives.py"
+set "CODE=%ERRORLEVEL%"
 goto done
 
 :python
-python "sync_launcher.py" --auto
+python "sync_archives.py"
+set "CODE=%ERRORLEVEL%"
 goto done
 
 :done
 echo.
-pause >nul
+if /i "%~1"=="--no-pause" exit /b %CODE%
+pause
+exit /b %CODE%
